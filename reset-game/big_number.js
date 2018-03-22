@@ -1,5 +1,6 @@
 // Very simple big number library, slow but easy to understand.
-// Will work in modern browsers easily, for Node just change the last line.
+// Will work in modern browsers easily,
+// for Node just change the last few lines.
 
 class Decimal {
   constructor (value, raw) {
@@ -243,7 +244,13 @@ class Decimal {
     if (this.neg) {
       return '-' + this.negate().toStr(digits);
     }
-    return this.mantessa().toNum().toFixed(digits) + 'e' + this.exponent();
+    let mantessa = this.mantessa().toNum().toFixed(digits);
+    let exponent = this.exponent();
+    if (mantessa.startsWith('10')) {
+      mantessa = '1' + mantessa.slice(2);
+      exponent++;
+    }
+    return mantessa + 'e' + exponent;
   }
 
   save () {
