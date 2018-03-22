@@ -19,7 +19,7 @@ let prod = function (x, val_5, g_num_resets) {
     }
   }
   // Count even mini resets as resets.
-  let total_resets = Object.keys(num_resets).map((x, y) => x + y);
+  let total_resets = Object.values(num_resets).map((x, y) => x + y);
   let two_pow = Decimal.pow(2, num_resets[2]);
   let three_pow = Decimal.pow(x.max(1).decLog(3).max(1), num_resets[3])
   let five_pow = Decimal.pow(val_5.max(1), num_resets[5]);
