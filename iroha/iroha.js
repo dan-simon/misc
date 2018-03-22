@@ -20,7 +20,7 @@ let iroha_negate = function (x) {return '見' + x}
 
 let iroha_invert = function (x) {return '世' + x}
 
-let iroha_special = 'いろはにほへとちりぬるをわかよたれそつねならむうゐのおくやまけふこえてあさきゆめみしゑひもせ' +
+let iroha_special = 'いろはにほへとちりぬるをわかよたれそつねならむうのおくやまけふこえてあさきゆめみしひもせす' +
 'アイウエオカキクケコサシスセソタチツテト';
 
 function iroha (n, depth, japanese) {
@@ -47,7 +47,7 @@ function iroha (n, depth, japanese) {
   }
   let log = bin_log(bin_log(n));
   let neg = log.lt(0);
-  let start_of_negs = 28;
+  let start_of_negs = 27;
   let iroha_prefix = neg ? ((x) => x + start_of_negs) : ((x) => x < start_of_negs ? x : 1000);
   let paren_surround = (x) => '(' + x + ')';
   let normal_prefix = (x) => (neg ? '~' : '') + paren_surround(x);
