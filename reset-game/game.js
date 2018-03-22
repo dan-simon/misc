@@ -142,7 +142,7 @@ let try_to_reset = function (type) {
     player.x = new Decimal(0);
     player.val_5 = new Decimal(0);
     for (let i of reset_list) {
-      if (+i === +type) {
+      if (i === type || +i === +type) {
         player.resets[i] += reset_info.resets;
         break;
       }
@@ -181,9 +181,12 @@ let update_display = function () {
   prod(player.x, player.val_5, player.resets).toStr(2);
   if (get_val_5_exists()) {
     document.getElementById('val_5').innerHTML = 'Mini points: ' +
-    player.x.toStr(2);
+    player.val_5.toStr(2);
     document.getElementById('val_5_prod').innerHTML = 'Mini points per second: ' +
     val_5_prod(player.x, player.val_5, player.resets).toStr(2);
+  } else {
+    document.getElementById('val_5').innerHTML = '';
+    document.getElementById('val_5_prod').innerHTML = '';
   }
   for (let i of reset_list) {
     set_reset_text(player.x, player.val_5, player.resets, i);
@@ -196,6 +199,8 @@ let setup = function () {
       try_to_reset(i);
     }
   }
+  document.getElementById('import').onclick = import_save;
+  document.getElementById('export').onclick = export_save;
 }
 
 let make_save = function () {
@@ -210,6 +215,16 @@ let load_save = function () {
     player = {'x': new Decimal(save.x, true), 'val_5': new Decimal(save.val_5, true),
     'resets': save.resets, 'time': save.time};
   }
+}
+
+let export_save = function () {
+  make_save();
+  document.getElementById('save-area').value = localStorage.getItem('reset_save');
+}
+
+let import_save = function () {
+  localStorage.setItem('reset_save', document.getElementById('save-area').value);
+  load_save();
 }
 
 let player = init_player();
