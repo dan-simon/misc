@@ -8,10 +8,29 @@ class Decimal {
       for (let i in value) {
         this[i] = value[i];
       }
-    } else {
+    } else if (typeof value === 'number') {
       this.zero = value === 0;
       this.neg = value < 0;
       this.e = Math.log(Math.abs(value));
+    } else if (typeof value === 'string') {
+      if (value.indexOf('e') === -1) {
+        value = +value;
+        this.zero = value === 0;
+        this.neg = value < 0;
+        this.e = Math.log(Math.abs(value));
+      } else {
+        let [mant, exp] = value.split('e');
+        if (mant === '') {
+          mant = '1';
+        }
+        mant = +mant;
+        exp = +exp;
+        this.zero = mant === 0;
+        this.neg = mant < 0;
+        this.e = Math.LN10 * exp + Math.log(mant);
+      }
+    } else {
+      throw new Error('Could not convert value to Decimal.');
     }
   }
 
@@ -265,6 +284,14 @@ for (let i of Object.getOwnPropertyNames(Decimal.prototype)) {
     }
     return first[i](...args);
   }
+}
+
+Decimal.load = function (x) {
+  return new Decimal(x, true);
+}
+
+Decimal.from = function (x) {
+  return new Decimal(x);
 }
 
 // Comment this for Node.
