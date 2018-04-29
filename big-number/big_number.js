@@ -39,6 +39,11 @@ class Decimal {
       {'zero': this.zero, 'neg': !this.neg, 'e': this.e}, true);
   }
 
+  abs () {
+    return new Decimal(
+      {'zero': this.zero, 'neg': false, 'e': this.e}, true);
+  }
+
   eq (other) {
     if (!(other instanceof Decimal)) {
       other = new Decimal(other);
