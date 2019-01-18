@@ -142,7 +142,7 @@ function buyMultUpg() {
 }
 
 function getMultUpgEffect() {
-  let r = player.multUpg.amount + 1;
+  let r = new Decimal(player.multUpg.amount + 1);
   if (player.assUpgrades.has[2]) {
     r = r.pow(getAssUpgradeEffect(2))
   }
@@ -204,7 +204,7 @@ function getAssGain() {
 
 function getAssUpgradeEffect (x) {
   if (x === 1) {
-    return Math.pow(player.ass.max(1).log10() + 1, Math.log10(Math.max(player.assTime / 60, 1)));
+    return Math.pow(player.ass.plus(1).log10() + 1, Math.log10(player.assTime / 60 + 1));
   } else if (x === 2) {
     return 1 + Math.log10(1 - player.tickspeed.amount.log(10)) / 5;
   } else if (x === 3) {
@@ -260,7 +260,7 @@ function updateGUI() {
       document.getElementById('gen' + i).classList.remove('locked');
     }
   }
-  document.getElementById('multUpgAmount').textContent = getMultUpgEffect();
+  document.getElementById('multUpgAmount').textContent = format(getMultUpgEffect());
   document.getElementById('multUpgCost').textContent = format(player.multUpg.cost);
   if (!canBuyMultUpg()) {
     document.getElementById('multUpg').classList.add('locked');
