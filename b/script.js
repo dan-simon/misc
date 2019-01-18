@@ -482,3 +482,9 @@ setInterval(saveGame, 10000)
 loadGame();
 
 updateGUI();
+
+window.addEventListener('keydown', function(event) {
+  if (event.keyCode === 77) {
+    maxall();
+  }
+});
