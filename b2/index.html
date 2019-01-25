@@ -1,0 +1,34 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/styles.css">
+  <title>Infinite Layers</title>
+</head>
+<body>
+  <div id="app">
+    <div class="column" v-for="(generator, idx) in player.generators">
+      <div class="currency">
+        <span>You have {{ format(generator.prestigeAmount) }} {{ generator.prestigeName }}<span v-if="idx > 0"> and {{ format(generator.currencyAmount) }} {{ generator.currencyName }}</span>. <button @click="maxAll(idx)">Max all</button></span>
+      </div>
+      <button class="prestige" @click="prestige(idx)">Get {{ format(getPrestigeGain(generator.prestigeAmount)) }} {{ generator.nextPrestigeName }}.</button>
+      <div class="generators-container">
+        <div class="generator" v-for="(gen, jdx) in generator.list">
+          <h4>{{ gen.generatorName }} </h4>
+          <span class="generator-amount">{{ format(gen.amount) }}</span>
+          <span class="generator-multiplier">{{ format(getMult(idx, jdx)) }}x</span>
+          <span class="generator-cost">Cost: {{ format(gen.cost) }}</span>
+          <span><button @click="buyGenerator(idx, jdx)">Buy 1</button><button @click="buyMaxGenerator(idx, jdx)">Buy max</button></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="js/vue.js"></script>
+<script src="js/breakinfinity.js"></script>
+<script src="js/data.js"></script>
+<script src="js/format.js"></script>
+<script src="js/loop.js"></script>
+<script src="js/index.js"></script>
+</html>
