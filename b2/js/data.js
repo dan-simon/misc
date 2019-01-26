@@ -1,11 +1,19 @@
-const prestigeThreshold = Decimal.pow(2, 1024 / 12);
+const prestigeThreshold = Decimal.pow(10, 24);
 
 function getPrestigeGain (x) {
-  return Decimal.floor(Decimal.pow(10, Math.sqrt(Decimal.log(Decimal.max(x, 1), prestigeThreshold) * 8 + 1) / 2 - 1.5));
+  x = x.max(1e3);
+  let steps = x.log(prestigeThreshold) - 1;
+  let gens = Math.log2(x.log(10));
+  let pow = 9.5 * steps / gens;
+  return Decimal.floor(Decimal.pow(10, pow));
+}
+
+function getCurrencyEffect (i) {
+  return player.generators[i].currencyAmount;
 }
 
 function getMult (i, j) {
-  let x = (player.generators.length === i + 1) ? new Decimal(1) : player.generators[i + 1].currencyAmount;
+  let x = (player.generators.length === i + 1) ? new Decimal(1) : getCurrencyEffect(i + 1);
   return player.generators[i].list[j].mult.times(x);
 }
 
@@ -44,7 +52,7 @@ function initializeGenerator (i) {
 
 function getInitialGenerator (i, j) {
   return {
-    cost: Decimal.pow(10, (j === 0) ? 0 : (j + 1) * (j + 2) / 2),
+    cost: Decimal.pow(10, (j === 0) ? 0 : Math.pow(2, j)),
     mult: new Decimal(1),
     amount: new Decimal(0),
     bought: 0,

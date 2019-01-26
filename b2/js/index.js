@@ -23,7 +23,7 @@ var app = new Vue({
       if (g.cost.gt(player.generators[i].prestigeAmount)) return false;
       if (player.generators[i].list.length === j + 1) initializeGenerator(i);
       player.generators[i].prestigeAmount = player.generators[i].prestigeAmount.minus(g.cost);
-      g.cost = g.cost.times(Decimal.pow(10, Math.round((j + 1) * (j + 2) / 2)));
+      g.cost = g.cost.times(Decimal.pow(10, Math.pow(2, j)));
       g.mult = g.mult.times(2);
       g.amount = g.amount.plus(1);
       g.bought += 1;
