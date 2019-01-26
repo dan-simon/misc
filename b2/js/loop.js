@@ -14,6 +14,12 @@ function gameLoop () {
         player.generators[i].list[j - 1].amount = player.generators[i].list[j - 1].amount.plus(gain);
       }
     }
+    if (player.generators[i].autoMaxAll) {
+      maxAll(i);
+    }
+    if (player.generators[i].prestigeGain) {
+      player.generators[i + 1].prestigeAmount = player.generators[i + 1].prestigeAmount.plus(getPrestigeGain(player.generators[i].prestigeAmount.times(diff)));
+    }
   }
   player.lastUpdate = now;
 }

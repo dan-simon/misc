@@ -14,30 +14,18 @@ var app = new Vue({
       player.generators[i + 1].prestigeAmount = player.generators[i + 1].prestigeAmount.plus(
         getPrestigeGain(player.generators[i].prestigeAmount));
       for (let k = 0; k <= i; k++) {
-        resetTier(i);
+        resetTier(k);
       }
       partialResetTier(i + 1);
     },
     buyGenerator(i, j) {
-      let g = player.generators[i].list[j];
-      if (g.cost.gt(player.generators[i].prestigeAmount)) return false;
-      if (player.generators[i].list.length === j + 1) initializeGenerator(i);
-      player.generators[i].prestigeAmount = player.generators[i].prestigeAmount.minus(g.cost);
-      g.cost = g.cost.times(Decimal.pow(10, Math.pow(2, j)));
-      g.mult = g.mult.times(2);
-      g.amount = g.amount.plus(1);
-      g.bought += 1;
-      return true;
+      return buyGenerator(i, j);
     },
     buyMaxGenerator(i, j) {
-      while (this.buyGenerator(i, j)) {
-        continue;
-      }
+      buyMaxGenerator(i, j);
     },
     maxAll(i) {
-      for (let j = 0; j < player.generators[i].list.length; j++) {
-        this.buyMaxGenerator(i, j);
-      }
+      maxAll(i);
     },
     format(x) {
       return format(x);
@@ -47,6 +35,16 @@ var app = new Vue({
     },
     getPrestigeGain(x) {
       return getPrestigeGain(x);
+    },
+    toggleAutoMaxAll(i) {
+      if (i < player.generators.length - 2) {
+        player.generators[i].autoMaxAll = !player.generators[i].autoMaxAll;
+      }
+    },
+    togglePrestigeGain(i) {
+      if (i < player.generators.length - 3) {
+        player.generators[i].prestigeGain = !player.generators[i].prestigeGain;
+      }
     }
   }
 })

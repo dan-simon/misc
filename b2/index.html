@@ -10,7 +10,7 @@
   <div id="app">
     <div class="column" v-for="(generator, idx) in player.generators">
       <div class="currency">
-        <span>You have {{ format(generator.prestigeAmount) }} {{ generator.prestigeName }}<span v-if="idx > 0"> and {{ format(generator.currencyAmount) }} {{ generator.currencyName }}</span>. <button @click="maxAll(idx)">Max all</button></span>
+        <span>You have {{ format(generator.prestigeAmount) }} {{ generator.prestigeName }}<span v-if="idx > 0"> and {{ format(generator.currencyAmount) }} {{ generator.currencyName }}</span>. <button @click="maxAll(idx)" v-if="idx < player.generators.length - 1">Max all</button> <button @click="toggleAutoMaxAll(idx)" v-if="idx < player.generators.length - 2">Auto max all: {{ generator.autoMaxAll ? 'on' : 'off' }}</button> <button @click="togglePrestigeGain(idx)" v-if="idx < player.generators.length - 3">Prestige gain: {{ generator.prestigeGain ? 'on' : 'off' }}</button></span>
       </div>
       <button class="prestige" @click="prestige(idx)">Get {{ format(getPrestigeGain(generator.prestigeAmount)) }} {{ generator.nextPrestigeName }}.</button>
       <div class="generators-container">
@@ -29,6 +29,7 @@
 <script src="js/breakinfinity.js"></script>
 <script src="js/data.js"></script>
 <script src="js/format.js"></script>
+<script src="js/buying.js"></script>
 <script src="js/loop.js"></script>
 <script src="js/index.js"></script>
 </html>

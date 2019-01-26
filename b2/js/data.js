@@ -8,13 +8,16 @@ function getPrestigeGain (x) {
   return Decimal.floor(Decimal.pow(10, pow));
 }
 
-function getCurrencyEffect (i) {
-  return player.generators[i].currencyAmount;
+function getBoost (tier) {
+  let ret = new Decimal(1);
+  for (let i = tier + 1; i < player.generators.length; i++) {
+    ret = ret.times(player.generators[i].currencyAmount.pow(i - tier));
+  }
+  return ret;
 }
 
-function getMult (i, j) {
-  let x = (player.generators.length === i + 1) ? new Decimal(1) : getCurrencyEffect(i + 1);
-  return player.generators[i].list[j].mult.times(x);
+function getMult (i, j) {;
+  return player.generators[i].list[j].mult.times(getBoost(i));
 }
 
 function initializeTier () {
@@ -37,6 +40,8 @@ function getInitialTier (i) {
     prestigeAmount: (i === 0) ? new Decimal(1) : new Decimal(0),
     prestigeName: getPrestigeCurrencyName(i),
     nextPrestigeName: getPrestigeCurrencyName(i + 1),
+    autoMaxAll: i < player.generators.length ? player.generators[i].autoMaxAll : false,
+    prestigeGain: i < player.generators.length ? player.generators[i].prestigeGain : false,
     list: [getInitialGenerator(i, 0)]
   }
   if (i !== 0) {
