@@ -4,7 +4,7 @@ function getPrestigeGain (x) {
   x = x.max(1e3);
   let steps = x.log(prestigeThreshold) - 1;
   let gens = Math.log2(x.log(10));
-  let pow = 9.5 * steps / gens;
+  let pow = 8 * steps / gens;
   return Decimal.floor(Decimal.pow(10, pow));
 }
 

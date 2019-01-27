@@ -25,7 +25,7 @@ function gameLoop () {
 }
 
 function saveGame() {
-  localStorage.setItem('save', btoa(JSON.stringify(player)));
+  localStorage.setItem('save', btoa(JSON.stringify(player, function(k, v) {return (v === Infinity) ? "Infinity" : v})));
 }
 
 function loadGame(save) {
@@ -33,30 +33,17 @@ function loadGame(save) {
     save = localStorage.getItem('save');
   }
   if (save) {
-    player = JSON.parse(atob(save));
-    convertDecimals(player);
+    player = JSON.parse(atob(save), revive);
   }
 }
 
-function convertDecimals(y) {
-  if (y === null || (typeof y !== 'object' && typeof y !== 'array')) {
-    return;
-  } else if (typeof y === 'array') {
-    for (let i = 0; i < y.length; i++) {
-      if (typeof y[i] === 'string' && !isNaN(y[i])) {
-        y[i] = new Decimal(y[i]);
-      } else {
-        convertDecimals(y[i]);
-      }
-    }
+function revive(k, v) {
+  if (v === 'Infinity') {
+    return Infinity;
+  } else if (typeof v === 'string' && !isNaN(v)) {
+    return new Decimal(v);
   } else {
-    for (let i in y) {
-      if (typeof y[i] === 'string' && !isNaN(y[i])) {
-        y[i] = new Decimal(y[i]);
-      } else {
-        convertDecimals(y[i]);
-      }
-    }
+    return v;
   }
 }
 
