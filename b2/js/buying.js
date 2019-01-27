@@ -1,8 +1,19 @@
+let buyEpsilon = new Decimal(1e-20);
+
+function safeSubtract(i, j) {
+  let oldAmount = player.generators[i].prestigeAmount;
+  player.generators[i].prestigeAmount = oldAmount.minus(j);
+  // 1e(1 million) is a lot
+  if (oldAmount.exponent >= 1e6) {
+    player.generators[i].prestigeAmount = player.generators[i].prestigeAmount.max(oldAmount.times(buyEpsilon));
+  }
+}
+
 function buyGenerator(i, j) {
   let g = player.generators[i].list[j];
   if (g.cost.gt(player.generators[i].prestigeAmount)) return false;
   if (player.generators[i].list.length === j + 1) initializeGenerator(i);
-  player.generators[i].prestigeAmount = player.generators[i].prestigeAmount.minus(g.cost);
+  safeSubtract(i, g.cost);
   g.cost = g.cost.times(Decimal.pow(10, Math.pow(2, j)));
   g.mult = g.mult.times(2);
   g.amount = g.amount.plus(1);
@@ -24,7 +35,7 @@ function buyMaxGenerator(i, j) {
   // We have to initialize the next generator.
   if (x > 0 && player.generators[i].list.length === j + 1) initializeGenerator(i);
   let totalCost = g.cost.times(costIncrease.pow(x).minus(1).div(costIncrease.minus(1)));
-  player.generators[i].prestigeAmount = player.generators[i].prestigeAmount.minus(totalCost);
+  safeSubtract(i, totalCost);
   g.cost = g.cost.times(Decimal.pow(10, x * Math.pow(2, j)));
   g.mult = g.mult.times(Decimal.pow(2, x));
   g.amount = g.amount.plus(x);

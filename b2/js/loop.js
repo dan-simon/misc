@@ -18,7 +18,7 @@ function gameLoop () {
       maxAll(i);
     }
     if (player.generators[i].prestigeGain) {
-      player.generators[i + 1].prestigeAmount = player.generators[i + 1].prestigeAmount.plus(getPrestigeGain(player.generators[i].prestigeAmount.times(diff)));
+      player.generators[i + 1].prestigeAmount = player.generators[i + 1].prestigeAmount.plus(getPrestigeGain(player.generators[i].prestigeAmount).times(diff));
     }
   }
   player.lastUpdate = now;

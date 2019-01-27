@@ -25,7 +25,7 @@ function initializeTier () {
 }
 
 function resetTier (i) {
-  player.generators[i] = getInitialTier(i);
+  Vue.set(player.generators, i, getInitialTier(i));
 }
 
 function partialResetTier (i) {
