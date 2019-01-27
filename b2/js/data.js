@@ -40,8 +40,10 @@ function getInitialTier (i) {
     prestigeAmount: (i === 0) ? new Decimal(1) : new Decimal(0),
     prestigeName: getPrestigeCurrencyName(i),
     nextPrestigeName: getPrestigeCurrencyName(i + 1),
+    displayName: getDisplayName(i),
     autoMaxAll: i < player.generators.length ? player.generators[i].autoMaxAll : false,
     prestigeGain: i < player.generators.length ? player.generators[i].prestigeGain : false,
+    display: i < player.generators.length ? player.generators[i].display : true,
     list: [getInitialGenerator(i, 0)]
   }
   if (i !== 0) {
@@ -96,6 +98,19 @@ function getPrestigeName (i, title=false) {
   return r;
 }
 
-let player = {lastUpdate: Date.now(), generators: []}
+function getDisplayName (i) {
+  if (i === 0) {
+    return 'Normal';
+  } else {
+    return getPrestigeName(i, title=true);
+  }
+}
+
+let player = {
+  lastUpdate: Date.now(),
+  lowTiers: Infinity,
+  highTiers: Infinity,
+  generators: []
+}
 
 initializeTier();

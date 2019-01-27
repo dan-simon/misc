@@ -45,6 +45,9 @@ var app = new Vue({
       if (i < player.generators.length - 3) {
         player.generators[i].prestigeGain = !player.generators[i].prestigeGain;
       }
+    },
+    toggleDisplay(i) {
+      player.generators[i].display = !player.generators[i].display;
     }
   }
 })
