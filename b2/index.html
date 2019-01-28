@@ -34,6 +34,11 @@
         </div>
       </div>
     </div>
+    <div class="column" v-if="player.singularity.unlocked">
+      <div class="currency">
+        <span>You have {{ format(player.singularity.currencyAmount) }} singularity power, making all dimension multipliers x^{{ formatLong(getSingularityPowerEffect()) }}.</span>
+      </div>
+    </div>
   </div>
 </body>
 <script src="js/vue.js"></script>

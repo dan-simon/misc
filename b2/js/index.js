@@ -18,6 +18,9 @@ var app = new Vue({
       }
       partialResetTier(i + 1);
     },
+    getSingularityPowerEffect() {
+      return getSingularityPowerEffect();
+    },
     buyGenerator(i, j) {
       return buyGenerator(i, j);
     },
@@ -29,6 +32,9 @@ var app = new Vue({
     },
     format(x) {
       return format(x);
+    },
+    formatLong(x) {
+      return formatLong(x);
     },
     getMult(i, j) {
       return getMult(i, j);

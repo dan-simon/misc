@@ -8,6 +8,12 @@ function getPrestigeGain (x) {
   return Decimal.floor(Decimal.pow(10, pow));
 }
 
+const singularityUnlockExp = 1e4;
+
+function getSingularityPowerEffect () {
+  return 1 + 0.06 * (1 - Math.exp(-Math.log10(player.singularity.currencyAmount) / 8));
+}
+
 function getBoost (tier) {
   let ret = new Decimal(1);
   for (let i = tier + 1; i < player.generators.length; i++) {
@@ -17,7 +23,7 @@ function getBoost (tier) {
 }
 
 function getMult (i, j) {;
-  return player.generators[i].list[j].mult.times(getBoost(i));
+  return player.generators[i].list[j].mult.times(getBoost(i)).pow(getSingularityPowerEffect());
 }
 
 function initializeTier () {
@@ -110,6 +116,10 @@ let player = {
   lastUpdate: Date.now(),
   lowTiers: Infinity,
   highTiers: Infinity,
+  singularity: {
+    unlocked: false,
+    currencyAmount: 1
+  },
   generators: []
 }
 

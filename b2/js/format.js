@@ -1,7 +1,12 @@
-function format(amount) {
+function format(amount, places=2) {
+  amount = new Decimal(amount);
   let power = amount.exponent;
   let mantissa = amount.mantissa;
-  if (power < 3) return amount.toFixed(1)
+  if (power < places + 1) return amount.toFixed(places)
   if (power >= 1e6) return "e" + format(new Decimal(amount.log(10)))
-  return mantissa.toFixed(2) + "e" + power
+  return mantissa.toFixed(places) + "e" + power
+}
+
+function formatLong(x) {
+  return format(x, places=5);
 }

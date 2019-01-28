@@ -1,6 +1,12 @@
 function gameLoop () {
   let now = Date.now();
   let diff = (now - player.lastUpdate) / 1000;
+  if (player.generators[0].prestigeAmount.exponent >= singularityUnlockExp) {
+    player.singularity.unlocked = true;
+  }
+  if (player.singularity.unlocked) {
+    player.singularity.currencyAmount += Math.pow(player.generators[0].prestigeAmount.max(1).log(10) / singularityUnlockExp, 3) * diff;
+  }
   for (let i = 0; i < player.generators.length; i++) {
     for (let j = 0; j < player.generators[i].list.length; j++) {
       let gain = player.generators[i].list[j].amount.times(getMult(i, j)).times(diff);
