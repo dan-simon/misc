@@ -31,15 +31,23 @@ function gameLoop () {
 }
 
 function saveGame() {
-  localStorage.setItem('save', btoa(JSON.stringify(player, function(k, v) {return (v === Infinity) ? "Infinity" : v})));
+  localStorage.setItem('save-infinite-layers', btoa(JSON.stringify(player, function(k, v) {return (v === Infinity) ? "Infinity" : v})));
 }
 
 function loadGame(save) {
   if (save === undefined) {
-    save = localStorage.getItem('save');
+    save = localStorage.getItem('save-infinite-layers');
+    if (!save) {
+      save = localStorage.getItem('save');
+    }
   }
   if (save) {
-    player = JSON.parse(atob(save), revive);
+    if (save) {
+      proposedPlayer = JSON.parse(atob(save), revive);
+      if (proposedPlayer.assTime === undefined) {
+        player = proposedPlayer;
+      }
+    }
   }
 }
 

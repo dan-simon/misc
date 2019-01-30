@@ -373,17 +373,23 @@ function mainLoop() {
 }
 
 function saveGame() {
-  localStorage.setItem('save', btoa(JSON.stringify(player)));
+  localStorage.setItem('save-ass-eat', btoa(JSON.stringify(player)));
 }
 
 function loadGame(save) {
   if (save === undefined) {
-    save = localStorage.getItem('save');
+    save = localStorage.getItem('save-ass-eat');
+    if (!save) {
+      save = localStorage.getItem('save');
+    }
   }
   if (save) {
-    player = JSON.parse(atob(save));
-    addProperties(originalPlayer, player)
-    convertDecimals(originalPlayer, player);
+    proposedPlayer = JSON.parse(atob(save));
+    if (proposedPlayer.assTime !== undefined) {
+      player = proposedPlayer;
+      addProperties(originalPlayer, player);
+      convertDecimals(originalPlayer, player);
+    }
   }
 }
 
