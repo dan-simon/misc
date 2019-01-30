@@ -120,7 +120,8 @@ let player = {
     unlocked: false,
     currencyAmount: 1
   },
-  generators: []
+  generators: [],
+  currentTheme: 'default'
 }
 
 initializeTier();

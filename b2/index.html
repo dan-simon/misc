@@ -8,6 +8,9 @@
 </head>
 <body>
   <div id="app">
+    <div>
+      <span><button onclick="saveGame()">Save</button> <button onclick="loadGame(prompt('Enter your save:'))">Load</button> <button onclick="exportGame()">Export</button> <button onclick="nextTheme()">Current theme: {{ player.currentTheme }}</button></span>
+    </div>
     <div v-if="player.generators.length > 3">
       <span v-for="(generator, idx) in player.generators">
         <button @click="toggleDisplay(idx)">{{ generator.displayName }} display: {{ generator.display ? 'enabled' : 'disabled' }}</button>
@@ -40,12 +43,15 @@
       </div>
     </div>
   </div>
+  <div style="display: none;"><textarea id="exportOutput"></textarea></div>
 </body>
 <script src="js/vue.js"></script>
 <script src="js/breakinfinity.js"></script>
 <script src="js/data.js"></script>
 <script src="js/format.js"></script>
 <script src="js/buying.js"></script>
+<script src="js/saving.js"></script>
+<script src="js/style.js"></script>
 <script src="js/loop.js"></script>
 <script src="js/index.js"></script>
 </html>

@@ -30,37 +30,7 @@ function gameLoop () {
   player.lastUpdate = now;
 }
 
-function saveGame() {
-  localStorage.setItem('save-infinite-layers', btoa(JSON.stringify(player, function(k, v) {return (v === Infinity) ? "Infinity" : v})));
-}
-
-function loadGame(save) {
-  if (save === undefined) {
-    save = localStorage.getItem('save-infinite-layers');
-    if (!save) {
-      save = localStorage.getItem('save');
-    }
-  }
-  if (save) {
-    if (save) {
-      proposedPlayer = JSON.parse(atob(save), revive);
-      if (proposedPlayer.assTime === undefined) {
-        player = proposedPlayer;
-      }
-    }
-  }
-}
-
-function revive(k, v) {
-  if (v === 'Infinity') {
-    return Infinity;
-  } else if (typeof v === 'string' && !isNaN(v)) {
-    return new Decimal(v);
-  } else {
-    return v;
-  }
-}
-
 loadGame();
 setInterval(saveGame, 10000);
 setInterval(gameLoop, 50);
+setTheme(player.currentTheme);
