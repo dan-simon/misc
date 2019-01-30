@@ -33,4 +33,3 @@ function gameLoop () {
 loadGame();
 setInterval(saveGame, 10000);
 setInterval(gameLoop, 50);
-setTheme(player.currentTheme);

@@ -21,6 +21,8 @@ function loadGame(save) {
       }
     }
   }
+  saveFix();
+  setTheme(player.currentTheme);
 }
 
 function exportGame() {
@@ -46,5 +48,13 @@ function revive(k, v) {
     return new Decimal(v);
   } else {
     return v;
+  }
+}
+
+function saveFix () {
+  for (let i of player.generators) {
+    if (typeof i.display !== 'boolean') {
+      i.display = true;
+    }
   }
 }
