@@ -1,4 +1,4 @@
-themes = ['default', 'dark'];
+let themes = ['default', 'dark', 'cook1ee'];
 
 function nextTheme() {
     setTheme(getNextTheme());

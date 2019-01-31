@@ -7,8 +7,8 @@ function gameLoop () {
   if (player.singularity.unlocked) {
     player.singularity.currencyAmount += Math.pow(player.generators[0].prestigeAmount.max(1).log(10) / singularityUnlockExp, 3) * diff;
   }
-  for (let i = 0; i < player.generators.length; i++) {
-    for (let j = 0; j < player.generators[i].list.length; j++) {
+  for (let i = player.generators.length - 1; i >= 0; i--) {
+    for (let j = player.generators[i].list.length - 1; j >= 0; j--) {
       let gain = player.generators[i].list[j].amount.times(getMult(i, j)).times(diff);
       if (j === 0) {
         if (i === 0) {
