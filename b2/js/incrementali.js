@@ -5,9 +5,9 @@ function getIncrementaliEffect() {
 function getIncrementaliUpgradeEffect(i) {
   let amount = getIncrementaliUpgradeAmount(i);
   if (i === 0) {
-    return Math.pow(1.5, amount) / 100;
+    return Math.pow(1.2, amount) / 100;
   } else if (i === 1) {
-    return Math.pow(1.5, amount);
+    return Math.pow(1.2, amount);
   } else if (i === 2) {
     return Math.pow(Math.log10(player.incrementali.currencyAmount) + 1, amount) * Math.pow(player.incrementali.currencyAmount, 0.25 - 0.25 * Math.pow(0.9, amount));
   }

@@ -49,8 +49,8 @@
       <div class="currency">
         <span>You have {{ format(player.incrementali.galaxies) }} incrementali galaxies (next at {{ format(player.incrementali.nextGalaxy) }}), raising the singularity power effect cap to x^{{ formatLong(getSingularityPowerCap()) }}.</span>
       </div>
-      <button class="prestige" @click="buyIncrementaliUpgrade(0)">Increase incrementali production 1.5x.<br/>Currently {{ format(getIncrementaliUpgradeEffect(0)) }} per second.<br/>Cost: {{ format(player.incrementali.costs[0]) }}</span>
-      <button class="prestige" @click="buyIncrementaliUpgrade(1)">Incrementali multiplier ^1.5.<br/>Currently x^{{ format(getIncrementaliUpgradeEffect(1)) }}.<br/>Cost: {{ format(player.incrementali.costs[1]) }}</span>
+      <button class="prestige" @click="buyIncrementaliUpgrade(0)">Increase incrementali production 1.2x.<br/>Currently {{ format(getIncrementaliUpgradeEffect(0)) }} per second.<br/>Cost: {{ format(player.incrementali.costs[0]) }}</span>
+      <button class="prestige" @click="buyIncrementaliUpgrade(1)">Incrementali multiplier ^1.2.<br/>Currently x^{{ format(getIncrementaliUpgradeEffect(1)) }}.<br/>Cost: {{ format(player.incrementali.costs[1]) }}</span>
       <button class="prestige" @click="buyIncrementaliUpgrade(2)">Multiply singularity power production based on incrementali.<br/>Currently {{ format(getIncrementaliUpgradeEffect(2)) }}x.<br/>Cost: {{ format(player.incrementali.costs[2]) }}</span>
     </div>
   </div>
