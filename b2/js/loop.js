@@ -5,7 +5,13 @@ function gameLoop () {
     player.singularity.unlocked = true;
   }
   if (player.singularity.unlocked) {
-    player.singularity.currencyAmount += Math.pow(player.generators[0].prestigeAmount.max(1).log(10) / singularityUnlockExp, 3) * diff;
+    player.singularity.currencyAmount += Math.pow(player.generators[0].prestigeAmount.max(1).log(10) / singularityUnlockExp, 3) * getIncrementaliUpgradeEffect(2) * diff;
+  }
+  if (player.singularity.currencyAmount >= 1e24) {
+    player.incrementali.unlocked = true;
+  }
+  if (player.incrementali.unlocked) {
+    incrementaliTick(diff);
   }
   for (let i = player.generators.length - 1; i >= 0; i--) {
     for (let j = player.generators[i].list.length - 1; j >= 0; j--) {

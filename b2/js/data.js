@@ -11,7 +11,7 @@ function getPrestigeGain (x) {
 const singularityUnlockExp = 1e4;
 
 function getSingularityPowerEffect () {
-  return 1 + 0.06 * (1 - Math.exp(-Math.log10(player.singularity.currencyAmount) / 8));
+  return 1 + (getSingularityPowerCap() - 1) * (1 - Math.exp(-Math.log10(player.singularity.currencyAmount) / 8));
 }
 
 function getBoost (tier) {
@@ -23,7 +23,7 @@ function getBoost (tier) {
 }
 
 function getMult (i, j) {;
-  return player.generators[i].list[j].mult.times(getBoost(i)).pow(getSingularityPowerEffect());
+  return player.generators[i].list[j].mult.times(getBoost(i)).times(getIncrementaliEffect()).pow(getSingularityPowerEffect());
 }
 
 function initializeTier () {
@@ -119,6 +119,15 @@ let player = {
   singularity: {
     unlocked: false,
     currencyAmount: 1
+  },
+  incrementali: {
+    unlocked: false,
+    currencyAmount: 1,
+    galaxies: 0,
+    nextGalaxy: 100,
+    costs: [1e24, 1e27, 1e30],
+    upgrades: [0, 0, 0],
+    costIncreases: [10, 1e3, 1e5]
   },
   generators: [],
   currentTheme: 'default'

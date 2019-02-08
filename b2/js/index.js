@@ -5,18 +5,7 @@ var app = new Vue({
   },
   methods: {
     prestige(i) {
-      if (player.generators[i].prestigeAmount.lt(prestigeThreshold)) {
-        return false;
-      }
-      if (player.generators.length === i + 1) {
-        initializeTier();
-      }
-      player.generators[i + 1].prestigeAmount = player.generators[i + 1].prestigeAmount.plus(
-        getPrestigeGain(player.generators[i].prestigeAmount));
-      for (let k = 0; k <= i; k++) {
-        resetTier(k);
-      }
-      partialResetTier(i + 1);
+      return prestige(i);
     },
     getSingularityPowerEffect() {
       return getSingularityPowerEffect();
@@ -41,6 +30,18 @@ var app = new Vue({
     },
     getPrestigeGain(x) {
       return getPrestigeGain(x);
+    },
+    buyIncrementaliUpgrade(i) {
+      return buyIncrementaliUpgrade(i);
+    },
+    getIncrementaliEffect() {
+      return getIncrementaliEffect();
+    },
+    getIncrementaliUpgradeEffect(i) {
+      return getIncrementaliUpgradeEffect(i);
+    },
+    getSingularityPowerCap() {
+      return getSingularityPowerCap();
     },
     toggleAutoMaxAll(i) {
       if (i < player.generators.length - 2) {
