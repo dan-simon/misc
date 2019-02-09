@@ -44,7 +44,7 @@ function exportGame() {
 function revive(k, v) {
   if (v === 'Infinity') {
     return Infinity;
-  } else if (typeof v === 'string' && !isNaN(v)) {
+  } else if (typeof v === 'string' && (!isNaN(v) || (v[0] === 'e' && !isNaN(v.slice(1))))) {
     return new Decimal(v);
   } else {
     return v;
