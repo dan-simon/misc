@@ -55,6 +55,9 @@ var app = new Vue({
     },
     toggleDisplay(i) {
       player.generators[i].display = !player.generators[i].display;
+    },
+    toggleMetaDisplay() {
+      player.metaDisplay = !player.metaDisplay;
     }
   }
 })

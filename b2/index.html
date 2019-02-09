@@ -12,9 +12,12 @@
       <span><button onclick="saveGame()">Save</button> <button onclick="loadGame(prompt('Enter your save:'))">Load</button> <button onclick="exportGame()">Export</button> <button onclick="nextTheme()">Current theme: {{ player.currentTheme }}</button></span>
     </div>
     <div v-if="player.generators.length > 3">
-      <span v-for="(generator, idx) in player.generators">
-        <button @click="toggleDisplay(idx)">{{ generator.displayName }} display: {{ generator.display ? 'enabled' : 'disabled' }}</button>
-      </span>
+      <button @click="toggleMetaDisplay()">Display buttons display: {{ player.metaDisplay ? 'enabled' : 'disabled' }}</button>
+      <div v-if="player.metaDisplay">
+        <span v-for="(generator, idx) in player.generators">
+          <button @click="toggleDisplay(idx)">{{ generator.displayName }} display: {{ generator.display ? 'enabled' : 'disabled' }}</button>
+        </span>
+      </div>
       <div>Display <input v-model.number="player.lowTiers"></input> lowest dimensions.</div>
       <div>Display <input v-model.number="player.highTiers"></input> highest dimensions.</div>
     </div>
