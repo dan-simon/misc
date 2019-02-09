@@ -2,7 +2,8 @@ function prestige (i) {
   if (player.generators[i].prestigeAmount.lt(prestigeThreshold)) {
     return false;
   }
-  if (player.generators.length === i + 1) {
+  let prestigeRank = player.generators.length - i - 1;
+  if (prestigeRank === 0) {
     initializeTier();
   }
   player.generators[i + 1].prestigeAmount = player.generators[i + 1].prestigeAmount.plus(
@@ -11,7 +12,8 @@ function prestige (i) {
     resetTier(k);
   }
   partialResetTier(i + 1);
-  player.incrementali.currencyAmount = 1;
-  player.incrementali.galaxies = 0;
-  player.incrementali.nextGalaxy = 100;
+  if (prestigeRank <= 1)
+    player.incrementali.currencyAmount = 1;
+    player.incrementali.galaxies = 0;
+    player.incrementali.nextGalaxy = 100;
 }

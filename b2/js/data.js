@@ -111,26 +111,3 @@ function getDisplayName (i) {
     return getPrestigeName(i, title=true);
   }
 }
-
-let player = {
-  lastUpdate: Date.now(),
-  lowTiers: Infinity,
-  highTiers: Infinity,
-  singularity: {
-    unlocked: false,
-    currencyAmount: 1
-  },
-  incrementali: {
-    unlocked: false,
-    currencyAmount: 1,
-    galaxies: 0,
-    nextGalaxy: 100,
-    costs: [1e24, 1e27, 1e30],
-    upgrades: [0, 0, 0],
-    costIncreases: [10, 1e3, 1e5]
-  },
-  generators: [],
-  currentTheme: 'default'
-}
-
-initializeTier();

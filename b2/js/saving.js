@@ -57,4 +57,12 @@ function saveFix () {
       i.display = true;
     }
   }
+  let initial = initialIncrementali();
+  for (let key of ['costs', 'upgrades', 'costIncreases']) {
+    if (player.incrementali[key].length < initial[key].length) {
+      for (let i = player.incrementali[key].length; i < initial[key].length; i++) {
+        player.incrementali[key].push(initial[key][i]);
+      }
+    }
+  }
 }
