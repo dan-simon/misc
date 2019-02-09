@@ -10,3 +10,12 @@ function format(amount, places=2) {
 function formatLong(x) {
   return format(x, places=5);
 }
+
+function numberToSuperscript(x) {
+  x = x + '';
+  let s = '⁰¹²³⁴⁵⁶⁷⁸⁹';
+  for (let i = 0; i < s.length; i++) {
+    x = x.replace(i + '', s[i]);
+  }
+  return x;
+}

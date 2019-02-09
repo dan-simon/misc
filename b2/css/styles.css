@@ -30,6 +30,15 @@
   background-color: #13579b;
 }
 
+.upgrade {
+  width: 200px;
+  height: 150px;
+  border: 1px solid black;
+  text-align: center;
+  padding: 20px;
+  background-color: #13579b;
+}
+
 .generators-container {
   display: flex;
   flex-direction: column;

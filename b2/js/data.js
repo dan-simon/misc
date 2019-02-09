@@ -96,7 +96,7 @@ function getPrestigeName (i, title=false) {
   } else if (metaLevel === 1) {
     r = 'Meta-' + main;
   } else {
-    r = 'Meta^' + metaLevel + '-' + main;
+    r = 'Meta' + numberToSuperscript(metaLevel) + '-' + main;
   }
   if (!title) {
     r = r.toLowerCase();
