@@ -1,5 +1,16 @@
 function saveText(player) {
-  return btoa(JSON.stringify(player, function(k, v) {return (v === Infinity) ? "Infinity" : v}));
+  return btoa(JSON.stringify(player, function(k, v) {
+    if (v === Infinity) {
+      return "Infinity";
+    } else if (typeof v === 'string') {
+      for (let i = 0; i < superscripts.length; i++) {
+        v = v.replace(superscripts[i], '^' + i,);
+      }
+      return v;
+    } else {
+      return v;
+    }
+  }));
 }
 
 function saveGame() {
@@ -46,6 +57,11 @@ function revive(k, v) {
     return Infinity;
   } else if (typeof v === 'string' && (!isNaN(v) || (v[0] === 'e' && !isNaN(v.slice(1))))) {
     return new Decimal(v);
+  } else if (typeof v === 'string') {
+    for (let i = 0; i < superscripts.length; i++) {
+      v = v.replace('^' + i, superscripts[i]);
+    }
+    return v;
   } else {
     return v;
   }

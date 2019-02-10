@@ -11,11 +11,12 @@ function formatLong(x) {
   return format(x, places=5);
 }
 
+let superscripts = '⁰¹²³⁴⁵⁶⁷⁸⁹';
+
 function numberToSuperscript(x) {
   x = x + '';
-  let s = '⁰¹²³⁴⁵⁶⁷⁸⁹';
-  for (let i = 0; i < s.length; i++) {
-    x = x.replace(i + '', s[i]);
+  for (let i = 0; i < superscripts.length; i++) {
+    x = x.replace(i + '', superscripts[i]);
   }
   return x;
 }
