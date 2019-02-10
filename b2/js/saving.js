@@ -27,6 +27,9 @@ function loadGame(save) {
   if (save) {
     proposedPlayer = JSON.parse(atob(save), revive);
     if (proposedPlayer.assTime === undefined) {
+      if (!proposedPlayer.version) {
+        proposedPlayer.version = 0;
+      }
       for (let i in proposedPlayer) {
         Vue.set(player, i, proposedPlayer[i]);
       }
@@ -80,5 +83,13 @@ function saveFix () {
         player.incrementali[key].push(initial[key][i]);
       }
     }
+  }
+  if (player.version === 0) {
+    player.version = 1;
+    player.singularity.currencyAmount = Math.min(player.singularity.currencyAmount, 1e70);
+    player.incrementali.costs[1] = 1e27;
+    player.incrementali.upgrades[1] = 0;
+    player.incrementali.costIncreases[1] = 1e3;
+    alert('Unfortunately, for balancing purposes, your singularity power has been reduced to 1e70 (if it was more than that), and your second incrementali upgrade has been reset.')
   }
 }

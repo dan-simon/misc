@@ -9,7 +9,8 @@ let player = {
   incrementali: initialIncrementali(),
   generators: [],
   currentTheme: 'default',
-  metaDisplay: true
+  metaDisplay: true,
+  version: 1
 }
 
 initializeTier();
