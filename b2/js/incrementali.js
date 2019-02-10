@@ -38,11 +38,11 @@ function buyIncrementaliUpgrade(i) {
     return false;
   }
   player.singularity.currencyAmount -= player.incrementali.costs[i];
-  player.incrementali.costs[i] *= player.incrementali.costIncreases[i];
   player.incrementali.upgrades[i]++;
   if (i === 1) {
     player.incrementali.costIncreases[i] = Math.pow(10, 3 + Math.floor(player.incrementali.upgrades[i] / 15));
   }
+  player.incrementali.costs[i] *= player.incrementali.costIncreases[i];
   return true;
 }
 
