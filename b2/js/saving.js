@@ -78,7 +78,7 @@ function saveFix () {
   }
   if (player.version < 1) {
     player.version = 1;
-    player.singularity.currencyAmount = Math.min(player.singularity.currencyAmount, 1e70);
+    player.singularity.currencyAmount = Decimal.min(player.singularity.currencyAmount, 1e70);
     player.incrementali.costs[1] = 1e27;
     player.incrementali.upgrades[1] = 0;
     player.incrementali.costIncreases[1] = 1e3;
