@@ -34,11 +34,11 @@ function getIncrementaliUpgradeAmount(i) {
 }
 
 function buyIncrementaliUpgrade(i) {
-  if (player.incrementali.costs[i] > player.singularity.currencyAmount) {
+  if (player.incrementali.costs[i].gte(player.singularity.currencyAmount)) {
     return false;
   }
-  player.singularity.currencyAmount -= player.incrementali.costs[i];
-  player.incrementali.costs[i] *= player.incrementali.costIncreases[i];
+  player.singularity.currencyAmount = player.singularity.currencyAmount.minus(player.incrementali.costs[i]);
+  player.incrementali.costs[i] = player.incrementali.costs[i].times(player.incrementali.costIncreases[i]);
   player.incrementali.upgrades[i]++;
   if (i === 1) {
     player.incrementali.costIncreases[i] = Math.pow(10, 3 + Math.floor(player.incrementali.upgrades[i] / 15));

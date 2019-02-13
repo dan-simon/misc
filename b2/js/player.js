@@ -4,13 +4,13 @@ let player = {
   highTiers: Infinity,
   singularity: {
     unlocked: false,
-    currencyAmount: 1
+    currencyAmount: new Decimal(1)
   },
   incrementali: initialIncrementali(),
   generators: [],
   currentTheme: 'default',
   metaDisplay: true,
-  version: 1
+  version: 2
 }
 
 initializeTier();

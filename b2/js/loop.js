@@ -5,9 +5,10 @@ function gameLoop () {
     player.singularity.unlocked = true;
   }
   if (player.singularity.unlocked) {
-    player.singularity.currencyAmount += Math.pow(player.generators[0].prestigeAmount.max(1).log(10) / singularityUnlockExp, 3) * getIncrementaliUpgradeEffect(2) * diff;
+    player.singularity.currencyAmount = player.singularity.currencyAmount.plus(
+      Decimal.pow(player.generators[0].prestigeAmount.max(1).log(10) / singularityUnlockExp, 3).times(getIncrementaliUpgradeEffect(2)).times(diff));
   }
-  if (player.singularity.currencyAmount >= 1e24) {
+  if (player.singularity.currencyAmount.gte(1e24)) {
     player.incrementali.unlocked = true;
   }
   if (player.incrementali.unlocked) {

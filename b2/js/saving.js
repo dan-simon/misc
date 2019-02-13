@@ -76,20 +76,27 @@ function saveFix () {
       i.display = true;
     }
   }
-  let initial = initialIncrementali();
-  for (let key of ['costs', 'upgrades', 'costIncreases']) {
-    if (player.incrementali[key].length < initial[key].length) {
-      for (let i = player.incrementali[key].length; i < initial[key].length; i++) {
-        player.incrementali[key].push(initial[key][i]);
-      }
-    }
-  }
-  if (player.version === 0) {
+  if (player.version < 1) {
     player.version = 1;
     player.singularity.currencyAmount = Math.min(player.singularity.currencyAmount, 1e70);
     player.incrementali.costs[1] = 1e27;
     player.incrementali.upgrades[1] = 0;
     player.incrementali.costIncreases[1] = 1e3;
     alert('Unfortunately, for balancing purposes, your singularity power has been reduced to 1e70 (if it was more than that), and your second incrementali upgrade has been reset.')
+  }
+  if (player.version < 2) {
+    player.version = 2;
+    player.singularity.currencyAmount = new Decimal(player.singularity.currencyAmount);
+    let initial = initialIncrementali();
+    for (let key of ['costs', 'upgrades', 'costIncreases']) {
+      if (player.incrementali[key].length < initial[key].length) {
+        for (let i = player.incrementali[key].length; i < initial[key].length; i++) {
+          player.incrementali[key].push(initial[key][i]);
+        }
+      }
+    }
+    for (let i = 0; i < player.incrementali.costs.length; i++) {
+      player.incrementali.costs[i] = new Decimal(player.incrementali.costs[i]);
+    }
   }
 }

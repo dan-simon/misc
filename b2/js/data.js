@@ -11,7 +11,7 @@ function getPrestigeGain (x) {
 const singularityUnlockExp = 1e4;
 
 function getSingularityPowerEffect () {
-  return 1 + (getSingularityPowerCap() - 1) * (1 - Math.exp(-Math.log10(player.singularity.currencyAmount) / 8));
+  return 1 + (getSingularityPowerCap() - 1) * (1 - Math.exp(-player.singularity.currencyAmount.log10() / 8));
 }
 
 function getBoost (tier) {
