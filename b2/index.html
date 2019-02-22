@@ -9,7 +9,7 @@
 <body>
   <div id="app">
     <div>
-      <span><button onclick="saveGame()">Save</button> <button onclick="loadGame(prompt('Enter your save:'))">Load</button> <button onclick="exportGame()">Export</button> <button onclick="nextTheme()">Current theme: {{ player.currentTheme }}</button></span>
+      <span><button onclick="saveGame()">Save</button> <button onclick="loadGame(prompt('Enter your save:'))">Load</button> <button onclick="exportGame()">Export</button> <button onclick="nextTheme()">Current theme: {{ player.currentTheme }}</button> <button onclick="toggleSaveType()">Current save type: {{ player.saveType }}</button></span>
     </div>
     <div v-if="player.generators.length > 3">
       <button @click="toggleMetaDisplay()">Display buttons display: {{ player.metaDisplay ? 'enabled' : 'disabled' }}</button>

@@ -10,6 +10,7 @@ let player = {
   generators: [],
   currentTheme: 'default',
   metaDisplay: true,
+  saveType: 'full',
   version: 2
 }
 

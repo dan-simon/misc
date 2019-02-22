@@ -1,5 +1,6 @@
 function saveText(player) {
-  return btoa(JSON.stringify(player, function(k, v) {
+  let p = saveObject(player);
+  return btoa(JSON.stringify(p, function(k, v) {
     if (v === Infinity) {
       return "Infinity";
     } else if (typeof v === 'string') {
@@ -11,6 +12,33 @@ function saveText(player) {
       return v;
     }
   }));
+}
+
+function saveObject(player) {
+  let p = {};
+  for (let i in player) {
+    if (i !== 'generators') {
+      p[i] = player[i];
+    } else {
+      p.generators = [];
+      for (let i = 0; i < player.generators.length; i++) {
+        if (i < player.generators.length - 3 && player.saveType === 'short') {
+          p.generators.push(getInitialTier(i));
+        } else {
+          p.generators.push(player.generators[i]);
+        }
+      }
+    }
+  }
+  return p;
+}
+
+function toggleSaveType() {
+  if (player.saveType === 'full') {
+    player.saveType = 'short';
+  } else if (player.saveType === 'short') {
+    player.saveType = 'full';
+  }
 }
 
 function saveGame() {
