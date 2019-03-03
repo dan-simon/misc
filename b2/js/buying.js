@@ -12,7 +12,7 @@ function safeSubtract(i, j) {
 function buyGenerator(i, j) {
   let g = player.generators[i].list[j];
   if (g.cost.gt(player.generators[i].prestigeAmount)) return false;
-  if (player.generators[i].list.length === j + 1) initializeGenerator(i);
+  if (player.generators[i].list.length === j + 1 && !isLiquified(i)) initializeGenerator(i);
   safeSubtract(i, g.cost);
   g.cost = g.cost.times(Decimal.pow(10, Math.pow(2, j)));
   g.mult = g.mult.times(2);
@@ -33,7 +33,7 @@ function buyMaxGenerator(i, j) {
   // We're not going to buy any.
   if (x < 0) return;
   // We have to initialize the next generator.
-  if (x > 0 && player.generators[i].list.length === j + 1) initializeGenerator(i);
+  if (x > 0 && player.generators[i].list.length === j + 1 && !isLiquified(i)) initializeGenerator(i);
   let totalCost = g.cost.times(costIncrease.pow(x).minus(1).div(costIncrease.minus(1)));
   safeSubtract(i, totalCost);
   g.cost = g.cost.times(Decimal.pow(10, x * Math.pow(2, j)));

@@ -22,8 +22,16 @@ function getBoost (tier) {
   return ret;
 }
 
-function getMult (i, j) {;
-  return player.generators[i].list[j].mult.times(getBoost(i)).times(getIncrementaliEffect()).pow(getSingularityPowerEffect());
+function getMult (i, j) {
+  if (isLiquified(i)) {
+    if (j === 0) {
+      return getLiquifiedMult(i);
+    } else {
+      return new Decimal(0);
+    }
+  } else {
+    return player.generators[i].list[j].mult.times(getBoost(i)).times(getIncrementaliEffect()).pow(getSingularityPowerEffect());
+  }
 }
 
 function initializeTier () {

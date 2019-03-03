@@ -127,4 +127,10 @@ function saveFix () {
       player.incrementali.costs[i] = new Decimal(player.incrementali.costs[i]);
     }
   }
+  if (player.version < 3) {
+    player.version = 3;
+    for (let i = 0; i < player.incrementali.costs.length; i++) {
+      player.incrementali.costs[i] = new Decimal(player.incrementali.costs[i]);
+    }
+  }
 }

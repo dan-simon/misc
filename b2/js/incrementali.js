@@ -4,7 +4,8 @@ function initialIncrementali() {
     currencyAmount: 1,
     galaxies: 0,
     nextGalaxy: 100,
-    costs: [1e24, 1e27, 1e30, 1e32, 1e34],
+    costs: [new Decimal(1e24), new Decimal(1e27), new Decimal(1e30),
+      new Decimal(1e32), new Decimal(1e34)],
     upgrades: [0, 0, 0, 0, 0],
     costIncreases: [10, 1e3, 1e5, 1e6, 1e8]
   };
