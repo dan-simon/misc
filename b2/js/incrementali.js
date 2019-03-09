@@ -22,7 +22,7 @@ function getIncrementaliUpgradeEffect(i) {
   } else if (i === 1) {
     return Math.pow(getIncrementaliUpgradeEffect(4), amount);
   } else if (i === 2) {
-    return Math.pow(Math.log10(player.incrementali.currencyAmount) + 1, amount) * Math.pow(player.incrementali.currencyAmount, 0.25 - 0.25 * Math.pow(0.9, amount));
+    return Decimal.pow(Math.log10(player.incrementali.currencyAmount) + 1, amount).times(Decimal.pow(player.incrementali.currencyAmount, 0.25 - 0.25 * Math.pow(0.9, amount)));
   } else if (i === 3) {
     return 1.3 - 0.1 * Math.pow(0.8, amount * Math.log10(player.incrementali.currencyAmount));
   } else if (i === 4) {
