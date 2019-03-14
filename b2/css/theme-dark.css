@@ -9,3 +9,8 @@ html * {
 button {
   background-color: black;
 }
+
+#showDimsText {
+  background-color: white;
+  color: black;
+}
