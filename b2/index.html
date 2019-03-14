@@ -18,8 +18,8 @@
           <button @click="toggleDisplay(idx)">{{ generator.displayName }} display: {{ generator.display ? 'enabled' : 'disabled' }}</button>
         </span>
       </div>
-      <div id="showDimsText">Display <input v-model.number="player.lowTiers"></input> lowest dimensions.</div>
-      <div id="showDimsText">Display <input v-model.number="player.highTiers"></input> highest dimensions.</div>
+      <div>Display <input v-model.number="player.lowTiers" id="showDimsText"></input> lowest dimensions.</div>
+      <div>Display <input v-model.number="player.highTiers" id="showDimsText"></input> highest dimensions.</div>
     </div>
     <div class="column" v-for="(generator, idx) in player.generators">
       <div v-if="generator.display">
