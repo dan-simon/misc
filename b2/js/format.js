@@ -16,7 +16,7 @@ let superscripts = '⁰¹²³⁴⁵⁶⁷⁸⁹';
 function numberToSuperscript(x) {
   x = x + '';
   for (let i = 0; i < superscripts.length; i++) {
-    x = x.replace(i + '', superscripts[i]);
+    x = x.replace(new RegExp(i + '', 'g'), superscripts[i]);
   }
   return x;
 }

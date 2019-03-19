@@ -34,6 +34,9 @@ var app = new Vue({
     buyIncrementaliUpgrade(i) {
       return buyIncrementaliUpgrade(i);
     },
+    maxAllIncrementaliUpgrades() {
+      return maxAllIncrementaliUpgrades();
+    },
     getIncrementaliEffect() {
       return getIncrementaliEffect();
     },

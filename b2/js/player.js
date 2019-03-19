@@ -11,7 +11,7 @@ let player = {
   currentTheme: 'default',
   metaDisplay: true,
   saveType: 'full',
-  version: 3
+  version: 5
 }
 
 initializeTier();

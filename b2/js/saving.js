@@ -133,4 +133,17 @@ function saveFix () {
       player.incrementali.costs[i] = new Decimal(player.incrementali.costs[i]);
     }
   }
+  if (player.version < 4) {
+    player.version = 4;
+    for (let i = 0; i < player.incrementali.costs.length; i++) {
+      player.incrementali.costs[i] = new Decimal(player.incrementali.costs[i]);
+    }
+  }
+  if (player.version < 5) {
+    player.version = 5;
+    let unlocked = player.incrementali.unlocked;
+    player.incrementali = initialIncrementali();
+    player.incrementali.unlocked = unlocked;
+    alert('Unfortunately, as part of an attempted rebalance, your incrementali have been completely reset.');
+  }
 }

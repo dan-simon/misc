@@ -57,6 +57,7 @@
       <button class="upgrade" @click="buyIncrementaliUpgrade(2)">Multiply singularity power production based on incrementali.<br/>Currently {{ format(getIncrementaliUpgradeEffect(2)) }}x.<br/>Cost: {{ format(player.incrementali.costs[2]) }}</span></button>
       <button class="upgrade" @click="buyIncrementaliUpgrade(3)">Boost the incrementali production upgrade based on incrementali.<br/>Currently {{ format(getIncrementaliUpgradeEffect(3)) }}x per purchase.<br/>Cost: {{ format(player.incrementali.costs[3]) }}</span></button>
       <button class="upgrade" @click="buyIncrementaliUpgrade(4)">Boost the incrementali multiplier upgrade based on incrementali galaxies.<br/>Currently {{ format(getIncrementaliUpgradeEffect(4)) }}x per purchase.<br/>Cost: {{ format(player.incrementali.costs[4]) }}</span></button>
+      <button class="upgrade" @click="maxAllIncrementaliUpgrades()">Max buy all incrementali upgrades</button>
     </div>
   </div>
   <a href="https://discord.gg/YArVwQ4">Discord</a>

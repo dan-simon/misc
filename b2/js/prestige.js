@@ -13,7 +13,7 @@ function prestige (i) {
   }
   partialResetTier(i + 1);
   if (prestigeRank <= 1)
-    player.incrementali.currencyAmount = 1;
+    player.incrementali.currencyAmount = new Decimal(1);
     player.incrementali.galaxies = 0;
-    player.incrementali.nextGalaxy = 100;
+    player.incrementali.nextGalaxy = new Decimal(100);
 }
