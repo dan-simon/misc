@@ -1,0 +1,31 @@
+How about just the original idea?
+
+integral from 0 to t of 2^(integral from 0 to y of 2^(x / 3600)dx / 300)dy
+
+reframe 2^x as e^(ln(2)x)
+
+integral from 0 to t of e^(ln(2) * integral from 0 to y of e^(ln(2) * x / 3600)dx / 300)dy
+
+integral from 0 to t of e^(ln(2) / 300 * integral from 0 to y of e^(ln(2) / 3600 * x)dx)dy
+
+e^(cx) -> integral -> e^(cx) / c
+
+integral from 0 to t of e^(ln(2) / 300 * (e^(ln(2) / 3600 * y) - 1))dy
+
+which doesn't really exist, ugh. let's try something we can actually calculate.
+
+using:
+
+600 * (e ** (6 * (e ** (x / 3600) - 1) / c) - 1)
+
+no, make some annoying timewall for rewards to multiply by 1.5.
+How about the rewards get stronger (from 1 to 1.5) at a rate of initially
+a day to cap, but there's a fifth bar which makes that go twice as quick
+for every 30 minutes (so at 3:00:00 it's possible, at 5:00:00 it's less
+than 2 minutes)
+
+development, efficiency, refactoring, recruitment, patience
+
+Also, multiply production by (reached milestones + 1) (milestone every 30 minutes)
+
+prestige works like progress; it's added just as progress is added to other progress.
