@@ -94,3 +94,30 @@ eyJwcm9ncmVzcyI6WzAsMCwwLDAsMCwwLDAsMC4wMDAxNTU0OTc2ODUxODUxODUxXSwiZGV2cyI6WzAs
 
 just before update:
 eyJwcm9ncmVzcyI6WzE3ODM4Ljg0MzkxNjE0NjY4LDE3NDA0Ljk5NDkzNTMyMDI2NSwxNzQwMy40NDMyMTg4ODI0OSwxNzQxMy4zMzU1NDY0MTcyMywxNzIyNC4yMDY3MzUyMDUxMSwxNjc2MS4wOTAwOTg0NTQ1NjIsMTU1NzEuNjIzNDAwMTE2NjIzLDFdLCJkZXZzIjpbNTksMCwwLDAsMF0sIm1pbGVzdG9uZXMiOjksImVubGlnaHRlbmVkIjoyLCJsYXN0VXBkYXRlIjoxNTU0MTM5ODc0Nzg0fQ==
+
+Something where all devs work on the update with half effectiveness would be nice, along with dev auto-assign
+(those could all be part of the initial-10-devs first headstart upgrade, but those three things should be split up IMO into two upgrades)
+Scaling is reduced after 4:30:00
+Patience is more powerful.
+(replace the 2 by 2.5, and 1:00 by 10 seconds)
+Initial 10 devs + dev auto-assign
+Maybe each type has a rather weak non-repeatable?
+Endgame power boosts upgrade point formula. (2 -> 2 + log2(x + 2) / 10)
+After reaching 1, the patience meter keeps going, but with reduced effect.
+(x -> 1 + ln(x) / 10)
+All devs also work on development, whatever they're assigned to.
+
+Patience needs to have auto-enlightned at some point.
+
+Hm, I just noticed that power is all lost on update. That might seem weird, but I think I'll keep it.
+
+Ideally, after 30 prestiges and 10 experience of each kind, prestiges take 10 minutes.
+
+But at that point you're getting about 0.3 power/sec, so after 300 secs you have roughly 100 power of each kind.
+
+That gives a 60x mult to production, and a 6x mult to patience meter.
+
+The 60x mult to production makes it take about 3 minutes to get to 3:00:00,
+at that point the idea of 7 more minutes for update seems reasonable (but testing will be needed).
+
+So, 10 is probably a reasonable cost, but who knows?
