@@ -1,6 +1,13 @@
 function loadGame (s) {
   player = JSON.parse(atob(s));
+  fixPlayer();
   saveGame();
+}
+
+function fixPlayer () {
+  if (!('enlightened' in player)) {
+    player.enlightened = 0;
+  }
 }
 
 function loadGameStorage () {
@@ -41,6 +48,7 @@ let initialPlayer = {
   progress: [0, 0, 0, 0, 0, 0, 0, 0], // in seconds, or for the last from 0 to 1
   devs: [0, 0, 0, 0, 0],
   milestones: 0,
+  enlightened: 0,
   lastUpdate: Date.now()
 }
 
@@ -66,10 +74,6 @@ function addProgress(orig, change, c) {
 
 function getScaling() {
   return 1 + getEffect(2) + getEffect(6);
-}
-
-function getPrestigeDevProgress() {
-  return centralFormula(player.progress[0], 1);
 }
 
 function addToProgress(diff) {
@@ -130,28 +134,32 @@ function getEffect(i) {
   } else if (i === 3) {
     return 1 + Math.floor(x / 300);
   } else if (i === 4) {
-    return 86400 / Math.pow(2, x / 1800);
+    return 86400 / Math.pow(2, x / 1800) * Math.pow(2, player.enlightened);
   } else if (i === 7) {
-    return 1 + x / 2;
+    return 1 + x / 2 * Math.pow(1.1, player.enlightened);
   }
 }
 
-function canPrestige() {
-  return player.progress[0] >= 1800;
-}
-
-function progessWithPrestige(x) {
-  return addProgress(player.progress[x], getPrestigeDevProgress(), 1);
+function canPrestige(i) {
+  return player.progress[0] >= Math.max(1800, player.progress[i]);
 }
 
 function prestige(i) {
-  if (canPrestige()) {
-    player.progress[i] = progessWithPrestige(i);
+  if (canPrestige(i)) {
+    player.progress[i] = player.progress[0];
     for (let j = 0; j <= 4; j++) {
       player.progress[j] = 0;
       player.devs[j] = 0;
     }
     player.progress[7] = 0;
+    player.enlightened = 0;
+  }
+}
+
+function enlightened() {
+  if (player.progress[7] === 1) {
+    player.progress[7] = 0;
+    player.enlightened++;
   }
 }
 
@@ -198,18 +206,22 @@ function updateDisplay () {
   for (let i = 0; i <= 4; i++) {
     document.getElementById("devs-" + i).innerHTML = player.devs[i];
   }
-  if (canPrestige()) {
-    for (let i = 5; i <= 6; i++) {
-      document.getElementById("prestige-" + i).innerHTML = toTime(player.progress[i]) + ' -> ' + toTime(progessWithPrestige(i));
-    }
-  } else {
-    for (let i = 5; i <= 6; i++) {
+  for (let i = 5; i <= 6; i++) {
+    if (canPrestige(i)) {
+      document.getElementById("prestige-" + i).innerHTML = toTime(player.progress[i]) + ' -> ' + toTime(player.progress[0]);
+    } else {
       document.getElementById("prestige-" + i).innerHTML = 'need more development';
     }
+  }
+  if (player.progress[7] === 1) {
+    document.getElementById('enlightened-desc').innerHTML = 'make patience meter slower, but slightly stronger';
+  } else {
+    document.getElementById('enlightened-desc').innerHTML = 'requires max patience meter';
   }
   document.getElementById('total-devs').innerHTML = getTotalDevs();
   document.getElementById('progress-milestones').innerHTML = player.milestones;
   document.getElementById('progress-milestones-effect').innerHTML = getMilestoneEffect();
+  document.getElementById('enlightened').innerHTML = player.enlightened;
 }
 
 window.onload = function () {
