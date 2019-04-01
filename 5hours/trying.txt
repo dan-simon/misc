@@ -29,3 +29,68 @@ development, efficiency, refactoring, recruitment, patience
 Also, multiply production by (reached milestones + 1) (milestone every 30 minutes)
 
 prestige works like progress; it's added just as progress is added to other progress.
+
+I'd like to have lategame stuff, patience stuff, and headstart stuff.
+base patience effect after 00:01:00 is nerfed: 1m / (1 + ln(1m / x))
+
+update gain: floor(2 ** (hours - 5))
+
+lategame updates produce production multiplier, 0.01/second, 0 initially (sqrt(x + 1))
+
+patience updates produce patience gain multiplier, 0.01/second, 0 initially (log2(x + 2))
+
+headstart updates produce dev gain multiplier, 0.01/second, 0 initially (log2(x + 2))
+
+there's no cancellation
+
+Let's at first say double-exponential cost scaling means 10, 100, 1e4, etc.
+
+possible upgrades:
+
+Scaling is reduced after 4:30:00.
+(replace the Math.exp(x / 3600) by Math.min(Math.exp(x / 3600), Math.pow(x / 3600, 3)))
+
+Efficiency is slightly boosted.
+(after buying)
+Efficiency is slightly boosted.
+x ** (1 + 0.2 * bought) ** 0.5, exponential cost scaling
+(the ** 0.5 stops it from being definitively OP, and it also affects meta-efficiency)
+
+Efficiency affects the patience meter with reduced effect.
+(after buying)
+Efficiency affects the patience meter more strongly.
+max(1, log2(max(1, log2(x)))) ** ((1 + bought) / 2), double-exponential cost scaling
+(the double log2 is less strong than it might seem (1 million still goes to a value above 4),
+but it's not strong enough to destabilize everything (I think))
+Probably just start with updates and no upgrades, then see how far you can get,
+then add the initial OP upgrades, then see how far you can get with those.
+----
+Patience is more powerful.
+(replace the 2 by 2.5, and 1:00 by 10 seconds)
+
+After reaching 1, the patience meter keeps going, but with reduced effect.
+(after buying)
+The patience meter's effect after reaching 1 is increased.
+x -> 1 + bought * Math.log(x) / 5, exponential cost scaling
+
+You start with 2 times enlightened, which do not affect patience gain speed.
+(after buying)
+You start with {new bought + 1} times enlightened, which do not affect patience gain speed.
+1 + bought times, double-exponential cost scaling
+----
+You start with 10 devs rather than 1.
+
+You start with 30 minutes of meta-efficiency and meta-refactoring.
+(after buying)
+You start with {new bought * 30 minutes} minutes of meta-efficiency and meta-refactoring.
+bought * 30 minutes, exponential cost scaling
+
+You start with 0.1x of the dev gain from your farthest-ever recruitment.
+You start with {0.1 * 2 ** new bought}x of the dev gain from your farthest-ever recruitment.
+0.1 * 2 ** new bought, double-exponential cost scaling
+(this doesn't need double-exponential cost scaling but it has it for consistency)
+
+eyJwcm9ncmVzcyI6WzAsMCwwLDAsMCwwLDAsMC4wMDAxNTU0OTc2ODUxODUxODUxXSwiZGV2cyI6WzAsMCwwLDAsMCwwLDAsMF0sIm1pbGVzdG9uZXMiOjAsImVubGlnaHRlbmVkIjowLCJsYXN0VXBkYXRlIjoxNTU0MTM5NTM4MzM3LCJ1cGRhdGVQb2ludHMiOjEsInVwZGF0ZXMiOjEsImV4cGVyaWVuY2UiOlswLDAsMF0sInBvd2VyIjpbMCwwLDAsMF19
+
+just before update:
+eyJwcm9ncmVzcyI6WzE3ODM4Ljg0MzkxNjE0NjY4LDE3NDA0Ljk5NDkzNTMyMDI2NSwxNzQwMy40NDMyMTg4ODI0OSwxNzQxMy4zMzU1NDY0MTcyMywxNzIyNC4yMDY3MzUyMDUxMSwxNjc2MS4wOTAwOTg0NTQ1NjIsMTU1NzEuNjIzNDAwMTE2NjIzLDFdLCJkZXZzIjpbNTksMCwwLDAsMF0sIm1pbGVzdG9uZXMiOjksImVubGlnaHRlbmVkIjoyLCJsYXN0VXBkYXRlIjoxNTU0MTM5ODc0Nzg0fQ==

@@ -8,6 +8,12 @@ function fixPlayer () {
   if (!('enlightened' in player)) {
     player.enlightened = 0;
   }
+  if (!('updates' in player)) {
+    player.updatePoints = 0;
+    player.updates = 0;
+    player.experience = [0, 0, 0];
+    player.power = [0, 0, 0];
+  }
 }
 
 function loadGameStorage () {
@@ -49,6 +55,10 @@ let initialPlayer = {
   devs: [0, 0, 0, 0, 0],
   milestones: 0,
   enlightened: 0,
+  updatePoints: 0,
+  updates: 0,
+  experience: [0, 0, 0],
+  power: [0, 0, 0],
   lastUpdate: Date.now()
 }
 
@@ -77,7 +87,7 @@ function getScaling() {
 }
 
 function addToProgress(diff) {
-  let perDev = diff * getEffect(1) * getEffect(5) * getMilestoneEffect();
+  let perDev = diff * getEffect(1) * getEffect(5) * getMilestoneEffect() * getUpdatePowerEffect(0);
   let scaling = getScaling();
   for (let i = 0; i <= 4; i++) {
     player.progress[i] = addProgress(player.progress[i], player.devs[i] * perDev, scaling);
@@ -92,6 +102,12 @@ function checkForMilestones() {
   player.milestones = Math.max(player.milestones, Math.floor(player.progress[0] / 1800));
 }
 
+function addToUpdatePower(diff) {
+  for (let i = 0; i <= 2; i++) {
+    player.power[i] += diff * player.experience[i] * getUpdatesEffect();
+  }
+}
+
 function gameCode() {
   let now = Date.now();
   diff = (now - player.lastUpdate) / 1000;
@@ -101,6 +117,7 @@ function gameCode() {
   player.lastUpdate = now;
   addToProgress(diff);
   addToPatience(diff);
+  addToUpdatePower(diff);
   checkForMilestones();
 }
 
@@ -125,6 +142,14 @@ function getTotalDevs () {
   return getEffect(3);
 }
 
+function getBasePatienceMeterTime (x) {
+  let result = 86400 / Math.pow(2, x / 1800);
+  if (result < 60) {
+    result = 60 / (1 + Math.ln(60 / result));
+  }
+  return result;
+}
+
 function getEffect(i) {
   let x = player.progress[i];
   if (i === 1 || i === 5) {
@@ -132,9 +157,10 @@ function getEffect(i) {
   } else if (i === 2 || i === 6) {
     return x / 1800 * getEffect(7);
   } else if (i === 3) {
-    return 1 + Math.floor(x / 300);
+    return 1 + Math.floor(x * getUpdatePowerEffect(2) / 300);
   } else if (i === 4) {
-    return 86400 / Math.pow(2, x / 1800) * Math.pow(2, player.enlightened);
+    let base = getBasePatienceMeterTime(x);
+    return base / getUpdatePowerEffect(1) * Math.pow(2, player.enlightened);
   } else if (i === 7) {
     return 1 + x / 2 * Math.pow(1.1, player.enlightened);
   }
@@ -189,6 +215,47 @@ function zeroDev(i) {
   player.devs[i] = 0;
 }
 
+function canUpdate() {
+  return player.progress[0] >= 18000;
+}
+
+function getUpdateGain() {
+  return Math.floor(Math.pow(2, player.progress[0] / 3600 - 5));
+}
+
+function update() {
+  if (canUpdate()) {
+    player.updatePoints += getUpdateGain();
+    player.updates++;
+    for (let i = 0; i <= 7; i++) {
+      player.progress[i] = 0;
+      player.devs[i] = 0;
+    }
+    player.milestones = 0;
+    player.enlightened = 0;
+    for (let i = 0; i <= 3; i++) {
+      player.power[i] = 0;
+    }
+  }
+}
+
+function getUpdatesEffect() {
+  return Math.max(0, (1 + Math.log2(player.updates)) / 100);
+}
+
+function assignAll(i) {
+  player.experience[i] += player.updatePoints;
+  player.updatePoints = 0;
+}
+
+function getUpdatePowerEffect(i) {
+  if (i === 0) {
+    return Math.sqrt(player.power[i] + 1);
+  } else {
+    return Math.log2(player.power[i] + 2)
+  }
+}
+
 function updateDisplay () {
   for (let i = 0; i <= 6; i++) {
     document.getElementById("progress-span-" + i).innerHTML = toTime(player.progress[i]);
@@ -210,7 +277,7 @@ function updateDisplay () {
     if (canPrestige(i)) {
       document.getElementById("prestige-" + i).innerHTML = toTime(player.progress[i]) + ' -> ' + toTime(player.progress[0]);
     } else {
-      document.getElementById("prestige-" + i).innerHTML = 'need more development';
+      document.getElementById("prestige-" + i).innerHTML = 'requires ' + toTime(1800) + ' development';
     }
   }
   if (player.progress[7] === 1) {
@@ -218,10 +285,32 @@ function updateDisplay () {
   } else {
     document.getElementById('enlightened-desc').innerHTML = 'requires max patience meter';
   }
-  document.getElementById('total-devs').innerHTML = getTotalDevs();
+  if (canUpdate()) {
+    let gain = getUpdateGain();
+    document.getElementById('update-gain').innerHTML = 'gain ' + gain + ' update point' + (gain === 1 ? '' : 's');
+  } else {
+    document.getElementById('update-gain').innerHTML = 'requires ' + toTime(18000) + ' development';
+  }
+  if (player.updates > 0) {
+    document.getElementById('update-div').style.display = '';
+  } else {
+    document.getElementById('update-div').style.display = 'none';
+  }
+  document.getElementById('update-points').innerHTML = player.updatePoints;
+  document.getElementById('updates').innerHTML = player.updates;
+  document.getElementById('updates-effect').innerHTML = format(getUpdatesEffect());
+  for (let i = 0; i <= 2; i++) {
+    document.getElementById('update-experience-span-' + i).innerHTML = player.experience[i];
+    document.getElementById('update-power-span-' + i).innerHTML = format(player.power[i]);
+    document.getElementById('update-effect-span-' + i).innerHTML = format(getUpdatePowerEffect(i));
+  }
   document.getElementById('progress-milestones').innerHTML = player.milestones;
   document.getElementById('progress-milestones-effect').innerHTML = getMilestoneEffect();
   document.getElementById('enlightened').innerHTML = player.enlightened;
+  document.getElementById('devs-plural').innerHTML = (getTotalDevs() === 1) ? '' : 's';
+  document.getElementById('progress-milestones-plural').innerHTML = (player.milestones === 1) ? '' : 's';
+  document.getElementById('update-points-plural').innerHTML = (player.updatePoints === 1) ? '' : 's';
+  document.getElementById('updates-plural').innerHTML = (player.updates === 1) ? '' : 's';
 }
 
 window.onload = function () {

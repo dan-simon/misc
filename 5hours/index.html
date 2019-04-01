@@ -27,9 +27,9 @@
     </tr>
     <tr>
       <td></td>
-      <td><span id="effect-span-1"></span>x multiplier on all types of progress</td>
+      <td><span id="effect-span-1"></span>x multiplier to all production</td>
       <td><span id="effect-span-2"></span>x slower scaling</td>
-      <td><span id="effect-span-3"></span> dev(s)</td>
+      <td><span id="effect-span-3"></span> total dev<span id="devs-plural"></span></td>
       <td><span id="effect-span-4"></span> total real time for patience meter to max out</td>
       <td><span id="effect-span-5"></span>x additional multiplier on all types of progress</td>
       <td><span id="effect-span-6"></span>x additional slower scaling (additive with refactoring)</td>
@@ -46,10 +46,42 @@
       <td><button onclick="enlightened()">Become enlightened: <span id="enlightened-desc"></span></button></td>
     </tr>
   </table>
-  <span>Other information: <span id="total-devs"></span> total devs, <span id="progress-milestones"></span> progress milestones (giving a <span id="progress-milestones-effect"></span>x boost to all production), <span id="enlightened"></span> times enlightened</span>
+  <button onclick="update()">Release an update.<br/>(<span id="update-gain"></span>)</button>
+  <div id="update-div" style="display: none;">
+    <span>You have <span id="update-points">0</span> update point<span id="update-points-plural"></span>, and have updated <span id="updates">0</span> time<span id="updates-plural"></span> (corresponding to <span id="updates-effect">0.01</span> power per experience per second)</span>
+    <table style="table-layout: fixed; width: 800px;">
+      <tr>
+        <td>Endgame</td>
+        <td>Patience</td>
+        <td>Headstart</td>
+      </tr>
+      <tr>
+        <td><span id="update-experience-span-0">0</span> endgame experience</td>
+        <td><span id="update-experience-span-1">0</span> patience experience</td>
+        <td><span id="update-experience-span-2">0</span> headstart experience</td>
+      </tr>
+      <tr>
+        <td><span id="update-power-span-0">0</span> endgame power</td>
+        <td><span id="update-power-span-1">0</span> patience power</td>
+        <td><span id="update-power-span-2">0</span> headstart power</td>
+      </tr>
+      <tr>
+        <td><span id="update-effect-span-0">1</span>x multiplier to all production</td>
+        <td><span id="update-effect-span-1">1</span>x patience meter gain</td>
+        <td><span id="update-effect-span-2">1</span>x additional dev gain</td>
+      </tr>
+      <tr>
+        <td><button onclick="assignAll(0)">Turn all your update points into endgame experience.</button></td>
+        <td><button onclick="assignAll(1)">Turn all your update points into patience experience.</button></td>
+        <td><button onclick="assignAll(2)">Turn all your update points into headstart experience.</button></td>
+      </tr>
+    </table>
+  </div>
+  <br/>
+  <span>Other information: <span id="progress-milestones"></span> progress milestone<span id="progress-milestones-plural"></span> (giving a <span id="progress-milestones-effect"></span>x multiplier to all production), <span id="enlightened"></span> times enlightened</span>
   <br/>
   <span><button onclick="saveGame()">Save</button> <button onclick="exportGame()">Export</button> <button onclick="loadGamePrompt()">Load</button> <button onclick="resetGame()">RESET</button></span>
   <br/>
-  <span  style="display: none;"><input id="export-output"></input></span>
+  <span style="display: none;"><input id="export-output"></input></span>
 </body>
 </html>
