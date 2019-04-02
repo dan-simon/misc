@@ -121,3 +121,5 @@ The 60x mult to production makes it take about 3 minutes to get to 3:00:00,
 at that point the idea of 7 more minutes for update seems reasonable (but testing will be needed).
 
 So, 10 is probably a reasonable cost, but who knows?
+
+eyJwcm9ncmVzcyI6WzAsMCwwLDEwNzcuNjY2ODA2ODIyMzczMiwwLDAsMjIzNC41NjEyMTE1ODkyOTQsMC4wMjc4MzU5MTEzMDI1OTA2Nl0sImRldnMiOlswLDAsMCw0LDAsMCwwLDBdLCJtaWxlc3RvbmVzIjoxLCJlbmxpZ2h0ZW5lZCI6MCwibGFzdFVwZGF0ZSI6MTU1NDE0NjE3ODgxNSwidXBkYXRlUG9pbnRzIjowLCJ1cGRhdGVzIjoxLCJleHBlcmllbmNlIjpbMCwxLDBdLCJwb3dlciI6WzAsMzguODY5MTU5OTk5OTczMjQsMCwwXX0=

@@ -162,7 +162,7 @@ function getEffect(i) {
     let base = getBasePatienceMeterTime(x);
     return base / getUpdatePowerEffect(1) * Math.pow(2, player.enlightened);
   } else if (i === 7) {
-    return 1 + x / 2 * Math.pow(1.1, player.enlightened);
+    return 1 + x / 2 * (1 + player.enlightened / 10);
   }
 }
 
