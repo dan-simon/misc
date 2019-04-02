@@ -2,6 +2,7 @@ function loadGame (s) {
   player = JSON.parse(atob(s));
   fixPlayer();
   saveGame();
+  fillInInputs();
 }
 
 function fixPlayer () {
@@ -514,7 +515,6 @@ function updateDisplay () {
 
 window.onload = function () {
   loadGameStorage();
-  fillInInputs();
   setInterval(tick, 50);
   setInterval(saveGame, 10000);
 }
