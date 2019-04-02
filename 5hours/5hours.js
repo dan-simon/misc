@@ -23,6 +23,15 @@ function fixPlayer () {
       }
     }
   }
+  if (!('options' in player)) {
+    player.options = {
+      confirmations: {
+        prestige: true,
+        prestigeWithoutGain: true,
+        update: true
+      }
+    }
+  }
 }
 
 function loadGameStorage () {
@@ -73,6 +82,13 @@ let initialPlayer = {
     dev: {
       settings: [0, 0, 0, 0, 0],
       on: false
+    }
+  },
+  options: {
+    confirmations: {
+      prestige: true,
+      prestigeWithoutGain: true,
+      update: true
     }
   },
   lastUpdate: Date.now()
@@ -256,12 +272,34 @@ function getEffect(i) {
   }
 }
 
+function toggleConfirmation(x) {
+  player.options.confirmations[x] = !player.options.confirmations[x];
+}
+
+function canPrestigeWithoutGain(i) {
+  return player.progress[0] >= 1800 && player.progress[0] <= player.progress[i];
+}
+
 function canPrestige(i) {
-  return player.progress[0] >= Math.max(1800, player.progress[i]);
+  return player.progress[0] >= 1800;
+}
+
+function confirmPrestige(i) {
+  let whatWillReset = 'development, efficiency, refactoring, recruitment, patience, patience meter, and times enlightened';
+  if (canPrestigeWithoutGain(i) &&
+  player.options.confirmations.prestigeWithoutGain &&
+  !confirm('Are you sure you want to prestige? You will gain nothing, and your ' + whatWillReset + ' will reset.')) {
+    return false;
+  } else if (player.options.confirmations.prestige &&
+  !confirm('Are you sure you want to prestige? Your ' + whatWillReset + ' will reset.')) {
+    return false;
+  } else {
+    return true;
+  }
 }
 
 function prestige(i) {
-  if (canPrestige(i)) {
+  if (canPrestige(i) && confirmPrestige(i)) {
     player.progress[i] = player.progress[0];
     for (let j = 0; j <= 4; j++) {
       player.progress[j] = 0;
@@ -322,8 +360,21 @@ function getUpdateGain() {
   return Math.floor(Math.pow(base, player.progress[0] / 3600 - 5));
 }
 
+function confirmUpdate() {
+  let whatWillReset = 'meta-efficiency, meta-refactoring, and progress milestones, along with everything prestige resets';
+  if (player.updates > 0) {
+    whatWillReset = whatWillReset.replace('and progress milestones', 'progress milestones, and endgame/patience/headstart power')
+  }
+  if (player.options.confirmations.update &&
+  !confirm('Are you sure you want to update? Your ' + whatWillReset + ' will reset.')) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
 function update() {
-  if (canUpdate()) {
+  if (canUpdate() && confirmUpdate()) {
     player.updatePoints += getUpdateGain();
     player.updates++;
     for (let i = 0; i <= 7; i++) {
@@ -365,11 +416,22 @@ function buyUpdateUpgrade(i, j) {
   player.upgrades[i][j] = true;
 }
 
+function fillInInputs() {
+  fillInAutoDev();
+  fillInConfirmations();
+}
+
 function fillInAutoDev () {
   for (let i = 0; i <= 4; i++) {
-    document.getElementById("auto-dev-" + i).value = player.auto.dev.settings[i];
+    document.getElementById('auto-dev-' + i).value = player.auto.dev.settings[i];
   }
-  document.getElementById("auto-dev-on").checked = player.auto.dev.on;
+  document.getElementById('auto-dev-on').checked = player.auto.dev.on;
+}
+
+function fillInConfirmations() {
+  document.getElementById('prestige-confirmation').checked = player.options.confirmations.prestige;
+  document.getElementById('prestige-without-gain-confirmation').checked = player.options.confirmations.prestigeWithoutGain;
+  document.getElementById('update-confirmation').checked = player.options.confirmations.update;
 }
 
 function toggleAutoDev() {
@@ -398,10 +460,12 @@ function updateDisplay () {
     document.getElementById("devs-" + i).innerHTML = player.devs[i];
   }
   for (let i = 5; i <= 6; i++) {
-    if (canPrestige(i)) {
-      document.getElementById("prestige-" + i).innerHTML = toTime(player.progress[i]) + ' -> ' + toTime(player.progress[0]);
+    if (canPrestigeWithoutGain(i)) {
+      document.getElementById("prestige-" + i).innerHTML = '(' + toTime(player.progress[i]) + ' -> ' + toTime(player.progress[i]) + ') (no gain)';
+    } else if (canPrestige(i)) {
+      document.getElementById("prestige-" + i).innerHTML = '(' + toTime(player.progress[i]) + ' -> ' + toTime(player.progress[0]) + ')';
     } else {
-      document.getElementById("prestige-" + i).innerHTML = 'requires ' + toTime(1800) + ' development';
+      document.getElementById("prestige-" + i).innerHTML = '(requires ' + toTime(1800) + ' development)';
     }
   }
   if (player.progress[7] >= 1) {
@@ -450,7 +514,7 @@ function updateDisplay () {
 
 window.onload = function () {
   loadGameStorage();
-  fillInAutoDev();
+  fillInInputs();
   setInterval(tick, 50);
   setInterval(saveGame, 10000);
 }

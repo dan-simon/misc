@@ -41,8 +41,8 @@
       <td>Devs: <span id="devs-2"></span><br/><button onclick="addDev(2)">+</button><button onclick="subtractDev(2)">-</button><button onclick="maxDev(2)">max</button><button onclick="zeroDev(2)">0</button></td>
       <td>Devs: <span id="devs-3"></span><br/><button onclick="addDev(3)">+</button><button onclick="subtractDev(3)">-</button><button onclick="maxDev(3)">max</button><button onclick="zeroDev(3)">0</button></td>
       <td>Devs: <span id="devs-4"></span><br/><button onclick="addDev(4)">+</button><button onclick="subtractDev(4)">-</button><button onclick="maxDev(4)">max</button><button onclick="zeroDev(4)">0</button></td>
-      <td><button onclick="prestige(5)">Prestige to boost meta-efficiency<br/>(<span id="prestige-5"></span>)</button></td>
-      <td><button onclick="prestige(6)">Prestige to boost meta-refactoring<br/>(<span id="prestige-6"></span>)</button></td>
+      <td><button onclick="prestige(5)">Prestige to boost meta-efficiency<br/><span id="prestige-5"></span></button></td>
+      <td><button onclick="prestige(6)">Prestige to boost meta-refactoring<br/><span id="prestige-6"></span></button></td>
       <td><button onclick="enlightened()">Become enlightened: <span id="enlightened-desc"></span></button></td>
     </tr>
     <tr id="auto-dev-row">
@@ -78,7 +78,7 @@
       <tr>
         <td><span id="update-effect-span-0">1</span>x multiplier to all production</td>
         <td><span id="update-effect-span-1">1</span>x patience meter gain</td>
-        <td><span id="update-effect-span-2">1</span>x additional dev gain</td>
+        <td><span id="update-effect-span-2">1</span>x dev gain from recruitment</td>
       </tr>
       <tr>
         <td><button style="width: 250px;" onclick="assignAll(0)">Turn all your update points into endgame experience.</button></td>
@@ -100,7 +100,13 @@
   <br/>
   <span>Other information: <span id="progress-milestones"></span> progress milestone<span id="progress-milestones-plural"></span> (giving a <span id="progress-milestones-effect"></span>x multiplier to all production), <span id="enlightened"></span> time<span id="enlightened-plural"></span> enlightened</span>
   <br/>
-  <span><button onclick="saveGame()">Save</button> <button onclick="exportGame()">Export</button> <button onclick="loadGamePrompt()">Load</button> <button onclick="resetGame()">RESET</button><span id="auto-dev-span" style="display: none;">Auto dev assignment: <input id="auto-dev-on" onclick="toggleAutoDev()" type="checkbox"></span></span>
+  <span><button onclick="saveGame()">Save</button> <button onclick="exportGame()">Export</button> <button onclick="loadGamePrompt()">Load</button> <button onclick="resetGame()">RESET</button></span>
+  <span>
+    Prestige confirmation: <input id="prestige-confirmation" onclick="toggleConfirmation('prestige')" type="checkbox"></input>
+    Prestige-without-gain confirmation: <input id="prestige-without-gain-confirmation" onclick="toggleConfirmation('prestigeWithoutGain')" type="checkbox"></input>
+    Update confirmation: <input id="update-confirmation" onclick="toggleConfirmation('update')" type="checkbox"></input>
+    <span id="auto-dev-span" style="display: none;">Auto dev assignment: <input id="auto-dev-on" onclick="toggleAutoDev()" type="checkbox"></input></span>
+  </span>
   <br/>
   <span style="display: none;"><input id="export-output"></input></span>
 </body>
