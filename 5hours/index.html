@@ -71,14 +71,24 @@
         <td><span id="update-effect-span-2">1</span>x additional dev gain</td>
       </tr>
       <tr>
-        <td><button onclick="assignAll(0)">Turn all your update points into endgame experience.</button></td>
-        <td><button onclick="assignAll(1)">Turn all your update points into patience experience.</button></td>
-        <td><button onclick="assignAll(2)">Turn all your update points into headstart experience.</button></td>
+        <td><button style="width: 250px;" onclick="assignAll(0)">Turn all your update points into endgame experience.</button></td>
+        <td><button style="width: 250px;" onclick="assignAll(1)">Turn all your update points into patience experience.</button></td>
+        <td><button style="width: 250px;" onclick="assignAll(2)">Turn all your update points into headstart experience.</button></td>
+      </tr>
+      <tr>
+        <td><button style="height: 60px; width: 250px;" onclick="buyUpdateUpgrade(0, 0)">Scaling becomes slower after 4:30:00.<br/>Cost: 5 endgame experience<span id="up-0-0-bought"></span></button></td>
+        <td><button style="height: 60px; width: 250px;" onclick="buyUpdateUpgrade(0, 1)">Patience affects the patience meter more strongly.<br/>Cost: 5 patience experience<span id="up-0-1-bought"></span></button></td>
+        <td><button style="height: 60px; width: 250px;" onclick="buyUpdateUpgrade(0, 2)">Start with 10 devs, and unlock auto dev assignment.<br/>Cost: 5 headstart experience<span id="up-0-2-bought"></span></button></td>
+      </tr>
+      <tr>
+        <td><button style="height: 60px; width: 250px;" onclick="buyUpdateUpgrade(1, 0)">Improve the update point gain formula.<br/>Cost: 100 endgame experience<span id="up-1-0-bought"></span></button></td>
+        <td><button style="height: 60px; width: 250px;" onclick="buyUpdateUpgrade(1, 1)">The patience meter increases with greatly reduced effect past 1.<br/>Cost: 100 patience experience<span id="up-1-1-bought"></span></button></td>
+        <td><button style="height: 60px; width: 250px;" onclick="buyUpdateUpgrade(1, 2)">All your devs act as working on development, in addition to whatever they're working on.<br/>Cost: 100 headstart experience<span id="up-1-2-bought"></span></button></td>
       </tr>
     </table>
   </div>
   <br/>
-  <span>Other information: <span id="progress-milestones"></span> progress milestone<span id="progress-milestones-plural"></span> (giving a <span id="progress-milestones-effect"></span>x multiplier to all production), <span id="enlightened"></span> times enlightened</span>
+  <span>Other information: <span id="progress-milestones"></span> progress milestone<span id="progress-milestones-plural"></span> (giving a <span id="progress-milestones-effect"></span>x multiplier to all production), <span id="enlightened"></span> time<span id="enlightened-plural"></span> enlightened</span>
   <br/>
   <span><button onclick="saveGame()">Save</button> <button onclick="exportGame()">Export</button> <button onclick="loadGamePrompt()">Load</button> <button onclick="resetGame()">RESET</button></span>
   <br/>
