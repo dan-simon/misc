@@ -45,6 +45,16 @@
       <td><button onclick="prestige(6)">Prestige to boost meta-refactoring<br/>(<span id="prestige-6"></span>)</button></td>
       <td><button onclick="enlightened()">Become enlightened: <span id="enlightened-desc"></span></button></td>
     </tr>
+    <tr id="auto-dev-row">
+      <td>Fraction of devs to assign: <input id="auto-dev-0" type="text" onchange="updateAutoDev(0)"></input></td>
+      <td>Fraction of devs to assign: <input id="auto-dev-1" type="text" onchange="updateAutoDev(1)"></input></td>
+      <td>Fraction of devs to assign: <input id="auto-dev-2" type="text" onchange="updateAutoDev(2)"></input></td>
+      <td>Fraction of devs to assign: <input id="auto-dev-3" type="text" onchange="updateAutoDev(3)"></input></td>
+      <td>Fraction of devs to assign: <input id="auto-dev-4" type="text" onchange="updateAutoDev(4)"></input></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
   </table>
   <button onclick="update()">Release an update.<br/>(<span id="update-gain"></span>)</button>
   <div id="update-div" style="display: none;">
@@ -90,7 +100,7 @@
   <br/>
   <span>Other information: <span id="progress-milestones"></span> progress milestone<span id="progress-milestones-plural"></span> (giving a <span id="progress-milestones-effect"></span>x multiplier to all production), <span id="enlightened"></span> time<span id="enlightened-plural"></span> enlightened</span>
   <br/>
-  <span><button onclick="saveGame()">Save</button> <button onclick="exportGame()">Export</button> <button onclick="loadGamePrompt()">Load</button> <button onclick="resetGame()">RESET</button></span>
+  <span><button onclick="saveGame()">Save</button> <button onclick="exportGame()">Export</button> <button onclick="loadGamePrompt()">Load</button> <button onclick="resetGame()">RESET</button><span id="auto-dev-span" style="display: none;">Auto dev assignment: <input id="auto-dev-on" onclick="toggleAutoDev()" type="checkbox"></span></span>
   <br/>
   <span style="display: none;"><input id="export-output"></input></span>
 </body>

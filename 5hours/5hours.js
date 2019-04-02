@@ -16,6 +16,12 @@ function fixPlayer () {
   }
   if (!('upgrades' in player)) {
     player.upgrades = [[false, false, false], [false, false, false]];
+    player.auto = {
+      dev: {
+        settings: [0, 0, 0, 0, 0],
+        on: false
+      }
+    }
   }
 }
 
@@ -63,6 +69,12 @@ let initialPlayer = {
   experience: [0, 0, 0],
   power: [0, 0, 0],
   upgrades: [[false, false, false], [false, false, false]],
+  auto: {
+    dev: {
+      settings: [0, 0, 0, 0, 0],
+      on: false
+    }
+  },
   lastUpdate: Date.now()
 }
 
@@ -81,7 +93,7 @@ function endgameUpg0Formula(x) {
 
 function endgameUpg0FormulaInverse(x) {
   if (player.upgrades[0][0]) {
-    let options = [Math.ln(x), Math.pow(x, 1 / 3)];
+    let options = [Math.log(x), Math.pow(x, 1 / 3)];
     let checkOption = (i) => Math.abs(endgameUpg0Formula(i) / x - 1) < 1e-9;
     return options.filter(checkOption)[0];
   } else {
@@ -139,6 +151,17 @@ function addToUpdatePower(diff) {
   }
 }
 
+function autoAssignDevs() {
+  for (let i = 0; i <= 4; i++) {
+    player.devs[i] = 0;
+  }
+  for (let i = 0; i <= 4; i++) {
+    let askedFor = Math.floor(getTotalDevs() * player.auto.dev.settings[i]);
+    let maxAllowed = getTotalDevs() - player.devs.reduce((a, b) => a + b);
+    player.devs[i] = Math.min(askedFor, maxAllowed);
+  }
+}
+
 function gameCode() {
   let now = Date.now();
   diff = (now - player.lastUpdate) / 1000;
@@ -146,6 +169,9 @@ function gameCode() {
     diff = 0;
   }
   player.lastUpdate = now;
+  if (player.upgrades[0][2] && player.auto.dev.on) {
+    autoAssignDevs();
+  }
   addToProgress(diff);
   addToPatience(diff);
   addToUpdatePower(diff);
@@ -169,12 +195,20 @@ function toTime(x) {
   return [x / 3600, x / 60 % 60, Math.floor(x % 60)].map((i) => Math.floor(i).toString().padStart(2, '0')).join(':');
 }
 
+function baseDevs() {
+  if (player.upgrades[0][2]) {
+    return 10;
+  } else {
+    return 1;
+  }
+}
+
 function getTotalDevs () {
   return getEffect(3);
 }
 
 function patienceMeterScaling () {
-  if (player.upgrades[1][1]) {
+  if (player.upgrades[0][1]) {
     return 2.5;
   } else {
     return 2;
@@ -182,7 +216,7 @@ function patienceMeterScaling () {
 }
 
 function patienceMeterMinTime () {
-  if (player.upgrades[1][1]) {
+  if (player.upgrades[0][1]) {
     return 10;
   } else {
     return 60;
@@ -193,7 +227,7 @@ function getBasePatienceMeterTime (x) {
   let result = 86400 / Math.pow(patienceMeterScaling(), x / 1800);
   let minTime = patienceMeterMinTime();
   if (result < minTime) {
-    result = minTime / (1 + Math.ln(minTime / result));
+    result = minTime / (1 + Math.log(minTime / result));
   }
   return result;
 }
@@ -202,7 +236,7 @@ function softcapPatienceMeter(x) {
   if (x <= 1) {
     return x;
   } else {
-    return 1 + Math.ln(x) / 10;
+    return 1 + Math.log(x) / 10;
   }
 }
 
@@ -213,7 +247,7 @@ function getEffect(i) {
   } else if (i === 2 || i === 6) {
     return x / 1800 * getEffect(7);
   } else if (i === 3) {
-    return 1 + Math.floor(x * getUpdatePowerEffect(2) / 300);
+    return baseDevs() + Math.floor(x * getUpdatePowerEffect(2) / 300);
   } else if (i === 4) {
     let base = getBasePatienceMeterTime(x);
     return base / getUpdatePowerEffect(1) * Math.pow(2, player.enlightened);
@@ -331,6 +365,21 @@ function buyUpdateUpgrade(i, j) {
   player.upgrades[i][j] = true;
 }
 
+function fillInAutoDev () {
+  for (let i = 0; i <= 4; i++) {
+    document.getElementById("auto-dev-" + i).value = player.auto.dev.settings[i];
+  }
+  document.getElementById("auto-dev-on").checked = player.auto.dev.on;
+}
+
+function toggleAutoDev() {
+  player.auto.dev.on = !player.auto.dev.on;
+}
+
+function updateAutoDev(i) {
+  player.auto.dev.settings[i] = +document.getElementById("auto-dev-" + i).value || 0;
+}
+
 function updateDisplay () {
   for (let i = 0; i <= 6; i++) {
     document.getElementById("progress-span-" + i).innerHTML = toTime(player.progress[i]);
@@ -382,6 +431,13 @@ function updateDisplay () {
       document.getElementById('up-' + j + '-' + i + '-bought').innerHTML = player.upgrades[j][i] ? ' (bought)' : '';
     }
   }
+  if (player.upgrades[0][2]) {
+    document.getElementById('auto-dev-row').style.display = '';
+    document.getElementById('auto-dev-span').style.display = '';
+  } else {
+    document.getElementById('auto-dev-row').style.display = 'none';
+    document.getElementById('auto-dev-span').style.display = 'none';
+  }
   document.getElementById('progress-milestones').innerHTML = player.milestones;
   document.getElementById('progress-milestones-effect').innerHTML = getMilestoneEffect();
   document.getElementById('enlightened').innerHTML = player.enlightened;
@@ -394,6 +450,7 @@ function updateDisplay () {
 
 window.onload = function () {
   loadGameStorage();
+  fillInAutoDev();
   setInterval(tick, 50);
   setInterval(saveGame, 10000);
 }
