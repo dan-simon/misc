@@ -102,7 +102,7 @@ function resetGame() {
 function endgameUpg0Formula(x) {
   if (player.upgrades[0][0] && x > 2) {
     // Don't take x^3 for small x.
-    return Math.min(Math.exp(x), Math.pow(x, 3));
+    return Math.min(Math.exp(x), 2 * Math.pow(x, 2.5));
   } else {
     return Math.exp(x);
   }
@@ -110,7 +110,7 @@ function endgameUpg0Formula(x) {
 
 function endgameUpg0FormulaInverse(x) {
   if (player.upgrades[0][0]) {
-    let options = [Math.log(x), Math.pow(x, 1 / 3)];
+    let options = [Math.log(x), Math.pow(x / 2, 0.4)];
     let checkOption = (i) => Math.abs(endgameUpg0Formula(i) / x - 1) < 1e-9;
     return options.filter(checkOption)[0];
   } else {
