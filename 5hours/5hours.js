@@ -174,7 +174,7 @@ function autoAssignDevs() {
   }
   for (let i = 0; i <= 4; i++) {
     let askedFor = Math.floor(getTotalDevs() * player.auto.dev.settings[i]);
-    let maxAllowed = getTotalDevs() - player.devs.reduce((a, b) => a + b);
+    let maxAllowed = getUnassignedDevs();
     player.devs[i] = Math.min(askedFor, maxAllowed);
   }
 }
@@ -226,6 +226,10 @@ function baseDevs() {
 
 function getTotalDevs () {
   return getEffect(3);
+}
+
+function getUnassignedDevs () {
+  return getTotalDevs() - player.devs.reduce((a, b) => a + b);
 }
 
 function patienceMeterScaling () {
@@ -354,7 +358,7 @@ function canUpdate() {
 
 function getUpgradeGainBase() {
   if (player.upgrades[1][0]) {
-    return 3;
+    return 2.2;
   } else {
     return 2;
   }
@@ -411,7 +415,7 @@ function getUpdatePowerEffect(i) {
   }
 }
 
-const UPGRADE_COSTS = [5, 100];
+const UPGRADE_COSTS = [5, 1e4];
 
 function buyUpdateUpgrade(i, j) {
   if (player.upgrades[i][j] || player.experience[j] < UPGRADE_COSTS[i]) {
@@ -507,10 +511,12 @@ function updateDisplay () {
     document.getElementById('auto-dev-row').style.display = 'none';
     document.getElementById('auto-dev-span').style.display = 'none';
   }
+  document.getElementById('unassigned-devs').innerHTML = getUnassignedDevs();
   document.getElementById('progress-milestones').innerHTML = player.milestones;
   document.getElementById('progress-milestones-effect').innerHTML = getMilestoneEffect();
   document.getElementById('enlightened').innerHTML = player.enlightened;
   document.getElementById('devs-plural').innerHTML = (getTotalDevs() === 1) ? '' : 's';
+  document.getElementById('unassigned-devs-plural').innerHTML = (getUnassignedDevs() === 1) ? '' : 's';
   document.getElementById('progress-milestones-plural').innerHTML = (player.milestones === 1) ? '' : 's';
   document.getElementById('update-points-plural').innerHTML = (player.updatePoints === 1) ? '' : 's';
   document.getElementById('updates-plural').innerHTML = (player.updates === 1) ? '' : 's';
