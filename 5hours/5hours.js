@@ -201,7 +201,11 @@ function tick() {
 }
 
 function format(x) {
-  if (x === Math.floor(x)) {
+  if (x >= 1e6) {
+    let e = Math.floor(Math.log10(x));
+    let m = x / Math.pow(10, e);
+    return m.toFixed(2) + 'e' + e;
+  } else if (x === Math.floor(x)) {
     return '' + x;
   } else {
     return x.toFixed(2);
