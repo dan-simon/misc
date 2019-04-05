@@ -5,7 +5,7 @@
   <script src="5hours.js"></script>
 </head>
 <body>
-  <span><button id="main-button" onclick="setTab('main')">Main</button> <button id="update-button" onclick="setTab('update')" style="display: none;">Update</button> <button id="ad-update-button" onclick="setTab('ad-update')" style="display: none;"><span id="ad-update-button-name"></span></button></span>
+  <span><button id="main-button" onclick="setTab('main')">Main</button> <button id="update-button" onclick="setTab('update')" style="display: none;">Update</button> <button id="challenges-button" onclick="setTab('challenges')" style="display: none;">Challenges</button></span>
   <div id="main-div" style="display: none;">
     <table style="table-layout: fixed; width: 1200px;">
       <tr>
@@ -62,7 +62,7 @@
     <button onclick="update()">Release an update.<br/>(<span id="update-gain"></span>)</button>
   </div>
   <div id="update-div" style="display: none;">
-    <span>You have <span id="update-points">0</span> update point<span id="update-points-plural"></span>, and have updated <span id="updates">0</span> time<span id="updates-plural"></span> (corresponding to <span id="updates-effect">0.01</span> power per experience per second)</span>
+    <span>You have <span id="update-points">0</span> update point<span id="update-points-plural"></span>, and have updated <span id="updates">0</span> time<span id="updates-plural"></span> (corresponding to <span id="power-gain-per-experience">0.01</span> power per experience per second)</span>
     <table style="table-layout: fixed; width: 800px;">
       <tr>
         <td>Endgame</td>
@@ -101,16 +101,155 @@
       </tr>
     </table>
   </div>
-  <div id="ad-update-div" style="display: none;">
-    <span><button onclick="gotoLore(-1)">&lt;-</button> <span id="lore"></span> <button onclick="gotoLore(1)">-&gt;</button></span>
-    <div id="ad-update">
-      <button style="height: 100px; width: 250px;" onclick="toggleADUpdate()">
-        <span id="start-ad-update">Start working on the AD update. This will reset everything that update resets. In addition, overall production multiplier, overall scaling slowdown, and total devs will be severely nerfed. Reaching certain milestones will give you rewards.</span>
-        <span id="stop-ad-update">Stop working on the AD update. There's no way you can finish this update with all these nerfs, but at least you got somewhere.</span>
-      </button>
-      <br/>
-      <span>Record development in AD update: <span id="record-development-in-ad-update"></span>, corresponding to <span id="perma-enlightened"></span> permanent time<span id="perma-enlightened-plural"></span> enlightened and <span id="enlightened-slow-factor"></span>x slower patience meter per time enlightened.</span>
-    </div>
+  <div id="challenges-div" style="display: none;">
+    <span>You have <span id="total-challenge-completions"></span> total challenge completions. You are currently in <span id="current-challenge"></span>. <span id="next-challenge-unlock">Next challenge unlocks at development.</span> <button onclick="exitChallenge()">Exit current challenge</button></span>
+    <table style="table-layout: fixed; width: 1100px;">
+      <tr>
+        <td id="logarithmic-td" style="display: none;">
+          <button style="height: 150px; width: 350px;" onclick="enterChallenge('logarithmic')">
+            Logarithmic
+            <br/>
+            Overall production multiplier, overall scaling slowdown, and total devs is severely nerfed, but also boosted by total challenge completions. Reaching certain milestones will give you permanent rewards, even if you can't finish. Finishing this challenge is winning the game (you can keep playing though).
+            <br/>
+            Goal: 5:00:00 development
+          </button>
+          <br/>
+          Farthest reached: <span id="record-development-in-logarithmic"></span>
+          <br/>
+          <span id="logarithmic-reward-description"></span>
+          <br/>
+          <span id="logarithmic-completed-description"></span>
+        </td>
+        <td id="inefficient-td" style="display: none;">
+          <button style="height: 150px; width: 350px;" onclick="enterChallenge('inefficient')">
+            Inefficient
+            <br/>
+            Efficiency and meta-efficency are useless.
+            <br/>
+            Goal: 5:00:00 development
+          </button>
+          <br/>
+          Farthest reached: <span id="record-development-in-inefficient"></span>
+          <br/>
+          <span id="inefficient-reward-description"></span>
+          <br/>
+          <br/>
+          <span id="inefficient-completed-description"></span>
+        </td>
+        <td id="ufd-td" style="display: none;">
+          <button style="height: 150px; width: 350px;" onclick="enterChallenge('ufd')">
+            UFD
+            <br/>
+            Refactoring and meta-refactoring are useless.
+            <br/>
+            Goal: 2:30:00 development
+          </button>
+          <br/>
+          Farthest reached: <span id="record-development-in-ufd"></span>
+          <br/>
+          <span id="ufd-reward-description"></span>
+          <br/>
+          <br/>
+          <span id="ufd-completed-description"></span>
+        </td>
+      </tr>
+      <tr>
+        <td id="lonely-td" style="display: none;">
+          <button style="height: 150px; width: 350px;" onclick="enterChallenge('lonely')">
+            Lonely
+            <br/>
+            You always only have one dev.
+            <br/>
+            Goal: 24:00:00 development
+          </button>
+          <br/>
+          Farthest reached: <span id="record-development-in-lonely"></span>
+          <br/>
+          <span id="lonely-reward-description"></span>
+          <br/>
+          <span id="lonely-completed-description"></span>
+        </td>
+        <td id="impatient-td" style="display: none;">
+          <button style="height: 150px; width: 350px;" onclick="enterChallenge('impatient')">
+            Impatient
+            <br/>
+            The patience meter is always at 0.
+            <br/>
+            Goal: 12:00:00 development
+          </button>
+          <br/>
+          Farthest reached: <span id="record-development-in-impatient"></span>
+          <br/>
+          <span id="impatient-reward-description"></span>
+          <br/>
+          <span id="impatient-completed-description"></span>
+        </td>
+        <td id="unprestigious-td" style="display: none;">
+          <button style="height: 150px; width: 350px;" onclick="enterChallenge('unprestigious')">
+            Unprestigious
+            <br/>
+            You can't prestige (that is, you can't get meta-efficiency or meta-refactoring).
+            <br/>
+            Goal: 5:00:00 development
+          </button>
+          <br/>
+          Farthest reached: <span id="record-development-in-unprestigious"></span>
+          <br/>
+          <span id="unprestigious-reward-description"></span>
+          <br/>
+          <span id="unprestigious-completed-description"></span>
+        </td>
+      </tr>
+      <tr>
+        <td id="slow-td" style="display: none;">
+          <button style="height: 150px; width: 350px;" onclick="enterChallenge('slow')">
+            Slow
+            <br/>
+            Everything (including patience and power gain) is a billion times slower.
+            <br/>
+            Goal: 5:00:00 development
+          </button>
+          <br/>
+          Farthest reached: <span id="record-development-in-slow"></span>
+          <br/>
+          <span id="slow-reward-description"></span>
+          <br/>
+          <span id="slow-completed-description"></span>
+        </td>
+        <td id="powerless-td" style="display: none;">
+          <button style="height: 150px; width: 350px;" onclick="enterChallenge('powerless')">
+            Powerless
+            <br/>
+            Power is not produced.
+            <br/>
+            Goal: 12:00:00 development
+          </button>
+          <br/>
+          Farthest reached: <span id="record-development-in-powerless"></span>
+          <br/>
+          <span id="powerless-reward-description"></span>
+          <br/>
+          <br/>
+          <span id="powerless-completed-description"></span>
+        </td>
+        <td id="upgradeless-td" style="display: none;">
+          <button style="height: 150px; width: 350px;" onclick="enterChallenge('upgradeless')">
+            Upgradeless
+            <br/>
+            All upgrades (the things bought with experience) are useless.
+            <br/>
+            Goal: 8:00:00 development
+          </button>
+          <br/>
+          Farthest reached: <span id="record-development-in-upgradeless"></span>
+          <br/>
+          <span id="upgradeless-reward-description"></span>
+          <br/>
+          <br/>
+          <span id="upgradeless-completed-description"></span>
+        </td>
+      </tr>
+    </table>
   </div>
   <span>Other information: <span id="record-development"></span> record development ever, <span id="unassigned-devs"></span> unassigned dev<span id="unassigned-devs-plural"></span>, <span id="progress-milestones"></span> progress milestone<span id="progress-milestones-plural"></span> (giving a <span id="progress-milestones-effect"></span>x multiplier to all production), <span id="enlightened"></span> time<span id="enlightened-plural"></span> enlightened</span>
   <br/>

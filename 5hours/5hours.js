@@ -42,12 +42,22 @@ function fixPlayer () {
       'recordDevelopment': 0
     }
   }
-  if (!('lore' in player)) {
-    player.lore = 0;
-  }
-  if (!('inADUpdate' in player)) {
-    player.inADUpdate = false;
-    player.stats.recordDevelopmentInADUpdate = 0;
+  if (!('currentChallenge' in player)) {
+    player.currentChallenge = '';
+    player.stats.recordDevelopment = {
+      '': player.stats.recordDevelopment,
+      'logarithmic': 0,
+      'inefficient': 0,
+      'ufd': 0,
+      'lonely': 0,
+      'impatient': 0,
+      'unprestigious': 0,
+      'slow': 0,
+      'powerless': 0,
+      'upgradeless': 0
+    };
+    player.options.confirmations.enterChallenge = true;
+    player.options.confirmations.exitChallenge = true;
   }
 }
 
@@ -105,16 +115,27 @@ let initialPlayer = {
     confirmations: {
       prestige: true,
       prestigeWithoutGain: true,
-      update: true
+      update: true,
+      enterChallenge: true,
+      exitChallenge: true
     }
   },
   tab: 'main',
+  currentChallenge: '',
   stats: {
-    recordDevelopment: 0,
-    recordDevelopmentInADUpdate: 0
+    'recordDevelopment': {
+      '': 0,
+      'logarithmic': 0,
+      'inefficient': 0,
+      'ufd': 0,
+      'lonely': 0,
+      'impatient': 0,
+      'unprestigious': 0,
+      'slow': 0,
+      'powerless': 0,
+      'upgradeless': 0
+    }
   },
-  lore: 0,
-  inADUpdate: false,
   lastUpdate: Date.now()
 }
 
@@ -123,7 +144,7 @@ function resetGame() {
 }
 
 function endgameUpg0Formula(x) {
-  if (player.upgrades[0][0] && x > 2) {
+  if (upgradeActive(0, 0) && x > 2) {
     // Don't take x^3 for small x.
     return Math.min(Math.exp(x), 2 * Math.pow(x, 2.5));
   } else {
@@ -132,7 +153,7 @@ function endgameUpg0Formula(x) {
 }
 
 function endgameUpg0FormulaInverse(x) {
-  if (player.upgrades[0][0]) {
+  if (upgradeActive(0, 0)) {
     let options = [Math.log(x), Math.pow(x / 2, 0.4)];
     let checkOption = (i) => Math.abs(endgameUpg0Formula(i) / x - 1) < 1e-9;
     return options.filter(checkOption)[0];
@@ -155,11 +176,11 @@ function addProgress(orig, change, c) {
 }
 
 function getScaling() {
-  return maybeLog(1 + getEffect(2) + getEffect(6));
+  return maybeLog(1 + getEffect(2) + getEffect(6) + challengeReward('ufd'));
 }
 
 function devsWorkingOn(i) {
-  if (i === 0 && player.upgrades[1][2]) {
+  if (i === 0 && upgradeActive(1, 2)) {
     return player.devs[i] + getTotalDevs();
   } else {
     return player.devs[i];
@@ -167,11 +188,12 @@ function devsWorkingOn(i) {
 }
 
 function maybeLog(x) {
-  if (player.inADUpdate) {
+  if (player.currentChallenge === 'logarithmic') {
+    let pow = 1 + getTotalChallengeCompletions() / 4;
     if (x instanceof Decimal) {
-      return new Decimal(1 + Decimal.ln(x));
+      return Decimal.pow(1 + Decimal.ln(x), pow);
     } else {
-      return 1 + Math.log(x);
+      return Math.pow(1 + Math.log(x), pow);
     }
   } else {
     return x;
@@ -179,7 +201,7 @@ function maybeLog(x) {
 }
 
 function getTotalProductionMultiplier() {
-  return maybeLog(getEffect(1).times(getEffect(5)).times(getMilestoneEffect()).times(getUpdatePowerEffect(0)));
+  return maybeLog(getEffect(1).times(getEffect(5)).times(getMilestoneEffect()).times(getUpdatePowerEffect(0)).times(challengeReward('inefficient')));
 }
 
 function addToProgress(diff) {
@@ -192,7 +214,7 @@ function addToProgress(diff) {
 
 function addToPatience(diff) {
   player.progress[7] = player.progress[7] + diff / getEffect(4);
-  if (!player.upgrades[1][1]) {
+  if (!upgradeActive(1, 1)) {
     player.progress[7] = Math.min(1, player.progress[7]);
   }
 }
@@ -203,7 +225,7 @@ function checkForMilestones() {
 
 function addToUpdatePower(diff) {
   for (let i = 0; i <= 2; i++) {
-    player.power[i] += diff * player.experience[i] * getUpdatesEffect();
+    player.power[i] += diff * player.experience[i] * getPowerGainPerExperience();
   }
 }
 
@@ -224,8 +246,12 @@ function gameCode() {
   if (isNaN(diff)) {
     diff = 0;
   }
+  if (player.currentChallenge === 'slow') {
+    diff /= 1e9;
+  }
+  diff *= challengeReward('slow');
   player.lastUpdate = now;
-  if (player.upgrades[0][2] && player.auto.dev.on) {
+  if (upgradeActive(0, 2) && player.auto.dev.on) {
     autoAssignDevs();
   }
   addToProgress(diff);
@@ -236,11 +262,11 @@ function gameCode() {
 }
 
 function checkForRecordDevelopement() {
-  player.stats.recordDevelopment = Math.max(
-    player.progress[0], player.stats.recordDevelopment);
-  if (player.inADUpdate) {
-    player.stats.recordDevelopmentInADUpdate = Math.max(
-      player.progress[0], player.stats.recordDevelopmentInADUpdate);
+  player.stats.recordDevelopment[''] = Math.max(
+    player.progress[0], player.stats.recordDevelopment['']);
+  if (player.currentChallenge !== '') {
+    player.stats.recordDevelopment[player.currentChallenge] = Math.max(
+      player.progress[0], player.stats.recordDevelopment[player.currentChallenge]);
   }
 }
 
@@ -263,11 +289,14 @@ function format(x) {
 }
 
 function toTime(x) {
+  if (x === Infinity) {
+    return Infinity;
+  }
   return [x / 3600, x / 60 % 60, Math.floor(x % 60)].map((i) => Math.floor(i).toString().padStart(2, '0')).join(':');
 }
 
 function baseDevs() {
-  if (player.upgrades[0][2]) {
+  if (upgradeActive(0, 2)) {
     return 10;
   } else {
     return 1;
@@ -283,7 +312,7 @@ function getUnassignedDevs () {
 }
 
 function patienceMeterScaling () {
-  if (player.upgrades[0][1]) {
+  if (upgradeActive(0, 1)) {
     return 2.5;
   } else {
     return 2;
@@ -291,7 +320,7 @@ function patienceMeterScaling () {
 }
 
 function patienceMeterMinTime () {
-  if (player.upgrades[0][1]) {
+  if (upgradeActive(0, 1)) {
     return 10;
   } else {
     return 60;
@@ -318,14 +347,30 @@ function softcapPatienceMeter(x) {
 function getEffect(i) {
   let x = player.progress[i];
   if (i === 1 || i === 5) {
-    return Decimal.pow(2, x / 1800 * getEffect(7));
+    if (player.currentChallenge === 'inefficient') {
+      return new Decimal(1);
+    } else {
+      return Decimal.pow(2, x / 1800 * getEffect(7));
+    }
   } else if (i === 2 || i === 6) {
-    return x / 1800 * getEffect(7);
+    if (player.currentChallenge === 'ufd') {
+      return 0;
+    } else {
+      return x / 1800 * getEffect(7);
+    }
   } else if (i === 3) {
-    return Math.floor(maybeLog(baseDevs() + x * getUpdatePowerEffect(2) / 300));
+    if (player.currentChallenge === 'lonely') {
+      return 1;
+    } else {
+      return Math.floor(maybeLog(baseDevs() + x * getUpdatePowerEffect(2) * challengeReward('lonely') / 300));
+    }
   } else if (i === 4) {
-    let base = getBasePatienceMeterTime(x);
-    return base / getUpdatePowerEffect(1) * Math.pow(getEnlightenedSlowFactor(), player.enlightened);
+    if (player.currentChallenge === 'impatient') {
+      return Infinity;
+    } else {
+      let base = getBasePatienceMeterTime(x);
+      return base / (getUpdatePowerEffect(1) * challengeReward('impatient')) * Math.pow(getEnlightenedSlowFactor(), player.enlightened);
+    }
   } else if (i === 7) {
     return 1 + softcapPatienceMeter(x) * (0.5 + 0.05 * getTotalEnlightened());
   }
@@ -335,16 +380,16 @@ function getTotalEnlightened() {
   return player.enlightened + getPermaEnlightened();
 }
 
-function getADMilestones() {
-  return Math.max(player.stats.recordDevelopmentInADUpdate / 1800 - 1, 0);
+function getLogarithmicMilestones() {
+  return Math.min(Math.max(player.stats.recordDevelopment.logarithmic / 1800 - 1, 0), 9);
 }
 
 function getPermaEnlightened() {
-  return Math.floor(getADMilestones());
+  return Math.floor(getLogarithmicMilestones());
 }
 
 function getEnlightenedSlowFactor() {
-  return 2 - Math.floor(getADMilestones() / 3) / 10;
+  return 2 - Math.floor(getLogarithmicMilestones() / 3) / 10;
 }
 
 function toggleConfirmation(x) {
@@ -352,11 +397,11 @@ function toggleConfirmation(x) {
 }
 
 function canPrestigeWithoutGain(i) {
-  return player.progress[0] >= 1800 && player.progress[0] <= player.progress[i];
+  return canPrestige(i) && player.progress[0] <= player.progress[i];
 }
 
 function canPrestige(i) {
-  return player.progress[0] >= 1800;
+  return player.currentChallenge !== 'unprestigious' && player.progress[0] >= 1800;
 }
 
 function confirmPrestige(i) {
@@ -375,7 +420,7 @@ function confirmPrestige(i) {
 
 function prestige(i) {
   if (canPrestige(i) && confirmPrestige(i)) {
-    player.progress[i] = player.progress[0];
+    player.progress[i] = player.progress[0] + challengeReward('unprestigious');
     for (let j = 0; j <= 4; j++) {
       player.progress[j] = 0;
       player.devs[j] = 0;
@@ -419,12 +464,150 @@ function zeroDev(i) {
 }
 
 function canUpdate() {
-  return player.progress[0] >= 18000;
+  return player.progress[0] >= CHALLENGE_GOALS[player.currentChallenge];
+}
+
+const CHALLENGE_GOALS = {
+  '': 18000,
+  'logarithmic': 18000,
+  'inefficient': 18000,
+  'ufd': 9000,
+  'lonely': 86400,
+  'impatient': 43200,
+  'unprestigious': 18000,
+  'slow': 18000,
+  'powerless': 43200,
+  'upgradeless': 28800
+}
+
+function challengeCompletions(x) {
+  let result = player.stats.recordDevelopment[x] / CHALLENGE_GOALS[x];
+  if (result < 1) {
+    return 0;
+  } else {
+    return 1 + Math.log(result);
+  }
+}
+
+function getTotalChallengeCompletions() {
+  return Object.keys(CHALLENGE_GOALS).filter(x => x !== '').map(
+    x => challengeCompletions(x)).reduce((a, b) => a + b);
+}
+
+function challengeReward(x) {
+  let pastCompletion = player.stats.recordDevelopment[x] - CHALLENGE_GOALS[x];
+  let table = {
+    'inefficient': [new Decimal(1), x => Decimal.pow(2, 1 + x / 1800)],
+    'ufd': [0, x => 1 + x / 900],
+    'lonely': [1, x => 2 + x / 3600],
+    'impatient': [1, x => 2 + x / 3600],
+    'unprestigious': [0, x => 1800 + x],
+    'slow': [1, x => 1.5 + x / 3600],
+    'powerless': [1, x => Math.pow(2, x / 3600)],
+    'upgradeless': [2.2, x => 2.4 + x / 18000]
+  }
+  if (pastCompletion < 0) {
+    return table[x][0];
+  } else {
+    return table[x][1](pastCompletion);
+  }
+}
+
+function describeChallengeReward(x) {
+  if (x === 'logarithmic') {
+    return getPermaEnlightened() + ' permanent time' + ((getPermaEnlightened() === 1) ? '' : 's') + ' enlightened<br/>Patience meter is ' + format(getEnlightenedSlowFactor()) + 'x slower per time enlightened';
+  } else {
+    let table = {
+      'inefficient': x => format(x) + 'x multiplier to all production',
+      'ufd': x => format(1 + x) + 'x slower scaling (additive)',
+      'lonely': x => format(x) + 'x dev gain from recruitment',
+      'impatient': x => format(x) + ' patience meter gain',
+      'unprestigious': x => toTime(x) + ' extra minutes when prestiging',
+      'slow': x => 'Everything (including patience and power gain)<br/>is ' + format(x) + 'x faster',
+      'powerless': x => format(x) + 'x power production',
+      'upgradeless': x => format(x) + ' base for second endgame upgrade'
+    }
+    return table[x](challengeReward(x));
+  }
+}
+
+function describeChallengeCompleted(x) {
+  let cc = challengeCompletions(x);
+  if (cc === 0) {
+    return 'You have not yet completed this challenge.';
+  } else {
+    return 'You have completed this challenge ' + format(cc) + ' times.';
+  }
+}
+
+const CHALLENGE_UNLOCKS = {
+  'logarithmic': 86400,
+  'inefficient': 108000,
+  'ufd': 129600,
+  'lonely': 172800,
+  'impatient': 216000,
+  'unprestigious': 259200,
+  'slow': 345600,
+  'powerless': 432000,
+  'upgradeless': 518400
+}
+
+function isChallengeUnlocked(x) {
+  return CHALLENGE_UNLOCKS[x] <= player.stats.recordDevelopment[''];
+}
+
+function nextChallengeUnlock() {
+  let locked = Object.keys(CHALLENGE_UNLOCKS).filter(x => !isChallengeUnlocked(x)).sort((x, y) => CHALLENGE_UNLOCKS[x] - CHALLENGE_UNLOCKS[y]);
+  if (locked.length === 0) {
+    return 'All challenges are unlocked.';
+  } else {
+    return 'Next challenge unlocks at ' + toTime(CHALLENGE_UNLOCKS[locked[0]]) + ' development.';
+  }
+}
+
+function getChallengeForDisplay(challenge) {
+  if (challenge === '') {
+    return 'no challenge';
+  } else if (challenge === 'ufd') {
+    return 'UFD';
+  } else {
+    return challenge[0].toUpperCase() + challenge.slice(1).toLowerCase();
+  }
+}
+
+function enterChallenge(x) {
+  if (confirmEnterChallenge(x)) {
+    player.currentChallenge = x;
+    for (let i = 0; i <= 7; i++) {
+      player.progress[i] = 0;
+      player.devs[i] = 0;
+    }
+    player.milestones = 0;
+    player.enlightened = 0;
+    for (let i = 0; i <= 3; i++) {
+      player.power[i] = 0;
+    }
+  }
+}
+
+function exitChallenge() {
+  if (player.currentChallenge !== '' && confirmExitChallenge()) {
+    player.currentChallenge = '';
+    for (let i = 0; i <= 7; i++) {
+      player.progress[i] = 0;
+      player.devs[i] = 0;
+    }
+    player.milestones = 0;
+    player.enlightened = 0;
+    for (let i = 0; i <= 3; i++) {
+      player.power[i] = 0;
+    }
+  }
 }
 
 function getUpgradeGainBase() {
-  if (player.upgrades[1][0]) {
-    return 2.2;
+  if (upgradeActive(1, 0)) {
+    return challengeReward('upgradeless');
   } else {
     return 2;
   }
@@ -448,6 +631,26 @@ function confirmUpdate() {
   }
 }
 
+function confirmEnterChallenge (x) {
+  if (player.options.confirmations.enterChallenge &&
+  !confirm('Are you sure you want to enter the \'' + getChallengeForDisplay(x) + '\' challenge? ' +
+  'The described special conditions will apply, and everything update resets will reset.')) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+function confirmExitChallenge() {
+  if (player.options.confirmations.exitChallenge &&
+  !confirm('Are you sure you want to exit the \'' + getChallengeForDisplay(player.currentChallenge) + '\' challenge? ' +
+  'You will not get further in it than you are now until you enter it again, and everything update resets will reset.')) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
 function update() {
   if (canUpdate() && confirmUpdate()) {
     player.updatePoints += getUpdateGain();
@@ -464,24 +667,12 @@ function update() {
   }
 }
 
-function toggleADUpdate() {
-  if (canUpdate()) {
-    player.updatePoints += getUpdateGain();
+function getPowerGainPerExperience() {
+  if (player.currentChallenge === 'powerless') {
+    return 0;
+  } else {
+    return Math.max(0, (1 + Math.log2(player.updates)) / 100) * challengeReward('powerless');
   }
-  player.inADUpdate = !player.inADUpdate;
-  for (let i = 0; i <= 7; i++) {
-    player.progress[i] = 0;
-    player.devs[i] = 0;
-  }
-  player.milestones = 0;
-  player.enlightened = 0;
-  for (let i = 0; i <= 3; i++) {
-    player.power[i] = 0;
-  }
-}
-
-function getUpdatesEffect() {
-  return Math.max(0, (1 + Math.log2(player.updates)) / 100);
 }
 
 function assignAll(i) {
@@ -499,8 +690,16 @@ function getUpdatePowerEffect(i) {
 
 const UPGRADE_COSTS = [5, 1e4];
 
+function upgradeBought(i, j) {
+  return player.upgrades[i][j];
+}
+
+function upgradeActive(i, j) {
+  return player.currentChallenge !== 'upgradeless' && player.upgrades[i][j];
+}
+
 function buyUpdateUpgrade(i, j) {
-  if (player.upgrades[i][j] || player.experience[j] < UPGRADE_COSTS[i]) {
+  if (upgradeBought(i, j) || player.experience[j] < UPGRADE_COSTS[i]) {
     return false;
   }
   player.experience[j] -= UPGRADE_COSTS[i];
@@ -533,7 +732,7 @@ function updateAutoDev(i) {
   player.auto.dev.settings[i] = +document.getElementById("auto-dev-" + i).value || 0;
 }
 
-const TAB_LIST = ['main', 'update', 'ad-update'];
+const TAB_LIST = ['main', 'update', 'challenges'];
 
 function updateTabButtonDisplay () {
   if (player.updates > 0) {
@@ -541,10 +740,10 @@ function updateTabButtonDisplay () {
   } else {
     document.getElementById('update-button').style.display = 'none';
   }
-  if (player.stats.recordDevelopment >= 86400) {
-    document.getElementById('ad-update-button').style.display = '';
+  if (player.stats.recordDevelopment[''] >= 86400) {
+    document.getElementById('challenges-button').style.display = '';
   } else {
-    document.getElementById('ad-update-button').style.display = 'none';
+    document.getElementById('challenges-button').style.display = 'none';
   }
 }
 
@@ -563,19 +762,19 @@ function setTab(x) {
   updateTabDisplay();
 }
 
-let LORE_LIST = [
-  'You\'ve done a full day\'s worth of development, and you\'re amazed at how much you\'ve accomplished.',
-  'You feel that you could develop any game at this rate.',
-  'Suddenly, ahead of you, you see a colorful flame, shining in all the colors of the spectrum, in the shape of... a giraffe? That can\'t be right.',
-  'It says "It is good that you have come this far, but there are tasks far harder than anything you have done."',
-  '"Enter the world of the AD update, where development is almost impossible."',
-  '"I expect you will never complete it, or even come close."',
-  '"But as you get further into it, you may gain the enlightenment that you seek."'
-]
-
-function gotoLore(x) {
-  if (0 <= player.lore + x && player.lore + x < LORE_LIST.length) {
-    player.lore += x;
+function updateChallengeDisplay () {
+  document.getElementById('total-challenge-completions').innerHTML = format(getTotalChallengeCompletions());
+  document.getElementById('current-challenge').innerHTML = getChallengeForDisplay(player.currentChallenge);
+  document.getElementById('next-challenge-unlock').innerHTML = nextChallengeUnlock();
+  for (let i in CHALLENGE_UNLOCKS) {
+    if (isChallengeUnlocked(i)) {
+      document.getElementById(i + '-td').style.display = '';
+    } else {
+      document.getElementById(i + '-td').style.display = 'none';
+    }
+    document.getElementById('record-development-in-' + i).innerHTML = toTime(player.stats.recordDevelopment[i]);
+    document.getElementById(i + '-reward-description').innerHTML = describeChallengeReward(i);
+    document.getElementById(i + '-completed-description').innerHTML = describeChallengeCompleted(i);
   }
 }
 
@@ -602,6 +801,8 @@ function updateDisplay () {
       document.getElementById("prestige-" + i).innerHTML = '(' + toTime(player.progress[i]) + ' -> ' + toTime(player.progress[i]) + ') (no gain)';
     } else if (canPrestige(i)) {
       document.getElementById("prestige-" + i).innerHTML = '(' + toTime(player.progress[i]) + ' -> ' + toTime(player.progress[0]) + ')';
+    } else if (player.currentChallenge === 'unprestigious') {
+      document.getElementById("prestige-" + i).innerHTML = '(disabled in this challenge)';
     } else {
       document.getElementById("prestige-" + i).innerHTML = '(requires ' + toTime(1800) + ' development)';
     }
@@ -615,45 +816,28 @@ function updateDisplay () {
     let gain = getUpdateGain();
     document.getElementById('update-gain').innerHTML = 'gain ' + format(gain) + ' update point' + (gain === 1 ? '' : 's');
   } else {
-    document.getElementById('update-gain').innerHTML = 'requires ' + toTime(18000) + ' development';
+    document.getElementById('update-gain').innerHTML = 'requires ' + toTime(CHALLENGE_GOALS[player.currentChallenge]) + ' development';
   }
   document.getElementById('update-points').innerHTML = format(player.updatePoints);
   document.getElementById('updates').innerHTML = player.updates;
-  document.getElementById('updates-effect').innerHTML = format(getUpdatesEffect());
+  document.getElementById('power-gain-per-experience').innerHTML = format(getPowerGainPerExperience());
   for (let i = 0; i <= 2; i++) {
     document.getElementById('update-experience-span-' + i).innerHTML = format(player.experience[i]);
     document.getElementById('update-power-span-' + i).innerHTML = format(player.power[i]);
     document.getElementById('update-effect-span-' + i).innerHTML = format(getUpdatePowerEffect(i));
     for (let j = 0; j <= 1; j++) {
-      document.getElementById('up-' + j + '-' + i + '-bought').innerHTML = player.upgrades[j][i] ? ' (bought)' : '';
+      document.getElementById('up-' + j + '-' + i + '-bought').innerHTML = upgradeBought(j, i) ? ' (bought)' : '';
     }
   }
-  if (player.upgrades[0][2]) {
+  if (upgradeActive(0, 2)) {
     document.getElementById('auto-dev-row').style.display = '';
     document.getElementById('auto-dev-span').style.display = '';
   } else {
     document.getElementById('auto-dev-row').style.display = 'none';
     document.getElementById('auto-dev-span').style.display = 'none';
   }
-  document.getElementById('lore').innerHTML = LORE_LIST[player.lore];
-  if (player.lore >= 4) {
-    document.getElementById('ad-update').style.display = '';
-    document.getElementById('ad-update-button-name').innerHTML = 'AD Update';
-  } else {
-    document.getElementById('ad-update').style.display = 'none';
-    document.getElementById('ad-update-button-name').innerHTML = '???';
-  }
-  if (player.inADUpdate) {
-    document.getElementById('start-ad-update').style.display = 'none';
-    document.getElementById('stop-ad-update').style.display = '';
-  } else {
-    document.getElementById('start-ad-update').style.display = '';
-    document.getElementById('stop-ad-update').style.display = 'none';
-  }
-  document.getElementById('perma-enlightened').innerHTML = getPermaEnlightened();
-  document.getElementById('enlightened-slow-factor').innerHTML = format(getEnlightenedSlowFactor());
-  document.getElementById('record-development').innerHTML = toTime(player.stats.recordDevelopment);
-  document.getElementById('record-development-in-ad-update').innerHTML = toTime(player.stats.recordDevelopmentInADUpdate);
+  updateChallengeDisplay();
+  document.getElementById('record-development').innerHTML = toTime(player.stats.recordDevelopment['']);
   document.getElementById('unassigned-devs').innerHTML = getUnassignedDevs();
   document.getElementById('progress-milestones').innerHTML = player.milestones;
   document.getElementById('progress-milestones-effect').innerHTML = getMilestoneEffect();
@@ -661,7 +845,6 @@ function updateDisplay () {
   document.getElementById('devs-plural').innerHTML = (getTotalDevs() === 1) ? '' : 's';
   document.getElementById('unassigned-devs-plural').innerHTML = (getUnassignedDevs() === 1) ? '' : 's';
   document.getElementById('progress-milestones-plural').innerHTML = (player.milestones === 1) ? '' : 's';
-  document.getElementById('perma-enlightened-plural').innerHTML = (getPermaEnlightened() === 1) ? '' : 's';
   document.getElementById('update-points-plural').innerHTML = (player.updatePoints === 1) ? '' : 's';
   document.getElementById('updates-plural').innerHTML = (player.updates === 1) ? '' : 's';
   document.getElementById('enlightened-plural').innerHTML = (getTotalEnlightened() === 1) ? '' : 's';
