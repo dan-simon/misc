@@ -247,7 +247,7 @@ function gameCode() {
     diff = 0;
   }
   if (player.currentChallenge === 'slow') {
-    diff /= 1e9;
+    diff /= 1000;
   }
   diff *= challengeReward('slow');
   player.lastUpdate = now;
@@ -475,7 +475,7 @@ const CHALLENGE_GOALS = {
   'lonely': 86400,
   'impatient': 43200,
   'unprestigious': 18000,
-  'slow': 18000,
+  'slow': 86400,
   'powerless': 43200,
   'upgradeless': 28800
 }
@@ -502,7 +502,7 @@ function challengeReward(x) {
     'lonely': [1, x => 2 + x / 3600],
     'impatient': [1, x => 2 + x / 3600],
     'unprestigious': [0, x => 1800 + x],
-    'slow': [1, x => 1.5 + x / 3600],
+    'slow': [1, x => 1.5 + x / 43200],
     'powerless': [1, x => Math.pow(2, x / 3600)],
     'upgradeless': [2.2, x => 2.4 + x / 18000]
   }
