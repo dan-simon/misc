@@ -3,6 +3,7 @@ function loadGame (s) {
   fixPlayer();
   saveGame();
   fillInInputs();
+  updateTabDisplay();
 }
 
 function fixPlayer () {
@@ -32,6 +33,9 @@ function fixPlayer () {
         update: true
       }
     }
+  }
+  if (!('tab' in player)) {
+    player.tab = 'main';
   }
 }
 
@@ -92,6 +96,7 @@ let initialPlayer = {
       update: true
     }
   },
+  tab: 'main',
   lastUpdate: Date.now()
 }
 
@@ -119,16 +124,16 @@ function endgameUpg0FormulaInverse(x) {
 }
 
 function centralFormula(x, c) {
-  return 600 * (Math.exp(6 * (endgameUpg0Formula(x / 3600) - 1) / c) - 1);
+  return Decimal.exp(6 * (endgameUpg0Formula(x / 3600) - 1) / c).minus(1).times(600);
 }
 
 function invertCentralFormula(x, c) {
-  return 3600 * endgameUpg0FormulaInverse(c * Math.log(x / 600 + 1) / 6 + 1);
+  return 3600 * endgameUpg0FormulaInverse(c * Decimal.ln(x.div(600).plus(1)) / 6 + 1);
 }
 
 function addProgress(orig, change, c) {
   let real = centralFormula(orig, c);
-  return invertCentralFormula(real + change, c);
+  return invertCentralFormula(real.plus(change), c);
 }
 
 function getScaling() {
@@ -144,10 +149,10 @@ function devsWorkingOn(i) {
 }
 
 function addToProgress(diff) {
-  let perDev = diff * getEffect(1) * getEffect(5) * getMilestoneEffect() * getUpdatePowerEffect(0);
+  let perDev = new Decimal(diff).times(getEffect(1)).times(getEffect(5)).times(getMilestoneEffect()).times(getUpdatePowerEffect(0));
   let scaling = getScaling();
   for (let i = 0; i <= 4; i++) {
-    player.progress[i] = addProgress(player.progress[i], devsWorkingOn(i) * perDev, scaling);
+    player.progress[i] = addProgress(player.progress[i], perDev.times(devsWorkingOn(i)), scaling);
   }
 }
 
@@ -201,12 +206,13 @@ function tick() {
 }
 
 function format(x) {
-  if (x >= 1e6) {
-    let e = Math.floor(Math.log10(x));
-    let m = x / Math.pow(10, e);
+  x = new Decimal(x);
+  if (x.gte(1e6)) {
+    let e = x.exponent;
+    let m = x.mantissa;
     return m.toFixed(2) + 'e' + e;
-  } else if (x === Math.floor(x)) {
-    return '' + x;
+  } else if (x.equals(Math.floor(x))) {
+    return '' + x.toNumber();
   } else {
     return x.toFixed(2);
   }
@@ -268,7 +274,7 @@ function softcapPatienceMeter(x) {
 function getEffect(i) {
   let x = player.progress[i];
   if (i === 1 || i === 5) {
-    return Math.pow(2, x / 1800 * getEffect(7));
+    return Decimal.pow(2, x / 1800 * getEffect(7));
   } else if (i === 2 || i === 6) {
     return x / 1800 * getEffect(7);
   } else if (i === 3) {
@@ -451,7 +457,33 @@ function updateAutoDev(i) {
   player.auto.dev.settings[i] = +document.getElementById("auto-dev-" + i).value || 0;
 }
 
+const TAB_LIST = ['main', 'update'];
+
+function updateTabButtonDisplay () {
+  if (player.updates > 1) {
+    document.getElementById('update-button').style.display = '';
+  } else {
+    document.getElementById('update-button').style.display = 'none';
+  }
+}
+
+function updateTabDisplay() {
+  for (let i = 0; i < TAB_LIST.length; i++) {
+    if (player.tab === TAB_LIST[i]) {
+      document.getElementById(TAB_LIST[i] + '-div').style.display = '';
+    } else {
+      document.getElementById(TAB_LIST[i] + '-div').style.display = 'none';
+    }
+  }
+}
+
+function setTab(x) {
+  player.tab = x;
+  updateTabDisplay();
+}
+
 function updateDisplay () {
+  updateTabButtonDisplay();
   for (let i = 0; i <= 6; i++) {
     document.getElementById("progress-span-" + i).innerHTML = toTime(player.progress[i]);
   }
@@ -484,20 +516,15 @@ function updateDisplay () {
   }
   if (canUpdate()) {
     let gain = getUpdateGain();
-    document.getElementById('update-gain').innerHTML = 'gain ' + gain + ' update point' + (gain === 1 ? '' : 's');
+    document.getElementById('update-gain').innerHTML = 'gain ' + format(gain) + ' update point' + (gain === 1 ? '' : 's');
   } else {
     document.getElementById('update-gain').innerHTML = 'requires ' + toTime(18000) + ' development';
   }
-  if (player.updates > 0) {
-    document.getElementById('update-div').style.display = '';
-  } else {
-    document.getElementById('update-div').style.display = 'none';
-  }
-  document.getElementById('update-points').innerHTML = player.updatePoints;
+  document.getElementById('update-points').innerHTML = format(player.updatePoints);
   document.getElementById('updates').innerHTML = player.updates;
   document.getElementById('updates-effect').innerHTML = format(getUpdatesEffect());
   for (let i = 0; i <= 2; i++) {
-    document.getElementById('update-experience-span-' + i).innerHTML = player.experience[i];
+    document.getElementById('update-experience-span-' + i).innerHTML = format(player.experience[i]);
     document.getElementById('update-power-span-' + i).innerHTML = format(player.power[i]);
     document.getElementById('update-effect-span-' + i).innerHTML = format(getUpdatePowerEffect(i));
     for (let j = 0; j <= 1; j++) {
