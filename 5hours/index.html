@@ -5,7 +5,7 @@
   <script src="5hours.js"></script>
 </head>
 <body>
-  <span><button id="main-button" onclick="setTab('main')">Main</button> <button id="update-button" onclick="setTab('update')" style="display: none;">Update</button></span>
+  <span><button id="main-button" onclick="setTab('main')">Main</button> <button id="update-button" onclick="setTab('update')" style="display: none;">Update</button> <button id="ad-update-button" onclick="setTab('ad-update')" style="display: none;"><span id="ad-update-button-name"></span></button></span>
   <div id="main-div" style="display: none;">
     <table style="table-layout: fixed; width: 1200px;">
       <tr>
@@ -101,7 +101,18 @@
       </tr>
     </table>
   </div>
-  <span>Other information: <span id="unassigned-devs"></span> unassigned dev<span id="unassigned-devs-plural"></span>, <span id="progress-milestones"></span> progress milestone<span id="progress-milestones-plural"></span> (giving a <span id="progress-milestones-effect"></span>x multiplier to all production), <span id="enlightened"></span> time<span id="enlightened-plural"></span> enlightened</span>
+  <div id="ad-update-div" style="display: none;">
+    <span><button onclick="gotoLore(-1)">&lt;-</button> <span id="lore"></span> <button onclick="gotoLore(1)">-&gt;</button></span>
+    <div id="ad-update">
+      <button style="height: 100px; width: 250px;" onclick="toggleADUpdate()">
+        <span id="start-ad-update">Start working on the AD update. This will reset everything that update resets. In addition, overall production multiplier, overall scaling slowdown, and total devs will be severely nerfed. Reaching certain milestones will give you rewards.</span>
+        <span id="stop-ad-update">Stop working on the AD update. There's no way you can finish this update with all these nerfs, but at least you got somewhere.</span>
+      </button>
+      <br/>
+      <span>Record development in AD update: <span id="record-development-in-ad-update"></span>, corresponding to <span id="perma-enlightened"></span> permanent time<span id="perma-enlightened-plural"></span> enlightened and <span id="enlightened-slow-factor"></span>x slower patience meter per time enlightened.</span>
+    </div>
+  </div>
+  <span>Other information: <span id="record-development"></span> record development ever, <span id="unassigned-devs"></span> unassigned dev<span id="unassigned-devs-plural"></span>, <span id="progress-milestones"></span> progress milestone<span id="progress-milestones-plural"></span> (giving a <span id="progress-milestones-effect"></span>x multiplier to all production), <span id="enlightened"></span> time<span id="enlightened-plural"></span> enlightened</span>
   <br/>
   <span><button onclick="saveGame()">Save</button> <button onclick="exportGame()">Export</button> <button onclick="loadGamePrompt()">Load</button> <button onclick="resetGame()">RESET</button></span>
   <span>

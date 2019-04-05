@@ -37,6 +37,18 @@ function fixPlayer () {
   if (!('tab' in player)) {
     player.tab = 'main';
   }
+  if (!('stats' in player)) {
+    player.stats = {
+      'recordDevelopment': 0
+    }
+  }
+  if (!('lore' in player)) {
+    player.lore = 0;
+  }
+  if (!('inADUpdate' in player)) {
+    player.inADUpdate = false;
+    player.stats.recordDevelopmentInADUpdate = 0;
+  }
 }
 
 function loadGameStorage () {
@@ -97,6 +109,12 @@ let initialPlayer = {
     }
   },
   tab: 'main',
+  stats: {
+    recordDevelopment: 0,
+    recordDevelopmentInADUpdate: 0
+  },
+  lore: 0,
+  inADUpdate: false,
   lastUpdate: Date.now()
 }
 
@@ -137,7 +155,7 @@ function addProgress(orig, change, c) {
 }
 
 function getScaling() {
-  return 1 + getEffect(2) + getEffect(6);
+  return maybeLog(1 + getEffect(2) + getEffect(6));
 }
 
 function devsWorkingOn(i) {
@@ -148,8 +166,24 @@ function devsWorkingOn(i) {
   }
 }
 
+function maybeLog(x) {
+  if (player.inADUpdate) {
+    if (x instanceof Decimal) {
+      return new Decimal(1 + Decimal.ln(x));
+    } else {
+      return 1 + Math.log(x);
+    }
+  } else {
+    return x;
+  }
+}
+
+function getTotalProductionMultiplier() {
+  return maybeLog(getEffect(1).times(getEffect(5)).times(getMilestoneEffect()).times(getUpdatePowerEffect(0)));
+}
+
 function addToProgress(diff) {
-  let perDev = new Decimal(diff).times(getEffect(1)).times(getEffect(5)).times(getMilestoneEffect()).times(getUpdatePowerEffect(0));
+  let perDev = new Decimal(diff).times(getTotalProductionMultiplier());
   let scaling = getScaling();
   for (let i = 0; i <= 4; i++) {
     player.progress[i] = addProgress(player.progress[i], perDev.times(devsWorkingOn(i)), scaling);
@@ -198,6 +232,16 @@ function gameCode() {
   addToPatience(diff);
   addToUpdatePower(diff);
   checkForMilestones();
+  checkForRecordDevelopement();
+}
+
+function checkForRecordDevelopement() {
+  player.stats.recordDevelopment = Math.max(
+    player.progress[0], player.stats.recordDevelopment);
+  if (player.inADUpdate) {
+    player.stats.recordDevelopmentInADUpdate = Math.max(
+      player.progress[0], player.stats.recordDevelopmentInADUpdate);
+  }
 }
 
 function tick() {
@@ -278,13 +322,29 @@ function getEffect(i) {
   } else if (i === 2 || i === 6) {
     return x / 1800 * getEffect(7);
   } else if (i === 3) {
-    return baseDevs() + Math.floor(x * getUpdatePowerEffect(2) / 300);
+    return Math.floor(maybeLog(baseDevs() + x * getUpdatePowerEffect(2) / 300));
   } else if (i === 4) {
     let base = getBasePatienceMeterTime(x);
-    return base / getUpdatePowerEffect(1) * Math.pow(2, player.enlightened);
+    return base / getUpdatePowerEffect(1) * Math.pow(getEnlightenedSlowFactor(), player.enlightened);
   } else if (i === 7) {
-    return 1 + softcapPatienceMeter(x) * (0.5 + 0.05 * player.enlightened);
+    return 1 + softcapPatienceMeter(x) * (0.5 + 0.05 * getTotalEnlightened());
   }
+}
+
+function getTotalEnlightened() {
+  return player.enlightened + getPermaEnlightened();
+}
+
+function getADMilestones() {
+  return Math.max(player.stats.recordDevelopmentInADUpdate / 1800 - 1, 0);
+}
+
+function getPermaEnlightened() {
+  return Math.floor(getADMilestones());
+}
+
+function getEnlightenedSlowFactor() {
+  return 2 - Math.floor(getADMilestones() / 3) / 10;
 }
 
 function toggleConfirmation(x) {
@@ -404,6 +464,22 @@ function update() {
   }
 }
 
+function toggleADUpdate() {
+  if (canUpdate()) {
+    player.updatePoints += getUpdateGain();
+  }
+  player.inADUpdate = !player.inADUpdate;
+  for (let i = 0; i <= 7; i++) {
+    player.progress[i] = 0;
+    player.devs[i] = 0;
+  }
+  player.milestones = 0;
+  player.enlightened = 0;
+  for (let i = 0; i <= 3; i++) {
+    player.power[i] = 0;
+  }
+}
+
 function getUpdatesEffect() {
   return Math.max(0, (1 + Math.log2(player.updates)) / 100);
 }
@@ -457,13 +533,18 @@ function updateAutoDev(i) {
   player.auto.dev.settings[i] = +document.getElementById("auto-dev-" + i).value || 0;
 }
 
-const TAB_LIST = ['main', 'update'];
+const TAB_LIST = ['main', 'update', 'ad-update'];
 
 function updateTabButtonDisplay () {
-  if (player.updates > 1) {
+  if (player.updates > 0) {
     document.getElementById('update-button').style.display = '';
   } else {
     document.getElementById('update-button').style.display = 'none';
+  }
+  if (player.stats.recordDevelopment >= 86400) {
+    document.getElementById('ad-update-button').style.display = '';
+  } else {
+    document.getElementById('ad-update-button').style.display = 'none';
   }
 }
 
@@ -480,6 +561,22 @@ function updateTabDisplay() {
 function setTab(x) {
   player.tab = x;
   updateTabDisplay();
+}
+
+let LORE_LIST = [
+  'You\'ve done a full day\'s worth of development, and you\'re amazed at how much you\'ve accomplished.',
+  'You feel that you could develop any game at this rate.',
+  'Suddenly, ahead of you, you see a colorful flame, shining in all the colors of the spectrum, in the shape of... a giraffe? That can\'t be right.',
+  'It says "It is good that you have come this far, but there are tasks far harder than anything you have done."',
+  '"Enter the world of the AD update, where development is almost impossible."',
+  '"I expect you will never complete it, or even come close."',
+  '"But as you get further into it, you may gain the enlightenment that you seek."'
+]
+
+function gotoLore(x) {
+  if (0 <= player.lore + x && player.lore + x < LORE_LIST.length) {
+    player.lore += x;
+  }
 }
 
 function updateDisplay () {
@@ -538,16 +635,36 @@ function updateDisplay () {
     document.getElementById('auto-dev-row').style.display = 'none';
     document.getElementById('auto-dev-span').style.display = 'none';
   }
+  document.getElementById('lore').innerHTML = LORE_LIST[player.lore];
+  if (player.lore >= 4) {
+    document.getElementById('ad-update').style.display = '';
+    document.getElementById('ad-update-button-name').innerHTML = 'AD Update';
+  } else {
+    document.getElementById('ad-update').style.display = 'none';
+    document.getElementById('ad-update-button-name').innerHTML = '???';
+  }
+  if (player.inADUpdate) {
+    document.getElementById('start-ad-update').style.display = 'none';
+    document.getElementById('stop-ad-update').style.display = '';
+  } else {
+    document.getElementById('start-ad-update').style.display = '';
+    document.getElementById('stop-ad-update').style.display = 'none';
+  }
+  document.getElementById('perma-enlightened').innerHTML = getPermaEnlightened();
+  document.getElementById('enlightened-slow-factor').innerHTML = format(getEnlightenedSlowFactor());
+  document.getElementById('record-development').innerHTML = toTime(player.stats.recordDevelopment);
+  document.getElementById('record-development-in-ad-update').innerHTML = toTime(player.stats.recordDevelopmentInADUpdate);
   document.getElementById('unassigned-devs').innerHTML = getUnassignedDevs();
   document.getElementById('progress-milestones').innerHTML = player.milestones;
   document.getElementById('progress-milestones-effect').innerHTML = getMilestoneEffect();
-  document.getElementById('enlightened').innerHTML = player.enlightened;
+  document.getElementById('enlightened').innerHTML = getTotalEnlightened();
   document.getElementById('devs-plural').innerHTML = (getTotalDevs() === 1) ? '' : 's';
   document.getElementById('unassigned-devs-plural').innerHTML = (getUnassignedDevs() === 1) ? '' : 's';
   document.getElementById('progress-milestones-plural').innerHTML = (player.milestones === 1) ? '' : 's';
+  document.getElementById('perma-enlightened-plural').innerHTML = (getPermaEnlightened() === 1) ? '' : 's';
   document.getElementById('update-points-plural').innerHTML = (player.updatePoints === 1) ? '' : 's';
   document.getElementById('updates-plural').innerHTML = (player.updates === 1) ? '' : 's';
-  document.getElementById('enlightened-plural').innerHTML = (player.enlightened === 1) ? '' : 's';
+  document.getElementById('enlightened-plural').innerHTML = (getTotalEnlightened() === 1) ? '' : 's';
 }
 
 window.onload = function () {
