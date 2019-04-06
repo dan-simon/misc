@@ -407,12 +407,10 @@ function canPrestige(i) {
 function confirmPrestige(i) {
   let whatWillReset = 'development, efficiency, refactoring, recruitment, patience, patience meter, and times enlightened';
   if (canPrestigeWithoutGain(i) &&
-  player.options.confirmations.prestigeWithoutGain &&
-  !confirm('Are you sure you want to prestige? You will gain nothing, and your ' + whatWillReset + ' will reset.')) {
-    return false;
-  } else if (player.options.confirmations.prestige &&
-  !confirm('Are you sure you want to prestige? Your ' + whatWillReset + ' will reset.')) {
-    return false;
+  player.options.confirmations.prestigeWithoutGain) {
+    return confirm('Are you sure you want to prestige? You will gain nothing, and your ' + whatWillReset + ' will reset.');
+  } else if (player.options.confirmations.prestige) {
+    return confirm('Are you sure you want to prestige? Your ' + whatWillReset + ' will reset.');
   } else {
     return true;
   }
@@ -420,7 +418,7 @@ function confirmPrestige(i) {
 
 function prestige(i) {
   if (canPrestige(i) && confirmPrestige(i)) {
-    player.progress[i] = player.progress[0] + challengeReward('unprestigious');
+    player.progress[i] = Math.max(player.progress[i], player.progress[0] + challengeReward('unprestigious'));
     for (let j = 0; j <= 4; j++) {
       player.progress[j] = 0;
       player.devs[j] = 0;
@@ -623,29 +621,26 @@ function confirmUpdate() {
   if (player.updates > 0) {
     whatWillReset = whatWillReset.replace('and progress milestones', 'progress milestones, and endgame/patience/headstart power')
   }
-  if (player.options.confirmations.update &&
-  !confirm('Are you sure you want to update? Your ' + whatWillReset + ' will reset.')) {
-    return false;
+  if (player.options.confirmations.update) {
+    return confirm('Are you sure you want to update? Your ' + whatWillReset + ' will reset.');
   } else {
     return true;
   }
 }
 
 function confirmEnterChallenge (x) {
-  if (player.options.confirmations.enterChallenge &&
-  !confirm('Are you sure you want to enter the \'' + getChallengeForDisplay(x) + '\' challenge? ' +
-  'The described special conditions will apply, and everything update resets will reset.')) {
-    return false;
+  if (player.options.confirmations.enterChallenge) {
+    return confirm('Are you sure you want to enter the \'' + getChallengeForDisplay(x) + '\' challenge? ' +
+    'The described special conditions will apply, and everything update resets will reset.');
   } else {
     return true;
   }
 }
 
 function confirmExitChallenge() {
-  if (player.options.confirmations.exitChallenge &&
-  !confirm('Are you sure you want to exit the \'' + getChallengeForDisplay(player.currentChallenge) + '\' challenge? ' +
-  'You will not get further in it than you are now until you enter it again, and everything update resets will reset.')) {
-    return false;
+  if (player.options.confirmations.exitChallenge) {
+    return confirm('Are you sure you want to exit the \'' + getChallengeForDisplay(player.currentChallenge) + '\' challenge? ' +
+    'You will not get further in it than you are now until you enter it again, and everything update resets will reset.');
   } else {
     return true;
   }
