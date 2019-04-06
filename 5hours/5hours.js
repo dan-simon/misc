@@ -471,10 +471,10 @@ const CHALLENGE_GOALS = {
   '': 18000,
   'logarithmic': 18000,
   'inefficient': 21600,
-  'ufd': 9000,
+  'ufd': 6000,
   'lonely': 86400,
   'impatient': 43200,
-  'unprestigious': 18000,
+  'unprestigious': 28800,
   'slow': 86400,
   'powerless': 43200,
   'upgradeless': 28800
@@ -498,7 +498,7 @@ function challengeReward(x) {
   let pastCompletion = player.stats.recordDevelopment[x] - CHALLENGE_GOALS[x];
   let table = {
     'inefficient': [new Decimal(1), x => Decimal.pow(2, 1 + x / 1800)],
-    'ufd': [0, x => 1 + x / 900],
+    'ufd': [0, x => 1 + x / 3600],
     'lonely': [1, x => 2 + x / 3600],
     'impatient': [1, x => 2 + x / 3600],
     'unprestigious': [0, x => 1800 + x],
@@ -543,13 +543,13 @@ function describeChallengeCompleted(x) {
 const CHALLENGE_UNLOCKS = {
   'logarithmic': 86400,
   'inefficient': 108000,
-  'ufd': 129600,
-  'lonely': 172800,
-  'impatient': 216000,
-  'unprestigious': 259200,
-  'slow': 345600,
-  'powerless': 432000,
-  'upgradeless': 518400
+  'ufd': 144000,
+  'lonely': 194400,
+  'impatient': 259200,
+  'unprestigious': 345600,
+  'slow': 432000,
+  'powerless': 518400,
+  'upgradeless': 648000
 }
 
 function isChallengeUnlocked(x) {
