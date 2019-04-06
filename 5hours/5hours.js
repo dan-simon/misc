@@ -189,7 +189,7 @@ function devsWorkingOn(i) {
 
 function maybeLog(x) {
   if (player.currentChallenge === 'logarithmic') {
-    let pow = 1 + getTotalChallengeCompletions() / 4;
+    let pow = Math.min(3, 1 + getTotalChallengeCompletions() / 4);
     if (x instanceof Decimal) {
       return Decimal.pow(1 + Decimal.ln(x), pow);
     } else {
@@ -281,8 +281,8 @@ function format(x) {
     let e = x.exponent;
     let m = x.mantissa;
     return m.toFixed(2) + 'e' + e;
-  } else if (x.equals(Math.floor(x))) {
-    return '' + x.toNumber();
+  } else if (x.equals(Math.round(x.toNumber()))) {
+    return '' + Math.round(x.toNumber());
   } else {
     return x.toFixed(2);
   }
@@ -397,7 +397,7 @@ function toggleConfirmation(x) {
 }
 
 function canPrestigeWithoutGain(i) {
-  return canPrestige(i) && player.progress[0] <= player.progress[i];
+  return canPrestige(i) && player.progress[i] >= player.progress[0] + challengeReward('unprestigious');
 }
 
 function canPrestige(i) {
@@ -499,7 +499,7 @@ function challengeReward(x) {
     'ufd': [0, x => 1 + x / 3600],
     'lonely': [1, x => 2 + x / 3600],
     'impatient': [1, x => 2 + x / 3600],
-    'unprestigious': [0, x => 1800 + x],
+    'unprestigious': [0, x => 600 + x / 3],
     'slow': [1, x => 1.5 + x / 43200],
     'powerless': [1, x => Math.pow(2, x / 3600)],
     'upgradeless': [2.2, x => 2.4 + x / 18000]
@@ -519,8 +519,8 @@ function describeChallengeReward(x) {
       'inefficient': x => format(x) + 'x multiplier to all production',
       'ufd': x => format(1 + x) + 'x slower scaling (additive)',
       'lonely': x => format(x) + 'x dev gain from recruitment',
-      'impatient': x => format(x) + ' patience meter gain',
-      'unprestigious': x => toTime(x) + ' extra minutes when prestiging',
+      'impatient': x => format(x) + 'x patience meter gain',
+      'unprestigious': x => toTime(x) + ' extra time when prestiging',
       'slow': x => 'Everything (including patience and power gain)<br/>is ' + format(x) + 'x faster',
       'powerless': x => format(x) + 'x power production',
       'upgradeless': x => format(x) + ' base for second endgame upgrade'
@@ -542,12 +542,12 @@ const CHALLENGE_UNLOCKS = {
   'logarithmic': 86400,
   'inefficient': 108000,
   'ufd': 144000,
-  'lonely': 194400,
-  'impatient': 259200,
-  'unprestigious': 345600,
-  'slow': 432000,
-  'powerless': 518400,
-  'upgradeless': 648000
+  'lonely': 216000,
+  'impatient': 432000,
+  'unprestigious': 648000,
+  'slow': 864000,
+  'powerless': 1296000,
+  'upgradeless': 1728000
 }
 
 function isChallengeUnlocked(x) {
@@ -792,11 +792,11 @@ function updateDisplay () {
     }
   }
   for (let i = 0; i <= 4; i++) {
-    document.getElementById("devs-" + i).innerHTML = player.devs[i];
+    document.getElementById("devs-" + i).innerHTML = format(player.devs[i]);
   }
   for (let i = 5; i <= 6; i++) {
     if (canPrestigeWithoutGain(i)) {
-      document.getElementById("prestige-" + i).innerHTML = '(' + toTime(player.progress[i]) + ' -> ' + toTime(player.progress[i]) + ') (no gain)';
+      document.getElementById("prestige-" + i).innerHTML = '(' + toTime(player.progress[i]) + ' -> ' + toTime(player.progress[i]) + ')<br/>(no gain)';
     } else if (canPrestige(i)) {
       document.getElementById("prestige-" + i).innerHTML = '(' + toTime(player.progress[i]) + ' -> ' + toTime(player.progress[0]) + ')';
     } else if (player.currentChallenge === 'unprestigious') {
@@ -836,7 +836,7 @@ function updateDisplay () {
   }
   updateChallengeDisplay();
   document.getElementById('record-development').innerHTML = toTime(player.stats.recordDevelopment['']);
-  document.getElementById('unassigned-devs').innerHTML = getUnassignedDevs();
+  document.getElementById('unassigned-devs').innerHTML = format(getUnassignedDevs());
   document.getElementById('progress-milestones').innerHTML = player.milestones;
   document.getElementById('progress-milestones-effect').innerHTML = getMilestoneEffect();
   document.getElementById('enlightened').innerHTML = getTotalEnlightened();
