@@ -470,7 +470,7 @@ function canUpdate() {
 const CHALLENGE_GOALS = {
   '': 18000,
   'logarithmic': 18000,
-  'inefficient': 18000,
+  'inefficient': 21600,
   'ufd': 9000,
   'lonely': 86400,
   'impatient': 43200,
@@ -655,6 +655,7 @@ function update() {
   if (canUpdate() && confirmUpdate()) {
     player.updatePoints += getUpdateGain();
     player.updates++;
+    player.currentChallenge = '';
     for (let i = 0; i <= 7; i++) {
       player.progress[i] = 0;
       player.devs[i] = 0;
