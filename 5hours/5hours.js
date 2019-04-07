@@ -275,16 +275,19 @@ function tick() {
   updateDisplay();
 }
 
-function format(x) {
+function format(x, n) {
   x = new Decimal(x);
+  if (n === undefined) {
+    n = 2;
+  }
   if (x.gte(1e6)) {
     let e = x.exponent;
     let m = x.mantissa;
-    return m.toFixed(2) + 'e' + e;
+    return m.toFixed(n) + 'e' + e;
   } else if (x.equals(Math.round(x.toNumber()))) {
     return '' + Math.round(x.toNumber());
   } else {
-    return x.toFixed(2);
+    return x.toFixed(n);
   }
 }
 
@@ -396,8 +399,12 @@ function toggleConfirmation(x) {
   player.options.confirmations[x] = !player.options.confirmations[x];
 }
 
+function newValueFromPrestige() {
+  return player.progress[0] + challengeReward('unprestigious');
+}
+
 function canPrestigeWithoutGain(i) {
-  return canPrestige(i) && player.progress[i] >= player.progress[0] + challengeReward('unprestigious');
+  return canPrestige(i) && player.progress[i] >= newValueFromPrestige();
 }
 
 function canPrestige(i) {
@@ -418,7 +425,7 @@ function confirmPrestige(i) {
 
 function prestige(i) {
   if (canPrestige(i) && confirmPrestige(i)) {
-    player.progress[i] = Math.max(player.progress[i], player.progress[0] + challengeReward('unprestigious'));
+    player.progress[i] = Math.max(player.progress[i], newValueFromPrestige());
     for (let j = 0; j <= 4; j++) {
       player.progress[j] = 0;
       player.devs[j] = 0;
@@ -472,7 +479,7 @@ const CHALLENGE_GOALS = {
   'ufd': 6000,
   'lonely': 86400,
   'impatient': 43200,
-  'unprestigious': 28800,
+  'unprestigious': 86400,
   'slow': 86400,
   'powerless': 43200,
   'upgradeless': 28800
@@ -499,7 +506,7 @@ function challengeReward(x) {
     'ufd': [0, x => 1 + x / 3600],
     'lonely': [1, x => 2 + x / 3600],
     'impatient': [1, x => 2 + x / 3600],
-    'unprestigious': [0, x => 600 + x / 3],
+    'unprestigious': [0, x => 1800 + x / 4],
     'slow': [1, x => 1.5 + x / 43200],
     'powerless': [1, x => Math.pow(2, x / 3600)],
     'upgradeless': [2.2, x => 2.4 + x / 18000]
@@ -781,7 +788,7 @@ function updateDisplay () {
   for (let i = 0; i <= 6; i++) {
     document.getElementById("progress-span-" + i).innerHTML = toTime(player.progress[i]);
   }
-  document.getElementById("progress-span-7").innerHTML = player.progress[7].toFixed(4);
+  document.getElementById("progress-span-7").innerHTML = format(player.progress[7], 4);
   for (let i = 1; i <= 7; i++) {
     if (i === 2 || i === 6) {
       document.getElementById("effect-span-" + i).innerHTML = format(1 + getEffect(i));
@@ -798,7 +805,7 @@ function updateDisplay () {
     if (canPrestigeWithoutGain(i)) {
       document.getElementById("prestige-" + i).innerHTML = '(' + toTime(player.progress[i]) + ' -> ' + toTime(player.progress[i]) + ')<br/>(no gain)';
     } else if (canPrestige(i)) {
-      document.getElementById("prestige-" + i).innerHTML = '(' + toTime(player.progress[i]) + ' -> ' + toTime(player.progress[0]) + ')';
+      document.getElementById("prestige-" + i).innerHTML = '(' + toTime(player.progress[i]) + ' -> ' + toTime(newValueFromPrestige()) + ')';
     } else if (player.currentChallenge === 'unprestigious') {
       document.getElementById("prestige-" + i).innerHTML = '(disabled in this challenge)';
     } else {
