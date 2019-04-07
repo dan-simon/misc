@@ -480,8 +480,8 @@ const CHALLENGE_GOALS = {
   'lonely': 86400,
   'impatient': 43200,
   'unprestigious': 86400,
-  'slow': 86400,
-  'powerless': 43200,
+  'slow': 259200,
+  'powerless': 345600,
   'upgradeless': 28800
 }
 
@@ -507,8 +507,8 @@ function challengeReward(x) {
     'lonely': [1, x => 2 + x / 3600],
     'impatient': [1, x => 2 + x / 3600],
     'unprestigious': [0, x => 1800 + x / 4],
-    'slow': [1, x => 1.5 + x / 43200],
-    'powerless': [1, x => Math.pow(2, x / 3600)],
+    'slow': [1, x => 1.5 + x / 86400],
+    'powerless': [1, x => Math.pow(2, 1 + x / 3600)],
     'upgradeless': [2.2, x => 2.4 + x / 18000]
   }
   if (pastCompletion < 0) {
