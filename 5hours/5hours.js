@@ -484,7 +484,7 @@ const CHALLENGE_GOALS = {
   'unprestigious': 86400,
   'slow': 259200,
   'powerless': 345600,
-  'upgradeless': 28800
+  'upgradeless': 32400
 }
 
 function challengeCompletions(x) {
