@@ -331,10 +331,12 @@ function patienceMeterMinTime () {
 }
 
 function getBasePatienceMeterTime (x) {
-  let result = 86400 / Math.pow(patienceMeterScaling(), x / 1800);
+  let result = new Decimal(86400).div(Decimal.pow(patienceMeterScaling(), x / 1800));
   let minTime = patienceMeterMinTime();
-  if (result < minTime) {
-    result = minTime / (1 + Math.log(minTime / result));
+  if (result.lt(minTime)) {
+    result = minTime / (1 + Decimal.ln(Decimal.div(minTime, result)));
+  } else {
+    result = result.toNumber();
   }
   return result;
 }
