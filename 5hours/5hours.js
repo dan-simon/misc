@@ -1,6 +1,14 @@
-function loadGame (s) {
+function loadGame (s, offlineProgress) {
+  // offlineProgress = null means leave it up to the save.
   player = JSON.parse(atob(s));
+  if (offlineProgress === null) {
+    offlineProgress = player.options.offlineProgress;
+  }
+  if (!offlineProgress) {
+    player.lastUpdate = Date.now();
+  }
   fixPlayer();
+  convertSaveToDecimal()
   saveGame();
   fillInInputs();
   updateTabDisplay();
@@ -11,10 +19,10 @@ function fixPlayer () {
     player.enlightened = 0;
   }
   if (!('updates' in player)) {
-    player.updatePoints = 0;
+    player.updatePoints = new Decimal(0);
     player.updates = 0;
-    player.experience = [0, 0, 0];
-    player.power = [0, 0, 0];
+    player.experience = [new Decimal(0), new Decimal(0), new Decimal(0)];
+    player.power = [new Decimal(0), new Decimal(0), new Decimal(0)];
   }
   if (!('upgrades' in player)) {
     player.upgrades = [[false, false, false], [false, false, false]];
@@ -30,8 +38,11 @@ function fixPlayer () {
       confirmations: {
         prestige: true,
         prestigeWithoutGain: true,
-        update: true
-      }
+        update: true,
+        enterChallenge: true,
+        exitChallenge: true
+      },
+      offlineProgress: true
     }
   }
   if (!('tab' in player)) {
@@ -59,19 +70,35 @@ function fixPlayer () {
     player.options.confirmations.enterChallenge = true;
     player.options.confirmations.exitChallenge = true;
   }
+  if (!('offlineProgress' in player.options)) {
+    player.options.offlineProgress = true;
+  }
+  if (!('dilation' in player)) {
+    player.dilation = 0;
+  }
+}
+
+function convertSaveToDecimal () {
+  player.updatePoints = new Decimal(player.updatePoints);
+  for (let i = 0; i <= 2; i++) {
+    player.experience[i] = new Decimal(player.experience[i]);
+    player.power[i] = new Decimal(player.power[i]);
+  }
 }
 
 function loadGameStorage () {
   try {
-    loadGame(localStorage.getItem('5hours-save'));
+    // We're loading from storage, player.options.offlineProgress isn't set yet.
+    loadGame(localStorage.getItem('5hours-save'), null);
   } catch (ex) {
+    console.log('Exception while loading game: ' + ex + '\nPlease report thist.')
     resetGame();
   }
 }
 
 function loadGamePrompt() {
   try {
-    loadGame(prompt('Enter your save:'))
+    loadGame(prompt('Enter your save:'), player.options.offlineProgress);
   } catch(ex) {}
 }
 
@@ -100,10 +127,10 @@ let initialPlayer = {
   devs: [0, 0, 0, 0, 0],
   milestones: 0,
   enlightened: 0,
-  updatePoints: 0,
+  updatePoints: new Decimal(0),
   updates: 0,
-  experience: [0, 0, 0],
-  power: [0, 0, 0],
+  experience: [new Decimal(0), new Decimal(0), new Decimal(0)],
+  power: [new Decimal(0), new Decimal(0), new Decimal(0)],
   upgrades: [[false, false, false], [false, false, false]],
   auto: {
     dev: {
@@ -118,7 +145,8 @@ let initialPlayer = {
       update: true,
       enterChallenge: true,
       exitChallenge: true
-    }
+    },
+    offlineProgress: true
   },
   tab: 'main',
   currentChallenge: '',
@@ -136,16 +164,25 @@ let initialPlayer = {
       'upgradeless': 0
     }
   },
+  dilation: 0,
   lastUpdate: Date.now()
 }
 
 function resetGame() {
-  loadGame(btoa(JSON.stringify(initialPlayer)));
+  // The false here sets Date.now() to when the game was reset
+  // rather than when the window was loaded.
+  loadGame(btoa(JSON.stringify(initialPlayer)), false);
+}
+
+function resetGameWithConfirmation() {
+  if (confirm('Do you really want to reset the game? You will lose all your progress, and get no benefit.')) {
+    resetGame();
+  }
 }
 
 function endgameUpg0Formula(x) {
   if (upgradeActive(0, 0) && x > 2) {
-    // Don't take x^3 for small x.
+    // Don't take 2*x^2.5 for small x.
     return Math.min(Math.exp(x), 2 * Math.pow(x, 2.5));
   } else {
     return Math.exp(x);
@@ -225,8 +262,12 @@ function checkForMilestones() {
 
 function addToUpdatePower(diff) {
   for (let i = 0; i <= 2; i++) {
-    player.power[i] += diff * player.experience[i] * getPowerGainPerExperience();
+    player.power[i] = player.power[i].plus(new Decimal(diff).times(player.experience[i]).times(getPowerGainPerExperience()));
   }
+}
+
+function addToDilation(diff) {
+  player.dilation = player.dilation + diff * getDilationPerSecond();
 }
 
 function autoAssignDevs() {
@@ -257,6 +298,7 @@ function gameCode() {
   addToProgress(diff);
   addToPatience(diff);
   addToUpdatePower(diff);
+  addToDilation(diff);
   checkForMilestones();
   checkForRecordDevelopement();
 }
@@ -355,7 +397,7 @@ function getEffect(i) {
     if (player.currentChallenge === 'inefficient') {
       return new Decimal(1);
     } else {
-      return Decimal.pow(2, x / 1800 * getEffect(7));
+      return dilationBoost(Decimal.pow(2, x / 1800 * getEffect(7)));
     }
   } else if (i === 2 || i === 6) {
     if (player.currentChallenge === 'ufd') {
@@ -395,6 +437,10 @@ function getPermaEnlightened() {
 
 function getEnlightenedSlowFactor() {
   return 2 - Math.floor(getLogarithmicMilestones() / 3) / 10;
+}
+
+function toggleOption(x) {
+  player.options[x] = !player.options[x];
 }
 
 function toggleConfirmation(x) {
@@ -510,7 +556,7 @@ function challengeReward(x) {
     'impatient': [1, x => 2 + x / 3600],
     'unprestigious': [0, x => 1800 + x / 4],
     'slow': [1, x => 1.5 + x / 86400],
-    'powerless': [1, x => Math.pow(2, 1 + x / 3600)],
+    'powerless': [new Decimal(1), x => Decimal.pow(2, 1 + x / 3600)],
     'upgradeless': [2.2, x => 2.4 + x / 18000]
   }
   if (pastCompletion < 0) {
@@ -592,7 +638,7 @@ function enterChallenge(x) {
     player.milestones = 0;
     player.enlightened = 0;
     for (let i = 0; i <= 3; i++) {
-      player.power[i] = 0;
+      player.power[i] = new Decimal(0);
     }
   }
 }
@@ -607,7 +653,7 @@ function exitChallenge() {
     player.milestones = 0;
     player.enlightened = 0;
     for (let i = 0; i <= 3; i++) {
-      player.power[i] = 0;
+      player.power[i] = new Decimal(0);
     }
   }
 }
@@ -622,7 +668,7 @@ function getUpgradeGainBase() {
 
 function getUpdateGain() {
   let base = getUpgradeGainBase();
-  return Math.floor(Math.pow(base, player.progress[0] / 3600 - 5));
+  return Decimal.floor(Decimal.pow(base, player.progress[0] / 3600 - 5));
 }
 
 function confirmUpdate() {
@@ -657,7 +703,7 @@ function confirmExitChallenge() {
 
 function update() {
   if (canUpdate() && confirmUpdate()) {
-    player.updatePoints += getUpdateGain();
+    player.updatePoints = player.updatePoints.plus(getUpdateGain());
     player.updates++;
     player.currentChallenge = '';
     for (let i = 0; i <= 7; i++) {
@@ -667,29 +713,29 @@ function update() {
     player.milestones = 0;
     player.enlightened = 0;
     for (let i = 0; i <= 3; i++) {
-      player.power[i] = 0;
+      player.power[i] = new Decimal(0);
     }
   }
 }
 
 function getPowerGainPerExperience() {
   if (player.currentChallenge === 'powerless') {
-    return 0;
+    return new Decimal(0);
   } else {
-    return Math.max(0, (1 + Math.log2(player.updates)) / 100) * challengeReward('powerless');
+    return Decimal.max(0, (1 + Math.log2(player.updates)) / 100).times(challengeReward('powerless'));
   }
 }
 
 function assignAll(i) {
-  player.experience[i] += player.updatePoints;
-  player.updatePoints = 0;
+  player.experience[i] = player.experience[i].plus(player.updatePoints);
+  player.updatePoints = new Decimal(0);
 }
 
 function getUpdatePowerEffect(i) {
   if (i === 0) {
-    return Math.sqrt(player.power[i] + 1);
+    return Decimal.sqrt(player.power[i].plus(1));
   } else {
-    return Math.log2(player.power[i] + 2)
+    return Decimal.log2(player.power[i].plus(2))
   }
 }
 
@@ -704,15 +750,31 @@ function upgradeActive(i, j) {
 }
 
 function buyUpdateUpgrade(i, j) {
-  if (upgradeBought(i, j) || player.experience[j] < UPGRADE_COSTS[i]) {
+  if (upgradeBought(i, j) || player.experience[j].lt(UPGRADE_COSTS[i])) {
     return false;
   }
-  player.experience[j] -= UPGRADE_COSTS[i];
+  player.experience[j] = player.experience[j].minus(UPGRADE_COSTS[i]);
   player.upgrades[i][j] = true;
+}
+
+function getDilationPerSecond() {
+  if (player.currentChallenge !== 'logarithmic') {
+    return 0;
+  }
+  return Math.max(0, Math.pow(2, player.progress[0] / 3600 - 12) - 1) / 1000;
+}
+
+function getDilationEffect() {
+  return 1 + 1 / 10 - 1 / (10 + Math.log10(1 + player.dilation));
+}
+
+function dilationBoost(x) {
+  return Decimal.pow(10, Math.max(x.log10(), Math.pow(x.log10(), getDilationEffect())))
 }
 
 function fillInInputs() {
   fillInAutoDev();
+  fillInOptions();
   fillInConfirmations();
 }
 
@@ -721,6 +783,10 @@ function fillInAutoDev () {
     document.getElementById('auto-dev-' + i).value = player.auto.dev.settings[i];
   }
   document.getElementById('auto-dev-on').checked = player.auto.dev.on;
+}
+
+function fillInOptions() {
+  document.getElementById('offline-progress').checked = player.options.offlineProgress;
 }
 
 function fillInConfirmations() {
@@ -783,6 +849,11 @@ function updateChallengeDisplay () {
     document.getElementById(i + '-reward-description').innerHTML = describeChallengeReward(i);
     document.getElementById(i + '-completed-description').innerHTML = describeChallengeCompleted(i);
   }
+  if (player.dilation > 0) {
+    document.getElementById('dilation').innerHTML = 'You have ' + format(player.dilation, 4) + ' dilation, ' + format(getDilationPerSecond(), 4)+ ' dilation per second, with effect x^' + format(getDilationEffect(), 4) + '.';
+  } else {
+    document.getElementById('dilation').innerHTML = '';
+  }
 }
 
 function updateDisplay () {
@@ -821,7 +892,7 @@ function updateDisplay () {
   }
   if (canUpdate()) {
     let gain = getUpdateGain();
-    document.getElementById('update-gain').innerHTML = 'gain ' + format(gain) + ' update point' + (gain === 1 ? '' : 's');
+    document.getElementById('update-gain').innerHTML = 'gain ' + format(gain) + ' update point' + (gain.eq(1) ? '' : 's');
   } else {
     document.getElementById('update-gain').innerHTML = 'requires ' + toTime(CHALLENGE_GOALS[player.currentChallenge]) + ' development';
   }
@@ -852,7 +923,7 @@ function updateDisplay () {
   document.getElementById('devs-plural').innerHTML = (getTotalDevs() === 1) ? '' : 's';
   document.getElementById('unassigned-devs-plural').innerHTML = (getUnassignedDevs() === 1) ? '' : 's';
   document.getElementById('progress-milestones-plural').innerHTML = (player.milestones === 1) ? '' : 's';
-  document.getElementById('update-points-plural').innerHTML = (player.updatePoints === 1) ? '' : 's';
+  document.getElementById('update-points-plural').innerHTML = (player.updatePoints.eq(1)) ? '' : 's';
   document.getElementById('updates-plural').innerHTML = (player.updates === 1) ? '' : 's';
   document.getElementById('enlightened-plural').innerHTML = (getTotalEnlightened() === 1) ? '' : 's';
 }

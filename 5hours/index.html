@@ -7,7 +7,7 @@
 <body>
   <span><button id="main-button" onclick="setTab('main')">Main</button> <button id="update-button" onclick="setTab('update')" style="display: none;">Update</button> <button id="challenges-button" onclick="setTab('challenges')" style="display: none;">Challenges</button></span>
   <div id="main-div" style="display: none;">
-    <table style="table-layout: fixed; width: 1280px;">
+    <table style="table-layout: fixed; width: 1360px;">
       <tr>
         <td>Development</td>
         <td>Efficiency</td>
@@ -63,7 +63,7 @@
   </div>
   <div id="update-div" style="display: none;">
     <span>You have <span id="update-points">0</span> update point<span id="update-points-plural"></span>, and have updated <span id="updates">0</span> time<span id="updates-plural"></span> (corresponding to <span id="power-gain-per-experience">0.01</span> power per experience per second)</span>
-    <table style="table-layout: fixed; width: 800px;">
+    <table style="table-layout: fixed; width: 950px;">
       <tr>
         <td>Endgame</td>
         <td>Patience</td>
@@ -85,31 +85,33 @@
         <td><span id="update-effect-span-2">1</span>x dev gain from recruitment</td>
       </tr>
       <tr>
-        <td><button style="width: 250px;" onclick="assignAll(0)">Turn all your update points into endgame experience.</button></td>
-        <td><button style="width: 250px;" onclick="assignAll(1)">Turn all your update points into patience experience.</button></td>
-        <td><button style="width: 250px;" onclick="assignAll(2)">Turn all your update points into headstart experience.</button></td>
+        <td><button style="width: 300px;" onclick="assignAll(0)">Turn all your update points into endgame experience.</button></td>
+        <td><button style="width: 300px;" onclick="assignAll(1)">Turn all your update points into patience experience.</button></td>
+        <td><button style="width: 300px;" onclick="assignAll(2)">Turn all your update points into headstart experience.</button></td>
       </tr>
       <tr>
-        <td><button style="height: 60px; width: 250px;" onclick="buyUpdateUpgrade(0, 0)">Scaling becomes slower after 4:30:00.<br/>Cost: 5 endgame experience<span id="up-0-0-bought"></span></button></td>
-        <td><button style="height: 60px; width: 250px;" onclick="buyUpdateUpgrade(0, 1)">Patience affects the patience meter more strongly.<br/>Cost: 5 patience experience<span id="up-0-1-bought"></span></button></td>
-        <td><button style="height: 60px; width: 250px;" onclick="buyUpdateUpgrade(0, 2)">Start with 10 devs, and unlock auto dev assignment.<br/>Cost: 5 headstart experience<span id="up-0-2-bought"></span></button></td>
+        <td><button style="height: 60px; width: 300px;" onclick="buyUpdateUpgrade(0, 0)">Scaling becomes slower after 4:30:00.<br/>Cost: 5 endgame experience<span id="up-0-0-bought"></span></button></td>
+        <td><button style="height: 60px; width: 300px;" onclick="buyUpdateUpgrade(0, 1)">Patience affects the patience meter more strongly.<br/>Cost: 5 patience experience<span id="up-0-1-bought"></span></button></td>
+        <td><button style="height: 60px; width: 300px;" onclick="buyUpdateUpgrade(0, 2)">Start with 10 devs, and unlock auto dev assignment.<br/>Cost: 5 headstart experience<span id="up-0-2-bought"></span></button></td>
       </tr>
       <tr>
-        <td><button style="height: 60px; width: 250px;" onclick="buyUpdateUpgrade(1, 0)">Improve the update point gain formula.<br/>Cost: 10000 endgame experience<span id="up-1-0-bought"></span></button></td>
-        <td><button style="height: 60px; width: 250px;" onclick="buyUpdateUpgrade(1, 1)">The patience meter increases with greatly reduced effect past 1.<br/>Cost: 10000 patience experience<span id="up-1-1-bought"></span></button></td>
-        <td><button style="height: 60px; width: 250px;" onclick="buyUpdateUpgrade(1, 2)">All your devs act as working on development, in addition to whatever they're working on.<br/>Cost: 10000 headstart experience<span id="up-1-2-bought"></span></button></td>
+        <td><button style="height: 60px; width: 300px;" onclick="buyUpdateUpgrade(1, 0)">Improve the update point gain formula.<br/>Cost: 10000 endgame experience<span id="up-1-0-bought"></span></button></td>
+        <td><button style="height: 60px; width: 300px;" onclick="buyUpdateUpgrade(1, 1)">The patience meter increases with greatly reduced effect past 1.<br/>Cost: 10000 patience experience<span id="up-1-1-bought"></span></button></td>
+        <td><button style="height: 60px; width: 300px;" onclick="buyUpdateUpgrade(1, 2)">All your devs act as working on development, in addition to whatever they're working on.<br/>Cost: 10000 headstart experience<span id="up-1-2-bought"></span></button></td>
       </tr>
     </table>
   </div>
   <div id="challenges-div" style="display: none;">
-    <span>You have <span id="total-challenge-completions"></span> total challenge completions. You are currently in <span id="current-challenge"></span>. <span id="next-challenge-unlock">Next challenge unlocks at development.</span> <button onclick="exitChallenge()">Exit current challenge</button></span>
+    <span>You have <span id="total-challenge-completions"></span> total challenge completions. You are currently in <span id="current-challenge"></span>. <span id="next-challenge-unlock">Next challenge unlocks eventually.</span><button onclick="exitChallenge()">Exit current challenge</button></span>
+    <br/>
+    <span id="dilation"></span>
     <table style="table-layout: fixed; width: 1100px;">
       <tr>
         <td id="logarithmic-td" style="display: none;">
           <button style="height: 150px; width: 350px;" onclick="enterChallenge('logarithmic')">
             Logarithmic
             <br/>
-            Overall production multiplier, overall scaling slowdown, and total devs is severely nerfed, but also boosted by total challenge completions. Reaching certain milestones will give you permanent rewards, even if you can't finish.
+            Overall production multiplier, overall scaling slowdown, and total devs is severely nerfed, but also boosted by total challenge completions. Reaching certain milestones will give you permanent rewards, even if you can't finish. If you get far enough in this challenge, you produce dilation which boosts the exponents of efficiency and meta-efficiency.
             <br/>
             Goal: 5:00:00 development
           </button>
@@ -253,15 +255,20 @@
   </div>
   <span>Other information: <span id="record-development"></span> record development ever, <span id="unassigned-devs"></span> unassigned dev<span id="unassigned-devs-plural"></span>, <span id="progress-milestones"></span> progress milestone<span id="progress-milestones-plural"></span> (giving a <span id="progress-milestones-effect"></span>x multiplier to all production), <span id="enlightened"></span> time<span id="enlightened-plural"></span> enlightened</span>
   <br/>
-  <span><button onclick="saveGame()">Save</button> <button onclick="exportGame()">Export</button> <button onclick="loadGamePrompt()">Load</button> <button onclick="resetGame()">RESET</button></span>
   <span>
     Prestige confirmation: <input id="prestige-confirmation" onclick="toggleConfirmation('prestige')" type="checkbox"></input>
     Prestige-without-gain confirmation: <input id="prestige-without-gain-confirmation" onclick="toggleConfirmation('prestigeWithoutGain')" type="checkbox"></input>
     Update confirmation: <input id="update-confirmation" onclick="toggleConfirmation('update')" type="checkbox"></input>
+  </span>
+  <br/>
+  <span>
     Enter-challenge confirmation: <input id="enter-challenge-confirmation" onclick="toggleConfirmation('enterChallenge')" type="checkbox"></input>
     Exit-challenge confirmation: <input id="exit-challenge-confirmation" onclick="toggleConfirmation('exitChallenge')" type="checkbox"></input>
+    Offline progress: <input id="offline-progress" onclick="toggleOption('offlineProgress')" type="checkbox"></input>
     <span id="auto-dev-span" style="display: none;">Auto dev assignment: <input id="auto-dev-on" onclick="toggleAutoDev()" type="checkbox"></input></span>
   </span>
+  <br/>
+  <span><button onclick="saveGame()">Save</button> <button onclick="exportGame()">Export</button> <button onclick="loadGamePrompt()">Load</button> <button onclick="resetGameWithConfirmation()">RESET</button></span>
   <br/>
   <span style="display: none;"><input id="export-output"></input></span>
 </body>
