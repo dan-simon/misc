@@ -76,6 +76,33 @@ function fixPlayer () {
   if (!('dilation' in player)) {
     player.dilation = 0;
   }
+  if (!('last' in player.stats)) {
+    player.stats.last = {
+      enlightened: Date.now(),
+      prestige: Date.now(),
+      update: Date.now(),
+      update: Date.now(),
+      prestigeType: null,
+      updatePointGain: new Decimal(0)
+    }
+  }
+  if (!('enlightened' in player.auto)) {
+    player.auto.enlightened = {
+      setting: 'total times enlightened',
+      value: new Decimal(0),
+      on: false
+    };
+    player.auto.prestige = {
+      setting: 'development',
+      value: new Decimal(0),
+      on: false
+    };
+    player.auto.update = {
+      setting: 'development',
+      value: new Decimal(0),
+      on: false
+    };
+  }
 }
 
 function convertSaveToDecimal () {
@@ -136,6 +163,21 @@ let initialPlayer = {
     dev: {
       settings: [0, 0, 0, 0, 0],
       on: false
+    },
+    enlightened: {
+      setting: 'total times enlightened',
+      value: new Decimal(0),
+      on: false
+    },
+    prestige: {
+      setting: 'development',
+      value: new Decimal(0),
+      on: false
+    },
+    update: {
+      setting: 'development',
+      value: new Decimal(0),
+      on: false
     }
   },
   options: {
@@ -162,6 +204,14 @@ let initialPlayer = {
       'slow': 0,
       'powerless': 0,
       'upgradeless': 0
+    },
+    last: {
+      enlightened: Date.now(),
+      prestige: Date.now(),
+      update: Date.now(),
+      update: Date.now(),
+      prestigeType: null,
+      updatePointGain: new Decimal(0)
     }
   },
   dilation: 0,
@@ -281,6 +331,53 @@ function autoAssignDevs() {
   }
 }
 
+function checkForAutoEnlightened() {
+  let table = {
+    'total times enlightened': x => getTotalEnlightened() < x,
+    'seconds since last time enlightened': x => Date.now() - player.stats.last.enlightened >= x * 1000
+  }
+  if (table[player.auto.enlightened.setting](player.auto.enlightened.value.toNumber())) {
+    enlightened();
+  }
+}
+
+function getCurrentAutoPrestigeType() {
+  if (player.stats.last.prestigeType === null) {
+    return player.auto.prestige.initial;
+  } else {
+    return 5 + (player.stats.last.prestigeType + player.auto.prestige.alternate - 5) % 2;
+  }
+}
+
+function getBetterPrestigeValue() {
+  return Math.max(player.progress[5], player.progress[6]);
+}
+
+function checkForAutoPrestige() {
+  let type = getCurrentAutoPrestigeType();
+  let table = {
+    'development': x => player.progress[0] >= x,
+    'X improvement over current': x => newValueFromPrestige() - player.progress[type] >= x,
+    'X improvement over better': x => newValueFromPrestige() - getBetterPrestigeValue() >= x,
+    'seconds since last prestige': x => Date.now() - player.stats.last.prestige >= x * 1000
+  }
+  if (table[player.auto.prestige.setting](player.auto.prestige.value.toNumber())) {
+    prestige(type);
+  }
+}
+
+function checkForAutoUpdate() {
+  let table = {
+    'development': x => player.progress[0] >= x.toNumber(),
+    'update points': x => getUpdateGain().gte(x),
+    'X times last update points': x => player.stats.last.updatePointGain >= x.toNumber(),
+    'seconds since last update': x => Date.now() - player.stats.last.update >= x.toNumber() * 1000
+  }
+  if (table[player.auto.update.setting](player.auto.update.value)) {
+    update();
+  }
+}
+
 function gameCode() {
   let now = Date.now();
   diff = (now - player.lastUpdate) / 1000;
@@ -294,6 +391,15 @@ function gameCode() {
   player.lastUpdate = now;
   if (upgradeActive(0, 2) && player.auto.dev.on) {
     autoAssignDevs();
+  }
+  if (hasAuto('update') && player.auto.update.on) {
+    checkForAutoUpdate();
+  }
+  if (hasAuto('prestige') && player.auto.prestige.on) {
+    checkForAutoPrestige();
+  }
+  if (hasAuto('enlightened') && player.auto.enlightened.on) {
+    checkForAutoEnlightened();
   }
   addToProgress(diff);
   addToPatience(diff);
@@ -471,8 +577,8 @@ function confirmPrestige(i) {
   }
 }
 
-function prestige(i) {
-  if (canPrestige(i) && confirmPrestige(i)) {
+function prestige(i, force) {
+  if (force || (canPrestige(i) && confirmPrestige(i))) {
     player.progress[i] = Math.max(player.progress[i], newValueFromPrestige());
     for (let j = 0; j <= 4; j++) {
       player.progress[j] = 0;
@@ -480,6 +586,9 @@ function prestige(i) {
     }
     player.progress[7] = 0;
     player.enlightened = 0;
+    player.stats.last.prestige = Date.now();
+    player.stats.last.enlightened = Date.now();
+    player.stats.last.prestigeType = i;
   }
 }
 
@@ -487,6 +596,7 @@ function enlightened() {
   if (player.progress[7] >= 1) {
     player.progress[7] = 0;
     player.enlightened++;
+    player.stats.last.enlightened = Date.now();
   }
 }
 
@@ -701,9 +811,10 @@ function confirmExitChallenge() {
   }
 }
 
-function update() {
-  if (canUpdate() && confirmUpdate()) {
-    player.updatePoints = player.updatePoints.plus(getUpdateGain());
+function update(force) {
+  if (force || (canUpdate() && confirmUpdate())) {
+    let gain = getUpdateGain();
+    player.updatePoints = player.updatePoints.plus(gain);
     player.updates++;
     player.currentChallenge = '';
     for (let i = 0; i <= 7; i++) {
@@ -715,6 +826,11 @@ function update() {
     for (let i = 0; i <= 3; i++) {
       player.power[i] = new Decimal(0);
     }
+    player.stats.last.update = Date.now();
+    player.stats.last.prestige = Date.now();
+    player.stats.last.enlightened = Date.now();
+    player.stats.last.prestigeType = null;
+    player.stats.last.updatePointGain = gain;
   }
 }
 
