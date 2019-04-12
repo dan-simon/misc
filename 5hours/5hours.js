@@ -616,8 +616,8 @@ function confirmPrestige(i) {
   }
 }
 
-function prestige(i, force) {
-  if (force || (canPrestige(i) && confirmPrestige(i))) {
+function prestige(i, noConfirm) {
+  if (canPrestige(i) && (noConfirm || confirmPrestige(i))) {
     player.progress[i] = Math.max(player.progress[i], newValueFromPrestige());
     for (let j = 0; j <= 4; j++) {
       player.progress[j] = 0;
@@ -858,8 +858,8 @@ function confirmExitChallenge() {
   }
 }
 
-function update(force) {
-  if (force || (canUpdate() && confirmUpdate())) {
+function update(noConfirm) {
+  if (canUpdate() && (noConfirm || confirmUpdate())) {
     let gain = getUpdateGain();
     player.updatePoints = player.updatePoints.plus(gain);
     player.updates++;
