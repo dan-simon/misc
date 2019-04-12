@@ -142,6 +142,36 @@ headstart: You keep your milestones on update.
 
 Can we add something small and new at 1e200 UP or so?
 
+Achievement ideas:
+
+You gotta start somewhere: Assign a dev.
+Division of labor: Have at least one dev working on each of development, efficiency, refactoring, recruitment, and patience at once.
+I have to start again?: Prestige.
+A well-deserved break: Have no devs working on anything, with at least one hour of progress in each of development, efficiency, refactoring, recruitment, and patience.
+Universal harmony: Have development, efficiency, refactoring, recruitment, and patience all within a minute of each other and over an hour.
+K-strategist: Have efficiency above your number of devs, with more than one dev.
+Wow that's a lot of progress: Gain at least an hour of progress in one prestige.
+The benefit of patience: Become enlightened.
+The five hours are over: Update.
+Experienced: Have at least one experience of each type (endgame, patience, headstart).
+That's fast!: Update in an hour.
+Long run era: Get at least 2 update points in one update.
+Are they even doing anything?: Get all the upgrades.
+That's faster!!: Update in a minute.
+Saving tokens: Update without becoming enlightened.
+The challenging day: Get 24:00:00 development.
+That's fastest!!!: Update in a second.
+Recruit-many: Get 50 thousand devs.
+That wasn't too bad: Update in Logarithmic.
+Anti-challenged: Get 12 challenge completions.
+Anti-anti-challenged: Get 20 challenge completions.
+No devs for that: Update without having any devs working on anything.
+Time is relative: Start production of dilation.
+Dilation was an OK idea: Get 33.3333 dilation. [actually 100 / 3]
+The five-times-eightfold path: Get 40 enlightenments.
+Do we have any audience left?: Get a billion devs.
+Can you get infinite UP?: Get 1.80e308 update points. [actually MAX_VALUE]
+
 eyJwcm9ncmVzcyI6WzAsMCwwLDEwNzcuNjY2ODA2ODIyMzczMiwwLDAsMjIzNC41NjEyMTE1ODkyOTQsMC4wMjc4MzU5MTEzMDI1OTA2Nl0sImRldnMiOlswLDAsMCw0LDAsMCwwLDBdLCJtaWxlc3RvbmVzIjoxLCJlbmxpZ2h0ZW5lZCI6MCwibGFzdFVwZGF0ZSI6MTU1NDE0NjE3ODgxNSwidXBkYXRlUG9pbnRzIjowLCJ1cGRhdGVzIjoxLCJleHBlcmllbmNlIjpbMCwxLDBdLCJwb3dlciI6WzAsMzguODY5MTU5OTk5OTczMjQsMCwwXX0=
 
 eyJwcm9ncmVzcyI6WzAsMCwyNDEuNDQ2Mzk3MzAwMTE3MjcsMzM1LjUyNDgzMDUxMzI5ODM1LDAsMCwwLDAuMDA4Mjk1ODYyNTM2ODExOTVdLCJkZXZzIjpbMCwwLDIsMCwwLDAsMCwwXSwibWlsZXN0b25lcyI6MCwiZW5saWdodGVuZWQiOjAsImxhc3RVcGRhdGUiOjE1NTQyMjc5OTcwNjQsInVwZGF0ZVBvaW50cyI6MCwidXBkYXRlcyI6MiwiZXhwZXJpZW5jZSI6WzEsMSwwXSwicG93ZXIiOls2LjI1NTM1OTk5OTk5OTM2Nyw2LjMyNzYzOTk5OTk5OTM1NiwwLDBdLCJ1cGdyYWRlcyI6W1tmYWxzZSxmYWxzZSxmYWxzZV0sW2ZhbHNlLGZhbHNlLGZhbHNlXV0sImF1dG8iOnsiZGV2Ijp7InNldHRpbmdzIjpbMCwwLDAsMCwwXSwib24iOmZhbHNlfX0sIm9wdGlvbnMiOnsiY29uZmlybWF0aW9ucyI6eyJwcmVzdGlnZSI6ZmFsc2UsInByZXN0aWdlV2l0aG91dEdhaW4iOnRydWUsInVwZGF0ZSI6ZmFsc2V9fX0=

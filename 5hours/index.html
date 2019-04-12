@@ -5,7 +5,12 @@
   <script src="5hours.js"></script>
 </head>
 <body>
-  <span><button id="main-button" onclick="setTab('main')">Main</button> <button id="update-button" onclick="setTab('update')" style="display: none;">Update</button> <button id="challenges-button" onclick="setTab('challenges')" style="display: none;">Challenges</button></span>
+  <span>
+    <button id="main-button" onclick="setTab('main')">Main</button>
+    <button id="achievements-button" onclick="setTab('achievements')">Achievements</button>
+    <button id="update-button" onclick="setTab('update')" style="display: none;">Update</button>
+    <button id="challenges-button" onclick="setTab('challenges')" style="display: none;">Challenges</button>
+  </span>
   <div id="main-div" style="display: none;">
     <table style="table-layout: fixed; width: 1360px;">
       <tr>
@@ -74,6 +79,63 @@
     <br/>
     <span id="auto-help-span" style="display: none;">You can input an amount of time as a number of seconds, or in 12:34:56 format.</span>
   </div>
+  <div id="achievements-div" style="display: none;">
+    <span>You have <span id="total-achievements"></span> achievement<span id="total-achievements-plural"></span>, giving a <span id="achievements-effect"></span>x multiplier to all production.</span>
+    <br/>
+    <span>You gotta start somewhere: Assign a dev. <span id="ach-status-0">&#x2718;</span></span>
+    <br/>
+    <span>Division of labor: Have at least one dev working on each of development, efficiency, refactoring, recruitment, and patience at once. <span id="ach-status-1">&#x2718;</span></span>
+    <br/>
+    <span>I have to start again?: Prestige. <span id="ach-status-2">&#x2718;</span></span>
+    <br/>
+    <span>A well-deserved break: Have no devs working on anything, with at least one hour of progress in each of development, efficiency, refactoring, recruitment, and patience. <span id="ach-status-3">&#x2718;</span></span>
+    <br/>
+    <span>Universal harmony: Have development, efficiency, refactoring, recruitment, and patience all within a minute of each other and all over an hour. <span id="ach-status-4">&#x2718;</span></span>
+    <br/>
+    <span>K-strategist: Have efficiency above your number of devs, with more than one dev. <span id="ach-status-5">&#x2718;</span></span>
+    <br/>
+    <span>Wow that's a lot of progress: Gain at least an hour of progress in one prestige. <span id="ach-status-6">&#x2718;</span></span>
+    <br/>
+    <span>The benefit of patience: Become enlightened. <span id="ach-status-7">&#x2718;</span></span>
+    <br/>
+    <span>The five hours are over: Update. <span id="ach-status-8">&#x2718;</span></span>
+    <br/>
+    <span>Experienced: Have at least one experience of each type (endgame, patience, headstart). <span id="ach-status-9">&#x2718;</span></span>
+    <br/>
+    <span>That's fast!: Update in an hour. <span id="ach-status-10">&#x2718;</span></span>
+    <br/>
+    <span>Long run era: Get at least 2 update points in one update. <span id="ach-status-11">&#x2718;</span></span>
+    <br/>
+    <span>Are they even doing anything?: Get all the upgrades. <span id="ach-status-12">&#x2718;</span></span>
+    <br/>
+    <span>That's faster!!: Update in a minute. <span id="ach-status-13">&#x2718;</span></span>
+    <br/>
+    <span>Saving tokens: Update without becoming enlightened. <span id="ach-status-14">&#x2718;</span></span>
+    <br/>
+    <span>The challenging day: Get 24:00:00 development. <span id="ach-status-15">&#x2718;</span></span>
+    <br/>
+    <span>That's fastest!!!: Update in a second. <span id="ach-status-16">&#x2718;</span></span>
+    <br/>
+    <span>Recruit-many: Get 50 thousand devs. <span id="ach-status-17">&#x2718;</span></span>
+    <br/>
+    <span>That wasn't too bad: Update in Logarithmic. <span id="ach-status-18">&#x2718;</span></span>
+    <br/>
+    <span>Anti-challenged: Get 12 challenge completions. <span id="ach-status-19">&#x2718;</span></span>
+    <br/>
+    <span>Anti-anti-challenged: Get 20 challenge completions. <span id="ach-status-20">&#x2718;</span></span>
+    <br/>
+    <span>No devs for that: Update without ever having any devs working on anything. <span id="ach-status-21">&#x2718;</span></span>
+    <br/>
+    <span>Time is relative: Start production of dilation. <span id="ach-status-22">&#x2718;</span></span>
+    <br/>
+    <span>Dilation was an OK idea: Get 33.3333 dilation. <span id="ach-status-23">&#x2718;</span></span>
+    <br/>
+    <span>The five-times-eightfold path: Have 40 times enlightened. <span id="ach-status-24">&#x2718;</span></span>
+    <br/>
+    <span>Do we have any audience left?: Get a billion devs. <span id="ach-status-25">&#x2718;</span></span>
+    <br/>
+    <span>Can you get infinite UP?: Get 1.80e308 update points. <span id="ach-status-26">&#x2718;</span></span>
+  </div>
   <div id="update-div" style="display: none;">
     <span>You have <span id="update-points">0</span> update point<span id="update-points-plural"></span>, and have updated <span id="updates">0</span> time<span id="updates-plural"></span> (corresponding to <span id="power-gain-per-experience">0.01</span> power per experience per second)</span>
     <table style="table-layout: fixed; width: 950px;">
@@ -115,7 +177,7 @@
     </table>
   </div>
   <div id="challenges-div" style="display: none;">
-    <span>You have <span id="total-challenge-completions"></span> total challenge completions. You are currently in <span id="current-challenge"></span>. <span id="next-challenge-unlock">Next challenge unlocks eventually.</span><button onclick="exitChallenge()">Exit current challenge</button></span>
+    <span>You have <span id="total-challenge-completions"></span> total challenge completions. You are currently in <span id="current-challenge"></span>. <span id="next-challenge-unlock">Next challenge unlocks eventually.</span> <button onclick="exitChallenge()">Exit current challenge</button></span>
     <br/>
     <span id="dilation"></span>
     <table style="table-layout: fixed; width: 1100px;">

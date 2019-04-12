@@ -112,6 +112,20 @@ function fixPlayer () {
   if (!('updateChallenge' in player.options)) {
     player.options.updateChallenge = true;
   }
+  if (!('achievements' in player)) {
+    player.achievements = {
+      list: [
+        false, false, false, false, false, false, false, false, false,
+        false, false, false, false, false, false, false, false, false,
+        false, false, false, false, false, false, false, false, false
+      ],
+      number: 0,
+      stats: {
+        savingTokens: true,
+        noDevsForThat: true
+      }
+    }
+  }
   for (let i in player.auto) {
     if (player.auto[i].setting && AUTO_SETTINGS[i].indexOf(player.auto[i].setting) === -1) {
       alert('Your ' + i + ' auto setting\'s name is no longer a possible setting. It has been reset.');
@@ -244,6 +258,18 @@ let initialPlayer = {
       updatePointGain: new Decimal(0)
     }
   },
+  achievements: {
+    list: [
+      false, false, false, false, false, false, false, false, false,
+      false, false, false, false, false, false, false, false, false,
+      false, false, false, false, false, false, false, false, false
+    ],
+    number: 0,
+    stats: {
+      savingTokens: true,
+      noDevsForThat: true
+    }
+  },
   dilation: 0,
   lastUpdate: Date.now()
 }
@@ -318,7 +344,7 @@ function maybeLog(x) {
 }
 
 function getTotalProductionMultiplier() {
-  return maybeLog(getEffect(1).times(getEffect(5)).times(getMilestoneEffect()).times(getUpdatePowerEffect(0)).times(challengeReward('inefficient')));
+  return maybeLog(getEffect(1).times(getEffect(5)).times(getMilestoneEffect()).times(getUpdatePowerEffect(0)).times(challengeReward('inefficient'))).times(getAchievementsEffect());
 }
 
 function addToProgress(diff) {
@@ -357,7 +383,7 @@ function autoAssignDevs() {
   for (let i = 0; i <= 4; i++) {
     let askedFor = Math.floor(getTotalDevs() * player.auto.dev.settings[i]);
     let maxAllowed = getUnassignedDevs();
-    player.devs[i] = Math.min(askedFor, maxAllowed);
+    setDevs(i, Math.min(askedFor, maxAllowed));
   }
 }
 
@@ -458,6 +484,7 @@ function gameCode() {
   addToDilation(diff);
   checkForMilestones();
   checkForRecordDevelopement();
+  checkForAchievements();
 }
 
 function checkForRecordDevelopement() {
@@ -628,18 +655,32 @@ function confirmPrestige(i) {
   }
 }
 
+function prestigeCore(i, now, oldProgress) {
+  for (let j = 0; j <= 4; j++) {
+    player.progress[j] = 0;
+    player.devs[j] = 0;
+  }
+  player.progress[7] = 0;
+  player.enlightened = 0;
+  givePrestigeAchievements(i, oldProgress);
+  player.stats.last.prestige = now;
+  player.stats.last.enlightened = now;
+  player.stats.last.prestigeType = i;
+}
+
+function givePrestigeAchievements(i, oldProgress) {
+  giveAchievement(2);
+  if (player.progress[i] - oldProgress >= 3600) {
+    giveAchievement(6);
+  }
+}
+
 function prestige(i, noConfirm) {
   if (canPrestige(i) && (noConfirm || confirmPrestige(i))) {
+    let oldProgress = player.progress[i];
     player.progress[i] = Math.max(player.progress[i], newValueFromPrestige());
-    for (let j = 0; j <= 4; j++) {
-      player.progress[j] = 0;
-      player.devs[j] = 0;
-    }
-    player.progress[7] = 0;
-    player.enlightened = 0;
-    player.stats.last.prestige = Date.now();
-    player.stats.last.enlightened = Date.now();
-    player.stats.last.prestigeType = i;
+    let now = Date.now();
+    prestigeCore(i, now, oldProgress);
   }
 }
 
@@ -648,6 +689,7 @@ function enlightened() {
     player.progress[7] = 0;
     player.enlightened++;
     player.stats.last.enlightened = Date.now();
+    player.achievements.stats.savingTokens = false;
   }
 }
 
@@ -657,7 +699,7 @@ function getMilestoneEffect() {
 
 function tryToChangeDevs(i, change) {
   if (player.devs.reduce((a, b) => a + b) + change <= getTotalDevs() && player.devs[i] + change >= 0) {
-    player.devs[i] += change;
+    setDevs(i, player.devs[i] + change);
   }
 }
 
@@ -670,11 +712,18 @@ function subtractDev(i) {
 }
 
 function maxDev(i) {
-  player.devs[i] += getTotalDevs() - player.devs.reduce((a, b) => a + b);
+  setDevs(i, player.devs[i] + getTotalDevs() - player.devs.reduce((a, b) => a + b));
 }
 
 function zeroDev(i) {
-  player.devs[i] = 0;
+  setDevs(i, 0);
+}
+
+function setDevs(i, x) {
+  player.devs[i] = x;
+  if (x !== 0) {
+    player.achievements.stats.noDevsForThat = false;
+  }
 }
 
 function canUpdate() {
@@ -791,40 +840,81 @@ function getChallengeForDisplay(challenge) {
 
 function enterChallenge(x) {
   if (confirmEnterChallenge(x)) {
+    let gain = null;
     if (player.options.updateChallenge && canUpdate()) {
-      player.updatePoints = player.updatePoints.plus(getUpdateGain());
+      gain = getUpdateGain();
+      player.updatePoints = player.updatePoints.plus(gain);
       player.updates++;
     }
+    let oldChallenge = player.currentChallenge;
     player.currentChallenge = x;
-    for (let i = 0; i <= 7; i++) {
-      player.progress[i] = 0;
-      player.devs[i] = 0;
-    }
-    player.milestones = 0;
-    player.enlightened = 0;
-    for (let i = 0; i <= 3; i++) {
-      player.power[i] = new Decimal(0);
-    }
+    let now = Date.now();
+    updateCore(now, gain, oldChallenge);
   }
 }
 
 function exitChallenge() {
   if (player.currentChallenge !== '' && confirmExitChallenge()) {
+    let gain = null;
     if (player.options.updateChallenge && canUpdate()) {
-      player.updatePoints = player.updatePoints.plus(getUpdateGain());
+      gain = getUpdateGain();
+      player.updatePoints = player.updatePoints.plus(gain);
       player.updates++;
     }
+    let oldChallenge = player.currentChallenge;
     player.currentChallenge = '';
-    for (let i = 0; i <= 7; i++) {
-      player.progress[i] = 0;
-      player.devs[i] = 0;
-    }
-    player.milestones = 0;
-    player.enlightened = 0;
-    for (let i = 0; i <= 3; i++) {
-      player.power[i] = new Decimal(0);
-    }
+    let now = Date.now();
+    updateCore(now, gain, oldChallenge);
   }
+}
+
+function giveUpdateAchievements(now, gain, oldChallenge) {
+  giveAchievement(8);
+  if (now - player.stats.last.update <= 3600000) {
+    giveAchievement(10);
+  }
+  if (gain.gte(2)) {
+    giveAchievement(11);
+  }
+  if (now - player.stats.last.update <= 60000) {
+    giveAchievement(13);
+  }
+  if (player.achievements.stats.savingTokens) {
+    giveAchievement(14);
+  }
+  if (now - player.stats.last.update <= 1000) {
+    giveAchievement(16);
+  }
+  if (oldChallenge === 'logarithmic') {
+    giveAchievement(18);
+  }
+  if (player.achievements.stats.noDevsForThat) {
+    giveAchievement(21);
+  }
+}
+
+function updateCore(now, gain, oldChallenge) {
+  for (let i = 0; i <= 7; i++) {
+    player.progress[i] = 0;
+    player.devs[i] = 0;
+  }
+  player.milestones = 0;
+  player.enlightened = 0;
+  for (let i = 0; i <= 3; i++) {
+    player.power[i] = new Decimal(0);
+  }
+  if (gain !== null) {
+    giveUpdateAchievements(now, gain, oldChallenge);
+  }
+  player.stats.last.update = now;
+  player.stats.last.prestige = now;
+  player.stats.last.enlightened = now;
+  player.stats.last.prestigeType = null;
+  if (gain !== null) {
+    player.stats.last.updatePointGain = gain;
+  }
+  player.achievements.stats.savingTokens = true;
+  player.achievements.stats.noDevsForThat = true;
 }
 
 function getUpgradeGainBase() {
@@ -875,21 +965,10 @@ function update(noConfirm) {
     let gain = getUpdateGain();
     player.updatePoints = player.updatePoints.plus(gain);
     player.updates++;
+    let oldChallenge = player.currentChallenge;
     player.currentChallenge = '';
-    for (let i = 0; i <= 7; i++) {
-      player.progress[i] = 0;
-      player.devs[i] = 0;
-    }
-    player.milestones = 0;
-    player.enlightened = 0;
-    for (let i = 0; i <= 3; i++) {
-      player.power[i] = new Decimal(0);
-    }
-    player.stats.last.update = Date.now();
-    player.stats.last.prestige = Date.now();
-    player.stats.last.enlightened = Date.now();
-    player.stats.last.prestigeType = null;
-    player.stats.last.updatePointGain = gain;
+    let now = Date.now();
+    updateCore(now, gain, oldChallenge);
   }
 }
 
@@ -1037,7 +1116,74 @@ function hasAuto(x) {
   return getTotalChallengeCompletions() >= table[x];
 }
 
-const TAB_LIST = ['main', 'update', 'challenges'];
+function getAchievementsEffect() {
+  return Math.pow(1.1, player.achievements.number);
+}
+
+function giveAchievement(i) {
+  if (!player.achievements.list[i]) {
+    player.achievements.list[i] = true;
+    player.achievements.number++;
+  }
+}
+
+function checkForAchievements() {
+  let progress = player.progress.slice(0, 5);
+  let devs = player.devs.slice(0, 5);
+  if (devs.some(i => i !== 0)) {
+    giveAchievement(0);
+  }
+  if (devs.every(i => i !== 0)) {
+    giveAchievement(1);
+  }
+  if (devs.every(i => i === 0) && progress.every(x => x >= 3600)) {
+    giveAchievement(3);
+  }
+  if (Math.max.apply(null, progress) - Math.min.apply(null, progress) <= 60 && progress.every(x => x >= 3600)) {
+    giveAchievement(4);
+  }
+  if (getEffect(1).gt(getEffect(3)) && getEffect(3) > 1) {
+    giveAchievement(5);
+  }
+  if (getTotalEnlightened() > 0) {
+    giveAchievement(7);
+  }
+  if (player.experience.every(i => i.neq(0))) {
+    giveAchievement(9);
+  }
+  if (player.upgrades.every(i => i.every(j => j))) {
+    giveAchievement(12);
+  }
+  if (player.progress[0] >= 86400) {
+    giveAchievement(15);
+  }
+  if (getTotalDevs() >= 50000) {
+    giveAchievement(17);
+  }
+  if (getTotalChallengeCompletions() >= 12) {
+    giveAchievement(19);
+  }
+  if (getTotalChallengeCompletions() >= 20) {
+    giveAchievement(20);
+  }
+  if (player.dilation > 0) {
+    giveAchievement(22);
+  }
+  if (player.dilation >= 100 / 3) {
+    giveAchievement(23);
+  }
+  if (getTotalEnlightened() >= 40) {
+    giveAchievement(24);
+  }
+  if (getTotalDevs() >= 1e9) {
+    giveAchievement(25);
+  }
+  if (player.updatePoints.gte(Number.MAX_VALUE)) {
+    giveAchievement(26);
+  }
+}
+
+const TAB_LIST = ['main', 'achievements', 'update', 'challenges'];
 
 function updateTabButtonDisplay () {
   if (player.updates > 0) {
@@ -1085,6 +1231,19 @@ function updateChallengeDisplay () {
     document.getElementById('dilation').innerHTML = 'You have ' + format(player.dilation, 4) + ' dilation, ' + format(getDilationPerSecond(), 4)+ ' dilation per second, with effect x^' + format(getDilationEffect(), 4) + '.';
   } else {
     document.getElementById('dilation').innerHTML = '';
+  }
+}
+
+function updateAchievementDisplay() {
+  document.getElementById('total-achievements').innerHTML = player.achievements.number;
+  document.getElementById('total-achievements-plural').innerHTML = (player.achievements.number === 1) ? '' : 's';
+  document.getElementById('achievements-effect').innerHTML = format(getAchievementsEffect());
+  for (let i = 0; i <= 26; i++) {
+    if (player.achievements.list[i]) {
+      document.getElementById('ach-status-' + i).innerHTML = '&#x2714;';
+    } else {
+      document.getElementById('ach-status-' + i).innerHTML = '&#x2718;';
+    }
   }
 }
 
@@ -1159,6 +1318,7 @@ function updateDisplay () {
     document.getElementById('auto-help-span').style.display = 'none';
   }
   updateChallengeDisplay();
+  updateAchievementDisplay();
   document.getElementById('record-development').innerHTML = toTime(player.stats.recordDevelopment['']);
   document.getElementById('unassigned-devs').innerHTML = format(getUnassignedDevs());
   document.getElementById('progress-milestones').innerHTML = player.milestones;
