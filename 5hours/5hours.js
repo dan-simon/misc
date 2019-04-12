@@ -112,6 +112,12 @@ function fixPlayer () {
   if (!('updateChallenge' in player.options)) {
     player.options.updateChallenge = true;
   }
+  for (let i in player.auto) {
+    if (player.auto[i].setting && AUTO_SETTINGS[i].indexOf(player.auto[i].setting)) {
+      alert('Your ' + i + ' auto setting\'s name is no longer a possible setting. It has been reset.');
+      player.auto[i].setting = AUTO_SETTINGS[i][0];
+    }
+  }
 }
 
 function convertSaveToDecimal () {
@@ -357,8 +363,8 @@ let AUTO_SETTINGS = {
   ],
   'prestige': [
     'development',
-    'X improvement over current',
-    'X improvement over better',
+    '+X time improvement over current',
+    '+X time improvement over better',
     'seconds since last prestige'
   ],
   'update': [
