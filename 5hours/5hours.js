@@ -91,18 +91,24 @@ function fixPlayer () {
     player.auto.enlightened = {
       setting: 'total times enlightened',
       value: new Decimal(0),
+      displayValue: '0',
       on: false
     };
     player.auto.prestige = {
       setting: 'development',
       value: new Decimal(0),
+      displayValue: '0',
+      initial: 5,
+      alternate: true,
       on: false
     };
     player.auto.update = {
       setting: 'development',
       value: new Decimal(0),
+      displayValue: '0',
       on: false
     };
+  }
   if (!('updateChallenge' in player.options)) {
     player.options.updateChallenge = true;
   }
@@ -113,6 +119,9 @@ function convertSaveToDecimal () {
   for (let i = 0; i <= 2; i++) {
     player.experience[i] = new Decimal(player.experience[i]);
     player.power[i] = new Decimal(player.power[i]);
+  }
+  for (let i = 0; i <= 2; i++) {
+    player.auto[AUTO_LIST[i]].value = new Decimal(player.auto[AUTO_LIST[i]].value);
   }
 }
 
@@ -170,16 +179,21 @@ let initialPlayer = {
     enlightened: {
       setting: 'total times enlightened',
       value: new Decimal(0),
+      displayValue: '0',
       on: false
     },
     prestige: {
       setting: 'development',
       value: new Decimal(0),
+      displayValue: '0',
+      initial: 5,
+      alternate: true,
       on: false
     },
     update: {
       setting: 'development',
       value: new Decimal(0),
+      displayValue: '0',
       on: false
     }
   },
@@ -335,10 +349,31 @@ function autoAssignDevs() {
   }
 }
 
+let AUTO_SETTINGS = {
+  'enlightened': [
+    'total times enlightened',
+    'seconds since last time enlightened',
+    'time to max out patience meter'
+  ],
+  'prestige': [
+    'development',
+    'X improvement over current',
+    'X improvement over better',
+    'seconds since last prestige'
+  ],
+  'update': [
+    'development',
+    'update points',
+    'X times last update points',
+    'seconds since last update'
+  ]
+}
+
 function checkForAutoEnlightened() {
   let table = {
     'total times enlightened': x => getTotalEnlightened() < x,
-    'seconds since last time enlightened': x => Date.now() - player.stats.last.enlightened >= x * 1000
+    'seconds since last time enlightened': x => Date.now() - player.stats.last.enlightened >= x * 1000,
+    'time to max out patience meter': x => x >= getEffect(4),
   }
   if (table[player.auto.enlightened.setting](player.auto.enlightened.value.toNumber())) {
     enlightened();
@@ -366,7 +401,7 @@ function checkForAutoPrestige() {
     'seconds since last prestige': x => Date.now() - player.stats.last.prestige >= x * 1000
   }
   if (table[player.auto.prestige.setting](player.auto.prestige.value.toNumber())) {
-    prestige(type);
+    prestige(type, true);
   }
 }
 
@@ -378,7 +413,7 @@ function checkForAutoUpdate() {
     'seconds since last update': x => Date.now() - player.stats.last.update >= x.toNumber() * 1000
   }
   if (table[player.auto.update.setting](player.auto.update.value)) {
-    update();
+    update(true);
   }
 }
 
@@ -902,6 +937,7 @@ function dilationBoost(x) {
 
 function fillInInputs() {
   fillInAutoDev();
+  fillInAutoOther();
   fillInOptions();
   fillInConfirmations();
 }
@@ -911,6 +947,18 @@ function fillInAutoDev () {
     document.getElementById('auto-dev-' + i).value = player.auto.dev.settings[i];
   }
   document.getElementById('auto-dev-on').checked = player.auto.dev.on;
+}
+
+let AUTO_LIST = ['enlightened', 'prestige', 'update'];
+
+function fillInAutoOther () {
+  for (let i = 0; i <= 2; i++) {
+    document.getElementById('auto-' + AUTO_LIST[i] + '-setting').innerHTML = player.auto[AUTO_LIST[i]].setting;
+    document.getElementById('auto-' + AUTO_LIST[i] + '-value').value = player.auto[AUTO_LIST[i]].displayValue;
+    document.getElementById('auto-' + AUTO_LIST[i] + '-on').checked = player.auto[AUTO_LIST[i]].on;
+  }
+  document.getElementById('auto-prestige-initial').innerHTML = 'meta-' + ['efficiency', 'refactoring'][player.auto.prestige.initial - 5];
+  document.getElementById('auto-prestige-alternate').checked = player.auto.prestige.alternate;
 }
 
 function fillInOptions() {
@@ -926,12 +974,55 @@ function fillInConfirmations() {
   document.getElementById('exit-challenge-confirmation').checked = player.options.confirmations.exitChallenge;
 }
 
-function toggleAutoDev() {
-  player.auto.dev.on = !player.auto.dev.on;
+function toggleAutoOn(x) {
+  player.auto[x].on = !player.auto[x].on;
 }
 
 function updateAutoDev(i) {
-  player.auto.dev.settings[i] = +document.getElementById("auto-dev-" + i).value || 0;
+  player.auto.dev.settings[i] = +document.getElementById('auto-dev-' + i).value || 0;
+}
+
+function nextAutoSetting(x) {
+  player.auto[x].setting = AUTO_SETTINGS[x][(AUTO_SETTINGS[x].indexOf(player.auto[x].setting) + 1) % AUTO_SETTINGS[x].length];
+  document.getElementById('auto-' + x + '-setting').innerHTML = player.auto[x].setting;
+}
+
+function parseAutoValue(x) {
+  try {
+    let parts = x.split(':');
+    let result = parts.map((i, index) => new Decimal(i).times(Decimal.pow(60, parts.length - index - 1))).reduce((a, b) => a.plus(b));
+    if (isNaN(result)) {
+      return new Decimal(0);
+    } else {
+      return result;
+    }
+  } catch (e) {
+    return new Decimal(0);
+  }
+}
+
+function updateAutoValue(x) {
+  let value = document.getElementById('auto-' + x + '-value').value;
+  player.auto[x].value = parseAutoValue(value);
+  player.auto[x].displayValue = value;
+}
+
+function toggleAutoPrestigeInitial() {
+  player.auto.prestige.initial = 5 + player.auto.prestige.initial % 2;
+  document.getElementById('auto-prestige-initial').innerHTML = 'meta-' + ['efficiency', 'refactoring'][player.auto.prestige.initial - 5];
+}
+
+function toggleAutoPrestigeAlternate() {
+  player.auto.prestige.alternate = !player.auto.prestige.alternate;
+}
+
+function hasAuto(x) {
+  let table = {
+    'enlightened': 2,
+    'prestige': 4,
+    'update': 8
+  }
+  return getTotalChallengeCompletions() >= table[x];
 }
 
 const TAB_LIST = ['main', 'update', 'challenges'];
@@ -1042,6 +1133,13 @@ function updateDisplay () {
   } else {
     document.getElementById('auto-dev-row').style.display = 'none';
     document.getElementById('auto-dev-span').style.display = 'none';
+  }
+  for (let i = 0; i <= 2; i++) {
+    if (hasAuto(AUTO_LIST[i])) {
+      document.getElementById('auto-' + AUTO_LIST[i] + '-span').style.display = '';
+    } else {
+      document.getElementById('auto-' + AUTO_LIST[i] + '-span').style.display = 'none';
+    }
   }
   updateChallengeDisplay();
   document.getElementById('record-development').innerHTML = toTime(player.stats.recordDevelopment['']);

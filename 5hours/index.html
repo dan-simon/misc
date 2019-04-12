@@ -60,6 +60,17 @@
       </tr>
     </table>
     <button onclick="update()">Release an update.<br/>(<span id="update-gain"></span>)</button>
+    <br/>
+    <span id="auto-dev-span" style="display: none;">Auto dev assignment: <input id="auto-dev-on" onclick="toggleAutoOn('dev')" type="checkbox"></input></span>
+    <br/>
+    <span id="auto-enlightened-span" style="display: none;">Auto-enlighten: current setting: <button id="auto-enlightened-setting" onclick="nextAutoSetting('enlightened')"></button> value: <input id="auto-enlightened-value" type="text" onchange="updateAutoValue('enlightened')"></input>, on: <input id="auto-enlightened-on" onclick="toggleAutoOn('enlightened')" type="checkbox"></input></span>
+    <br/>
+    <span id="auto-prestige-span" style="display: none;">
+      Auto-prestige: current setting: <button id="auto-prestige-setting" onclick="nextAutoSetting('prestige')"></button> value: <input id="auto-prestige-value" type="text" onchange="updateAutoValue('prestige')"></input>,
+      starting prestige type: <button id="auto-prestige-initial" onclick="toggleAutoPrestigeInitial()"></button>, switch between prestige types: <input id="auto-prestige-alternate" onclick="toggleAutoPrestigeAlternate()" type="checkbox"></input>, on: <input id="auto-prestige-on" onclick="toggleAutoOn('prestige')" type="checkbox"></input>
+    </span>
+    <br/>
+    <span id="auto-update-span" style="display: none;">Auto-update: current setting: <button id="auto-update-setting" onclick="nextAutoSetting('update')"></button> value: <input id="auto-update-value" type="text" onchange="updateAutoValue('update')"></input>, on: <input id="auto-update-on" onclick="toggleAutoOn('update')" type="checkbox"></input></span>
   </div>
   <div id="update-div" style="display: none;">
     <span>You have <span id="update-points">0</span> update point<span id="update-points-plural"></span>, and have updated <span id="updates">0</span> time<span id="updates-plural"></span> (corresponding to <span id="power-gain-per-experience">0.01</span> power per experience per second)</span>
@@ -269,7 +280,6 @@
   <span>
     Prestige if possible when entering/exiting a challenge: <input id="update-challenge" onclick="toggleOption('updateChallenge')" type="checkbox"></input>
     Offline progress: <input id="offline-progress" onclick="toggleOption('offlineProgress')" type="checkbox"></input>
-    <span id="auto-dev-span" style="display: none;">Auto dev assignment: <input id="auto-dev-on" onclick="toggleAutoDev()" type="checkbox"></input></span>
   </span>
   <br/>
   <span><button onclick="saveGame()">Save</button> <button onclick="exportGame()">Export</button> <button onclick="loadGamePrompt()">Load</button> <button onclick="resetGameWithConfirmation()">RESET</button></span>
