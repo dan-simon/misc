@@ -113,7 +113,7 @@ function fixPlayer () {
     player.options.updateChallenge = true;
   }
   for (let i in player.auto) {
-    if (player.auto[i].setting && AUTO_SETTINGS[i].indexOf(player.auto[i].setting)) {
+    if (player.auto[i].setting && AUTO_SETTINGS[i].indexOf(player.auto[i].setting) === -1) {
       alert('Your ' + i + ' auto setting\'s name is no longer a possible setting. It has been reset.');
       player.auto[i].setting = AUTO_SETTINGS[i][0];
     }
