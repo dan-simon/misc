@@ -358,27 +358,27 @@ function autoAssignDevs() {
 let AUTO_SETTINGS = {
   'enlightened': [
     'total times enlightened',
-    'seconds since last time enlightened',
+    'real seconds since last time enlightened',
     'time to max out patience meter'
   ],
   'prestige': [
     'development',
     '+X time improvement over current',
     '+X time improvement over better',
-    'seconds since last prestige'
+    'real seconds since last prestige'
   ],
   'update': [
     'development',
     'update points',
     'X times last update points',
-    'seconds since last update'
+    'real seconds since last update'
   ]
 }
 
 function checkForAutoEnlightened() {
   let table = {
     'total times enlightened': x => getTotalEnlightened() < x,
-    'seconds since last time enlightened': x => Date.now() - player.stats.last.enlightened >= x * 1000,
+    'real seconds since last time enlightened': x => Date.now() - player.stats.last.enlightened >= x * 1000,
     'time to max out patience meter': x => x >= getEffect(4),
   }
   if (table[player.auto.enlightened.setting](player.auto.enlightened.value.toNumber())) {
@@ -402,9 +402,9 @@ function checkForAutoPrestige() {
   let type = getCurrentAutoPrestigeType();
   let table = {
     'development': x => player.progress[0] >= x,
-    'X improvement over current': x => newValueFromPrestige() - player.progress[type] >= x,
-    'X improvement over better': x => newValueFromPrestige() - getBetterPrestigeValue() >= x,
-    'seconds since last prestige': x => Date.now() - player.stats.last.prestige >= x * 1000
+    '+X time improvement over current': x => newValueFromPrestige() - player.progress[type] >= x,
+    '+X time improvement over better': x => newValueFromPrestige() - getBetterPrestigeValue() >= x,
+    'real seconds since last prestige': x => Date.now() - player.stats.last.prestige >= x * 1000
   }
   if (table[player.auto.prestige.setting](player.auto.prestige.value.toNumber())) {
     prestige(type, true);
@@ -416,7 +416,7 @@ function checkForAutoUpdate() {
     'development': x => player.progress[0] >= x.toNumber(),
     'update points': x => getUpdateGain().gte(x),
     'X times last update points': x => player.stats.last.updatePointGain >= x.toNumber(),
-    'seconds since last update': x => Date.now() - player.stats.last.update >= x.toNumber() * 1000
+    'real seconds since last update': x => Date.now() - player.stats.last.update >= x.toNumber() * 1000
   }
   if (table[player.auto.update.setting](player.auto.update.value)) {
     update(true);
