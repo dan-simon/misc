@@ -132,12 +132,16 @@ function convertSaveToDecimal () {
 }
 
 function loadGameStorage () {
-  try {
-    // We're loading from storage, player.options.offlineProgress isn't set yet.
-    loadGame(localStorage.getItem('5hours-save'), null);
-  } catch (ex) {
-    console.log('Exception while loading game: ' + ex + '\nPlease report thist.')
+  if (!localStorage.getItem('5hours-save')) {
     resetGame();
+  } else {
+    try {
+      // We're loading from storage, player.options.offlineProgress isn't set yet.
+      loadGame(localStorage.getItem('5hours-save'), null);
+    } catch (ex) {
+      console.log('Exception while loading game: ' + ex + '\nPlease report this.')
+      resetGame();
+    }
   }
 }
 
