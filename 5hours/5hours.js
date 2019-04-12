@@ -148,7 +148,9 @@ function loadGameStorage () {
 function loadGamePrompt() {
   try {
     loadGame(prompt('Enter your save:'), player.options.offlineProgress);
-  } catch(ex) {}
+  } catch(ex) {
+    alert('The save you entered does not seem to be valid. The error was ' + ex);
+  }
 }
 
 function saveGame () {
@@ -1150,6 +1152,11 @@ function updateDisplay () {
     } else {
       document.getElementById('auto-' + AUTO_LIST[i] + '-span').style.display = 'none';
     }
+  }
+  if (hasAuto(AUTO_LIST[0])) {
+    document.getElementById('auto-help-span').style.display = '';
+  } else {
+    document.getElementById('auto-help-span').style.display = 'none';
   }
   updateChallengeDisplay();
   document.getElementById('record-development').innerHTML = toTime(player.stats.recordDevelopment['']);
