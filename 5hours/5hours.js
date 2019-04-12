@@ -931,7 +931,7 @@ function getUpdateGain() {
 }
 
 function confirmUpdate() {
-  let whatWillReset = 'meta-efficiency, meta-refactoring, and progress milestones, along with everything prestige resets';
+  let whatWillReset = 'meta-efficiency, meta-refactoring, and progress milestones, along with everything prestige resets,';
   if (player.updates > 0) {
     whatWillReset = whatWillReset.replace('and progress milestones', 'progress milestones, and endgame/patience/headstart power')
   }
