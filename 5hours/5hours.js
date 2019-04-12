@@ -42,7 +42,8 @@ function fixPlayer () {
         enterChallenge: true,
         exitChallenge: true
       },
-      offlineProgress: true
+      offlineProgress: true,
+      updateChallenge: true
     }
   }
   if (!('tab' in player)) {
@@ -102,6 +103,8 @@ function fixPlayer () {
       value: new Decimal(0),
       on: false
     };
+  if (!('updateChallenge' in player.options)) {
+    player.options.updateChallenge = true;
   }
 }
 
@@ -188,7 +191,8 @@ let initialPlayer = {
       enterChallenge: true,
       exitChallenge: true
     },
-    offlineProgress: true
+    offlineProgress: true,
+    updateChallenge: true
   },
   tab: 'main',
   currentChallenge: '',
@@ -740,6 +744,10 @@ function getChallengeForDisplay(challenge) {
 
 function enterChallenge(x) {
   if (confirmEnterChallenge(x)) {
+    if (player.options.updateChallenge && canUpdate()) {
+      player.updatePoints = player.updatePoints.plus(getUpdateGain());
+      player.updates++;
+    }
     player.currentChallenge = x;
     for (let i = 0; i <= 7; i++) {
       player.progress[i] = 0;
@@ -755,6 +763,10 @@ function enterChallenge(x) {
 
 function exitChallenge() {
   if (player.currentChallenge !== '' && confirmExitChallenge()) {
+    if (player.options.updateChallenge && canUpdate()) {
+      player.updatePoints = player.updatePoints.plus(getUpdateGain());
+      player.updates++;
+    }
     player.currentChallenge = '';
     for (let i = 0; i <= 7; i++) {
       player.progress[i] = 0;
@@ -903,6 +915,7 @@ function fillInAutoDev () {
 
 function fillInOptions() {
   document.getElementById('offline-progress').checked = player.options.offlineProgress;
+  document.getElementById('update-challenge').checked = player.options.updateChallenge;
 }
 
 function fillInConfirmations() {
