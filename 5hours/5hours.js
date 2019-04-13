@@ -12,6 +12,8 @@ function loadGame (s, offlineProgress) {
   saveGame();
   fillInInputs();
   updateTabDisplay();
+  updateAchievementDisplay();
+  updateLoreDisplay();
 }
 
 function fixPlayer () {
@@ -125,6 +127,9 @@ function fixPlayer () {
         noDevsForThat: true
       }
     }
+  }
+  if (!('lore' in player)) {
+    player.lore = [];
   }
   for (let i in player.auto) {
     if (player.auto[i].setting && AUTO_SETTINGS[i].indexOf(player.auto[i].setting) === -1) {
@@ -270,6 +275,7 @@ let initialPlayer = {
       noDevsForThat: true
     }
   },
+  lore: [],
   dilation: 0,
   lastUpdate: Date.now()
 }
@@ -484,7 +490,7 @@ function gameCode() {
   addToDilation(diff);
   checkForMilestones();
   checkForRecordDevelopement();
-  checkForAchievements();
+  checkForAchievementsAndLore();
 }
 
 function checkForRecordDevelopement() {
@@ -662,14 +668,15 @@ function prestigeCore(i, now, oldProgress) {
   }
   player.progress[7] = 0;
   player.enlightened = 0;
-  givePrestigeAchievements(i, oldProgress);
+  givePrestigeAchievementsAndLore(i, oldProgress);
   player.stats.last.prestige = now;
   player.stats.last.enlightened = now;
   player.stats.last.prestigeType = i;
 }
 
-function givePrestigeAchievements(i, oldProgress) {
+function givePrestigeAchievementsAndLore(i, oldProgress) {
   giveAchievement(2);
+  giveLore(7);
   if (player.progress[i] - oldProgress >= 3600) {
     giveAchievement(6);
   }
@@ -819,8 +826,12 @@ function isChallengeUnlocked(x) {
   return CHALLENGE_UNLOCKS[x] <= player.stats.recordDevelopment[''];
 }
 
+function sortedChallenges() {
+  return Object.keys(CHALLENGE_UNLOCKS).sort((x, y) => CHALLENGE_UNLOCKS[x] - CHALLENGE_UNLOCKS[y]);
+}
+
 function nextChallengeUnlock() {
-  let locked = Object.keys(CHALLENGE_UNLOCKS).filter(x => !isChallengeUnlocked(x)).sort((x, y) => CHALLENGE_UNLOCKS[x] - CHALLENGE_UNLOCKS[y]);
+  let locked = sortedChallenges().filter(x => !isChallengeUnlocked(x));
   if (locked.length === 0) {
     return 'All challenges are unlocked.';
   } else {
@@ -868,13 +879,15 @@ function exitChallenge() {
   }
 }
 
-function giveUpdateAchievements(now, gain, oldChallenge) {
+function giveUpdateAchievementsAndLore(now, gain, oldChallenge) {
   giveAchievement(8);
+  giveLore(11);
   if (now - player.stats.last.update <= 3600000) {
     giveAchievement(10);
   }
   if (gain.gte(2)) {
     giveAchievement(11);
+    giveLore(12);
   }
   if (now - player.stats.last.update <= 60000) {
     giveAchievement(13);
@@ -887,6 +900,7 @@ function giveUpdateAchievements(now, gain, oldChallenge) {
   }
   if (oldChallenge === 'logarithmic') {
     giveAchievement(18);
+    giveLore(23);
   }
   if (player.achievements.stats.noDevsForThat) {
     giveAchievement(21);
@@ -904,7 +918,7 @@ function updateCore(now, gain, oldChallenge) {
     player.power[i] = new Decimal(0);
   }
   if (gain !== null) {
-    giveUpdateAchievements(now, gain, oldChallenge);
+    giveUpdateAchievementsAndLore(now, gain, oldChallenge);
   }
   player.stats.last.update = now;
   player.stats.last.prestige = now;
@@ -1124,17 +1138,44 @@ function giveAchievement(i) {
   if (!player.achievements.list[i]) {
     player.achievements.list[i] = true;
     player.achievements.number++;
+    updateAchievementDisplay();
   }
 }
 
-function checkForAchievements() {
+function giveLore(i) {
+  if (player.lore.indexOf(i) === -1) {
+    player.lore.push(i);
+    updateLoreDisplay();
+  }
+}
+
+function checkForAchievementsAndLore() {
   let progress = player.progress.slice(0, 5);
   let devs = player.devs.slice(0, 5);
+  let loreFarthest = Math.max(
+    Math.max.apply(null, progress), player.stats.recordDevelopment['']);
+  giveLore(0);
   if (devs.some(i => i !== 0)) {
     giveAchievement(0);
+    giveLore(1);
+  }
+  if (loreFarthest >= 120) {
+    giveLore(2);
+  }
+  if (loreFarthest >= 180) {
+    giveLore(3);
+  }
+  if (getTotalDevs() > 1) {
+    giveLore(4);
   }
   if (devs.every(i => i !== 0)) {
     giveAchievement(1);
+  }
+  if (getEffect(1).gte(1.2)) {
+    giveLore(5);
+  }
+  if (getEffect(2) >= 0.5) {
+    giveLore(6);
   }
   if (devs.every(i => i === 0) && progress.every(x => x >= 3600)) {
     giveAchievement(3);
@@ -1142,20 +1183,36 @@ function checkForAchievements() {
   if (Math.max.apply(null, progress) - Math.min.apply(null, progress) <= 60 && progress.every(x => x >= 3600)) {
     giveAchievement(4);
   }
-  if (getEffect(1).gt(getEffect(3)) && getEffect(3) > 1) {
+  if (getEffect(1).gt(getTotalDevs()) && getTotalDevs() > 1) {
     giveAchievement(5);
+  }
+  if (loreFarthest >= 12600) {
+    giveLore(8);
+  }
+  if (loreFarthest >= 16200) {
+    giveLore(9);
   }
   if (getTotalEnlightened() > 0) {
     giveAchievement(7);
+    giveLore(10);
   }
   if (player.experience.every(i => i.neq(0))) {
     giveAchievement(9);
   }
+  if (player.stats.recordDevelopment[''] >= 43200) {
+    giveLore(13);
+  }
   if (player.upgrades.every(i => i.every(j => j))) {
     giveAchievement(12);
   }
-  if (player.progress[0] >= 86400) {
+  if (player.stats.recordDevelopment[''] >= 86400) {
     giveAchievement(15);
+  }
+  let challenges = sortedChallenges();
+  for (let i = 0; i <= 8; i++) {
+    if (isChallengeUnlocked(challenges[i])) {
+      giveLore(14 + i);
+    }
   }
   if (getTotalDevs() >= 50000) {
     giveAchievement(17);
@@ -1168,22 +1225,71 @@ function checkForAchievements() {
   }
   if (player.dilation > 0) {
     giveAchievement(22);
+    giveLore(24);
   }
   if (player.dilation >= 100 / 3) {
     giveAchievement(23);
+    giveLore(25);
   }
   if (getTotalEnlightened() >= 40) {
     giveAchievement(24);
+    giveLore(26);
   }
   if (getTotalDevs() >= 1e9) {
     giveAchievement(25);
+    giveLore(27);
   }
   if (player.updatePoints.gte(Number.MAX_VALUE)) {
     giveAchievement(26);
+    giveLore(28);
+  }
+  if (player.achievements.list.every(x => x)) {
+    giveLore(29);
+  }
+  if (player.lore.length >= LORE_LIST.length - 3) {
+    for (let i = 3; i > 0; i--) {
+      giveLore(LORE_LIST.length - i);
+    }
   }
 }
 
-const TAB_LIST = ['main', 'achievements', 'update', 'challenges'];
+const LORE_LIST = [
+  'You just got a game idea and you\'re excited to start working on it. It seems simple enough that it should only take 5 hours to finish.',
+  'You started working. Everything seems fairly reasonable so far.',
+  'Weird, you\'ve only made two minutes of progress on what you\'re working on, but you think it\'s been a bit longer than that.',
+  'The oddly-slow progress thing is still happening. Is time itself bending? Probably not: it\'s just that you had unrealistic expectations. You hope this doesn\'t get worse.',
+  'You manage to recruit another developer to help. They seem to be just as effective as you.',
+  'Your study of efficiency is paying off. You\'re now 20% as effective at getting stuff done, and it\'s only getting better.',
+  'It seems that most of the unexpected slowdown in progress is due to bad coding style, and by refactoring the code you\'ve managed to significantly improve the ease of progress.',
+  'The efficiency and refactoring weren\'t enough. You decided to restart the project from scratch, taking advantage of what you\'d learned.',
+  'Progress seems to be slowing down, even given everything you\'ve learned from restarting the project. Perhaps you need more patience, though.',
+  'Patience alone didn\'t seem to help quite enough to finish; you\'re close, but not there. Maybe there\'s something you can do to enlighten the situation.',
+  'You\'re now enlightened. Apart from the mystical aspects, this seems to make patience a little stronger. You feel that restarting the project will cause you to lose your enlightenment, though',
+  'You finally made a game which was basically what you wanted, but you\'ve thought of a bunch of cool stuff you can add. Maybe you can release another update with that.',
+  'You\'ve gotten enough experience from past updates that now you can make bigger updates. How far will this go?',
+  'You seem to be getting the hang of this. It\'s a bit monotonous, but maybe that will change soon.',
+  'You consider starting programming in a new language, and all your skills in it are terrible. You\'ve heard that the new paradigm might give you enlightenment though.',
+  'One of the people working with you tells you that efficiency is overrated. You decide that you\'ll try not working on it while making some update soon.',
+  'OK, efficiency is more useful than you thought. In that case, as suggested by someone else, refactoring must be what\'s overrated. You decide to try going without that.',
+  'Going without efficiency and without refactoring turned out to both be terrible ideas. You decide that to avoid such bad ideas from other people, you\'ll just work alone.',
+  'This is all so slow! You decide that you\'re going to stop waiting for patience. You have a bunch of enlightenment even without patience, so what\'s the point of patience anyway?',
+  'Restarting development over and over without even releasing an update is so annoying! You decide to try to release an update without starting over for once.',
+  'You\'re planning on taking a vacation, along with everyone else. You all won\'t be able to dedicate quite as much time to updating the game then, but it will still be fine, right?',
+  'What was the use of experience anyway? It\'s said that it gives you some kind of "power", but that power doesn\'t seem that powerful. You\'ll just go without it.',
+  'There\'s some other stuff you did with your experience, but in retrospect it couldn\'t have been worth it. You decide to do without that instead.',
+  'Wow, you understand that other language now. That wasn\'t too bad.',
+  'Maybe you spoke too soon. You\'ve kept programming in that other language and now you\'re getting some "dilation", whatever that is. Even though it\'s right in front of you, it seems hard to describe to anyone else.',
+  'You still don\'t really know what this "dilation" stuff is, but it seems useful. You think you probably have enough of it for now, though.',
+  'You are extremely enlightened right now, but it doesn\'t actually seem to be helping in development that much.',
+  'There are a lot of people working on this game. You decide to not think about whether anyone is actually playing it.',
+  'Well, you\'ve done it. You\'ve made so many great updates that your game is recognized as the best game in the world. You still feel like you could add more to it, but you\'re not sure what the point would be.',
+  'Not only is your game the best ever, but you\'ve done everything that could be expected of you in its development, even some things that were considered unrelated (e.g., that "dilation" was apparently an important new substance in physics). You\'re not really sure what to do next.',
+  'You feel something in your mind saying "Yeah, that\'s it, you\'ve reached the end of the game." You\'re not sure what that means; you still have more ideas for your game. "You can either keep going (but nothing really new happens) or hard reset." Huh? "In any case, congratulations, thanks for playing, and I hope you enjoyed."',
+  'Not that long later, you meet someone who looks surprised to see you. She says she just finished your game and wonders what she can do next. You say, "Well of course you can keep going or hard reset" (and you suddenly understand the voice in your mind a bit better) "but you can also make your own game. Maybe it will catch on."',
+  'As you say this, you remember how far you\'ve gone in your quest to make a game, and how far you\'ve come since you\'ve started. You also recall how, in playing, the person you\'re talking to must have gone through a similar journey. You hear the voice in your mind say "So did I" [not really, making this game was rather easy, but please ignore this bracketed part OK?], and you smile.'
+]
+
+const TAB_LIST = ['main', 'achievements', 'lore', 'update', 'challenges'];
 
 function updateTabButtonDisplay () {
   if (player.updates > 0) {
@@ -1245,6 +1351,10 @@ function updateAchievementDisplay() {
       document.getElementById('ach-status-' + i).innerHTML = '&#x2718;';
     }
   }
+}
+
+function updateLoreDisplay() {
+  document.getElementById('lore-div').innerHTML = player.lore.map(i => LORE_LIST[i]).join('<br/>') + '<hr/>';
 }
 
 function updateDisplay () {
@@ -1318,7 +1428,6 @@ function updateDisplay () {
     document.getElementById('auto-help-span').style.display = 'none';
   }
   updateChallengeDisplay();
-  updateAchievementDisplay();
   document.getElementById('record-development').innerHTML = toTime(player.stats.recordDevelopment['']);
   document.getElementById('unassigned-devs').innerHTML = format(getUnassignedDevs());
   document.getElementById('progress-milestones').innerHTML = player.milestones;

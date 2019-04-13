@@ -172,6 +172,70 @@ The five-times-eightfold path: Get 40 enlightenments.
 Do we have any audience left?: Get a billion devs.
 Can you get infinite UP?: Get 1.80e308 update points. [actually MAX_VALUE]
 
+Start: You just got a game idea and you're excited to start working on it. It seems simple enough that it should only take 5 hours to finish.
+
+Assign a dev: You started working. Everything seems fairly reasonable so far.
+
+2 minutes anything: Weird, you've only made two minutes of progress on what you're working on, but you're sure it's been longer than that.
+
+3 minutes anything: The oddly-slow progress thing is still happening. Is time itself bending? Probably not: it's just that you had unrealistic expectations. You hope this doesn't get worse.
+
+>1 dev: You manage to recruit another developer to help. They seem to be just as effective as you.
+
+>=x2 from efficiency: Your study of efficiency is paying off. You're now twice as effective at getting stuff done. Unfortunately, your unrealistic expectations seem to only be getting worse.
+
+>=x2 from refactoring (I think this is >=1): Although your expectations were unrealistic, it seems that most of the unexpected slowdown is due to bad code, and by refactoring the code you've managed to significantly improve the ease of progress.
+
+prestige: The refactoring and efficiency wasn't enough. You decided to restart the project from scratch, taking advantage of what you'd learned.
+
+3:30 anything: Progress seems to be slowing down, even given everything you've learned from restarting the project. Perhaps you need more patience, though.
+
+4:30 anything: Patience alone didn't seem to help quite enough to finish; you're close, but not there. Maybe there's something you can do to enlighten the situation.
+
+Update: You finally made a game which was basically what you wanted, but you've thought of a bunch of cool stuff you can add. Maybe you can release another update with that.
+
+Update for >=2 UP: You've gotten enough experience from past updates that now you can make bigger updates. How far will this go?
+
+Reach 12:00:00 record development: You seem to be getting the hang of this. It's a bit monotonous, but maybe that will change soon.
+
+Unlock Logarithmic: You consider starting programming in a new language which you honestly don't know (which no one really knows), and all your skills in it are terrible. You've heard that the new paradigm might give you enlightenment though.
+
+Unlock Inefficient: One of the people working with you tells you that efficiency is overrated. You decide that you'll try not working on it while making some update soon.
+
+Unlock UFD: OK, efficiency is more useful than you thought. In that case, as suggested by someone else, refactoring must be what's overrated. You decide to try going without that.
+
+Unlock Lonely: Going without efficiency and without refactoring turned out to both be terrible ideas. You decide that to avoid such bad ideas from other people, you'll just work alone.
+
+Unlock Impatience: This is all so slow! You decide that you're going to stop waiting for patience. You have a bunch of enlightenment even without patience, so what's the point of patience anyway?
+
+Unlock Unprestigious: Restarting development over and over without even releasing an update is so annoying! You decide to try to release an update without starting over for once.
+
+Unlock Slow: You're planning on taking a vacation, along with everyone else. You all won't be able to dedicate quite as much time to updating the game then, but it will still be fine, right?
+
+Unlock Powerless: What was the use of experience anyway? It's said that it gives you some kind of "power", but that power doesn't seem that powerful. You'll just go without it.
+
+Unlock Upgradeless: There's some other stuff you did with your experience, but in retrospect it couldn't have been worth it. You decide to do without that.
+
+Finish Logarithmic: Wow, you understand that other language now. That wasn't too bad.
+
+1 billion devs: Wow, that's a lot of people working on this game. You decide to not think about whether anyone is actually playing it.
+
+40 enlightenments: You are extremely enlightened right now, but it doesn't actually seem to be helping in development that much.
+
+Start producing dilation: Maybe you spoke too soon. You've kept programming in that other language and now you're getting some "dilation", whatever that is. Even though it's right in front of you, it seems hard to describe to anyone else.
+
+33.333 dilation: You still don't really know what this "dilation" stuff is, but it seems useful. You think you probably have enough of it for now, though.
+
+1.79e308 UP: Well, you've done it. You've made so many great updates that your game is recognized as the best game in the world. You still feel like you could add more to it, but you're not sure what the point would be.
+
+All achievements: Not only is your game the best ever, but you've done everything that could be expected of you in its development, even some things that were considered unrelated (e.g., that "dilation" was apparently an important new substance in physics). You're not really sure what to do next.
+
+All lore but this one and following: You feel something in your mind saying "Yeah, that's it, you've reached the end of the game." Not sure what that means; you can keep working on the game if you want to. "You can either keep going (but nothing really new happens) or hard reset." Huh? "In any case, congratulations, thanks for playing, and I hope you enjoyed."
+
+Same: Not that long later, you meet someone who (like most people) looks surprised to see you. She says she just finished your game and wonders what she can do next. You say, "Well of course you can keep going or hard reset" (and you suddenly understand the voice in your mind a bit better) "but you can also make your own game. Maybe it will catch on."
+
+Same: As you say this, you remember how far you've done in your quest to make a game, and how far you've come since you've started. You also recall how, in playing, the person you're talking to must have gone through a similar journey. You hear the voice in your mind say "So did I" [not really, making this game was rather easy, but please ignore this bracketed part OK?], and you smile.
+
 eyJwcm9ncmVzcyI6WzAsMCwwLDEwNzcuNjY2ODA2ODIyMzczMiwwLDAsMjIzNC41NjEyMTE1ODkyOTQsMC4wMjc4MzU5MTEzMDI1OTA2Nl0sImRldnMiOlswLDAsMCw0LDAsMCwwLDBdLCJtaWxlc3RvbmVzIjoxLCJlbmxpZ2h0ZW5lZCI6MCwibGFzdFVwZGF0ZSI6MTU1NDE0NjE3ODgxNSwidXBkYXRlUG9pbnRzIjowLCJ1cGRhdGVzIjoxLCJleHBlcmllbmNlIjpbMCwxLDBdLCJwb3dlciI6WzAsMzguODY5MTU5OTk5OTczMjQsMCwwXX0=
 
 eyJwcm9ncmVzcyI6WzAsMCwyNDEuNDQ2Mzk3MzAwMTE3MjcsMzM1LjUyNDgzMDUxMzI5ODM1LDAsMCwwLDAuMDA4Mjk1ODYyNTM2ODExOTVdLCJkZXZzIjpbMCwwLDIsMCwwLDAsMCwwXSwibWlsZXN0b25lcyI6MCwiZW5saWdodGVuZWQiOjAsImxhc3RVcGRhdGUiOjE1NTQyMjc5OTcwNjQsInVwZGF0ZVBvaW50cyI6MCwidXBkYXRlcyI6MiwiZXhwZXJpZW5jZSI6WzEsMSwwXSwicG93ZXIiOls2LjI1NTM1OTk5OTk5OTM2Nyw2LjMyNzYzOTk5OTk5OTM1NiwwLDBdLCJ1cGdyYWRlcyI6W1tmYWxzZSxmYWxzZSxmYWxzZV0sW2ZhbHNlLGZhbHNlLGZhbHNlXV0sImF1dG8iOnsiZGV2Ijp7InNldHRpbmdzIjpbMCwwLDAsMCwwXSwib24iOmZhbHNlfX0sIm9wdGlvbnMiOnsiY29uZmlybWF0aW9ucyI6eyJwcmVzdGlnZSI6ZmFsc2UsInByZXN0aWdlV2l0aG91dEdhaW4iOnRydWUsInVwZGF0ZSI6ZmFsc2V9fX0=
