@@ -1354,7 +1354,11 @@ function updateAchievementDisplay() {
 }
 
 function updateLoreDisplay() {
-  document.getElementById('lore-div').innerHTML = player.lore.map(i => LORE_LIST[i]).join('<br/>') + '<hr/>';
+  let loreShown = LORE_LIST.map((lore, i) => (player.lore.indexOf(i) === -1) ? '' : lore);
+  while (loreShown[loreShown.length - 1] === '') {
+    loreShown.pop();
+  }
+  document.getElementById('lore-div').innerHTML = loreShown.join('<br/>') + '<hr/>';
 }
 
 function updateDisplay () {
