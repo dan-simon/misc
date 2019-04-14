@@ -1268,7 +1268,7 @@ const LORE_LIST = [
   'You finally made a game which was basically what you wanted, but you\'ve thought of a bunch of cool stuff you can add. Maybe you can release another update with that.',
   'You\'ve gotten enough experience from past updates that now you can make bigger updates. How far will this go?',
   'You seem to be getting the hang of this. It\'s a bit monotonous, but maybe that will change soon.',
-  'You consider starting programming in a new language, and all your skills in it are terrible. You\'ve heard that the new paradigm might give you enlightenment though.',
+  'You decide that for some update soon, you\'re going to start programming in a new language. All your skills in it are terrible, but you\'ve heard that the new paradigm might give you enlightenment, so you try it anyway.',
   'One of the people working with you tells you that efficiency is overrated. You decide that you\'ll try not working on it while making some update soon.',
   'OK, efficiency is more useful than you thought. In that case, as suggested by someone else, refactoring must be what\'s overrated. You decide to try going without that.',
   'Going without efficiency and without refactoring turned out to both be terrible ideas. You decide that to avoid such bad ideas from other people, you\'ll just work alone.',
