@@ -741,7 +741,7 @@ const CHALLENGE_GOALS = {
   '': 18000,
   'logarithmic': 18000,
   'inefficient': 21600,
-  'ufd': 6000,
+  'ufd': 7200,
   'lonely': 86400,
   'impatient': 43200,
   'unprestigious': 86400,
