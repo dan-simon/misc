@@ -812,8 +812,8 @@ function describeChallengeCompleted(x) {
 
 const CHALLENGE_UNLOCKS = {
   'logarithmic': 86400,
-  'inefficient': 108000,
-  'ufd': 144000,
+  'inefficient': 129600,
+  'ufd': 172800,
   'lonely': 216000,
   'impatient': 432000,
   'unprestigious': 648000,
