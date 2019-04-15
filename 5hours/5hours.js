@@ -741,7 +741,7 @@ const CHALLENGE_GOALS = {
   '': 18000,
   'logarithmic': 18000,
   'inefficient': 21600,
-  'ufd': 7200,
+  'ufd': 6000,
   'lonely': 86400,
   'impatient': 43200,
   'unprestigious': 86400,
@@ -812,8 +812,8 @@ function describeChallengeCompleted(x) {
 
 const CHALLENGE_UNLOCKS = {
   'logarithmic': 86400,
-  'inefficient': 129600,
-  'ufd': 172800,
+  'inefficient': 108000,
+  'ufd': 144000,
   'lonely': 216000,
   'impatient': 432000,
   'unprestigious': 648000,
