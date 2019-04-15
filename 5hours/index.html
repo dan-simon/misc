@@ -169,14 +169,14 @@
         <td><button style="width: 300px;" onclick="assignAll(2)">Turn all your update points into headstart experience.</button></td>
       </tr>
       <tr>
-        <td><button style="height: 60px; width: 300px;" onclick="buyUpdateUpgrade(0, 0)">Scaling becomes slower after 4:30:00.<br/>Cost: 5 endgame experience<span id="up-0-0-bought"></span></button></td>
-        <td><button style="height: 60px; width: 300px;" onclick="buyUpdateUpgrade(0, 1)">Patience affects the patience meter more strongly.<br/>Cost: 5 patience experience<span id="up-0-1-bought"></span></button></td>
-        <td><button style="height: 60px; width: 300px;" onclick="buyUpdateUpgrade(0, 2)">Start with 10 devs, and unlock auto dev assignment.<br/>Cost: 5 headstart experience<span id="up-0-2-bought"></span></button></td>
+        <td><button style="height: 60px; width: 300px;" onclick="buyUpdateUpgrade(0, 0)">Scaling becomes slower after 4:30:00.<br/>Cost: <span id="up-0-0-cost"></span> endgame experience<span id="up-0-0-bought"></span></button></td>
+        <td><button style="height: 60px; width: 300px;" onclick="buyUpdateUpgrade(0, 1)">Patience affects the patience meter more strongly.<br/>Cost: <span id="up-0-1-cost"></span> patience experience<span id="up-0-1-bought"></span></button></td>
+        <td><button style="height: 60px; width: 300px;" onclick="buyUpdateUpgrade(0, 2)">Start with 10 devs, and unlock auto dev assignment.<br/>Cost: <span id="up-0-2-cost"></span> headstart experience<span id="up-0-2-bought"></span></button></td>
       </tr>
       <tr>
-        <td><button style="height: 60px; width: 300px;" onclick="buyUpdateUpgrade(1, 0)">Improve the update point gain formula.<br/>Cost: 10000 endgame experience<span id="up-1-0-bought"></span></button></td>
-        <td><button style="height: 60px; width: 300px;" onclick="buyUpdateUpgrade(1, 1)">The patience meter increases with greatly reduced effect past 1.<br/>Cost: 10000 patience experience<span id="up-1-1-bought"></span></button></td>
-        <td><button style="height: 60px; width: 300px;" onclick="buyUpdateUpgrade(1, 2)">All your devs act as working on development, in addition to whatever they're working on.<br/>Cost: 10000 headstart experience<span id="up-1-2-bought"></span></button></td>
+        <td><button style="height: 60px; width: 300px;" onclick="buyUpdateUpgrade(1, 0)">Improve the update point gain formula.<br/>Cost: <span id="up-1-0-cost"></span> endgame experience<span id="up-1-0-bought"></span></button></td>
+        <td><button style="height: 60px; width: 300px;" onclick="buyUpdateUpgrade(1, 1)">The patience meter increases with greatly reduced effect past 1.<br/>Cost: <span id="up-1-1-cost"></span> patience experience<span id="up-1-1-bought"></span></button></td>
+        <td><button style="height: 60px; width: 300px;" onclick="buyUpdateUpgrade(1, 2)">All your devs act as working on development, in addition to whatever they're working on.<br/>Cost: <span id="up-1-2-cost"></span> headstart experience<span id="up-1-2-bought"></span></button></td>
       </tr>
     </table>
   </div>
@@ -192,7 +192,7 @@
             <br/>
             Overall production multiplier, overall scaling slowdown, and total devs is severely nerfed, but also boosted by total challenge completions. Reaching certain milestones will give you permanent rewards, even if you can't finish. If you get far enough in this challenge, you produce dilation which boosts the exponents of efficiency and meta-efficiency.
             <br/>
-            Goal: 5:00:00 development
+            Goal: <span id="logarithmic-goal"></span> development
           </button>
           <br/>
           Farthest reached: <span id="record-development-in-logarithmic"></span>
@@ -207,7 +207,7 @@
             <br/>
             Efficiency and meta-efficency are useless.
             <br/>
-            Goal: 6:00:00 development
+            Goal: <span id="inefficient-goal"></span> development
           </button>
           <br/>
           Farthest reached: <span id="record-development-in-inefficient"></span>
@@ -223,7 +223,7 @@
             <br/>
             Refactoring and meta-refactoring are useless.
             <br/>
-            Goal: 1:40:00 development
+            Goal: <span id="ufd-goal"></span> development
           </button>
           <br/>
           Farthest reached: <span id="record-development-in-ufd"></span>
@@ -241,7 +241,7 @@
             <br/>
             You always only have one dev.
             <br/>
-            Goal: 24:00:00 development
+            Goal: <span id="lonely-goal"></span> development
           </button>
           <br/>
           Farthest reached: <span id="record-development-in-lonely"></span>
@@ -256,7 +256,7 @@
             <br/>
             The patience meter is always at 0.
             <br/>
-            Goal: 12:00:00 development
+            Goal: <span id="impatient-goal"></span> development
           </button>
           <br/>
           Farthest reached: <span id="record-development-in-impatient"></span>
@@ -271,7 +271,7 @@
             <br/>
             You can't prestige (that is, you can't get meta-efficiency or meta-refactoring).
             <br/>
-            Goal: 24:00:00 development
+            Goal: <span id="unprestigious-goal"></span> development
           </button>
           <br/>
           Farthest reached: <span id="record-development-in-unprestigious"></span>
@@ -288,7 +288,7 @@
             <br/>
             Everything (including patience and power gain) is a thousand times slower.
             <br/>
-            Goal: 72:00:00 development
+            Goal: <span id="slow-goal"></span> development
           </button>
           <br/>
           Farthest reached: <span id="record-development-in-slow"></span>
@@ -303,7 +303,7 @@
             <br/>
             Power is not produced.
             <br/>
-            Goal: 96:00:00 development
+            Goal: <span id="powerless-goal"></span> development
           </button>
           <br/>
           Farthest reached: <span id="record-development-in-powerless"></span>
@@ -319,7 +319,7 @@
             <br/>
             All upgrades (the things bought with experience) are useless.
             <br/>
-            Goal: 9:00:00 development
+            Goal: <span id="upgradeless-goal"></span> development
           </button>
           <br/>
           Farthest reached: <span id="record-development-in-upgradeless"></span>
@@ -349,6 +349,8 @@
     Prestige if possible when entering/exiting a challenge: <input id="update-challenge" onclick="toggleOption('updateChallenge')" type="checkbox"></input>
     Offline progress: <input id="offline-progress" onclick="toggleOption('offlineProgress')" type="checkbox"></input>
   </span>
+  <br/>
+  <span><span id="hard-mode-span">Hard mode: off</span> <button onclick="toggleHardMode()">Toggle hard mode</button></span>
   <br/>
   <span><button onclick="saveGame()">Save</button> <button onclick="exportGame()">Export</button> <button onclick="loadGamePrompt()">Load</button> <button onclick="resetGameWithConfirmation()">RESET</button></span>
   <br/>

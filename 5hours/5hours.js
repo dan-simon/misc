@@ -45,7 +45,8 @@ function fixPlayer () {
         exitChallenge: true
       },
       offlineProgress: true,
-      updateChallenge: true
+      updateChallenge: true,
+      hardMode: false
     }
   }
   if (!('tab' in player)) {
@@ -136,6 +137,9 @@ function fixPlayer () {
       alert('Your ' + i + ' auto setting\'s name is no longer a possible setting. It has been reset.');
       player.auto[i].setting = AUTO_SETTINGS[i][0];
     }
+  }
+  if (!('hardMode' in player.options)) {
+    player.options.hardMode = false;
   }
 }
 
@@ -237,7 +241,8 @@ let initialPlayer = {
       exitChallenge: true
     },
     offlineProgress: true,
-    updateChallenge: true
+    updateChallenge: true,
+    hardMode: false
   },
   tab: 'main',
   currentChallenge: '',
@@ -734,7 +739,7 @@ function setDevs(i, x) {
 }
 
 function canUpdate() {
-  return player.progress[0] >= CHALLENGE_GOALS[player.currentChallenge];
+  return player.progress[0] >= getChallengeGoal(player.currentChallenge);
 }
 
 const CHALLENGE_GOALS = {
@@ -750,8 +755,20 @@ const CHALLENGE_GOALS = {
   'upgradeless': 32400
 }
 
+function getChallengeGoal(x) {
+  let hardModeTable = {
+    'ufd': 7200,
+    'lonely': 129600
+  }
+  if (player.options.hardMode && x in hardModeTable) {
+    return hardModeTable[x];
+  } else {
+    return CHALLENGE_GOALS[x];
+  }
+}
+
 function challengeCompletions(x) {
-  let result = player.stats.recordDevelopment[x] / CHALLENGE_GOALS[x];
+  let result = player.stats.recordDevelopment[x] / getChallengeGoal(x);
   if (result < 1) {
     return 0;
   } else {
@@ -765,7 +782,7 @@ function getTotalChallengeCompletions() {
 }
 
 function challengeReward(x) {
-  let pastCompletion = player.stats.recordDevelopment[x] - CHALLENGE_GOALS[x];
+  let pastCompletion = player.stats.recordDevelopment[x] - getChallengeGoal(x);
   let table = {
     'inefficient': [new Decimal(1), x => Decimal.pow(2, 1 + x / 1800)],
     'ufd': [0, x => 1 + x / 3600],
@@ -822,8 +839,16 @@ const CHALLENGE_UNLOCKS = {
   'upgradeless': 1728000
 }
 
+function getChallengeUnlock(x) {
+  if (player.options.hardMode && x !== 'logarithmic') {
+    return CHALLENGE_UNLOCKS[x] * 1.2;
+  } else {
+    return CHALLENGE_UNLOCKS[x];
+  }
+}
+
 function isChallengeUnlocked(x) {
-  return CHALLENGE_UNLOCKS[x] <= player.stats.recordDevelopment[''];
+  return getChallengeUnlock(x) <= player.stats.recordDevelopment[''];
 }
 
 function sortedChallenges() {
@@ -835,7 +860,7 @@ function nextChallengeUnlock() {
   if (locked.length === 0) {
     return 'All challenges are unlocked.';
   } else {
-    return 'Next challenge unlocks at ' + toTime(CHALLENGE_UNLOCKS[locked[0]]) + ' development.';
+    return 'Next challenge unlocks at ' + toTime(getChallengeUnlock(locked[0])) + ' development.';
   }
 }
 
@@ -1009,6 +1034,16 @@ function getUpdatePowerEffect(i) {
 
 const UPGRADE_COSTS = [5, 1e4];
 
+const HARD_MODE_UPGRADE_COSTS = [10, 1e6];
+
+function getUpgradeCost(x) {
+  if (player.options.hardMode) {
+    return HARD_MODE_UPGRADE_COSTS[x];
+  } else {
+    return UPGRADE_COSTS[x];
+  }
+}
+
 function upgradeBought(i, j) {
   return player.upgrades[i][j];
 }
@@ -1018,10 +1053,10 @@ function upgradeActive(i, j) {
 }
 
 function buyUpdateUpgrade(i, j) {
-  if (upgradeBought(i, j) || player.experience[j].lt(UPGRADE_COSTS[i])) {
+  if (upgradeBought(i, j) || player.experience[j].lt(getUpgradeCost(i))) {
     return false;
   }
-  player.experience[j] = player.experience[j].minus(UPGRADE_COSTS[i]);
+  player.experience[j] = player.experience[j].minus(getUpgradeCost(i));
   player.upgrades[i][j] = true;
 }
 
@@ -1329,6 +1364,7 @@ function updateChallengeDisplay () {
     } else {
       document.getElementById(i + '-td').style.display = 'none';
     }
+    document.getElementById(i + '-goal').innerHTML = toTime(getChallengeGoal(i));
     document.getElementById('record-development-in-' + i).innerHTML = toTime(player.stats.recordDevelopment[i]);
     document.getElementById(i + '-reward-description').innerHTML = describeChallengeReward(i);
     document.getElementById(i + '-completed-description').innerHTML = describeChallengeCompleted(i);
@@ -1359,6 +1395,26 @@ function updateLoreDisplay() {
     loreShown.pop();
   }
   document.getElementById('lore-div').innerHTML = loreShown.join('<br/>') + '<hr/>';
+}
+
+function confirmToggleHardMode() {
+  if (player.options.hardMode) {
+    return confirm(
+      'Turning hard mode off will make various things easier again. ' +
+      'This includes upgrade costs, challenge requirements, and some challenge goals being lowered. ' +
+      'Are you sure you want to do this?');
+  } else {
+    return confirm(
+      'Turning hard mode on will make various things harder. ' +
+      'This includes upgrade costs, challenge requirements, and some challenge goals being increased. ' +
+      'Also note that the intended default mode is non-hard-mode. Are you sure you want to do this?');
+  }
+}
+
+function toggleHardMode() {
+  if (confirmToggleHardMode()) {
+    player.options.hardMode = !player.options.hardMode;
+  }
 }
 
 function updateDisplay () {
@@ -1399,7 +1455,7 @@ function updateDisplay () {
     let gain = getUpdateGain();
     document.getElementById('update-gain').innerHTML = 'gain ' + format(gain) + ' update point' + (gain.eq(1) ? '' : 's');
   } else {
-    document.getElementById('update-gain').innerHTML = 'requires ' + toTime(CHALLENGE_GOALS[player.currentChallenge]) + ' development';
+    document.getElementById('update-gain').innerHTML = 'requires ' + toTime(getChallengeGoal(player.currentChallenge)) + ' development';
   }
   document.getElementById('update-points').innerHTML = format(player.updatePoints);
   document.getElementById('updates').innerHTML = player.updates;
@@ -1409,6 +1465,7 @@ function updateDisplay () {
     document.getElementById('update-power-span-' + i).innerHTML = format(player.power[i]);
     document.getElementById('update-effect-span-' + i).innerHTML = format(getUpdatePowerEffect(i));
     for (let j = 0; j <= 1; j++) {
+      document.getElementById('up-' + j + '-' + i + '-cost').innerHTML = format(getUpgradeCost(j));
       document.getElementById('up-' + j + '-' + i + '-bought').innerHTML = upgradeBought(j, i) ? ' (bought)' : '';
     }
   }
@@ -1437,6 +1494,11 @@ function updateDisplay () {
   document.getElementById('progress-milestones').innerHTML = player.milestones;
   document.getElementById('progress-milestones-effect').innerHTML = getMilestoneEffect();
   document.getElementById('enlightened').innerHTML = getTotalEnlightened();
+  if (player.options.hardMode) {
+    document.getElementById('hard-mode-span').innerHTML = 'Hard mode: on';
+  } else {
+    document.getElementById('hard-mode-span').innerHTML = 'Hard mode: off';
+  }
   document.getElementById('devs-plural').innerHTML = (getTotalDevs() === 1) ? '' : 's';
   document.getElementById('unassigned-devs-plural').innerHTML = (getUnassignedDevs() === 1) ? '' : 's';
   document.getElementById('progress-milestones-plural').innerHTML = (player.milestones === 1) ? '' : 's';
