@@ -1,0 +1,83 @@
+* {
+  box-sizing: border-box;
+}
+
+.generator {
+  display: inline-block;
+  border: 2px solid khaki;
+  background-color: beige;
+  text-align: center;
+  width: 300px;
+  padding: 15px;
+  font-size: 1.3em;
+  user-select: none;
+}
+
+.upgrade {
+  display: inline-block;
+  border: 2px solid khaki;
+  background-color: beige;
+  text-align: center;
+  width: 300px;
+  padding: 15px;
+  font-size: 1.3em;
+  user-select: none;
+}
+
+.prestige {
+  position: absolute;
+  right: 80%;
+  text-align: center;
+  border: 2px solid purple;
+  background-color: rgb(230,172,203);
+  width: 200px;
+  height: 100px;
+}
+
+.stat {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.locked {
+  background-color: rgb(212, 90, 90) !important;
+}
+
+.bought {
+  background-color: green !important;
+}
+
+.generators-row {
+  margin: auto;
+  text-align: center;
+}
+
+.upgrades-container {
+  margin: auto;
+  text-align: center;
+}
+
+#currency {
+  font-size: 3em;
+  text-align: center;
+}
+
+.utility {
+  display: inline-block;
+  border: 2px solid blue;
+  background-color: aqua;
+  text-align: center;
+  margin: auto;
+  width: 150px;
+  user-select: none;
+}
+
+.row {
+  text-align: center;
+}
+
+#footer {
+  margin: 10px;
+  text-align: center;
+}

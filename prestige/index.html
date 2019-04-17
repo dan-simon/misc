@@ -1,0 +1,66 @@
+<html lang="en">
+<head>
+  <meta chatset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Comppatible" content-"ie-edge">
+  <link rel="stylesheet" href="styles.css">
+  <title>Prestige get knockoff</title>
+</head>
+<body>
+  <div id="prestige" class="prestige" onclick="prestige()"></div>
+  <div id="currency">You have <span id="currencyAmount"></span> money</div>
+  <div class="row"><div id="maxall" class="utility" onclick="maxall()">Max all</div></div>
+  <div class="row">
+    <div id="generators-tab-button" class="utility" onclick="setTab('generators')">Generators</div>
+    <div id="stats-tab-button" class="utility" onclick="setTab('stats')">Stats</div>
+    <div id="prestige-upgrades-tab-button" class="utility" onclick="setTab('prestige-upgrades')">Prestige Upgrades</div>
+  </div>
+  <div id="generators-tab" class="tab">
+    <div class="upgrades-container">
+      <div class="upgrade" id="multUpg" onclick="buyMultUpg()">Increase multiplier on all generators.<br/>Currently: <span id="multUpgAmount"></span>x<br/>Cost: <span id="multUpgCost"></span></div>
+      <div class="upgrade" id="tickspeed" onclick="buyTickspeed()">Decrease tickspeed by 10%.<br/>Currently: <span id="tickspeedAmount"></span><br/>Cost: <span id="tickspeedCost"></span><br/>(<span id="tickspeedCostIncrease"></span>x per purchase)</div>
+    </div>
+    <div class="generators-container">
+      <div class="generators-row">
+        <div class="generator" id="gen1" onclick="buyGenerator(1)">Amount: <span id="gen1Amount"></span><br/>Bought: <span id="gen1Bought"></span><br/>Mult: <span id="gen1Mult"></span>x<br/>Cost: <span id="gen1Cost"></span><br/></div>
+        <div class="generator" id="gen2" onclick="buyGenerator(2)">Amount: <span id="gen2Amount"></span><br/>Bought: <span id="gen2Bought"></span><br/>Mult: <span id="gen2Mult"></span>x<br/>Cost: <span id="gen2Cost"></span><br/></div>
+      </div>
+      <div class="generators-row">
+        <div class="generator" id="gen3" onclick="buyGenerator(3)">Amount: <span id="gen3Amount"></span><br/>Bought: <span id="gen3Bought"></span><br/>Mult: <span id="gen3Mult"></span>x<br/>Cost: <span id="gen3Cost"></span><br/></div>
+        <div class="generator" id="gen4" onclick="buyGenerator(4)">Amount: <span id="gen4Amount"></span><br/>Bought: <span id="gen4Bought"></span><br/>Mult: <span id="gen4Mult"></span>x<br/>Cost: <span id="gen4Cost"></span><br/></div>
+      </div>
+      <div class="generators-row">
+        <div class="generator" id="gen5" onclick="buyGenerator(5)">Amount: <span id="gen5Amount"></span><br/>Bought: <span id="gen5Bought"></span><br/>Mult: <span id="gen5Mult"></span>x<br/>Cost: <span id="gen5Cost"></span><br/></div>
+        <div class="generator" id="gen6" onclick="buyGenerator(6)">Amount: <span id="gen6Amount"></span><br/>Bought: <span id="gen6Bought"></span><br/>Mult: <span id="gen6Mult"></span>x<br/>Cost: <span id="gen6Cost"></span><br/></div>
+      </div>
+      <div class="generators-row">
+        <div class="generator" id="gen7" onclick="buyGenerator(7)">Amount: <span id="gen7Amount"></span><br/>Bought: <span id="gen7Bought"></span><br/>Mult: <span id="gen7Mult"></span>x<br/>Cost: <span id="gen7Cost"></span><br/></div>
+        <div class="generator" id="gen8" onclick="buyGenerator(8)">Amount: <span id="gen8Amount"></span><br/>Bought: <span id="gen8Bought"></span><br/>Mult: <span id="gen8Mult"></span>x<br/>Cost: <span id="gen8Cost"></span><br/></div>
+      </div>
+      <div class="generators-row">
+        <div class="generator" id="gen9" onclick="buyGenerator(9)">Amount: <span id="gen9Amount"></span><br/>Bought: <span id="gen9Bought"></span><br/>Mult: <span id="gen9Mult"></span>x<br/>Cost: <span id="gen9Cost"></span><br/></div>
+        <div class="generator" id="gen10" onclick="buyGenerator(10)">Amount: <span id="gen10Amount"></span><br/>Bought: <span id="gen10Bought"></span><br/>Mult: <span id="gen10Mult"></span>x<br/>Cost: <span id="gen10Cost"></span><br/></div>
+      </div>
+    </div>
+  </div>
+  <div id="stats-tab" class="tab">
+    <div class="stat">You have <span id="prestigeStat"></span> prestige points.</div>
+    <div class="stat">You have <span id="infinityPointsStat"></span> infinity points.</div>
+    <div class="stat">You last prestiged <span id="prestigeTimeStat"></span> seconds ago.</div>
+    <div class="stat">You last infinitied <span id="infinityTimeStat"></span> seconds ago.</div>
+    <div class="stat">You have played this game for <span id="totalTimeStat"></span> seconds.</div>
+    <div class="row"><div class="utility" onclick="saveGame()">Save</div><div class="utility" onclick="loadGame(prompt('Input your save:'))">Load</div><div class="utility" onclick="exportGame()">Export</div><div class="utility" onclick="resetGame()">RESET</div></div>
+  </div>
+  <div id="prestige-upgrades-tab" class="tab">
+    <div class="upgrades-container">
+      <div class="upgrade tall" id="prestigeUpg1" onclick="buyPrestigeUpgrade(1)">Multiplier based on prestige and time since last prestige<br/>Currently: <span id="prestigeUpg1Effect"></span>x<br/>Cost: <span id="prestigeUpg1Cost"></span></div>
+      <div class="upgrade tall" id="prestigeUpg2" onclick="buyPrestigeUpgrade(2)">"Increase mult" multiplier is powered based on tickspeed.<br/>Currently: ^<span id="prestigeUpg2Effect"></span><br/>Cost: <span id="prestigeUpg2Cost"></span></div>
+      <div class="upgrade tall" id="prestigeUpg3" onclick="buyPrestigeUpgrade(3)">Multiplier to prestige point gain based on tickspeed.<br/>Currently: <span id="prestigeUpg3Effect"></span>x<br/>Cost: <span id="prestigeUpg3Cost"></span></div>
+    </div>
+  </div>
+  <div id="footer">Knockoff of what we're here calling "Prestige get" (originally by Hevipelle). Play <a href="https://ivark.github.io">this</a> instead of this.</div>
+  <div style="display: none;"><textarea id="exportOutput" style="color:black; width: 200px; height: 55px;"></textarea></div>
+</body>
+<script src="breakinfinity.js"></script>
+<script src="script.js"></script>
+</html>
