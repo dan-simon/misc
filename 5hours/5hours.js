@@ -366,11 +366,29 @@ function addToProgress(diff) {
   }
 }
 
-function addToPatience(diff) {
-  player.progress[7] = player.progress[7] + diff / getEffect(4);
-  if (!upgradeActive(1, 1)) {
-    player.progress[7] = Math.min(1, player.progress[7]);
+function getPatienceMeterEffect(x, enlights) {
+  return 1 + softcapPatienceMeter(x) * (0.5 + 0.05 * enlights);
+}
+
+function getTimeForPatienceMeterToMaxOut(patience, enlights) {
+  if (player.currentChallenge === 'impatient') {
+    return Infinity;
+  } else {
+    let base = getBasePatienceMeterTime(patience);
+    return base / (getUpdatePowerEffect(1) * challengeReward('impatient')) * Math.pow(getEnlightenedSlowFactor(), enlights);
   }
+}
+
+function getPatienceMeterNewValue(old, diff, patience, enlights) {
+  let result = old + diff / getTimeForPatienceMeterToMaxOut(patience, enlights);
+  if (!upgradeActive(1, 1)) {
+    result = Math.min(1, result);
+  }
+  return result;
+}
+
+function addToPatience(diff) {
+  player.progress[7] = getPatienceMeterNewValue(player.progress[7], diff, player.progress[4], player.enlightened);
 }
 
 function checkForMilestones() {
@@ -385,6 +403,19 @@ function addToUpdatePower(diff) {
 
 function addToDilation(diff) {
   player.dilation = player.dilation + diff * getDilationPerSecond();
+}
+
+function getGameSpeed() {
+  let speed = 1;
+  if (player.currentChallenge === 'slow') {
+    speed /= 1000;
+  }
+  speed *= challengeReward('slow');
+  return speed;
+}
+
+function realTimeToGameTime(diff) {
+  return diff * getGameSpeed();
 }
 
 function autoAssignDevs() {
@@ -402,7 +433,8 @@ let AUTO_SETTINGS = {
   'enlightened': [
     'total times enlightened',
     'real seconds since last time enlightened',
-    'time to max out patience meter'
+    'time to max out patience meter',
+    'optimal for X-second-long prestige'
   ],
   'prestige': [
     'development',
@@ -418,11 +450,22 @@ let AUTO_SETTINGS = {
   ]
 }
 
+function shouldEnlightened(x) {
+  let realSecondsAlready = (Date.now() - player.stats.last.enlightened) / 1000;
+  let gameSecondsRemaining = Math.max(0, realTimeToGameTime(x - realSecondsAlready));
+  let valueIfNot = getPatienceMeterNewValue(player.progress[7], gameSecondsRemaining, player.progress[4], player.enlightened);
+  let valueIfSo = getPatienceMeterNewValue(0, gameSecondsRemaining, player.progress[4], player.enlightened + 1);
+  let effectIfNot = getPatienceMeterEffect(valueIfNot, getTotalEnlightened());
+  let effectIfSo = getPatienceMeterEffect(valueIfSo, getTotalEnlightened() + 1);
+  return effectIfSo >= effectIfNot;
+}
+
 function checkForAutoEnlightened() {
   let table = {
     'total times enlightened': x => getTotalEnlightened() < x,
     'real seconds since last time enlightened': x => Date.now() - player.stats.last.enlightened >= x * 1000,
     'time to max out patience meter': x => x >= getEffect(4),
+    'optimal for X-second-long prestige': x => shouldEnlightened(x)
   }
   if (table[player.auto.enlightened.setting](player.auto.enlightened.value.toNumber())) {
     enlightened();
@@ -472,10 +515,7 @@ function gameCode() {
   if (isNaN(diff)) {
     diff = 0;
   }
-  if (player.currentChallenge === 'slow') {
-    diff /= 1000;
-  }
-  diff *= challengeReward('slow');
+  diff = realTimeToGameTime(diff);
   player.lastUpdate = now;
   if (upgradeActive(0, 2) && player.auto.dev.on) {
     autoAssignDevs();
@@ -607,14 +647,9 @@ function getEffect(i) {
       return Math.floor(maybeLog(baseDevs() + x * getUpdatePowerEffect(2) * challengeReward('lonely') / 300));
     }
   } else if (i === 4) {
-    if (player.currentChallenge === 'impatient') {
-      return Infinity;
-    } else {
-      let base = getBasePatienceMeterTime(x);
-      return base / (getUpdatePowerEffect(1) * challengeReward('impatient')) * Math.pow(getEnlightenedSlowFactor(), player.enlightened);
-    }
+    return getTimeForPatienceMeterToMaxOut(x, player.enlightened)
   } else if (i === 7) {
-    return 1 + softcapPatienceMeter(x) * (0.5 + 0.05 * getTotalEnlightened());
+    return getPatienceMeterEffect(x, getTotalEnlightened());
   }
 }
 
@@ -848,7 +883,7 @@ function getChallengeUnlock(x) {
 }
 
 function isChallengeUnlocked(x) {
-  return getChallengeUnlock(x) <= player.stats.recordDevelopment[''];
+  return getChallengeUnlock(x) <= player.stats.recordDevelopment[''] || player.stats.recordDevelopment[x] > 0;
 }
 
 function sortedChallenges() {
