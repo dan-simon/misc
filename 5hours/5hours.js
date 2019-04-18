@@ -141,6 +141,19 @@ function fixPlayer () {
   if (!('hardMode' in player.options)) {
     player.options.hardMode = false;
   }
+  if (!('update' in player.stats.recordDevelopment)) {
+    let h1 = {};
+    let h2 = {};
+    for (let i in player.stats.recordDevelopment) {
+      h1[i] = player.stats.recordDevelopment[i];
+      h2[i] = player.stats.recordDevelopment[i];
+    }
+    player.stats.recordDevelopment = {
+      update: player.progress[0],
+      ascension: h1,
+      ever: h2
+    }
+  }
 }
 
 function convertSaveToDecimal () {
@@ -247,17 +260,32 @@ let initialPlayer = {
   tab: 'main',
   currentChallenge: '',
   stats: {
-    'recordDevelopment': {
-      '': 0,
-      'logarithmic': 0,
-      'inefficient': 0,
-      'ufd': 0,
-      'lonely': 0,
-      'impatient': 0,
-      'unprestigious': 0,
-      'slow': 0,
-      'powerless': 0,
-      'upgradeless': 0
+    recordDevelopment: {
+      update: 0,
+      ascension: {
+        '': 0,
+        'logarithmic': 0,
+        'inefficient': 0,
+        'ufd': 0,
+        'lonely': 0,
+        'impatient': 0,
+        'unprestigious': 0,
+        'slow': 0,
+        'powerless': 0,
+        'upgradeless': 0
+      },
+      ever: {
+        '': 0,
+        'logarithmic': 0,
+        'inefficient': 0,
+        'ufd': 0,
+        'lonely': 0,
+        'impatient': 0,
+        'unprestigious': 0,
+        'slow': 0,
+        'powerless': 0,
+        'upgradeless': 0
+      },
     },
     last: {
       enlightened: Date.now(),
@@ -538,13 +566,20 @@ function gameCode() {
   checkForAchievementsAndLore();
 }
 
-function checkForRecordDevelopement() {
-  player.stats.recordDevelopment[''] = Math.max(
-    player.progress[0], player.stats.recordDevelopment['']);
+function checkForRecordDevelopementWithin(x) {
+  let records = player.stats.recordDevelopment[x];
+  records[''] = Math.max(player.progress[0], records['']);
   if (player.currentChallenge !== '') {
-    player.stats.recordDevelopment[player.currentChallenge] = Math.max(
-      player.progress[0], player.stats.recordDevelopment[player.currentChallenge]);
+    let challenge = player.currentChallenge;
+    records[challenge] = Math.max(player.progress[0], records[challenge]);
   }
+}
+
+function checkForRecordDevelopement() {
+  player.stats.recordDevelopment.update = Math.max(
+    player.progress[0], player.stats.recordDevelopment.update);
+  checkForRecordDevelopementWithin('ascension');
+  checkForRecordDevelopementWithin('ever');
 }
 
 function tick() {
@@ -658,7 +693,7 @@ function getTotalEnlightened() {
 }
 
 function getLogarithmicMilestones() {
-  return Math.min(Math.max(player.stats.recordDevelopment.logarithmic / 1800 - 1, 0), 9);
+  return Math.min(Math.max(player.stats.recordDevelopment.ascension.logarithmic / 1800 - 1, 0), 9);
 }
 
 function getPermaEnlightened() {
@@ -803,7 +838,7 @@ function getChallengeGoal(x) {
 }
 
 function challengeCompletions(x) {
-  let result = player.stats.recordDevelopment[x] / getChallengeGoal(x);
+  let result = player.stats.recordDevelopment.ascension[x] / getChallengeGoal(x);
   if (result < 1) {
     return 0;
   } else {
@@ -817,7 +852,7 @@ function getTotalChallengeCompletions() {
 }
 
 function challengeReward(x) {
-  let pastCompletion = player.stats.recordDevelopment[x] - getChallengeGoal(x);
+  let pastCompletion = player.stats.recordDevelopment.ascension[x] - getChallengeGoal(x);
   let table = {
     'inefficient': [new Decimal(1), x => Decimal.pow(2, 1 + x / 1800)],
     'ufd': [0, x => 1 + x / 3600],
@@ -883,11 +918,15 @@ function getChallengeUnlock(x) {
 }
 
 function isChallengeUnlocked(x) {
-  return getChallengeUnlock(x) <= player.stats.recordDevelopment[''] || player.stats.recordDevelopment[x] > 0;
+  return getChallengeUnlock(x) <= player.stats.recordDevelopment.ascension[''] || player.stats.recordDevelopment.ascension[x] > 0;
 }
 
 function sortedChallenges() {
   return Object.keys(CHALLENGE_UNLOCKS).sort((x, y) => CHALLENGE_UNLOCKS[x] - CHALLENGE_UNLOCKS[y]);
+}
+
+function anyChallengesUnlocked() {
+  return Object.keys(CHALLENGE_UNLOCKS).any(isChallengeUnlocked);
 }
 
 function nextChallengeUnlock() {
@@ -1223,7 +1262,7 @@ function checkForAchievementsAndLore() {
   let progress = player.progress.slice(0, 5);
   let devs = player.devs.slice(0, 5);
   let loreFarthest = Math.max(
-    Math.max.apply(null, progress), player.stats.recordDevelopment['']);
+    Math.max.apply(null, progress), player.stats.recordDevelopment.ascension['']);
   giveLore(0);
   if (devs.some(i => i !== 0)) {
     giveAchievement(0);
@@ -1269,13 +1308,13 @@ function checkForAchievementsAndLore() {
   if (player.experience.every(i => i.neq(0))) {
     giveAchievement(9);
   }
-  if (player.stats.recordDevelopment[''] >= 43200) {
+  if (loreFarthest >= 43200) {
     giveLore(13);
   }
   if (player.upgrades.every(i => i.every(j => j))) {
     giveAchievement(12);
   }
-  if (player.stats.recordDevelopment[''] >= 86400) {
+  if (player.stats.recordDevelopment.ever[''] >= 86400) {
     giveAchievement(15);
   }
   let challenges = sortedChallenges();
@@ -1316,15 +1355,27 @@ function checkForAchievementsAndLore() {
   if (player.achievements.list.every(x => x)) {
     giveLore(29);
   }
-  if (player.lore.length >= LORE_LIST.length - 3) {
-    for (let i = 3; i > 0; i--) {
+  if (player.lore.length >= LORE_LIST.length - 4) {
+    for (let i = 4; i > 0; i--) {
       giveLore(LORE_LIST.length - i);
     }
   }
 }
 
+function firstLoreMessage() {
+  if (player.ascensions === 0) {
+    return 'You just got a game idea and you\'re excited to start working on it. It seems simple enough that it should only take 5 hours to finish.';
+  } else if (player.antichallengesCompleted.length === 0) {
+    return 'You have a game idea and you\'re excited to start working on it. It seems simple enough that it should only take 5 hours to finish. You feel like the idea came from somewhere, but you\'re not sure where.';
+  } else if (player.antichallengesCompleted.length < 9) {
+    return 'You have a game idea and you\'re excited to start working on it. It seems simple enough that it should only take 5 hours to finish. Actually, this game idea, along with a lot of other memories, feels like it came from a past life or something.';
+  } else if (player.antichallengesCompleted.length === 9) {
+    return 'You remember perfectly how you ascended from another universe to this one. You start working on the game idea again, making some tweaks so that it\'s even more fun. Taking into account both these tweaks and your experience from past universes, you expect to be done in 5 hours.'
+  }
+}
+
 const LORE_LIST = [
-  'You just got a game idea and you\'re excited to start working on it. It seems simple enough that it should only take 5 hours to finish.',
+  firstLoreMessage,
   'You started working. Everything seems fairly reasonable so far.',
   'Weird, you\'ve only made two minutes of progress on what you\'re working on, but you think it\'s been a bit longer than that.',
   'The oddly-slow progress thing is still happening. Is time itself bending? Probably not: it\'s just that you had unrealistic expectations. You hope this doesn\'t get worse.',
@@ -1354,7 +1405,8 @@ const LORE_LIST = [
   'There are a lot of people working on this game. You decide to not think about whether anyone is actually playing it.',
   'Well, you\'ve done it. You\'ve made so many great updates that your game is recognized as the best game in the world. You still feel like you could add more to it, but you\'re not sure what the point would be.',
   'Not only is your game the best ever, but you\'ve done everything that could be expected of you in its development, even some things that were considered unrelated (e.g., that "dilation" was apparently an important new substance in physics). You\'re not really sure what to do next.',
-  'You feel something in your mind saying "Yeah, that\'s it, you\'ve reached the end of the game." You\'re not sure what that means; you still have more ideas for your game. "You can either keep going (but nothing really new happens) or hard reset." Huh? "In any case, congratulations, thanks for playing, and I hope you enjoyed."',
+  'You feel something in your mind saying "You can ascend." You realize that yes, you can ascend, entering a new universe and losing almost all your memories of this one. Since life here is now fairly boring, you decide to do that some time soon. However, you wait a while just to see what happens if you don\'t.',
+  'The voice in your mind says "If for some weird reason you don\'t want to ascend, you can either keep going without ascending, or hard reset." Huh? "In any case, I hope you\'re enjoying the game. By the way, there\'s no more lore after this."',
   'Not that long later, you meet someone who looks surprised to see you. She says she just finished your game and wonders what she can do next. You say, "Well of course you can keep going or hard reset" (and you suddenly understand the voice in your mind a bit better) "but you can also make your own game. Maybe it will catch on."',
   'As you say this, you remember how far you\'ve gone in your quest to make a game, and how far you\'ve come since you\'ve started. You also recall how, in playing, the person you\'re talking to must have gone through a similar journey. You hear the voice in your mind say "So did I" [not really, making this game was rather easy, but please ignore this bracketed part OK?], and you smile.'
 ]
@@ -1367,7 +1419,7 @@ function updateTabButtonDisplay () {
   } else {
     document.getElementById('update-button').style.display = 'none';
   }
-  if (player.stats.recordDevelopment[''] >= 86400) {
+  if (anyChallengesUnlocked()) {
     document.getElementById('challenges-button').style.display = '';
   } else {
     document.getElementById('challenges-button').style.display = 'none';
@@ -1400,7 +1452,7 @@ function updateChallengeDisplay () {
       document.getElementById(i + '-td').style.display = 'none';
     }
     document.getElementById(i + '-goal').innerHTML = toTime(getChallengeGoal(i));
-    document.getElementById('record-development-in-' + i).innerHTML = toTime(player.stats.recordDevelopment[i]);
+    document.getElementById('record-development-in-' + i).innerHTML = toTime(player.stats.recordDevelopment.ascension[i]);
     document.getElementById(i + '-reward-description').innerHTML = describeChallengeReward(i);
     document.getElementById(i + '-completed-description').innerHTML = describeChallengeCompleted(i);
   }
@@ -1425,7 +1477,7 @@ function updateAchievementDisplay() {
 }
 
 function updateLoreDisplay() {
-  let loreShown = LORE_LIST.map((lore, i) => (player.lore.indexOf(i) === -1) ? '' : lore);
+  let loreShown = LORE_LIST.map((lore, i) => (player.lore.indexOf(i) === -1) ? '' : ((typeof lore === 'function') ? lore() : lore));
   while (loreShown[loreShown.length - 1] === '') {
     loreShown.pop();
   }
@@ -1449,6 +1501,15 @@ function confirmToggleHardMode() {
 function toggleHardMode() {
   if (confirmToggleHardMode()) {
     player.options.hardMode = !player.options.hardMode;
+  }
+}
+
+function getRecordDevelopmentDescription() {
+  let records = player.stats.recordDevelopment
+  if (player.ascensions > 0) {
+    return toTime(records.ascension['']) + ' record development this ascension, ' + toTime(records.ever['']) + ' record development ever';
+  } else {
+    return toTime(records.ever['']) + ' record development ever';
   }
 }
 
@@ -1524,7 +1585,7 @@ function updateDisplay () {
     document.getElementById('auto-help-span').style.display = 'none';
   }
   updateChallengeDisplay();
-  document.getElementById('record-development').innerHTML = toTime(player.stats.recordDevelopment['']);
+  document.getElementById('record-development-description').innerHTML = getRecordDevelopmentDescription();
   document.getElementById('unassigned-devs').innerHTML = format(getUnassignedDevs());
   document.getElementById('progress-milestones').innerHTML = player.milestones;
   document.getElementById('progress-milestones-effect').innerHTML = getMilestoneEffect();
