@@ -154,6 +154,14 @@ function fixPlayer () {
       ever: h2
     }
   }
+  if (!('ascensions' in player)) {
+    player.ascensions = 0;
+    player.ascensionPoints = new Decimal(0);
+    player.antichallengesCompleted = [];
+    player.ascensionUpgrades = [];
+    player.ascensionQoL = [];
+    player.gameTimeInAscension = 0;
+  }
 }
 
 function convertSaveToDecimal () {
@@ -310,6 +318,12 @@ let initialPlayer = {
   },
   lore: [],
   dilation: 0,
+  ascensions: 0,
+  ascensionPoints: new Decimal(0),
+  antichallengesCompleted: [],
+  ascensionUpgrades: [],
+  ascensionQoL: [],
+  gameTimeInAscension: 0,
   lastUpdate: Date.now()
 }
 
@@ -525,6 +539,10 @@ function checkForAutoPrestige() {
   }
 }
 
+function toggleRequireMaxToUpdate() {
+  player.auto.update.requireMax = !player.auto.update.requireMax;
+}
+
 function checkForAutoUpdate() {
   let table = {
     'development': x => player.progress[0] >= x.toNumber(),
@@ -532,7 +550,8 @@ function checkForAutoUpdate() {
     'X times last update points': x => player.stats.last.updatePointGain >= x.toNumber(),
     'real seconds since last update': x => Date.now() - player.stats.last.update >= x.toNumber() * 1000
   }
-  if (table[player.auto.update.setting](player.auto.update.value)) {
+  if (table[player.auto.update.setting](player.auto.update.value)
+  && (!player.auto.update.requireMax || player.progress[0] === player.stats.recordDevelopment.update)) {
     update(true);
   }
 }
@@ -1089,7 +1108,8 @@ function getPowerGainPerExperience() {
   if (player.currentChallenge === 'powerless') {
     return new Decimal(0);
   } else {
-    return Decimal.max(0, (1 + Math.log2(player.updates)) / 100).times(challengeReward('powerless'));
+    // At least one update so that you can generate power pre-update if you have experience.
+    return Decimal.max(0, (1 + Math.log2(Math.max(1, player.updates))) / 100).times(challengeReward('powerless'));
   }
 }
 
@@ -1171,6 +1191,7 @@ function fillInAutoOther () {
     document.getElementById('auto-' + AUTO_LIST[i] + '-value').value = player.auto[AUTO_LIST[i]].displayValue;
     document.getElementById('auto-' + AUTO_LIST[i] + '-on').checked = player.auto[AUTO_LIST[i]].on;
   }
+  document.getElementById('auto-update-require-max').checked = player.auto.update.requireMax;
   document.getElementById('auto-prestige-initial').innerHTML = 'meta-' + ['efficiency', 'refactoring'][player.auto.prestige.initial - 5];
   document.getElementById('auto-prestige-alternate').checked = player.auto.prestige.alternate;
 }
