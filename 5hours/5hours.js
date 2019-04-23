@@ -4,16 +4,28 @@ function loadGame (s, offlineProgress) {
   if (offlineProgress === null) {
     offlineProgress = player.options.offlineProgress;
   }
-  if (!offlineProgress) {
-    player.lastUpdate = Date.now();
-  }
   fixPlayer();
-  convertSaveToDecimal()
+  convertSaveToDecimal();
+  // We can do this after fixing Decimal.
+  let now = Date.now();
+  if (offlineProgress) {
+    simulateTime((now - player.lastUpdate) / 1000);
+  }
+  player.lastUpdate = now;
   saveGame();
   fillInInputs();
   updateTabDisplay();
   updateAchievementDisplay();
   updateLoreDisplay();
+}
+
+function simulateTime(totalDiff) {
+  let baseTickLength = 0.05;
+  let ticks = Math.ceil(Math.min(totalDiff / baseTickLength, 1000));
+  let tickLength = totalDiff / ticks;
+  for (let i = 0; i < ticks; i++) {
+    gameCode(tickLength);
+  }
 }
 
 function fixPlayer () {
@@ -509,9 +521,11 @@ function checkForAutoUpdate() {
   }
 }
 
-function gameCode() {
+function gameCode(diff) {
   let now = Date.now();
-  diff = (now - player.lastUpdate) / 1000;
+  if (diff === undefined) {
+    diff = (now - player.lastUpdate) / 1000;
+  }
   if (isNaN(diff)) {
     diff = 0;
   }
