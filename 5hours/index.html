@@ -339,6 +339,16 @@
     <span>Next theorems at <span id="next-theorem-ascension-points">0</span> ascension point<span id="next-theorem-ascension-points-plural"></span>, <span id="next-theorem-ascensions">0</span> ascension<span id="next-theorem-ascensions-plural"></span>, and <span id="next-theorem-ascension-tab-record-development-ever"></span> record development ever.</span>
     <br/>
     <span>You have <span id="theorems">0</span> total theorem<span id="theorems-plural"></span> (<span id="spent-theorems">0</span> spent, <span id="unspent-theorems">0</span> unspent).</span>
+    <br/>
+    <button style="height: 60px; width: 350px;" onclick="buyStudy(0)">
+      Each milestone multiplies efficiency and meta-efficiency.<br/>Effect: <span id="study-0-effect"></span>x -> <span id="study-0-next-effect"></span>x<br/>Cost: <span id="study-0-cost"></span> theorems<br/>(bought <span id="study-0-bought"></span> time<span id="study-0-bought-plural">, <span id="study-0-buyable">)</span>
+    </button>
+    <button style="height: 60px; width: 350px;" onclick="buyStudy(1)">
+      Patience meter is faster based on time in this ascension.<br/>Effect: <span id="study-1-effect"></span>x -> <span id="study-1-next-effect"></span>x<br/>Cost: <span id="study-1-cost"></span> theorems<br/>(bought <span id="study-1-bought"></span> time<span id="study-1-bought-plural">, <span id="study-1-buyable">)</span>
+    </button>
+    <button style="height: 60px; width: 350px;" onclick="buyStudy(2)">
+      Dilation gain is multiplied based on total devs.<br/>Effect: <span id="study-2-effect"></span>x -> <span id="study-2-next-effect"></span>x<br/>Cost: <span id="study-2-cost"></span> theorems<br/>(bought <span id="study-2-bought"></span> time<span id="study-2-bought-plural">, <span id="study-2-buyable">)</span>
+    </button>
   </div>
   <span>Other information: <span id="record-development-this-ascension-span" style="display: none;"><span id="record-development-this-ascension"></span> record development this ascension,</span> <span id="record-development-ever"></span> record development ever,
   <span id="unassigned-devs"></span> unassigned dev<span id="unassigned-devs-plural"></span>, <span id="progress-milestones"></span> progress milestone<span id="progress-milestones-plural"></span> (giving a <span id="progress-milestones-effect"></span>x multiplier to all production), <span id="enlightened"></span> time<span id="enlightened-plural"></span> enlightened</span>

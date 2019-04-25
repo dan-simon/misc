@@ -413,7 +413,7 @@ function getTimeForPatienceMeterToMaxOut(patience, enlights) {
     return Infinity;
   } else {
     let base = getBasePatienceMeterTime(patience);
-    return base / (getUpdatePowerEffect(1) * challengeReward('impatient')) * Math.pow(getEnlightenedSlowFactor(), enlights);
+    return base / (getUpdatePowerEffect(1) * challengeReward('impatient') * getStudyEffect(1)) * Math.pow(getEnlightenedSlowFactor(), enlights);
   }
 }
 
@@ -679,7 +679,8 @@ function getEffect(i) {
     if (player.currentChallenge === 'inefficient') {
       return new Decimal(1);
     } else {
-      return dilationBoost(Decimal.pow(2, x / 1800 * getEffect(7)));
+      return dilationBoost(Decimal.pow(2, x / 1800).times(
+        Decimal.pow(getStudyEffect(0), player.milestones)).pow(getEffect(7)));
     }
   } else if (i === 2 || i === 6) {
     if (player.currentChallenge === 'ufd') {
@@ -1228,7 +1229,7 @@ function getDilationPerSecond() {
   if (player.currentChallenge !== 'logarithmic') {
     return 0;
   }
-  return Math.max(0, Math.pow(2, player.progress[0] / 3600 - 12) - 1) / 1000;
+  return Math.max(0, Math.pow(2, player.progress[0] / 3600 - 12) - 1) * getStudyEffect(2) / 1000;
 }
 
 function getDilationEffect() {
@@ -1617,6 +1618,38 @@ function getTotalTheorems() {
 
 function getSpentTheorems() {
   return player.studiesBought.map(x => x * (x + 1) / 2).reduce((a, b) => a + b);
+}
+
+function getStudyEffect(x, studyBought) {
+  if (studyBought === undefined) {
+    studyBought = player.studiesBought[x];
+  }
+  if (x === 0) {
+    return 1 + studyBought / 20;
+  } else if (x === 1) {
+    return 1 + studyBought * player.gameTimeInAscension / 86400;
+  } else if (x === 2) {
+    return Math.pow(1 + getTotalDevs() / 1e9, studyBought);
+  }
+}
+
+function buyStudy(x) {
+  if (player.ascensions === 0) {
+    // How does the player even have access to this?
+    return false;
+  }
+  if (getTotalTheorems() - getSpentTheorems() < player.studiesBought[x] + 1) {
+    return false;
+  }
+  // Check to hopefully stop players having a slow early game.
+  if (player.ascensions === 1 && x !== 0 && player.studiesBought[0] === 0 &&
+    !confirm('It is recommended to get the milestone-boosting study in your ' +
+    'second ascension, so that early game is not slow. Are you sure you want ' +
+    'to get the study you are getting?')) {
+    return false;
+  }
+  player.studiesBought[x]++;
+  return true;
 }
 
 function updateAscensionDisplay() {
