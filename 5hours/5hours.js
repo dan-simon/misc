@@ -1633,12 +1633,16 @@ function getStudyEffect(x, studyBought) {
   }
 }
 
+function getStudyCost(x) {
+  return 1 + player.studiesBought[x];
+}
+
+function canBuyStudy(x) {
+  return player.ascensions > 0 && getTotalTheorems() - getSpentTheorems() >= getStudyCost(x);
+}
+
 function buyStudy(x) {
-  if (player.ascensions === 0) {
-    // How does the player even have access to this?
-    return false;
-  }
-  if (getTotalTheorems() - getSpentTheorems() < player.studiesBought[x] + 1) {
+  if (!canBuyStudy(x)) {
     return false;
   }
   // Check to hopefully stop players having a slow early game.
@@ -1670,6 +1674,16 @@ function updateAscensionDisplay() {
   document.getElementById('spent-theorems').innerHTML = spent;
   document.getElementById('unspent-theorems').innerHTML = total - spent;
   document.getElementById('theorems-plural').innerHTML = (total === 1) ? '' : 's';
+  for (let i = 0; i <= 2; i++) {
+    document.getElementById('study-' + i + '-effect').innerHTML = format(getStudyEffect(i));
+    document.getElementById('study-' + i + '-next-effect').innerHTML = format(getStudyEffect(i, player.studiesBought[i] + 1));
+    let cost = getStudyCost(i);
+    document.getElementById('study-' + i + '-cost').innerHTML = cost;
+    document.getElementById('study-' + i + '-cost-plural').innerHTML = (cost === 1) ? '' : 's';
+    document.getElementById('study-' + i + '-bought').innerHTML = player.studiesBought[i];
+    document.getElementById('study-' + i + '-bought-plural').innerHTML = (player.studiesBought[i] === 1) ? '' : 's';
+    document.getElementById('study-' + i + '-buyable').innerHTML = canBuyStudy(i) ? 'buyable' : 'unbuyable';
+  }
 }
 
 function updateDisplay () {
