@@ -717,6 +717,10 @@ function getEnlightenedSlowFactor() {
   return 2 - Math.floor(getLogarithmicMilestones() / 3) / 10;
 }
 
+function toggle(x) {
+  player[x] = !player[x];
+}
+
 function toggleOption(x) {
   player.options[x] = !player.options[x];
 }
@@ -1069,13 +1073,19 @@ function ascendCore(now, gain) {
     }
   }
   player.gameTimeInAscension = 0;
+  let respecChanged = false;
   if (player.respecStudies) {
     player.studiesBought = [0, 0, 0];
     player.respecStudies = false;
+    respecChanged = true;
   }
   if (player.respecQoL) {
     player.QoLBought = [];
     player.respecQoL = false;
+    respecChanged = true;
+  }
+  if (respecChanged) {
+    fillInRespec();
   }
   giveAscensionAchievements(now);
   player.stats.last.ascension = now;
@@ -1245,6 +1255,7 @@ function fillInInputs() {
   fillInAutoOther();
   fillInOptions();
   fillInConfirmations();
+  fillInRespec();
 }
 
 function fillInAutoDev () {
@@ -1278,6 +1289,10 @@ function fillInConfirmations() {
   document.getElementById('enter-challenge-confirmation').checked = player.options.confirmations.enterChallenge;
   document.getElementById('exit-challenge-confirmation').checked = player.options.confirmations.exitChallenge;
   document.getElementById('ascension-confirmation').checked = player.options.confirmations.ascension;
+}
+
+function fillInRespec() {
+  document.getElementById('respec-studies').checked = player.respecStudies;
 }
 
 function toggleAutoOn(x) {
