@@ -155,7 +155,9 @@ function fixPlayer () {
     player.ascensions = 0;
     player.antiChallenges = [];
     player.studiesBought = [0, 0, 0];
+    player.respecStudies = false;
     player.QoLBought = [];
+    player.respecQoL = false;
     player.gameTimeInAscension = 0;
     player.stats.last.ascension = Date.now();
     player.stats.last.ascensionPointGain = new Decimal(0);
@@ -300,7 +302,9 @@ let initialPlayer = {
   ascensions: 0,
   antiChallenges: [],
   studiesBought: [0, 0, 0],
+  respecStudies: false,
   QoLBought: [],
+  respecQoL: false,
   gameTimeInAscension: 0,
   achievements: {
     list: [
@@ -1064,6 +1068,14 @@ function ascendCore(now, gain) {
     }
   }
   player.gameTimeInAscension = 0;
+  if (player.respecStudies) {
+    player.studiesBought = [0, 0, 0];
+    player.respecStudies = false;
+  }
+  if (player.respecQoL) {
+    player.QoLBought = [];
+    player.respecQoL = false;
+  }
   giveAscensionAchievements(now);
   player.stats.last.ascension = now;
   player.stats.last.update = now;
@@ -1575,6 +1587,58 @@ function toggleHardMode() {
   }
 }
 
+function getCurrentTheorems(x) {
+  if (x === 'ascensionPoints') {
+    return Math.max(0, 1 + Math.floor(player.ascensionPoints.log(2)));
+  } else if (x === 'ascensions') {
+    return Math.max(0, 1 + Math.floor(Math.log2(player.ascensions)));
+  } else if (x === 'recordDevelopment') {
+    return Math.max(0, Math.floor(player.stats.recordDevelopment.ever / 720000) - 4);
+  }
+}
+
+function getTheoremAt(x, n) {
+  if (x === 'ascensionPoints') {
+    return Decimal.pow(2, n - 1);
+  } else if (x === 'ascensions') {
+    return Math.pow(2, n - 1);
+  } else if (x === 'recordDevelopment') {
+    return (n + 4) * 720000;
+  }
+}
+
+function getNextTheorem(x) {
+  return getTheoremAt(x, getCurrentTheorems(x) + 1);
+}
+
+function getTotalTheorems() {
+  return getCurrentTheorems('ascensionPoints') + getCurrentTheorems('ascensions') + getCurrentTheorems('recordDevelopment');
+}
+
+function getSpentTheorems() {
+  return player.studiesBought.map(x => x * (x + 1) / 2).reduce((a, b) => a + b);
+}
+
+function updateAscensionDisplay() {
+  document.getElementById('ascension-points').innerHTML = format(player.ascensionPoints);
+  document.getElementById('ascensions').innerHTML = player.ascensions;
+  document.getElementById('ascension-tab-record-development-ever').innerHTML = toTime(player.stats.recordDevelopment.ever);
+  document.getElementById('ascension-points-plural').innerHTML = (player.ascensionPoints.eq(1)) ? '' : 's';
+  document.getElementById('ascensions-plural').innerHTML = (player.ascensions === 1) ? '' : 's';
+  let nextTheorems = [getNextTheorem('ascensionPoints'), getNextTheorem('ascensions'), getNextTheorem('recordDevelopment')];
+  document.getElementById('next-theorem-ascension-points').innerHTML = format(nextTheorems[0]);
+  document.getElementById('next-theorem-ascensions').innerHTML = nextTheorems[1];
+  document.getElementById('next-theorem-ascension-tab-record-development-ever').innerHTML = toTime(nextTheorems[2]);
+  document.getElementById('next-theorem-ascension-points-plural').innerHTML = (nextTheorems[0].eq(1)) ? '' : 's';
+  document.getElementById('next-theorem-ascensions-plural').innerHTML = (nextTheorems[1] === 1) ? '' : 's';
+  let total = getTotalTheorems();
+  let spent = getSpentTheorems();
+  document.getElementById('theorems').innerHTML = total;
+  document.getElementById('spent-theorems').innerHTML = spent;
+  document.getElementById('unspent-theorems').innerHTML = total - spent;
+  document.getElementById('theorems-plural').innerHTML = (total === 1) ? '' : 's';
+}
+
 function updateDisplay () {
   updateTabButtonDisplay();
   for (let i = 0; i <= 6; i++) {
@@ -1653,6 +1717,7 @@ function updateDisplay () {
     document.getElementById('auto-help-span').style.display = 'none';
   }
   updateChallengeDisplay();
+  updateAscensionDisplay();
   if (player.ascensions > 0) {
     document.getElementById('record-development-this-ascension-span').style.display = '';
     document.getElementById('record-development-this-ascension').innerHTML = toTime(player.stats.recordDevelopment['']);
