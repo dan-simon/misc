@@ -150,6 +150,18 @@ function fixPlayer () {
       player.auto[i].setting = AUTO_SETTINGS[i][0];
     }
   }
+  if (!('ascensions' in player)) {
+    player.ascensionPoints = new Decimal(0);
+    player.ascensions = 0;
+    player.antiChallenges = [];
+    player.studiesBought = [0, 0, 0];
+    player.QoLBought = [];
+    player.gameTimeInAscension = 0;
+    player.stats.last.ascension = Date.now();
+    player.stats.last.ascensionPointGain = new Decimal(0);
+    player.stats.recordDevelopment.ever = player.stats.recordDevelopment[''];
+    player.options.confirmations.ascension = true;
+  }
   if (!('hardMode' in player.options)) {
     player.options.hardMode = false;
   }
@@ -161,6 +173,7 @@ function convertSaveToDecimal () {
     player.experience[i] = new Decimal(player.experience[i]);
     player.power[i] = new Decimal(player.power[i]);
   }
+  player.ascensionPoints = new Decimal(player.ascensionPoints);
   for (let i = 0; i <= 2; i++) {
     player.auto[AUTO_LIST[i]].value = new Decimal(player.auto[AUTO_LIST[i]].value);
   }
@@ -249,6 +262,7 @@ let initialPlayer = {
       prestige: true,
       prestigeWithoutGain: true,
       update: true,
+      ascension: true,
       enterChallenge: true,
       exitChallenge: true
     },
@@ -269,17 +283,25 @@ let initialPlayer = {
       'unprestigious': 0,
       'slow': 0,
       'powerless': 0,
-      'upgradeless': 0
+      'upgradeless': 0,
+      'ever': 0
     },
     last: {
       enlightened: Date.now(),
       prestige: Date.now(),
       update: Date.now(),
-      update: Date.now(),
+      ascension: Date.now(),
       prestigeType: null,
-      updatePointGain: new Decimal(0)
+      updatePointGain: new Decimal(0),
+      ascensionPointGain: new Decimal(0)
     }
   },
+  ascensionPoints: new Decimal(0),
+  ascensions: 0,
+  antiChallenges: [],
+  studiesBought: [0, 0, 0],
+  QoLBought: [],
+  gameTimeInAscension: 0,
   achievements: {
     list: [
       false, false, false, false, false, false, false, false, false,
@@ -547,14 +569,21 @@ function gameCode(diff) {
   addToPatience(diff);
   addToUpdatePower(diff);
   addToDilation(diff);
+  addToAscensionTime(diff);
   checkForMilestones();
   checkForRecordDevelopement();
   checkForAchievementsAndLore();
 }
 
+function addToAscensionTime(diff) {
+  player.gameTimeInAscension += diff;
+}
+
 function checkForRecordDevelopement() {
   player.stats.recordDevelopment[''] = Math.max(
     player.progress[0], player.stats.recordDevelopment['']);
+  player.stats.recordDevelopment.ever = Math.max(
+    player.progress[0], player.stats.recordDevelopment.ever);
   if (player.currentChallenge !== '') {
     player.stats.recordDevelopment[player.currentChallenge] = Math.max(
       player.progress[0], player.stats.recordDevelopment[player.currentChallenge]);
@@ -791,6 +820,10 @@ function canUpdate() {
   return player.progress[0] >= getChallengeGoal(player.currentChallenge);
 }
 
+function canAscend() {
+  return player.updatePoints.gte(Number.MAX_VALUE);
+}
+
 const CHALLENGE_GOALS = {
   '': 18000,
   'logarithmic': 18000,
@@ -1005,6 +1038,43 @@ function updateCore(now, gain, oldChallenge) {
   player.achievements.stats.noDevsForThat = true;
 }
 
+function giveAscensionAchievements(now) {
+  // not yet implemented
+}
+
+function ascendCore(now, gain) {
+  for (let i = 0; i <= 7; i++) {
+    player.progress[i] = 0;
+    player.devs[i] = 0;
+  }
+  player.milestones = 0;
+  player.enlightened = 0;
+  player.updatePoints = new Decimal(0);
+  player.updates = 0;
+  player.upgrades = [[false, false, false], [false, false, false]];
+  for (let i = 0; i <= 3; i++) {
+    player.experience[i] = new Decimal(0);
+    player.power[i] = new Decimal(0);
+  }
+  player.currentChallenge = '';
+  player.stats.recordDevelopment[''] = 0;
+  for (let i in CHALLENGE_UNLOCKS) {
+    if (!player.antiChallenges.includes(i)) {
+      player.stats.recordDevelopment[i] = 0;
+    }
+  }
+  player.gameTimeInAscension = 0;
+  giveAscensionAchievements(now);
+  player.stats.last.ascension = now;
+  player.stats.last.update = now;
+  player.stats.last.prestige = now;
+  player.stats.last.enlightened = now;
+  player.stats.last.prestigeType = null;
+  player.stats.last.ascensionPointGain = gain;
+  player.achievements.stats.savingTokens = true;
+  player.achievements.stats.noDevsForThat = true;
+}
+
 function getUpgradeGainBase() {
   if (upgradeActive(1, 0)) {
     return challengeReward('upgradeless');
@@ -1016,6 +1086,10 @@ function getUpgradeGainBase() {
 function getUpdateGain() {
   let base = getUpgradeGainBase();
   return Decimal.floor(Decimal.pow(base, player.progress[0] / 3600 - 5));
+}
+
+function getAscensionGain() {
+  return Decimal.floor(Decimal.pow(10, player.updatePoints.log(Number.MAX_VALUE) - 1));
 }
 
 function confirmUpdate() {
@@ -1057,6 +1131,35 @@ function update(noConfirm) {
     player.currentChallenge = '';
     let now = Date.now();
     updateCore(now, gain, oldChallenge);
+  }
+}
+
+function confirmAscend() {
+  let whatWillReset = 'update points, updates, endgame/patience/headstart efficiency, update upgrades, and challenge completions, along with everything update resets,';
+  if (player.ascensions > 0) {
+    whatWillReset = whatWillReset.replace('challenge completions', 'completions of challenges where the corresponding anti-challenge is not yet completed');
+  }
+  if (player.options.confirmations.ascension) {
+    return confirm('Are you sure you want to ascend? Your ' + whatWillReset + ' will reset.');
+  } else {
+    return true;
+  }
+}
+
+function ascend(noConfirm) {
+  if (canAscend() && (noConfirm || confirmAscend())) {
+    let gain = getAscensionGain();
+    if (player.ascensions > 0) {
+      for (let i in CHALLENGE_UNLOCKS) {
+        if (player.stats.recordDevelopment[i] === 0 && !player.antiChallenges.includes(i)) {
+          player.antiChallenges.push(i)
+        }
+      }
+    }
+    player.ascensionPoints = player.ascensionPoints.plus(gain);
+    player.ascensions++;
+    let now = Date.now();
+    ascendCore(now, gain);
   }
 }
 
@@ -1161,6 +1264,7 @@ function fillInConfirmations() {
   document.getElementById('update-confirmation').checked = player.options.confirmations.update;
   document.getElementById('enter-challenge-confirmation').checked = player.options.confirmations.enterChallenge;
   document.getElementById('exit-challenge-confirmation').checked = player.options.confirmations.exitChallenge;
+  document.getElementById('ascension-confirmation').checked = player.options.confirmations.ascension;
 }
 
 function toggleAutoOn(x) {
@@ -1373,18 +1477,23 @@ const LORE_LIST = [
   'As you say this, you remember how far you\'ve gone in your quest to make a game, and how far you\'ve come since you\'ve started. You also recall how, in playing, the person you\'re talking to must have gone through a similar journey. You hear the voice in your mind say "So did I" [not really, making this game was rather easy, but please ignore this bracketed part OK?], and you smile.'
 ]
 
-const TAB_LIST = ['main', 'achievements', 'lore', 'update', 'challenges'];
+const TAB_LIST = ['main', 'achievements', 'lore', 'update', 'challenges', 'ascension'];
 
 function updateTabButtonDisplay () {
-  if (player.updates > 0) {
+  if (player.updates > 0 || player.ascensions > 0) {
     document.getElementById('update-button').style.display = '';
   } else {
     document.getElementById('update-button').style.display = 'none';
   }
-  if (player.stats.recordDevelopment[''] >= 86400) {
+  if (player.stats.recordDevelopment[''] >= 86400 || player.ascensions > 0) {
     document.getElementById('challenges-button').style.display = '';
   } else {
     document.getElementById('challenges-button').style.display = 'none';
+  }
+  if (player.stats.recordDevelopment[''] >= 86400 || player.ascensions > 0) {
+    document.getElementById('ascension-button').style.display = '';
+  } else {
+    document.getElementById('ascension-button').style.display = 'none';
   }
 }
 
@@ -1506,6 +1615,12 @@ function updateDisplay () {
   } else {
     document.getElementById('update-gain').innerHTML = 'requires ' + toTime(getChallengeGoal(player.currentChallenge)) + ' development';
   }
+  if (canAscend()) {
+    let gain = getAscensionGain();
+    document.getElementById('ascension-gain').innerHTML = 'gain ' + format(gain) + ' ascension point' + (gain.eq(1) ? '' : 's');
+  } else {
+    document.getElementById('ascension-gain').innerHTML = 'requires ' + format(Number.MAX_VALUE) + ' update points';
+  }
   document.getElementById('update-points').innerHTML = format(player.updatePoints);
   document.getElementById('updates').innerHTML = player.updates;
   document.getElementById('power-gain-per-experience').innerHTML = format(getPowerGainPerExperience());
@@ -1538,7 +1653,13 @@ function updateDisplay () {
     document.getElementById('auto-help-span').style.display = 'none';
   }
   updateChallengeDisplay();
-  document.getElementById('record-development').innerHTML = toTime(player.stats.recordDevelopment['']);
+  if (player.ascensions > 0) {
+    document.getElementById('record-development-this-ascension-span').style.display = '';
+    document.getElementById('record-development-this-ascension').innerHTML = toTime(player.stats.recordDevelopment['']);
+  } else {
+    document.getElementById('record-development-this-ascension-span').style.display = 'none';
+  }
+  document.getElementById('record-development-ever').innerHTML = toTime(player.stats.recordDevelopment.ever);
   document.getElementById('unassigned-devs').innerHTML = format(getUnassignedDevs());
   document.getElementById('progress-milestones').innerHTML = player.milestones;
   document.getElementById('progress-milestones-effect').innerHTML = getMilestoneEffect();
