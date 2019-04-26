@@ -358,8 +358,10 @@
     <br/>
     <span>Complete an anti-challenge by ascending without making any progress in that challenge. Progress in challenges for which you have completed the corresponding anti-challenge will be kept on ascension.</span>
     <br/>
-    <span>You have <span id="qol-points">0</span> QoL point<span id="qol-points-plural"></span> (<span id="spent-qol-points">0</span> spent, <span id="unspent-qol-points">0</span> unspent). You get one per completed anti-challenge.</span>
-    <table style="table-layout: fixed; width: 600px;">
+    <span>You have <span id="qol-points">0</span> QoL point<span id="qol-points-plural"></span> (<span id="spent-qol-points">0</span> spent, <span id="unspent-qol-points">0</span> unspent).</span>
+    <br/>
+    <span>You get one QoL point per completed anti-challenge. Each upgrade below costs one QoL point.</span>
+    <table style="table-layout: fixed; width: 900px;">
       <tr>
         <td>Anti-Logarithmic: <span id="anti-challenge-status-logarithmic">&#x2718;</span></td>
         <td>Anti-Inefficient: <span id="anti-challenge-status-inefficient">&#x2718;</span></td>
@@ -376,6 +378,24 @@
         <td>Anti-Upgradeless: <span id="anti-challenge-status-upgradeless">&#x2718;</span></td>
       </tr>
     </table>
+    <table style="table-layout: fixed; width: 900px;">
+      <tr>
+        <td><button style="height: 80px; width: 280px;" onclick="buyQoL(0)">Start ascensions with 1 endgame experience and 1 patience experience, and keep your headstart experience on ascension.<br/><span id="qol-0-bought"></span></button></td>
+        <td><button style="height: 80px; width: 280px;" onclick="buyQoL(1)">Start ascensions with all update upgrades.<br/><span id="qol-1-bought"></span></button></td>
+        <td><button style="height: 80px; width: 280px;" onclick="buyQoL(2)">Start ascensions with half a day in current ascension.<br/><span id="qol-2-bought"></span></button></td>
+      </tr>
+      <tr>
+        <td><button style="height: 80px; width: 280px;" onclick="buyQoL(3)">Ascension autobuyer<br/><span id="qol-3-bought"></span></button></td>
+        <td><button style="height: 80px; width: 280px;" onclick="buyQoL(4)">Upgrade point auto-assigner<br/><span id="qol-4-bought"></span></button></td>
+        <td><button style="height: 80px; width: 280px;" onclick="buyQoL(5)">Your meta-efficiency and meta-refactoring approach your efficiency and refactoring by 0.1% per second.<br/><span id="qol-5-bought"></span></button></td>
+      </tr>
+      <tr>
+        <td><button style="height: 80px; width: 280px;" onclick="buyQoL(6)">Produce dilation based on record Logarithmic progress, even when not in Logarithmic.<br/><span id="qol-6-bought"></span></button></td>
+        <td><button style="height: 80px; width: 280px;" onclick="buyQoL(7)">Enlightenments divide your patience meter by 2 rather than resetting it to 0.<br/><span id="qol-7-bought"></span></button></td>
+        <td><button style="height: 80px; width: 280px;" onclick="buyQoL(8)">Devs always work on everything with 1% effectiveness, in addition to whatever they're working on.<br/><span id="qol-8-bought"></span></button></td>
+      </tr>
+    </table>
+    <span>Respec QoL points on next ascension: <input id="respec-qol" onclick="toggle('respecQoL')" type="checkbox"></input></span>
   </div>
   <span>Other information: <span id="record-development-this-ascension-span" style="display: none;"><span id="record-development-this-ascension"></span> record development this ascension,</span> <span id="record-development-ever"></span> record development ever,
   <span id="unassigned-devs"></span> unassigned dev<span id="unassigned-devs-plural"></span>, <span id="progress-milestones"></span> progress milestone<span id="progress-milestones-plural"></span> (giving a <span id="progress-milestones-effect"></span>x multiplier to all production), <span id="enlightened"></span> time<span id="enlightened-plural"></span> enlightened</span>

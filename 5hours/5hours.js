@@ -159,6 +159,7 @@ function fixPlayer () {
     player.QoLBought = [];
     player.respecQoL = false;
     player.gameTimeInAscension = 0;
+    player.lastAscensionHeadstartExperience = 0;
     player.stats.last.ascension = Date.now();
     player.stats.last.ascensionPointGain = new Decimal(0);
     player.stats.recordDevelopment.ever = player.stats.recordDevelopment[''];
@@ -306,6 +307,7 @@ let initialPlayer = {
   QoLBought: [],
   respecQoL: false,
   gameTimeInAscension: 0,
+  lastAscensionHeadstartExperience: 0,
   achievements: {
     list: [
       false, false, false, false, false, false, false, false, false,
@@ -1066,6 +1068,7 @@ function ascendCore(now, gain) {
   player.updatePoints = new Decimal(0);
   player.updates = 0;
   player.upgrades = [[false, false, false], [false, false, false]];
+  player.lastAscensionHeadstartExperience = player.experience[2];
   for (let i = 0; i <= 3; i++) {
     player.experience[i] = new Decimal(0);
     player.power[i] = new Decimal(0);
@@ -1091,6 +1094,11 @@ function ascendCore(now, gain) {
   }
   if (respecChanged) {
     fillInRespec();
+  }
+  for (let i = 0; i <= 2; i++) {
+    if (player.QoLBought.includes(i)) {
+      giveQoLStartingBenefit(i);
+    }
   }
   giveAscensionAchievements(now);
   player.stats.last.ascension = now;
@@ -1298,6 +1306,7 @@ function fillInConfirmations() {
 
 function fillInRespec() {
   document.getElementById('respec-studies').checked = player.respecStudies;
+  document.getElementById('respec-qol').checked = player.respecQoL;
 }
 
 function toggleAutoOn(x) {
@@ -1686,6 +1695,35 @@ function getSpentQoLPoints() {
   return player.QoLBought.length;
 }
 
+function canBuyQoL(i) {
+  return player.ascensions > 0 && getTotalQoLPoints() - getSpentQoLPoints() >= 1 && !player.QoLBought.includes(i);
+}
+
+function giveQoLStartingBenefit(i) {
+  if (i === 0) {
+    player.experience[0] = player.experience[0].plus(1);
+    player.experience[1] = player.experience[1].plus(1);
+    player.experience[2] = player.experience[2].plus(
+      player.lastAscensionHeadstartExperience);
+  }
+  if (i === 1) {
+    player.upgrades = [[true, true, true], [true, true, true]];
+  }
+  if (i === 2) {
+    player.gameTimeInAscension += 43200;
+  }
+}
+
+function buyQoL(i) {
+  if (!canBuyQoL(i)) {
+    return false;
+  }
+  player.QoLBought.push(i);
+  if (i < 3) {
+    giveQoLStartingBenefit(i);
+  }
+}
+
 function updateAscensionDisplay() {
   document.getElementById('ascension-points').innerHTML = format(player.ascensionPoints);
   document.getElementById('ascensions').innerHTML = player.ascensions;
@@ -1730,6 +1768,13 @@ function updateAntiChallengesDisplay() {
       document.getElementById('anti-challenge-status-' + i).innerHTML = '&#x2714;';
     } else {
       document.getElementById('anti-challenge-status-' + i).innerHTML = '&#x2718;';
+    }
+  }
+  for (let i = 0; i < 9; i++) {
+    if (player.QoLBought.includes(i)) {
+      document.getElementById('qol-' + i + '-bought').innerHTML = '(bought)'
+    } else {
+      document.getElementById('qol-' + i + '-bought').innerHTML = '';
     }
   }
 }
