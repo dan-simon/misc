@@ -80,6 +80,8 @@
     <br/>
     <span id="auto-update-span" style="display: none;">Auto-update: current setting: <button id="auto-update-setting" onclick="nextAutoSetting('update')"></button> value: <input id="auto-update-value" type="text" onchange="updateAutoValue('update')"></input>, on: <input id="auto-update-on" onclick="toggleAutoOn('update')" type="checkbox"></input></span>
     <br/>
+    <span id="auto-ascension-span" style="display: none;">Auto-ascension: current setting: <button id="auto-ascension-setting" onclick="nextAutoSetting('ascension')"></button> value: <input id="auto-ascension-value" type="text" onchange="updateAutoValue('ascension')"></input>, on: <input id="auto-ascension-on" onclick="toggleAutoOn('ascension')" type="checkbox"></input></span>
+    <br/>
     <span id="auto-help-span" style="display: none;">You can input an amount of time as a number of seconds, or in 12:34:56 format.</span>
   </div>
   <div id="achievements-div" style="display: none;">
@@ -181,6 +183,9 @@
         <td><button style="height: 60px; width: 300px;" onclick="buyUpdateUpgrade(1, 2)">All your devs act as working on development, in addition to whatever they're working on.<br/>Cost: <span id="up-1-2-cost"></span> headstart experience<span id="up-1-2-bought"></span></button></td>
       </tr>
     </table>
+    <span id="auto-assign-span" style="display: none;">Auto-assign: current cycle: <input id="auto-assign-list" type="text" onchange="updateAutoAssignList()"></input>, on: <input id="auto-assign-on" onclick="toggleAutoOn('assign')" type="checkbox"></input></span>
+    <br/>
+    <span id="auto-assign-help-span" style="display: none;">Auto-assign will cycle through assigning upgrade points to the given types of experience if any are unspent, with "none" being none. For example, "endgame, patience, headstart, none" would assign to endgame first update, patience second update, then headstart, then none, then endgame, etc.</span>
   </div>
   <div id="challenges-div" style="display: none;">
     <span>You have <span id="total-challenge-completions"></span> total challenge completions. You are currently in <span id="current-challenge"></span>. <span id="next-challenge-unlock">Next challenge unlocks eventually.</span> <button onclick="exitChallenge()">Exit current challenge</button></span>

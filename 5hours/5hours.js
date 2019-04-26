@@ -175,6 +175,17 @@ function fixPlayer () {
     player.stats.last.ascensionPointGain = new Decimal(0);
     player.stats.recordDevelopment.ever = player.stats.recordDevelopment[''];
     player.options.confirmations.ascension = true;
+    player.auto.ascension = {
+      setting: 'update points',
+      value: new Decimal(0),
+      displayValue: '0',
+      on: false
+    }
+    player.auto.assign = {
+      list: [],
+      index: 0,
+      on: false
+    }
   }
   if (!('hardMode' in player.options)) {
     player.options.hardMode = false;
@@ -188,7 +199,7 @@ function convertSaveToDecimal () {
     player.power[i] = new Decimal(player.power[i]);
   }
   player.ascensionPoints = new Decimal(player.ascensionPoints);
-  for (let i = 0; i <= 2; i++) {
+  for (let i = 0; i <= 3; i++) {
     player.auto[AUTO_LIST[i]].value = new Decimal(player.auto[AUTO_LIST[i]].value);
   }
   player.savedHeadstartExperience = new Decimal(player.savedHeadstartExperience);
@@ -269,6 +280,17 @@ let initialPlayer = {
       setting: 'development',
       value: new Decimal(0),
       displayValue: '0',
+      on: false
+    },
+    ascension: {
+      setting: 'update points',
+      value: new Decimal(0),
+      displayValue: '0',
+      on: false
+    },
+    assign: {
+      list: [],
+      index: 0,
       on: false
     }
   },
@@ -519,7 +541,13 @@ let AUTO_SETTINGS = {
     'update points',
     'X times last update points',
     'real seconds since last update'
-  ]
+  ],
+  'ascension': [
+    'update points',
+    'ascension points',
+    'X times last ascension points',
+    'real seconds since last ascension'
+  ],
 }
 
 function shouldEnlightened(x) {
@@ -578,11 +606,37 @@ function checkForAutoUpdate() {
   let table = {
     'development': x => player.progress[0] >= x.toNumber(),
     'update points': x => getUpdateGain().gte(x),
-    'X times last update points': x => player.stats.last.updatePointGain >= x.toNumber(),
+    'X times last update points': x => getUpdateGain.gte(player.stats.last.updatePointGain.times(x)),
     'real seconds since last update': x => Date.now() - player.stats.last.update >= x.toNumber() * 1000
   }
   if (table[player.auto.update.setting](player.auto.update.value)) {
     update(true);
+  }
+}
+
+function checkForAutoAscension() {
+  let table = {
+    'update points': x => player.updatePoints.gte(x),
+    'ascension points': x => getAscensionGain().gte(x),
+    'X times last ascension points': x => getAscensionGain().gte(player.stats.last.ascensionPointGain.times(x)),
+    'real seconds since last ascension': x => Date.now() - player.stats.last.ascension >= x.toNumber() * 1000
+  }
+  if (table[player.auto.ascension.setting](player.auto.ascension.value)) {
+    ascend(true);
+  }
+}
+
+function checkForAutoAssign() {
+  if (player.upgradePoints.gt(0)) {
+    if (player.auto.assign.index >= player.auto.assign.list.length) {
+      player.auto.assign.index = 0;
+    }
+    let type = player.auto.assign.list[player.auto.assign.index];
+    let types = ['endgame', 'patience', 'headstart'];
+    if (types.indexOf(type) !== -1) {
+      assignAll(types.indexOf(type));
+    }
+    player.auto.assign.index++;
   }
 }
 
@@ -599,6 +653,9 @@ function gameCode(diff) {
   if (upgradeActive(0, 2) && player.auto.dev.on) {
     autoAssignDevs();
   }
+  if (hasAuto('ascension') && player.auto.ascension.on) {
+    checkForAutoAscension();
+  }
   if (hasAuto('update') && player.auto.update.on) {
     checkForAutoUpdate();
   }
@@ -607,6 +664,9 @@ function gameCode(diff) {
   }
   if (hasAuto('enlightened') && player.auto.enlightened.on) {
     checkForAutoEnlightened();
+  }
+  if (hasAuto('assign') && player.auto.assign.on) {
+    checkForAutoAssign();
   }
   addToProgress(diff);
   addToPatience(diff);
@@ -1151,7 +1211,9 @@ function ascendCore(now, gain) {
   player.stats.last.prestige = now;
   player.stats.last.enlightened = now;
   player.stats.last.prestigeType = null;
+  player.stats.last.updatePointGain = new Decimal(0);
   player.stats.last.ascensionPointGain = gain;
+  player.auto.assign.index = 0;
   player.achievements.stats.savingTokens = true;
   player.achievements.stats.noDevsForThat = true;
 }
@@ -1345,16 +1407,18 @@ function fillInAutoDev () {
   document.getElementById('auto-dev-on').checked = player.auto.dev.on;
 }
 
-let AUTO_LIST = ['enlightened', 'prestige', 'update'];
+let AUTO_LIST = ['enlightened', 'prestige', 'update', 'ascension'];
 
 function fillInAutoOther () {
-  for (let i = 0; i <= 2; i++) {
+  for (let i = 0; i <= 3; i++) {
     document.getElementById('auto-' + AUTO_LIST[i] + '-setting').innerHTML = player.auto[AUTO_LIST[i]].setting;
     document.getElementById('auto-' + AUTO_LIST[i] + '-value').value = player.auto[AUTO_LIST[i]].displayValue;
     document.getElementById('auto-' + AUTO_LIST[i] + '-on').checked = player.auto[AUTO_LIST[i]].on;
   }
   document.getElementById('auto-prestige-initial').innerHTML = 'meta-' + ['efficiency', 'refactoring'][player.auto.prestige.initial - 5];
   document.getElementById('auto-prestige-alternate').checked = player.auto.prestige.alternate;
+  document.getElementById('auto-assign-list').value = player.auto.assign.list.join(', ');
+  document.getElementById('auto-assign-on').value = player.auto.assign.on;
 }
 
 function fillInOptions() {
@@ -1409,6 +1473,11 @@ function updateAutoValue(x) {
   player.auto[x].displayValue = value;
 }
 
+function updateAutoAssignList() {
+  let value = document.getElementById('auto-assign-list').value;
+  player.auto.assign.value = value.toLowerCase().split(/[^a-z]+/).filter(i => i);
+}
+
 function toggleAutoPrestigeInitial() {
   player.auto.prestige.initial = 5 + player.auto.prestige.initial % 2;
   document.getElementById('auto-prestige-initial').innerHTML = 'meta-' + ['efficiency', 'refactoring'][player.auto.prestige.initial - 5];
@@ -1419,6 +1488,12 @@ function toggleAutoPrestigeAlternate() {
 }
 
 function hasAuto(x) {
+  if (x === 'ascension') {
+    return hasQoL(3);
+  }
+  if (x === 'assign') {
+    return hasQoL(4);
+  }
   let table = {
     'enlightened': 2,
     'prestige': 4,
@@ -1911,17 +1986,24 @@ function updateDisplay () {
     document.getElementById('auto-dev-row').style.display = 'none';
     document.getElementById('auto-dev-span').style.display = 'none';
   }
-  for (let i = 0; i <= 2; i++) {
+  for (let i = 0; i <= 3; i++) {
     if (hasAuto(AUTO_LIST[i])) {
       document.getElementById('auto-' + AUTO_LIST[i] + '-span').style.display = '';
     } else {
       document.getElementById('auto-' + AUTO_LIST[i] + '-span').style.display = 'none';
     }
   }
-  if (hasAuto(AUTO_LIST[0])) {
+  if (AUTO_LIST.some(hasAuto)) {
     document.getElementById('auto-help-span').style.display = '';
   } else {
     document.getElementById('auto-help-span').style.display = 'none';
+  }
+  if (hasAuto('assign')) {
+    document.getElementById('auto-assign-span').style.display = '';
+    document.getElementById('auto-assign-help-span').style.display = '';
+  } else {
+    document.getElementById('auto-assign-span').style.display = 'none';
+    document.getElementById('auto-assign-help-span').style.display = 'none';
   }
   if (player.tab === 'challenges') {
     updateChallengesDisplay();
