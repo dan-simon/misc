@@ -1347,6 +1347,7 @@ function ascend(noConfirm) {
     player.ascensionPoints = player.ascensionPoints.plus(gain);
     player.ascensions++;
     let now = Date.now();
+    let dilation = player.dilation;
     ascendCore(now, gain, dilation);
   }
 }
@@ -1660,7 +1661,9 @@ function checkForAchievementsAndLore() {
     giveAchievement(26);
     giveLore(28);
   }
-  if (player.achievements.list.slice(0, 27).every(x => x)) {
+  // Not redundant because of ascension.
+  if (player.updatePoints.gte(Number.MAX_VALUE) &&
+  player.achievements.list.slice(0, 27).every(x => x)) {
     giveLore(29);
   }
   if (player.lore.length >= LORE_LIST.length - 4) {
