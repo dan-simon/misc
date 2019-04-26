@@ -153,10 +153,21 @@ function fixPlayer () {
   if (!('ascensions' in player)) {
     player.ascensionPoints = new Decimal(0);
     player.ascensions = 0;
-    player.antiChallenges = [];
+    player.antiChallenges = {
+      'logarithmic': false,
+      'inefficient': false,
+      'ufd': false,
+      'lonely': false,
+      'impatient': false,
+      'unprestigious': false,
+      'slow': false,
+      'powerless': false,
+      'upgradeless': false
+    };
     player.studiesBought = [0, 0, 0];
     player.respecStudies = false;
-    player.QoLBought = [];
+    player.QoLBought = [
+      false, false, false, false, false, false, false, false, false];
     player.respecQoL = false;
     player.gameTimeInAscension = 0;
     player.lastAscensionHeadstartExperience = 0;
@@ -301,10 +312,20 @@ let initialPlayer = {
   },
   ascensionPoints: new Decimal(0),
   ascensions: 0,
-  antiChallenges: [],
+  antiChallenges: {
+    'logarithmic': false,
+    'inefficient': false,
+    'ufd': false,
+    'lonely': false,
+    'impatient': false,
+    'unprestigious': false,
+    'slow': false,
+    'powerless': false,
+    'upgradeless': false
+  },
   studiesBought: [0, 0, 0],
   respecStudies: false,
-  QoLBought: [],
+  QoLBought: [false, false, false, false, false, false, false, false, false],
   respecQoL: false,
   gameTimeInAscension: 0,
   lastAscensionHeadstartExperience: 0,
@@ -374,11 +395,14 @@ function getScaling() {
 }
 
 function devsWorkingOn(i) {
-  if (i === 0 && upgradeActive(1, 2)) {
-    return player.devs[i] + getTotalDevs();
-  } else {
-    return player.devs[i];
+  let ret = player.devs[i];
+  if (upgradeActive(1, 2)) {
+    ret += getTotalDevs();
   }
+  if (hasQoL(8)) {
+    ret += getTotalDevs() / 100;
+  }
+  return ret;
 }
 
 function maybeLog(x) {
@@ -401,8 +425,15 @@ function getTotalProductionMultiplier() {
 function addToProgress(diff) {
   let perDev = new Decimal(diff).times(getTotalProductionMultiplier());
   let scaling = getScaling();
+  let newValueFromPrestige = getNewValueFromPrestige();
   for (let i = 0; i <= 4; i++) {
     player.progress[i] = addProgress(player.progress[i], perDev.times(devsWorkingOn(i)), scaling);
+  }
+  if (hasQoL(5)) {
+    for (let i = 5; i <= 6; i++) {
+      let change = (newValueFromPrestige - player.progress[i]) * (1 - Math.exp(-diff / 1000));
+      player.progress[i] += Math.max(0, change);
+    }
   }
 }
 
@@ -493,8 +524,9 @@ let AUTO_SETTINGS = {
 function shouldEnlightened(x) {
   let realSecondsAlready = (Date.now() - player.stats.last.enlightened) / 1000;
   let gameSecondsRemaining = Math.max(0, realTimeToGameTime(x - realSecondsAlready));
+  let newInitialProgress = getPatienceMeterValueAfterEnlightened();
   let valueIfNot = getPatienceMeterNewValue(player.progress[7], gameSecondsRemaining, player.progress[4], player.enlightened);
-  let valueIfSo = getPatienceMeterNewValue(0, gameSecondsRemaining, player.progress[4], player.enlightened + 1);
+  let valueIfSo = getPatienceMeterNewValue(newInitialProgress, gameSecondsRemaining, player.progress[4], player.enlightened + 1);
   let effectIfNot = getPatienceMeterEffect(valueIfNot, getTotalEnlightened());
   let effectIfSo = getPatienceMeterEffect(valueIfSo, getTotalEnlightened() + 1);
   return effectIfSo >= effectIfNot;
@@ -507,7 +539,8 @@ function checkForAutoEnlightened() {
     'time to max out patience meter': x => x >= getEffect(4),
     'optimal for X-second-long prestige': x => shouldEnlightened(x)
   }
-  if (table[player.auto.enlightened.setting](player.auto.enlightened.value.toNumber())) {
+  // With QoL it's possible to enlighten more than once.
+  while (table[player.auto.enlightened.setting](player.auto.enlightened.value.toNumber())) {
     enlightened();
   }
 }
@@ -528,8 +561,8 @@ function checkForAutoPrestige() {
   let type = getCurrentAutoPrestigeType();
   let table = {
     'development': x => player.progress[0] >= x,
-    '+X time improvement over current': x => newValueFromPrestige() - player.progress[type] >= x,
-    '+X time improvement over better': x => newValueFromPrestige() - getBetterPrestigeValue() >= x,
+    '+X time improvement over current': x => getNewValueFromPrestige() - player.progress[type] >= x,
+    '+X time improvement over better': x => getNewValueFromPrestige() - getBetterPrestigeValue() >= x,
     'real seconds since last prestige': x => Date.now() - player.stats.last.prestige >= x * 1000
   }
   if (table[player.auto.prestige.setting](player.auto.prestige.value.toNumber())) {
@@ -731,12 +764,12 @@ function toggleConfirmation(x) {
   player.options.confirmations[x] = !player.options.confirmations[x];
 }
 
-function newValueFromPrestige() {
+function getNewValueFromPrestige() {
   return player.progress[0] + challengeReward('unprestigious');
 }
 
 function canPrestigeWithoutGain(i) {
-  return canPrestige(i) && player.progress[i] >= newValueFromPrestige();
+  return canPrestige(i) && player.progress[i] >= getNewValueFromPrestige();
 }
 
 function canPrestige(i) {
@@ -779,15 +812,23 @@ function givePrestigeAchievementsAndLore(i, oldProgress) {
 function prestige(i, noConfirm) {
   if (canPrestige(i) && (noConfirm || confirmPrestige(i))) {
     let oldProgress = player.progress[i];
-    player.progress[i] = Math.max(player.progress[i], newValueFromPrestige());
+    player.progress[i] = Math.max(player.progress[i], getNewValueFromPrestige());
     let now = Date.now();
     prestigeCore(i, now, oldProgress);
   }
 }
 
+function getPatienceMeterValueAfterEnlightened() {
+  if (hasQoL(7)) {
+    return player.progress[7] / 2;
+  } else {
+    return 0;
+  }
+}
+
 function enlightened() {
   if (player.progress[7] >= 1) {
-    player.progress[7] = 0;
+    player.progress[7] = getPatienceMeterValueAfterEnlightened();
     player.enlightened++;
     player.stats.last.enlightened = Date.now();
     player.achievements.stats.savingTokens = false;
@@ -1076,7 +1117,7 @@ function ascendCore(now, gain) {
   player.currentChallenge = '';
   player.stats.recordDevelopment[''] = 0;
   for (let i in CHALLENGE_UNLOCKS) {
-    if (!player.antiChallenges.includes(i)) {
+    if (!player.antiChallenges[i]) {
       player.stats.recordDevelopment[i] = 0;
     }
   }
@@ -1088,7 +1129,8 @@ function ascendCore(now, gain) {
     respecChanged = true;
   }
   if (player.respecQoL) {
-    player.QoLBought = [];
+    player.QoLBought = [
+      false, false, false, false, false, false, false, false, false];
     player.respecQoL = false;
     respecChanged = true;
   }
@@ -1096,7 +1138,7 @@ function ascendCore(now, gain) {
     fillInRespec();
   }
   for (let i = 0; i <= 2; i++) {
-    if (player.QoLBought.includes(i)) {
+    if (hasQoL(i)) {
       giveQoLStartingBenefit(i);
     }
   }
@@ -1187,8 +1229,8 @@ function ascend(noConfirm) {
     let gain = getAscensionGain();
     if (player.ascensions > 0) {
       for (let i in CHALLENGE_UNLOCKS) {
-        if (player.stats.recordDevelopment[i] === 0 && !player.antiChallenges.includes(i)) {
-          player.antiChallenges.push(i)
+        if (player.stats.recordDevelopment[i] === 0 && !player.antiChallenges[i]) {
+          player.antiChallenges[i] = true;
         }
       }
     }
@@ -1248,11 +1290,19 @@ function buyUpdateUpgrade(i, j) {
   player.upgrades[i][j] = true;
 }
 
+function getDilationPerSecondFromLogarithmicProgress(x) {
+  return Math.max(0, Math.pow(2, x / 3600 - 12) - 1) * getStudyEffect(2) / 1000;
+}
+
 function getDilationPerSecond() {
-  if (player.currentChallenge !== 'logarithmic') {
+  if (hasQoL(6)) {
+    return getDilationPerSecondFromLogarithmicProgress(
+      player.stats.recordDevelopment.logarithmic);
+  } else if (player.currentChallenge !== 'logarithmic') {
     return 0;
+  } else {
+    return getDilationPerSecondFromLogarithmicProgress(player.progress[0]);
   }
-  return Math.max(0, Math.pow(2, player.progress[0] / 3600 - 12) - 1) * getStudyEffect(2) / 1000;
 }
 
 function getDilationEffect() {
@@ -1687,16 +1737,20 @@ function buyStudy(x) {
   return true;
 }
 
+function getAntiChallengesCompleted() {
+  return Object.values(player.antiChallenges).reduce((a, b) => a + b);
+}
+
 function getTotalQoLPoints() {
-  return player.antiChallenges.length;
+  return getAntiChallengesCompleted();
 }
 
 function getSpentQoLPoints() {
-  return player.QoLBought.length;
+  return player.QoLBought.reduce((a, b) => a + b);
 }
 
 function canBuyQoL(i) {
-  return player.ascensions > 0 && getTotalQoLPoints() - getSpentQoLPoints() >= 1 && !player.QoLBought.includes(i);
+  return player.ascensions > 0 && getTotalQoLPoints() - getSpentQoLPoints() >= 1 && !player.QoLBought[i];
 }
 
 function giveQoLStartingBenefit(i) {
@@ -1714,11 +1768,15 @@ function giveQoLStartingBenefit(i) {
   }
 }
 
+function hasQoL(i) {
+  return player.QoLBought[i];
+}
+
 function buyQoL(i) {
   if (!canBuyQoL(i)) {
     return false;
   }
-  player.QoLBought.push(i);
+  player.QoLBought[i] = true;
   if (i < 3) {
     giveQoLStartingBenefit(i);
   }
@@ -1755,8 +1813,9 @@ function updateAscensionDisplay() {
 }
 
 function updateAntiChallengesDisplay() {
-  document.getElementById('anti-challenges').innerHTML = player.antiChallenges.length;
-  document.getElementById('anti-challenges-plural').innerHTML = (player.antiChallenges.length === 1) ? '' : 's';
+  let antiChallenges = getAntiChallengesCompleted();
+  document.getElementById('anti-challenges').innerHTML = antiChallenges;
+  document.getElementById('anti-challenges-plural').innerHTML = (antiChallenges === 1) ? '' : 's';
   let totalQoL = getTotalQoLPoints();
   let spentQoL = getSpentQoLPoints();
   document.getElementById('qol-points').innerHTML = totalQoL;
@@ -1764,14 +1823,14 @@ function updateAntiChallengesDisplay() {
   document.getElementById('spent-qol-points').innerHTML = spentQoL;
   document.getElementById('unspent-qol-points').innerHTML = totalQoL - spentQoL;
   for (let i in CHALLENGE_UNLOCKS) {
-    if (player.antiChallenges.includes(i)) {
+    if (player.antiChallenges[i]) {
       document.getElementById('anti-challenge-status-' + i).innerHTML = '&#x2714;';
     } else {
       document.getElementById('anti-challenge-status-' + i).innerHTML = '&#x2718;';
     }
   }
   for (let i = 0; i < 9; i++) {
-    if (player.QoLBought.includes(i)) {
+    if (player.QoLBought[i]) {
       document.getElementById('qol-' + i + '-bought').innerHTML = '(bought)'
     } else {
       document.getElementById('qol-' + i + '-bought').innerHTML = '';
@@ -1801,7 +1860,7 @@ function updateDisplay () {
     if (canPrestigeWithoutGain(i)) {
       document.getElementById("prestige-" + i).innerHTML = '(' + toTime(player.progress[i]) + ' -> ' + toTime(player.progress[i]) + ')<br/>(no gain)';
     } else if (canPrestige(i)) {
-      document.getElementById("prestige-" + i).innerHTML = '(' + toTime(player.progress[i]) + ' -> ' + toTime(newValueFromPrestige()) + ')';
+      document.getElementById("prestige-" + i).innerHTML = '(' + toTime(player.progress[i]) + ' -> ' + toTime(getNewValueFromPrestige()) + ')';
     } else if (player.currentChallenge === 'unprestigious') {
       document.getElementById("prestige-" + i).innerHTML = '(disabled in this challenge)';
     } else {
