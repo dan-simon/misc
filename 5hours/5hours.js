@@ -1177,9 +1177,9 @@ function updateCore(now, gain, oldChallenge) {
   player.achievements.stats.noDevsForThat = true;
 }
 
-function giveAscensionAchievements(now) {
+function giveAscensionAchievements(now, dilation) {
   giveAchievement(27);
-  if (player.dilation.eq(0)) {
+  if (dilation.eq(0)) {
     giveAchievement(28);
   }
   if (now - player.stats.last.update <= 3600000) {
@@ -1208,7 +1208,7 @@ function removeForgottenLore() {
   }
 }
 
-function ascendCore(now, gain) {
+function ascendCore(now, gain, dilation) {
   for (let i = 0; i <= 7; i++) {
     player.progress[i] = 0;
     player.devs[i] = 0;
@@ -1248,7 +1248,7 @@ function ascendCore(now, gain) {
   if (respecChanged) {
     fillInRespec();
   }
-  giveAscensionAchievements(now);
+  giveAscensionAchievements(now, dilation);
   removeForgottenLore();
   player.stats.last.ascension = now;
   player.stats.last.update = now;
@@ -1323,7 +1323,7 @@ function update(noConfirm) {
 }
 
 function confirmAscend() {
-  let whatWillReset = 'update points, updates, endgame/patience/headstart efficiency, update upgrades, and challenge completions, along with everything update resets,';
+  let whatWillReset = 'update points, updates, endgame/patience/headstart efficiency, update upgrades, dilation, and challenge completions, along with everything update resets,';
   if (player.ascensions > 0) {
     whatWillReset = whatWillReset.replace('challenge completions', 'completions of challenges where the corresponding anti-challenge is not yet completed');
   }
@@ -1347,7 +1347,7 @@ function ascend(noConfirm) {
     player.ascensionPoints = player.ascensionPoints.plus(gain);
     player.ascensions++;
     let now = Date.now();
-    ascendCore(now, gain);
+    ascendCore(now, gain, dilation);
   }
 }
 
@@ -1660,7 +1660,7 @@ function checkForAchievementsAndLore() {
     giveAchievement(26);
     giveLore(28);
   }
-  if (player.achievements.list.every(x => x)) {
+  if (player.achievements.list.slice(0, 27).every(x => x)) {
     giveLore(29);
   }
   if (player.lore.length >= LORE_LIST.length - 4) {
