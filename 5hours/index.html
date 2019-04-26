@@ -15,16 +15,16 @@
     <button id="anti-challenges-button" onclick="setTab('anti-challenges')" style="display: none;">Anti-challenges</button>
   </span>
   <div id="main-div" style="display: none;">
-    <table style="table-layout: fixed; width: 1360px;">
+    <table style="table-layout: fixed; width: 1300px;">
       <tr>
-        <td>Development</td>
-        <td>Efficiency</td>
-        <td>Refactoring</td>
-        <td>Recruitment</td>
-        <td>Patience</td>
-        <td>Meta-Efficiency</td>
-        <td>Meta-Refactoring</td>
-        <td>Patience Meter</td>
+        <td style="width: 11%">Development</td>
+        <td style="width: 11%">Efficiency</td>
+        <td style="width: 11%">Refactoring</td>
+        <td style="width: 11%">Recruitment</td>
+        <td style="width: 11%">Patience</td>
+        <td style="width: 15%">Meta-Efficiency</td>
+        <td style="width: 15%">Meta-Refactoring</td>
+        <td style="width: 15%">Patience Meter</td>
       </tr>
       <tr>
         <td><span id="progress-span-0">0:00:00</span></td>
@@ -52,9 +52,9 @@
         <td>Devs: <span id="devs-2"></span><br/><button onclick="addDev(2)">+</button><button onclick="subtractDev(2)">-</button><button onclick="maxDev(2)">max</button><button onclick="zeroDev(2)">0</button></td>
         <td>Devs: <span id="devs-3"></span><br/><button onclick="addDev(3)">+</button><button onclick="subtractDev(3)">-</button><button onclick="maxDev(3)">max</button><button onclick="zeroDev(3)">0</button></td>
         <td>Devs: <span id="devs-4"></span><br/><button onclick="addDev(4)">+</button><button onclick="subtractDev(4)">-</button><button onclick="maxDev(4)">max</button><button onclick="zeroDev(4)">0</button></td>
-        <td><button style="height: 60px;" onclick="prestige(5)">Prestige to boost meta-efficiency<br/><span id="prestige-5"></span></button></td>
-        <td><button style="height: 60px;" onclick="prestige(6)">Prestige to boost meta-refactoring<br/><span id="prestige-6"></span></button></td>
-        <td><button style="height: 60px;" onclick="enlightened()">Become enlightened: <span id="enlightened-desc"></span></button></td>
+        <td><button style="height: 70px;" onclick="prestige(5)">Prestige to boost meta-efficiency<br/><span id="prestige-5"></span></button></td>
+        <td><button style="height: 70px;" onclick="prestige(6)">Prestige to boost meta-refactoring<br/><span id="prestige-6"></span></button></td>
+        <td><button style="height: 70px;" onclick="enlightened()">Become enlightened: <span id="enlightened-desc"></span></button></td>
       </tr>
       <tr id="auto-dev-row">
         <td>Fraction of devs to assign: <input id="auto-dev-0" type="text" onchange="updateAutoDev(0)"></input></td>

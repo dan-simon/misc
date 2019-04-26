@@ -540,8 +540,11 @@ function checkForAutoEnlightened() {
     'optimal for X-second-long prestige': x => shouldEnlightened(x)
   }
   // With QoL it's possible to enlighten more than once.
+  // This code could be simplified but this seems more clear.
   while (table[player.auto.enlightened.setting](player.auto.enlightened.value.toNumber())) {
-    enlightened();
+    if (!enlightened()) {
+      break;
+    }
   }
 }
 
@@ -832,6 +835,9 @@ function enlightened() {
     player.enlightened++;
     player.stats.last.enlightened = Date.now();
     player.achievements.stats.savingTokens = false;
+    return true;
+  } else {
+    return false;
   }
 }
 
