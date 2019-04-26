@@ -170,7 +170,7 @@ function fixPlayer () {
       false, false, false, false, false, false, false, false, false];
     player.respecQoL = false;
     player.gameTimeInAscension = 0;
-    player.lastAscensionHeadstartExperience = 0;
+    player.savedHeadstartExperience = new Decimal(0);
     player.stats.last.ascension = Date.now();
     player.stats.last.ascensionPointGain = new Decimal(0);
     player.stats.recordDevelopment.ever = player.stats.recordDevelopment[''];
@@ -191,6 +191,7 @@ function convertSaveToDecimal () {
   for (let i = 0; i <= 2; i++) {
     player.auto[AUTO_LIST[i]].value = new Decimal(player.auto[AUTO_LIST[i]].value);
   }
+  player.savedHeadstartExperience = new Decimal(player.savedHeadstartExperience);
 }
 
 function loadGameStorage () {
@@ -328,7 +329,7 @@ let initialPlayer = {
   QoLBought: [false, false, false, false, false, false, false, false, false],
   respecQoL: false,
   gameTimeInAscension: 0,
-  lastAscensionHeadstartExperience: 0,
+  savedHeadstartExperience: new Decimal(0),
   achievements: {
     list: [
       false, false, false, false, false, false, false, false, false,
@@ -468,7 +469,7 @@ function checkForMilestones() {
 
 function addToUpdatePower(diff) {
   for (let i = 0; i <= 2; i++) {
-    player.power[i] = player.power[i].plus(new Decimal(diff).times(player.experience[i]).times(getPowerGainPerExperience()));
+    player.power[i] = player.power[i].plus(new Decimal(diff).times(getExperience(i)).times(getPowerGainPerExperience()));
   }
 }
 
@@ -1084,7 +1085,7 @@ function updateCore(now, gain, oldChallenge) {
   }
   player.milestones = 0;
   player.enlightened = 0;
-  for (let i = 0; i <= 3; i++) {
+  for (let i = 0; i <= 2; i++) {
     player.power[i] = new Decimal(0);
   }
   if (gain !== null) {
@@ -1115,8 +1116,9 @@ function ascendCore(now, gain) {
   player.updatePoints = new Decimal(0);
   player.updates = 0;
   player.upgrades = [[false, false, false], [false, false, false]];
-  player.lastAscensionHeadstartExperience = player.experience[2];
-  for (let i = 0; i <= 3; i++) {
+  player.savedHeadstartExperience = player.savedHeadstartExperience.plus(
+    player.experience[2]);
+  for (let i = 0; i <= 2; i++) {
     player.experience[i] = new Decimal(0);
     player.power[i] = new Decimal(0);
   }
@@ -1142,11 +1144,6 @@ function ascendCore(now, gain) {
   }
   if (respecChanged) {
     fillInRespec();
-  }
-  for (let i = 0; i <= 2; i++) {
-    if (hasQoL(i)) {
-      giveQoLStartingBenefit(i);
-    }
   }
   giveAscensionAchievements(now);
   player.stats.last.ascension = now;
@@ -1251,13 +1248,25 @@ function getPowerGainPerExperience() {
   if (player.currentChallenge === 'powerless') {
     return new Decimal(0);
   } else {
-    return Decimal.max(0, (1 + Math.log2(player.updates)) / 100).times(challengeReward('powerless'));
+    return Decimal.max(0, (1 + Math.log2(Math.max(1, player.updates))) / 100).times(challengeReward('powerless'));
   }
 }
 
 function assignAll(i) {
   player.experience[i] = player.experience[i].plus(player.updatePoints);
   player.updatePoints = new Decimal(0);
+}
+
+function getExperience(i) {
+  let ret = player.experience[i];
+  if (hasQoL(0)) {
+    if (i < 2) {
+      ret = ret.plus(1);
+    } else {
+      ret = ret.plus(player.savedHeadstartExperience);
+    }
+  }
+  return ret;
 }
 
 function getUpdatePowerEffect(i) {
@@ -1281,17 +1290,19 @@ function getUpgradeCost(x) {
 }
 
 function upgradeBought(i, j) {
-  return player.upgrades[i][j];
+  return player.upgrades[i][j] || hasQoL(1);
 }
 
 function upgradeActive(i, j) {
-  return player.currentChallenge !== 'upgradeless' && player.upgrades[i][j];
+  return player.currentChallenge !== 'upgradeless' && upgradeBought(i, j);
 }
 
 function buyUpdateUpgrade(i, j) {
-  if (upgradeBought(i, j) || player.experience[j].lt(getUpgradeCost(i))) {
+  if (upgradeBought(i, j) || getExperience(j).lt(getUpgradeCost(i))) {
     return false;
   }
+  // Experience can be negative, if you have saved experience and
+  // spend all your experience on something.
   player.experience[j] = player.experience[j].minus(getUpgradeCost(i));
   player.upgrades[i][j] = true;
 }
@@ -1482,13 +1493,14 @@ function checkForAchievementsAndLore() {
     giveAchievement(7);
     giveLore(10);
   }
-  if (player.experience.every(i => i.neq(0))) {
+  if ([0, 1, 2].every(i => getExperience(i).gt(0))) {
     giveAchievement(9);
   }
   if (player.stats.recordDevelopment[''] >= 43200) {
     giveLore(13);
   }
-  if (player.upgrades.every(i => i.every(j => j))) {
+  if ([[0, 0], [0, 1], [0, 2], [1, 0], [1, 1], [1, 2]].every(
+    l => upgradeBought(l[0], l[1]))) {
     giveAchievement(12);
   }
   if (player.stats.recordDevelopment[''] >= 86400) {
@@ -1712,9 +1724,9 @@ function getStudyEffect(x, studyBought) {
     studyBought = player.studiesBought[x];
   }
   if (x === 0) {
-    return 1 + studyBought / 20;
+    return 1 + studyBought / 10;
   } else if (x === 1) {
-    return 1 + studyBought * player.gameTimeInAscension / 86400;
+    return Math.pow(1 + getGameTimeInAscension() / 86400, Math.log2(1 + studyBought));
   } else if (x === 2) {
     return Math.pow(1 + getTotalDevs() / 1e9, studyBought);
   }
@@ -1759,18 +1771,11 @@ function canBuyQoL(i) {
   return player.ascensions > 0 && getTotalQoLPoints() - getSpentQoLPoints() >= 1 && !player.QoLBought[i];
 }
 
-function giveQoLStartingBenefit(i) {
-  if (i === 0) {
-    player.experience[0] = player.experience[0].plus(1);
-    player.experience[1] = player.experience[1].plus(1);
-    player.experience[2] = player.experience[2].plus(
-      player.lastAscensionHeadstartExperience);
-  }
-  if (i === 1) {
-    player.upgrades = [[true, true, true], [true, true, true]];
-  }
-  if (i === 2) {
-    player.gameTimeInAscension += 43200;
+function getGameTimeInAscension() {
+  if (hasQoL(2)) {
+    return player.gameTimeInAscension + 43200;
+  } else {
+    return player.gameTimeInAscension;
   }
 }
 
@@ -1783,9 +1788,6 @@ function buyQoL(i) {
     return false;
   }
   player.QoLBought[i] = true;
-  if (i < 3) {
-    giveQoLStartingBenefit(i);
-  }
 }
 
 function updateAscensionDisplay() {
@@ -1894,7 +1896,7 @@ function updateDisplay () {
   document.getElementById('updates').innerHTML = player.updates;
   document.getElementById('power-gain-per-experience').innerHTML = format(getPowerGainPerExperience());
   for (let i = 0; i <= 2; i++) {
-    document.getElementById('update-experience-span-' + i).innerHTML = format(player.experience[i]);
+    document.getElementById('update-experience-span-' + i).innerHTML = format(getExperience(i));
     document.getElementById('update-power-span-' + i).innerHTML = format(player.power[i]);
     document.getElementById('update-effect-span-' + i).innerHTML = format(getUpdatePowerEffect(i));
     for (let j = 0; j <= 1; j++) {
