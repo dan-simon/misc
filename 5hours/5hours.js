@@ -90,7 +90,7 @@ function fixPlayer () {
     player.options.offlineProgress = true;
   }
   if (!('dilation' in player)) {
-    player.dilation = 0;
+    player.dilation = new Decimal(0);
   }
   if (!('last' in player.stats)) {
     player.stats.last = {
@@ -186,6 +186,14 @@ function fixPlayer () {
       index: 0,
       on: false
     }
+    player.achievements.list = player.achievements.list.concat([
+      false, false, false, false, false, false, false, false, false]);
+    // I guess this technically isn't correct if you
+    // manage to do your first ascension with one dev,
+    // and opened the game pre-ascension but haven't gotten a second dev yet,
+    // but it shouldn't be an issue for new saves and is correct 99.99%
+    // of the time for old saves.
+    player.achievements.stats.ascendingInALonelyWorld = false;
   }
   if (!('hardMode' in player.options)) {
     player.options.hardMode = false;
@@ -202,6 +210,7 @@ function convertSaveToDecimal () {
   for (let i = 0; i <= 3; i++) {
     player.auto[AUTO_LIST[i]].value = new Decimal(player.auto[AUTO_LIST[i]].value);
   }
+  player.dilation = new Decimal(player.dilation);
   player.savedHeadstartExperience = new Decimal(player.savedHeadstartExperience);
 }
 
@@ -356,16 +365,18 @@ let initialPlayer = {
     list: [
       false, false, false, false, false, false, false, false, false,
       false, false, false, false, false, false, false, false, false,
+      false, false, false, false, false, false, false, false, false,
       false, false, false, false, false, false, false, false, false
     ],
     number: 0,
     stats: {
       savingTokens: true,
-      noDevsForThat: true
+      noDevsForThat: true,
+      ascendingInALonelyWorld: true
     }
   },
   lore: [],
-  dilation: 0,
+  dilation: new Decimal(0),
   lastUpdate: Date.now()
 }
 
@@ -458,6 +469,9 @@ function addToProgress(diff) {
       player.progress[i] += Math.max(0, change);
     }
   }
+  if (getTotalDevs() > 1) {
+    player.achievements.stats.ascendingInALonelyWorld = false;
+  }
 }
 
 function getPatienceMeterEffect(x, enlights) {
@@ -496,7 +510,7 @@ function addToUpdatePower(diff) {
 }
 
 function addToDilation(diff) {
-  player.dilation = player.dilation + diff * getDilationPerSecond();
+  player.dilation = player.dilation.plus(getDilationPerSecond().times(diff));
 }
 
 function getGameSpeed() {
@@ -626,15 +640,16 @@ function checkForAutoAscension() {
   }
 }
 
+const EXPERIENCE_TYPES_LIST = ['endgame', 'patience', 'headstart'];
+
 function checkForAutoAssign() {
-  if (player.upgradePoints.gt(0)) {
+  if (player.updatePoints.gt(0)) {
     if (player.auto.assign.index >= player.auto.assign.list.length) {
       player.auto.assign.index = 0;
     }
     let type = player.auto.assign.list[player.auto.assign.index];
-    let types = ['endgame', 'patience', 'headstart'];
-    if (types.indexOf(type) !== -1) {
-      assignAll(types.indexOf(type));
+    if (EXPERIENCE_TYPES_LIST.includes(type)) {
+      assignAll(EXPERIENCE_TYPES_LIST.indexOf(type));
     }
     player.auto.assign.index++;
   }
@@ -1163,7 +1178,34 @@ function updateCore(now, gain, oldChallenge) {
 }
 
 function giveAscensionAchievements(now) {
-  // not yet implemented
+  giveAchievement(27);
+  if (player.dilation.eq(0)) {
+    giveAchievement(28);
+  }
+  if (now - player.stats.last.update <= 3600000) {
+    giveAchievement(29);
+  }
+  if (player.achievements.stats.ascendingInALonelyWorld) {
+    giveAchievement(30);
+  }
+  // Can't be 0 with the current state of the game, and the achievement says 1.
+  if (player.updates === 1) {
+    giveAchievement(34);
+  }
+}
+
+function keepLore(i, challenges) {
+  let index = ((i - CHALLENGE_LORE_CONSTANT) % 9 + 9) % 9;
+  return player.antiChallenges[challenges[index]];
+}
+
+function removeForgottenLore() {
+  let oldLoreLength = player.lore.length;
+  let challenges = sortedChallenges();
+  player.lore = player.lore.filter((i) => keepLore(i, challenges));
+  if (oldLoreLength > player.lore.length) {
+    updateLoreDisplay();
+  }
 }
 
 function ascendCore(now, gain) {
@@ -1176,6 +1218,7 @@ function ascendCore(now, gain) {
   player.updatePoints = new Decimal(0);
   player.updates = 0;
   player.upgrades = [[false, false, false], [false, false, false]];
+  player.dilation = new Decimal(0);
   player.savedHeadstartExperience = player.savedHeadstartExperience.plus(
     player.experience[2]);
   for (let i = 0; i <= 2; i++) {
@@ -1206,6 +1249,7 @@ function ascendCore(now, gain) {
     fillInRespec();
   }
   giveAscensionAchievements(now);
+  removeForgottenLore();
   player.stats.last.ascension = now;
   player.stats.last.update = now;
   player.stats.last.prestige = now;
@@ -1216,6 +1260,7 @@ function ascendCore(now, gain) {
   player.auto.assign.index = 0;
   player.achievements.stats.savingTokens = true;
   player.achievements.stats.noDevsForThat = true;
+  player.achievements.stats.ascendingInALonelyWorld = true;
 }
 
 function getUpgradeGainBase() {
@@ -1370,7 +1415,7 @@ function buyUpdateUpgrade(i, j) {
 }
 
 function getDilationPerSecondFromLogarithmicProgress(x) {
-  return Math.max(0, Math.pow(2, x / 3600 - 12) - 1) * getStudyEffect(2) / 1000;
+  return Decimal.max(0, Decimal.pow(2, x / 3600 - 12) - 1).times(getStudyEffect(2)).div(1000);
 }
 
 function getDilationPerSecond() {
@@ -1378,14 +1423,14 @@ function getDilationPerSecond() {
     return getDilationPerSecondFromLogarithmicProgress(
       player.stats.recordDevelopment.logarithmic);
   } else if (player.currentChallenge !== 'logarithmic') {
-    return 0;
+    return new Decimal(0);
   } else {
     return getDilationPerSecondFromLogarithmicProgress(player.progress[0]);
   }
 }
 
 function getDilationEffect() {
-  return 1 + 1 / 10 - 1 / (10 + Math.log10(1 + player.dilation));
+  return 1 + 1 / 10 - 1 / (10 + Decimal.log10(player.dilation.plus(1)));
 }
 
 function dilationBoost(x) {
@@ -1418,7 +1463,7 @@ function fillInAutoOther () {
   document.getElementById('auto-prestige-initial').innerHTML = 'meta-' + ['efficiency', 'refactoring'][player.auto.prestige.initial - 5];
   document.getElementById('auto-prestige-alternate').checked = player.auto.prestige.alternate;
   document.getElementById('auto-assign-list').value = player.auto.assign.list.join(', ');
-  document.getElementById('auto-assign-on').value = player.auto.assign.on;
+  document.getElementById('auto-assign-on').checked = player.auto.assign.on;
 }
 
 function fillInOptions() {
@@ -1475,7 +1520,7 @@ function updateAutoValue(x) {
 
 function updateAutoAssignList() {
   let value = document.getElementById('auto-assign-list').value;
-  player.auto.assign.value = value.toLowerCase().split(/[^a-z]+/).filter(i => i);
+  player.auto.assign.list = value.toLowerCase().split(/[^a-z]+/).filter(i => EXPERIENCE_TYPES_LIST.includes(i));
 }
 
 function toggleAutoPrestigeInitial() {
@@ -1488,10 +1533,7 @@ function toggleAutoPrestigeAlternate() {
 }
 
 function hasAuto(x) {
-  if (x === 'ascension') {
-    return hasQoL(3);
-  }
-  if (x === 'assign') {
+  if (x === 'ascension' || x === 'assign') {
     return hasQoL(4);
   }
   let table = {
@@ -1499,7 +1541,7 @@ function hasAuto(x) {
     'prestige': 4,
     'update': 8
   }
-  return getTotalChallengeCompletions() >= table[x];
+  return hasQoL(3) || getTotalChallengeCompletions() >= table[x];
 }
 
 function getAchievementsEffect() {
@@ -1520,6 +1562,8 @@ function giveLore(i) {
     updateLoreDisplay();
   }
 }
+
+const CHALLENGE_LORE_CONSTANT = 14;
 
 function checkForAchievementsAndLore() {
   let progress = player.progress.slice(0, 5);
@@ -1584,7 +1628,7 @@ function checkForAchievementsAndLore() {
   let challenges = sortedChallenges();
   for (let i = 0; i <= 8; i++) {
     if (isChallengeUnlocked(challenges[i])) {
-      giveLore(14 + i);
+      giveLore(CHALLENGE_LORE_CONSTANT + i);
     }
   }
   if (getTotalDevs() >= 50000) {
@@ -1596,11 +1640,11 @@ function checkForAchievementsAndLore() {
   if (getTotalChallengeCompletions() >= 20) {
     giveAchievement(20);
   }
-  if (player.dilation > 0) {
+  if (player.dilation.gt(0)) {
     giveAchievement(22);
     giveLore(24);
   }
-  if (player.dilation >= 100 / 3) {
+  if (player.dilation.gte(100 / 3)) {
     giveAchievement(23);
     giveLore(25);
   }
@@ -1619,10 +1663,22 @@ function checkForAchievementsAndLore() {
   if (player.achievements.list.every(x => x)) {
     giveLore(29);
   }
-  if (player.lore.length >= LORE_LIST.length - 3) {
-    for (let i = 3; i > 0; i--) {
+  if (player.lore.length >= LORE_LIST.length - 4) {
+    for (let i = 4; i > 0; i--) {
       giveLore(LORE_LIST.length - i);
     }
+  }
+  if (getAntiChallengesCompleted() === 9) {
+    giveAchievement(31);
+  }
+  if (player.stats.recordDevelopment.upgradeless >= 43200) {
+    giveAchievement(32);
+  }
+  if (challengeReward('slow') >= 60) {
+    giveAchievement(33);
+  }
+  if (player.studiesBought.every(x => x === 0) && player.stats.recordDevelopment[''] >= 6480000) {
+    giveAchievement(35);
   }
 }
 
@@ -1657,7 +1713,8 @@ const LORE_LIST = [
   'There are a lot of people working on this game. You decide to not think about whether anyone is actually playing it.',
   'Well, you\'ve done it. You\'ve made so many great updates that your game is recognized as the best game in the world. You still feel like you could add more to it, but you\'re not sure what the point would be.',
   'Not only is your game the best ever, but you\'ve done everything that could be expected of you in its development, even some things that were considered unrelated (e.g., that "dilation" was apparently an important new substance in physics). You\'re not really sure what to do next.',
-  'You feel something in your mind saying "Yeah, that\'s it, you\'ve reached the end of the game." You\'re not sure what that means; you still have more ideas for your game. "You can either keep going (but nothing really new happens) or hard reset." Huh? "In any case, congratulations, thanks for playing, and I hope you enjoyed."',
+  'You feel something in your mind saying "You can ascend." You\'re not completely sure what that means, but somehow you intuitively feel that indeed you can, and it would involve going to a new universe and losing most of your memories of this one.',
+  'You think ascending would be exciting and perhaps a good idea sometime soon, but you like this universe and want to hear whatever else the voice in your mind might say, so you decide to stay for a while.The voice continues, "If for some reason you don\'t want to ascend, you can either keep going (but nothing really new happens) or hard reset." Huh? "In any case, congratulations, thanks for playing, and I hope you enjoyed."',
   'Not that long later, you meet someone who looks surprised to see you. She says she just finished your game and wonders what she can do next. You say, "Well of course you can keep going or hard reset" (and you suddenly understand the voice in your mind a bit better) "but you can also make your own game. Maybe it will catch on."',
   'As you say this, you remember how far you\'ve gone in your quest to make a game, and how far you\'ve come since you\'ve started. You also recall how, in playing, the person you\'re talking to must have gone through a similar journey. You hear the voice in your mind say "So did I" [not really, making this game was rather easy, but please ignore this bracketed part OK?], and you smile.'
 ]
@@ -1714,7 +1771,7 @@ function updateChallengesDisplay () {
     document.getElementById(i + '-reward-description').innerHTML = describeChallengeReward(i);
     document.getElementById(i + '-completed-description').innerHTML = describeChallengeCompleted(i);
   }
-  if (player.dilation > 0) {
+  if (player.dilation.gt(0)) {
     document.getElementById('dilation').innerHTML = 'You have ' + format(player.dilation, 4) + ' dilation, ' + format(getDilationPerSecond(), 4)+ ' dilation per second, with effect x^' + format(getDilationEffect(), 4) + '.';
   } else {
     document.getElementById('dilation').innerHTML = '';
@@ -1725,7 +1782,7 @@ function updateAchievementDisplay() {
   document.getElementById('total-achievements').innerHTML = player.achievements.number;
   document.getElementById('total-achievements-plural').innerHTML = (player.achievements.number === 1) ? '' : 's';
   document.getElementById('achievements-effect').innerHTML = format(getAchievementsEffect());
-  for (let i = 0; i <= 26; i++) {
+  for (let i = 0; i <= 35; i++) {
     if (player.achievements.list[i]) {
       document.getElementById('ach-status-' + i).innerHTML = '&#x2714;';
     } else {
@@ -1803,7 +1860,7 @@ function getStudyEffect(x, studyBought) {
   } else if (x === 1) {
     return Math.pow(1 + getGameTimeInAscension() / 86400, Math.log2(1 + studyBought));
   } else if (x === 2) {
-    return Math.pow(1 + getTotalDevs() / 1e9, studyBought);
+    return Decimal.pow(1 + getTotalDevs() / 1e9, studyBought);
   }
 }
 
@@ -1822,7 +1879,7 @@ function buyStudy(x) {
   // Check to hopefully stop players having a slow early game.
   if (player.ascensions === 1 && x !== 0 && player.studiesBought[0] === 0 &&
     !confirm('It is recommended to get the milestone-boosting study in your ' +
-    'second ascension, so that early game is not slow. Are you sure you want ' +
+    'second ascension, so that early game is not too slow. Are you sure you want ' +
     'to get the study you are getting?')) {
     return false;
   }

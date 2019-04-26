@@ -140,6 +140,24 @@
     <span>Do we have any audience left?: Get a billion devs. <span id="ach-status-25">&#x2718;</span></span>
     <br/>
     <span>Can you get infinite UP?: Get 1.80e308 update points. <span id="ach-status-26">&#x2718;</span></span>
+    <br/>
+    <span>Another universe, another layer: Ascend. <span id="ach-status-27">&#x2718;</span></span>
+    <br/>
+    <span>I never liked dilation stuff anyway: Ascend with zero dilation. <span id="ach-status-28">&#x2718;</span></span>
+    <br/>
+    <span>Because I hate to grind: Ascend in an hour. <span id="ach-status-29">&#x2718;</span></span>
+    <br/>
+    <span>Ascending in a lonely world: Ascend without ever having more than one dev. <span id="ach-status-30">&#x2718;</span></span>
+    <br/>
+    <span>Truly anti-challenged: Complete all the anti-challenges. <span id="ach-status-31">&#x2718;</span></span>
+    <br/>
+    <span>Way too hard: Get to 12:00:00 in Upgradeless. <span id="ach-status-32">&#x2718;</span></span>
+    <br/>
+    <span>I am speed: Get the Slow reward to be at least 60x. <span id="ach-status-33">&#x2718;</span></span>
+    <br/>
+    <span>Is this the final update?: Ascend having updated only once. <span id="ach-status-34">&#x2718;</span></span>
+    <br/>
+    <span>Unascended: Reach 1800:00:00 record development in your current ascension with no ascension studies. <span id="ach-status-35">&#x2718;</span></span>
     <hr/>
   </div>
   <div id="lore-div" style="display: none;">
@@ -183,9 +201,12 @@
         <td><button style="height: 60px; width: 300px;" onclick="buyUpdateUpgrade(1, 2)">All your devs act as working on development, in addition to whatever they're working on.<br/>Cost: <span id="up-1-2-cost"></span> headstart experience<span id="up-1-2-bought"></span></button></td>
       </tr>
     </table>
-    <span id="auto-assign-span" style="display: none;">Auto-assign: current cycle: <input id="auto-assign-list" type="text" onchange="updateAutoAssignList()"></input>, on: <input id="auto-assign-on" onclick="toggleAutoOn('assign')" type="checkbox"></input></span>
-    <br/>
-    <span id="auto-assign-help-span" style="display: none;">Auto-assign will cycle through assigning upgrade points to the given types of experience if any are unspent, with "none" being none. For example, "endgame, patience, headstart, none" would assign to endgame first update, patience second update, then headstart, then none, then endgame, etc.</span>
+    <span id="auto-assign-span" style="display: none;">Auto-assign: current cycle: <input id="auto-assign-list" type="text" style="width: 600px;" onchange="updateAutoAssignList()"></input>, on: <input id="auto-assign-on" onclick="toggleAutoOn('assign')" type="checkbox"></input></span>
+    <div id="auto-assign-help-span" style="display: none;">
+      <span>Auto-assign will cycle through assigning upgrade points to the given types of experience if any are unspent.</span>
+      <br/>
+      <span>For example, 'endgame, patience, headstart' would assign to endgame first update, patience second update, then headstart, then endgame, etc.</span>
+    </div>
   </div>
   <div id="challenges-div" style="display: none;">
     <span>You have <span id="total-challenge-completions"></span> total challenge completions. You are currently in <span id="current-challenge"></span>. <span id="next-challenge-unlock">Next challenge unlocks eventually.</span> <button onclick="exitChallenge()">Exit current challenge</button></span>
@@ -392,8 +413,8 @@
         <td><button style="height: 80px; width: 280px;" onclick="buyQoL(2)">Start ascensions with half a day in current ascension.<br/><span id="qol-2-bought"></span></button></td>
       </tr>
       <tr>
-        <td><button style="height: 80px; width: 280px;" onclick="buyQoL(3)">Ascension autobuyer<br/><span id="qol-3-bought"></span></button></td>
-        <td><button style="height: 80px; width: 280px;" onclick="buyQoL(4)">Upgrade point auto-assigner<br/><span id="qol-4-bought"></span></button></td>
+        <td><button style="height: 80px; width: 280px;" onclick="buyQoL(3)">Start ascensions with enlighten, patience, and update autobuyers.<br/><span id="qol-3-bought"></span></button></td>
+        <td><button style="height: 80px; width: 280px;" onclick="buyQoL(4)">Ascension autobuyer and upgrade point auto-assigner<br/><span id="qol-4-bought"></span></button></td>
         <td><button style="height: 80px; width: 280px;" onclick="buyQoL(5)">Your meta-efficiency and meta-refactoring approach their values on prestige by 0.1% per second.<br/><span id="qol-5-bought"></span></button></td>
       </tr>
       <tr>
