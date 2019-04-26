@@ -966,6 +966,11 @@ function getChallengeForDisplay(challenge) {
 }
 
 function enterChallenge(x) {
+  // I don't think this can happen unless element display is incorrect,
+  // but just to be sure...
+  if (!isChallengeUnlocked(x)) {
+    return;
+  }
   if (confirmEnterChallenge(x)) {
     let gain = null;
     if (player.options.updateChallenge && canUpdate()) {
@@ -1505,7 +1510,7 @@ const LORE_LIST = [
   'As you say this, you remember how far you\'ve gone in your quest to make a game, and how far you\'ve come since you\'ve started. You also recall how, in playing, the person you\'re talking to must have gone through a similar journey. You hear the voice in your mind say "So did I" [not really, making this game was rather easy, but please ignore this bracketed part OK?], and you smile.'
 ]
 
-const TAB_LIST = ['main', 'achievements', 'lore', 'update', 'challenges', 'ascension'];
+const TAB_LIST = ['main', 'achievements', 'lore', 'update', 'challenges', 'ascension', 'anti-challenges'];
 
 function updateTabButtonDisplay () {
   if (player.updates > 0 || player.ascensions > 0) {
@@ -1518,10 +1523,12 @@ function updateTabButtonDisplay () {
   } else {
     document.getElementById('challenges-button').style.display = 'none';
   }
-  if (player.stats.recordDevelopment[''] >= 86400 || player.ascensions > 0) {
+  if (player.ascensions > 0) {
     document.getElementById('ascension-button').style.display = '';
+    document.getElementById('anti-challenges-button').style.display = '';
   } else {
     document.getElementById('ascension-button').style.display = 'none';
+    document.getElementById('anti-challenges-button').style.display = 'none';
   }
 }
 
@@ -1540,7 +1547,7 @@ function setTab(x) {
   updateTabDisplay();
 }
 
-function updateChallengeDisplay () {
+function updateChallengesDisplay () {
   document.getElementById('total-challenge-completions').innerHTML = format(getTotalChallengeCompletions());
   document.getElementById('current-challenge').innerHTML = getChallengeForDisplay(player.currentChallenge);
   document.getElementById('next-challenge-unlock').innerHTML = nextChallengeUnlock();
@@ -1671,6 +1678,14 @@ function buyStudy(x) {
   return true;
 }
 
+function getTotalQoLPoints() {
+  return player.antiChallenges.length;
+}
+
+function getSpentQoLPoints() {
+  return player.QoLBought.length;
+}
+
 function updateAscensionDisplay() {
   document.getElementById('ascension-points').innerHTML = format(player.ascensionPoints);
   document.getElementById('ascensions').innerHTML = player.ascensions;
@@ -1698,6 +1713,24 @@ function updateAscensionDisplay() {
     document.getElementById('study-' + i + '-bought').innerHTML = player.studiesBought[i];
     document.getElementById('study-' + i + '-bought-plural').innerHTML = (player.studiesBought[i] === 1) ? '' : 's';
     document.getElementById('study-' + i + '-buyable').innerHTML = canBuyStudy(i) ? 'buyable' : 'unbuyable';
+  }
+}
+
+function updateAntiChallengesDisplay() {
+  document.getElementById('anti-challenges').innerHTML = player.antiChallenges.length;
+  document.getElementById('anti-challenges-plural').innerHTML = (player.antiChallenges.length === 1) ? '' : 's';
+  let totalQoL = getTotalQoLPoints();
+  let spentQoL = getSpentQoLPoints();
+  document.getElementById('qol-points').innerHTML = totalQoL;
+  document.getElementById('anti-challenges-plural').innerHTML = (totalQoL === 1) ? '' : 's';
+  document.getElementById('spent-qol-points').innerHTML = spentQoL;
+  document.getElementById('unspent-qol-points').innerHTML = totalQoL - spentQoL;
+  for (let i in CHALLENGE_UNLOCKS) {
+    if (player.antiChallenges.includes(i)) {
+      document.getElementById('anti-challenge-status-' + i).innerHTML = '&#x2714;';
+    } else {
+      document.getElementById('anti-challenge-status-' + i).innerHTML = '&#x2718;';
+    }
   }
 }
 
@@ -1778,8 +1811,15 @@ function updateDisplay () {
   } else {
     document.getElementById('auto-help-span').style.display = 'none';
   }
-  updateChallengeDisplay();
-  updateAscensionDisplay();
+  if (player.tab === 'challenges') {
+    updateChallengesDisplay();
+  }
+  if (player.tab === 'ascension') {
+    updateAscensionDisplay();
+  }
+  if (player.tab === 'anti-challenges') {
+    updateAntiChallengesDisplay();
+  }
   if (player.ascensions > 0) {
     document.getElementById('record-development-this-ascension-span').style.display = '';
     document.getElementById('record-development-this-ascension').innerHTML = toTime(player.stats.recordDevelopment['']);

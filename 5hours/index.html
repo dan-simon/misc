@@ -12,6 +12,7 @@
     <button id="update-button" onclick="setTab('update')" style="display: none;">Update</button>
     <button id="challenges-button" onclick="setTab('challenges')" style="display: none;">Challenges</button>
     <button id="ascension-button" onclick="setTab('ascension')" style="display: none;">Ascension</button>
+    <button id="anti-challenges-button" onclick="setTab('anti-challenges')" style="display: none;">Anti-challenges</button>
   </span>
   <div id="main-div" style="display: none;">
     <table style="table-layout: fixed; width: 1360px;">
@@ -351,6 +352,30 @@
     </button>
     <br/>
     <span>Respec theorems on next ascension: <input id="respec-studies" onclick="toggle('respecStudies')" type="checkbox"></input></span>
+  </div>
+  <div id="anti-challenges-div" style="display: none;">
+    <span>You have completed <span id="anti-challenges">0</span> anti-challenge<span id="anti-challenges-plural"></span>.</span>
+    <br/>
+    <span>Complete an anti-challenge by ascending without making any progress in that challenge. Progress in challenges for which you have completed the corresponding anti-challenge will be kept on ascension.</span>
+    <br/>
+    <span>You have <span id="qol-points">0</span> QoL point<span id="qol-points-plural"></span> (<span id="spent-qol-points">0</span> spent, <span id="unspent-qol-points">0</span> unspent). You get one per completed anti-challenge.</span>
+    <table style="table-layout: fixed; width: 600px;">
+      <tr>
+        <td>Anti-Logarithmic: <span id="anti-challenge-status-logarithmic">&#x2718;</span></td>
+        <td>Anti-Inefficient: <span id="anti-challenge-status-inefficient">&#x2718;</span></td>
+        <td>Anti-UFD: <span id="anti-challenge-status-ufd">&#x2718;</span></td>
+      </tr>
+      <tr>
+        <td>Anti-Lonely: <span id="anti-challenge-status-lonely">&#x2718;</span></td>
+        <td>Anti-Impatient: <span id="anti-challenge-status-impatient">&#x2718;</span></td>
+        <td>Anti-Unprestigious: <span id="anti-challenge-status-unprestigious">&#x2718;</span></td>
+      </tr>
+      <tr>
+        <td>Anti-Slow: <span id="anti-challenge-status-slow">&#x2718;</span></td>
+        <td>Anti-Powerless: <span id="anti-challenge-status-powerless">&#x2718;</span></td>
+        <td>Anti-Upgradeless: <span id="anti-challenge-status-upgradeless">&#x2718;</span></td>
+      </tr>
+    </table>
   </div>
   <span>Other information: <span id="record-development-this-ascension-span" style="display: none;"><span id="record-development-this-ascension"></span> record development this ascension,</span> <span id="record-development-ever"></span> record development ever,
   <span id="unassigned-devs"></span> unassigned dev<span id="unassigned-devs-plural"></span>, <span id="progress-milestones"></span> progress milestone<span id="progress-milestones-plural"></span> (giving a <span id="progress-milestones-effect"></span>x multiplier to all production), <span id="enlightened"></span> time<span id="enlightened-plural"></span> enlightened</span>
