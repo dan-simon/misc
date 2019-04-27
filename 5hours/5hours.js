@@ -1700,7 +1700,7 @@ const LORE_LIST = [
   'The efficiency and refactoring weren\'t enough. You decided to restart the project from scratch, taking advantage of what you\'d learned.',
   'Progress seems to be slowing down, even given everything you\'ve learned from restarting the project. Perhaps you need more patience, though.',
   'Patience alone didn\'t seem to help quite enough to finish; you\'re close, but not there. Maybe there\'s something you can do to enlighten the situation.',
-  'You\'re now enlightened. Apart from the mystical aspects, this seems to make patience a little stronger. You feel that restarting the project will cause you to lose your enlightenment, though',
+  'You\'re now enlightened. Apart from the mystical aspects, this seems to make patience a little stronger. You feel that restarting the project will cause you to lose your enlightenment, though.',
   'You finally made a game which was basically what you wanted, but you\'ve thought of a bunch of cool stuff you can add. Maybe you can release another update with that.',
   'You\'ve gotten enough experience from past updates that now you can make bigger updates. How far will this go?',
   'You seem to be getting the hang of this. It\'s a bit monotonous, but maybe that will change soon.',
