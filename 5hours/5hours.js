@@ -1277,7 +1277,11 @@ function getUpdateGain() {
 }
 
 function getAscensionGain() {
-  return Decimal.floor(Decimal.pow(10, player.updatePoints.log(Number.MAX_VALUE) - 1));
+  let ret = Decimal.pow(10, player.updatePoints.log(Number.MAX_VALUE) - 1);
+  if (hasQoL(4)) {
+    ret = ret.times(2);
+  }
+  return Decimal.floor(ret);
 }
 
 function confirmUpdate() {
@@ -1535,14 +1539,14 @@ function toggleAutoPrestigeAlternate() {
 
 function hasAuto(x) {
   if (x === 'ascension' || x === 'assign') {
-    return hasQoL(4);
+    return hasQoL(3);
   }
   let table = {
     'enlightened': 2,
     'prestige': 4,
     'update': 8
   }
-  return hasQoL(3) || getTotalChallengeCompletions() >= table[x];
+  return getTotalChallengeCompletions() >= table[x];
 }
 
 function getAchievementsEffect() {
@@ -1851,7 +1855,7 @@ function getTotalTheorems() {
 }
 
 function getSpentTheorems() {
-  return player.studiesBought.map(x => x * (x + 1) / 2).reduce((a, b) => a + b);
+  return [0, 1, 2].map(getStudyCost).map(x => x * (x - 1) / 2).reduce((a, b) => a + b);
 }
 
 function getStudyEffect(x, studyBought) {
