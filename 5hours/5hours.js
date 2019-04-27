@@ -430,7 +430,7 @@ function getScaling() {
 
 function devsWorkingOn(i) {
   let ret = player.devs[i];
-  if (upgradeActive(1, 2)) {
+  if (i === 0 && upgradeActive(1, 2)) {
     ret += getTotalDevs();
   }
   if (hasQoL(8)) {
