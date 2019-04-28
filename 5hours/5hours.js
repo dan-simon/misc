@@ -1182,7 +1182,7 @@ function updateCore(now, gain, oldChallenge) {
   player.achievements.stats.noDevsForThat = true;
 }
 
-function giveAscensionAchievements(now, dilation) {
+function giveAscensionAchievements(now, dilation, updates) {
   giveAchievement(27);
   if (dilation.eq(0)) {
     giveAchievement(28);
@@ -1194,7 +1194,7 @@ function giveAscensionAchievements(now, dilation) {
     giveAchievement(30);
   }
   // Can't be 0 with the current state of the game, and the achievement says 1.
-  if (player.updates === 1) {
+  if (updates === 1) {
     giveAchievement(34);
   }
 }
@@ -1213,7 +1213,7 @@ function removeForgottenLore() {
   }
 }
 
-function ascendCore(now, gain, dilation) {
+function ascendCore(now, gain, dilation, updates) {
   for (let i = 0; i <= 7; i++) {
     player.progress[i] = 0;
     player.devs[i] = 0;
@@ -1253,7 +1253,7 @@ function ascendCore(now, gain, dilation) {
   if (respecChanged) {
     fillInRespec();
   }
-  giveAscensionAchievements(now, dilation);
+  giveAscensionAchievements(now, dilation, updates);
   removeForgottenLore();
   player.stats.last.ascension = now;
   player.stats.last.update = now;
@@ -1357,7 +1357,8 @@ function ascend(noConfirm) {
     player.ascensions++;
     let now = Date.now();
     let dilation = player.dilation;
-    ascendCore(now, gain, dilation);
+    let updates = player.updates;
+    ascendCore(now, gain, dilation, updates);
   }
 }
 
@@ -1831,17 +1832,41 @@ function toggleHardMode() {
   }
 }
 
+function applyCurrentTheoremScaling(n) {
+  if (n > 5) {
+    return 5 + Math.floor(Math.log(n - 4) / Math.log(1.5));
+  } else {
+    return n;
+  }
+}
+
 function getCurrentTheorems(x) {
+  let ret;
   if (x === 'ascensionPoints') {
-    return Math.max(0, 1 + Math.floor(player.ascensionPoints.log(2)));
+    ret = Math.max(0, 1 + Math.floor(player.ascensionPoints.log(2)));
   } else if (x === 'ascensions') {
-    return Math.max(0, 1 + Math.floor(Math.log2(player.ascensions)));
+    ret = Math.max(0, 1 + Math.floor(Math.log2(player.ascensions)));
   } else if (x === 'recordDevelopment') {
-    return Math.max(0, Math.floor(player.stats.recordDevelopment.ever / 720000) - 4);
+    ret = Math.max(0, Math.floor(player.stats.recordDevelopment.ever / 720000) - 4);
+  }
+  if (x !== 'ascensions') {
+    ret = applyCurrentTheoremScaling(ret);
+  }
+  return ret;
+}
+
+function applyTheoremAtScaling(n) {
+  if (n > 5) {
+    return 5 + Math.floor(Math.pow(1.5, n - 5));
+  } else {
+    return n;
   }
 }
 
 function getTheoremAt(x, n) {
+  if (x !== 'ascensions') {
+    n = applyTheoremAtScaling(n);
+  }
   if (x === 'ascensionPoints') {
     return Decimal.pow(2, n - 1);
   } else if (x === 'ascensions') {
