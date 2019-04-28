@@ -1895,7 +1895,7 @@ function getStudyEffect(x, studyBought) {
   if (x === 0) {
     return 1 + studyBought / 10;
   } else if (x === 1) {
-    return Math.pow(1 + getGameTimeInAscension() / 86400, Math.log2(1 + studyBought));
+    return 1 + studyBought * getGameTimeInAscension() / 86400;
   } else if (x === 2) {
     return Decimal.pow(1 + getTotalDevs() / 1e9, studyBought);
   }
