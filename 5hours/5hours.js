@@ -195,6 +195,9 @@ function fixPlayer () {
     // of the time for old saves.
     player.achievements.stats.ascendingInALonelyWorld = false;
   }
+  if (!('gameStart' in player.stats)) {
+    player.stats.last.gameStart = Date.now();
+  }
   if (!('hardMode' in player.options)) {
     player.options.hardMode = false;
   }
@@ -337,6 +340,7 @@ let initialPlayer = {
       prestige: Date.now(),
       update: Date.now(),
       ascension: Date.now(),
+      gameStart: Date.now(),
       prestigeType: null,
       updatePointGain: new Decimal(0),
       ascensionPointGain: new Decimal(0)
