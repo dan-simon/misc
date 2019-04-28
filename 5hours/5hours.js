@@ -467,7 +467,8 @@ function addToProgress(diff) {
   for (let i = 0; i <= 4; i++) {
     player.progress[i] = addProgress(player.progress[i], perDev.times(devsWorkingOn(i)), scaling);
   }
-  if (hasQoL(5)) {
+  // The lack of a parameter is OK.
+  if (canPrestige() && hasQoL(5)) {
     for (let i = 5; i <= 6; i++) {
       let change = (newValueFromPrestige - player.progress[i]) * (1 - Math.exp(-diff / 1000));
       player.progress[i] += Math.max(0, change);
