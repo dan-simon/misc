@@ -1893,7 +1893,7 @@ function getStudyEffect(x, studyBought) {
     studyBought = player.studiesBought[x];
   }
   if (x === 0) {
-    return 1 + studyBought / 10;
+    return 1 + Math.max(0, 1 + Math.log2(studyBought)) / 10;
   } else if (x === 1) {
     return 1 + studyBought * getGameTimeInAscension() / 86400;
   } else if (x === 2) {
