@@ -164,8 +164,6 @@ function fixPlayer () {
       'powerless': false,
       'upgradeless': false
     };
-    player.studiesBought = [0, 0, 0];
-    player.respecStudies = false;
     player.QoLBought = [
       false, false, false, false, false, false, false, false, false];
     player.respecQoL = false;
@@ -359,8 +357,6 @@ let initialPlayer = {
     'powerless': false,
     'upgradeless': false
   },
-  studiesBought: [0, 0, 0],
-  respecStudies: false,
   QoLBought: [false, false, false, false, false, false, false, false, false],
   respecQoL: false,
   gameTimeInAscension: 0,
@@ -488,7 +484,7 @@ function getTimeForPatienceMeterToMaxOut(patience, enlights) {
     return Infinity;
   } else {
     let base = getBasePatienceMeterTime(patience);
-    return base / (getUpdatePowerEffect(1) * challengeReward('impatient') * getStudyEffect(1)) * Math.pow(getEnlightenedSlowFactor(), enlights);
+    return base / (getUpdatePowerEffect(1) * challengeReward('impatient')) * Math.pow(getEnlightenedSlowFactor(), enlights);
   }
 }
 
@@ -792,14 +788,21 @@ function softcapPatienceMeter(x) {
   }
 }
 
+function getEfficiencyBase() {
+  if (player.ascensions > 0) {
+    return 2.2;
+  } else {
+    return 2;
+  }
+}
+
 function getEffect(i) {
   let x = player.progress[i];
   if (i === 1 || i === 5) {
     if (player.currentChallenge === 'inefficient') {
       return new Decimal(1);
     } else {
-      return dilationBoost(Decimal.pow(2, x / 1800).times(
-        Decimal.pow(getStudyEffect(0), player.milestones)).pow(getEffect(7)));
+      return dilationBoost(Decimal.pow(getEfficiencyBase(), x / 1800).pow(getEffect(7)));
     }
   } else if (i === 2 || i === 6) {
     if (player.currentChallenge === 'ufd') {
@@ -1239,11 +1242,6 @@ function ascendCore(now, gain, dilation, updates) {
   }
   player.gameTimeInAscension = 0;
   let respecChanged = false;
-  if (player.respecStudies) {
-    player.studiesBought = [0, 0, 0];
-    player.respecStudies = false;
-    respecChanged = true;
-  }
   if (player.respecQoL) {
     player.QoLBought = [
       false, false, false, false, false, false, false, false, false];
@@ -1426,7 +1424,7 @@ function buyUpdateUpgrade(i, j) {
 }
 
 function getDilationPerSecondFromLogarithmicProgress(x) {
-  return Decimal.max(0, Decimal.pow(2, x / 3600 - 12) - 1).times(getStudyEffect(2)).div(1000);
+  return Decimal.max(0, Decimal.pow(2, x / 3600 - 12) - 1).div(1000);
 }
 
 function getDilationPerSecond() {
@@ -1492,7 +1490,6 @@ function fillInConfirmations() {
 }
 
 function fillInRespec() {
-  document.getElementById('respec-studies').checked = player.respecStudies;
   document.getElementById('respec-qol').checked = player.respecQoL;
 }
 
@@ -1690,7 +1687,7 @@ function checkForAchievementsAndLore() {
   if (challengeReward('slow') >= 60) {
     giveAchievement(33);
   }
-  if (player.studiesBought.every(x => x === 0) && player.stats.recordDevelopment[''] >= 6480000) {
+  if (player.stats.recordDevelopment[''] >= 32400000) {
     giveAchievement(35);
   }
 }
@@ -1832,98 +1829,6 @@ function toggleHardMode() {
   }
 }
 
-function applyCurrentTheoremScaling(n) {
-  if (n > 5) {
-    return 5 + Math.floor(Math.log(n - 4) / Math.log(1.5));
-  } else {
-    return n;
-  }
-}
-
-function getCurrentTheorems(x) {
-  let ret;
-  if (x === 'ascensionPoints') {
-    ret = Math.max(0, 1 + Math.floor(player.ascensionPoints.log(2)));
-  } else if (x === 'ascensions') {
-    ret = Math.max(0, 1 + Math.floor(Math.log2(player.ascensions)));
-  } else if (x === 'recordDevelopment') {
-    ret = Math.max(0, Math.floor(player.stats.recordDevelopment.ever / 720000) - 4);
-  }
-  if (x !== 'ascensions') {
-    ret = applyCurrentTheoremScaling(ret);
-  }
-  return ret;
-}
-
-function applyTheoremAtScaling(n) {
-  if (n > 5) {
-    return 5 + Math.floor(Math.pow(1.5, n - 5));
-  } else {
-    return n;
-  }
-}
-
-function getTheoremAt(x, n) {
-  if (x !== 'ascensions') {
-    n = applyTheoremAtScaling(n);
-  }
-  if (x === 'ascensionPoints') {
-    return Decimal.pow(2, n - 1);
-  } else if (x === 'ascensions') {
-    return Math.pow(2, n - 1);
-  } else if (x === 'recordDevelopment') {
-    return (n + 4) * 720000;
-  }
-}
-
-function getNextTheorem(x) {
-  return getTheoremAt(x, getCurrentTheorems(x) + 1);
-}
-
-function getTotalTheorems() {
-  return getCurrentTheorems('ascensionPoints') + getCurrentTheorems('ascensions') + getCurrentTheorems('recordDevelopment');
-}
-
-function getSpentTheorems() {
-  return [0, 1, 2].map(getStudyCost).map(x => x * (x - 1) / 2).reduce((a, b) => a + b);
-}
-
-function getStudyEffect(x, studyBought) {
-  if (studyBought === undefined) {
-    studyBought = player.studiesBought[x];
-  }
-  if (x === 0) {
-    return 1 + Math.max(0, 1 + Math.log2(studyBought)) / 10;
-  } else if (x === 1) {
-    return 1 + studyBought * getGameTimeInAscension() / 86400;
-  } else if (x === 2) {
-    return Decimal.pow(1 + getTotalDevs() / 1e9, studyBought);
-  }
-}
-
-function getStudyCost(x) {
-  return 1 + player.studiesBought[x];
-}
-
-function canBuyStudy(x) {
-  return player.ascensions > 0 && getTotalTheorems() - getSpentTheorems() >= getStudyCost(x);
-}
-
-function buyStudy(x) {
-  if (!canBuyStudy(x)) {
-    return false;
-  }
-  // Check to hopefully stop players having a slow early game.
-  if (player.ascensions === 1 && x !== 0 && player.studiesBought[0] === 0 &&
-    !confirm('It is recommended to get the milestone-boosting study in your ' +
-    'second ascension, so that early game is not too slow. Are you sure you want ' +
-    'to get the study you are getting?')) {
-    return false;
-  }
-  player.studiesBought[x]++;
-  return true;
-}
-
 function getAntiChallengesCompleted() {
   return Object.values(player.antiChallenges).reduce((a, b) => a + b);
 }
@@ -1962,31 +1867,8 @@ function buyQoL(i) {
 function updateAscensionDisplay() {
   document.getElementById('ascension-points').innerHTML = format(player.ascensionPoints);
   document.getElementById('ascensions').innerHTML = player.ascensions;
-  document.getElementById('ascension-tab-record-development-ever').innerHTML = toTime(player.stats.recordDevelopment.ever);
   document.getElementById('ascension-points-plural').innerHTML = (player.ascensionPoints.eq(1)) ? '' : 's';
   document.getElementById('ascensions-plural').innerHTML = (player.ascensions === 1) ? '' : 's';
-  let nextTheorems = [getNextTheorem('ascensionPoints'), getNextTheorem('ascensions'), getNextTheorem('recordDevelopment')];
-  document.getElementById('next-theorem-ascension-points').innerHTML = format(nextTheorems[0]);
-  document.getElementById('next-theorem-ascensions').innerHTML = nextTheorems[1];
-  document.getElementById('next-theorem-ascension-tab-record-development-ever').innerHTML = toTime(nextTheorems[2]);
-  document.getElementById('next-theorem-ascension-points-plural').innerHTML = (nextTheorems[0].eq(1)) ? '' : 's';
-  document.getElementById('next-theorem-ascensions-plural').innerHTML = (nextTheorems[1] === 1) ? '' : 's';
-  let total = getTotalTheorems();
-  let spent = getSpentTheorems();
-  document.getElementById('theorems').innerHTML = total;
-  document.getElementById('spent-theorems').innerHTML = spent;
-  document.getElementById('unspent-theorems').innerHTML = total - spent;
-  document.getElementById('theorems-plural').innerHTML = (total === 1) ? '' : 's';
-  for (let i = 0; i <= 2; i++) {
-    document.getElementById('study-' + i + '-effect').innerHTML = format(getStudyEffect(i));
-    document.getElementById('study-' + i + '-next-effect').innerHTML = format(getStudyEffect(i, player.studiesBought[i] + 1));
-    let cost = getStudyCost(i);
-    document.getElementById('study-' + i + '-cost').innerHTML = cost;
-    document.getElementById('study-' + i + '-cost-plural').innerHTML = (cost === 1) ? '' : 's';
-    document.getElementById('study-' + i + '-bought').innerHTML = player.studiesBought[i];
-    document.getElementById('study-' + i + '-bought-plural').innerHTML = (player.studiesBought[i] === 1) ? '' : 's';
-    document.getElementById('study-' + i + '-buyable').innerHTML = canBuyStudy(i) ? 'buyable' : 'unbuyable';
-  }
 }
 
 function updateAntiChallengesDisplay() {
