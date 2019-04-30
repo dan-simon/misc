@@ -11,7 +11,6 @@
     <button id="lore-button" onclick="setTab('lore')">Lore</button>
     <button id="update-button" onclick="setTab('update')" style="display: none;">Update</button>
     <button id="challenges-button" onclick="setTab('challenges')" style="display: none;">Challenges</button>
-    <button id="ascension-button" onclick="setTab('ascension')" style="display: none;">Ascension</button>
     <button id="anti-challenges-button" onclick="setTab('anti-challenges')" style="display: none;">Anti-challenges</button>
   </span>
   <div id="main-div" style="display: none;">
@@ -67,7 +66,7 @@
         <td></td>
       </tr>
     </table>
-    <button onclick="update()" style="width: 200px;">Release an update.<br/>(<span id="update-gain"></span>)</button><button onclick="ascend()" style="width: 200px;">Ascend.<br/>(<span id="ascension-gain"></span>)</button>
+    <button onclick="update()" style="width: 200px;">Release an update.<br/>(<span id="update-gain"></span>)</button><button onclick="ascend()" style="width: 200px;">Ascend.</button>
     <br/>
     <span id="auto-dev-span" style="display: none;">Auto dev assignment: <input id="auto-dev-on" onclick="toggleAutoOn('dev')" type="checkbox"></input></span>
     <br/>
@@ -79,8 +78,6 @@
     </span>
     <br/>
     <span id="auto-update-span" style="display: none;">Auto-update: current setting: <button id="auto-update-setting" onclick="nextAutoSetting('update')"></button> value: <input id="auto-update-value" type="text" onchange="updateAutoValue('update')"></input>, on: <input id="auto-update-on" onclick="toggleAutoOn('update')" type="checkbox"></input></span>
-    <br/>
-    <span id="auto-ascension-span" style="display: none;">Auto-ascension: current setting: <button id="auto-ascension-setting" onclick="nextAutoSetting('ascension')"></button> value: <input id="auto-ascension-value" type="text" onchange="updateAutoValue('ascension')"></input>, on: <input id="auto-ascension-on" onclick="toggleAutoOn('ascension')" type="checkbox"></input></span>
     <br/>
     <span id="auto-help-span" style="display: none;">You can input an amount of time as a number of seconds, or in 12:34:56 format.</span>
   </div>
@@ -141,7 +138,7 @@
     <br/>
     <span>Can you get infinite UP?: Get 1.80e308 update points. <span id="ach-status-26">&#x2718;</span></span>
     <br/>
-    <span>Another universe, another layer: Ascend. Reward: Efficiency and meta-efficiency are 2.2x per 30 minutes instead of 2x.<span id="ach-status-27">&#x2718;</span></span>
+    <span>Another universe, another layer: Ascend. Reward: Efficiency and meta-efficiency are 2.2x per 30 minutes instead of 2x. <span id="ach-status-27">&#x2718;</span></span>
     <br/>
     <span>I never liked dilation stuff anyway: Ascend with zero dilation. <span id="ach-status-28">&#x2718;</span></span>
     <br/>
@@ -149,13 +146,13 @@
     <br/>
     <span>Ascending in a lonely world: Ascend without ever having more than one dev. <span id="ach-status-30">&#x2718;</span></span>
     <br/>
-    <span>Truly anti-challenged: Complete all the anti-challenges. <span id="ach-status-31">&#x2718;</span></span>
+    <span>Truly anti-challenged: Complete all the anti-challenges. Reward: Ascension only resets update upgrades and what update resets. <span id="ach-status-31">&#x2718;</span></span>
     <br/>
     <span>Way too hard: Get to 12:00:00 in Upgradeless. <span id="ach-status-32">&#x2718;</span></span>
     <br/>
     <span>I am speed: Get the Slow reward to be at least 60x. <span id="ach-status-33">&#x2718;</span></span>
     <br/>
-    <span>Is this the final update?: Ascend having updated only once. <span id="ach-status-34">&#x2718;</span></span>
+    <span>What the AD devs are doing: Ascend with zero updates. <span id="ach-status-34">&#x2718;</span></span>
     <br/>
     <span>It's over 9000: Reach 9000:00:00 record development. <span id="ach-status-35">&#x2718;</span></span>
     <hr/>
@@ -360,9 +357,6 @@
       </tr>
     </table>
   </div>
-  <div id="ascension-div" style="display: none;">
-    <span>You have <span id="ascension-points">0</span> ascension point<span id="ascension-points-plural"></span> and <span id="ascensions">0</span> ascension<span id="ascensions-plural"></span>.</span>
-  </div>
   <div id="anti-challenges-div" style="display: none;">
     <span>You have completed <span id="anti-challenges">0</span> anti-challenge<span id="anti-challenges-plural"></span>.</span>
     <br/>
@@ -392,11 +386,11 @@
       <tr>
         <td><button style="height: 80px; width: 280px;" onclick="buyQoL(0)">Start ascensions with 1 endgame experience and 1 patience experience, and keep all the headstart experience you've ever gotten.<br/><span id="qol-0-bought"></span></button></td>
         <td><button style="height: 80px; width: 280px;" onclick="buyQoL(1)">Start ascensions with all update upgrades.<br/><span id="qol-1-bought"></span></button></td>
-        <td><button style="height: 80px; width: 280px;" onclick="buyQoL(2)">Start ascensions with half a day in current ascension.<br/><span id="qol-2-bought"></span></button></td>
+        <td><button style="height: 80px; width: 280px;" onclick="buyQoL(2)">You only need 1.55e231 update points to ascend.<br/><span id="qol-2-bought"></span></button></td>
       </tr>
       <tr>
-        <td><button style="height: 80px; width: 280px;" onclick="buyQoL(3)">Ascension autobuyer and upgrade point auto-assigner<br/><span id="qol-3-bought"></span></button></td>
-        <td><button style="height: 80px; width: 280px;" onclick="buyQoL(4)">Double ascension point gain.<br/><span id="qol-4-bought"></span></button></td>
+        <td><button style="height: 80px; width: 280px;" onclick="buyQoL(3)">Upgrade point auto-assigner.<br/><span id="qol-3-bought"></span></button></td>
+        <td><button style="height: 80px; width: 280px;" onclick="buyQoL(4)">Produce 100 updates per second.<br/><span id="qol-4-bought"></span></button></td>
         <td><button style="height: 80px; width: 280px;" onclick="buyQoL(5)">While you can prestige, your meta-efficiency and meta-refactoring approach their values on prestige by 0.1% per second.<br/><span id="qol-5-bought"></span></button></td>
       </tr>
       <tr>

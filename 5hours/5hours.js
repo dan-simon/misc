@@ -151,7 +151,6 @@ function fixPlayer () {
     }
   }
   if (!('ascensions' in player)) {
-    player.ascensionPoints = new Decimal(0);
     player.ascensions = 0;
     player.antiChallenges = {
       'logarithmic': false,
@@ -167,18 +166,10 @@ function fixPlayer () {
     player.QoLBought = [
       false, false, false, false, false, false, false, false, false];
     player.respecQoL = false;
-    player.gameTimeInAscension = 0;
     player.savedHeadstartExperience = new Decimal(0);
     player.stats.last.ascension = Date.now();
-    player.stats.last.ascensionPointGain = new Decimal(0);
     player.stats.recordDevelopment.ever = player.stats.recordDevelopment[''];
     player.options.confirmations.ascension = true;
-    player.auto.ascension = {
-      setting: 'update points',
-      value: new Decimal(0),
-      displayValue: '0',
-      on: false
-    }
     player.auto.assign = {
       list: [],
       index: 0,
@@ -192,6 +183,10 @@ function fixPlayer () {
     // but it shouldn't be an issue for new saves and is correct 99.99%
     // of the time for old saves.
     player.achievements.stats.ascendingInALonelyWorld = false;
+  }
+  if (!('dilationShards' in player)) {
+    player.dilationShards = new Decimal(0);
+    player.updatesShards = 0;
   }
   if (!('gameStart' in player.stats)) {
     player.stats.last.gameStart = Date.now();
@@ -207,11 +202,11 @@ function convertSaveToDecimal () {
     player.experience[i] = new Decimal(player.experience[i]);
     player.power[i] = new Decimal(player.power[i]);
   }
-  player.ascensionPoints = new Decimal(player.ascensionPoints);
-  for (let i = 0; i <= 3; i++) {
+  for (let i = 0; i <= 2; i++) {
     player.auto[AUTO_LIST[i]].value = new Decimal(player.auto[AUTO_LIST[i]].value);
   }
   player.dilation = new Decimal(player.dilation);
+  player.dilationShards = new Decimal(player.dilationShards);
   player.savedHeadstartExperience = new Decimal(player.savedHeadstartExperience);
 }
 
@@ -264,6 +259,7 @@ let initialPlayer = {
   enlightened: 0,
   updatePoints: new Decimal(0),
   updates: 0,
+  updatesShards: 0,
   experience: [new Decimal(0), new Decimal(0), new Decimal(0)],
   power: [new Decimal(0), new Decimal(0), new Decimal(0)],
   upgrades: [[false, false, false], [false, false, false]],
@@ -288,12 +284,6 @@ let initialPlayer = {
     },
     update: {
       setting: 'development',
-      value: new Decimal(0),
-      displayValue: '0',
-      on: false
-    },
-    ascension: {
-      setting: 'update points',
       value: new Decimal(0),
       displayValue: '0',
       on: false
@@ -340,11 +330,9 @@ let initialPlayer = {
       ascension: Date.now(),
       gameStart: Date.now(),
       prestigeType: null,
-      updatePointGain: new Decimal(0),
-      ascensionPointGain: new Decimal(0)
+      updatePointGain: new Decimal(0)
     }
   },
-  ascensionPoints: new Decimal(0),
   ascensions: 0,
   antiChallenges: {
     'logarithmic': false,
@@ -359,7 +347,6 @@ let initialPlayer = {
   },
   QoLBought: [false, false, false, false, false, false, false, false, false],
   respecQoL: false,
-  gameTimeInAscension: 0,
   savedHeadstartExperience: new Decimal(0),
   achievements: {
     list: [
@@ -377,6 +364,7 @@ let initialPlayer = {
   },
   lore: [],
   dilation: new Decimal(0),
+  dilationShards: new Decimal(0),
   lastUpdate: Date.now()
 }
 
@@ -510,8 +498,34 @@ function addToUpdatePower(diff) {
   }
 }
 
+function getUpdatesPerSecond() {
+  if (hasQoL(4)) {
+    return 100;
+  } else {
+    return 0;
+  }
+}
+
+function addToUpdates(diff) {
+  player.updates += getUpdatesPerSecond() * diff;
+}
+
 function addToDilation(diff) {
   player.dilation = player.dilation.plus(getDilationPerSecond().times(diff));
+}
+
+function fragment(x) {
+  if (player[x] instanceof Decimal) {
+    player[x + 'Shards'] = player[x + 'Shards'].plus(player[x]);
+    player[x] = new Decimal(0);
+  } else {
+    player[x + 'Shards'] += player[x];
+    player[x] = 0;
+  }
+}
+
+function getSpeedEffect(x) {
+  return 1 + Math.pow(x.toNumber(), 0.1) / 10;
 }
 
 function getGameSpeed() {
@@ -520,6 +534,8 @@ function getGameSpeed() {
     speed /= 1000;
   }
   speed *= challengeReward('slow');
+  speed *= getSpeedEffect(player.updatesShards);
+  speed *= getSpeedEffect(player.dilationShards);
   return speed;
 }
 
@@ -556,13 +572,7 @@ let AUTO_SETTINGS = {
     'update points',
     'X times last update points',
     'real seconds since last update'
-  ],
-  'ascension': [
-    'update points',
-    'ascension points',
-    'X times last ascension points',
-    'real seconds since last ascension'
-  ],
+  ]
 }
 
 function shouldEnlightened(x) {
@@ -629,18 +639,6 @@ function checkForAutoUpdate() {
   }
 }
 
-function checkForAutoAscension() {
-  let table = {
-    'update points': x => player.updatePoints.gte(x),
-    'ascension points': x => getAscensionGain().gte(x),
-    'X times last ascension points': x => getAscensionGain().gte(player.stats.last.ascensionPointGain.times(x)),
-    'real seconds since last ascension': x => Date.now() - player.stats.last.ascension >= x.toNumber() * 1000
-  }
-  if (table[player.auto.ascension.setting](player.auto.ascension.value)) {
-    ascend(true);
-  }
-}
-
 const EXPERIENCE_TYPES_LIST = ['endgame', 'patience', 'headstart'];
 
 function checkForAutoAssign() {
@@ -669,9 +667,6 @@ function gameCode(diff) {
   if (upgradeActive(0, 2) && player.auto.dev.on) {
     autoAssignDevs();
   }
-  if (hasAuto('ascension') && player.auto.ascension.on) {
-    checkForAutoAscension();
-  }
   if (hasAuto('update') && player.auto.update.on) {
     checkForAutoUpdate();
   }
@@ -687,15 +682,11 @@ function gameCode(diff) {
   addToProgress(diff);
   addToPatience(diff);
   addToUpdatePower(diff);
+  addToUpdates(diff);
   addToDilation(diff);
-  addToAscensionTime(diff);
   checkForMilestones();
   checkForRecordDevelopement();
   checkForAchievementsAndLore();
-}
-
-function addToAscensionTime(diff) {
-  player.gameTimeInAscension += diff;
 }
 
 function checkForRecordDevelopement() {
@@ -789,7 +780,7 @@ function softcapPatienceMeter(x) {
 }
 
 function getEfficiencyBase() {
-  if (player.ascensions > 0) {
+  if (hasAchievement(27)) {
     return 2.2;
   } else {
     return 2;
@@ -864,12 +855,12 @@ function canPrestige(i) {
 }
 
 function confirmPrestige(i) {
-  let whatWillReset = 'development, efficiency, refactoring, recruitment, patience, patience meter, and times enlightened';
+  let whatWillReset = 'Your development, efficiency, refactoring, recruitment, patience, patience meter, and times enlightened';
   if (canPrestigeWithoutGain(i) &&
   player.options.confirmations.prestigeWithoutGain) {
-    return confirm('Are you sure you want to prestige? You will gain nothing, and your ' + whatWillReset + ' will reset.');
+    return confirm('Are you sure you want to prestige? ' + whatWillReset + ' will reset, and you will gain nothing.');
   } else if (player.options.confirmations.prestige) {
-    return confirm('Are you sure you want to prestige? Your ' + whatWillReset + ' will reset.');
+    return confirm('Are you sure you want to prestige? ' + whatWillReset + ' will reset.');
   } else {
     return true;
   }
@@ -962,8 +953,16 @@ function canUpdate() {
   return player.progress[0] >= getChallengeGoal(player.currentChallenge);
 }
 
+function getAscendThreshold() {
+  if (hasQoL(2)) {
+    return Math.pow(Number.MAX_VALUE, 3 / 4);
+  } else {
+    return Number.MAX_VALUE;
+  }
+}
+
 function canAscend() {
-  return player.updatePoints.gte(Number.MAX_VALUE);
+  return player.updatePoints.gte(getAscendThreshold());
 }
 
 const CHALLENGE_GOALS = {
@@ -1196,8 +1195,7 @@ function giveAscensionAchievements(now, dilation, updates) {
   if (player.achievements.stats.ascendingInALonelyWorld) {
     giveAchievement(30);
   }
-  // Can't be 0 with the current state of the game, and the achievement says 1.
-  if (updates === 1) {
+  if (updates === 0) {
     giveAchievement(34);
   }
 }
@@ -1216,31 +1214,35 @@ function removeForgottenLore() {
   }
 }
 
-function ascendCore(now, gain, dilation, updates) {
+function ascendCore(now, dilation, updates) {
   for (let i = 0; i <= 7; i++) {
     player.progress[i] = 0;
     player.devs[i] = 0;
   }
   player.milestones = 0;
   player.enlightened = 0;
-  player.updatePoints = new Decimal(0);
-  player.updates = 0;
   player.upgrades = [[false, false, false], [false, false, false]];
-  player.dilation = new Decimal(0);
-  player.savedHeadstartExperience = player.savedHeadstartExperience.plus(
-    player.experience[2]);
-  for (let i = 0; i <= 2; i++) {
-    player.experience[i] = new Decimal(0);
-    player.power[i] = new Decimal(0);
+  if (!hasAchievement(31)) {
+    player.updatePoints = new Decimal(0);
+    player.updates = 0;
+    player.updatesShards = new Decimal(0);
+    player.dilation = new Decimal(0);
+    player.dilationShards = new Decimal(0);
+    player.savedHeadstartExperience = player.savedHeadstartExperience.plus(
+      player.experience[2]);
+    for (let i = 0; i <= 2; i++) {
+      player.experience[i] = new Decimal(0);
+      player.power[i] = new Decimal(0);
+    }
+    player.stats.recordDevelopment[''] = 0;
+    for (let i in CHALLENGE_UNLOCKS) {
+      if (!player.antiChallenges[i]) {
+        player.stats.recordDevelopment[i] = 0;
+      }
+    }
+    removeForgottenLore();
   }
   player.currentChallenge = '';
-  player.stats.recordDevelopment[''] = 0;
-  for (let i in CHALLENGE_UNLOCKS) {
-    if (!player.antiChallenges[i]) {
-      player.stats.recordDevelopment[i] = 0;
-    }
-  }
-  player.gameTimeInAscension = 0;
   let respecChanged = false;
   if (player.respecQoL) {
     player.QoLBought = [
@@ -1252,14 +1254,12 @@ function ascendCore(now, gain, dilation, updates) {
     fillInRespec();
   }
   giveAscensionAchievements(now, dilation, updates);
-  removeForgottenLore();
   player.stats.last.ascension = now;
   player.stats.last.update = now;
   player.stats.last.prestige = now;
   player.stats.last.enlightened = now;
   player.stats.last.prestigeType = null;
   player.stats.last.updatePointGain = new Decimal(0);
-  player.stats.last.ascensionPointGain = gain;
   player.auto.assign.index = 0;
   player.achievements.stats.savingTokens = true;
   player.achievements.stats.noDevsForThat = true;
@@ -1279,21 +1279,13 @@ function getUpdateGain() {
   return Decimal.floor(Decimal.pow(base, player.progress[0] / 3600 - 5));
 }
 
-function getAscensionGain() {
-  let ret = Decimal.pow(10, player.updatePoints.log(Number.MAX_VALUE) - 1);
-  if (hasQoL(4)) {
-    ret = ret.times(2);
-  }
-  return Decimal.floor(ret);
-}
-
 function confirmUpdate() {
-  let whatWillReset = 'meta-efficiency, meta-refactoring, and progress milestones, along with everything prestige resets,';
+  let whatWillReset = 'Your meta-efficiency, meta-refactoring, and progress milestones, along with everything prestige resets,';
   if (player.updates > 0) {
     whatWillReset = whatWillReset.replace('and progress milestones', 'progress milestones, and endgame/patience/headstart power')
   }
   if (player.options.confirmations.update) {
-    return confirm('Are you sure you want to update? Your ' + whatWillReset + ' will reset.');
+    return confirm('Are you sure you want to update? ' + whatWillReset + ' will reset.');
   } else {
     return true;
   }
@@ -1330,12 +1322,15 @@ function update(noConfirm) {
 }
 
 function confirmAscend() {
-  let whatWillReset = 'update points, updates, endgame/patience/headstart efficiency, update upgrades, dilation, and challenge completions, along with everything update resets,';
+  let whatWillReset = 'Your update points, updates, update shards, endgame/patience/headstart efficiency, update upgrades, dilation, dilation shards, and challenge completions, along with everything update resets,';
   if (player.ascensions > 0) {
     whatWillReset = whatWillReset.replace('challenge completions', 'completions of challenges where the corresponding anti-challenge is not yet completed');
   }
+  if (hasAchievement(31)) {
+    whatWillReset = 'Your update upgrades, along with everything update resets';
+  }
   if (player.options.confirmations.ascension) {
-    return confirm('Are you sure you want to ascend? Your ' + whatWillReset + ' will reset.');
+    return confirm('Are you sure you want to ascend? ' + whatWillReset + ' will reset.');
   } else {
     return true;
   }
@@ -1343,7 +1338,6 @@ function confirmAscend() {
 
 function ascend(noConfirm) {
   if (canAscend() && (noConfirm || confirmAscend())) {
-    let gain = getAscensionGain();
     if (player.ascensions > 0) {
       for (let i in CHALLENGE_UNLOCKS) {
         if (player.stats.recordDevelopment[i] === 0 && !player.antiChallenges[i]) {
@@ -1351,12 +1345,11 @@ function ascend(noConfirm) {
         }
       }
     }
-    player.ascensionPoints = player.ascensionPoints.plus(gain);
     player.ascensions++;
     let now = Date.now();
     let dilation = player.dilation;
     let updates = player.updates;
-    ascendCore(now, gain, dilation, updates);
+    ascendCore(now, dilation, updates);
   }
 }
 
@@ -1461,10 +1454,10 @@ function fillInAutoDev () {
   document.getElementById('auto-dev-on').checked = player.auto.dev.on;
 }
 
-let AUTO_LIST = ['enlightened', 'prestige', 'update', 'ascension'];
+let AUTO_LIST = ['enlightened', 'prestige', 'update'];
 
 function fillInAutoOther () {
-  for (let i = 0; i <= 3; i++) {
+  for (let i = 0; i <= 2; i++) {
     document.getElementById('auto-' + AUTO_LIST[i] + '-setting').innerHTML = player.auto[AUTO_LIST[i]].setting;
     document.getElementById('auto-' + AUTO_LIST[i] + '-value').value = player.auto[AUTO_LIST[i]].displayValue;
     document.getElementById('auto-' + AUTO_LIST[i] + '-on').checked = player.auto[AUTO_LIST[i]].on;
@@ -1541,7 +1534,7 @@ function toggleAutoPrestigeAlternate() {
 }
 
 function hasAuto(x) {
-  if (x === 'ascension' || x === 'assign') {
+  if (x === 'assign') {
     return hasQoL(3);
   }
   let table = {
@@ -1556,8 +1549,12 @@ function getAchievementsEffect() {
   return Math.pow(1.1, player.achievements.number);
 }
 
+function hasAchievement(i) {
+  return player.achievements.list[i];
+}
+
 function giveAchievement(i) {
-  if (!player.achievements.list[i]) {
+  if (!hasAchievement(i)) {
     player.achievements.list[i] = true;
     player.achievements.number++;
     updateAchievementDisplay();
@@ -1729,7 +1726,7 @@ const LORE_LIST = [
   'As you say this, you remember how far you\'ve gone in your quest to make a game, and how far you\'ve come since you\'ve started. You also recall how, in playing, the person you\'re talking to must have gone through a similar journey. You hear the voice in your mind say "So did I" [not really, making this game was rather easy, but please ignore this bracketed part OK?], and you smile.'
 ]
 
-const TAB_LIST = ['main', 'achievements', 'lore', 'update', 'challenges', 'ascension', 'anti-challenges'];
+const TAB_LIST = ['main', 'achievements', 'lore', 'update', 'challenges', 'anti-challenges'];
 
 function updateTabButtonDisplay () {
   if (player.updates > 0 || player.ascensions > 0) {
@@ -1743,10 +1740,8 @@ function updateTabButtonDisplay () {
     document.getElementById('challenges-button').style.display = 'none';
   }
   if (player.ascensions > 0) {
-    document.getElementById('ascension-button').style.display = '';
     document.getElementById('anti-challenges-button').style.display = '';
   } else {
-    document.getElementById('ascension-button').style.display = 'none';
     document.getElementById('anti-challenges-button').style.display = 'none';
   }
 }
@@ -1793,7 +1788,7 @@ function updateAchievementDisplay() {
   document.getElementById('total-achievements-plural').innerHTML = (player.achievements.number === 1) ? '' : 's';
   document.getElementById('achievements-effect').innerHTML = format(getAchievementsEffect());
   for (let i = 0; i <= 35; i++) {
-    if (player.achievements.list[i]) {
+    if (hasAchievement(i)) {
       document.getElementById('ach-status-' + i).innerHTML = '&#x2714;';
     } else {
       document.getElementById('ach-status-' + i).innerHTML = '&#x2718;';
@@ -1845,14 +1840,6 @@ function canBuyQoL(i) {
   return player.ascensions > 0 && getTotalQoLPoints() - getSpentQoLPoints() >= 1 && !player.QoLBought[i];
 }
 
-function getGameTimeInAscension() {
-  if (hasQoL(2)) {
-    return player.gameTimeInAscension + 43200;
-  } else {
-    return player.gameTimeInAscension;
-  }
-}
-
 function hasQoL(i) {
   return player.QoLBought[i];
 }
@@ -1862,13 +1849,6 @@ function buyQoL(i) {
     return false;
   }
   player.QoLBought[i] = true;
-}
-
-function updateAscensionDisplay() {
-  document.getElementById('ascension-points').innerHTML = format(player.ascensionPoints);
-  document.getElementById('ascensions').innerHTML = player.ascensions;
-  document.getElementById('ascension-points-plural').innerHTML = (player.ascensionPoints.eq(1)) ? '' : 's';
-  document.getElementById('ascensions-plural').innerHTML = (player.ascensions === 1) ? '' : 's';
 }
 
 function updateAntiChallengesDisplay() {
@@ -1937,14 +1917,8 @@ function updateDisplay () {
   } else {
     document.getElementById('update-gain').innerHTML = 'requires ' + toTime(getChallengeGoal(player.currentChallenge)) + ' development';
   }
-  if (canAscend()) {
-    let gain = getAscensionGain();
-    document.getElementById('ascension-gain').innerHTML = 'gain ' + format(gain) + ' ascension point' + (gain.eq(1) ? '' : 's');
-  } else {
-    document.getElementById('ascension-gain').innerHTML = 'requires ' + format(Number.MAX_VALUE) + ' update points';
-  }
   document.getElementById('update-points').innerHTML = format(player.updatePoints);
-  document.getElementById('updates').innerHTML = player.updates;
+  document.getElementById('updates').innerHTML = Math.round(player.updates);
   document.getElementById('power-gain-per-experience').innerHTML = format(getPowerGainPerExperience());
   for (let i = 0; i <= 2; i++) {
     document.getElementById('update-experience-span-' + i).innerHTML = format(getExperience(i));
@@ -1962,7 +1936,7 @@ function updateDisplay () {
     document.getElementById('auto-dev-row').style.display = 'none';
     document.getElementById('auto-dev-span').style.display = 'none';
   }
-  for (let i = 0; i <= 3; i++) {
+  for (let i = 0; i <= 2; i++) {
     if (hasAuto(AUTO_LIST[i])) {
       document.getElementById('auto-' + AUTO_LIST[i] + '-span').style.display = '';
     } else {
@@ -1983,9 +1957,6 @@ function updateDisplay () {
   }
   if (player.tab === 'challenges') {
     updateChallengesDisplay();
-  }
-  if (player.tab === 'ascension') {
-    updateAscensionDisplay();
   }
   if (player.tab === 'anti-challenges') {
     updateAntiChallengesDisplay();
@@ -2010,7 +1981,7 @@ function updateDisplay () {
   document.getElementById('unassigned-devs-plural').innerHTML = (getUnassignedDevs() === 1) ? '' : 's';
   document.getElementById('progress-milestones-plural').innerHTML = (player.milestones === 1) ? '' : 's';
   document.getElementById('update-points-plural').innerHTML = (player.updatePoints.eq(1)) ? '' : 's';
-  document.getElementById('updates-plural').innerHTML = (player.updates === 1) ? '' : 's';
+  document.getElementById('updates-plural').innerHTML = (Math.round(player.updates) === 1) ? '' : 's';
   document.getElementById('enlightened-plural').innerHTML = (getTotalEnlightened() === 1) ? '' : 's';
 }
 
