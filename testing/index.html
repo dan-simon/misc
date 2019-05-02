@@ -4,7 +4,12 @@
 <body id="body" style="height: 95vh; ">
   <textarea id="input"></textarea>
   <br/>
+  <textarea id="input2"></textarea>
+  <br/>
   <button id="btn">Button</button>
 </body>
-<script>document.getElementById('input').onkeyup = () => {document.getElementById('btn').style = document.getElementById('input').value}</script>
+<script>
+  document.getElementById('input').onkeyup = () => {document.getElementById('btn').innerHTML = document.getElementById('input').value};
+  document.getElementById('input2').onkeyup = () => {document.getElementById('btn').style = document.getElementById('input2').value};
+</script>
 </html>
