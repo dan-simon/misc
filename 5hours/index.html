@@ -50,9 +50,9 @@
         <td>Devs: <span id="devs-2"></span><br/><button onclick="addDev(2)">+</button><button onclick="subtractDev(2)">-</button><button onclick="maxDev(2)">max</button><button onclick="zeroDev(2)">0</button></td>
         <td>Devs: <span id="devs-3"></span><br/><button onclick="addDev(3)">+</button><button onclick="subtractDev(3)">-</button><button onclick="maxDev(3)">max</button><button onclick="zeroDev(3)">0</button></td>
         <td>Devs: <span id="devs-4"></span><br/><button onclick="addDev(4)">+</button><button onclick="subtractDev(4)">-</button><button onclick="maxDev(4)">max</button><button onclick="zeroDev(4)">0</button></td>
-        <td><button style="-webkit-appearance: default-button; height: 70px;" onclick="prestige(5)">Prestige to boost meta-efficiency<br/><span id="prestige-5"></span></button></td>
-        <td><button style="-webkit-appearance: default-button; height: 70px;" onclick="prestige(6)">Prestige to boost meta-refactoring<br/><span id="prestige-6"></span></button></td>
-        <td><button style="-webkit-appearance: default-button; height: 70px;" onclick="enlightened()">Become enlightened: <span id="enlightened-desc"></span></button></td>
+        <td><button style="height: 70px;" onclick="prestige(5)">Prestige to boost meta-efficiency<br/><span id="prestige-5"></span></button></td>
+        <td><button style="height: 70px;" onclick="prestige(6)">Prestige to boost meta-refactoring<br/><span id="prestige-6"></span></button></td>
+        <td><button style="height: 70px;" onclick="enlightened()">Become enlightened: <span id="enlightened-desc"></span></button></td>
       </tr>
       <tr id="auto-dev-row">
         <td>Fraction of devs to assign: <input id="auto-dev-0" type="text" onchange="updateAutoDev(0)"></input></td>
@@ -65,7 +65,7 @@
         <td></td>
       </tr>
     </table>
-    <button style="-webkit-appearance: default-button;" onclick="update()">Release an update.<br/>(<span id="update-gain"></span>)</button>
+    <button onclick="update()">Release an update.<br/>(<span id="update-gain"></span>)</button>
     <br/>
     <span id="auto-dev-span" style="display: none;">Auto dev assignment: <input id="auto-dev-on" onclick="toggleAutoOn('dev')" type="checkbox"></input></span>
     <br/>
