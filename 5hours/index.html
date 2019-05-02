@@ -67,12 +67,12 @@
         <td><span id="effect-span-6"></span>x additional slower scaling (additive with refactoring)</td>
       </tr>
       <tr>
-        <td><button style="width: 150px; height: 70px; border: 1px solid;" onclick="enlightened()">Become enlightened: <span id="enlightened-desc"></span></button></td>
-        <td><button style="width: 150px; height: 70px; border: 1px solid;" onclick="prestige(5)">Prestige to boost meta-efficiency<br/><span id="prestige-5"></span></button></td>
-        <td><button style="width: 150px; height: 70px; border: 1px solid;" onclick="prestige(6)">Prestige to boost meta-refactoring<br/><span id="prestige-6"></span></button></td>
+        <td><button style="width: 150px; height: 70px; border: 1px solid; background-color: #999999;" onclick="enlightened()">Become enlightened: <span id="enlightened-desc"></span></button></td>
+        <td><button style="width: 150px; height: 70px; border: 1px solid; background-color: #999999;" onclick="prestige(5)">Prestige to boost meta-efficiency<br/><span id="prestige-5"></span></button></td>
+        <td><button style="width: 150px; height: 70px; border: 1px solid; background-color: #999999;" onclick="prestige(6)">Prestige to boost meta-refactoring<br/><span id="prestige-6"></span></button></td>
       </tr>
       <tr>
-        <td><button style="width: 150px; height: 70px; border: 1px solid;" onclick="update()">Release an update.<br/>(<span id="update-gain"></span>)</button></td>
+        <td><button style="width: 150px; height: 70px; border: 1px solid; background-color: #999999;" onclick="update()">Release an update.<br/>(<span id="update-gain"></span>)</button></td>
         <td></td>
         <td></td>
       </tr>
@@ -179,14 +179,14 @@
         <td><button style="width: 300px;" onclick="assignAll(2)">Turn all your update points into headstart experience.</button></td>
       </tr>
       <tr>
-        <td><button style="height: 60px; width: 300px; border: 1px solid;" onclick="buyUpdateUpgrade(0, 0)">Scaling becomes slower after 4:30:00.<br/>Cost: <span id="up-0-0-cost"></span> endgame experience<span id="up-0-0-bought"></span></button></td>
-        <td><button style="height: 60px; width: 300px; border: 1px solid;" onclick="buyUpdateUpgrade(0, 1)">Patience affects the patience meter more strongly.<br/>Cost: <span id="up-0-1-cost"></span> patience experience<span id="up-0-1-bought"></span></button></td>
-        <td><button style="height: 60px; width: 300px; border: 1px solid;" onclick="buyUpdateUpgrade(0, 2)">Start with 10 devs, and unlock auto dev assignment.<br/>Cost: <span id="up-0-2-cost"></span> headstart experience<span id="up-0-2-bought"></span></button></td>
+        <td><button style="height: 60px; width: 300px; border: 1px solid; background-color: #999999;" onclick="buyUpdateUpgrade(0, 0)">Scaling becomes slower after 4:30:00.<br/>Cost: <span id="up-0-0-cost"></span> endgame experience<span id="up-0-0-bought"></span></button></td>
+        <td><button style="height: 60px; width: 300px; border: 1px solid; background-color: #999999;" onclick="buyUpdateUpgrade(0, 1)">Patience affects the patience meter more strongly.<br/>Cost: <span id="up-0-1-cost"></span> patience experience<span id="up-0-1-bought"></span></button></td>
+        <td><button style="height: 60px; width: 300px; border: 1px solid; background-color: #999999;" onclick="buyUpdateUpgrade(0, 2)">Start with 10 devs, and unlock auto dev assignment.<br/>Cost: <span id="up-0-2-cost"></span> headstart experience<span id="up-0-2-bought"></span></button></td>
       </tr>
       <tr>
-        <td><button style="height: 60px; width: 300px; border: 1px solid;" onclick="buyUpdateUpgrade(1, 0)">Improve the update point gain formula.<br/>Cost: <span id="up-1-0-cost"></span> endgame experience<span id="up-1-0-bought"></span></button></td>
-        <td><button style="height: 60px; width: 300px; border: 1px solid;" onclick="buyUpdateUpgrade(1, 1)">The patience meter increases with greatly reduced effect past 1.<br/>Cost: <span id="up-1-1-cost"></span> patience experience<span id="up-1-1-bought"></span></button></td>
-        <td><button style="height: 60px; width: 300px; border: 1px solid;" onclick="buyUpdateUpgrade(1, 2)">All your devs act as working on development, in addition to whatever they're working on.<br/>Cost: <span id="up-1-2-cost"></span> headstart experience<span id="up-1-2-bought"></span></button></td>
+        <td><button style="height: 60px; width: 300px; border: 1px solid; background-color: #999999;" onclick="buyUpdateUpgrade(1, 0)">Improve the update point gain formula.<br/>Cost: <span id="up-1-0-cost"></span> endgame experience<span id="up-1-0-bought"></span></button></td>
+        <td><button style="height: 60px; width: 300px; border: 1px solid; background-color: #999999;" onclick="buyUpdateUpgrade(1, 1)">The patience meter increases with greatly reduced effect past 1.<br/>Cost: <span id="up-1-1-cost"></span> patience experience<span id="up-1-1-bought"></span></button></td>
+        <td><button style="height: 60px; width: 300px; border: 1px solid; background-color: #999999;" onclick="buyUpdateUpgrade(1, 2)">All your devs act as working on development, in addition to whatever they're working on.<br/>Cost: <span id="up-1-2-cost"></span> headstart experience<span id="up-1-2-bought"></span></button></td>
       </tr>
     </table>
   </div>
@@ -197,7 +197,7 @@
     <table style="table-layout: fixed; width: 1100px;">
       <tr>
         <td id="logarithmic-td" style="display: none;">
-          <button style="height: 150px; width: 350px; border: 1px solid;" onclick="enterChallenge('logarithmic')">
+          <button style="height: 150px; width: 350px; border: 1px solid; background-color: #999999;" onclick="enterChallenge('logarithmic')">
             Logarithmic
             <br/>
             Overall production multiplier, overall scaling slowdown, and total devs are severely nerfed, but also boosted by total challenge completions. Reaching certain milestones (01:00:00 to 05:00:00, every 00:30:00) will give you permanent rewards, even if you can't finish. If you get far enough in this challenge (12:00:00), you produce dilation which boosts the exponents of efficiency and meta-efficiency.
@@ -212,7 +212,7 @@
           <span id="logarithmic-completed-description"></span>
         </td>
         <td id="inefficient-td" style="display: none;">
-          <button style="height: 150px; width: 350px; border: 1px solid;" onclick="enterChallenge('inefficient')">
+          <button style="height: 150px; width: 350px; border: 1px solid; background-color: #999999;" onclick="enterChallenge('inefficient')">
             Inefficient
             <br/>
             Efficiency and meta-efficency are useless.
@@ -228,7 +228,7 @@
           <span id="inefficient-completed-description"></span>
         </td>
         <td id="ufd-td" style="display: none;">
-          <button style="height: 150px; width: 350px; border: 1px solid;" onclick="enterChallenge('ufd')">
+          <button style="height: 150px; width: 350px; border: 1px solid; background-color: #999999;" onclick="enterChallenge('ufd')">
             UFD
             <br/>
             Refactoring and meta-refactoring are useless.
@@ -246,7 +246,7 @@
       </tr>
       <tr>
         <td id="lonely-td" style="display: none;">
-          <button style="height: 150px; width: 350px; border: 1px solid;" onclick="enterChallenge('lonely')">
+          <button style="height: 150px; width: 350px; border: 1px solid; background-color: #999999;" onclick="enterChallenge('lonely')">
             Lonely
             <br/>
             You always only have one dev.
@@ -261,7 +261,7 @@
           <span id="lonely-completed-description"></span>
         </td>
         <td id="impatient-td" style="display: none;">
-          <button style="height: 150px; width: 350px; border: 1px solid;" onclick="enterChallenge('impatient')">
+          <button style="height: 150px; width: 350px; border: 1px solid; background-color: #999999;" onclick="enterChallenge('impatient')">
             Impatient
             <br/>
             The patience meter is always at 0.
@@ -276,7 +276,7 @@
           <span id="impatient-completed-description"></span>
         </td>
         <td id="unprestigious-td" style="display: none;">
-          <button style="height: 150px; width: 350px; border: 1px solid;" onclick="enterChallenge('unprestigious')">
+          <button style="height: 150px; width: 350px; border: 1px solid; background-color: #999999;" onclick="enterChallenge('unprestigious')">
             Unprestigious
             <br/>
             You can't prestige (that is, you can't get meta-efficiency or meta-refactoring).
@@ -293,7 +293,7 @@
       </tr>
       <tr>
         <td id="slow-td" style="display: none;">
-          <button style="height: 150px; width: 350px; border: 1px solid;" onclick="enterChallenge('slow')">
+          <button style="height: 150px; width: 350px; border: 1px solid; background-color: #999999;" onclick="enterChallenge('slow')">
             Slow
             <br/>
             Everything (including patience and power gain) is a thousand times slower.
@@ -308,7 +308,7 @@
           <span id="slow-completed-description"></span>
         </td>
         <td id="powerless-td" style="display: none;">
-          <button style="height: 150px; width: 350px; border: 1px solid;" onclick="enterChallenge('powerless')">
+          <button style="height: 150px; width: 350px; border: 1px solid; background-color: #999999;" onclick="enterChallenge('powerless')">
             Powerless
             <br/>
             Power is not produced.
@@ -324,7 +324,7 @@
           <span id="powerless-completed-description"></span>
         </td>
         <td id="upgradeless-td" style="display: none;">
-          <button style="height: 150px; width: 350px; border: 1px solid;" onclick="enterChallenge('upgradeless')">
+          <button style="height: 150px; width: 350px; border: 1px solid; background-color: #999999;" onclick="enterChallenge('upgradeless')">
             Upgradeless
             <br/>
             All upgrades (the things bought with experience) are useless.
