@@ -1351,7 +1351,7 @@ const LORE_LIST = [
   'You\'re now enlightened. Apart from the mystical aspects, this seems to make patience a little stronger. You feel that restarting the project will cause you to lose your enlightenment, though',
   'You finally made a game which was basically what you wanted, but you\'ve thought of a bunch of cool stuff you can add. Maybe you can release another update with that.',
   'You\'ve gotten enough experience from past updates that now you can make bigger updates. How far will this go?',
-  'You seem to be getting the hang of this. It\'s a bit monotonous, but maybe that will change soon.',
+  'You seem to be getting the hang of this. It\'s a bit monotonous, but maybe that will change soon. Maybe at 24:00:00, that seems significant.',
   'You decide that for some update soon, you\'re going to start programming in a new language. All your skills in it are terrible, but you\'ve heard that the new paradigm might give you enlightenment, so you try it anyway.',
   'One of the people working with you tells you that efficiency is overrated. You decide that you\'ll try not working on it while making some update soon.',
   'OK, efficiency is more useful than you thought. In that case, as suggested by someone else, refactoring must be what\'s overrated. You decide to try going without that.',
