@@ -145,7 +145,7 @@ function fixPlayer () {
     player.lore = [];
   }
   for (let i in player.auto) {
-    if (player.auto[i].setting && AUTO_SETTINGS[i].indexOf(player.auto[i].setting) === -1) {
+    if (player.auto[i].setting && i in AUTO_SETTINGS && AUTO_SETTINGS[i].indexOf(player.auto[i].setting) === -1) {
       alert('Your ' + i + ' auto setting\'s name is no longer a possible setting. It has been reset.');
       player.auto[i].setting = AUTO_SETTINGS[i][0];
     }
@@ -174,7 +174,7 @@ function loadGameStorage () {
       // We're loading from storage, player.options.offlineProgress isn't set yet.
       loadGame(localStorage.getItem('5hours-save'), null);
     } catch (ex) {
-      console.log('Exception while loading game: ' + ex + '\nPlease report this.')
+      console.log('Exception while loading game, please report this.', ex);
       resetGame();
     }
   }
@@ -1101,8 +1101,12 @@ function upgradeActive(i, j) {
   return player.currentChallenge !== 'upgradeless' && player.upgrades[i][j];
 }
 
+function canBuyUpdateUpgrade(i, j) {
+  return !upgradeBought(i, j) && player.experience[j].gte(getUpgradeCost(i));
+}
+
 function buyUpdateUpgrade(i, j) {
-  if (upgradeBought(i, j) || player.experience[j].lt(getUpgradeCost(i))) {
+  if (!canBuyUpdateUpgrade(i, j)) {
     return false;
   }
   player.experience[j] = player.experience[j].minus(getUpgradeCost(i));
@@ -1377,14 +1381,14 @@ const TAB_LIST = ['main', 'achievements', 'lore', 'update', 'challenges'];
 
 function updateTabButtonDisplay () {
   if (player.updates > 0) {
-    document.getElementById('update-button').style.display = '';
+    document.getElementById('update-tab-button').style.display = '';
   } else {
-    document.getElementById('update-button').style.display = 'none';
+    document.getElementById('update-tab-button').style.display = 'none';
   }
   if (player.stats.recordDevelopment[''] >= 86400) {
-    document.getElementById('challenges-button').style.display = '';
+    document.getElementById('challenges-tab-button').style.display = '';
   } else {
-    document.getElementById('challenges-button').style.display = 'none';
+    document.getElementById('challenges-tab-button').style.display = 'none';
   }
 }
 
@@ -1412,6 +1416,11 @@ function updateChallengeDisplay () {
       document.getElementById(i + '-td').style.display = '';
     } else {
       document.getElementById(i + '-td').style.display = 'none';
+    }
+    if (challengeCompletions(i) >= 1) {
+      document.getElementById(i + '-button').style.backgroundColor = '#20F020';
+    } else {
+      document.getElementById(i + '-button').style.backgroundColor = '#F02020';
     }
     document.getElementById(i + '-goal').innerHTML = toTime(getChallengeGoal(i));
     document.getElementById('record-development-in-' + i).innerHTML = toTime(player.stats.recordDevelopment[i]);
@@ -1485,26 +1494,36 @@ function updateDisplay () {
     document.getElementById("devs-" + i).innerHTML = format(player.devs[i]);
   }
   for (let i = 5; i <= 6; i++) {
+    let el = document.getElementById('prestige-' + i);
+    let btn = document.getElementById('prestige-' + i + '-button');
     if (canPrestigeWithoutGain(i)) {
-      document.getElementById("prestige-" + i).innerHTML = '(' + toTime(player.progress[i]) + ' -> ' + toTime(player.progress[i]) + ')<br/>(no gain)';
+      el.innerHTML = '(' + toTime(player.progress[i]) + ' -> ' + toTime(player.progress[i]) + ')<br/>(no gain)';
+      btn.style.backgroundColor = '#F0F020';
     } else if (canPrestige(i)) {
-      document.getElementById("prestige-" + i).innerHTML = '(' + toTime(player.progress[i]) + ' -> ' + toTime(newValueFromPrestige()) + ')';
+      el.innerHTML = '(' + toTime(player.progress[i]) + ' -> ' + toTime(newValueFromPrestige()) + ')';
+      btn.style.backgroundColor = '#20F020';
     } else if (player.currentChallenge === 'unprestigious') {
-      document.getElementById("prestige-" + i).innerHTML = '(disabled in this challenge)';
+      el.innerHTML = '(disabled in this challenge)';
+      btn.style.backgroundColor = '#F02020';
     } else {
-      document.getElementById("prestige-" + i).innerHTML = '(requires ' + toTime(1800) + ' development)';
+      el.innerHTML = '(requires ' + toTime(1800) + ' development)';
+      btn.style.backgroundColor = '#F02020';
     }
   }
   if (player.progress[7] >= 1) {
     document.getElementById('enlightened-desc').innerHTML = 'make patience meter slower, but slightly stronger';
+    document.getElementById('enlightened-button').style.backgroundColor = '#20F020';
   } else {
     document.getElementById('enlightened-desc').innerHTML = 'requires max patience meter';
+    document.getElementById('enlightened-button').style.backgroundColor = '#F02020';
   }
   if (canUpdate()) {
     let gain = getUpdateGain();
     document.getElementById('update-gain').innerHTML = 'gain ' + format(gain) + ' update point' + (gain.eq(1) ? '' : 's');
+    document.getElementById('update-button').style.backgroundColor = '#20F020';
   } else {
     document.getElementById('update-gain').innerHTML = 'requires ' + toTime(getChallengeGoal(player.currentChallenge)) + ' development';
+    document.getElementById('update-button').style.backgroundColor = '#F02020';
   }
   document.getElementById('update-points').innerHTML = format(player.updatePoints);
   document.getElementById('updates').innerHTML = player.updates;
@@ -1516,6 +1535,16 @@ function updateDisplay () {
     for (let j = 0; j <= 1; j++) {
       document.getElementById('up-' + j + '-' + i + '-cost').innerHTML = format(getUpgradeCost(j));
       document.getElementById('up-' + j + '-' + i + '-bought').innerHTML = upgradeBought(j, i) ? ' (bought)' : '';
+      let btn = document.getElementById('up-' + j + '-' + i + '-button');
+      if (upgradeActive(j, i)) {
+        btn.style.backgroundColor = '#2020F0';
+      } else if (upgradeBought(j, i)) {
+        btn.style.backgroundColor = '#F020F0';
+      } else if (canBuyUpdateUpgrade(j, i)) {
+        btn.style.backgroundColor = '#20F020';
+      } else {
+        btn.style.backgroundColor = '#F02020';
+      }
     }
   }
   if (upgradeActive(0, 2)) {
