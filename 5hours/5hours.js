@@ -197,15 +197,13 @@ function exportGame () {
   let parent = output.parentElement;
   parent.style.display = "";
   output.value = btoa(JSON.stringify(player));
-  output.onblur = function() {
-    parent.style.display = "none";
-  }
   output.focus();
   output.select();
   try {
     document.execCommand('copy');
-    output.blur();
-  } catch(ex) {}
+  } catch(ex) {
+    alert('Copying to clipboard failed.');
+  }
 }
 
 let initialPlayer = {
