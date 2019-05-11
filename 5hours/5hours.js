@@ -1071,6 +1071,15 @@ function assignAll(i) {
   player.updatePoints = new Decimal(0);
 }
 
+function assignThird(i) {
+  let x = Decimal.floor(player.updatePoints.div(3));
+  if (player.updatePoints.gt(0) && x.eq(0)) {
+    x = new Decimal(1);
+  }
+  player.experience[i] = player.experience[i].plus(x);
+  player.updatePoints = player.updatePoints.minus(x);
+}
+
 function getUpdatePowerEffect(i) {
   if (i === 0) {
     return Decimal.sqrt(player.power[i].plus(1));
