@@ -580,9 +580,21 @@ function format(x, n) {
   }
 }
 
-function toTime(x) {
+function toTime(x, options) {
   if (x === Infinity) {
     return Infinity;
+  }
+  if (!options) {
+    options = {};
+  }
+  if (x < 1 && options.secondFractions) {
+    let level = 0;
+    while (x < 1) {
+      x *= 1000;
+      level += 1;
+    }
+    let prefixes = ['milli', 'micro', 'nano', 'pico'];
+    return x.toFixed(2) + ' ' + prefixes[level] + 'seconds';
   }
   return [x / 3600, x / 60 % 60, Math.floor(x % 60)].map((i) => Math.floor(i).toString().padStart(2, '0')).join(':');
 }
@@ -1080,6 +1092,12 @@ function assignThird(i) {
   player.updatePoints = player.updatePoints.minus(x);
 }
 
+function assignOne(i) {
+  let x = Decimal.min(1, player.updatePoints);
+  player.experience[i] = player.experience[i].plus(x);
+  player.updatePoints = player.updatePoints.minus(x);
+}
+
 function getUpdatePowerEffect(i) {
   if (i === 0) {
     return Decimal.sqrt(player.power[i].plus(1));
@@ -1492,7 +1510,7 @@ function updateDisplay () {
     if (i === 2 || i === 6) {
       document.getElementById("effect-span-" + i).innerHTML = format(1 + getEffect(i));
     } else if (i === 4) {
-      document.getElementById("effect-span-" + i).innerHTML = toTime(getEffect(i));
+      document.getElementById("effect-span-" + i).innerHTML = toTime(getEffect(i), {secondFractions: true});
     } else {
       document.getElementById("effect-span-" + i).innerHTML = format(getEffect(i));
     }
