@@ -83,6 +83,33 @@ function exportGame() {
   } catch(ex) {}
 }
 
+function resetGameWithConfirmation() {
+  if (confirm('Are you sure you want to reset the game?')) {
+    resetGame();
+  }
+}
+
+function resetGame() {
+  player = {
+    lastUpdate: Date.now(),
+    lowTiers: Infinity,
+    highTiers: Infinity,
+    singularity: {
+      unlocked: false,
+      currencyAmount: new Decimal(1)
+    },
+    incrementali: initialIncrementali(),
+    generators: [],
+    currentTheme: 'default',
+    metaDisplay: true,
+    saveType: 'full',
+    version: 3
+  }
+  initializeTier();
+  saveGame();
+  window.location.reload(true);
+}
+
 function revive(k, v) {
   if (v === 'Infinity') {
     return Infinity;
