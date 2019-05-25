@@ -32,7 +32,7 @@ function getIncrementaliUpgradeEffect(i) {
 }
 
 function getIncrementaliUpgradeAmount(i) {
-  return player.incrementali.upgrades[i] + player.incrementali.galaxies;
+  return player.incrementali.upgrades[i] + player.incrementali.galaxies + (Math.max(0,(Decimal.log10(player.singularity.currencyAmount)-600))**.5/10)
 }
 
 function buyIncrementaliUpgrade(i) {
