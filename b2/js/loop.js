@@ -5,7 +5,7 @@ function gameLoop () {
     player.singularity.unlocked = true;
   }
   if (player.singularity.unlocked) {
-    var singularityExp = 3 + Math.max(0,(Decimal.log10(player.incrementali.currencyAmount)-30)/100)
+    var singularityExp = 3 + Math.max(0,(Decimal.log10(player.incrementali.currencyAmount.plus(1))-30)/100)
     player.singularity.currencyAmount = player.singularity.currencyAmount.plus(
       Decimal.pow(player.generators[0].prestigeAmount.max(1).log(10) / singularityUnlockExp, singularityExp).times(getIncrementaliUpgradeEffect(2)).times(diff));
   }
