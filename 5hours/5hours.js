@@ -593,7 +593,7 @@ function toTime(x, options) {
       x *= 1000;
       level += 1;
     }
-    let prefixes = ['milli', 'micro', 'nano', 'pico'];
+    let prefixes = [null, 'milli', 'micro', 'nano', 'pico'];
     return x.toFixed(2) + ' ' + prefixes[level] + 'seconds';
   }
   return [x / 3600, x / 60 % 60, Math.floor(x % 60)].map((i) => Math.floor(i).toString().padStart(2, '0')).join(':');
