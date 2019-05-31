@@ -12,7 +12,7 @@ function prestige (i) {
     resetTier(k);
   }
   partialResetTier(i + 1);
-  if (prestigeRank <= 1)
+  if (prestigeRank <= 1 && player.singularity.currencyAmount.lte(Decimal.pow(10,1000)))
     player.incrementali.currencyAmount = new Decimal(1);
     player.incrementali.galaxies = 0;
     player.incrementali.nextGalaxy = new Decimal(100);
