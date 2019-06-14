@@ -1,0 +1,48 @@
+<html>
+<head>
+  <title>Ever Ascending</title>
+  <script src="breakinfinity.js"></script>
+  <script src="script.js"></script>
+</head>
+<body>
+  <table>
+      <tr id="row-0">
+        <td>Earth</td>
+        <td id="element-0">0</td>
+        <td><span id="earth-production">0</span> per second</td>
+        <td><button id="upgrade-speedEarth-0" onclick="buyUpgrade('speedEarth', 0)">Cost: 10</button></td>
+        <td><button id="upgrade-convertImprovement-0" onclick="buyUpgrade('convertImprovement', 0)">Cost: 30</button></td>
+        <td><button id="upgrade-unlocks-0" onclick="buyUpgrade('unlocks', 0)">Cost: 100</button></td>
+      </tr>
+      <tr id="row-1" style="display: none;">
+        <td>Water</td>
+        <td id="element-1">0</td>
+        <td><button id="convert-1" onclick="convert(1)">Convert all your earth to water</button></td>
+        <td><button id="upgrade-speedEarth-1" onclick="buyUpgrade('speedEarth', 1)">Cost: 10</button></td>
+        <td><button id="upgrade-convertImprovement-1" onclick="buyUpgrade('convertImprovement', 1)">Cost: 30</button></td>
+        <td><button id="upgrade-unlocks-1" onclick="buyUpgrade('unlocks', 1)">Cost: 100</button></td>
+      </tr>
+      <tr id="row-2" style="display: none;">
+        <td>Air</td>
+        <td id="element-2">0</td>
+        <td><button id="convert-2" onclick="convert(2)">Convert all your water to air</button></td>
+        <td><button id="upgrade-speedEarth-2" onclick="buyUpgrade('speedEarth', 2)">Cost: 10</button></td>
+        <td><button id="upgrade-convertImprovement-2" onclick="buyUpgrade('convertImprovement', 2)">Cost: 30</button></td>
+        <td><button id="upgrade-unlocks-2" onclick="buyUpgrade('unlocks', 2)">Cost: 100</button></td>
+      </tr>
+      <tr id="row-3" style="display: none;">
+        <td>Fire</td>
+        <td id="element-3">0</td>
+        <td><button id="convert-3" onclick="convert(3)">Convert all your air to fire</button></td>
+        <td><button id="upgrade-speedEarth-3" onclick="buyUpgrade('speedEarth', 3)">Cost: 10</button></td>
+        <td><button id="upgrade-convertImprovement-3" onclick="buyUpgrade('convertImprovement', 3)">Cost: 30</button></td>
+        <td>If this text is still here, the game is still a prototype.</td>
+      </tr>
+    </table>
+  <span>Offline progress: <input id="offline-progress" onclick="toggleOption('offlineProgress')" type="checkbox"></input></span>
+  <br/>
+  <span><button onclick="saveGame()">Save</button> <button onclick="exportGame()">Export</button> <button onclick="loadGamePrompt()">Load</button> <button onclick="resetGameWithConfirmation()">RESET</button></span>
+  <br/>
+  <span style="display: none;">Exported save (also copied to clipboard): <input id="export-output"></input></span>
+</body>
+</html>
