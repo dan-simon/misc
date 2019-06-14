@@ -16,6 +16,7 @@ function loadGame (s, offlineProgress) {
   // No tabs yet, no achievements, no lore, etc.
   fillInOptions();
   fillInRespec();
+  fillInAuto();
 }
 
 function simulateTime(totalDiff) {
@@ -41,6 +42,11 @@ function fixPlayer () {
     };
     player.respec = false;
     player.version = 1;
+  }
+  if (player.version < 1.1) {
+    player.fastestTimeInAscension = 1e6;
+    player.auto = [false, false, false, false];
+    player.version = 1.1;
   }
 }
 
@@ -113,6 +119,8 @@ let initialPlayer = {
   totalAether: 0,
   ascensions: 0,
   timeInAscension: 0,
+  fastestTimeInAscension: 1e6,
+  auto: [false, false, false, false],
   stash: 0,
   aetherUpgrades: {
     list: [0, 0, 0, 0],
@@ -158,7 +166,9 @@ window.onload = function () {
   setInterval(saveGame, 10000);
 }
 
-let elementNames = ['Earth', 'Water', 'Air', 'Fire']
+let elementNames = ['Earth', 'Water', 'Air', 'Fire'];
+
+let upgradeNames = ['speedEarth', 'convertImprovement', 'unlocks'];
 
 function gameCode(diff) {
   let now = Date.now();
@@ -171,6 +181,14 @@ function gameCode(diff) {
   player.lastUpdate = now;
   player.elementAmounts[0] += diff * getEarthPerSecond();
   player.timeInAscension += diff;
+  for (let i = 1; i <= 3; i++) {
+    passiveConvert(i, diff * getAetherBasedPassiveConversion());
+  }
+  for (let i = 0; i <= 3; i++) {
+    if (hasAuto(i) && player.auto[i]) {
+      autoUpgrade(i);
+    }
+  }
 }
 
 function getSpeedEarthBase() {
@@ -198,8 +216,36 @@ function convert(i) {
   }
 }
 
+function passiveConvert(i, r) {
+  if (1 <= i && i <= 3 && player.upgrades.unlocks.list[i - 1]) {
+    player.elementAmounts[i] += r * player.elementAmounts[i - 1] * Math.pow(1.1, player.upgrades.convertImprovement.total) / 4;
+  }
+}
+
+function getAetherBasedPassiveConversion() {
+  return Math.pow(Math.max(0, Math.log10(player.aether)), 2) / 100;
+}
+
+function hasAuto(i) {
+  return player.fastestTimeInAscension < Math.pow(10, 3 - i);
+}
+
+function autoUpgrade(j) {
+  for (let i = 0; i < upgradeNames.length; i++) {
+    while (buyUpgrade(upgradeNames[i], j)) {}
+  }
+}
+
 function getAetherGain() {
   return Math.floor(Math.pow(player.elementAmounts[3], 0.1));
+}
+
+function getStashGain() {
+  if (player.aetherUpgrades.list[3] === 0) {
+    return 0;
+  } else {
+    return Math.pow(player.elementAmounts[0], 1 - Math.pow(0.9, player.aetherUpgrades.list[3]));
+  }
 }
 
 function ascend() {
@@ -207,8 +253,11 @@ function ascend() {
     return false;
   }
   let gain = getAetherGain();
-  player.stash += Math.pow(player.elementAmounts[0], 1 - Math.pow(0.9, player.aetherUpgrades.list[3]));
+  player.stash += getStashGain();
   player.elementAmounts = [player.stash, 0, 0, 0];
+  player.aether += gain;
+  player.totalAether += gain;
+  player.ascensions++;
   player.upgrades = {
     speedEarth: {
       list: [0, 0, 0, 0],
@@ -223,14 +272,15 @@ function ascend() {
       baseCostMult: 3
     },
     unlocks: {
-      list: [false, false, false, false],
+      list: [
+        player.ascensions >= 2, player.ascensions >= 4,
+        player.ascensions >= 8, player.ascensions >= 16
+      ],
       baseCost: 100,
       baseCostMult: 1
     }
   };
-  player.aether += gain;
-  player.totalAether += gain;
-  player.ascensions++;
+  player.fastestTimeInAscension = Math.min(player.fastestTimeInAscension, player.timeInAscension);
   player.timeInAscension = 0;
   if (player.respec) {
     player.aetherUpgrades = {
@@ -356,6 +406,16 @@ function updateAetherUpgradeDisplay() {
   }
 }
 
+function updateAutoDisplay() {
+  for (let i = 0; i <= 3; i++) {
+    if (hasAuto(i)) {
+      document.getElementById('auto-span-' + i).style.display = '';
+    } else {
+      document.getElementById('auto-span-' + i).style.display = 'none';
+    }
+  }
+}
+
 function updateDisplay() {
   updateElementDisplay();
   updateElementAmountDisplay();
@@ -365,6 +425,7 @@ function updateDisplay() {
   updateAetherUpgradeSpanDisplay();
   updateAetherAmountDisplay();
   updateAetherUpgradeDisplay();
+  updateAutoDisplay();
   document.getElementById('earth-production').innerHTML = formatValue(getEarthPerSecond());
 }
 
@@ -376,10 +437,20 @@ function fillInRespec() {
   document.getElementById('respec').checked = player.respec;
 }
 
+function fillInAuto() {
+  for (let i = 0; i <= 3; i++) {
+    document.getElementById('auto-' + i).checked = player.auto[i];
+  }
+}
+
 function toggleOption(x) {
   player.options[x] = !player.options[x];
 }
 
 function toggleRespec() {
   player.respec = !player.respec;
+}
+
+function toggleAuto(i) {
+  player.auto[i] = !player.auto[i];
 }
