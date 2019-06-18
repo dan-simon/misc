@@ -321,7 +321,7 @@ function resetGameWithConfirmation() {
 }
 
 function endgameUpg0Formula(x) {
-  if (upgradeActive(0, 0) && x > 2) {
+  if (updateUpgradeActive(0, 0) && x > 2) {
     // Don't take 2*x^2.5 for small x.
     return Math.min(Math.exp(x), 2 * Math.pow(x, 2.5));
   } else {
@@ -330,7 +330,7 @@ function endgameUpg0Formula(x) {
 }
 
 function endgameUpg0FormulaInverse(x) {
-  if (upgradeActive(0, 0)) {
+  if (updateUpgradeActive(0, 0)) {
     let options = [Math.log(x), Math.pow(x / 2, 0.4)];
     let checkOption = (i) => Math.abs(endgameUpg0Formula(i) / x - 1) < 1e-9;
     return options.filter(checkOption)[0];
@@ -344,7 +344,7 @@ function centralFormula(x, c) {
 }
 
 function invertCentralFormula(x, c) {
-  return 3600 * endgameUpg0FormulaInverse(c * Decimal.ln(x.div(600).plus(1)) / 6 + 1);
+  return 3600 * endgameUpg0FormulaInverse(c * Decimal.ln(x.div(600).plus(1)).toNumber() / 6 + 1);
 }
 
 function addProgress(orig, change, c) {
@@ -357,7 +357,7 @@ function getScaling() {
 }
 
 function devsWorkingOn(i) {
-  if (i === 0 && upgradeActive(1, 2)) {
+  if (i === 0 && updateUpgradeActive(1, 2)) {
     return player.devs[i] + getTotalDevs();
   } else {
     return player.devs[i];
@@ -368,7 +368,7 @@ function maybeLog(x) {
   if (player.currentChallenge === 'logarithmic') {
     let pow = Math.min(3, 1 + getTotalChallengeCompletions() / 4);
     if (x instanceof Decimal) {
-      return Decimal.pow(1 + Decimal.ln(x), pow);
+      return Decimal.pow(1 + Decimal.ln(x).toNumber(), pow);
     } else {
       return Math.pow(1 + Math.log(x), pow);
     }
@@ -404,7 +404,7 @@ function getTimeForPatienceMeterToMaxOut(patience, enlights) {
 
 function getPatienceMeterNewValue(old, diff, patience, enlights) {
   let result = old + diff / getTimeForPatienceMeterToMaxOut(patience, enlights);
-  if (!upgradeActive(1, 1)) {
+  if (!updateUpgradeActive(1, 1)) {
     result = Math.min(1, result);
   }
   return result;
@@ -471,12 +471,15 @@ function autoAssignUpdatePoints() {
   if (player.auto.assignUpdatePoints.settings.every(x => x === 0)) {
     return;
   }
+  // This is so we don't mar the runs of crazy people who are trying to
+  // do without one of the three types of experience entirely.
+  let lastNonZero = player.auto.assignUpdatePoints.settings.map(x => x !== 0).lastIndexOf(true);
   let total = Math.min(1, player.auto.assignUpdatePoints.settings.reduce((a, b) => a + b));
   for (let i = 0; i <= 2; i++) {
     let askedFor = Decimal.floor(unspentUpdatePoints.times(player.auto.assignUpdatePoints.settings[i]).div(total));
     let maxAllowed = player.updatePoints;
     let x = Decimal.min(askedFor, maxAllowed);
-    if (i === 2) {
+    if (i === lastNonZero) {
       x = maxAllowed;
     }
     player.experience[i] = player.experience[i].plus(x);
@@ -574,7 +577,7 @@ function gameCode(diff) {
   }
   diff = realTimeToGameTime(diff);
   player.lastUpdate = now;
-  if (upgradeActive(0, 2) && player.auto.dev.on) {
+  if (updateUpgradeActive(0, 2) && player.auto.dev.on) {
     autoAssignDevs();
   }
   if (hasAuto('update') && player.auto.update.on) {
@@ -618,15 +621,22 @@ function format(x, n) {
   if (n === undefined) {
     n = 2;
   }
-  if (x.gte(1e6)) {
-    let e = x.exponent;
-    let m = x.mantissa;
-    return m.toFixed(n) + 'e' + e;
-  } else if (x.equals(Math.round(x.toNumber()))) {
-    return '' + Math.round(x.toNumber());
-  } else {
-    return x.toFixed(n);
+  let es = 0;
+  while (x.gte(Decimal.pow(10, 1e6))) {
+    x = x.log(10);
+    es++;
   }
+  let result;
+  if (x.gte(1e6)) {
+    let e = Math.floor(x.log(10).toNumber());
+    let m = x.div(Decimal.pow(10, e)).toNumber();
+    result = m.toFixed(n) + 'e' + e;
+  } else if (x.equals(Math.round(x.toNumber()))) {
+    result = '' + Math.round(x.toNumber());
+  } else {
+    result = x.toFixed(n);
+  }
+  return 'e'.repeat(es) + result;
 }
 
 function toTime(x, options) {
@@ -637,11 +647,13 @@ function toTime(x, options) {
     options = {};
   }
   if (x < 1 && options.secondFractions) {
-    let level = 0;
-    while (x < 1) {
-      x *= 1000;
-      level += 1;
+    if (x < 1e-12) {
+      let exponent = Math.floor(Math.log10(x));
+      let mantissa = x / Math.pow(10, exponent);
+      return m.toFixed(n) + 'e' + exponent + ' seconds';
     }
+    let level = -Math.floor(Math.log10(x) / 3);
+    x *= Math.pow(1000, level)
     let prefixes = [null, 'milli', 'micro', 'nano', 'pico'];
     return x.toFixed(2) + ' ' + prefixes[level] + 'seconds';
   }
@@ -649,7 +661,7 @@ function toTime(x, options) {
 }
 
 function baseDevs() {
-  if (upgradeActive(0, 2)) {
+  if (updateUpgradeActive(0, 2)) {
     return 10;
   } else {
     return 1;
@@ -665,7 +677,7 @@ function getUnassignedDevs () {
 }
 
 function patienceMeterScaling () {
-  if (upgradeActive(0, 1)) {
+  if (updateUpgradeActive(0, 1)) {
     return 2.5;
   } else {
     return 2;
@@ -673,7 +685,7 @@ function patienceMeterScaling () {
 }
 
 function patienceMeterMinTime () {
-  if (upgradeActive(0, 1)) {
+  if (updateUpgradeActive(0, 1)) {
     return 10;
   } else {
     return 60;
@@ -681,14 +693,16 @@ function patienceMeterMinTime () {
 }
 
 function getBasePatienceMeterTime (x) {
-  let result = new Decimal(86400).div(Decimal.pow(patienceMeterScaling(), x / 1800));
+  // We really didn't need Decimal anyway.
+  let scaling = patienceMeterScaling();
+  let stepsTaken = x / 1800;
   let minTime = patienceMeterMinTime();
-  if (result.lt(minTime)) {
-    result = minTime / (1 + Decimal.ln(Decimal.div(minTime, result)));
+  let stepsNeededForMin = Math.log(86400 / minTime) / Math.log(scaling);
+  if (stepsTaken > stepsNeededForMin) {
+    return minTime / (1 + Math.log(scaling) * (stepsTaken - stepsNeededForMin))
   } else {
-    result = result.toNumber();
+    return 86400 / Math.pow(scaling, stepsTaken);
   }
-  return result;
 }
 
 function softcapPatienceMeter(x) {
@@ -1065,7 +1079,7 @@ function updateCore(now, gain, oldChallenge) {
 }
 
 function getUpgradeGainBase() {
-  if (upgradeActive(1, 0)) {
+  if (updateUpgradeActive(1, 0)) {
     return challengeReward('upgradeless');
   } else {
     return 2;
@@ -1151,7 +1165,7 @@ function getUpdatePowerEffect(i) {
   if (i === 0) {
     return Decimal.sqrt(player.power[i].plus(1));
   } else {
-    return Decimal.log2(player.power[i].plus(2))
+    return Decimal.log2(player.power[i].plus(2)).toNumber();
   }
 }
 
@@ -1167,16 +1181,16 @@ function getUpgradeCost(x) {
   }
 }
 
-function upgradeBought(i, j) {
+function updateUpgradeBought(i, j) {
   return player.upgrades[i][j];
 }
 
-function upgradeActive(i, j) {
+function updateUpgradeActive(i, j) {
   return player.currentChallenge !== 'upgradeless' && player.upgrades[i][j];
 }
 
 function canBuyUpdateUpgrade(i, j) {
-  return !upgradeBought(i, j) && player.experience[j].gte(getUpgradeCost(i));
+  return !updateUpgradeBought(i, j) && player.experience[j].gte(getUpgradeCost(i));
 }
 
 function buyUpdateUpgrade(i, j) {
@@ -1636,11 +1650,11 @@ function updateDisplay () {
     document.getElementById('update-effect-span-' + i).innerHTML = format(getUpdatePowerEffect(i));
     for (let j = 0; j <= 1; j++) {
       document.getElementById('up-' + j + '-' + i + '-cost').innerHTML = format(getUpgradeCost(j));
-      document.getElementById('up-' + j + '-' + i + '-bought').innerHTML = upgradeBought(j, i) ? ' (bought)' : '';
+      document.getElementById('up-' + j + '-' + i + '-bought').innerHTML = updateUpgradeBought(j, i) ? ' (bought)' : '';
       let btn = document.getElementById('up-' + j + '-' + i + '-button');
-      if (upgradeActive(j, i)) {
+      if (updateUpgradeActive(j, i)) {
         btn.style.backgroundColor = '#2020F0';
-      } else if (upgradeBought(j, i)) {
+      } else if (updateUpgradeBought(j, i)) {
         btn.style.backgroundColor = '#F020F0';
       } else if (canBuyUpdateUpgrade(j, i)) {
         btn.style.backgroundColor = '#20F020';
@@ -1649,7 +1663,7 @@ function updateDisplay () {
       }
     }
   }
-  if (upgradeActive(0, 2)) {
+  if (updateUpgradeActive(0, 2)) {
     document.getElementById('auto-dev-row').style.display = '';
     document.getElementById('auto-dev-span').style.display = '';
   } else {
