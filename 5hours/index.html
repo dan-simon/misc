@@ -11,6 +11,7 @@
     <button id="lore-tab-button" onclick="setTab('lore')">Lore</button>
     <button id="update-tab-button" onclick="setTab('update')" style="display: none;">Update</button>
     <button id="challenges-tab-button" onclick="setTab('challenges')" style="display: none;">Challenges</button>
+    <button id="completion-milestones-tab-button" onclick="setTab('completion-milestones')" style="display: none;">Completion Milestones</button>
   </span>
   <div id="main-div" style="display: none;">
     <table style="table-layout: fixed; width: 1050px;">
@@ -31,7 +32,7 @@
       <tr>
         <td></td>
         <td><span id="effect-span-1"></span>x multiplier to all production</td>
-        <td><span id="effect-span-2"></span>x slower scaling</td>
+        <td>+<span id="effect-span-2"></span> slower scaling</td>
         <td><span id="effect-span-3"></span> total dev<span id="devs-plural"></span></td>
         <td><span id="effect-span-4"></span> total game time for patience meter to max out</td>
       </tr>
@@ -64,7 +65,7 @@
       <tr>
         <td><span id="effect-span-7"></span>x boost to normal and meta efficency and refactoring</td>
         <td><span id="effect-span-5"></span>x additional multiplier to all production</td>
-        <td><span id="effect-span-6"></span>x additional slower scaling (additive with refactoring)</td>
+        <td>+<span id="effect-span-6"></span> additional slower scaling</td>
       </tr>
       <tr>
         <td><button id="enlightened-button" style="width: 190px; height: 70px; border: 1px solid; background-color: #F02020;" onclick="enlightened()">Become enlightened: <span id="enlightened-desc"></span></button></td>
@@ -87,6 +88,8 @@
     </span>
     <br/>
     <span id="auto-update-span" style="display: none;">Auto-update: current setting: <button id="auto-update-setting" onclick="nextAutoSetting('update')"></button> value: <input id="auto-update-value" type="text" onchange="updateAutoValue('update')"></input>, on: <input id="auto-update-on" onclick="toggleAutoOn('update')" type="checkbox"></input></span>
+    <br/>
+    <span id="auto-assign-update-points-span" style="display: none;">Auto update point assignment: <input id="auto-assign-update-points-on" onclick="toggleAutoOn('assignUpdatePoints')" type="checkbox"></input></span>
     <br/>
     <span id="auto-help-span" style="display: none;">You can input an amount of time as a number of seconds, or in 12:34:56 format.</span>
   </div>
@@ -123,7 +126,7 @@
     <br/>
     <span>Saving tokens: Update without becoming enlightened. <span id="ach-status-14">&#x2718;</span></span>
     <br/>
-    <span>The challenging day: Get 24:00:00 record development. <span id="ach-status-15">&#x2718;</span></span>
+    <span>The challenging day: Get 24:00:00 record development (challenges unlock). <span id="ach-status-15">&#x2718;</span></span>
     <br/>
     <span>That's fastest!!!: Update in a second. <span id="ach-status-16">&#x2718;</span></span>
     <br/>
@@ -197,6 +200,11 @@
         <td><button id="up-1-0-button" style="height: 60px; width: 310px; border: 1px solid; background-color: #F02020;" onclick="buyUpdateUpgrade(1, 0)">Improve the update point gain formula.<br/>Cost: <span id="up-1-0-cost"></span> endgame experience<span id="up-1-0-bought"></span></button></td>
         <td><button id="up-1-1-button" style="height: 60px; width: 310px; border: 1px solid; background-color: #F02020;" onclick="buyUpdateUpgrade(1, 1)">The patience meter increases with greatly reduced effect past 1.<br/>Cost: <span id="up-1-1-cost"></span> patience experience<span id="up-1-1-bought"></span></button></td>
         <td><button id="up-1-2-button" style="height: 60px; width: 310px; border: 1px solid; background-color: #F02020;" onclick="buyUpdateUpgrade(1, 2)">All your devs act as working on development, in addition to whatever they're working on.<br/>Cost: <span id="up-1-2-cost"></span> headstart experience<span id="up-1-2-bought"></span></button></td>
+      </tr>
+      <tr id="auto-assign-update-points-row">
+        <td>Fraction of update points to assign: <input id="auto-assign-update-points-0" type="text" onchange="updateAutoAssignUpdatePoints(0)"></input></td>
+        <td>Fraction of update points to assign: <input id="auto-assign-update-points-1" type="text" onchange="updateAutoAssignUpdatePoints(1)"></input></td>
+        <td>Fraction of update points to assign: <input id="auto-assign-update-points-2" type="text" onchange="updateAutoAssignUpdatePoints(2)"></input></td>
       </tr>
     </table>
   </div>
@@ -351,6 +359,18 @@
         </td>
       </tr>
     </table>
+  </div>
+  <div id="completion-milestones-div" style="display: none;">
+    <span>You have <span id="total-challenge-completions-milestone-tab"></span> total challenge completions.</span>
+    <br/>
+    <span>2 total challenge completions: Auto-enlighten. <span id="milestone-status-0">&#x2718;</span></span>
+    <br/>
+    <span>4 total challenge completions: Auto-prestige. <span id="milestone-status-1">&#x2718;</span></span>
+    <br/>
+    <span>8 total challenge completions: Auto-update. <span id="milestone-status-2">&#x2718;</span></span>
+    <br/>
+    <span>16 total challenge completions: Auto update point assignment. <span id="milestone-status-3">&#x2718;</span></span>
+    <hr/>
   </div>
   <span>Other information: <span id="record-development"></span> record development ever, <span id="unassigned-devs"></span> unassigned dev<span id="unassigned-devs-plural"></span>, <span id="progress-milestones"></span> progress milestone<span id="progress-milestones-plural"></span> (giving a <span id="progress-milestones-effect"></span>x multiplier to all production), <span id="enlightened"></span> time<span id="enlightened-plural"></span> enlightened</span>
   <br/>

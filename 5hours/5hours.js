@@ -15,6 +15,7 @@ function loadGame (s, offlineProgress) {
   saveGame();
   fillInInputs();
   updateTabDisplay();
+  updateCompletionMilestoneDisplay();
   updateAchievementDisplay();
   updateLoreDisplay();
 }
@@ -153,6 +154,13 @@ function fixPlayer () {
   if (!('hardMode' in player.options)) {
     player.options.hardMode = false;
   }
+  if (!('completionMilestones' in player)) {
+    player.completionMilestones = 0;
+    player.auto.assignUpdatePoints = {
+      settings: [0, 0, 0],
+      on: false
+    }
+  }
 }
 
 function convertSaveToDecimal () {
@@ -240,6 +248,10 @@ let initialPlayer = {
       value: new Decimal(0),
       displayValue: '0',
       on: false
+    },
+    assignUpdatePoints: {
+      settings: [0, 0, 0],
+      on: false
     }
   },
   options: {
@@ -292,6 +304,7 @@ let initialPlayer = {
   },
   lore: [],
   dilation: 0,
+  completionMilestones: 0,
   lastUpdate: Date.now()
 }
 
@@ -405,6 +418,16 @@ function checkForMilestones() {
   player.milestones = Math.max(player.milestones, Math.floor(player.progress[0] / 1800));
 }
 
+const COMPLETION_MILESTONES = [2, 4, 8, 16];
+
+function checkForCompletionMilestones() {
+  while (player.completionMilestones < COMPLETION_MILESTONES.length &&
+    getTotalChallengeCompletions() >= COMPLETION_MILESTONES[player.completionMilestones]) {
+    player.completionMilestones++;
+    updateCompletionMilestoneDisplay();
+  }
+}
+
 function addToUpdatePower(diff) {
   for (let i = 0; i <= 2; i++) {
     player.power[i] = player.power[i].plus(new Decimal(diff).times(player.experience[i]).times(getPowerGainPerExperience()));
@@ -436,6 +459,28 @@ function autoAssignDevs() {
     let askedFor = Math.floor(getTotalDevs() * player.auto.dev.settings[i]);
     let maxAllowed = getUnassignedDevs();
     setDevs(i, Math.min(askedFor, maxAllowed));
+  }
+}
+
+function autoAssignUpdatePoints() {
+  // This is built to approximate what would happen given that
+  // unspent update points are assigned every tick. Given this,
+  // if update points are assigned to anything, they'll eventually
+  // all be assigned.
+  let unspentUpdatePoints = player.updatePoints;
+  if (player.auto.assignUpdatePoints.settings.every(x => x === 0)) {
+    return;
+  }
+  let total = Math.min(1, player.auto.assignUpdatePoints.settings.reduce((a, b) => a + b));
+  for (let i = 0; i <= 2; i++) {
+    let askedFor = Decimal.floor(unspentUpdatePoints.times(player.auto.assignUpdatePoints.settings[i]).div(total));
+    let maxAllowed = player.updatePoints;
+    let x = Decimal.min(askedFor, maxAllowed);
+    if (i === 2) {
+      x = maxAllowed;
+    }
+    player.experience[i] = player.experience[i].plus(x);
+    player.updatePoints = player.updatePoints.minus(x);
   }
 }
 
@@ -541,11 +586,15 @@ function gameCode(diff) {
   if (hasAuto('enlightened') && player.auto.enlightened.on) {
     checkForAutoEnlightened();
   }
+  if (hasAuto('assign-update-points') && player.auto.assignUpdatePoints.on) {
+    autoAssignUpdatePoints();
+  }
   addToProgress(diff);
   addToPatience(diff);
   addToUpdatePower(diff);
   addToDilation(diff);
   checkForMilestones();
+  checkForCompletionMilestones();
   checkForRecordDevelopement();
   checkForAchievementsAndLore();
 }
@@ -865,7 +914,7 @@ function describeChallengeReward(x) {
   } else {
     let table = {
       'inefficient': x => format(x) + 'x multiplier to all production',
-      'ufd': x => format(1 + x) + 'x slower scaling (additive)',
+      'ufd': x => '+' + format(x) + ' slower scaling',
       'lonely': x => format(x) + 'x dev gain from recruitment',
       'impatient': x => format(x) + 'x patience meter gain',
       'unprestigious': x => toTime(x) + ' extra time when prestiging',
@@ -998,7 +1047,7 @@ function updateCore(now, gain, oldChallenge) {
   }
   player.milestones = 0;
   player.enlightened = 0;
-  for (let i = 0; i <= 3; i++) {
+  for (let i = 0; i <= 2; i++) {
     player.power[i] = new Decimal(0);
   }
   if (gain !== null) {
@@ -1145,8 +1194,12 @@ function getDilationPerSecond() {
   return Math.max(0, Math.pow(2, player.progress[0] / 3600 - 12) - 1) / 1000;
 }
 
+function diminishingReturns(x) {
+  return 1 / 10 - 1 / (10 + x);
+}
+
 function getDilationEffect() {
-  return 1 + 1 / 10 - 1 / (10 + Math.log10(1 + player.dilation));
+  return 1 + diminishingReturns(Math.log10(1 + player.dilation));
 }
 
 function dilationBoost(x) {
@@ -1156,6 +1209,7 @@ function dilationBoost(x) {
 function fillInInputs() {
   fillInAutoDev();
   fillInAutoOther();
+  fillInAutoAssignUpdatePoints();
   fillInOptions();
   fillInConfirmations();
 }
@@ -1179,6 +1233,13 @@ function fillInAutoOther () {
   document.getElementById('auto-prestige-alternate').checked = player.auto.prestige.alternate;
 }
 
+function fillInAutoAssignUpdatePoints() {
+  for (let i = 0; i <= 2; i++) {
+    document.getElementById('auto-assign-update-points-' + i).value = player.auto.assignUpdatePoints.settings[i];
+  }
+  document.getElementById('auto-assign-update-points-on').checked = player.auto.assignUpdatePoints.on;
+}
+
 function fillInOptions() {
   document.getElementById('offline-progress').checked = player.options.offlineProgress;
   document.getElementById('update-challenge').checked = player.options.updateChallenge;
@@ -1198,6 +1259,10 @@ function toggleAutoOn(x) {
 
 function updateAutoDev(i) {
   player.auto.dev.settings[i] = +document.getElementById('auto-dev-' + i).value || 0;
+}
+
+function updateAutoAssignUpdatePoints(i) {
+  player.auto.assignUpdatePoints.settings[i] = +document.getElementById('auto-assign-update-points-' + i).value || 0;
 }
 
 function nextAutoSetting(x) {
@@ -1236,11 +1301,12 @@ function toggleAutoPrestigeAlternate() {
 
 function hasAuto(x) {
   let table = {
-    'enlightened': 2,
-    'prestige': 4,
-    'update': 8
+    'enlightened': 0,
+    'prestige': 1,
+    'update': 2,
+    'assign-update-points': 3
   }
-  return getTotalChallengeCompletions() >= table[x];
+  return player.completionMilestones > table[x];
 }
 
 function getAchievementsEffect() {
@@ -1402,7 +1468,7 @@ const LORE_LIST = [
   'As you say this, you remember how far you\'ve gone in your quest to make a game, and how far you\'ve come since you\'ve started. You also recall how, in playing, the person you\'re talking to must have gone through a similar journey. You hear the voice in your mind say "So did I" [not really, making this game was rather easy, but please ignore this bracketed part OK?], and you smile.'
 ]
 
-const TAB_LIST = ['main', 'achievements', 'lore', 'update', 'challenges'];
+const TAB_LIST = ['main', 'achievements', 'lore', 'update', 'challenges', 'completion-milestones'];
 
 function updateTabButtonDisplay () {
   if (player.updates > 0) {
@@ -1412,8 +1478,9 @@ function updateTabButtonDisplay () {
   }
   if (player.stats.recordDevelopment[''] >= 86400) {
     document.getElementById('challenges-tab-button').style.display = '';
+    document.getElementById('completion-milestones-tab-button').style.display = '';
   } else {
-    document.getElementById('challenges-tab-button').style.display = 'none';
+    document.getElementById('completion-milestones-tab-button').style.display = 'none';
   }
 }
 
@@ -1432,7 +1499,7 @@ function setTab(x) {
   updateTabDisplay();
 }
 
-function updateChallengeDisplay () {
+function updateChallengeDisplay() {
   document.getElementById('total-challenge-completions').innerHTML = format(getTotalChallengeCompletions());
   document.getElementById('current-challenge').innerHTML = getChallengeForDisplay(player.currentChallenge);
   document.getElementById('next-challenge-unlock').innerHTML = nextChallengeUnlock();
@@ -1456,6 +1523,16 @@ function updateChallengeDisplay () {
     document.getElementById('dilation').innerHTML = 'You have ' + format(player.dilation, 4) + ' dilation, ' + format(getDilationPerSecond(), 4)+ ' dilation per second, with effect x^' + format(getDilationEffect(), 4) + '.';
   } else {
     document.getElementById('dilation').innerHTML = '';
+  }
+}
+
+function updateCompletionMilestoneDisplay() {
+  for (let i = 0; i < COMPLETION_MILESTONES.length; i++) {
+    if (player.completionMilestones > i) {
+      document.getElementById('milestone-status-' + i).innerHTML = '&#x2714;';
+    } else {
+      document.getElementById('milestone-status-' + i).innerHTML = '&#x2718;';
+    }
   }
 }
 
@@ -1508,7 +1585,7 @@ function updateDisplay () {
   document.getElementById("progress-span-7").innerHTML = format(player.progress[7], 4);
   for (let i = 1; i <= 7; i++) {
     if (i === 2 || i === 6) {
-      document.getElementById("effect-span-" + i).innerHTML = format(1 + getEffect(i));
+      document.getElementById("effect-span-" + i).innerHTML = format(getEffect(i));
     } else if (i === 4) {
       document.getElementById("effect-span-" + i).innerHTML = toTime(getEffect(i), {secondFractions: true});
     } else {
@@ -1586,12 +1663,21 @@ function updateDisplay () {
       document.getElementById('auto-' + AUTO_LIST[i] + '-span').style.display = 'none';
     }
   }
+  if (hasAuto('assign-update-points')) {
+    document.getElementById('auto-assign-update-points-row').style.display = '';
+    document.getElementById('auto-assign-update-points-span').style.display = '';
+  } else {
+    document.getElementById('auto-assign-update-points-row').style.display = 'none';
+    document.getElementById('auto-assign-update-points-span').style.display = 'none';
+  }
   if (hasAuto(AUTO_LIST[0])) {
     document.getElementById('auto-help-span').style.display = '';
   } else {
     document.getElementById('auto-help-span').style.display = 'none';
   }
   updateChallengeDisplay();
+  // One line of code, it can go here.
+  document.getElementById('total-challenge-completions-milestone-tab').innerHTML = format(getTotalChallengeCompletions());
   document.getElementById('record-development').innerHTML = toTime(player.stats.recordDevelopment['']);
   document.getElementById('unassigned-devs').innerHTML = format(getUnassignedDevs());
   document.getElementById('progress-milestones').innerHTML = player.milestones;
