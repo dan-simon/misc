@@ -210,8 +210,11 @@
   </div>
   <div id="challenges-div" style="display: none;">
     <span>You have <span id="total-challenge-completions"></span> total challenge completions. You are currently in <span id="current-challenge"></span>. <span id="next-challenge-unlock">Next challenge unlocks eventually.</span> <button onclick="exitChallenge()">Exit current challenge</button></span>
-    <br/>
-    <span id="dilation"></span>
+    <div id="dilation" style="display: none;">
+      <span id="dilation-text"></span>
+      <br/>
+      <button id="dilation-upgrade-button" onclick="buyDilationUpgrade()"></button>
+    </div>
     <table style="table-layout: fixed; width: 1100px;">
       <tr>
         <td id="logarithmic-td" style="display: none;">

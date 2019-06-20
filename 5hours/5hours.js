@@ -161,6 +161,9 @@ function fixPlayer () {
       on: false
     }
   }
+  if (!('dilationUpgradesBought' in player)) {
+    player.dilationUpgradesBought = 0;
+  }
 }
 
 function convertSaveToDecimal () {
@@ -304,6 +307,7 @@ let initialPlayer = {
   },
   lore: [],
   dilation: 0,
+  dilationUpgradesBought: 0,
   completionMilestones: 0,
   lastUpdate: Date.now()
 }
@@ -398,7 +402,7 @@ function getTimeForPatienceMeterToMaxOut(patience, enlights) {
     return Infinity;
   } else {
     let base = getBasePatienceMeterTime(patience);
-    return base / (getUpdatePowerEffect(1) * challengeReward('impatient')) * Math.pow(getEnlightenedSlowFactor(), enlights);
+    return base / (getUpdatePowerEffect(1) * challengeReward('impatient') * Math.pow(1.1, player.dilationUpgradesBought)) * Math.pow(getEnlightenedSlowFactor(), enlights);
   }
 }
 
@@ -1224,6 +1228,14 @@ function dilationBoost(x) {
   return Decimal.pow(10, Math.max(x.log10(), Math.pow(x.log10(), getDilationEffect())))
 }
 
+function buyDilationUpgrade() {
+  if (player.dilation < 10 * Math.pow(2, player.dilationUpgradesBought)) {
+    return false;
+  }
+  player.dilation -= 10 * Math.pow(2, player.dilationUpgradesBought);
+  player.dilationUpgradesBought++;
+}
+
 function fillInInputs() {
   fillInAutoDev();
   fillInAutoOther();
@@ -1538,9 +1550,11 @@ function updateChallengeDisplay() {
     document.getElementById(i + '-completed-description').innerHTML = describeChallengeCompleted(i);
   }
   if (player.dilation > 0) {
-    document.getElementById('dilation').innerHTML = 'You have ' + format(player.dilation, 4) + ' dilation, ' + format(getDilationPerSecond(), 4)+ ' dilation per second, with effect x^' + format(getDilationEffect(), 4) + '.';
+    document.getElementById('dilation').style.display = '';
+    document.getElementById('dilation-text').innerHTML = 'You have ' + format(player.dilation, 4) + ' dilation, ' + format(getDilationPerSecond(), 4) + ' dilation per second, with effect x^' + format(getDilationEffect(), 4) + '.';
+    document.getElementById('dilation-upgrade-button').innerHTML = 'Multiply patience meter speed by 1.1. Currently: ' + format(Math.pow(1.1, player.dilationUpgradesBought)) + 'x, Cost: ' + format(10 * Math.pow(2, player.dilationUpgradesBought)) + ' dilation';
   } else {
-    document.getElementById('dilation').innerHTML = '';
+    document.getElementById('dilation').style.display = 'none';
   }
 }
 
