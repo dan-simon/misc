@@ -1201,11 +1201,15 @@ function buyUpdateUpgrade(i, j) {
   player.upgrades[i][j] = true;
 }
 
+function getDilationBase() {
+  return Math.max(2, getTotalChallengeCompletions() / 10);
+}
+
 function getDilationPerSecond() {
   if (player.currentChallenge !== 'logarithmic') {
     return 0;
   }
-  return Math.max(0, Math.pow(2, player.progress[0] / 3600 - 12) - 1) / 1000;
+  return Math.max(0, Math.pow(getDilationBase(), player.progress[0] / 3600 - 12) - 1) / 1000;
 }
 
 function diminishingReturns(x) {
