@@ -361,11 +361,14 @@ function getScaling() {
 }
 
 function devsWorkingOn(i) {
+  let result = player.devs[i];
   if (i === 0 && updateUpgradeActive(1, 2)) {
-    return player.devs[i] + getTotalDevs();
-  } else {
-    return player.devs[i];
+    result += getTotalDevs();
   }
+  if (hasAuto('dev-one-percent')) {
+    result += getTotalDevs() / 100;
+  }
+  return result;
 }
 
 function maybeLog(x) {
@@ -422,7 +425,7 @@ function checkForMilestones() {
   player.milestones = Math.max(player.milestones, Math.floor(player.progress[0] / 1800));
 }
 
-const COMPLETION_MILESTONES = [2, 4, 8, 16];
+const COMPLETION_MILESTONES = [2, 4, 8, 16, 32];
 
 function checkForCompletionMilestones() {
   while (player.completionMilestones < COMPLETION_MILESTONES.length &&
@@ -1330,11 +1333,14 @@ function toggleAutoPrestigeAlternate() {
 }
 
 function hasAuto(x) {
+  // dev-one-percent isn't really auto, except insofar as it means
+  // you don't have to manually do some stuff (lonely, upgradeless).
   let table = {
     'enlightened': 0,
     'prestige': 1,
     'update': 2,
-    'assign-update-points': 3
+    'assign-update-points': 3,
+    'dev-one-percent': 4
   }
   return player.completionMilestones > table[x];
 }
