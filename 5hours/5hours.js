@@ -18,6 +18,7 @@ function loadGame (s, offlineProgress) {
   updateCompletionMilestoneDisplay();
   updateAchievementDisplay();
   updateLoreDisplay();
+  updateOtherDisplay();
 }
 
 function simulateTime(totalDiff) {
@@ -1237,6 +1238,12 @@ function buyDilationUpgrade() {
   }
   player.dilation -= 10 * Math.pow(2, player.dilationUpgradesBought);
   player.dilationUpgradesBought++;
+  fillInDilationUpgrades();
+}
+
+function updateOtherDisplay() {
+  // Add other stuff here if needed.
+  fillInDilationUpgrades();
 }
 
 function fillInInputs() {
@@ -1271,6 +1278,10 @@ function fillInAutoAssignUpdatePoints() {
     document.getElementById('auto-assign-update-points-' + i).value = player.auto.assignUpdatePoints.settings[i];
   }
   document.getElementById('auto-assign-update-points-on').checked = player.auto.assignUpdatePoints.on;
+}
+
+function fillInDilationUpgrades() {
+  document.getElementById('dilation-upgrade-button').innerHTML = 'Multiply patience meter speed by 1.1. Currently: ' + format(Math.pow(1.1, player.dilationUpgradesBought)) + 'x, Cost: ' + format(10 * Math.pow(2, player.dilationUpgradesBought)) + ' dilation';
 }
 
 function fillInOptions() {
@@ -1558,7 +1569,6 @@ function updateChallengeDisplay() {
   if (player.dilation > 0) {
     document.getElementById('dilation').style.display = '';
     document.getElementById('dilation-text').innerHTML = 'You have ' + format(player.dilation, 4) + ' dilation, ' + format(getDilationPerSecond(), 4) + ' dilation per second, with effect x^' + format(getDilationEffect(), 4) + '.';
-    document.getElementById('dilation-upgrade-button').innerHTML = 'Multiply patience meter speed by 1.1. Currently: ' + format(Math.pow(1.1, player.dilationUpgradesBought)) + 'x, Cost: ' + format(10 * Math.pow(2, player.dilationUpgradesBought)) + ' dilation';
   } else {
     document.getElementById('dilation').style.display = 'none';
   }
