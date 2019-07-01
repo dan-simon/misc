@@ -406,7 +406,7 @@ function getTimeForPatienceMeterToMaxOut(patience, enlights) {
     return Infinity;
   } else {
     let base = getBasePatienceMeterTime(patience);
-    return base / (getUpdatePowerEffect(1) * challengeReward('impatient') * Math.pow(1.1, player.dilationUpgradesBought)) * Math.pow(getEnlightenedSlowFactor(), enlights);
+    return base / (getUpdatePowerEffect(1) * challengeReward('impatient') * Math.pow(1.1, player.dilationUpgradesBought) * getAchievementsPatienceEffect()) * Math.pow(getEnlightenedSlowFactor(), enlights);
   }
 }
 
@@ -1360,6 +1360,10 @@ function getAchievementsEffect() {
   return Math.pow(1.1, player.achievements.number);
 }
 
+function getAchievementsPatienceEffect() {
+  return Math.pow(1.01, player.achievements.number);
+}
+
 function giveAchievement(i) {
   if (!player.achievements.list[i]) {
     player.achievements.list[i] = true;
@@ -1588,6 +1592,7 @@ function updateAchievementDisplay() {
   document.getElementById('total-achievements').innerHTML = player.achievements.number;
   document.getElementById('total-achievements-plural').innerHTML = (player.achievements.number === 1) ? '' : 's';
   document.getElementById('achievements-effect').innerHTML = format(getAchievementsEffect());
+  document.getElementById('achievements-patience-effect').innerHTML = format(getAchievementsPatienceEffect());
   for (let i = 0; i <= 26; i++) {
     if (player.achievements.list[i]) {
       document.getElementById('ach-status-' + i).innerHTML = '&#x2714;';
