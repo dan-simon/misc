@@ -1060,6 +1060,10 @@ function giveUpdateAchievementsAndLore(now, gain, oldChallenge) {
   if (player.achievements.stats.noDevsForThat) {
     giveAchievement(21);
   }
+  if (gain.gte(Number.MAX_VALUE)) {
+    giveAchievement(26);
+    giveLore(28);
+  }
 }
 
 function updateCore(now, gain, oldChallenge) {
@@ -1468,10 +1472,6 @@ function checkForAchievementsAndLore() {
   if (getTotalDevs() >= 1e9) {
     giveAchievement(25);
     giveLore(27);
-  }
-  if (player.updatePoints.gte(Number.MAX_VALUE)) {
-    giveAchievement(26);
-    giveLore(28);
   }
   if (player.achievements.list.every(x => x)) {
     giveLore(29);
