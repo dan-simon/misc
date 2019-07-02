@@ -12,6 +12,7 @@
     <button id="update-tab-button" onclick="setTab('update')" style="display: none;">Update</button>
     <button id="challenges-tab-button" onclick="setTab('challenges')" style="display: none;">Challenges</button>
     <button id="completion-milestones-tab-button" onclick="setTab('completion-milestones')" style="display: none;">Completion Milestones</button>
+    <button id="magic-tab-button" onclick="setTab('magic')" style="display: none;">Magic</button>
   </span>
   <div id="main-div" style="display: none;">
     <table style="table-layout: fixed; width: 1050px;">
@@ -68,12 +69,12 @@
         <td>+<span id="effect-span-6"></span> additional slower scaling</td>
       </tr>
       <tr>
-        <td><button id="enlightened-button" style="width: 190px; height: 70px; border: 1px solid; background-color: #F02020;" onclick="enlightened()">Become enlightened: <span id="enlightened-desc"></span></button></td>
-        <td><button id="prestige-5-button" style="width: 190px; height: 70px; border: 1px solid; background-color: #F02020;" onclick="prestige(5)">Prestige to boost meta-efficiency<br/><span id="prestige-5"></span></button></td>
-        <td><button id="prestige-6-button" style="width: 190px; height: 70px; border: 1px solid; background-color: #F02020;" onclick="prestige(6)">Prestige to boost meta-refactoring<br/><span id="prestige-6"></span></button></td>
+        <td><button id="enlightened-button" style="width: 190px; height: 70px; border: 1px solid; background-color: #F02020;" onclick="enlightened()">Become enlightened.<br/><span id="enlightened-desc"></span></button></td>
+        <td><button id="prestige-5-button" style="width: 190px; height: 70px; border: 1px solid; background-color: #F02020;" onclick="prestige(5)">Prestige to boost meta-efficiency.<br/><span id="prestige-5"></span></button></td>
+        <td><button id="prestige-6-button" style="width: 190px; height: 70px; border: 1px solid; background-color: #F02020;" onclick="prestige(6)">Prestige to boost meta-refactoring.<br/><span id="prestige-6"></span></button></td>
       </tr>
       <tr>
-        <td><button id="update-button" style="width: 190px; height: 70px; border: 1px solid; background-color: #F02020;" onclick="update()">Release an update.<br/>(<span id="update-gain"></span>)</button></td>
+        <td><button id="update-button" style="width: 190px; height: 70px; border: 1px solid; background-color: #F02020;" onclick="update()">Release an update.<br/><span id="update-gain"></span></button></td>
         <td></td>
         <td></td>
       </tr>
@@ -94,61 +95,81 @@
     <span id="auto-help-span" style="display: none;">You can input an amount of time as a number of seconds, or in 12:34:56 format.</span>
   </div>
   <div id="achievements-div" style="display: none;">
-    <span>You have <span id="total-achievements"></span> achievement<span id="total-achievements-plural"></span>, giving a <span id="achievements-effect"></span>x multiplier to all production and <span id="achievements-patience-effect"></span>x patience meter gain.</span>
+    <span>You have <span id="total-normal-achievements"></span> normal achievement<span id="total-normal-achievements-plural"></span>, giving a <span id="normal-achievements-effect"></span>x multiplier to all production and <span id="normal-achievements-patience-effect"></span>x patience meter gain.</span>
     <br/>
-    <span>You gotta start somewhere: Assign a dev. <span id="ach-status-0">&#x2718;</span></span>
+    <span>You gotta start somewhere: Assign a dev. <span id="normal-ach-status-0">&#x2718;</span></span>
     <br/>
-    <span>Division of labor: Have at least one dev working on each of development, efficiency, refactoring, recruitment, and patience at once. <span id="ach-status-1">&#x2718;</span></span>
+    <span>Division of labor: Have at least one dev working on each of development, efficiency, refactoring, recruitment, and patience at once. <span id="normal-ach-status-1">&#x2718;</span></span>
     <br/>
-    <span>I have to start again?: Prestige. <span id="ach-status-2">&#x2718;</span></span>
+    <span>I have to start again?: Prestige. <span id="normal-ach-status-2">&#x2718;</span></span>
     <br/>
-    <span>A well-deserved break: Have no devs working on anything, with at least one hour of progress in each of development, efficiency, refactoring, recruitment, and patience. <span id="ach-status-3">&#x2718;</span></span>
+    <span>A well-deserved break: Have no devs working on anything, with at least one hour of progress in each of development, efficiency, refactoring, recruitment, and patience. <span id="normal-ach-status-3">&#x2718;</span></span>
     <br/>
-    <span>Universal harmony: Have development, efficiency, refactoring, recruitment, and patience all within a minute of each other and all over an hour. <span id="ach-status-4">&#x2718;</span></span>
+    <span>Universal harmony: Have development, efficiency, refactoring, recruitment, and patience all within a minute of each other and all over an hour. <span id="normal-ach-status-4">&#x2718;</span></span>
     <br/>
-    <span>K-strategist: Have your production multiplier from efficiency above your number of devs, with more than one dev. <span id="ach-status-5">&#x2718;</span></span>
+    <span>K-strategist: Have your production multiplier from efficiency above your number of devs, with more than one dev. <span id="normal-ach-status-5">&#x2718;</span></span>
     <br/>
-    <span>Wow that's a lot of progress: Gain at least an hour of progress in one prestige. <span id="ach-status-6">&#x2718;</span></span>
+    <span>Wow that's a lot of progress: Gain at least an hour of progress in one prestige. <span id="normal-ach-status-6">&#x2718;</span></span>
     <br/>
-    <span>The benefit of patience: Become enlightened. <span id="ach-status-7">&#x2718;</span></span>
+    <span>The benefit of patience: Become enlightened. <span id="normal-ach-status-7">&#x2718;</span></span>
     <br/>
-    <span>The five hours are over: Update. <span id="ach-status-8">&#x2718;</span></span>
+    <span>The five hours are over: Update. <span id="normal-ach-status-8">&#x2718;</span></span>
     <br/>
-    <span>Experienced: Have at least one experience of each type (endgame, patience, headstart). <span id="ach-status-9">&#x2718;</span></span>
+    <span>Experienced: Have at least one experience of each type (endgame, patience, headstart). <span id="normal-ach-status-9">&#x2718;</span></span>
     <br/>
-    <span>That's fast!: Update in an hour. <span id="ach-status-10">&#x2718;</span></span>
+    <span>That's fast!: Update in an hour. <span id="normal-ach-status-10">&#x2718;</span></span>
     <br/>
-    <span>Long run era: Get at least 2 update points in one update. <span id="ach-status-11">&#x2718;</span></span>
+    <span>Long run era: Get at least 2 update points in one update. <span id="normal-ach-status-11">&#x2718;</span></span>
     <br/>
-    <span>Are they even doing anything?: Get all the upgrades. <span id="ach-status-12">&#x2718;</span></span>
+    <span>Are they even doing anything?: Get all the update upgrades. <span id="normal-ach-status-12">&#x2718;</span></span>
     <br/>
-    <span>That's faster!!: Update in a minute. <span id="ach-status-13">&#x2718;</span></span>
+    <span>That's faster!!: Update in a minute. <span id="normal-ach-status-13">&#x2718;</span></span>
     <br/>
-    <span>Saving tokens: Update without becoming enlightened. <span id="ach-status-14">&#x2718;</span></span>
+    <span>Saving tokens: Update without becoming enlightened. <span id="normal-ach-status-14">&#x2718;</span></span>
     <br/>
-    <span>The challenging day: Get 24:00:00 record development (challenges unlock). <span id="ach-status-15">&#x2718;</span></span>
+    <span>The challenging day: Get 24:00:00 record development (challenges unlock). <span id="normal-ach-status-15">&#x2718;</span></span>
     <br/>
-    <span>That's fastest!!!: Update in a second. <span id="ach-status-16">&#x2718;</span></span>
+    <span>That's fastest!!!: Update in a second. <span id="normal-ach-status-16">&#x2718;</span></span>
     <br/>
-    <span>Recruit-many: Get 50 thousand devs. <span id="ach-status-17">&#x2718;</span></span>
+    <span>Recruit-many: Get 50 thousand devs. <span id="normal-ach-status-17">&#x2718;</span></span>
     <br/>
-    <span>That wasn't too bad: Update in Logarithmic. <span id="ach-status-18">&#x2718;</span></span>
+    <span>That wasn't too bad: Update in Logarithmic. <span id="normal-ach-status-18">&#x2718;</span></span>
     <br/>
-    <span>Anti-challenged: Get 12 challenge completions. <span id="ach-status-19">&#x2718;</span></span>
+    <span>Anti-challenged: Get 12 challenge completions. <span id="normal-ach-status-19">&#x2718;</span></span>
     <br/>
-    <span>Anti-anti-challenged: Get 20 challenge completions. <span id="ach-status-20">&#x2718;</span></span>
+    <span>Anti-anti-challenged: Get 20 challenge completions. <span id="normal-ach-status-20">&#x2718;</span></span>
     <br/>
-    <span>No devs for that: Update without ever having any devs working on anything. <span id="ach-status-21">&#x2718;</span></span>
+    <span>No devs for that: Update without ever having any devs working on anything. <span id="normal-ach-status-21">&#x2718;</span></span>
     <br/>
-    <span>Time is relative: Start production of dilation. <span id="ach-status-22">&#x2718;</span></span>
+    <span>Time is relative: Start production of dilation. <span id="normal-ach-status-22">&#x2718;</span></span>
     <br/>
-    <span>Dilation was an OK idea: Get 33.3333 dilation. <span id="ach-status-23">&#x2718;</span></span>
+    <span>Dilation was an OK idea: Get 33.3333 dilation. <span id="normal-ach-status-23">&#x2718;</span></span>
     <br/>
-    <span>The five-times-eightfold path: Have 40 times enlightened. <span id="ach-status-24">&#x2718;</span></span>
+    <span>The five-times-eightfold path: Have 40 times enlightened. <span id="normal-ach-status-24">&#x2718;</span></span>
     <br/>
-    <span>Do we have any audience left?: Get a billion devs. <span id="ach-status-25">&#x2718;</span></span>
+    <span>Do we have any audience left?: Get a billion devs. <span id="normal-ach-status-25">&#x2718;</span></span>
     <br/>
-    <span>Can you get infinite UP?: Get at least 1.80e308 update points in one update. <span id="ach-status-26">&#x2718;</span></span>
+    <span>Can you get infinite UP?: Get at least 1.80e308 update points in one update. <span id="normal-ach-status-26">&#x2718;</span></span>
+    <hr/>
+    <span>You have <span id="total-lategame-achievements"></span> lategame achievement<span id="total-lategame-achievements-plural"></span>, giving <span id="lategame-achievements-patience-effect"></span>x patience meter gain and a <span id="lategame-achievements-completions-effect"></span>x multiplier to total challenge completions.</span>
+    <br/>
+    <span>The first one's always free: Get all the normal achievements. <span id="lategame-ach-status-0">&#x2718;</span></span>
+    <br/>
+    <span>Yo dawg, I heard you like updates: Have each of the last 10 updates give at least 1.80e308x more update points than the previous one, with none giving 0 update points. <span id="lategame-ach-status-1">&#x2718;</span></span>
+    <br/>
+    <span>Wow that's really a lot of progress: Gain at least 4383:00:00 of progress in one prestige. <span id="lategame-ach-status-2">&#x2718;</span></span>
+    <br/>
+    <span>The answer to life, challenges, and everything: Get 42 challenge completions. <span id="lategame-ach-status-3">&#x2718;</span></span>
+    <br/>
+    <span>"How's it work?" "Magic!": Unlock magic. <span id="lategame-ach-status-4">&#x2718;</span></span>
+    <br/>
+    <span>General relativity: Get a trillion dilation. <span id="lategame-ach-status-5">&#x2718;</span></span>
+    <br/>
+    <span>The ten-times eightfold path: Get 80 times enlightened. <span id="lategame-ach-status-6">&#x2718;</span></span>
+    <br/>
+    <span>No backlog, no downside: Get ten trillion devs. <span id="lategame-ach-status-7">&#x2718;</span></span>
+    <br/>
+    <span>But I don't want to be killed horribly!: Get 17532:00:00 record development. <span id="lategame-ach-status-8">&#x2718;</span></span>
     <hr/>
   </div>
   <div id="lore-div" style="display: none;">
@@ -213,7 +234,9 @@
     <div id="dilation" style="display: none;">
       <span id="dilation-text"></span>
       <br/>
-      <button id="dilation-upgrade-button" onclick="buyDilationUpgrade()"></button>
+      <button id="dilation-upgrade-0-button" onclick="buyDilationUpgrade(0)"></button>
+      <br/>
+      <button id="dilation-upgrade-1-button" onclick="buyDilationUpgrade(1)"></button>
     </div>
     <table style="table-layout: fixed; width: 1100px;">
       <tr>
@@ -377,7 +400,15 @@
     <span>32 total challenge completions: All your devs act as working on everything with 1% effectiveness, in addition to whatever they're working on. <span id="milestone-status-4">&#x2718;</span></span>
     <hr/>
   </div>
-  <span>Other information: <span id="record-development"></span> record development ever, <span id="unassigned-devs"></span> unassigned dev<span id="unassigned-devs-plural"></span>, <span id="progress-milestones"></span> progress milestone<span id="progress-milestones-plural"></span> (giving a <span id="progress-milestones-effect"></span>x multiplier to all production), <span id="enlightened"></span> time<span id="enlightened-plural"></span> enlightened</span>
+  <div id="magic-div" style="display: none;">
+    <span id="magic-span">You have <span id="magic"></span> magic, <span id="magic-per-real-second"></span> magic per real second, making everything but magic gain <span id="magic-effect"></span>x faster.</span>
+    <br/>
+    <span id="magic-info-span">(More stuff with magic (namely sigils) is hopefully coming soon, in the meantime rest assured that accumulating fairly large amounts of magic shouldn't break your save.)</span>
+    <hr/>
+  </div>
+  <span>Other information: <span id="record-development"></span> record development ever, <span id="unassigned-devs"></span> unassigned dev<span id="unassigned-devs-plural"></span>, <span id="progress-milestones"></span> progress milestone<span id="progress-milestones-plural"></span> (giving a <span id="progress-milestones-effect"></span>x multiplier to all production),
+  <br/>
+  <span id="enlightened"></span> time<span id="enlightened-plural"></span> enlightened, <span id="last-update-point-gain"></span> update points from last update, <span id="game-speed"></span> game speed</span>
   <br/>
   <span>
     Prestige confirmation: <input id="prestige-confirmation" onclick="toggleConfirmation('prestige')" type="checkbox"></input>

@@ -165,6 +165,26 @@ function fixPlayer () {
   if (!('dilationUpgradesBought' in player)) {
     player.dilationUpgradesBought = 0;
   }
+  if (!('magic' in player)) {
+    player.dilationUpgradesBought = [player.dilationUpgradesBought, 0];
+    player.magic = 0;
+  }
+  if (!('normal' in player.achievements)) {
+    player.achievements = {
+      normal: {
+        list: player.achievements.list,
+        number: player.achievements.number
+      },
+      lategame: {
+        list: [false, false, false, false, false, false, false, false, false],
+        number: 0
+      },
+      stats: player.achievements.stats
+    }
+  }
+  if (!('yoDawg' in player.achievements.stats)) {
+    player.achievements.stats.yoDawg = 0;
+  }
 }
 
 function convertSaveToDecimal () {
@@ -176,6 +196,7 @@ function convertSaveToDecimal () {
   for (let i = 0; i <= 2; i++) {
     player.auto[AUTO_LIST[i]].value = new Decimal(player.auto[AUTO_LIST[i]].value);
   }
+  player.stats.last.updatePointGain = new Decimal(player.stats.last.updatePointGain);
 }
 
 function loadGameStorage () {
@@ -295,20 +316,28 @@ let initialPlayer = {
     }
   },
   achievements: {
-    list: [
-      false, false, false, false, false, false, false, false, false,
-      false, false, false, false, false, false, false, false, false,
-      false, false, false, false, false, false, false, false, false
-    ],
-    number: 0,
+    normal: {
+      list: [
+        false, false, false, false, false, false, false, false, false,
+        false, false, false, false, false, false, false, false, false,
+        false, false, false, false, false, false, false, false, false
+      ],
+      number: 0
+    },
+    lategame: {
+      list: [false, false, false, false, false, false, false, false, false],
+      number: 0
+    },
     stats: {
       savingTokens: true,
-      noDevsForThat: true
+      noDevsForThat: true,
+      yoDawg: 0
     }
   },
   lore: [],
   dilation: 0,
-  dilationUpgradesBought: 0,
+  dilationUpgradesBought: [0, 0],
+  magic: 0,
   completionMilestones: 0,
   lastUpdate: Date.now()
 }
@@ -386,7 +415,7 @@ function maybeLog(x) {
 }
 
 function getTotalProductionMultiplier() {
-  return maybeLog(getEffect(1).times(getEffect(5)).times(getMilestoneEffect()).times(getUpdatePowerEffect(0)).times(challengeReward('inefficient'))).times(getAchievementsEffect());
+  return maybeLog(getEffect(1).times(getEffect(5)).times(getMilestoneEffect()).times(getUpdatePowerEffect(0)).times(challengeReward('inefficient'))).times(getNormalAchievementsEffect());
 }
 
 function addToProgress(diff) {
@@ -406,7 +435,8 @@ function getTimeForPatienceMeterToMaxOut(patience, enlights) {
     return Infinity;
   } else {
     let base = getBasePatienceMeterTime(patience);
-    return base / (getUpdatePowerEffect(1) * challengeReward('impatient') * Math.pow(1.1, player.dilationUpgradesBought) * getAchievementsPatienceEffect()) * Math.pow(getEnlightenedSlowFactor(), enlights);
+    return base / (getUpdatePowerEffect(1) * challengeReward('impatient') * getDilationUpgradeEffect(0) *
+    getNormalAchievementsPatienceEffect() * getLategameAchievementsPatienceEffect()) * Math.pow(getEnlightenedSlowFactor(), enlights);
   }
 }
 
@@ -451,7 +481,7 @@ function getGameSpeed() {
   if (player.currentChallenge === 'slow') {
     speed /= 1000;
   }
-  speed *= challengeReward('slow');
+  speed *= challengeReward('slow') * getMagicGamespeedEffect();
   return speed;
 }
 
@@ -567,7 +597,7 @@ function checkForAutoUpdate() {
   let table = {
     'development': x => player.progress[0] >= x.toNumber(),
     'update points': x => getUpdateGain().gte(x),
-    'X times last update points': x => player.stats.last.updatePointGain >= x.toNumber(),
+    'X times last update points': x => getUpdateGain().gte(player.stats.last.updatePointGain.times(x)),
     'real seconds since last update': x => Date.now() - player.stats.last.update >= x.toNumber() * 1000
   }
   if (table[player.auto.update.setting](player.auto.update.value)) {
@@ -583,6 +613,7 @@ function gameCode(diff) {
   if (isNaN(diff)) {
     diff = 0;
   }
+  realDiff = diff;
   diff = realTimeToGameTime(diff);
   player.lastUpdate = now;
   if (updateUpgradeActive(0, 2) && player.auto.dev.on) {
@@ -604,6 +635,7 @@ function gameCode(diff) {
   addToPatience(diff);
   addToUpdatePower(diff);
   addToDilation(diff);
+  addToMagic(realDiff);
   checkForMilestones();
   checkForCompletionMilestones();
   checkForRecordDevelopement();
@@ -638,6 +670,10 @@ function format(x, n) {
   if (x.gte(1e6)) {
     let e = Math.floor(x.log(10).toNumber());
     let m = x.div(Decimal.pow(10, e)).toNumber();
+    if (+m.toFixed(n) >= 10) {
+      m /= 10;
+      e++;
+    }
     result = m.toFixed(n) + 'e' + e;
   } else if (x.equals(Math.round(x.toNumber()))) {
     result = '' + Math.round(x.toNumber());
@@ -658,7 +694,7 @@ function toTime(x, options) {
     if (x < 1e-12) {
       let exponent = Math.floor(Math.log10(x));
       let mantissa = x / Math.pow(10, exponent);
-      return m.toFixed(n) + 'e' + exponent + ' seconds';
+      return mantissa.toFixed(2) + 'e' + exponent + ' seconds';
     }
     let level = -Math.floor(Math.log10(x) / 3);
     x *= Math.pow(1000, level)
@@ -810,10 +846,13 @@ function prestigeCore(i, now, oldProgress) {
 }
 
 function givePrestigeAchievementsAndLore(i, oldProgress) {
-  giveAchievement(2);
+  giveNormalAchievement(2);
   giveLore(7);
   if (player.progress[i] - oldProgress >= 3600) {
-    giveAchievement(6);
+    giveNormalAchievement(6);
+  }
+  if (player.progress[i] - oldProgress >= 15778800) {
+    giveLategameAchievement(2);
   }
 }
 
@@ -908,7 +947,8 @@ function challengeCompletions(x) {
 
 function getTotalChallengeCompletions() {
   return Object.keys(CHALLENGE_GOALS).filter(x => x !== '').map(
-    x => challengeCompletions(x)).reduce((a, b) => a + b);
+    x => challengeCompletions(x)).reduce((a, b) => a + b) *
+    getLategameAchievementsCompletionsEffect();
 }
 
 function challengeReward(x) {
@@ -1035,34 +1075,43 @@ function exitChallenge() {
 }
 
 function giveUpdateAchievementsAndLore(now, gain, oldChallenge) {
-  giveAchievement(8);
+  giveNormalAchievement(8);
   giveLore(11);
   if (now - player.stats.last.update <= 3600000) {
-    giveAchievement(10);
+    giveNormalAchievement(10);
   }
   if (gain.gte(2)) {
-    giveAchievement(11);
+    giveNormalAchievement(11);
     giveLore(12);
   }
   if (now - player.stats.last.update <= 60000) {
-    giveAchievement(13);
+    giveNormalAchievement(13);
   }
   if (player.achievements.stats.savingTokens) {
-    giveAchievement(14);
+    giveNormalAchievement(14);
   }
   if (now - player.stats.last.update <= 1000) {
-    giveAchievement(16);
+    giveNormalAchievement(16);
   }
   if (oldChallenge === 'logarithmic') {
-    giveAchievement(18);
+    giveNormalAchievement(18);
     giveLore(23);
   }
   if (player.achievements.stats.noDevsForThat) {
-    giveAchievement(21);
+    giveNormalAchievement(21);
   }
   if (gain.gte(Number.MAX_VALUE)) {
-    giveAchievement(26);
+    giveNormalAchievement(26);
     giveLore(28);
+  }
+  // Include "previous updates"
+  if (gain.gte(player.stats.last.updatePointGain.times(Number.MAX_VALUE)) && gain.gt(0)) {
+    player.achievements.stats.yoDawg++;
+    if (player.achievements.stats.yoDawg >= 10) {
+      giveLategameAchievement(1);
+    }
+  } else {
+    player.achievements.stats.yoDawg = 0;
   }
 }
 
@@ -1236,13 +1285,37 @@ function dilationBoost(x) {
   return Decimal.pow(10, Math.max(x.log10(), Math.pow(x.log10(), getDilationEffect())))
 }
 
-function buyDilationUpgrade() {
-  if (player.dilation < 10 * Math.pow(2, player.dilationUpgradesBought)) {
+function getDilationUpgradeCost(i) {
+  return [10, 1e10][i] * Math.pow([2, 10][i], player.dilationUpgradesBought[i])
+}
+
+function getDilationUpgradeEffect(i) {
+  let x = player.dilationUpgradesBought[i];
+  if (i === 0) {
+    return Math.pow(1.1, x);
+  } else if (i === 1) {
+    return x;
+  }
+}
+
+function buyDilationUpgrade(i) {
+  if (player.dilation < getDilationUpgradeCost(i)) {
     return false;
   }
-  player.dilation -= 10 * Math.pow(2, player.dilationUpgradesBought);
-  player.dilationUpgradesBought++;
+  player.dilation -= getDilationUpgradeCost(i);
+  player.dilationUpgradesBought[i]++;
   fillInDilationUpgrades();
+}
+
+function addToMagic(realDiff) {
+  let softcap = player.dilationUpgradesBought[1];
+  if (softcap > 0) {
+    player.magic = softcap * Math.log(Math.exp(player.magic / softcap) + realDiff / 1000);
+  }
+}
+
+function getMagicGamespeedEffect() {
+  return player.magic + 1;
 }
 
 function updateOtherDisplay() {
@@ -1285,7 +1358,12 @@ function fillInAutoAssignUpdatePoints() {
 }
 
 function fillInDilationUpgrades() {
-  document.getElementById('dilation-upgrade-button').innerHTML = 'Multiply patience meter speed by 1.1. Currently: ' + format(Math.pow(1.1, player.dilationUpgradesBought)) + 'x, Cost: ' + format(10 * Math.pow(2, player.dilationUpgradesBought)) + ' dilation';
+  document.getElementById('dilation-upgrade-0-button').innerHTML = 'Multiply patience meter speed by 1.1. Currently: ' + format(getDilationUpgradeEffect(0)) + 'x, Cost: ' + format(getDilationUpgradeCost(0)) + ' dilation';
+  if (player.dilationUpgradesBought[1] > 0) {
+    document.getElementById('dilation-upgrade-1-button').innerHTML = 'Increase the magic production rate and softcap by 1. Currently: ' + format(getDilationUpgradeEffect(1)) + ', Cost: ' + format(getDilationUpgradeCost(1)) + ' dilation';
+  } else {
+    document.getElementById('dilation-upgrade-1-button').innerHTML = 'Unlock magic. Cost: ' + format(getDilationUpgradeCost(1)) + ' dilation';
+  }
 }
 
 function fillInOptions() {
@@ -1360,18 +1438,34 @@ function hasAuto(x) {
   return player.completionMilestones > table[x];
 }
 
-function getAchievementsEffect() {
-  return Math.pow(1.1, player.achievements.number);
+function getNormalAchievementsEffect() {
+  return Math.pow(1.1, player.achievements.normal.number);
 }
 
-function getAchievementsPatienceEffect() {
-  return Math.pow(1.01, player.achievements.number);
+function getNormalAchievementsPatienceEffect() {
+  return Math.pow(1.01, player.achievements.normal.number);
 }
 
-function giveAchievement(i) {
-  if (!player.achievements.list[i]) {
-    player.achievements.list[i] = true;
-    player.achievements.number++;
+function getLategameAchievementsPatienceEffect() {
+  return Math.pow(1.1, player.achievements.lategame.number);
+}
+
+function getLategameAchievementsCompletionsEffect() {
+  return Math.pow(1.01, player.achievements.lategame.number);
+}
+
+function giveNormalAchievement(i) {
+  if (!player.achievements.normal.list[i]) {
+    player.achievements.normal.list[i] = true;
+    player.achievements.normal.number++;
+    updateAchievementDisplay();
+  }
+}
+
+function giveLategameAchievement(i) {
+  if (!player.achievements.lategame.list[i]) {
+    player.achievements.lategame.list[i] = true;
+    player.achievements.lategame.number++;
     updateAchievementDisplay();
   }
 }
@@ -1390,7 +1484,7 @@ function checkForAchievementsAndLore() {
     Math.max.apply(null, progress), player.stats.recordDevelopment['']);
   giveLore(0);
   if (devs.some(i => i !== 0)) {
-    giveAchievement(0);
+    giveNormalAchievement(0);
     giveLore(1);
   }
   if (loreFarthest >= 120) {
@@ -1403,7 +1497,7 @@ function checkForAchievementsAndLore() {
     giveLore(4);
   }
   if (devs.every(i => i !== 0)) {
-    giveAchievement(1);
+    giveNormalAchievement(1);
   }
   if (getEffect(1).gte(1.2)) {
     giveLore(5);
@@ -1412,13 +1506,13 @@ function checkForAchievementsAndLore() {
     giveLore(6);
   }
   if (devs.every(i => i === 0) && progress.every(x => x >= 3600)) {
-    giveAchievement(3);
+    giveNormalAchievement(3);
   }
   if (Math.max.apply(null, progress) - Math.min.apply(null, progress) <= 60 && progress.every(x => x >= 3600)) {
-    giveAchievement(4);
+    giveNormalAchievement(4);
   }
   if (getEffect(1).gt(getTotalDevs()) && getTotalDevs() > 1) {
-    giveAchievement(5);
+    giveNormalAchievement(5);
   }
   if (loreFarthest >= 12600) {
     giveLore(8);
@@ -1427,20 +1521,20 @@ function checkForAchievementsAndLore() {
     giveLore(9);
   }
   if (getTotalEnlightened() > 0) {
-    giveAchievement(7);
+    giveNormalAchievement(7);
     giveLore(10);
   }
   if (player.experience.every(i => i.neq(0))) {
-    giveAchievement(9);
+    giveNormalAchievement(9);
   }
   if (player.stats.recordDevelopment[''] >= 43200) {
     giveLore(13);
   }
   if (player.upgrades.every(i => i.every(j => j))) {
-    giveAchievement(12);
+    giveNormalAchievement(12);
   }
   if (player.stats.recordDevelopment[''] >= 86400) {
-    giveAchievement(15);
+    giveNormalAchievement(15);
   }
   let challenges = sortedChallenges();
   for (let i = 0; i <= 8; i++) {
@@ -1449,37 +1543,56 @@ function checkForAchievementsAndLore() {
     }
   }
   if (getTotalDevs() >= 50000) {
-    giveAchievement(17);
+    giveNormalAchievement(17);
   }
   if (getTotalChallengeCompletions() >= 12) {
-    giveAchievement(19);
+    giveNormalAchievement(19);
   }
   if (getTotalChallengeCompletions() >= 20) {
-    giveAchievement(20);
+    giveNormalAchievement(20);
   }
   if (player.dilation > 0) {
-    giveAchievement(22);
+    giveNormalAchievement(22);
     giveLore(24);
   }
   if (player.dilation >= 100 / 3) {
-    giveAchievement(23);
+    giveNormalAchievement(23);
     giveLore(25);
   }
   if (getTotalEnlightened() >= 40) {
-    giveAchievement(24);
+    giveNormalAchievement(24);
     giveLore(26);
   }
   if (getTotalDevs() >= 1e9) {
-    giveAchievement(25);
+    giveNormalAchievement(25);
     giveLore(27);
   }
-  if (player.achievements.list.every(x => x)) {
+  if (player.achievements.normal.list.every(x => x)) {
+    giveLategameAchievement(0);
     giveLore(29);
   }
   if (player.lore.length >= LORE_LIST.length - 3) {
     for (let i = 3; i > 0; i--) {
       giveLore(LORE_LIST.length - i);
     }
+  }
+  if (getTotalChallengeCompletions() >= 42) {
+    giveLategameAchievement(3);
+  }
+  if (player.dilationUpgradesBought[1] > 0) {
+    giveLategameAchievement(4);
+  }
+  if (player.dilation >= 1e12) {
+    giveLategameAchievement(5);
+  }
+  if (getTotalEnlightened() >= 80) {
+    giveLategameAchievement(6);
+  }
+  if (getTotalDevs() >= 1e13) {
+    giveLategameAchievement(7);
+  }
+  if (player.stats.recordDevelopment[''] >= 63115200) {
+    giveLategameAchievement(8);
   }
 }
 
@@ -1514,12 +1627,12 @@ const LORE_LIST = [
   'There are a lot of people working on this game. You decide to not think about whether anyone is actually playing it.',
   'Well, you\'ve done it. You\'ve made so many great updates that your game is recognized as the best game in the world. You still feel like you could add more to it, but you\'re not sure what the point would be.',
   'Not only is your game the best ever, but you\'ve done everything that could be expected of you in its development, even some things that were considered unrelated (e.g., that "dilation" was apparently an important new substance in physics). You\'re not really sure what to do next.',
-  'You feel something in your mind saying "Yeah, that\'s it, you\'ve reached the end of the game." You\'re not sure what that means; you still have more ideas for your game. "You can either keep going (but nothing really new happens) or hard reset." Huh? "In any case, congratulations, thanks for playing, and I hope you enjoyed."',
+  'You feel something in your mind saying "Yeah, that\'s it, you\'ve reached the end of the game." You\'re not sure what that means; you still have more ideas for your game. "You can either keep going (some new stuff happens, but who cares that much?) or hard reset." Huh? "In any case, congratulations, thanks for playing, and I hope you enjoyed."',
   'Not that long later, you meet someone who looks surprised to see you. She says she just finished your game and wonders what she can do next. You say, "Well of course you can keep going or hard reset" (and you suddenly understand the voice in your mind a bit better) "but you can also make your own game. Maybe it will catch on."',
   'As you say this, you remember how far you\'ve gone in your quest to make a game, and how far you\'ve come since you\'ve started. You also recall how, in playing, the person you\'re talking to must have gone through a similar journey. You hear the voice in your mind say "So did I" [not really, making this game was rather easy, but please ignore this bracketed part OK?], and you smile.'
 ]
 
-const TAB_LIST = ['main', 'achievements', 'lore', 'update', 'challenges', 'completion-milestones'];
+const TAB_LIST = ['main', 'achievements', 'lore', 'update', 'challenges', 'completion-milestones', 'magic'];
 
 function updateTabButtonDisplay () {
   if (player.updates > 0) {
@@ -1531,7 +1644,13 @@ function updateTabButtonDisplay () {
     document.getElementById('challenges-tab-button').style.display = '';
     document.getElementById('completion-milestones-tab-button').style.display = '';
   } else {
+    document.getElementById('challenges-tab-button').style.display = 'none';
     document.getElementById('completion-milestones-tab-button').style.display = 'none';
+  }
+  if (player.dilationUpgradesBought[1] > 0) {
+    document.getElementById('magic-tab-button').style.display = '';
+  } else {
+    document.getElementById('magic-tab-button').style.display = 'none';
   }
 }
 
@@ -1588,16 +1707,36 @@ function updateCompletionMilestoneDisplay() {
   }
 }
 
+function updateMagicDisplay() {
+  let softcap = player.dilationUpgradesBought[1];
+  if (softcap > 0) {
+    document.getElementById('magic').innerHTML = format(player.magic, 4);
+    document.getElementById('magic-per-real-second').innerHTML = format(softcap / (1000 * Math.exp(player.magic / softcap)), 4);
+    document.getElementById('magic-effect').innerHTML = format(getMagicGamespeedEffect(), 4);
+  }
+}
+
 function updateAchievementDisplay() {
-  document.getElementById('total-achievements').innerHTML = player.achievements.number;
-  document.getElementById('total-achievements-plural').innerHTML = (player.achievements.number === 1) ? '' : 's';
-  document.getElementById('achievements-effect').innerHTML = format(getAchievementsEffect());
-  document.getElementById('achievements-patience-effect').innerHTML = format(getAchievementsPatienceEffect());
+  document.getElementById('total-normal-achievements').innerHTML = player.achievements.normal.number;
+  document.getElementById('total-normal-achievements-plural').innerHTML = (player.achievements.normal.number === 1) ? '' : 's';
+  document.getElementById('normal-achievements-effect').innerHTML = format(getNormalAchievementsEffect());
+  document.getElementById('normal-achievements-patience-effect').innerHTML = format(getNormalAchievementsPatienceEffect());
   for (let i = 0; i <= 26; i++) {
-    if (player.achievements.list[i]) {
-      document.getElementById('ach-status-' + i).innerHTML = '&#x2714;';
+    if (player.achievements.normal.list[i]) {
+      document.getElementById('normal-ach-status-' + i).innerHTML = '&#x2714;';
     } else {
-      document.getElementById('ach-status-' + i).innerHTML = '&#x2718;';
+      document.getElementById('normal-ach-status-' + i).innerHTML = '&#x2718;';
+    }
+  }
+  document.getElementById('total-lategame-achievements').innerHTML = player.achievements.lategame.number;
+  document.getElementById('total-lategame-achievements-plural').innerHTML = (player.achievements.lategame.number === 1) ? '' : 's';
+  document.getElementById('lategame-achievements-patience-effect').innerHTML = format(getLategameAchievementsPatienceEffect());
+  document.getElementById('lategame-achievements-completions-effect').innerHTML = format(getLategameAchievementsCompletionsEffect());
+  for (let i = 0; i <= 8; i++) {
+    if (player.achievements.lategame.list[i]) {
+      document.getElementById('lategame-ach-status-' + i).innerHTML = '&#x2714;';
+    } else {
+      document.getElementById('lategame-ach-status-' + i).innerHTML = '&#x2718;';
     }
   }
 }
@@ -1652,32 +1791,33 @@ function updateDisplay () {
     let el = document.getElementById('prestige-' + i);
     let btn = document.getElementById('prestige-' + i + '-button');
     if (canPrestigeWithoutGain(i)) {
-      el.innerHTML = '(' + toTime(player.progress[i]) + ' -> ' + toTime(player.progress[i]) + ')<br/>(no gain)';
+      el.innerHTML = toTime(player.progress[i]) + ' -> ' + toTime(player.progress[i]) + '<br/>no gain';
       btn.style.backgroundColor = '#F0F020';
     } else if (canPrestige(i)) {
-      el.innerHTML = '(' + toTime(player.progress[i]) + ' -> ' + toTime(newValueFromPrestige()) + ')';
+      let newValue = newValueFromPrestige();
+      el.innerHTML = toTime(player.progress[i]) + ' -> ' + toTime(newValue) + '<br/>' + toTime(newValue - player.progress[i]) + ' gain'
       btn.style.backgroundColor = '#20F020';
     } else if (player.currentChallenge === 'unprestigious') {
-      el.innerHTML = '(disabled in this challenge)';
+      el.innerHTML = 'Disabled in this challenge.';
       btn.style.backgroundColor = '#F02020';
     } else {
-      el.innerHTML = '(requires ' + toTime(1800) + ' development)';
+      el.innerHTML = 'Requires ' + toTime(1800) + ' development.';
       btn.style.backgroundColor = '#F02020';
     }
   }
   if (player.progress[7] >= 1) {
-    document.getElementById('enlightened-desc').innerHTML = 'make patience meter slower, but slightly stronger';
+    document.getElementById('enlightened-desc').innerHTML = 'Make patience meter slower, but slightly stronger.';
     document.getElementById('enlightened-button').style.backgroundColor = '#20F020';
   } else {
-    document.getElementById('enlightened-desc').innerHTML = 'requires max patience meter';
+    document.getElementById('enlightened-desc').innerHTML = 'Requires max patience meter.';
     document.getElementById('enlightened-button').style.backgroundColor = '#F02020';
   }
   if (canUpdate()) {
     let gain = getUpdateGain();
-    document.getElementById('update-gain').innerHTML = 'gain ' + format(gain) + ' update point' + (gain.eq(1) ? '' : 's');
+    document.getElementById('update-gain').innerHTML = 'Gain ' + format(gain) + ' update point' + (gain.eq(1) ? '' : 's') + '.';
     document.getElementById('update-button').style.backgroundColor = '#20F020';
   } else {
-    document.getElementById('update-gain').innerHTML = 'requires ' + toTime(getChallengeGoal(player.currentChallenge)) + ' development';
+    document.getElementById('update-gain').innerHTML = 'Requires ' + toTime(getChallengeGoal(player.currentChallenge)) + ' development.';
     document.getElementById('update-button').style.backgroundColor = '#F02020';
   }
   document.getElementById('update-points').innerHTML = format(player.updatePoints);
@@ -1729,6 +1869,7 @@ function updateDisplay () {
     document.getElementById('auto-help-span').style.display = 'none';
   }
   updateChallengeDisplay();
+  updateMagicDisplay();
   // One line of code, it can go here.
   document.getElementById('total-challenge-completions-milestone-tab').innerHTML = format(getTotalChallengeCompletions());
   document.getElementById('record-development').innerHTML = toTime(player.stats.recordDevelopment['']);
@@ -1736,6 +1877,8 @@ function updateDisplay () {
   document.getElementById('progress-milestones').innerHTML = player.milestones;
   document.getElementById('progress-milestones-effect').innerHTML = getMilestoneEffect();
   document.getElementById('enlightened').innerHTML = getTotalEnlightened();
+  document.getElementById('last-update-point-gain').innerHTML = format(player.stats.last.updatePointGain);
+  document.getElementById('game-speed').innerHTML = format(getGameSpeed());
   if (player.options.hardMode) {
     document.getElementById('hard-mode-span').innerHTML = 'Hard mode: on';
   } else {
