@@ -1,7 +1,22 @@
 <html>
 <head>
   <title>5 hours until the update</title>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
   <script src="break_eternity.js"></script>
+  <script src="saving.js"></script>
+  <script src="ach_and_lore.js"></script>
+  <script src="ach_display.js"></script>
+  <script src="auto_display.js"></script>
+  <script src="auto.js"></script>
+  <script src="challenges.js"></script>
+  <script src="dilation.js"></script>
+  <script src="fill_in.js"></script>
+  <script src="lore_display.js"></script>
+  <script src="main_update_display.js"></script>
+  <script src="patience.js"></script>
+  <script src="tab_display.js"></script>
+  <script src="update.js"></script>
   <script src="5hours.js"></script>
 </head>
 <body>
@@ -12,7 +27,6 @@
     <button id="update-tab-button" onclick="setTab('update')" style="display: none;">Update</button>
     <button id="challenges-tab-button" onclick="setTab('challenges')" style="display: none;">Challenges</button>
     <button id="completion-milestones-tab-button" onclick="setTab('completion-milestones')" style="display: none;">Completion Milestones</button>
-    <button id="magic-tab-button" onclick="setTab('magic')" style="display: none;">Magic</button>
   </span>
   <div id="main-div" style="display: none;">
     <table style="table-layout: fixed; width: 1050px;">
@@ -159,9 +173,9 @@
     <br/>
     <span>Wow that's really a lot of progress: Gain at least 4383:00:00 of progress in one prestige. <span id="lategame-ach-status-2">&#x2718;</span></span>
     <br/>
-    <span>The answer to life, challenges, and everything: Get 42 challenge completions. <span id="lategame-ach-status-3">&#x2718;</span></span>
+    <span>This takes a lot of patience: Get the patience meter effect to be at least a 10x boost. <span id="lategame-ach-status-3">&#x2718;</span></span>
     <br/>
-    <span>"How's it work?" "Magic!": Unlock magic. <span id="lategame-ach-status-4">&#x2718;</span></span>
+    <span>The answer to life, challenges, and everything: Get 42 challenge completions. <span id="lategame-ach-status-4">&#x2718;</span></span>
     <br/>
     <span>General relativity: Get a trillion dilation. <span id="lategame-ach-status-5">&#x2718;</span></span>
     <br/>
@@ -235,8 +249,6 @@
       <span id="dilation-text"></span>
       <br/>
       <button id="dilation-upgrade-0-button" onclick="buyDilationUpgrade(0)"></button>
-      <br/>
-      <button id="dilation-upgrade-1-button" onclick="buyDilationUpgrade(1)"></button>
     </div>
     <table style="table-layout: fixed; width: 1100px;">
       <tr>
@@ -398,12 +410,6 @@
     <span>16 total challenge completions: Auto update point assignment. <span id="milestone-status-3">&#x2718;</span></span>
     <br/>
     <span>32 total challenge completions: All your devs act as working on everything with 1% effectiveness, in addition to whatever they're working on. <span id="milestone-status-4">&#x2718;</span></span>
-    <hr/>
-  </div>
-  <div id="magic-div" style="display: none;">
-    <span id="magic-span">You have <span id="magic"></span> magic, <span id="magic-per-real-second"></span> magic per real second, making everything but magic gain <span id="magic-effect"></span>x faster.</span>
-    <br/>
-    <span id="magic-info-span">(More stuff with magic (namely sigils) is hopefully coming soon, in the meantime rest assured that accumulating fairly large amounts of magic shouldn't break your save.)</span>
     <hr/>
   </div>
   <span>Other information: <span id="record-development"></span> record development ever, <span id="unassigned-devs"></span> unassigned dev<span id="unassigned-devs-plural"></span>, <span id="progress-milestones"></span> progress milestone<span id="progress-milestones-plural"></span> (giving a <span id="progress-milestones-effect"></span>x multiplier to all production),
