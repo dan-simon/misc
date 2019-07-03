@@ -1,5 +1,3 @@
-
-
 const CHALLENGE_GOALS = {
   '': 18000,
   'logarithmic': 18000,

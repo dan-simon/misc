@@ -81,7 +81,7 @@ function updateDisplay () {
   document.getElementById('progress-milestones-effect').innerHTML = getMilestoneEffect();
   document.getElementById('enlightened').innerHTML = getTotalEnlightened();
   document.getElementById('last-update-point-gain').innerHTML = format(player.stats.last.updatePointGain);
-  document.getElementById('game-speed').innerHTML = format(getGameSpeed());
+  document.getElementById('game-speed').innerHTML = format(getGameSpeed(), 4);
   if (player.options.hardMode) {
     document.getElementById('hard-mode-span').innerHTML = 'Hard mode: on';
   } else {
