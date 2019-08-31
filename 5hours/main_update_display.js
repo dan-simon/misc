@@ -35,7 +35,7 @@ function updateDisplay () {
     }
   }
   if (player.progress[7] >= 1) {
-    document.getElementById('enlightened-desc').innerHTML = 'Make patience meter slower, but slightly stronger.';
+    document.getElementById('enlightened-desc').innerHTML = 'Reset patience meter and make it slower, but slightly stronger.';
     document.getElementById('enlightened-button').style.backgroundColor = '#20F020';
   } else {
     document.getElementById('enlightened-desc').innerHTML = 'Requires max patience meter.';

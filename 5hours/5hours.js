@@ -242,7 +242,7 @@ function prestige(i, noConfirm) {
 
 function enlightened() {
   if (player.progress[7] >= 1) {
-    player.progress[7] = 0;
+    player.progress[7] = getPatienceMeterAfterEnlightened();
     player.enlightened++;
     player.stats.last.enlightened = Date.now();
     player.achievements.stats.savingTokens = false;

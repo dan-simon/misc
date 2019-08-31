@@ -52,6 +52,11 @@ function getEnlightenedSlowFactor() {
   return 2 - Math.floor(getLogarithmicMilestones() / 3) / 10;
 }
 
+function getPatienceMeterAfterEnlightened() {
+  return player.progress[7] * (getNormalAchievementsPatienceKeptEffect() +
+  getLategameAchievementsPatienceKeptEffect());
+}
+
 function getPatienceMeterEffect(x, enlights) {
   return 1 + softcapPatienceMeter(x) * (0.5 + 0.05 * enlights);
 }

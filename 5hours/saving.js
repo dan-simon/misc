@@ -214,7 +214,12 @@ function loadGameStorage () {
 
 function loadGamePrompt() {
   try {
-    loadGame(prompt('Enter your save:'), player.options.offlineProgress);
+    let save = prompt('Enter your save:');
+    if (save && !(/^\s+$/.test(save))) {
+      loadGame(save, player.options.offlineProgress);
+    } else if (save !== null) {
+      alert('The save you entered appears to be empty.');
+    }
   } catch(ex) {
     alert('The save you entered does not seem to be valid. The error was ' + ex);
   }

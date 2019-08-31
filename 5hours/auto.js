@@ -72,7 +72,7 @@ function shouldEnlightened(x) {
   let realSecondsAlready = (Date.now() - player.stats.last.enlightened) / 1000;
   let gameSecondsRemaining = Math.max(0, realTimeToGameTime(x - realSecondsAlready));
   let valueIfNot = getPatienceMeterNewValue(player.progress[7], gameSecondsRemaining, player.progress[4], player.enlightened);
-  let valueIfSo = getPatienceMeterNewValue(0, gameSecondsRemaining, player.progress[4], player.enlightened + 1);
+  let valueIfSo = getPatienceMeterNewValue(getPatienceMeterAfterEnlightened(), gameSecondsRemaining, player.progress[4], player.enlightened + 1);
   let effectIfNot = getPatienceMeterEffect(valueIfNot, getTotalEnlightened());
   let effectIfSo = getPatienceMeterEffect(valueIfSo, getTotalEnlightened() + 1);
   return effectIfSo >= effectIfNot;
@@ -85,7 +85,7 @@ function checkForAutoEnlightened() {
     'time to max out patience meter': x => x >= getEffect(4),
     'optimal for X-second-long prestige': x => shouldEnlightened(x)
   }
-  if (table[player.auto.enlightened.setting](player.auto.enlightened.value.toNumber())) {
+  while (player.progress[7] >= 1 && table[player.auto.enlightened.setting](player.auto.enlightened.value.toNumber())) {
     enlightened();
   }
 }

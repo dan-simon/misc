@@ -6,12 +6,20 @@ function getNormalAchievementsPatienceEffect() {
   return Math.pow(1.01, player.achievements.normal.number);
 }
 
+function getNormalAchievementsPatienceKeptEffect() {
+  return 0.01 * player.achievements.normal.number;
+}
+
 function getLategameAchievementsPatienceEffect() {
   return Math.pow(1.1, player.achievements.lategame.number);
 }
 
 function getLategameAchievementsCompletionsEffect() {
   return Math.pow(1.01, player.achievements.lategame.number);
+}
+
+function getLategameAchievementsPatienceKeptEffect() {
+  return 0.01 * player.achievements.lategame.number;
 }
 
 function giveNormalAchievement(i) {
