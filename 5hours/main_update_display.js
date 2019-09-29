@@ -76,7 +76,7 @@ function updateDisplay () {
   // One line of code, it can go here.
   document.getElementById('total-challenge-completions-milestone-tab').innerHTML = format(getTotalChallengeCompletions());
   document.getElementById('progress-milestones').innerHTML = player.milestones;
-  document.getElementById('progress-milestones-effect').innerHTML = getMilestoneEffect();\
+  document.getElementById('progress-milestones-effect').innerHTML = getMilestoneEffect();
   document.getElementById('record-development').innerHTML = toTime(player.stats.recordDevelopment['']);
   document.getElementById('unassigned-devs').innerHTML = format(getUnassignedDevs());
   document.getElementById('enlightened').innerHTML = getTotalEnlightened();
