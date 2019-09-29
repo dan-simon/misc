@@ -75,10 +75,10 @@ function updateDisplay () {
   updateChallengeDisplay();
   // One line of code, it can go here.
   document.getElementById('total-challenge-completions-milestone-tab').innerHTML = format(getTotalChallengeCompletions());
+  document.getElementById('progress-milestones').innerHTML = player.milestones;
+  document.getElementById('progress-milestones-effect').innerHTML = getMilestoneEffect();\
   document.getElementById('record-development').innerHTML = toTime(player.stats.recordDevelopment['']);
   document.getElementById('unassigned-devs').innerHTML = format(getUnassignedDevs());
-  document.getElementById('progress-milestones').innerHTML = player.milestones;
-  document.getElementById('progress-milestones-effect').innerHTML = getMilestoneEffect();
   document.getElementById('enlightened').innerHTML = getTotalEnlightened();
   document.getElementById('last-update-point-gain').innerHTML = format(player.stats.last.updatePointGain);
   document.getElementById('game-speed').innerHTML = format(getGameSpeed(), 4);
@@ -88,9 +88,10 @@ function updateDisplay () {
     document.getElementById('hard-mode-span').innerHTML = 'Hard mode: off';
   }
   document.getElementById('devs-plural').innerHTML = (getTotalDevs() === 1) ? '' : 's';
-  document.getElementById('unassigned-devs-plural').innerHTML = (getUnassignedDevs() === 1) ? '' : 's';
-  document.getElementById('progress-milestones-plural').innerHTML = (player.milestones === 1) ? '' : 's';
   document.getElementById('update-points-plural').innerHTML = (player.updatePoints.eq(1)) ? '' : 's';
   document.getElementById('updates-plural').innerHTML = (player.updates === 1) ? '' : 's';
+  document.getElementById('progress-milestones-plural').innerHTML = (player.milestones === 1) ? '' : 's';
+  document.getElementById('unassigned-devs-plural').innerHTML = (getUnassignedDevs() === 1) ? '' : 's';
   document.getElementById('enlightened-plural').innerHTML = (getTotalEnlightened() === 1) ? '' : 's';
+  document.getElementById('last-update-point-gain-plural').innerHTML = player.stats.last.updatePointGain.eq(1) ? '' : 's';
 }
