@@ -159,33 +159,6 @@ function getUnassignedDevs () {
   return getTotalDevs() - player.devs.reduce((a, b) => a + b);
 }
 
-function getEffect(i) {
-  let x = player.progress[i];
-  if (i === 1 || i === 5) {
-    if (player.currentChallenge === 'inefficient') {
-      return new Decimal(1);
-    } else {
-      return dilationBoost(Decimal.pow(2, x / 1800 * getEffect(7)));
-    }
-  } else if (i === 2 || i === 6) {
-    if (player.currentChallenge === 'ufd') {
-      return 0;
-    } else {
-      return x / 1800 * getEffect(7);
-    }
-  } else if (i === 3) {
-    if (player.currentChallenge === 'lonely') {
-      return 1;
-    } else {
-      return Math.floor(maybeLog(baseDevs() + x * getUpdatePowerEffect(2) * challengeReward('lonely') / 300));
-    }
-  } else if (i === 4) {
-    return getTimeForPatienceMeterToMaxOut(x, player.enlightened)
-  } else if (i === 7) {
-    return getPatienceMeterEffect(x, getTotalEnlightened());
-  }
-}
-
 function toggleOption(x) {
   player.options[x] = !player.options[x];
 }

@@ -11,6 +11,7 @@
   <script src="dilation.js"></script>
   <script src="fill_in.js"></script>
   <script src="format.js"></script>
+  <script src="get_effect.js"></script>
   <script src="lore_display.js"></script>
   <script src="main_update_display.js"></script>
   <script src="patience.js"></script>
@@ -45,8 +46,8 @@
       </tr>
       <tr>
         <td></td>
-        <td><span id="effect-span-1"></span>x multiplier to all production</td>
-        <td>+<span id="effect-span-2"></span> slower scaling</td>
+        <td><span id="effect-span-1"></span> multiplier to all production</td>
+        <td><span id="effect-span-2"></span> slower scaling</td>
         <td><span id="effect-span-3"></span> total dev<span id="devs-plural"></span></td>
         <td><span id="effect-span-4"></span> total game time for patience meter to max out</td>
       </tr>
@@ -77,17 +78,17 @@
         <td><span id="progress-span-6">0:00:00</span></td>
       </tr>
       <tr>
-        <td><span id="effect-span-7"></span>x boost to normal and meta efficency and refactoring</td>
-        <td><span id="effect-span-5"></span>x additional multiplier to all production</td>
-        <td>+<span id="effect-span-6"></span> additional slower scaling</td>
+        <td><span id="effect-span-7"></span> boost to normal and meta efficency and refactoring</td>
+        <td><span id="effect-span-5"></span> additional multiplier to all production</td>
+        <td><span id="effect-span-6"></span> additional slower scaling</td>
       </tr>
       <tr>
-        <td><button id="enlightened-button" style="width: 190px; height: 70px; border: 1px solid; background-color: #F02020;" onclick="enlightened()">Become enlightened.<br/><span id="enlightened-desc"></span></button></td>
-        <td><button id="prestige-5-button" style="width: 190px; height: 70px; border: 1px solid; background-color: #F02020;" onclick="prestige(5)">Prestige to boost meta-efficiency.<br/><span id="prestige-5"></span></button></td>
-        <td><button id="prestige-6-button" style="width: 190px; height: 70px; border: 1px solid; background-color: #F02020;" onclick="prestige(6)">Prestige to boost meta-refactoring.<br/><span id="prestige-6"></span></button></td>
+        <td><button id="enlightened-button" style="width: 190px; height: 80px; border: 1px solid; background-color: #F02020;" onclick="enlightened()">Become enlightened.<br/><span id="enlightened-desc"></span></button></td>
+        <td><button id="prestige-5-button" style="width: 190px; height: 80px; border: 1px solid; background-color: #F02020;" onclick="prestige(5)">Prestige to boost meta-efficiency.<br/><span id="prestige-5"></span></button></td>
+        <td><button id="prestige-6-button" style="width: 190px; height: 80px; border: 1px solid; background-color: #F02020;" onclick="prestige(6)">Prestige to boost meta-refactoring.<br/><span id="prestige-6"></span></button></td>
       </tr>
       <tr>
-        <td><button id="update-button" style="width: 190px; height: 70px; border: 1px solid; background-color: #F02020;" onclick="update()">Release an update.<br/><span id="update-gain"></span></button></td>
+        <td><button id="update-button" style="width: 190px; height: 80px; border: 1px solid; background-color: #F02020;" onclick="update()">Release an update.<br/><span id="update-gain"></span></button></td>
         <td></td>
         <td></td>
       </tr>

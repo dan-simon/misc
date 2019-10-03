@@ -5,13 +5,7 @@ function updateDisplay () {
   }
   document.getElementById("progress-span-7").innerHTML = format(player.progress[7], 4);
   for (let i = 1; i <= 7; i++) {
-    if (i === 2 || i === 6) {
-      document.getElementById("effect-span-" + i).innerHTML = format(getEffect(i));
-    } else if (i === 4) {
-      document.getElementById("effect-span-" + i).innerHTML = toTime(getEffect(i), {secondFractions: true});
-    } else {
-      document.getElementById("effect-span-" + i).innerHTML = format(getEffect(i));
-    }
+    document.getElementById("effect-span-" + i).innerHTML = formatEffect(i);
   }
   for (let i = 0; i <= 4; i++) {
     document.getElementById("devs-" + i).innerHTML = format(player.devs[i]);
@@ -20,11 +14,11 @@ function updateDisplay () {
     let el = document.getElementById('prestige-' + i);
     let btn = document.getElementById('prestige-' + i + '-button');
     if (canPrestigeWithoutGain(i)) {
-      el.innerHTML = toTime(player.progress[i]) + ' -> ' + toTime(player.progress[i]) + '<br/>no gain';
+      el.innerHTML = formatEffect(i) + ' -> ' + formatEffect(i) + '<br/>' + toTime(player.progress[i]) + ' -> ' + toTime(player.progress[i]) + '<br/>no gain';
       btn.style.backgroundColor = '#F0F020';
     } else if (canPrestige(i)) {
       let newValue = newValueFromPrestige();
-      el.innerHTML = toTime(player.progress[i]) + ' -> ' + toTime(newValue) + '<br/>' + toTime(newValue - player.progress[i]) + ' gain'
+      el.innerHTML = formatEffect(i) + ' -> ' + formatEffect(i, newValue) + '<br/>' + toTime(player.progress[i]) + ' -> ' + toTime(newValue) + '<br/>' + toTime(newValue - player.progress[i]) + ' gain'
       btn.style.backgroundColor = '#20F020';
     } else if (player.currentChallenge === 'unprestigious') {
       el.innerHTML = 'Disabled in this challenge.';
