@@ -184,6 +184,9 @@ function fixPlayer () {
   if (!('yoDawg' in player.achievements.stats)) {
     player.achievements.stats.yoDawg = 0;
   }
+  if (!('turnAllUpdatePointsIntoExperience' in player.options.confirmations)) {
+    player.options.confirmations.turnAllUpdatePointsIntoExperience = true;
+  }
 }
 
 function convertSaveToDecimal () {
@@ -287,6 +290,7 @@ let initialPlayer = {
     confirmations: {
       prestige: true,
       prestigeWithoutGain: true,
+      turnAllUpdatePointsIntoExperience: true,
       update: true,
       enterChallenge: true,
       exitChallenge: true

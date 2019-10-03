@@ -45,6 +45,7 @@ function fillInConfirmations() {
   document.getElementById('prestige-confirmation').checked = player.options.confirmations.prestige;
   document.getElementById('prestige-without-gain-confirmation').checked = player.options.confirmations.prestigeWithoutGain;
   document.getElementById('update-confirmation').checked = player.options.confirmations.update;
+  document.getElementById('turn-all-update-points-into-experience-confirmation').checked = player.options.confirmations.turnAllUpdatePointsIntoExperience;
   document.getElementById('enter-challenge-confirmation').checked = player.options.confirmations.enterChallenge;
   document.getElementById('exit-challenge-confirmation').checked = player.options.confirmations.exitChallenge;
 }

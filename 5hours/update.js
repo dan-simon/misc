@@ -1,3 +1,5 @@
+let EXPERIENCE_TYPES = ['endgame', 'patience', 'headstart'];
+
 function updateCore(now, gain, oldChallenge) {
   for (let i = 0; i <= 7; i++) {
     player.progress[i] = 0;
@@ -72,8 +74,11 @@ function getPowerGainPerExperience() {
 }
 
 function assignAll(i) {
-  player.experience[i] = player.experience[i].plus(player.updatePoints);
-  player.updatePoints = new Decimal(0);
+  if (!player.options.confirmations.turnAllUpdatePointsIntoExperience ||
+  confirm('Are you sure you want to turn all your update points into ' + EXPERIENCE_TYPES[i] + ' experience?')) {
+    player.experience[i] = player.experience[i].plus(player.updatePoints);
+    player.updatePoints = new Decimal(0);
+  }
 }
 
 function assignThird(i) {

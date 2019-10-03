@@ -16,7 +16,7 @@ function getEffect(i, progressOverride) {
     if (player.currentChallenge === 'lonely') {
       return 1;
     } else {
-      return Math.floor(maybeLog(baseDevs() + x * getUpdatePowerEffect(2) * challengeReward('lonely') / 300));
+      return Math.floor(maybeLog(baseDevs() + getAdditionalDevsDueToUpdates() + x * getUpdatePowerEffect(2) * challengeReward('lonely') / 300));
     }
   } else if (i === 4) {
     return getTimeForPatienceMeterToMaxOut(x, player.enlightened)

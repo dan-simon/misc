@@ -44,8 +44,9 @@ function updateDisplay () {
     document.getElementById('update-button').style.backgroundColor = '#F02020';
   }
   document.getElementById('update-points').innerHTML = format(player.updatePoints);
-  document.getElementById('updates').innerHTML = player.updates;
+  document.getElementById('updates').innerHTML = format(player.updates);
   document.getElementById('power-gain-per-experience').innerHTML = format(getPowerGainPerExperience());
+  document.getElementById('additional-devs-due-to-updates').innerHTML = format(getAdditionalDevsDueToUpdates());
   for (let i = 0; i <= 2; i++) {
     document.getElementById('update-experience-span-' + i).innerHTML = format(player.experience[i]);
     document.getElementById('update-power-span-' + i).innerHTML = format(player.power[i]);
@@ -65,6 +66,7 @@ function updateDisplay () {
       }
     }
   }
+  updateLonelyInfoDisplay();
   updateAutoDisplay();
   updateChallengeDisplay();
   // One line of code, it can go here.
@@ -84,6 +86,7 @@ function updateDisplay () {
   document.getElementById('devs-plural').innerHTML = (getTotalDevs() === 1) ? '' : 's';
   document.getElementById('update-points-plural').innerHTML = (player.updatePoints.eq(1)) ? '' : 's';
   document.getElementById('updates-plural').innerHTML = (player.updates === 1) ? '' : 's';
+  document.getElementById('additional-devs-due-to-updates-plural').innerHTML = (getAdditionalDevsDueToUpdates() === 1) ? '' : 's';
   document.getElementById('progress-milestones-plural').innerHTML = (player.milestones === 1) ? '' : 's';
   document.getElementById('unassigned-devs-plural').innerHTML = (getUnassignedDevs() === 1) ? '' : 's';
   document.getElementById('enlightened-plural').innerHTML = (getTotalEnlightened() === 1) ? '' : 's';
