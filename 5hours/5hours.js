@@ -152,7 +152,7 @@ function baseDevs() {
 }
 
 function getAdditionalDevsDueToUpdates() {
-  return Math.round(1 + Math.log2(player.updates));
+  return Math.max(0, Math.round(1 + Math.log2(player.updates)));
 }
 
 function getTotalDevs () {
