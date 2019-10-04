@@ -88,6 +88,7 @@ function updateDisplay () {
   document.getElementById('updates-plural').innerHTML = (player.updates === 1) ? '' : 's';
   document.getElementById('additional-devs-due-to-updates-plural').innerHTML = (getAdditionalDevsDueToUpdates() === 1) ? '' : 's';
   document.getElementById('progress-milestones-plural').innerHTML = (player.milestones === 1) ? '' : 's';
+  document.getElementById('progress-milestones-to-be').innerHTML = (player.milestones === 1) ? 'is' : 'are';
   document.getElementById('unassigned-devs-plural').innerHTML = (getUnassignedDevs() === 1) ? '' : 's';
   document.getElementById('enlightened-plural').innerHTML = (getTotalEnlightened() === 1) ? '' : 's';
   document.getElementById('last-update-point-gain-plural').innerHTML = player.stats.last.updatePointGain.eq(1) ? '' : 's';
