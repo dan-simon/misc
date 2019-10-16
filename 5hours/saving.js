@@ -99,7 +99,6 @@ function fixPlayer () {
       enlightened: Date.now(),
       prestige: Date.now(),
       update: Date.now(),
-      update: Date.now(),
       prestigeType: null,
       updatePointGain: new Decimal(0)
     }
@@ -317,7 +316,6 @@ let initialPlayer = {
     last: {
       enlightened: Date.now(),
       prestige: Date.now(),
-      update: Date.now(),
       update: Date.now(),
       prestigeType: null,
       updatePointGain: new Decimal(0)

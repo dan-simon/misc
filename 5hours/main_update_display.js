@@ -78,6 +78,9 @@ function updateDisplay () {
   document.getElementById('enlightened').innerHTML = getTotalEnlightened();
   document.getElementById('last-update-point-gain').innerHTML = format(player.stats.last.updatePointGain);
   document.getElementById('game-speed').innerHTML = format(getGameSpeed(), 4);
+  document.getElementById('time-since-last-enlightened').innerHTML = toTime((Date.now() - player.stats.last.enlightened) / 1000);
+  document.getElementById('time-since-last-prestige').innerHTML = toTime((Date.now() - player.stats.last.prestige) / 1000);
+  document.getElementById('time-since-last-update').innerHTML = toTime((Date.now() - player.stats.last.update) / 1000);
   if (player.options.hardMode) {
     document.getElementById('hard-mode-span').innerHTML = 'Hard mode: on';
   } else {
