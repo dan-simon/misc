@@ -69,7 +69,7 @@ function describeChallengeReward(x) {
       'unprestigious': x => toTime(x) + ' extra time when prestiging',
       'slow': x => 'Everything (including patience and power gain)<br/>is ' + format(x) + 'x faster',
       'powerless': x => format(x) + 'x power production',
-      'upgradeless': x => format(x) + ' base for second endgame upgrade'
+      'upgradeless': x => format(x) + ' per 01:00:00 for second endgame upgrade'
     }
     return table[x](challengeReward(x));
   }
