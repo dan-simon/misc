@@ -36,9 +36,18 @@ function getUpdateGainBase() {
   }
 }
 
+function getUpdateGainMultiplier() {
+  if (updateUpgradeActive(1, 0)) {
+    return 10;
+  } else {
+    return 1;
+  }
+}
+
 function getUpdateGain() {
   let base = getUpdateGainBase();
-  return Decimal.floor(Decimal.pow(base, player.progress[0] / 3600 - 5));
+  let hours = Math.max(0, player.progress[0] / 3600 - 5);
+  return Decimal.floor(Decimal.pow(base, hours).times(getUpdateGainMultiplier()));
 }
 
 function confirmUpdate() {
