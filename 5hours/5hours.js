@@ -290,7 +290,7 @@ function updateChallengeDisplay() {
   }
   if (player.dilation > 0) {
     document.getElementById('dilation').style.display = '';
-    document.getElementById('dilation-text').innerHTML = 'You have ' + format(player.dilation, 4) + ' dilation, ' + format(getDilationPerSecond(), 4) + ' dilation per second, with effect x^' + format(getDilationEffect(), 4) + '.';
+    document.getElementById('dilation-text').innerHTML = 'You have ' + format(player.dilation, 4) + ' dilation, ' + format(getDilationPerSecond(), 4) + ' dilation per second, raising the exponents of efficiency and meta-efficiency ^' + format(getDilationEffect(), 4) + '.';
   } else {
     document.getElementById('dilation').style.display = 'none';
   }
