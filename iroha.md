@@ -41,7 +41,7 @@ function binaryLogarithm(x) {
 
 function binaryExponential(x) {
   let e = Math.floor(x);
-  let m = isFinite(x) ? 1 + x - e : 1;
+  let m = isFinite(x) ? 1 + (x - e) : 1;
   return m * Math.pow(2, e);
 }
 
