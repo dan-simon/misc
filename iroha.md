@@ -18,8 +18,63 @@ Table for small numbers: 0 = い, 1 = ろ, 2 = は, 3 = に, 4 = ほ, 5 = へ, 6
 
 Let's do an example. Specifically, let's do -42. This is negative, so we negate and remember we'll need the inversion sign 見. We then have 42. Applying the binary logarithm twice, we get 2.328125. We separate into 2 and 0.328125. After the subtraction from one and subsequent binary inversion of 0.328125, we get 1.65625. Applying the binary logarithm twice, we get -0.6875. We separate into -0 and 0.6875. After the subtraction from one and binary inversion, we get 3.5. Applying the binary logarithm twice, we get 0.75. We separate into 0 and 0.75. After the subtraction from one and binary inversion, we get 4. Applying the binary logarithm twice, we get 1. We separate into 1 and 0. After the subtraction from one and binary inversion, we get 1, so we're done. It took us four iterations. Our expected result is thus 見はくいろ. This manages to be correct, though I made two mistakes doing it in my head.
 
-You've gotten this far, so I'll explain Hex too. Hex is much simpler. You see, every day you get six spells, which you can use via understanding spellcharts... wait, wrong thing called Hex. For Hex notation, you just note the sign (zero is considered positive). If the sign is positive, you take the binary logarithm and return to the beginning. If the sign is negative, you negate, take the binary logarithm, negate, and return to the beginning. In theory, you do this infinitely many times (stopping if you take the binary logarithm of zero, which is understood to be negative infinity), interpret the signs as a binary fraction with minus signs being 0 and plus signs being 1, round to the nearest eight-digit (32-bit) hexadecimal fraction (ties are broken by rounding to the option with an even last digit, so a number equal to the hexadecimal fraction .012345678 would be rounded to .01234568), and remove the decimal point and pad to eight digits. In practice, you only need to do this about 40 times rather than infinite times for the answer to almost never be wrong. (Also, there's a slight difference between this algorithm and how the AD library does it, but the result is the same. I'm not sure which is faster and also not sure which is clearer.)
+You've gotten this far, so I'll explain Hex too. Hex is much simpler. You see, every day you get six spells, which you can use via understanding spellcharts... wait, wrong thing called Hex. For Hex notation, you just note the sign (zero is considered positive). If the sign is positive, you take the binary logarithm and return to the beginning. If the sign is negative, you negate, take the binary logarithm, negate, and return to the beginning. In theory, you do this infinitely many times (stopping if you take the binary logarithm of zero, which is understood to be negative infinity), interpret the signs as a binary fraction with minus signs being 0 and plus signs being 1, round to the nearest eight-digit (32-bit) hexadecimal fraction (ties are broken by rounding to the option with an even last digit, so a number equal to the hexadecimal fraction .012345678 would be rounded to .01234568), and remove the decimal point and pad to eight digits. In practice, you only need to do this about 40 times rather than infinite times for the answer to almost never be wrong. In a combination of theory and practice, you only need to do this 32 times and add one due to rounding under certain conditions which are easy to check. (Also, there's a slight difference between this algorithm and how the AD Notations library does it, but the result is the same. I'm not sure which is faster and also not sure which is clearer.) As a special case, infinity, which corresponds to the binary fraction 1, is written as FFFFFFFF, so that every number is eight digits and it's not confused with 00000000 (which is negative infinity). (If you're using few enough characters or big enough numbers that this makes it seem like Infinity is equal to some other relevant finite number, you might want to do something else, but even FF000000 is bigger than ee10000 and FFF00000 is bigger than eeeeee10000, so this almost certainly isn't relevant.)
 
 Note that due to taking the binary logarithm of a positive number being monotone increasing and the composition of negating, taking the binary logarithm, and negating a negative number also being monotone increasing, Hex notation has the desirable property that if one number a has a representation in Hex notation that is less than the representation of some other number b as eight-digit hexadecimal numbers, then a is less than b.
 
 Let's do -42 as an example here too. -42 is negative so we get a minus sign. When we negate, take the binary logarithm, and negate, we get -5.3125. -5.3125 is negative so we get a minus sign. When we negate, take the binary logarithm, and negate, we get -2.328125. -2.328125 is negative so we get a minus sign. When we negate, take the binary logarithm, and negate, we get -1.1640625. -1.1640625 is negative so we get a minus sign. When we negate, take the binary logarithm, and negate, we get -0.1640625. -0.1640625 is negative so we get a minus sign. When we negate, take the binary logarithm, and negate, we get 2.6875. 2.6875 is positive so we get a plus sign. When we take the binary logarithm, we get 1.34375. 1.34375 is positive so we get a plus sign. When we take the binary logarithm, we get 0.34375. 0.34375 is positive so we get a plus sign. When we take the binary logarithm, we get -1.625. -1.625 is negative so we get a minus sign. When we negate, take the binary logarithm, and negate, we get -0.625. -0.625 is negative so we get a minus sign. When we negate, take the binary logarithm, and negate, we get 0.75. 0.75 is positive so we get a plus sign. When we take the binary logarithm, we get -0.5. -0.5 is negative so we get a minus sign. When we negate, take the binary logarithm, and negate, we get 1. 1 is positive so we get a plus sign.  When we take the binary logarithm, we get 0. 0 is considered positive so we get a plus sign. We now take the binary logarithm of 0, which stops the loop. The signs we now have are minus, minus, minus, minus, minus, plus, plus, plus, minus, minus, plus, minus, plus, plus, which becomes the binary fraction .00000111001011, which becomes the hexadecimal fraction .072C, which becomes 072C0000. And indeed this is what we get. I did some but not all of this one in my head. When writing this type of conversion out it's generally more convenient to use binary fractions than to use decimal fractions (the binary logarithm maps binary fractions to binary fractions in a relatively easy-to-handle way).
+
+Here's an implementation of Hex notation for normal Javascript numbers (not Decimals). `hexChars` is usually 8 but can be decreased or increased. There's also inversion of Hex notation. There are quite possibly bugs but I don't know of any (other than normal Javascript numbers not going high enough or not having enough precision). The
+```javascript
+if (h !== Math.pow(16, hexChars) - 1 && (n > 0 || (n === 0 && h % 2 === 1))) {
+  h += 1;
+}
+```
+is probably the most confusing part. Basically, `h !== Math.pow(16, hexChars)` avoids Infinity being written as 100000000, `n > 0` means we should round up, and `n === 0 && h % 2 === 1` means both rounding up and rounding down have the same distance but since we round to even we should round up.
+
+```javascript
+function binaryLogarithm(x) {
+  let e = Math.floor(Math.log2(x));
+  let m = isFinite(x) ? x / Math.pow(2, e) : 1;
+  return (m - 1) + e;
+}
+
+function binaryExponential(x) {
+  let e = Math.floor(x);
+  let m = isFinite(x) ? 1 + x - e : 1;
+  return m * Math.pow(2, e);
+}
+
+function toHex(n, hexChars) {
+  let h = 0;
+  for (let i = 0; i < hexChars * 4; i++) {
+    h *= 2;
+    if (n >= 0) {
+      h += 1;
+      n = binaryLogarithm(n);
+    } else {
+      n = -binaryLogarithm(-n);
+    }
+  }
+  if (h !== Math.pow(16, hexChars) - 1 && (n > 0 || (n === 0 && h % 2 === 1))) {
+    h += 1;
+  }
+  return h.toString(16).toUpperCase().padStart(hexChars, '0');
+}
+
+function fromHex(s) {
+  let bits = s.length * 4;
+  let h = parseInt(s, 16);
+  let n = -Infinity;
+  for (let i = 0; i < bits; i++) {
+    let b = h % 2;
+    if (b) {
+      n = binaryExponential(n);
+    } else {
+      n = -binaryExponential(-n);
+    }
+    h = (h - b) / 2;
+  }
+  return n;
+}
+```
