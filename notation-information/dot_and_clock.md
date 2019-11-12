@@ -1,0 +1,31 @@
+I think I'm going to try to explain some more notations. This time it'll be Dot and Clock.
+
+Dot uses base 254 heavily. The digits are the Braille symbols that use some but not all of the eight possible dot positions. They thus correspond to binary numbers between 1 and 254 (far top left dot = 1, mid top left dot = 2, mid bottom left dot = 4, far top right dot = 8, mid top right dot = 16, mid bottom right dot = 32, far bottom left dot = 64, far bottom right dot = 128). For example, ⢞ = 2 + 4 + 8 + 16 + 128 - 1 = 157. Since we want a set of digits, which thus must go from 0 to 253, we subtract one from the corresponding binary number.
+
+16387063.9980315 is an important dividing point for Dot notation. It seems weird, but it's (roughly) 254^3 - (1 / 254) / 2 (actually, that's 16387063.998031495, and I'm not sure why the difference exists). In any case, below this dividing point, dot notation just returns the number in base 254 with one digit past the decimal point and with no actual decimal point character. If the number's less than one, dot notation returns the one character that's the first digit past the decimal point (the case where this is zero is the only place zero can occur). Above the dividing point, dot notation takes the log base 254 minus 2 and calls that the exponent, divides the original number by 254^exponent and calls that the mantissa, and returns the exponent in base 254, followed by ⣿, followed by the mantissa in base 254 with one digit past the decimal point and with no actual decimal point character. Note that just above the dividing point (that is, above the dividing point and below 254^3), the exponent is 0. Note also that just below the dividing point (between it and 254^3 - (1 / 254) / 2, numbers are represented as ⠂⠁⠁⠁⠁. Generally the mantissa is between 254^2 and 254^3, and thus uses four characters, but in some very rare cases (such as above the dividing point and below 254^3, but also in general between 254^n - 254^(n - 4) / 2 and 254^n), the mantissa is ⠂⠁⠁⠁⠁ and uses five characters.
+
+Infinity is a special case. It's ⣿⠀⣿. Note that the middle character there is the empty dots character, not a space. This is the only place that empty character is used, and the only place ⣿ is used more than once or somewhere not in the middle of a number, so it's unambiguous. Negation is handled in the standard way, with a minus sign. Dots notation uses standard rounding in the above description (for example, when getting one digit past the decimal point, the stuff after that digit is rounded to nearest, or to even if there's an exact tie). That's all I have to say about Dot right now.
+
+Clock uses base 12 heavily. The digits are 🕛🕐🕑🕒🕓🕔🕕🕖🕗🕘🕙🕚, in that order.
+
+There are five different regimes of clock notation. Each includes the smaller given endpoint but not the larger given endpoint.
+
+1 clock (0-12): Just the digit.
+
+2 clocks (12-12^13): The first clock is the exponent base 12 minus one, the second clock is the mantissa base 12 minus one times 12/11.
+
+3 clocks (12^13-12^157): The first two clocks are the exponent base 12 minus 13, the second clock is (the mantissa base 12 minus one) times 12/11.
+
+4 clocks, first is 🕛 (12^157-12^301): The first clock is 🕛 (zero), the middle two clocks are the exponent base 12 minus 157, the second clock is (the mantissa base 12 minus one) times 12/11.
+
+4 clocks, first isn't 🕛 (12^301-Infinity, starts repeating at 12^116719860413677): Let e refer to (the exponent base 12 minus 1583/11) times 11/12. The first clock is (the exponent of e base 12 minus one) maxed with 11, the other three clocks are (the mantissa of e base 12 minus one) times 1728/11.
+
+Note that 157 = 12^2 + 12 + 1, 1583 = 11 * 12^2 - 1, and 1728 = 12^3.
+
+There are probably precision issues with the above description in some cases. The algorithm used differs from this significantly.
+
+Infinity is 🕛🕡. This is the only place 🕡 is used so there's no ambiguity. Negation is handled in the standard way, with a minus sign. Clock notation uses floor rounding in the above description.
+
+This notation always uses 1 to 4 clocks, giving (not counting Infinity and negatives) 22620 possible numbers. It starts repeating after about e1.26e14, which is slightly annoying. However, in most ranges, it's somewhat usable, which is amazing with only a few tens of thousands of possible numbers. That's less entropy than two Dots characters.
+
+I don't have that much to say right now about how I got an algorithm with weird constants like 1583/11 from the code, which has fewer such weird constants. Maybe some other time I'll want to write about unrolling loops.
