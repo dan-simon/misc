@@ -173,4 +173,9 @@ function saveFix () {
     player.incrementali.unlocked = unlocked;
     alert('Unfortunately, as part of an attempted rebalance, your incrementali have been completely reset.');
   }
+  if (player.version < 6) {
+    player.version = 6;
+    player.lowLayers = Infinity;
+    player.highLayers = Infinity;
+  }
 }

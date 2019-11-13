@@ -23,9 +23,11 @@
       </div>
       <div>Display <input v-model.number="player.lowTiers" id="showDimsText"></input> lowest dimensions.</div>
       <div>Display <input v-model.number="player.highTiers" id="showDimsText"></input> highest dimensions.</div>
+      <div>Display <input v-model.number="player.lowLayers" id="showLayersText"></input> lowest prestige layers.</div>
+      <div>Display <input v-model.number="player.highLayers" id="showLayersText"></input> highest prestige layers.</div>
     </div>
     <div class="column" v-for="(generator, idx) in player.generators">
-      <div v-if="generator.display">
+      <div v-if="generator.display && (idx < player.lowLayers || idx >= player.generators.length - player.highLayers)">
         <div class="currency">
           <span>You have {{ format(generator.prestigeAmount) }} {{ generator.prestigeName }}<span v-if="idx > 0"> and {{ format(generator.currencyAmount) }} {{ generator.currencyName }}</span>. <button @click="maxAll(idx)" v-if="idx < player.generators.length - 1">Max all</button> <button @click="toggleAutoMaxAll(idx)" v-if="idx < player.generators.length - 2">Auto max all: {{ generator.autoMaxAll ? 'on' : 'off' }}</button> <button @click="togglePrestigeGain(idx)" v-if="idx < player.generators.length - 3">Prestige gain: {{ generator.prestigeGain ? 'on' : 'off' }}</button></span>
         </div>
