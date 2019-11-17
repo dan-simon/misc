@@ -1,0 +1,29 @@
+@font-face {
+  font-family: Typewriter;
+  src: url('MonospaceTypewriter.ttf');
+}
+
+body {
+  text-align: center;
+  font-family: Typewriter, serif;
+  font-size: 1rem;
+  background-color: #000000;
+  color: #ffffff;
+}
+
+button {
+	border: 0;
+  font-family: Typewriter, serif;
+  font-size: 1rem;
+  background-color: #aaaaaa;
+  color: #000000;
+}
+
+.options-button {
+  width: 256px;
+  height: 64px;
+}
+
+.disabled {
+  background-color: #555555;
+}

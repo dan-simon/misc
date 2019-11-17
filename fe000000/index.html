@@ -1,0 +1,126 @@
+<html>
+<template name="generator"><span>$i</span></template>
+<head>
+  <title>FE000000</title>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/break_infinity.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@antimatter-dimensions/notations"></script>
+  <script src="js/boost.js"></script>
+  <script src="js/format.js"></script>
+  <script src="js/generators.js"></script>
+  <script src="js/hotkeys.js"></script>
+  <script src="js/loop.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/max-all.js"></script>
+  <script src="js/options.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/prestige.js"></script>
+  <script src="js/saving.js"></script>
+  <script src="js/stars.js"></script>
+  <script src="js/tabs.js"></script>
+  <script src="js/update-display.js"></script>
+  <link rel="stylesheet" href="styles.css"></link>
+</head>
+<body>
+  <span><button onclick="Tabs.setTab('main')">Main</button> <button onclick="Tabs.setTab('options')">Options</button></span>
+  <div id="b0">
+    <span>You have <span id="e0"></span> stars. You are getting <span id="e1"></span> stars per second. <button id="b1" onclick="MaxAll.maxAll()">Max all</button></span>
+    <br/>
+    <span>You have <span id="e2"></span> boosts, giving a <span id="e3"></span>x multiplier to all generators. <button id="b2" onclick="Boost.buy()">Cost: <span id="e4"></span></button> <button id="b3" onclick="Boost.buyMax()">Max</button></span>
+    <br/>
+    <br/>
+    <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
+      <tr id="b4">
+        <td>Generator 1</td>
+        <td><span id="e5"></span></td>
+        <td><span id="e6"></span>/s</td>
+        <td><span id="e7"></span>x</td>
+        <td><button id="b5" onclick="Generator(1).buy()">Cost: <span id="e8"></span></button></td>
+        <td><button id="b6" onclick="Generator(1).buyMax()">Max</button></td>
+      </tr>
+      <tr id="b7">
+        <td>Generator 2</td>
+        <td><span id="e9"></span></td>
+        <td><span id="e10"></span>/s</td>
+        <td><span id="e11"></span>x</td>
+        <td><button id="b8" onclick="Generator(2).buy()">Cost: <span id="e12"></span></button></td>
+        <td><button id="b9" onclick="Generator(2).buyMax()">Max</button></td>
+      </tr>
+      <tr id="b10">
+        <td>Generator 3</td>
+        <td><span id="e13"></span></td>
+        <td><span id="e14"></span>/s</td>
+        <td><span id="e15"></span>x</td>
+        <td><button id="b11" onclick="Generator(3).buy()">Cost: <span id="e16"></span></button></td>
+        <td><button id="b12" onclick="Generator(3).buyMax()">Max</button></td>
+      </tr>
+      <tr id="b13">
+        <td>Generator 4</td>
+        <td><span id="e17"></span></td>
+        <td><span id="e18"></span>/s</td>
+        <td><span id="e19"></span>x</td>
+        <td><button id="b14" onclick="Generator(4).buy()">Cost: <span id="e20"></span></button></td>
+        <td><button id="b15" onclick="Generator(4).buyMax()">Max</button></td>
+      </tr>
+      <tr id="b16">
+        <td>Generator 5</td>
+        <td><span id="e21"></span></td>
+        <td><span id="e22"></span>/s</td>
+        <td><span id="e23"></span>x</td>
+        <td><button id="b17" onclick="Generator(5).buy()">Cost: <span id="e24"></span></button></td>
+        <td><button id="b18" onclick="Generator(5).buyMax()">Max</button></td>
+      </tr>
+      <tr id="b19">
+        <td>Generator 6</td>
+        <td><span id="e25"></span></td>
+        <td><span id="e26"></span>/s</td>
+        <td><span id="e27"></span>x</td>
+        <td><button id="b20" onclick="Generator(6).buy()">Cost: <span id="e28"></span></button></td>
+        <td><button id="b21" onclick="Generator(6).buyMax()">Max</button></td>
+      </tr>
+      <tr id="b22">
+        <td>Generator 7</td>
+        <td><span id="e29"></span></td>
+        <td><span id="e30"></span>/s</td>
+        <td><span id="e31"></span>x</td>
+        <td><button id="b23" onclick="Generator(7).buy()">Cost: <span id="e32"></span></button></td>
+        <td><button id="b24" onclick="Generator(7).buyMax()">Max</button></td>
+      </tr>
+      <tr id="b25">
+        <td>Generator 8</td>
+        <td><span id="e33"></span></td>
+        <td><span id="e34"></span>/s</td>
+        <td><span id="e35"></span>x</td>
+        <td><button id="b26" onclick="Generator(8).buy()">Cost: <span id="e36"></span></button></td>
+        <td><button id="b27" onclick="Generator(8).buyMax()">Max</button></td>
+      </tr>
+    </table>
+    <div id="b28">
+      <br/>
+      <span>You have <span id="e37"></span> prestige power multiplying all generators by its amount.</span>
+      <br/>
+      <span id="b29"><button style="height: 48px;" onclick="Prestige.prestige()">Prestige: <span id="e38"></span> → <span id="e39"></span><br/>(+<span id="e40"></span>, <span id="e41"></span>x)</button></span>
+      <span id="b30">You need <span id="e42"></span> stars to prestige.</span>
+    </div>
+  </div>
+  <div id="b31">
+    <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 8px; border-collapse: separate;">
+      <tr>
+        <td><button class="options-button" onclick="Saving.saveGame()">Save</button></td>
+        <td><button class="options-button" onclick="Saving.exportGame()">Export</button></td>
+        <td><button class="options-button" onclick="Saving.loadGamePrompt()">Load</button></td>
+      </tr>
+      <tr>
+        <td><button class="options-button" onclick="Options.toggleOfflineProgress()">Offline progress: <span id="e43"></span></button></td>
+        <td><button class="options-button" onclick="Options.toggleHotkeys()">Hotkeys: <span id="e44"></span></button></td>
+        <td><button class="options-button" onclick="Options.nextNotation()">Notation: <span id="e45"></span></button></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><button class="options-button" onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></td>
+        <td></td>
+      </tr>
+    </table>
+    <span style="display: none;">Exported save (also copied to clipboard): <input id="export-output"></input></span>
+  </div>
+</body>
+</html>
