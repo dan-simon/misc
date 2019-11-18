@@ -6,6 +6,10 @@ let InfinityPoints = {
     player.infinityPoints = player.infinityPoints.plus(x);
   },
   multiplier() {
-    return this.amount().div(4).plus(1);
+    if (this.amount().gt(8)) {
+      return this.amount().log(2);
+    } else {
+      return this.amount().div(4).plus(1);
+    }
   }
 }
