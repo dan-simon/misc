@@ -7,6 +7,9 @@ function gameLoop(diff, display) {
   for (let i = 8; i >= 1; i--) {
     Generator(i).produce(diff);
   }
+  for (let i = 8; i >= 1; i--) {
+    InfinityGenerator(i).produce(diff);
+  }
   if (display !== false) {
     updateDisplay();
   }

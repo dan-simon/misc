@@ -5,5 +5,5 @@ function format (x) {
     NOTATIONS[player.options.notation] = new ADNotations[
       player.options.notation.replace(/ [a-z]/g, (x) => x[1].toUpperCase()) + 'Notation']();
   }
-  return NOTATIONS[player.options.notation].format(x, 2, 2);
+  return NOTATIONS[player.options.notation].format(x, 3, 3);
 }

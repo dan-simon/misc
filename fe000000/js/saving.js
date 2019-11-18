@@ -27,7 +27,17 @@ let Saving = {
     }
   },
   fixPlayer() {
-    // no fixes needed yet
+    if (player.version < 1.25) {
+      // The first line here fixes a bug, the rest are due to new content.
+      player.prestigePower = Decimal.max(1, player.prestigePower);
+      player.infinityPoints = new Decimal(0);
+      player.infinities = 0;
+      player.infinityStars = new Decimal(1);
+      player.infinityGenerators = initialInfinityGenerators();
+      player.highestInfinityGenerator = 0;
+      player.infinityUpgrades = [0, 0];
+      player.version = 1.25;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
@@ -35,6 +45,11 @@ let Saving = {
       player.generators[i].amount = new Decimal(player.generators[i].amount);
     }
     player.prestigePower = new Decimal(player.prestigePower);
+    player.infinityPoints = new Decimal(player.infinityPoints);
+    player.infinityStars = new Decimal(player.infinityStars);
+    for (let i = 0; i < 8; i++) {
+      player.infinityGenerators[i].amount = new Decimal(player.infinityGenerators[i].amount);
+    }
   },
   loadGameStorage () {
     if (!localStorage.getItem('fe000000-save')) {

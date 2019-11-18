@@ -12,7 +12,7 @@ let Prestige = {
     return Decimal.pow(2, Math.max(128, 96 + 16 * Math.log2(this.prestigePower())));
   },
   canPrestige() {
-    return player.stars.gte(this.prestigeRequirement());
+    return player.stars.gte(this.prestigeRequirement()) && !InfinityPrestigeLayer.mustInfinity();
   },
   isVisible() {
     return this.prestigePower().gt(1) || this.canPrestige();

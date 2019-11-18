@@ -40,6 +40,11 @@ fs.readFile('index-template.html', 'utf8', function(err, contents) {
   let updateDisplay = 'function updateDisplay() {\n' +
   (contents.match(/~[fr] [^~]+ ~/g) || []).map(updateDisplayOneElement).concat(
     (contents.match(/<[-a-z]+( [-a-z]+="[^"]+"| ~[-.a-z]+=[^~]+~)*\/?>/g) || []).filter(x => x.includes('~')).map(updateDisplayOneStyle)).join('\n') + '\n}';
+  if (newContents.includes('~')) {
+    let index = newContents.indexOf('~')
+    console.log('context for first tilde:\n' + newContents.slice(Math.max(0, index - 100), index + 100));
+    throw new Error('tilde found in output, check above for context');
+  }
   fs.writeFile('index.html', newContents, function (err) {console.log(err)});
   fs.writeFile('js/update-display.js', updateDisplay, function (err) {console.log(err)});
 });

@@ -19,7 +19,11 @@ let Generator = function (i) {
       return Decimal.pow(2, i * (i + this.bought()));
     },
     multiplier() {
-      return Decimal.pow(2, this.bought() / 8).times(Boost.multiplier()).times(Prestige.multiplier());
+      let factors = [
+        Decimal.pow(2, this.bought() / 8), Boost.multiplier(), Prestige.multiplier(),
+        InfinityPoints.multiplier(), InfinityStars.multiplier()
+      ];
+      return factors.reduce((a, b) => a.times(b));
     },
     productionPerSecond() {
       return this.amount().times(this.multiplier());
@@ -39,7 +43,7 @@ let Generator = function (i) {
       return i <= player.highestGenerator + 1;
     },
     canBuy() {
-      return this.isVisible() && this.cost().lte(player.stars);
+      return this.isVisible() && this.cost().lte(player.stars) && !InfinityPrestigeLayer.mustInfinity();
     },
     buy() {
       if (!this.canBuy()) return
@@ -56,7 +60,7 @@ let Generator = function (i) {
   }
 }
 
-Generators = {
+let Generators = {
   list: [...Array(8)].map((_, i) => Generator(i + 1)),
   get: function (x) {
     return this.list[x - 1]

@@ -8,11 +8,14 @@ let Boost = {
   cost() {
     return Decimal.pow(2, Math.pow(8 + 2 * this.bought(), 2));
   },
+  multiplierPer() {
+    return InfinityUpgrade(1).effect();
+  },
   multiplier() {
-    return Decimal.pow(2, this.bought());
+    return Decimal.pow(this.multiplierPer(), this.bought());
   },
   canBuy() {
-    return this.cost().lte(player.stars);
+    return this.cost().lte(player.stars) && !InfinityPrestigeLayer.mustInfinity();
   },
   buy() {
     if (!this.canBuy()) return
