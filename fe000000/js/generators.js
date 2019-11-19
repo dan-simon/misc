@@ -47,7 +47,7 @@ let Generator = function (i) {
       return (i < 8) ? Generator(i + 1).productionPerSecond() : new Decimal(0);
     },
     isVisible() {
-      return i <= player.highestGenerator + 1 && ((!Challenge.isChallengeRnning(6)) || i <= 6);
+      return i <= player.highestGenerator + 1 && ((!Challenge.isChallengeRunning(6)) || i <= 6);
     },
     canBuy() {
       return this.isVisible() && this.cost().lte(player.stars) && !InfinityPrestigeLayer.mustInfinity();
