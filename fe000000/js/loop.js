@@ -4,13 +4,17 @@ function gameLoop(diff, display) {
     diff = (now - player.lastUpdate) / 1024;
     player.lastUpdate = now;
   }
-  for (let i = 8; i >= 1; i--) {
-    Generator(i).produce(diff);
+  if (!InfinityPrestigeLayer.mustInfinity()) {
+    for (let i = 8; i >= 1; i--) {
+      Generator(i).produce(diff);
+    }
   }
   for (let i = 8; i >= 1; i--) {
     InfinityGenerator(i).produce(diff);
   }
+  Stats.addToTimeStats(diff);
   if (display !== false) {
     updateDisplay();
   }
+  InfinityPrestigeLayer.updatePeakIPPerSec();
 }

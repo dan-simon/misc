@@ -12,6 +12,7 @@
   <script src="js/infinity/infinity-stars.js"></script>
   <script src="js/infinity/infinity-upgrades.js"></script>
   <script src="js/boost.js"></script>
+  <script src="js/challenge.js"></script>
   <script src="js/format.js"></script>
   <script src="js/generators.js"></script>
   <script src="js/hotkeys.js"></script>
@@ -21,14 +22,17 @@
   <script src="js/options.js"></script>
   <script src="js/player.js"></script>
   <script src="js/prestige.js"></script>
+  <script src="js/sacrifice.js"></script>
   <script src="js/saving.js"></script>
   <script src="js/stars.js"></script>
+  <script src="js/stats.js"></script>
   <script src="js/tabs.js"></script>
   <script src="js/update-display.js"></script>
   <link rel="stylesheet" href="styles.css"></link>
 </head>
 <body>
-  <span><button onclick="Tabs.setTab('main')">Main</button> <button ~style.display=Tabs.isTabVisible('infinity') ? '' : 'none'~ onclick="Tabs.setTab('infinity')">Infinity</button> <button onclick="Tabs.setTab('options')">Options</button></span>
+  <div ~style.display=InfinityPrestigeLayer.canInfinity() ? '' : 'none'~><button style="height: 48px;" onclick="InfinityPrestigeLayer.infinity()">Infinity: Gain ~f InfinityPrestigeLayer.infinityPointGain() ~ infinity points<br/>~f InfinityPrestigeLayer.currentIPPerSec() ~ IP/sec, ~f InfinityPrestigeLayer.peakIPPerSec() ~ peak IP/sec</button></div>
+  <span><button onclick="Tabs.setTab('main')">Main</button> <button ~style.display=Tabs.isTabVisible('infinity') ? '' : 'none'~ onclick="Tabs.setTab('infinity')">Infinity</button> <button ~style.display=Tabs.isTabVisible('challenges') ? '' : 'none'~ onclick="Tabs.setTab('challenges')">Challenges</button> <button onclick="Tabs.setTab('statistics')">Statistics</button> <button onclick="Tabs.setTab('options')">Options</button></span>
   <div ~style.display=Tabs.currentTab() === 'main' ? '' : 'none'~>
     <div ~style.display=InfinityPrestigeLayer.mustInfinity() ? 'none' : ''~>
       <span>You have ~f Stars.amount() ~ stars. You are getting ~f Stars.perSecond() ~ stars per second. <button ~class=MaxAll.anythingToBuy() ? "" : "disabled"~ onclick="MaxAll.maxAll()">Max all</button></span>
@@ -102,6 +106,13 @@
           <td><button ~class=Generator(8).canBuy() ? "" : "disabled"~ onclick="Generator(8).buyMax()">Max</button></td>
         </tr>
       </table>
+      <div ~style.display=Sacrifice.isVisible() ? '' : 'none'~>
+        <br/>
+        <span>You have a ~f Sacrifice.sacrificeMultiplier() ~ sacrifice multiplier multiplying Generator 8 by its amount.</span>
+        <br/>
+        <span ~style.display=Sacrifice.canSacrifice() ? '' : 'none'~><button style="height: 48px;" onclick="Sacrifice.sacrifice()">Sacrifice: ~f Sacrifice.sacrificeMultiplier() ~ → ~f Sacrifice.newSacrificeMultiplier() ~<br/>(+~f Sacrifice.sacrificeMultiplierGain() ~, ~f Sacrifice.sacrificeMultiplierMultGain() ~x)</button></span>
+        <span ~style.display=Sacrifice.canSacrifice() ? 'none' : ''~>You need ~f Sacrifice.sacrificeRequirement() ~ stars and at least one of Generator 8 to sacrifice.</span>
+      </div>
       <div ~style.display=Prestige.isVisible() ? '' : 'none'~>
         <br/>
         <span>You have ~f Prestige.prestigePower() ~ prestige power multiplying all generators by its amount.</span>
@@ -110,15 +121,17 @@
         <span ~style.display=Prestige.canPrestige() ? 'none' : ''~>You need ~f Prestige.prestigeRequirement() ~ stars to prestige.</span>
       </div>
     </div>
-    <div ~style.display=InfinityPrestigeLayer.canInfinity() ? '' : 'none'~>
-      <br/>
-      <span><button style="height: 48px;" onclick="InfinityPrestigeLayer.infinity()">Infinity: Gain ~f InfinityPrestigeLayer.infinityPointGain() ~ infinity points</span>
+    <div ~style.display=InfinityPrestigeLayer.mustInfinity() ? '' : 'none'~>
+      <span>The universe has collapsed due to an excess of stars.</span>
     </div>
   </div>
   <div ~style.display=Tabs.currentTab() === 'infinity' ? '' : 'none'~>
     <span>You have ~f InfinityPoints.amount() ~ infinity points, multiplying all generators by ~f InfinityPoints.multiplier() ~. <button ~class=InfinityMaxAll.anythingToBuy() ? "" : "disabled"~ onclick="InfinityMaxAll.maxAll()">Max all</button></span>
     <br/>
     <span>You have ~f Infinities.amount() ~ infinities, multiplying all infinity generators by ~f Infinities.infinityGeneratorMultiplier() ~.</span>
+    <br/>
+    <span ~style.display=InfinityPrestigeLayer.canInfinityBeBroken() ? '' : 'none'~><button style="height: 48px;" onclick="InfinityPrestigeLayer.toggleBreakInfinity()">~r InfinityPrestigeLayer.breakInfinityButtonText() ~</button></span>
+    <span ~style.display=InfinityPrestigeLayer.canInfinityBeBroken() ? 'none' : ''~>You need to complete all the challenges to be able to break infinity.</span>
     <br/>
     <span>You have ~f InfinityStars.amount() ~ infinity stars, multiplying all generators by their amount^~f InfinityStars.exponent() ~ = ~f InfinityStars.multiplier() ~.</span>
     <br/>
@@ -206,6 +219,168 @@
         <td><button ~class=InfinityGenerator(8).canBuy() ? "" : "disabled"~ onclick="InfinityGenerator(8).buyMax()">Max</button></td>
       </tr>
     </table>
+  </div>
+  <div ~style.display=Tabs.currentTab() === 'challenges' ? '' : 'none'~>
+    <span>You have completed ~f Challenge.getChallengesCompleted() ~ challenges, multiplying all generators by ~f Challenge.multiplier() ~.</span>
+    <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
+      <tr>
+        <td>
+          <div class="challengediv">
+            <span>Challenge 1</span>
+            <br/>
+            <span>Generator 1 multiplier is raised ~f 4 ~. All other generator multipliers are always ~f 1 ~x.</span>
+            <br/>
+            <span>~r Challenge.challengeStatusDescription(1) ~</span>
+            <br/>
+            <span><button onclick="Challenge.startOrExitChallenge(1)">~r Challenge.isChallengeRunning(1) ? "Exit challenge" : "Start challenge" ~</button></span>
+          </div>
+        </td>
+        <td>
+          <div class="challengediv">
+            <span>Challenge 2</span>
+            <br/>
+            <span>There's a multiplier on all generators increasing linearly from ~f 0 ~ to ~f 1 ~ over ~f 256 ~ seconds. Every time you buy a generator or boost, or sacrifice or prestige, this multiplier resets to ~f 0 ~.</span>
+            <br/>
+            <span>~r Challenge.challengeStatusDescription(2) ~</span>
+            <br/>
+            <span><button onclick="Challenge.startOrExitChallenge(2)">~r Challenge.isChallengeRunning(2) ? "Exit challenge" : "Start challenge" ~</button></span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="challengediv">
+            <span>Challenge 3</span>
+            <br/>
+            <span>There's a multiplier on Generator 1, starting at ~f 1 / 256 ~ and doubling every ~f 256 ~ seconds. Every time you prestige, this multiplier resets to ~f 1 / 256 ~.</span>
+            <br/>
+            <span>~r Challenge.challengeStatusDescription(3) ~</span>
+            <br/>
+            <span><button onclick="Challenge.startOrExitChallenge(3)">~r Challenge.isChallengeRunning(3) ? "Exit challenge" : "Start challenge" ~</button></span>
+          </div>
+        </td>
+        <td>
+          <div class="challengediv">
+            <span>Challenge 4</span>
+            <br/>
+            <span>Every time you buy a generator, the amounts of all lower generators are reset, like a sacrifice without the benefit.</span>
+            <br/>
+            <span>~r Challenge.challengeStatusDescription(4) ~</span>
+            <br/>
+            <span><button onclick="Challenge.startOrExitChallenge(4)">~r Challenge.isChallengeRunning(4) ? "Exit challenge" : "Start challenge" ~</button></span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="challengediv">
+            <span>Challenge 5</span>
+            <br/>
+            <span>All generator cost increases are raised ^~f 2 ~.</span>
+            <br/>
+            <span>~r Challenge.challengeStatusDescription(5) ~</span>
+            <br/>
+            <span><button onclick="Challenge.startOrExitChallenge(5)">~r Challenge.isChallengeRunning(5) ? "Exit challenge" : "Start challenge" ~</button></span>
+          </div>
+        </td>
+        <td>
+          <div class="challengediv">
+            <span>Challenge 6</span>
+            <br/>
+            <span>There are only 6 generators. (Generator 7 and Generator 8 don't exist.)</span>
+            <br/>
+            <span>~r Challenge.challengeStatusDescription(6) ~</span>
+            <br/>
+            <span><button onclick="Challenge.startOrExitChallenge(6)">~r Challenge.isChallengeRunning(6) ? "Exit challenge" : "Start challenge" ~</button></span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="challengediv">
+            <span>Challenge 7</span>
+            <br/>
+            <span>You can only buy ~f 343 ~ total generators and boosts throughout the challenge. This count does not reset on prestige.</span>
+            <br/>
+            <span>~r Challenge.challengeStatusDescription(7) ~</span>
+            <br/>
+            <span><button onclick="Challenge.startOrExitChallenge(7)">~r Challenge.isChallengeRunning(7) ? "Exit challenge" : "Start challenge" ~</button></span>
+          </div>
+        </td>
+        <td>
+          <div class="challengediv">
+            <span>Challenge 8</span>
+            <br/>
+            <span>You can't buy boosts, the boost multiplier is ~f 1 ~x, and prestige power is raised ^~f 0.5 ~, but all generators (including Generator 8) are multiplied by your amount of Generator 8.</span>
+            <br/>
+            <span>~r Challenge.challengeStatusDescription(8) ~</span>
+            <br/>
+            <span><button onclick="Challenge.startOrExitChallenge(8)">~r Challenge.isChallengeRunning(8) ? "Exit challenge" : "Start challenge" ~</button></span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="challengediv">
+            <span>Challenge 9</span>
+            <br/>
+            <span>The boost multiplier is ~f 1 ~x. You can't buy boosts.</span>
+            <br/>
+            <span>~r Challenge.challengeStatusDescription(9) ~</span>
+            <br/>
+            <span><button onclick="Challenge.startOrExitChallenge(9)">~r Challenge.isChallengeRunning(9) ? "Exit challenge" : "Start challenge" ~</button></span>
+          </div>
+        </td>
+        <td>
+          <div class="challengediv">
+            <span>Challenge 10</span>
+            <br/>
+            <span>You can't buy boosts or more than one of each generator, and you can't prestige. You can sacrifice multiple times at the same point and the sacrifice bonuses multiply, but sacrifice resets everything like prestige.</span>
+            <br/>
+            <span>~r Challenge.challengeStatusDescription(10) ~</span>
+            <br/>
+            <span><button onclick="Challenge.startOrExitChallenge(10)">~r Challenge.isChallengeRunning(10) ? "Exit challenge" : "Start challenge" ~</button></span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="challengediv">
+            <span>Challenge 11</span>
+            <br/>
+            <span>Prestige power is raised ^~f 0.5 ~.</span>
+            <br/>
+            <span>~r Challenge.challengeStatusDescription(11) ~</span>
+            <br/>
+            <span><button onclick="Challenge.startOrExitChallenge(11)">~r Challenge.isChallengeRunning(11) ? "Exit challenge" : "Start challenge" ~</button></span>
+          </div>
+        </td>
+        <td>
+          <div class="challengediv">
+            <span>Challenge 12</span>
+            <br/>
+            <span>Infinity generators are disabled.</span>
+            <br/>
+            <span>~r Challenge.challengeStatusDescription(12) ~</span>
+            <br/>
+            <span><button onclick="Challenge.startOrExitChallenge(12)">~r Challenge.isChallengeRunning(12) ? "Exit challenge" : "Start challenge" ~</button></span>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div ~style.display=Tabs.currentTab() === 'statistics' ? '' : 'none'~>
+    <span>You have produced ~f player.stats.totalStarsProduced ~ total stars.</span>
+    <br/>
+    <span>You have spent ~f player.stats.timeSincePurchase ~ seconds without purchasing anything.</span>
+    <br/>
+    <span>You have spent ~f player.stats.timeSinceSacrifice ~ seconds without sacrificing.</span>
+    <br/>
+    <span>You have spent ~f player.stats.timeSincePrestige ~ seconds in this prestige.</span>
+    <br/>
+    <span>You have spent ~f player.stats.timeSinceInfinity ~ seconds in this infinity.</span>
+    <br/>
+    <span>You have spent ~f player.stats.timeSinceGameStart ~ seconds playing this game (counting time offline).</span>
   </div>
   <div ~style.display=Tabs.currentTab() === 'options' ? '' : 'none'~>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 8px; border-collapse: separate;">

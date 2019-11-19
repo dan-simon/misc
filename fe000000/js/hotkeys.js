@@ -24,12 +24,20 @@ window.addEventListener('keydown', function(event) {
       }
     break;
 
+    case 73: // I
+      InfinityPrestigeLayer.infinity();
+    break;
+
     case 77: // M
       MaxAll.maxAll();
     break;
 
     case 80: // P
       Prestige.prestige();
+    break;
+
+    case 83: // S
+      Sacrifice.sacrifice();
     break;
   }
 }, false);

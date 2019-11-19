@@ -27,3 +27,14 @@ button {
 .disabled {
   background-color: #555555;
 }
+
+.challengediv {
+  display: table;
+  text-align: center;
+  width: 512px;
+  height:192px;
+  padding: 4px;
+  margin: 4px;
+  border: solid;
+  border-width: 1px 1px;
+}

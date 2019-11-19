@@ -38,18 +38,42 @@ let Saving = {
       player.infinityUpgrades = [0, 0];
       player.version = 1.25;
     }
+    if (player.version < 1.3125) {
+      player.sacrificeMultiplier = new Decimal(1);
+      player.stats = {
+        totalStarsProduced: new Decimal(0),
+        timeSincePurchase: 0,
+        timeSinceSacrifice: 0,
+        timeSincePrestige: 0,
+        timeSinceInfinity: 0,
+        timeSinceGameStart: 0,
+        peakIPPerSec: new Decimal(0)
+      };
+      player.version = 1.3125;
+    }
+    if (player.version < 1.375) {
+      player.currentChallenge = 0;
+      player.challengesCompleted = [
+        false, false, false, false, false, false,
+        false, false, false, false, false, false,
+      ];
+      player.breakInfinity = false;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
     for (let i = 0; i < 8; i++) {
       player.generators[i].amount = new Decimal(player.generators[i].amount);
     }
+    player.sacrificeMultiplier = new Decimal(player.sacrificeMultiplier);
     player.prestigePower = new Decimal(player.prestigePower);
     player.infinityPoints = new Decimal(player.infinityPoints);
     player.infinityStars = new Decimal(player.infinityStars);
     for (let i = 0; i < 8; i++) {
       player.infinityGenerators[i].amount = new Decimal(player.infinityGenerators[i].amount);
     }
+    player.stats.totalStarsProduced = new Decimal(player.stats.totalStarsProduced);
+    player.stats.peakIPPerSec = new Decimal(player.stats.peakIPPerSec);
   },
   loadGameStorage () {
     if (!localStorage.getItem('fe000000-save')) {

@@ -21,6 +21,7 @@ let Boost = {
     if (!this.canBuy()) return
     player.stars = player.stars.minus(this.cost());
     this.incrementBought();
+    Stats.recordPurchase();
   },
   buyMax() {
     while (this.canBuy()) {this.buy()};

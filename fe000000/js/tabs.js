@@ -8,8 +8,10 @@ let Tabs = {
   isTabVisible(x) {
     return {
       'main': () => true,
-      'options': () => true,
       'infinity': () => player.infinities > 0,
+      'challenges': () => player.infinities > 0,
+      'statistics': () => true,
+      'options': () => true,
     }[x]();
   }
 }

@@ -15,7 +15,7 @@ let Prestige = {
     return player.stars.gte(this.prestigeRequirement()) && !InfinityPrestigeLayer.mustInfinity();
   },
   isVisible() {
-    return this.prestigePower().gt(1) || this.canPrestige();
+    return this.canPrestige() || this.prestigePower().gt(1) || player.infinities > 0;
   },
   newPrestigePower() {
     return this.canPrestige() ? Decimal.pow(2, (player.stars.log(2) - 96) / 16) : this.prestigePower();
@@ -36,5 +36,9 @@ let Prestige = {
     player.boost = {bought: 0};
     player.generators = initialGenerators();
     player.highestGenerator = 0;
+    player.sacrificeMultiplier = new Decimal(1);
+    player.timeSincePurchase = 0;
+    player.timeSinceSacrifice = 0;
+    player.timeSincePrestige = 0;
   }
 }

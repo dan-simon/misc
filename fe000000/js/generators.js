@@ -12,18 +12,25 @@ let Generator = function (i) {
     addAmount(x) {
       player.generators[i - 1].amount = player.generators[i - 1].amount.plus(x);
     },
+    resetAmount() {
+      player.generators[i - 1].amount = new Decimal(0);
+    },
     incrementBought() {
       player.generators[i - 1].bought++;
     },
     cost() {
-      return Decimal.pow(2, i * (i + this.bought()));
+      let extraFactor = Challenge.isChallengeRunning(5) ? 2 : 1;
+      return Decimal.pow(2, Math.pow(i, 2) + i * this.bought() * extraFactor);
     },
     multiplier() {
       let factors = [
         Decimal.pow(2, this.bought() / 8), Boost.multiplier(), Prestige.multiplier(),
-        InfinityPoints.multiplier(), InfinityStars.multiplier()
+        InfinityPoints.multiplier(), InfinityStars.multiplier(), Challenge.multiplier(),
+        (i === 8) ? Sacrifice.sacrificeMultiplier() : 1
       ];
-      return factors.reduce((a, b) => a.times(b));
+      let multiplier = factors.reduce((a, b) => a.times(b));
+      let powFactors = [Challenge.isChallengeRunning(1) ? ((i === 1) ? 4 : 0) : 1];
+      return multiplier.pow(powFactors.reduce((a, b) => a.times(b)));
     },
     productionPerSecond() {
       return this.amount().times(this.multiplier());
@@ -40,7 +47,7 @@ let Generator = function (i) {
       return (i < 8) ? Generator(i + 1).productionPerSecond() : new Decimal(0);
     },
     isVisible() {
-      return i <= player.highestGenerator + 1;
+      return i <= player.highestGenerator + 1 && ((!Challenge.isChallengeRnning(6)) || i <= 6);
     },
     canBuy() {
       return this.isVisible() && this.cost().lte(player.stars) && !InfinityPrestigeLayer.mustInfinity();
@@ -53,6 +60,10 @@ let Generator = function (i) {
       if (player.highestGenerator < i) {
         player.highestGenerator = i;
       }
+      if (Challenge.isChallengeRunning(4)) {
+        Generators.resetAmounts(i - 1);
+      }
+      Stats.recordPurchase();
     },
     buyMax() {
       while (this.canBuy()) {this.buy()};
@@ -67,5 +78,8 @@ let Generators = {
   },
   highest () {
     return Generators.list[player.highestGenerator + 1] || null;
+  },
+  resetAmounts(i) {
+    Generators.list.slice(0, i).forEach(g => g.resetAmount());
   }
 }
