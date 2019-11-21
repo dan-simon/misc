@@ -74,9 +74,6 @@ let Challenge = {
   challenge7PurchasesLeft() {
     return 343 - player.stats.purchasesThisInfinity;
   },
-  allPurchasesUsed() {
-    return this.isChallengeRunning(7) && this.challenge7PurchasesLeft() <= 0;
-  },
   challengeText() {
     let cc = this.currentChallenge();
     if (cc === 2) {

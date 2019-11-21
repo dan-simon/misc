@@ -6,8 +6,8 @@ let Stats = {
     player.stats.timeSinceInfinity += diff;
     player.stats.timeSinceGameStart += diff;
   },
-  recordPurchase() {
+  recordPurchase(n) {
     player.stats.timeSincePurchase = 0;
-    player.stats.purchasesThisInfinity++;
+    player.stats.purchasesThisInfinity += n;
   }
 }

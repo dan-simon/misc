@@ -6,8 +6,8 @@ let InfinityUpgrade = function (i) {
     bought() {
       return player.infinityUpgrades[i - 1];
     },
-    incrementBought() {
-      player.infinityUpgrades[i - 1]++;
+    addBought(n) {
+      player.infinityUpgrades[i - 1] += n;
     },
     boughtLimit() {
       return [Infinity, 12][i - 1];
@@ -27,6 +27,9 @@ let InfinityUpgrade = function (i) {
     cost() {
       return this.initialCost().times(Decimal.pow(this.costIncreasePer(), this.bought()));
     },
+    costFor(n) {
+      return this.cost().times(Decimal.pow(this.costIncreasePer(), n).minus(1)).div(Decimal.minus(this.costIncreasePer(), 1));
+    },
     effect() {
       return this.initialEffect() + this.effectIncreasePer() * this.bought();
     },
@@ -36,16 +39,29 @@ let InfinityUpgrade = function (i) {
     atBoughtLimit() {
       return this.bought() >= this.boughtLimit();
     },
-    canBuy() {
-      return this.cost().lte(player.infinityPoints) && !this.atBoughtLimit();
+    canBuy(n) {
+      if (n === undefined) {
+        n = 1;
+      }
+      return n <= this.maxBuyable();
     },
-    buy() {
-      if (!this.canBuy()) return
-      player.infinityPoints = player.infinityPoints.minus(this.cost());
-      this.incrementBought();
+    maxBuyable(n) {
+      let num = Math.floor(player.infinityPoints.div(this.cost()).times(
+        Decimal.minus(this.costIncreasePer(), 1)).plus(1).log(this.costIncreasePer()));
+      num = Math.min(num, this.boughtLimit() - this.bought());
+      num = Math.max(num, 0);
+      return num;
+    },
+    buy(n, guaranteedBuyable) {
+      if (n === undefined) {
+        n = 1;
+      }
+      if (n === 0 || (!guaranteedBuyable && !this.canBuy(n))) return;
+      player.infinityPoints = player.infinityPoints.minus(this.costFor(n));
+      this.addBought(n);
     },
     buyMax() {
-      while (this.canBuy()) {this.buy()};
+      this.buy(this.maxBuyable(), true);
     }
   }
 }

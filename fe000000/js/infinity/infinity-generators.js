@@ -15,8 +15,8 @@ let InfinityGenerator = function (i) {
     resetAmount(x) {
       player.infinityGenerators[i - 1].amount = new Decimal(player.infinityGenerators[i - 1].bought);
     },
-    incrementBought() {
-      player.infinityGenerators[i - 1].bought++;
+    addBought(n) {
+      player.infinityGenerators[i - 1].bought += n;
     },
     costIncreasePer() {
       return Decimal.pow(2, i);
@@ -26,6 +26,9 @@ let InfinityGenerator = function (i) {
     },
     cost() {
       return this.initialCost().times(Decimal.pow(this.costIncreasePer(), this.bought()));
+    },
+    costFor(n) {
+      return this.cost().times(Decimal.pow(this.costIncreasePer(), n).minus(1)).div(Decimal.minus(this.costIncreasePer(), 1));
     },
     multiplier() {
       if (Challenge.isChallengeRunning(12)) {
@@ -50,20 +53,33 @@ let InfinityGenerator = function (i) {
     isVisible() {
       return i <= player.highestInfinityGenerator + 1;
     },
-    canBuy() {
-      return this.isVisible() && this.cost().lte(player.infinityPoints);
+    canBuy(n) {
+      if (n === undefined) {
+        n = 1;
+      }
+      return n <= this.maxBuyable();
     },
-    buy() {
-      if (!this.canBuy()) return
-      player.infinityPoints = player.infinityPoints.minus(this.cost());
-      this.addAmount(1);
-      this.incrementBought();
+    maxBuyable(n) {
+      if (!this.isVisible()) return 0;
+      let num = Math.floor(player.infinityPoints.div(this.cost()).times(
+        Decimal.minus(this.costIncreasePer(), 1)).plus(1).log(this.costIncreasePer()));
+      num = Math.max(num, 0);
+      return num;
+    },
+    buy(n, guaranteedBuyable) {
+      if (n === undefined) {
+        n = 1;
+      }
+      if (n === 0 || (!guaranteedBuyable && !this.canBuy(n))) return;
+      player.infinityPoints = player.infinityPoints.minus(this.costFor(n));
+      this.addAmount(n);
+      this.addBought(n);
       if (player.highestInfinityGenerator < i) {
         player.highestInfinityGenerator = i;
       }
     },
     buyMax() {
-      while (this.canBuy()) {this.buy()};
+      this.buy(this.maxBuyable(), true);
     }
   }
 }

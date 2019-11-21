@@ -15,8 +15,8 @@ let Generator = function (i) {
     resetAmount() {
       player.generators[i - 1].amount = new Decimal(0);
     },
-    incrementBought() {
-      player.generators[i - 1].bought++;
+    addBought(n) {
+      player.generators[i - 1].bought += n;
     },
     costIncreasePer() {
       let extraFactor = Challenge.isChallengeRunning(5) ? 2 : 1;
@@ -27,6 +27,9 @@ let Generator = function (i) {
     },
     cost() {
       return this.initialCost().times(Decimal.pow(this.costIncreasePer(), this.bought()));
+    },
+    costFor(n) {
+      return this.cost().times(Decimal.pow(this.costIncreasePer(), n).minus(1)).div(Decimal.minus(this.costIncreasePer(), 1));
     },
     multiplier() {
       let factors = [
@@ -58,25 +61,40 @@ let Generator = function (i) {
     isVisible() {
       return i <= player.highestGenerator + 1 && ((!Challenge.isChallengeRunning(6)) || i <= 6);
     },
-    canBuy() {
-      return this.isVisible() && this.cost().lte(player.stars) && !Challenge.allPurchasesUsed() &&
-      ((!Challenge.isChallengeRunning(10)) || this.bought() === 0) && !InfinityPrestigeLayer.mustInfinity();
+    canBuy(n) {
+      if (n === undefined) {
+        n = 1;
+      }
+      return n <= this.maxBuyable();
     },
-    buy() {
-      if (!this.canBuy()) return
-      player.stars = player.stars.minus(this.cost());
-      this.addAmount(1);
-      this.incrementBought();
+    maxBuyable() {
+      if (!this.isVisible() || InfinityPrestigeLayer.mustInfinity()) return 0;
+      let num = Math.floor(player.stars.div(this.cost()).times(
+        Decimal.minus(this.costIncreasePer(), 1)).plus(1).log(this.costIncreasePer()));
+      num = Math.min(num,
+        Challenge.isChallengeRunning(10) ? 1 - this.bought() : Infinity,
+        Challenge.isChallengeRunning(7) ? Challenge.challenge7PurchasesLeft() : Infinity);
+      num = Math.max(num, 0);
+      return num;
+    },
+    buy(n, guaranteedBuyable) {
+      if (n === undefined) {
+        n = 1;
+      }
+      if (n === 0 || (!guaranteedBuyable && !this.canBuy(n))) return;
+      player.stars = player.stars.minus(this.costFor(n));
+      this.addAmount(n);
+      this.addBought(n);
       if (player.highestGenerator < i) {
         player.highestGenerator = i;
       }
       if (Challenge.isChallengeRunning(4)) {
         Generators.resetAmounts(i - 1);
       }
-      Stats.recordPurchase();
+      Stats.recordPurchase(n);
     },
     buyMax() {
-      while (this.canBuy()) {this.buy()};
+      this.buy(this.maxBuyable(), true);
     }
   }
 }
