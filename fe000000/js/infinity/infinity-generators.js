@@ -22,6 +22,9 @@ let InfinityGenerator = function (i) {
       return Decimal.pow(2, i * (i + this.bought()));
     },
     multiplier() {
+      if (Challenge.isChallengeRunning(12)) {
+        return new Decimal(0);
+      }
       return Decimal.pow(2, this.bought() / 8).times(Infinities.infinityGeneratorMultiplier());
     },
     productionPerSecond() {
@@ -65,6 +68,6 @@ let InfinityGenerators = {
     return this.list[x - 1]
   },
   highest () {
-    return InfinityGenerators.list[player.highestInfinityGenerator + 1] || null;
+    return InfinityGenerators.list[player.highestInfinityGenerator] || null;
   }
 }

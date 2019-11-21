@@ -80,7 +80,7 @@ let Generators = {
     return this.list[x - 1]
   },
   highest () {
-    return Generators.list[player.highestGenerator + 1] || null;
+    return Generators.list[player.highestGenerator] || null;
   },
   resetAmounts(i) {
     Generators.list.slice(0, i).forEach(g => g.resetAmount());
