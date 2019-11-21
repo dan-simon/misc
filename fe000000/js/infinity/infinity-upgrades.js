@@ -21,8 +21,11 @@ let InfinityUpgrade = function (i) {
     initialEffect() {
       return [2, 0.5][i - 1];
     },
+    initialCost() {
+      return this.costIncreasePer();
+    },
     cost() {
-      return Decimal.pow(this.costIncreasePer(), this.bought() + 1);
+      return this.initialCost().times(Decimal.pow(this.costIncreasePer(), this.bought()));
     },
     effect() {
       return this.initialEffect() + this.effectIncreasePer() * this.bought();

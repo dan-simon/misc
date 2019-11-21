@@ -18,8 +18,14 @@ let InfinityGenerator = function (i) {
     incrementBought() {
       player.infinityGenerators[i - 1].bought++;
     },
+    costIncreasePer() {
+      return Decimal.pow(2, i);
+    },
+    initialCost() {
+      return Decimal.pow(2, Math.pow(i, 2));
+    },
     cost() {
-      return Decimal.pow(2, i * (i + this.bought()));
+      return this.initialCost().times(Decimal.pow(this.costIncreasePer(), this.bought()));
     },
     multiplier() {
       if (Challenge.isChallengeRunning(12)) {

@@ -18,9 +18,15 @@ let Generator = function (i) {
     incrementBought() {
       player.generators[i - 1].bought++;
     },
-    cost() {
+    costIncreasePer() {
       let extraFactor = Challenge.isChallengeRunning(5) ? 2 : 1;
-      return Decimal.pow(2, Math.pow(i, 2) + i * this.bought() * extraFactor);
+      return Decimal.pow(2, i * extraFactor);
+    },
+    initialCost() {
+      return Decimal.pow(2, Math.pow(i, 2));
+    },
+    cost() {
+      return this.initialCost().times(Decimal.pow(this.costIncreasePer(), this.bought()));
     },
     multiplier() {
       let factors = [
