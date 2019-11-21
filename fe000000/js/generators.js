@@ -29,6 +29,7 @@ let Generator = function (i) {
         (i === 8) ? Sacrifice.sacrificeMultiplier() : 1,
         Challenge.isChallengeRunning(2) ? Challenge.challenge2Mult() : 1,
         (i === 1 && Challenge.isChallengeRunning(3)) ? Challenge.challenge3Mult() : 1,
+        Challenge.isChallengeRunning(8) ? Generator(8).amount().max(1) : 1
       ];
       let multiplier = factors.reduce((a, b) => a.times(b));
       let powFactors = [Challenge.isChallengeRunning(1) ? ((i === 1) ? 4 : 0) : 1];
@@ -53,7 +54,7 @@ let Generator = function (i) {
     },
     canBuy() {
       return this.isVisible() && this.cost().lte(player.stars) && !Challenge.allPurchasesUsed() &&
-      !InfinityPrestigeLayer.mustInfinity();
+      ((!Challenge.isChallengeRunning(10)) || this.bought() === 0) && !InfinityPrestigeLayer.mustInfinity();
     },
     buy() {
       if (!this.canBuy()) return

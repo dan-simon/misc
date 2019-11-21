@@ -15,7 +15,11 @@ let Sacrifice = {
     return this.canSacrifice() || this.sacrificeMultiplier().gt(1) || player.infinities > 0;
   },
   newSacrificeMultiplier() {
-    return this.canSacrifice() ? new Decimal(player.stars.log(2) / 16) : this.sacrificeMultiplier();
+    let mult = new Decimal(player.stars.log(2) / 16);
+    if (Challenge.isChallengeRunning(10)) {
+      mult = mult.times(this.sacrificeMultiplier());
+    }
+    return this.canSacrifice() ? mult : this.sacrificeMultiplier();
   },
   sacrificeMultiplierGain() {
     return this.newSacrificeMultiplier().minus(this.sacrificeMultiplier());
@@ -29,8 +33,15 @@ let Sacrifice = {
     this.sacrificeReset();
   },
   sacrificeReset() {
-    Generators.resetAmounts(7);
-    player.timeSincePurchase = 0;
-    player.timeSinceSacrifice = 0;
+    if (Challenge.isChallengeRunning(10)) {
+      player.stars = new Decimal(2);
+      player.boost = {bought: 0};
+      player.generators = initialGenerators();
+      player.highestGenerator = 0;
+    } else {
+      Generators.resetAmounts(7);
+    }
+    player.stats.timeSincePurchase = 0;
+    player.stats.timeSinceSacrifice = 0;
   }
 }

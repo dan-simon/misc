@@ -8,17 +8,26 @@ let Prestige = {
   multiplier() {
     return this.prestigePower();
   },
+  isPrestigeDisabled() {
+    return Challenge.isChallengeRunning(10);
+  },
+  isPrestigeSquareRooted() {
+    return [8, 11].indexOf(Challenge.currentChallenge()) !== -1;
+  },
+  prestigePowerExponent() {
+    return this.isPrestigeDisabled() ? 0 : (this.isPrestigeSquareRooted() ? 0.5 : 1);
+  },
   prestigeRequirement() {
-    return Decimal.pow(2, Math.max(128, 96 + 16 * Math.log2(this.prestigePower())));
+    return Decimal.pow(2, Math.max(128, 96 + 16 * Math.log2(this.prestigePower()) / this.prestigePowerExponent()));
   },
   canPrestige() {
-    return player.stars.gte(this.prestigeRequirement()) && !InfinityPrestigeLayer.mustInfinity();
+    return player.stars.gte(this.prestigeRequirement()) && !InfinityPrestigeLayer.mustInfinity() && !this.isPrestigeDisabled();
   },
   isVisible() {
-    return this.canPrestige() || this.prestigePower().gt(1) || player.infinities > 0;
+    return (this.canPrestige() || this.prestigePower().gt(1) || player.infinities > 0) && !this.isPrestigeDisabled();
   },
   newPrestigePower() {
-    return this.canPrestige() ? Decimal.pow(2, (player.stars.log(2) - 96) / 16) : this.prestigePower();
+    return this.canPrestige() ? Decimal.pow(2, this.prestigePowerExponent() * (player.stars.log(2) - 96) / 16) : this.prestigePower();
   },
   prestigePowerGain() {
     return this.newPrestigePower().minus(this.prestigePower());

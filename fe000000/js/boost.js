@@ -8,14 +8,21 @@ let Boost = {
   cost() {
     return Decimal.pow(2, Math.pow(8 + 2 * this.bought(), 2));
   },
+  areBoostsDisabled() {
+    return [8, 9, 10].indexOf(Challenge.currentChallenge()) !== -1;
+  },
   multiplierPer() {
-    return InfinityUpgrade(1).effect();
+    return this.areBoostsDisabled() ? 1 : InfinityUpgrade(1).effect();
   },
   multiplier() {
     return Decimal.pow(this.multiplierPer(), this.bought());
   },
+  isVisible() {
+    return !this.areBoostsDisabled();
+  },
   canBuy() {
-    return this.cost().lte(player.stars) && !Challenge.allPurchasesUsed() && !InfinityPrestigeLayer.mustInfinity();
+    return this.isVisible() && this.cost().lte(player.stars) && !Challenge.allPurchasesUsed() &&
+    !InfinityPrestigeLayer.mustInfinity();
   },
   buy() {
     if (!this.canBuy()) return

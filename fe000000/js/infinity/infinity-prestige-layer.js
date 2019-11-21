@@ -3,7 +3,7 @@ let InfinityPrestigeLayer = {
     return Challenge.areAllChallengesCompleted();
   },
   isInfinityBroken() {
-    return this.canInfinityBeBroken() && player.breakInfinity;
+    return this.canInfinityBeBroken() && player.breakInfinity && Challenges.isNoChallengeRunning();
   },
   breakInfinityButtonText() {
     return player.breakInfinity ?

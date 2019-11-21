@@ -12,6 +12,9 @@ let Challenge = {
   isChallengeRunning(x) {
     return this.currentChallenge() === x;
   },
+  isNoChallengeRunning() {
+    return this.currentChallenge() === 0;
+  },
   challengeStatusDescription(x) {
     if (this.isChallengeCompleted(x)) {
       if (this.isChallengeRunning(x)) {

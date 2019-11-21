@@ -40,7 +40,7 @@
       <div ~style.display=Challenge.isThereChallengeText() ? '' : 'none'~>
         <span>~r Challenge.challengeText() ~</span>
       </div>
-      <span>You have ~f Boost.bought() ~ boosts, multipying all generators by ~f Boost.multiplier() ~x (~f Boost.multiplierPer() ~x each). <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buy()">Cost: ~f Boost.cost() ~</button> <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buyMax()">Max</button></span>
+      <span ~style.display=Boost.isVisible() ? '' : 'none'~>You have ~f Boost.bought() ~ boosts, multipying all generators by ~f Boost.multiplier() ~x (~f Boost.multiplierPer() ~x each). <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buy()">Cost: ~f Boost.cost() ~</button> <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buyMax()">Max</button></span>
       <br/>
       <br/>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
