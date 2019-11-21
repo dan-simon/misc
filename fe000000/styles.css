@@ -15,6 +15,7 @@ button {
 	border: 0;
   font-family: Typewriter, serif;
   font-size: 1rem;
+  margin: 2px;
   background-color: #aaaaaa;
   color: #000000;
 }
