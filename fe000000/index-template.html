@@ -33,10 +33,13 @@
 <body>
   <div ~style.display=InfinityPrestigeLayer.canInfinity() ? '' : 'none'~><button style="height: 48px;" onclick="InfinityPrestigeLayer.infinity()">Infinity: Gain ~f InfinityPrestigeLayer.infinityPointGain() ~ infinity points<br/>~f InfinityPrestigeLayer.currentIPPerSec() ~ IP/sec, ~f InfinityPrestigeLayer.peakIPPerSec() ~ peak IP/sec</button></div>
   <span><button onclick="Tabs.setTab('main')">Main</button> <button ~style.display=Tabs.isTabVisible('infinity') ? '' : 'none'~ onclick="Tabs.setTab('infinity')">Infinity</button> <button ~style.display=Tabs.isTabVisible('challenges') ? '' : 'none'~ onclick="Tabs.setTab('challenges')">Challenges</button> <button onclick="Tabs.setTab('statistics')">Statistics</button> <button onclick="Tabs.setTab('options')">Options</button></span>
-  <div ~style.display=Tabs.currentTab() === 'main' ? '' : 'none'~>
+  <tab ~style.display=Tabs.currentTab() === 'main' ? '' : 'none'~>
     <div ~style.display=InfinityPrestigeLayer.mustInfinity() ? 'none' : ''~>
       <span>You have ~f Stars.amount() ~ stars. You are getting ~f Stars.perSecond() ~ stars per second. <button ~class=MaxAll.anythingToBuy() ? "" : "disabled"~ onclick="MaxAll.maxAll()">Max all</button></span>
       <br/>
+      <div ~style.display=Challenge.isThereChallengeText() ? '' : 'none'~>
+        <span>~r Challenge.challengeText() ~</span>
+      </div>
       <span>You have ~f Boost.bought() ~ boosts, multipying all generators by ~f Boost.multiplier() ~x (~f Boost.multiplierPer() ~x each). <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buy()">Cost: ~f Boost.cost() ~</button> <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buyMax()">Max</button></span>
       <br/>
       <br/>
@@ -124,8 +127,8 @@
     <div ~style.display=InfinityPrestigeLayer.mustInfinity() ? '' : 'none'~>
       <span>The universe has collapsed due to an excess of stars.</span>
     </div>
-  </div>
-  <div ~style.display=Tabs.currentTab() === 'infinity' ? '' : 'none'~>
+  </tab>
+  <tab ~style.display=Tabs.currentTab() === 'infinity' ? '' : 'none'~>
     <span>You have ~f InfinityPoints.amount() ~ infinity points, multiplying all generators by ~f InfinityPoints.multiplier() ~. <button ~class=InfinityMaxAll.anythingToBuy() ? "" : "disabled"~ onclick="InfinityMaxAll.maxAll()">Max all</button></span>
     <br/>
     <span>You have ~f Infinities.amount() ~ infinities, multiplying all infinity generators by ~f Infinities.infinityGeneratorMultiplier() ~.</span>
@@ -219,8 +222,8 @@
         <td><button ~class=InfinityGenerator(8).canBuy() ? "" : "disabled"~ onclick="InfinityGenerator(8).buyMax()">Max</button></td>
       </tr>
     </table>
-  </div>
-  <div ~style.display=Tabs.currentTab() === 'challenges' ? '' : 'none'~>
+  </tab>
+  <tab ~style.display=Tabs.currentTab() === 'challenges' ? '' : 'none'~>
     <span>You have completed ~f Challenge.getChallengesCompleted() ~ challenges, multiplying all generators by ~f Challenge.multiplier() ~.</span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
@@ -363,13 +366,13 @@
             <br/>
             <span>~r Challenge.challengeStatusDescription(12) ~</span>
             <br/>
-            <span><button onclick="Challenge.startOrExitChallenge(12)">~r Challenge.isChallengeRunning(12) ? "Exit challenge" : "Start challenge" ~</button></span>
+            <span><button class="randomname" onclick="Challenge.startOrExitChallenge(12)">~r Challenge.isChallengeRunning(12) ? "Exit challenge" : "Start challenge" ~</button></span>
           </div>
         </td>
       </tr>
     </table>
-  </div>
-  <div ~style.display=Tabs.currentTab() === 'statistics' ? '' : 'none'~>
+  </tab>
+  <tab ~style.display=Tabs.currentTab() === 'statistics' ? '' : 'none'~>
     <span>You have produced ~f player.stats.totalStarsProduced ~ total stars.</span>
     <br/>
     <span>You have spent ~f player.stats.timeSincePurchase ~ seconds without purchasing anything.</span>
@@ -381,8 +384,8 @@
     <span>You have spent ~f player.stats.timeSinceInfinity ~ seconds in this infinity.</span>
     <br/>
     <span>You have spent ~f player.stats.timeSinceGameStart ~ seconds playing this game (counting time offline).</span>
-  </div>
-  <div ~style.display=Tabs.currentTab() === 'options' ? '' : 'none'~>
+  </tab>
+  <tab ~style.display=Tabs.currentTab() === 'options' ? '' : 'none'~>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 8px; border-collapse: separate;">
       <tr>
         <td><button class="options-button" onclick="Saving.saveGame()">Save</button></td>
@@ -401,6 +404,6 @@
       </tr>
     </table>
     <span style="display: none;">Exported save (also copied to clipboard): <input id="export-output"></input></span>
-  </div>
+  </tab>
 </body>
 </html>

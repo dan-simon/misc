@@ -8,5 +8,6 @@ let Stats = {
   },
   recordPurchase() {
     player.stats.timeSincePurchase = 0;
+    player.stats.purchasesThisInfinity++;
   }
 }

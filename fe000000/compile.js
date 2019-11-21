@@ -9,7 +9,7 @@ function extractCode(x) {
 }
 
 function updateDisplayOneElement(x, i) {
-  return '  document.getElementById("e' + i + '").innerHTML = ' + extractCode(x) + ';'
+  return 'e[' + i + '].textContent = ' + extractCode(x) + ';'
 }
 
 function styleNameToJsName(x) {
@@ -22,8 +22,45 @@ function styleNameToJsName(x) {
 function updateDisplayOneStyle(x, i) {
   return x.match(/ ~[-.a-z]+=[^~]+~/).map(function (y, j) {
     let property = y.split('=')[0].slice(2).split('.').map(styleNameToJsName).join('.');
-    return '  document.getElementById("b' + i + '").' + property + ' = ' + y.split('=').slice(1).join('=').slice(0, -1) + ';';
-  }).join('\n');
+    return 'b[' + i + '].' + property + ' = ' + y.split('=').slice(1).join('=').slice(0, -1) + ';';
+  });
+}
+
+function cmp(a, b) {
+  return (a < b) ? -1 : ((a > b) ? 1 : 0);
+}
+
+function getUntabbed(inTabs) {
+  let untabbed = {};
+  for (let i = 0; i < el1Number; i++) {
+    untabbed['e' + i] = true;
+  }
+  for (let i = 0; i < el2Number; i++) {
+    untabbed['b' + i] = true;
+  }
+  for (let i of inTabs) {
+    for (let j of i[1]) {
+      delete untabbed[j];
+    }
+  }
+  return Object.keys(untabbed).sort((a, b) => (-cmp(a[0], b[0])) || cmp(+a.slice(1), +b.slice(1)));
+}
+
+function makeUpdateDisplaySetup() {
+  return 'let e;\nlet b;\n\nfunction updateDisplaySetup() {\n  e = [' +
+  [...Array(el1Number)].map((_, i) => 'document.getElementById("e' + i + '")').join(', ') + '];\n  b = [' +
+  [...Array(el2Number)].map((_, i) => 'document.getElementById("b' + i + '")').join(', ') + '];\n}';
+}
+
+function makeUpdateDisplay(el1CodeList, el2CodeList, inTabs) {
+  let f = x => [el1CodeList, el2CodeList]['eb'.indexOf(x[0])][+x.slice(1)];
+  let g = (l, s) => l.map(i => s + i).join('\n');
+  let untabbed = getUntabbed(inTabs);
+  let setupCode = makeUpdateDisplaySetup();
+  let updateDisplayCode = 'function updateDisplay() {\n' + g(untabbed.map(f), '  ') + '\n' +
+  inTabs.map(x => '  if (' + x[0][0] + '[' + x[0].slice(1) + '].style.display !== "none") {\n' +
+  g(x[1].map(f), '    ') + '\n  }').join('\n') + '\n}';
+  return setupCode + '\n\n' + updateDisplayCode;
 }
 
 let el1Number = 0;
@@ -37,9 +74,12 @@ fs.readFile('index-template.html', 'utf8', function(err, contents) {
   let newContents = contents.replace(
     /<[-a-z]+( [-a-z]+="[^"]+"| ~[-.a-z]+=[^~]+~)*\/?>/g, dealWithElement).replace(
     /~[fr] [^~]+ ~/g, (x) => '<span id="e' + el1Number++ + '"></span>');
-  let updateDisplay = 'function updateDisplay() {\n' +
-  (contents.match(/~[fr] [^~]+ ~/g) || []).map(updateDisplayOneElement).concat(
-    (contents.match(/<[-a-z]+( [-a-z]+="[^"]+"| ~[-.a-z]+=[^~]+~)*\/?>/g) || []).filter(x => x.includes('~')).map(updateDisplayOneStyle)).join('\n') + '\n}';
+  let el1CodeList = (contents.match(/~[fr] [^~]+ ~/g) || []).map(updateDisplayOneElement);
+  let el2CodeList = (contents.match(/<[-a-z]+( [-a-z]+="[^"]+"| ~[-.a-z]+=[^~]+~)*\/?>/g) || []).filter(x => x.includes('~')).map(updateDisplayOneStyle);
+  let inTabs = (newContents.match(/<tab .*?<\/tab>/gs) || []).map(
+    x => x.match(/id="[be]\d+"/g).map(y => y.slice(4, -1))).map(x => [x[0], x.slice(1)]);
+  let updateDisplay = makeUpdateDisplay(el1CodeList, el2CodeList, inTabs);
+  newContents = newContents.replace(/<tab /g, '<div ').replace(/<\/tab>/g, '</div>');
   if (newContents.includes('~')) {
     let index = newContents.indexOf('~')
     console.log('context for first tilde:\n' + newContents.slice(Math.max(0, index - 100), index + 100));

@@ -37,7 +37,8 @@ let initialPlayer = {
     timeSincePrestige: 0,
     timeSinceInfinity: 0,
     timeSinceGameStart: 0,
-    peakIPPerSec: new Decimal(0)
+    peakIPPerSec: new Decimal(0),
+    purchasesThisInfinity: 0,
   },
   currentTab: 'main',
   version: 1.375,

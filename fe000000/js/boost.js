@@ -15,7 +15,7 @@ let Boost = {
     return Decimal.pow(this.multiplierPer(), this.bought());
   },
   canBuy() {
-    return this.cost().lte(player.stars) && !InfinityPrestigeLayer.mustInfinity();
+    return this.cost().lte(player.stars) && !Challenge.allPurchasesUsed() && !InfinityPrestigeLayer.mustInfinity();
   },
   buy() {
     if (!this.canBuy()) return

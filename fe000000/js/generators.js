@@ -26,7 +26,9 @@ let Generator = function (i) {
       let factors = [
         Decimal.pow(2, this.bought() / 8), Boost.multiplier(), Prestige.multiplier(),
         InfinityPoints.multiplier(), InfinityStars.multiplier(), Challenge.multiplier(),
-        (i === 8) ? Sacrifice.sacrificeMultiplier() : 1
+        (i === 8) ? Sacrifice.sacrificeMultiplier() : 1,
+        Challenge.isChallengeRunning(2) ? Challenge.challenge2Mult() : 1,
+        (i === 1 && Challenge.isChallengeRunning(3)) ? Challenge.challenge3Mult() : 1,
       ];
       let multiplier = factors.reduce((a, b) => a.times(b));
       let powFactors = [Challenge.isChallengeRunning(1) ? ((i === 1) ? 4 : 0) : 1];
@@ -50,7 +52,8 @@ let Generator = function (i) {
       return i <= player.highestGenerator + 1 && ((!Challenge.isChallengeRunning(6)) || i <= 6);
     },
     canBuy() {
-      return this.isVisible() && this.cost().lte(player.stars) && !InfinityPrestigeLayer.mustInfinity();
+      return this.isVisible() && this.cost().lte(player.stars) && !Challenge.allPurchasesUsed() &&
+      !InfinityPrestigeLayer.mustInfinity();
     },
     buy() {
       if (!this.canBuy()) return

@@ -58,5 +58,32 @@ let Challenge = {
   },
   areAllChallengesCompleted() {
     return this.getChallengesCompleted() === 12;
+  },
+  isThereChallengeText() {
+    return [2, 3, 7].indexOf(this.currentChallenge()) !== -1;
+  },
+  challenge2Mult() {
+    return Math.min(player.stats.timeSincePurchase / 256, 1);
+  },
+  challenge3Mult() {
+    return Decimal.pow(2, player.stats.timeSincePrestige / 256 - 8);
+  },
+  challenge7PurchasesLeft() {
+    return 343 - player.stats.purchasesThisInfinity;
+  },
+  allPurchasesUsed() {
+    return this.isChallengeRunning(7) && this.challenge7PurchasesLeft() <= 0;
+  },
+  challengeText() {
+    let cc = this.currentChallenge();
+    if (cc === 2) {
+      return 'Challenge 2 multiplier: ' + format(this.challenge2Mult());
+    } else if (cc === 3) {
+      return 'Challenge 3 multiplier: ' + format(this.challenge3Mult());
+    } else if (cc === 7) {
+      return 'Challenge 7 purchases left: ' + format(this.challenge7PurchasesLeft());
+    } else {
+      return 'This text should never appear.';
+    }
   }
 }

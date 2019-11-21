@@ -58,6 +58,8 @@ let Saving = {
         false, false, false, false, false, false,
       ];
       player.breakInfinity = false;
+      player.stats.purchasesThisInfinity = 0;
+      player.version = 1.375;
     }
   },
   convertSaveToDecimal() {

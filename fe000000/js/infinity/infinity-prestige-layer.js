@@ -49,7 +49,8 @@ let InfinityPrestigeLayer = {
     player.prestigePower = new Decimal(1);
     player.infinityStars = new Decimal(1);
     InfinityGenerators.list.forEach(x => x.resetAmount());
-    player.timeSinceInfinity = 0;
-    player.peakIPPerSec = new Decimal(0);
+    player.stats.timeSinceInfinity = 0;
+    player.stats.peakIPPerSec = new Decimal(0);
+    player.stats.purchasesThisInfinity = 0;
   }
 }

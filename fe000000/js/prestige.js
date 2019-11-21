@@ -37,8 +37,8 @@ let Prestige = {
     player.generators = initialGenerators();
     player.highestGenerator = 0;
     player.sacrificeMultiplier = new Decimal(1);
-    player.timeSincePurchase = 0;
-    player.timeSinceSacrifice = 0;
-    player.timeSincePrestige = 0;
+    player.stats.timeSincePurchase = 0;
+    player.stats.timeSinceSacrifice = 0;
+    player.stats.timeSincePrestige = 0;
   }
 }
