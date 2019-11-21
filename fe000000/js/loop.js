@@ -13,8 +13,8 @@ function gameLoop(diff, display) {
     InfinityGenerator(i).produce(diff);
   }
   Stats.addToTimeStats(diff);
+  InfinityPrestigeLayer.updatePeakIPPerSec();
   if (display !== false) {
     updateDisplay();
   }
-  InfinityPrestigeLayer.updatePeakIPPerSec();
 }
