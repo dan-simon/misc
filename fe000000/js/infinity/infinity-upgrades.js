@@ -22,7 +22,7 @@ let InfinityUpgrade = function (i) {
       return [2, 0.5][i - 1];
     },
     initialCost() {
-      return this.costIncreasePer();
+      return new Decimal(this.costIncreasePer());
     },
     cost() {
       return this.initialCost().times(Decimal.pow(this.costIncreasePer(), this.bought()));
