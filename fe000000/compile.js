@@ -56,9 +56,10 @@ function getUntabbed(inTabs) {
 }
 
 function makeUpdateDisplaySetup(setupList) {
-  return 'let e;\nlet b;\n\nfunction updateDisplaySetup() {\n  e = [' +
+  return 'let e;\nlet b;\n\nfunction updateDisplayPageLoadSetup() {\n  e = [' +
   [...Array(el1Number)].map((_, i) => 'document.getElementById("e' + i + '")').join(', ') + '];\n  b = [' +
-  [...Array(el2Number)].map((_, i) => 'document.getElementById("b' + i + '")').join(', ') + '];\n' + g(setupList, '  ') + '\n}';
+  [...Array(el2Number)].map((_, i) => 'document.getElementById("b' + i + '")').join(', ') +
+  '];\n}\n\nfunction updateDisplaySaveLoadSetup() {\n' + g(setupList, '  ') + '\n}';
 }
 
 let g = (l, s) => l.map(i => s + i).join('\n');

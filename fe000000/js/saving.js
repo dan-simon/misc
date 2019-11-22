@@ -17,6 +17,7 @@ let Saving = {
     }
     player.lastUpdate = now;
     this.saveGame();
+    updateDisplaySaveLoadSetup();
   },
   simulateTime(totalDiff) {
     let baseTickLength = 1 / 16;
@@ -76,6 +77,10 @@ let Saving = {
     }
     if (player.version < 1.4375) {
       player.autobuyers = initialAutobuyers();
+      // this is usable for testing and for cheaters
+      player.cheats = {
+        gameSpeed: 1,
+      };
       player.version = 1.4375;
     }
   },

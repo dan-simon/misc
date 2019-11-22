@@ -1,6 +1,6 @@
 window.onload = function () {
+  updateDisplayPageLoadSetup();
   Saving.loadGameStorage();
-  updateDisplaySetup();
   setInterval(gameLoop, 64);
   setInterval(() => Saving.saveGame(), 16384);
 }

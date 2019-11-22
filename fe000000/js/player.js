@@ -62,6 +62,9 @@ let initialPlayer = {
       [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
     ],
   },
+  cheats: {
+    gameSpeed: 1,
+  },
   currentTab: 'main',
   version: 1.4375,
 }
