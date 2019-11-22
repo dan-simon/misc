@@ -32,7 +32,14 @@
 </head>
 <body>
   <div ~style.display=InfinityPrestigeLayer.canInfinity() ? '' : 'none'~><button style="height: 48px;" onclick="InfinityPrestigeLayer.infinity()">Infinity: Gain ~f InfinityPrestigeLayer.infinityPointGain() ~ infinity points<br/>~f InfinityPrestigeLayer.currentIPPerSec() ~ IP/sec, ~f InfinityPrestigeLayer.peakIPPerSec() ~ peak IP/sec</button></div>
-  <span><button onclick="Tabs.setTab('main')">Main</button> <button ~style.display=Tabs.isTabVisible('infinity') ? '' : 'none'~ onclick="Tabs.setTab('infinity')">Infinity</button> <button ~style.display=Tabs.isTabVisible('challenges') ? '' : 'none'~ onclick="Tabs.setTab('challenges')">Challenges</button> <button onclick="Tabs.setTab('statistics')">Statistics</button> <button onclick="Tabs.setTab('options')">Options</button></span>
+  <span>
+    <button onclick="Tabs.setTab('main')">Main</button>
+    <button ~style.display=Tabs.isTabVisible('infinity') ? '' : 'none'~ onclick="Tabs.setTab('infinity')">Infinity</button>
+    <button ~style.display=Tabs.isTabVisible('challenges') ? '' : 'none'~ onclick="Tabs.setTab('challenges')">Challenges</button>
+    <button ~style.display=Tabs.isTabVisible('autobuyers') ? '' : 'none'~ onclick="Tabs.setTab('autobuyers')">Autobuyers</button>
+    <button onclick="Tabs.setTab('statistics')">Statistics</button>
+    <button onclick="Tabs.setTab('options')">Options</button>
+  </span>
   <tab ~style.display=Tabs.currentTab() === 'main' ? '' : 'none'~>
     <div ~style.display=InfinityPrestigeLayer.mustInfinity() ? 'none' : ''~>
       <span>You have ~f Stars.amount() ~ stars. You are getting ~f Stars.perSecond() ~ stars per second. <button ~class=MaxAll.anythingToBuy() ? "" : "disabled"~ onclick="MaxAll.maxAll()">Max all</button></span>
@@ -371,6 +378,11 @@
         </td>
       </tr>
     </table>
+  </tab>
+  <tab ~style.display=Tabs.currentTab() === 'autobuyers' ? '' : 'none'~>
+    <input type="checkbox" ~!checked=false~ ~!onchange=function() {alert(this.checked)}~></input>
+    <input type="text" ~!value="Testing"~ ~!onchange=function() {alert(this.value)}~></input>
+    <select ~!value="banana"~ ~!onchange=function() {alert(this.value)}~><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="banana">banana</option></select>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'statistics' ? '' : 'none'~>
     <span>You have produced ~f player.stats.totalStarsProduced ~ total stars.</span>

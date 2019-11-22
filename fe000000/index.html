@@ -32,109 +32,116 @@
 </head>
 <body>
   <div id="b0"><button style="height: 48px;" onclick="InfinityPrestigeLayer.infinity()">Infinity: Gain <span id="e0"></span> infinity points<br/><span id="e1"></span> IP/sec, <span id="e2"></span> peak IP/sec</button></div>
-  <span><button onclick="Tabs.setTab('main')">Main</button> <button id="b1" onclick="Tabs.setTab('infinity')">Infinity</button> <button id="b2" onclick="Tabs.setTab('challenges')">Challenges</button> <button onclick="Tabs.setTab('statistics')">Statistics</button> <button onclick="Tabs.setTab('options')">Options</button></span>
-  <div id="b3">
-    <div id="b4">
-      <span>You have <span id="e3"></span> stars. You are getting <span id="e4"></span> stars per second. <button id="b5" onclick="MaxAll.maxAll()">Max all</button></span>
+  <span>
+    <button onclick="Tabs.setTab('main')">Main</button>
+    <button id="b1" onclick="Tabs.setTab('infinity')">Infinity</button>
+    <button id="b2" onclick="Tabs.setTab('challenges')">Challenges</button>
+    <button id="b3" onclick="Tabs.setTab('autobuyers')">Autobuyers</button>
+    <button onclick="Tabs.setTab('statistics')">Statistics</button>
+    <button onclick="Tabs.setTab('options')">Options</button>
+  </span>
+  <div id="b4">
+    <div id="b5">
+      <span>You have <span id="e3"></span> stars. You are getting <span id="e4"></span> stars per second. <button id="b6" onclick="MaxAll.maxAll()">Max all</button></span>
       <br/>
-      <div id="b6">
+      <div id="b7">
         <span><span id="e5"></span></span>
       </div>
-      <span id="b7">You have <span id="e6"></span> boosts, multipying all generators by <span id="e7"></span>x (<span id="e8"></span>x each). <button id="b8" onclick="Boost.buy()">Cost: <span id="e9"></span></button> <button id="b9" onclick="Boost.buyMax()">Max</button></span>
+      <span id="b8">You have <span id="e6"></span> boosts, multipying all generators by <span id="e7"></span>x (<span id="e8"></span>x each). <button id="b9" onclick="Boost.buy()">Cost: <span id="e9"></span></button> <button id="b10" onclick="Boost.buyMax()">Max</button></span>
       <br/>
       <br/>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
-        <tr id="b10">
+        <tr id="b11">
           <td>Generator 1</td>
           <td><span id="e10"></span></td>
           <td><span id="e11"></span>/s</td>
           <td><span id="e12"></span>x</td>
-          <td><button id="b11" onclick="Generator(1).buy()">Cost: <span id="e13"></span></button></td>
-          <td><button id="b12" onclick="Generator(1).buyMax()">Max</button></td>
+          <td><button id="b12" onclick="Generator(1).buy()">Cost: <span id="e13"></span></button></td>
+          <td><button id="b13" onclick="Generator(1).buyMax()">Max</button></td>
         </tr>
-        <tr id="b13">
+        <tr id="b14">
           <td>Generator 2</td>
           <td><span id="e14"></span></td>
           <td><span id="e15"></span>/s</td>
           <td><span id="e16"></span>x</td>
-          <td><button id="b14" onclick="Generator(2).buy()">Cost: <span id="e17"></span></button></td>
-          <td><button id="b15" onclick="Generator(2).buyMax()">Max</button></td>
+          <td><button id="b15" onclick="Generator(2).buy()">Cost: <span id="e17"></span></button></td>
+          <td><button id="b16" onclick="Generator(2).buyMax()">Max</button></td>
         </tr>
-        <tr id="b16">
+        <tr id="b17">
           <td>Generator 3</td>
           <td><span id="e18"></span></td>
           <td><span id="e19"></span>/s</td>
           <td><span id="e20"></span>x</td>
-          <td><button id="b17" onclick="Generator(3).buy()">Cost: <span id="e21"></span></button></td>
-          <td><button id="b18" onclick="Generator(3).buyMax()">Max</button></td>
+          <td><button id="b18" onclick="Generator(3).buy()">Cost: <span id="e21"></span></button></td>
+          <td><button id="b19" onclick="Generator(3).buyMax()">Max</button></td>
         </tr>
-        <tr id="b19">
+        <tr id="b20">
           <td>Generator 4</td>
           <td><span id="e22"></span></td>
           <td><span id="e23"></span>/s</td>
           <td><span id="e24"></span>x</td>
-          <td><button id="b20" onclick="Generator(4).buy()">Cost: <span id="e25"></span></button></td>
-          <td><button id="b21" onclick="Generator(4).buyMax()">Max</button></td>
+          <td><button id="b21" onclick="Generator(4).buy()">Cost: <span id="e25"></span></button></td>
+          <td><button id="b22" onclick="Generator(4).buyMax()">Max</button></td>
         </tr>
-        <tr id="b22">
+        <tr id="b23">
           <td>Generator 5</td>
           <td><span id="e26"></span></td>
           <td><span id="e27"></span>/s</td>
           <td><span id="e28"></span>x</td>
-          <td><button id="b23" onclick="Generator(5).buy()">Cost: <span id="e29"></span></button></td>
-          <td><button id="b24" onclick="Generator(5).buyMax()">Max</button></td>
+          <td><button id="b24" onclick="Generator(5).buy()">Cost: <span id="e29"></span></button></td>
+          <td><button id="b25" onclick="Generator(5).buyMax()">Max</button></td>
         </tr>
-        <tr id="b25">
+        <tr id="b26">
           <td>Generator 6</td>
           <td><span id="e30"></span></td>
           <td><span id="e31"></span>/s</td>
           <td><span id="e32"></span>x</td>
-          <td><button id="b26" onclick="Generator(6).buy()">Cost: <span id="e33"></span></button></td>
-          <td><button id="b27" onclick="Generator(6).buyMax()">Max</button></td>
+          <td><button id="b27" onclick="Generator(6).buy()">Cost: <span id="e33"></span></button></td>
+          <td><button id="b28" onclick="Generator(6).buyMax()">Max</button></td>
         </tr>
-        <tr id="b28">
+        <tr id="b29">
           <td>Generator 7</td>
           <td><span id="e34"></span></td>
           <td><span id="e35"></span>/s</td>
           <td><span id="e36"></span>x</td>
-          <td><button id="b29" onclick="Generator(7).buy()">Cost: <span id="e37"></span></button></td>
-          <td><button id="b30" onclick="Generator(7).buyMax()">Max</button></td>
+          <td><button id="b30" onclick="Generator(7).buy()">Cost: <span id="e37"></span></button></td>
+          <td><button id="b31" onclick="Generator(7).buyMax()">Max</button></td>
         </tr>
-        <tr id="b31">
+        <tr id="b32">
           <td>Generator 8</td>
           <td><span id="e38"></span></td>
           <td><span id="e39"></span>/s</td>
           <td><span id="e40"></span>x</td>
-          <td><button id="b32" onclick="Generator(8).buy()">Cost: <span id="e41"></span></button></td>
-          <td><button id="b33" onclick="Generator(8).buyMax()">Max</button></td>
+          <td><button id="b33" onclick="Generator(8).buy()">Cost: <span id="e41"></span></button></td>
+          <td><button id="b34" onclick="Generator(8).buyMax()">Max</button></td>
         </tr>
       </table>
-      <div id="b34">
+      <div id="b35">
         <br/>
         <span>You have a <span id="e42"></span> sacrifice multiplier multiplying Generator 8 by its amount.</span>
         <br/>
-        <span id="b35"><button style="height: 48px;" onclick="Sacrifice.sacrifice()">Sacrifice: <span id="e43"></span> → <span id="e44"></span><br/>(+<span id="e45"></span>, <span id="e46"></span>x)</button></span>
-        <span id="b36">You need <span id="e47"></span> stars and at least one of Generator 8 to sacrifice.</span>
+        <span id="b36"><button style="height: 48px;" onclick="Sacrifice.sacrifice()">Sacrifice: <span id="e43"></span> → <span id="e44"></span><br/>(+<span id="e45"></span>, <span id="e46"></span>x)</button></span>
+        <span id="b37">You need <span id="e47"></span> stars and at least one of Generator 8 to sacrifice.</span>
       </div>
-      <div id="b37">
+      <div id="b38">
         <br/>
         <span>You have <span id="e48"></span> prestige power multiplying all generators by its amount.</span>
         <br/>
-        <span id="b38"><button style="height: 48px;" onclick="Prestige.prestige()">Prestige: <span id="e49"></span> → <span id="e50"></span><br/>(+<span id="e51"></span>, <span id="e52"></span>x)</button></span>
-        <span id="b39">You need <span id="e53"></span> stars to prestige.</span>
+        <span id="b39"><button style="height: 48px;" onclick="Prestige.prestige()">Prestige: <span id="e49"></span> → <span id="e50"></span><br/>(+<span id="e51"></span>, <span id="e52"></span>x)</button></span>
+        <span id="b40">You need <span id="e53"></span> stars to prestige.</span>
       </div>
     </div>
-    <div id="b40">
+    <div id="b41">
       <span>The universe has collapsed due to an excess of stars.</span>
     </div>
   </div>
-  <div id="b41">
-    <span>You have <span id="e54"></span> infinity points, multiplying all generators by <span id="e55"></span>. <button id="b42" onclick="InfinityMaxAll.maxAll()">Max all</button></span>
+  <div id="b42">
+    <span>You have <span id="e54"></span> infinity points, multiplying all generators by <span id="e55"></span>. <button id="b43" onclick="InfinityMaxAll.maxAll()">Max all</button></span>
     <br/>
     <span>You have <span id="e56"></span> infinities, multiplying all infinity generators by <span id="e57"></span>.</span>
     <br/>
-    <span id="b43"><button style="height: 48px;" onclick="InfinityPrestigeLayer.toggleBreakInfinity()"><span id="e58"></span></button></span>
-    <span id="b44">You need to complete all the challenges to be able to break infinity.</span>
+    <span id="b44"><button style="height: 48px;" onclick="InfinityPrestigeLayer.toggleBreakInfinity()"><span id="e58"></span></button></span>
+    <span id="b45">You need to complete all the challenges to be able to break infinity.</span>
     <br/>
     <span>You have <span id="e59"></span> infinity stars, multiplying all generators by their amount^<span id="e60"></span> = <span id="e61"></span>.</span>
     <br/>
@@ -144,86 +151,86 @@
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
         <td>Increase the multiplier per boost:</td>
-        <td><span id="b45"><span id="e63"></span> → <span id="e64"></span></span><span id="b46"><span id="e65"></span> (maxed)</span></td>
-        <td><span id="b47"><button id="b48" onclick="InfinityUpgrade(1).buy()">Cost: <span id="e66"></span> IP</button></span></td>
-        <td><span id="b49"><button id="b50" onclick="InfinityUpgrade(1).buyMax()">Max</button></span></td>
+        <td><span id="b46"><span id="e63"></span> → <span id="e64"></span></span><span id="b47"><span id="e65"></span> (maxed)</span></td>
+        <td><span id="b48"><button id="b49" onclick="InfinityUpgrade(1).buy()">Cost: <span id="e66"></span> IP</button></span></td>
+        <td><span id="b50"><button id="b51" onclick="InfinityUpgrade(1).buyMax()">Max</button></span></td>
       </tr>
       <tr>
         <td>Increase the power of infinity stars:</td>
-        <td><span id="b51"><span id="e67"></span> → <span id="e68"></span></span><span id="b52"><span id="e69"></span> (maxed)</span></td>
-        <td><span id="b53"><button id="b54" onclick="InfinityUpgrade(2).buy()">Cost: <span id="e70"></span> IP</button></span></td>
-        <td><span id="b55"><button id="b56" onclick="InfinityUpgrade(2).buyMax()">Max</button></span></td>
+        <td><span id="b52"><span id="e67"></span> → <span id="e68"></span></span><span id="b53"><span id="e69"></span> (maxed)</span></td>
+        <td><span id="b54"><button id="b55" onclick="InfinityUpgrade(2).buy()">Cost: <span id="e70"></span> IP</button></span></td>
+        <td><span id="b56"><button id="b57" onclick="InfinityUpgrade(2).buyMax()">Max</button></span></td>
       </tr>
     </table>
     <br/>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
-      <tr id="b57">
+      <tr id="b58">
         <td>Infinity Generator 1</td>
         <td><span id="e71"></span></td>
         <td><span id="e72"></span>/s</td>
         <td><span id="e73"></span>x</td>
-        <td><button id="b58" onclick="InfinityGenerator(1).buy()">Cost: <span id="e74"></span> IP</button></td>
-        <td><button id="b59" onclick="InfinityGenerator(1).buyMax()">Max</button></td>
+        <td><button id="b59" onclick="InfinityGenerator(1).buy()">Cost: <span id="e74"></span> IP</button></td>
+        <td><button id="b60" onclick="InfinityGenerator(1).buyMax()">Max</button></td>
       </tr>
-      <tr id="b60">
+      <tr id="b61">
         <td>Infinity Generator 2</td>
         <td><span id="e75"></span></td>
         <td><span id="e76"></span>/s</td>
         <td><span id="e77"></span>x</td>
-        <td><button id="b61" onclick="InfinityGenerator(2).buy()">Cost: <span id="e78"></span> IP</button></td>
-        <td><button id="b62" onclick="InfinityGenerator(2).buyMax()">Max</button></td>
+        <td><button id="b62" onclick="InfinityGenerator(2).buy()">Cost: <span id="e78"></span> IP</button></td>
+        <td><button id="b63" onclick="InfinityGenerator(2).buyMax()">Max</button></td>
       </tr>
-      <tr id="b63">
+      <tr id="b64">
         <td>Infinity Generator 3</td>
         <td><span id="e79"></span></td>
         <td><span id="e80"></span>/s</td>
         <td><span id="e81"></span>x</td>
-        <td><button id="b64" onclick="InfinityGenerator(3).buy()">Cost: <span id="e82"></span> IP</button></td>
-        <td><button id="b65" onclick="InfinityGenerator(3).buyMax()">Max</button></td>
+        <td><button id="b65" onclick="InfinityGenerator(3).buy()">Cost: <span id="e82"></span> IP</button></td>
+        <td><button id="b66" onclick="InfinityGenerator(3).buyMax()">Max</button></td>
       </tr>
-      <tr id="b66">
+      <tr id="b67">
         <td>Infinity Generator 4</td>
         <td><span id="e83"></span></td>
         <td><span id="e84"></span>/s</td>
         <td><span id="e85"></span>x</td>
-        <td><button id="b67" onclick="InfinityGenerator(4).buy()">Cost: <span id="e86"></span> IP</button></td>
-        <td><button id="b68" onclick="InfinityGenerator(4).buyMax()">Max</button></td>
+        <td><button id="b68" onclick="InfinityGenerator(4).buy()">Cost: <span id="e86"></span> IP</button></td>
+        <td><button id="b69" onclick="InfinityGenerator(4).buyMax()">Max</button></td>
       </tr>
-      <tr id="b69">
+      <tr id="b70">
         <td>Infinity Generator 5</td>
         <td><span id="e87"></span></td>
         <td><span id="e88"></span>/s</td>
         <td><span id="e89"></span>x</td>
-        <td><button id="b70" onclick="InfinityGenerator(5).buy()">Cost: <span id="e90"></span> IP</button></td>
-        <td><button id="b71" onclick="InfinityGenerator(5).buyMax()">Max</button></td>
+        <td><button id="b71" onclick="InfinityGenerator(5).buy()">Cost: <span id="e90"></span> IP</button></td>
+        <td><button id="b72" onclick="InfinityGenerator(5).buyMax()">Max</button></td>
       </tr>
-      <tr id="b72">
+      <tr id="b73">
         <td>Infinity Generator 6</td>
         <td><span id="e91"></span></td>
         <td><span id="e92"></span>/s</td>
         <td><span id="e93"></span>x</td>
-        <td><button id="b73" onclick="InfinityGenerator(6).buy()">Cost: <span id="e94"></span> IP</button></td>
-        <td><button id="b74" onclick="InfinityGenerator(6).buyMax()">Max</button></td>
+        <td><button id="b74" onclick="InfinityGenerator(6).buy()">Cost: <span id="e94"></span> IP</button></td>
+        <td><button id="b75" onclick="InfinityGenerator(6).buyMax()">Max</button></td>
       </tr>
-      <tr id="b75">
+      <tr id="b76">
         <td>Infinity Generator 7</td>
         <td><span id="e95"></span></td>
         <td><span id="e96"></span>/s</td>
         <td><span id="e97"></span>x</td>
-        <td><button id="b76" onclick="InfinityGenerator(7).buy()">Cost: <span id="e98"></span> IP</button></td>
-        <td><button id="b77" onclick="InfinityGenerator(7).buyMax()">Max</button></td>
+        <td><button id="b77" onclick="InfinityGenerator(7).buy()">Cost: <span id="e98"></span> IP</button></td>
+        <td><button id="b78" onclick="InfinityGenerator(7).buyMax()">Max</button></td>
       </tr>
-      <tr id="b78">
+      <tr id="b79">
         <td>Infinity Generator 8</td>
         <td><span id="e99"></span></td>
         <td><span id="e100"></span>/s</td>
         <td><span id="e101"></span>x</td>
-        <td><button id="b79" onclick="InfinityGenerator(8).buy()">Cost: <span id="e102"></span> IP</button></td>
-        <td><button id="b80" onclick="InfinityGenerator(8).buyMax()">Max</button></td>
+        <td><button id="b80" onclick="InfinityGenerator(8).buy()">Cost: <span id="e102"></span> IP</button></td>
+        <td><button id="b81" onclick="InfinityGenerator(8).buyMax()">Max</button></td>
       </tr>
     </table>
   </div>
-  <div id="b81">
+  <div id="b82">
     <span>You have completed <span id="e103"></span> challenges, multiplying all generators by <span id="e104"></span>.</span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
@@ -372,7 +379,12 @@
       </tr>
     </table>
   </div>
-  <div id="b82">
+  <div id="b83">
+    <input id="b84" type="checkbox"></input>
+    <input id="b85" type="text"></input>
+    <select id="b86"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="banana">banana</option></select>
+  </div>
+  <div id="b87">
     <span>You have produced <span id="e144"></span> total stars.</span>
     <br/>
     <span>You have produced <span id="e145"></span> total infinity points.</span>
@@ -388,30 +400,30 @@
     <span>You have spent <span id="e150"></span> seconds in this infinity.</span>
     <br/>
     <span>You have spent <span id="e151"></span> seconds playing this game (counting time offline).</span>
-    <div id="b83">
+    <div id="b88">
       <span>Last infinity took <span id="e152"></span> seconds and gave <span id="e153"></span> IP, giving <span id="e154"></span> IP/second.</span>
       <br/>
-      <span id="b84">The infinity two infinities ago took <span id="e155"></span> seconds and gave <span id="e156"></span> IP, giving <span id="e157"></span> IP/second.</span>
+      <span id="b89">The infinity two infinities ago took <span id="e155"></span> seconds and gave <span id="e156"></span> IP, giving <span id="e157"></span> IP/second.</span>
       <br/>
-      <span id="b85">The infinity three infinities ago took <span id="e158"></span> seconds and gave <span id="e159"></span> IP, giving <span id="e160"></span> IP/second.</span>
+      <span id="b90">The infinity three infinities ago took <span id="e158"></span> seconds and gave <span id="e159"></span> IP, giving <span id="e160"></span> IP/second.</span>
       <br/>
-      <span id="b86">The infinity four infinities ago took <span id="e161"></span> seconds and gave <span id="e162"></span> IP, giving <span id="e163"></span> IP/second.</span>
+      <span id="b91">The infinity four infinities ago took <span id="e161"></span> seconds and gave <span id="e162"></span> IP, giving <span id="e163"></span> IP/second.</span>
       <br/>
-      <span id="b87">The infinity five infinities ago took <span id="e164"></span> seconds and gave <span id="e165"></span> IP, giving <span id="e166"></span> IP/second.</span>
+      <span id="b92">The infinity five infinities ago took <span id="e164"></span> seconds and gave <span id="e165"></span> IP, giving <span id="e166"></span> IP/second.</span>
       <br/>
-      <span id="b88">The infinity six infinities ago took <span id="e167"></span> seconds and gave <span id="e168"></span> IP, giving <span id="e169"></span> IP/second.</span>
+      <span id="b93">The infinity six infinities ago took <span id="e167"></span> seconds and gave <span id="e168"></span> IP, giving <span id="e169"></span> IP/second.</span>
       <br/>
-      <span id="b89">The infinity seven infinities ago took <span id="e170"></span> seconds and gave <span id="e171"></span> IP, giving <span id="e172"></span> IP/second.</span>
+      <span id="b94">The infinity seven infinities ago took <span id="e170"></span> seconds and gave <span id="e171"></span> IP, giving <span id="e172"></span> IP/second.</span>
       <br/>
-      <span id="b90">The infinity eight infinities ago took <span id="e173"></span> seconds and gave <span id="e174"></span> IP, giving <span id="e175"></span> IP/second.</span>
+      <span id="b95">The infinity eight infinities ago took <span id="e173"></span> seconds and gave <span id="e174"></span> IP, giving <span id="e175"></span> IP/second.</span>
       <br/>
-      <span id="b91">The infinity nine infinities ago took <span id="e176"></span> seconds and gave <span id="e177"></span> IP, giving <span id="e178"></span> IP/second.</span>
+      <span id="b96">The infinity nine infinities ago took <span id="e176"></span> seconds and gave <span id="e177"></span> IP, giving <span id="e178"></span> IP/second.</span>
       <br/>
-      <span id="b92">The infinity ten infinities ago took <span id="e179"></span> seconds and gave <span id="e180"></span> IP, giving <span id="e181"></span> IP/second.</span>
+      <span id="b97">The infinity ten infinities ago took <span id="e179"></span> seconds and gave <span id="e180"></span> IP, giving <span id="e181"></span> IP/second.</span>
       <br/>
     </div>
   </div>
-  <div id="b93">
+  <div id="b98">
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 8px; border-collapse: separate;">
       <tr>
         <td><button class="options-button" onclick="Saving.saveGame()">Save</button></td>
