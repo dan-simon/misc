@@ -66,7 +66,7 @@ let Autobuyers = {
       (a, b) => cmp(Autobuyer(a).priority(), Autobuyer(b).priority()) || cmp(a, b)).map(x => Autobuyer(x));
   },
   sacrifice() {
-    if (!Sacrifice.canSacrifice()) return;
+    if (!Autobuyer(10).isActive() || !Sacrifice.canSacrifice()) return;
     let shouldSacrifice;
     let mode = Autobuyer(10).mode();
     let priority = Autobuyer(10).priority();
@@ -80,7 +80,7 @@ let Autobuyers = {
     }
   },
   prestige() {
-    if (!Prestige.canPrestige()) return;
+    if (!Autobuyer(11).isActive() || !Prestige.canPrestige()) return;
     let shouldPrestige;
     let mode = Autobuyer(11).mode();
     let priority = Autobuyer(11).priority();
@@ -94,7 +94,7 @@ let Autobuyers = {
     }
   },
   infinity() {
-    if (!InfinityPrestigeLayer.canInfinity()) return;
+    if (!Autobuyer(12).isActive() || !InfinityPrestigeLayer.canInfinity()) return;
     let shouldInfinity;
     let mode = Autobuyer(12).mode();
     let priority = Autobuyer(12).priority();
