@@ -6,7 +6,7 @@ let Sacrifice = {
     player.sacrificeMultiplier = x;
   },
   sacrificeRequirement() {
-    return Decimal.pow(2, 16 * this.sacrificeMultiplier().toNumber());
+    return Decimal.pow(2, 16 * (Challenge.isChallengeRunning(10) ? 1 : this.sacrificeMultiplier().toNumber()));
   },
   canSacrifice() {
     return Generator(8).amount().gt(0) && player.stars.gte(this.sacrificeRequirement()) && !InfinityPrestigeLayer.mustInfinity();
