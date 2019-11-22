@@ -37,7 +37,7 @@ let Challenge = {
     this.setChallenge(x);
     InfinityPrestigeLayer.infinityReset();
   },
-  exitChallenge(x) {
+  exitChallenge() {
     this.setChallenge(0);
     InfinityPrestigeLayer.infinityReset();
   },
@@ -53,14 +53,14 @@ let Challenge = {
   isChallengeCompleted(x) {
     return player.challengesCompleted[x - 1];
   },
-  getChallengesCompleted() {
+  numberOfChallengesCompleted() {
     return player.challengesCompleted.reduce((a, b) => a + b);
   },
   multiplier() {
-    return Decimal.pow(2, this.getChallengesCompleted() / 4);
+    return Decimal.pow(2, this.numberOfChallengesCompleted() / 4);
   },
   areAllChallengesCompleted() {
-    return this.getChallengesCompleted() === 12;
+    return this.numberOfChallengesCompleted() === 12;
   },
   isThereChallengeText() {
     return [2, 3, 7].indexOf(this.currentChallenge()) !== -1;

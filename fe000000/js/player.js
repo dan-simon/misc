@@ -6,6 +6,17 @@ function initialInfinityGenerators() {
   return [...Array(8)].map(_ => ({amount: new Decimal(0), bought: 0}));
 }
 
+function initialAutobuyers() {
+  return [
+    {on: false, mode: 'Buy singles', priority: 1}, {on: false, mode: 'Buy singles', priority: 2},
+    {on: false, mode: 'Buy singles', priority: 3}, {on: false, mode: 'Buy singles', priority: 4},
+    {on: false, mode: 'Buy singles', priority: 5}, {on: false, mode: 'Buy singles', priority: 6},
+    {on: false, mode: 'Buy singles', priority: 7}, {on: false, mode: 'Buy singles', priority: 8},
+    {on: false, mode: 'Buy singles', priority: 9}, {on: false, mode: 'Multiplier', priority: new Decimal(2)},
+    {on: false, mode: 'Multiplier', priority: new Decimal(2)}, {on: false, mode: 'Amount', priority: new Decimal(2)},
+  ];
+}
+
 let initialPlayer = {
   stars: new Decimal(2),
   boost: {bought: 0},
@@ -25,6 +36,7 @@ let initialPlayer = {
     false, false, false, false, false, false,
   ],
   breakInfinity: false,
+  autobuyers: initialAutobuyers(),
   options: {
     notation: 'Scientific',
     offlineProgress: true,
@@ -51,7 +63,7 @@ let initialPlayer = {
     ],
   },
   currentTab: 'main',
-  version: 1.40625,
+  version: 1.4375,
 }
 
 let player;

@@ -14,6 +14,7 @@ function gameLoop(diff, display) {
   }
   Stats.addToTimeStats(diff);
   InfinityPrestigeLayer.updatePeakIPPerSec();
+  Autobuyers.tick();
   if (display !== false) {
     updateDisplay();
   }

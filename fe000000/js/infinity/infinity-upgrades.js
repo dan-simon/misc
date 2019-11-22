@@ -69,6 +69,6 @@ let InfinityUpgrade = function (i) {
 let InfinityUpgrades = {
   list: [1, 2].map((x) => InfinityUpgrade(x)),
   get: function (x) {
-    return this.list[x - 1]
+    return this.list[x - 1];
   },
 }

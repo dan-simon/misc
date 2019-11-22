@@ -102,7 +102,7 @@ let Generator = function (i) {
 let Generators = {
   list: [...Array(8)].map((_, i) => Generator(i + 1)),
   get: function (x) {
-    return this.list[x - 1]
+    return this.list[x - 1];
   },
   highest () {
     return Generators.list[player.highestGenerator] || null;

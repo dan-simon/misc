@@ -1,5 +1,4 @@
 <html>
-<template name="generator"><span>$i</span></template>
 <head>
   <title>FE000000</title>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/break_infinity.js"></script>
@@ -11,7 +10,7 @@
   <script src="js/infinity/infinity-prestige-layer.js"></script>
   <script src="js/infinity/infinity-stars.js"></script>
   <script src="js/infinity/infinity-upgrades.js"></script>
-  <script src="js/autobuyer.js"></script>
+  <script src="js/autobuyers.js"></script>
   <script src="js/boost.js"></script>
   <script src="js/challenge.js"></script>
   <script src="js/format.js"></script>
@@ -405,198 +404,325 @@
     </table>
   </div>
   <div id="b83">
+    <span>You have <span id="e144"></span> autobuyers.</span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
         <td>
           <div id="b84" class="autobuyerdiv">
             <span>Generator 1 Autobuyer</span>
             <br/>
-            <span>On: [undone]</span>
+            <span>On: <input id="b85" type="checkbox"></input></span>
             <br/>
-            <span>Mode: [undone]</span>
+            <span>Mode: <select id="b86">
+              <option value="Buy singles">Buy singles</option>
+              <option value="Buy max">Buy max</option>
+            </select></span>
             <br/>
-            <span>Priority: [undone]</span>
-          </div>
-        </td>
-        <td>
-          <div id="b85" class="autobuyerdiv">
-            <span>Generator 2 Autobuyer</span>
-            <br/>
-            <span>On: [undone]</span>
-            <br/>
-            <span>Mode: [undone]</span>
-            <br/>
-            <span>Priority: [undone]</span>
-          </div>
-        </td>
-        <td>
-          <div id="b86" class="autobuyerdiv">
-            <span>Generator 3 Autobuyer</span>
-            <br/>
-            <span>On: [undone]</span>
-            <br/>
-            <span>Mode: [undone]</span>
-            <br/>
-            <span>Priority: [undone]</span>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div id="b87" class="autobuyerdiv">
-            <span>Generator 4 Autobuyer</span>
-            <br/>
-            <span>On: [undone]</span>
-            <br/>
-            <span>Mode: [undone]</span>
-            <br/>
-            <span>Priority: [undone]</span>
+            <span>Priority: <select id="b87">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </select></span></span>
           </div>
         </td>
         <td>
           <div id="b88" class="autobuyerdiv">
-            <span>Generator 5 Autobuyer</span>
+            <span>Generator 2 Autobuyer</span>
             <br/>
-            <span>On: [undone]</span>
+            <span>On: <input id="b89" type="checkbox"></input></span>
             <br/>
-            <span>Mode: [undone]</span>
+            <span>Mode: <select id="b90">
+              <option value="Buy singles">Buy singles</option>
+              <option value="Buy max">Buy max</option>
+            </select></span>
             <br/>
-            <span>Priority: [undone]</span>
-          </div>
-        </td>
-        <td>
-          <div id="b89" class="autobuyerdiv">
-            <span>Generator 6 Autobuyer</span>
-            <br/>
-            <span>On: [undone]</span>
-            <br/>
-            <span>Mode: [undone]</span>
-            <br/>
-            <span>Priority: [undone]</span>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div id="b90" class="autobuyerdiv">
-            <span>Generator 7 Autobuyer</span>
-            <br/>
-            <span>On: [undone]</span>
-            <br/>
-            <span>Mode: [undone]</span>
-            <br/>
-            <span>Priority: [undone]</span>
-          </div>
-        </td>
-        <td>
-          <div id="b91" class="autobuyerdiv">
-            <span>Generator 8 Autobuyer</span>
-            <br/>
-            <span>On: [undone]</span>
-            <br/>
-            <span>Mode: [undone]</span>
-            <br/>
-            <span>Priority: [undone]</span>
+            <span>Priority: <select id="b91">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </select></span></span>
           </div>
         </td>
         <td>
           <div id="b92" class="autobuyerdiv">
-            <span>Boost Autobuyer</span>
+            <span>Generator 3 Autobuyer</span>
             <br/>
-            <span>On: [undone]</span>
+            <span>On: <input id="b93" type="checkbox"></input></span>
             <br/>
-            <span>Mode: [undone]</span>
+            <span>Mode: <select id="b94">
+              <option value="Buy singles">Buy singles</option>
+              <option value="Buy max">Buy max</option>
+            </select></span>
             <br/>
-            <span>Priority: [undone]</span>
+            <span>Priority: <select id="b95">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </select></span></span>
           </div>
         </td>
       </tr>
       <tr>
         <td>
-          <div id="b93" class="autobuyerdiv">
+          <div id="b96" class="autobuyerdiv">
+            <span>Generator 4 Autobuyer</span>
+            <br/>
+            <span>On: <input id="b97" type="checkbox"></input></span>
+            <br/>
+            <span>Mode: <select id="b98">
+              <option value="Buy singles">Buy singles</option>
+              <option value="Buy max">Buy max</option>
+            </select></span>
+            <br/>
+            <span>Priority: <select id="b99">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </select></span></span>
+          </div>
+        </td>
+        <td>
+          <div id="b100" class="autobuyerdiv">
+            <span>Generator 5 Autobuyer</span>
+            <br/>
+            <span>On: <input id="b101" type="checkbox"></input></span>
+            <br/>
+            <span>Mode: <select id="b102">
+              <option value="Buy singles">Buy singles</option>
+              <option value="Buy max">Buy max</option>
+            </select></span>
+            <br/>
+            <span>Priority: <select id="b103">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </select></span></span>
+          </div>
+        </td>
+        <td>
+          <div id="b104" class="autobuyerdiv">
+            <span>Generator 6 Autobuyer</span>
+            <br/>
+            <span>On: <input id="b105" type="checkbox"></input></span>
+            <br/>
+            <span>Mode: <select id="b106">
+              <option value="Buy singles">Buy singles</option>
+              <option value="Buy max">Buy max</option>
+            </select></span>
+            <br/>
+            <span>Priority: <select id="b107">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </select></span></span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div id="b108" class="autobuyerdiv">
+            <span>Generator 7 Autobuyer</span>
+            <br/>
+            <span>On: <input id="b109" type="checkbox"></input></span>
+            <br/>
+            <span>Mode: <select id="b110">
+              <option value="Buy singles">Buy singles</option>
+              <option value="Buy max">Buy max</option>
+            </select></span>
+            <br/>
+            <span>Priority: <select id="b111">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </select></span></span>
+          </div>
+        </td>
+        <td>
+          <div id="b112" class="autobuyerdiv">
+            <span>Generator 8 Autobuyer</span>
+            <br/>
+            <span>On: <input id="b113" type="checkbox"></input></span>
+            <br/>
+            <span>Mode: <select id="b114">
+              <option value="Buy singles">Buy singles</option>
+              <option value="Buy max">Buy max</option>
+            </select></span>
+            <br/>
+            <span>Priority: <select id="b115">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </select></span></span>
+          </div>
+        </td>
+        <td>
+          <div id="b116" class="autobuyerdiv">
+            <span>Boost Autobuyer</span>
+            <br/>
+            <span>On: <input id="b117" type="checkbox"></input></span>
+            <br/>
+            <span>Mode: <select id="b118">
+              <option value="Buy singles">Buy singles</option>
+              <option value="Buy max">Buy max</option>
+            </select></span>
+            <br/>
+            <span>Priority: <select id="b119">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </select></span></span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div id="b120" class="autobuyerdiv">
             <span>Sacrifice Autobuyer</span>
             <br/>
-            <span>On: [undone]</span>
+            <span>On: <input id="b121" type="checkbox"></input></span>
             <br/>
-            <span>Mode: [undone]</span>
+            <span>Mode: <select id="b122">
+              <option value="Multiplier">Multiplier</option>
+              <option value="Time">Time</option>
+            </select></span>
             <br/>
-            <span>[mode desc here]:</span>
+            <span><span id="e145"></span>:</span>
             <br/>
-            <span>[undone]</span>
+            <span><input id="b123" type="text"></input></span>
           </div>
         </td>
         <td>
-          <div id="b94" class="autobuyerdiv">
+          <div id="b124" class="autobuyerdiv">
             <span>Prestige Autobuyer</span>
             <br/>
-            <span>On: [undone]</span>
+            <span>On: <input id="b125" type="checkbox"></input></span>
             <br/>
-            <span>Mode: [undone]</span>
+            <span>Mode: <select id="b126">
+              <option value="Multiplier">Multiplier</option>
+              <option value="Time">Time</option>
+            </select></span>
             <br/>
-            <span>[mode desc here]:</span>
+            <span><span id="e146"></span>:</span>
             <br/>
-            <span>[undone]</span>
+            <span><input id="b127" type="text"></input></span>
           </div>
         </td>
         <td>
-          <div id="b95" class="autobuyerdiv">
+          <div id="b128" class="autobuyerdiv">
             <span>Infinity Autobuyer</span>
             <br/>
-            <span>On: [undone]</span>
+            <span>On: <input id="b129" type="checkbox"></input></span>
             <br/>
-            <span>Mode: [undone]</span>
+            <span>Mode: <select id="b130">
+              <option value="Amount">Amount</option>
+              <option value="Time">Time</option>
+              <option value="X times last">X times last</option>
+              <option value="Time past peak/sec">Time past peak/sec</option>
+              <option value="Fraction of peak/sec">Fraction of peak/sec</option>
+            </select></span>
             <br/>
-            <span>[mode desc here]:</span>
+            <span><span id="e147"></span>:</span>
             <br/>
-            <span>[undone]</span>
+            <span><input id="b131" type="text"></input></span>
           </div>
         </td>
       </tr>
     </table>
-    <input id="b96" type="checkbox"></input>
-    <input id="b97" type="text"></input>
-    <select id="b98"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="banana">banana</option></select>
   </div>
-  <div id="b99">
-    <span>You have produced <span id="e144"></span> total stars.</span>
+  <div id="b132">
+    <span>You have produced <span id="e148"></span> total stars.</span>
     <br/>
-    <span>You have produced <span id="e145"></span> total infinity points.</span>
+    <span>You have produced <span id="e149"></span> total infinity points.</span>
     <br/>
-    <span>Your fastest infinity took <span id="e146"></span> seconds.</span>
+    <span>Your fastest infinity took <span id="e150"></span> seconds.</span>
     <br/>
-    <span>You have spent <span id="e147"></span> seconds without purchasing anything.</span>
+    <span>You have spent <span id="e151"></span> seconds without purchasing anything.</span>
     <br/>
-    <span>You have spent <span id="e148"></span> seconds without sacrificing.</span>
+    <span>You have spent <span id="e152"></span> seconds without sacrificing.</span>
     <br/>
-    <span>You have spent <span id="e149"></span> seconds in this prestige.</span>
+    <span>You have spent <span id="e153"></span> seconds in this prestige.</span>
     <br/>
-    <span>You have spent <span id="e150"></span> seconds in this infinity.</span>
+    <span>You have spent <span id="e154"></span> seconds in this infinity.</span>
     <br/>
-    <span>You have spent <span id="e151"></span> seconds playing this game (counting time offline).</span>
-    <div id="b100">
-      <span>Last infinity took <span id="e152"></span> seconds and gave <span id="e153"></span> IP, giving <span id="e154"></span> IP/second.</span>
+    <span>You have spent <span id="e155"></span> seconds playing this game (counting time offline).</span>
+    <div id="b133">
+      <span>Last infinity took <span id="e156"></span> seconds and gave <span id="e157"></span> IP, giving <span id="e158"></span> IP/second.</span>
       <br/>
-      <span id="b101">The infinity two infinities ago took <span id="e155"></span> seconds and gave <span id="e156"></span> IP, giving <span id="e157"></span> IP/second.</span>
+      <span id="b134">The infinity two infinities ago took <span id="e159"></span> seconds and gave <span id="e160"></span> IP, giving <span id="e161"></span> IP/second.</span>
       <br/>
-      <span id="b102">The infinity three infinities ago took <span id="e158"></span> seconds and gave <span id="e159"></span> IP, giving <span id="e160"></span> IP/second.</span>
+      <span id="b135">The infinity three infinities ago took <span id="e162"></span> seconds and gave <span id="e163"></span> IP, giving <span id="e164"></span> IP/second.</span>
       <br/>
-      <span id="b103">The infinity four infinities ago took <span id="e161"></span> seconds and gave <span id="e162"></span> IP, giving <span id="e163"></span> IP/second.</span>
+      <span id="b136">The infinity four infinities ago took <span id="e165"></span> seconds and gave <span id="e166"></span> IP, giving <span id="e167"></span> IP/second.</span>
       <br/>
-      <span id="b104">The infinity five infinities ago took <span id="e164"></span> seconds and gave <span id="e165"></span> IP, giving <span id="e166"></span> IP/second.</span>
+      <span id="b137">The infinity five infinities ago took <span id="e168"></span> seconds and gave <span id="e169"></span> IP, giving <span id="e170"></span> IP/second.</span>
       <br/>
-      <span id="b105">The infinity six infinities ago took <span id="e167"></span> seconds and gave <span id="e168"></span> IP, giving <span id="e169"></span> IP/second.</span>
+      <span id="b138">The infinity six infinities ago took <span id="e171"></span> seconds and gave <span id="e172"></span> IP, giving <span id="e173"></span> IP/second.</span>
       <br/>
-      <span id="b106">The infinity seven infinities ago took <span id="e170"></span> seconds and gave <span id="e171"></span> IP, giving <span id="e172"></span> IP/second.</span>
+      <span id="b139">The infinity seven infinities ago took <span id="e174"></span> seconds and gave <span id="e175"></span> IP, giving <span id="e176"></span> IP/second.</span>
       <br/>
-      <span id="b107">The infinity eight infinities ago took <span id="e173"></span> seconds and gave <span id="e174"></span> IP, giving <span id="e175"></span> IP/second.</span>
+      <span id="b140">The infinity eight infinities ago took <span id="e177"></span> seconds and gave <span id="e178"></span> IP, giving <span id="e179"></span> IP/second.</span>
       <br/>
-      <span id="b108">The infinity nine infinities ago took <span id="e176"></span> seconds and gave <span id="e177"></span> IP, giving <span id="e178"></span> IP/second.</span>
+      <span id="b141">The infinity nine infinities ago took <span id="e180"></span> seconds and gave <span id="e181"></span> IP, giving <span id="e182"></span> IP/second.</span>
       <br/>
-      <span id="b109">The infinity ten infinities ago took <span id="e179"></span> seconds and gave <span id="e180"></span> IP, giving <span id="e181"></span> IP/second.</span>
+      <span id="b142">The infinity ten infinities ago took <span id="e183"></span> seconds and gave <span id="e184"></span> IP, giving <span id="e185"></span> IP/second.</span>
       <br/>
     </div>
   </div>
-  <div id="b110">
+  <div id="b143">
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 8px; border-collapse: separate;">
       <tr>
         <td><button class="options-button" onclick="Saving.saveGame()">Save</button></td>
@@ -604,9 +730,9 @@
         <td><button class="options-button" onclick="Saving.loadGamePrompt()">Load</button></td>
       </tr>
       <tr>
-        <td><button class="options-button" onclick="Options.toggleOfflineProgress()">Offline progress: <span id="e182"></span></button></td>
-        <td><button class="options-button" onclick="Options.toggleHotkeys()">Hotkeys: <span id="e183"></span></button></td>
-        <td><button class="options-button" onclick="Options.nextNotation()">Notation: <span id="e184"></span></button></td>
+        <td><button class="options-button" onclick="Options.toggleOfflineProgress()">Offline progress: <span id="e186"></span></button></td>
+        <td><button class="options-button" onclick="Options.toggleHotkeys()">Hotkeys: <span id="e187"></span></button></td>
+        <td><button class="options-button" onclick="Options.nextNotation()">Notation: <span id="e188"></span></button></td>
       </tr>
       <tr>
         <td></td>

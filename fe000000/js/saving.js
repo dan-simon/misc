@@ -74,6 +74,10 @@ let Saving = {
       ];
       player.version = 1.40625;
     }
+    if (player.version < 1.4375) {
+      player.autobuyers = initialAutobuyers();
+      player.version = 1.4375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
@@ -95,6 +99,9 @@ let Saving = {
         player.stats.lastTenInfinities[i][1] = new Decimal(player.stats.lastTenInfinities[i][1]);
         player.stats.lastTenInfinities[i][2] = new Decimal(player.stats.lastTenInfinities[i][2]);
       }
+    }
+    for (let i = 9; i < 12; i++) {
+      player.autobuyers[i].priority = new Decimal(player.autobuyers[i].priority);
     }
   },
   loadGameStorage () {

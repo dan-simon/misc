@@ -3,7 +3,7 @@ let InfinityPrestigeLayer = {
     return Challenge.areAllChallengesCompleted();
   },
   isInfinityBroken() {
-    return this.canInfinityBeBroken() && player.breakInfinity && Challenges.isNoChallengeRunning();
+    return this.canInfinityBeBroken() && player.breakInfinity && Challenge.isNoChallengeRunning();
   },
   breakInfinityButtonText() {
     return player.breakInfinity ?
@@ -11,7 +11,7 @@ let InfinityPrestigeLayer = {
       `Break infinity: allow stars to go beyond ${format(Decimal.pow(2, 256))}, with greater IP gain`;
   },
   toggleBreakInfinity() {
-    if (player.canInfinityBeBroken()) {
+    if (this.canInfinityBeBroken()) {
       player.breakInfinity = !player.breakInfinity;
     }
   },

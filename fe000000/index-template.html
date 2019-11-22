@@ -1,5 +1,4 @@
 <html>
-<template name="generator"><span>$i</span></template>
 <head>
   <title>FE000000</title>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/break_infinity.js"></script>
@@ -11,7 +10,7 @@
   <script src="js/infinity/infinity-prestige-layer.js"></script>
   <script src="js/infinity/infinity-stars.js"></script>
   <script src="js/infinity/infinity-upgrades.js"></script>
-  <script src="js/autobuyer.js"></script>
+  <script src="js/autobuyers.js"></script>
   <script src="js/boost.js"></script>
   <script src="js/challenge.js"></script>
   <script src="js/format.js"></script>
@@ -232,7 +231,7 @@
     </table>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'challenges' ? '' : 'none'~>
-    <span>You have completed ~f Challenge.getChallengesCompleted() ~ challenges, multiplying all generators by ~f Challenge.multiplier() ~.</span>
+    <span>You have completed ~f Challenge.numberOfChallengesCompleted() ~ challenges, multiplying all generators by ~f Challenge.multiplier() ~.</span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
         <td>
@@ -405,157 +404,284 @@
     </table>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'autobuyers' ? '' : 'none'~>
+    <span>You have ~f Autobuyers.numberOfAutobuyers() ~ autobuyers.</span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
         <td>
-          <div class="autobuyerdiv" ~style.display=Autobuyer.hasAutobuyer(1) ? '' : 'none'~>
+          <div class="autobuyerdiv" ~style.display=Autobuyer(1).hasAutobuyer() ? '' : 'none'~>
             <span>Generator 1 Autobuyer</span>
             <br/>
-            <span>On: [undone]</span>
+            <span>On: <input type="checkbox" ~!checked=Autobuyer(1).isOn()~ ~!onchange=function() {Autobuyer(1).setIsOn(this.checked)}~></input></span>
             <br/>
-            <span>Mode: [undone]</span>
+            <span>Mode: <select ~!value=Autobuyer(1).mode()~ ~!onchange=function() {Autobuyer(1).setMode(this.value)}~>
+              <option value="Buy singles">Buy singles</option>
+              <option value="Buy max">Buy max</option>
+            </select></span>
             <br/>
-            <span>Priority: [undone]</span>
+            <span>Priority: <select ~!value=Autobuyer(1).priority().toString()~ ~!onchange=function() {Autobuyer(1).setPriority(+this.value)}~>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </select></span></span>
           </div>
         </td>
         <td>
-          <div class="autobuyerdiv" ~style.display=Autobuyer.hasAutobuyer(2) ? '' : 'none'~>
+          <div class="autobuyerdiv" ~style.display=Autobuyer(2).hasAutobuyer() ? '' : 'none'~>
             <span>Generator 2 Autobuyer</span>
             <br/>
-            <span>On: [undone]</span>
+            <span>On: <input type="checkbox" ~!checked=Autobuyer(2).isOn()~ ~!onchange=function() {Autobuyer(2).setIsOn(this.checked)}~></input></span>
             <br/>
-            <span>Mode: [undone]</span>
+            <span>Mode: <select ~!value=Autobuyer(2).mode()~ ~!onchange=function() {Autobuyer(2).setMode(this.value)}~>
+              <option value="Buy singles">Buy singles</option>
+              <option value="Buy max">Buy max</option>
+            </select></span>
             <br/>
-            <span>Priority: [undone]</span>
+            <span>Priority: <select ~!value=Autobuyer(2).priority().toString()~ ~!onchange=function() {Autobuyer(2).setPriority(+this.value)}~>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </select></span></span>
           </div>
         </td>
         <td>
-          <div class="autobuyerdiv" ~style.display=Autobuyer.hasAutobuyer(3) ? '' : 'none'~>
+          <div class="autobuyerdiv" ~style.display=Autobuyer(3).hasAutobuyer() ? '' : 'none'~>
             <span>Generator 3 Autobuyer</span>
             <br/>
-            <span>On: [undone]</span>
+            <span>On: <input type="checkbox" ~!checked=Autobuyer(3).isOn()~ ~!onchange=function() {Autobuyer(3).setIsOn(this.checked)}~></input></span>
             <br/>
-            <span>Mode: [undone]</span>
+            <span>Mode: <select ~!value=Autobuyer(3).mode()~ ~!onchange=function() {Autobuyer(3).setMode(this.value)}~>
+              <option value="Buy singles">Buy singles</option>
+              <option value="Buy max">Buy max</option>
+            </select></span>
             <br/>
-            <span>Priority: [undone]</span>
+            <span>Priority: <select ~!value=Autobuyer(3).priority().toString()~ ~!onchange=function() {Autobuyer(3).setPriority(+this.value)}~>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </select></span></span>
           </div>
         </td>
       </tr>
       <tr>
         <td>
-          <div class="autobuyerdiv" ~style.display=Autobuyer.hasAutobuyer(4) ? '' : 'none'~>
+          <div class="autobuyerdiv" ~style.display=Autobuyer(4).hasAutobuyer() ? '' : 'none'~>
             <span>Generator 4 Autobuyer</span>
             <br/>
-            <span>On: [undone]</span>
+            <span>On: <input type="checkbox" ~!checked=Autobuyer(4).isOn()~ ~!onchange=function() {Autobuyer(4).setIsOn(this.checked)}~></input></span>
             <br/>
-            <span>Mode: [undone]</span>
+            <span>Mode: <select ~!value=Autobuyer(4).mode()~ ~!onchange=function() {Autobuyer(4).setMode(this.value)}~>
+              <option value="Buy singles">Buy singles</option>
+              <option value="Buy max">Buy max</option>
+            </select></span>
             <br/>
-            <span>Priority: [undone]</span>
+            <span>Priority: <select ~!value=Autobuyer(4).priority().toString()~ ~!onchange=function() {Autobuyer(4).setPriority(+this.value)}~>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </select></span></span>
           </div>
         </td>
         <td>
-          <div class="autobuyerdiv" ~style.display=Autobuyer.hasAutobuyer(5) ? '' : 'none'~>
+          <div class="autobuyerdiv" ~style.display=Autobuyer(5).hasAutobuyer() ? '' : 'none'~>
             <span>Generator 5 Autobuyer</span>
             <br/>
-            <span>On: [undone]</span>
+            <span>On: <input type="checkbox" ~!checked=Autobuyer(5).isOn()~ ~!onchange=function() {Autobuyer(5).setIsOn(this.checked)}~></input></span>
             <br/>
-            <span>Mode: [undone]</span>
+            <span>Mode: <select ~!value=Autobuyer(5).mode()~ ~!onchange=function() {Autobuyer(5).setMode(this.value)}~>
+              <option value="Buy singles">Buy singles</option>
+              <option value="Buy max">Buy max</option>
+            </select></span>
             <br/>
-            <span>Priority: [undone]</span>
+            <span>Priority: <select ~!value=Autobuyer(5).priority().toString()~ ~!onchange=function() {Autobuyer(5).setPriority(+this.value)}~>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </select></span></span>
           </div>
         </td>
         <td>
-          <div class="autobuyerdiv" ~style.display=Autobuyer.hasAutobuyer(6) ? '' : 'none'~>
+          <div class="autobuyerdiv" ~style.display=Autobuyer(6).hasAutobuyer() ? '' : 'none'~>
             <span>Generator 6 Autobuyer</span>
             <br/>
-            <span>On: [undone]</span>
+            <span>On: <input type="checkbox" ~!checked=Autobuyer(6).isOn()~ ~!onchange=function() {Autobuyer(6).setIsOn(this.checked)}~></input></span>
             <br/>
-            <span>Mode: [undone]</span>
+            <span>Mode: <select ~!value=Autobuyer(6).mode()~ ~!onchange=function() {Autobuyer(6).setMode(this.value)}~>
+              <option value="Buy singles">Buy singles</option>
+              <option value="Buy max">Buy max</option>
+            </select></span>
             <br/>
-            <span>Priority: [undone]</span>
+            <span>Priority: <select ~!value=Autobuyer(6).priority().toString()~ ~!onchange=function() {Autobuyer(6).setPriority(+this.value)}~>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </select></span></span>
           </div>
         </td>
       </tr>
       <tr>
         <td>
-          <div class="autobuyerdiv" ~style.display=Autobuyer.hasAutobuyer(7) ? '' : 'none'~>
+          <div class="autobuyerdiv" ~style.display=Autobuyer(7).hasAutobuyer() ? '' : 'none'~>
             <span>Generator 7 Autobuyer</span>
             <br/>
-            <span>On: [undone]</span>
+            <span>On: <input type="checkbox" ~!checked=Autobuyer(7).isOn()~ ~!onchange=function() {Autobuyer(7).setIsOn(this.checked)}~></input></span>
             <br/>
-            <span>Mode: [undone]</span>
+            <span>Mode: <select ~!value=Autobuyer(7).mode()~ ~!onchange=function() {Autobuyer(7).setMode(this.value)}~>
+              <option value="Buy singles">Buy singles</option>
+              <option value="Buy max">Buy max</option>
+            </select></span>
             <br/>
-            <span>Priority: [undone]</span>
+            <span>Priority: <select ~!value=Autobuyer(7).priority().toString()~ ~!onchange=function() {Autobuyer(7).setPriority(+this.value)}~>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </select></span></span>
           </div>
         </td>
         <td>
-          <div class="autobuyerdiv" ~style.display=Autobuyer.hasAutobuyer(8) ? '' : 'none'~>
+          <div class="autobuyerdiv" ~style.display=Autobuyer(8).hasAutobuyer() ? '' : 'none'~>
             <span>Generator 8 Autobuyer</span>
             <br/>
-            <span>On: [undone]</span>
+            <span>On: <input type="checkbox" ~!checked=Autobuyer(8).isOn()~ ~!onchange=function() {Autobuyer(8).setIsOn(this.checked)}~></input></span>
             <br/>
-            <span>Mode: [undone]</span>
+            <span>Mode: <select ~!value=Autobuyer(8).mode()~ ~!onchange=function() {Autobuyer(8).setMode(this.value)}~>
+              <option value="Buy singles">Buy singles</option>
+              <option value="Buy max">Buy max</option>
+            </select></span>
             <br/>
-            <span>Priority: [undone]</span>
+            <span>Priority: <select ~!value=Autobuyer(8).priority().toString()~ ~!onchange=function() {Autobuyer(8).setPriority(+this.value)}~>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </select></span></span>
           </div>
         </td>
         <td>
-          <div class="autobuyerdiv" ~style.display=Autobuyer.hasAutobuyer(9) ? '' : 'none'~>
+          <div class="autobuyerdiv" ~style.display=Autobuyer(9).hasAutobuyer() ? '' : 'none'~>
             <span>Boost Autobuyer</span>
             <br/>
-            <span>On: [undone]</span>
+            <span>On: <input type="checkbox" ~!checked=Autobuyer(9).isOn()~ ~!onchange=function() {Autobuyer(9).setIsOn(this.checked)}~></input></span>
             <br/>
-            <span>Mode: [undone]</span>
+            <span>Mode: <select ~!value=Autobuyer(9).mode()~ ~!onchange=function() {Autobuyer(9).setMode(this.value)}~>
+              <option value="Buy singles">Buy singles</option>
+              <option value="Buy max">Buy max</option>
+            </select></span>
             <br/>
-            <span>Priority: [undone]</span>
+            <span>Priority: <select ~!value=Autobuyer(9).priority().toString()~ ~!onchange=function() {Autobuyer(9).setPriority(+this.value)}~>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </select></span></span>
           </div>
         </td>
       </tr>
       <tr>
         <td>
-          <div class="autobuyerdiv" ~style.display=Autobuyer.hasAutobuyer(10) ? '' : 'none'~>
+          <div class="autobuyerdiv" ~style.display=Autobuyer(10).hasAutobuyer() ? '' : 'none'~>
             <span>Sacrifice Autobuyer</span>
             <br/>
-            <span>On: [undone]</span>
+            <span>On: <input type="checkbox" ~!checked=Autobuyer(10).isOn()~ ~!onchange=function() {Autobuyer(10).setIsOn(this.checked)}~></input></span>
             <br/>
-            <span>Mode: [undone]</span>
+            <span>Mode: <select ~!value=Autobuyer(10).mode()~ ~!onchange=function() {Autobuyer(10).setMode(this.value)}~>
+              <option value="Multiplier">Multiplier</option>
+              <option value="Time">Time</option>
+            </select></span>
             <br/>
-            <span>[mode desc here]:</span>
+            <span>~r Autobuyer(10).mode() ~:</span>
             <br/>
-            <span>[undone]</span>
+            <span><input type="text" ~!value=Autobuyer(10).priority().toString()~ ~!onchange=function() {Autobuyer(10).setPriority(new Decimal(this.value))}~></input></span>
           </div>
         </td>
         <td>
-          <div class="autobuyerdiv" ~style.display=Autobuyer.hasAutobuyer(11) ? '' : 'none'~>
+          <div class="autobuyerdiv" ~style.display=Autobuyer(11).hasAutobuyer() ? '' : 'none'~>
             <span>Prestige Autobuyer</span>
             <br/>
-            <span>On: [undone]</span>
+            <span>On: <input type="checkbox" ~!checked=Autobuyer(11).isOn()~ ~!onchange=function() {Autobuyer(11).setIsOn(this.checked)}~></input></span>
             <br/>
-            <span>Mode: [undone]</span>
+            <span>Mode: <select ~!value=Autobuyer(11).mode()~ ~!onchange=function() {Autobuyer(11).setMode(this.value)}~>
+              <option value="Multiplier">Multiplier</option>
+              <option value="Time">Time</option>
+            </select></span>
             <br/>
-            <span>[mode desc here]:</span>
+            <span>~r Autobuyer(11).mode() ~:</span>
             <br/>
-            <span>[undone]</span>
+            <span><input type="text" ~!value=Autobuyer(11).priority().toString()~ ~!onchange=function() {Autobuyer(11).setPriority(new Decimal(this.value))}~></input></span>
           </div>
         </td>
         <td>
-          <div class="autobuyerdiv" ~style.display=Autobuyer.hasAutobuyer(12) ? '' : 'none'~>
+          <div class="autobuyerdiv" ~style.display=Autobuyer(12).hasAutobuyer() ? '' : 'none'~>
             <span>Infinity Autobuyer</span>
             <br/>
-            <span>On: [undone]</span>
+            <span>On: <input type="checkbox" ~!checked=Autobuyer(12).isOn()~ ~!onchange=function() {Autobuyer(12).setIsOn(this.checked)}~></input></span>
             <br/>
-            <span>Mode: [undone]</span>
+            <span>Mode: <select ~!value=Autobuyer(12).mode()~ ~!onchange=function() {Autobuyer(12).setMode(this.value)}~>
+              <option value="Amount">Amount</option>
+              <option value="Time">Time</option>
+              <option value="X times last">X times last</option>
+              <option value="Time past peak/sec">Time past peak/sec</option>
+              <option value="Fraction of peak/sec">Fraction of peak/sec</option>
+            </select></span>
             <br/>
-            <span>[mode desc here]:</span>
+            <span>~r Autobuyer(12).mode() ~:</span>
             <br/>
-            <span>[undone]</span>
+            <span><input type="text" ~!value=Autobuyer(12).priority().toString()~ ~!onchange=function() {Autobuyer(12).setPriority(new Decimal(this.value))}~></input></span>
           </div>
         </td>
       </tr>
     </table>
-    <input type="checkbox" ~!checked=false~ ~!onchange=function() {alert(this.checked)}~></input>
-    <input type="text" ~!value="Testing"~ ~!onchange=function() {alert(this.value)}~></input>
-    <select ~!value="banana"~ ~!onchange=function() {alert(this.value)}~><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="banana">banana</option></select>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'statistics' ? '' : 'none'~>
     <span>You have produced ~f player.stats.totalStarsProduced ~ total stars.</span>
