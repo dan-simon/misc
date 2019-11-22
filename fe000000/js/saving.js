@@ -61,6 +61,19 @@ let Saving = {
       player.stats.purchasesThisInfinity = 0;
       player.version = 1.375;
     }
+    if (player.version < 1.40625) {
+      player.stats.totalIPProduced = new Decimal(0);
+      player.stats.fastestInfinity = Math.pow(2, 256);
+      player.stats.timeSinceLastPeakIPPerSec = Math.pow(2, 256);
+      player.stats.lastTenInfinities = [
+        [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
+        [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
+        [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
+        [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
+        [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
+      ];
+      player.version = 1.40625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
@@ -75,7 +88,14 @@ let Saving = {
       player.infinityGenerators[i].amount = new Decimal(player.infinityGenerators[i].amount);
     }
     player.stats.totalStarsProduced = new Decimal(player.stats.totalStarsProduced);
+    player.stats.totalIPProduced = new Decimal(player.stats.totalIPProduced);
     player.stats.peakIPPerSec = new Decimal(player.stats.peakIPPerSec);
+    for (let i = 0; i < 10; i++) {
+      if (player.stats.lastTenInfinities[i] !== -1) {
+        player.stats.lastTenInfinities[i][1] = new Decimal(player.stats.lastTenInfinities[i][1]);
+        player.stats.lastTenInfinities[i][2] = new Decimal(player.stats.lastTenInfinities[i][2]);
+      }
+    }
   },
   loadGameStorage () {
     if (!localStorage.getItem('fe000000-save')) {

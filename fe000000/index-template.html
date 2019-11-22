@@ -375,6 +375,10 @@
   <tab ~style.display=Tabs.currentTab() === 'statistics' ? '' : 'none'~>
     <span>You have produced ~f player.stats.totalStarsProduced ~ total stars.</span>
     <br/>
+    <span>You have produced ~f player.stats.totalIPProduced ~ total infinity points.</span>
+    <br/>
+    <span>Your fastest infinity took ~f player.stats.fastestInfinity ~ seconds.</span>
+    <br/>
     <span>You have spent ~f player.stats.timeSincePurchase ~ seconds without purchasing anything.</span>
     <br/>
     <span>You have spent ~f player.stats.timeSinceSacrifice ~ seconds without sacrificing.</span>
@@ -384,6 +388,28 @@
     <span>You have spent ~f player.stats.timeSinceInfinity ~ seconds in this infinity.</span>
     <br/>
     <span>You have spent ~f player.stats.timeSinceGameStart ~ seconds playing this game (counting time offline).</span>
+    <div ~style.display=player.stats.lastTenInfinities[0][0] !== -1 ? '' : 'none'~>
+      <span>Last infinity took ~f player.stats.lastTenInfinities[0][0] ~ seconds and gave ~f player.stats.lastTenInfinities[0][1] ~ IP, giving ~f player.stats.lastTenInfinities[0][2] ~ IP/second.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenInfinities[1][0] !== -1 ? '' : 'none'~>The infinity two infinities ago took ~f player.stats.lastTenInfinities[1][0] ~ seconds and gave ~f player.stats.lastTenInfinities[1][1] ~ IP, giving ~f player.stats.lastTenInfinities[1][2] ~ IP/second.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenInfinities[2][0] !== -1 ? '' : 'none'~>The infinity three infinities ago took ~f player.stats.lastTenInfinities[2][0] ~ seconds and gave ~f player.stats.lastTenInfinities[2][1] ~ IP, giving ~f player.stats.lastTenInfinities[2][2] ~ IP/second.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenInfinities[3][0] !== -1  ? '' : 'none'~>The infinity four infinities ago took ~f player.stats.lastTenInfinities[3][0] ~ seconds and gave ~f player.stats.lastTenInfinities[3][1] ~ IP, giving ~f player.stats.lastTenInfinities[3][2] ~ IP/second.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenInfinities[4][0] !== -1 ? '' : 'none'~>The infinity five infinities ago took ~f player.stats.lastTenInfinities[4][0] ~ seconds and gave ~f player.stats.lastTenInfinities[4][1] ~ IP, giving ~f player.stats.lastTenInfinities[4][2] ~ IP/second.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenInfinities[5][0] !== -1 ? '' : 'none'~>The infinity six infinities ago took ~f player.stats.lastTenInfinities[5][0] ~ seconds and gave ~f player.stats.lastTenInfinities[5][1] ~ IP, giving ~f player.stats.lastTenInfinities[5][2] ~ IP/second.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenInfinities[6][0] !== -1 ? '' : 'none'~>The infinity seven infinities ago took ~f player.stats.lastTenInfinities[6][0] ~ seconds and gave ~f player.stats.lastTenInfinities[6][1] ~ IP, giving ~f player.stats.lastTenInfinities[6][2] ~ IP/second.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenInfinities[7][0] !== -1  ? '' : 'none'~>The infinity eight infinities ago took ~f player.stats.lastTenInfinities[7][0] ~ seconds and gave ~f player.stats.lastTenInfinities[7][1] ~ IP, giving ~f player.stats.lastTenInfinities[7][2] ~ IP/second.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenInfinities[8][0] !== -1  ? '' : 'none'~>The infinity nine infinities ago took ~f player.stats.lastTenInfinities[8][0] ~ seconds and gave ~f player.stats.lastTenInfinities[8][1] ~ IP, giving ~f player.stats.lastTenInfinities[8][2] ~ IP/second.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenInfinities[9][0] !== -1  ? '' : 'none'~>The infinity ten infinities ago took ~f player.stats.lastTenInfinities[9][0] ~ seconds and gave ~f player.stats.lastTenInfinities[9][1] ~ IP, giving ~f player.stats.lastTenInfinities[9][2] ~ IP/second.</span>
+      <br/>
+    </div>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'options' ? '' : 'none'~>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 8px; border-collapse: separate;">

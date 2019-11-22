@@ -32,16 +32,26 @@ let initialPlayer = {
   },
   stats: {
     totalStarsProduced: new Decimal(0),
+    totalIPProduced: new Decimal(0),
     timeSincePurchase: 0,
     timeSinceSacrifice: 0,
     timeSincePrestige: 0,
     timeSinceInfinity: 0,
     timeSinceGameStart: 0,
+    timeSinceLastPeakIPPerSec: Math.pow(2, 256),
+    fastestInfinity: Math.pow(2, 256),
     peakIPPerSec: new Decimal(0),
     purchasesThisInfinity: 0,
+    lastTenInfinities: [
+      [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
+      [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
+      [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
+      [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
+      [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
+    ],
   },
   currentTab: 'main',
-  version: 1.375,
+  version: 1.40625,
 }
 
 let player;

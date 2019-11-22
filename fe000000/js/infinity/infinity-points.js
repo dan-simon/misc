@@ -4,6 +4,7 @@ let InfinityPoints = {
   },
   addAmount(x) {
     player.infinityPoints = player.infinityPoints.plus(x);
+    player.stats.totalIPProduced = player.stats.totalIPProduced.plus(x);
   },
   multiplier() {
     if (this.amount().gt(8)) {
