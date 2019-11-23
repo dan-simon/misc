@@ -85,7 +85,7 @@ function updateDisplay() {
   e[0].textContent = format(InfinityPrestigeLayer.infinityPointGain());
   e[1].textContent = format(InfinityPrestigeLayer.currentIPPerSec());
   e[2].textContent = format(InfinityPrestigeLayer.peakIPPerSec());
-  b[0].style.display = InfinityPrestigeLayer.canInfinity() ? '' : 'none';
+  b[0].style.visibility = InfinityPrestigeLayer.canInfinity() ? '' : 'hidden';
   b[1].style.display = Tabs.isTabVisible('infinity') ? '' : 'none';
   b[2].style.display = Tabs.isTabVisible('challenges') ? '' : 'none';
   b[3].style.display = Tabs.isTabVisible('autobuyers') ? '' : 'none';

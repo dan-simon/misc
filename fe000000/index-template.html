@@ -31,7 +31,9 @@
   <link rel="stylesheet" href="styles.css"></link>
 </head>
 <body>
-  <div ~style.display=InfinityPrestigeLayer.canInfinity() ? '' : 'none'~><button style="height: 48px;" onclick="InfinityPrestigeLayer.infinity()">Infinity: Gain ~f InfinityPrestigeLayer.infinityPointGain() ~ infinity points<br/>~f InfinityPrestigeLayer.currentIPPerSec() ~ IP/sec, ~f InfinityPrestigeLayer.peakIPPerSec() ~ peak IP/sec</button></div>
+  <div ~style.visibility=InfinityPrestigeLayer.canInfinity() ? '' : 'hidden'~>
+    <button style="height: 48px;" onclick="InfinityPrestigeLayer.infinity()">Infinity: Gain ~f InfinityPrestigeLayer.infinityPointGain() ~ infinity points<br/>~f InfinityPrestigeLayer.currentIPPerSec() ~ IP/sec, ~f InfinityPrestigeLayer.peakIPPerSec() ~ peak IP/sec</button>
+  </div>
   <span>
     <button onclick="Tabs.setTab('main')">Main</button>
     <button ~style.display=Tabs.isTabVisible('infinity') ? '' : 'none'~ onclick="Tabs.setTab('infinity')">Infinity</button>
