@@ -10,7 +10,7 @@ let InfinityUpgrade = function (i) {
       player.infinityUpgrades[i - 1] += n;
     },
     boughtLimit() {
-      return [Infinity, 12][i - 1];
+      return [Infinity, 8][i - 1];
     },
     costIncreasePer() {
       return [8, 16][i - 1];
