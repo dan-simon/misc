@@ -19,7 +19,7 @@ let Generator = function (i) {
       player.generators[i - 1].bought += n;
     },
     costIncreasePer() {
-      let extraFactor = Challenge.isChallengeRunning(5) ? 2 : 1;
+      let extraFactor = Challenge.isChallengeEffectActive(5) ? 2 : 1;
       return Decimal.pow(2, i * extraFactor);
     },
     initialCost() {
@@ -36,8 +36,8 @@ let Generator = function (i) {
         Decimal.pow(2, this.bought() / 8), Boost.multiplier(), Prestige.multiplier(),
         InfinityPoints.multiplier(), InfinityStars.multiplier(), Challenge.multiplier(),
         (i === 8) ? Sacrifice.sacrificeMultiplier() : 1,
-        Challenge.isChallengeRunning(2) ? Challenge.challenge2Mult() : 1,
-        (i === 1 && Challenge.isChallengeRunning(3)) ? Challenge.challenge3Mult() : 1,
+        Challenge.isChallengeEffectActive(2) ? Challenge.challenge2Mult() : 1,
+        (i === 1 && Challenge.isChallengeEffectActive(3)) ? Challenge.challenge3Mult() : 1,
         Challenge.isChallengeRunning(8) ? Generator(8).amount().max(1) : 1
       ];
       let multiplier = factors.reduce((a, b) => a.times(b));
@@ -59,7 +59,7 @@ let Generator = function (i) {
       return (i < 8) ? Generator(i + 1).productionPerSecond() : new Decimal(0);
     },
     isVisible() {
-      return i <= player.highestGenerator + 1 && ((!Challenge.isChallengeRunning(6)) || i <= 6);
+      return i <= player.highestGenerator + 1 && ((!Challenge.isChallengeEffectActive(6)) || i <= 6);
     },
     canBuy(n) {
       if (n === undefined) {
@@ -73,7 +73,7 @@ let Generator = function (i) {
         Decimal.minus(this.costIncreasePer(), 1)).plus(1).log(this.costIncreasePer()));
       num = Math.min(num,
         Challenge.isChallengeRunning(10) ? 1 - this.bought() : Infinity,
-        Challenge.isChallengeRunning(7) ? Challenge.challenge7PurchasesLeft() : Infinity);
+        Challenge.isChallengeEffectActive(7) ? Challenge.challenge7PurchasesLeft() : Infinity);
       num = Math.max(num, 0);
       return num;
     },
@@ -88,7 +88,7 @@ let Generator = function (i) {
       if (player.highestGenerator < i) {
         player.highestGenerator = i;
       }
-      if (Challenge.isChallengeRunning(4)) {
+      if (Challenge.isChallengeEffectActive(4)) {
         Generators.resetAmounts(i - 1);
       }
       Stats.recordPurchase(n);

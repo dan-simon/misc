@@ -5,8 +5,24 @@ let Sacrifice = {
   setSacrificeMultiplier(x) {
     player.sacrificeMultiplier = x;
   },
+  hasStrongerSacrifice() {
+    return InfinityChallenge.isInfinityChallengeRunning(2) || InfinityChallenge.isInfinityChallengeCompleted(2);
+  },
+  sacrificeExponent() {
+    if (InfinityChallenge.isInfinityChallengeRunning(2)) {
+      return 1 / 8;
+    } else if (InfinityChallenge.isInfinityChallengeCompleted(2)) {
+      return 1 / 64;
+    } else {
+      return 0;
+    }
+  },
   sacrificeRequirement() {
-    return Decimal.pow(2, 16 * (Challenge.isChallengeRunning(10) ? 1 : this.sacrificeMultiplier().toNumber()));
+    let req = Decimal.pow(2, 16 * (Challenge.isChallengeRunning(10) ? 1 : this.sacrificeMultiplier().toNumber()));
+    if (this.hasStrongerSacrifice()) {
+      req = req.min(this.sacrificeMultiplier().pow(1 / this.sacrificeExponent()));
+    }
+    return req;
   },
   canSacrifice() {
     return Generator(8).amount().gt(0) && player.stars.gte(this.sacrificeRequirement()) && !InfinityPrestigeLayer.mustInfinity();
@@ -16,6 +32,9 @@ let Sacrifice = {
   },
   newSacrificeMultiplier() {
     let mult = new Decimal(player.stars.log(2) / 16);
+    if (this.hasStrongerSacrifice()) {
+      mult = mult.max(player.stars.pow(this.sacrificeExponent()));
+    }
     if (Challenge.isChallengeRunning(10)) {
       mult = mult.times(this.sacrificeMultiplier());
     }

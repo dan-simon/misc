@@ -4,6 +4,7 @@
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/break_infinity.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@antimatter-dimensions/notations"></script>
   <script src="js/infinity/infinities.js"></script>
+  <script src="js/infinity/infinity-challenge.js"></script>
   <script src="js/infinity/infinity-generators.js"></script>
   <script src="js/infinity/infinity-max-all.js"></script>
   <script src="js/infinity/infinity-points.js"></script>
@@ -39,6 +40,7 @@
     <button ~style.display=Tabs.isTabVisible('infinity') ? '' : 'none'~ onclick="Tabs.setTab('infinity')">Infinity</button>
     <button ~style.display=Tabs.isTabVisible('challenges') ? '' : 'none'~ onclick="Tabs.setTab('challenges')">Challenges</button>
     <button ~style.display=Tabs.isTabVisible('autobuyers') ? '' : 'none'~ onclick="Tabs.setTab('autobuyers')">Autobuyers</button>
+    <button ~style.display=Tabs.isTabVisible('infinity-challenges') ? '' : 'none'~ onclick="Tabs.setTab('infinity-challenges')">Infinity Challenges</button>
     <button onclick="Tabs.setTab('statistics')">Statistics</button>
     <button onclick="Tabs.setTab('options')">Options</button>
   </span>
@@ -680,6 +682,47 @@
             <span>~r Autobuyer(12).mode() ~:</span>
             <br/>
             <span><input type="text" ~!value=Autobuyer(12).priority().toString()~ ~!onchange=function() {Autobuyer(12).setPriority(new Decimal(this.value))}~></input></span>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </tab>
+  <tab ~style.display=Tabs.currentTab() === 'infinity-challenges' ? '' : 'none'~>
+    <span>You have completed ~f InfinityChallenge.numberOfInfinityChallengesCompleted() ~ infinity challenges, multiplying all infinity generators by ~f InfinityChallenge.multiplier() ~.</span>
+    <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
+      <tr>
+        <td>
+          <div class="challengediv">
+            <span>Infinity Challenge 1</span>
+            <br/>
+            <span>Challenges 2, 3, 4, 5, 6, and 7 all apply.</span>
+            <br/>
+            <span>Requirement to start: ~f InfinityChallenge.getInfinityChallengeRequirement(1) ~ stars this eternity</span>
+            <br/>
+            <span>Goal: ~f InfinityChallenge.getInfinityChallengeGoal(1) ~ stars</span>
+            <br/>
+            <span>~r InfinityChallenge.infinityChallengeStatusDescription(1) ~</span>
+            <br/>
+            <span><button onclick="InfinityChallenge.startOrExitInfinityChallenge(1)">~r InfinityChallenge.isInfinityChallengeRunning(1) ? "Exit challenge" : (InfinityChallenge.isInfinityChallengeRequirementReached(1) ? "Start challenge" : "Requires more stars") ~</button></span>
+            <br/>
+            <span>Reward: The multiplier to generators based on IP is uncapped.</span>
+          </div>
+        </td>
+        <td>
+          <div class="challengediv">
+            <span>Infinity Challenge 2</span>
+            <br/>
+            <span>Prestige power is raised ^~f 0.5 ~, but sacrifice is far stronger.</span>
+            <br/>
+            <span>Requirement to start: ~f InfinityChallenge.getInfinityChallengeRequirement(2) ~ stars this eternity</span>
+            <br/>
+            <span>Goal: ~f InfinityChallenge.getInfinityChallengeGoal(2) ~ stars</span>
+            <br/>
+            <span>~r InfinityChallenge.infinityChallengeStatusDescription(2) ~</span>
+            <br/>
+            <span><button onclick="InfinityChallenge.startOrExitInfinityChallenge(2)">~r InfinityChallenge.isInfinityChallengeRunning(2) ? "Exit challenge" : (InfinityChallenge.isInfinityChallengeRequirementReached(2) ? "Start challenge" : "Requires more stars") ~</button></span>
+            <br/>
+            <span>Reward: Sacrifice is stronger.</span>
           </div>
         </td>
       </tr>

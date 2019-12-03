@@ -46,7 +46,7 @@ let Boost = {
     if (player.stars.lt(this.costFor(num))) {
       num -= 1;
     }
-    num = Math.min(num, Challenge.isChallengeRunning(7) ? Challenge.challenge7PurchasesLeft() : Infinity);
+    num = Math.min(num, Challenge.isChallengeEffectActive(7) ? Challenge.challenge7PurchasesLeft() : Infinity);
     num = Math.max(num, 0);
     return num;
   },

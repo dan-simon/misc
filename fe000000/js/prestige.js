@@ -12,7 +12,7 @@ let Prestige = {
     return Challenge.isChallengeRunning(10);
   },
   isPrestigeSquareRooted() {
-    return [8, 11].indexOf(Challenge.currentChallenge()) !== -1;
+    return [8, 11].indexOf(Challenge.currentChallenge()) !== -1 || InfinityChallenge.isInfinityChallengeRunning(2);
   },
   prestigePowerExponent() {
     return this.isPrestigeDisabled() ? 0 : (this.isPrestigeSquareRooted() ? 0.5 : 1);

@@ -35,6 +35,10 @@ let initialPlayer = {
     false, false, false, false, false, false,
     false, false, false, false, false, false,
   ],
+  currentInfinityChallenge: 0,
+  infinityChallengesCompleted: [
+    false, false, false, false, false, false, false, false,
+  ],
   breakInfinity: false,
   autobuyers: initialAutobuyers(),
   options: {
@@ -44,6 +48,7 @@ let initialPlayer = {
   },
   stats: {
     totalStarsProduced: new Decimal(0),
+    totalStarsProducedThisEternity: new Decimal(0),
     totalIPProduced: new Decimal(0),
     timeSincePurchase: 0,
     timeSinceSacrifice: 0,
@@ -66,7 +71,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.4375,
+  version: 1.453125,
 }
 
 let player;

@@ -34,7 +34,7 @@ let InfinityGenerator = function (i) {
       if (Challenge.isChallengeRunning(12)) {
         return new Decimal(0);
       }
-      return Decimal.pow(2, this.bought() / 8).times(Infinities.infinityGeneratorMultiplier());
+      return Decimal.pow(2, this.bought() / 8).times(Infinities.infinityGeneratorMultiplier()).times(InfinityChallenge.multiplier());
     },
     productionPerSecond() {
       return this.amount().times(this.multiplier());

@@ -3,7 +3,8 @@ let InfinityPrestigeLayer = {
     return Challenge.areAllChallengesCompleted();
   },
   isInfinityBroken() {
-    return this.canInfinityBeBroken() && player.breakInfinity && Challenge.isNoChallengeRunning();
+    return this.canInfinityBeBroken() && player.breakInfinity &&
+    Challenge.isNoChallengeRunning() && InfinityChallenge.isNoInfinityChallengeRunning();
   },
   breakInfinityButtonText() {
     return player.breakInfinity ?
@@ -15,14 +16,21 @@ let InfinityPrestigeLayer = {
       player.breakInfinity = !player.breakInfinity;
     }
   },
+  starRequirementForInfinity() {
+    if (InfinityChallenge.isSomeInfinityChallengeRunning()) {
+      return InfinityChallenge.getInfinityChallengeGoal(InfinityChallenge.currentInfinityChallenge());
+    } else {
+      return Decimal.pow(2, 256);
+    }
+  },
   canInfinity() {
-    return Stars.amount().log(2) >= 256;
+    return Stars.amount().gte(this.starRequirementForInfinity());
   },
   mustInfinity() {
     return this.canInfinity() && !this.isInfinityBroken();
   },
   infinityPointGain() {
-    let oom = this.isInfinityBroken() ? Stars.amount().log(2) / 256 : 1;
+    let oom = (this.isInfinityBroken() ? Stars.amount() : this.starRequirementForInfinity()).log(2) / 256;
     return Decimal.pow(2, oom).floor();
   },
   currentIPPerSec() {
@@ -45,6 +53,7 @@ let InfinityPrestigeLayer = {
     Infinities.increment();
     Stats.addInfinity(player.stats.timeSinceInfinity, gain);
     Challenge.checkForChallengeCompletion();
+    InfinityChallenge.checkForInfinityChallengeCompletion();
     Challenge.setChallenge(0);
     this.infinityReset();
   },

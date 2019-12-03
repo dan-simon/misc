@@ -83,6 +83,15 @@ let Saving = {
       };
       player.version = 1.4375;
     }
+    if (player.version < 1.453125) {
+      player.currentInfinityChallenge = 0;
+      player.infinityChallengesCompleted = [
+        false, false, false, false, false, false, false, false,
+      ];
+      // Eternity hasn't been added yet, so this is clearly correct.
+      player.stats.totalStarsProducedThisEternity = player.stats.totalStarsProduced;
+      player.version = 1.453125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
@@ -97,6 +106,7 @@ let Saving = {
       player.infinityGenerators[i].amount = new Decimal(player.infinityGenerators[i].amount);
     }
     player.stats.totalStarsProduced = new Decimal(player.stats.totalStarsProduced);
+    player.stats.totalStarsProducedThisEternity = new Decimal(player.stats.totalStarsProducedThisEternity);
     player.stats.totalIPProduced = new Decimal(player.stats.totalIPProduced);
     player.stats.peakIPPerSec = new Decimal(player.stats.peakIPPerSec);
     for (let i = 0; i < 10; i++) {

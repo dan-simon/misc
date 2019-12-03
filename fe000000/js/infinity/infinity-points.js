@@ -7,6 +7,10 @@ let InfinityPoints = {
     player.stats.totalIPProduced = player.stats.totalIPProduced.plus(x);
   },
   multiplier() {
-    return this.amount().div(4).plus(1);
+    let mult = this.amount().div(4).plus(1);
+    if (!InfinityChallenge.isInfinityChallengeCompleted(1)) {
+      mult = mult.min(16);
+    }
+    return mult;
   }
 }

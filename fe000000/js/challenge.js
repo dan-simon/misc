@@ -12,6 +12,12 @@ let Challenge = {
   isChallengeRunning(x) {
     return this.currentChallenge() === x;
   },
+  isChallengeEffectActive(x) {
+    return this.isChallengeRunning(x) || (2 <= x && x <= 7 && InfinityChallenge.isInfinityChallengeRunning(1));
+  },
+  isSomeChallengeRunning(x) {
+    return this.currentChallenge() !== 0;
+  },
   isNoChallengeRunning() {
     return this.currentChallenge() === 0;
   },
@@ -35,6 +41,7 @@ let Challenge = {
   },
   startChallenge(x) {
     this.setChallenge(x);
+    InfinityChallenge.setInfinityChallenge(0);
     InfinityPrestigeLayer.infinityReset();
   },
   exitChallenge() {
@@ -63,7 +70,7 @@ let Challenge = {
     return this.numberOfChallengesCompleted() === 12;
   },
   isThereChallengeText() {
-    return [2, 3, 7].indexOf(this.currentChallenge()) !== -1;
+    return [2, 3, 7].indexOf(this.currentChallenge()) !== -1 || InfinityChallenge.isInfinityChallengeRunning(1);
   },
   challenge2Mult() {
     return Math.min(player.stats.timeSincePurchase / 256, 1);
@@ -82,6 +89,10 @@ let Challenge = {
       return 'Challenge 3 multiplier: ' + format(this.challenge3Mult());
     } else if (cc === 7) {
       return 'Challenge 7 purchases left: ' + format(this.challenge7PurchasesLeft());
+    } else if (InfinityChallenge.currentInfinityChallenge() === 1) {
+      return 'Challenge 2 multiplier: ' + format(this.challenge2Mult()) + ', ' +
+      'Challenge 3 multiplier: ' + format(this.challenge3Mult()) + ', ' +
+      'Challenge 7 purchases left: ' + format(this.challenge7PurchasesLeft());
     } else {
       return 'This text should never appear.';
     }
