@@ -1,10 +1,10 @@
 let InfinityChallenge = {
   goals: [Infinity,
-    Decimal.pow(2, 1024), Decimal.pow(2, 65536), Decimal.pow(2, 65536), Decimal.pow(2, 65536),
+    Decimal.pow(2, 1024), Decimal.pow(2, 10240), Decimal.pow(2, 65536), Decimal.pow(2, 65536),
     Decimal.pow(2, 65536), Decimal.pow(2, 65536), Decimal.pow(2, 65536), Decimal.pow(2, 65536),
   ],
   requirements: [Infinity,
-    Decimal.pow(2, 8192), Decimal.pow(2, 12288), Decimal.pow(2, 65536), Decimal.pow(2, 65536),
+    Decimal.pow(2, 8192), Decimal.pow(2, 20480), Decimal.pow(2, 65536), Decimal.pow(2, 65536),
     Decimal.pow(2, 65536), Decimal.pow(2, 65536), Decimal.pow(2, 65536), Decimal.pow(2, 65536),
   ],
   startOrExitInfinityChallenge(x) {

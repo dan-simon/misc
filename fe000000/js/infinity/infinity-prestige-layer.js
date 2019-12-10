@@ -55,6 +55,7 @@ let InfinityPrestigeLayer = {
     Challenge.checkForChallengeCompletion();
     InfinityChallenge.checkForInfinityChallengeCompletion();
     Challenge.setChallenge(0);
+    InfinityChallenge.setInfinityChallenge(0);
     this.infinityReset();
   },
   infinityReset() {
