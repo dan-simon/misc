@@ -18,7 +18,7 @@ let Prestige = {
     return this.isPrestigeDisabled() ? 0 : (this.isPrestigeSquareRooted() ? 0.5 : 1);
   },
   prestigeRequirement() {
-    return Decimal.pow(2, Math.max(128, 96 + 16 * Math.log2(this.prestigePower()) / this.prestigePowerExponent()));
+    return Decimal.pow(2, Math.max(128, 96 + 16 * Decimal.log2(this.prestigePower()) / this.prestigePowerExponent()));
   },
   canPrestige() {
     return player.stars.gte(this.prestigeRequirement()) && !InfinityPrestigeLayer.mustInfinity() && !this.isPrestigeDisabled();
