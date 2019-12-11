@@ -70,7 +70,9 @@ let Challenge = {
     return this.numberOfChallengesCompleted() === 12;
   },
   isThereChallengeText() {
-    return [2, 3, 7].indexOf(this.currentChallenge()) !== -1 || InfinityChallenge.isInfinityChallengeRunning(1);
+    return [2, 3, 7].indexOf(this.currentChallenge()) !== -1
+    || InfinityChallenge.isInfinityChallengeRunning(1)
+    || InfinityChallenge.isInfinityChallengeRunning(3);
   },
   challenge2Mult() {
     return Math.min(player.stats.timeSincePurchase / 256, 1);
@@ -83,16 +85,20 @@ let Challenge = {
   },
   challengeText() {
     let cc = this.currentChallenge();
+    let ic = InfinityChallenge.currentInfinityChallenge();
     if (cc === 2) {
       return 'Challenge 2 multiplier: ' + format(this.challenge2Mult());
     } else if (cc === 3) {
       return 'Challenge 3 multiplier: ' + format(this.challenge3Mult());
     } else if (cc === 7) {
       return 'Challenge 7 purchases left: ' + format(this.challenge7PurchasesLeft());
-    } else if (InfinityChallenge.currentInfinityChallenge() === 1) {
+    } else if (ic === 1) {
       return 'Challenge 2 multiplier: ' + format(this.challenge2Mult()) + ', ' +
       'Challenge 3 multiplier: ' + format(this.challenge3Mult()) + ', ' +
       'Challenge 7 purchases left: ' + format(this.challenge7PurchasesLeft());
+    } else if (ic === 3) {
+      return 'Infinity Challenge 3 prestige power exponent: ' +
+      format(InfinityChallenge.infinityChallenge3PrestigePowerExponent());
     } else {
       return 'This text should never appear.';
     }

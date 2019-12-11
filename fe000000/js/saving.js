@@ -92,6 +92,10 @@ let Saving = {
       player.stats.totalStarsProducedThisEternity = player.stats.totalStarsProduced;
       player.version = 1.453125;
     }
+    if (player.version < 1.4609375) {
+      player.stats.prestigesThisInfinity = 0;
+      player.version = 1.4609375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

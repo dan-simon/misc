@@ -15,6 +15,9 @@ let Prestige = {
     return [8, 11].indexOf(Challenge.currentChallenge()) !== -1 || InfinityChallenge.isInfinityChallengeRunning(2);
   },
   prestigePowerExponent() {
+    if (InfinityChallenge.isInfinityChallengeRunning(3)) {
+      return InfinityChallenge.infinityChallenge3PrestigePowerExponent();
+    }
     return this.isPrestigeDisabled() ? 0 : (this.isPrestigeSquareRooted() ? 0.5 : 1);
   },
   prestigeRequirement() {
@@ -38,6 +41,7 @@ let Prestige = {
   prestige() {
     if (!this.canPrestige()) return;
     this.setPrestigePower(this.newPrestigePower());
+    player.stats.prestigesThisInfinity++;
     this.prestigeReset();
   },
   prestigeReset() {

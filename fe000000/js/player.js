@@ -59,6 +59,7 @@ let initialPlayer = {
     fastestInfinity: Math.pow(2, 256),
     peakIPPerSec: new Decimal(0),
     purchasesThisInfinity: 0,
+    prestigesThisInfinity: 0,
     lastTenInfinities: [
       [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
       [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
@@ -71,7 +72,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.453125,
+  version: 1.4609375,
 }
 
 let player;

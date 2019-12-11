@@ -726,6 +726,27 @@
           </div>
         </td>
       </tr>
+      <tr>
+        <td>
+          <div class="challengediv">
+            <span>Infinity Challenge 3</span>
+            <br/>
+            <span>The prestige power formula is worse the more prestiges you do.</span>
+            <br/>
+            <span>Requirement to start: ~f InfinityChallenge.getInfinityChallengeRequirement(3) ~ stars this eternity</span>
+            <br/>
+            <span>Goal: ~f InfinityChallenge.getInfinityChallengeGoal(3) ~ stars</span>
+            <br/>
+            <span>~r InfinityChallenge.infinityChallengeStatusDescription(3) ~</span>
+            <br/>
+            <span><button onclick="InfinityChallenge.startOrExitInfinityChallenge(3)">~r InfinityChallenge.isInfinityChallengeRunning(3) ? "Exit challenge" : (InfinityChallenge.isInfinityChallengeRequirementReached(3) ? "Start challenge" : "Requires more stars") ~</button></span>
+            <br/>
+            <span>Reward: Multiplier to Infinity Generator 1 based on prestige power (~f InfinityChallenge.infinityChallenge3Reward() ~).</span>
+          </div>
+        </td>
+        <td>
+        </td>
+      </tr>
     </table>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'statistics' ? '' : 'none'~>
