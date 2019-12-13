@@ -39,7 +39,11 @@ let InfinityGenerator = function (i) {
         (i === 1 && InfinityChallenge.isInfinityChallengeCompleted(3)) ? InfinityChallenge.infinityChallenge3Reward() : 1,
         InfinityChallenge.isInfinityChallengeCompleted(4) ? InfinityChallenge.infinityChallenge4Reward() : 1
       ];
-      return factors.reduce((a, b) => a.times(b));
+      let multiplier = factors.reduce((a, b) => a.times(b));
+      let powFactors = [
+        (i === 5 && InfinityChallenge.isInfinityChallengeCompleted(5)) ? InfinityChallenge.infinityChallenge5Reward() : 1
+      ];
+      return multiplier.pow(powFactors.reduce((a, b) => a * b));
     },
     productionPerSecond() {
       return this.amount().times(this.multiplier());

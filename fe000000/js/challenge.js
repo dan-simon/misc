@@ -71,7 +71,7 @@ let Challenge = {
   },
   isThereChallengeText() {
     return [2, 3, 7].indexOf(this.currentChallenge()) !== -1
-    || [1, 3, 4].indexOf(InfinityChallenge.currentInfinityChallenge()) !== -1;
+    || [1, 3, 4, 5].indexOf(InfinityChallenge.currentInfinityChallenge()) !== -1;
   },
   challenge2Mult() {
     return Math.min(player.stats.timeSincePurchase / 256, 1);
@@ -101,6 +101,9 @@ let Challenge = {
     } else if (ic === 4) {
       return 'Infinity Challenge 4 multiplier exponent: ' +
       format(InfinityChallenge.infinityChallenge4Pow());
+    } else if (ic === 5) {
+      return 'Infinity Challenge 5 multiplier exponent: ' +
+      format(InfinityChallenge.infinityChallenge5Pow());
     } else {
       return 'This text should never appear.';
     }

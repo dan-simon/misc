@@ -43,7 +43,8 @@ let Generator = function (i) {
       let multiplier = factors.reduce((a, b) => a.times(b));
       let powFactors = [
         Challenge.isChallengeRunning(1) ? ((i === 1) ? 4 : 0) : 1,
-        InfinityChallenge.isInfinityChallengeRunning(4) ? InfinityChallenge.infinityChallenge4Pow() : 1
+        InfinityChallenge.isInfinityChallengeRunning(4) ? InfinityChallenge.infinityChallenge4Pow() : 1,
+        InfinityChallenge.isInfinityChallengeRunning(5) ? InfinityChallenge.infinityChallenge5Pow() : 1
       ];
       return multiplier.pow(powFactors.reduce((a, b) => a * b));
     },

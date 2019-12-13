@@ -764,6 +764,27 @@
           </div>
         </td>
       </tr>
+      <tr>
+        <td>
+          <div class="infinitychallengediv">
+            <span>Infinity Challenge 5</span>
+            <br/>
+            <span>There's an exponent on the multipliers of all generators based on stars, capping at 1.</span>
+            <br/>
+            <span>Requirement to start: ~f InfinityChallenge.getInfinityChallengeRequirement(5) ~ stars this eternity</span>
+            <br/>
+            <span>Goal: ~f InfinityChallenge.getInfinityChallengeGoal(5) ~ stars</span>
+            <br/>
+            <span>~r InfinityChallenge.infinityChallengeStatusDescription(5) ~</span>
+            <br/>
+            <span><button onclick="InfinityChallenge.startOrExitInfinityChallenge(5)">~r InfinityChallenge.isInfinityChallengeRunning(5) ? "Exit challenge" : (InfinityChallenge.isInfinityChallengeRequirementReached(5) ? "Start challenge" : "Requires more stars") ~</button></span>
+            <br/>
+            <span>Reward: Exponent to Infinity Generator 5 multiplier based on stars (~f InfinityChallenge.infinityChallenge5Reward() ~).</span>
+          </div>
+        </td>
+        <td>
+        </td>
+      </tr>
     </table>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'statistics' ? '' : 'none'~>

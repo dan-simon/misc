@@ -1,11 +1,11 @@
 let InfinityChallenge = {
   goals: [Infinity,
     Decimal.pow(2, 1024), Decimal.pow(2, 10240), Decimal.pow(2, 14336), Decimal.pow(2, 32768),
-    Decimal.pow(2, 65536), Decimal.pow(2, 65536), Decimal.pow(2, 65536), Decimal.pow(2, 65536),
+    Decimal.pow(2, 24576), Decimal.pow(2, 65536), Decimal.pow(2, 65536), Decimal.pow(2, 65536),
   ],
   requirements: [Infinity,
     Decimal.pow(2, 8192), Decimal.pow(2, 20480), Decimal.pow(2, 32768), Decimal.pow(2, 36864),
-    Decimal.pow(2, 65536), Decimal.pow(2, 65536), Decimal.pow(2, 65536), Decimal.pow(2, 65536),
+    Decimal.pow(2, 49152), Decimal.pow(2, 65536), Decimal.pow(2, 65536), Decimal.pow(2, 65536),
   ],
   startOrExitInfinityChallenge(x) {
     if (this.isInfinityChallengeRunning(x)) {
@@ -94,5 +94,14 @@ let InfinityChallenge = {
   },
   infinityChallenge4Reward() {
     return 1 + player.stats.timeSinceInfinity / 64;
+  },
+  infinityChallenge5Pow() {
+    return Math.min(1, Math.log2(Math.max(Stars.amount().log(2), 1)) / 16);
+  },
+  // This reward is theoretically unbalanced and will eventually make everything explode,
+  // but I'm fairly sure it doesn't do so until past break_infinity's limit,
+  // probably much farther.
+  infinityChallenge5Reward() {
+    return 1 + Math.log2(Math.max(Stars.amount().log(2) / 16384, 1));
   },
 }
