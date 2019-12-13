@@ -409,13 +409,15 @@
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'autobuyers' ? '' : 'none'~>
     <span>You have ~f Autobuyers.numberOfAutobuyers() ~ autobuyers.</span>
+    <br/>
+    <span><button onclick="Autobuyers.setAll(true)">Turn all autobuyers on</button> <button onclick="Autobuyers.setAll(false)">Turn all autobuyers off</button></span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
         <td>
           <div class="autobuyerdiv" ~style.display=Autobuyer(1).hasAutobuyer() ? '' : 'none'~>
             <span>Generator 1 Autobuyer</span>
             <br/>
-            <span>On: <input type="checkbox" ~!checked=Autobuyer(1).isOn()~ ~!onchange=function() {Autobuyer(1).setIsOn(this.checked)}~></input></span>
+            <span>On: <input type="checkbox" class="autobuyer-checkbox-1" ~!checked=Autobuyer(1).isOn()~ ~!onchange=function() {Autobuyer(1).setIsOn(this.checked)}~></input></span>
             <br/>
             <span>Mode: <select ~!value=Autobuyer(1).mode()~ ~!onchange=function() {Autobuyer(1).setMode(this.value)}~>
               <option value="Buy singles">Buy singles</option>
@@ -439,7 +441,7 @@
           <div class="autobuyerdiv" ~style.display=Autobuyer(2).hasAutobuyer() ? '' : 'none'~>
             <span>Generator 2 Autobuyer</span>
             <br/>
-            <span>On: <input type="checkbox" ~!checked=Autobuyer(2).isOn()~ ~!onchange=function() {Autobuyer(2).setIsOn(this.checked)}~></input></span>
+            <span>On: <input type="checkbox" class="autobuyer-checkbox-2" ~!checked=Autobuyer(2).isOn()~ ~!onchange=function() {Autobuyer(2).setIsOn(this.checked)}~></input></span>
             <br/>
             <span>Mode: <select ~!value=Autobuyer(2).mode()~ ~!onchange=function() {Autobuyer(2).setMode(this.value)}~>
               <option value="Buy singles">Buy singles</option>
@@ -463,7 +465,7 @@
           <div class="autobuyerdiv" ~style.display=Autobuyer(3).hasAutobuyer() ? '' : 'none'~>
             <span>Generator 3 Autobuyer</span>
             <br/>
-            <span>On: <input type="checkbox" ~!checked=Autobuyer(3).isOn()~ ~!onchange=function() {Autobuyer(3).setIsOn(this.checked)}~></input></span>
+            <span>On: <input type="checkbox" class="autobuyer-checkbox-3" ~!checked=Autobuyer(3).isOn()~ ~!onchange=function() {Autobuyer(3).setIsOn(this.checked)}~></input></span>
             <br/>
             <span>Mode: <select ~!value=Autobuyer(3).mode()~ ~!onchange=function() {Autobuyer(3).setMode(this.value)}~>
               <option value="Buy singles">Buy singles</option>
@@ -489,7 +491,7 @@
           <div class="autobuyerdiv" ~style.display=Autobuyer(4).hasAutobuyer() ? '' : 'none'~>
             <span>Generator 4 Autobuyer</span>
             <br/>
-            <span>On: <input type="checkbox" ~!checked=Autobuyer(4).isOn()~ ~!onchange=function() {Autobuyer(4).setIsOn(this.checked)}~></input></span>
+            <span>On: <input type="checkbox" class="autobuyer-checkbox-4" ~!checked=Autobuyer(4).isOn()~ ~!onchange=function() {Autobuyer(4).setIsOn(this.checked)}~></input></span>
             <br/>
             <span>Mode: <select ~!value=Autobuyer(4).mode()~ ~!onchange=function() {Autobuyer(4).setMode(this.value)}~>
               <option value="Buy singles">Buy singles</option>
@@ -513,7 +515,7 @@
           <div class="autobuyerdiv" ~style.display=Autobuyer(5).hasAutobuyer() ? '' : 'none'~>
             <span>Generator 5 Autobuyer</span>
             <br/>
-            <span>On: <input type="checkbox" ~!checked=Autobuyer(5).isOn()~ ~!onchange=function() {Autobuyer(5).setIsOn(this.checked)}~></input></span>
+            <span>On: <input type="checkbox" class="autobuyer-checkbox-5" ~!checked=Autobuyer(5).isOn()~ ~!onchange=function() {Autobuyer(5).setIsOn(this.checked)}~></input></span>
             <br/>
             <span>Mode: <select ~!value=Autobuyer(5).mode()~ ~!onchange=function() {Autobuyer(5).setMode(this.value)}~>
               <option value="Buy singles">Buy singles</option>
@@ -537,7 +539,7 @@
           <div class="autobuyerdiv" ~style.display=Autobuyer(6).hasAutobuyer() ? '' : 'none'~>
             <span>Generator 6 Autobuyer</span>
             <br/>
-            <span>On: <input type="checkbox" ~!checked=Autobuyer(6).isOn()~ ~!onchange=function() {Autobuyer(6).setIsOn(this.checked)}~></input></span>
+            <span>On: <input type="checkbox" class="autobuyer-checkbox-6" ~!checked=Autobuyer(6).isOn()~ ~!onchange=function() {Autobuyer(6).setIsOn(this.checked)}~></input></span>
             <br/>
             <span>Mode: <select ~!value=Autobuyer(6).mode()~ ~!onchange=function() {Autobuyer(6).setMode(this.value)}~>
               <option value="Buy singles">Buy singles</option>
@@ -563,7 +565,7 @@
           <div class="autobuyerdiv" ~style.display=Autobuyer(7).hasAutobuyer() ? '' : 'none'~>
             <span>Generator 7 Autobuyer</span>
             <br/>
-            <span>On: <input type="checkbox" ~!checked=Autobuyer(7).isOn()~ ~!onchange=function() {Autobuyer(7).setIsOn(this.checked)}~></input></span>
+            <span>On: <input type="checkbox" class="autobuyer-checkbox-7" ~!checked=Autobuyer(7).isOn()~ ~!onchange=function() {Autobuyer(7).setIsOn(this.checked)}~></input></span>
             <br/>
             <span>Mode: <select ~!value=Autobuyer(7).mode()~ ~!onchange=function() {Autobuyer(7).setMode(this.value)}~>
               <option value="Buy singles">Buy singles</option>
@@ -587,7 +589,7 @@
           <div class="autobuyerdiv" ~style.display=Autobuyer(8).hasAutobuyer() ? '' : 'none'~>
             <span>Generator 8 Autobuyer</span>
             <br/>
-            <span>On: <input type="checkbox" ~!checked=Autobuyer(8).isOn()~ ~!onchange=function() {Autobuyer(8).setIsOn(this.checked)}~></input></span>
+            <span>On: <input type="checkbox" class="autobuyer-checkbox-8" ~!checked=Autobuyer(8).isOn()~ ~!onchange=function() {Autobuyer(8).setIsOn(this.checked)}~></input></span>
             <br/>
             <span>Mode: <select ~!value=Autobuyer(8).mode()~ ~!onchange=function() {Autobuyer(8).setMode(this.value)}~>
               <option value="Buy singles">Buy singles</option>
@@ -611,7 +613,7 @@
           <div class="autobuyerdiv" ~style.display=Autobuyer(9).hasAutobuyer() ? '' : 'none'~>
             <span>Boost Autobuyer</span>
             <br/>
-            <span>On: <input type="checkbox" ~!checked=Autobuyer(9).isOn()~ ~!onchange=function() {Autobuyer(9).setIsOn(this.checked)}~></input></span>
+            <span>On: <input type="checkbox" class="autobuyer-checkbox-9" ~!checked=Autobuyer(9).isOn()~ ~!onchange=function() {Autobuyer(9).setIsOn(this.checked)}~></input></span>
             <br/>
             <span>Mode: <select ~!value=Autobuyer(9).mode()~ ~!onchange=function() {Autobuyer(9).setMode(this.value)}~>
               <option value="Buy singles">Buy singles</option>
@@ -637,7 +639,7 @@
           <div class="autobuyerdiv" ~style.display=Autobuyer(10).hasAutobuyer() ? '' : 'none'~>
             <span>Sacrifice Autobuyer</span>
             <br/>
-            <span>On: <input type="checkbox" ~!checked=Autobuyer(10).isOn()~ ~!onchange=function() {Autobuyer(10).setIsOn(this.checked)}~></input></span>
+            <span>On: <input type="checkbox" class="autobuyer-checkbox-10" ~!checked=Autobuyer(10).isOn()~ ~!onchange=function() {Autobuyer(10).setIsOn(this.checked)}~></input></span>
             <br/>
             <span>Mode: <select ~!value=Autobuyer(10).mode()~ ~!onchange=function() {Autobuyer(10).setMode(this.value)}~>
               <option value="Multiplier">Multiplier</option>
@@ -653,7 +655,7 @@
           <div class="autobuyerdiv" ~style.display=Autobuyer(11).hasAutobuyer() ? '' : 'none'~>
             <span>Prestige Autobuyer</span>
             <br/>
-            <span>On: <input type="checkbox" ~!checked=Autobuyer(11).isOn()~ ~!onchange=function() {Autobuyer(11).setIsOn(this.checked)}~></input></span>
+            <span>On: <input type="checkbox" class="autobuyer-checkbox-11" ~!checked=Autobuyer(11).isOn()~ ~!onchange=function() {Autobuyer(11).setIsOn(this.checked)}~></input></span>
             <br/>
             <span>Mode: <select ~!value=Autobuyer(11).mode()~ ~!onchange=function() {Autobuyer(11).setMode(this.value)}~>
               <option value="Multiplier">Multiplier</option>
@@ -669,7 +671,7 @@
           <div class="autobuyerdiv" ~style.display=Autobuyer(12).hasAutobuyer() ? '' : 'none'~>
             <span>Infinity Autobuyer</span>
             <br/>
-            <span>On: <input type="checkbox" ~!checked=Autobuyer(12).isOn()~ ~!onchange=function() {Autobuyer(12).setIsOn(this.checked)}~></input></span>
+            <span>On: <input type="checkbox" class="autobuyer-checkbox-12" ~!checked=Autobuyer(12).isOn()~ ~!onchange=function() {Autobuyer(12).setIsOn(this.checked)}~></input></span>
             <br/>
             <span>Mode: <select ~!value=Autobuyer(12).mode()~ ~!onchange=function() {Autobuyer(12).setMode(this.value)}~>
               <option value="Amount">Amount</option>
@@ -692,7 +694,7 @@
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
         <td>
-          <div class="challengediv">
+          <div class="infinitychallengediv">
             <span>Infinity Challenge 1</span>
             <br/>
             <span>Challenges 2, 3, 4, 5, 6, and 7 all apply.</span>
@@ -709,7 +711,7 @@
           </div>
         </td>
         <td>
-          <div class="challengediv">
+          <div class="infinitychallengediv">
             <span>Infinity Challenge 2</span>
             <br/>
             <span>Prestige power is raised ^~f 0.5 ~, but sacrifice is far stronger.</span>
@@ -728,7 +730,7 @@
       </tr>
       <tr>
         <td>
-          <div class="challengediv">
+          <div class="infinitychallengediv">
             <span>Infinity Challenge 3</span>
             <br/>
             <span>The prestige power formula is worse the more prestiges you do.</span>
@@ -745,6 +747,21 @@
           </div>
         </td>
         <td>
+          <div class="infinitychallengediv">
+            <span>Infinity Challenge 4</span>
+            <br/>
+            <span>There's an exponent on the multipliers of all generators increasing linearly from ~f 0 ~ to ~f 1 ~ over ~f 16 ~ seconds. Every time you buy a generator or boost, or sacrifice or prestige, this exponent resets to ~f 0 ~.</span>
+            <br/>
+            <span>Requirement to start: ~f InfinityChallenge.getInfinityChallengeRequirement(4) ~ stars this eternity</span>
+            <br/>
+            <span>Goal: ~f InfinityChallenge.getInfinityChallengeGoal(4) ~ stars</span>
+            <br/>
+            <span>~r InfinityChallenge.infinityChallengeStatusDescription(4) ~</span>
+            <br/>
+            <span><button onclick="InfinityChallenge.startOrExitInfinityChallenge(4)">~r InfinityChallenge.isInfinityChallengeRunning(4) ? "Exit challenge" : (InfinityChallenge.isInfinityChallengeRequirementReached(4) ? "Start challenge" : "Requires more stars") ~</button></span>
+            <br/>
+            <span>Reward: Multiplier to all infinity generators based on time in infinity (~f InfinityChallenge.infinityChallenge4Reward() ~).</span>
+          </div>
         </td>
       </tr>
     </table>

@@ -27,6 +27,9 @@ let Autobuyer = function (i) {
     setPriority(x) {
       player.autobuyers[i - 1].priority = x;
     },
+    checkbox() {
+      return document.getElementsByClassName('autobuyer-checkbox-' + i)[0];
+    },
     target() {
       if (i <= 8) {
         return Generator(i);
@@ -57,6 +60,14 @@ let Autobuyers = {
   },
   numberOfAutobuyers() {
     return Challenge.numberOfChallengesCompleted();
+  },
+  setAll(x) {
+    for (let autobuyer of this.list) {
+      if (autobuyer.hasAutobuyer()) {
+        autobuyer.setIsOn(x);
+        autobuyer.checkbox().checked = x;
+      }
+    }
   },
   priorityOrder() {
     function cmp(a, b) {

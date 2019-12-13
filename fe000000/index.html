@@ -409,13 +409,15 @@
   </div>
   <div id="b84">
     <span>You have <span id="e144"></span> autobuyers.</span>
+    <br/>
+    <span><button onclick="Autobuyers.setAll(true)">Turn all autobuyers on</button> <button onclick="Autobuyers.setAll(false)">Turn all autobuyers off</button></span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
         <td>
           <div id="b85" class="autobuyerdiv">
             <span>Generator 1 Autobuyer</span>
             <br/>
-            <span>On: <input id="b86" type="checkbox"></input></span>
+            <span>On: <input id="b86" type="checkbox" class="autobuyer-checkbox-1"></input></span>
             <br/>
             <span>Mode: <select id="b87">
               <option value="Buy singles">Buy singles</option>
@@ -439,7 +441,7 @@
           <div id="b89" class="autobuyerdiv">
             <span>Generator 2 Autobuyer</span>
             <br/>
-            <span>On: <input id="b90" type="checkbox"></input></span>
+            <span>On: <input id="b90" type="checkbox" class="autobuyer-checkbox-2"></input></span>
             <br/>
             <span>Mode: <select id="b91">
               <option value="Buy singles">Buy singles</option>
@@ -463,7 +465,7 @@
           <div id="b93" class="autobuyerdiv">
             <span>Generator 3 Autobuyer</span>
             <br/>
-            <span>On: <input id="b94" type="checkbox"></input></span>
+            <span>On: <input id="b94" type="checkbox" class="autobuyer-checkbox-3"></input></span>
             <br/>
             <span>Mode: <select id="b95">
               <option value="Buy singles">Buy singles</option>
@@ -489,7 +491,7 @@
           <div id="b97" class="autobuyerdiv">
             <span>Generator 4 Autobuyer</span>
             <br/>
-            <span>On: <input id="b98" type="checkbox"></input></span>
+            <span>On: <input id="b98" type="checkbox" class="autobuyer-checkbox-4"></input></span>
             <br/>
             <span>Mode: <select id="b99">
               <option value="Buy singles">Buy singles</option>
@@ -513,7 +515,7 @@
           <div id="b101" class="autobuyerdiv">
             <span>Generator 5 Autobuyer</span>
             <br/>
-            <span>On: <input id="b102" type="checkbox"></input></span>
+            <span>On: <input id="b102" type="checkbox" class="autobuyer-checkbox-5"></input></span>
             <br/>
             <span>Mode: <select id="b103">
               <option value="Buy singles">Buy singles</option>
@@ -537,7 +539,7 @@
           <div id="b105" class="autobuyerdiv">
             <span>Generator 6 Autobuyer</span>
             <br/>
-            <span>On: <input id="b106" type="checkbox"></input></span>
+            <span>On: <input id="b106" type="checkbox" class="autobuyer-checkbox-6"></input></span>
             <br/>
             <span>Mode: <select id="b107">
               <option value="Buy singles">Buy singles</option>
@@ -563,7 +565,7 @@
           <div id="b109" class="autobuyerdiv">
             <span>Generator 7 Autobuyer</span>
             <br/>
-            <span>On: <input id="b110" type="checkbox"></input></span>
+            <span>On: <input id="b110" type="checkbox" class="autobuyer-checkbox-7"></input></span>
             <br/>
             <span>Mode: <select id="b111">
               <option value="Buy singles">Buy singles</option>
@@ -587,7 +589,7 @@
           <div id="b113" class="autobuyerdiv">
             <span>Generator 8 Autobuyer</span>
             <br/>
-            <span>On: <input id="b114" type="checkbox"></input></span>
+            <span>On: <input id="b114" type="checkbox" class="autobuyer-checkbox-8"></input></span>
             <br/>
             <span>Mode: <select id="b115">
               <option value="Buy singles">Buy singles</option>
@@ -611,7 +613,7 @@
           <div id="b117" class="autobuyerdiv">
             <span>Boost Autobuyer</span>
             <br/>
-            <span>On: <input id="b118" type="checkbox"></input></span>
+            <span>On: <input id="b118" type="checkbox" class="autobuyer-checkbox-9"></input></span>
             <br/>
             <span>Mode: <select id="b119">
               <option value="Buy singles">Buy singles</option>
@@ -637,7 +639,7 @@
           <div id="b121" class="autobuyerdiv">
             <span>Sacrifice Autobuyer</span>
             <br/>
-            <span>On: <input id="b122" type="checkbox"></input></span>
+            <span>On: <input id="b122" type="checkbox" class="autobuyer-checkbox-10"></input></span>
             <br/>
             <span>Mode: <select id="b123">
               <option value="Multiplier">Multiplier</option>
@@ -653,7 +655,7 @@
           <div id="b125" class="autobuyerdiv">
             <span>Prestige Autobuyer</span>
             <br/>
-            <span>On: <input id="b126" type="checkbox"></input></span>
+            <span>On: <input id="b126" type="checkbox" class="autobuyer-checkbox-11"></input></span>
             <br/>
             <span>Mode: <select id="b127">
               <option value="Multiplier">Multiplier</option>
@@ -669,7 +671,7 @@
           <div id="b129" class="autobuyerdiv">
             <span>Infinity Autobuyer</span>
             <br/>
-            <span>On: <input id="b130" type="checkbox"></input></span>
+            <span>On: <input id="b130" type="checkbox" class="autobuyer-checkbox-12"></input></span>
             <br/>
             <span>Mode: <select id="b131">
               <option value="Amount">Amount</option>
@@ -692,7 +694,7 @@
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
         <td>
-          <div class="challengediv">
+          <div class="infinitychallengediv">
             <span>Infinity Challenge 1</span>
             <br/>
             <span>Challenges 2, 3, 4, 5, 6, and 7 all apply.</span>
@@ -709,7 +711,7 @@
           </div>
         </td>
         <td>
-          <div class="challengediv">
+          <div class="infinitychallengediv">
             <span>Infinity Challenge 2</span>
             <br/>
             <span>Prestige power is raised ^<span id="e154"></span>, but sacrifice is far stronger.</span>
@@ -728,7 +730,7 @@
       </tr>
       <tr>
         <td>
-          <div class="challengediv">
+          <div class="infinitychallengediv">
             <span>Infinity Challenge 3</span>
             <br/>
             <span>The prestige power formula is worse the more prestiges you do.</span>
@@ -745,46 +747,61 @@
           </div>
         </td>
         <td>
+          <div class="infinitychallengediv">
+            <span>Infinity Challenge 4</span>
+            <br/>
+            <span>There's an exponent on the multipliers of all generators increasing linearly from <span id="e164"></span> to <span id="e165"></span> over <span id="e166"></span> seconds. Every time you buy a generator or boost, or sacrifice or prestige, this exponent resets to <span id="e167"></span>.</span>
+            <br/>
+            <span>Requirement to start: <span id="e168"></span> stars this eternity</span>
+            <br/>
+            <span>Goal: <span id="e169"></span> stars</span>
+            <br/>
+            <span><span id="e170"></span></span>
+            <br/>
+            <span><button onclick="InfinityChallenge.startOrExitInfinityChallenge(4)"><span id="e171"></span></button></span>
+            <br/>
+            <span>Reward: Multiplier to all infinity generators based on time in infinity (<span id="e172"></span>).</span>
+          </div>
         </td>
       </tr>
     </table>
   </div>
   <div id="b134">
-    <span>You have produced <span id="e164"></span> total stars.</span>
+    <span>You have produced <span id="e173"></span> total stars.</span>
     <br/>
-    <span>You have produced <span id="e165"></span> total infinity points.</span>
+    <span>You have produced <span id="e174"></span> total infinity points.</span>
     <br/>
-    <span>Your fastest infinity took <span id="e166"></span> seconds.</span>
+    <span>Your fastest infinity took <span id="e175"></span> seconds.</span>
     <br/>
-    <span>You have spent <span id="e167"></span> seconds without purchasing anything.</span>
+    <span>You have spent <span id="e176"></span> seconds without purchasing anything.</span>
     <br/>
-    <span>You have spent <span id="e168"></span> seconds without sacrificing.</span>
+    <span>You have spent <span id="e177"></span> seconds without sacrificing.</span>
     <br/>
-    <span>You have spent <span id="e169"></span> seconds in this prestige.</span>
+    <span>You have spent <span id="e178"></span> seconds in this prestige.</span>
     <br/>
-    <span>You have spent <span id="e170"></span> seconds in this infinity.</span>
+    <span>You have spent <span id="e179"></span> seconds in this infinity.</span>
     <br/>
-    <span>You have spent <span id="e171"></span> seconds playing this game (counting time offline).</span>
+    <span>You have spent <span id="e180"></span> seconds playing this game (counting time offline).</span>
     <div id="b135">
-      <span>Last infinity took <span id="e172"></span> seconds and gave <span id="e173"></span> IP, giving <span id="e174"></span> IP/second.</span>
+      <span>Last infinity took <span id="e181"></span> seconds and gave <span id="e182"></span> IP, giving <span id="e183"></span> IP/second.</span>
       <br/>
-      <span id="b136">The infinity two infinities ago took <span id="e175"></span> seconds and gave <span id="e176"></span> IP, giving <span id="e177"></span> IP/second.</span>
+      <span id="b136">The infinity two infinities ago took <span id="e184"></span> seconds and gave <span id="e185"></span> IP, giving <span id="e186"></span> IP/second.</span>
       <br/>
-      <span id="b137">The infinity three infinities ago took <span id="e178"></span> seconds and gave <span id="e179"></span> IP, giving <span id="e180"></span> IP/second.</span>
+      <span id="b137">The infinity three infinities ago took <span id="e187"></span> seconds and gave <span id="e188"></span> IP, giving <span id="e189"></span> IP/second.</span>
       <br/>
-      <span id="b138">The infinity four infinities ago took <span id="e181"></span> seconds and gave <span id="e182"></span> IP, giving <span id="e183"></span> IP/second.</span>
+      <span id="b138">The infinity four infinities ago took <span id="e190"></span> seconds and gave <span id="e191"></span> IP, giving <span id="e192"></span> IP/second.</span>
       <br/>
-      <span id="b139">The infinity five infinities ago took <span id="e184"></span> seconds and gave <span id="e185"></span> IP, giving <span id="e186"></span> IP/second.</span>
+      <span id="b139">The infinity five infinities ago took <span id="e193"></span> seconds and gave <span id="e194"></span> IP, giving <span id="e195"></span> IP/second.</span>
       <br/>
-      <span id="b140">The infinity six infinities ago took <span id="e187"></span> seconds and gave <span id="e188"></span> IP, giving <span id="e189"></span> IP/second.</span>
+      <span id="b140">The infinity six infinities ago took <span id="e196"></span> seconds and gave <span id="e197"></span> IP, giving <span id="e198"></span> IP/second.</span>
       <br/>
-      <span id="b141">The infinity seven infinities ago took <span id="e190"></span> seconds and gave <span id="e191"></span> IP, giving <span id="e192"></span> IP/second.</span>
+      <span id="b141">The infinity seven infinities ago took <span id="e199"></span> seconds and gave <span id="e200"></span> IP, giving <span id="e201"></span> IP/second.</span>
       <br/>
-      <span id="b142">The infinity eight infinities ago took <span id="e193"></span> seconds and gave <span id="e194"></span> IP, giving <span id="e195"></span> IP/second.</span>
+      <span id="b142">The infinity eight infinities ago took <span id="e202"></span> seconds and gave <span id="e203"></span> IP, giving <span id="e204"></span> IP/second.</span>
       <br/>
-      <span id="b143">The infinity nine infinities ago took <span id="e196"></span> seconds and gave <span id="e197"></span> IP, giving <span id="e198"></span> IP/second.</span>
+      <span id="b143">The infinity nine infinities ago took <span id="e205"></span> seconds and gave <span id="e206"></span> IP, giving <span id="e207"></span> IP/second.</span>
       <br/>
-      <span id="b144">The infinity ten infinities ago took <span id="e199"></span> seconds and gave <span id="e200"></span> IP, giving <span id="e201"></span> IP/second.</span>
+      <span id="b144">The infinity ten infinities ago took <span id="e208"></span> seconds and gave <span id="e209"></span> IP, giving <span id="e210"></span> IP/second.</span>
       <br/>
     </div>
   </div>
@@ -796,9 +813,9 @@
         <td><button class="options-button" onclick="Saving.loadGamePrompt()">Load</button></td>
       </tr>
       <tr>
-        <td><button class="options-button" onclick="Options.toggleOfflineProgress()">Offline progress: <span id="e202"></span></button></td>
-        <td><button class="options-button" onclick="Options.toggleHotkeys()">Hotkeys: <span id="e203"></span></button></td>
-        <td><button class="options-button" onclick="Options.nextNotation()">Notation: <span id="e204"></span></button></td>
+        <td><button class="options-button" onclick="Options.toggleOfflineProgress()">Offline progress: <span id="e211"></span></button></td>
+        <td><button class="options-button" onclick="Options.toggleHotkeys()">Hotkeys: <span id="e212"></span></button></td>
+        <td><button class="options-button" onclick="Options.nextNotation()">Notation: <span id="e213"></span></button></td>
       </tr>
       <tr>
         <td></td>

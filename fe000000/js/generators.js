@@ -41,8 +41,11 @@ let Generator = function (i) {
         Challenge.isChallengeRunning(8) ? Generator(8).amount().max(1) : 1
       ];
       let multiplier = factors.reduce((a, b) => a.times(b));
-      let powFactors = [Challenge.isChallengeRunning(1) ? ((i === 1) ? 4 : 0) : 1];
-      return multiplier.pow(powFactors.reduce((a, b) => a.times(b)));
+      let powFactors = [
+        Challenge.isChallengeRunning(1) ? ((i === 1) ? 4 : 0) : 1,
+        InfinityChallenge.isInfinityChallengeRunning(4) ? InfinityChallenge.infinityChallenge4Pow() : 1
+      ];
+      return multiplier.pow(powFactors.reduce((a, b) => a * b));
     },
     productionPerSecond() {
       return this.amount().times(this.multiplier());

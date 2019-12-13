@@ -1,10 +1,10 @@
 let InfinityChallenge = {
   goals: [Infinity,
-    Decimal.pow(2, 1024), Decimal.pow(2, 10240), Decimal.pow(2, 14336), Decimal.pow(2, 65536),
+    Decimal.pow(2, 1024), Decimal.pow(2, 10240), Decimal.pow(2, 14336), Decimal.pow(2, 32768),
     Decimal.pow(2, 65536), Decimal.pow(2, 65536), Decimal.pow(2, 65536), Decimal.pow(2, 65536),
   ],
   requirements: [Infinity,
-    Decimal.pow(2, 8192), Decimal.pow(2, 20480), Decimal.pow(2, 32768), Decimal.pow(2, 65536),
+    Decimal.pow(2, 8192), Decimal.pow(2, 20480), Decimal.pow(2, 32768), Decimal.pow(2, 36864),
     Decimal.pow(2, 65536), Decimal.pow(2, 65536), Decimal.pow(2, 65536), Decimal.pow(2, 65536),
   ],
   startOrExitInfinityChallenge(x) {
@@ -88,5 +88,11 @@ let InfinityChallenge = {
   },
   infinityChallenge3Reward() {
     return 1 + Prestige.prestigePower().log(2);
-  }
+  },
+  infinityChallenge4Pow() {
+    return Math.min(player.stats.timeSincePurchase / 16, 1);
+  },
+  infinityChallenge4Reward() {
+    return 1 + player.stats.timeSinceInfinity / 64;
+  },
 }
