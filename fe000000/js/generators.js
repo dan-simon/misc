@@ -77,7 +77,9 @@ let Generator = function (i) {
         Decimal.minus(this.costIncreasePer(), 1)).plus(1).log(this.costIncreasePer()));
       num = Math.min(num,
         Challenge.isChallengeRunning(10) ? 1 - this.bought() : Infinity,
-        Challenge.isChallengeEffectActive(7) ? Challenge.challenge7PurchasesLeft() : Infinity);
+        Challenge.isChallengeEffectActive(7) ? Challenge.challenge7PurchasesLeft() : Infinity,
+        (i !== 8 && InfinityChallenge.isInfinityChallengeRunning(8)) ?
+          InfinityChallenge.infinityChallenge8PurchasesLeft() : Infinity);
       num = Math.max(num, 0);
       return num;
     },
@@ -95,7 +97,7 @@ let Generator = function (i) {
       if (Challenge.isChallengeEffectActive(4)) {
         Generators.resetAmounts(i - 1);
       }
-      Stats.recordPurchase(n);
+      Stats.recordPurchase(i, n);
     },
     buyMax() {
       this.buy(this.maxBuyable(), true);

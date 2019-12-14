@@ -154,7 +154,7 @@
     <br/>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
-        <td>Increase the multiplier per boost:</td>
+        <td>Increase the base multiplier per boost:</td>
         <td><span ~style.display=InfinityUpgrade(1).atBoughtLimit() ? 'none' : ''~>~f InfinityUpgrade(1).effect() ~ → ~f InfinityUpgrade(1).nextEffect() ~</span><span ~style.display=InfinityUpgrade(1).atBoughtLimit() ? '' : 'none'~>~f InfinityUpgrade(1).effect() ~ (maxed)</span></td>
         <td><span ~style.display=InfinityUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=InfinityUpgrade(1).canBuy() ? "" : "disabled"~ onclick="InfinityUpgrade(1).buy()">Cost: ~f InfinityUpgrade(1).cost() ~ IP</button></span></td>
         <td><span ~style.display=InfinityUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=InfinityUpgrade(1).canBuy() ? "" : "disabled"~ onclick="InfinityUpgrade(1).buyMax()">Max</button></span></td>
@@ -822,7 +822,7 @@
           <div class="infinitychallengediv">
             <span>Infinity Challenge 8</span>
             <br/>
-            <span>Something happens. It's not yet decided what. Don't push anything that still has this text.</span>
+            <span>You can only buy ~f 7 ~ total generators (apart from Generator 8) and boosts throughout the challenge. Each Generator 8 you buy gives you 8 extra purchases.</span>
             <br/>
             <span>Requirement to start: ~f InfinityChallenge.getInfinityChallengeRequirement(8) ~ stars this eternity</span>
             <br/>

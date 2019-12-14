@@ -7,9 +7,10 @@ let Stats = {
     player.stats.timeSinceGameStart += diff;
     player.stats.timeSinceLastPeakIPPerSec += diff;
   },
-  recordPurchase(n) {
+  recordPurchase(i, n) {
     player.stats.timeSincePurchase = 0;
     player.stats.purchasesThisInfinity += n;
+    player.stats.purchasesThisInfinityByType[i] += n;
   },
   addInfinity(time, gain) {
     player.stats.fastestInfinity = Math.min(time, player.stats.fastestInfinity);

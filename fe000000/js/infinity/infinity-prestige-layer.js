@@ -67,6 +67,7 @@ let InfinityPrestigeLayer = {
     player.stats.timeSinceLastPeakIPPerSec = Math.pow(2, 256);
     player.stats.peakIPPerSec = new Decimal(0);
     player.stats.purchasesThisInfinity = 0;
+    player.stats.purchasesThisInfinityByType = [0, 0, 0, 0, 0, 0, 0, 0, 0];
     player.stats.prestigesThisInfinity = 0;
   }
 }

@@ -96,6 +96,10 @@ let Saving = {
       player.stats.prestigesThisInfinity = 0;
       player.version = 1.4609375;
     }
+    if (player.version < 1.46875) {
+      player.stats.purchasesThisInfinityByType = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+      player.version = 1.46875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

@@ -1,7 +1,7 @@
 let InfinityChallenge = {
   goals: [Infinity,
     Decimal.pow(2, 1024), Decimal.pow(2, 10240), Decimal.pow(2, 14336), Decimal.pow(2, 32768),
-    Decimal.pow(2, 24576), Decimal.pow(2, 20480), Decimal.pow(2, 22528), Decimal.pow(2, 65536),
+    Decimal.pow(2, 24576), Decimal.pow(2, 20480), Decimal.pow(2, 22528), Decimal.pow(2, 57344),
   ],
   requirements: [Infinity,
     Decimal.pow(2, 8192), Decimal.pow(2, 20480), Decimal.pow(2, 32768), Decimal.pow(2, 36864),
@@ -111,5 +111,8 @@ let InfinityChallenge = {
   // I think it's slightly more likely to be a problem than the previous one, though.
   infinityChallenge6Reward() {
     return 1 + Math.log2(Math.max(InfinityStars.amount().log(2), 1)) / 512;
+  },
+  infinityChallenge8PurchasesLeft() {
+    return 7 - player.stats.purchasesThisInfinity + 9 * player.stats.purchasesThisInfinityByType[8];
   },
 }

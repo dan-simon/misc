@@ -53,7 +53,8 @@ let Boost = {
     if (player.stars.lt(this.costFor(num))) {
       num -= 1;
     }
-    num = Math.min(num, Challenge.isChallengeEffectActive(7) ? Challenge.challenge7PurchasesLeft() : Infinity);
+    num = Math.min(num, Challenge.isChallengeEffectActive(7) ? Challenge.challenge7PurchasesLeft() : Infinity,
+      InfinityChallenge.isInfinityChallengeRunning(8) ? InfinityChallenge.infinityChallenge8PurchasesLeft() : Infinity);
     num = Math.max(num, 0);
     return num;
   },
@@ -64,7 +65,7 @@ let Boost = {
     if (n === 0 || (!guaranteedBuyable && !this.canBuy(n))) return;
     player.stars = player.stars.minus(this.costFor(n));
     this.addBought(n);
-    Stats.recordPurchase(n);
+    Stats.recordPurchase(0, n);
   },
   buyMax() {
     this.buy(this.maxBuyable(), true);
