@@ -25,7 +25,14 @@ let Boost = {
     return [8, 9, 10].indexOf(Challenge.currentChallenge()) !== -1;
   },
   multiplierPer() {
-    return this.areBoostsDisabled() ? 1 : InfinityUpgrade(1).effect();
+    let mult = this.areBoostsDisabled() ? 1 : InfinityUpgrade(1).effect();
+    if (InfinityChallenge.isInfinityChallengeCompleted(7)) {
+      mult += 2;
+    }
+    if (InfinityChallenge.isInfinityChallengeRunning(7)) {
+      mult = Math.pow(mult, 2);
+    }
+    return mult;
   },
   multiplier() {
     return Decimal.pow(this.multiplierPer(), this.bought());

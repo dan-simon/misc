@@ -11,14 +11,19 @@ let Prestige = {
   isPrestigeDisabled() {
     return Challenge.isChallengeRunning(10);
   },
-  isPrestigeSquareRooted() {
-    return [8, 11].indexOf(Challenge.currentChallenge()) !== -1 || InfinityChallenge.isInfinityChallengeRunning(2);
-  },
   prestigePowerExponent() {
-    if (InfinityChallenge.isInfinityChallengeRunning(3)) {
-      return InfinityChallenge.infinityChallenge3PrestigePowerExponent();
+    if (this.isPrestigeDisabled()) {
+      return 0;
     }
-    return this.isPrestigeDisabled() ? 0 : (this.isPrestigeSquareRooted() ? 0.5 : 1);
+    let isPrestigePowerSquareRooted = [8, 11].indexOf(Challenge.currentChallenge()) !== -1 ||
+      [2, 7].indexOf(InfinityChallenge.currentInfinityChallenge()) !== -1;
+    let expComponents = [
+      InfinityChallenge.isInfinityChallengeRunning(3) ? InfinityChallenge.infinityChallenge3PrestigePowerExponent() : 1,
+      InfinityChallenge.isInfinityChallengeRunning(6) ? InfinityChallenge.infinityChallenge6PrestigePowerExponent() : 1,
+      InfinityChallenge.isInfinityChallengeCompleted(6) ? InfinityChallenge.infinityChallenge6Reward() : 1,
+      isPrestigePowerSquareRooted ? 0.5 : 1
+    ];
+    return expComponents.reduce((a, b) => a * b);
   },
   prestigeRequirement() {
     return Decimal.pow(2, Math.max(128, 96 + 16 * Decimal.log2(this.prestigePower()) / this.prestigePowerExponent()));

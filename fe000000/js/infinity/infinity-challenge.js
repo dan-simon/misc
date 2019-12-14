@@ -1,11 +1,11 @@
 let InfinityChallenge = {
   goals: [Infinity,
     Decimal.pow(2, 1024), Decimal.pow(2, 10240), Decimal.pow(2, 14336), Decimal.pow(2, 32768),
-    Decimal.pow(2, 24576), Decimal.pow(2, 65536), Decimal.pow(2, 65536), Decimal.pow(2, 65536),
+    Decimal.pow(2, 24576), Decimal.pow(2, 20480), Decimal.pow(2, 22528), Decimal.pow(2, 65536),
   ],
   requirements: [Infinity,
     Decimal.pow(2, 8192), Decimal.pow(2, 20480), Decimal.pow(2, 32768), Decimal.pow(2, 36864),
-    Decimal.pow(2, 49152), Decimal.pow(2, 65536), Decimal.pow(2, 65536), Decimal.pow(2, 65536),
+    Decimal.pow(2, 49152), Decimal.pow(2, 53248), Decimal.pow(2, 57344), Decimal.pow(2, 61440),
   ],
   startOrExitInfinityChallenge(x) {
     if (this.isInfinityChallengeRunning(x)) {
@@ -103,5 +103,13 @@ let InfinityChallenge = {
   // probably much farther.
   infinityChallenge5Reward() {
     return 1 + Math.log2(Math.max(Stars.amount().log(2) / 16384, 1));
+  },
+  infinityChallenge6PrestigePowerExponent() {
+    return 1 / (1 + player.stats.prestigesThisInfinity % 2);
+  },
+  // This is another theoretically problematic but practically probably-fine reward.
+  // I think it's slightly more likely to be a problem than the previous one, though.
+  infinityChallenge6Reward() {
+    return 1 + Math.log2(Math.max(InfinityStars.amount().log(2), 1)) / 512;
   },
 }
