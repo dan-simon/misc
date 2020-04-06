@@ -7,6 +7,6 @@ let InfinityMaxAll = {
       InfinityGenerators.highest().buy();
     }
     InfinityUpgrades.list.forEach(x => x.buyMax());
-    Generators.list.forEach(x => x.buyMax());
+    InfinityGenerators.list.forEach(x => x.buyMax());
   }
 }
