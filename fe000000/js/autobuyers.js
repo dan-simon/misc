@@ -4,7 +4,11 @@ let Autobuyer = function (i) {
   }
   return {
     hasAutobuyer() {
-      return Challenge.isChallengeCompleted(i);
+      if (i === 13) {
+        return EternityMilestones.isEternityMilestoneActive(16);
+      } else {
+        return Challenge.isChallengeCompleted(i);
+      }
     },
     isOn() {
       return player.autobuyers[i - 1].isOn;
@@ -59,7 +63,8 @@ let Autobuyers = {
     return this.list[x - 1];
   },
   numberOfAutobuyers() {
-    return Challenge.numberOfChallengesCompleted();
+    // There's auto-conversion of Boolean to number here.
+    return Challenge.numberOfChallengesCompleted() + EternityMilestones.isEternityMilestoneActive(16);
   },
   setAll(x) {
     for (let autobuyer of this.list) {
@@ -124,7 +129,28 @@ let Autobuyers = {
       InfinityPrestigeLayer.infinity();
     }
   },
+  eternity() {
+    if (!Autobuyer(13).isActive() || !EternityPrestigeLayer.canEternity()) return;
+    let shouldEternity;
+    let mode = Autobuyer(13).mode();
+    let priority = Autobuyer(13).priority();
+    if (mode === 'Amount') {
+      shouldEternity = EternityPrestigeLayer.eternityPointGain().gte(priority);
+    } else if (mode === 'Time') {
+      shouldEternity = player.stats.timeSinceEternity >= priority.toNumber();
+    } else if (mode === 'X times last') {
+      shouldEternity = EternityPrestigeLayer.eternityPointGain().gte(player.stats.lastTenEternities[0][1].times(priority));
+    } else if (mode === 'Time past peak/sec') {
+      shouldEternity = player.stats.timeSinceLastPeakEPPerSec >= priority.toNumber();
+    } else if (mode === 'Fraction of peak/sec') {
+      shouldEternity = EternityPrestigeLayer.currentEPPerSec().lte(EternityPrestigeLayer.peakEPPerSec().times(priority));
+    }
+    if (shouldEternity) {
+      EternityPrestigeLayer.eternity();
+    }
+  },
   tick() {
+    Autobuyers.eternity();
     Autobuyers.infinity();
     Autobuyers.prestige();
     Autobuyers.sacrifice();

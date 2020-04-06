@@ -12,9 +12,17 @@ function gameLoop(diff, display) {
   for (let i = 8; i >= 1; i--) {
     InfinityGenerator(i).produce(diff);
   }
+  for (let i = 8; i >= 1; i--) {
+    EternityGenerator(i).produce(diff);
+  }
   Stats.addToTimeStats(diff);
   InfinityPrestigeLayer.updatePeakIPPerSec();
+  EternityPrestigeLayer.updatePeakEPPerSec();
   Autobuyers.tick();
+  InfinityAutobuyers.tick();
+  if (EternityMilestones.isEternityMilestoneActive(6)) {
+    InfinityChallenge.checkForAllAutoInfinityChallengeCompletions();
+  }
   if (display !== false) {
     updateDisplay();
   }

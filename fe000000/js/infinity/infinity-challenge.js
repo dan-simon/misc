@@ -23,8 +23,11 @@ let InfinityChallenge = {
   getInfinityChallengeRequirement(x) {
     return this.requirements[x];
   },
+  totalStarsProducedThisEternity() {
+    return player.stats.totalStarsProducedThisEternity;
+  },
   isInfinityChallengeRequirementReached(x) {
-    return player.stats.totalStarsProducedThisEternity.gte(this.getInfinityChallengeRequirement(x));
+    return this.totalStarsProducedThisEternity().gte(this.getInfinityChallengeRequirement(x));
   },
   isInfinityChallengeRunning(x) {
     return this.currentInfinityChallenge() === x;
@@ -71,6 +74,20 @@ let InfinityChallenge = {
   completeInfinityChallenge(x) {
     player.infinityChallengesCompleted[x - 1] = true;
   },
+  checkForAllAutoInfinityChallengeCompletions() {
+    // Don't call this unless the player actually has
+    // the relevant eternity milestone.
+    for (let i = 1; i <= 8; i++) {
+      this.checkForAutoInfinityChallengeCompletion(i);
+    }
+  },
+  checkForAutoInfinityChallengeCompletion(x) {
+    // Don't call this unless the player actually has
+    // the relevant eternity milestone.
+    if (this.isInfinityChallengeRequirementReached(x)) {
+      this.completeInfinityChallenge(x);
+    }
+  },
   isInfinityChallengeCompleted(x) {
     return player.infinityChallengesCompleted[x - 1];
   },
@@ -79,9 +96,6 @@ let InfinityChallenge = {
   },
   multiplier() {
     return Decimal.pow(2, this.numberOfInfinityChallengesCompleted() / 4);
-  },
-  areAllInfinityChallengesCompleted() {
-    return this.numberOfInfinityChallengesCompleted() === 2;
   },
   infinityChallenge3PrestigePowerExponent() {
     return 8 / (8 + player.stats.prestigesThisInfinity);

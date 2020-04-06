@@ -3,6 +3,9 @@ let InfinityGenerator = function (i) {
     return InfinityGenerators.get(i);
   }
   return {
+    tier() {
+      return i;
+    },
     amount() {
       return player.infinityGenerators[i - 1].amount;
     },
@@ -38,11 +41,13 @@ let InfinityGenerator = function (i) {
         Decimal.pow(2, this.bought() / 8), Infinities.infinityGeneratorMultiplier(), InfinityChallenge.multiplier(),
         (i === 1 && InfinityChallenge.isInfinityChallengeCompleted(3)) ? InfinityChallenge.infinityChallenge3Reward() : 1,
         InfinityChallenge.isInfinityChallengeCompleted(4) ? InfinityChallenge.infinityChallenge4Reward() : 1,
-        (i === 8 && InfinityChallenge.isInfinityChallengeCompleted(8)) ? Math.max(1, Generator(8).amount().toNumber()) : 1
+        (i === 8 && InfinityChallenge.isInfinityChallengeCompleted(8)) ? Math.max(1, Generator(8).amount().toNumber()) : 1,
+        EternityStars.multiplier()
       ];
       let multiplier = factors.reduce((a, b) => a.times(b));
       let powFactors = [
-        (i === 5 && InfinityChallenge.isInfinityChallengeCompleted(5)) ? InfinityChallenge.infinityChallenge5Reward() : 1
+        (i === 5 && InfinityChallenge.isInfinityChallengeCompleted(5)) ? InfinityChallenge.infinityChallenge5Reward() : 1,
+        EternityStars.power()
       ];
       return multiplier.pow(powFactors.reduce((a, b) => a * b));
     },
@@ -99,7 +104,7 @@ let InfinityGenerators = {
   get: function (x) {
     return this.list[x - 1];
   },
-  highest () {
+  highest() {
     return InfinityGenerators.list[player.highestInfinityGenerator] || null;
   }
 }

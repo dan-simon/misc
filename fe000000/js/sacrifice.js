@@ -53,11 +53,12 @@ let Sacrifice = {
   },
   sacrificeReset() {
     if (Challenge.isChallengeRunning(10)) {
-      player.stars = new Decimal(2);
+      // Challenge 10 overrides Eternity Milestone 4.
+      player.stars = EternityStartingBenefits.stars();
       player.boost = {bought: 0};
       player.generators = initialGenerators();
       player.highestGenerator = 0;
-    } else {
+    } else if (!EternityMilestones.isEternityMilestoneActive(4)) {
       Generators.resetAmounts(7);
     }
     player.stats.timeSincePurchase = 0;

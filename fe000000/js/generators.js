@@ -3,6 +3,9 @@ let Generator = function (i) {
     return Generators.get(i);
   }
   return {
+    tier() {
+      return i;
+    },
     amount() {
       return player.generators[i - 1].amount;
     },
@@ -34,7 +37,8 @@ let Generator = function (i) {
     multiplier() {
       let factors = [
         Decimal.pow(2, this.bought() / 8), Boost.multiplier(), Prestige.multiplier(),
-        InfinityPoints.multiplier(), InfinityStars.multiplier(), Challenge.multiplier(),
+        InfinityPoints.multiplier(), Challenge.multiplier(),
+        InfinityStars.multiplier(), EternityStars.multiplier(),
         (i === 8) ? Sacrifice.sacrificeMultiplier() : 1,
         Challenge.isChallengeEffectActive(2) ? Challenge.challenge2Mult() : 1,
         (i === 1 && Challenge.isChallengeEffectActive(3)) ? Challenge.challenge3Mult() : 1,
@@ -44,7 +48,8 @@ let Generator = function (i) {
       let powFactors = [
         Challenge.isChallengeRunning(1) ? ((i === 1) ? 4 : 0) : 1,
         InfinityChallenge.isInfinityChallengeRunning(4) ? InfinityChallenge.infinityChallenge4Pow() : 1,
-        InfinityChallenge.isInfinityChallengeRunning(5) ? InfinityChallenge.infinityChallenge5Pow() : 1
+        InfinityChallenge.isInfinityChallengeRunning(5) ? InfinityChallenge.infinityChallenge5Pow() : 1,
+        EternityStars.power()
       ];
       return multiplier.pow(powFactors.reduce((a, b) => a * b));
     },
@@ -110,7 +115,7 @@ let Generators = {
   get: function (x) {
     return this.list[x - 1];
   },
-  highest () {
+  highest() {
     return Generators.list[player.highestGenerator] || null;
   },
   resetAmounts(i) {

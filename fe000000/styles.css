@@ -61,3 +61,14 @@ button {
   border: solid;
   border-width: 1px 1px;
 }
+
+.eternitymilestonediv {
+  display: table;
+  text-align: center;
+  width: 256px;
+  height: 192px;
+  padding: 4px;
+  margin: 4px;
+  border: solid;
+  border-width: 1px 1px;
+}
