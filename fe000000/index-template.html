@@ -242,7 +242,7 @@
           <div class="challengediv">
             <span>Challenge 1</span>
             <br/>
-            <span>Generator 1 multiplier is raised ~f 4 ~. All other generator multipliers are always ~f 1 ~x.</span>
+            <span>Generator 1 multiplier is raised ^~f 4 ~. All other generator multipliers are always ~f 1 ~x.</span>
             <br/>
             <span>~r Challenge.challengeStatusDescription(1) ~</span>
             <br/>
@@ -354,7 +354,7 @@
           <div class="challengediv">
             <span>Challenge 9</span>
             <br/>
-            <span>The boost multiplier is ~f 1 ~x. You can't buy boosts.</span>
+            <span>You can't buy boosts and the boost multiplier is ~f 1 ~x.</span>
             <br/>
             <span>~r Challenge.challengeStatusDescription(9) ~</span>
             <br/>
@@ -434,7 +434,7 @@
               <option value="7">7</option>
               <option value="8">8</option>
               <option value="9">9</option>
-            </select></span></span>
+            </select></span>
           </div>
         </td>
         <td>
@@ -458,7 +458,7 @@
               <option value="7">7</option>
               <option value="8">8</option>
               <option value="9">9</option>
-            </select></span></span>
+            </select></span>
           </div>
         </td>
         <td>
@@ -482,7 +482,7 @@
               <option value="7">7</option>
               <option value="8">8</option>
               <option value="9">9</option>
-            </select></span></span>
+            </select></span>
           </div>
         </td>
       </tr>
@@ -508,7 +508,7 @@
               <option value="7">7</option>
               <option value="8">8</option>
               <option value="9">9</option>
-            </select></span></span>
+            </select></span>
           </div>
         </td>
         <td>
@@ -532,7 +532,7 @@
               <option value="7">7</option>
               <option value="8">8</option>
               <option value="9">9</option>
-            </select></span></span>
+            </select></span>
           </div>
         </td>
         <td>
@@ -556,7 +556,7 @@
               <option value="7">7</option>
               <option value="8">8</option>
               <option value="9">9</option>
-            </select></span></span>
+            </select></span>
           </div>
         </td>
       </tr>
@@ -582,7 +582,7 @@
               <option value="7">7</option>
               <option value="8">8</option>
               <option value="9">9</option>
-            </select></span></span>
+            </select></span>
           </div>
         </td>
         <td>
@@ -606,7 +606,7 @@
               <option value="7">7</option>
               <option value="8">8</option>
               <option value="9">9</option>
-            </select></span></span>
+            </select></span>
           </div>
         </td>
         <td>
@@ -630,7 +630,7 @@
               <option value="7">7</option>
               <option value="8">8</option>
               <option value="9">9</option>
-            </select></span></span>
+            </select></span>
           </div>
         </td>
       </tr>
@@ -691,6 +691,8 @@
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'infinity-challenges' ? '' : 'none'~>
     <span>You have completed ~f InfinityChallenge.numberOfInfinityChallengesCompleted() ~ infinity challenges, multiplying all infinity generators by ~f InfinityChallenge.multiplier() ~.</span>
+    <br/>
+    <span>You have produced ~f player.stats.totalStarsProducedThisEternity ~ stars this eternity.</span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
         <td>
@@ -832,7 +834,7 @@
             <br/>
             <span><button onclick="InfinityChallenge.startOrExitInfinityChallenge(8)">~r InfinityChallenge.isInfinityChallengeRunning(8) ? "Exit challenge" : (InfinityChallenge.isInfinityChallengeRequirementReached(8) ? "Start challenge" : "Requires more stars") ~</button></span>
             <br/>
-            <span>Reward: Multiplier to Infinity Generator 8 equal to number of Generator 8 (lower-bounded by 1).</span>
+            <span>Reward: Multiplier to Infinity Generator 8 equal to number of Generator 8 (lower-bounded by ~f 1 ~).</span>
           </div>
         </td>
       </tr>
@@ -840,6 +842,8 @@
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'statistics' ? '' : 'none'~>
     <span>You have produced ~f player.stats.totalStarsProduced ~ total stars.</span>
+    <br/>
+    <span>You have produced ~f player.stats.totalStarsProducedThisEternity ~ stars this eternity.</span>
     <br/>
     <span>You have produced ~f player.stats.totalIPProduced ~ total infinity points.</span>
     <br/>
