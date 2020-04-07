@@ -18,7 +18,10 @@ let Sacrifice = {
     }
   },
   sacrificeRequirement() {
-    let req = Decimal.pow(2, 16 * (Challenge.isChallengeRunning(10) ? 1 : this.sacrificeMultiplier().toNumber()));
+    // Decimal.pow(2, Infinity) is 0, but Decimal.pow(2, 1e20) isn't,
+    // so we take the min with 1e20 in case this.sacrificeMultiplier()
+    // is too big to be converted to number.
+    let req = Decimal.pow(2, 16 * (Challenge.isChallengeRunning(10) ? 1 : this.sacrificeMultiplier().min(1e20).toNumber()));
     if (this.hasStrongerSacrifice()) {
       req = req.min(this.sacrificeMultiplier().pow(1 / this.sacrificeExponent()));
     }
