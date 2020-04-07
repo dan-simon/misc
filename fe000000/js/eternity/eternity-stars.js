@@ -14,6 +14,6 @@ let EternityStars = {
     return (player.eternities > 0) ? this.amount() : new Decimal(1);
   },
   power() {
-    return 1 + Math.log2(this.amount().log(2)) / 256;
+    return 1 + Math.log2(this.amount().log(2)) / 512;
   }
 }

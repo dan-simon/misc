@@ -114,9 +114,11 @@ let InfinityChallenge = {
   },
   // This reward is theoretically unbalanced and will eventually make everything explode,
   // but I'm fairly sure it doesn't do so until past break_infinity's limit,
-  // probably much farther.
+  // probably much farther. It used to be stronger; I nerfed it, mostly because
+  // I didn't want it to get to ^16 and for infinity dimension multipliers
+  // from other sources to thus be 3x as stronger.
   infinityChallenge5Reward() {
-    return 1 + Math.log2(Math.max(Stars.amount().log(2) / 16384, 1));
+    return 1 + Math.sqrt(Math.log2(Math.max(Stars.amount().log(2) / 16384, 1)));
   },
   infinityChallenge6PrestigePowerExponent() {
     return 1 / (1 + player.stats.prestigesThisInfinity % 2);
