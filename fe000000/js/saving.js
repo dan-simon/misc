@@ -119,6 +119,13 @@ let Saving = {
       player.stats.lastTenEternities = initialLastTenEternities();
       player.version = 1.5;
     }
+    if (player.version < 1.50625) {
+      player.slowAutobuyers = [
+        false, false, false, false, false, false, false, false, false,
+      ];
+      player.slowAutobuyersTimer = 0;
+      player.version = 1.50625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

@@ -55,6 +55,14 @@ let EternityPrestigeLayer = {
       ];
       player.breakInfinity = false;
     }
+    // Doesn't need to be part of eternity milestone 2,
+    // since after eternity milestone 2 you have all the
+    // normal autobuyers anyway (plus the slow autobuyers have
+    // nothing to do with challenges).
+    player.slowAutobuyers = [
+      false, false, false, false, false, false, false, false, false,
+    ];
+    player.slowAutobuyersTimer = 0;
     player.stats.totalStarsProducedThisEternity = new Decimal(0);
     player.stats.timeSinceEternity = 0;
     player.stats.timeSinceLastPeakEPPerSec = Math.pow(2, 256);

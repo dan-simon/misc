@@ -18,7 +18,7 @@ function gameLoop(diff, display) {
   Stats.addToTimeStats(diff);
   InfinityPrestigeLayer.updatePeakIPPerSec();
   EternityPrestigeLayer.updatePeakEPPerSec();
-  Autobuyers.tick();
+  Autobuyers.tick(diff);
   InfinityAutobuyers.tick();
   if (EternityMilestones.isEternityMilestoneActive(6)) {
     InfinityChallenge.checkForAllAutoInfinityChallengeCompletions();

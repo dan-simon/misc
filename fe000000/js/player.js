@@ -60,6 +60,10 @@ let initialPlayer = {
     false, false, false, false, false, false,
     false, false, false, false, false, false,
   ],
+  slowAutobuyers: [
+    false, false, false, false, false, false, false, false, false,
+  ],
+  slowAutobuyersTimer: 0,
   currentInfinityChallenge: 0,
   infinityChallengesCompleted: [
     false, false, false, false, false, false, false, false,
@@ -73,7 +77,7 @@ let initialPlayer = {
   highestEternityGenerator: 0,
   eternityMilestonesOn: [true, true],
   infinityAutobuyers: [
-    false, false, false, false, false, false, false, false, false, false
+    false, false, false, false, false, false, false, false, false, false,
   ],
   options: {
     notation: 'Scientific',
@@ -107,7 +111,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.5,
+  version: 1.50625,
 }
 
 let player;

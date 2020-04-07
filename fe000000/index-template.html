@@ -272,7 +272,7 @@
             <br/>
             <span><button onclick="Challenge.startOrExitChallenge(1)">~r Challenge.isChallengeRunning(1) ? "Exit challenge" : "Start challenge" ~</button></span>
             <br/>
-            <span>Reward: Generator 1 Autobuyer</span>
+            <span>Reward: Faster Generator 1 Autobuyer (triggering every game tick)</span>
           </div>
         </td>
         <td>
@@ -285,7 +285,7 @@
             <br/>
             <span><button onclick="Challenge.startOrExitChallenge(2)">~r Challenge.isChallengeRunning(2) ? "Exit challenge" : "Start challenge" ~</button></span>
             <br/>
-            <span>Reward: Generator 2 Autobuyer</span>
+            <span>Reward: Faster Generator 2 Autobuyer (triggering every game tick)</span>
           </div>
         </td>
       </tr>
@@ -300,7 +300,7 @@
             <br/>
             <span><button onclick="Challenge.startOrExitChallenge(3)">~r Challenge.isChallengeRunning(3) ? "Exit challenge" : "Start challenge" ~</button></span>
             <br/>
-            <span>Reward: Generator 3 Autobuyer</span>
+            <span>Reward: Faster Generator 3 Autobuyer (triggering every game tick)</span>
           </div>
         </td>
         <td>
@@ -313,7 +313,7 @@
             <br/>
             <span><button onclick="Challenge.startOrExitChallenge(4)">~r Challenge.isChallengeRunning(4) ? "Exit challenge" : "Start challenge" ~</button></span>
             <br/>
-            <span>Reward: Generator 4 Autobuyer</span>
+            <span>Reward: Faster Generator 4 Autobuyer (triggering every game tick)</span>
           </div>
         </td>
       </tr>
@@ -328,7 +328,7 @@
             <br/>
             <span><button onclick="Challenge.startOrExitChallenge(5)">~r Challenge.isChallengeRunning(5) ? "Exit challenge" : "Start challenge" ~</button></span>
             <br/>
-            <span>Reward: Generator 5 Autobuyer</span>
+            <span>Reward: Faster Generator 5 Autobuyer (triggering every game tick)</span>
           </div>
         </td>
         <td>
@@ -341,7 +341,7 @@
             <br/>
             <span><button onclick="Challenge.startOrExitChallenge(6)">~r Challenge.isChallengeRunning(6) ? "Exit challenge" : "Start challenge" ~</button></span>
             <br/>
-            <span>Reward: Generator 6 Autobuyer</span>
+            <span>Reward: Faster Generator 6 Autobuyer (triggering every game tick)</span>
           </div>
         </td>
       </tr>
@@ -356,7 +356,7 @@
             <br/>
             <span><button onclick="Challenge.startOrExitChallenge(7)">~r Challenge.isChallengeRunning(7) ? "Exit challenge" : "Start challenge" ~</button></span>
             <br/>
-            <span>Reward: Generator 7 Autobuyer</span>
+            <span>Reward: Faster Generator 7 Autobuyer (triggering every game tick)</span>
           </div>
         </td>
         <td>
@@ -369,7 +369,7 @@
             <br/>
             <span><button onclick="Challenge.startOrExitChallenge(8)">~r Challenge.isChallengeRunning(8) ? "Exit challenge" : "Start challenge" ~</button></span>
             <br/>
-            <span>Reward: Generator 8 Autobuyer</span>
+            <span>Reward: Faster Generator 8 Autobuyer (triggering every game tick)</span>
           </div>
         </td>
       </tr>
@@ -384,7 +384,7 @@
             <br/>
             <span><button onclick="Challenge.startOrExitChallenge(9)">~r Challenge.isChallengeRunning(9) ? "Exit challenge" : "Start challenge" ~</button></span>
             <br/>
-            <span>Reward: Boost Autobuyer</span>
+            <span>Reward: Faster Boost Autobuyer (triggering every game tick)</span>
           </div>
         </td>
         <td>
@@ -434,12 +434,16 @@
   <tab ~style.display=Tabs.currentTab() === 'autobuyers' ? '' : 'none'~>
     <span>You have ~f Autobuyers.numberOfAutobuyers() ~ autobuyers.</span>
     <br/>
+    <div ~style.display=Autobuyers.areAnyAutobuyersSlow() ? '' : 'none'~>
+      <span>Slow autobuyers will trigger in ~f Autobuyers.timeUntilNextSlowTrigger() ~ more seconds.</span>
+      <br/>
+    </div>
     <span><button onclick="Autobuyers.setAll(true)">Turn all autobuyers on</button> <button onclick="Autobuyers.setAll(false)">Turn all autobuyers off</button></span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
         <td>
           <div class="autobuyerdiv" ~style.display=Autobuyer(1).hasAutobuyer() ? '' : 'none'~>
-            <span>Generator 1 Autobuyer</span>
+            <span><span ~style.display=Autobuyer(1).isSlow() ? '' : 'none'~>Slow </span>Generator 1 Autobuyer</span>
             <br/>
             <span>On: <input type="checkbox" class="autobuyer-checkbox-1" ~!checked=Autobuyer(1).isOn()~ ~!onchange=function() {Autobuyer(1).setIsOn(this.checked)}~></input></span>
             <br/>
@@ -460,10 +464,17 @@
               <option value="9">9</option>
             </select></span>
           </div>
+          <button ~style.display=Autobuyer(1).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(1).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(1).unlockSlow()">
+            Unlock Slow Generator 1 Autobuyer
+            <br/>
+            (triggering every ~f 16 ~ seconds)
+            <br/>
+            Cost: ~f Autobuyer(1).unlockSlowCost() ~ stars
+          </button>
         </td>
         <td>
           <div class="autobuyerdiv" ~style.display=Autobuyer(2).hasAutobuyer() ? '' : 'none'~>
-            <span>Generator 2 Autobuyer</span>
+            <span><span ~style.display=Autobuyer(2).isSlow() ? '' : 'none'~>Slow </span>Generator 2 Autobuyer</span>
             <br/>
             <span>On: <input type="checkbox" class="autobuyer-checkbox-2" ~!checked=Autobuyer(2).isOn()~ ~!onchange=function() {Autobuyer(2).setIsOn(this.checked)}~></input></span>
             <br/>
@@ -484,10 +495,17 @@
               <option value="9">9</option>
             </select></span>
           </div>
+          <button class="autobuyerunlockbutton" ~style.display=Autobuyer(2).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(2).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(2).unlockSlow()">
+            Unlock Slow Generator 2 Autobuyer
+            <br/>
+            (triggering every ~f 16 ~ seconds)
+            <br/>
+            Cost: ~f Autobuyer(2).unlockSlowCost() ~ stars
+          </button>
         </td>
         <td>
           <div class="autobuyerdiv" ~style.display=Autobuyer(3).hasAutobuyer() ? '' : 'none'~>
-            <span>Generator 3 Autobuyer</span>
+            <span><span ~style.display=Autobuyer(3).isSlow() ? '' : 'none'~>Slow </span>Generator 3 Autobuyer</span>
             <br/>
             <span>On: <input type="checkbox" class="autobuyer-checkbox-3" ~!checked=Autobuyer(3).isOn()~ ~!onchange=function() {Autobuyer(3).setIsOn(this.checked)}~></input></span>
             <br/>
@@ -508,12 +526,19 @@
               <option value="9">9</option>
             </select></span>
           </div>
+          <button class="autobuyerunlockbutton" ~style.display=Autobuyer(3).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(3).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(3).unlockSlow()">
+            Unlock Slow Generator 3 Autobuyer
+            <br/>
+            (triggering every ~f 16 ~ seconds)
+            <br/>
+            Cost: ~f Autobuyer(3).unlockSlowCost() ~ stars
+          </button>
         </td>
       </tr>
       <tr>
         <td>
           <div class="autobuyerdiv" ~style.display=Autobuyer(4).hasAutobuyer() ? '' : 'none'~>
-            <span>Generator 4 Autobuyer</span>
+            <span><span ~style.display=Autobuyer(4).isSlow() ? '' : 'none'~>Slow </span>Generator 4 Autobuyer</span>
             <br/>
             <span>On: <input type="checkbox" class="autobuyer-checkbox-4" ~!checked=Autobuyer(4).isOn()~ ~!onchange=function() {Autobuyer(4).setIsOn(this.checked)}~></input></span>
             <br/>
@@ -534,10 +559,17 @@
               <option value="9">9</option>
             </select></span>
           </div>
+          <button class="autobuyerunlockbutton" ~style.display=Autobuyer(4).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(4).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(4).unlockSlow()">
+            Unlock Slow Generator 4 Autobuyer
+            <br/>
+            (triggering every ~f 16 ~ seconds)
+            <br/>
+            Cost: ~f Autobuyer(4).unlockSlowCost() ~ stars
+          </button>
         </td>
         <td>
           <div class="autobuyerdiv" ~style.display=Autobuyer(5).hasAutobuyer() ? '' : 'none'~>
-            <span>Generator 5 Autobuyer</span>
+            <span><span ~style.display=Autobuyer(5).isSlow() ? '' : 'none'~>Slow </span>Generator 5 Autobuyer</span>
             <br/>
             <span>On: <input type="checkbox" class="autobuyer-checkbox-5" ~!checked=Autobuyer(5).isOn()~ ~!onchange=function() {Autobuyer(5).setIsOn(this.checked)}~></input></span>
             <br/>
@@ -558,10 +590,17 @@
               <option value="9">9</option>
             </select></span>
           </div>
+          <button class="autobuyerunlockbutton" ~style.display=Autobuyer(5).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(5).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(5).unlockSlow()">
+            Unlock Slow Generator 5 Autobuyer
+            <br/>
+            (triggering every ~f 16 ~ seconds)
+            <br/>
+            Cost: ~f Autobuyer(5).unlockSlowCost() ~ stars
+          </button>
         </td>
         <td>
           <div class="autobuyerdiv" ~style.display=Autobuyer(6).hasAutobuyer() ? '' : 'none'~>
-            <span>Generator 6 Autobuyer</span>
+            <span><span ~style.display=Autobuyer(6).isSlow() ? '' : 'none'~>Slow </span>Generator 6 Autobuyer</span>
             <br/>
             <span>On: <input type="checkbox" class="autobuyer-checkbox-6" ~!checked=Autobuyer(6).isOn()~ ~!onchange=function() {Autobuyer(6).setIsOn(this.checked)}~></input></span>
             <br/>
@@ -582,12 +621,19 @@
               <option value="9">9</option>
             </select></span>
           </div>
+          <button class="autobuyerunlockbutton" ~style.display=Autobuyer(6).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(6).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(6).unlockSlow()">
+            Unlock Slow Generator 6 Autobuyer
+            <br/>
+            (triggering every ~f 16 ~ seconds)
+            <br/>
+            Cost: ~f Autobuyer(6).unlockSlowCost() ~ stars
+          </button>
         </td>
       </tr>
       <tr>
         <td>
           <div class="autobuyerdiv" ~style.display=Autobuyer(7).hasAutobuyer() ? '' : 'none'~>
-            <span>Generator 7 Autobuyer</span>
+            <span><span ~style.display=Autobuyer(7).isSlow() ? '' : 'none'~>Slow </span>Generator 7 Autobuyer</span>
             <br/>
             <span>On: <input type="checkbox" class="autobuyer-checkbox-7" ~!checked=Autobuyer(7).isOn()~ ~!onchange=function() {Autobuyer(7).setIsOn(this.checked)}~></input></span>
             <br/>
@@ -608,10 +654,17 @@
               <option value="9">9</option>
             </select></span>
           </div>
+          <button class="autobuyerunlockbutton" ~style.display=Autobuyer(7).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(7).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(7).unlockSlow()">
+            Unlock Slow Generator 7 Autobuyer
+            <br/>
+            (triggering every ~f 16 ~ seconds)
+            <br/>
+            Cost: ~f Autobuyer(7).unlockSlowCost() ~ stars
+          </button>
         </td>
         <td>
           <div class="autobuyerdiv" ~style.display=Autobuyer(8).hasAutobuyer() ? '' : 'none'~>
-            <span>Generator 8 Autobuyer</span>
+            <span><span ~style.display=Autobuyer(8).isSlow() ? '' : 'none'~>Slow </span>Generator 8 Autobuyer</span>
             <br/>
             <span>On: <input type="checkbox" class="autobuyer-checkbox-8" ~!checked=Autobuyer(8).isOn()~ ~!onchange=function() {Autobuyer(8).setIsOn(this.checked)}~></input></span>
             <br/>
@@ -632,10 +685,17 @@
               <option value="9">9</option>
             </select></span>
           </div>
+          <button class="autobuyerunlockbutton" ~style.display=Autobuyer(8).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(8).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(8).unlockSlow()">
+            Unlock Slow Generator 8 Autobuyer
+            <br/>
+            (triggering every ~f 16 ~ seconds)
+            <br/>
+            Cost: ~f Autobuyer(8).unlockSlowCost() ~ stars
+          </button>
         </td>
         <td>
           <div class="autobuyerdiv" ~style.display=Autobuyer(9).hasAutobuyer() ? '' : 'none'~>
-            <span>Boost Autobuyer</span>
+            <span><span ~style.display=Autobuyer(9).isSlow() ? '' : 'none'~>Slow </span>Boost Autobuyer</span>
             <br/>
             <span>On: <input type="checkbox" class="autobuyer-checkbox-9" ~!checked=Autobuyer(9).isOn()~ ~!onchange=function() {Autobuyer(9).setIsOn(this.checked)}~></input></span>
             <br/>
@@ -656,6 +716,13 @@
               <option value="9">9</option>
             </select></span>
           </div>
+          <button class="autobuyerunlockbutton" ~style.display=Autobuyer(9).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(9).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(9).unlockSlow()">
+            Unlock Slow Boost Autobuyer
+            <br/>
+            (triggering every ~f 16 ~ seconds)
+            <br/>
+            Cost: ~f Autobuyer(9).unlockSlowCost() ~ stars
+          </button>
         </td>
       </tr>
       <tr>

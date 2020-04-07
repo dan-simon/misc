@@ -32,8 +32,18 @@ button {
 .autobuyerdiv {
   display: table;
   text-align: center;
-  width: 256px;
+  width: 352px;
   height: 128px;
+  padding: 4px;
+  margin: 4px;
+  border: solid;
+  border-width: 1px 1px;
+}
+
+.autobuyerunlockbutton {
+  text-align: center;
+  width: 362px;
+  height: 72px;
   padding: 4px;
   margin: 4px;
   border: solid;
