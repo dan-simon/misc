@@ -56,7 +56,7 @@ let EternityPrestigeLayer = {
       player.breakInfinity = false;
     }
     player.stats.totalStarsProducedThisEternity = new Decimal(0);
-    player.stats.timeSinceEternity = new Decimal(0);
+    player.stats.timeSinceEternity = 0;
     player.stats.timeSinceLastPeakEPPerSec = Math.pow(2, 256);
     player.stats.peakEPPerSec = new Decimal(0);
     player.stats.lastTenInfinities = initialLastTenInfinities();
