@@ -28,7 +28,7 @@ let Sacrifice = {
     return Generator(8).amount().gt(0) && player.stars.gte(this.sacrificeRequirement()) && !InfinityPrestigeLayer.mustInfinity();
   },
   isVisible() {
-    return this.canSacrifice() || this.sacrificeMultiplier().gt(1) || player.infinities > 0;
+    return this.canSacrifice() || this.sacrificeMultiplier().gt(1) || player.infinities > 0 || player.eternities > 0;
   },
   newSacrificeMultiplier() {
     let mult = new Decimal(player.stars.log(2) / 16);

@@ -32,7 +32,7 @@ let Prestige = {
     return player.stars.gte(this.prestigeRequirement()) && !InfinityPrestigeLayer.mustInfinity() && !this.isPrestigeDisabled();
   },
   isVisible() {
-    return (this.canPrestige() || this.prestigePower().gt(1) || player.infinities > 0) && !this.isPrestigeDisabled();
+    return (this.canPrestige() || this.prestigePower().gt(1) || player.infinities > 0 || player.eternities > 0) && !this.isPrestigeDisabled();
   },
   newPrestigePower() {
     return this.canPrestige() ? Decimal.pow(2, this.prestigePowerExponent() * (player.stars.log(2) - 96) / 16) : this.prestigePower();
