@@ -4,8 +4,10 @@ let Stats = {
     player.stats.timeSinceSacrifice += diff;
     player.stats.timeSincePrestige += diff;
     player.stats.timeSinceInfinity += diff;
+    player.stats.timeSinceEternity += diff;
     player.stats.timeSinceGameStart += diff;
     player.stats.timeSinceLastPeakIPPerSec += diff;
+    player.stats.timeSinceLastPeakEPPerSec += diff;
   },
   recordPurchase(i, n) {
     player.stats.timeSincePurchase = 0;
