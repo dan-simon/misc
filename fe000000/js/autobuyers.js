@@ -139,6 +139,8 @@ let Autobuyers = {
       shouldInfinity = player.stats.timeSinceInfinity >= priority.toNumber();
     } else if (mode === 'X times last') {
       shouldInfinity = InfinityPrestigeLayer.infinityPointGain().gte(player.stats.lastTenInfinities[0][1].times(priority));
+    } else if (mode === 'X times best of last ten') {
+      shouldInfinity = InfinityPrestigeLayer.infinityPointGain().gte(player.stats.lastTenInfinities.map(x => x[1]).reduce(Decimal.max).times(priority));
     } else if (mode === 'Time past peak/sec') {
       shouldInfinity = player.stats.timeSinceLastPeakIPPerSec >= priority.toNumber();
     } else if (mode === 'Fraction of peak/sec') {
@@ -159,6 +161,8 @@ let Autobuyers = {
       shouldEternity = player.stats.timeSinceEternity >= priority.toNumber();
     } else if (mode === 'X times last') {
       shouldEternity = EternityPrestigeLayer.eternityPointGain().gte(player.stats.lastTenEternities[0][1].times(priority));
+    }  else if (mode === 'X times best of last ten') {
+      shouldEternity = EternityPrestigeLayer.eternityPointGain().gte(player.stats.lastTenEternities.map(x => x[1]).reduce(Decimal.max).times(priority));
     } else if (mode === 'Time past peak/sec') {
       shouldEternity = player.stats.timeSinceLastPeakEPPerSec >= priority.toNumber();
     } else if (mode === 'Fraction of peak/sec') {
