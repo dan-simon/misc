@@ -16,6 +16,10 @@ window.addEventListener('keydown', function(event) {
     return false;
   }
   switch (event.keyCode) {
+    case 65: // A
+      Autobuyers.toggleAll();
+    break;
+
     case 66: // B
       if (shiftDown) {
         Boost.buy();

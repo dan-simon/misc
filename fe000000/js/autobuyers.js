@@ -103,6 +103,15 @@ let Autobuyers = {
       }
     }
   },
+  toggleAll() {
+    for (let autobuyer of this.list) {
+      if (autobuyer.hasAutobuyer()) {
+        autobuyer.setIsOn(!autobuyer.isOn());
+        // Note that autobuyer.isOn() has been negated by the previous line.
+        autobuyer.checkbox().checked = autobuyer.isOn();
+      }
+    }
+  },
   priorityOrder() {
     function cmp(a, b) {
       return (a < b) ? -1 : ((a > b) ? 1 : 0);
