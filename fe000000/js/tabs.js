@@ -14,6 +14,7 @@ let Tabs = {
       'infinity-challenges': () => InfinityPrestigeLayer.canInfinityBeBroken() || player.eternities > 0,
       'eternity': () => player.eternities > 0,
       'eternity-milestones': () => player.eternities > 0,
+      'studies': () => player.eternities > 0,
       'statistics': () => true,
       'options': () => true,
     }[x]();

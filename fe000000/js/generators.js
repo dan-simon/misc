@@ -42,7 +42,8 @@ let Generator = function (i) {
         (i === 8) ? Sacrifice.sacrificeMultiplier() : 1,
         Challenge.isChallengeEffectActive(2) ? Challenge.challenge2Mult() : 1,
         (i === 1 && Challenge.isChallengeEffectActive(3)) ? Challenge.challenge3Mult() : 1,
-        Challenge.isChallengeRunning(8) ? Generator(8).amount().max(1) : 1
+        Challenge.isChallengeRunning(8) ? Generator(8).amount().max(1) : 1,
+        Study(2).effect(), Study(3).effect(), Study(4).effect()
       ];
       let multiplier = factors.reduce((a, b) => a.times(b));
       let powFactors = [
@@ -86,6 +87,9 @@ let Generator = function (i) {
         (i !== 8 && InfinityChallenge.isInfinityChallengeRunning(8)) ?
           InfinityChallenge.infinityChallenge8PurchasesLeft() : Infinity);
       num = Math.max(num, 0);
+      if (!Number.isFinite(num)) {
+        throw new Error('Non-finite number of purchases: ' + num.toString());
+      }
       return num;
     },
     buy(n, guaranteedBuyable) {

@@ -32,6 +32,8 @@ let EternityPrestigeLayer = {
     // when you start a challenge.
     Challenge.setChallenge(0);
     InfinityChallenge.setInfinityChallenge(0);
+    // I'm not sure whether or not this should go in the reset function.
+    Studies.maybeRespec();
     this.eternityReset();
   },
   eternityReset() {

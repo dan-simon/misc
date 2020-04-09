@@ -36,6 +36,7 @@
   <script src="js/saving.js"></script>
   <script src="js/stars.js"></script>
   <script src="js/stats.js"></script>
+  <script src="js/studies.js"></script>
   <script src="js/tabs.js"></script>
   <script src="js/update-display.js"></script>
   <link rel="stylesheet" href="styles.css"></link>
@@ -55,6 +56,7 @@
     <button ~style.display=Tabs.isTabVisible('infinity-challenges') ? '' : 'none'~ onclick="Tabs.setTab('infinity-challenges')">Infinity Challenges</button>
     <button ~style.display=Tabs.isTabVisible('eternity') ? '' : 'none'~ onclick="Tabs.setTab('eternity')">Eternity</button>
     <button ~style.display=Tabs.isTabVisible('eternity-milestones') ? '' : 'none'~ onclick="Tabs.setTab('eternity-milestones')">Eternity Milestones</button>
+    <button ~style.display=Tabs.isTabVisible('studies') ? '' : 'none'~ onclick="Tabs.setTab('studies')">Studies</button>
     <button onclick="Tabs.setTab('statistics')">Statistics</button>
     <button onclick="Tabs.setTab('options')">Options</button>
   </span>
@@ -963,7 +965,7 @@
     <br/>
     <span>You have ~f EternityStars.amount() ~ eternity stars, multiplying all normal and infinity generators by ~f EternityStars.multiplier() ~</span>
     <br/>
-    <span>and raising all normal and infinity generators ^~r formatWithPrecision(EternityStars.power(), 5) ~.</span>
+    <span>and raising all normal and infinity generator multipliers ^~r formatWithPrecision(EternityStars.power(), 5) ~.</span>
     <br/>
     <span>You are getting ~f EternityStars.perSecond() ~ eternity stars per second.</span>
     <br/>
@@ -1195,6 +1197,205 @@
         </td>
       </tr>
     </table>
+  </tab>
+  <tab ~style.display=Tabs.currentTab() === 'studies' ? '' : 'none'~>
+    <span>
+      You have ~f Studies.totalTheorems() ~ total theorems and ~f Studies.unspentTheorems() ~ unspent theorems.
+      <button onclick="Studies.toggleRespec()">Respec studies on next eternity: ~r Studies.isRespecOn() ? "On" : "Off" ~</button>
+    </span>
+    <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 8px; border-collapse: separate;">
+      <tr>
+        <td>
+          <button ~class=Study(1).className()~ onclick="Study(1).buy()">
+            Study 1
+            <br/>
+            Double per-boost multiplier
+            <br/>
+            Cost: ~f Study(1).cost() ~ TT
+          </button>
+        </td>
+        <td>
+          <button ~class=Study(2).className()~ onclick="Study(2).buy()">
+            Study 2
+            <br/>
+            Multiplier to normal generators based on prestige power
+            <br/>
+            Currently: ~f Study(2).rawEffect() ~x
+            <br/>
+            Cost: ~f Study(2).cost() ~ TT
+          </button>
+        </td>
+        <td>
+          <button ~class=Study(3).className()~ onclick="Study(3).buy()">
+            Study 3
+            <br/>
+            Multiplier to normal generators based on total stars
+            <br/>
+            Currently: ~f Study(3).rawEffect() ~x
+            <br/>
+            Cost: ~f Study(3).cost() ~ TT
+          </button>
+        </td>
+        <td>
+          <button ~class=Study(4).className()~ onclick="Study(4).buy()">
+            Study 4
+            <br/>
+            Multiplier to normal generators based on total theorems
+            <br/>
+            Currently: ~f Study(4).rawEffect() ~x
+            <br/>
+            Cost: ~f Study(4).cost() ~ TT
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button ~class=Study(5).className()~ onclick="Study(5).buy()">
+            Study 5
+            <br/>
+            Multiplier to infinity generators based on number of boosts
+            <br/>
+            Currently: ~f Study(5).rawEffect() ~x
+            <br/>
+            Cost: ~f Study(5).cost() ~ TT
+          </button>
+        </td>
+        <td>
+          <button ~class=Study(6).className()~ onclick="Study(6).buy()">
+            Study 6
+            <br/>
+            Multiplier to infinity generators based on prestige power
+            <br/>
+            Currently: ~f Study(6).rawEffect() ~x
+            <br/>
+            Cost: ~f Study(6).cost() ~ TT
+          </button>
+        </td>
+        <td>
+          <button ~class=Study(7).className()~ onclick="Study(7).buy()">
+            Study 7
+            <br/>
+            Multiplier to infinity generators based on eternities
+            <br/>
+            Currently: ~f Study(7).rawEffect() ~x
+            <br/>
+            Cost: ~f Study(7).cost() ~ TT
+          </button>
+        </td>
+        <td>
+          <button ~class=Study(8).className()~ onclick="Study(8).buy()">
+            Study 8
+            <br/>
+            Multiplier to infinity generators based on total theorems
+            <br/>
+            Currently: ~f Study(8).rawEffect() ~x
+            <br/>
+            Cost: ~f Study(8).cost() ~ TT
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button ~class=Study(9).className()~ onclick="Study(9).buy()">
+            Study 9
+            <br/>
+            Eternity generators are multiplied by per-boost multiplier
+            <br/>
+            Currently: ~f Study(9).rawEffect() ~x
+            <br/>
+            Cost: ~f Study(9).cost() ~ TT
+          </button>
+        </td>
+        <td>
+          <button ~class=Study(10).className()~ onclick="Study(10).buy()">
+            Study 10
+            <br/>
+            Multiplier to eternity generators based on prestige power
+            <br/>
+            Currently: ~f Study(10).rawEffect() ~x
+            <br/>
+            Cost: ~f Study(10).cost() ~ TT
+          </button>
+        </td>
+        <td>
+          <button ~class=Study(11).className()~ onclick="Study(11).buy()">
+            Study 11
+            <br/>
+            Multiplier to eternity generators based on time in eternity
+            <br/>
+            Currently: ~f Study(11).rawEffect() ~x
+            <br/>
+            Cost: ~f Study(11).cost() ~ TT
+          </button>
+        </td>
+        <td>
+          <button ~class=Study(12).className()~ onclick="Study(12).buy()">
+            Study 12
+            <br/>
+            Eternity generators are multiplied by total theorems
+            <br/>
+            Currently: ~f Study(12).rawEffect() ~x
+            <br/>
+            Cost: ~f Study(12).cost() ~ TT
+          </button>
+        </td>
+      </tr>
+    </table>
+    <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 0px; border-collapse: separate;">
+      <tr>
+        <td>
+          <button ~class=Studies.canBuy(0) ? '' : 'disabled'~ style="width: 256px; height: 96px;" onclick="Studies.buy(0)">
+            Buy a theorem with stars
+            <br/>
+            Cost: ~f Studies.cost(0) ~ stars
+          </button>
+        </td>
+        <td>
+          <button ~class=Studies.canBuy(1) ? '' : 'disabled'~ style="width: 256px; height: 96px;" onclick="Studies.buy(1)">
+            Buy a theorem with infinity points
+            <br/>
+            Cost: ~f Studies.cost(1) ~ IP
+          </button>
+        </td>
+        <td>
+          <button ~class=Studies.canBuy(2) ? '' : 'disabled'~ style="width: 256px; height: 96px;" onclick="Studies.buy(2)">
+            Buy a theorem with eternity points
+            <br/>
+            Cost: ~f Studies.cost(2) ~ EP
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button ~class=Studies.canBuy(0) ? '' : 'disabled'~ style="width: 256px; height: 48px;" onclick="Studies.buyMax(0)">
+            Buy max theorems with stars
+            <br/>
+            Cost: ~f Studies.cost(0) ~ stars
+          </button>
+        </td>
+        <td>
+          <button ~class=Studies.canBuy(1) ? '' : 'disabled'~ style="width: 256px; height: 48px;" onclick="Studies.buyMax(1)">
+            Buy max theorems with infinity points
+          </button>
+        </td>
+        <td>
+          <button ~class=Studies.canBuy(2) ? '' : 'disabled'~ style="width: 256px; height: 48px;" onclick="Studies.buyMax(2)">
+            Buy max theorems with eternity points
+          </button>
+        </td>
+      </tr>
+    </table>
+    <span>
+      Buying a study will increase the costs of all studies on other rows by ~f 2 ~ theorems.
+    </span>
+    <br/>
+    <span>
+      You need to buy at least one eternity generator before you can buy theorems with eternity points.
+    </span>
+    <br/>
+    <span>
+      After ~f 4 ~ theorem purchases of a certain type, theorem costs of that type start increasing more quickly.
+    </span>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'statistics' ? '' : 'none'~>
     <span>You have produced ~f player.stats.totalStarsProduced ~ total stars.</span>

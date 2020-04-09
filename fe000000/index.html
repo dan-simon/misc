@@ -36,6 +36,7 @@
   <script src="js/saving.js"></script>
   <script src="js/stars.js"></script>
   <script src="js/stats.js"></script>
+  <script src="js/studies.js"></script>
   <script src="js/tabs.js"></script>
   <script src="js/update-display.js"></script>
   <link rel="stylesheet" href="styles.css"></link>
@@ -55,111 +56,112 @@
     <button id="b5" onclick="Tabs.setTab('infinity-challenges')">Infinity Challenges</button>
     <button id="b6" onclick="Tabs.setTab('eternity')">Eternity</button>
     <button id="b7" onclick="Tabs.setTab('eternity-milestones')">Eternity Milestones</button>
+    <button id="b8" onclick="Tabs.setTab('studies')">Studies</button>
     <button onclick="Tabs.setTab('statistics')">Statistics</button>
     <button onclick="Tabs.setTab('options')">Options</button>
   </span>
-  <div id="b8">
-    <div id="b9">
-      <span>You have <span id="e6"></span> stars. You are getting <span id="e7"></span> stars per second. <button id="b10" onclick="MaxAll.maxAll()">Max all</button></span>
+  <div id="b9">
+    <div id="b10">
+      <span>You have <span id="e6"></span> stars. You are getting <span id="e7"></span> stars per second. <button id="b11" onclick="MaxAll.maxAll()">Max all</button></span>
       <br/>
-      <div id="b11">
+      <div id="b12">
         <span><span id="e8"></span></span>
       </div>
-      <span id="b12">You have <span id="e9"></span> boosts, multipying all generators by <span id="e10"></span>x (<span id="e11"></span>x each). <button id="b13" onclick="Boost.buy()">Cost: <span id="e12"></span></button> <button id="b14" onclick="Boost.buyMax()">Max</button></span>
+      <span id="b13">You have <span id="e9"></span> boosts, multipying all generators by <span id="e10"></span>x (<span id="e11"></span>x each). <button id="b14" onclick="Boost.buy()">Cost: <span id="e12"></span></button> <button id="b15" onclick="Boost.buyMax()">Max</button></span>
       <br/>
       <br/>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
-        <tr id="b15">
+        <tr id="b16">
           <td>Generator 1</td>
           <td><span id="e13"></span></td>
           <td><span id="e14"></span>/s</td>
           <td><span id="e15"></span>x</td>
-          <td><button id="b16" onclick="Generator(1).buy()">Cost: <span id="e16"></span></button></td>
-          <td><button id="b17" onclick="Generator(1).buyMax()">Max</button></td>
+          <td><button id="b17" onclick="Generator(1).buy()">Cost: <span id="e16"></span></button></td>
+          <td><button id="b18" onclick="Generator(1).buyMax()">Max</button></td>
         </tr>
-        <tr id="b18">
+        <tr id="b19">
           <td>Generator 2</td>
           <td><span id="e17"></span></td>
           <td><span id="e18"></span>/s</td>
           <td><span id="e19"></span>x</td>
-          <td><button id="b19" onclick="Generator(2).buy()">Cost: <span id="e20"></span></button></td>
-          <td><button id="b20" onclick="Generator(2).buyMax()">Max</button></td>
+          <td><button id="b20" onclick="Generator(2).buy()">Cost: <span id="e20"></span></button></td>
+          <td><button id="b21" onclick="Generator(2).buyMax()">Max</button></td>
         </tr>
-        <tr id="b21">
+        <tr id="b22">
           <td>Generator 3</td>
           <td><span id="e21"></span></td>
           <td><span id="e22"></span>/s</td>
           <td><span id="e23"></span>x</td>
-          <td><button id="b22" onclick="Generator(3).buy()">Cost: <span id="e24"></span></button></td>
-          <td><button id="b23" onclick="Generator(3).buyMax()">Max</button></td>
+          <td><button id="b23" onclick="Generator(3).buy()">Cost: <span id="e24"></span></button></td>
+          <td><button id="b24" onclick="Generator(3).buyMax()">Max</button></td>
         </tr>
-        <tr id="b24">
+        <tr id="b25">
           <td>Generator 4</td>
           <td><span id="e25"></span></td>
           <td><span id="e26"></span>/s</td>
           <td><span id="e27"></span>x</td>
-          <td><button id="b25" onclick="Generator(4).buy()">Cost: <span id="e28"></span></button></td>
-          <td><button id="b26" onclick="Generator(4).buyMax()">Max</button></td>
+          <td><button id="b26" onclick="Generator(4).buy()">Cost: <span id="e28"></span></button></td>
+          <td><button id="b27" onclick="Generator(4).buyMax()">Max</button></td>
         </tr>
-        <tr id="b27">
+        <tr id="b28">
           <td>Generator 5</td>
           <td><span id="e29"></span></td>
           <td><span id="e30"></span>/s</td>
           <td><span id="e31"></span>x</td>
-          <td><button id="b28" onclick="Generator(5).buy()">Cost: <span id="e32"></span></button></td>
-          <td><button id="b29" onclick="Generator(5).buyMax()">Max</button></td>
+          <td><button id="b29" onclick="Generator(5).buy()">Cost: <span id="e32"></span></button></td>
+          <td><button id="b30" onclick="Generator(5).buyMax()">Max</button></td>
         </tr>
-        <tr id="b30">
+        <tr id="b31">
           <td>Generator 6</td>
           <td><span id="e33"></span></td>
           <td><span id="e34"></span>/s</td>
           <td><span id="e35"></span>x</td>
-          <td><button id="b31" onclick="Generator(6).buy()">Cost: <span id="e36"></span></button></td>
-          <td><button id="b32" onclick="Generator(6).buyMax()">Max</button></td>
+          <td><button id="b32" onclick="Generator(6).buy()">Cost: <span id="e36"></span></button></td>
+          <td><button id="b33" onclick="Generator(6).buyMax()">Max</button></td>
         </tr>
-        <tr id="b33">
+        <tr id="b34">
           <td>Generator 7</td>
           <td><span id="e37"></span></td>
           <td><span id="e38"></span>/s</td>
           <td><span id="e39"></span>x</td>
-          <td><button id="b34" onclick="Generator(7).buy()">Cost: <span id="e40"></span></button></td>
-          <td><button id="b35" onclick="Generator(7).buyMax()">Max</button></td>
+          <td><button id="b35" onclick="Generator(7).buy()">Cost: <span id="e40"></span></button></td>
+          <td><button id="b36" onclick="Generator(7).buyMax()">Max</button></td>
         </tr>
-        <tr id="b36">
+        <tr id="b37">
           <td>Generator 8</td>
           <td><span id="e41"></span></td>
           <td><span id="e42"></span>/s</td>
           <td><span id="e43"></span>x</td>
-          <td><button id="b37" onclick="Generator(8).buy()">Cost: <span id="e44"></span></button></td>
-          <td><button id="b38" onclick="Generator(8).buyMax()">Max</button></td>
+          <td><button id="b38" onclick="Generator(8).buy()">Cost: <span id="e44"></span></button></td>
+          <td><button id="b39" onclick="Generator(8).buyMax()">Max</button></td>
         </tr>
       </table>
-      <div id="b39">
+      <div id="b40">
         <br/>
         <span>You have a <span id="e45"></span> sacrifice multiplier multiplying Generator 8 by its amount.</span>
         <br/>
-        <span id="b40"><button style="height: 48px;" onclick="Sacrifice.sacrifice()">Sacrifice: <span id="e46"></span> → <span id="e47"></span><br/>(+<span id="e48"></span>, <span id="e49"></span>x)</button></span>
-        <span id="b41">You need <span id="e50"></span> stars and at least one of Generator 8 to sacrifice.</span>
+        <span id="b41"><button style="height: 48px;" onclick="Sacrifice.sacrifice()">Sacrifice: <span id="e46"></span> → <span id="e47"></span><br/>(+<span id="e48"></span>, <span id="e49"></span>x)</button></span>
+        <span id="b42">You need <span id="e50"></span> stars and at least one of Generator 8 to sacrifice.</span>
       </div>
-      <div id="b42">
+      <div id="b43">
         <br/>
         <span>You have <span id="e51"></span> prestige power multiplying all generators by its amount.</span>
         <br/>
-        <span id="b43"><button style="height: 48px;" onclick="Prestige.prestige()">Prestige: <span id="e52"></span> → <span id="e53"></span><br/>(+<span id="e54"></span>, <span id="e55"></span>x)</button></span>
-        <span id="b44">You need <span id="e56"></span> stars to prestige.</span>
+        <span id="b44"><button style="height: 48px;" onclick="Prestige.prestige()">Prestige: <span id="e52"></span> → <span id="e53"></span><br/>(+<span id="e54"></span>, <span id="e55"></span>x)</button></span>
+        <span id="b45">You need <span id="e56"></span> stars to prestige.</span>
       </div>
     </div>
-    <div id="b45">
+    <div id="b46">
       <span>The universe has collapsed due to an excess of stars.</span>
     </div>
   </div>
-  <div id="b46">
-    <span>You have <span id="e57"></span> infinity points, multiplying all generators by <span id="e58"></span>. <button id="b47" onclick="InfinityMaxAll.maxAll()">Max all</button></span>
+  <div id="b47">
+    <span>You have <span id="e57"></span> infinity points, multiplying all generators by <span id="e58"></span>. <button id="b48" onclick="InfinityMaxAll.maxAll()">Max all</button></span>
     <br/>
     <span>You have <span id="e59"></span> infinities, multiplying all infinity generators by <span id="e60"></span>.</span>
     <br/>
-    <span id="b48"><button style="height: 48px;" onclick="InfinityPrestigeLayer.toggleBreakInfinity()"><span id="e61"></span></button></span>
-    <span id="b49">You need to complete all the challenges to be able to break infinity.</span>
+    <span id="b49"><button style="height: 48px;" onclick="InfinityPrestigeLayer.toggleBreakInfinity()"><span id="e61"></span></button></span>
+    <span id="b50">You need to complete all the challenges to be able to break infinity.</span>
     <br/>
     <span>You have <span id="e62"></span> infinity stars, multiplying all generators by their amount^<span id="e63"></span> = <span id="e64"></span>.</span>
     <br/>
@@ -169,96 +171,96 @@
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
         <td>Increase the base multiplier per boost:</td>
-        <td><span id="b50"><span id="e66"></span> → <span id="e67"></span></span><span id="b51"><span id="e68"></span> (maxed)</span></td>
-        <td><span id="b52"><button id="b53" onclick="InfinityUpgrade(1).buy()">Cost: <span id="e69"></span> IP</button></span></td>
-        <td><span id="b54"><button id="b55" onclick="InfinityUpgrade(1).buyMax()">Max</button></span></td>
-        <td><span id="b56"><button onclick="InfinityAutobuyer(9).toggle()">Auto: <span id="e70"></span></button></span></td>
+        <td><span id="b51"><span id="e66"></span> → <span id="e67"></span></span><span id="b52"><span id="e68"></span> (maxed)</span></td>
+        <td><span id="b53"><button id="b54" onclick="InfinityUpgrade(1).buy()">Cost: <span id="e69"></span> IP</button></span></td>
+        <td><span id="b55"><button id="b56" onclick="InfinityUpgrade(1).buyMax()">Max</button></span></td>
+        <td><span id="b57"><button onclick="InfinityAutobuyer(9).toggle()">Auto: <span id="e70"></span></button></span></td>
       </tr>
       <tr>
         <td>Increase the power of infinity stars:</td>
-        <td><span id="b57"><span id="e71"></span> → <span id="e72"></span></span><span id="b58"><span id="e73"></span> (maxed)</span></td>
-        <td><span id="b59"><button id="b60" onclick="InfinityUpgrade(2).buy()">Cost: <span id="e74"></span> IP</button></span></td>
-        <td><span id="b61"><button id="b62" onclick="InfinityUpgrade(2).buyMax()">Max</button></span></td>
-        <td><span id="b63"><button onclick="InfinityAutobuyer(10).toggle()">Auto: <span id="e75"></span></button></span></td>
+        <td><span id="b58"><span id="e71"></span> → <span id="e72"></span></span><span id="b59"><span id="e73"></span> (maxed)</span></td>
+        <td><span id="b60"><button id="b61" onclick="InfinityUpgrade(2).buy()">Cost: <span id="e74"></span> IP</button></span></td>
+        <td><span id="b62"><button id="b63" onclick="InfinityUpgrade(2).buyMax()">Max</button></span></td>
+        <td><span id="b64"><button onclick="InfinityAutobuyer(10).toggle()">Auto: <span id="e75"></span></button></span></td>
       </tr>
     </table>
     <br/>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
-      <tr id="b64">
+      <tr id="b65">
         <td>Infinity Generator 1</td>
         <td><span id="e76"></span></td>
         <td><span id="e77"></span>/s</td>
         <td><span id="e78"></span>x</td>
-        <td><button id="b65" onclick="InfinityGenerator(1).buy()">Cost: <span id="e79"></span> IP</button></td>
-        <td><button id="b66" onclick="InfinityGenerator(1).buyMax()">Max</button></td>
-        <td><button id="b67" onclick="InfinityAutobuyer(1).toggle()">Auto: <span id="e80"></span></button></td>
+        <td><button id="b66" onclick="InfinityGenerator(1).buy()">Cost: <span id="e79"></span> IP</button></td>
+        <td><button id="b67" onclick="InfinityGenerator(1).buyMax()">Max</button></td>
+        <td><button id="b68" onclick="InfinityAutobuyer(1).toggle()">Auto: <span id="e80"></span></button></td>
       </tr>
-      <tr id="b68">
+      <tr id="b69">
         <td>Infinity Generator 2</td>
         <td><span id="e81"></span></td>
         <td><span id="e82"></span>/s</td>
         <td><span id="e83"></span>x</td>
-        <td><button id="b69" onclick="InfinityGenerator(2).buy()">Cost: <span id="e84"></span> IP</button></td>
-        <td><button id="b70" onclick="InfinityGenerator(2).buyMax()">Max</button></td>
-        <td><button id="b71" onclick="InfinityAutobuyer(2).toggle()">Auto: <span id="e85"></span></button></td>
+        <td><button id="b70" onclick="InfinityGenerator(2).buy()">Cost: <span id="e84"></span> IP</button></td>
+        <td><button id="b71" onclick="InfinityGenerator(2).buyMax()">Max</button></td>
+        <td><button id="b72" onclick="InfinityAutobuyer(2).toggle()">Auto: <span id="e85"></span></button></td>
       </tr>
-      <tr id="b72">
+      <tr id="b73">
         <td>Infinity Generator 3</td>
         <td><span id="e86"></span></td>
         <td><span id="e87"></span>/s</td>
         <td><span id="e88"></span>x</td>
-        <td><button id="b73" onclick="InfinityGenerator(3).buy()">Cost: <span id="e89"></span> IP</button></td>
-        <td><button id="b74" onclick="InfinityGenerator(3).buyMax()">Max</button></td>
-        <td><button id="b75" onclick="InfinityAutobuyer(3).toggle()">Auto: <span id="e90"></span></button></td>
+        <td><button id="b74" onclick="InfinityGenerator(3).buy()">Cost: <span id="e89"></span> IP</button></td>
+        <td><button id="b75" onclick="InfinityGenerator(3).buyMax()">Max</button></td>
+        <td><button id="b76" onclick="InfinityAutobuyer(3).toggle()">Auto: <span id="e90"></span></button></td>
       </tr>
-      <tr id="b76">
+      <tr id="b77">
         <td>Infinity Generator 4</td>
         <td><span id="e91"></span></td>
         <td><span id="e92"></span>/s</td>
         <td><span id="e93"></span>x</td>
-        <td><button id="b77" onclick="InfinityGenerator(4).buy()">Cost: <span id="e94"></span> IP</button></td>
-        <td><button id="b78" onclick="InfinityGenerator(4).buyMax()">Max</button></td>
-        <td><button id="b79" onclick="InfinityAutobuyer(4).toggle()">Auto: <span id="e95"></span></button></td>
+        <td><button id="b78" onclick="InfinityGenerator(4).buy()">Cost: <span id="e94"></span> IP</button></td>
+        <td><button id="b79" onclick="InfinityGenerator(4).buyMax()">Max</button></td>
+        <td><button id="b80" onclick="InfinityAutobuyer(4).toggle()">Auto: <span id="e95"></span></button></td>
       </tr>
-      <tr id="b80">
+      <tr id="b81">
         <td>Infinity Generator 5</td>
         <td><span id="e96"></span></td>
         <td><span id="e97"></span>/s</td>
         <td><span id="e98"></span>x</td>
-        <td><button id="b81" onclick="InfinityGenerator(5).buy()">Cost: <span id="e99"></span> IP</button></td>
-        <td><button id="b82" onclick="InfinityGenerator(5).buyMax()">Max</button></td>
-        <td><button id="b83" onclick="InfinityAutobuyer(5).toggle()">Auto: <span id="e100"></span></button></td>
+        <td><button id="b82" onclick="InfinityGenerator(5).buy()">Cost: <span id="e99"></span> IP</button></td>
+        <td><button id="b83" onclick="InfinityGenerator(5).buyMax()">Max</button></td>
+        <td><button id="b84" onclick="InfinityAutobuyer(5).toggle()">Auto: <span id="e100"></span></button></td>
       </tr>
-      <tr id="b84">
+      <tr id="b85">
         <td>Infinity Generator 6</td>
         <td><span id="e101"></span></td>
         <td><span id="e102"></span>/s</td>
         <td><span id="e103"></span>x</td>
-        <td><button id="b85" onclick="InfinityGenerator(6).buy()">Cost: <span id="e104"></span> IP</button></td>
-        <td><button id="b86" onclick="InfinityGenerator(6).buyMax()">Max</button></td>
-        <td><button id="b87" onclick="InfinityAutobuyer(6).toggle()">Auto: <span id="e105"></span></button></td>
+        <td><button id="b86" onclick="InfinityGenerator(6).buy()">Cost: <span id="e104"></span> IP</button></td>
+        <td><button id="b87" onclick="InfinityGenerator(6).buyMax()">Max</button></td>
+        <td><button id="b88" onclick="InfinityAutobuyer(6).toggle()">Auto: <span id="e105"></span></button></td>
       </tr>
-      <tr id="b88">
+      <tr id="b89">
         <td>Infinity Generator 7</td>
         <td><span id="e106"></span></td>
         <td><span id="e107"></span>/s</td>
         <td><span id="e108"></span>x</td>
-        <td><button id="b89" onclick="InfinityGenerator(7).buy()">Cost: <span id="e109"></span> IP</button></td>
-        <td><button id="b90" onclick="InfinityGenerator(7).buyMax()">Max</button></td>
-        <td><button id="b91" onclick="InfinityAutobuyer(7).toggle()">Auto: <span id="e110"></span></button></td>
+        <td><button id="b90" onclick="InfinityGenerator(7).buy()">Cost: <span id="e109"></span> IP</button></td>
+        <td><button id="b91" onclick="InfinityGenerator(7).buyMax()">Max</button></td>
+        <td><button id="b92" onclick="InfinityAutobuyer(7).toggle()">Auto: <span id="e110"></span></button></td>
       </tr>
-      <tr id="b92">
+      <tr id="b93">
         <td>Infinity Generator 8</td>
         <td><span id="e111"></span></td>
         <td><span id="e112"></span>/s</td>
         <td><span id="e113"></span>x</td>
-        <td><button id="b93" onclick="InfinityGenerator(8).buy()">Cost: <span id="e114"></span> IP</button></td>
-        <td><button id="b94" onclick="InfinityGenerator(8).buyMax()">Max</button></td>
-        <td><button id="b95" onclick="InfinityAutobuyer(8).toggle()">Auto: <span id="e115"></span></button></td>
+        <td><button id="b94" onclick="InfinityGenerator(8).buy()">Cost: <span id="e114"></span> IP</button></td>
+        <td><button id="b95" onclick="InfinityGenerator(8).buyMax()">Max</button></td>
+        <td><button id="b96" onclick="InfinityAutobuyer(8).toggle()">Auto: <span id="e115"></span></button></td>
       </tr>
     </table>
   </div>
-  <div id="b96">
+  <div id="b97">
     <span>You have completed <span id="e116"></span> challenges, multiplying all generators by <span id="e117"></span>.</span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
@@ -431,10 +433,10 @@
       </tr>
     </table>
   </div>
-  <div id="b97">
+  <div id="b98">
     <span>You have <span id="e157"></span> autobuyers.</span>
     <br/>
-    <div id="b98">
+    <div id="b99">
       <span>Slow autobuyers will trigger in <span id="e158"></span> more seconds.</span>
       <br/>
     </div>
@@ -442,17 +444,17 @@
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
         <td>
-          <div id="b99" class="autobuyerdiv">
-            <span><span id="b100">Slow </span>Generator 1 Autobuyer</span>
+          <div id="b100" class="autobuyerdiv">
+            <span><span id="b101">Slow </span>Generator 1 Autobuyer</span>
             <br/>
-            <span>On: <input id="b101" type="checkbox" class="autobuyer-checkbox-1"></input></span>
+            <span>On: <input id="b102" type="checkbox" class="autobuyer-checkbox-1"></input></span>
             <br/>
-            <span>Mode: <select id="b102">
+            <span>Mode: <select id="b103">
               <option value="Buy singles">Buy singles</option>
               <option value="Buy max">Buy max</option>
             </select></span>
             <br/>
-            <span>Priority: <select id="b103">
+            <span>Priority: <select id="b104">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -464,7 +466,7 @@
               <option value="9">9</option>
             </select></span>
           </div>
-          <button id="b104" onclick="Autobuyer(1).unlockSlow()">
+          <button id="b105" onclick="Autobuyer(1).unlockSlow()">
             Unlock Slow Generator 1 Autobuyer
             <br/>
             (triggering every <span id="e159"></span> seconds)
@@ -473,17 +475,17 @@
           </button>
         </td>
         <td>
-          <div id="b105" class="autobuyerdiv">
-            <span><span id="b106">Slow </span>Generator 2 Autobuyer</span>
+          <div id="b106" class="autobuyerdiv">
+            <span><span id="b107">Slow </span>Generator 2 Autobuyer</span>
             <br/>
-            <span>On: <input id="b107" type="checkbox" class="autobuyer-checkbox-2"></input></span>
+            <span>On: <input id="b108" type="checkbox" class="autobuyer-checkbox-2"></input></span>
             <br/>
-            <span>Mode: <select id="b108">
+            <span>Mode: <select id="b109">
               <option value="Buy singles">Buy singles</option>
               <option value="Buy max">Buy max</option>
             </select></span>
             <br/>
-            <span>Priority: <select id="b109">
+            <span>Priority: <select id="b110">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -495,7 +497,7 @@
               <option value="9">9</option>
             </select></span>
           </div>
-          <button id="b110" class="autobuyerunlockbutton" onclick="Autobuyer(2).unlockSlow()">
+          <button id="b111" class="autobuyerunlockbutton" onclick="Autobuyer(2).unlockSlow()">
             Unlock Slow Generator 2 Autobuyer
             <br/>
             (triggering every <span id="e161"></span> seconds)
@@ -504,17 +506,17 @@
           </button>
         </td>
         <td>
-          <div id="b111" class="autobuyerdiv">
-            <span><span id="b112">Slow </span>Generator 3 Autobuyer</span>
+          <div id="b112" class="autobuyerdiv">
+            <span><span id="b113">Slow </span>Generator 3 Autobuyer</span>
             <br/>
-            <span>On: <input id="b113" type="checkbox" class="autobuyer-checkbox-3"></input></span>
+            <span>On: <input id="b114" type="checkbox" class="autobuyer-checkbox-3"></input></span>
             <br/>
-            <span>Mode: <select id="b114">
+            <span>Mode: <select id="b115">
               <option value="Buy singles">Buy singles</option>
               <option value="Buy max">Buy max</option>
             </select></span>
             <br/>
-            <span>Priority: <select id="b115">
+            <span>Priority: <select id="b116">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -526,7 +528,7 @@
               <option value="9">9</option>
             </select></span>
           </div>
-          <button id="b116" class="autobuyerunlockbutton" onclick="Autobuyer(3).unlockSlow()">
+          <button id="b117" class="autobuyerunlockbutton" onclick="Autobuyer(3).unlockSlow()">
             Unlock Slow Generator 3 Autobuyer
             <br/>
             (triggering every <span id="e163"></span> seconds)
@@ -537,17 +539,17 @@
       </tr>
       <tr>
         <td>
-          <div id="b117" class="autobuyerdiv">
-            <span><span id="b118">Slow </span>Generator 4 Autobuyer</span>
+          <div id="b118" class="autobuyerdiv">
+            <span><span id="b119">Slow </span>Generator 4 Autobuyer</span>
             <br/>
-            <span>On: <input id="b119" type="checkbox" class="autobuyer-checkbox-4"></input></span>
+            <span>On: <input id="b120" type="checkbox" class="autobuyer-checkbox-4"></input></span>
             <br/>
-            <span>Mode: <select id="b120">
+            <span>Mode: <select id="b121">
               <option value="Buy singles">Buy singles</option>
               <option value="Buy max">Buy max</option>
             </select></span>
             <br/>
-            <span>Priority: <select id="b121">
+            <span>Priority: <select id="b122">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -559,7 +561,7 @@
               <option value="9">9</option>
             </select></span>
           </div>
-          <button id="b122" class="autobuyerunlockbutton" onclick="Autobuyer(4).unlockSlow()">
+          <button id="b123" class="autobuyerunlockbutton" onclick="Autobuyer(4).unlockSlow()">
             Unlock Slow Generator 4 Autobuyer
             <br/>
             (triggering every <span id="e165"></span> seconds)
@@ -568,17 +570,17 @@
           </button>
         </td>
         <td>
-          <div id="b123" class="autobuyerdiv">
-            <span><span id="b124">Slow </span>Generator 5 Autobuyer</span>
+          <div id="b124" class="autobuyerdiv">
+            <span><span id="b125">Slow </span>Generator 5 Autobuyer</span>
             <br/>
-            <span>On: <input id="b125" type="checkbox" class="autobuyer-checkbox-5"></input></span>
+            <span>On: <input id="b126" type="checkbox" class="autobuyer-checkbox-5"></input></span>
             <br/>
-            <span>Mode: <select id="b126">
+            <span>Mode: <select id="b127">
               <option value="Buy singles">Buy singles</option>
               <option value="Buy max">Buy max</option>
             </select></span>
             <br/>
-            <span>Priority: <select id="b127">
+            <span>Priority: <select id="b128">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -590,7 +592,7 @@
               <option value="9">9</option>
             </select></span>
           </div>
-          <button id="b128" class="autobuyerunlockbutton" onclick="Autobuyer(5).unlockSlow()">
+          <button id="b129" class="autobuyerunlockbutton" onclick="Autobuyer(5).unlockSlow()">
             Unlock Slow Generator 5 Autobuyer
             <br/>
             (triggering every <span id="e167"></span> seconds)
@@ -599,17 +601,17 @@
           </button>
         </td>
         <td>
-          <div id="b129" class="autobuyerdiv">
-            <span><span id="b130">Slow </span>Generator 6 Autobuyer</span>
+          <div id="b130" class="autobuyerdiv">
+            <span><span id="b131">Slow </span>Generator 6 Autobuyer</span>
             <br/>
-            <span>On: <input id="b131" type="checkbox" class="autobuyer-checkbox-6"></input></span>
+            <span>On: <input id="b132" type="checkbox" class="autobuyer-checkbox-6"></input></span>
             <br/>
-            <span>Mode: <select id="b132">
+            <span>Mode: <select id="b133">
               <option value="Buy singles">Buy singles</option>
               <option value="Buy max">Buy max</option>
             </select></span>
             <br/>
-            <span>Priority: <select id="b133">
+            <span>Priority: <select id="b134">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -621,7 +623,7 @@
               <option value="9">9</option>
             </select></span>
           </div>
-          <button id="b134" class="autobuyerunlockbutton" onclick="Autobuyer(6).unlockSlow()">
+          <button id="b135" class="autobuyerunlockbutton" onclick="Autobuyer(6).unlockSlow()">
             Unlock Slow Generator 6 Autobuyer
             <br/>
             (triggering every <span id="e169"></span> seconds)
@@ -632,17 +634,17 @@
       </tr>
       <tr>
         <td>
-          <div id="b135" class="autobuyerdiv">
-            <span><span id="b136">Slow </span>Generator 7 Autobuyer</span>
+          <div id="b136" class="autobuyerdiv">
+            <span><span id="b137">Slow </span>Generator 7 Autobuyer</span>
             <br/>
-            <span>On: <input id="b137" type="checkbox" class="autobuyer-checkbox-7"></input></span>
+            <span>On: <input id="b138" type="checkbox" class="autobuyer-checkbox-7"></input></span>
             <br/>
-            <span>Mode: <select id="b138">
+            <span>Mode: <select id="b139">
               <option value="Buy singles">Buy singles</option>
               <option value="Buy max">Buy max</option>
             </select></span>
             <br/>
-            <span>Priority: <select id="b139">
+            <span>Priority: <select id="b140">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -654,7 +656,7 @@
               <option value="9">9</option>
             </select></span>
           </div>
-          <button id="b140" class="autobuyerunlockbutton" onclick="Autobuyer(7).unlockSlow()">
+          <button id="b141" class="autobuyerunlockbutton" onclick="Autobuyer(7).unlockSlow()">
             Unlock Slow Generator 7 Autobuyer
             <br/>
             (triggering every <span id="e171"></span> seconds)
@@ -663,17 +665,17 @@
           </button>
         </td>
         <td>
-          <div id="b141" class="autobuyerdiv">
-            <span><span id="b142">Slow </span>Generator 8 Autobuyer</span>
+          <div id="b142" class="autobuyerdiv">
+            <span><span id="b143">Slow </span>Generator 8 Autobuyer</span>
             <br/>
-            <span>On: <input id="b143" type="checkbox" class="autobuyer-checkbox-8"></input></span>
+            <span>On: <input id="b144" type="checkbox" class="autobuyer-checkbox-8"></input></span>
             <br/>
-            <span>Mode: <select id="b144">
+            <span>Mode: <select id="b145">
               <option value="Buy singles">Buy singles</option>
               <option value="Buy max">Buy max</option>
             </select></span>
             <br/>
-            <span>Priority: <select id="b145">
+            <span>Priority: <select id="b146">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -685,7 +687,7 @@
               <option value="9">9</option>
             </select></span>
           </div>
-          <button id="b146" class="autobuyerunlockbutton" onclick="Autobuyer(8).unlockSlow()">
+          <button id="b147" class="autobuyerunlockbutton" onclick="Autobuyer(8).unlockSlow()">
             Unlock Slow Generator 8 Autobuyer
             <br/>
             (triggering every <span id="e173"></span> seconds)
@@ -694,17 +696,17 @@
           </button>
         </td>
         <td>
-          <div id="b147" class="autobuyerdiv">
-            <span><span id="b148">Slow </span>Boost Autobuyer</span>
+          <div id="b148" class="autobuyerdiv">
+            <span><span id="b149">Slow </span>Boost Autobuyer</span>
             <br/>
-            <span>On: <input id="b149" type="checkbox" class="autobuyer-checkbox-9"></input></span>
+            <span>On: <input id="b150" type="checkbox" class="autobuyer-checkbox-9"></input></span>
             <br/>
-            <span>Mode: <select id="b150">
+            <span>Mode: <select id="b151">
               <option value="Buy singles">Buy singles</option>
               <option value="Buy max">Buy max</option>
             </select></span>
             <br/>
-            <span>Priority: <select id="b151">
+            <span>Priority: <select id="b152">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -716,7 +718,7 @@
               <option value="9">9</option>
             </select></span>
           </div>
-          <button id="b152" class="autobuyerunlockbutton" onclick="Autobuyer(9).unlockSlow()">
+          <button id="b153" class="autobuyerunlockbutton" onclick="Autobuyer(9).unlockSlow()">
             Unlock Slow Boost Autobuyer
             <br/>
             (triggering every <span id="e175"></span> seconds)
@@ -727,44 +729,44 @@
       </tr>
       <tr>
         <td>
-          <div id="b153" class="autobuyerdiv">
+          <div id="b154" class="autobuyerdiv">
             <span>Sacrifice Autobuyer</span>
             <br/>
-            <span>On: <input id="b154" type="checkbox" class="autobuyer-checkbox-10"></input></span>
+            <span>On: <input id="b155" type="checkbox" class="autobuyer-checkbox-10"></input></span>
             <br/>
-            <span>Mode: <select id="b155">
+            <span>Mode: <select id="b156">
               <option value="Multiplier">Multiplier</option>
               <option value="Time">Time</option>
             </select></span>
             <br/>
             <span><span id="e177"></span>:</span>
             <br/>
-            <span><input id="b156" type="text"></input></span>
+            <span><input id="b157" type="text"></input></span>
           </div>
         </td>
         <td>
-          <div id="b157" class="autobuyerdiv">
+          <div id="b158" class="autobuyerdiv">
             <span>Prestige Autobuyer</span>
             <br/>
-            <span>On: <input id="b158" type="checkbox" class="autobuyer-checkbox-11"></input></span>
+            <span>On: <input id="b159" type="checkbox" class="autobuyer-checkbox-11"></input></span>
             <br/>
-            <span>Mode: <select id="b159">
+            <span>Mode: <select id="b160">
               <option value="Multiplier">Multiplier</option>
               <option value="Time">Time</option>
             </select></span>
             <br/>
             <span><span id="e178"></span>:</span>
             <br/>
-            <span><input id="b160" type="text"></input></span>
+            <span><input id="b161" type="text"></input></span>
           </div>
         </td>
         <td>
-          <div id="b161" class="autobuyerdiv">
+          <div id="b162" class="autobuyerdiv">
             <span>Infinity Autobuyer</span>
             <br/>
-            <span>On: <input id="b162" type="checkbox" class="autobuyer-checkbox-12"></input></span>
+            <span>On: <input id="b163" type="checkbox" class="autobuyer-checkbox-12"></input></span>
             <br/>
-            <span>Mode: <select id="b163">
+            <span>Mode: <select id="b164">
               <option value="Amount">Amount</option>
               <option value="Time">Time</option>
               <option value="X times last">X times last</option>
@@ -775,19 +777,19 @@
             <br/>
             <span><span id="e179"></span>:</span>
             <br/>
-            <span><input id="b164" type="text"></input></span>
+            <span><input id="b165" type="text"></input></span>
           </div>
         </td>
       </tr>
       <tr>
         <td/>
         <td>
-          <div id="b165" class="autobuyerdiv">
+          <div id="b166" class="autobuyerdiv">
             <span>Eternity Autobuyer</span>
             <br/>
-            <span>On: <input id="b166" type="checkbox" class="autobuyer-checkbox-13"></input></span>
+            <span>On: <input id="b167" type="checkbox" class="autobuyer-checkbox-13"></input></span>
             <br/>
-            <span>Mode: <select id="b167">
+            <span>Mode: <select id="b168">
               <option value="Amount">Amount</option>
               <option value="Time">Time</option>
               <option value="X times last">X times last</option>
@@ -798,14 +800,14 @@
             <br/>
             <span><span id="e180"></span>:</span>
             <br/>
-            <span><input id="b168" type="text"></input></span>
+            <span><input id="b169" type="text"></input></span>
           </div>
         </td>
         <td/>
       </tr>
     </table>
   </div>
-  <div id="b169">
+  <div id="b170">
     <span>You have completed <span id="e181"></span> infinity challenges, multiplying all infinity generators by <span id="e182"></span>.</span>
     <br/>
     <span>You have produced <span id="e183"></span> stars this eternity.</span>
@@ -956,90 +958,90 @@
       </tr>
     </table>
   </div>
-  <div id="b170">
-    <span>You have <span id="e232"></span> eternity points. <button id="b171" onclick="EternityMaxAll.maxAll()">Max all</button></span>
+  <div id="b171">
+    <span>You have <span id="e232"></span> eternity points. <button id="b172" onclick="EternityMaxAll.maxAll()">Max all</button></span>
     <br/>
     <span>You have <span id="e233"></span> eternities, multiplying all eternity generators by <span id="e234"></span>.</span>
     <br/>
     <span>You have <span id="e235"></span> eternity stars, multiplying all normal and infinity generators by <span id="e236"></span></span>
     <br/>
-    <span>and raising all normal and infinity generators ^<span id="e237"></span>.</span>
+    <span>and raising all normal and infinity generator multipliers ^<span id="e237"></span>.</span>
     <br/>
     <span>You are getting <span id="e238"></span> eternity stars per second.</span>
     <br/>
     <br/>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
-      <tr id="b172">
+      <tr id="b173">
         <td>Eternity Generator 1</td>
         <td><span id="e239"></span></td>
         <td><span id="e240"></span>/s</td>
         <td><span id="e241"></span>x</td>
-        <td><button id="b173" onclick="EternityGenerator(1).buy()">Cost: <span id="e242"></span> EP</button></td>
-        <td><button id="b174" onclick="EternityGenerator(1).buyMax()">Max</button></td>
+        <td><button id="b174" onclick="EternityGenerator(1).buy()">Cost: <span id="e242"></span> EP</button></td>
+        <td><button id="b175" onclick="EternityGenerator(1).buyMax()">Max</button></td>
       </tr>
-      <tr id="b175">
+      <tr id="b176">
         <td>Eternity Generator 2</td>
         <td><span id="e243"></span></td>
         <td><span id="e244"></span>/s</td>
         <td><span id="e245"></span>x</td>
-        <td><button id="b176" onclick="EternityGenerator(2).buy()">Cost: <span id="e246"></span> EP</button></td>
-        <td><button id="b177" onclick="EternityGenerator(2).buyMax()">Max</button></td>
+        <td><button id="b177" onclick="EternityGenerator(2).buy()">Cost: <span id="e246"></span> EP</button></td>
+        <td><button id="b178" onclick="EternityGenerator(2).buyMax()">Max</button></td>
       </tr>
-      <tr id="b178">
+      <tr id="b179">
         <td>Eternity Generator 3</td>
         <td><span id="e247"></span></td>
         <td><span id="e248"></span>/s</td>
         <td><span id="e249"></span>x</td>
-        <td><button id="b179" onclick="EternityGenerator(3).buy()">Cost: <span id="e250"></span> EP</button></td>
-        <td><button id="b180" onclick="EternityGenerator(3).buyMax()">Max</button></td>
+        <td><button id="b180" onclick="EternityGenerator(3).buy()">Cost: <span id="e250"></span> EP</button></td>
+        <td><button id="b181" onclick="EternityGenerator(3).buyMax()">Max</button></td>
       </tr>
-      <tr id="b181">
+      <tr id="b182">
         <td>Eternity Generator 4</td>
         <td><span id="e251"></span></td>
         <td><span id="e252"></span>/s</td>
         <td><span id="e253"></span>x</td>
-        <td><button id="b182" onclick="EternityGenerator(4).buy()">Cost: <span id="e254"></span> EP</button></td>
-        <td><button id="b183" onclick="EternityGenerator(4).buyMax()">Max</button></td>
+        <td><button id="b183" onclick="EternityGenerator(4).buy()">Cost: <span id="e254"></span> EP</button></td>
+        <td><button id="b184" onclick="EternityGenerator(4).buyMax()">Max</button></td>
       </tr>
-      <tr id="b184">
+      <tr id="b185">
         <td>Eternity Generator 5</td>
         <td><span id="e255"></span></td>
         <td><span id="e256"></span>/s</td>
         <td><span id="e257"></span>x</td>
-        <td><button id="b185" onclick="EternityGenerator(5).buy()">Cost: <span id="e258"></span> EP</button></td>
-        <td><button id="b186" onclick="EternityGenerator(5).buyMax()">Max</button></td>
+        <td><button id="b186" onclick="EternityGenerator(5).buy()">Cost: <span id="e258"></span> EP</button></td>
+        <td><button id="b187" onclick="EternityGenerator(5).buyMax()">Max</button></td>
       </tr>
-      <tr id="b187">
+      <tr id="b188">
         <td>Eternity Generator 6</td>
         <td><span id="e259"></span></td>
         <td><span id="e260"></span>/s</td>
         <td><span id="e261"></span>x</td>
-        <td><button id="b188" onclick="EternityGenerator(6).buy()">Cost: <span id="e262"></span> EP</button></td>
-        <td><button id="b189" onclick="EternityGenerator(6).buyMax()">Max</button></td>
+        <td><button id="b189" onclick="EternityGenerator(6).buy()">Cost: <span id="e262"></span> EP</button></td>
+        <td><button id="b190" onclick="EternityGenerator(6).buyMax()">Max</button></td>
       </tr>
-      <tr id="b190">
+      <tr id="b191">
         <td>Eternity Generator 7</td>
         <td><span id="e263"></span></td>
         <td><span id="e264"></span>/s</td>
         <td><span id="e265"></span>x</td>
-        <td><button id="b191" onclick="EternityGenerator(7).buy()">Cost: <span id="e266"></span> EP</button></td>
-        <td><button id="b192" onclick="EternityGenerator(7).buyMax()">Max</button></td>
+        <td><button id="b192" onclick="EternityGenerator(7).buy()">Cost: <span id="e266"></span> EP</button></td>
+        <td><button id="b193" onclick="EternityGenerator(7).buyMax()">Max</button></td>
       </tr>
-      <tr id="b193">
+      <tr id="b194">
         <td>Eternity Generator 8</td>
         <td><span id="e267"></span></td>
         <td><span id="e268"></span>/s</td>
         <td><span id="e269"></span>x</td>
-        <td><button id="b194" onclick="EternityGenerator(8).buy()">Cost: <span id="e270"></span> EP</button></td>
-        <td><button id="b195" onclick="EternityGenerator(8).buyMax()">Max</button></td>
+        <td><button id="b195" onclick="EternityGenerator(8).buy()">Cost: <span id="e270"></span> EP</button></td>
+        <td><button id="b196" onclick="EternityGenerator(8).buyMax()">Max</button></td>
       </tr>
     </table>
   </div>
-  <div id="b196">
+  <div id="b197">
     <span>
       You have <span id="e271"></span> eternities.
-      <button id="b197" onclick="EternityMilestones.toggleMilestone(4)">Eternity Milestone 4: <span id="e272"></span></button>
-      <button id="b198" onclick="EternityMilestones.toggleMilestone(8)">Eternity Milestone 8: <span id="e273"></span></button>
+      <button id="b198" onclick="EternityMilestones.toggleMilestone(4)">Eternity Milestone 4: <span id="e272"></span></button>
+      <button id="b199" onclick="EternityMilestones.toggleMilestone(8)">Eternity Milestone 8: <span id="e273"></span></button>
     </span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
@@ -1196,78 +1198,277 @@
       </tr>
     </table>
   </div>
-  <div id="b199">
-    <span>You have produced <span id="e309"></span> total stars.</span>
+  <div id="b200">
+    <span>
+      You have <span id="e309"></span> total theorems and <span id="e310"></span> unspent theorems.
+      <button onclick="Studies.toggleRespec()">Respec studies on next eternity: <span id="e311"></span></button>
+    </span>
+    <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 8px; border-collapse: separate;">
+      <tr>
+        <td>
+          <button id="b201" onclick="Study(1).buy()">
+            Study 1
+            <br/>
+            Double per-boost multiplier
+            <br/>
+            Cost: <span id="e312"></span> TT
+          </button>
+        </td>
+        <td>
+          <button id="b202" onclick="Study(2).buy()">
+            Study 2
+            <br/>
+            Multiplier to normal generators based on prestige power
+            <br/>
+            Currently: <span id="e313"></span>x
+            <br/>
+            Cost: <span id="e314"></span> TT
+          </button>
+        </td>
+        <td>
+          <button id="b203" onclick="Study(3).buy()">
+            Study 3
+            <br/>
+            Multiplier to normal generators based on total stars
+            <br/>
+            Currently: <span id="e315"></span>x
+            <br/>
+            Cost: <span id="e316"></span> TT
+          </button>
+        </td>
+        <td>
+          <button id="b204" onclick="Study(4).buy()">
+            Study 4
+            <br/>
+            Multiplier to normal generators based on total theorems
+            <br/>
+            Currently: <span id="e317"></span>x
+            <br/>
+            Cost: <span id="e318"></span> TT
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button id="b205" onclick="Study(5).buy()">
+            Study 5
+            <br/>
+            Multiplier to infinity generators based on number of boosts
+            <br/>
+            Currently: <span id="e319"></span>x
+            <br/>
+            Cost: <span id="e320"></span> TT
+          </button>
+        </td>
+        <td>
+          <button id="b206" onclick="Study(6).buy()">
+            Study 6
+            <br/>
+            Multiplier to infinity generators based on prestige power
+            <br/>
+            Currently: <span id="e321"></span>x
+            <br/>
+            Cost: <span id="e322"></span> TT
+          </button>
+        </td>
+        <td>
+          <button id="b207" onclick="Study(7).buy()">
+            Study 7
+            <br/>
+            Multiplier to infinity generators based on eternities
+            <br/>
+            Currently: <span id="e323"></span>x
+            <br/>
+            Cost: <span id="e324"></span> TT
+          </button>
+        </td>
+        <td>
+          <button id="b208" onclick="Study(8).buy()">
+            Study 8
+            <br/>
+            Multiplier to infinity generators based on total theorems
+            <br/>
+            Currently: <span id="e325"></span>x
+            <br/>
+            Cost: <span id="e326"></span> TT
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button id="b209" onclick="Study(9).buy()">
+            Study 9
+            <br/>
+            Eternity generators are multiplied by per-boost multiplier
+            <br/>
+            Currently: <span id="e327"></span>x
+            <br/>
+            Cost: <span id="e328"></span> TT
+          </button>
+        </td>
+        <td>
+          <button id="b210" onclick="Study(10).buy()">
+            Study 10
+            <br/>
+            Multiplier to eternity generators based on prestige power
+            <br/>
+            Currently: <span id="e329"></span>x
+            <br/>
+            Cost: <span id="e330"></span> TT
+          </button>
+        </td>
+        <td>
+          <button id="b211" onclick="Study(11).buy()">
+            Study 11
+            <br/>
+            Multiplier to eternity generators based on time in eternity
+            <br/>
+            Currently: <span id="e331"></span>x
+            <br/>
+            Cost: <span id="e332"></span> TT
+          </button>
+        </td>
+        <td>
+          <button id="b212" onclick="Study(12).buy()">
+            Study 12
+            <br/>
+            Eternity generators are multiplied by total theorems
+            <br/>
+            Currently: <span id="e333"></span>x
+            <br/>
+            Cost: <span id="e334"></span> TT
+          </button>
+        </td>
+      </tr>
+    </table>
+    <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 0px; border-collapse: separate;">
+      <tr>
+        <td>
+          <button id="b213" style="width: 256px; height: 96px;" onclick="Studies.buy(0)">
+            Buy a theorem with stars
+            <br/>
+            Cost: <span id="e335"></span> stars
+          </button>
+        </td>
+        <td>
+          <button id="b214" style="width: 256px; height: 96px;" onclick="Studies.buy(1)">
+            Buy a theorem with infinity points
+            <br/>
+            Cost: <span id="e336"></span> IP
+          </button>
+        </td>
+        <td>
+          <button id="b215" style="width: 256px; height: 96px;" onclick="Studies.buy(2)">
+            Buy a theorem with eternity points
+            <br/>
+            Cost: <span id="e337"></span> EP
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button id="b216" style="width: 256px; height: 48px;" onclick="Studies.buyMax(0)">
+            Buy max theorems with stars
+            <br/>
+            Cost: <span id="e338"></span> stars
+          </button>
+        </td>
+        <td>
+          <button id="b217" style="width: 256px; height: 48px;" onclick="Studies.buyMax(1)">
+            Buy max theorems with infinity points
+          </button>
+        </td>
+        <td>
+          <button id="b218" style="width: 256px; height: 48px;" onclick="Studies.buyMax(2)">
+            Buy max theorems with eternity points
+          </button>
+        </td>
+      </tr>
+    </table>
+    <span>
+      Buying a study will increase the costs of all studies on other rows by <span id="e339"></span> theorems.
+    </span>
     <br/>
-    <span>You have produced <span id="e310"></span> stars this eternity.</span>
+    <span>
+      You need to buy at least one eternity generator before you can buy theorems with eternity points.
+    </span>
     <br/>
-    <span>You have produced <span id="e311"></span> total infinity points.</span>
+    <span>
+      After <span id="e340"></span> theorem purchases of a certain type, theorem costs of that type start increasing more quickly.
+    </span>
+  </div>
+  <div id="b219">
+    <span>You have produced <span id="e341"></span> total stars.</span>
     <br/>
-    <span>Your fastest infinity took <span id="e312"></span> seconds.</span>
+    <span>You have produced <span id="e342"></span> stars this eternity.</span>
     <br/>
-    <span>Your fastest eternity took <span id="e313"></span> seconds.</span>
+    <span>You have produced <span id="e343"></span> total infinity points.</span>
     <br/>
-    <span>You have produced <span id="e314"></span> total infinity points.</span>
+    <span>Your fastest infinity took <span id="e344"></span> seconds.</span>
     <br/>
-    <span>You have produced <span id="e315"></span> total eternity points.</span>
+    <span>Your fastest eternity took <span id="e345"></span> seconds.</span>
     <br/>
-    <span>You have spent <span id="e316"></span> seconds without purchasing anything.</span>
+    <span>You have produced <span id="e346"></span> total infinity points.</span>
     <br/>
-    <span>You have spent <span id="e317"></span> seconds without sacrificing.</span>
+    <span>You have produced <span id="e347"></span> total eternity points.</span>
     <br/>
-    <span>You have spent <span id="e318"></span> seconds in this prestige.</span>
+    <span>You have spent <span id="e348"></span> seconds without purchasing anything.</span>
     <br/>
-    <span>You have spent <span id="e319"></span> seconds in this infinity.</span>
+    <span>You have spent <span id="e349"></span> seconds without sacrificing.</span>
     <br/>
-    <span>You have spent <span id="e320"></span> seconds in this eternity.</span>
+    <span>You have spent <span id="e350"></span> seconds in this prestige.</span>
     <br/>
-    <span>You have spent <span id="e321"></span> seconds playing this game (counting time offline).</span>
-    <div id="b200">
-      <span>Last infinity took <span id="e322"></span> seconds and gave <span id="e323"></span> IP, giving <span id="e324"></span> IP/second.</span>
+    <span>You have spent <span id="e351"></span> seconds in this infinity.</span>
+    <br/>
+    <span>You have spent <span id="e352"></span> seconds in this eternity.</span>
+    <br/>
+    <span>You have spent <span id="e353"></span> seconds playing this game (counting time offline).</span>
+    <div id="b220">
+      <span>Last infinity took <span id="e354"></span> seconds and gave <span id="e355"></span> IP, giving <span id="e356"></span> IP/second.</span>
       <br/>
-      <span id="b201">The infinity two infinities ago took <span id="e325"></span> seconds and gave <span id="e326"></span> IP, giving <span id="e327"></span> IP/second.</span>
+      <span id="b221">The infinity two infinities ago took <span id="e357"></span> seconds and gave <span id="e358"></span> IP, giving <span id="e359"></span> IP/second.</span>
       <br/>
-      <span id="b202">The infinity three infinities ago took <span id="e328"></span> seconds and gave <span id="e329"></span> IP, giving <span id="e330"></span> IP/second.</span>
+      <span id="b222">The infinity three infinities ago took <span id="e360"></span> seconds and gave <span id="e361"></span> IP, giving <span id="e362"></span> IP/second.</span>
       <br/>
-      <span id="b203">The infinity four infinities ago took <span id="e331"></span> seconds and gave <span id="e332"></span> IP, giving <span id="e333"></span> IP/second.</span>
+      <span id="b223">The infinity four infinities ago took <span id="e363"></span> seconds and gave <span id="e364"></span> IP, giving <span id="e365"></span> IP/second.</span>
       <br/>
-      <span id="b204">The infinity five infinities ago took <span id="e334"></span> seconds and gave <span id="e335"></span> IP, giving <span id="e336"></span> IP/second.</span>
+      <span id="b224">The infinity five infinities ago took <span id="e366"></span> seconds and gave <span id="e367"></span> IP, giving <span id="e368"></span> IP/second.</span>
       <br/>
-      <span id="b205">The infinity six infinities ago took <span id="e337"></span> seconds and gave <span id="e338"></span> IP, giving <span id="e339"></span> IP/second.</span>
+      <span id="b225">The infinity six infinities ago took <span id="e369"></span> seconds and gave <span id="e370"></span> IP, giving <span id="e371"></span> IP/second.</span>
       <br/>
-      <span id="b206">The infinity seven infinities ago took <span id="e340"></span> seconds and gave <span id="e341"></span> IP, giving <span id="e342"></span> IP/second.</span>
+      <span id="b226">The infinity seven infinities ago took <span id="e372"></span> seconds and gave <span id="e373"></span> IP, giving <span id="e374"></span> IP/second.</span>
       <br/>
-      <span id="b207">The infinity eight infinities ago took <span id="e343"></span> seconds and gave <span id="e344"></span> IP, giving <span id="e345"></span> IP/second.</span>
+      <span id="b227">The infinity eight infinities ago took <span id="e375"></span> seconds and gave <span id="e376"></span> IP, giving <span id="e377"></span> IP/second.</span>
       <br/>
-      <span id="b208">The infinity nine infinities ago took <span id="e346"></span> seconds and gave <span id="e347"></span> IP, giving <span id="e348"></span> IP/second.</span>
+      <span id="b228">The infinity nine infinities ago took <span id="e378"></span> seconds and gave <span id="e379"></span> IP, giving <span id="e380"></span> IP/second.</span>
       <br/>
-      <span id="b209">The infinity ten infinities ago took <span id="e349"></span> seconds and gave <span id="e350"></span> IP, giving <span id="e351"></span> IP/second.</span>
+      <span id="b229">The infinity ten infinities ago took <span id="e381"></span> seconds and gave <span id="e382"></span> IP, giving <span id="e383"></span> IP/second.</span>
       <br/>
     </div>
-    <div id="b210">
-      <span>Last eternity took <span id="e352"></span> seconds and gave <span id="e353"></span> EP, giving <span id="e354"></span> EP/second.</span>
+    <div id="b230">
+      <span>Last eternity took <span id="e384"></span> seconds and gave <span id="e385"></span> EP, giving <span id="e386"></span> EP/second.</span>
       <br/>
-      <span id="b211">The eternity two eternities ago took <span id="e355"></span> seconds and gave <span id="e356"></span> EP, giving <span id="e357"></span> EP/second.</span>
+      <span id="b231">The eternity two eternities ago took <span id="e387"></span> seconds and gave <span id="e388"></span> EP, giving <span id="e389"></span> EP/second.</span>
       <br/>
-      <span id="b212">The eternity three eternities ago took <span id="e358"></span> seconds and gave <span id="e359"></span> EP, giving <span id="e360"></span> EP/second.</span>
+      <span id="b232">The eternity three eternities ago took <span id="e390"></span> seconds and gave <span id="e391"></span> EP, giving <span id="e392"></span> EP/second.</span>
       <br/>
-      <span id="b213">The eternity four eternities ago took <span id="e361"></span> seconds and gave <span id="e362"></span> EP, giving <span id="e363"></span> EP/second.</span>
+      <span id="b233">The eternity four eternities ago took <span id="e393"></span> seconds and gave <span id="e394"></span> EP, giving <span id="e395"></span> EP/second.</span>
       <br/>
-      <span id="b214">The eternity five eternities ago took <span id="e364"></span> seconds and gave <span id="e365"></span> EP, giving <span id="e366"></span> EP/second.</span>
+      <span id="b234">The eternity five eternities ago took <span id="e396"></span> seconds and gave <span id="e397"></span> EP, giving <span id="e398"></span> EP/second.</span>
       <br/>
-      <span id="b215">The eternity six eternities ago took <span id="e367"></span> seconds and gave <span id="e368"></span> EP, giving <span id="e369"></span> EP/second.</span>
+      <span id="b235">The eternity six eternities ago took <span id="e399"></span> seconds and gave <span id="e400"></span> EP, giving <span id="e401"></span> EP/second.</span>
       <br/>
-      <span id="b216">The eternity seven eternities ago took <span id="e370"></span> seconds and gave <span id="e371"></span> EP, giving <span id="e372"></span> EP/second.</span>
+      <span id="b236">The eternity seven eternities ago took <span id="e402"></span> seconds and gave <span id="e403"></span> EP, giving <span id="e404"></span> EP/second.</span>
       <br/>
-      <span id="b217">The eternity eight eternities ago took <span id="e373"></span> seconds and gave <span id="e374"></span> EP, giving <span id="e375"></span> EP/second.</span>
+      <span id="b237">The eternity eight eternities ago took <span id="e405"></span> seconds and gave <span id="e406"></span> EP, giving <span id="e407"></span> EP/second.</span>
       <br/>
-      <span id="b218">The eternity nine eternities ago took <span id="e376"></span> seconds and gave <span id="e377"></span> EP, giving <span id="e378"></span> EP/second.</span>
+      <span id="b238">The eternity nine eternities ago took <span id="e408"></span> seconds and gave <span id="e409"></span> EP, giving <span id="e410"></span> EP/second.</span>
       <br/>
-      <span id="b219">The eternity ten eternities ago took <span id="e379"></span> seconds and gave <span id="e380"></span> EP, giving <span id="e381"></span> EP/second.</span>
+      <span id="b239">The eternity ten eternities ago took <span id="e411"></span> seconds and gave <span id="e412"></span> EP, giving <span id="e413"></span> EP/second.</span>
       <br/>
     </div>
   </div>
-  <div id="b220">
+  <div id="b240">
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 8px; border-collapse: separate;">
       <tr>
         <td><button class="options-button" onclick="Saving.saveGame()">Save</button></td>
@@ -1275,9 +1476,9 @@
         <td><button class="options-button" onclick="Saving.loadGamePrompt()">Load</button></td>
       </tr>
       <tr>
-        <td><button class="options-button" onclick="Options.toggleOfflineProgress()">Offline progress: <span id="e382"></span></button></td>
-        <td><button class="options-button" onclick="Options.toggleHotkeys()">Hotkeys: <span id="e383"></span></button></td>
-        <td><button class="options-button" onclick="Options.nextNotation()">Notation: <span id="e384"></span></button></td>
+        <td><button class="options-button" onclick="Options.toggleOfflineProgress()">Offline progress: <span id="e414"></span></button></td>
+        <td><button class="options-button" onclick="Options.toggleHotkeys()">Hotkeys: <span id="e415"></span></button></td>
+        <td><button class="options-button" onclick="Options.nextNotation()">Notation: <span id="e416"></span></button></td>
       </tr>
       <tr>
         <td></td>

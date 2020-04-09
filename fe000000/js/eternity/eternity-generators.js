@@ -34,7 +34,13 @@ let EternityGenerator = function (i) {
       return this.cost().times(Decimal.pow(this.costIncreasePer(), n).minus(1)).div(Decimal.minus(this.costIncreasePer(), 1));
     },
     multiplier() {
-      return Decimal.pow(2, this.bought() / 8).times(Eternities.eternityGeneratorMultiplier());
+      let factors = [
+        Decimal.pow(2, this.bought() / 8), Eternities.eternityGeneratorMultiplier(),
+        Study(9).effect(), Study(10).effect(), Study(11).effect(), Study(12).effect()
+      ];
+      // Most of these are numbers but that's fine, the first one is a Decimal
+      // so the below code works.
+      return factors.reduce((a, b) => a.times(b));
     },
     productionPerSecond() {
       return this.amount().times(this.multiplier());

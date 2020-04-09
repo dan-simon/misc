@@ -82,3 +82,75 @@ button {
   border: solid;
   border-width: 1px 1px;
 }
+
+.studynormalunbuyable {
+  display: table;
+  text-align: center;
+  background: #555555;
+  width: 256px;
+  height: 144px;
+}
+
+.studynormalbuyable {
+  display: table;
+  text-align: center;
+  background: radial-gradient(#cccc33, #aaaaaa);
+  width: 256px;
+  height: 144px;
+}
+
+.studynormalbought {
+  display: table;
+  text-align: center;
+  background: #cccc33;
+  width: 256px;
+  height: 144px;
+}
+
+.studyinfinityunbuyable {
+  display: table;
+  text-align: center;
+  background: #555555;
+  width: 256px;
+  height: 144px;
+}
+
+.studyinfinitybuyable {
+  display: table;
+  text-align: center;
+  background: radial-gradient(#cc33cc, #aaaaaa);
+  width: 256px;
+  height: 144px;
+}
+
+.studyinfinitybought {
+  display: table;
+  text-align: center;
+  background: #cc33cc;
+  width: 256px;
+  height: 144px;
+}
+
+.studytimeunbuyable {
+  display: table;
+  text-align: center;
+  background: #555555;
+  width: 256px;
+  height: 144px;
+}
+
+.studytimebuyable {
+  display: table;
+  text-align: center;
+  background: radial-gradient(#33cccc, #aaaaaa);
+  width: 256px;
+  height: 144px;
+}
+
+.studytimebought {
+  display: table;
+  text-align: center;
+  background: #33cccc;
+  width: 256px;
+  height: 144px;
+}

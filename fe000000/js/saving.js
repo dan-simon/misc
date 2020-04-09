@@ -126,6 +126,15 @@ let Saving = {
       player.slowAutobuyersTimer = 0;
       player.version = 1.50625;
     }
+    if (player.version < 1.515625) {
+      player.boughtTheorems = [0, 0, 0];
+      player.unspentTheorems = 0;
+      player.studies = [
+        false, false, false, false, false, false,
+        false, false, false, false, false, false,
+      ];
+      player.version = 1.515625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

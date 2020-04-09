@@ -79,6 +79,12 @@ let initialPlayer = {
   infinityAutobuyers: [
     false, false, false, false, false, false, false, false, false, false,
   ],
+  boughtTheorems: [0, 0, 0],
+  unspentTheorems: 0,
+  studies: [
+    false, false, false, false, false, false,
+    false, false, false, false, false, false,
+  ],
   options: {
     notation: 'Scientific',
     offlineProgress: true,
@@ -111,7 +117,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.50625,
+  version: 1.515625,
 }
 
 let player;
