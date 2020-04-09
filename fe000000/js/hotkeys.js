@@ -24,6 +24,10 @@ window.addEventListener('keydown', function(event) {
       }
     break;
 
+    case 69: // E, also, nice
+      EternityPrestigeLayer.eternity();
+    break;
+
     case 73: // I
       InfinityPrestigeLayer.infinity();
     break;
