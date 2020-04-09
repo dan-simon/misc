@@ -64,9 +64,10 @@ let Autobuyer = function (i) {
         return 'buyMax';
       }
     },
-    tick(triggerSlowAutobuyers) {
+    tick(triggerSlowAutobuyers, triggerFastAutobuyers) {
       if (!this.isActive()) return;
       if (this.isSlow() && !triggerSlowAutobuyers) return;
+      if (!this.isSlow() && !triggerFastAutobuyers) return;
       if (i <= 9) {
         this.target()[this.targetMethod()]();
       }
@@ -84,6 +85,15 @@ let Autobuyers = {
   },
   areAnyAutobuyersSlow() {
     return this.list.some(i => i.isSlow());
+  },
+  areAnyAutobuyersFast() {
+    return this.list.some(i => i.hasAutobuyer() && !i.isSlow());
+  },
+  areThereAnyAutobuyers() {
+    return this.numberOfAutobuyers() > 0;
+  },
+  doFastAutobuyersAlwaysTrigger() {
+    return this.fastAutobuyersTimerLength() <= 0;
   },
   setAll(x) {
     for (let autobuyer of this.list) {
@@ -172,19 +182,39 @@ let Autobuyers = {
       EternityPrestigeLayer.eternity();
     }
   },
+  slowAutobuyersTimerLength() {
+    return Math.max(16, player.autobuyersTimerLength);
+  },
+  fastAutobuyersTimerLength() {
+    return player.autobuyersTimerLength;
+  },
   timeUntilNextSlowTrigger() {
-    return 16 - player.slowAutobuyersTimer;
+    return this.slowAutobuyersTimerLength() - player.slowAutobuyersTimer;
+  },
+  timeUntilNextFastTrigger() {
+    return this.fastAutobuyersTimerLength() - player.fastAutobuyersTimer;
+  },
+  setFastAutobuyersTimerLength(x) {
+    player.autobuyersTimerLength = x;
+  },
+  mod(a, b) {
+    return (b > 0) ? a % b : 0;
   },
   tick(diff) {
-    Autobuyers.eternity();
-    Autobuyers.infinity();
-    Autobuyers.prestige();
-    Autobuyers.sacrifice();
     player.slowAutobuyersTimer += diff;
-    let triggerSlowAutobuyers = player.slowAutobuyersTimer >= 16;
-    player.slowAutobuyersTimer %= 16;
+    let triggerSlowAutobuyers = player.slowAutobuyersTimer >= this.slowAutobuyersTimerLength();
+    player.slowAutobuyersTimer = this.mod(player.slowAutobuyersTimer, this.slowAutobuyersTimerLength());
+    player.fastAutobuyersTimer += diff;
+    let triggerFastAutobuyers = player.fastAutobuyersTimer >= this.fastAutobuyersTimerLength();
+    player.fastAutobuyersTimer = this.mod(player.fastAutobuyersTimer, this.fastAutobuyersTimerLength());
+    if (triggerFastAutobuyers) {
+      Autobuyers.eternity();
+      Autobuyers.infinity();
+      Autobuyers.prestige();
+      Autobuyers.sacrifice();
+    }
     for (let autobuyer of this.priorityOrder()) {
-      autobuyer.tick(triggerSlowAutobuyers);
+      autobuyer.tick(triggerSlowAutobuyers, triggerFastAutobuyers);
     }
   }
 }

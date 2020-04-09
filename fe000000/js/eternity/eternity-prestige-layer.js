@@ -61,10 +61,11 @@ let EternityPrestigeLayer = {
     // since after eternity milestone 2 you have all the
     // normal autobuyers anyway (plus the slow autobuyers have
     // nothing to do with challenges).
+    // Honestly resetting autobuyer timers feels really bad
+    // to me for some reason.
     player.slowAutobuyers = [
       false, false, false, false, false, false, false, false, false,
     ];
-    player.slowAutobuyersTimer = 0;
     player.stats.totalStarsProducedThisEternity = new Decimal(0);
     player.stats.timeSinceEternity = 0;
     player.stats.timeSinceLastPeakEPPerSec = Math.pow(2, 256);

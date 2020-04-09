@@ -64,6 +64,8 @@ let initialPlayer = {
     false, false, false, false, false, false, false, false, false,
   ],
   slowAutobuyersTimer: 0,
+  fastAutobuyersTimer: 0,
+  autobuyersTimerLength: 0,
   currentInfinityChallenge: 0,
   infinityChallengesCompleted: [
     false, false, false, false, false, false, false, false,

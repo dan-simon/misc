@@ -440,6 +440,14 @@
       <span>Slow autobuyers will trigger in ~f Autobuyers.timeUntilNextSlowTrigger() ~ more seconds.</span>
       <br/>
     </div>
+    <div ~style.display=Autobuyers.areAnyAutobuyersFast() ? '' : 'none'~>
+      <span>Fast autobuyers <span ~style.display=Autobuyers.doFastAutobuyersAlwaysTrigger() ? '' : 'none'~>trigger every tick.</span><span ~style.display=Autobuyers.doFastAutobuyersAlwaysTrigger() ? 'none' : ''~>will trigger in ~f Autobuyers.timeUntilNextFastTrigger() ~ more seconds.</span></span>
+      <br/>
+    </div>
+    <div ~style.display=Autobuyers.areThereAnyAutobuyers() ? '' : 'none'~>
+      <span>Make autobuyers trigger at most every X seconds (0 to always trigger): <input type="text" ~!value=Autobuyers.fastAutobuyersTimerLength()~ ~!onchange=function() {Autobuyers.setFastAutobuyersTimerLength(+this.value)}~></input></span>
+      <br/>
+    </div>
     <span><button onclick="Autobuyers.setAll(true)">Turn all autobuyers on</button> <button onclick="Autobuyers.setAll(false)">Turn all autobuyers off</button></span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
