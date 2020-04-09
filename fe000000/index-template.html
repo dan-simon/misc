@@ -156,7 +156,9 @@
     </div>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'infinity' ? '' : 'none'~>
-    <span>You have ~f InfinityPoints.amount() ~ infinity points, multiplying all generators by ~f InfinityPoints.multiplier() ~. <button ~class=InfinityMaxAll.anythingToBuy() ? "" : "disabled"~ onclick="InfinityMaxAll.maxAll()">Max all</button></span>
+    <span>You have ~f InfinityPoints.amount() ~ infinity points. <button ~class=InfinityMaxAll.anythingToBuy() ? "" : "disabled"~ onclick="InfinityMaxAll.maxAll()">Max all</button></span>
+    <br/>
+    <span>You have produced ~f InfinityPoints.totalIPProducedThisEternity() ~ infinity points this eternity, multiplying all generators by ~f InfinityPoints.multiplier() ~.</span>
     <br/>
     <span>You have ~f Infinities.amount() ~ infinities, multiplying all infinity generators by ~f Infinities.infinityGeneratorMultiplier() ~.</span>
     <br/>
@@ -835,7 +837,7 @@
             <br/>
             <span><button onclick="InfinityChallenge.startOrExitInfinityChallenge(1)">~r InfinityChallenge.isInfinityChallengeRunning(1) ? "Exit challenge" : (InfinityChallenge.isInfinityChallengeRequirementReached(1) ? "Start challenge" : "Requires more stars") ~</button></span>
             <br/>
-            <span>Reward: The multiplier to generators based on IP is uncapped.</span>
+            <span>Reward: The multiplier to generators based on total IP this eternity is uncapped.</span>
           </div>
         </td>
         <td>
@@ -1411,6 +1413,8 @@
     <span>You have produced ~f player.stats.totalStarsProducedThisEternity ~ stars this eternity.</span>
     <br/>
     <span>You have produced ~f player.stats.totalIPProduced ~ total infinity points.</span>
+    <br/>
+    <span>You have produced ~f player.stats.totalIPProducedThisEternity ~ infinity points this eternity.</span>
     <br/>
     <span>Your fastest infinity took ~f player.stats.fastestInfinity ~ seconds.</span>
     <br/>

@@ -66,7 +66,9 @@ let EternityPrestigeLayer = {
     player.slowAutobuyers = [
       false, false, false, false, false, false, false, false, false,
     ];
-    player.stats.totalStarsProducedThisEternity = new Decimal(0);
+    // Small bonus, arguably unexpected but not that big in the grand scheme of things.
+    player.stats.totalStarsProducedThisEternity = EternityStartingBenefits.stars();
+    player.stats.totalIPProducedThisEternity = EternityStartingBenefits.infinityPoints();
     player.stats.timeSinceEternity = 0;
     player.stats.timeSinceLastPeakEPPerSec = Math.pow(2, 256);
     player.stats.peakEPPerSec = new Decimal(0);

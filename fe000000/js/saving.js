@@ -140,6 +140,10 @@ let Saving = {
       player.autobuyersTimerLength = 0;
       player.version = 1.5234375;
     }
+    if (player.version < 1.53125) {
+      player.totalIPProducedThisEternity = player.totalIPProduced;
+      player.version = 1.53125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
@@ -157,6 +161,7 @@ let Saving = {
     player.stats.totalStarsProduced = new Decimal(player.stats.totalStarsProduced);
     player.stats.totalStarsProducedThisEternity = new Decimal(player.stats.totalStarsProducedThisEternity);
     player.stats.totalIPProduced = new Decimal(player.stats.totalIPProduced);
+    player.stats.totalIPProducedThisEternity = new Decimal(player.stats.totalIPProducedThisEternity);
     player.stats.totalEPProduced = new Decimal(player.stats.totalEPProduced);
     player.stats.peakIPPerSec = new Decimal(player.stats.peakIPPerSec);
     player.stats.peakEPPerSec = new Decimal(player.stats.peakEPPerSec);

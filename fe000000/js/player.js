@@ -96,6 +96,7 @@ let initialPlayer = {
     totalStarsProduced: new Decimal(0),
     totalStarsProducedThisEternity: new Decimal(0),
     totalIPProduced: new Decimal(0),
+    totalIPProducedThisEternity: new Decimal(0),
     totalEPProduced: new Decimal(0),
     timeSincePurchase: 0,
     timeSinceSacrifice: 0,
@@ -119,7 +120,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.5234375,
+  version: 1.53125,
 }
 
 let player;
