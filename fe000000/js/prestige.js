@@ -32,7 +32,7 @@ let Prestige = {
     return player.stars.gte(this.prestigeRequirement()) && !InfinityPrestigeLayer.mustInfinity() && !this.isPrestigeDisabled();
   },
   isVisible() {
-    return (this.canPrestige() || this.prestigePower().gt(1) || player.infinities > 0) && !this.isPrestigeDisabled();
+    return (this.canPrestige() || this.prestigePower().gt(1) || player.infinities > 0 || player.eternities > 0) && !this.isPrestigeDisabled();
   },
   newPrestigePower() {
     return this.canPrestige() ? Decimal.pow(2, this.prestigePowerExponent() * (player.stars.log(2) - 96) / 16) : this.prestigePower();
@@ -47,16 +47,18 @@ let Prestige = {
     if (!this.canPrestige()) return;
     this.setPrestigePower(this.newPrestigePower());
     player.stats.prestigesThisInfinity++;
-    this.prestigeReset();
+    this.prestigeReset(false);
   },
-  prestigeReset() {
-    player.stars = new Decimal(2);
-    player.boost = {bought: 0};
-    player.generators = initialGenerators();
-    player.highestGenerator = 0;
-    player.sacrificeMultiplier = new Decimal(1);
-    player.stats.timeSincePurchase = 0;
-    player.stats.timeSinceSacrifice = 0;
-    player.stats.timeSincePrestige = 0;
+  prestigeReset(fromHigher) {
+    if (fromHigher || !EternityMilestones.isEternityMilestoneActive(8)) {
+      player.stars = EternityStartingBenefits.stars();
+      player.boost = {bought: 0};
+      player.generators = initialGenerators();
+      player.highestGenerator = 0;
+      player.sacrificeMultiplier = new Decimal(1);
+      player.stats.timeSincePurchase = 0;
+      player.stats.timeSinceSacrifice = 0;
+      player.stats.timeSincePrestige = 0;
+    }
   }
 }

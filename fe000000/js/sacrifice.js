@@ -18,7 +18,10 @@ let Sacrifice = {
     }
   },
   sacrificeRequirement() {
-    let req = Decimal.pow(2, 16 * (Challenge.isChallengeRunning(10) ? 1 : this.sacrificeMultiplier().toNumber()));
+    // Decimal.pow(2, Infinity) is 0, but Decimal.pow(2, 1e20) isn't,
+    // so we take the min with 1e20 in case this.sacrificeMultiplier()
+    // is too big to be converted to number.
+    let req = Decimal.pow(2, 16 * (Challenge.isChallengeRunning(10) ? 1 : this.sacrificeMultiplier().min(1e20).toNumber()));
     if (this.hasStrongerSacrifice()) {
       req = req.min(this.sacrificeMultiplier().pow(1 / this.sacrificeExponent()));
     }
@@ -28,7 +31,7 @@ let Sacrifice = {
     return Generator(8).amount().gt(0) && player.stars.gte(this.sacrificeRequirement()) && !InfinityPrestigeLayer.mustInfinity();
   },
   isVisible() {
-    return this.canSacrifice() || this.sacrificeMultiplier().gt(1) || player.infinities > 0;
+    return this.canSacrifice() || this.sacrificeMultiplier().gt(1) || player.infinities > 0 || player.eternities > 0;
   },
   newSacrificeMultiplier() {
     let mult = new Decimal(player.stars.log(2) / 16);
@@ -53,11 +56,12 @@ let Sacrifice = {
   },
   sacrificeReset() {
     if (Challenge.isChallengeRunning(10)) {
-      player.stars = new Decimal(2);
+      // Challenge 10 overrides Eternity Milestone 4.
+      player.stars = EternityStartingBenefits.stars();
       player.boost = {bought: 0};
       player.generators = initialGenerators();
       player.highestGenerator = 0;
-    } else {
+    } else if (!EternityMilestones.isEternityMilestoneActive(4)) {
       Generators.resetAmounts(7);
     }
     player.stats.timeSincePurchase = 0;

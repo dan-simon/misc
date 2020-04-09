@@ -23,8 +23,11 @@ let InfinityChallenge = {
   getInfinityChallengeRequirement(x) {
     return this.requirements[x];
   },
+  totalStarsProducedThisEternity() {
+    return player.stats.totalStarsProducedThisEternity;
+  },
   isInfinityChallengeRequirementReached(x) {
-    return player.stats.totalStarsProducedThisEternity.gte(this.getInfinityChallengeRequirement(x));
+    return this.totalStarsProducedThisEternity().gte(this.getInfinityChallengeRequirement(x));
   },
   isInfinityChallengeRunning(x) {
     return this.currentInfinityChallenge() === x;
@@ -71,6 +74,20 @@ let InfinityChallenge = {
   completeInfinityChallenge(x) {
     player.infinityChallengesCompleted[x - 1] = true;
   },
+  checkForAllAutoInfinityChallengeCompletions() {
+    // Don't call this unless the player actually has
+    // the relevant eternity milestone.
+    for (let i = 1; i <= 8; i++) {
+      this.checkForAutoInfinityChallengeCompletion(i);
+    }
+  },
+  checkForAutoInfinityChallengeCompletion(x) {
+    // Don't call this unless the player actually has
+    // the relevant eternity milestone.
+    if (this.isInfinityChallengeRequirementReached(x)) {
+      this.completeInfinityChallenge(x);
+    }
+  },
   isInfinityChallengeCompleted(x) {
     return player.infinityChallengesCompleted[x - 1];
   },
@@ -79,9 +96,6 @@ let InfinityChallenge = {
   },
   multiplier() {
     return Decimal.pow(2, this.numberOfInfinityChallengesCompleted() / 4);
-  },
-  areAllInfinityChallengesCompleted() {
-    return this.numberOfInfinityChallengesCompleted() === 2;
   },
   infinityChallenge3PrestigePowerExponent() {
     return 8 / (8 + player.stats.prestigesThisInfinity);
@@ -100,9 +114,11 @@ let InfinityChallenge = {
   },
   // This reward is theoretically unbalanced and will eventually make everything explode,
   // but I'm fairly sure it doesn't do so until past break_infinity's limit,
-  // probably much farther.
+  // probably much farther. It used to be stronger; I nerfed it, mostly because
+  // I didn't want it to get to ^16 and for infinity dimension multipliers
+  // from other sources to thus be 3x as stronger.
   infinityChallenge5Reward() {
-    return 1 + Math.log2(Math.max(Stars.amount().log(2) / 16384, 1));
+    return 1 + Math.sqrt(Math.log2(Math.max(Stars.amount().log(2) / 16384, 1)));
   },
   infinityChallenge6PrestigePowerExponent() {
     return 1 / (1 + player.stats.prestigesThisInfinity % 2);

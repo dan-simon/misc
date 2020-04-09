@@ -4,7 +4,27 @@ let Autobuyer = function (i) {
   }
   return {
     hasAutobuyer() {
-      return Challenge.isChallengeCompleted(i);
+      if (i === 13) {
+        return EternityMilestones.isEternityMilestoneActive(16);
+      } else if (i > 9) {
+        return Challenge.isChallengeCompleted(i);
+      } else {
+        return Challenge.isChallengeCompleted(i) || player.slowAutobuyers[i];
+      }
+    },
+    isSlow() {
+      return i <= 9 && this.hasAutobuyer() && !Challenge.isChallengeCompleted(i);
+    },
+    canUnlockSlow() {
+      return i <= 9 && !this.hasAutobuyer() && player.stars.gte(this.unlockSlowCost());
+    },
+    unlockSlow() {
+      if (!this.canUnlockSlow()) return;
+      player.slowAutobuyers[i] = true;
+      player.stars = player.stars.minus(this.unlockSlowCost());
+    },
+    unlockSlowCost() {
+      return Decimal.pow(2, 2 * Math.pow(i, 2));
     },
     isOn() {
       return player.autobuyers[i - 1].isOn;
@@ -44,8 +64,10 @@ let Autobuyer = function (i) {
         return 'buyMax';
       }
     },
-    tick() {
+    tick(triggerSlowAutobuyers, triggerFastAutobuyers) {
       if (!this.isActive()) return;
+      if (this.isSlow() && !triggerSlowAutobuyers) return;
+      if (!this.isSlow() && !triggerFastAutobuyers) return;
       if (i <= 9) {
         this.target()[this.targetMethod()]();
       }
@@ -54,18 +76,39 @@ let Autobuyer = function (i) {
 }
 
 let Autobuyers = {
-  list: [...Array(12)].map((_, i) => Autobuyer(i + 1)),
+  list: [...Array(13)].map((_, i) => Autobuyer(i + 1)),
   get: function (x) {
     return this.list[x - 1];
   },
   numberOfAutobuyers() {
-    return Challenge.numberOfChallengesCompleted();
+    return this.list.filter(i => i.hasAutobuyer()).length;
+  },
+  areAnyAutobuyersSlow() {
+    return this.list.some(i => i.isSlow());
+  },
+  areAnyAutobuyersFast() {
+    return this.list.some(i => i.hasAutobuyer() && !i.isSlow());
+  },
+  areThereAnyAutobuyers() {
+    return this.numberOfAutobuyers() > 0;
+  },
+  doFastAutobuyersAlwaysTrigger() {
+    return this.fastAutobuyersTimerLength() <= 0;
   },
   setAll(x) {
     for (let autobuyer of this.list) {
       if (autobuyer.hasAutobuyer()) {
         autobuyer.setIsOn(x);
         autobuyer.checkbox().checked = x;
+      }
+    }
+  },
+  toggleAll() {
+    for (let autobuyer of this.list) {
+      if (autobuyer.hasAutobuyer()) {
+        autobuyer.setIsOn(!autobuyer.isOn());
+        // Note that autobuyer.isOn() has been negated by the previous line.
+        autobuyer.checkbox().checked = autobuyer.isOn();
       }
     }
   },
@@ -115,6 +158,8 @@ let Autobuyers = {
       shouldInfinity = player.stats.timeSinceInfinity >= priority.toNumber();
     } else if (mode === 'X times last') {
       shouldInfinity = InfinityPrestigeLayer.infinityPointGain().gte(player.stats.lastTenInfinities[0][1].times(priority));
+    } else if (mode === 'X times best of last ten') {
+      shouldInfinity = InfinityPrestigeLayer.infinityPointGain().gte(player.stats.lastTenInfinities.map(x => x[1]).reduce(Decimal.max).times(priority));
     } else if (mode === 'Time past peak/sec') {
       shouldInfinity = player.stats.timeSinceLastPeakIPPerSec >= priority.toNumber();
     } else if (mode === 'Fraction of peak/sec') {
@@ -124,12 +169,66 @@ let Autobuyers = {
       InfinityPrestigeLayer.infinity();
     }
   },
-  tick() {
-    Autobuyers.infinity();
-    Autobuyers.prestige();
-    Autobuyers.sacrifice();
+  eternity() {
+    if (!Autobuyer(13).isActive() || !EternityPrestigeLayer.canEternity()) return;
+    let shouldEternity;
+    let mode = Autobuyer(13).mode();
+    let priority = Autobuyer(13).priority();
+    if (mode === 'Amount') {
+      shouldEternity = EternityPrestigeLayer.eternityPointGain().gte(priority);
+    } else if (mode === 'Time') {
+      shouldEternity = player.stats.timeSinceEternity >= priority.toNumber();
+    } else if (mode === 'X times last') {
+      shouldEternity = EternityPrestigeLayer.eternityPointGain().gte(player.stats.lastTenEternities[0][1].times(priority));
+    }  else if (mode === 'X times best of last ten') {
+      shouldEternity = EternityPrestigeLayer.eternityPointGain().gte(player.stats.lastTenEternities.map(x => x[1]).reduce(Decimal.max).times(priority));
+    } else if (mode === 'Time past peak/sec') {
+      shouldEternity = player.stats.timeSinceLastPeakEPPerSec >= priority.toNumber();
+    } else if (mode === 'Fraction of peak/sec') {
+      shouldEternity = EternityPrestigeLayer.currentEPPerSec().lte(EternityPrestigeLayer.peakEPPerSec().times(priority));
+    }
+    if (shouldEternity) {
+      EternityPrestigeLayer.eternity();
+    }
+  },
+  slowAutobuyersTimerLength() {
+    return Math.max(16, player.autobuyersTimerLength);
+  },
+  // The below two methods don't need to be separate but they sort of
+  // serve slightly different functions.
+  fastAutobuyersTimerLength() {
+    return player.autobuyersTimerLength;
+  },
+  autobuyersTimerLength() {
+    return player.autobuyersTimerLength;
+  },
+  timeUntilNextSlowTrigger() {
+    return this.slowAutobuyersTimerLength() - player.slowAutobuyersTimer;
+  },
+  timeUntilNextFastTrigger() {
+    return this.fastAutobuyersTimerLength() - player.fastAutobuyersTimer;
+  },
+  setAutobuyersTimerLength(x) {
+    player.autobuyersTimerLength = x;
+  },
+  mod(a, b) {
+    return (b > 0) ? a % b : 0;
+  },
+  tick(diff) {
+    player.slowAutobuyersTimer += diff;
+    let triggerSlowAutobuyers = player.slowAutobuyersTimer >= this.slowAutobuyersTimerLength();
+    player.slowAutobuyersTimer = this.mod(player.slowAutobuyersTimer, this.slowAutobuyersTimerLength());
+    player.fastAutobuyersTimer += diff;
+    let triggerFastAutobuyers = player.fastAutobuyersTimer >= this.fastAutobuyersTimerLength();
+    player.fastAutobuyersTimer = this.mod(player.fastAutobuyersTimer, this.fastAutobuyersTimerLength());
+    if (triggerFastAutobuyers) {
+      Autobuyers.eternity();
+      Autobuyers.infinity();
+      Autobuyers.prestige();
+      Autobuyers.sacrifice();
+    }
     for (let autobuyer of this.priorityOrder()) {
-      autobuyer.tick();
+      autobuyer.tick(triggerSlowAutobuyers, triggerFastAutobuyers);
     }
   }
 }

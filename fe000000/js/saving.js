@@ -100,30 +100,78 @@ let Saving = {
       player.stats.purchasesThisInfinityByType = [0, 0, 0, 0, 0, 0, 0, 0, 0];
       player.version = 1.46875;
     }
+    if (player.version < 1.5) {
+      player.eternityPoints = new Decimal(0);
+      player.eternities = 0;
+      player.eternityStars = new Decimal(2);
+      player.eternityGenerators = initialEternityGenerators();
+      player.highestEternityGenerator = 0;
+      player.eternityMilestonesOn = [true, true];
+      player.autobuyers.push({on: false, mode: 'Amount', priority: new Decimal(2)});
+      player.infinityAutobuyers = [
+        false, false, false, false, false, false, false, false, false, false
+      ];
+      player.stats.totalEPProduced = new Decimal(0);
+      player.stats.timeSinceEternity = player.stats.timeSinceGameStart;
+      player.stats.timeSinceLastPeakEPPerSec = Math.pow(2, 256);
+      player.stats.fastestEternity = Math.pow(2, 256);
+      player.stats.peakEPPerSec = new Decimal(0);
+      player.stats.lastTenEternities = initialLastTenEternities();
+      player.version = 1.5;
+    }
+    if (player.version < 1.50625) {
+      player.slowAutobuyers = [
+        false, false, false, false, false, false, false, false, false,
+      ];
+      player.slowAutobuyersTimer = 0;
+      player.version = 1.50625;
+    }
+    if (player.version < 1.515625) {
+      player.boughtTheorems = [0, 0, 0];
+      player.unspentTheorems = 0;
+      player.studies = [
+        false, false, false, false, false, false,
+        false, false, false, false, false, false,
+      ];
+      player.version = 1.515625;
+    }
+    if (player.version < 1.5234375) {
+      player.fastAutobuyersTimer = 0;
+      player.autobuyersTimerLength = 0;
+      player.version = 1.5234375;
+    }
+    if (player.version < 1.53125) {
+      player.totalIPProducedThisEternity = player.totalIPProduced;
+      player.version = 1.53125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
-    for (let i = 0; i < 8; i++) {
-      player.generators[i].amount = new Decimal(player.generators[i].amount);
-    }
+    player.infinityStars = new Decimal(player.infinityStars);
+    player.eternityStars = new Decimal(player.eternityStars);
+    player.infinityPoints = new Decimal(player.infinityPoints);
+    player.eternityPoints = new Decimal(player.eternityPoints);
     player.sacrificeMultiplier = new Decimal(player.sacrificeMultiplier);
     player.prestigePower = new Decimal(player.prestigePower);
-    player.infinityPoints = new Decimal(player.infinityPoints);
-    player.infinityStars = new Decimal(player.infinityStars);
     for (let i = 0; i < 8; i++) {
+      player.generators[i].amount = new Decimal(player.generators[i].amount);
       player.infinityGenerators[i].amount = new Decimal(player.infinityGenerators[i].amount);
+      player.eternityGenerators[i].amount = new Decimal(player.eternityGenerators[i].amount);
     }
     player.stats.totalStarsProduced = new Decimal(player.stats.totalStarsProduced);
     player.stats.totalStarsProducedThisEternity = new Decimal(player.stats.totalStarsProducedThisEternity);
     player.stats.totalIPProduced = new Decimal(player.stats.totalIPProduced);
+    player.stats.totalIPProducedThisEternity = new Decimal(player.stats.totalIPProducedThisEternity);
+    player.stats.totalEPProduced = new Decimal(player.stats.totalEPProduced);
     player.stats.peakIPPerSec = new Decimal(player.stats.peakIPPerSec);
+    player.stats.peakEPPerSec = new Decimal(player.stats.peakEPPerSec);
     for (let i = 0; i < 10; i++) {
       if (player.stats.lastTenInfinities[i] !== -1) {
         player.stats.lastTenInfinities[i][1] = new Decimal(player.stats.lastTenInfinities[i][1]);
         player.stats.lastTenInfinities[i][2] = new Decimal(player.stats.lastTenInfinities[i][2]);
       }
     }
-    for (let i = 9; i < 12; i++) {
+    for (let i = 9; i < 13; i++) {
       player.autobuyers[i].priority = new Decimal(player.autobuyers[i].priority);
     }
   },
