@@ -445,7 +445,7 @@
       <br/>
     </div>
     <div ~style.display=Autobuyers.areThereAnyAutobuyers() ? '' : 'none'~>
-      <span>Make autobuyers trigger at most every X seconds (0 to always trigger): <input type="text" ~!value=Autobuyers.fastAutobuyersTimerLength()~ ~!onchange=function() {Autobuyers.setFastAutobuyersTimerLength(+this.value)}~></input></span>
+      <span>Make autobuyers trigger at most every X seconds (0 to always trigger): <input type="text" ~!value=Autobuyers.autobuyersTimerLength()~ ~!onchange=function() {Autobuyers.setAutobuyersTimerLength(+this.value)}~></input></span>
       <br/>
     </div>
     <span><button onclick="Autobuyers.setAll(true)">Turn all autobuyers on</button> <button onclick="Autobuyers.setAll(false)">Turn all autobuyers off</button></span>

@@ -7,8 +7,8 @@ function updateDisplayPageLoadSetup() {
 }
 
 function updateDisplaySaveLoadSetup() {
-  b[104].value = Autobuyers.fastAutobuyersTimerLength();
-  b[104].onchange = function() {Autobuyers.setFastAutobuyersTimerLength(+this.value)};
+  b[104].value = Autobuyers.autobuyersTimerLength();
+  b[104].onchange = function() {Autobuyers.setAutobuyersTimerLength(+this.value)};
   b[107].checked = Autobuyer(1).isOn();
   b[107].onchange = function() {Autobuyer(1).setIsOn(this.checked)};
   b[108].value = Autobuyer(1).mode();

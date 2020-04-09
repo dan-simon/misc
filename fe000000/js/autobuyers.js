@@ -185,7 +185,12 @@ let Autobuyers = {
   slowAutobuyersTimerLength() {
     return Math.max(16, player.autobuyersTimerLength);
   },
+  // The below two methods don't need to be separate but they sort of
+  // serve slightly different functions.
   fastAutobuyersTimerLength() {
+    return player.autobuyersTimerLength;
+  },
+  autobuyersTimerLength() {
     return player.autobuyersTimerLength;
   },
   timeUntilNextSlowTrigger() {
@@ -194,7 +199,7 @@ let Autobuyers = {
   timeUntilNextFastTrigger() {
     return this.fastAutobuyersTimerLength() - player.fastAutobuyersTimer;
   },
-  setFastAutobuyersTimerLength(x) {
+  setAutobuyersTimerLength(x) {
     player.autobuyersTimerLength = x;
   },
   mod(a, b) {

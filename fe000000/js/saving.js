@@ -135,6 +135,11 @@ let Saving = {
       ];
       player.version = 1.515625;
     }
+    if (player.version < 1.5234375) {
+      player.fastAutobuyersTimer = 0;
+      player.autobuyersTimerLength = 0;
+      player.version = 1.5234375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
