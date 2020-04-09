@@ -36,7 +36,7 @@ function cmp(a, b) {
 }
 
 function flatten(l) {
-  return [].concat.apply([], l);
+  return [].concat.apply([], l.map(i => Array.isArray(i) ? i : [i]));
 }
 
 function getUntabbed(inTabs) {
@@ -70,7 +70,7 @@ function makeUpdateDisplay(el1CodeList, el2CodeList, setupList, inTabs) {
   let setupCode = makeUpdateDisplaySetup(setupList);
   let updateDisplayCode = 'function updateDisplay() {\n' + g(untabbed.map(f), '  ') + '\n' +
   inTabs.map(x => '  if (' + x[0][0] + '[' + x[0].slice(1) + '].style.display !== "none") {\n' +
-  g(x[1].map(f), '    ') + '\n  }').join('\n') + '\n}';
+  g(flatten(x[1].map(f)), '    ') + '\n  }').join('\n') + '\n}';
   return setupCode + '\n\n' + updateDisplayCode;
 }
 

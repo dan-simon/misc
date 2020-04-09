@@ -59,7 +59,7 @@ let InfinityPrestigeLayer = {
     this.infinityReset();
   },
   infinityReset() {
-    Prestige.prestigeReset();
+    Prestige.prestigeReset(true);
     player.prestigePower = new Decimal(1);
     player.infinityStars = new Decimal(1);
     InfinityGenerators.list.forEach(x => x.resetAmount());
