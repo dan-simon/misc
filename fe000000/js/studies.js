@@ -8,9 +8,9 @@ let STUDY_EFFECTS = [
   () => Decimal.pow(2, Math.pow(Math.min(16, Math.max(0, Math.log2(Eternities.amount()))), 2) / 4),
   () => Decimal.pow(2, Math.pow(Studies.totalTheorems(), 2) / 16),
   () => Boost.multiplierPer(),
-  () => Math.max(1, Math.log2(Prestige.prestigePower().log2())),
-  () => 1 + 1 + player.stats.timeSinceEternity / 64,
-  () => Studies.totalTheorems(),
+  () => Math.pow(Math.max(1, Math.log2(Prestige.prestigePower().log2())), 3),
+  () => Math.pow(2, Math.pow(Math.log2(1 + player.stats.timeSinceEternity / 64), 1.5)),
+  () => Math.pow(Studies.totalTheorems(), 2),
 ]
 
 let Study = function (i) {

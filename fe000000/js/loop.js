@@ -4,6 +4,7 @@ function gameLoop(diff, display) {
     diff = (now - player.lastUpdate) / 1024 * player.cheats.gameSpeed;
     player.lastUpdate = now;
   }
+  Boost.produceBoostPower(diff);
   if (!InfinityPrestigeLayer.mustInfinity()) {
     for (let i = 8; i >= 1; i--) {
       Generator(i).produce(diff);

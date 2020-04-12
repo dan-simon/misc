@@ -45,6 +45,7 @@ function initialLastTenEternities() {
 let initialPlayer = {
   stars: new Decimal(2),
   boost: {bought: 0},
+  boostPower: 1,
   generators: initialGenerators(),
   highestGenerator: 0,
   sacrificeMultiplier: new Decimal(1),
@@ -77,6 +78,7 @@ let initialPlayer = {
   eternityStars: new Decimal(2),
   eternityGenerators: initialEternityGenerators(),
   highestEternityGenerator: 0,
+  eternityUpgrades: [0, 0],
   eternityMilestonesOn: [true, true],
   infinityAutobuyers: [
     false, false, false, false, false, false, false, false, false, false,
@@ -120,7 +122,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.53125,
+  version: 1.5625,
 }
 
 let player;

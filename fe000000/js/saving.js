@@ -144,6 +144,14 @@ let Saving = {
       player.totalIPProducedThisEternity = player.totalIPProduced;
       player.version = 1.53125;
     }
+    if (player.version < 1.546875) {
+      player.eternityUpgrades = [0, 0];
+      player.version = 1.546875;
+    }
+    if (player.version < 1.5625) {
+      player.boostPower = 1;
+      player.version = 1.5625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

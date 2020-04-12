@@ -11,6 +11,7 @@
   <script src="js/eternity/eternity-prestige-layer.js"></script>
   <script src="js/eternity/eternity-stars.js"></script>
   <script src="js/eternity/eternity-starting-benefits.js"></script>
+  <script src="js/eternity/eternity-upgrades.js"></script>
   <script src="js/infinity/infinities.js"></script>
   <script src="js/infinity/infinity-autobuyers.js"></script>
   <script src="js/infinity/infinity-challenge.js"></script>
@@ -67,7 +68,16 @@
       <div ~style.display=Challenge.isThereChallengeText() ? '' : 'none'~>
         <span>~r Challenge.challengeText() ~</span>
       </div>
-      <span ~style.display=Boost.isVisible() ? '' : 'none'~>You have ~f Boost.bought() ~ boosts, multipying all generators by ~f Boost.multiplier() ~x (~f Boost.multiplierPer() ~x each). <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buy()">Cost: ~f Boost.cost() ~</button> <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buyMax()">Max</button></span>
+      <div ~style.display=Boost.isVisible() ? '' : 'none'~>
+        <span/>You have ~f Boost.bought() ~ boosts, multipying all generators by ~f Boost.multiplier() ~x (~f Boost.multiplierPer() ~x each). <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buy()">Cost: ~f Boost.cost() ~</button> <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buyMax()">Max</button></span>
+        <br/>
+        <div ~style.display=Boost.isBoostPowerVisible() ? '' : 'none'~>
+          <span>You have ~f Boost.boostPower() ~ boost power, increasing the per-boost multiplier by ~f Boost.boostPowerEffect() ~x.</span>
+          <br/>
+          <span>You are generating ~r formatWithPrecision(Boost.boostPowerPerSecond(), 5) ~ boost power per second (~r formatWithPrecision(Boost.boostPowerPerBoost(), 5) ~ per boost above ~f Boost.boostPowerStart() ~).</span>
+        </div>
+        <span ~style.display=Boost.isBoostPowerVisible() ? 'none' : ''~>You will start generating boost power for each boost above ~f Boost.boostPowerStart() ~ boosts.</span>
+      </div>
       <br/>
       <br/>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
@@ -981,6 +991,21 @@
     <br/>
     <br/>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
+      <tr>
+        <td>Increase the per-purchase multiplier for eternity generators:</td>
+        <td><span ~style.display=EternityUpgrade(1).atBoughtLimit() ? 'none' : ''~>^~f EternityUpgrade(1).effect() ~ → ^~f EternityUpgrade(1).nextEffect() ~</span><span ~style.display=EternityUpgrade(1).atBoughtLimit() ? '' : 'none'~>^~f EternityUpgrade(1).effect() ~ (maxed)</span></td>
+        <td><span ~style.display=EternityUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=EternityUpgrade(1).canBuy() ? "" : "disabled"~ onclick="EternityUpgrade(1).buy()">Cost: ~f EternityUpgrade(1).cost() ~ IP</button></span></td>
+        <td><span ~style.display=EternityUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=EternityUpgrade(1).canBuy() ? "" : "disabled"~ onclick="EternityUpgrade(1).buyMax()">Max</button></span></td>
+      </tr>
+      <tr>
+        <td>Increase the multiplier per boost:</td>
+        <td><span ~style.display=EternityUpgrade(2).atBoughtLimit() ? 'none' : ''~>~f EternityUpgrade(2).effect() ~x → ~f EternityUpgrade(2).nextEffect() ~x</span><span ~style.display=EternityUpgrade(2).atBoughtLimit() ? '' : 'none'~>~f EternityUpgrade(2).effect() ~x (maxed)</span></td>
+        <td><span ~style.display=EternityUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=EternityUpgrade(2).canBuy() ? "" : "disabled"~ onclick="EternityUpgrade(2).buy()">Cost: ~f EternityUpgrade(2).cost() ~ IP</button></span></td>
+        <td><span ~style.display=EternityUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=EternityUpgrade(2).canBuy() ? "" : "disabled"~ onclick="EternityUpgrade(2).buyMax()">Max</button></span></td>
+      </tr>
+    </table>
+    <br/>
+    <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr ~style.display=EternityGenerator(1).isVisible() ? '' : 'none'~>
         <td>Eternity Generator 1</td>
         <td>~f EternityGenerator(1).amount() ~</td>
@@ -1342,7 +1367,7 @@
           <button ~class=Study(12).className()~ onclick="Study(12).buy()">
             Study 12
             <br/>
-            Eternity generators are multiplied by total theorems
+            Multiplier to eternity generators based on total theorems
             <br/>
             Currently: ~f Study(12).rawEffect() ~x
             <br/>

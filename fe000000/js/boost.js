@@ -32,7 +32,7 @@ let Boost = {
     if (InfinityChallenge.isInfinityChallengeCompleted(7)) {
       mult += 2;
     }
-    mult *= Study(1).effect();
+    mult *= Study(1).effect() * EternityUpgrade(2).effect() * this.boostPowerEffect();
     if (InfinityChallenge.isInfinityChallengeRunning(7)) {
       mult = Math.pow(mult, 2);
     }
@@ -73,5 +73,26 @@ let Boost = {
   },
   buyMax() {
     this.buy(this.maxBuyable(), true);
+  },
+  boostPower() {
+    return player.boostPower;
+  },
+  boostPowerEffect() {
+    return 1 + Math.log2(this.boostPower())
+  },
+  isBoostPowerVisible() {
+    return this.isVisible() && this.boostPower() > 1;
+  },
+  boostPowerPerSecond() {
+    return this.boostPowerPerBoost() * Math.max(0, this.bought() - this.boostPowerStart());
+  },
+  boostPowerPerBoost() {
+    return 1 / 16384;
+  },
+  boostPowerStart() {
+    return 320;
+  },
+  produceBoostPower(diff) {
+    player.boostPower += this.boostPowerPerSecond() * diff;
   }
 };

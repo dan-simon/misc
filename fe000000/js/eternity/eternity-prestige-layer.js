@@ -40,6 +40,7 @@ let EternityPrestigeLayer = {
     InfinityPrestigeLayer.infinityReset();
     player.eternityStars = new Decimal(2);
     EternityGenerators.list.forEach(x => x.resetAmount());
+    player.boostPower = 1;
     player.infinityPoints = EternityStartingBenefits.infinityPoints();
     player.infinities = EternityStartingBenefits.infinities();
     player.infinityGenerators = initialInfinityGenerators();
