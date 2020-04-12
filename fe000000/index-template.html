@@ -75,6 +75,8 @@
           <span>You have ~f Boost.boostPower() ~ boost power, increasing the per-boost multiplier by ~f Boost.boostPowerEffect() ~x.</span>
           <br/>
           <span>You are generating ~r formatWithPrecision(Boost.boostPowerPerSecond(), 5) ~ boost power per second (~r formatWithPrecision(Boost.boostPowerPerBoost(), 5) ~ per boost above ~f Boost.boostPowerStart() ~).</span>
+          <br/>
+          <span>Your best boost power ever is ~f Boost.bestBoostPowerEver() ~ (giving ~f Boost.extraTheorems() ~ extra theorems, next at ~f Boost.nextExtraTheorem() ~).</span>
         </div>
         <span ~style.display=Boost.isBoostPowerVisible() ? 'none' : ''~>You will start generating boost power for each boost above ~f Boost.boostPowerStart() ~ boosts.</span>
       </div>
@@ -1122,7 +1124,7 @@
           <div class="eternitymilestonediv">
             ~f 5 ~ eternities
             <br/>
-            ~r EternityMilestones.milestoneStatusDescription(1) ~
+            ~r EternityMilestones.milestoneStatusDescription(5) ~
             <br/>
             Start each eternity with infinities based on your eternities (currently ~f EternityStartingBenefits.rawInfinities() ~)
           </div>

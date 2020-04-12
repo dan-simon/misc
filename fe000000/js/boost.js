@@ -94,5 +94,18 @@ let Boost = {
   },
   produceBoostPower(diff) {
     player.boostPower += this.boostPowerPerSecond() * diff;
+    let oldExtraTheorems = this.extraTheorems();
+    player.bestBoostPowerEver = Math.max(player.boostPower, player.bestBoostPowerEver);
+    let newExtraTheorems = this.extraTheorems();
+    player.unspentTheorems += newExtraTheorems - oldExtraTheorems;
+  },
+  bestBoostPowerEver() {
+    return player.bestBoostPowerEver;
+  },
+  extraTheorems() {
+    return Studies.theoremsFrom(Math.log2(this.bestBoostPowerEver()));
+  },
+  nextExtraTheorem() {
+    return Math.pow(2, Studies.costPow(this.extraTheorems()));
   }
 };

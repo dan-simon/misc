@@ -152,6 +152,10 @@ let Saving = {
       player.boostPower = 1;
       player.version = 1.5625;
     }
+    if (player.version < 1.578125) {
+      player.bestBoostPowerEver = 1;
+      player.version = 1.578125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

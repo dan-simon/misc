@@ -46,6 +46,7 @@ let initialPlayer = {
   stars: new Decimal(2),
   boost: {bought: 0},
   boostPower: 1,
+  bestBoostPowerEver: 1,
   generators: initialGenerators(),
   highestGenerator: 0,
   sacrificeMultiplier: new Decimal(1),
@@ -122,7 +123,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.5625,
+  version: 1.578125,
 }
 
 let player;

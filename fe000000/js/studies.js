@@ -3,8 +3,8 @@ let STUDY_EFFECTS = [
   () => Decimal.pow(4, Math.pow(Prestige.prestigePower().log2(), 0.5)),
   () => Decimal.pow(2, Math.pow(player.stats.totalStarsProduced.log2(), 0.5) / 2),
   () => Decimal.pow(2, 16 * Studies.totalTheorems()),
-  () => Decimal.pow(2, Math.pow(Boost.bought(), 2) / 8192),
-  () => Decimal.pow(Prestige.prestigePower(), 1 / 2048),
+  () => Decimal.pow(2, Math.pow(Boost.bought(), 1.75) / 1024),
+  () => Decimal.pow(2, Math.pow(4 * Prestige.prestigePower().log2(), 0.875) / 1024),
   () => Decimal.pow(2, Math.pow(Math.min(16, Math.max(0, Math.log2(Eternities.amount()))), 2) / 4),
   () => Decimal.pow(2, Math.pow(Studies.totalTheorems(), 2) / 16),
   () => Boost.multiplierPer(),
@@ -60,7 +60,7 @@ let Studies = {
     return this.list[x - 1];
   },
   totalTheorems() {
-    return player.boughtTheorems.reduce((a, b) => a + b);
+    return player.boughtTheorems.reduce((a, b) => a + b) + Boost.extraTheorems();
   },
   unspentTheorems() {
     return player.unspentTheorems;
@@ -90,6 +90,10 @@ let Studies = {
     // Should only be called in getting the cost, otherwise
     // what it does probably isn't what you think it does.
     return n > 3 ? Math.pow(2, (n + 1) / 2) : n + 1;
+  },
+  theoremsFrom(x) {
+    // Only used for boost power.
+    return Math.floor(x > 4 ? 2 * Math.log2(x) : x)
   },
   cost(x) {
     return Decimal.pow(2, Math.pow(256, 2 - x) * this.costPow(player.boughtTheorems[x])).floor();
