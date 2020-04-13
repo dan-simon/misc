@@ -9,6 +9,7 @@
   <script src="js/eternity/eternity-milestones.js"></script>
   <script src="js/eternity/eternity-points.js"></script>
   <script src="js/eternity/eternity-prestige-layer.js"></script>
+  <script src="js/eternity/eternity-producer.js"></script>
   <script src="js/eternity/eternity-stars.js"></script>
   <script src="js/eternity/eternity-starting-benefits.js"></script>
   <script src="js/eternity/eternity-upgrades.js"></script>
@@ -49,18 +50,25 @@
   <div ~style.visibility=EternityPrestigeLayer.canEternity() ? '' : 'hidden'~>
     <button style="height: 48px;" onclick="EternityPrestigeLayer.eternity()">Eternity: Gain ~f EternityPrestigeLayer.eternityPointGain() ~ eternity points<br/>~f EternityPrestigeLayer.currentEPPerSec() ~ EP/sec, ~f EternityPrestigeLayer.peakEPPerSec() ~ peak EP/sec</button>
   </div>
-  <span>
-    <button onclick="Tabs.setTab('main')">Main</button>
-    <button ~style.display=Tabs.isTabVisible('infinity') ? '' : 'none'~ onclick="Tabs.setTab('infinity')">Infinity</button>
-    <button ~style.display=Tabs.isTabVisible('challenges') ? '' : 'none'~ onclick="Tabs.setTab('challenges')">Challenges</button>
-    <button ~style.display=Tabs.isTabVisible('autobuyers') ? '' : 'none'~ onclick="Tabs.setTab('autobuyers')">Autobuyers</button>
-    <button ~style.display=Tabs.isTabVisible('infinity-challenges') ? '' : 'none'~ onclick="Tabs.setTab('infinity-challenges')">Infinity Challenges</button>
-    <button ~style.display=Tabs.isTabVisible('eternity') ? '' : 'none'~ onclick="Tabs.setTab('eternity')">Eternity</button>
-    <button ~style.display=Tabs.isTabVisible('eternity-milestones') ? '' : 'none'~ onclick="Tabs.setTab('eternity-milestones')">Eternity Milestones</button>
-    <button ~style.display=Tabs.isTabVisible('studies') ? '' : 'none'~ onclick="Tabs.setTab('studies')">Studies</button>
-    <button onclick="Tabs.setTab('statistics')">Statistics</button>
-    <button onclick="Tabs.setTab('options')">Options</button>
-  </span>
+  <div>
+    <span>
+      <button onclick="Tabs.setTab('main')">Main</button>
+      <button ~style.display=Tabs.isTabVisible('infinity') ? '' : 'none'~ onclick="Tabs.setTab('infinity')">Infinity</button>
+      <button ~style.display=Tabs.isTabVisible('challenges') ? '' : 'none'~ onclick="Tabs.setTab('challenges')">Challenges</button>
+      <button ~style.display=Tabs.isTabVisible('autobuyers') ? '' : 'none'~ onclick="Tabs.setTab('autobuyers')">Autobuyers</button>
+      <button ~style.display=Tabs.isTabVisible('infinity-challenges') ? '' : 'none'~ onclick="Tabs.setTab('infinity-challenges')">Infinity Challenges</button>
+      <button onclick="Tabs.setTab('statistics')">Statistics</button>
+      <button onclick="Tabs.setTab('options')">Options</button>
+    </span>
+  </div>
+  <div ~style.display=Tabs.isTabVisible('eternity') ? '' : 'none'~>
+    <span>
+      <button ~style.display=Tabs.isTabVisible('eternity') ? '' : 'none'~ onclick="Tabs.setTab('eternity')">Eternity</button>
+      <button ~style.display=Tabs.isTabVisible('eternity-milestones') ? '' : 'none'~ onclick="Tabs.setTab('eternity-milestones')">Eternity Milestones</button>
+      <button ~style.display=Tabs.isTabVisible('studies') ? '' : 'none'~ onclick="Tabs.setTab('studies')">Studies</button>
+      <button ~style.display=Tabs.isTabVisible('eternity-producer') ? '' : 'none'~ onclick="Tabs.setTab('eternity-producer')">Eternity Producer</button>
+    </span>
+  </div>
   <tab ~style.display=Tabs.currentTab() === 'main' ? '' : 'none'~>
     <div ~style.display=InfinityPrestigeLayer.mustInfinity() ? 'none' : ''~>
       <span>You have ~f Stars.amount() ~ stars. You are getting ~f Stars.perSecond() ~ stars per second. <button ~class=MaxAll.anythingToBuy() ? "" : "disabled"~ onclick="MaxAll.maxAll()">Max all</button></span>
@@ -1322,7 +1330,7 @@
             <br/>
             Multiplier to infinity generators based on eternities
             <br/>
-            Currently: ~f Study(7).rawEffect() ~x
+            ~r Study(7).cappedText() ~: ~f Study(7).rawEffect() ~x
             <br/>
             Cost: ~f Study(7).cost() ~ TT
           </button>
@@ -1368,7 +1376,7 @@
             <br/>
             Multiplier to eternity generators based on time in eternity
             <br/>
-            Currently: ~f Study(11).rawEffect() ~x
+            ~r Study(11).cappedText() ~: ~f Study(11).rawEffect() ~x
             <br/>
             Cost: ~f Study(11).cost() ~ TT
           </button>
@@ -1414,8 +1422,6 @@
         <td>
           <button ~class=Studies.canBuy(0) ? '' : 'disabled'~ style="width: 256px; height: 48px;" onclick="Studies.buyMax(0)">
             Buy max theorems with stars
-            <br/>
-            Cost: ~f Studies.cost(0) ~ stars
           </button>
         </td>
         <td>
@@ -1441,6 +1447,40 @@
     <span>
       After ~f 4 ~ theorem purchases of a certain type, theorem costs of that type start increasing more quickly.
     </span>
+  </tab>
+  <tab ~style.display=Tabs.currentTab() === 'eternity-producer' ? '' : 'none'~>
+    <div ~style.display=EternityProducer.isUnlocked() ? 'none' : ''~>
+      <span>The Eternity Producer, when unlocked, will produce ~f EternityProducer.rawProductionPerSecond() ~ eternities per second.</span>
+      <br/>
+      <span>It will also multiply all eternity generators by ~f EternityProducer.rawMultiplier() ~ (based on eternities).</span>
+      <br/>
+      <span>It can be improved via upgrades.</span>
+      <br/>
+      <button style="height: 48px;" onclick="EternityProducer.unlock()" ~style.display=EternityProducer.canUnlock() ? '' : 'disabled'~>
+        Unlock the Eternity Producer<br/>Cost: ~f EternityProducer.unlockCost() ~ eternity points
+      </button>
+    </div>
+    <div ~style.display=EternityProducer.isUnlocked() ? '' : 'none'~>
+      <span>You have ~f Eternities.amount() ~ eternities. Due to the Eternity Producer, they multiply all eternity generators by ~f EternityProducer.multiplier() ~.</span>
+      <br/>
+      <span>The Eternity Producer is producing ~f EternityProducer.productionPerSecond() ~ eternities per second.</span>
+      <br/>
+      <span><button ~class=EternityProducer.anythingToBuy() ? "" : "disabled"~ onclick="EternityProducer.maxAll()">Max Eternity Producer upgrades</button></span>
+      <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
+        <tr>
+          <td>Increase Eternity Producer production per second:</td>
+          <td><span ~style.display=EternityProducerUpgrade(1).atBoughtLimit() ? 'none' : ''~>~f EternityProducerUpgrade(1).effect() ~ → ~f EternityProducerUpgrade(1).nextEffect() ~</span><span ~style.display=EternityProducerUpgrade(1).atBoughtLimit() ? '' : 'none'~>~f EternityProducerUpgrade(1).effect() ~ (maxed)</span></td>
+          <td><span ~style.display=EternityProducerUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=EternityProducerUpgrade(1).canBuy() ? "" : "disabled"~ onclick="EternityProducerUpgrade(1).buy()">Cost: ~f EternityProducerUpgrade(1).cost() ~ EP</button></span></td>
+          <td><span ~style.display=EternityProducerUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=EternityProducerUpgrade(1).canBuy() ? "" : "disabled"~ onclick="EternityProducerUpgrade(1).buyMax()">Max</button></span></td>
+        </tr>
+        <tr>
+          <td>Increase Eternity Producer multiplier to eternity generators:</td>
+          <td><span ~style.display=EternityProducerUpgrade(2).atBoughtLimit() ? 'none' : ''~>~f EternityProducerUpgrade(2).effect() ~ → ~f EternityProducerUpgrade(2).nextEffect() ~</span><span ~style.display=EternityProducerUpgrade(2).atBoughtLimit() ? '' : 'none'~>~f EternityProducerUpgrade(2).effect() ~ (maxed)</span></td>
+          <td><span ~style.display=EternityProducerUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=EternityProducerUpgrade(2).canBuy() ? "" : "disabled"~ onclick="EternityProducerUpgrade(2).buy()">Cost: ~f EternityProducerUpgrade(2).cost() ~ EP</button></span></td>
+          <td><span ~style.display=EternityProducerUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=EternityProducerUpgrade(2).canBuy() ? "" : "disabled"~ onclick="EternityProducerUpgrade(2).buyMax()">Max</button></span></td>
+        </tr>
+      </table>
+    </div>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'statistics' ? '' : 'none'~>
     <span>You have produced ~f player.stats.totalStarsProduced ~ total stars.</span>

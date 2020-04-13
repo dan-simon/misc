@@ -5,11 +5,12 @@ let STUDY_EFFECTS = [
   () => Decimal.pow(2, 16 * Studies.totalTheorems()),
   () => Decimal.pow(2, Math.pow(Boost.bought(), 1.75) / 1024),
   () => Decimal.pow(2, Math.pow(4 * Prestige.prestigePower().log2(), 0.875) / 1024),
-  () => Decimal.pow(2, Math.pow(Math.min(16, Math.max(0, Math.log2(Eternities.amount()))), 2) / 4),
+  // We can use Math.pow() because it's small, this simplifies an isCapped() check later.
+  () => Math.pow(2, Math.pow(Math.min(16, Math.max(0, Math.log2(Eternities.amount()))), 2) / 4),
   () => Decimal.pow(2, Math.pow(Studies.totalTheorems(), 2) / 16),
   () => Math.pow(Boost.multiplierPer(), InfinityChallenge.isInfinityChallengeRunning(7) ? 0.5 : 1),
   () => Math.pow(Math.max(1, Math.log2(Prestige.prestigePower().log2())), 3),
-  () => Math.pow(2, Math.pow(Math.log2(1 + player.stats.timeSinceEternity / 64), 1.5)),
+  () => Math.pow(2, Math.min(16, Math.pow(Math.log2(1 + player.stats.timeSinceEternity / 64), 4 / 3))),
   () => Math.pow(Studies.totalTheorems(), 2),
 ]
 
@@ -39,6 +40,14 @@ let Study = function (i) {
       // a number, and it never has to be a Decimal.
       // So we use 1 as the default value.
       return this.isBought() ? this.rawEffect() : 1;
+    },
+    isCapped() {
+      // Note that this technique only works if the effect is a number and not a Decimal.
+      return (i === 7 || i === 11) &&
+        this.rawEffect() === {7: Math.pow(2, 64), 11: Math.pow(2, 16)}[i];
+    },
+    cappedText() {
+      return this.isCapped() ? 'Capped' : 'Currently';
     },
     buy() {
       if (this.isBuyable()) {

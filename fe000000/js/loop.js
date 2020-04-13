@@ -5,6 +5,7 @@ function gameLoop(diff, display) {
     player.lastUpdate = now;
   }
   // This order is (I think) the one giving the most stuff.
+  EternityProducer.produce(diff);
   Boost.produceBoostPower(diff);
   for (let i = 8; i >= 1; i--) {
     EternityGenerator(i).produce(diff);

@@ -160,6 +160,13 @@ let Saving = {
       player.eternityUpgrades.push(0);
       player.version = 1.59375;
     }
+    if (player.version < 1.609375) {
+      player.eternityProducer = {
+        unlocked: false,
+        upgrades: [0, 0]
+      };
+      player.version = 1.609375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

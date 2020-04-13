@@ -36,7 +36,8 @@ let EternityGenerator = function (i) {
     multiplier() {
       let factors = [
         Decimal.pow(2, this.bought() * EternityUpgrade(1).effect() / 8), Eternities.eternityGeneratorMultiplier(),
-        EternityUpgrade(3).effect(), Study(9).effect(), Study(10).effect(), Study(11).effect(), Study(12).effect()
+        Study(9).effect(), Study(10).effect(), Study(11).effect(), Study(12).effect(),
+        EternityUpgrade(3).effect(), EternityProducer.multiplier()
       ];
       // Most of these are numbers but that's fine, the first one is a Decimal
       // so the below code works.
@@ -65,7 +66,7 @@ let EternityGenerator = function (i) {
       }
       return n <= this.maxBuyable();
     },
-    maxBuyable(n) {
+    maxBuyable() {
       if (!this.isVisible()) return 0;
       let num = Math.floor(player.eternityPoints.div(this.cost()).times(
         Decimal.minus(this.costIncreasePer(), 1)).plus(1).log(this.costIncreasePer()));

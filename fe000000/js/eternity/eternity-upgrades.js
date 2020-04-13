@@ -55,7 +55,7 @@ let EternityUpgrade = function (i) {
       }
       return n <= this.maxBuyable();
     },
-    maxBuyable(n) {
+    maxBuyable() {
       let num = Math.floor(player.eternityPoints.div(this.cost()).times(
         Decimal.minus(this.costIncreasePer(), 1)).plus(1).log(this.costIncreasePer()));
       num = Math.min(num, this.boughtLimit() - this.bought());

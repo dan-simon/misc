@@ -90,6 +90,10 @@ let initialPlayer = {
     false, false, false, false, false, false,
     false, false, false, false, false, false,
   ],
+  eternityProducer: {
+    unlocked: false,
+    upgrades: [0, 0]
+  },
   options: {
     notation: 'Scientific',
     offlineProgress: true,
@@ -123,7 +127,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.59375
+  version: 1.609375
 }
 
 let player;
