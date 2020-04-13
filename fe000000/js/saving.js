@@ -156,6 +156,10 @@ let Saving = {
       player.bestBoostPowerEver = 1;
       player.version = 1.578125;
     }
+    if (player.version < 1.59375) {
+      player.eternityUpgrades.push(0);
+      player.version = 1.59375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

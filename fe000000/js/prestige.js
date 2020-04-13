@@ -56,9 +56,11 @@ let Prestige = {
       player.generators = initialGenerators();
       player.highestGenerator = 0;
       player.sacrificeMultiplier = new Decimal(1);
-      player.stats.timeSincePurchase = 0;
-      player.stats.timeSinceSacrifice = 0;
-      player.stats.timeSincePrestige = 0;
     }
+    // Prestiging still resets times (this matters in a few challenges
+    // and in stats tab).
+    player.stats.timeSincePurchase = 0;
+    player.stats.timeSinceSacrifice = 0;
+    player.stats.timeSincePrestige = 0;
   }
 }

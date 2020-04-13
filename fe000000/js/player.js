@@ -79,7 +79,7 @@ let initialPlayer = {
   eternityStars: new Decimal(2),
   eternityGenerators: initialEternityGenerators(),
   highestEternityGenerator: 0,
-  eternityUpgrades: [0, 0],
+  eternityUpgrades: [0, 0, 0],
   eternityMilestonesOn: [true, true],
   infinityAutobuyers: [
     false, false, false, false, false, false, false, false, false, false,
@@ -123,7 +123,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.578125,
+  version: 1.59375
 }
 
 let player;

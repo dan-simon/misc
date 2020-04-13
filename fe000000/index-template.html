@@ -983,6 +983,8 @@
   <tab ~style.display=Tabs.currentTab() === 'eternity' ? '' : 'none'~>
     <span>You have ~f EternityPoints.amount() ~ eternity points. <button ~class=EternityMaxAll.anythingToBuy() ? "" : "disabled"~ onclick="EternityMaxAll.maxAll()">Max all</button></span>
     <br/>
+    <span>You have produced ~f EternityPoints.totalEPProduced() ~ total eternity points.</span>
+    </br>
     <span>You have ~f Eternities.amount() ~ eternities, multiplying all eternity generators by ~f Eternities.eternityGeneratorMultiplier() ~.</span>
     <br/>
     <span>You have ~f EternityStars.amount() ~ eternity stars, multiplying all normal and infinity generators by ~f EternityStars.multiplier() ~</span>
@@ -996,14 +998,20 @@
       <tr>
         <td>Increase the per-purchase multiplier for eternity generators:</td>
         <td><span ~style.display=EternityUpgrade(1).atBoughtLimit() ? 'none' : ''~>^~f EternityUpgrade(1).effect() ~ → ^~f EternityUpgrade(1).nextEffect() ~</span><span ~style.display=EternityUpgrade(1).atBoughtLimit() ? '' : 'none'~>^~f EternityUpgrade(1).effect() ~ (maxed)</span></td>
-        <td><span ~style.display=EternityUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=EternityUpgrade(1).canBuy() ? "" : "disabled"~ onclick="EternityUpgrade(1).buy()">Cost: ~f EternityUpgrade(1).cost() ~ IP</button></span></td>
+        <td><span ~style.display=EternityUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=EternityUpgrade(1).canBuy() ? "" : "disabled"~ onclick="EternityUpgrade(1).buy()">Cost: ~f EternityUpgrade(1).cost() ~ EP</button></span></td>
         <td><span ~style.display=EternityUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=EternityUpgrade(1).canBuy() ? "" : "disabled"~ onclick="EternityUpgrade(1).buyMax()">Max</button></span></td>
       </tr>
       <tr>
         <td>Increase the multiplier per boost:</td>
         <td><span ~style.display=EternityUpgrade(2).atBoughtLimit() ? 'none' : ''~>~f EternityUpgrade(2).effect() ~x → ~f EternityUpgrade(2).nextEffect() ~x</span><span ~style.display=EternityUpgrade(2).atBoughtLimit() ? '' : 'none'~>~f EternityUpgrade(2).effect() ~x (maxed)</span></td>
-        <td><span ~style.display=EternityUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=EternityUpgrade(2).canBuy() ? "" : "disabled"~ onclick="EternityUpgrade(2).buy()">Cost: ~f EternityUpgrade(2).cost() ~ IP</button></span></td>
+        <td><span ~style.display=EternityUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=EternityUpgrade(2).canBuy() ? "" : "disabled"~ onclick="EternityUpgrade(2).buy()">Cost: ~f EternityUpgrade(2).cost() ~ EP</button></span></td>
         <td><span ~style.display=EternityUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=EternityUpgrade(2).canBuy() ? "" : "disabled"~ onclick="EternityUpgrade(2).buyMax()">Max</button></span></td>
+      </tr>
+      <tr>
+        <td>Multiplier to eternity generators based on total EP produced:</td>
+        <td><span ~style.display=EternityUpgrade(3).atBoughtLimit() ? 'none' : ''~>~f EternityUpgrade(3).effect() ~x → ~f EternityUpgrade(3).nextEffect() ~x</span><span ~style.display=EternityUpgrade(3).atBoughtLimit() ? '' : 'none'~>~f EternityUpgrade(3).effect() ~x (maxed)</span></td>
+        <td><span ~style.display=EternityUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=EternityUpgrade(3).canBuy() ? "" : "disabled"~ onclick="EternityUpgrade(3).buy()">Cost: ~f EternityUpgrade(3).cost() ~ EP</button></span></td>
+        <td><span ~style.display=EternityUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=EternityUpgrade(3).canBuy() ? "" : "disabled"~ onclick="EternityUpgrade(3).buyMax()">Max</button></span></td>
       </tr>
     </table>
     <br/>
@@ -1336,7 +1344,7 @@
           <button ~class=Study(9).className()~ onclick="Study(9).buy()">
             Study 9
             <br/>
-            Eternity generators are multiplied by per-boost multiplier
+            Eternity generators are multiplied by <span ~style.display=InfinityChallenge.isInfinityChallengeRunning(7) ? '' : 'none'~>square root of</span> per-boost multiplier
             <br/>
             Currently: ~f Study(9).rawEffect() ~x
             <br/>
@@ -1443,13 +1451,11 @@
     <br/>
     <span>You have produced ~f player.stats.totalIPProducedThisEternity ~ infinity points this eternity.</span>
     <br/>
+    <span>You have produced ~f player.stats.totalEPProduced ~ total eternity points.</span>
+    <br/>
     <span>Your fastest infinity took ~f player.stats.fastestInfinity ~ seconds.</span>
     <br/>
     <span>Your fastest eternity took ~f player.stats.fastestEternity ~ seconds.</span>
-    <br/>
-    <span>You have produced ~f player.stats.totalIPProduced ~ total infinity points.</span>
-    <br/>
-    <span>You have produced ~f player.stats.totalEPProduced ~ total eternity points.</span>
     <br/>
     <span>You have spent ~f player.stats.timeSincePurchase ~ seconds without purchasing anything.</span>
     <br/>

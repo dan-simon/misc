@@ -64,6 +64,8 @@ let Sacrifice = {
     } else if (!EternityMilestones.isEternityMilestoneActive(4)) {
       Generators.resetAmounts(7);
     }
+    // Sacrificing still resets times (this matters in a few challenges
+    // and in stats tab).
     player.stats.timeSincePurchase = 0;
     player.stats.timeSinceSacrifice = 0;
   }

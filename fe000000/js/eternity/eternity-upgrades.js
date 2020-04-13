@@ -10,16 +10,16 @@ let EternityUpgrade = function (i) {
       player.eternityUpgrades[i - 1] += n;
     },
     boughtLimit() {
-      return [7, Infinity][i - 1];
+      return [7, Infinity, Infinity][i - 1];
     },
     costIncreasePer() {
-      return [16, 4096][i - 1];
+      return [16, 4096, Math.pow(2, 20)][i - 1];
     },
     effectIncreasePer() {
-      return [1, 0.5][i - 1];
+      return [1, 0.5, 0.5][i - 1];
     },
     initialEffect() {
-      return [1, 1][i - 1];
+      return [1, 1, 0][i - 1];
     },
     initialCost() {
       return new Decimal(this.costIncreasePer());
@@ -30,11 +30,21 @@ let EternityUpgrade = function (i) {
     costFor(n) {
       return this.cost().times(Decimal.pow(this.costIncreasePer(), n).minus(1)).div(Decimal.minus(this.costIncreasePer(), 1));
     },
+    processEffect(x) {
+      if (i === 3) {
+        // This formula is annoyingly complicated, but I think it might have to be.
+        // The first upgrade is really good (roughly 8x), and the second is decent (roughly 3x),
+        // but after that they start being junk fairly quickly.
+        return Decimal.pow(Math.max(EternityPoints.totalEPProduced().log2(), 1), Math.pow(x, 0.5));
+      } else {
+        return x;
+      }
+    },
     effect() {
-      return this.initialEffect() + this.effectIncreasePer() * this.bought();
+      return this.processEffect(this.initialEffect() + this.effectIncreasePer() * this.bought());
     },
     nextEffect() {
-      return this.initialEffect() + this.effectIncreasePer() * (this.bought() + 1);
+      return this.processEffect(this.initialEffect() + this.effectIncreasePer() * (this.bought() + 1));
     },
     atBoughtLimit() {
       return this.bought() >= this.boughtLimit();
