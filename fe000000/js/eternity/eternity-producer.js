@@ -32,7 +32,7 @@ let EternityProducerUpgrade = function (i) {
     },
     processEffect(x) {
       if (i === 2) {
-        return Math.pow(Math.max(1, 16 * x), Math.sqrt(Math.log2(1 + Eternities.amount() / Math.pow(2, 16))));
+        return Math.pow(Math.max(1, 16 * Math.pow(x, 2)), Math.sqrt(Math.log2(1 + Eternities.amount() / Math.pow(2, 16))));
       } else {
         return x;
       }

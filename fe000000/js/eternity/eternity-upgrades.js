@@ -13,10 +13,10 @@ let EternityUpgrade = function (i) {
       return [7, Infinity, Infinity][i - 1];
     },
     costIncreasePer() {
-      return [16, 4096, Math.pow(2, 20)][i - 1];
+      return [16, 4096, Math.pow(2, 16)][i - 1];
     },
     effectIncreasePer() {
-      return [1, 0.5, 0.5][i - 1];
+      return [1, 0.5, 1][i - 1];
     },
     initialEffect() {
       return [1, 1, 0][i - 1];
@@ -33,7 +33,7 @@ let EternityUpgrade = function (i) {
     processEffect(x) {
       if (i === 3) {
         // This formula is annoyingly complicated, but I think it might have to be.
-        // The first upgrade is really good (roughly 8x), and the second is decent (roughly 3x),
+        // The first upgrade is really good (roughly 16x), and the second is decent (roughly 4x),
         // but after that they start being junk fairly quickly.
         return Decimal.pow(Math.max(EternityPoints.totalEPProduced().log2(), 1), Math.pow(x, 0.5));
       } else {
