@@ -34,6 +34,10 @@ let Study = function (i) {
     rawEffect() {
       return STUDY_EFFECTS[i - 1]();
     },
+    rawTotalEffect() {
+      // This only exists for display of the Study 1 effect.
+      return (i === 1) ? Decimal.pow(this.rawEffect(), Boost.bought()) : this.rawEffect();
+    },
     effect() {
       // Most but not all studies have Decimal effect, but
       // in one case (extra boost mult) the effect has to be
