@@ -99,17 +99,21 @@ let Studies = {
   boughtThatAreNotOnRow(x) {
     return this.list.filter(y => y.isBought() && y.row() !== x).length;
   },
-  costPow(n) {
+  costPow(n, type) {
     // Should only be called in getting the cost, otherwise
     // what it does probably isn't what you think it does.
-    return n > 3 ? Math.pow(2, (n + 1) / 2) : n + 1;
+    return Math.pow(n > 3 ? Math.pow(2, (n + 1) / 2) : n + 1, this.costExponent(type));
   },
-  theoremsFrom(x) {
+  theoremsFrom(x, type) {
     // Only used for boost power.
-    return Math.floor(x > 4 ? 2 * Math.log2(x) : x)
+    let y = Math.pow(x, 1 / this.costExponent(type));
+    return Math.floor((y > 4 ? 2 * Math.log2(y) : y));
+  },
+  costExponent(type) {
+    return Math.min(1, 0.875 + type / 16);
   },
   cost(x) {
-    return Decimal.pow(2, Math.pow(256, 2 - x) * this.costPow(player.boughtTheorems[x])).floor();
+    return Decimal.pow(2, Math.pow(256, 2 - x) * this.costPow(player.boughtTheorems[x], x)).floor();
   },
   canBuy(x) {
     return player[['stars', 'infinityPoints', 'eternityPoints'][x]].gte(this.cost(x)) && (x !== 2 || EternityGenerator(1).bought() > 0);

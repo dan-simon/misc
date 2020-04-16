@@ -103,9 +103,9 @@ let Boost = {
     return player.bestBoostPowerEver;
   },
   extraTheorems() {
-    return Studies.theoremsFrom(Math.log2(this.bestBoostPowerEver()));
+    return Studies.theoremsFrom(Math.log2(this.bestBoostPowerEver()), 3);
   },
   nextExtraTheorem() {
-    return Math.pow(2, Studies.costPow(this.extraTheorems()));
+    return Math.pow(2, Studies.costPow(this.extraTheorems(), 3));
   }
 };
