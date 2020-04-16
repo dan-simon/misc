@@ -51,7 +51,7 @@ let Boost = {
     return n <= this.maxBuyable();
   },
   maxBuyable() {
-    if (!this.isVisible() || InfinityPrestigeLayer.mustInfinity()) return 0;
+    if (!this.isVisible() || InfinityPrestigeLayer.mustInfinity() || !Generators.anyGenerators()) return 0;
     // The 6 rather than 8 handles an off-by-one issue.
     let num = Math.floor((Math.pow(player.stars.max(1).log(2), 0.5) - 6) / 2) - this.bought();
     if (player.stars.lt(this.costFor(num))) {

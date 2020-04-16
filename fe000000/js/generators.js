@@ -124,5 +124,8 @@ let Generators = {
   },
   resetAmounts(i) {
     Generators.list.slice(0, i).forEach(g => g.resetAmount());
+  },
+  anyGenerators() {
+    return Generators.list.some(x => x.amount().gt(0));
   }
 }
