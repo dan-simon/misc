@@ -88,7 +88,7 @@ let Studies = {
     for (let i = 0; i < 12; i++) {
       player.studies[i] = false;
     }
-    player.unspentTheorems = this.totalTheorems();
+    player.unspentTheorems = this.totalTheorems() - EternityChallenge.getUnlockedEternityChallengeCost();
   },
   maybeRespec() {
     if (this.isRespecOn()) {

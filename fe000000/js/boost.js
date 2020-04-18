@@ -6,20 +6,24 @@ let Boost = {
     player.boost.bought = player.boost.bought + n;
   },
   costForOne(n) {
-    return Decimal.pow(2, Math.pow(8 + 2 * (this.bought() + n - 1), 2));
+    return Decimal.pow(2, this.costSlowdown() * Math.pow(this.costSkip() * (this.bought() + this.costStart() + n - 1), this.costPow()));
   },
   cost() {
     return this.costForOne(1);
   },
   costFor(n) {
-    // Everything but the last two are easily negligible and don't change the total cost up to precision.
-    if (n === 0) {
-      return new Decimal(0);
-    } else if (n === 1) {
-      return this.costForOne(1)
-    } else {
-      return this.costForOne(n).plus(this.costForOne(n - 1));
+    // Scaling gets good enough that it becomes impractical to consider 
+    let m = n;
+    let totalCost = new Decimal(0);
+    while (m > 0) {
+      let newTotalCost = totalCost.plus(this.costForOne(m));
+      if (totalCost.eq(newTotalCost)) {
+        break
+      }
+      totalCost = newTotalCost;
+      m--;
     }
+    return totalCost;
   },
   areBoostsDisabled() {
     return [8, 9, 10].indexOf(Challenge.currentChallenge()) !== -1;
@@ -50,10 +54,21 @@ let Boost = {
     }
     return n <= this.maxBuyable();
   },
+  costSlowdown() {
+    return EternityChallenge.getEternityChallengeReward(2);
+  },
+  costPower() {
+    return EternityChallenge.isEternityChallengeRunning(2) ? 3 : 2;
+  },
+  costStart() {
+    return EternityChallenge.isEternityChallengeRunning(2) ? 2 : 4;
+  },
+  costSkip() {
+    return EternityChallenge.isEternityChallengeRunning(2) ? 1 : 2;
+  },
   maxBuyable() {
     if (!this.isVisible() || InfinityPrestigeLayer.mustInfinity() || !Generators.anyGenerators()) return 0;
-    // The 6 rather than 8 handles an off-by-one issue.
-    let num = Math.floor((Math.pow(player.stars.max(1).log(2), 0.5) - 6) / 2) - this.bought();
+    let num = Math.floor((Math.pow(player.stars.max(1).log(2) / this.costSlowdown(), 1 / this.costPower()) - this.costStart()) / this.costSkip() + 1) - this.bought();
     if (player.stars.lt(this.costFor(num))) {
       num -= 1;
     }

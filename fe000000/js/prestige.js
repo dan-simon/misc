@@ -9,7 +9,7 @@ let Prestige = {
     return this.prestigePower();
   },
   isPrestigeDisabled() {
-    return Challenge.isChallengeRunning(10);
+    return Challenge.isChallengeRunning(10) || EternityChallenge.isEternityChallengeRunning(3);
   },
   prestigePowerExponent() {
     if (this.isPrestigeDisabled()) {
@@ -21,7 +21,7 @@ let Prestige = {
       InfinityChallenge.isInfinityChallengeRunning(3) ? InfinityChallenge.infinityChallenge3PrestigePowerExponent() : 1,
       InfinityChallenge.isInfinityChallengeRunning(6) ? InfinityChallenge.infinityChallenge6PrestigePowerExponent() : 1,
       InfinityChallenge.isInfinityChallengeCompleted(6) ? InfinityChallenge.infinityChallenge6Reward() : 1,
-      isPrestigePowerSquareRooted ? 0.5 : 1
+      EternityChallenge.getEternityChallengeReward(3), isPrestigePowerSquareRooted ? 0.5 : 1
     ];
     return expComponents.reduce((a, b) => a * b);
   },

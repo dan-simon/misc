@@ -43,6 +43,7 @@ let EternityPrestigeLayer = {
     player.boostPower = 1;
     player.infinityPoints = EternityStartingBenefits.infinityPoints();
     player.infinities = EternityStartingBenefits.infinities();
+    player.realInfinities = 0;
     player.infinityGenerators = initialInfinityGenerators();
     player.highestInfinityGenerator = 0;
     player.infinityUpgrades = [0, 0];

@@ -43,14 +43,16 @@ let Generator = function (i) {
         Challenge.isChallengeEffectActive(2) ? Challenge.challenge2Mult() : 1,
         (i === 1 && Challenge.isChallengeEffectActive(3)) ? Challenge.challenge3Mult() : 1,
         Challenge.isChallengeRunning(8) ? Generator(8).amount().max(1) : 1,
-        Study(2).effect(), Study(3).effect(), Study(4).effect()
+        Study(2).effect(), Study(3).effect(), Study(4).effect(),
+        EternityChallenge.getEternityChallengeReward(1),
       ];
       let multiplier = factors.reduce((a, b) => a.times(b));
       let powFactors = [
         Challenge.isChallengeRunning(1) ? ((i === 1) ? 4 : 0) : 1,
         InfinityChallenge.isInfinityChallengeRunning(4) ? InfinityChallenge.infinityChallenge4Pow() : 1,
         InfinityChallenge.isInfinityChallengeRunning(5) ? InfinityChallenge.infinityChallenge5Pow() : 1,
-        EternityStars.power()
+        EternityChallenge.isEternityChallengeRunning(1) ? EternityChallenge.eternityChallenge1InfinityStarsEffect() : 1,
+        EternityStars.power(),
       ];
       return multiplier.pow(powFactors.reduce((a, b) => a * b));
     },

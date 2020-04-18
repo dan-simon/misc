@@ -34,10 +34,13 @@ let EternityGenerator = function (i) {
       return this.cost().times(Decimal.pow(this.costIncreasePer(), n).minus(1)).div(Decimal.minus(this.costIncreasePer(), 1));
     },
     multiplier() {
+      if (EternityChallenge.isEternityChallengeRunning(8)) {
+        return new Decimal(0);
+      }
       let factors = [
         Decimal.pow(2, this.bought() * EternityUpgrade(1).effect() / 8), Eternities.eternityGeneratorMultiplier(),
         Study(9).effect(), Study(10).effect(), Study(11).effect(), Study(12).effect(),
-        EternityUpgrade(3).effect(), EternityProducer.multiplier()
+        EternityUpgrade(3).effect(), EternityProducer.multiplier(), EternityChallenge.getEternityChallengeReward(8),
       ];
       // Most of these are numbers but that's fine, the first one is a Decimal
       // so the below code works.
