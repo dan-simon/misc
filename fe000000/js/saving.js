@@ -167,6 +167,13 @@ let Saving = {
       };
       player.version = 1.609375;
     }
+    if (player.version < 1.625) {
+      // No Decimal conversion has happened yet.
+      if (player.stars === "0" && player.generators.every(x => x.amount === "0")) {
+        player.stars = new Decimal(2);
+      }
+      player.version = 1.625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
