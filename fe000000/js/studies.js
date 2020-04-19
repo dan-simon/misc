@@ -73,7 +73,7 @@ let Studies = {
     return this.list[x - 1];
   },
   totalTheorems() {
-    return player.boughtTheorems.reduce((a, b) => a + b) + Boost.extraTheorems();
+    return player.boughtTheorems.reduce((a, b) => a + b) + Boost.extraTheorems() + EternityChallenge.extraTheorems();
   },
   unspentTheorems() {
     return player.unspentTheorems;

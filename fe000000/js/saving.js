@@ -167,6 +167,13 @@ let Saving = {
       };
       player.version = 1.609375;
     }
+    if (player.version < 1.640625) {
+      player.unlockedEternityChallenge = 0;
+      player.currentEternityChallenge = 0;
+      player.eternityChallengeCompletions = [0, 0, 0, 0, 0, 0, 0, 0];
+      player.respecEternityChallenge = false;
+      player.version = 1.640625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

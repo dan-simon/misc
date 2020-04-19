@@ -6,7 +6,7 @@ let Boost = {
     player.boost.bought = player.boost.bought + n;
   },
   costForOne(n) {
-    return Decimal.pow(2, this.costSlowdown() * Math.pow(this.costSkip() * (this.bought() + this.costStart() + n - 1), this.costPow()));
+    return Decimal.pow(2, this.costSlowdown() * Math.pow(this.costSkip() * (this.bought() + this.costStart() + n - 1), this.costPower()));
   },
   cost() {
     return this.costForOne(1);

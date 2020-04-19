@@ -1,6 +1,10 @@
 let EternityPrestigeLayer = {
   infinityPointRequirementForEternity() {
-    return Decimal.pow(2, 256);
+    if (EternityChallenge.isSomeEternityChallengeRunning()) {
+      return EternityChallenge.getEternityChallengeGoal(EternityChallenge.currentEternityChallenge());
+    } else {
+      return Decimal.pow(2, 256);
+    }
   },
   canEternity() {
     return InfinityPoints.amount().gte(this.infinityPointRequirementForEternity());
@@ -32,8 +36,11 @@ let EternityPrestigeLayer = {
     // when you start a challenge.
     Challenge.setChallenge(0);
     InfinityChallenge.setInfinityChallenge(0);
+    // Eternity challenge handling
+    EternityChallenge.checkForEternityChallengeCompletion();
     // I'm not sure whether or not this should go in the reset function.
     Studies.maybeRespec();
+    EternityChallenge.maybeRespec();
     this.eternityReset();
   },
   eternityReset() {

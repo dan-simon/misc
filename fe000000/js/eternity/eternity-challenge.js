@@ -20,7 +20,8 @@ let EternityChallenge = {
     Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 32)),
   ],
   rewards: [
-    x => Decimal.pow(2, x * Math.pow(player.stars.max(1).log2(), 0.5) / 4),
+    null,
+    x => Decimal.pow(2, x * Math.pow(Stars.amount().max(1).log2(), 0.5) / 4),
     x => 1 - x / 8,
     x => 1 + x / 512,
     x => InfinityPoints.amount().max(1).pow(x / 512),
@@ -30,6 +31,7 @@ let EternityChallenge = {
     x => Decimal.pow(16, x),
   ],
   resourceAmounts: [
+    () => null,
     () => Stars.amount(),
     () => Boost.bought(),
     () => Prestige.prestigePower(),
@@ -40,8 +42,8 @@ let EternityChallenge = {
     () => EternityStars.amount(),
   ],
   resourceNames: [
-    'stars', 'boosts', 'prestige power', 'infinity points',
-    'infinity stars', 'total eternity challenge completions',
+    null, 'stars', 'boosts', 'prestige power', 'infinity points',
+    'infinity stars', 'total EC completions',
     'eternity points', 'eternity stars',
   ],
   costs: [Infinity, 5, 6, 8, 10, 12, 15, 20, 24],
@@ -52,6 +54,21 @@ let EternityChallenge = {
       this.startEternityChallenge(x);
     } else if (this.canEternityChallengeBeUnlocked(x)) {
       this.unlockEternityChallenge(x);
+    }
+  },
+  eternityChallengeButtonText(x) {
+    if (this.isEternityChallengeRunning(x)) {
+      return 'Exit challenge';
+    } else if (this.canEternityChallengeBeStarted(x)) {
+      return 'Start challenge';
+    } else if (this.canEternityChallengeBeUnlocked(x)) {
+      return 'Unlock challenge';
+    } else if (this.getUnlockedEternityChallenge() !== 0) {
+      return 'Another EC already unlocked';
+    } else if (Decimal.lt(this.getEternityChallengeResourceAmount(x), this.getEternityChallengeRequirement(x))) {
+      return 'Requires more ' + this.getEternityChallengeResourceName(x);
+    } else if (player.unspentTheorems < this.getEternityChallengeCost(x)) {
+      return 'Requires more unspent theorems';
     }
   },
   currentEternityChallenge() {
@@ -84,28 +101,37 @@ let EternityChallenge = {
     let challenge = this.getUnlockedEternityChallenge();
     return (challenge > 0) ? this.getEternityChallengeCost(challenge) : 0;
   },
-  getEternityChallengeCompetions(x) {
+  getEternityChallengeCompletions(x) {
     return player.eternityChallengeCompletions[x - 1];
   },
-  getRewardCalculationEternityChallengeCompetions(x) {
+  isEternityChallengeCompleted(x) {
+    return this.getEternityChallengeCompletions(x) >= 4;
+  },
+  getRewardCalculationEternityChallengeCompletions(x) {
     if (EternityChallenge.isEternityChallengeRunning(6)) {
       return 0;
     }
-    return this.getEternityChallengeCompetions(x) *
+    return this.getEternityChallengeCompletions(x) *
       (x === 6 ? 1 : EternityChallenge.getEternityChallengeReward(6));
   },
-  getNextRewardCalculationEternityChallengeCompetions(x) {
+  getNextRewardCalculationEternityChallengeCompletions(x) {
     if (EternityChallenge.isEternityChallengeRunning(6)) {
       return 0;
     }
-    return (1 + this.getEternityChallengeCompetions(x)) *
+    return (1 + this.getEternityChallengeCompletions(x)) *
       (x === 6 ? 1 : EternityChallenge.getEternityChallengeReward(6));
   },
   getTotalEternityChallengeCompletions() {
-    return [1, 2, 3, 4, 5, 6, 7, 8].map(x => this.getEternityChallengeCompetions(x)).reduce((a, b) => a + b);
+    return [1, 2, 3, 4, 5, 6, 7, 8].map(x => this.getEternityChallengeCompletions(x)).reduce((a, b) => a + b);
+  },
+  extraTheorems() {
+    return this.getTotalEternityChallengeCompletions();
   },
   getEternityChallengeResourceAmount(x) {
     return this.resourceAmounts[x]();
+  },
+  getEternityChallengeResourceName(x) {
+    return this.resourceNames[x];
   },
   canEternityChallengeBeStarted(x) {
     return this.getUnlockedEternityChallenge() === x;
@@ -119,19 +145,24 @@ let EternityChallenge = {
   isNoEternityChallengeRunning() {
     return this.currentEternityChallenge() === 0;
   },
-  eternityChallengeCostDescription(x) {
+  eternityChallengeRequirementDescription(x) {
     // This could be done as easily in the HTML but it seems nice to have a method
-    return format(this.eternityChallengeResourceAmount(x)) + '/' + format(this.eternityChallengeRequirement(x)) +
+    return format(this.getEternityChallengeResourceAmount(x)) + '/' + format(this.getEternityChallengeRequirement(x)) +
       ' ' + this.getEternityChallengeResourceName(x);
   },
-  eternityChallengeCostDescription(x) {
-    return 'Cost: ' + format(this.getEternityChallengeCost(x)) + ' theorems';
-  },
   eternityChallengeStatusDescription(x) {
-    if (this.isEternityChallengeRunning(x)) {
-      return 'Running';
+    if (this.isEternityChallengeCompleted(x)) {
+      if (this.isEternityChallengeRunning(x)) {
+        return 'Completed, running';
+      } else {
+        return 'Completed';
+      }
     } else {
-      return '';
+      if (this.isEternityChallengeRunning(x)) {
+        return 'Running';
+      } else {
+        return '';
+      }
     }
   },
   eternityChallengeCompletionsDescription(x) {
@@ -141,54 +172,58 @@ let EternityChallenge = {
   setEternityChallenge(x) {
     player.currentEternityChallenge = x;
   },
-  // here are some functions that should be together
+  canEternityChallengeBeUnlocked(x) {
+    return this.getUnlockedEternityChallenge() === 0 &&
+      Decimal.gte(this.getEternityChallengeResourceAmount(x), this.getEternityChallengeRequirement(x));
+      player.unspentTheorems >= this.getEternityChallengeCost(x);
+  },
   unlockEternityChallenge(x) {
     // This function should only be called if the eternity challenge
     // has previously been confirmed to be unlockable.
     player.unspentTheorems -= this.getEternityChallengeCost(x);
     player.unlockedEternityChallenge = x;
   },
+  isRespecOn() {
+    return player.respecEternityChallenge;
+  },
+  toggleRespec() {
+    player.respecEternityChallenge = !player.respecEternityChallenge;
+  },
+  respec() {
+    this.lockUnlockedEternityChallenge();
+  },
+  maybeRespec() {
+    if (this.isRespecOn()) {
+      this.respec();
+    }
+    player.respecEternityChallenge = false;
+  },
   lockUnlockedEternityChallenge() {
     player.unspentTheorems += this.getUnlockedEternityChallengeCost();
     player.unlockedEternityChallenge = 0;
   },
-  // nothing below this line has been changed yet at all
-  startInfinityChallenge(x) {
-    this.setInfinityChallenge(x);
-    Challenge.setChallenge(0);
-    InfinityPrestigeLayer.infinityReset();
+  startEternityChallenge(x) {
+    this.setEternityChallenge(x);
+    EternityPrestigeLayer.eternityReset();
   },
-  exitInfinityChallenge() {
-    this.setInfinityChallenge(0);
-    InfinityPrestigeLayer.infinityReset();
+  exitEternityChallenge() {
+    this.setEternityChallenge(0);
+    EternityPrestigeLayer.eternityReset();
   },
-  checkForInfinityChallengeCompletion() {
-    let cc = this.currentInfinityChallenge();
+  checkForEternityChallengeCompletion() {
+    let cc = this.currentEternityChallenge();
     if (cc !== 0) {
-      this.completeInfinityChallenge(cc);
+      this.completeEternityChallenge(cc);
     }
   },
-  completeInfinityChallenge(x) {
-    player.infinityChallengesCompleted[x - 1] = true;
-  },
-  checkForAllAutoInfinityChallengeCompletions() {
-    // Don't call this unless the player actually has
-    // the relevant eternity milestone.
-    for (let i = 1; i <= 8; i++) {
-      this.checkForAutoInfinityChallengeCompletion(i);
+  completeEternityChallenge(x) {
+    if (player.eternityChallengeCompletions[x - 1] < 4) {
+      player.eternityChallengeCompletions[x - 1]++;
+      player.unspentTheorems++;
     }
+    this.setEternityChallenge(0);
+    this.lockUnlockedEternityChallenge();
   },
-  checkForAutoInfinityChallengeCompletion(x) {
-    // Don't call this unless the player actually has
-    // the relevant eternity milestone.
-    if (this.isInfinityChallengeRequirementReached(x)) {
-      this.completeInfinityChallenge(x);
-    }
-  },
-  isInfinityChallengeCompleted(x) {
-    return player.infinityChallengesCompleted[x - 1];
-  },
-  // new code after this point
   eternityChallenge1InfinityStarsEffect() {
     return 1 - 1 / (1 + player.infinityStars.log2().max(1) / 4096);
   },
@@ -196,9 +231,24 @@ let EternityChallenge = {
     return 1 - 1 / (1 + player.eternityStars.log2().max(1) / 256);
   },
   eternityChallenge4AllowedInfinities() {
-    return 12 - 4 * this.getEternityChallengeCompetions(4);
+    return Math.max(0, 12 - 4 * this.getEternityChallengeCompletions(4));
   },
   eternityChallenge4RemainingInfinities() {
     return this.eternityChallenge4AllowedInfinities() - Infinities.realAmount();
+  },
+  isThereEternityChallengeText() {
+    return [1, 4].indexOf(this.currentEternityChallenge()) !== -1;
+  },
+  eternityChallengeText() {
+    let cc = this.currentEternityChallenge();
+    if (cc === 1) {
+      return 'Eternity Challenge 1 exponents: ' +
+        formatWithPrecision(this.eternityChallenge1InfinityStarsEffect(), 5) + ' to normal generators, ' +
+        formatWithPrecision(this.eternityChallenge1EternityStarsEffect(), 5) + ' to infinity generators';
+    } else if (cc === 4) {
+      return 'Eternity Challenge 4: ' + format(eternityChallenge4RemainingInfinities()) + '/' + format(eternityChallenge4AllowedInfinities()) + ' infinities done';
+    } else {
+      return 'This text should never appear.';
+    }
   }
 }

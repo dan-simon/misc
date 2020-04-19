@@ -94,6 +94,10 @@ let initialPlayer = {
     unlocked: false,
     upgrades: [0, 0]
   },
+  unlockedEternityChallenge: 0,
+  currentEternityChallenge: 0,
+  eternityChallengeCompletions: [0, 0, 0, 0, 0, 0, 0, 0],
+  respecEternityChallenge: false,
   options: {
     notation: 'Scientific',
     offlineProgress: true,
@@ -127,7 +131,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.609375
+  version: 1.640625
 }
 
 let player;
