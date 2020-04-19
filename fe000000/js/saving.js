@@ -167,6 +167,13 @@ let Saving = {
       };
       player.version = 1.609375;
     }
+    if (player.version < 1.625) {
+      // No Decimal conversion has happened yet.
+      if (player.stars === "0" && player.generators.every(x => x.amount === "0")) {
+        player.stars = new Decimal(2);
+      }
+      player.version = 1.625;
+    }
     if (player.version < 1.640625) {
       player.unlockedEternityChallenge = 0;
       player.currentEternityChallenge = 0;

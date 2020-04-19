@@ -16,7 +16,7 @@ let Autobuyer = function (i) {
       return i <= 9 && this.hasAutobuyer() && !Challenge.isChallengeCompleted(i);
     },
     canUnlockSlow() {
-      return i <= 9 && !this.hasAutobuyer() && player.stars.gte(this.unlockSlowCost());
+      return i <= 9 && Generators.anyGenerators() && !this.hasAutobuyer() && player.stars.gte(this.unlockSlowCost());
     },
     unlockSlow() {
       if (!this.canUnlockSlow()) return;
