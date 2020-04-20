@@ -18,7 +18,7 @@ let Boost = {
     while (m > 0) {
       let newTotalCost = totalCost.plus(this.costForOne(m));
       if (totalCost.eq(newTotalCost)) {
-        break
+        break;
       }
       totalCost = newTotalCost;
       m--;
@@ -68,7 +68,7 @@ let Boost = {
   },
   maxBuyable() {
     if (!this.isVisible() || InfinityPrestigeLayer.mustInfinity() || !Generators.anyGenerators()) return 0;
-    let num = Math.floor((Math.pow(player.stars.max(1).log(2) / this.costSlowdown(), 1 / this.costPower()) - this.costStart()) / this.costSkip() + 1) - this.bought();
+    let num = Math.floor(Math.pow(player.stars.max(1).log(2) / this.costSlowdown(), 1 / this.costPower()) / this.costSkip() - this.costStart() + 1) - this.bought();
     if (player.stars.lt(this.costFor(num))) {
       num -= 1;
     }

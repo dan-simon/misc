@@ -740,7 +740,7 @@ function updateDisplay() {
     e[390].textContent = EternityChallenge.eternityChallengeStatusDescription(1);
     e[391].textContent = EternityChallenge.eternityChallengeButtonText(1);
     e[392].textContent = format(EternityChallenge.getEternityChallengeReward(1));
-    b[267].style.display = EternityChallenge.isEternityChallengeCompleted(1) ? '' : 'none';
+    b[267].style.display = EternityChallenge.isEternityChallengeCompleted(1) ? 'none' : '';
     e[393].textContent = format(EternityChallenge.getEternityChallengeNextReward(1));
     e[394].textContent = EternityChallenge.eternityChallengeRequirementDescription(2);
     e[395].textContent = format(EternityChallenge.getEternityChallengeCost(2));
@@ -748,7 +748,7 @@ function updateDisplay() {
     e[397].textContent = EternityChallenge.eternityChallengeStatusDescription(2);
     e[398].textContent = EternityChallenge.eternityChallengeButtonText(2);
     e[399].textContent = format(EternityChallenge.getEternityChallengeReward(2));
-    b[268].style.display = EternityChallenge.isEternityChallengeCompleted(2) ? '' : 'none';
+    b[268].style.display = EternityChallenge.isEternityChallengeCompleted(2) ? 'none' : '';
     e[400].textContent = format(EternityChallenge.getEternityChallengeNextReward(2));
     e[401].textContent = EternityChallenge.eternityChallengeRequirementDescription(3);
     e[402].textContent = format(EternityChallenge.getEternityChallengeCost(3));
@@ -756,7 +756,7 @@ function updateDisplay() {
     e[404].textContent = EternityChallenge.eternityChallengeStatusDescription(3);
     e[405].textContent = EternityChallenge.eternityChallengeButtonText(3);
     e[406].textContent = formatWithPrecision(EternityChallenge.getEternityChallengeReward(3), 5);
-    b[269].style.display = EternityChallenge.isEternityChallengeCompleted(3) ? '' : 'none';
+    b[269].style.display = EternityChallenge.isEternityChallengeCompleted(3) ? 'none' : '';
     e[407].textContent = formatWithPrecision(EternityChallenge.getEternityChallengeNextReward(3), 5);
     e[408].textContent = format(EternityChallenge.eternityChallenge4AllowedInfinities());
     e[409].textContent = EternityChallenge.eternityChallengeRequirementDescription(4);
@@ -765,7 +765,7 @@ function updateDisplay() {
     e[412].textContent = EternityChallenge.eternityChallengeStatusDescription(4);
     e[413].textContent = EternityChallenge.eternityChallengeButtonText(4);
     e[414].textContent = format(EternityChallenge.getEternityChallengeReward(4));
-    b[270].style.display = EternityChallenge.isEternityChallengeCompleted(4) ? '' : 'none';
+    b[270].style.display = EternityChallenge.isEternityChallengeCompleted(4) ? 'none' : '';
     e[415].textContent = format(EternityChallenge.getEternityChallengeNextReward(4));
     e[416].textContent = format(0.5);
     e[417].textContent = EternityChallenge.eternityChallengeRequirementDescription(5);
@@ -774,7 +774,7 @@ function updateDisplay() {
     e[420].textContent = EternityChallenge.eternityChallengeStatusDescription(5);
     e[421].textContent = EternityChallenge.eternityChallengeButtonText(5);
     e[422].textContent = format(EternityChallenge.getEternityChallengeReward(5));
-    b[271].style.display = EternityChallenge.isEternityChallengeCompleted(5) ? '' : 'none';
+    b[271].style.display = EternityChallenge.isEternityChallengeCompleted(5) ? 'none' : '';
     e[423].textContent = format(EternityChallenge.getEternityChallengeNextReward(5));
     e[424].textContent = EternityChallenge.eternityChallengeRequirementDescription(6);
     e[425].textContent = format(EternityChallenge.getEternityChallengeCost(6));
@@ -782,7 +782,7 @@ function updateDisplay() {
     e[427].textContent = EternityChallenge.eternityChallengeStatusDescription(6);
     e[428].textContent = EternityChallenge.eternityChallengeButtonText(6);
     e[429].textContent = format(EternityChallenge.getEternityChallengeReward(6));
-    b[272].style.display = EternityChallenge.isEternityChallengeCompleted(6) ? '' : 'none';
+    b[272].style.display = EternityChallenge.isEternityChallengeCompleted(6) ? 'none' : '';
     e[430].textContent = format(EternityChallenge.getEternityChallengeNextReward(6));
     e[431].textContent = format(4);
     e[432].textContent = EternityChallenge.eternityChallengeRequirementDescription(7);
@@ -791,7 +791,7 @@ function updateDisplay() {
     e[435].textContent = EternityChallenge.eternityChallengeStatusDescription(7);
     e[436].textContent = EternityChallenge.eternityChallengeButtonText(7);
     e[437].textContent = format(EternityChallenge.getEternityChallengeReward(7));
-    b[273].style.display = EternityChallenge.isEternityChallengeCompleted(7) ? '' : 'none';
+    b[273].style.display = EternityChallenge.isEternityChallengeCompleted(7) ? 'none' : '';
     e[438].textContent = format(EternityChallenge.getEternityChallengeNextReward(7));
     e[439].textContent = EternityChallenge.eternityChallengeRequirementDescription(8);
     e[440].textContent = format(EternityChallenge.getEternityChallengeCost(8));
@@ -799,7 +799,7 @@ function updateDisplay() {
     e[442].textContent = EternityChallenge.eternityChallengeStatusDescription(8);
     e[443].textContent = EternityChallenge.eternityChallengeButtonText(8);
     e[444].textContent = format(EternityChallenge.getEternityChallengeReward(8));
-    b[274].style.display = EternityChallenge.isEternityChallengeCompleted(8) ? '' : 'none';
+    b[274].style.display = EternityChallenge.isEternityChallengeCompleted(8) ? 'none' : '';
     e[445].textContent = format(EternityChallenge.getEternityChallengeNextReward(8));
   }
   if (b[275].style.display !== "none") {

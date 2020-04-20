@@ -32,10 +32,6 @@ let EternityPrestigeLayer = {
     EternityPoints.addAmount(gain);
     Eternities.increment();
     Stats.addEternity(player.stats.timeSinceEternity, gain);
-    // Not handled by Infinity.infinityReset() since that's also called
-    // when you start a challenge.
-    Challenge.setChallenge(0);
-    InfinityChallenge.setInfinityChallenge(0);
     // Eternity challenge handling
     EternityChallenge.checkForEternityChallengeCompletion();
     // I'm not sure whether or not this should go in the reset function.
@@ -45,6 +41,10 @@ let EternityPrestigeLayer = {
   },
   eternityReset() {
     InfinityPrestigeLayer.infinityReset();
+    // Not handled by Infinity.infinityReset() since that's also called
+    // when you start a challenge.
+    Challenge.setChallenge(0);
+    InfinityChallenge.setInfinityChallenge(0);
     player.eternityStars = new Decimal(2);
     EternityGenerators.list.forEach(x => x.resetAmount());
     player.boostPower = 1;

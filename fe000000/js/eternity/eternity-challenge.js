@@ -1,28 +1,28 @@
 let EternityChallenge = {
   goals: [Infinity,
+    Decimal.pow(2, 512), Decimal.pow(2, 8192), Decimal.pow(2, 1024),
+    Decimal.pow(2, 1.375 * Math.pow(2, 14)), Decimal.pow(2, Math.pow(2, 32)),
     Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 32)),
-    Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 32)),
-    Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 32)),
   ],
   requirements: [Infinity,
-    Decimal.pow(2, 1.75 * Math.pow(2, 21)), 1024, Decimal.pow(2, 1.5 * Math.pow(2, 18)),
-    Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 32)), 12,
+    Decimal.pow(2, 1.75 * Math.pow(2, 21)), 1024, Decimal.pow(2, 1.375 * Math.pow(2, 18)),
+    Decimal.pow(2, 1.375 * Math.pow(2, 14)), Decimal.pow(2, Math.pow(2, 32)), 12,
     Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 32)),
   ],
   goalIncreases: [Infinity,
-    Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 32)),
-    Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 32)),
+    Decimal.pow(2, 1024), Decimal.pow(2, 3072), Decimal.pow(2, 512),
+    Decimal.pow(2, 8192), Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 32)),
     Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 32)),
   ],
   requirementIncreases: [Infinity,
-    Decimal.pow(2, 1.5 * Math.pow(2, 20)), 512, Decimal.pow(2, Math.pow(2, 17)),
-    Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 32)), 4,
+    Decimal.pow(2, 1.5 * Math.pow(2, 20)), 512, Decimal.pow(2, 1.25 * Math.pow(2, 17)),
+    Decimal.pow(2, 1.5 * Math.pow(2, 13)), Decimal.pow(2, Math.pow(2, 32)), 4,
     Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 32)),
   ],
   rewards: [
     null,
     x => Decimal.pow(2, x * Math.pow(Stars.amount().max(1).log2(), 0.5) / 4),
-    x => 1 - x / 8,
+    x => 1 - x / 16,
     x => 1 + x / 512,
     x => InfinityPoints.amount().max(1).pow(x / 512),
     x => 1 + x / 64,
@@ -174,7 +174,7 @@ let EternityChallenge = {
   },
   canEternityChallengeBeUnlocked(x) {
     return this.getUnlockedEternityChallenge() === 0 &&
-      Decimal.gte(this.getEternityChallengeResourceAmount(x), this.getEternityChallengeRequirement(x));
+      Decimal.gte(this.getEternityChallengeResourceAmount(x), this.getEternityChallengeRequirement(x)) &&
       player.unspentTheorems >= this.getEternityChallengeCost(x);
   },
   unlockEternityChallenge(x) {
@@ -225,13 +225,16 @@ let EternityChallenge = {
     this.lockUnlockedEternityChallenge();
   },
   eternityChallenge1InfinityStarsEffect() {
-    return 1 - 1 / (1 + player.infinityStars.log2().max(1) / 4096);
+    return 1 - 1 / (1 + player.infinityStars.max(1).log2() / 2048);
   },
   eternityChallenge1EternityStarsEffect() {
-    return 1 - 1 / (1 + player.eternityStars.log2().max(1) / 256);
+    return 1 - 1 / (1 + player.eternityStars.max(1).log2() / 256);
   },
   eternityChallenge4AllowedInfinities() {
     return Math.max(0, 12 - 4 * this.getEternityChallengeCompletions(4));
+  },
+  eternityChallenge4DoneInfinities() {
+    return Infinities.realAmount();
   },
   eternityChallenge4RemainingInfinities() {
     return this.eternityChallenge4AllowedInfinities() - Infinities.realAmount();
@@ -246,7 +249,8 @@ let EternityChallenge = {
         formatWithPrecision(this.eternityChallenge1InfinityStarsEffect(), 5) + ' to normal generators, ' +
         formatWithPrecision(this.eternityChallenge1EternityStarsEffect(), 5) + ' to infinity generators';
     } else if (cc === 4) {
-      return 'Eternity Challenge 4: ' + format(eternityChallenge4RemainingInfinities()) + '/' + format(eternityChallenge4AllowedInfinities()) + ' infinities done';
+      return 'Eternity Challenge 4: ' + format(this.eternityChallenge4DoneInfinities()) + '/' +
+        format(this.eternityChallenge4AllowedInfinities()) + ' infinities done';
     } else {
       return 'This text should never appear.';
     }
