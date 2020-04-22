@@ -77,7 +77,7 @@
         <span>~r Challenge.challengeText() ~</span>
       </div>
       <div ~style.display=Boost.isVisible() ? '' : 'none'~>
-        <span/>You have ~f Boost.bought() ~ boosts, multipying all generators by ~f Boost.multiplier() ~x (~f Boost.multiplierPer() ~x each). <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buy()">Cost: ~f Boost.cost() ~</button> <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buyMax()">Max</button></span>
+        <span/>You have ~f Boost.bought() ~ boosts, multiplying all generators by ~f Boost.multiplier() ~x (~f Boost.multiplierPer() ~x each). <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buy()">Cost: ~f Boost.cost() ~</button> <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buyMax()">Max</button></span>
         <br/>
         <div ~style.display=Boost.isBoostPowerVisible() ? '' : 'none'~>
           <span>You have ~f Boost.boostPower() ~ boost power, increasing the per-boost multiplier by ~f Boost.boostPowerEffect() ~x.</span>
