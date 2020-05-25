@@ -6,17 +6,17 @@ let EternityChallenge = {
   ],
   requirements: [Infinity,
     Decimal.pow(2, 1.75 * Math.pow(2, 21)), 1024, Decimal.pow(2, 1.375 * Math.pow(2, 18)),
-    Decimal.pow(2, 1.375 * Math.pow(2, 14)), Decimal.pow(2, Math.pow(2, 32)), 12,
+    Decimal.pow(2, 1.375 * Math.pow(2, 14)), Decimal.pow(2, 1.375 * Math.pow(2, 16)), 16,
     Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 32)),
   ],
   goalIncreases: [Infinity,
-    Decimal.pow(2, 1024), Decimal.pow(2, 3072), Decimal.pow(2, 512),
-    Decimal.pow(2, 8192), Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 32)),
+    Decimal.pow(2, 1024), Decimal.pow(2, 9216), Decimal.pow(2, 320),
+    Decimal.pow(2, 1.75 * Math.pow(2, 14)), Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 32)),
     Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 32)),
   ],
   requirementIncreases: [Infinity,
     Decimal.pow(2, 1.5 * Math.pow(2, 20)), 512, Decimal.pow(2, 1.25 * Math.pow(2, 17)),
-    Decimal.pow(2, 1.5 * Math.pow(2, 13)), Decimal.pow(2, Math.pow(2, 32)), 4,
+    Decimal.pow(2, Math.pow(2, 15)), Decimal.pow(2, Math.pow(2, 32)), 4,
     Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 32)),
   ],
   rewards: [
@@ -28,7 +28,7 @@ let EternityChallenge = {
     x => 1 + x / 64,
     x => 1 + x / 8,
     x => EternityPoints.amount().max(1).pow(x / 4),
-    x => Decimal.pow(16, x),
+    x => Decimal.pow(2, 16 * x),
   ],
   resourceAmounts: [
     () => null,
@@ -47,6 +47,7 @@ let EternityChallenge = {
     'eternity points', 'eternity stars',
   ],
   costs: [Infinity, 5, 6, 8, 10, 12, 15, 20, 24],
+  totalCompletionsRewardThresholds: [null, 8, 16, 24, 32],
   pressEternityChallengeButton(x) {
     if (this.isEternityChallengeRunning(x)) {
       this.exitEternityChallenge();
@@ -123,6 +124,21 @@ let EternityChallenge = {
   },
   getTotalEternityChallengeCompletions() {
     return [1, 2, 3, 4, 5, 6, 7, 8].map(x => this.getEternityChallengeCompletions(x)).reduce((a, b) => a + b);
+  },
+  getTotalCompletionsRewardThreshold(x) {
+    return this.totalCompletionsRewardThresholds[x];
+  },
+  getTotalCompletionsRewardRawEffect(x) {
+    if (x === 1) {
+      return 1 + this.getTotalEternityChallengeCompletions() / 4;
+    }
+    return null;
+  },
+  getTotalCompletionsRewardEffect(x) {
+    if (this.getTotalEternityChallengeCompletions() >= this.getTotalCompletionsRewardThreshold(x)) {
+      return this.getTotalCompletionsRewardRawEffect(x);
+    }
+    return 1;
   },
   extraTheorems() {
     return this.getTotalEternityChallengeCompletions();

@@ -102,7 +102,7 @@ let Boost = {
     return this.boostPowerPerBoost() * Math.max(0, this.bought() - this.boostPowerStart());
   },
   boostPowerPerBoost() {
-    return 1 / 16384;
+    return EternityChallenge.getTotalCompletionsRewardEffect(1) / 16384;
   },
   boostPowerStart() {
     return 320;

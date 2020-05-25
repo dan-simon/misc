@@ -1494,6 +1494,10 @@
       You have completed ~f EternityChallenge.getTotalEternityChallengeCompletions() ~ eternity challenge tiers, giving you ~f EternityChallenge.extraTheorems() ~ extra theorems (~f 1 ~ per tier).
       <button onclick="EternityChallenge.toggleRespec()">Respec eternity challenge on next eternity: ~r EternityChallenge.isRespecOn() ? "On" : "Off" ~</button>
     </span>
+    <br/>
+    <span>
+      At ~f EternityChallenge.getTotalCompletionsRewardThreshold(1) ~ total eternity challenge tiers completed: Multiplier to boost power based on eternity challenge tiers completed (~f EternityChallenge.getTotalCompletionsRewardRawEffect(1) ~)
+    </span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
         <td>
@@ -1658,7 +1662,7 @@
               <br/>
               <span><button onclick="EternityChallenge.pressEternityChallengeButton(7)">~r EternityChallenge.eternityChallengeButtonText(7) ~</button></span>
               <br/>
-              <span>Reward: Infinity generator multiplier based on eternity points.</span>
+              <span>Reward: Multiplier to infinity generators based on eternity points.</span>
               <br/>
               <span>Current: ~f EternityChallenge.getEternityChallengeReward(7) ~x<span ~style.display=EternityChallenge.isEternityChallengeCompleted(7) ? 'none' : ''~>, Next: ~f EternityChallenge.getEternityChallengeNextReward(7) ~x</span></span>
           </div>
