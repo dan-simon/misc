@@ -1,6 +1,8 @@
 <html>
 <head>
   <title>FE000000</title>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/break_infinity.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@antimatter-dimensions/notations"></script>
   <script src="js/eternity/eternities.js"></script>
@@ -14,6 +16,8 @@
   <script src="js/eternity/eternity-stars.js"></script>
   <script src="js/eternity/eternity-starting-benefits.js"></script>
   <script src="js/eternity/eternity-upgrades.js"></script>
+  <script src="js/eternity/permanence-upgrades.js"></script>
+  <script src="js/eternity/permanence.js"></script>
   <script src="js/infinity/infinities.js"></script>
   <script src="js/infinity/infinity-autobuyers.js"></script>
   <script src="js/infinity/infinity-challenge.js"></script>
@@ -1475,7 +1479,7 @@
       <span><button ~class=EternityProducer.anythingToBuy() ? "" : "disabled"~ onclick="EternityProducer.maxAll()">Max Eternity Producer upgrades</button></span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
-          <td>Increase Eternity Producer production per second:</td>
+          <td>Increase Eternity Producer base production per second:</td>
           <td><span ~style.display=EternityProducerUpgrade(1).atBoughtLimit() ? 'none' : ''~>~f EternityProducerUpgrade(1).effect() ~ → ~f EternityProducerUpgrade(1).nextEffect() ~</span><span ~style.display=EternityProducerUpgrade(1).atBoughtLimit() ? '' : 'none'~>~f EternityProducerUpgrade(1).effect() ~ (maxed)</span></td>
           <td><span ~style.display=EternityProducerUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=EternityProducerUpgrade(1).canBuy() ? "" : "disabled"~ onclick="EternityProducerUpgrade(1).buy()">Cost: ~f EternityProducerUpgrade(1).cost() ~ EP</button></span></td>
           <td><span ~style.display=EternityProducerUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=EternityProducerUpgrade(1).canBuy() ? "" : "disabled"~ onclick="EternityProducerUpgrade(1).buyMax()">Max</button></span></td>
@@ -1487,6 +1491,39 @@
           <td><span ~style.display=EternityProducerUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=EternityProducerUpgrade(2).canBuy() ? "" : "disabled"~ onclick="EternityProducerUpgrade(2).buyMax()">Max</button></span></td>
         </tr>
       </table>
+      <div ~style.display=Permanence.hasGainedPermanence() ? '' : 'none'~>
+        <span>You have ~f Permanence.amount() ~ permanence.</span>
+        <br/>
+        <span><button ~class=Permanence.anythingToBuy() ? "" : "disabled"~ onclick="Permanence.maxAll()">Max Permanence upgrades</button></span>
+        <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
+          <tr>
+            <td>Multiplier to eternity production:</td>
+            <td><span ~style.display=PermanenceUpgrade(1).atBoughtLimit() ? 'none' : ''~>~f PermanenceUpgrade(1).effect() ~ → ~f PermanenceUpgrade(1).nextEffect() ~</span><span ~style.display=PermanenceUpgrade(1).atBoughtLimit() ? '' : 'none'~>~f PermanenceUpgrade(1).effect() ~ (maxed)</span></td>
+            <td><span ~style.display=PermanenceUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(1).buy()">Cost: ~f PermanenceUpgrade(1).cost() ~ permanence</button></span></td>
+            <td><span ~style.display=PermanenceUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(1).buyMax()">Max</button></span></td>
+          </tr>
+          <tr>
+            <td>Power to Eternity Producer multiplier to eternity generators:</td>
+            <td><span ~style.display=PermanenceUpgrade(2).atBoughtLimit() ? 'none' : ''~>~f PermanenceUpgrade(2).effect() ~ → ~f PermanenceUpgrade(2).nextEffect() ~</span><span ~style.display=PermanenceUpgrade(2).atBoughtLimit() ? '' : 'none'~>~f PermanenceUpgrade(2).effect() ~ (maxed)</span></td>
+            <td><span ~style.display=PermanenceUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(2).buy()">Cost: ~f PermanenceUpgrade(2).cost() ~ permanence</button></span></td>
+            <td><span ~style.display=PermanenceUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(2).buyMax()">Max</button></span></td>
+          </tr>
+          <tr>
+            <td>Power to third-row study effects:</td>
+            <td><span ~style.display=PermanenceUpgrade(3).atBoughtLimit() ? 'none' : ''~>~f PermanenceUpgrade(3).effect() ~ → ~f PermanenceUpgrade(3).nextEffect() ~</span><span ~style.display=PermanenceUpgrade(3).atBoughtLimit() ? '' : 'none'~>~f PermanenceUpgrade(3).effect() ~ (maxed)</span></td>
+            <td><span ~style.display=PermanenceUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(3).buy()">Cost: ~f PermanenceUpgrade(3).cost() ~ permanence</button></span></td>
+            <td><span ~style.display=PermanenceUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(3).buyMax()">Max</button></span></td>
+          </tr>
+          <tr>
+            <td>Multiplier to permanence gain based on eternity stars:</td>
+            <td><span ~style.display=PermanenceUpgrade(4).atBoughtLimit() ? 'none' : ''~>~f PermanenceUpgrade(4).effect() ~ → ~f PermanenceUpgrade(4).nextEffect() ~</span><span ~style.display=PermanenceUpgrade(4).atBoughtLimit() ? '' : 'none'~>~f PermanenceUpgrade(4).effect() ~ (maxed)</span></td>
+            <td><span ~style.display=PermanenceUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(4).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(4).buy()">Cost: ~f PermanenceUpgrade(4).cost() ~ permanence</button></span></td>
+            <td><span ~style.display=PermanenceUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(4).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(4).buyMax()">Max</button></span></td>
+          </tr>
+        </table>
+      </div>
+      <span ~style.display=Permanence.canGainPermanence() ? '' : 'none'~><button style="height: 48px;" onclick="Permanence.gainPermanence()">Lose all but ~f Permanence.getLeftoverEternities() ~ eternities,<br/>but gain ~f Permanence.permanenceGain() ~ permanence.</button></span>
+      <span ~style.display=Permanence.canGainPermanence() ? 'none' : ''~>You need ~f Permanence.getRequiredEternities() ~ eternities to gain permanence.<span ~style.display=Permanence.hasGainedPermanence() ? 'none' : ''~> Permanence can be spent on a variety of upgrades.</span></span>
     </div>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'eternity-challenges' ? '' : 'none'~>
@@ -1496,7 +1533,11 @@
     </span>
     <br/>
     <span>
-      At ~f EternityChallenge.getTotalCompletionsRewardThreshold(1) ~ total eternity challenge tiers completed: Multiplier to boost power based on eternity challenge tiers completed (~f EternityChallenge.getTotalCompletionsRewardRawEffect(1) ~)
+      At ~f EternityChallenge.getTotalCompletionsRewardThreshold(1) ~ total eternity challenge tiers completed: Multiplier to boost power gain based on eternity challenge tiers completed (~f EternityChallenge.getTotalCompletionsRewardRawEffect(1) ~)
+    </span>
+    <br/>
+    <span>
+      At ~f EternityChallenge.getTotalCompletionsRewardThreshold(2) ~ total eternity challenge tiers completed: Multiplier to eternity gain based on eternity challenge tiers completed (~f EternityChallenge.getTotalCompletionsRewardRawEffect(2) ~)
     </span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>

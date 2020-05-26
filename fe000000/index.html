@@ -1,6 +1,8 @@
 <html>
 <head>
   <title>FE000000</title>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/break_infinity.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@antimatter-dimensions/notations"></script>
   <script src="js/eternity/eternities.js"></script>
@@ -14,6 +16,8 @@
   <script src="js/eternity/eternity-stars.js"></script>
   <script src="js/eternity/eternity-starting-benefits.js"></script>
   <script src="js/eternity/eternity-upgrades.js"></script>
+  <script src="js/eternity/permanence-upgrades.js"></script>
+  <script src="js/eternity/permanence.js"></script>
   <script src="js/infinity/infinities.js"></script>
   <script src="js/infinity/infinity-autobuyers.js"></script>
   <script src="js/infinity/infinity-challenge.js"></script>
@@ -1475,7 +1479,7 @@
       <span><button id="b253" onclick="EternityProducer.maxAll()">Max Eternity Producer upgrades</button></span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
-          <td>Increase Eternity Producer production per second:</td>
+          <td>Increase Eternity Producer base production per second:</td>
           <td><span id="b254"><span id="e374"></span> → <span id="e375"></span></span><span id="b255"><span id="e376"></span> (maxed)</span></td>
           <td><span id="b256"><button id="b257" onclick="EternityProducerUpgrade(1).buy()">Cost: <span id="e377"></span> EP</button></span></td>
           <td><span id="b258"><button id="b259" onclick="EternityProducerUpgrade(1).buyMax()">Max</button></span></td>
@@ -1487,16 +1491,53 @@
           <td><span id="b264"><button id="b265" onclick="EternityProducerUpgrade(2).buyMax()">Max</button></span></td>
         </tr>
       </table>
+      <div id="b266">
+        <span>You have <span id="e382"></span> permanence.</span>
+        <br/>
+        <span><button id="b267" onclick="Permanence.maxAll()">Max Permanence upgrades</button></span>
+        <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
+          <tr>
+            <td>Multiplier to eternity production:</td>
+            <td><span id="b268"><span id="e383"></span> → <span id="e384"></span></span><span id="b269"><span id="e385"></span> (maxed)</span></td>
+            <td><span id="b270"><button id="b271" onclick="PermanenceUpgrade(1).buy()">Cost: <span id="e386"></span> permanence</button></span></td>
+            <td><span id="b272"><button id="b273" onclick="PermanenceUpgrade(1).buyMax()">Max</button></span></td>
+          </tr>
+          <tr>
+            <td>Power to Eternity Producer multiplier to eternity generators:</td>
+            <td><span id="b274"><span id="e387"></span> → <span id="e388"></span></span><span id="b275"><span id="e389"></span> (maxed)</span></td>
+            <td><span id="b276"><button id="b277" onclick="PermanenceUpgrade(2).buy()">Cost: <span id="e390"></span> permanence</button></span></td>
+            <td><span id="b278"><button id="b279" onclick="PermanenceUpgrade(2).buyMax()">Max</button></span></td>
+          </tr>
+          <tr>
+            <td>Power to third-row study effects:</td>
+            <td><span id="b280"><span id="e391"></span> → <span id="e392"></span></span><span id="b281"><span id="e393"></span> (maxed)</span></td>
+            <td><span id="b282"><button id="b283" onclick="PermanenceUpgrade(3).buy()">Cost: <span id="e394"></span> permanence</button></span></td>
+            <td><span id="b284"><button id="b285" onclick="PermanenceUpgrade(3).buyMax()">Max</button></span></td>
+          </tr>
+          <tr>
+            <td>Multiplier to permanence gain based on eternity stars:</td>
+            <td><span id="b286"><span id="e395"></span> → <span id="e396"></span></span><span id="b287"><span id="e397"></span> (maxed)</span></td>
+            <td><span id="b288"><button id="b289" onclick="PermanenceUpgrade(4).buy()">Cost: <span id="e398"></span> permanence</button></span></td>
+            <td><span id="b290"><button id="b291" onclick="PermanenceUpgrade(4).buyMax()">Max</button></span></td>
+          </tr>
+        </table>
+      </div>
+      <span id="b292"><button style="height: 48px;" onclick="Permanence.gainPermanence()">Lose all but <span id="e399"></span> eternities,<br/>but gain <span id="e400"></span> permanence.</button></span>
+      <span id="b293">You need <span id="e401"></span> eternities to gain permanence.<span id="b294"> Permanence can be spent on a variety of upgrades.</span></span>
     </div>
   </div>
-  <div id="b266">
+  <div id="b295">
     <span>
-      You have completed <span id="e382"></span> eternity challenge tiers, giving you <span id="e383"></span> extra theorems (<span id="e384"></span> per tier).
-      <button onclick="EternityChallenge.toggleRespec()">Respec eternity challenge on next eternity: <span id="e385"></span></button>
+      You have completed <span id="e402"></span> eternity challenge tiers, giving you <span id="e403"></span> extra theorems (<span id="e404"></span> per tier).
+      <button onclick="EternityChallenge.toggleRespec()">Respec eternity challenge on next eternity: <span id="e405"></span></button>
     </span>
     <br/>
     <span>
-      At <span id="e386"></span> total eternity challenge tiers completed: Multiplier to boost power based on eternity challenge tiers completed (<span id="e387"></span>)
+      At <span id="e406"></span> total eternity challenge tiers completed: Multiplier to boost power gain based on eternity challenge tiers completed (<span id="e407"></span>)
+    </span>
+    <br/>
+    <span>
+      At <span id="e408"></span> total eternity challenge tiers completed: Multiplier to eternity gain based on eternity challenge tiers completed (<span id="e409"></span>)
     </span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
@@ -1504,23 +1545,23 @@
           <div class="eternitychallengediv">
             <span>Eternity Challenge 1</span>
             <br/>
-            <span>There are exponents on all normal generators multipliers based on infinity stars and on all infinity generator multipliers based on eternity stars (both less than <span id="e388"></span>).</span>
+            <span>There are exponents on all normal generators multipliers based on infinity stars and on all infinity generator multipliers based on eternity stars (both less than <span id="e410"></span>).</span>
             <br/>
             <span>Requirement to start:</span>
             <br/>
-            <span><span id="e389"></span></span>
+            <span><span id="e411"></span></span>
             <br/>
-            <span>Cost: <span id="e390"></span> theorems</span>
+            <span>Cost: <span id="e412"></span> theorems</span>
             <br/>
-            <span>Goal: <span id="e391"></span> IP</span>
+            <span>Goal: <span id="e413"></span> IP</span>
             <br/>
-            <span><span id="e392"></span></span>
+            <span><span id="e414"></span></span>
             <br/>
-            <span><button onclick="EternityChallenge.pressEternityChallengeButton(1)"><span id="e393"></span></button></span>
+            <span><button onclick="EternityChallenge.pressEternityChallengeButton(1)"><span id="e415"></span></button></span>
             <br/>
             <span>Reward: Multiplier to normal generators based on stars.</span>
             <br/>
-            <span>Current: <span id="e394"></span>x<span id="b267">, Next: <span id="e395"></span>x</span></span>
+            <span>Current: <span id="e416"></span>x<span id="b296">, Next: <span id="e417"></span>x</span></span>
           </div>
         </td>
         <td>
@@ -1531,19 +1572,19 @@
               <br/>
               <span>Requirement to start:</span>
               <br/>
-              <span><span id="e396"></span></span>
+              <span><span id="e418"></span></span>
               <br/>
-              <span>Cost: <span id="e397"></span> theorems</span>
+              <span>Cost: <span id="e419"></span> theorems</span>
               <br/>
-              <span>Goal: <span id="e398"></span> IP</span>
+              <span>Goal: <span id="e420"></span> IP</span>
               <br/>
-              <span><span id="e399"></span></span>
+              <span><span id="e421"></span></span>
               <br/>
-              <span><button onclick="EternityChallenge.pressEternityChallengeButton(2)"><span id="e400"></span></button></span>
+              <span><button onclick="EternityChallenge.pressEternityChallengeButton(2)"><span id="e422"></span></button></span>
               <br/>
               <span>Reward: Boosts are cheaper.</span>
               <br/>
-              <span>Current: Cost ^<span id="e401"></span><span id="b268">, Next: Cost ^<span id="e402"></span></span></span>
+              <span>Current: Cost ^<span id="e423"></span><span id="b297">, Next: Cost ^<span id="e424"></span></span></span>
             </div>
         </td>
       </tr>
@@ -1556,42 +1597,42 @@
               <br/>
               <span>Requirement to start:</span>
               <br/>
-              <span><span id="e403"></span></span>
+              <span><span id="e425"></span></span>
               <br/>
-              <span>Cost: <span id="e404"></span> theorems</span>
+              <span>Cost: <span id="e426"></span> theorems</span>
               <br/>
-              <span>Goal: <span id="e405"></span> IP</span>
+              <span>Goal: <span id="e427"></span> IP</span>
               <br/>
-              <span><span id="e406"></span></span>
+              <span><span id="e428"></span></span>
               <br/>
-              <span><button onclick="EternityChallenge.pressEternityChallengeButton(3)"><span id="e407"></span></button></span>
+              <span><button onclick="EternityChallenge.pressEternityChallengeButton(3)"><span id="e429"></span></button></span>
               <br/>
               <span>Reward: Exponent to prestige power.</span>
               <br/>
-              <span>Current: ^<span id="e408"></span><span id="b269">, Next: ^<span id="e409"></span></span></span>
+              <span>Current: ^<span id="e430"></span><span id="b298">, Next: ^<span id="e431"></span></span></span>
           </div>
         </td>
         <td>
           <div class="eternitychallengediv">
               <span>Eternity Challenge 4</span>
               <br/>
-              <span>You can infinity at most <span id="e410"></span> times. If you infinity more, you will automatically exit the challenge.</span>
+              <span>You can infinity at most <span id="e432"></span> times. If you infinity more, you will automatically exit the challenge.</span>
               <br/>
               <span>Requirement to start:</span>
               <br/>
-              <span><span id="e411"></span></span>
+              <span><span id="e433"></span></span>
               <br/>
-              <span>Cost: <span id="e412"></span> theorems</span>
+              <span>Cost: <span id="e434"></span> theorems</span>
               <br/>
-              <span>Goal: <span id="e413"></span> IP</span>
+              <span>Goal: <span id="e435"></span> IP</span>
               <br/>
-              <span><span id="e414"></span></span>
+              <span><span id="e436"></span></span>
               <br/>
-              <span><button onclick="EternityChallenge.pressEternityChallengeButton(4)"><span id="e415"></span></button></span>
+              <span><button onclick="EternityChallenge.pressEternityChallengeButton(4)"><span id="e437"></span></button></span>
               <br/>
               <span>Reward: Multiplier to infinity generators based on infinity points.</span>
               <br/>
-              <span>Current: <span id="e416"></span>x<span id="b270">, Next: <span id="e417"></span>x</span></span>
+              <span>Current: <span id="e438"></span>x<span id="b299">, Next: <span id="e439"></span>x</span></span>
           </div>
         </td>
       </tr>
@@ -1600,78 +1641,7 @@
           <div class="eternitychallengediv">
               <span>Eternity Challenge 5</span>
               <br/>
-              <span>Infinity generator multipliers are square-rooted (^<span id="e418"></span>).</span>
-              <br/>
-              <span>Requirement to start:</span>
-              <br/>
-              <span><span id="e419"></span></span>
-              <br/>
-              <span>Cost: <span id="e420"></span> theorems</span>
-              <br/>
-              <span>Goal: <span id="e421"></span> IP</span>
-              <br/>
-              <span><span id="e422"></span></span>
-              <br/>
-              <span><button onclick="EternityChallenge.pressEternityChallengeButton(5)"><span id="e423"></span></button></span>
-              <br/>
-              <span>Reward: Exponent to infinity generator multipliers.</span>
-              <br/>
-              <span>Current: ^<span id="e424"></span><span id="b271">, Next: ^<span id="e425"></span></span></span>
-          </div>
-        </td>
-        <td>
-          <div class="eternitychallengediv">
-              <span>Eternity Challenge 6</span>
-              <br/>
-              <span>All eternity challenge rewards are disabled.</span>
-              <br/>
-              <span>Requirement to start:</span>
-              <br/>
-              <span><span id="e426"></span></span>
-              <br/>
-              <span>Cost: <span id="e427"></span> theorems</span>
-              <br/>
-              <span>Goal: <span id="e428"></span> IP</span>
-              <br/>
-              <span><span id="e429"></span></span>
-              <br/>
-              <span><button onclick="EternityChallenge.pressEternityChallengeButton(6)"><span id="e430"></span></button></span>
-              <br/>
-              <span>Reward: All other eternity challenge rewards are stronger.</span>
-              <br/>
-              <span>Current: <span id="e431"></span>x<span id="b272">, Next: <span id="e432"></span>x</span></span>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="eternitychallengediv">
-              <span>Eternity Challenge 7</span>
-              <br/>
-              <span>Infinity generators are multiplied by (eternity points)^<span id="e433"></span>, but infinity generator per-purchase multipliers are disabled.</span>
-              <br/>
-              <span>Requirement to start:</span>
-              <br/>
-              <span><span id="e434"></span></span>
-              <br/>
-              <span>Cost: <span id="e435"></span> theorems</span>
-              <br/>
-              <span>Goal: <span id="e436"></span> IP</span>
-              <br/>
-              <span><span id="e437"></span></span>
-              <br/>
-              <span><button onclick="EternityChallenge.pressEternityChallengeButton(7)"><span id="e438"></span></button></span>
-              <br/>
-              <span>Reward: Multiplier to infinity generators based on eternity points.</span>
-              <br/>
-              <span>Current: <span id="e439"></span>x<span id="b273">, Next: <span id="e440"></span>x</span></span>
-          </div>
-        </td>
-        <td>
-          <div class="eternitychallengediv">
-              <span>Eternity Challenge 8</span>
-              <br/>
-              <span>Eternity generators are disabled.</span>
+              <span>Infinity generator multipliers are square-rooted (^<span id="e440"></span>).</span>
               <br/>
               <span>Requirement to start:</span>
               <br/>
@@ -1683,11 +1653,82 @@
               <br/>
               <span><span id="e444"></span></span>
               <br/>
-              <span><button onclick="EternityChallenge.pressEternityChallengeButton(8)"><span id="e445"></span></button></span>
+              <span><button onclick="EternityChallenge.pressEternityChallengeButton(5)"><span id="e445"></span></button></span>
+              <br/>
+              <span>Reward: Exponent to infinity generator multipliers.</span>
+              <br/>
+              <span>Current: ^<span id="e446"></span><span id="b300">, Next: ^<span id="e447"></span></span></span>
+          </div>
+        </td>
+        <td>
+          <div class="eternitychallengediv">
+              <span>Eternity Challenge 6</span>
+              <br/>
+              <span>All eternity challenge rewards are disabled.</span>
+              <br/>
+              <span>Requirement to start:</span>
+              <br/>
+              <span><span id="e448"></span></span>
+              <br/>
+              <span>Cost: <span id="e449"></span> theorems</span>
+              <br/>
+              <span>Goal: <span id="e450"></span> IP</span>
+              <br/>
+              <span><span id="e451"></span></span>
+              <br/>
+              <span><button onclick="EternityChallenge.pressEternityChallengeButton(6)"><span id="e452"></span></button></span>
+              <br/>
+              <span>Reward: All other eternity challenge rewards are stronger.</span>
+              <br/>
+              <span>Current: <span id="e453"></span>x<span id="b301">, Next: <span id="e454"></span>x</span></span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="eternitychallengediv">
+              <span>Eternity Challenge 7</span>
+              <br/>
+              <span>Infinity generators are multiplied by (eternity points)^<span id="e455"></span>, but infinity generator per-purchase multipliers are disabled.</span>
+              <br/>
+              <span>Requirement to start:</span>
+              <br/>
+              <span><span id="e456"></span></span>
+              <br/>
+              <span>Cost: <span id="e457"></span> theorems</span>
+              <br/>
+              <span>Goal: <span id="e458"></span> IP</span>
+              <br/>
+              <span><span id="e459"></span></span>
+              <br/>
+              <span><button onclick="EternityChallenge.pressEternityChallengeButton(7)"><span id="e460"></span></button></span>
+              <br/>
+              <span>Reward: Multiplier to infinity generators based on eternity points.</span>
+              <br/>
+              <span>Current: <span id="e461"></span>x<span id="b302">, Next: <span id="e462"></span>x</span></span>
+          </div>
+        </td>
+        <td>
+          <div class="eternitychallengediv">
+              <span>Eternity Challenge 8</span>
+              <br/>
+              <span>Eternity generators are disabled.</span>
+              <br/>
+              <span>Requirement to start:</span>
+              <br/>
+              <span><span id="e463"></span></span>
+              <br/>
+              <span>Cost: <span id="e464"></span> theorems</span>
+              <br/>
+              <span>Goal: <span id="e465"></span> IP</span>
+              <br/>
+              <span><span id="e466"></span></span>
+              <br/>
+              <span><button onclick="EternityChallenge.pressEternityChallengeButton(8)"><span id="e467"></span></button></span>
               <br/>
               <span>Reward: Multiplier to eternity generators.</span>
               <br/>
-              <span>Current: <span id="e446"></span>x<span id="b274">, Next: <span id="e447"></span>x</span></span>
+              <span>Current: <span id="e468"></span>x<span id="b303">, Next: <span id="e469"></span>x</span></span>
           </div>
         </td>
       </tr>
@@ -1700,78 +1741,78 @@
       Eternity challenges lock again once completed.
     </span>
   </div>
-  <div id="b275">
-    <span>You have produced <span id="e448"></span> total stars.</span>
+  <div id="b304">
+    <span>You have produced <span id="e470"></span> total stars.</span>
     <br/>
-    <span>You have produced <span id="e449"></span> stars this eternity.</span>
+    <span>You have produced <span id="e471"></span> stars this eternity.</span>
     <br/>
-    <span>You have produced <span id="e450"></span> total infinity points.</span>
+    <span>You have produced <span id="e472"></span> total infinity points.</span>
     <br/>
-    <span>You have produced <span id="e451"></span> infinity points this eternity.</span>
+    <span>You have produced <span id="e473"></span> infinity points this eternity.</span>
     <br/>
-    <span>You have produced <span id="e452"></span> total eternity points.</span>
+    <span>You have produced <span id="e474"></span> total eternity points.</span>
     <br/>
-    <span>Your fastest infinity took <span id="e453"></span> seconds.</span>
+    <span>Your fastest infinity took <span id="e475"></span> seconds.</span>
     <br/>
-    <span>Your fastest eternity took <span id="e454"></span> seconds.</span>
+    <span>Your fastest eternity took <span id="e476"></span> seconds.</span>
     <br/>
-    <span>You have spent <span id="e455"></span> seconds without purchasing anything.</span>
+    <span>You have spent <span id="e477"></span> seconds without purchasing anything.</span>
     <br/>
-    <span>You have spent <span id="e456"></span> seconds without sacrificing.</span>
+    <span>You have spent <span id="e478"></span> seconds without sacrificing.</span>
     <br/>
-    <span>You have spent <span id="e457"></span> seconds in this prestige.</span>
+    <span>You have spent <span id="e479"></span> seconds in this prestige.</span>
     <br/>
-    <span>You have spent <span id="e458"></span> seconds in this infinity.</span>
+    <span>You have spent <span id="e480"></span> seconds in this infinity.</span>
     <br/>
-    <span>You have spent <span id="e459"></span> seconds in this eternity.</span>
+    <span>You have spent <span id="e481"></span> seconds in this eternity.</span>
     <br/>
-    <span>You have spent <span id="e460"></span> seconds playing this game (counting time offline).</span>
-    <div id="b276">
-      <span>Last infinity took <span id="e461"></span> seconds and gave <span id="e462"></span> IP, giving <span id="e463"></span> IP/second.</span>
+    <span>You have spent <span id="e482"></span> seconds playing this game (counting time offline).</span>
+    <div id="b305">
+      <span>Last infinity took <span id="e483"></span> seconds and gave <span id="e484"></span> IP, giving <span id="e485"></span> IP/second.</span>
       <br/>
-      <span id="b277">The infinity two infinities ago took <span id="e464"></span> seconds and gave <span id="e465"></span> IP, giving <span id="e466"></span> IP/second.</span>
+      <span id="b306">The infinity two infinities ago took <span id="e486"></span> seconds and gave <span id="e487"></span> IP, giving <span id="e488"></span> IP/second.</span>
       <br/>
-      <span id="b278">The infinity three infinities ago took <span id="e467"></span> seconds and gave <span id="e468"></span> IP, giving <span id="e469"></span> IP/second.</span>
+      <span id="b307">The infinity three infinities ago took <span id="e489"></span> seconds and gave <span id="e490"></span> IP, giving <span id="e491"></span> IP/second.</span>
       <br/>
-      <span id="b279">The infinity four infinities ago took <span id="e470"></span> seconds and gave <span id="e471"></span> IP, giving <span id="e472"></span> IP/second.</span>
+      <span id="b308">The infinity four infinities ago took <span id="e492"></span> seconds and gave <span id="e493"></span> IP, giving <span id="e494"></span> IP/second.</span>
       <br/>
-      <span id="b280">The infinity five infinities ago took <span id="e473"></span> seconds and gave <span id="e474"></span> IP, giving <span id="e475"></span> IP/second.</span>
+      <span id="b309">The infinity five infinities ago took <span id="e495"></span> seconds and gave <span id="e496"></span> IP, giving <span id="e497"></span> IP/second.</span>
       <br/>
-      <span id="b281">The infinity six infinities ago took <span id="e476"></span> seconds and gave <span id="e477"></span> IP, giving <span id="e478"></span> IP/second.</span>
+      <span id="b310">The infinity six infinities ago took <span id="e498"></span> seconds and gave <span id="e499"></span> IP, giving <span id="e500"></span> IP/second.</span>
       <br/>
-      <span id="b282">The infinity seven infinities ago took <span id="e479"></span> seconds and gave <span id="e480"></span> IP, giving <span id="e481"></span> IP/second.</span>
+      <span id="b311">The infinity seven infinities ago took <span id="e501"></span> seconds and gave <span id="e502"></span> IP, giving <span id="e503"></span> IP/second.</span>
       <br/>
-      <span id="b283">The infinity eight infinities ago took <span id="e482"></span> seconds and gave <span id="e483"></span> IP, giving <span id="e484"></span> IP/second.</span>
+      <span id="b312">The infinity eight infinities ago took <span id="e504"></span> seconds and gave <span id="e505"></span> IP, giving <span id="e506"></span> IP/second.</span>
       <br/>
-      <span id="b284">The infinity nine infinities ago took <span id="e485"></span> seconds and gave <span id="e486"></span> IP, giving <span id="e487"></span> IP/second.</span>
+      <span id="b313">The infinity nine infinities ago took <span id="e507"></span> seconds and gave <span id="e508"></span> IP, giving <span id="e509"></span> IP/second.</span>
       <br/>
-      <span id="b285">The infinity ten infinities ago took <span id="e488"></span> seconds and gave <span id="e489"></span> IP, giving <span id="e490"></span> IP/second.</span>
+      <span id="b314">The infinity ten infinities ago took <span id="e510"></span> seconds and gave <span id="e511"></span> IP, giving <span id="e512"></span> IP/second.</span>
       <br/>
     </div>
-    <div id="b286">
-      <span>Last eternity took <span id="e491"></span> seconds and gave <span id="e492"></span> EP, giving <span id="e493"></span> EP/second.</span>
+    <div id="b315">
+      <span>Last eternity took <span id="e513"></span> seconds and gave <span id="e514"></span> EP, giving <span id="e515"></span> EP/second.</span>
       <br/>
-      <span id="b287">The eternity two eternities ago took <span id="e494"></span> seconds and gave <span id="e495"></span> EP, giving <span id="e496"></span> EP/second.</span>
+      <span id="b316">The eternity two eternities ago took <span id="e516"></span> seconds and gave <span id="e517"></span> EP, giving <span id="e518"></span> EP/second.</span>
       <br/>
-      <span id="b288">The eternity three eternities ago took <span id="e497"></span> seconds and gave <span id="e498"></span> EP, giving <span id="e499"></span> EP/second.</span>
+      <span id="b317">The eternity three eternities ago took <span id="e519"></span> seconds and gave <span id="e520"></span> EP, giving <span id="e521"></span> EP/second.</span>
       <br/>
-      <span id="b289">The eternity four eternities ago took <span id="e500"></span> seconds and gave <span id="e501"></span> EP, giving <span id="e502"></span> EP/second.</span>
+      <span id="b318">The eternity four eternities ago took <span id="e522"></span> seconds and gave <span id="e523"></span> EP, giving <span id="e524"></span> EP/second.</span>
       <br/>
-      <span id="b290">The eternity five eternities ago took <span id="e503"></span> seconds and gave <span id="e504"></span> EP, giving <span id="e505"></span> EP/second.</span>
+      <span id="b319">The eternity five eternities ago took <span id="e525"></span> seconds and gave <span id="e526"></span> EP, giving <span id="e527"></span> EP/second.</span>
       <br/>
-      <span id="b291">The eternity six eternities ago took <span id="e506"></span> seconds and gave <span id="e507"></span> EP, giving <span id="e508"></span> EP/second.</span>
+      <span id="b320">The eternity six eternities ago took <span id="e528"></span> seconds and gave <span id="e529"></span> EP, giving <span id="e530"></span> EP/second.</span>
       <br/>
-      <span id="b292">The eternity seven eternities ago took <span id="e509"></span> seconds and gave <span id="e510"></span> EP, giving <span id="e511"></span> EP/second.</span>
+      <span id="b321">The eternity seven eternities ago took <span id="e531"></span> seconds and gave <span id="e532"></span> EP, giving <span id="e533"></span> EP/second.</span>
       <br/>
-      <span id="b293">The eternity eight eternities ago took <span id="e512"></span> seconds and gave <span id="e513"></span> EP, giving <span id="e514"></span> EP/second.</span>
+      <span id="b322">The eternity eight eternities ago took <span id="e534"></span> seconds and gave <span id="e535"></span> EP, giving <span id="e536"></span> EP/second.</span>
       <br/>
-      <span id="b294">The eternity nine eternities ago took <span id="e515"></span> seconds and gave <span id="e516"></span> EP, giving <span id="e517"></span> EP/second.</span>
+      <span id="b323">The eternity nine eternities ago took <span id="e537"></span> seconds and gave <span id="e538"></span> EP, giving <span id="e539"></span> EP/second.</span>
       <br/>
-      <span id="b295">The eternity ten eternities ago took <span id="e518"></span> seconds and gave <span id="e519"></span> EP, giving <span id="e520"></span> EP/second.</span>
+      <span id="b324">The eternity ten eternities ago took <span id="e540"></span> seconds and gave <span id="e541"></span> EP, giving <span id="e542"></span> EP/second.</span>
       <br/>
     </div>
   </div>
-  <div id="b296">
+  <div id="b325">
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 8px; border-collapse: separate;">
       <tr>
         <td><button class="options-button" onclick="Saving.saveGame()">Save</button></td>
@@ -1779,9 +1820,9 @@
         <td><button class="options-button" onclick="Saving.loadGamePrompt()">Load</button></td>
       </tr>
       <tr>
-        <td><button class="options-button" onclick="Options.toggleOfflineProgress()">Offline progress: <span id="e521"></span></button></td>
-        <td><button class="options-button" onclick="Options.toggleHotkeys()">Hotkeys: <span id="e522"></span></button></td>
-        <td><button class="options-button" onclick="Options.nextNotation()">Notation: <span id="e523"></span></button></td>
+        <td><button class="options-button" onclick="Options.toggleOfflineProgress()">Offline progress: <span id="e543"></span></button></td>
+        <td><button class="options-button" onclick="Options.toggleHotkeys()">Hotkeys: <span id="e544"></span></button></td>
+        <td><button class="options-button" onclick="Options.nextNotation()">Notation: <span id="e545"></span></button></td>
       </tr>
       <tr>
         <td></td>

@@ -32,7 +32,11 @@ let Study = function (i) {
       return Math.floor((i + 3) / 4);
     },
     rawEffect() {
-      return STUDY_EFFECTS[i - 1]();
+      if (this.row() === 3) {
+        return Math.pow(STUDY_EFFECTS[i - 1](), PermanenceUpgrade(3).effect());
+      } else {
+        return STUDY_EFFECTS[i - 1]();
+      }
     },
     rawTotalEffect() {
       // This only exists for display of the Study 1 effect.

@@ -30,7 +30,7 @@ let EternityPrestigeLayer = {
     if (!this.canEternity()) return;
     let gain = this.eternityPointGain();
     EternityPoints.addAmount(gain);
-    Eternities.increment();
+    Eternities.add(Eternities.commonEternityGainMultiplier());
     Stats.addEternity(player.stats.timeSinceEternity, gain);
     // Eternity challenge handling
     EternityChallenge.checkForEternityChallengeCompletion();

@@ -181,6 +181,12 @@ let Saving = {
       player.respecEternityChallenge = false;
       player.version = 1.640625;
     }
+    if (player.version < 1.65625) {
+      player.permanence = 0;
+      player.permanenceUpgrades = [0, 0, 0, 0];
+      player.hasGainedPermanence = false;
+      player.version = 1.65625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

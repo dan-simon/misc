@@ -1,22 +1,22 @@
 let EternityChallenge = {
   goals: [Infinity,
     Decimal.pow(2, 512), Decimal.pow(2, 8192), Decimal.pow(2, 1024),
-    Decimal.pow(2, 1.375 * Math.pow(2, 14)), Decimal.pow(2, Math.pow(2, 32)),
-    Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 32)),
+    Decimal.pow(2, 1.375 * Math.pow(2, 14)), Decimal.pow(2, 1.125 * Math.pow(2, 15)),
+    Decimal.pow(2, 1.6875 * Math.pow(2, 15)), Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 32)),
   ],
   requirements: [Infinity,
     Decimal.pow(2, 1.75 * Math.pow(2, 21)), 1024, Decimal.pow(2, 1.375 * Math.pow(2, 18)),
-    Decimal.pow(2, 1.375 * Math.pow(2, 14)), Decimal.pow(2, 1.375 * Math.pow(2, 16)), 16,
+    Decimal.pow(2, 1.375 * Math.pow(2, 14)), Decimal.pow(2, 1.375 * Math.pow(2, 16)), 15,
     Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 32)),
   ],
   goalIncreases: [Infinity,
     Decimal.pow(2, 1024), Decimal.pow(2, 9216), Decimal.pow(2, 320),
-    Decimal.pow(2, 1.75 * Math.pow(2, 14)), Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 32)),
+    Decimal.pow(2, 1.75 * Math.pow(2, 14)), Decimal.pow(2, 1.375 * Math.pow(2, 14)), Decimal.pow(2, Math.pow(2, 32)),
     Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 32)),
   ],
   requirementIncreases: [Infinity,
     Decimal.pow(2, 1.5 * Math.pow(2, 20)), 512, Decimal.pow(2, 1.25 * Math.pow(2, 17)),
-    Decimal.pow(2, Math.pow(2, 15)), Decimal.pow(2, Math.pow(2, 32)), 4,
+    Decimal.pow(2, Math.pow(2, 15)), Decimal.pow(2, Math.pow(2, 16)), 5,
     Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 32)),
   ],
   rewards: [
@@ -26,7 +26,7 @@ let EternityChallenge = {
     x => 1 + x / 256,
     x => Decimal.pow(2, x * Math.pow(InfinityPoints.amount().max(1).log2(), 0.5) / 2),
     x => 1 + x / 64,
-    x => 1 + x / 8,
+    x => 1 + x / 16,
     x => EternityPoints.amount().max(1).pow(x / 4),
     x => Decimal.pow(2, 16 * x),
   ],
@@ -131,6 +131,8 @@ let EternityChallenge = {
   getTotalCompletionsRewardRawEffect(x) {
     if (x === 1) {
       return 1 + this.getTotalEternityChallengeCompletions() / 4;
+    } else if (x === 2) {
+      return Math.pow(1 + this.getTotalEternityChallengeCompletions() / 4, 3);
     }
     return null;
   },

@@ -1,41 +1,39 @@
-let EternityUpgrade = function (i) {
-  if ('EternityUpgrades' in window) {
-    return EternityUpgrades.get(i);
+let PermanenceUpgrade = function (i) {
+  if ('PermanenceUpgrade' in window) {
+    return PermanenceUpgrade.get(i);
   }
   return {
     bought() {
-      return player.eternityUpgrades[i - 1];
+      return player.permanenceUpgrades[i - 1];
     },
     addBought(n) {
-      player.eternityUpgrades[i - 1] += n;
+      player.permanenceUpgrades[i - 1] += n;
     },
     boughtLimit() {
-      return [7, Infinity, Infinity][i - 1];
+      return Infinity;
     },
     costIncreasePer() {
-      return [16, 4096, Math.pow(2, 16)][i - 1];
+      return 2;
     },
     effectIncreasePer() {
-      return [1, 0.5, 1][i - 1];
+      return [1, 0.125, 0.25, 0.25][i - 1];
     },
     initialEffect() {
-      return [1, 1, 0][i - 1];
+      return [1, 1, 1, 0][i - 1];
     },
     initialCost() {
-      return new Decimal(this.costIncreasePer());
+      return 1;
     },
     cost() {
-      return this.initialCost().times(Decimal.pow(this.costIncreasePer(), this.bought()));
+      return this.initialCost() * Math.pow(this.costIncreasePer(), this.bought());
     },
     costFor(n) {
-      return this.cost().times(Decimal.pow(this.costIncreasePer(), n).minus(1)).div(Decimal.minus(this.costIncreasePer(), 1));
+      return this.cost() * (Math.pow(this.costIncreasePer(), n) - 1) / (this.costIncreasePer() - 1);
     },
     processEffect(x) {
-      if (i === 3) {
+      if (i === 4) {
         // This formula is annoyingly complicated, but I think it might have to be.
-        // The first upgrade is really good (roughly 16x), and the second is decent (roughly 4x),
-        // but after that they start being junk fairly quickly.
-        return Decimal.pow(Math.max(EternityPoints.totalEPProduced().log2(), 1), Math.pow(x, 0.5));
+        return Decimal.pow(1 + Math.max(EternityStars.amount().log2() / 1024, 0), Math.pow(x, 0.5));
       } else {
         return x;
       }
@@ -56,8 +54,8 @@ let EternityUpgrade = function (i) {
       return n <= this.maxBuyable();
     },
     maxBuyable() {
-      let num = Math.floor(player.eternityPoints.div(this.cost()).times(
-        Decimal.minus(this.costIncreasePer(), 1)).plus(1).log(this.costIncreasePer()));
+      let num = Math.floor(Math.log(player.permanence / this.cost() * (this.costIncreasePer() - 1) + 1)
+        / Math.log(this.costIncreasePer()));
       num = Math.min(num, this.boughtLimit() - this.bought());
       num = Math.max(num, 0);
       return num;
@@ -67,7 +65,7 @@ let EternityUpgrade = function (i) {
         n = 1;
       }
       if (n === 0 || (!guaranteedBuyable && !this.canBuy(n))) return;
-      player.eternityPoints = player.eternityPoints.minus(this.costFor(n));
+      player.permanence = player.permanence - this.costFor(n);
       this.addBought(n);
     },
     buyMax() {
@@ -76,8 +74,8 @@ let EternityUpgrade = function (i) {
   }
 }
 
-let EternityUpgrades = {
-  list: [1, 2, 3].map((x) => EternityUpgrade(x)),
+let PermanenceUpgrades = {
+  list: [1, 2, 3, 4].map((x) => PermanenceUpgrade(x)),
   get: function (x) {
     return this.list[x - 1];
   },
