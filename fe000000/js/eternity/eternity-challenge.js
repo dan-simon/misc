@@ -14,7 +14,7 @@ let EternityChallenge = {
     Decimal.pow(2, 1024), Decimal.pow(2, 9216), Decimal.pow(2, 320),
     Decimal.pow(2, 1.75 * Math.pow(2, 14)), Decimal.pow(2, 1.375 * Math.pow(2, 14)),
     Decimal.pow(2, 1.4375 * Math.pow(2, 16)), Decimal.pow(2, 1.25 * Math.pow(2, 16)),
-    Decimal.pow(2, Math.pow(2, 32)),
+    Decimal.pow(2, Math.pow(2, 16)),
   ],
   requirementIncreases: [Infinity,
     Decimal.pow(2, 1.5 * Math.pow(2, 20)), 512, Decimal.pow(2, 1.25 * Math.pow(2, 17)),
