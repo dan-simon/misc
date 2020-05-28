@@ -7,10 +7,10 @@ let EternityPrestigeLayer = {
     }
   },
   canEternity() {
-    return InfinityPoints.amount().gte(this.infinityPointRequirementForEternity());
+    return InfinityPoints.totalIPProducedThisEternity().gte(this.infinityPointRequirementForEternity());
   },
   eternityPointGain() {
-    let oom = InfinityPoints.amount().log(2) / 256;
+    let oom = InfinityPoints.totalIPProducedThisEternity().log(2) / 256;
     return Decimal.pow(2, oom).floor();
   },
   currentEPPerSec() {
