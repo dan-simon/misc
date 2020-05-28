@@ -26,6 +26,9 @@ function gameLoop(diff, display) {
   if (EternityMilestones.isEternityMilestoneActive(6)) {
     InfinityChallenge.checkForAllAutoInfinityChallengeCompletions();
   }
+  if (EternityChallenge.isTotalCompletionsRewardActive(3)) {
+    InfinityPoints.addAmount(InfinityPrestigeLayer.infinityPointGain().times(diff));
+  }
   if (display !== false) {
     updateDisplay();
   }

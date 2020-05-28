@@ -2,11 +2,14 @@ let Eternities = {
   amount() {
     return player.eternities;
   },
-  increment() {
-    player.eternities++;
-  },
   add(x) {
     player.eternities += x;
+  },
+  setAmount(x) {
+    player.eternities = x;
+  },
+  commonEternityGainMultiplier() {
+    return EternityChallenge.getTotalCompletionsRewardEffect(2) * PermanenceUpgrade(1).effect();
   },
   eternityGeneratorMultiplier() {
     // This is intentionally always at most 1, and often less.

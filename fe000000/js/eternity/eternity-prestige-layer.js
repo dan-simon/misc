@@ -1,6 +1,10 @@
 let EternityPrestigeLayer = {
   infinityPointRequirementForEternity() {
-    return Decimal.pow(2, 256);
+    if (EternityChallenge.isSomeEternityChallengeRunning()) {
+      return EternityChallenge.getEternityChallengeGoal(EternityChallenge.currentEternityChallenge());
+    } else {
+      return Decimal.pow(2, 256);
+    }
   },
   canEternity() {
     return InfinityPoints.amount().gte(this.infinityPointRequirementForEternity());
@@ -26,23 +30,27 @@ let EternityPrestigeLayer = {
     if (!this.canEternity()) return;
     let gain = this.eternityPointGain();
     EternityPoints.addAmount(gain);
-    Eternities.increment();
+    Eternities.add(Eternities.commonEternityGainMultiplier());
     Stats.addEternity(player.stats.timeSinceEternity, gain);
-    // Not handled by Infinity.infinityReset() since that's also called
-    // when you start a challenge.
-    Challenge.setChallenge(0);
-    InfinityChallenge.setInfinityChallenge(0);
+    // Eternity challenge handling
+    EternityChallenge.checkForEternityChallengeCompletion();
     // I'm not sure whether or not this should go in the reset function.
     Studies.maybeRespec();
+    EternityChallenge.maybeRespec();
     this.eternityReset();
   },
   eternityReset() {
     InfinityPrestigeLayer.infinityReset();
+    // Not handled by Infinity.infinityReset() since that's also called
+    // when you start a challenge.
+    Challenge.setChallenge(0);
+    InfinityChallenge.setInfinityChallenge(0);
     player.eternityStars = new Decimal(2);
     EternityGenerators.list.forEach(x => x.resetAmount());
     player.boostPower = 1;
     player.infinityPoints = EternityStartingBenefits.infinityPoints();
     player.infinities = EternityStartingBenefits.infinities();
+    player.realInfinities = 0;
     player.infinityGenerators = initialInfinityGenerators();
     player.highestInfinityGenerator = 0;
     player.infinityUpgrades = [0, 0];

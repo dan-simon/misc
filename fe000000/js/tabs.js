@@ -16,6 +16,7 @@ let Tabs = {
       'eternity-milestones': () => player.eternities > 0,
       'studies': () => player.eternities > 0,
       'eternity-producer': () => player.eternities > 0,
+      'eternity-challenges': () => player.eternities > 0,
       'statistics': () => true,
       'options': () => true,
     }[x]();

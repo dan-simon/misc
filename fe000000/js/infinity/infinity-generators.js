@@ -38,16 +38,20 @@ let InfinityGenerator = function (i) {
         return new Decimal(0);
       }
       let factors = [
-        Decimal.pow(2, this.bought() / 8), Infinities.infinityGeneratorMultiplier(), InfinityChallenge.multiplier(),
+        EternityChallenge.isEternityChallengeRunning(7) ? new Decimal(1) : Decimal.pow(2, this.bought() / 8),
+        Infinities.infinityGeneratorMultiplier(), InfinityChallenge.multiplier(),
         (i === 1 && InfinityChallenge.isInfinityChallengeCompleted(3)) ? InfinityChallenge.infinityChallenge3Reward() : 1,
         InfinityChallenge.isInfinityChallengeCompleted(4) ? InfinityChallenge.infinityChallenge4Reward() : 1,
         (i === 8 && InfinityChallenge.isInfinityChallengeCompleted(8)) ? Math.max(1, Generator(8).amount().toNumber()) : 1,
-        EternityStars.multiplier(), Study(5).effect(), Study(6).effect(), Study(7).effect(), Study(8).effect()
+        EternityStars.multiplier(), Study(5).effect(), Study(6).effect(), Study(7).effect(), Study(8).effect(),
+        EternityChallenge.getEternityChallengeReward(4), EternityChallenge.getEternityChallengeReward(7),
       ];
       let multiplier = factors.reduce((a, b) => a.times(b));
       let powFactors = [
         (i === 5 && InfinityChallenge.isInfinityChallengeCompleted(5)) ? InfinityChallenge.infinityChallenge5Reward() : 1,
-        EternityStars.power()
+        EternityChallenge.isEternityChallengeRunning(1) ? EternityChallenge.eternityChallenge1EternityStarsEffect() : 1,
+        EternityChallenge.isEternityChallengeRunning(5) ? 0.5 : 1, EternityChallenge.getEternityChallengeReward(5),
+        EternityStars.power(),
       ];
       return multiplier.pow(powFactors.reduce((a, b) => a * b));
     },

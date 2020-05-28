@@ -2,8 +2,12 @@ let Infinities = {
   amount() {
     return player.infinities;
   },
+  realAmount() {
+    return player.realInfinities;
+  },
   increment() {
     player.infinities++;
+    player.realInfinities++;
   },
   infinityGeneratorMultiplier() {
     // This is intentionally always at most 1, and often less.

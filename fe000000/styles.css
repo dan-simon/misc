@@ -72,6 +72,17 @@ button {
   border-width: 1px 1px;
 }
 
+.eternitychallengediv {
+  display: table;
+  text-align: center;
+  width: 512px;
+  height: 320px;
+  padding: 4px;
+  margin: 4px;
+  border: solid;
+  border-width: 1px 1px;
+}
+
 .eternitymilestonediv {
   display: table;
   text-align: center;
@@ -88,7 +99,7 @@ button {
   text-align: center;
   background: #555555;
   width: 256px;
-  height: 144px;
+  height: 160px;
 }
 
 .studynormalbuyable {
@@ -96,7 +107,7 @@ button {
   text-align: center;
   background: radial-gradient(#cccc33, #aaaaaa);
   width: 256px;
-  height: 144px;
+  height: 160px;
 }
 
 .studynormalbought {
@@ -104,7 +115,7 @@ button {
   text-align: center;
   background: #cccc33;
   width: 256px;
-  height: 144px;
+  height: 160px;
 }
 
 .studyinfinityunbuyable {
@@ -112,7 +123,7 @@ button {
   text-align: center;
   background: #555555;
   width: 256px;
-  height: 144px;
+  height: 160px;
 }
 
 .studyinfinitybuyable {
@@ -120,7 +131,7 @@ button {
   text-align: center;
   background: radial-gradient(#cc33cc, #aaaaaa);
   width: 256px;
-  height: 144px;
+  height: 160px;
 }
 
 .studyinfinitybought {
@@ -128,7 +139,7 @@ button {
   text-align: center;
   background: #cc33cc;
   width: 256px;
-  height: 144px;
+  height: 160px;
 }
 
 .studytimeunbuyable {
@@ -136,7 +147,7 @@ button {
   text-align: center;
   background: #555555;
   width: 256px;
-  height: 144px;
+  height: 160px;
 }
 
 .studytimebuyable {
@@ -144,7 +155,7 @@ button {
   text-align: center;
   background: radial-gradient(#33cccc, #aaaaaa);
   width: 256px;
-  height: 144px;
+  height: 160px;
 }
 
 .studytimebought {
@@ -152,5 +163,5 @@ button {
   text-align: center;
   background: #33cccc;
   width: 256px;
-  height: 144px;
+  height: 160px;
 }

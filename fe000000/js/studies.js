@@ -10,7 +10,8 @@ let STUDY_EFFECTS = [
   () => Decimal.pow(2, Math.pow(Studies.totalTheorems(), 2) / 16),
   () => Math.pow(Boost.multiplierPer(), InfinityChallenge.isInfinityChallengeRunning(7) ? 0.5 : 1),
   () => Math.pow(Math.max(1, Math.log2(Prestige.prestigePower().log2())), 3),
-  () => Math.pow(2, Math.min(16, Math.pow(Math.log2(1 + player.stats.timeSinceEternity / 64), 4 / 3))),
+  () => Math.pow(2, Math.min(16, Math.pow(Math.log2(
+    1 + player.stats.timeSinceEternity * (1 + EternityStars.amount().max(1).log2() / 1024) / 64), 4 / 3))),
   () => Math.pow(Studies.totalTheorems(), 2),
 ]
 
@@ -32,7 +33,11 @@ let Study = function (i) {
       return Math.floor((i + 3) / 4);
     },
     rawEffect() {
-      return STUDY_EFFECTS[i - 1]();
+      if (this.row() === 3) {
+        return Math.pow(STUDY_EFFECTS[i - 1](), PermanenceUpgrade(3).effect());
+      } else {
+        return STUDY_EFFECTS[i - 1]();
+      }
     },
     rawTotalEffect() {
       // This only exists for display of the Study 1 effect.
@@ -47,8 +52,10 @@ let Study = function (i) {
     },
     isCapped() {
       // Note that this technique only works if the effect is a number and not a Decimal.
+      // Note also that we use STUDY_EFFECTS[i - 1]() directly since the raw effect of study 11
+      // is modified by an upgrade that boosts third-row studies.
       return (i === 7 || i === 11) &&
-        this.rawEffect() === {7: Math.pow(2, 64), 11: Math.pow(2, 16)}[i];
+        STUDY_EFFECTS[i - 1]() === {7: Math.pow(2, 64), 11: Math.pow(2, 16)}[i];
     },
     cappedText() {
       return this.isCapped() ? 'Capped' : 'Currently';
@@ -73,7 +80,7 @@ let Studies = {
     return this.list[x - 1];
   },
   totalTheorems() {
-    return player.boughtTheorems.reduce((a, b) => a + b) + Boost.extraTheorems();
+    return player.boughtTheorems.reduce((a, b) => a + b) + Boost.extraTheorems() + EternityChallenge.extraTheorems();
   },
   unspentTheorems() {
     return player.unspentTheorems;
@@ -88,7 +95,7 @@ let Studies = {
     for (let i = 0; i < 12; i++) {
       player.studies[i] = false;
     }
-    player.unspentTheorems = this.totalTheorems();
+    player.unspentTheorems = this.totalTheorems() - EternityChallenge.getUnlockedEternityChallengeCost();
   },
   maybeRespec() {
     if (this.isRespecOn()) {
