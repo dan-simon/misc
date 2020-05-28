@@ -75,6 +75,7 @@ let EternityPrestigeLayer = {
     player.slowAutobuyers = [
       false, false, false, false, false, false, false, false, false,
     ];
+    player.dilation.buildup = new Decimal(4);
     // Small bonus, arguably unexpected but not that big in the grand scheme of things.
     player.stats.totalStarsProducedThisEternity = EternityStartingBenefits.stars();
     player.stats.totalIPProducedThisEternity = EternityStartingBenefits.infinityPoints();

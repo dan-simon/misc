@@ -101,6 +101,15 @@ let initialPlayer = {
   permanence: 0,
   permanenceUpgrades: [0, 0, 0, 0],
   hasGainedPermanence: false,
+  dilation: {
+    unlocked: false,
+    active: false,
+    upgrades: [0, 0, 0],
+    buildup: new Decimal(4),
+    tachyonParticles: new Decimal(0),
+    dilatedTime: new Decimal(1),
+    fastestEternityDilated: -1
+  },
   options: {
     notation: 'Scientific',
     offlineProgress: true,
@@ -134,7 +143,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.65625
+  version: 1.671875
 }
 
 let player;

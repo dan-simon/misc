@@ -187,6 +187,18 @@ let Saving = {
       player.hasGainedPermanence = false;
       player.version = 1.65625;
     }
+    if (player.version < 1.671875) {
+      player.dilation = {
+        unlocked: false,
+        active: false,
+        upgrades: [0, 0, 0],
+        buildup: new Decimal(4),
+        tachyonParticles: new Decimal(0),
+        dilatedTime: new Decimal(1),
+        fastestEternityDilated: -1
+      }
+      player.version = 1.671875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
@@ -201,6 +213,10 @@ let Saving = {
       player.infinityGenerators[i].amount = new Decimal(player.infinityGenerators[i].amount);
       player.eternityGenerators[i].amount = new Decimal(player.eternityGenerators[i].amount);
     }
+    player.dilation.buildup = new Decimal(player.dilation.buildup);
+    player.dilation.tachyonParticles = new Decimal(player.dilation.tachyonParticles);
+    player.dilation.dilatedTime = new Decimal(player.dilation.dilatedTime);
+    player.dilation.maxStarsDilated = new Decimal(player.dilation.maxStarsDilated);
     player.stats.totalStarsProduced = new Decimal(player.stats.totalStarsProduced);
     player.stats.totalStarsProducedThisEternity = new Decimal(player.stats.totalStarsProducedThisEternity);
     player.stats.totalIPProduced = new Decimal(player.stats.totalIPProduced);

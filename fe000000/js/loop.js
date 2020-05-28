@@ -18,17 +18,18 @@ function gameLoop(diff, display) {
       Generator(i).produce(diff);
     }
   }
-  Stats.addToTimeStats(diff);
-  InfinityPrestigeLayer.updatePeakIPPerSec();
-  EternityPrestigeLayer.updatePeakEPPerSec();
-  Autobuyers.tick(diff);
-  InfinityAutobuyers.tick();
+  Dilation.tick(diff);
   if (EternityMilestones.isEternityMilestoneActive(6)) {
     InfinityChallenge.checkForAllAutoInfinityChallengeCompletions();
   }
   if (EternityChallenge.isTotalCompletionsRewardActive(3)) {
     InfinityPoints.addAmount(InfinityPrestigeLayer.infinityPointGain().times(diff));
   }
+  Stats.addToTimeStats(diff);
+  InfinityPrestigeLayer.updatePeakIPPerSec();
+  EternityPrestigeLayer.updatePeakEPPerSec();
+  Autobuyers.tick(diff);
+  InfinityAutobuyers.tick();
   if (display !== false) {
     updateDisplay();
   }

@@ -53,7 +53,7 @@ let InfinityGenerator = function (i) {
         EternityChallenge.isEternityChallengeRunning(5) ? 0.5 : 1, EternityChallenge.getEternityChallengeReward(5),
         EternityStars.power(),
       ];
-      return multiplier.pow(powFactors.reduce((a, b) => a * b));
+      return Dilation.dilate(multiplier.pow(powFactors.reduce((a, b) => a * b)));
     },
     productionPerSecond() {
       return this.amount().times(this.multiplier());

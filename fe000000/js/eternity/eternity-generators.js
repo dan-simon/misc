@@ -44,7 +44,7 @@ let EternityGenerator = function (i) {
       ];
       // Most of these are numbers but that's fine, the first one is a Decimal
       // so the below code works.
-      return factors.reduce((a, b) => a.times(b));
+      return Dilation.dilate(factors.reduce((a, b) => a.times(b)));
     },
     productionPerSecond() {
       return this.amount().times(this.multiplier());

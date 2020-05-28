@@ -44,7 +44,7 @@ let Generator = function (i) {
         (i === 1 && Challenge.isChallengeEffectActive(3)) ? Challenge.challenge3Mult() : 1,
         Challenge.isChallengeRunning(8) ? Generator(8).amount().max(1) : 1,
         Study(2).effect(), Study(3).effect(), Study(4).effect(),
-        EternityChallenge.getEternityChallengeReward(1),
+        EternityChallenge.getEternityChallengeReward(1), Dilation.multiplier(),
       ];
       let multiplier = factors.reduce((a, b) => a.times(b));
       let powFactors = [
@@ -54,7 +54,7 @@ let Generator = function (i) {
         EternityChallenge.isEternityChallengeRunning(1) ? EternityChallenge.eternityChallenge1InfinityStarsEffect() : 1,
         EternityStars.power(),
       ];
-      return multiplier.pow(powFactors.reduce((a, b) => a * b));
+      return Dilation.dilate(multiplier.pow(powFactors.reduce((a, b) => a * b)));
     },
     productionPerSecond() {
       return this.amount().times(this.multiplier());
