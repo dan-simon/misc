@@ -174,19 +174,16 @@ let EternityChallenge = {
       ' ' + this.getEternityChallengeResourceName(x);
   },
   eternityChallengeStatusDescription(x) {
+    let description;
     if (this.isEternityChallengeCompleted(x)) {
-      if (this.isEternityChallengeRunning(x)) {
-        return 'Completed, running';
-      } else {
-        return 'Completed';
-      }
+      description = 'Completed (' + format(this.getEternityChallengeCompletions(x)) + '/' + format(4) + ')';
     } else {
-      if (this.isEternityChallengeRunning(x)) {
-        return 'Running';
-      } else {
-        return '';
-      }
+      description = format(this.getEternityChallengeCompletions(x)) + '/' + format(4) + ' completions';
     }
+    if (this.isEternityChallengeRunning(x)) {
+      description += ', running';
+    }
+    return description;
   },
   eternityChallengeCompletionsDescription(x) {
     // This could be done as easily in the HTML but it seems nice to have a method (also applies to some things below)
