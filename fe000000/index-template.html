@@ -1769,9 +1769,9 @@
                 </button>
               </div>
               <div ~style.display=Chroma.isColorUnlocked(1) ? '' : 'none'~>
-                <span>~r Chroma.colorName(1, true) ~: ~f Chroma.colorAmount(1) ~</span>
+                <span class="greyspan">~r Chroma.colorName(1, true) ~: ~f Chroma.colorAmount(1) ~</span>
                 <br/>
-                <span>Multiplier per boost ~f Chroma.effectOfColor(1) ~x</span>
+                <span class="greyspan">Multiplier per boost ~f Chroma.effectOfColor(1) ~x</span>
                 <br/>
                 <br/>
                 <button onclick="Chroma.setNextColor(1)">Produce ~r Chroma.colorName(1) ~ next</button>
@@ -1786,9 +1786,9 @@
                 </button>
               </div>
               <div ~style.display=Chroma.isColorUnlocked(2) ? '' : 'none'~>
-                <span>~r Chroma.colorName(2, true) ~: ~f Chroma.colorAmount(2) ~</span>
+                <span class="purplespan">~r Chroma.colorName(2, true) ~: ~f Chroma.colorAmount(2) ~</span>
                 <br/>
-                <span>Eternity production ~f Chroma.effectOfColor(2) ~x</span>
+                <span class="purplespan">Eternity production ~f Chroma.effectOfColor(2) ~x</span>
                 <br/>
                 <br/>
                 <button onclick="Chroma.setNextColor(2)">Produce ~r Chroma.colorName(2) ~ next</button>
@@ -1803,11 +1803,11 @@
                 </button>
               </div>
               <div ~style.display=Chroma.isColorUnlocked(3) ? '' : 'none'~>
-                <span>~r Chroma.colorName(3, true) ~: ~f Chroma.colorAmount(3) ~</span>
+                <span class="orangespan">~r Chroma.colorName(3, true) ~: ~f Chroma.colorAmount(3) ~</span>
                 <br/>
-                <span>Chroma buildup speed ~f Chroma.effectOfColor(3) ~x</span>
+                <span class="orangespan">Chroma buildup speed ~f Chroma.effectOfColor(3) ~x</span>
                 <br/>
-                <span>(based on total eternity points)</span>
+                <span class="orangespan">(based on total eternity points)</span>
                 <br/>
                 <button onclick="Chroma.setNextColor(3)">Produce ~r Chroma.colorName(3) ~ next</button>
               </div>
@@ -1823,9 +1823,9 @@
                 </button>
               </div>
               <div ~style.display=Chroma.isColorUnlocked(4) ? '' : 'none'~>
-                <span>~r Chroma.colorName(4, true) ~: ~f Chroma.colorAmount(4) ~</span>
+                <span class="yellowspan">~r Chroma.colorName(4, true) ~: ~f Chroma.colorAmount(4) ~</span>
                 <br/>
-                <span>Generator 4 multiplier ~f Chroma.effectOfColor(4) ~x</span>
+                <span class="yellowspan">Generator 4 multiplier ~f Chroma.effectOfColor(4) ~x</span>
                 <br/>
                 <br/>
                 <button onclick="Chroma.setNextColor(4)">Produce ~r Chroma.colorName(4) ~ next</button>
@@ -1840,9 +1840,9 @@
                 </button>
               </div>
               <div ~style.display=Chroma.isColorUnlocked(5) ? '' : 'none'~>
-                <span>~r Chroma.colorName(5, true) ~: ~f Chroma.colorAmount(5) ~</span>
+                <span class="greenspan">~r Chroma.colorName(5, true) ~: ~f Chroma.colorAmount(5) ~</span>
                 <br/>
-                <span>~f Chroma.effectOfColor(5) ~ extra theorems, next at ~f Chroma.nextExtraTheorem() ~</span>
+                <span class="greenspan">~f Chroma.effectOfColor(5) ~ extra theorems, next at ~f Chroma.nextExtraTheorem() ~</span>
                 <br/>
                 <br/>
                 <button onclick="Chroma.setNextColor(5)">Produce ~r Chroma.colorName(5) ~ next</button>
@@ -1857,9 +1857,9 @@
                 </button>
               </div>
               <div ~style.display=Chroma.isColorUnlocked(6) ? '' : 'none'~>
-                <span>~r Chroma.colorName(6, true) ~: ~f Chroma.colorAmount(6) ~</span>
+                <span class="bluespan">~r Chroma.colorName(6, true) ~: ~f Chroma.colorAmount(6) ~</span>
                 <br/>
-                <span>Chroma and chroma cap ^~r formatWithPrecision(Chroma.effectOfColor(6), 5) ~</span>
+                <span class="bluespan">Chroma and chroma cap ^~r formatWithPrecision(Chroma.effectOfColor(6), 5) ~</span>
                 <br/>
                 <br/>
                 <button onclick="Chroma.setNextColor(6)">Produce ~r Chroma.colorName(6) ~ next</button>

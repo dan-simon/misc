@@ -13,7 +13,7 @@ let Chroma = {
     null,
     x => Math.pow(1 + x / 1024, 2.5),
     x => Math.pow(1 + x / 64, 0.5),
-    x => Math.pow(Math.max(EternityPoints.totalEPProduced().log2(), 1) / 4096,
+    x => Math.pow(Math.max(EternityPoints.totalEPProduced().log2() / 4096, 1),
       Math.log2(1 + x / 256) / 4),
     x => Decimal.pow(2, 1024 * Math.sqrt(x)),
     x => Math.floor(16 * Math.log2(1 + x / 4096)),

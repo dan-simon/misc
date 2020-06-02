@@ -176,3 +176,27 @@ button {
   width: 256px;
   height: 160px;
 }
+
+.greyspan {
+  color: #aaaaaa;
+}
+
+.purplespan {
+  color: #6633cc;
+}
+
+.orangespan {
+  color: #cc6633;
+}
+
+.yellowspan {
+  color: #ffff00;
+}
+
+.greenspan {
+  color: #33ff33;
+}
+
+.bluespan {
+  color: #3333ff;
+}
