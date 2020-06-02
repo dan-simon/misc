@@ -11,10 +11,11 @@ let Chroma = {
   ],
   colorEffectFormulas: [
     null,
-    x => Math.pow(1 + x / 1024, 2),
+    x => Math.pow(1 + x / 1024, 4),
     x => Math.pow(1 + x / 64, 0.5),
-    x => 1 + x / 1024,
-    x => Decimal.pow(2, 256 * Math.sqrt(x)),
+    x => Math.pow(Math.max(EternityPoints.totalEPProduced().log2(), 1) / 4096,
+      Math.log2(1 + x / 256) / 4),
+    x => Decimal.pow(2, 1024 * Math.sqrt(x)),
     x => Math.floor(16 * Math.log2(1 + x / 4096)),
     x => 1 + Math.log2(1 + Math.log2(1 + x / Math.pow(2, 16))) / 16
   ],
