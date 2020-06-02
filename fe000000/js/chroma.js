@@ -31,7 +31,7 @@ let Chroma = {
     return Math.pow(this.rawCap(), this.exponent());
   },
   chromaSpeedMultiplier() {
-    return this.effectOfColor(3);
+    return this.effectOfColor(3) * EternityChallenge.getTotalCompletionsRewardEffect(4);
   },
   extraTheorems() {
     return this.effectOfColor(5);

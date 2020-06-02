@@ -187,7 +187,11 @@
     </div>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'infinity' ? '' : 'none'~>
-    <span>You have ~f InfinityPoints.amount() ~ infinity points. <button ~class=InfinityMaxAll.anythingToBuy() ? "" : "disabled"~ onclick="InfinityMaxAll.maxAll()">Max all</button></span>
+    <span>You have ~f InfinityPoints.amount() ~ infinity points.
+      <button ~class=InfinityMaxAll.anythingToBuy() ? "" : "disabled"~ onclick="InfinityMaxAll.maxAll()">Max all</button>
+      <button ~class=InfinityMaxAll.anyUpgradesToBuy() ? "" : "disabled"~ onclick="InfinityMaxAll.maxUpgrades()">Max upgrades</button>
+      <button ~class=InfinityMaxAll.anyGeneratorsToBuy() ? "" : "disabled"~ onclick="InfinityMaxAll.maxGenerators()">Max generators</button>
+    </span>
     <br/>
     <span>You have produced ~f InfinityPoints.totalIPProducedThisEternity() ~ infinity points this eternity, multiplying all generators by ~f InfinityPoints.multiplier() ~.</span>
     <br/>
@@ -1000,7 +1004,11 @@
     </table>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'eternity' ? '' : 'none'~>
-    <span>You have ~f EternityPoints.amount() ~ eternity points. <button ~class=EternityMaxAll.anythingToBuy() ? "" : "disabled"~ onclick="EternityMaxAll.maxAll()">Max all</button></span>
+    <span>You have ~f EternityPoints.amount() ~ eternity points.
+      <button ~class=EternityMaxAll.anythingToBuy() ? "" : "disabled"~ onclick="EternityMaxAll.maxAll()">Max all</button>
+      <button ~class=EternityMaxAll.anyUpgradesToBuy() ? "" : "disabled"~ onclick="EternityMaxAll.maxUpgrades()">Max upgrades</button>
+      <button ~class=EternityMaxAll.anyGeneratorsToBuy() ? "" : "disabled"~ onclick="EternityMaxAll.maxGenerators()">Max generators</button>
+    </span>
     <br/>
     <span>You have produced ~f EternityPoints.totalEPProduced() ~ total eternity points.</span>
     </br>
@@ -1266,6 +1274,10 @@
     <span>
       You have ~f Studies.totalTheorems() ~ total theorems and ~f Studies.unspentTheorems() ~ unspent theorems.
       <button onclick="Studies.toggleRespec()">Respec studies on next eternity: ~r Studies.isRespecOn() ? "On" : "Off" ~</button>
+    </span>
+    <br/>
+    <span>
+      <button onclick="Studies.respecAndReset()">Respec studies and do an eternity reset (no eternity point gain or eternity gain)</button>
     </span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 8px; border-collapse: separate;">
       <tr>
@@ -1544,6 +1556,14 @@
     <br/>
     <span>
       At ~f EternityChallenge.getTotalCompletionsRewardThreshold(3) ~ total eternity challenge tiers completed: You gain your infinity points on infinity every second, without needing to infinity.
+    </span>
+    <br/>
+    <span>
+      At ~f EternityChallenge.getTotalCompletionsRewardThreshold(4) ~ total eternity challenge tiers completed: Chroma buildup speed ~f EternityChallenge.getTotalCompletionsRewardRawEffect(4) ~x
+    </span>
+    <br/>
+    <span>
+      <button onclick="EternityChallenge.respecAndReset()">Respec eternity challenge and do an eternity reset (no eternity point gain or eternity gain)</button>
     </span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>

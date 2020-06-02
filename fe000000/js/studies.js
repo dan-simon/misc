@@ -103,6 +103,10 @@ let Studies = {
     }
     player.respecStudies = false;
   },
+  respecAndReset() {
+    this.respec();
+    EternityPrestigeLayer.eternityReset();
+  },
   boughtThatAreNotOnRow(x) {
     return this.list.filter(y => y.isBought() && y.row() !== x).length;
   },

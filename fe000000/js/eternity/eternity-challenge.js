@@ -135,6 +135,8 @@ let EternityChallenge = {
       return 1 + this.getTotalEternityChallengeCompletions() / 4;
     } else if (x === 2) {
       return Math.pow(1 + this.getTotalEternityChallengeCompletions() / 4, 3);
+    } else if (x === 4) {
+      return 2;
     }
     return null;
   },
@@ -218,7 +220,13 @@ let EternityChallenge = {
     }
     player.respecEternityChallenge = false;
   },
+  respecAndReset() {
+    this.respec();
+    EternityPrestigeLayer.eternityReset();
+  },
   lockUnlockedEternityChallenge() {
+    // This can happen if we're respeccing and doing an eternity reset.
+    this.setEternityChallenge(0);
     player.unspentTheorems += this.getUnlockedEternityChallengeCost();
     player.unlockedEternityChallenge = 0;
   },
