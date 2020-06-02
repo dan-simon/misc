@@ -11,7 +11,7 @@ let Chroma = {
   ],
   colorEffectFormulas: [
     null,
-    x => Math.pow(1 + x / 1024, 4),
+    x => Math.pow(1 + x / 1024, 2.5),
     x => Math.pow(1 + x / 64, 0.5),
     x => Math.pow(Math.max(EternityPoints.totalEPProduced().log2(), 1) / 4096,
       Math.log2(1 + x / 256) / 4),
