@@ -45,6 +45,7 @@ let Generator = function (i) {
         Challenge.isChallengeRunning(8) ? Generator(8).amount().max(1) : 1,
         Study(2).effect(), Study(3).effect(), Study(4).effect(),
         EternityChallenge.getEternityChallengeReward(1),
+        (i === 4) ? Chroma.effectOfColor(4) : 1,
       ];
       let multiplier = factors.reduce((a, b) => a.times(b));
       let powFactors = [

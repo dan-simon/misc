@@ -9,7 +9,7 @@ let Eternities = {
     player.eternities = x;
   },
   commonEternityGainMultiplier() {
-    return EternityChallenge.getTotalCompletionsRewardEffect(2) * PermanenceUpgrade(1).effect();
+    return EternityChallenge.getTotalCompletionsRewardEffect(2) * PermanenceUpgrade(1).effect() * Chroma.effectOfColor(2);
   },
   eternityGeneratorMultiplier() {
     // This is intentionally always at most 1, and often less.

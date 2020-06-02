@@ -187,6 +187,15 @@ let Saving = {
       player.hasGainedPermanence = false;
       player.version = 1.65625;
     }
+    if (player.version < 1.671875) {
+      player.chroma = {
+        colors: [0, 0, 0, 0, 0, 0],
+        unlocked: [false, false, false, false, false, false],
+        current: 0,
+        next: 0
+      };
+      player.version = 1.671875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

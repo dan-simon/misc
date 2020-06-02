@@ -75,6 +75,8 @@ let EternityPrestigeLayer = {
     player.slowAutobuyers = [
       false, false, false, false, false, false, false, false, false,
     ];
+    // Reset color being generated, as the player desired.
+    Chroma.updateChromaOnEternity();
     // Small bonus, arguably unexpected but not that big in the grand scheme of things.
     player.stats.totalStarsProducedThisEternity = EternityStartingBenefits.stars();
     player.stats.totalIPProducedThisEternity = EternityStartingBenefits.infinityPoints();

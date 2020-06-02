@@ -101,6 +101,12 @@ let initialPlayer = {
   permanence: 0,
   permanenceUpgrades: [0, 0, 0, 0],
   hasGainedPermanence: false,
+  chroma: {
+    colors: [0, 0, 0, 0, 0, 0],
+    unlocked: [false, false, false, false, false, false],
+    current: 0,
+    next: 0
+  },
   options: {
     notation: 'Scientific',
     offlineProgress: true,
@@ -134,7 +140,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.65625
+  version: 1.671875
 }
 
 let player;
