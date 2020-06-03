@@ -9,6 +9,13 @@ let EternityPrestigeLayer = {
   canEternity() {
     return InfinityPoints.totalIPProducedThisEternity().gte(this.infinityPointRequirementForEternity());
   },
+  resetText() {
+    if (this.canEternity()) {
+      return 'eternity';
+    } else {
+      return 'do an eternity reset (no eternity point gain or eternity gain)';
+    }
+  },
   eternityPointGain() {
     let oom = InfinityPoints.totalIPProducedThisEternity().log(2) / 256;
     return Decimal.pow(2, oom).floor();

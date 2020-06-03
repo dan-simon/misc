@@ -222,7 +222,11 @@ let EternityChallenge = {
   },
   respecAndReset() {
     this.respec();
-    EternityPrestigeLayer.eternityReset();
+    if (EternityPrestigeLayer.canEternity()) {
+      EternityPrestigeLayer.eternity();
+    } else {
+      EternityPrestigeLayer.eternityReset();
+    }
   },
   lockUnlockedEternityChallenge() {
     // This can happen if we're respeccing and doing an eternity reset.

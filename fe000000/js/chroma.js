@@ -3,7 +3,7 @@ let Chroma = {
   colorCosts: [
     null,
     Decimal.pow(2, 4096),
-    Decimal.pow(2, Math.pow(2, 32)),
+    Decimal.pow(2, 8192),
     Decimal.pow(2, Math.pow(2, 32)),
     Decimal.pow(2, Math.pow(2, 32)),
     Decimal.pow(2, Math.pow(2, 32)),

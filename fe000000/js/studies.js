@@ -105,7 +105,11 @@ let Studies = {
   },
   respecAndReset() {
     this.respec();
-    EternityPrestigeLayer.eternityReset();
+    if (EternityPrestigeLayer.canEternity()) {
+      EternityPrestigeLayer.eternity();
+    } else {
+      EternityPrestigeLayer.eternityReset();
+    }
   },
   boughtThatAreNotOnRow(x) {
     return this.list.filter(y => y.isBought() && y.row() !== x).length;
