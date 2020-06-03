@@ -4,7 +4,7 @@ let Chroma = {
     null,
     Decimal.pow(2, 4096),
     Decimal.pow(2, 8192),
-    Decimal.pow(2, Math.pow(2, 32)),
+    Decimal.pow(2, 12288),
     Decimal.pow(2, Math.pow(2, 32)),
     Decimal.pow(2, Math.pow(2, 32)),
     Decimal.pow(2, Math.pow(2, 32))
@@ -113,7 +113,9 @@ let Chroma = {
     return t / this.chromaSpeedMultiplier() - player.stats.timeSinceEternity;
   },
   currentProductionText() {
-    if (this.isProducing()) {
+    if (this.amount() === this.actualCap()) {
+      return 'would be producing ' + this.currentColorName() + ' but are at the chroma cap';
+    } else if (this.isProducing()) {
       return 'are currently producing ' + this.currentColorName();
     } else {
       return 'will start to produce ' + Chroma.currentColorName() + ' in ' + format(Chroma.timeUntilProduction()) + ' seconds';
