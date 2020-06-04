@@ -788,7 +788,7 @@ function updateDisplay() {
     e[409].textContent = format(EternityChallenge.getTotalCompletionsRewardRawEffect(2));
     e[410].textContent = format(EternityChallenge.getTotalCompletionsRewardThreshold(3));
     e[411].textContent = format(29);
-    e[412].textContent = format(Decimal.pow(2, Math.pow(1, 12)));
+    e[412].textContent = format(Decimal.pow(2, Math.pow(2, 12)));
     e[413].textContent = format(1);
     e[414].textContent = EternityChallenge.eternityChallengeRequirementDescription(1);
     e[415].textContent = format(EternityChallenge.getEternityChallengeCost(1));
