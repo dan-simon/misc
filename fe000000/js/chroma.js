@@ -5,7 +5,7 @@ let Chroma = {
     Decimal.pow(2, 4096),
     Decimal.pow(2, 8192),
     Decimal.pow(2, 12288),
-    Decimal.pow(2, Math.pow(2, 32)),
+    Decimal.pow(2, Math.pow(2, 14)),
     Decimal.pow(2, Math.pow(2, 32)),
     Decimal.pow(2, Math.pow(2, 32))
   ],
@@ -15,7 +15,7 @@ let Chroma = {
     x => Math.pow(1 + x / 64, 0.5),
     x => Math.pow(Math.max(EternityPoints.totalEPProduced().log2() / 4096, 1),
       Math.log2(1 + x / 256) / 4),
-    x => Decimal.pow(2, 1024 * Math.sqrt(x)),
+    x => Decimal.pow(EternityGenerator(8).amount().max(1), 2 * Math.sqrt(x)),
     x => Math.floor(16 * Math.log2(1 + x / 4096)),
     x => 1 + Math.log2(1 + Math.log2(1 + x / Math.pow(2, 16))) / 16
   ],
