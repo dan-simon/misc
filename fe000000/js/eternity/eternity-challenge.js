@@ -26,10 +26,10 @@ let EternityChallenge = {
     x => Decimal.pow(2, x * Math.pow(Stars.amount().max(1).log2(), 0.5) / 4),
     x => 1 - x / 16,
     x => 1 + x / 256,
-    x => Decimal.pow(2, x * Math.pow(InfinityPoints.amount().max(1).log2(), 0.5) / 2),
+    x => Decimal.pow(2, x * Math.pow(InfinityPoints.totalIPProducedThisEternity().max(1).log2(), 0.5) / 2),
     x => 1 + x / 64,
     x => 1 + x / 16,
-    x => EternityPoints.amount().max(1).pow(x / 4),
+    x => EternityPoints.totalEPProduced().max(1).pow(x / 4),
     x => Decimal.pow(2, 32 * x),
   ],
   resourceAmounts: [
