@@ -139,5 +139,9 @@ let Generators = {
     } else {
       return x;
     }
+  },
+  areAnyMultipliersNerfed() {
+    // Note that the nerf never reduces a multiplier below the initial nerf value.
+    return Generators.list.some(x => x.multiplier().gte(this.nerfValue));
   }
 }
