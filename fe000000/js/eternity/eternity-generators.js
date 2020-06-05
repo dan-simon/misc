@@ -39,7 +39,7 @@ let EternityGenerator = function (i) {
       }
       let factors = [
         Decimal.pow(2, this.bought() * EternityUpgrade(1).effect() / 8), Eternities.eternityGeneratorMultiplier(),
-        Study(9).effect(), Study(10).effect(), Study(11).effect(), Study(12).effect(),
+        Study(9).effect(), Study(10).effect(), Study(11).effect(), Study(12).effect(),  Study(15).effect(),
         EternityUpgrade(3).effect(), EternityProducer.multiplier(), EternityChallenge.getEternityChallengeReward(8),
         (i === 8) ? Chroma.effectOfColor(4) : 1,
       ];

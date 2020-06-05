@@ -196,6 +196,10 @@ let Saving = {
       };
       player.version = 1.671875;
     }
+    if (player.version < 1.6875) {
+      player.studies = player.studies.concat([0, 0, 0, 0]);
+      player.version = 1.6875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

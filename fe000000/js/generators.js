@@ -43,7 +43,7 @@ let Generator = function (i) {
         Challenge.isChallengeEffectActive(2) ? Challenge.challenge2Mult() : 1,
         (i === 1 && Challenge.isChallengeEffectActive(3)) ? Challenge.challenge3Mult() : 1,
         Challenge.isChallengeRunning(8) ? Generator(8).amount().max(1) : 1,
-        Study(2).effect(), Study(3).effect(), Study(4).effect(),
+        Study(2).effect(), Study(3).effect(), Study(4).effect(), Study(13).effect(),
         EternityChallenge.getEternityChallengeReward(1),
       ];
       let multiplier = factors.reduce((a, b) => a.times(b));
@@ -54,7 +54,7 @@ let Generator = function (i) {
         EternityChallenge.isEternityChallengeRunning(1) ? EternityChallenge.eternityChallenge1InfinityStarsEffect() : 1,
         EternityStars.power(),
       ];
-      return multiplier.pow(powFactors.reduce((a, b) => a * b));
+      return Generators.nerf(multiplier.pow(powFactors.reduce((a, b) => a * b)));
     },
     productionPerSecond() {
       return this.amount().times(this.multiplier());
@@ -129,5 +129,15 @@ let Generators = {
   },
   anyGenerators() {
     return Generators.list.some(x => x.amount().gt(0));
+  },
+  nerfValue: Decimal.pow(2, Math.pow(2, 29)),
+  nerfExponent: -1 / 128,
+  nerf(x) {
+    if (x.gte(this.nerfValue)) {
+      y = x.log(2) / Generators.nerfValue.log(2);
+      return Decimal.pow(Generators.nerfValue, Math.pow(y, Math.pow(y, this.nerfExponent)));
+    } else {
+      return x;
+    }
   }
 }

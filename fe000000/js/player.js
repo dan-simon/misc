@@ -89,6 +89,7 @@ let initialPlayer = {
   studies: [
     false, false, false, false, false, false,
     false, false, false, false, false, false,
+    0, 0, 0, 0
   ],
   eternityProducer: {
     unlocked: false,
@@ -140,7 +141,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.671875
+  version: 1.6875
 }
 
 let player;

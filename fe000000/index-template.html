@@ -181,6 +181,9 @@
         <span ~style.display=Prestige.canPrestige() ? '' : 'none'~><button style="height: 48px;" onclick="Prestige.prestige()">Prestige: ~f Prestige.prestigePower() ~ → ~f Prestige.newPrestigePower() ~<br/>(+~f Prestige.prestigePowerGain() ~, ~f Prestige.prestigePowerMultGain() ~x)</button></span>
         <span ~style.display=Prestige.canPrestige() ? 'none' : ''~>You need ~f Prestige.prestigeRequirement() ~ stars to prestige.</span>
       </div>
+      <span>Generator multipliers above ~f Generators.nerfValue ~ are reduced.</span>
+      <br/>
+      <span>Given a multiplier x, let y be log(x, ~f Generators.nerfValue ~). x is reduced to ~f Generators.nerfValue ~^y^y^~r formatWithPrecision(Generators.nerfExponent, 5) ~.
     </div>
     <div ~style.display=InfinityPrestigeLayer.mustInfinity() ? '' : 'none'~>
       <span>The universe has collapsed due to an excess of stars.</span>
@@ -1278,6 +1281,8 @@
     <br/>
     <span>
       <button onclick="Studies.respecAndReset()">Respec studies and ~r EternityPrestigeLayer.resetText() ~</button>
+      <br ~style.display=EternityPrestigeLayer.canEternity() ? 'none' : ''~/>
+      <button onclick="Studies.tryToBuyFirstTwelve()">Try to buy all of studies 1-12 (in order)</button>
     </span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 8px; border-collapse: separate;">
       <tr>
@@ -1418,6 +1423,60 @@
           </button>
         </td>
       </tr>
+      <tr ~style.display=Studies.canAccessFourthRow() ? '' : 'none'~>
+        <td>
+          <button ~class=Study(13).className()~ onclick="Study(13).buy()">
+            Study 13
+            <br/>
+            Large fixed multiplier to normal generators
+            <br/>
+            Currently: ~f Study(13).effect() ~x
+            <br/>
+            Next: ~f Study(13).nextEffect() ~x
+            <br/>
+            Cost: ~f Study(13).cost() ~ TT
+          </button>
+        </td>
+        <td>
+          <button ~class=Study(14).className()~ onclick="Study(14).buy()">
+            Study 14
+            <br/>
+            Multiplier to infinity generators based on total color value
+            <br/>
+            Currently: ~f Study(14).effect() ~x
+            <br/>
+            Next: ~f Study(14).nextEffect() ~x
+            <br/>
+            Cost: ~f Study(14).cost() ~ TT
+          </button>
+        </td>
+        <td>
+          <button ~class=Study(15).className()~ onclick="Study(15).buy()">
+            Study 15
+            <br/>
+            Eternity generators are multiplied by chroma
+            <br/>
+            Currently: ~f Study(15).effect() ~x
+            <br/>
+            Next: ~f Study(15).nextEffect() ~x
+            <br/>
+            Cost: ~f Study(15).cost() ~ TT
+          </button>
+        </td>
+        <td>
+          <button ~class=Study(16).className()~ onclick="Study(16).buy()">
+            Study 16
+            <br/>
+            Multiplier to chroma buildup speed based on total theorems
+            <br/>
+            Currently: ~f Study(16).effect() ~x
+            <br/>
+            Next: ~f Study(16).nextEffect() ~x
+            <br/>
+            Cost: ~f Study(16).cost() ~ TT
+          </button>
+        </td>
+      </tr>
     </table>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 0px; border-collapse: separate;">
       <tr>
@@ -1472,6 +1531,25 @@
     <span>
       After ~f 4 ~ theorem purchases of a certain type, theorem costs of that type start increasing more quickly.
     </span>
+    <br/>
+    <div ~style.display=Studies.canAccessFourthRow() ? 'none' : ''~>
+      <span>
+        After you get ~f Studies.totalStudyCost() ~ theorems (enough to buy all the studies), a fourth row will appear.
+      </span>
+      <br/>
+      <span>
+        However, studies in this row can only be bought if all studies above are bought.
+      </span>
+    </div>
+    <div ~style.display=Studies.canAccessFourthRow() ? '' : 'none'~>
+      <span>
+        Studies on the fourth row are rebuyable, with increasing costs. Their costs are unaffected by buying other studies.
+      </span>
+      <br/>
+      <span>
+        However, they can only be bought if all studies above are bought.
+      </span>
+    </div>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'eternity-producer' ? '' : 'none'~>
     <div ~style.display=EternityProducer.isUnlocked() ? 'none' : ''~>
@@ -1490,7 +1568,7 @@
       <br/>
       <span>The Eternity Producer is producing ~f EternityProducer.productionPerSecond() ~ eternities per second.</span>
       <br/>
-      <span><button ~class=EternityProducer.anythingToBuy() ? "" : "disabled"~ onclick="EternityProducer.maxAll()">Max Eternity Producer upgrades</button></span>
+      <span>You have ~f EternityPoints.amount() ~ eternity points. <button ~class=EternityProducer.anythingToBuy() ? "" : "disabled"~ onclick="EternityProducer.maxAll()">Max Eternity Producer upgrades</button></span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>Increase Eternity Producer base production per second:</td>
@@ -1774,11 +1852,13 @@
       </button>
     </div>
     <div ~style.display=Chroma.isUnlocked() ? '' : 'none'~>
-      <span>You have spent ~f player.stats.timeSinceEternity ~ seconds in this eternity, giving you ~f Chroma.amount() ~ chroma (capped at ~f Chroma.actualCap() ~, based on eternity points).</span>
+      <span>You have spent ~f player.stats.timeSinceEternity ~ seconds in this eternity, giving you ~f Chroma.amount() ~ chroma (capped at ~f Chroma.cap() ~, based on eternity points).</span>
       <br/>
       <span>You ~r Chroma.currentProductionText() ~, and will produce ~r Chroma.nextColorName() ~ after next eternity reset.</span>
       <br/>
       <span>The value of whatever color you are producing is constantly set to your chroma (unless your chroma is lower).</span>
+      <br/>
+      <span>All sources of chroma buildup speed act retroactively in the current eternity.</span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 0px; border-collapse: separate;">
         <tr>
           <td>
@@ -1870,23 +1950,7 @@
               </div>
             </div>
           </td>
-          <td>
-            <div class="chromadiv">
-              <div ~style.display=Chroma.isColorUnlocked(6) ? 'none' : ''~>
-                <button style="height: 48px;" onclick="Chroma.unlockColor(6)" ~class=Chroma.canUnlockColor(6) ? '' : 'disabled'~>
-                  Unlock ~r Chroma.colorName(6) ~<br/>Cost: ~f Chroma.getUnlockColorCost(6) ~ eternity points
-                </button>
-              </div>
-              <div ~style.display=Chroma.isColorUnlocked(6) ? '' : 'none'~>
-                <span class="bluespan">~r Chroma.colorName(6, true) ~: ~f Chroma.colorAmount(6) ~</span>
-                <br/>
-                <span class="bluespan">Chroma and chroma cap ^~r formatWithPrecision(Chroma.effectOfColor(6), 5) ~</span>
-                <br/>
-                <br/>
-                <button onclick="Chroma.setNextColor(6)">Produce ~r Chroma.colorName(6) ~ next</button>
-              </div>
-            </div>
-          </td>
+          <td/>
         </tr>
       </table>
     </div>

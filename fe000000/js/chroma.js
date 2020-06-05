@@ -6,8 +6,7 @@ let Chroma = {
     Decimal.pow(2, 8192),
     Decimal.pow(2, 12288),
     Decimal.pow(2, Math.pow(2, 14)),
-    Decimal.pow(2, Math.pow(2, 15)),
-    Decimal.pow(2, Math.pow(2, 32))
+    Decimal.pow(2, Math.pow(2, 15))
   ],
   colorEffectFormulas: [
     null,
@@ -16,34 +15,30 @@ let Chroma = {
     x => Math.pow(Math.max(EternityPoints.totalEPProduced().log2() / 4096, 1),
       Math.log2(1 + x / 256) / 4),
     x => Decimal.pow(EternityGenerator(8).amount().max(1), 2 * Math.sqrt(x)),
-    x => Math.floor(16 * Math.log2(1 + x / 4096)),
-    x => 1 + Math.log2(1 + Math.log2(1 + x / Math.pow(2, 16))) / 16
+    x => Math.floor(16 * Math.log2(1 + x / 4096))
   ],
   amount() {
     let t = player.stats.timeSinceEternity * this.chromaSpeedMultiplier();
-    let cap = this.rawCap();
-    return Math.pow(cap * (1 - Math.exp(-t / cap)), this.exponent());
+    let cap = this.cap();
+    return cap * (1 - Math.exp(-t / cap));
   },
-  rawCap() {
+  cap() {
     return Math.max(EternityPoints.totalEPProduced().log2(), 1);
   },
-  actualCap() {
-    return Math.pow(this.rawCap(), this.exponent());
-  },
   chromaSpeedMultiplier() {
-    return this.effectOfColor(3) * EternityChallenge.getTotalCompletionsRewardEffect(4);
+    return this.effectOfColor(3) * EternityChallenge.getTotalCompletionsRewardEffect(4) * Study(16).effect();
   },
   extraTheorems() {
     return this.effectOfColor(5);
-  },
-  exponent() {
-    return this.effectOfColor(6);
   },
   effectOfColor(x) {
     return this.colorEffectFormulas[x](this.colorAmount(x));
   },
   colorAmount(x) {
     return player.chroma.colors[x - 1];
+  },
+  totalColorAmount() {
+    return player.chroma.colors.reduce((a, b) => a + b);
   },
   setColorAmount(x, value) {
     player.chroma.colors[x - 1] = value;
@@ -108,12 +103,12 @@ let Chroma = {
   },
   timeUntilProduction() {
     let c = this.colorAmount(player.chroma.current);
-    let cap = this.rawCap();
-    let t = -cap * Math.log(1 - Math.pow(c, 1 / this.exponent()) / cap);
+    let cap = this.cap();
+    let t = -cap * Math.log(1 - c / cap);
     return t / this.chromaSpeedMultiplier() - player.stats.timeSinceEternity;
   },
   currentProductionText() {
-    if (this.amount() === this.actualCap()) {
+    if (this.amount() === this.cap()) {
       return 'would be producing ' + this.currentColorName() + ' but are at the chroma cap';
     } else if (this.isProducing()) {
       return 'are currently producing ' + this.currentColorName();
