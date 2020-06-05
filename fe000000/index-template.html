@@ -182,7 +182,11 @@
         <span ~style.display=Prestige.canPrestige() ? 'none' : ''~>You need ~f Prestige.prestigeRequirement() ~ stars to prestige.</span>
       </div>
       <span>Generator multipliers above ~f Generators.nerfValue ~ are reduced.</span>
-      <div ~style.display=Generators.areAnyMultipliersNerfed() ? '' : 'none'~>Given a multiplier x, let y be log(x, ~f Generators.nerfValue ~). x is reduced to ~f Generators.nerfValue ~^y^y^~r formatWithPrecision(Generators.nerfExponent, 5) ~.</div>
+      <br/>
+      <div ~style.display=Generators.areAnyMultipliersNerfed() ? '' : 'none'~>
+        Given a multiplier x, let y be log(x, ~f Generators.nerfValue ~). x is reduced to ~f Generators.nerfValue ~^y^y^~r formatWithPrecision(Generators.nerfExponent, 5) ~.
+      </div>
+      <span>Currently the game ends at ~f Saving.gameEnd ~ stars (if you get to this point then you will be able to start new content).</span>
     </div>
     <div ~style.display=InfinityPrestigeLayer.mustInfinity() ? '' : 'none'~>
       <span>The universe has collapsed due to an excess of stars.</span>
