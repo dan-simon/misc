@@ -18,6 +18,9 @@ let Chroma = {
     x => Math.floor(16 * Math.log2(1 + x / 4096))
   ],
   amount() {
+    if (!this.isUnlocked()) {
+      return 0;
+    }
     let t = player.stats.timeSinceEternity * this.chromaSpeedMultiplier();
     let cap = this.cap();
     return cap * (1 - Math.exp(-t / cap));

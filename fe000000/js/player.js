@@ -12,13 +12,13 @@ function initialEternityGenerators() {
 
 function initialAutobuyers() {
   return [
-    {on: false, mode: 'Buy singles', priority: 1}, {on: false, mode: 'Buy singles', priority: 2},
-    {on: false, mode: 'Buy singles', priority: 3}, {on: false, mode: 'Buy singles', priority: 4},
-    {on: false, mode: 'Buy singles', priority: 5}, {on: false, mode: 'Buy singles', priority: 6},
-    {on: false, mode: 'Buy singles', priority: 7}, {on: false, mode: 'Buy singles', priority: 8},
-    {on: false, mode: 'Buy singles', priority: 9}, {on: false, mode: 'Multiplier', priority: new Decimal(2)},
-    {on: false, mode: 'Multiplier', priority: new Decimal(2)}, {on: false, mode: 'Amount', priority: new Decimal(2)},
-    {on: false, mode: 'Amount', priority: new Decimal(2)},
+    {isOn: true, mode: 'Buy max', priority: 1}, {isOn: true, mode: 'Buy max', priority: 2},
+    {isOn: true, mode: 'Buy max', priority: 3}, {isOn: true, mode: 'Buy max', priority: 4},
+    {isOn: true, mode: 'Buy max', priority: 5}, {isOn: true, mode: 'Buy max', priority: 6},
+    {isOn: true, mode: 'Buy max', priority: 7}, {isOn: true, mode: 'Buy max', priority: 8},
+    {isOn: true, mode: 'Buy max', priority: 9}, {isOn: true, mode: 'Multiplier', priority: new Decimal(2)},
+    {isOn: true, mode: 'Multiplier', priority: new Decimal(2)}, {isOn: true, mode: 'Amount', priority: new Decimal(2)},
+    {isOn: true, mode: 'Amount', priority: new Decimal(2)},
   ];
 }
 
@@ -82,7 +82,7 @@ let initialPlayer = {
   eternityUpgrades: [0, 0, 0],
   eternityMilestonesOn: [true, true],
   infinityAutobuyers: [
-    false, false, false, false, false, false, false, false, false, false,
+    true, true, true, true, true, true, true, true, true, true,
   ],
   boughtTheorems: [0, 0, 0],
   unspentTheorems: 0,

@@ -32,7 +32,9 @@ let Prestige = {
     return player.stars.gte(this.prestigeRequirement()) && !InfinityPrestigeLayer.mustInfinity() && !this.isPrestigeDisabled();
   },
   isVisible() {
-    return (this.canPrestige() || this.prestigePower().gt(1) || player.infinities > 0 || player.eternities > 0) && !this.isPrestigeDisabled();
+    // This used to be as follows: (this.canPrestige() || this.prestigePower().gt(1) || player.infinities > 0 || player.eternities > 0) && !this.isPrestigeDisabled();
+    // Seeing that things are possible probably isn't too intimidating, so I'm experimenting with making it true unless prestige is disabled.
+    return !this.isPrestigeDisabled();
   },
   newPrestigePower() {
     return this.canPrestige() ? Decimal.pow(2, this.prestigePowerExponent() * (player.stars.log(2) - 96) / 16) : this.prestigePower();

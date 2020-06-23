@@ -50,11 +50,13 @@
   <link rel="stylesheet" href="styles.css"></link>
 </head>
 <body>
-  <div ~style.visibility=InfinityPrestigeLayer.canInfinity() ? '' : 'hidden'~>
-    <button style="height: 48px;" onclick="InfinityPrestigeLayer.infinity()">Infinity: Gain ~f InfinityPrestigeLayer.infinityPointGain() ~ infinity points<br/>~f InfinityPrestigeLayer.currentIPPerSec() ~ IP/sec, ~f InfinityPrestigeLayer.peakIPPerSec() ~ peak IP/sec</button>
+  <div style="height: 56px;">
+    <span ~style.display=InfinityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~f InfinityPrestigeLayer.starRequirementForInfinity() ~ stars to infinity.</span>
+    <button ~style.display=InfinityPrestigeLayer.canInfinity() ? '' : 'none'~ style="height: 48px;" onclick="InfinityPrestigeLayer.infinity()">Infinity: Gain ~f InfinityPrestigeLayer.infinityPointGain() ~ infinity points<br/>~f InfinityPrestigeLayer.currentIPPerSec() ~ IP/sec, ~f InfinityPrestigeLayer.peakIPPerSec() ~ peak IP/sec</button>
   </div>
-  <div ~style.visibility=EternityPrestigeLayer.canEternity() ? '' : 'hidden'~>
-    <button style="height: 48px;" onclick="EternityPrestigeLayer.eternity()">Eternity: Gain ~f EternityPrestigeLayer.eternityPointGain() ~ eternity points<br/>~f EternityPrestigeLayer.currentEPPerSec() ~ EP/sec, ~f EternityPrestigeLayer.peakEPPerSec() ~ peak EP/sec</button>
+  <div style="height: 56px;">
+    <span ~style.display=EternityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~f EternityPrestigeLayer.infinityPointRequirementForEternity() ~ total infinity points this eternity to eternity.</span>
+    <button ~style.display=EternityPrestigeLayer.canEternity() ? '' : 'none'~ style="height: 48px;" onclick="EternityPrestigeLayer.eternity()">Eternity: Gain ~f EternityPrestigeLayer.eternityPointGain() ~ eternity points<br/>~f EternityPrestigeLayer.currentEPPerSec() ~ EP/sec, ~f EternityPrestigeLayer.peakEPPerSec() ~ peak EP/sec</button>
   </div>
   <div>
     <span>
@@ -181,6 +183,7 @@
         <span ~style.display=Prestige.canPrestige() ? '' : 'none'~><button style="height: 48px;" onclick="Prestige.prestige()">Prestige: ~f Prestige.prestigePower() ~ → ~f Prestige.newPrestigePower() ~<br/>(+~f Prestige.prestigePowerGain() ~, ~f Prestige.prestigePowerMultGain() ~x)</button></span>
         <span ~style.display=Prestige.canPrestige() ? 'none' : ''~>You need ~f Prestige.prestigeRequirement() ~ stars to prestige.</span>
       </div>
+      <br/>
       <span>Generator multipliers above ~f Generators.nerfValue ~ are reduced.</span>
       <br/>
       <div ~style.display=Generators.areAnyMultipliersNerfed() ? '' : 'none'~>
@@ -212,6 +215,7 @@
     <br/>
     <br/>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
+      <th colspan="4">Infinity Upgrades:</th>
       <tr>
         <td>Increase the base multiplier per boost:</td>
         <td><span ~style.display=InfinityUpgrade(1).atBoughtLimit() ? 'none' : ''~>~f InfinityUpgrade(1).effect() ~ → ~f InfinityUpgrade(1).nextEffect() ~</span><span ~style.display=InfinityUpgrade(1).atBoughtLimit() ? '' : 'none'~>~f InfinityUpgrade(1).effect() ~ (maxed)</span></td>
@@ -479,6 +483,10 @@
   <tab ~style.display=Tabs.currentTab() === 'autobuyers' ? '' : 'none'~>
     <span>You have ~f Autobuyers.numberOfAutobuyers() ~ autobuyers.</span>
     <br/>
+    <span>Newly unlocked autobuyers are on when unlocked.</span>
+    <br/>
+    <span>Autobuyers triggering at the same time trigger from lowest to highest autobuyer order.</span>
+    <br/>
     <div ~style.display=Autobuyers.areAnyAutobuyersSlow() ? '' : 'none'~>
       <span>Slow autobuyers will trigger in ~f Autobuyers.timeUntilNextSlowTrigger() ~ more seconds.</span>
       <br/>
@@ -505,7 +513,7 @@
               <option value="Buy max">Buy max</option>
             </select></span>
             <br/>
-            <span>Priority: <select ~!value=Autobuyer(1).priority().toString()~ ~!onchange=function() {Autobuyer(1).setPriority(+this.value)}~>
+            <span>Autobuyer order: <select ~!value=Autobuyer(1).priority().toString()~ ~!onchange=function() {Autobuyer(1).setPriority(+this.value)}~>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -536,7 +544,7 @@
               <option value="Buy max">Buy max</option>
             </select></span>
             <br/>
-            <span>Priority: <select ~!value=Autobuyer(2).priority().toString()~ ~!onchange=function() {Autobuyer(2).setPriority(+this.value)}~>
+            <span>Autobuyer order: <select ~!value=Autobuyer(2).priority().toString()~ ~!onchange=function() {Autobuyer(2).setPriority(+this.value)}~>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -567,7 +575,7 @@
               <option value="Buy max">Buy max</option>
             </select></span>
             <br/>
-            <span>Priority: <select ~!value=Autobuyer(3).priority().toString()~ ~!onchange=function() {Autobuyer(3).setPriority(+this.value)}~>
+            <span>Autobuyer order: <select ~!value=Autobuyer(3).priority().toString()~ ~!onchange=function() {Autobuyer(3).setPriority(+this.value)}~>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -600,7 +608,7 @@
               <option value="Buy max">Buy max</option>
             </select></span>
             <br/>
-            <span>Priority: <select ~!value=Autobuyer(4).priority().toString()~ ~!onchange=function() {Autobuyer(4).setPriority(+this.value)}~>
+            <span>Autobuyer order: <select ~!value=Autobuyer(4).priority().toString()~ ~!onchange=function() {Autobuyer(4).setPriority(+this.value)}~>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -631,7 +639,7 @@
               <option value="Buy max">Buy max</option>
             </select></span>
             <br/>
-            <span>Priority: <select ~!value=Autobuyer(5).priority().toString()~ ~!onchange=function() {Autobuyer(5).setPriority(+this.value)}~>
+            <span>Autobuyer order: <select ~!value=Autobuyer(5).priority().toString()~ ~!onchange=function() {Autobuyer(5).setPriority(+this.value)}~>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -662,7 +670,7 @@
               <option value="Buy max">Buy max</option>
             </select></span>
             <br/>
-            <span>Priority: <select ~!value=Autobuyer(6).priority().toString()~ ~!onchange=function() {Autobuyer(6).setPriority(+this.value)}~>
+            <span>Autobuyer order: <select ~!value=Autobuyer(6).priority().toString()~ ~!onchange=function() {Autobuyer(6).setPriority(+this.value)}~>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -695,7 +703,7 @@
               <option value="Buy max">Buy max</option>
             </select></span>
             <br/>
-            <span>Priority: <select ~!value=Autobuyer(7).priority().toString()~ ~!onchange=function() {Autobuyer(7).setPriority(+this.value)}~>
+            <span>Autobuyer order: <select ~!value=Autobuyer(7).priority().toString()~ ~!onchange=function() {Autobuyer(7).setPriority(+this.value)}~>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -726,7 +734,7 @@
               <option value="Buy max">Buy max</option>
             </select></span>
             <br/>
-            <span>Priority: <select ~!value=Autobuyer(8).priority().toString()~ ~!onchange=function() {Autobuyer(8).setPriority(+this.value)}~>
+            <span>Autobuyer order: <select ~!value=Autobuyer(8).priority().toString()~ ~!onchange=function() {Autobuyer(8).setPriority(+this.value)}~>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -757,7 +765,7 @@
               <option value="Buy max">Buy max</option>
             </select></span>
             <br/>
-            <span>Priority: <select ~!value=Autobuyer(9).priority().toString()~ ~!onchange=function() {Autobuyer(9).setPriority(+this.value)}~>
+            <span>Autobuyer order: <select ~!value=Autobuyer(9).priority().toString()~ ~!onchange=function() {Autobuyer(9).setPriority(+this.value)}~>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -986,7 +994,7 @@
             <br/>
             <span><button onclick="InfinityChallenge.startOrExitInfinityChallenge(7)">~r InfinityChallenge.isInfinityChallengeRunning(7) ? "Exit challenge" : (InfinityChallenge.isInfinityChallengeRequirementReached(7) ? "Start challenge" : "Requires more stars") ~</button></span>
             <br/>
-            <span>Reward: Multiplier per boost is increased by ~f 2 ~.</span>
+            <span>Reward: ~f 2 ~ is added to the multiplier per boost.</span>
           </div>
         </td>
         <td>
@@ -1028,6 +1036,7 @@
     <br/>
     <br/>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
+      <th colspan="4">Eternity Upgrades:</th>
       <tr>
         <td>Increase the per-purchase multiplier for eternity generators:</td>
         <td><span ~style.display=EternityUpgrade(1).atBoughtLimit() ? 'none' : ''~>^~f EternityUpgrade(1).effect() ~ → ^~f EternityUpgrade(1).nextEffect() ~</span><span ~style.display=EternityUpgrade(1).atBoughtLimit() ? '' : 'none'~>^~f EternityUpgrade(1).effect() ~ (maxed)</span></td>
@@ -1285,7 +1294,7 @@
     <span>
       <button onclick="Studies.respecAndReset()">Respec studies and ~r EternityPrestigeLayer.resetText() ~</button>
       <br ~style.display=EternityPrestigeLayer.canEternity() ? 'none' : ''~/>
-      <button onclick="Studies.tryToBuyFirstTwelve()">Try to buy all of studies 1-12 (in order)</button>
+      <button onclick="Studies.export()">Export studies</button> <button onclick="Studies.import()">Import studies</button> <button onclick="Studies.tryToBuyFirstTwelve()">Try to buy all of studies 1-12 (in order)</button>
     </span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 8px; border-collapse: separate;">
       <tr>
@@ -1532,7 +1541,7 @@
     </span>
     <br/>
     <span>
-      After ~f 4 ~ theorem purchases of a certain type, theorem costs of that type start increasing more quickly.
+      After ~f 4 ~ theorem purchases of a certain type, theorem costs of that type start increasing far more quickly.
     </span>
     <br/>
     <div ~style.display=Studies.canAccessFourthRow() ? 'none' : ''~>
@@ -1553,6 +1562,8 @@
         However, they can only be bought if all studies above are bought.
       </span>
     </div>
+    <br/>
+    <span style="display: none;">Exported studies: <input id="study-export-output"></input></span>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'eternity-producer' ? '' : 'none'~>
     <div ~style.display=EternityProducer.isUnlocked() ? 'none' : ''~>
@@ -1586,10 +1597,9 @@
           <td><span ~style.display=EternityProducerUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=EternityProducerUpgrade(2).canBuy() ? "" : "disabled"~ onclick="EternityProducerUpgrade(2).buyMax()">Max</button></span></td>
         </tr>
       </table>
+      <br/>
       <div ~style.display=Permanence.hasGainedPermanence() ? '' : 'none'~>
-        <span>You have ~f Permanence.amount() ~ permanence.</span>
-        <br/>
-        <span><button ~class=Permanence.anythingToBuy() ? "" : "disabled"~ onclick="Permanence.maxAll()">Max Permanence upgrades</button></span>
+        <span>You have ~f Permanence.amount() ~ permanence. <button ~class=Permanence.anythingToBuy() ? "" : "disabled"~ onclick="Permanence.maxAll()">Max permanence upgrades</button></span>
         <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
           <tr>
             <td>Multiplier to eternity production:</td>
@@ -1856,6 +1866,8 @@
     </div>
     <div ~style.display=Chroma.isUnlocked() ? '' : 'none'~>
       <span>You have spent ~f player.stats.timeSinceEternity ~ seconds in this eternity, giving you ~f Chroma.amount() ~ chroma (capped at ~f Chroma.cap() ~, based on eternity points).</span>
+      <br/>
+      <span>The distance between your chroma and its cap decreases exponentially.</span>
       <br/>
       <span>You ~r Chroma.currentProductionText() ~, and will produce ~r Chroma.nextColorName() ~ after next eternity reset.</span>
       <br/>

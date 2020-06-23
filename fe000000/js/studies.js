@@ -151,6 +151,50 @@ let Studies = {
       study.buy();
     }
   },
+  exportString() {
+    let extraList = [13, 14, 15, 16].map(x => Study(x).timesBought());
+    let extraString = extraList.some(x => x !== 0) ? '&' + extraList.join(',') : '';
+    return ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].filter(x => Study(x).isBought()).join(',') || 'none') + extraString;
+  },
+  export() {
+    let output = document.getElementById('study-export-output');
+    let parent = output.parentElement;
+    parent.style.display = "";
+    output.value = this.exportString();
+    output.focus();
+    output.select();
+    try {
+      document.execCommand('copy');
+    } catch(ex) {
+      alert('Copying to clipboard failed.');
+    }
+  },
+  toNumber(x) {
+    let result = Math.max(0, Math.floor(+x));
+    return Number.isFinite(result) ? result : 0;
+  },
+  importString(importString) {
+    let parts = importString.split('&');
+    // You can put any study id between 1 and 16 in the initial part of the import list; this is intended.
+    // Also, none should be handled as buying no studies based on current code even without a special case,
+    // but best to not rely on that.
+    if (parts[0] !== 'none') {
+      for (let i of parts[0].split(',').map(x => this.toNumber(x)).filter(x => 1 <= x && x <= 16)) {
+        Study(i).buy();
+      }
+    }
+    if (parts.length > 1) {
+      for (let j = 0; j < 4; j++) {
+        let times = this.toNumber(parts[1].split(',')[j]);
+        for (let k = 0; k < times; k++) {
+          Study(13 + j).buy();
+        }
+      }
+    }
+  },
+  import() {
+    this.importString(prompt('Enter your studies (as previously exported):'));
+  },
   totalStudyCost() {
     return 168;
   },
