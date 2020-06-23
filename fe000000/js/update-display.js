@@ -523,7 +523,7 @@ function updateDisplay() {
     b[191].className = EternityMaxAll.anyGeneratorsToBuy() ? "" : "disabled";
     e[252].textContent = format(EternityPoints.totalEPProduced());
     e[253].textContent = format(Eternities.amount());
-    e[254].textContent = format(Eternities.eternityGeneratorMultiplier());
+    e[254].textContent = format(Eternities.eternityGeneratorMultiplierForDisplay());
     e[255].textContent = format(EternityStars.amount());
     e[256].textContent = format(EternityStars.multiplier());
     e[257].textContent = formatWithPrecision(EternityStars.power(), 5);
