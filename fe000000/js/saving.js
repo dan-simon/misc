@@ -200,6 +200,11 @@ let Saving = {
       player.studies = player.studies.concat([0, 0, 0, 0]);
       player.version = 1.6875;
     }
+    if (player.version < 1.703125) {
+      player.chroma.colors = player.chroma.colors.slice(0, 5);
+      player.chroma.unlocked = player.chroma.unlocked.slice(0, 5);
+      player.version = 1.703125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

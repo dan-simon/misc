@@ -1,5 +1,5 @@
 let Chroma = {
-  colors: [null, 'grey', 'purple', 'orange', 'yellow', 'green', 'blue'],
+  colors: [null, 'grey', 'purple', 'orange', 'yellow', 'green'],
   colorCosts: [
     null,
     Decimal.pow(2, 4096),

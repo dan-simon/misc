@@ -103,8 +103,8 @@ let initialPlayer = {
   permanenceUpgrades: [0, 0, 0, 0],
   hasGainedPermanence: false,
   chroma: {
-    colors: [0, 0, 0, 0, 0, 0],
-    unlocked: [false, false, false, false, false, false],
+    colors: [0, 0, 0, 0, 0],
+    unlocked: [false, false, false, false, false],
     current: 0,
     next: 0
   },
@@ -141,7 +141,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.6875
+  version: 1.703125
 }
 
 let player;
