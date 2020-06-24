@@ -36,7 +36,7 @@ let Boost = {
     if (InfinityChallenge.isInfinityChallengeCompleted(7)) {
       mult += 2;
     }
-    mult *= Study(1).effect() * EternityUpgrade(2).effect() * this.boostPowerEffect();
+    mult *= Study(1).effect() * EternityUpgrade(2).effect() * Chroma.effectOfColor(1) * this.boostPowerEffect();
     if (InfinityChallenge.isInfinityChallengeRunning(7)) {
       mult = Math.pow(mult, 2);
     }

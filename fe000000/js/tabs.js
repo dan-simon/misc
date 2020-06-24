@@ -17,6 +17,7 @@ let Tabs = {
       'studies': () => player.eternities > 0,
       'eternity-producer': () => player.eternities > 0,
       'eternity-challenges': () => player.eternities > 0,
+      'chroma': () => player.eternities > 0,
       'statistics': () => true,
       'options': () => true,
     }[x]();

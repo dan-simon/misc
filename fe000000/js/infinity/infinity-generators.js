@@ -43,7 +43,7 @@ let InfinityGenerator = function (i) {
         (i === 1 && InfinityChallenge.isInfinityChallengeCompleted(3)) ? InfinityChallenge.infinityChallenge3Reward() : 1,
         InfinityChallenge.isInfinityChallengeCompleted(4) ? InfinityChallenge.infinityChallenge4Reward() : 1,
         (i === 8 && InfinityChallenge.isInfinityChallengeCompleted(8)) ? Math.max(1, Generator(8).amount().toNumber()) : 1,
-        EternityStars.multiplier(), Study(5).effect(), Study(6).effect(), Study(7).effect(), Study(8).effect(),
+        EternityStars.multiplier(), Study(5).effect(), Study(6).effect(), Study(7).effect(), Study(8).effect(), Study(14).effect(),
         EternityChallenge.getEternityChallengeReward(4), EternityChallenge.getEternityChallengeReward(7),
       ];
       let multiplier = factors.reduce((a, b) => a.times(b));

@@ -26,10 +26,10 @@ let EternityChallenge = {
     x => Decimal.pow(2, x * Math.pow(Stars.amount().max(1).log2(), 0.5) / 4),
     x => 1 - x / 16,
     x => 1 + x / 256,
-    x => Decimal.pow(2, x * Math.pow(InfinityPoints.amount().max(1).log2(), 0.5) / 2),
+    x => Decimal.pow(2, x * Math.pow(InfinityPoints.totalIPProducedThisEternity().max(1).log2(), 0.5) / 2),
     x => 1 + x / 64,
     x => 1 + x / 16,
-    x => EternityPoints.amount().max(1).pow(x / 4),
+    x => EternityPoints.totalEPProduced().max(1).pow(x / 4),
     x => Decimal.pow(2, 32 * x),
   ],
   resourceAmounts: [
@@ -135,6 +135,8 @@ let EternityChallenge = {
       return 1 + this.getTotalEternityChallengeCompletions() / 4;
     } else if (x === 2) {
       return Math.pow(1 + this.getTotalEternityChallengeCompletions() / 4, 3);
+    } else if (x === 4) {
+      return 2;
     }
     return null;
   },
@@ -218,7 +220,17 @@ let EternityChallenge = {
     }
     player.respecEternityChallenge = false;
   },
+  respecAndReset() {
+    this.respec();
+    if (EternityPrestigeLayer.canEternity()) {
+      EternityPrestigeLayer.eternity();
+    } else {
+      EternityPrestigeLayer.eternityReset();
+    }
+  },
   lockUnlockedEternityChallenge() {
+    // This can happen if we're respeccing and doing an eternity reset.
+    this.setEternityChallenge(0);
     player.unspentTheorems += this.getUnlockedEternityChallengeCost();
     player.unlockedEternityChallenge = 0;
   },

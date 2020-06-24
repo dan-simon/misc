@@ -13,6 +13,10 @@ let STUDY_EFFECTS = [
   () => Math.pow(2, Math.min(16, Math.pow(Math.log2(
     1 + player.stats.timeSinceEternity * (1 + EternityStars.amount().max(1).log2() / 1024) / 64), 4 / 3))),
   () => Math.pow(Studies.totalTheorems(), 2),
+  x => Decimal.pow(2, 4096 * x),
+  x => Decimal.pow(2, x * Math.sqrt(Chroma.totalColorAmount()) / 2),
+  x => Decimal.pow(Math.max(Chroma.amount(), 1), x),
+  x => 1 + x * Studies.totalTheorems() / 1024,
 ]
 
 let Study = function (i) {
@@ -21,13 +25,25 @@ let Study = function (i) {
   }
   return {
     isBought() {
+      // Works even for the rebuyable studies.
+      return player.studies[i - 1];
+    },
+    timesBought() {
       return player.studies[i - 1];
     },
     isBuyable() {
-      return !this.isBought() && Studies.unspentTheorems() >= this.cost();
+      if (i <= 12) {
+        return !this.isBought() && Studies.unspentTheorems() >= this.cost();
+      } else {
+        return Studies.list.slice(0, 12).every(i => i.isBought()) && Studies.unspentTheorems() >= this.cost();
+      }
     },
-    cost(x) {
-      return 2 * (1 + this.row() + Studies.boughtThatAreNotOnRow(this.row()));
+    cost() {
+      if (this.row() === 4) {
+        return Math.floor(Math.pow(2, this.timesBought() / 2));
+      } else {
+        return 2 * (1 + this.row() + Studies.boughtThatAreNotOnRow(this.row()));
+      }
     },
     row() {
       return Math.floor((i + 3) / 4);
@@ -35,6 +51,8 @@ let Study = function (i) {
     rawEffect() {
       if (this.row() === 3) {
         return Math.pow(STUDY_EFFECTS[i - 1](), PermanenceUpgrade(3).effect());
+      } else if (this.row() === 4) {
+        return STUDY_EFFECTS[i - 1](this.timesBought());
       } else {
         return STUDY_EFFECTS[i - 1]();
       }
@@ -45,10 +63,16 @@ let Study = function (i) {
     },
     effect() {
       // Most but not all studies have Decimal effect, but
-      // in one case (extra boost mult) the effect has to be
-      // a number, and it never has to be a Decimal.
-      // So we use 1 as the default value.
+      // in some cases (extra boost mult, chroma buildup mult)
+      // the effect has to be a number, and it never has to be
+      // a Decimal. So we use 1 as the default value. Note that
+      // this works fine for the fourth-row studies even though
+      // they're rebuyable.
       return this.isBought() ? this.rawEffect() : 1;
+    },
+    nextEffect() {
+      // This should only ever be called on fourth-row studies.
+      return STUDY_EFFECTS[i - 1](this.timesBought() + 1);
     },
     isCapped() {
       // Note that this technique only works if the effect is a number and not a Decimal.
@@ -63,24 +87,29 @@ let Study = function (i) {
     buy() {
       if (this.isBuyable()) {
         player.unspentTheorems -= this.cost();
-        player.studies[i - 1] = true;
+        if (this.row() === 4) {
+          player.studies[i - 1]++;
+        } else {
+          player.studies[i - 1] = true;
+        }
       }
     },
     className() {
-      let infix = ['normal', 'infinity', 'time'][this.row() - 1];
-      let suffix = this.isBought() ? 'bought' : (this.isBuyable() ? 'buyable' : 'unbuyable');
+      let infix = ['normal', 'infinity', 'time', 'chroma'][this.row() - 1];
+      // For the rebuyable studies this order is very important.
+      let suffix =  this.isBuyable() ? 'buyable' : (this.isBought() ? 'bought' : 'unbuyable');
       return 'study' + infix + suffix;
     }
   }
 }
 
 let Studies = {
-  list: [...Array(12)].map((_, i) => Study(i + 1)),
+  list: [...Array(16)].map((_, i) => Study(i + 1)),
   get: function (x) {
     return this.list[x - 1];
   },
   totalTheorems() {
-    return player.boughtTheorems.reduce((a, b) => a + b) + Boost.extraTheorems() + EternityChallenge.extraTheorems();
+    return player.boughtTheorems.reduce((a, b) => a + b) + Boost.extraTheorems() + Chroma.extraTheorems() + EternityChallenge.extraTheorems();
   },
   unspentTheorems() {
     return player.unspentTheorems;
@@ -95,6 +124,9 @@ let Studies = {
     for (let i = 0; i < 12; i++) {
       player.studies[i] = false;
     }
+    for (let i = 12; i < 16; i++) {
+      player.studies[i] = 0;
+    }
     player.unspentTheorems = this.totalTheorems() - EternityChallenge.getUnlockedEternityChallengeCost();
   },
   maybeRespec() {
@@ -103,8 +135,71 @@ let Studies = {
     }
     player.respecStudies = false;
   },
+  respecAndReset() {
+    this.respec();
+    if (EternityPrestigeLayer.canEternity()) {
+      EternityPrestigeLayer.eternity();
+    } else {
+      EternityPrestigeLayer.eternityReset();
+    }
+  },
   boughtThatAreNotOnRow(x) {
-    return this.list.filter(y => y.isBought() && y.row() !== x).length;
+    return this.list.slice(0, 12).filter(y => y.isBought() && y.row() !== x).length;
+  },
+  tryToBuyFirstTwelve() {
+    for (let study of this.list.slice(0, 12)) {
+      study.buy();
+    }
+  },
+  exportString() {
+    let extraList = [13, 14, 15, 16].map(x => Study(x).timesBought());
+    let extraString = extraList.some(x => x !== 0) ? '&' + extraList.join(',') : '';
+    return ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].filter(x => Study(x).isBought()).join(',') || 'none') + extraString;
+  },
+  export() {
+    let output = document.getElementById('study-export-output');
+    let parent = output.parentElement;
+    parent.style.display = "";
+    output.value = this.exportString();
+    output.focus();
+    output.select();
+    try {
+      document.execCommand('copy');
+    } catch(ex) {
+      alert('Copying to clipboard failed.');
+    }
+  },
+  toNumber(x) {
+    let result = Math.max(0, Math.floor(+x));
+    return Number.isFinite(result) ? result : 0;
+  },
+  importString(importString) {
+    let parts = importString.split('&');
+    // You can put any study id between 1 and 16 in the initial part of the import list; this is intended.
+    // Also, none should be handled as buying no studies based on current code even without a special case,
+    // but best to not rely on that.
+    if (parts[0] !== 'none') {
+      for (let i of parts[0].split(',').map(x => this.toNumber(x)).filter(x => 1 <= x && x <= 16)) {
+        Study(i).buy();
+      }
+    }
+    if (parts.length > 1) {
+      for (let j = 0; j < 4; j++) {
+        let times = this.toNumber(parts[1].split(',')[j]);
+        for (let k = 0; k < times; k++) {
+          Study(13 + j).buy();
+        }
+      }
+    }
+  },
+  import() {
+    this.importString(prompt('Enter your studies (as previously exported):'));
+  },
+  totalStudyCost() {
+    return 168;
+  },
+  canAccessFourthRow() {
+    return this.totalTheorems() >= this.totalStudyCost();
   },
   costPow(n, type) {
     // Should only be called in getting the cost, otherwise

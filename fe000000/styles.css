@@ -94,6 +94,17 @@ button {
   border-width: 1px 1px;
 }
 
+.chromadiv {
+  display: table;
+  text-align: center;
+  width: 384px;
+  height: 96px;
+  padding: 4px;
+  margin: 4px;
+  border: solid;
+  border-width: 1px 1px;
+}
+
 .studynormalunbuyable {
   display: table;
   text-align: center;
@@ -164,4 +175,48 @@ button {
   background: #33cccc;
   width: 256px;
   height: 160px;
+}
+
+.studychromaunbuyable {
+  display: table;
+  text-align: center;
+  background: #555555;
+  width: 256px;
+  height: 160px;
+}
+
+.studychromabuyable {
+  display: table;
+  text-align: center;
+  background: radial-gradient(#33cc33, #aaaaaa);
+  width: 256px;
+  height: 160px;
+}
+
+.studychromabought {
+  display: table;
+  text-align: center;
+  background: #33cc33;
+  width: 256px;
+  height: 160px;
+}
+
+.greyspan {
+  color: #aaaaaa;
+}
+
+.purplespan {
+  color: #6633cc;
+}
+
+.orangespan {
+  color: #cc6633;
+}
+
+.yellowspan {
+  color: #ffff00;
+}
+
+.greenspan {
+  color: #33ff33;
 }

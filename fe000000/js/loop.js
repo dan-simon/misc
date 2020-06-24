@@ -19,6 +19,8 @@ function gameLoop(diff, display) {
     }
   }
   Stats.addToTimeStats(diff);
+  // Why is this here? Because otherwise the eternity time will be out of sync with chroma when the UI updates.
+  Chroma.updateColors();
   InfinityPrestigeLayer.updatePeakIPPerSec();
   EternityPrestigeLayer.updatePeakEPPerSec();
   Autobuyers.tick(diff);

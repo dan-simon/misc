@@ -187,6 +187,24 @@ let Saving = {
       player.hasGainedPermanence = false;
       player.version = 1.65625;
     }
+    if (player.version < 1.671875) {
+      player.chroma = {
+        colors: [0, 0, 0, 0, 0, 0],
+        unlocked: [false, false, false, false, false, false],
+        current: 0,
+        next: 0
+      };
+      player.version = 1.671875;
+    }
+    if (player.version < 1.6875) {
+      player.studies = player.studies.concat([0, 0, 0, 0]);
+      player.version = 1.6875;
+    }
+    if (player.version < 1.703125) {
+      player.chroma.colors = player.chroma.colors.slice(0, 5);
+      player.chroma.unlocked = player.chroma.unlocked.slice(0, 5);
+      player.version = 1.703125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
@@ -265,5 +283,7 @@ let Saving = {
     if (confirm('Do you really want to reset the game? You will lose all your progress, and get no benefit.')) {
       this.resetGame();
     }
-  }
+  },
+  // Not sure where this should live, honestly.
+  gameEnd: Decimal.pow(2, Math.pow(2, 32))
 }
