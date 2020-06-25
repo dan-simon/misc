@@ -231,6 +231,10 @@ let Saving = {
         player.stats.lastTenInfinities[i][1] = new Decimal(player.stats.lastTenInfinities[i][1]);
         player.stats.lastTenInfinities[i][2] = new Decimal(player.stats.lastTenInfinities[i][2]);
       }
+      if (player.stats.lastTenEternities[i] !== -1) {
+        player.stats.lastTenEternities[i][1] = new Decimal(player.stats.lastTenEternities[i][1]);
+        player.stats.lastTenEternities[i][2] = new Decimal(player.stats.lastTenEternities[i][2]);
+      }
     }
     for (let i = 9; i < 13; i++) {
       player.autobuyers[i].priority = new Decimal(player.autobuyers[i].priority);
