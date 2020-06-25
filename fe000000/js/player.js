@@ -42,6 +42,16 @@ function initialLastTenEternities() {
   ];
 }
 
+function initialLastTenComplexities() {
+  return [
+    [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
+    [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
+    [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
+    [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
+    [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
+  ];
+}
+
 let initialPlayer = {
   stars: new Decimal(2),
   boost: {bought: 0},
@@ -75,7 +85,7 @@ let initialPlayer = {
   breakInfinity: false,
   autobuyers: initialAutobuyers(),
   eternityPoints: new Decimal(0),
-  eternities: 0,
+  eternities: new Decimal(0),
   eternityStars: new Decimal(2),
   eternityGenerators: initialEternityGenerators(),
   highestEternityGenerator: 0,
@@ -99,7 +109,7 @@ let initialPlayer = {
   currentEternityChallenge: 0,
   eternityChallengeCompletions: [0, 0, 0, 0, 0, 0, 0, 0],
   respecEternityChallenge: false,
-  permanence: 0,
+  permanence: new Decimal(0),
   permanenceUpgrades: [0, 0, 0, 0],
   hasGainedPermanence: false,
   chroma: {
@@ -108,6 +118,11 @@ let initialPlayer = {
     current: 0,
     next: 0
   },
+  complexityPoints: new Decimal(0),
+  complexities: 0,
+  complexityStars: new Decimal(2),
+  complexityGenerators: initialComplexityGenerators(),
+  highestComplexityGenerator: 0,
   options: {
     notation: 'Scientific',
     offlineProgress: true,
@@ -116,32 +131,40 @@ let initialPlayer = {
   stats: {
     totalStarsProduced: new Decimal(0),
     totalStarsProducedThisEternity: new Decimal(0),
+    totalStarsProducedThisComplexity: new Decimal(0),
     totalIPProduced: new Decimal(0),
     totalIPProducedThisEternity: new Decimal(0),
     totalEPProduced: new Decimal(0),
+    totalEPProducedThisComplexity: new Decimal(0),
+    totalCPProduced: new Decimal(0),
     timeSincePurchase: 0,
     timeSinceSacrifice: 0,
     timeSincePrestige: 0,
     timeSinceInfinity: 0,
     timeSinceEternity: 0,
+    timeSinceComplexity: 0,
     timeSinceGameStart: 0,
     timeSinceLastPeakIPPerSec: Math.pow(2, 256),
     timeSinceLastPeakEPPerSec: Math.pow(2, 256),
+    timeSinceLastPeakCPPerSec: Math.pow(2, 256),
     fastestInfinity: Math.pow(2, 256),
     fastestEternity: Math.pow(2, 256),
+    fastestComplexity: Math.pow(2, 256),
     peakIPPerSec: new Decimal(0),
     peakEPPerSec: new Decimal(0),
+    peakCPPerSec: new Decimal(0),
     purchasesThisInfinity: 0,
     purchasesThisInfinityByType: [0, 0, 0, 0, 0, 0, 0, 0, 0],
     prestigesThisInfinity: 0,
     lastTenInfinities: initialLastTenInfinities(),
-    lastTenEternities: initialLastTenEternities()
+    lastTenEternities: initialLastTenEternities(),
+    lastTenComplexities: initialLastTenComplexities()
   },
   cheats: {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.703125
+  version: 1.71875
 }
 
 let player;

@@ -1,6 +1,6 @@
 let EternityMilestones = {
   hasEternityMilestone(x) {
-    return player.eternities >= x;
+    return player.eternities.gte(x);
   },
   isEternityMilestoneDisabled(x) {
     if (x === 4 || x === 8) {
@@ -19,7 +19,7 @@ let EternityMilestones = {
   },
   milestoneStatusDescription(x) {
     if (this.isEternityMilestoneActive(x)) {
-      return 'Active';      
+      return 'Active';
     } else if (!this.hasEternityMilestone(x)) {
       return 'Locked';
     } else if (this.isEternityMilestoneDisabled(x)) {

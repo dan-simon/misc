@@ -1,6 +1,6 @@
 let Permanence = {
   getRequiredEternities() {
-    return this.getLeftoverEternities() + this.getEternitiesPerPermanence();
+    return this.getEternitiesPerPermanence().plus(this.getLeftoverEternities());
   },
   getLeftoverEternities() {
     return 16;
@@ -9,10 +9,10 @@ let Permanence = {
     return Math.pow(2, 24) / PermanenceUpgrade(4).effect();
   },
   canGainPermanence() {
-    return Eternities.amount() >= this.getRequiredEternities();
+    return Eternities.amount().gte(this.getRequiredEternities());
   },
   permanenceGain() {
-    return (Eternities.amount() - this.getLeftoverEternities()) / this.getEternitiesPerPermanence();
+    return Eternities.amount().minus(this.getLeftoverEternities()).div(this.getEternitiesPerPermanence());
   },
   hasGainedPermanence() {
     return player.hasGainedPermanence;
@@ -27,7 +27,7 @@ let Permanence = {
     return player.permanence;
   },
   add(x) {
-    player.permanence += x;
+    player.permanence = player.permanence.plus(x);
   },
   anythingToBuy() {
     return PermanenceUpgrades.list.some(x => x.canBuy());

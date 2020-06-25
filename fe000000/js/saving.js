@@ -205,31 +205,53 @@ let Saving = {
       player.chroma.unlocked = player.chroma.unlocked.slice(0, 5);
       player.version = 1.703125;
     }
+    if (player.version < 1.71875) {
+      player.eternities = new Decimal(player.eternities);
+      player.permanence = new Decimal(player.permanence);
+
+      player.version = 1.71875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
     player.infinityStars = new Decimal(player.infinityStars);
     player.eternityStars = new Decimal(player.eternityStars);
+    player.complexityStars = new Decimal(player.complexityStars);
     player.infinityPoints = new Decimal(player.infinityPoints);
     player.eternityPoints = new Decimal(player.eternityPoints);
+    player.complexityPoints = new Decimal(player.complexityPoints);
     player.sacrificeMultiplier = new Decimal(player.sacrificeMultiplier);
     player.prestigePower = new Decimal(player.prestigePower);
     for (let i = 0; i < 8; i++) {
       player.generators[i].amount = new Decimal(player.generators[i].amount);
       player.infinityGenerators[i].amount = new Decimal(player.infinityGenerators[i].amount);
       player.eternityGenerators[i].amount = new Decimal(player.eternityGenerators[i].amount);
+      player.complexityGenerators[i].amount = new Decimal(player.complexityGenerators[i].amount);
     }
+    player.eternities = new Decimal(player.eternities);
+    player.permanence = new Decimal(player.permanence);
     player.stats.totalStarsProduced = new Decimal(player.stats.totalStarsProduced);
     player.stats.totalStarsProducedThisEternity = new Decimal(player.stats.totalStarsProducedThisEternity);
+    player.stats.totalStarsProducedThisComplexity = new Decimal(player.stats.totalStarsProducedThisComplexity);
     player.stats.totalIPProduced = new Decimal(player.stats.totalIPProduced);
     player.stats.totalIPProducedThisEternity = new Decimal(player.stats.totalIPProducedThisEternity);
     player.stats.totalEPProduced = new Decimal(player.stats.totalEPProduced);
+    player.stats.totalEPProducedThisComplexity = new Decimal(player.stats.totalEPProducedThisComplexity);
     player.stats.peakIPPerSec = new Decimal(player.stats.peakIPPerSec);
     player.stats.peakEPPerSec = new Decimal(player.stats.peakEPPerSec);
+    player.stats.peakCPPerSec = new Decimal(player.stats.peakCPPerSec);
     for (let i = 0; i < 10; i++) {
       if (player.stats.lastTenInfinities[i] !== -1) {
         player.stats.lastTenInfinities[i][1] = new Decimal(player.stats.lastTenInfinities[i][1]);
         player.stats.lastTenInfinities[i][2] = new Decimal(player.stats.lastTenInfinities[i][2]);
+      }
+      if (player.stats.lastTenEternities[i] !== -1) {
+        player.stats.lastTenEternities[i][1] = new Decimal(player.stats.lastTenEternities[i][1]);
+        player.stats.lastTenEternities[i][2] = new Decimal(player.stats.lastTenEternities[i][2]);
+      }
+      if (player.stats.lastTenComplexities[i] !== -1) {
+        player.stats.lastTenComplexities[i][1] = new Decimal(player.stats.lastTenComplexities[i][1]);
+        player.stats.lastTenComplexities[i][2] = new Decimal(player.stats.lastTenComplexities[i][2]);
       }
     }
     for (let i = 9; i < 13; i++) {
