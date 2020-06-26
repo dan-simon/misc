@@ -10,6 +10,10 @@ function initialEternityGenerators() {
   return [...Array(8)].map(_ => ({amount: new Decimal(0), bought: 0}));
 }
 
+function initialComplexityGenerators() {
+  return [...Array(8)].map(_ => ({amount: new Decimal(0), bought: 0}));
+}
+
 function initialAutobuyers() {
   return [
     {isOn: true, mode: 'Buy max', priority: 1}, {isOn: true, mode: 'Buy max', priority: 2},
@@ -56,7 +60,7 @@ let initialPlayer = {
   stars: new Decimal(2),
   boost: {bought: 0},
   boostPower: 1,
-  bestBoostPowerEver: 1,
+  bestBoostPowerThisComplexity: 1,
   generators: initialGenerators(),
   highestGenerator: 0,
   sacrificeMultiplier: new Decimal(1),
@@ -95,7 +99,6 @@ let initialPlayer = {
     true, true, true, true, true, true, true, true, true, true,
   ],
   boughtTheorems: [0, 0, 0],
-  unspentTheorems: 0,
   studies: [
     false, false, false, false, false, false,
     false, false, false, false, false, false,
@@ -120,9 +123,11 @@ let initialPlayer = {
   },
   complexityPoints: new Decimal(0),
   complexities: 0,
-  complexityStars: new Decimal(2),
+  complexityStars: new Decimal(1),
   complexityGenerators: initialComplexityGenerators(),
   highestComplexityGenerator: 0,
+  complexityChallengeCompletions: [0, 0, 0, 0, 0, 0],
+  isComplexityChallengeRunning: [true, true, true, true, true, true],
   options: {
     notation: 'Scientific',
     offlineProgress: true,

@@ -5,6 +5,10 @@
   <meta content="utf-8" http-equiv="encoding">
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/break_infinity.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@antimatter-dimensions/notations"></script>
+  <script src="js/complexity/complexities.js"></script>
+  <script src="js/complexity/complexity-challenge.js"></script>
+  <script src="js/complexity/complexity-generators.js"></script>
+  <script src="js/complexity/complexity-stars.js"></script>
   <script src="js/eternity/eternities.js"></script>
   <script src="js/eternity/eternity-challenge.js"></script>
   <script src="js/eternity/eternity-generators.js"></script>
@@ -97,7 +101,7 @@
           <br/>
           <span>You are generating ~r formatWithPrecision(Boost.boostPowerPerSecond(), 5) ~ boost power per second (~r formatWithPrecision(Boost.boostPowerPerBoost(), 5) ~ per boost above ~f Boost.boostPowerStart() ~).</span>
           <br/>
-          <span>Your best boost power ever is ~f Boost.bestBoostPowerEver() ~ (giving ~f Boost.extraTheorems() ~ extra theorems, next at ~f Boost.nextExtraTheorem() ~).</span>
+          <span>Your best boost power this complexity is ~f Boost.bestBoostPowerThisComplexity() ~ (giving ~f Boost.extraTheorems() ~ extra theorems, next at ~f Boost.nextExtraTheorem() ~).</span>
         </div>
         <span ~style.display=Boost.isBoostPowerVisible() ? 'none' : ''~>You will start generating boost power for each boost above ~f Boost.boostPowerStart() ~ boosts.</span>
       </div>
@@ -1324,7 +1328,7 @@
           <button ~class=Study(3).className()~ onclick="Study(3).buy()">
             Study 3
             <br/>
-            Multiplier to normal generators based on total stars
+            Multiplier to normal generators based on total stars this complexity
             <br/>
             Currently: ~f Study(3).rawEffect() ~x
             <br/>

@@ -148,7 +148,7 @@ function updateDisplay() {
     e[18].textContent = formatWithPrecision(Boost.boostPowerPerSecond(), 5);
     e[19].textContent = formatWithPrecision(Boost.boostPowerPerBoost(), 5);
     e[20].textContent = format(Boost.boostPowerStart());
-    e[21].textContent = format(Boost.bestBoostPowerEver());
+    e[21].textContent = format(Boost.bestBoostPowerThisComplexity());
     e[22].textContent = format(Boost.extraTheorems());
     e[23].textContent = format(Boost.nextExtraTheorem());
     b[24].style.display = Boost.isBoostPowerVisible() ? 'none' : '';

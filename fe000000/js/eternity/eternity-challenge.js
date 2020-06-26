@@ -70,7 +70,7 @@ let EternityChallenge = {
       return 'Another EC already unlocked';
     } else if (Decimal.lt(this.getEternityChallengeResourceAmount(x), this.getEternityChallengeRequirement(x))) {
       return 'Requires more ' + this.getEternityChallengeResourceName(x);
-    } else if (player.unspentTheorems < this.getEternityChallengeCost(x)) {
+    } else if (Studies.unspentTheorems() < this.getEternityChallengeCost(x)) {
       return 'Requires more unspent theorems';
     }
   },
@@ -187,22 +187,17 @@ let EternityChallenge = {
     }
     return description;
   },
-  eternityChallengeCompletionsDescription(x) {
-    // This could be done as easily in the HTML but it seems nice to have a method (also applies to some things below)
-    return 'Completed ' + format(this.getEternityChallengeCompletions(x)) + '/' + format(4) + ' times';
-  },
   setEternityChallenge(x) {
     player.currentEternityChallenge = x;
   },
   canEternityChallengeBeUnlocked(x) {
     return this.getUnlockedEternityChallenge() === 0 &&
       Decimal.gte(this.getEternityChallengeResourceAmount(x), this.getEternityChallengeRequirement(x)) &&
-      player.unspentTheorems >= this.getEternityChallengeCost(x);
+      Studies.unspentTheorems() >= this.getEternityChallengeCost(x);
   },
   unlockEternityChallenge(x) {
     // This function should only be called if the eternity challenge
     // has previously been confirmed to be unlockable.
-    player.unspentTheorems -= this.getEternityChallengeCost(x);
     player.unlockedEternityChallenge = x;
   },
   isRespecOn() {
@@ -231,7 +226,6 @@ let EternityChallenge = {
   lockUnlockedEternityChallenge() {
     // This can happen if we're respeccing and doing an eternity reset.
     this.setEternityChallenge(0);
-    player.unspentTheorems += this.getUnlockedEternityChallengeCost();
     player.unlockedEternityChallenge = 0;
   },
   startEternityChallenge(x) {
@@ -251,7 +245,6 @@ let EternityChallenge = {
   completeEternityChallenge(x) {
     if (player.eternityChallengeCompletions[x - 1] < 4) {
       player.eternityChallengeCompletions[x - 1]++;
-      player.unspentTheorems++;
     }
     this.setEternityChallenge(0);
     this.lockUnlockedEternityChallenge();

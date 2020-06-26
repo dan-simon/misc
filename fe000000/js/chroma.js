@@ -55,10 +55,7 @@ let Chroma = {
   updateColors() {
     let color = player.chroma.current;
     if (color === 0) return;
-    let oldExtraTheorems = this.extraTheorems();
     this.setColorAmount(color, Math.max(this.colorAmount(color), this.amount()));
-    let newExtraTheorems = this.extraTheorems();
-    player.unspentTheorems += newExtraTheorems - oldExtraTheorems;
   },
   setNextColor(x) {
     if (this.isColorUnlocked(x)) {

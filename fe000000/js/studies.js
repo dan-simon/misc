@@ -1,7 +1,7 @@
 let STUDY_EFFECTS = [
   () => 2,
   () => Decimal.pow(4, Math.pow(Prestige.prestigePower().log2(), 0.5)),
-  () => Decimal.pow(2, Math.pow(player.stats.totalStarsProduced.log2(), 0.5) / 2),
+  () => Decimal.pow(2, Math.pow(player.stats.totalStarsProducedThisComplexity.log2(), 0.5) / 2),
   () => Decimal.pow(2, 16 * Studies.totalTheorems()),
   () => Decimal.pow(2, Math.pow(Boost.bought(), 1.75) / 1024),
   () => Decimal.pow(2, Math.pow(4 * Prestige.prestigePower().log2(), 0.875) / 1024),
@@ -86,7 +86,6 @@ let Study = function (i) {
     },
     buy() {
       if (this.isBuyable()) {
-        player.unspentTheorems -= this.cost();
         if (this.row() === 4) {
           player.studies[i - 1]++;
         } else {
@@ -109,10 +108,23 @@ let Studies = {
     return this.list[x - 1];
   },
   totalTheorems() {
-    return player.boughtTheorems.reduce((a, b) => a + b) + Boost.extraTheorems() + Chroma.extraTheorems() + EternityChallenge.extraTheorems();
+    return player.boughtTheorems.reduce((a, b) => a + b) + this.extraTheorems();
+  },
+  extraTheorems() {
+    return Boost.extraTheorems() + Chroma.extraTheorems() + EternityChallenge.extraTheorems();
   },
   unspentTheorems() {
-    return player.unspentTheorems;
+    return this.totalTheorems() - this.spentTheorems();
+  },
+  spentTheorems() {
+    /// This function is a mess that hopefully both works and is decently quick.
+    let rowCounts = [0, 1, 2].map(x => this.list.slice(4 * x, 4 * (x + 1)).filter(y => y.isBought()).length);
+    let firstThreeRowsInitial = rowCounts.map((x, i) => x * (2 * i + 4)).reduce((a, b) => a + b);
+    let firstThreeRowsExtra = 2 * (rowCounts[0] * rowCounts[1] + rowCounts[0] * rowCounts[2] + rowCounts[1] * rowCounts[2]);
+    let fourthRow = this.list.slice(12).map(x => [...Array(x.timesBought())].map((_, y) => Math.floor(Math.pow(2, y / 2))).reduce((a, b) => a + b, 0)).reduce((a, b) => a + b);
+    let cc = EternityChallenge.currentEternityChallenge();
+    let eternityChallenge = cc === 0 ? 0 : EternityChallenge.getEternityChallengeCost(cc);
+    return firstThreeRowsInitial + firstThreeRowsExtra + fourthRow + eternityChallenge;
   },
   isRespecOn() {
     return player.respecStudies;
@@ -127,7 +139,6 @@ let Studies = {
     for (let i = 12; i < 16; i++) {
       player.studies[i] = 0;
     }
-    player.unspentTheorems = this.totalTheorems() - EternityChallenge.getUnlockedEternityChallengeCost();
   },
   maybeRespec() {
     if (this.isRespecOn()) {
@@ -230,14 +241,12 @@ let Studies = {
     if (this.canBuy(x)) {
       this.setStat(x, this.getStat(x).minus(this.cost(x)));
       player.boughtTheorems[x] += 1;
-      player.unspentTheorems += 1;
     }
   },
   buyMax(x) {
     while (this.canBuy(x)) {
       this.setStat(x, this.getStat(x).minus(this.cost(x)));
       player.boughtTheorems[x] += 1;
-      player.unspentTheorems += 1;
     }
   }
 }

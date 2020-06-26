@@ -12,7 +12,7 @@ let Boost = {
     return this.costForOne(1);
   },
   costFor(n) {
-    // Scaling gets good enough that it becomes impractical to consider 
+    // Scaling gets good enough that it becomes impractical to consider
     let m = n;
     let totalCost = new Decimal(0);
     while (m > 0) {
@@ -109,16 +109,13 @@ let Boost = {
   },
   produceBoostPower(diff) {
     player.boostPower += this.boostPowerPerSecond() * diff;
-    let oldExtraTheorems = this.extraTheorems();
-    player.bestBoostPowerEver = Math.max(player.boostPower, player.bestBoostPowerEver);
-    let newExtraTheorems = this.extraTheorems();
-    player.unspentTheorems += newExtraTheorems - oldExtraTheorems;
+    player.bestBoostPowerThisComplexity = Math.max(player.boostPower, player.bestBoostPowerThisComplexity);
   },
-  bestBoostPowerEver() {
-    return player.bestBoostPowerEver;
+  bestBoostPowerThisComplexity() {
+    return player.bestBoostPowerThisComplexity;
   },
   extraTheorems() {
-    return Studies.theoremsFrom(Math.log2(this.bestBoostPowerEver()), 3);
+    return Studies.theoremsFrom(Math.log2(this.bestBoostPowerThisComplexity()), 3);
   },
   nextExtraTheorem() {
     return Math.pow(2, Studies.costPow(this.extraTheorems(), 3));

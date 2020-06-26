@@ -206,9 +206,26 @@ let Saving = {
       player.version = 1.703125;
     }
     if (player.version < 1.71875) {
+      player.bestBoostPowerThisComplexity = player.bestBoostPowerEver;
+      delete player.bestBoostPowerEver;
+      delete player.unspentTheorems;
       player.eternities = new Decimal(player.eternities);
       player.permanence = new Decimal(player.permanence);
-
+      player.complexityPoints = new Decimal(0);
+      player.complexities = 0;
+      player.complexityStars = new Decimal(1);
+      player.complexityGenerators = initialComplexityGenerators();
+      player.highestComplexityGenerator = 0;
+      player.complexityChallengeCompletions = [0, 0, 0, 0, 0, 0];
+      player.isComplexityChallengeRunning = [true, true, true, true, true, true];
+      player.stats.totalStarsProducedThisComplexity = player.stats.totalStarsProduced;
+      player.stats.totalEPProducedThisComplexity = player.stats.totalEPProduced
+      player.stats.totalCPProduced = new Decimal(0);
+      player.stats.timeSinceComplexity = player.stats.timeSinceGameStart;
+      player.stats.timeSinceLastPeakCPPerSec = Math.pow(2, 256);
+      player.stats.fastestComplexity = Math.pow(2, 256);
+      player.stats.peakCPPerSec = new Decimal(0);
+      player.stats.lastTenComplexities = initialLastTenComplexities();
       player.version = 1.71875;
     }
   },
