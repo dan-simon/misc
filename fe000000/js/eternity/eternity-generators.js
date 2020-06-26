@@ -76,7 +76,7 @@ let EternityGenerator = function (i) {
       return n <= this.maxBuyable();
     },
     maxBuyable() {
-      if (!this.isVisible()) return 0;
+      if (!this.isVisible() || (i == 8 && ComplexityChallenge.isSafeguardOn(5))) return 0;
       let num = Math.floor(player.eternityPoints.div(this.cost()).times(
         Decimal.minus(this.costIncreasePer(), 1)).plus(1).log(this.costIncreasePer()));
       num = Math.max(num, 0);

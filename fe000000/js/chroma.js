@@ -67,7 +67,8 @@ let Chroma = {
     return this.colorCosts[x];
   },
   canUnlockColor(x) {
-    return !this.isColorUnlocked(x) && player.eternityPoints.gte(this.getUnlockColorCost(x));
+    return !this.isColorUnlocked(x) && player.eternityPoints.gte(this.getUnlockColorCost(x)) &&
+      !(x === 1 && ComplexityChallenge.isSafeguardOn(4));
   },
   unlockColor(x) {
     if (!this.canUnlockColor(x)) return;

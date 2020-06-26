@@ -5,9 +5,11 @@ let Stats = {
     player.stats.timeSincePrestige += diff;
     player.stats.timeSinceInfinity += diff;
     player.stats.timeSinceEternity += diff;
+    player.stats.timeSinceComplexity += diff;
     player.stats.timeSinceGameStart += diff;
     player.stats.timeSinceLastPeakIPPerSec += diff;
     player.stats.timeSinceLastPeakEPPerSec += diff;
+    player.stats.timeSinceLastPeakCPPerSec += diff;
   },
   recordPurchase(i, n) {
     player.stats.timeSincePurchase = 0;

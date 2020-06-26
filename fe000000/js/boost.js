@@ -67,8 +67,13 @@ let Boost = {
   costSkip() {
     return EternityChallenge.isEternityChallengeRunning(2) ? 1 : 2;
   },
+  isNotBuyableAtAll() {
+    // This function is a bit misleadingly named. It checks if there's some condition making boosts completely unbuyable
+    // independent of how many stars you have.
+    return !this.isVisible() || InfinityPrestigeLayer.mustInfinity() || !Generators.anyGenerators() || ComplexityChallenge.isSafeguardOn(2);
+  },
   maxBuyable() {
-    if (!this.isVisible() || InfinityPrestigeLayer.mustInfinity() || !Generators.anyGenerators()) return 0;
+    if (this.isNotBuyableAtAll()) return 0;
     let num = Math.floor(Math.pow(player.stars.max(1).log(2) / this.costSlowdown(), 1 / this.costPower()) / this.costSkip() - this.costStart() + 1) - this.bought();
     if (player.stars.lt(this.costFor(num))) {
       num -= 1;

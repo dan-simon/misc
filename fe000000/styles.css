@@ -212,26 +212,26 @@ button {
   height: 160px;
 }
 
-.greyspan, .greydiv span {
+.greyspan, .greydiv > span {
   color: #aaaaaa;
 }
 
-.purplespan, .purplediv span {
+.purplespan, .purplediv > span {
   color: #6633cc;
 }
 
-.orangespan, .orangediv span {
+.orangespan, .orangediv > span {
   color: #cc6633;
 }
 
-.yellowspan, .yellowdiv span {
+.yellowspan, .yellowdiv > span {
   color: #ffff00;
 }
 
-.greenspan, .greendiv span {
+.greenspan, .greendiv > span {
   color: #33ff33;
 }
 
-.bluespan, .bluediv span {
+.bluespan, .bluediv > span {
   color: #3333ff;
 }

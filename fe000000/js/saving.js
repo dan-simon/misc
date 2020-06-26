@@ -231,6 +231,10 @@ let Saving = {
       player.stats.lastTenComplexities = initialLastTenComplexities();
       player.version = 1.71875;
     }
+    if (player.version < 1.734375) {
+      player.complexityChallengeSafeguards = [false, false, false, false, false];
+      player.version = 1.734375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

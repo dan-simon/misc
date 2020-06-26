@@ -32,6 +32,7 @@ let Study = function (i) {
       return player.studies[i - 1];
     },
     isBuyable() {
+      if (ComplexityChallenge.isSafeguardOn(6)) return false;
       if (i <= 12) {
         return !this.isBought() && Studies.unspentTheorems() >= this.cost();
       } else {

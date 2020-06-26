@@ -78,5 +78,11 @@ let ComplexityChallenge = {
     // It's easy to imagine wanting something else here (for example, because certain things
     // disqualify you from complexity challenges).
     ComplexityMaxAll.complexityReset();
+  },
+  isSafeguardOn(x) {
+    return player.complexityChallengeSafeguards[x - 2];
+  },
+  toggleSafeguard(x) {
+    player.complexityChallengeSafeguards[x - 2] = !player.complexityChallengeSafeguards[x - 2];
   }
 }
