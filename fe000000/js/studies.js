@@ -125,7 +125,7 @@ let Studies = {
     let firstThreeRowsInitial = rowCounts.map((x, i) => x * (2 * i + 4)).reduce((a, b) => a + b);
     let firstThreeRowsExtra = 2 * (rowCounts[0] * rowCounts[1] + rowCounts[0] * rowCounts[2] + rowCounts[1] * rowCounts[2]);
     let fourthRow = this.list.slice(12).map(x => [...Array(x.timesBought())].map((_, y) => Math.floor(Math.pow(2, y / 2))).reduce((a, b) => a + b, 0)).reduce((a, b) => a + b);
-    let cc = EternityChallenge.currentEternityChallenge();
+    let cc = EternityChallenge.getUnlockedEternityChallenge();
     let eternityChallenge = cc === 0 ? 0 : EternityChallenge.getEternityChallengeCost(cc);
     return firstThreeRowsInitial + firstThreeRowsExtra + fourthRow + eternityChallenge;
   },
