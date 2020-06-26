@@ -532,7 +532,7 @@ function updateDisplay() {
     b[194].className = EternityMaxAll.anythingToBuy() ? "" : "disabled";
     b[195].className = EternityMaxAll.anyUpgradesToBuy() ? "" : "disabled";
     b[196].className = EternityMaxAll.anyGeneratorsToBuy() ? "" : "disabled";
-    e[256].textContent = format(EternityPoints.totalEPProduced());
+    e[256].textContent = format(EternityPoints.totalEPProducedThisComplexity());
     e[257].textContent = format(Eternities.amount());
     e[258].textContent = format(Eternities.eternityGeneratorMultiplierForDisplay());
     e[259].textContent = format(EternityStars.amount());

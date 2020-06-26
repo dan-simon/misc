@@ -1,6 +1,6 @@
 let Permanence = {
   getRequiredEternities() {
-    return this.getEternitiesPerPermanence().plus(this.getLeftoverEternities());
+    return this.getEternitiesPerPermanence() + this.getLeftoverEternities();
   },
   getLeftoverEternities() {
     return 16;

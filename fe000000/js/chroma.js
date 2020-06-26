@@ -12,7 +12,7 @@ let Chroma = {
     null,
     x => Math.pow(1 + x / 1024, 2.5),
     x => Math.pow(1 + x / 64, 0.5),
-    x => Math.pow(Math.max(EternityPoints.totalEPProduced().log2() / 4096, 1),
+    x => Math.pow(Math.max(EternityPoints.totalEPProducedThisComplexity().log2() / 4096, 1),
       Math.log2(1 + x / 256) / 4),
     x => Decimal.pow(EternityGenerator(8).amount().max(1), 2 * Math.sqrt(x)),
     x => Math.floor(16 * Math.log2(1 + x / 4096))
@@ -26,7 +26,7 @@ let Chroma = {
     return cap * (1 - Math.exp(-t / cap));
   },
   cap() {
-    return Math.max(EternityPoints.totalEPProduced().log2(), 1);
+    return Math.max(EternityPoints.totalEPProducedThisComplexity().log2(), 1);
   },
   chromaSpeedMultiplier() {
     return this.effectOfColor(3) * EternityChallenge.getTotalCompletionsRewardEffect(4) *
