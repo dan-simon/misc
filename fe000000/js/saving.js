@@ -257,6 +257,7 @@ let Saving = {
     player.stats.totalIPProducedThisEternity = new Decimal(player.stats.totalIPProducedThisEternity);
     player.stats.totalEPProduced = new Decimal(player.stats.totalEPProduced);
     player.stats.totalEPProducedThisComplexity = new Decimal(player.stats.totalEPProducedThisComplexity);
+    player.stats.totalCPProduced = new Decimal(player.stats.totalCPProduced);
     player.stats.peakIPPerSec = new Decimal(player.stats.peakIPPerSec);
     player.stats.peakEPPerSec = new Decimal(player.stats.peakEPPerSec);
     player.stats.peakCPPerSec = new Decimal(player.stats.peakCPPerSec);

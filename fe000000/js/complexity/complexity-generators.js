@@ -10,7 +10,7 @@ let ComplexityGenerator = function (i) {
       return player.complexityGenerators[i - 1].amount;
     },
     bought() {
-      return player.complexityenerators[i - 1].bought;
+      return player.complexityGenerators[i - 1].bought;
     },
     addAmount(x) {
       player.complexityGenerators[i - 1].amount = player.complexityGenerators[i - 1].amount.plus(x);
@@ -34,7 +34,7 @@ let ComplexityGenerator = function (i) {
       return this.cost().times(Decimal.pow(this.costIncreasePer(), n).minus(1)).div(Decimal.minus(this.costIncreasePer(), 1));
     },
     multiplier() {
-      return Decimal.pow(2, this.bought() / 8);
+      return Decimal.pow(2, this.bought() / 8) * Complexities.complexityGeneratorMultiplier();
     },
     productionPerSecond() {
       return this.amount().times(this.multiplier());

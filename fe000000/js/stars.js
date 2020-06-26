@@ -6,6 +6,7 @@ let Stars = {
     player.stars = player.stars.plus(x);
     player.stats.totalStarsProduced = player.stats.totalStarsProduced.plus(x);
     player.stats.totalStarsProducedThisEternity = player.stats.totalStarsProducedThisEternity.plus(x);
+    player.stats.totalStarsProducedThisComplexity = player.stats.totalStarsProducedThisComplexity.plus(x);
   },
   perSecond() {
     return Generator(1).productionPerSecond();

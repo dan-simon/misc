@@ -29,7 +29,7 @@ let ComplexityChallenge = {
     return this.goals[x].pow(Math.pow(2, this.getComplexityChallengeCompletions(x) / 4));
   },
   getComplexityChallengeCompletionsAt(x, stars) {
-    return 1 + Math.floor(4 * Math.log2(stars.log(2) / this.goals[x].log(2)));
+    return 1 + Math.floor(4 * Math.log2(stars.max(1).log2() / this.goals[x].log2()));
   },
   getComplexityChallengeReward(x) {
     return this.rewards[x](this.getComplexityChallengeCompletions(x) * ComplexityStars.complexityChallengeMultiplier());
@@ -39,6 +39,9 @@ let ComplexityChallenge = {
   },
   getComplexityChallengeCompletions(x) {
     return player.complexityChallengeCompletions[x - 1];
+  },
+  getTotalComplexityChallengeCompletions() {
+    return [1, 2, 3, 4, 5, 6].map(x => this.getComplexityChallengeCompletions(x)).reduce((a, b) => a + b);
   },
   extraTheorems() {
     return this.getComplexityChallengeReward(6);
@@ -52,7 +55,7 @@ let ComplexityChallenge = {
   },
   complexityChallengeStatusDescription(x) {
     if (!this.isComplexityChallengeUnlocked(x)) {
-      return 'Locked';
+      return 'Locked (requires ' + format(this.requirements[x]) + ' complexities)';
     }
     let description = format(this.getComplexityChallengeCompletions(x)) + ' completions';
     if (this.isComplexityChallengeRunning(x)) {
@@ -69,6 +72,11 @@ let ComplexityChallenge = {
     }
   },
   makeComplexityChallengeCompletionsAtLeast(x, completions) {
-    player.complexityChallengeCompletions[x] = Math.max(player.complexityChallengeCompletions[x], completions);
+    player.complexityChallengeCompletions[x - 1] = Math.max(player.complexityChallengeCompletions[x - 1], completions);
+  },
+  complexityReset() {
+    // It's easy to imagine wanting something else here (for example, because certain things
+    // disqualify you from complexity challenges).
+    ComplexityMaxAll.complexityReset();
   }
 }

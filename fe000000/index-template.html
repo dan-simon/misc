@@ -9,6 +9,7 @@
   <script src="js/complexity/complexity-challenge.js"></script>
   <script src="js/complexity/complexity-generators.js"></script>
   <script src="js/complexity/complexity-max-all.js"></script>
+  <script src="js/complexity/complexity-points.js"></script>
   <script src="js/complexity/complexity-prestige-layer.js"></script>
   <script src="js/complexity/complexity-stars.js"></script>
   <script src="js/eternity/eternities.js"></script>
@@ -65,8 +66,8 @@
     <button ~style.display=EternityPrestigeLayer.canEternity() ? '' : 'none'~ style="height: 48px;" onclick="EternityPrestigeLayer.eternity()">Eternity: Gain ~f EternityPrestigeLayer.eternityPointGain() ~ eternity points<br/>~f EternityPrestigeLayer.currentEPPerSec() ~ EP/sec, ~f EternityPrestigeLayer.peakEPPerSec() ~ peak EP/sec</button>
   </div>
   <div style="height: 56px;">
-    <span ~style.display=ComplexityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~f ComplexityPrestigeLayer.requirementForComplexity() ~ to complexity.</span>
-    <button ~style.display=ComplexityPrestigeLayer.canComplexity() ? '' : 'none'~ style="height: 48px;" onclick="ComplexityPrestigeLayer.eternity()">Complexity: Gain ~f ComplexityPrestigeLayer.complexityPointGain() ~ complexity points<br/>~f ComplexityPrestigeLayer.currentCPPerSec() ~ CP/sec, ~f ComplexityPrestigeLayer.peakCPPerSec() ~ peak CP/sec</button>
+    <span ~style.display=ComplexityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~r ComplexityPrestigeLayer.requirementForComplexity() ~ to complexity.</span>
+    <button ~style.display=ComplexityPrestigeLayer.canComplexity() ? '' : 'none'~ style="height: 48px;" onclick="ComplexityPrestigeLayer.complexity()">Complexity: Gain ~f ComplexityPrestigeLayer.complexityPointGain() ~ complexity points<br/>~f ComplexityPrestigeLayer.currentCPPerSec() ~ CP/sec, ~f ComplexityPrestigeLayer.peakCPPerSec() ~ peak CP/sec</button>
   </div>
   <div>
     <span>
@@ -87,6 +88,12 @@
       <button ~style.display=Tabs.isTabVisible('eternity-producer') ? '' : 'none'~ onclick="Tabs.setTab('eternity-producer')">Eternity Producer</button>
       <button ~style.display=Tabs.isTabVisible('eternity-challenges') ? '' : 'none'~ onclick="Tabs.setTab('eternity-challenges')">Eternity Challenges</button>
       <button ~style.display=Tabs.isTabVisible('chroma') ? '' : 'none'~ onclick="Tabs.setTab('chroma')">Chroma</button>
+    </span>
+  </div>
+  <div ~style.display=Tabs.isTabVisible('complexity') ? '' : 'none'~>
+    <span>
+      <button ~style.display=Tabs.isTabVisible('complexity') ? '' : 'none'~ onclick="Tabs.setTab('complexity')">Complexity</button>
+      <button ~style.display=Tabs.isTabVisible('complexity-challenges') ? '' : 'none'~ onclick="Tabs.setTab('complexity-challenges')">Complexity Challenges</button>
     </span>
   </div>
   <tab ~style.display=Tabs.currentTab() === 'main' ? '' : 'none'~>
@@ -1979,6 +1986,208 @@
         </tr>
       </table>
     </div>
+  </tab>
+  <tab ~style.display=Tabs.currentTab() === 'complexity' ? '' : 'none'~>
+    <span>You have ~f ComplexityPoints.amount() ~ complexity points.
+      <button ~class=ComplexityMaxAll.anythingToBuy() ? "" : "disabled"~ onclick="ComplexityMaxAll.maxAll()">Max all</button>
+    </span>
+    <br/>
+    <span>You have produced ~f ComplexityPoints.totalCPProduced() ~ total complexity points.</span>
+    </br>
+    <span>You have ~f Complexities.amount() ~ complexities, multiplying all complexity generators by ~f Complexities.complexityGeneratorMultiplier() ~.</span>
+    <br/>
+    <span>You have ~f ComplexityStars.amount() ~ complexity stars, making all complexity challenge rewards ~f ComplexityStars.complexityChallengeMultiplier() ~x stronger.</span>
+    <br/>
+    <span>You are getting ~f ComplexityStars.perSecond() ~ complexity stars per second.</span>
+    <br/>
+    <br/>
+    <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
+      <tr ~style.display=ComplexityGenerator(1).isVisible() ? '' : 'none'~>
+        <td>Complexity Generator 1</td>
+        <td>~f ComplexityGenerator(1).amount() ~</td>
+        <td>~f ComplexityGenerator(1).perSecond() ~/s</td>
+        <td>~f ComplexityGenerator(1).multiplier() ~x</td>
+        <td><button ~class=ComplexityGenerator(1).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(1).buy()">Cost: ~f ComplexityGenerator(1).cost() ~ CP</button></td>
+        <td><button ~class=ComplexityGenerator(1).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(1).buyMax()">Max</button></td>
+      </tr>
+      <tr ~style.display=ComplexityGenerator(2).isVisible() ? '' : 'none'~>
+        <td>Complexity Generator 2</td>
+        <td>~f ComplexityGenerator(2).amount() ~</td>
+        <td>~f ComplexityGenerator(2).perSecond() ~/s</td>
+        <td>~f ComplexityGenerator(2).multiplier() ~x</td>
+        <td><button ~class=ComplexityGenerator(2).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(2).buy()">Cost: ~f ComplexityGenerator(2).cost() ~ CP</button></td>
+        <td><button ~class=ComplexityGenerator(2).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(2).buyMax()">Max</button></td>
+      </tr>
+      <tr ~style.display=ComplexityGenerator(3).isVisible() ? '' : 'none'~>
+        <td>Complexity Generator 3</td>
+        <td>~f ComplexityGenerator(3).amount() ~</td>
+        <td>~f ComplexityGenerator(3).perSecond() ~/s</td>
+        <td>~f ComplexityGenerator(3).multiplier() ~x</td>
+        <td><button ~class=ComplexityGenerator(3).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(3).buy()">Cost: ~f ComplexityGenerator(3).cost() ~ CP</button></td>
+        <td><button ~class=ComplexityGenerator(3).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(3).buyMax()">Max</button></td>
+      </tr>
+      <tr ~style.display=ComplexityGenerator(4).isVisible() ? '' : 'none'~>
+        <td>Complexity Generator 4</td>
+        <td>~f ComplexityGenerator(4).amount() ~</td>
+        <td>~f ComplexityGenerator(4).perSecond() ~/s</td>
+        <td>~f ComplexityGenerator(4).multiplier() ~x</td>
+        <td><button ~class=ComplexityGenerator(4).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(4).buy()">Cost: ~f ComplexityGenerator(4).cost() ~ CP</button></td>
+        <td><button ~class=ComplexityGenerator(4).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(4).buyMax()">Max</button></td>
+      </tr>
+      <tr ~style.display=ComplexityGenerator(5).isVisible() ? '' : 'none'~>
+        <td>Complexity Generator 5</td>
+        <td>~f ComplexityGenerator(5).amount() ~</td>
+        <td>~f ComplexityGenerator(5).perSecond() ~/s</td>
+        <td>~f ComplexityGenerator(5).multiplier() ~x</td>
+        <td><button ~class=ComplexityGenerator(5).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(5).buy()">Cost: ~f ComplexityGenerator(5).cost() ~ CP</button></td>
+        <td><button ~class=ComplexityGenerator(5).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(5).buyMax()">Max</button></td>
+      </tr>
+      <tr ~style.display=ComplexityGenerator(6).isVisible() ? '' : 'none'~>
+        <td>Complexity Generator 6</td>
+        <td>~f ComplexityGenerator(6).amount() ~</td>
+        <td>~f ComplexityGenerator(6).perSecond() ~/s</td>
+        <td>~f ComplexityGenerator(6).multiplier() ~x</td>
+        <td><button ~class=ComplexityGenerator(6).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(6).buy()">Cost: ~f ComplexityGenerator(6).cost() ~ CP</button></td>
+        <td><button ~class=ComplexityGenerator(6).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(6).buyMax()">Max</button></td>
+      </tr>
+      <tr ~style.display=ComplexityGenerator(7).isVisible() ? '' : 'none'~>
+        <td>Complexity Generator 7</td>
+        <td>~f ComplexityGenerator(7).amount() ~</td>
+        <td>~f ComplexityGenerator(7).perSecond() ~/s</td>
+        <td>~f ComplexityGenerator(7).multiplier() ~x</td>
+        <td><button ~class=ComplexityGenerator(7).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(7).buy()">Cost: ~f ComplexityGenerator(7).cost() ~ CP</button></td>
+        <td><button ~class=ComplexityGenerator(7).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(7).buyMax()">Max</button></td>
+      </tr>
+      <tr ~style.display=ComplexityGenerator(8).isVisible() ? '' : 'none'~>
+        <td>Complexity Generator 8</td>
+        <td>~f ComplexityGenerator(8).amount() ~</td>
+        <td>~f ComplexityGenerator(8).perSecond() ~/s</td>
+        <td>~f ComplexityGenerator(8).multiplier() ~x</td>
+        <td><button ~class=ComplexityGenerator(8).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(8).buy()">Cost: ~f ComplexityGenerator(8).cost() ~ CP</button></td>
+        <td><button ~class=ComplexityGenerator(8).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(8).buyMax()">Max</button></td>
+      </tr>
+    </table>
+  </tab>
+  <tab ~style.display=Tabs.currentTab() === 'complexity-challenges' ? '' : 'none'~>
+    <span>
+      You have completed ~f ComplexityChallenge.getTotalComplexityChallengeCompletions() ~ complexity challenge tiers.
+      <button onclick="ComplexityChallenge.complexityReset()">Restart complexity and re-enter all complexity challenges</button>
+    </span>
+    <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
+      <tr>
+        <td>
+          <div class="complexitychallengediv bluediv">
+            <span>Complexity Challenge 1</span>
+            <br/>
+            <span>No requirement (you're always in this challenge).</span>
+            <br/>
+            <span>Goal: ~f ComplexityChallenge.getComplexityChallengeGoal(1) ~ stars</span>
+            <br/>
+            <span>~r ComplexityChallenge.complexityChallengeStatusDescription(1) ~</span>
+            <br/>
+            <span>Reward: Multiplier to normal generators based on stars.</span>
+            <br/>
+            <span>Current: ~f ComplexityChallenge.getComplexityChallengeReward(1) ~x, Next: ~f ComplexityChallenge.getComplexityChallengeNextReward(1) ~x</span>
+          </div>
+        </td>
+        <td>
+          <div class="complexitychallengediv greydiv">
+            <span>Complexity Challenge 2</span>
+            <br/>
+            <span>You can't buy boosts.</span>
+            <br/>
+            <span>Goal: ~f ComplexityChallenge.getComplexityChallengeGoal(2) ~ stars</span>
+            <br/>
+            <span>~r ComplexityChallenge.complexityChallengeStatusDescription(2) ~</span>
+            <br/>
+            <span>Reward: Boosts are cheaper.</span>
+            <br/>
+            <span>Current: Cost ^~f ComplexityChallenge.getComplexityChallengeReward(2) ~, Next: Cost ^~f ComplexityChallenge.getComplexityChallengeNextReward(2) ~</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="complexitychallengediv purplediv">
+            <span>Complexity Challenge 3</span>
+            <br/>
+            <span>You can't unlock the Eternity Producer.</span>
+            <br/>
+            <span>Goal: ~f ComplexityChallenge.getComplexityChallengeGoal(3) ~ stars</span>
+            <br/>
+            <span>~r ComplexityChallenge.complexityChallengeStatusDescription(3) ~</span>
+            <br/>
+            <span>Reward: Multiplier to eternity production.</span>
+            <br/>
+            <span>Current: ~f ComplexityChallenge.getComplexityChallengeReward(3) ~x, Next: ~f ComplexityChallenge.getComplexityChallengeNextReward(3) ~x</span>
+          </div>
+        </td>
+        <td>
+          <div class="complexitychallengediv orangediv">
+            <span>Complexity Challenge 4</span>
+            <br/>
+            <span>You can't unlock chroma.</span>
+            <br/>
+            <span>Goal: ~f ComplexityChallenge.getComplexityChallengeGoal(4) ~ stars</span>
+            <br/>
+            <span>~r ComplexityChallenge.complexityChallengeStatusDescription(4) ~</span>
+            <br/>
+            <span>Reward: Multiplier to chroma buildup speed.</span>
+            <br/>
+            <span>Current: ~f ComplexityChallenge.getComplexityChallengeReward(4) ~x, Next: ~f ComplexityChallenge.getComplexityChallengeNextReward(4) ~x</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="complexitychallengediv yellowdiv">
+            <span>Complexity Challenge 5</span>
+            <br/>
+            <span>You can't buy Eternity Generator 8.</span>
+            <br/>
+            <span>Goal: ~f ComplexityChallenge.getComplexityChallengeGoal(5) ~ stars</span>
+            <br/>
+            <span>~r ComplexityChallenge.complexityChallengeStatusDescription(5) ~</span>
+            <br/>
+            <span>Reward: Multiplier to per-purchase Eternity Generator 8 multiplier.</span>
+            <br/>
+            <span>Current: ~f ComplexityChallenge.getComplexityChallengeReward(5) ~x, Next: ~f ComplexityChallenge.getComplexityChallengeNextReward(5) ~x</span>
+          </div>
+        </td>
+        <td>
+          <div class="complexitychallengediv greendiv">
+            <span>Complexity Challenge 6</span>
+            <br/>
+            <span>You can't buy studies.</span>
+            <br/>
+            <span>Goal: ~f ComplexityChallenge.getComplexityChallengeGoal(6) ~ stars</span>
+            <br/>
+            <span>~r ComplexityChallenge.complexityChallengeStatusDescription(6) ~</span>
+            <br/>
+            <span>Reward: Extra theorems.</span>
+            <br/>
+            <span>Current: +~f ComplexityChallenge.getComplexityChallengeReward(6) ~ theorems, Next: +~f ComplexityChallenge.getComplexityChallengeNextReward(6) ~ theorems</span>
+            <br/>
+            <span ~style.display=Number.isFinite(ComplexityChallenge.complexityStarsForNextExtraTheorem()) ? '' : 'none'~>Next extra theorem at ~f ComplexityChallenge.complexityStarsForNextExtraTheorem() ~ complexity stars.</span>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <span>
+      Being in a complexity challenge doesn't prevent you from violating its condition.
+    <span>
+    <br/>
+    <span>
+      Instead, violating the condition makes you exit the challenge.
+    </span>
+    <br/>
+    <span>
+      Thus, you are automatically in whichever complexity challenges you have not yet violated the condition of this complexity.
+    </span>
+    <br/>
+    <span>
+      In particular, when starting a new complexity, you will be in all complexity challenges that you've unlocked at once.
+    </span>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'statistics' ? '' : 'none'~>
     <span>You have produced ~f player.stats.totalStarsProduced ~ total stars.</span>

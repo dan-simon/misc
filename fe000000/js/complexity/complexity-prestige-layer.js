@@ -18,7 +18,8 @@ let ComplexityPrestigeLayer = {
   },
   requirementForComplexity() {
     if (this.hasEnoughEP()) {
-      return format(1) + ' Complexity Challenge 1 completion';
+      // Formulate the requirement in terms the player can understand without knowing about complexity challenges.
+      return format(Decimal.pow(2, Math.pow(2, 32))) + ' stars';
     }
     return format(this.eternityPointRequirementForComplexity()) + ' total eternity points this complexity';
   },
@@ -56,7 +57,7 @@ let ComplexityPrestigeLayer = {
     EternityPrestigeLayer.eternityReset();
     // Not handled by Eternity.eternityReset().
     EternityChallenge.setEternityChallenge(0);
-    player.complexityStars = new Decimal(2);
+    player.complexityStars = new Decimal(1);
     ComplexityGenerators.list.forEach(x => x.resetAmount());
     player.isComplexityChallengeRunning = [true, true, true, true, true, true];
     player.boostPower = 1;
@@ -64,8 +65,7 @@ let ComplexityPrestigeLayer = {
     player.eternityPoints = new Decimal(0);
     player.eternityGenerators = initialEternityGenerators();
     player.highestEternityGenerator = 0;
-    // start of undone zone
-    plauyer.eternityUpgrades = [0, 0, 0];
+    player.eternityUpgrades = [0, 0, 0];
     // Let the player keep eternity milestones off if they want.
     // Also let them keep their infinity autobuyers off if they want.
     player.boughtTheorems = [0, 0, 0];

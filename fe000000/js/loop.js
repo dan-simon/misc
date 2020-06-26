@@ -8,6 +8,9 @@ function gameLoop(diff, display) {
   EternityProducer.produce(diff);
   Boost.produceBoostPower(diff);
   for (let i = 8; i >= 1; i--) {
+    ComplexityGenerator(i).produce(diff);
+  }
+  for (let i = 8; i >= 1; i--) {
     EternityGenerator(i).produce(diff);
   }
   for (let i = 8; i >= 1; i--) {
@@ -31,6 +34,7 @@ function gameLoop(diff, display) {
   if (EternityChallenge.isTotalCompletionsRewardActive(3)) {
     InfinityPoints.addAmount(InfinityPrestigeLayer.infinityPointGain().times(diff));
   }
+  ComplexityChallenge.checkForComplexityChallengeCompletions();
   if (display !== false) {
     updateDisplay();
   }

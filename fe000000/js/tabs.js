@@ -18,6 +18,8 @@ let Tabs = {
       'eternity-producer': () => player.eternities.gt(0) || player.complexities > 0,
       'eternity-challenges': () => player.eternities.gt(0) || player.complexities > 0,
       'chroma': () => player.eternities.gt(0) || player.complexities > 0,
+      'complexity': () => player.complexities > 0,
+      'complexity-challenges': () => player.complexities > 0,
       'statistics': () => true,
       'options': () => true,
     }[x]();
