@@ -8,6 +8,8 @@
   <script src="js/complexity/complexities.js"></script>
   <script src="js/complexity/complexity-challenge.js"></script>
   <script src="js/complexity/complexity-generators.js"></script>
+  <script src="js/complexity/complexity-max-all.js"></script>
+  <script src="js/complexity/complexity-prestige-layer.js"></script>
   <script src="js/complexity/complexity-stars.js"></script>
   <script src="js/eternity/eternities.js"></script>
   <script src="js/eternity/eternity-challenge.js"></script>
@@ -61,6 +63,10 @@
   <div style="height: 56px;">
     <span ~style.display=EternityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~f EternityPrestigeLayer.infinityPointRequirementForEternity() ~ total infinity points this eternity to eternity.</span>
     <button ~style.display=EternityPrestigeLayer.canEternity() ? '' : 'none'~ style="height: 48px;" onclick="EternityPrestigeLayer.eternity()">Eternity: Gain ~f EternityPrestigeLayer.eternityPointGain() ~ eternity points<br/>~f EternityPrestigeLayer.currentEPPerSec() ~ EP/sec, ~f EternityPrestigeLayer.peakEPPerSec() ~ peak EP/sec</button>
+  </div>
+  <div style="height: 56px;">
+    <span ~style.display=ComplexityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~f ComplexityPrestigeLayer.requirementForComplexity() ~ to complexity.</span>
+    <button ~style.display=ComplexityPrestigeLayer.canComplexity() ? '' : 'none'~ style="height: 48px;" onclick="ComplexityPrestigeLayer.eternity()">Complexity: Gain ~f ComplexityPrestigeLayer.complexityPointGain() ~ complexity points<br/>~f ComplexityPrestigeLayer.currentCPPerSec() ~ CP/sec, ~f ComplexityPrestigeLayer.peakCPPerSec() ~ peak CP/sec</button>
   </div>
   <div>
     <span>
@@ -1979,15 +1985,21 @@
     <br/>
     <span>You have produced ~f player.stats.totalStarsProducedThisEternity ~ stars this eternity.</span>
     <br/>
+    <span>You have produced ~f player.stats.totalStarsProducedThisComplexity ~ stars this complexity.</span>
+    <br/>
     <span>You have produced ~f player.stats.totalIPProduced ~ total infinity points.</span>
     <br/>
     <span>You have produced ~f player.stats.totalIPProducedThisEternity ~ infinity points this eternity.</span>
     <br/>
     <span>You have produced ~f player.stats.totalEPProduced ~ total eternity points.</span>
     <br/>
+    <span>You have produced ~f player.stats.totalEPProducedThisComplexity ~ total eternity points this complexity.</span>
+    <br/>
     <span>Your fastest infinity took ~f player.stats.fastestInfinity ~ seconds.</span>
     <br/>
     <span>Your fastest eternity took ~f player.stats.fastestEternity ~ seconds.</span>
+    <br/>
+    <span>Your fastest complexity took ~f player.stats.fastestComplexity ~ seconds.</span>
     <br/>
     <span>You have spent ~f player.stats.timeSincePurchase ~ seconds without purchasing anything.</span>
     <br/>
@@ -1998,6 +2010,8 @@
     <span>You have spent ~f player.stats.timeSinceInfinity ~ seconds in this infinity.</span>
     <br/>
     <span>You have spent ~f player.stats.timeSinceEternity ~ seconds in this eternity.</span>
+    <br/>
+    <span>You have spent ~f player.stats.timeSinceComplexity ~ seconds in this complexity.</span>
     <br/>
     <span>You have spent ~f player.stats.timeSinceGameStart ~ seconds playing this game (counting time offline).</span>
     <div ~style.display=player.stats.lastTenInfinities[0][0] !== -1 ? '' : 'none'~>
@@ -2042,6 +2056,28 @@
       <span ~style.display=player.stats.lastTenEternities[8][0] !== -1  ? '' : 'none'~>The eternity nine eternities ago took ~f player.stats.lastTenEternities[8][0] ~ seconds and gave ~f player.stats.lastTenEternities[8][1] ~ EP, giving ~f player.stats.lastTenEternities[8][2] ~ EP/second.</span>
       <br/>
       <span ~style.display=player.stats.lastTenEternities[9][0] !== -1  ? '' : 'none'~>The eternity ten eternities ago took ~f player.stats.lastTenEternities[9][0] ~ seconds and gave ~f player.stats.lastTenEternities[9][1] ~ EP, giving ~f player.stats.lastTenEternities[9][2] ~ EP/second.</span>
+      <br/>
+    </div>
+    <div ~style.display=player.stats.lastTenComplexities[0][0] !== -1 ? '' : 'none'~>
+      <span>Last complexity took ~f player.stats.lastTenComplexities[0][0] ~ seconds and gave ~f player.stats.lastTenComplexities[0][1] ~ CP, giving ~f player.stats.lastTenComplexities[0][2] ~ CP/second.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenComplexities[1][0] !== -1 ? '' : 'none'~>The complexity two complexities ago took ~f player.stats.lastTenComplexities[1][0] ~ seconds and gave ~f player.stats.lastTenComplexities[1][1] ~ CP, giving ~f player.stats.lastTenComplexities[1][2] ~ CP/second.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenComplexities[2][0] !== -1 ? '' : 'none'~>The complexity three complexities ago took ~f player.stats.lastTenComplexities[2][0] ~ seconds and gave ~f player.stats.lastTenComplexities[2][1] ~ CP, giving ~f player.stats.lastTenComplexities[2][2] ~ CP/second.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenComplexities[3][0] !== -1  ? '' : 'none'~>The complexity four complexities ago took ~f player.stats.lastTenComplexities[3][0] ~ seconds and gave ~f player.stats.lastTenComplexities[3][1] ~ CP, giving ~f player.stats.lastTenComplexities[3][2] ~ CP/second.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenComplexities[4][0] !== -1 ? '' : 'none'~>The complexity five complexities ago took ~f player.stats.lastTenComplexities[4][0] ~ seconds and gave ~f player.stats.lastTenComplexities[4][1] ~ CP, giving ~f player.stats.lastTenComplexities[4][2] ~ CP/second.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenComplexities[5][0] !== -1 ? '' : 'none'~>The complexity six complexities ago took ~f player.stats.lastTenComplexities[5][0] ~ seconds and gave ~f player.stats.lastTenComplexities[5][1] ~ CP, giving ~f player.stats.lastTenComplexities[5][2] ~ CP/second.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenComplexities[6][0] !== -1 ? '' : 'none'~>The complexity seven complexities ago took ~f player.stats.lastTenComplexities[6][0] ~ seconds and gave ~f player.stats.lastTenComplexities[6][1] ~ CP, giving ~f player.stats.lastTenComplexities[6][2] ~ CP/second.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenComplexities[7][0] !== -1  ? '' : 'none'~>The complexity eight complexities ago took ~f player.stats.lastTenComplexities[7][0] ~ seconds and gave ~f player.stats.lastTenComplexities[7][1] ~ CP, giving ~f player.stats.lastTenComplexities[7][2] ~ CP/second.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenComplexities[8][0] !== -1  ? '' : 'none'~>The complexity nine complexities ago took ~f player.stats.lastTenComplexities[8][0] ~ seconds and gave ~f player.stats.lastTenComplexities[8][1] ~ CP, giving ~f player.stats.lastTenComplexities[8][2] ~ CP/second.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenComplexities[9][0] !== -1  ? '' : 'none'~>The complexity ten complexities ago took ~f player.stats.lastTenComplexities[9][0] ~ seconds and gave ~f player.stats.lastTenComplexities[9][1] ~ CP, giving ~f player.stats.lastTenComplexities[9][2] ~ CP/second.</span>
       <br/>
     </div>
   </tab>

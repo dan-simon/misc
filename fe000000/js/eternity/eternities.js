@@ -9,7 +9,8 @@ let Eternities = {
     player.eternities = new Decimal(x);
   },
   commonEternityGainMultiplier() {
-    return EternityChallenge.getTotalCompletionsRewardEffect(2) * PermanenceUpgrade(1).effect() * Chroma.effectOfColor(2);
+    return EternityChallenge.getTotalCompletionsRewardEffect(2) * PermanenceUpgrade(1).effect() *
+      Chroma.effectOfColor(2) * ComplexityChallenge.getComplexityChallengeReward(3);
   },
   eternityGeneratorMultiplier() {
     // This is intentionally always at most 1, and often less.

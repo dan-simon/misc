@@ -4,6 +4,7 @@ let Boost = {
   },
   addBought(n) {
     player.boost.bought = player.boost.bought + n;
+    ComplexityChallenge.exitComplexityChallenge(3);
   },
   costForOne(n) {
     return Decimal.pow(2, this.costSlowdown() * Math.pow(this.costSkip() * (this.bought() + this.costStart() + n - 1), this.costPower()));
@@ -55,7 +56,7 @@ let Boost = {
     return n <= this.maxBuyable();
   },
   costSlowdown() {
-    return EternityChallenge.getEternityChallengeReward(2);
+    return EternityChallenge.getEternityChallengeReward(2) * ComplexityChallenge.getComplexityChallengeReward(2);
   },
   costPower() {
     return EternityChallenge.isEternityChallengeRunning(2) ? 3 : 2;

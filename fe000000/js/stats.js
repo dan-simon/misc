@@ -23,5 +23,10 @@ let Stats = {
     player.stats.fastestEternity = Math.min(time, player.stats.fastestEternity);
     player.stats.lastTenEternities.unshift([time, gain, gain.div(time)]);
     player.stats.lastTenEternities.pop();
+  },
+  addComplexity(time, gain) {
+    player.stats.fastestComplexity = Math.min(time, player.stats.fastestComplexity);
+    player.stats.lastTenComplexities.unshift([time, gain, gain.div(time)]);
+    player.stats.lastTenComplexities.pop();
   }
 }

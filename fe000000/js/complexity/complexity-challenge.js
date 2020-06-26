@@ -18,7 +18,11 @@ let ComplexityChallenge = {
   isComplexityChallengeRunning(x) {
     return player.isComplexityChallengeRunning[x - 1] && this.isComplexityChallengeUnlocked(x);
   },
+  exitComplexityChallenge(x) {
+    player.isComplexityChallengeRunning[x - 1] = false;
+  },
   isComplexityChallengeUnlocked(x) {
+    // Yes, you can complete Complexity Challenge 1 before knowing that it exists.
     return player.complexities >= this.requirements[x];
   },
   getComplexityChallengeGoal(x) {
@@ -39,7 +43,17 @@ let ComplexityChallenge = {
   extraTheorems() {
     return this.getComplexityChallengeReward(6);
   },
+  complexityStarsForNextExtraTheorem() {
+    let cc6 = this.getComplexityChallengeCompletions(6);
+    if (cc6 === 0) {
+      return Infinity;
+    }
+    return Decimal.pow(2, Math.pow((this.extraTheorems() + 1) / cc6, 2));
+  },
   complexityChallengeStatusDescription(x) {
+    if (!this.isComplexityChallengeUnlocked(x)) {
+      return 'Locked';
+    }
     let description = format(this.getComplexityChallengeCompletions(x)) + ' completions';
     if (this.isComplexityChallengeRunning(x)) {
       description += ', running';

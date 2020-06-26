@@ -104,6 +104,7 @@ let EternityProducer = {
     if (!this.canUnlock()) return;
     player.eternityPoints = player.eternityPoints.minus(this.unlockCost());
     player.eternityProducer.unlocked = true;
+    ComplexityChallenge.exitComplexityChallenge(3);
   },
   productionPerSecond() {
     return EternityProducerUpgrade(1).effect() * Eternities.commonEternityGainMultiplier();
@@ -127,4 +128,3 @@ let EternityProducer = {
     this.upgradeList.forEach(x => x.buyMax());
   }
 }
-

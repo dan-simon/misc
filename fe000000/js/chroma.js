@@ -29,7 +29,8 @@ let Chroma = {
     return Math.max(EternityPoints.totalEPProduced().log2(), 1);
   },
   chromaSpeedMultiplier() {
-    return this.effectOfColor(3) * EternityChallenge.getTotalCompletionsRewardEffect(4) * Study(16).effect();
+    return this.effectOfColor(3) * EternityChallenge.getTotalCompletionsRewardEffect(4) *
+      Study(16).effect() * ComplexityChallenge.getComplexityChallengeReward(4);
   },
   extraTheorems() {
     return this.effectOfColor(5);
@@ -78,6 +79,7 @@ let Chroma = {
     if (player.chroma.next === 0) {
       player.chroma.next = x;
     }
+    ComplexityChallenge.exitComplexityChallenge(4);
   },
   updateChromaOnEternity() {
     player.chroma.current = player.chroma.next;

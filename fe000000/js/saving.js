@@ -206,6 +206,9 @@ let Saving = {
       player.version = 1.703125;
     }
     if (player.version < 1.71875) {
+      // This variable was accidentally not defined in the inital save, with no consequence at all.
+      // Still, best to define it.
+      player.respecStudies = false;
       player.bestBoostPowerThisComplexity = player.bestBoostPowerEver;
       delete player.bestBoostPowerEver;
       delete player.unspentTheorems;

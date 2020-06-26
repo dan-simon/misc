@@ -104,6 +104,7 @@ let initialPlayer = {
     false, false, false, false, false, false,
     0, 0, 0, 0
   ],
+  respecStudies: false,
   eternityProducer: {
     unlocked: false,
     upgrades: [0, 0]

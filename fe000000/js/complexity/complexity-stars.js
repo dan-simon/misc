@@ -9,6 +9,6 @@ let ComplexityStars = {
     return ComplexityGenerator(1).productionPerSecond();
   },
   complexityChallengeMultiplier() {
-    return Math.sqrt(this.amount.log(2));
+    return Math.sqrt(this.amount().log(2));
   }
 }

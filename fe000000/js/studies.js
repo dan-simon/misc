@@ -91,6 +91,7 @@ let Study = function (i) {
         } else {
           player.studies[i - 1] = true;
         }
+        ComplexityChallenge.exitComplexityChallenge(6);
       }
     },
     className() {
@@ -111,7 +112,8 @@ let Studies = {
     return player.boughtTheorems.reduce((a, b) => a + b) + this.extraTheorems();
   },
   extraTheorems() {
-    return Boost.extraTheorems() + Chroma.extraTheorems() + EternityChallenge.extraTheorems();
+    return Boost.extraTheorems() + EternityChallenge.extraTheorems() + Chroma.extraTheorems() +
+      ComplexityChallenge.extraTheorems();
   },
   unspentTheorems() {
     return this.totalTheorems() - this.spentTheorems();

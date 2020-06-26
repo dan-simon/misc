@@ -10,7 +10,7 @@ let EternityPrestigeLayer = {
     return InfinityPoints.totalIPProducedThisEternity().gte(this.infinityPointRequirementForEternity());
   },
   isRequirementVisible() {
-    return !this.canEternity() && (player.infinities > 0 || player.eternities.gt(0));
+    return !this.canEternity() && (player.infinities > 0 || player.eternities.gt(0) || player.complexities > 0);
   },
   resetText() {
     if (this.canEternity()) {
