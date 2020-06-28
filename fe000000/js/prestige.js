@@ -37,7 +37,7 @@ let Prestige = {
     return !this.isPrestigeDisabled();
   },
   newPrestigePower() {
-    return this.canPrestige() ? Decimal.pow(2, this.prestigePowerExponent() * (player.stars.log(2) - 96) / 16) : this.prestigePower();
+    return this.canPrestige() ? Decimal.pow(2, this.prestigePowerExponent() * (player.stars.max(1).log(2) - 96) / 16) : this.prestigePower();
   },
   prestigePowerGain() {
     return this.newPrestigePower().minus(this.prestigePower());
