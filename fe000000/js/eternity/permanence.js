@@ -5,8 +5,11 @@ let Permanence = {
   getLeftoverEternities() {
     return 16;
   },
+  getTotalPermanenceMultiplier() {
+    return PermanenceUpgrade(4).effect() * Complexities.permanenceMultiplier();
+  },
   getEternitiesPerPermanence() {
-    return Math.pow(2, 24) / PermanenceUpgrade(4).effect();
+    return Math.pow(2, 24) / this.getTotalPermanenceMultiplier();
   },
   canGainPermanence() {
     return Eternities.amount().gte(this.getRequiredEternities());

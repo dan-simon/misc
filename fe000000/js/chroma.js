@@ -26,11 +26,12 @@ let Chroma = {
     return cap * (1 - Math.exp(-t / cap));
   },
   cap() {
-    return Math.max(EternityPoints.totalEPProducedThisComplexity().log2(), 1);
+    return Math.max(EternityPoints.totalEPProducedThisComplexity().log2(), 1) *
+      ComplexityChallenge.getComplexityChallengeReward(4);
   },
   chromaSpeedMultiplier() {
     return this.effectOfColor(3) * EternityChallenge.getTotalCompletionsRewardEffect(4) *
-      Study(16).effect() * ComplexityChallenge.getComplexityChallengeReward(4);
+      Study(16).effect() * Complexities.chromaMultiplier();
   },
   extraTheorems() {
     return this.effectOfColor(5);

@@ -10,7 +10,7 @@ let ComplexityChallenge = {
     x => Decimal.pow(2, x * Math.pow(Stars.amount().max(1).log2(), 0.5) / 2),
     x => Math.pow(1 + x / 16, -0.5),
     x => Decimal.pow(2, x / 8),
-    x => Decimal.pow(2, x / 8),
+    x => 1 + x / 64,
     x => 1 + x / 8,
     x => Math.floor(x),
   ],
@@ -76,7 +76,7 @@ let ComplexityChallenge = {
   },
   complexityReset() {
     // It's easy to imagine wanting something else here (for example, because certain things
-    // disqualify you from complexity challenges).
+    // disqualify you from complexity challenges), which is why this is its own method.
     ComplexityMaxAll.complexityReset();
   },
   isSafeguardOn(x) {
