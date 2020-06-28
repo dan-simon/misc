@@ -20,7 +20,7 @@ let EternityPrestigeLayer = {
     }
   },
   eternityPointGain() {
-    let oom = InfinityPoints.totalIPProducedThisEternity().log(2) / 256;
+    let oom = InfinityPoints.totalIPProducedThisEternity().max(1).log(2) / 256;
     return Decimal.pow(2, oom).floor();
   },
   currentEPPerSec() {

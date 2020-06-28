@@ -27,7 +27,7 @@ let ComplexityPrestigeLayer = {
     return !this.canComplexity() && (player.eternities.gt(0) || player.complexities > 0);
   },
   complexityPointGain() {
-    let oom = EternityPoints.totalEPProducedThisComplexity().log(2) / Math.pow(2, 16);
+    let oom = EternityPoints.totalEPProducedThisComplexity().max(1).log(2) / Math.pow(2, 16);
     return Decimal.pow(2, oom).floor();
   },
   currentCPPerSec() {

@@ -33,7 +33,7 @@ let InfinityPrestigeLayer = {
     return !this.canInfinity();
   },
   infinityPointGain() {
-    let oom = (this.isInfinityBroken() ? Stars.amount() : this.starRequirementForInfinity()).log(2) / 256;
+    let oom = (this.isInfinityBroken() ? Stars.amount() : this.starRequirementForInfinity()).max(1).log(2) / 256;
     return Decimal.pow(2, oom).floor();
   },
   currentIPPerSec() {
