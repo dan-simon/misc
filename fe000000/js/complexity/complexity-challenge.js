@@ -8,13 +8,13 @@ let ComplexityChallenge = {
   rewards: [
     null,
     x => Decimal.pow(2, x * Math.pow(Stars.amount().max(1).log2(), 0.5) / 2),
-    x => Math.pow(1 + x / 16, -0.5),
+    x => Math.pow(1 + x / 128, -0.5),
     x => Decimal.pow(2, x / 8),
     x => 1 + x / 64,
     x => 1 + x / 8,
     x => Math.floor(x),
   ],
-  colors: [null, 'blue', 'grey', 'purple', 'orange', 'yellow', 'green'],
+  colors: [null, 'yellow', 'grey', 'purple', 'orange', 'cyan', 'green'],
   isComplexityChallengeRunning(x) {
     return player.isComplexityChallengeRunning[x - 1] && this.isComplexityChallengeUnlocked(x);
   },
