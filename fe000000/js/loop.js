@@ -1,7 +1,7 @@
 function gameLoop(diff, display) {
   if (typeof diff !== 'number') {
     let now = Date.now();
-    diff = Math.max(0, (now - player.lastUpdate) / 1024 * player.cheats.gameSpeed);
+    diff = Math.max(0, (now - player.lastUpdate) / 1000 * player.cheats.gameSpeed);
     player.lastUpdate = now;
   }
   // This order is (I think) the one giving the most stuff.

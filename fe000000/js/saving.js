@@ -13,7 +13,7 @@ let Saving = {
     // We can do this after fixing Decimal.
     let now = Date.now();
     if (offlineProgress) {
-      this.simulateTime((now - player.lastUpdate) / 1024);
+      this.simulateTime((now - player.lastUpdate) / 1000);
     }
     player.lastUpdate = now;
     this.saveGame();
