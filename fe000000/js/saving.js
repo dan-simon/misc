@@ -235,6 +235,16 @@ let Saving = {
       player.complexityChallengeSafeguards = [false, false, false, false, false];
       player.version = 1.734375;
     }
+    if (player.version < 1.765625) {
+      player.complexityUpgrades = [
+        [false, false, false, false, false],
+        [false, false, false, false, false],
+        [false, false, false, false, false],
+        [false, false, false, false, false],
+        [false, false, false, false, false]
+      ];
+      player.version = 1.765625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

@@ -16,6 +16,6 @@ let Complexities = {
     return this.permanenceAndChromaMultiplier();
   },
   permanenceAndChromaMultiplier() {
-    return Math.pow(4, Math.pow(this.amount(), 0.25));
+    return Math.pow(4, Math.pow(Math.min(this.amount(), 256), 0.25));
   }
 }

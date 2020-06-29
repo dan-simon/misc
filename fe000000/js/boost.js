@@ -4,7 +4,7 @@ let Boost = {
   },
   addBought(n) {
     player.boost.bought = player.boost.bought + n;
-    ComplexityChallenge.exitComplexityChallenge(3);
+    ComplexityChallenge.exitComplexityChallenge(2);
   },
   costForOne(n) {
     return Decimal.pow(2, this.costSlowdown() * Math.pow(this.costSkip() * (this.bought() + this.costStart() + n - 1), this.costPower()));
@@ -37,7 +37,8 @@ let Boost = {
     if (InfinityChallenge.isInfinityChallengeCompleted(7)) {
       mult += 2;
     }
-    mult *= Study(1).effect() * EternityUpgrade(2).effect() * Chroma.effectOfColor(1) * this.boostPowerEffect();
+    mult *= Study(1).effect() * EternityUpgrade(2).effect() * Chroma.effectOfColor(1) *
+      ComplexityUpgrades.effect(2, 1) * this.boostPowerEffect();
     if (InfinityChallenge.isInfinityChallengeRunning(7)) {
       mult = Math.pow(mult, 2);
     }
@@ -108,7 +109,7 @@ let Boost = {
     return this.boostPowerPerBoost() * Math.max(0, this.bought() - this.boostPowerStart());
   },
   boostPowerPerBoost() {
-    return EternityChallenge.getTotalCompletionsRewardEffect(1) / 16384;
+    return EternityChallenge.getTotalCompletionsRewardEffect(1) * ComplexityUpgrades.effect(1, 1) / 16384;
   },
   boostPowerStart() {
     return 320;

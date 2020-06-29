@@ -116,6 +116,18 @@ button {
   border-width: 1px 1px;
 }
 
+.complexityupgradediv {
+  display: table;
+  text-align: center;
+  width: 256px;
+  height: 256px;
+  font-size: 0.875rem;
+  padding: 4px;
+  margin: 4px;
+  border: solid;
+  border-width: 1px 1px;
+}
+
 .studynormalunbuyable {
   display: table;
   text-align: center;
@@ -234,4 +246,116 @@ button {
 
 .yellowspan, .yellowdiv > span {
   color: #ffff00;
+}
+
+.greytogrey {
+   background-image: linear-gradient(to right, #aaaaaa, #aaaaaa);
+   color: transparent;
+   -webkit-background-clip: text;
+   background-clip: text;
+}
+
+.greytopurple {
+   background-image: linear-gradient(to right, #aaaaaa, #6633cc);
+   color: transparent;
+   -webkit-background-clip: text;
+   background-clip: text;
+}
+
+.greytoorange {
+   background-image: linear-gradient(to right, #aaaaaa, #cc6633);
+   color: transparent;
+   -webkit-background-clip: text;
+   background-clip: text;
+}
+
+.greytogreen {
+   background-image: linear-gradient(to right, #aaaaaa, #33ff33);
+   color: transparent;
+   -webkit-background-clip: text;
+   background-clip: text;
+}
+
+.purpletogrey {
+   background-image: linear-gradient(to right, #6633cc, #aaaaaa);
+   color: transparent;
+   -webkit-background-clip: text;
+   background-clip: text;
+}
+
+.purpletopurple {
+   background-image: linear-gradient(to right, #6633cc, #6633cc);
+   color: transparent;
+   -webkit-background-clip: text;
+   background-clip: text;
+}
+
+.purpletoorange {
+   background-image: linear-gradient(to right, #6633cc, #cc6633);
+   color: transparent;
+   -webkit-background-clip: text;
+   background-clip: text;
+}
+
+.purpletogreen {
+   background-image: linear-gradient(to right, #6633cc, #33ff33);
+   color: transparent;
+   -webkit-background-clip: text;
+   background-clip: text;
+}
+
+.orangetogrey {
+   background-image: linear-gradient(to right, #cc6633, #aaaaaa);
+   color: transparent;
+   -webkit-background-clip: text;
+   background-clip: text;
+}
+
+.orangetopurple {
+   background-image: linear-gradient(to right, #cc6633, #6633cc);
+   color: transparent;
+   -webkit-background-clip: text;
+   background-clip: text;
+}
+
+.orangetoorange {
+   background-image: linear-gradient(to right, #cc6633, #cc6633);
+   color: transparent;
+   -webkit-background-clip: text;
+   background-clip: text;
+}
+
+.orangetogreen {
+   background-image: linear-gradient(to right, #cc6633, #33ff33);
+   color: transparent;
+   -webkit-background-clip: text;
+   background-clip: text;
+}
+
+.greentogrey {
+   background-image: linear-gradient(to right, #33ff33, #aaaaaa);
+   color: transparent;
+   -webkit-background-clip: text;
+   background-clip: text;
+}
+
+.greentopurple {
+   background-image: linear-gradient(to right, #33ff33, #6633cc);
+   color: transparent;
+   -webkit-background-clip: text;
+   background-clip: text;
+}
+
+.greentoorange {
+   background-image: linear-gradient(to right, #33ff33, #cc6633);
+   color: transparent;
+   -webkit-background-clip: text;
+   background-clip: text;
+}
+
+.greentogreen {
+   background-image: linear-gradient(to right, #33ff33, #33ff33);
+   color: transparent;
+   -webkit-background-clip: text;
+   background-clip: text;
 }

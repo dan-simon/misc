@@ -36,6 +36,15 @@ let Permanence = {
     return PermanenceUpgrades.list.some(x => x.canBuy());
   },
   maxAll() {
-    PermanenceUpgrades.list.forEach(x => x.buyMax());
+    // We name the upgrade list for convenience.
+    let list = PermanenceUpgrades.list;
+    // Buying short of max
+    list.forEach(x => x.buyShortOfMax(3));
+    while (list.some(x => x.canBuy())) {
+      // We copy it so that sorting doesn't rearrange the list, which would be a subtle source of bugs
+      // (lettign current costs influence future buy order even after costs change).
+      // Note: This nonly buys in the expected order if sort is stable.
+      [...list].sort((x, y) => x.bought() - y.bought())[0].buy();
+    }
   }
 }

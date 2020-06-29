@@ -58,6 +58,7 @@ let InfinityPrestigeLayer = {
     let gain = this.infinityPointGain();
     InfinityPoints.addAmount(gain);
     Infinities.increment();
+    ComplexityUpgrades.checkForComplexityUpgrades(true, false);
     Stats.addInfinity(player.stats.timeSinceInfinity, gain);
     Challenge.checkForChallengeCompletion();
     InfinityChallenge.checkForInfinityChallengeCompletion();

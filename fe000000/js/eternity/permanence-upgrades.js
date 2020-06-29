@@ -70,6 +70,9 @@ let PermanenceUpgrade = function (i) {
     },
     buyMax() {
       this.buy(this.maxBuyable(), true);
+    },
+    buyShortOfMax(n) {
+      this.buy(Math.max(0, this.maxBuyable() - n), true);
     }
   }
 }

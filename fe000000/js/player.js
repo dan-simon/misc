@@ -130,6 +130,13 @@ let initialPlayer = {
   complexityChallengeCompletions: [0, 0, 0, 0, 0, 0],
   isComplexityChallengeRunning: [true, true, true, true, true, true],
   complexityChallengeSafeguards: [false, false, false, false, false],
+  complexityUpgrades: [
+    [false, false, false, false, false],
+    [false, false, false, false, false],
+    [false, false, false, false, false],
+    [false, false, false, false, false],
+    [false, false, false, false, false]
+  ],
   options: {
     notation: 'Scientific',
     offlineProgress: true,
@@ -171,7 +178,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.734375
+  version: 1.765625
 }
 
 let player;
