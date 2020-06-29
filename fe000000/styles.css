@@ -224,14 +224,14 @@ button {
   color: #cc6633;
 }
 
-.yellowspan, .yellowdiv > span {
-  color: #ffff00;
+.cyanspan, .cyandiv > span {
+  color: #00ffff;
 }
 
 .greenspan, .greendiv > span {
   color: #33ff33;
 }
 
-.bluespan, .bluediv > span {
-  color: #3333ff;
+.yellowspan, .yellowdiv > span {
+  color: #ffff00;
 }
