@@ -131,11 +131,10 @@ let initialPlayer = {
   isComplexityChallengeRunning: [true, true, true, true, true, true],
   complexityChallengeSafeguards: [false, false, false, false, false],
   complexityUpgrades: [
-    [false, false, false, false, false],
-    [false, false, false, false, false],
-    [false, false, false, false, false],
-    [false, false, false, false, false],
-    [false, false, false, false, false]
+    [false, false, false, false],
+    [false, false, false, false],
+    [false, false, false, false],
+    [false, false, false, false]
   ],
   options: {
     notation: 'Scientific',

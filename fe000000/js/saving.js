@@ -237,11 +237,10 @@ let Saving = {
     }
     if (player.version < 1.765625) {
       player.complexityUpgrades = [
-        [false, false, false, false, false],
-        [false, false, false, false, false],
-        [false, false, false, false, false],
-        [false, false, false, false, false],
-        [false, false, false, false, false]
+        [false, false, false, false],
+        [false, false, false, false],
+        [false, false, false, false],
+        [false, false, false, false]
       ];
       player.version = 1.765625;
     }
