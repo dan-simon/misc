@@ -8,7 +8,7 @@ let ComplexityChallenge = {
   rewards: [
     null,
     x => Decimal.pow(2, x * Math.pow(Stars.amount().max(1).log2(), 0.5) / 2),
-    x => Math.pow(1 + x / 128, -0.5),
+    x => 1 / Math.log2(2 + x / 256),
     x => Decimal.pow(2, Math.sqrt(x) / 2),
     x => 1 + x / 64,
     x => 1 + x / 8,
