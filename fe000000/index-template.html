@@ -1888,9 +1888,13 @@
       <br/>
       <span>The distance between your chroma and its cap decreases exponentially.</span>
       <br/>
-      <span>You ~r Chroma.currentProductionText() ~, and will produce ~r Chroma.nextColorName() ~ after next eternity reset.</span>
-      <br/>
-      <span>The value of whatever color you are producing is constantly set to your chroma (unless your chroma is lower).</span>
+      <span ~style.display=Chroma.producingAll() ? 'none' : ''~>You ~r Chroma.currentProductionText() ~, and will produce ~r Chroma.nextColorName() ~ after next eternity reset.</span>
+      <br ~style.display=Chroma.producingAll() ? 'none' : ''~/>
+      <span>
+        <span ~style.display=Chroma.producingAll() ? 'none' : ''~>The value of whatever color you are producing is</span>
+        <span ~style.display=Chroma.producingAll() ? '' : 'none'~>The values of all colors are</span>
+        constantly set to your chroma (unless your chroma is lower).</span>
+      </span>
       <br/>
       <span>All sources of chroma buildup speed act retroactively in the current eternity.</span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 0px; border-collapse: separate;">
@@ -1908,7 +1912,7 @@
                 <span>Multiplier per boost ~f Chroma.effectOfColor(1) ~x</span>
                 <br/>
                 <br/>
-                <button onclick="Chroma.setNextColor(1)">Produce ~r Chroma.colorName(1) ~ next</button>
+                <button ~style.display=Chroma.producingAll() ? 'none' : ''~ onclick="Chroma.setNextColor(1)">Produce ~r Chroma.colorName(1) ~ next</button>
               </div>
             </div>
           </td>
@@ -1925,7 +1929,7 @@
                 <span>Eternity production ~f Chroma.effectOfColor(2) ~x</span>
                 <br/>
                 <br/>
-                <button onclick="Chroma.setNextColor(2)">Produce ~r Chroma.colorName(2) ~ next</button>
+                <button ~style.display=Chroma.producingAll() ? 'none' : ''~ onclick="Chroma.setNextColor(2)">Produce ~r Chroma.colorName(2) ~ next</button>
               </div>
             </div>
           </td>
@@ -1943,7 +1947,7 @@
                 <br/>
                 <span>(based on total EP this complexity)</span>
                 <br/>
-                <button onclick="Chroma.setNextColor(3)">Produce ~r Chroma.colorName(3) ~ next</button>
+                <button ~style.display=Chroma.producingAll() ? 'none' : ''~ onclick="Chroma.setNextColor(3)">Produce ~r Chroma.colorName(3) ~ next</button>
               </div>
             </div>
           </td>
@@ -1963,7 +1967,7 @@
                 <br/>
                 <span>(based on Eternity Generator 8 amount)</span>
                 <br/>
-                <button onclick="Chroma.setNextColor(4)">Produce ~r Chroma.colorName(4) ~ next</button>
+                <button ~style.display=Chroma.producingAll() ? 'none' : ''~ onclick="Chroma.setNextColor(4)">Produce ~r Chroma.colorName(4) ~ next</button>
               </div>
             </div>
           </td>
@@ -1980,7 +1984,7 @@
                 <span>~f Chroma.effectOfColor(5) ~ extra theorems, next at ~f Chroma.nextExtraTheorem() ~</span>
                 <br/>
                 <br/>
-                <button onclick="Chroma.setNextColor(5)">Produce ~r Chroma.colorName(5) ~ next</button>
+                <button ~style.display=Chroma.producingAll() ? 'none' : ''~ onclick="Chroma.setNextColor(5)">Produce ~r Chroma.colorName(5) ~ next</button>
               </div>
             </div>
           </td>
@@ -2332,11 +2336,11 @@
           <div class="complexityupgradediv">
             <span class="orangetoorange">Shadeless</span>
             <br/>
-            Default requirement
+            Complete Complexity Challenge 4 ~f 13 ~ times.
             <br/>
             ~r ComplexityUpgrades.complexityUpgradeStatusDescription(3, 3) ~
             <br/>
-            Default effect
+            Chroma always produces all colors at once.
           </div>
         </td>
         <td>

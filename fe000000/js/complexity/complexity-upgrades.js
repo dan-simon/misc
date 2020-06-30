@@ -15,7 +15,7 @@ let ComplexityUpgrades = {
     [
       () => false,
       () => EternityChallenge.getTotalEternityChallengeCompletions() >= 32,
-      () => false,
+      () => ComplexityChallenge.getComplexityChallengeCompletions(4) >= 13,
       () => false
     ],
     [
@@ -33,7 +33,7 @@ let ComplexityUpgrades = {
       () => 0
     ],
     [
-      () => 1 + Math.sqrt(Math.max(0, player.eternities.log(2) / 256)),
+      () => 1 + Math.max(0, player.eternities.log(2) / 16),
       () => 0,
       () => 0,
       () => 0
@@ -41,7 +41,7 @@ let ComplexityUpgrades = {
     [
       () => 0,
       () => 0,
-      () => 0,
+      () => null,
       () => 0
     ],
     [
@@ -54,7 +54,7 @@ let ComplexityUpgrades = {
   complexityUpgradeDefaults: [
     [1, 0, 0, 0],
     [1, 0, 0, 0],
-    [0, 0, 0, 0],
+    [0, 0, null, 0],
     [0, 0, 0, 0]
   ],
   checkForComplexityUpgrades(inf, eter) {

@@ -55,9 +55,17 @@ let Chroma = {
     return this.isColorUnlocked(1);
   },
   updateColors() {
-    let color = player.chroma.current;
-    if (color === 0) return;
-    this.setColorAmount(color, Math.max(this.colorAmount(color), this.amount()));
+    if (this.producingAll()) {
+      for (let color = 1; color <= 5; color++) {
+        if (this.isColorUnlocked(color)) {
+          this.setColorAmount(color, Math.max(this.colorAmount(color), this.amount()));
+        }
+      }
+     } else {
+      let color = player.chroma.current;
+      if (color === 0) return;
+      this.setColorAmount(color, Math.max(this.colorAmount(color), this.amount()));
+    }
   },
   setNextColor(x) {
     if (this.isColorUnlocked(x)) {
@@ -119,5 +127,8 @@ let Chroma = {
     } else {
       return 'will start to produce ' + Chroma.currentColorName() + ' in ' + format(Chroma.timeUntilProduction()) + ' seconds';
     }
+  },
+  producingAll() {
+    return ComplexityUpgrades.hasComplexityUpgrade(3, 3);
   }
 }
