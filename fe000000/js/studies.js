@@ -5,14 +5,13 @@ let STUDY_EFFECTS = [
   () => Decimal.pow(2, 16 * Studies.totalTheorems()),
   () => Decimal.pow(2, Math.pow(Boost.bought(), 1.75) / 1024),
   () => Decimal.pow(2, Math.pow(4 * Prestige.prestigePower().log2(), 0.875) / 1024),
-  // We can use Math.pow() because it's small, this simplifies an isCapped() check later.
-  () => Math.pow(2, Math.pow(Math.min(16, Math.max(0, Decimal.log2(Eternities.amount()))), 2) / 4),
+  () => Decimal.pow(2, Math.pow(Math.max(0, Decimal.log2(Eternities.amount())), 2) / 4),
   () => Decimal.pow(2, Math.pow(Studies.totalTheorems(), 2) / 16),
-  () => Math.pow(Boost.multiplierPer(), InfinityChallenge.isInfinityChallengeRunning(7) ? 0.5 : 1),
-  () => Math.pow(Math.max(1, Math.log2(Prestige.prestigePower().log2())), 3),
-  () => Math.pow(2, Math.min(16, Math.pow(Math.log2(
-    1 + player.stats.timeSinceEternity * (1 + EternityStars.amount().max(1).log2() / 1024) / 64), 4 / 3))),
-  () => Math.pow(Studies.totalTheorems(), 2),
+  () => Decimal.pow(Boost.multiplierPer(), InfinityChallenge.isInfinityChallengeRunning(7) ? 0.5 : 1),
+  () => Decimal.pow(Math.max(1, Math.log2(Prestige.prestigePower().log2())), 3),
+  () => Decimal.pow(2, Math.pow(Math.log2(
+    1 + player.stats.timeSinceEternity * (1 + EternityStars.amount().max(1).log2() / 1024) / 64), 4 / 3)),
+  () => Decimal.pow(Studies.totalTheorems(), 2),
   x => Decimal.pow(2, 4096 * x),
   x => Decimal.pow(2, x * Math.sqrt(Chroma.totalColorAmount()) / 2),
   x => Decimal.pow(Math.max(Chroma.amount(), 1), x),
@@ -50,13 +49,21 @@ let Study = function (i) {
       return Math.floor((i + 3) / 4);
     },
     rawEffect() {
-      if (this.row() === 3) {
-        return Math.pow(STUDY_EFFECTS[i - 1](), PermanenceUpgrade(3).effect());
-      } else if (this.row() === 4) {
+      if (this.row() === 4) {
         return STUDY_EFFECTS[i - 1](this.timesBought());
-      } else {
-        return STUDY_EFFECTS[i - 1]();
       }
+      let effect = STUDY_EFFECTS[i - 1]();
+      if (i === 7 || i === 11) {
+        if (ComplexityUpgrades.hasComplexityUpgrade(2, 4)) {
+          effect = effect.pow(ComplexityUpgrades.effect(2, 4));
+        } else {
+          effect = effect.min(Math.pow(2, {7: 64, 11: 16}[i]));
+        }
+      }
+      if (this.row() === 3) {
+        effect = Decimal.pow(effect, PermanenceUpgrade(3).effect());
+      }
+      return effect;
     },
     rawTotalEffect() {
       // This only exists for display of the Study 1 effect.
@@ -76,11 +83,11 @@ let Study = function (i) {
       return STUDY_EFFECTS[i - 1](this.timesBought() + 1);
     },
     isCapped() {
-      // Note that this technique only works if the effect is a number and not a Decimal.
+      // Note that if a third study gets capped this won't handle it.
       // Note also that we use STUDY_EFFECTS[i - 1]() directly since the raw effect of study 11
       // is modified by an upgrade that boosts third-row studies.
-      return (i === 7 || i === 11) &&
-        STUDY_EFFECTS[i - 1]() === {7: Math.pow(2, 64), 11: Math.pow(2, 16)}[i];
+      return (i === 7 || i === 11) && !ComplexityUpgrades.hasComplexityUpgrade(2, 4) &&
+        STUDY_EFFECTS[i - 1]().gte(Math.pow(2, {7: 64, 11: 16}[i]));
     },
     cappedText() {
       return this.isCapped() ? 'Capped' : 'Currently';

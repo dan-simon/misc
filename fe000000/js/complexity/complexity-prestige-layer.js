@@ -83,6 +83,8 @@ let ComplexityPrestigeLayer = {
     };
     player.unlockedEternityChallenge = 0;
     player.eternityChallengeCompletions = [0, 0, 0, 0, 0, 0, 0, 0];
+    // This does nothing without the upgrade (since the upgrade effect is 0).
+    ComplexityUpgrade.giveStartingECs(ComplexityUpgrade.effect(4, 2));
     player.respecEternityChallenge = false;
     player.permanence = new Decimal(0);
     player.permanenceUpgrades = [0, 0, 0, 0];

@@ -7,7 +7,7 @@ let ComplexityUpgrades = {
       () => false
     ],
     [
-      () => Boost.multiplierPer() >= Math.pow(2, 16) && !InfinityChallenge.isInfinityChallengeRunning(7),
+      () => Boost.multiplierPer() >= Math.pow(2, 20) && !InfinityChallenge.isInfinityChallengeRunning(7),
       () => Eternities.amount().gte(Math.pow(2, 16)),
       () => false,
       () => false
@@ -33,10 +33,10 @@ let ComplexityUpgrades = {
       () => 0
     ],
     [
-      () => 1 + Math.max(0, player.eternities.log(2) / 16),
+      () => 1 + Math.max(0, player.eternities.log(2) / 64),
       () => 0,
       () => 0,
-      () => 0
+      () => 2
     ],
     [
       () => 0,
@@ -46,14 +46,14 @@ let ComplexityUpgrades = {
     ],
     [
       () => 0,
-      () => 0,
+      () => Complexities.amount().min(32),
       () => 0,
       () => 0
     ]
   ],
   complexityUpgradeDefaults: [
     [1, 0, 0, 0],
-    [1, 0, 0, 0],
+    [1, 0, 0, 1],
     [0, 0, null, 0],
     [0, 0, 0, 0]
   ],
@@ -74,6 +74,23 @@ let ComplexityUpgrades = {
   },
   unlockComplexityUpgrade(row, column) {
     player.complexityUpgrades[row - 1][column - 1] = true;
+    if (row === 1 && column === 2) {
+      // Give the starting eternities, belatedly, as if the player had started with them.
+      player.eternities = player.eternities.plus(this.effect(1, 2));
+    }
+    if (row === 4 && column === 2) {
+      this.giveStartingECs(this.effect(1, 4));
+    }
+  },
+  giveStartingECs(x) {
+    for (let i = 0; i < Math.floor(x / 4); i++) {
+      // This should always be 4, but let's be safe in case extra completions
+      // are added later or something.
+      player.eternityChallengeCompletions[i] = Math.max(
+        player.eternityChallengeCompletions[i], 4);
+    }
+    player.eternityChallengeCompletions[Math.floor(x / 4)] = Math.max(
+      player.eternityChallengeCompletions[Math.floor(x / 4)], x % 4);
   },
   hasComplexityUpgrade(row, column) {
     return player.complexityUpgrades[row - 1][column - 1];
