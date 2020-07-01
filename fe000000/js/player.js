@@ -105,6 +105,7 @@ let initialPlayer = {
     0, 0, 0, 0
   ],
   respecStudies: false,
+  presets: [],
   eternityProducer: {
     unlocked: false,
     upgrades: [0, 0]
@@ -177,7 +178,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.765625
+  version: 1.78125
 }
 
 let player;

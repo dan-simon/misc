@@ -258,5 +258,51 @@ let Studies = {
       this.setStat(x, this.getStat(x).minus(this.cost(x)));
       player.boughtTheorems[x] += 1;
     }
+  },
+  hasPreset(x) {
+    return player.presets.length >= x;
+  },
+  presetName(x) {
+    if (!this.hasPreset(x)) return 'Untitled';
+    return player.presets[x - 1].name;
+  },
+  presetStudyList(x) {
+    if (!this.hasPreset(x)) return '';
+    return player.presets[x - 1].studies;
+  },
+  setPresetName(x, name) {
+    player.presets[x - 1].name = name;
+  },
+  setPresetStudyList(x, studyList) {
+    player.presets[x - 1].studies = studyList;
+  },
+  presetSetToCurrentStudies(x) {
+    this.setPresetStudyList(x, this.exportString());
+    this.redisplayPresetStudyList(x);
+  },
+  presetLoad(x) {
+    this.importString(this.presetStudyList(x));
+  },
+  presetDelete(x) {
+    player.presets = player.presets.slice(0, x - 1).concat(player.presets.slice(x));
+    for (let i = x; i <= player.presets.length; i++) {
+      this.redisplayPreset(i);
+    }
+  },
+  presetCreate() {
+    if (!this.hasPreset(32)) {
+      player.presets.push({'name': 'Untitled', 'studies': this.exportString()});
+      this.redisplayPreset(player.presets.length);
+    }
+  },
+  redisplayPreset(x) {
+    this.redisplayPresetName(x);
+    this.redisplayPresetStudyList(x);
+  },
+  redisplayPresetName(x) {
+    document.getElementsByClassName('presetname' + x)[0].value = this.presetName(x);
+  },
+  redisplayPresetStudyList(x) {
+    document.getElementsByClassName('presetstudylist' + x)[0].value = this.presetStudyList(x);
   }
 }
