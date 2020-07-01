@@ -1318,7 +1318,11 @@
     <br/>
     <span>Click on the name of a study preset on the line below to load that study list:</span>
     <div style="width: 1024px; margin-left: auto; margin-right: auto;">
-      <span ~style.display=Studies.hasPreset(1) ? 'none' : ''~>You don’t currently have any study presets. You can create presets at the bottom of this tab. Presets can be used to load study lists more easily.</span>
+      <div ~style.display=Studies.hasPreset(1) ? 'none' : ''~>
+        You don't currently have any study presets. You can create presets at the bottom of this tab.
+        <br/>
+        Presets can be used to load study lists more easily.
+      </div>
       <button ~style.display=Studies.hasPreset(1) ? '' : 'none'~ onclick="Studies.loadPreset(1)">~r Studies.presetName(1) ~</button>
       <button ~style.display=Studies.hasPreset(2) ? '' : 'none'~ onclick="Studies.loadPreset(2)">~r Studies.presetName(2) ~</button>
       <button ~style.display=Studies.hasPreset(3) ? '' : 'none'~ onclick="Studies.loadPreset(3)">~r Studies.presetName(3) ~</button>
