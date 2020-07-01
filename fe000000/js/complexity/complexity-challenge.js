@@ -77,7 +77,7 @@ let ComplexityChallenge = {
   complexityReset() {
     // It's easy to imagine wanting something else here (for example, because certain things
     // disqualify you from complexity challenges), which is why this is its own method.
-    ComplexityMaxAll.complexityReset();
+    ComplexityPrestigeLayer.complexityReset();
   },
   isSafeguardOn(x) {
     return player.complexityChallengeSafeguards[x - 2];
