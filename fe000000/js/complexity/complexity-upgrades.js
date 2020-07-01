@@ -61,7 +61,8 @@ let ComplexityUpgrades = {
     for (let row = 1; row < 4; row++) {
       if (ComplexityChallenge.isComplexityChallengeRunning([2, 3, 4, 6][row - 1])) {
         for (let column = 1; column < 4; column++) {
-          if (this.canUnlockComplexityUpgrade(row, column, inf, eter)) {
+          if (!this.hasComplexityUpgrade(row, column) &&
+            this.canUnlockComplexityUpgrade(row, column, inf, eter)) {
             this.unlockComplexityUpgrade(row, column);
           }
         }
@@ -70,13 +71,14 @@ let ComplexityUpgrades = {
   },
   canUnlockComplexityUpgrade(row, column, inf, eter) {
     // This doesn't check being in the challenge so make sure to check that first.
+    // It also doesn't check whether the player already has the complexity upgrade.
     return this.complexityUpgradeRequirements[row - 1][column - 1](inf, eter);
   },
   unlockComplexityUpgrade(row, column) {
     player.complexityUpgrades[row - 1][column - 1] = true;
     if (row === 1 && column === 2) {
       // Give the starting eternities, belatedly, as if the player had started with them.
-      player.eternities = player.eternities.plus(this.effect(1, 2));
+      Eternities.add(this.effect(1, 2));
     }
     if (row === 4 && column === 2) {
       this.giveStartingECs(this.effect(1, 4));
