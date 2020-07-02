@@ -279,5 +279,12 @@ let EternityChallenge = {
     } else {
       return 'This text should never appear.';
     }
+  },
+  eternityChallengeTotalCompletionsReward4Text() {
+    if (ComplexityUpgrades.hasComplexityUpgrade(2, 2)) {
+      return 'Chroma buildup speed ' + format(this.getTotalCompletionsRewardRawEffect(4)) + 'x.';
+    } else {
+      return 'Autobuyers for eternity upgrades, eternity generators, and Eternity Producer upgrades, and chroma buildup speed ' + format(this.getTotalCompletionsRewardRawEffect(4)) + 'x.';
+    }
   }
 }

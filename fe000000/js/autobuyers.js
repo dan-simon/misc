@@ -6,6 +6,8 @@ let Autobuyer = function (i) {
     hasAutobuyer() {
       if (i === 13) {
         return EternityMilestones.isEternityMilestoneActive(16);
+      } else if (i === 14) {
+        return ComplexityUpgrades.hasComplexityUpgrade(2, 2);
       } else if (i > 9) {
         return Challenge.isChallengeCompleted(i);
       } else {
@@ -191,6 +193,22 @@ let Autobuyers = {
       EternityPrestigeLayer.eternity();
     }
   },
+  gainPermanence() {
+    if (!Autobuyer(14).isActive() || !Permanence.canGainPermanence()) return;
+    let shouldGainPermanence;
+    let mode = Autobuyer(14).mode();
+    let priority = Autobuyer(14).priority();
+    if (mode === 'Amount') {
+      shouldGainPermanence = Permanence.permanenceGain().gte(priority);
+    } else if (mode === 'Time') {
+      shouldGainPermanence = player.stats.timeSincePermanenceGain >= priority.toNumber();
+    } else if (mode === 'X times last') {
+      shouldGainPermanence = Permanence.permanenceGain().gte(player.stats.lastPermanenceGain);
+    }
+    if (shouldGainPermanence) {
+      Permanence.gainPermanence();
+    }
+  },
   slowAutobuyersTimerLength() {
     return Math.max(16, player.autobuyersTimerLength);
   },
@@ -222,6 +240,7 @@ let Autobuyers = {
     let triggerFastAutobuyers = player.fastAutobuyersTimer >= this.fastAutobuyersTimerLength();
     player.fastAutobuyersTimer = this.mod(player.fastAutobuyersTimer, this.fastAutobuyersTimerLength());
     if (triggerFastAutobuyers) {
+      Autobuyers.gainPermanence();
       Autobuyers.eternity();
       Autobuyers.infinity();
       Autobuyers.prestige();

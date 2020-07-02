@@ -22,7 +22,7 @@ function initialAutobuyers() {
     {isOn: true, mode: 'Buy max', priority: 7}, {isOn: true, mode: 'Buy max', priority: 8},
     {isOn: true, mode: 'Buy max', priority: 9}, {isOn: true, mode: 'Multiplier', priority: new Decimal(2)},
     {isOn: true, mode: 'Multiplier', priority: new Decimal(2)}, {isOn: true, mode: 'Amount', priority: new Decimal(2)},
-    {isOn: true, mode: 'Amount', priority: new Decimal(2)},
+    {isOn: true, mode: 'Amount', priority: new Decimal(2)}, {isOn: true, mode: 'X times last', priority: new Decimal(2)},
   ];
 }
 
@@ -137,6 +137,10 @@ let initialPlayer = {
     [false, false, false, false],
     [false, false, false, false]
   ],
+  eternityAutobuyers: [
+    true, true, true, true, true, true, true, true,
+    true, true, true, true, true, true, true, true, true,
+  ],
   options: {
     notation: 'Scientific',
     offlineProgress: true,
@@ -156,6 +160,7 @@ let initialPlayer = {
     timeSincePrestige: 0,
     timeSinceInfinity: 0,
     timeSinceEternity: 0,
+    timeSincePermanenceGain: 0,
     timeSinceComplexity: 0,
     timeSinceGameStart: 0,
     timeSinceLastPeakIPPerSec: Math.pow(2, 256),
@@ -172,13 +177,14 @@ let initialPlayer = {
     prestigesThisInfinity: 0,
     lastTenInfinities: initialLastTenInfinities(),
     lastTenEternities: initialLastTenEternities(),
-    lastTenComplexities: initialLastTenComplexities()
+    lastTenComplexities: initialLastTenComplexities(),
+    lastPermanenceGain: new Decimal(0),
   },
   cheats: {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.78125
+  version: 1.796875
 }
 
 let player;

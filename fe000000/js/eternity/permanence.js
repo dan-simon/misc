@@ -23,7 +23,10 @@ let Permanence = {
   gainPermanence() {
     if (!this.canGainPermanence()) return;
     player.hasGainedPermanence = true;
-    this.add(this.permanenceGain());
+    let gain = this.permanenceGain();
+    player.stats.lastPermanenceGain = gain;
+    player.stats.timeSincePermanenceGain = 0;
+    this.add(gain);
     Eternities.setAmount(this.getLeftoverEternities());
   },
   amount() {
@@ -36,8 +39,10 @@ let Permanence = {
     return PermanenceUpgrades.list.some(x => x.canBuy());
   },
   maxAll() {
-    // We name the upgrade list for convenience.
-    let list = PermanenceUpgrades.list;
+    this.buyMaxOf([1, 2, 3, 4])
+  },
+  buyMaxOf(ids) {
+    let list = ids.map(x => PermanenceUpgrades.list[x - 1]);
     // Buying short of max
     list.forEach(x => x.buyShortOfMax(3));
     while (list.some(x => x.canBuy())) {

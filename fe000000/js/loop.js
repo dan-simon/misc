@@ -28,6 +28,7 @@ function gameLoop(diff, display) {
   EternityPrestigeLayer.updatePeakEPPerSec();
   Autobuyers.tick(diff);
   InfinityAutobuyers.tick();
+  EternityAutobuyers.tick();
   if (EternityMilestones.isEternityMilestoneActive(6)) {
     InfinityChallenge.checkForAllAutoInfinityChallengeCompletions();
   }

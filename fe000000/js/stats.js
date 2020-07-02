@@ -5,6 +5,7 @@ let Stats = {
     player.stats.timeSincePrestige += diff;
     player.stats.timeSinceInfinity += diff;
     player.stats.timeSinceEternity += diff;
+    player.stats.timeSincePermanenceGain += diff;
     player.stats.timeSinceComplexity += diff;
     player.stats.timeSinceGameStart += diff;
     player.stats.timeSinceLastPeakIPPerSec += diff;

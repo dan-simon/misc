@@ -88,6 +88,7 @@ let ComplexityPrestigeLayer = {
     player.respecEternityChallenge = false;
     player.permanence = new Decimal(0);
     player.permanenceUpgrades = [0, 0, 0, 0];
+    player.stats.lastPermanenceGain = new Decimal(0);
     // Don't reset player.hasGainedPermanence, since it's only used for display
     // (specifically, hiding permanence upgrades if it's false).
     player.chroma = {

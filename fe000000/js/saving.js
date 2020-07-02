@@ -248,6 +248,19 @@ let Saving = {
       player.presets = [];
       player.version = 1.78125;
     }
+    if (player.version < 1.796875) {
+      player.autobuyers.push({isOn: true, mode: 'X times last', priority: new Decimal(2)});
+      // The loose justification for the array being arranged like this is that
+      // the first 8 autobuyers are for eternity generators, and the other 9 are
+      // for other things.
+      player.eternityAutobuyers = [
+        true, true, true, true, true, true, true, true,
+        true, true, true, true, true, true, true, true, true,
+      ];
+      player.stats.lastPermanenceGain = new Decimal(0);
+      player.stats.timeSincePermanenceGain = 0;
+      player.version = 1.796875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
@@ -267,6 +280,7 @@ let Saving = {
     }
     player.eternities = new Decimal(player.eternities);
     player.permanence = new Decimal(player.permanence);
+    player.stats.lastPermanenceGain = new Decimal(player.stats.lastPermanenceGain);
     player.stats.totalStarsProduced = new Decimal(player.stats.totalStarsProduced);
     player.stats.totalStarsProducedThisEternity = new Decimal(player.stats.totalStarsProducedThisEternity);
     player.stats.totalStarsProducedThisComplexity = new Decimal(player.stats.totalStarsProducedThisComplexity);
