@@ -8,7 +8,7 @@ let ComplexityUpgrades = {
     ],
     [
       () => Boost.multiplierPer() >= Math.pow(2, 24) && !InfinityChallenge.isInfinityChallengeRunning(7),
-      () => Eternities.amount().gte(Math.pow(2, 16)),
+      () => Eternities.amount().gte(Math.pow(2, 24)),
       () => false,
       () => false
     ],

@@ -1316,7 +1316,7 @@ function updateDisplay() {
     e[647].textContent = format(Math.pow(2, 24));
     e[648].textContent = ComplexityUpgrades.complexityUpgradeStatusDescription(2, 1);
     e[649].textContent = format(ComplexityUpgrades.rawEffect(2, 1));
-    e[650].textContent = format(Math.pow(2, 16));
+    e[650].textContent = format(Math.pow(2, 24));
     e[651].textContent = ComplexityUpgrades.complexityUpgradeStatusDescription(2, 2);
     e[652].textContent = ComplexityUpgrades.complexityUpgradeStatusDescription(2, 3);
     e[653].textContent = ComplexityUpgrades.complexityUpgradeStatusDescription(2, 4);

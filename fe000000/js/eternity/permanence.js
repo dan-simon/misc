@@ -12,7 +12,7 @@ let Permanence = {
     return Math.pow(2, 24) / this.getTotalPermanenceMultiplier();
   },
   canGainPermanence() {
-    return Eternities.amount().gte(this.getRequiredEternities());
+    return EternityProducer.isUnlocked() && Eternities.amount().gte(this.getRequiredEternities());
   },
   permanenceGain() {
     return Eternities.amount().minus(this.getLeftoverEternities()).div(this.getEternitiesPerPermanence());
