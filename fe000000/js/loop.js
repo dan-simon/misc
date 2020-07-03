@@ -26,6 +26,7 @@ function gameLoop(diff, display) {
   Chroma.updateColors();
   InfinityPrestigeLayer.updatePeakIPPerSec();
   EternityPrestigeLayer.updatePeakEPPerSec();
+  ComplexityPrestigeLayer.updatePeakCPPerSec();
   Autobuyers.tick(diff);
   InfinityAutobuyers.tick();
   EternityAutobuyers.tick();
