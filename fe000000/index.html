@@ -204,7 +204,7 @@
         <span id="b60">You need <span id="e72"></span> stars to prestige.</span>
       </div>
       <br/>
-      <span>Generator multipliers above <span id="e73"></span> are reduced.</span>
+      <span>Generator multipliers are reduced above <span id="e73"></span> (the multiplier softcap).</span>
       <br/>
       <div id="b61">
         Given a multiplier x, let y be log(x, <span id="e74"></span>). x is reduced to <span id="e75"></span>^y^y^<span id="e76"></span>.
@@ -2221,185 +2221,202 @@
       <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 0px; border-collapse: separate;">
         <tr>
           <td>
-            <div class="chromadiv">
-              <div id="b486">
-                <button id="b487" style="height: 48px;" onclick="Chroma.unlockColor(1)">
+            <div id="b486" class="chromadiv">
+              <div id="b487">
+                <button id="b488" style="height: 48px;" onclick="Chroma.unlockColor(1)">
                   Unlock <span id="e556"></span><br/>Cost: <span id="e557"></span> eternity points
                 </button>
               </div>
-              <div id="b488" class="greydiv">
+              <div id="b489" class="greydiv">
                 <span><span id="e558"></span>: <span id="e559"></span></span>
                 <br/>
                 <span>Multiplier per boost <span id="e560"></span>x</span>
                 <br/>
                 <br/>
-                <button id="b489" onclick="Chroma.setNextColor(1)">Produce <span id="e561"></span> next</button>
+                <button id="b490" onclick="Chroma.setNextColor(1)">Produce <span id="e561"></span> next</button>
               </div>
             </div>
           </td>
           <td>
-            <div class="chromadiv">
-              <div id="b490">
-                <button id="b491" style="height: 48px;" onclick="Chroma.unlockColor(2)">
+            <div id="b491" class="chromadiv">
+              <div id="b492">
+                <button id="b493" style="height: 48px;" onclick="Chroma.unlockColor(2)">
                   Unlock <span id="e562"></span><br/>Cost: <span id="e563"></span> eternity points
                 </button>
               </div>
-              <div id="b492" class="purplediv">
+              <div id="b494" class="purplediv">
                 <span><span id="e564"></span>: <span id="e565"></span></span>
                 <br/>
                 <span>Eternity production <span id="e566"></span>x</span>
                 <br/>
                 <br/>
-                <button id="b493" onclick="Chroma.setNextColor(2)">Produce <span id="e567"></span> next</button>
+                <button id="b495" onclick="Chroma.setNextColor(2)">Produce <span id="e567"></span> next</button>
               </div>
             </div>
           </td>
           <td>
-            <div class="chromadiv">
-              <div id="b494">
-                <button id="b495" style="height: 48px;" onclick="Chroma.unlockColor(3)">
+            <div id="b496" class="chromadiv">
+              <div id="b497">
+                <button id="b498" style="height: 48px;" onclick="Chroma.unlockColor(3)">
                   Unlock <span id="e568"></span><br/>Cost: <span id="e569"></span> eternity points
                 </button>
               </div>
-              <div id="b496" class="orangediv">
+              <div id="b499" class="orangediv">
                 <span><span id="e570"></span>: <span id="e571"></span></span>
                 <br/>
                 <span>Chroma buildup speed <span id="e572"></span>x</span>
                 <br/>
                 <span>(based on total EP this complexity)</span>
                 <br/>
-                <button id="b497" onclick="Chroma.setNextColor(3)">Produce <span id="e573"></span> next</button>
+                <button id="b500" onclick="Chroma.setNextColor(3)">Produce <span id="e573"></span> next</button>
               </div>
             </div>
           </td>
         </tr>
         <tr>
           <td>
-            <div class="chromadiv">
-              <div id="b498">
-                <button id="b499" style="height: 48px;" onclick="Chroma.unlockColor(4)">
+            <div id="b501" class="chromadiv">
+              <div id="b502">
+                <button id="b503" style="height: 48px;" onclick="Chroma.unlockColor(4)">
                   Unlock <span id="e574"></span><br/>Cost: <span id="e575"></span> eternity points
                 </button>
               </div>
-              <div id="b500" class="cyandiv">
+              <div id="b504" class="cyandiv">
                 <span><span id="e576"></span>: <span id="e577"></span></span>
                 <br/>
                 <span>Eternity Generator 8 <span id="e578"></span>x</span>
                 <br/>
                 <span>(based on Eternity Generator 8 amount)</span>
                 <br/>
-                <button id="b501" onclick="Chroma.setNextColor(4)">Produce <span id="e579"></span> next</button>
+                <button id="b505" onclick="Chroma.setNextColor(4)">Produce <span id="e579"></span> next</button>
               </div>
             </div>
           </td>
           <td>
-            <div class="chromadiv">
-              <div id="b502">
-                <button id="b503" style="height: 48px;" onclick="Chroma.unlockColor(5)">
+            <div id="b506" class="chromadiv">
+              <div id="b507">
+                <button id="b508" style="height: 48px;" onclick="Chroma.unlockColor(5)">
                   Unlock <span id="e580"></span><br/>Cost: <span id="e581"></span> eternity points
                 </button>
               </div>
-              <div id="b504" class="greendiv">
+              <div id="b509" class="greendiv">
                 <span><span id="e582"></span>: <span id="e583"></span></span>
                 <br/>
                 <span><span id="e584"></span> extra theorems, next at <span id="e585"></span></span>
                 <br/>
                 <br/>
-                <button id="b505" onclick="Chroma.setNextColor(5)">Produce <span id="e586"></span> next</button>
+                <button id="b510" onclick="Chroma.setNextColor(5)">Produce <span id="e586"></span> next</button>
               </div>
             </div>
           </td>
-          <td/>
+          <td>
+            <div id="b511" class="chromadiv">
+              <div id="b512">
+                <button id="b513" style="height: 48px;" onclick="Chroma.unlockColor(6)">
+                  Unlock <span id="e587"></span><br/>Cost: <span id="e588"></span> eternity points
+                </button>
+              </div>
+              <div id="b514" class="reddiv">
+                <span><span id="e589"></span>: <span id="e590"></span></span>
+                <br/>
+                <span>Multiplier softcap ^<span id="e591"></span></span>
+                <br/>
+                <span>(based on eternities this complexity)</span>
+                <br/>
+                <button id="b515" onclick="Chroma.setNextColor(6)">Produce <span id="e592"></span> next</button>
+              </div>
+            </div>
+          </td>
         </tr>
       </table>
     </div>
   </div>
-  <div id="b506">
-    <span>You have <span id="e587"></span> complexity points.
-      <button id="b507" onclick="ComplexityMaxAll.maxAll()">Max all</button>
+  <div id="b516">
+    <span>You have <span id="e593"></span> complexity points.
+      <button id="b517" onclick="ComplexityMaxAll.maxAll()">Max all</button>
     </span>
     <br/>
-    <span>You have produced <span id="e588"></span> total complexity points (CP).</span>
+    <span>You have produced <span id="e594"></span> total complexity points (CP).</span>
     </br>
-    <span>You have <span id="e589"></span> complexities, multiplying all complexity generators (CGs) by <span id="e590"></span></span>
+    <span>You have <span id="e595"></span> complexities, multiplying all complexity generators (CGs) by <span id="e596"></span></span>
     <br/>
-    <span>and multiplying permanence and chroma buildup speed by <span id="e591"></span>.</span>
+    <span>and multiplying permanence and chroma buildup speed by <span id="e597"></span>.</span>
     <br/>
-    <span>You have <span id="e592"></span> complexity stars, making all complexity challenge rewards <span id="e593"></span>x stronger.</span>
+    <span>You have <span id="e598"></span> complexity stars, making all complexity challenge rewards <span id="e599"></span>x stronger.</span>
     <br/>
-    <span>You are getting <span id="e594"></span> complexity stars per second.</span>
+    <span>You are getting <span id="e600"></span> complexity stars per second.</span>
     <br/>
     <br/>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
-      <tr id="b508">
+      <tr id="b518">
         <td>Complexity Generator 1</td>
-        <td><span id="e595"></span></td>
-        <td><span id="e596"></span>/s</td>
-        <td><span id="e597"></span>x</td>
-        <td><button id="b509" onclick="ComplexityGenerator(1).buy()">Cost: <span id="e598"></span> CP</button></td>
-        <td><button id="b510" onclick="ComplexityGenerator(1).buyMax()">Max</button></td>
+        <td><span id="e601"></span></td>
+        <td><span id="e602"></span>/s</td>
+        <td><span id="e603"></span>x</td>
+        <td><button id="b519" onclick="ComplexityGenerator(1).buy()">Cost: <span id="e604"></span> CP</button></td>
+        <td><button id="b520" onclick="ComplexityGenerator(1).buyMax()">Max</button></td>
       </tr>
-      <tr id="b511">
+      <tr id="b521">
         <td>Complexity Generator 2</td>
-        <td><span id="e599"></span></td>
-        <td><span id="e600"></span>/s</td>
-        <td><span id="e601"></span>x</td>
-        <td><button id="b512" onclick="ComplexityGenerator(2).buy()">Cost: <span id="e602"></span> CP</button></td>
-        <td><button id="b513" onclick="ComplexityGenerator(2).buyMax()">Max</button></td>
+        <td><span id="e605"></span></td>
+        <td><span id="e606"></span>/s</td>
+        <td><span id="e607"></span>x</td>
+        <td><button id="b522" onclick="ComplexityGenerator(2).buy()">Cost: <span id="e608"></span> CP</button></td>
+        <td><button id="b523" onclick="ComplexityGenerator(2).buyMax()">Max</button></td>
       </tr>
-      <tr id="b514">
+      <tr id="b524">
         <td>Complexity Generator 3</td>
-        <td><span id="e603"></span></td>
-        <td><span id="e604"></span>/s</td>
-        <td><span id="e605"></span>x</td>
-        <td><button id="b515" onclick="ComplexityGenerator(3).buy()">Cost: <span id="e606"></span> CP</button></td>
-        <td><button id="b516" onclick="ComplexityGenerator(3).buyMax()">Max</button></td>
+        <td><span id="e609"></span></td>
+        <td><span id="e610"></span>/s</td>
+        <td><span id="e611"></span>x</td>
+        <td><button id="b525" onclick="ComplexityGenerator(3).buy()">Cost: <span id="e612"></span> CP</button></td>
+        <td><button id="b526" onclick="ComplexityGenerator(3).buyMax()">Max</button></td>
       </tr>
-      <tr id="b517">
+      <tr id="b527">
         <td>Complexity Generator 4</td>
-        <td><span id="e607"></span></td>
-        <td><span id="e608"></span>/s</td>
-        <td><span id="e609"></span>x</td>
-        <td><button id="b518" onclick="ComplexityGenerator(4).buy()">Cost: <span id="e610"></span> CP</button></td>
-        <td><button id="b519" onclick="ComplexityGenerator(4).buyMax()">Max</button></td>
+        <td><span id="e613"></span></td>
+        <td><span id="e614"></span>/s</td>
+        <td><span id="e615"></span>x</td>
+        <td><button id="b528" onclick="ComplexityGenerator(4).buy()">Cost: <span id="e616"></span> CP</button></td>
+        <td><button id="b529" onclick="ComplexityGenerator(4).buyMax()">Max</button></td>
       </tr>
-      <tr id="b520">
+      <tr id="b530">
         <td>Complexity Generator 5</td>
-        <td><span id="e611"></span></td>
-        <td><span id="e612"></span>/s</td>
-        <td><span id="e613"></span>x</td>
-        <td><button id="b521" onclick="ComplexityGenerator(5).buy()">Cost: <span id="e614"></span> CP</button></td>
-        <td><button id="b522" onclick="ComplexityGenerator(5).buyMax()">Max</button></td>
+        <td><span id="e617"></span></td>
+        <td><span id="e618"></span>/s</td>
+        <td><span id="e619"></span>x</td>
+        <td><button id="b531" onclick="ComplexityGenerator(5).buy()">Cost: <span id="e620"></span> CP</button></td>
+        <td><button id="b532" onclick="ComplexityGenerator(5).buyMax()">Max</button></td>
       </tr>
-      <tr id="b523">
+      <tr id="b533">
         <td>Complexity Generator 6</td>
-        <td><span id="e615"></span></td>
-        <td><span id="e616"></span>/s</td>
-        <td><span id="e617"></span>x</td>
-        <td><button id="b524" onclick="ComplexityGenerator(6).buy()">Cost: <span id="e618"></span> CP</button></td>
-        <td><button id="b525" onclick="ComplexityGenerator(6).buyMax()">Max</button></td>
+        <td><span id="e621"></span></td>
+        <td><span id="e622"></span>/s</td>
+        <td><span id="e623"></span>x</td>
+        <td><button id="b534" onclick="ComplexityGenerator(6).buy()">Cost: <span id="e624"></span> CP</button></td>
+        <td><button id="b535" onclick="ComplexityGenerator(6).buyMax()">Max</button></td>
       </tr>
-      <tr id="b526">
+      <tr id="b536">
         <td>Complexity Generator 7</td>
-        <td><span id="e619"></span></td>
-        <td><span id="e620"></span>/s</td>
-        <td><span id="e621"></span>x</td>
-        <td><button id="b527" onclick="ComplexityGenerator(7).buy()">Cost: <span id="e622"></span> CP</button></td>
-        <td><button id="b528" onclick="ComplexityGenerator(7).buyMax()">Max</button></td>
+        <td><span id="e625"></span></td>
+        <td><span id="e626"></span>/s</td>
+        <td><span id="e627"></span>x</td>
+        <td><button id="b537" onclick="ComplexityGenerator(7).buy()">Cost: <span id="e628"></span> CP</button></td>
+        <td><button id="b538" onclick="ComplexityGenerator(7).buyMax()">Max</button></td>
       </tr>
-      <tr id="b529">
+      <tr id="b539">
         <td>Complexity Generator 8</td>
-        <td><span id="e623"></span></td>
-        <td><span id="e624"></span>/s</td>
-        <td><span id="e625"></span>x</td>
-        <td><button id="b530" onclick="ComplexityGenerator(8).buy()">Cost: <span id="e626"></span> CP</button></td>
-        <td><button id="b531" onclick="ComplexityGenerator(8).buyMax()">Max</button></td>
+        <td><span id="e629"></span></td>
+        <td><span id="e630"></span>/s</td>
+        <td><span id="e631"></span>x</td>
+        <td><button id="b540" onclick="ComplexityGenerator(8).buy()">Cost: <span id="e632"></span> CP</button></td>
+        <td><button id="b541" onclick="ComplexityGenerator(8).buyMax()">Max</button></td>
       </tr>
     </table>
   </div>
-  <div id="b532">
+  <div id="b542">
     <span>
-      You have completed <span id="e627"></span> complexity challenge tiers.
+      You have completed <span id="e633"></span> complexity challenge tiers.
       <button onclick="ComplexityChallenge.complexityReset()">Restart complexity and re-enter all complexity challenges</button>
     </span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
@@ -2410,13 +2427,13 @@
             <br/>
             <span>No requirement (you're always in this challenge).</span>
             <br/>
-            <span>Goal: <span id="e628"></span> stars</span>
+            <span>Goal: <span id="e634"></span> stars</span>
             <br/>
-            <span><span id="e629"></span></span>
+            <span><span id="e635"></span></span>
             <br/>
             <span>Reward: Multiplier to normal generators based on stars.</span>
             <br/>
-            <span>Current: <span id="e630"></span>x, Next: <span id="e631"></span>x</span>
+            <span>Current: <span id="e636"></span>x, Next: <span id="e637"></span>x</span>
           </div>
         </td>
         <td>
@@ -2425,15 +2442,15 @@
             <br/>
             <span>You can't buy boosts.</span>
             <br/>
-            <span>Goal: <span id="e632"></span> stars</span>
+            <span>Goal: <span id="e638"></span> stars</span>
             <br/>
-            <span><span id="e633"></span></span>
+            <span><span id="e639"></span></span>
             <br/>
-            <span><button onclick="ComplexityChallenge.toggleSafeguard(2)">Buying boosts: <span id="e634"></span></button></span>
+            <span><button onclick="ComplexityChallenge.toggleSafeguard(2)">Buying boosts: <span id="e640"></span></button></span>
             <br/>
             <span>Reward: Boosts are cheaper.</span>
             <br/>
-            <span>Current: Cost ^<span id="e635"></span>, Next: Cost ^<span id="e636"></span></span>
+            <span>Current: Cost ^<span id="e641"></span>, Next: Cost ^<span id="e642"></span></span>
           </div>
         </td>
       </tr>
@@ -2444,15 +2461,15 @@
             <br/>
             <span>You can't unlock the Eternity Producer.</span>
             <br/>
-            <span>Goal: <span id="e637"></span> stars</span>
+            <span>Goal: <span id="e643"></span> stars</span>
             <br/>
-            <span><span id="e638"></span></span>
+            <span><span id="e644"></span></span>
             <br/>
-            <span><button onclick="ComplexityChallenge.toggleSafeguard(3)">Unlocking the Eternity Producer: <span id="e639"></span></button></span>
+            <span><button onclick="ComplexityChallenge.toggleSafeguard(3)">Unlocking the Eternity Producer: <span id="e645"></span></button></span>
             <br/>
             <span>Reward: Multiplier to eternity production.</span>
             <br/>
-            <span>Current: <span id="e640"></span>x, Next: <span id="e641"></span>x</span>
+            <span>Current: <span id="e646"></span>x, Next: <span id="e647"></span>x</span>
           </div>
         </td>
         <td>
@@ -2461,15 +2478,15 @@
             <br/>
             <span>You can't unlock chroma.</span>
             <br/>
-            <span>Goal: <span id="e642"></span> stars</span>
+            <span>Goal: <span id="e648"></span> stars</span>
             <br/>
-            <span><span id="e643"></span></span>
+            <span><span id="e649"></span></span>
             <br/>
-            <span><button onclick="ComplexityChallenge.toggleSafeguard(4)">Unlocking chroma: <span id="e644"></span></button></span>
+            <span><button onclick="ComplexityChallenge.toggleSafeguard(4)">Unlocking chroma: <span id="e650"></span></button></span>
             <br/>
             <span>Reward: Multiplier to chroma cap.</span>
             <br/>
-            <span>Current: <span id="e645"></span>x, Next: <span id="e646"></span>x</span>
+            <span>Current: <span id="e651"></span>x, Next: <span id="e652"></span>x</span>
           </div>
         </td>
       </tr>
@@ -2480,15 +2497,15 @@
             <br/>
             <span>You can't buy Eternity Generator 8.</span>
             <br/>
-            <span>Goal: <span id="e647"></span> stars</span>
+            <span>Goal: <span id="e653"></span> stars</span>
             <br/>
-            <span><span id="e648"></span></span>
+            <span><span id="e654"></span></span>
             <br/>
-            <span><button onclick="ComplexityChallenge.toggleSafeguard(2)">Buying Eternity Generator 8: <span id="e649"></span></button></span>
+            <span><button onclick="ComplexityChallenge.toggleSafeguard(2)">Buying Eternity Generator 8: <span id="e655"></span></button></span>
             <br/>
             <span>Reward: Multiplier to per-purchase Eternity Generator 8 multiplier.</span>
             <br/>
-            <span>Current: <span id="e650"></span>x, Next: <span id="e651"></span>x</span>
+            <span>Current: <span id="e656"></span>x, Next: <span id="e657"></span>x</span>
           </div>
         </td>
         <td>
@@ -2497,17 +2514,17 @@
             <br/>
             <span>You can't buy studies.</span>
             <br/>
-            <span>Goal: <span id="e652"></span> stars</span>
+            <span>Goal: <span id="e658"></span> stars</span>
             <br/>
-            <span><span id="e653"></span></span>
+            <span><span id="e659"></span></span>
             <br/>
-            <span><button onclick="ComplexityChallenge.toggleSafeguard(6)">Buying studies: <span id="e654"></span></button></span>
+            <span><button onclick="ComplexityChallenge.toggleSafeguard(6)">Buying studies: <span id="e660"></span></button></span>
             <br/>
             <span>Reward: Extra theorems.</span>
             <br/>
-            <span>Current: +<span id="e655"></span> theorems, Next: +<span id="e656"></span> theorems</span>
+            <span>Current: +<span id="e661"></span> theorems, Next: +<span id="e662"></span> theorems</span>
             <br/>
-            <span id="b533">Next extra theorem at <span id="e657"></span> complexity stars.</span>
+            <span id="b543">Next extra theorem at <span id="e663"></span> complexity stars.</span>
           </div>
         </td>
       </tr>
@@ -2536,18 +2553,18 @@
       The ability to disable certain things is there to prevent accidental violation of complexity challenge requirements.
     </span>
   </div>
-  <div id="b534">
+  <div id="b544">
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
         <td>
           <div class="complexityupgradediv">
             <span class="greytogrey">One per generator</span>
             <br/>
-            Complete Complexity Challenge 2 <span id="e658"></span> times.
+            Complete Complexity Challenge 2 <span id="e664"></span> times.
             <br/>
-            <span id="e659"></span>
+            <span id="e665"></span>
             <br/>
-            The multiplier to permanence and chroma from complexities also applies to boost power (currently <span id="e660"></span>x)
+            The multiplier to permanence and chroma from complexities also applies to boost power (currently <span id="e666"></span>x)
           </div>
         </td>
         <td>
@@ -2556,9 +2573,9 @@
             <br/>
             Eternity in Complexity Challenge 2.
             <br/>
-            <span id="e661"></span>
+            <span id="e667"></span>
             <br/>
-            You start every complexity with eternities based on your complexities (currently <span id="e662"></span>)
+            You start every complexity with eternities based on your complexities (currently <span id="e668"></span>)
           </div>
         </td>
         <td>
@@ -2567,7 +2584,7 @@
             <br/>
             Default requirement
             <br/>
-            <span id="e663"></span>
+            <span id="e669"></span>
             <br/>
             Default effect
           </div>
@@ -2578,7 +2595,7 @@
             <br/>
             Default requirement
             <br/>
-            <span id="e664"></span>
+            <span id="e670"></span>
             <br/>
             Default effect
           </div>
@@ -2589,20 +2606,20 @@
           <div class="complexityupgradediv">
             <span class="purpletogrey">Actually a boost</span>
             <br/>
-            Get a per-boost multiplier of <span id="e665"></span> outside of Infinity Challenge 7 in Complexity Challenge 3.
+            Get a per-boost multiplier of <span id="e671"></span> outside of Infinity Challenge 7 in Complexity Challenge 3.
             <br/>
-            <span id="e666"></span>
+            <span id="e672"></span>
             <br/>
-            Multiplier to the per-boost multiplier based on eternities (currently <span id="e667"></span>x)
+            Multiplier to the per-boost multiplier based on eternities (currently <span id="e673"></span>x)
           </div>
         </td>
         <td>
           <div class="complexityupgradediv">
             <span class="purpletopurple">Time after time</span>
             <br/>
-            Get <span id="e668"></span> eternities in Complexity Challenge 3.
+            Get <span id="e674"></span> eternities in Complexity Challenge 3.
             <br/>
-            <span id="e669"></span>
+            <span id="e675"></span>
             <br/>
             You always have autobuyers for eternity upgrades, eternity generators, and Eternity Producer upgrades, and you get autobuyers for permanence and permanence upgrades.
           </div>
@@ -2613,20 +2630,20 @@
             <br/>
             Unlock chroma in Complexity Challenge 3.
             <br/>
-            <span id="e670"></span>
+            <span id="e676"></span>
             <br/>
-            Multiplier to chroma buildup speed based on eternities (currently <span id="e671"></span>x)
+            Multiplier to chroma buildup speed based on eternities (currently <span id="e677"></span>x)
           </div>
         </td>
         <td>
           <div class="complexityupgradediv">
             <span class="purpletogreen">2 * 7 * 11</span>
             <br/>
-            Get <span id="e672"></span> theorems in Complexity Challenge 3.
+            Get <span id="e678"></span> theorems in Complexity Challenge 3.
             <br/>
-            <span id="e673"></span>
+            <span id="e679"></span>
             <br/>
-            Study 7 and Study 11 effects are uncapped and raised ^<span id="e674"></span>.
+            Study 7 and Study 11 effects are uncapped and raised ^<span id="e680"></span>.
           </div>
         </td>
       </tr>
@@ -2637,7 +2654,7 @@
             <br/>
             Default requirement
             <br/>
-            <span id="e675"></span>
+            <span id="e681"></span>
             <br/>
             Default effect
           </div>
@@ -2648,7 +2665,7 @@
             <br/>
             Complete all eternity challenges in Complexity Challenge 4.
             <br/>
-            <span id="e676"></span>
+            <span id="e682"></span>
             <br/>
             Eternity challenge requirements and costs are removed (unimplemented).
           </div>
@@ -2657,22 +2674,22 @@
           <div class="complexityupgradediv">
             <span class="orangetoorange">Shadeless</span>
             <br/>
-            Complete Complexity Challenge 4 <span id="e677"></span> times.
+            Complete Complexity Challenge 4 <span id="e683"></span> times.
             <br/>
-            <span id="e678"></span>
+            <span id="e684"></span>
             <br/>
             Chroma always produces all colors at once.
           </div>
         </td>
         <td>
           <div class="complexityupgradediv">
-            <span class="orangetogreen">Default</span>
+            <span class="orangetogreen">Chroma as pal</span>
             <br/>
-            Default requirement
+            Get some generator multiplier over the multiplier softcap (<span id="e685"></span>) in Complexity Challenge 4.
             <br/>
-            <span id="e679"></span>
+            <span id="e686"></span>
             <br/>
-            Default effect
+            Unlock another color of chroma.
           </div>
         </td>
       </tr>
@@ -2683,7 +2700,7 @@
             <br/>
             Default requirement
             <br/>
-            <span id="e680"></span>
+            <span id="e687"></span>
             <br/>
             Default effect
           </div>
@@ -2692,9 +2709,9 @@
           <div class="complexityupgradediv">
             <span class="greentopurple">Calm EC</span>
             <br/>
-            Complete <span id="e681"></span> eternity challenge tiers in Complexity Challenge 6.
+            Complete <span id="e688"></span> eternity challenge tiers in Complexity Challenge 6.
             <br/>
-            <span id="e682"></span>
+            <span id="e689"></span>
             <br/>
             You start each complexity with eternity challenge completions based on your complexities.
           </div>
@@ -2705,7 +2722,7 @@
             <br/>
             Default requirement
             <br/>
-            <span id="e683"></span>
+            <span id="e690"></span>
             <br/>
             Default effect
           </div>
@@ -2714,9 +2731,9 @@
           <div class="complexityupgradediv">
             <span class="greentogreen">greengreengreen</span>
             <br/>
-            Get <span id="e684"></span> theorems in Complexity Challenge 6.
+            Get <span id="e691"></span> theorems in Complexity Challenge 6.
             <br/>
-            <span id="e685"></span>
+            <span id="e692"></span>
             <br/>
             You keep your theorems and studies on complexity (unimplemented).
           </div>
@@ -2724,108 +2741,108 @@
       </tr>
     </table>
   </div>
-  <div id="b535">
-    <span>You have produced <span id="e686"></span> total stars.</span>
+  <div id="b545">
+    <span>You have produced <span id="e693"></span> total stars.</span>
     <br/>
-    <span>You have produced <span id="e687"></span> stars this eternity.</span>
+    <span>You have produced <span id="e694"></span> stars this eternity.</span>
     <br/>
-    <span>You have produced <span id="e688"></span> stars this complexity.</span>
+    <span>You have produced <span id="e695"></span> stars this complexity.</span>
     <br/>
-    <span>You have produced <span id="e689"></span> total infinity points.</span>
+    <span>You have produced <span id="e696"></span> total infinity points.</span>
     <br/>
-    <span>You have produced <span id="e690"></span> infinity points this eternity.</span>
+    <span>You have produced <span id="e697"></span> infinity points this eternity.</span>
     <br/>
-    <span>You have produced <span id="e691"></span> total eternity points.</span>
+    <span>You have produced <span id="e698"></span> total eternity points.</span>
     <br/>
-    <span>You have produced <span id="e692"></span> total eternity points this complexity.</span>
+    <span>You have produced <span id="e699"></span> total eternity points this complexity.</span>
     <br/>
-    <span>Your fastest infinity took <span id="e693"></span> seconds.</span>
+    <span>Your fastest infinity took <span id="e700"></span> seconds.</span>
     <br/>
-    <span>Your fastest eternity took <span id="e694"></span> seconds.</span>
+    <span>Your fastest eternity took <span id="e701"></span> seconds.</span>
     <br/>
-    <span>Your fastest complexity took <span id="e695"></span> seconds.</span>
+    <span>Your fastest complexity took <span id="e702"></span> seconds.</span>
     <br/>
-    <span>You have spent <span id="e696"></span> seconds without purchasing anything.</span>
+    <span>You have spent <span id="e703"></span> seconds without purchasing anything.</span>
     <br/>
-    <span>You have spent <span id="e697"></span> seconds without sacrificing.</span>
+    <span>You have spent <span id="e704"></span> seconds without sacrificing.</span>
     <br/>
-    <span>You have spent <span id="e698"></span> seconds in this prestige.</span>
+    <span>You have spent <span id="e705"></span> seconds in this prestige.</span>
     <br/>
-    <span>You have spent <span id="e699"></span> seconds in this infinity.</span>
+    <span>You have spent <span id="e706"></span> seconds in this infinity.</span>
     <br/>
-    <span>You have spent <span id="e700"></span> seconds in this eternity.</span>
+    <span>You have spent <span id="e707"></span> seconds in this eternity.</span>
     <br/>
-    <span>You have spent <span id="e701"></span> seconds in this complexity.</span>
+    <span>You have spent <span id="e708"></span> seconds in this complexity.</span>
     <br/>
-    <span>You have spent <span id="e702"></span> seconds playing this game (counting time offline).</span>
-    <div id="b536">
-      <span>Last infinity took <span id="e703"></span> seconds and gave <span id="e704"></span> IP, giving <span id="e705"></span> IP/second.</span>
-      <br/>
-      <span id="b537">The infinity two infinities ago took <span id="e706"></span> seconds and gave <span id="e707"></span> IP, giving <span id="e708"></span> IP/second.</span>
-      <br/>
-      <span id="b538">The infinity three infinities ago took <span id="e709"></span> seconds and gave <span id="e710"></span> IP, giving <span id="e711"></span> IP/second.</span>
-      <br/>
-      <span id="b539">The infinity four infinities ago took <span id="e712"></span> seconds and gave <span id="e713"></span> IP, giving <span id="e714"></span> IP/second.</span>
-      <br/>
-      <span id="b540">The infinity five infinities ago took <span id="e715"></span> seconds and gave <span id="e716"></span> IP, giving <span id="e717"></span> IP/second.</span>
-      <br/>
-      <span id="b541">The infinity six infinities ago took <span id="e718"></span> seconds and gave <span id="e719"></span> IP, giving <span id="e720"></span> IP/second.</span>
-      <br/>
-      <span id="b542">The infinity seven infinities ago took <span id="e721"></span> seconds and gave <span id="e722"></span> IP, giving <span id="e723"></span> IP/second.</span>
-      <br/>
-      <span id="b543">The infinity eight infinities ago took <span id="e724"></span> seconds and gave <span id="e725"></span> IP, giving <span id="e726"></span> IP/second.</span>
-      <br/>
-      <span id="b544">The infinity nine infinities ago took <span id="e727"></span> seconds and gave <span id="e728"></span> IP, giving <span id="e729"></span> IP/second.</span>
-      <br/>
-      <span id="b545">The infinity ten infinities ago took <span id="e730"></span> seconds and gave <span id="e731"></span> IP, giving <span id="e732"></span> IP/second.</span>
-      <br/>
-    </div>
+    <span>You have spent <span id="e709"></span> seconds playing this game (counting time offline).</span>
     <div id="b546">
-      <span>Last eternity took <span id="e733"></span> seconds and gave <span id="e734"></span> EP, giving <span id="e735"></span> EP/second.</span>
+      <span>Last infinity took <span id="e710"></span> seconds and gave <span id="e711"></span> IP, giving <span id="e712"></span> IP/second.</span>
       <br/>
-      <span id="b547">The eternity two eternities ago took <span id="e736"></span> seconds and gave <span id="e737"></span> EP, giving <span id="e738"></span> EP/second.</span>
+      <span id="b547">The infinity two infinities ago took <span id="e713"></span> seconds and gave <span id="e714"></span> IP, giving <span id="e715"></span> IP/second.</span>
       <br/>
-      <span id="b548">The eternity three eternities ago took <span id="e739"></span> seconds and gave <span id="e740"></span> EP, giving <span id="e741"></span> EP/second.</span>
+      <span id="b548">The infinity three infinities ago took <span id="e716"></span> seconds and gave <span id="e717"></span> IP, giving <span id="e718"></span> IP/second.</span>
       <br/>
-      <span id="b549">The eternity four eternities ago took <span id="e742"></span> seconds and gave <span id="e743"></span> EP, giving <span id="e744"></span> EP/second.</span>
+      <span id="b549">The infinity four infinities ago took <span id="e719"></span> seconds and gave <span id="e720"></span> IP, giving <span id="e721"></span> IP/second.</span>
       <br/>
-      <span id="b550">The eternity five eternities ago took <span id="e745"></span> seconds and gave <span id="e746"></span> EP, giving <span id="e747"></span> EP/second.</span>
+      <span id="b550">The infinity five infinities ago took <span id="e722"></span> seconds and gave <span id="e723"></span> IP, giving <span id="e724"></span> IP/second.</span>
       <br/>
-      <span id="b551">The eternity six eternities ago took <span id="e748"></span> seconds and gave <span id="e749"></span> EP, giving <span id="e750"></span> EP/second.</span>
+      <span id="b551">The infinity six infinities ago took <span id="e725"></span> seconds and gave <span id="e726"></span> IP, giving <span id="e727"></span> IP/second.</span>
       <br/>
-      <span id="b552">The eternity seven eternities ago took <span id="e751"></span> seconds and gave <span id="e752"></span> EP, giving <span id="e753"></span> EP/second.</span>
+      <span id="b552">The infinity seven infinities ago took <span id="e728"></span> seconds and gave <span id="e729"></span> IP, giving <span id="e730"></span> IP/second.</span>
       <br/>
-      <span id="b553">The eternity eight eternities ago took <span id="e754"></span> seconds and gave <span id="e755"></span> EP, giving <span id="e756"></span> EP/second.</span>
+      <span id="b553">The infinity eight infinities ago took <span id="e731"></span> seconds and gave <span id="e732"></span> IP, giving <span id="e733"></span> IP/second.</span>
       <br/>
-      <span id="b554">The eternity nine eternities ago took <span id="e757"></span> seconds and gave <span id="e758"></span> EP, giving <span id="e759"></span> EP/second.</span>
+      <span id="b554">The infinity nine infinities ago took <span id="e734"></span> seconds and gave <span id="e735"></span> IP, giving <span id="e736"></span> IP/second.</span>
       <br/>
-      <span id="b555">The eternity ten eternities ago took <span id="e760"></span> seconds and gave <span id="e761"></span> EP, giving <span id="e762"></span> EP/second.</span>
+      <span id="b555">The infinity ten infinities ago took <span id="e737"></span> seconds and gave <span id="e738"></span> IP, giving <span id="e739"></span> IP/second.</span>
       <br/>
     </div>
     <div id="b556">
-      <span>Last complexity took <span id="e763"></span> seconds and gave <span id="e764"></span> CP, giving <span id="e765"></span> CP/second.</span>
+      <span>Last eternity took <span id="e740"></span> seconds and gave <span id="e741"></span> EP, giving <span id="e742"></span> EP/second.</span>
       <br/>
-      <span id="b557">The complexity two complexities ago took <span id="e766"></span> seconds and gave <span id="e767"></span> CP, giving <span id="e768"></span> CP/second.</span>
+      <span id="b557">The eternity two eternities ago took <span id="e743"></span> seconds and gave <span id="e744"></span> EP, giving <span id="e745"></span> EP/second.</span>
       <br/>
-      <span id="b558">The complexity three complexities ago took <span id="e769"></span> seconds and gave <span id="e770"></span> CP, giving <span id="e771"></span> CP/second.</span>
+      <span id="b558">The eternity three eternities ago took <span id="e746"></span> seconds and gave <span id="e747"></span> EP, giving <span id="e748"></span> EP/second.</span>
       <br/>
-      <span id="b559">The complexity four complexities ago took <span id="e772"></span> seconds and gave <span id="e773"></span> CP, giving <span id="e774"></span> CP/second.</span>
+      <span id="b559">The eternity four eternities ago took <span id="e749"></span> seconds and gave <span id="e750"></span> EP, giving <span id="e751"></span> EP/second.</span>
       <br/>
-      <span id="b560">The complexity five complexities ago took <span id="e775"></span> seconds and gave <span id="e776"></span> CP, giving <span id="e777"></span> CP/second.</span>
+      <span id="b560">The eternity five eternities ago took <span id="e752"></span> seconds and gave <span id="e753"></span> EP, giving <span id="e754"></span> EP/second.</span>
       <br/>
-      <span id="b561">The complexity six complexities ago took <span id="e778"></span> seconds and gave <span id="e779"></span> CP, giving <span id="e780"></span> CP/second.</span>
+      <span id="b561">The eternity six eternities ago took <span id="e755"></span> seconds and gave <span id="e756"></span> EP, giving <span id="e757"></span> EP/second.</span>
       <br/>
-      <span id="b562">The complexity seven complexities ago took <span id="e781"></span> seconds and gave <span id="e782"></span> CP, giving <span id="e783"></span> CP/second.</span>
+      <span id="b562">The eternity seven eternities ago took <span id="e758"></span> seconds and gave <span id="e759"></span> EP, giving <span id="e760"></span> EP/second.</span>
       <br/>
-      <span id="b563">The complexity eight complexities ago took <span id="e784"></span> seconds and gave <span id="e785"></span> CP, giving <span id="e786"></span> CP/second.</span>
+      <span id="b563">The eternity eight eternities ago took <span id="e761"></span> seconds and gave <span id="e762"></span> EP, giving <span id="e763"></span> EP/second.</span>
       <br/>
-      <span id="b564">The complexity nine complexities ago took <span id="e787"></span> seconds and gave <span id="e788"></span> CP, giving <span id="e789"></span> CP/second.</span>
+      <span id="b564">The eternity nine eternities ago took <span id="e764"></span> seconds and gave <span id="e765"></span> EP, giving <span id="e766"></span> EP/second.</span>
       <br/>
-      <span id="b565">The complexity ten complexities ago took <span id="e790"></span> seconds and gave <span id="e791"></span> CP, giving <span id="e792"></span> CP/second.</span>
+      <span id="b565">The eternity ten eternities ago took <span id="e767"></span> seconds and gave <span id="e768"></span> EP, giving <span id="e769"></span> EP/second.</span>
+      <br/>
+    </div>
+    <div id="b566">
+      <span>Last complexity took <span id="e770"></span> seconds and gave <span id="e771"></span> CP, giving <span id="e772"></span> CP/second.</span>
+      <br/>
+      <span id="b567">The complexity two complexities ago took <span id="e773"></span> seconds and gave <span id="e774"></span> CP, giving <span id="e775"></span> CP/second.</span>
+      <br/>
+      <span id="b568">The complexity three complexities ago took <span id="e776"></span> seconds and gave <span id="e777"></span> CP, giving <span id="e778"></span> CP/second.</span>
+      <br/>
+      <span id="b569">The complexity four complexities ago took <span id="e779"></span> seconds and gave <span id="e780"></span> CP, giving <span id="e781"></span> CP/second.</span>
+      <br/>
+      <span id="b570">The complexity five complexities ago took <span id="e782"></span> seconds and gave <span id="e783"></span> CP, giving <span id="e784"></span> CP/second.</span>
+      <br/>
+      <span id="b571">The complexity six complexities ago took <span id="e785"></span> seconds and gave <span id="e786"></span> CP, giving <span id="e787"></span> CP/second.</span>
+      <br/>
+      <span id="b572">The complexity seven complexities ago took <span id="e788"></span> seconds and gave <span id="e789"></span> CP, giving <span id="e790"></span> CP/second.</span>
+      <br/>
+      <span id="b573">The complexity eight complexities ago took <span id="e791"></span> seconds and gave <span id="e792"></span> CP, giving <span id="e793"></span> CP/second.</span>
+      <br/>
+      <span id="b574">The complexity nine complexities ago took <span id="e794"></span> seconds and gave <span id="e795"></span> CP, giving <span id="e796"></span> CP/second.</span>
+      <br/>
+      <span id="b575">The complexity ten complexities ago took <span id="e797"></span> seconds and gave <span id="e798"></span> CP, giving <span id="e799"></span> CP/second.</span>
       <br/>
     </div>
   </div>
-  <div id="b566">
+  <div id="b576">
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 8px; border-collapse: separate;">
       <tr>
         <td><button class="options-button" onclick="Saving.saveGame()">Save</button></td>
@@ -2833,9 +2850,9 @@
         <td><button class="options-button" onclick="Saving.loadGamePrompt()">Load</button></td>
       </tr>
       <tr>
-        <td><button class="options-button" onclick="Options.toggleOfflineProgress()">Offline progress: <span id="e793"></span></button></td>
-        <td><button class="options-button" onclick="Options.toggleHotkeys()">Hotkeys: <span id="e794"></span></button></td>
-        <td><button class="options-button" onclick="Options.nextNotation()">Notation: <span id="e795"></span></button></td>
+        <td><button class="options-button" onclick="Options.toggleOfflineProgress()">Offline progress: <span id="e800"></span></button></td>
+        <td><button class="options-button" onclick="Options.toggleHotkeys()">Hotkeys: <span id="e801"></span></button></td>
+        <td><button class="options-button" onclick="Options.nextNotation()">Notation: <span id="e802"></span></button></td>
       </tr>
       <tr>
         <td></td>

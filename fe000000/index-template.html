@@ -204,10 +204,10 @@
         <span ~style.display=Prestige.canPrestige() ? 'none' : ''~>You need ~f Prestige.prestigeRequirement() ~ stars to prestige.</span>
       </div>
       <br/>
-      <span>Generator multipliers above ~f Generators.nerfValue ~ are reduced.</span>
+      <span>Generator multipliers are reduced above ~f Generators.nerfValue() ~ (the multiplier softcap).</span>
       <br/>
       <div ~style.display=Generators.areAnyMultipliersNerfed() ? '' : 'none'~>
-        Given a multiplier x, let y be log(x, ~f Generators.nerfValue ~). x is reduced to ~f Generators.nerfValue ~^y^y^~r formatWithPrecision(Generators.nerfExponent, 5) ~.
+        Given a multiplier x, let y be log(x, ~f Generators.nerfValue() ~). x is reduced to ~f Generators.nerfValue() ~^y^y^~r formatWithPrecision(Generators.nerfExponent, 5) ~.
       </div>
       <span>Currently the game ends at ~f Saving.gameEnd ~ stars (if you get to this point then you will be able to start new content).</span>
     </div>
@@ -2221,7 +2221,7 @@
       <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 0px; border-collapse: separate;">
         <tr>
           <td>
-            <div class="chromadiv">
+            <div class="chromadiv" ~style.display=Chroma.canSeeThatColorExists(1) ? '' : 'none'~>
               <div ~style.display=Chroma.isColorUnlocked(1) ? 'none' : ''~>
                 <button style="height: 48px;" onclick="Chroma.unlockColor(1)" ~class=Chroma.canUnlockColor(1) ? '' : 'disabled'~>
                   Unlock ~r Chroma.colorName(1) ~<br/>Cost: ~f Chroma.getUnlockColorCost(1) ~ eternity points
@@ -2238,7 +2238,7 @@
             </div>
           </td>
           <td>
-            <div class="chromadiv">
+            <div class="chromadiv" ~style.display=Chroma.canSeeThatColorExists(2) ? '' : 'none'~>
               <div ~style.display=Chroma.isColorUnlocked(2) ? 'none' : ''~>
                 <button style="height: 48px;" onclick="Chroma.unlockColor(2)" ~class=Chroma.canUnlockColor(2) ? '' : 'disabled'~>
                   Unlock ~r Chroma.colorName(2) ~<br/>Cost: ~f Chroma.getUnlockColorCost(2) ~ eternity points
@@ -2255,7 +2255,7 @@
             </div>
           </td>
           <td>
-            <div class="chromadiv">
+            <div class="chromadiv" ~style.display=Chroma.canSeeThatColorExists(3) ? '' : 'none'~>
               <div ~style.display=Chroma.isColorUnlocked(3) ? 'none' : ''~>
                 <button style="height: 48px;" onclick="Chroma.unlockColor(3)" ~class=Chroma.canUnlockColor(3) ? '' : 'disabled'~>
                   Unlock ~r Chroma.colorName(3) ~<br/>Cost: ~f Chroma.getUnlockColorCost(3) ~ eternity points
@@ -2275,7 +2275,7 @@
         </tr>
         <tr>
           <td>
-            <div class="chromadiv">
+            <div class="chromadiv" ~style.display=Chroma.canSeeThatColorExists(4) ? '' : 'none'~>
               <div ~style.display=Chroma.isColorUnlocked(4) ? 'none' : ''~>
                 <button style="height: 48px;" onclick="Chroma.unlockColor(4)" ~class=Chroma.canUnlockColor(4) ? '' : 'disabled'~>
                   Unlock ~r Chroma.colorName(4) ~<br/>Cost: ~f Chroma.getUnlockColorCost(4) ~ eternity points
@@ -2293,7 +2293,7 @@
             </div>
           </td>
           <td>
-            <div class="chromadiv">
+            <div class="chromadiv" ~style.display=Chroma.canSeeThatColorExists(5) ? '' : 'none'~>
               <div ~style.display=Chroma.isColorUnlocked(5) ? 'none' : ''~>
                 <button style="height: 48px;" onclick="Chroma.unlockColor(5)" ~class=Chroma.canUnlockColor(5) ? '' : 'disabled'~>
                   Unlock ~r Chroma.colorName(5) ~<br/>Cost: ~f Chroma.getUnlockColorCost(5) ~ eternity points
@@ -2309,7 +2309,24 @@
               </div>
             </div>
           </td>
-          <td/>
+          <td>
+            <div class="chromadiv" ~style.display=Chroma.canSeeThatColorExists(6) ? '' : 'none'~>
+              <div ~style.display=Chroma.isColorUnlocked(6) ? 'none' : ''~>
+                <button style="height: 48px;" onclick="Chroma.unlockColor(6)" ~class=Chroma.canUnlockColor(6) ? '' : 'disabled'~>
+                  Unlock ~r Chroma.colorName(6) ~<br/>Cost: ~f Chroma.getUnlockColorCost(6) ~ eternity points
+                </button>
+              </div>
+              <div class="reddiv" ~style.display=Chroma.isColorUnlocked(6) ? '' : 'none'~>
+                <span>~r Chroma.colorName(6, true) ~: ~f Chroma.colorAmount(6) ~</span>
+                <br/>
+                <span>Multiplier softcap ^~f Chroma.effectOfColor(6) ~</span>
+                <br/>
+                <span>(based on eternities this complexity)</span>
+                <br/>
+                <button ~style.display=Chroma.producingAll() ? 'none' : ''~ onclick="Chroma.setNextColor(6)">Produce ~r Chroma.colorName(6) ~ next</button>
+              </div>
+            </div>
+          </td>
         </tr>
       </table>
     </div>
@@ -2657,7 +2674,7 @@
           <div class="complexityupgradediv">
             <span class="orangetoorange">Shadeless</span>
             <br/>
-            Complete Complexity Challenge 4 ~f 13 ~ times.
+            Complete Complexity Challenge 4 ~f 8 ~ times.
             <br/>
             ~r ComplexityUpgrades.complexityUpgradeStatusDescription(3, 3) ~
             <br/>
@@ -2666,13 +2683,13 @@
         </td>
         <td>
           <div class="complexityupgradediv">
-            <span class="orangetogreen">Default</span>
+            <span class="orangetogreen">Chroma as pal</span>
             <br/>
-            Default requirement
+            Get some generator multiplier over the multiplier softcap (~f Generators.nerfValue() ~) in Complexity Challenge 4.
             <br/>
             ~r ComplexityUpgrades.complexityUpgradeStatusDescription(3, 4) ~
             <br/>
-            Default effect
+            Unlock another color of chroma.
           </div>
         </td>
       </tr>

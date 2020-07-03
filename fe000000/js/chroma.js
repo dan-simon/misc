@@ -1,12 +1,13 @@
 let Chroma = {
-  colors: [null, 'grey', 'purple', 'orange', 'cyan', 'green'],
+  colors: [null, 'grey', 'purple', 'orange', 'cyan', 'green', 'red'],
   colorCosts: [
     null,
     Decimal.pow(2, 4096),
     Decimal.pow(2, 8192),
     Decimal.pow(2, 12288),
     Decimal.pow(2, Math.pow(2, 14)),
-    Decimal.pow(2, Math.pow(2, 15))
+    Decimal.pow(2, Math.pow(2, 15)),
+    Decimal.pow(2, 1.5 * Math.pow(2, 16)),
   ],
   colorEffectFormulas: [
     null,
@@ -15,7 +16,8 @@ let Chroma = {
     x => Math.pow(Math.max(EternityPoints.totalEPProducedThisComplexity().log2() / 4096, 1),
       Math.log2(1 + x / 256) / 4),
     x => Decimal.pow(EternityGenerator(8).amount().max(1), 2 * Math.sqrt(x)),
-    x => Math.floor(16 * Math.log2(1 + x / 4096))
+    x => Math.floor(16 * Math.log2(1 + x / 4096)),
+    x => 1 + Math.sqrt(x / Math.pow(2, 24)) * Eternities.totalEternitiesProducedThisComplexity().div(Math.pow(2, 48)).plus(1).log2()
   ],
   amount() {
     if (!this.isUnlocked()) {
@@ -56,7 +58,7 @@ let Chroma = {
   },
   updateColors() {
     if (this.producingAll()) {
-      for (let color = 1; color <= 5; color++) {
+      for (let color = 1; color <= 6; color++) {
         if (this.isColorUnlocked(color)) {
           this.setColorAmount(color, Math.max(this.colorAmount(color), this.amount()));
         }
@@ -75,10 +77,14 @@ let Chroma = {
   getUnlockColorCost(x) {
     return this.colorCosts[x];
   },
+  canSeeThatColorExists(x) {
+    return x !== 6 || ComplexityUpgrades.hasComplexityUpgrade(3, 4);
+  },
   canUnlockColor(x) {
     // You can't unlock any colors but the first without unlocking the first (that is, unlocking chroma) first.
     return !this.isColorUnlocked(x) && player.eternityPoints.gte(this.getUnlockColorCost(x)) &&
-      !(x === 1 && ComplexityChallenge.isSafeguardOn(4)) && (x === 1 || this.isUnlocked());
+      !(x === 1 && ComplexityChallenge.isSafeguardOn(4)) && (x === 1 || this.isUnlocked()) &&
+      this.canSeeThatColorExists(x);
   },
   unlockColor(x) {
     if (!this.canUnlockColor(x)) return;

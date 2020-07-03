@@ -130,18 +130,21 @@ let Generators = {
   anyGenerators() {
     return Generators.list.some(x => x.amount().gt(0));
   },
-  nerfValue: Decimal.pow(2, Math.pow(2, 29)),
+  nerfValue() {
+    return Decimal.pow(2, Math.pow(2, 29)).pow(Chroma.effectOfColor(6));
+  },
   nerfExponent: -1 / 128,
   nerf(x) {
-    if (x.gte(this.nerfValue)) {
-      y = x.log(2) / Generators.nerfValue.log(2);
-      return Decimal.pow(Generators.nerfValue, Math.pow(y, Math.pow(y, this.nerfExponent)));
+    let nerfValue = this.nerfValue();
+    if (x.gte(nerfValue)) {
+      y = x.log(2) / nerfValue.log(2);
+      return Decimal.pow(nerfValue, Math.pow(y, Math.pow(y, this.nerfExponent)));
     } else {
       return x;
     }
   },
   areAnyMultipliersNerfed() {
     // Note that the nerf never reduces a multiplier below the initial nerf value.
-    return Generators.list.some(x => x.multiplier().gte(this.nerfValue));
+    return Generators.list.some(x => x.multiplier().gte(this.nerfValue()));
   }
 }

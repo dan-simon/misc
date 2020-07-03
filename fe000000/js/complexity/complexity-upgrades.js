@@ -15,8 +15,8 @@ let ComplexityUpgrades = {
     [
       () => false,
       () => EternityChallenge.getTotalEternityChallengeCompletions() >= 32,
-      () => ComplexityChallenge.getComplexityChallengeCompletions(4) >= 13,
-      () => false
+      () => ComplexityChallenge.getComplexityChallengeCompletions(4) >= 8,
+      () => Generators.areAnyMultipliersNerfed()
     ],
     [
       () => false,
@@ -42,7 +42,7 @@ let ComplexityUpgrades = {
       () => 0,
       () => 0,
       () => null,
-      () => 0
+      () => null
     ],
     [
       () => 0,
@@ -54,7 +54,7 @@ let ComplexityUpgrades = {
   complexityUpgradeDefaults: [
     [1, 0, 0, 0],
     [1, null, 1, 1],
-    [0, 0, null, 0],
+    [0, 0, null, null],
     [0, 0, 0, 0]
   ],
   checkForComplexityUpgrades(situation) {

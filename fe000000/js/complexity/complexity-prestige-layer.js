@@ -92,14 +92,15 @@ let ComplexityPrestigeLayer = {
     // Don't reset player.hasGainedPermanence, since it's only used for display
     // (specifically, hiding permanence upgrades if it's false).
     player.chroma = {
-      colors: [0, 0, 0, 0, 0],
-      unlocked: [false, false, false, false, false],
+      colors: [0, 0, 0, 0, 0, 0],
+      unlocked: [false, false, false, false, false, false],
       current: 0,
       next: 0
     };
     // Small bonus, arguably unexpected but not that big in the grand scheme of things.
     player.stats.totalStarsProducedThisComplexity = new Decimal(2);
     player.stats.totalEPProducedThisComplexity = new Decimal(0);
+    player.stats.totalEternitiesProducedThisComplexity = new Decimal(ComplexityUpgrades.effect(1, 2));
     player.stats.timeSinceComplexity = 0;
     player.stats.timeSinceLastPeakCPPerSec = Math.pow(2, 256);
     player.stats.peakCPPerSec = new Decimal(0);

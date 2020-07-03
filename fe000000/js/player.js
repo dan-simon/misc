@@ -154,6 +154,7 @@ let initialPlayer = {
     totalIPProducedThisEternity: new Decimal(0),
     totalEPProduced: new Decimal(0),
     totalEPProducedThisComplexity: new Decimal(0),
+    totalEternitiesProducedThisComplexity: new Decimal(0),
     totalCPProduced: new Decimal(0),
     timeSincePurchase: 0,
     timeSinceSacrifice: 0,
@@ -184,7 +185,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.796875
+  version: 1.8125
 }
 
 let player;

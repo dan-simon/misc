@@ -261,6 +261,12 @@ let Saving = {
       player.stats.timeSincePermanenceGain = 0;
       player.version = 1.796875;
     }
+    if (player.version < 1.8125) {
+      player.stats.totalEternitiesProducedThisComplexity = player.eternities;
+      player.chroma.colors.push(0);
+      player.chroma.unlocked.push(false);
+      player.version = 1.8125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
@@ -288,6 +294,7 @@ let Saving = {
     player.stats.totalIPProducedThisEternity = new Decimal(player.stats.totalIPProducedThisEternity);
     player.stats.totalEPProduced = new Decimal(player.stats.totalEPProduced);
     player.stats.totalEPProducedThisComplexity = new Decimal(player.stats.totalEPProducedThisComplexity);
+    player.stats.totalEternitiesProducedThisComplexity = new Decimal(player.stats.totalEternitiesProducedThisComplexity);
     player.stats.totalCPProduced = new Decimal(player.stats.totalCPProduced);
     player.stats.peakIPPerSec = new Decimal(player.stats.peakIPPerSec);
     player.stats.peakEPPerSec = new Decimal(player.stats.peakEPPerSec);

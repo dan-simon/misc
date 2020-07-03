@@ -224,6 +224,10 @@ button {
   height: 160px;
 }
 
+.yellowspan, .yellowdiv > span {
+  color: #ffff00;
+}
+
 .greyspan, .greydiv > span {
   color: #aaaaaa;
 }
@@ -244,8 +248,8 @@ button {
   color: #33ff33;
 }
 
-.yellowspan, .yellowdiv > span {
-  color: #ffff00;
+.redspan, .reddiv > span {
+  color: #ff0000;
 }
 
 .greytogrey {

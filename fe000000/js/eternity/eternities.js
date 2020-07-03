@@ -2,10 +2,15 @@ let Eternities = {
   amount() {
     return player.eternities;
   },
+  totalEternitiesProducedThisComplexity() {
+    return player.stats.totalEternitiesProducedThisComplexity;
+  },
   add(x) {
     player.eternities = player.eternities.plus(x);
+    player.stats.totalEternitiesProducedThisComplexity = player.stats.totalEternitiesProducedThisComplexity.plus(x);
   },
   setAmount(x) {
+    // This is apparently only called in one place, where it represents a loss of eternities.
     player.eternities = new Decimal(x);
   },
   commonEternityGainMultiplier() {
