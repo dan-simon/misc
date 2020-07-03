@@ -2,15 +2,15 @@ let ComplexityUpgrades = {
   complexityUpgradeRequirements: [
     [
       () => ComplexityChallenge.getComplexityChallengeCompletions(2) >= 8,
-      (_, eter) => eter,
+      situation => situation === 'eternity',
       () => false,
       () => false
     ],
     [
       () => Boost.multiplierPer() >= Math.pow(2, 24) && !InfinityChallenge.isInfinityChallengeRunning(7),
       () => Eternities.amount().gte(Math.pow(2, 24)),
-      () => false,
-      () => false
+      situation => situation === 'chroma',
+      () => Studies.totalTheorems() >= 154
     ],
     [
       () => false,
@@ -34,8 +34,8 @@ let ComplexityUpgrades = {
     ],
     [
       () => 1 + Math.max(0, player.eternities.log(2) / 64),
-      () => 0,
-      () => 0,
+      () => null,
+      () => 1 + Math.max(0, player.eternities.log(2) / 16),
       () => 2
     ],
     [
@@ -53,26 +53,26 @@ let ComplexityUpgrades = {
   ],
   complexityUpgradeDefaults: [
     [1, 0, 0, 0],
-    [1, 0, 0, 1],
+    [1, null, 1, 1],
     [0, 0, null, 0],
     [0, 0, 0, 0]
   ],
-  checkForComplexityUpgrades(inf, eter) {
+  checkForComplexityUpgrades(situation) {
     for (let row = 1; row < 4; row++) {
       if (ComplexityChallenge.isComplexityChallengeRunning([2, 3, 4, 6][row - 1])) {
         for (let column = 1; column < 4; column++) {
           if (!this.hasComplexityUpgrade(row, column) &&
-            this.canUnlockComplexityUpgrade(row, column, inf, eter)) {
+            this.canUnlockComplexityUpgrade(row, column, situation)) {
             this.unlockComplexityUpgrade(row, column);
           }
         }
       }
     }
   },
-  canUnlockComplexityUpgrade(row, column, inf, eter) {
+  canUnlockComplexityUpgrade(row, column, situation) {
     // This doesn't check being in the challenge so make sure to check that first.
     // It also doesn't check whether the player already has the complexity upgrade.
-    return this.complexityUpgradeRequirements[row - 1][column - 1](inf, eter);
+    return this.complexityUpgradeRequirements[row - 1][column - 1](situation);
   },
   unlockComplexityUpgrade(row, column) {
     player.complexityUpgrades[row - 1][column - 1] = true;

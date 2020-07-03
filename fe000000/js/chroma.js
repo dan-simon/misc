@@ -76,8 +76,9 @@ let Chroma = {
     return this.colorCosts[x];
   },
   canUnlockColor(x) {
+    // You can't unlock any colors but the first without unlocking the first (that is, unlocking chroma) first.
     return !this.isColorUnlocked(x) && player.eternityPoints.gte(this.getUnlockColorCost(x)) &&
-      !(x === 1 && ComplexityChallenge.isSafeguardOn(4));
+      !(x === 1 && ComplexityChallenge.isSafeguardOn(4)) && (x === 1 || this.isUnlocked());
   },
   unlockColor(x) {
     if (!this.canUnlockColor(x)) return;
@@ -89,7 +90,10 @@ let Chroma = {
     if (player.chroma.next === 0) {
       player.chroma.next = x;
     }
-    ComplexityChallenge.exitComplexityChallenge(4);
+    if (x === 1) {
+      ComplexityChallenge.exitComplexityChallenge(4);
+      ComplexityUpgrades.checkForComplexityUpgrades('chroma');
+    }
   },
   updateChromaOnEternity() {
     player.chroma.current = player.chroma.next;

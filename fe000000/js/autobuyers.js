@@ -203,7 +203,7 @@ let Autobuyers = {
     } else if (mode === 'Time') {
       shouldGainPermanence = player.stats.timeSincePermanenceGain >= priority.toNumber();
     } else if (mode === 'X times last') {
-      shouldGainPermanence = Permanence.permanenceGain().gte(player.stats.lastPermanenceGain);
+      shouldGainPermanence = Permanence.permanenceGain().gte(player.stats.lastPermanenceGain.times(priority));
     }
     if (shouldGainPermanence) {
       Permanence.gainPermanence();

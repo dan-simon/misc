@@ -36,7 +36,7 @@ function gameLoop(diff, display) {
     InfinityPoints.addAmount(InfinityPrestigeLayer.infinityPointGain().times(diff));
   }
   ComplexityChallenge.checkForComplexityChallengeCompletions();
-  ComplexityUpgrades.checkForComplexityUpgrades(false, false);
+  ComplexityUpgrades.checkForComplexityUpgrades();
   if (display !== false) {
     updateDisplay();
   }

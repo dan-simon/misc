@@ -1929,7 +1929,7 @@
             <td><span ~style.display=EternityAutobuyer(14).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(14).toggle()">Auto: ~r EternityAutobuyer(14).isOn() ? "On" : "Off" ~</button></span></td>
           </tr>
           <tr>
-            <td>Power to Eternity Producer multiplier to eternity generators:</td>
+            <td>Power to Eternity Producer multiplier to EGs:</td>
             <td><span ~style.display=PermanenceUpgrade(2).atBoughtLimit() ? 'none' : ''~>~f PermanenceUpgrade(2).effect() ~ → ~f PermanenceUpgrade(2).nextEffect() ~</span><span ~style.display=PermanenceUpgrade(2).atBoughtLimit() ? '' : 'none'~>~f PermanenceUpgrade(2).effect() ~ (maxed)</span></td>
             <td><span ~style.display=PermanenceUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(2).buy()">Cost: ~f PermanenceUpgrade(2).cost() ~ permanence</button></span></td>
             <td><span ~style.display=PermanenceUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(2).buyMax()">Max</button></span></td>
@@ -1943,7 +1943,7 @@
             <td><span ~style.display=EternityAutobuyer(16).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(16).toggle()">Auto: ~r EternityAutobuyer(16).isOn() ? "On" : "Off" ~</button></span></td>
           </tr>
           <tr>
-            <td>Multiplier to permanence gain based on eternity stars:</td>
+            <td>Multiplier to permanence based on eternity stars:</td>
             <td><span ~style.display=PermanenceUpgrade(4).atBoughtLimit() ? 'none' : ''~>~f PermanenceUpgrade(4).effect() ~ → ~f PermanenceUpgrade(4).nextEffect() ~</span><span ~style.display=PermanenceUpgrade(4).atBoughtLimit() ? '' : 'none'~>~f PermanenceUpgrade(4).effect() ~ (maxed)</span></td>
             <td><span ~style.display=PermanenceUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(4).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(4).buy()">Cost: ~f PermanenceUpgrade(4).cost() ~ permanence</button></span></td>
             <td><span ~style.display=PermanenceUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(4).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(4).buyMax()">Max</button></span></td>
@@ -2323,7 +2323,7 @@
     </br>
     <span>You have ~f Complexities.amount() ~ complexities, multiplying all complexity generators (CGs) by ~f Complexities.complexityGeneratorMultiplier() ~</span>
     <br/>
-    <span>and multiplying permanence gain and chroma buildup speed by ~f Complexities.permanenceAndChromaMultiplier() ~.</span>
+    <span>and multiplying permanence and chroma buildup speed by ~f Complexities.permanenceAndChromaMultiplier() ~.</span>
     <br/>
     <span>You have ~f ComplexityStars.amount() ~ complexity stars, making all complexity challenge rewards ~f ComplexityStars.complexityChallengeMultiplier() ~x stronger.</span>
     <br/>
@@ -2587,7 +2587,7 @@
       <tr>
         <td>
           <div class="complexityupgradediv">
-            <span class="purpletogrey">Upgrade name goes here</span>
+            <span class="purpletogrey">Actually a boost</span>
             <br/>
             Get a per-boost multiplier of ~f Math.pow(2, 24) ~ outside of Infinity Challenge 7 in Complexity Challenge 3.
             <br/>
@@ -2609,20 +2609,20 @@
         </td>
         <td>
           <div class="complexityupgradediv">
-            <span class="purpletoorange">Default</span>
+            <span class="purpletoorange">After a hurricane</span>
             <br/>
-            Default requirement
+            Unlock chroma in Complexity Challenge 3.
             <br/>
             ~r ComplexityUpgrades.complexityUpgradeStatusDescription(2, 3) ~
             <br/>
-            Default effect
+            Multiplier to chroma buildup speed based on eternities (currently ~f ComplexityUpgrades.rawEffect(2, 3) ~x)
           </div>
         </td>
         <td>
           <div class="complexityupgradediv">
-            <span class="purpletogreen">Default</span>
+            <span class="purpletogreen">2 * 7 * 11</span>
             <br/>
-            Default requirement
+            Get ~f 154 ~ theorems in Complexity Challenge 3.
             <br/>
             ~r ComplexityUpgrades.complexityUpgradeStatusDescription(2, 4) ~
             <br/>
