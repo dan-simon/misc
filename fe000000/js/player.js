@@ -114,6 +114,7 @@ let initialPlayer = {
   currentEternityChallenge: 0,
   eternityChallengeCompletions: [0, 0, 0, 0, 0, 0, 0, 0],
   respecEternityChallenge: false,
+  isEternityChallengeRequirementDisplayOn: true,
   permanence: new Decimal(0),
   permanenceUpgrades: [0, 0, 0, 0],
   hasGainedPermanence: false,

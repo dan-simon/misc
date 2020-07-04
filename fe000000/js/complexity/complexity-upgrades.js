@@ -13,7 +13,7 @@ let ComplexityUpgrades = {
       () => Studies.totalTheorems() >= 154
     ],
     [
-      () => false,
+      () => Boost.bought() >= 1024 && EternityChallenge.isEternityChallengeRunning(2),
       () => EternityChallenge.getTotalEternityChallengeCompletions() >= 32,
       () => ComplexityChallenge.getComplexityChallengeCompletions(4) >= 8,
       () => Generators.areAnyMultipliersNerfed()
@@ -39,8 +39,8 @@ let ComplexityUpgrades = {
       () => 2
     ],
     [
-      () => 0,
-      () => 0,
+      () => 1 + Math.log2(1 + Chroma.colorAmount(1) / Math.pow(2, 20)),
+      () => null,
       () => null,
       () => null
     ],
@@ -54,7 +54,7 @@ let ComplexityUpgrades = {
   complexityUpgradeDefaults: [
     [1, 0, 0, 0],
     [1, null, 1, 1],
-    [0, 0, null, null],
+    [1, null, null, null],
     [0, 0, 0, 0]
   ],
   checkForComplexityUpgrades(situation) {

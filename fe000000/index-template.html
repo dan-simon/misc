@@ -1958,7 +1958,8 @@
   <tab ~style.display=Tabs.currentTab() === 'eternity-challenges' ? '' : 'none'~>
     <span>
       You have completed ~f EternityChallenge.getTotalEternityChallengeCompletions() ~ eternity challenge tiers, giving you ~f EternityChallenge.extraTheorems() ~ extra theorems (~f 1 ~ per tier).
-      <button onclick="EternityChallenge.toggleRespec()">Respec eternity challenge on next eternity: ~r EternityChallenge.isRespecOn() ? "On" : "Off" ~</button>
+      <button ~style.display=EternityChallenge.canRespec() ? '' : 'none'~ onclick="EternityChallenge.toggleRespec()">Respec eternity challenge on next eternity: ~r EternityChallenge.isRespecOn() ? "On" : "Off" ~</button>
+      <button ~style.display=ComplexityUpgrades.hasComplexityUpgrade(3, 2) ? '' : 'none'~ onclick="EternityChallenge.toggleRequirementDisplay()">Show (now unneeded) eternity challenge requirements: ~r EternityChallenge.isRequirementDisplayOn() ? "On" : "Off" ~</button>
     </span>
     <br/>
     <span>
@@ -1993,7 +1994,7 @@
       ~r EternityChallenge.eternityChallengeTotalCompletionsReward4Text() ~
     </span>
     <br/>
-    <span>
+    <span ~style.display=EternityChallenge.canRespec() ? '' : 'none'~>
       <button onclick="EternityChallenge.respecAndReset()">Respec eternity challenge and ~r EternityPrestigeLayer.resetText() ~</button>
     </span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
@@ -2004,12 +2005,14 @@
             <br/>
             <span>There are exponents on all normal generators multipliers based on infinity stars and on all infinity generator multipliers based on eternity stars (both less than ~f 1 ~).</span>
             <br/>
-            <span>Requirement to start:</span>
-            <br/>
-            <span>~r EternityChallenge.eternityChallengeRequirementDescription(1) ~</span>
-            <br/>
-            <span>Cost: ~f EternityChallenge.getEternityChallengeCost(1) ~ theorems</span>
-            <br/>
+            <div ~style.display=EternityChallenge.isRequirementDisplayOn() ? '' : 'none'~>
+              <span>Requirement to start:</span>
+              <br/>
+              <span>~r EternityChallenge.eternityChallengeRequirementDescription(1) ~</span>
+            </div>
+            <div ~style.display=ComplexityUpgrades.hasComplexityUpgrade(3, 2) ? 'none' : ''~>
+              <span>Cost: ~f EternityChallenge.getEternityChallengeCost(1) ~ theorems</span>
+            </div>
             <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(1) ~ IP</span>
             <br/>
             <span>~r EternityChallenge.eternityChallengeStatusDescription(1) ~</span>
@@ -2022,170 +2025,184 @@
           </div>
         </td>
         <td>
-            <div class="eternitychallengediv">
-              <span>Eternity Challenge 2</span>
-              <br/>
-              <span>Boost costs are massively increased.</span>
-              <br/>
+          <div class="eternitychallengediv">
+            <span>Eternity Challenge 2</span>
+            <br/>
+            <span>Boost costs are massively increased.</span>
+            <br/>
+            <div ~style.display=EternityChallenge.isRequirementDisplayOn() ? '' : 'none'~>
               <span>Requirement to start:</span>
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(2) ~</span>
-              <br/>
-              <span>Cost: ~f EternityChallenge.getEternityChallengeCost(2) ~ theorems</span>
-              <br/>
-              <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(2) ~ IP</span>
-              <br/>
-              <span>~r EternityChallenge.eternityChallengeStatusDescription(2) ~</span>
-              <br/>
-              <span><button onclick="EternityChallenge.pressEternityChallengeButton(2)">~r EternityChallenge.eternityChallengeButtonText(2) ~</button></span>
-              <br/>
-              <span>Reward: Boosts are cheaper.</span>
-              <br/>
-              <span>Current: Cost ^~f EternityChallenge.getEternityChallengeReward(2) ~<span ~style.display=EternityChallenge.isEternityChallengeCompleted(2) ? 'none' : ''~>, Next: Cost ^~f EternityChallenge.getEternityChallengeNextReward(2) ~</span></span>
             </div>
+            <div ~style.display=ComplexityUpgrades.hasComplexityUpgrade(3, 2) ? 'none' : ''~>
+              <span>Cost: ~f EternityChallenge.getEternityChallengeCost(2) ~ theorems</span>
+            </div>
+            <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(2) ~ IP</span>
+            <br/>
+            <span>~r EternityChallenge.eternityChallengeStatusDescription(2) ~</span>
+            <br/>
+            <span><button onclick="EternityChallenge.pressEternityChallengeButton(2)">~r EternityChallenge.eternityChallengeButtonText(2) ~</button></span>
+            <br/>
+            <span>Reward: Boosts are cheaper.</span>
+            <br/>
+            <span>Current: Cost ^~f EternityChallenge.getEternityChallengeReward(2) ~<span ~style.display=EternityChallenge.isEternityChallengeCompleted(2) ? 'none' : ''~>, Next: Cost ^~f EternityChallenge.getEternityChallengeNextReward(2) ~</span></span>
+          </div>
         </td>
       </tr>
       <tr>
         <td>
           <div class="eternitychallengediv">
-              <span>Eternity Challenge 3</span>
-              <br/>
-              <span>You can't prestige.</span>
-              <br/>
+            <span>Eternity Challenge 3</span>
+            <br/>
+            <span>You can't prestige.</span>
+            <br/>
+            <div ~style.display=EternityChallenge.isRequirementDisplayOn() ? '' : 'none'~>
               <span>Requirement to start:</span>
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(3) ~</span>
-              <br/>
+            </div>
+            <div ~style.display=ComplexityUpgrades.hasComplexityUpgrade(3, 2) ? 'none' : ''~>
               <span>Cost: ~f EternityChallenge.getEternityChallengeCost(3) ~ theorems</span>
-              <br/>
-              <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(3) ~ IP</span>
-              <br/>
-              <span>~r EternityChallenge.eternityChallengeStatusDescription(3) ~</span>
-              <br/>
-              <span><button onclick="EternityChallenge.pressEternityChallengeButton(3)">~r EternityChallenge.eternityChallengeButtonText(3) ~</button></span>
-              <br/>
-              <span>Reward: Exponent to prestige power.</span>
-              <br/>
-              <span>Current: ^~r formatWithPrecision(EternityChallenge.getEternityChallengeReward(3), 5) ~<span ~style.display=EternityChallenge.isEternityChallengeCompleted(3) ? 'none' : ''~>, Next: ^~r formatWithPrecision(EternityChallenge.getEternityChallengeNextReward(3), 5) ~</span></span>
+            </div>
+            <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(3) ~ IP</span>
+            <br/>
+            <span>~r EternityChallenge.eternityChallengeStatusDescription(3) ~</span>
+            <br/>
+            <span><button onclick="EternityChallenge.pressEternityChallengeButton(3)">~r EternityChallenge.eternityChallengeButtonText(3) ~</button></span>
+            <br/>
+            <span>Reward: Exponent to prestige power.</span>
+            <br/>
+            <span>Current: ^~r formatWithPrecision(EternityChallenge.getEternityChallengeReward(3), 5) ~<span ~style.display=EternityChallenge.isEternityChallengeCompleted(3) ? 'none' : ''~>, Next: ^~r formatWithPrecision(EternityChallenge.getEternityChallengeNextReward(3), 5) ~</span></span>
           </div>
         </td>
         <td>
           <div class="eternitychallengediv">
-              <span>Eternity Challenge 4</span>
-              <br/>
-              <span>You can infinity at most ~f EternityChallenge.eternityChallenge4AllowedInfinities() ~ times. If you infinity more, you will automatically exit the challenge.</span>
-              <br/>
+            <span>Eternity Challenge 4</span>
+            <br/>
+            <span>You can infinity at most ~f EternityChallenge.eternityChallenge4AllowedInfinities() ~ times. If you infinity more, you will automatically exit the challenge.</span>
+            <br/>
+            <div ~style.display=EternityChallenge.isRequirementDisplayOn() ? '' : 'none'~>
               <span>Requirement to start:</span>
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(4) ~</span>
-              <br/>
+            </div>
+            <div ~style.display=ComplexityUpgrades.hasComplexityUpgrade(3, 2) ? 'none' : ''~>
               <span>Cost: ~f EternityChallenge.getEternityChallengeCost(4) ~ theorems</span>
-              <br/>
-              <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(4) ~ IP</span>
-              <br/>
-              <span>~r EternityChallenge.eternityChallengeStatusDescription(4) ~</span>
-              <br/>
-              <span><button onclick="EternityChallenge.pressEternityChallengeButton(4)">~r EternityChallenge.eternityChallengeButtonText(4) ~</button></span>
-              <br/>
-              <span>Reward: Multiplier to infinity generators based on total infinity points produced this eternity.</span>
-              <br/>
-              <span>Current: ~f EternityChallenge.getEternityChallengeReward(4) ~x<span ~style.display=EternityChallenge.isEternityChallengeCompleted(4) ? 'none' : ''~>, Next: ~f EternityChallenge.getEternityChallengeNextReward(4) ~x</span></span>
+            </div>
+            <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(4) ~ IP</span>
+            <br/>
+            <span>~r EternityChallenge.eternityChallengeStatusDescription(4) ~</span>
+            <br/>
+            <span><button onclick="EternityChallenge.pressEternityChallengeButton(4)">~r EternityChallenge.eternityChallengeButtonText(4) ~</button></span>
+            <br/>
+            <span>Reward: Multiplier to infinity generators based on total infinity points produced this eternity.</span>
+            <br/>
+            <span>Current: ~f EternityChallenge.getEternityChallengeReward(4) ~x<span ~style.display=EternityChallenge.isEternityChallengeCompleted(4) ? 'none' : ''~>, Next: ~f EternityChallenge.getEternityChallengeNextReward(4) ~x</span></span>
           </div>
         </td>
       </tr>
       <tr>
         <td>
           <div class="eternitychallengediv">
-              <span>Eternity Challenge 5</span>
-              <br/>
-              <span>Infinity generator multipliers are square-rooted (^~f 0.5 ~).</span>
-              <br/>
+            <span>Eternity Challenge 5</span>
+            <br/>
+            <span>Infinity generator multipliers are square-rooted (^~f 0.5 ~).</span>
+            <br/>
+            <div ~style.display=EternityChallenge.isRequirementDisplayOn() ? '' : 'none'~>
               <span>Requirement to start:</span>
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(5) ~</span>
-              <br/>
+            </div>
+            <div ~style.display=ComplexityUpgrades.hasComplexityUpgrade(3, 2) ? 'none' : ''~>
               <span>Cost: ~f EternityChallenge.getEternityChallengeCost(5) ~ theorems</span>
-              <br/>
-              <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(5) ~ IP</span>
-              <br/>
-              <span>~r EternityChallenge.eternityChallengeStatusDescription(5) ~</span>
-              <br/>
-              <span><button onclick="EternityChallenge.pressEternityChallengeButton(5)">~r EternityChallenge.eternityChallengeButtonText(5) ~</button></span>
-              <br/>
-              <span>Reward: Exponent to infinity generator multipliers.</span>
-              <br/>
-              <span>Current: ^~f EternityChallenge.getEternityChallengeReward(5) ~<span ~style.display=EternityChallenge.isEternityChallengeCompleted(5) ? 'none' : ''~>, Next: ^~f EternityChallenge.getEternityChallengeNextReward(5) ~</span></span>
+            </div>
+            <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(5) ~ IP</span>
+            <br/>
+            <span>~r EternityChallenge.eternityChallengeStatusDescription(5) ~</span>
+            <br/>
+            <span><button onclick="EternityChallenge.pressEternityChallengeButton(5)">~r EternityChallenge.eternityChallengeButtonText(5) ~</button></span>
+            <br/>
+            <span>Reward: Exponent to infinity generator multipliers.</span>
+            <br/>
+            <span>Current: ^~f EternityChallenge.getEternityChallengeReward(5) ~<span ~style.display=EternityChallenge.isEternityChallengeCompleted(5) ? 'none' : ''~>, Next: ^~f EternityChallenge.getEternityChallengeNextReward(5) ~</span></span>
           </div>
         </td>
         <td>
           <div class="eternitychallengediv">
-              <span>Eternity Challenge 6</span>
-              <br/>
-              <span>All eternity challenge rewards are disabled.</span>
-              <br/>
+            <span>Eternity Challenge 6</span>
+            <br/>
+            <span>All eternity challenge rewards are disabled.</span>
+            <br/>
+            <div ~style.display=EternityChallenge.isRequirementDisplayOn() ? '' : 'none'~>
               <span>Requirement to start:</span>
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(6) ~</span>
-              <br/>
+            </div>
+            <div ~style.display=ComplexityUpgrades.hasComplexityUpgrade(3, 2) ? 'none' : ''~>
               <span>Cost: ~f EternityChallenge.getEternityChallengeCost(6) ~ theorems</span>
-              <br/>
-              <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(6) ~ IP</span>
-              <br/>
-              <span>~r EternityChallenge.eternityChallengeStatusDescription(6) ~</span>
-              <br/>
-              <span><button onclick="EternityChallenge.pressEternityChallengeButton(6)">~r EternityChallenge.eternityChallengeButtonText(6) ~</button></span>
-              <br/>
-              <span>Reward: All other eternity challenge rewards are stronger.</span>
-              <br/>
-              <span>Current: ~f EternityChallenge.getEternityChallengeReward(6) ~x<span ~style.display=EternityChallenge.isEternityChallengeCompleted(6) ? 'none' : ''~>, Next: ~f EternityChallenge.getEternityChallengeNextReward(6) ~x</span></span>
+            </div>
+            <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(6) ~ IP</span>
+            <br/>
+            <span>~r EternityChallenge.eternityChallengeStatusDescription(6) ~</span>
+            <br/>
+            <span><button onclick="EternityChallenge.pressEternityChallengeButton(6)">~r EternityChallenge.eternityChallengeButtonText(6) ~</button></span>
+            <br/>
+            <span>Reward: All other eternity challenge rewards are stronger.</span>
+            <br/>
+            <span>Current: ~f EternityChallenge.getEternityChallengeReward(6) ~x<span ~style.display=EternityChallenge.isEternityChallengeCompleted(6) ? 'none' : ''~>, Next: ~f EternityChallenge.getEternityChallengeNextReward(6) ~x</span></span>
           </div>
         </td>
       </tr>
       <tr>
         <td>
           <div class="eternitychallengediv">
-              <span>Eternity Challenge 7</span>
-              <br/>
-              <span>Infinity generator per-purchase multipliers are disabled.</span>
-              <br/>
+            <span>Eternity Challenge 7</span>
+            <br/>
+            <span>Infinity generator per-purchase multipliers are disabled.</span>
+            <br/>
+            <div ~style.display=EternityChallenge.isRequirementDisplayOn() ? '' : 'none'~>
               <span>Requirement to start:</span>
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(7) ~</span>
-              <br/>
+            </div>
+            <div ~style.display=ComplexityUpgrades.hasComplexityUpgrade(3, 2) ? 'none' : ''~>
               <span>Cost: ~f EternityChallenge.getEternityChallengeCost(7) ~ theorems</span>
-              <br/>
-              <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(7) ~ IP</span>
-              <br/>
-              <span>~r EternityChallenge.eternityChallengeStatusDescription(7) ~</span>
-              <br/>
-              <span><button onclick="EternityChallenge.pressEternityChallengeButton(7)">~r EternityChallenge.eternityChallengeButtonText(7) ~</button></span>
-              <br/>
-              <span>Reward: Multiplier to infinity generators based on eternity points produced this complexity.</span>
-              <br/>
-              <span>Current: ~f EternityChallenge.getEternityChallengeReward(7) ~x<span ~style.display=EternityChallenge.isEternityChallengeCompleted(7) ? 'none' : ''~>, Next: ~f EternityChallenge.getEternityChallengeNextReward(7) ~x</span></span>
+            </div>
+            <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(7) ~ IP</span>
+            <br/>
+            <span>~r EternityChallenge.eternityChallengeStatusDescription(7) ~</span>
+            <br/>
+            <span><button onclick="EternityChallenge.pressEternityChallengeButton(7)">~r EternityChallenge.eternityChallengeButtonText(7) ~</button></span>
+            <br/>
+            <span>Reward: Multiplier to infinity generators based on eternity points produced this complexity.</span>
+            <br/>
+            <span>Current: ~f EternityChallenge.getEternityChallengeReward(7) ~x<span ~style.display=EternityChallenge.isEternityChallengeCompleted(7) ? 'none' : ''~>, Next: ~f EternityChallenge.getEternityChallengeNextReward(7) ~x</span></span>
           </div>
         </td>
         <td>
           <div class="eternitychallengediv">
-              <span>Eternity Challenge 8</span>
-              <br/>
-              <span>Eternity generators are disabled.</span>
-              <br/>
+            <span>Eternity Challenge 8</span>
+            <br/>
+            <span>Eternity generators are disabled.</span>
+            <br/>
+            <div ~style.display=EternityChallenge.isRequirementDisplayOn() ? '' : 'none'~>
               <span>Requirement to start:</span>
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(8) ~</span>
-              <br/>
+            </div>
+            <div ~style.display=ComplexityUpgrades.hasComplexityUpgrade(3, 2) ? 'none' : ''~>
               <span>Cost: ~f EternityChallenge.getEternityChallengeCost(8) ~ theorems</span>
-              <br/>
-              <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(8) ~ IP</span>
-              <br/>
-              <span>~r EternityChallenge.eternityChallengeStatusDescription(8) ~</span>
-              <br/>
-              <span><button onclick="EternityChallenge.pressEternityChallengeButton(8)">~r EternityChallenge.eternityChallengeButtonText(8) ~</button></span>
-              <br/>
-              <span>Reward: Multiplier to eternity generators.</span>
-              <br/>
-              <span>Current: ~f EternityChallenge.getEternityChallengeReward(8) ~x<span ~style.display=EternityChallenge.isEternityChallengeCompleted(8) ? 'none' : ''~>, Next: ~f EternityChallenge.getEternityChallengeNextReward(8) ~x</span></span>
+            </div>
+            <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(8) ~ IP</span>
+            <br/>
+            <span>~r EternityChallenge.eternityChallengeStatusDescription(8) ~</span>
+            <br/>
+            <span><button onclick="EternityChallenge.pressEternityChallengeButton(8)">~r EternityChallenge.eternityChallengeButtonText(8) ~</button></span>
+            <br/>
+            <span>Reward: Multiplier to eternity generators.</span>
+            <br/>
+            <span>Current: ~f EternityChallenge.getEternityChallengeReward(8) ~x<span ~style.display=EternityChallenge.isEternityChallengeCompleted(8) ? 'none' : ''~>, Next: ~f EternityChallenge.getEternityChallengeNextReward(8) ~x</span></span>
           </div>
         </td>
       </tr>
@@ -2652,11 +2669,11 @@
           <div class="complexityupgradediv">
             <span class="orangetogrey">No rest</span>
             <br/>
-            Default requirement
+            Get ~f 1024 ~ boosts in Eternity Challenge 2 in Complexity Challenge 4.
             <br/>
             ~r ComplexityUpgrades.complexityUpgradeStatusDescription(3, 1) ~
             <br/>
-            Default effect
+            Grey chroma powers purple and orange chroma effects (currently ^~f ComplexityUpgrades.rawEffect(3, 1) ~)
           </div>
         </td>
         <td>
@@ -2667,7 +2684,7 @@
             <br/>
             ~r ComplexityUpgrades.complexityUpgradeStatusDescription(3, 2) ~
             <br/>
-            Eternity challenge requirements and costs are removed (unimplemented).
+            Eternity challenge requirements and costs are removed.
           </div>
         </td>
         <td>

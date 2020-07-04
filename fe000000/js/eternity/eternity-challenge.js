@@ -95,6 +95,9 @@ let EternityChallenge = {
     return this.rewards[x](this.getNextRewardCalculationEternityChallengeCompletions(x));
   },
   getEternityChallengeCost(x) {
+    if (ComplexityUpgrades.hasComplexityUpgrade(3, 2)) {
+      return 0;
+    }
     return this.costs[x];
   },
   getUnlockedEternityChallenge() {
@@ -159,7 +162,7 @@ let EternityChallenge = {
     return this.resourceNames[x];
   },
   canEternityChallengeBeStarted(x) {
-    return this.getUnlockedEternityChallenge() === x;
+    return ComplexityUpgrades.hasComplexityUpgrade(3, 2) || this.getUnlockedEternityChallenge() === x;
   },
   isEternityChallengeRunning(x) {
     return this.currentEternityChallenge() === x;
@@ -191,6 +194,9 @@ let EternityChallenge = {
     player.currentEternityChallenge = x;
   },
   canEternityChallengeBeUnlocked(x) {
+    if (ComplexityUpgrades.hasComplexityUpgrade(3, 2)) {
+      return true;
+    }
     return this.getUnlockedEternityChallenge() === 0 &&
       Decimal.gte(this.getEternityChallengeResourceAmount(x), this.getEternityChallengeRequirement(x)) &&
       Studies.unspentTheorems() >= this.getEternityChallengeCost(x);
@@ -200,6 +206,9 @@ let EternityChallenge = {
     // has previously been confirmed to be unlockable.
     player.unlockedEternityChallenge = x;
   },
+  canRespec() {
+    return !ComplexityUpgrades.hasComplexityUpgrade(3, 2);
+  },
   isRespecOn() {
     return player.respecEternityChallenge;
   },
@@ -207,7 +216,10 @@ let EternityChallenge = {
     player.respecEternityChallenge = !player.respecEternityChallenge;
   },
   respec() {
-    this.lockUnlockedEternityChallenge();
+    // This fails in situations where ECs being locked is no longer a thing.
+    if (this.canRespec()) {
+      this.lockUnlockedEternityChallenge();
+    }
   },
   maybeRespec() {
     if (this.isRespecOn()) {
@@ -246,7 +258,7 @@ let EternityChallenge = {
     if (player.eternityChallengeCompletions[x - 1] < 4) {
       player.eternityChallengeCompletions[x - 1]++;
     }
-    this.setEternityChallenge(0);
+    // Current eternity challenge is set to 0 as part of lockUnlockedEternityChallenge.
     this.lockUnlockedEternityChallenge();
   },
   eternityChallenge1InfinityStarsEffect() {
@@ -285,6 +297,15 @@ let EternityChallenge = {
       return 'Chroma buildup speed ' + format(this.getTotalCompletionsRewardRawEffect(4)) + 'x.';
     } else {
       return 'Autobuyers for eternity upgrades, eternity generators, and Eternity Producer upgrades, and chroma buildup speed ' + format(this.getTotalCompletionsRewardRawEffect(4)) + 'x.';
+    }
+  },
+  // Technically this is a bit redundant.
+  isRequirementDisplayOn() {
+    return player.isEternityChallengeRequirementDisplayOn || !ComplexityUpgrades.hasComplexityUpgrade(3, 2);
+  },
+  toggleRequirementDisplay() {
+    if (ComplexityUpgrades.hasComplexityUpgrade(3, 2)) {
+      player.isEternityChallengeRequirementDisplayOn = !player.isEternityChallengeRequirementDisplayOn;
     }
   }
 }

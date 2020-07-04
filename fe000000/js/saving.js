@@ -267,6 +267,10 @@ let Saving = {
       player.chroma.unlocked.push(false);
       player.version = 1.8125;
     }
+    if (player.version < 1.828125) {
+      player.isEternityChallengeRequirementDisplayOn = true;
+      player.version = 1.828125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

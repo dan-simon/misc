@@ -39,7 +39,11 @@ let Chroma = {
     return this.effectOfColor(5);
   },
   effectOfColor(x) {
-    return this.colorEffectFormulas[x](this.colorAmount(x));
+    let effect = this.colorEffectFormulas[x](this.colorAmount(x));
+    if (x === 2 || x === 3) {
+      effect = Math.pow(effect, ComplexityUpgrades.effect(3, 1));
+    }
+    return effect;
   },
   colorAmount(x) {
     return player.chroma.colors[x - 1];
