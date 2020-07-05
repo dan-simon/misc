@@ -326,8 +326,8 @@ let EternityChallenge = {
   checkForAutoEternityChallengeCompletions() {
     if (this.isAutoECCompletionActive()) {
       let timePer = Complexities.autoECCompletionTime();
-      let autoCompletions = Math.floor(player.stats.timeSinceAutoECCompletion / timePer);
-      player.stats.timeSinceAutoECCompletion %= timePer;
+      let startingAutoCompletions = Math.floor(player.stats.timeSinceAutoECCompletion / timePer);
+      let autoCompletions = startingAutoCompletions;
       for (let ec = 1; ec <= 8; ec++) {
         if (autoCompletions === 0) {
           break;
@@ -340,6 +340,7 @@ let EternityChallenge = {
           player.usedAutoECCompletionThisComplexity = true;
         }
       }
+      player.stats.timeSinceAutoECCompletion -= timePer * (startingAutoCompletions - autoCompletions);
     }
   },
   usedAutoECCompletionThisComplexity() {
