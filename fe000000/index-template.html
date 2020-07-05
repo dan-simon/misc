@@ -1619,6 +1619,23 @@
           </button>
         </td>
       </tr>
+      <tr ~style.display=EternityAutobuyers.hasTheoremAutobuyers() ? '' : 'none'~>
+        <td>
+          <button style="width: 256px; height: 48px;" onclick="EternityAutobuyer(14).toggle()">
+            Auto buy theorems with stars: ~r EternityAutobuyer(14).isOn() ? "On" : "Off" ~
+          </button>
+        </td>
+        <td>
+          <button style="width: 256px; height: 48px;" onclick="EternityAutobuyer(15).toggle()">
+            Auto buy theorems with infinity points: ~r EternityAutobuyer(15).isOn() ? "On" : "Off" ~
+          </button>
+        </td>
+        <td>
+          <button style="width: 256px; height: 48px;" onclick="EternityAutobuyer(16).toggle()">
+            Auto buy theorems with eternity points: ~r EternityAutobuyer(16).isOn() ? "On" : "Off" ~
+          </button>
+        </td>
+      </tr>
     </table>
     <span>
       Buying a study will increase the costs of all studies on other rows by ~f 2 ~ theorems.
@@ -1926,28 +1943,28 @@
             <td><span ~style.display=PermanenceUpgrade(1).atBoughtLimit() ? 'none' : ''~>~f PermanenceUpgrade(1).effect() ~ → ~f PermanenceUpgrade(1).nextEffect() ~</span><span ~style.display=PermanenceUpgrade(1).atBoughtLimit() ? '' : 'none'~>~f PermanenceUpgrade(1).effect() ~ (maxed)</span></td>
             <td><span ~style.display=PermanenceUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(1).buy()">Cost: ~f PermanenceUpgrade(1).cost() ~ permanence</button></span></td>
             <td><span ~style.display=PermanenceUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(1).buyMax()">Max</button></span></td>
-            <td><span ~style.display=EternityAutobuyer(14).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(14).toggle()">Auto: ~r EternityAutobuyer(14).isOn() ? "On" : "Off" ~</button></span></td>
+            <td><span ~style.display=EternityAutobuyer(17).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(17).toggle()">Auto: ~r EternityAutobuyer(17).isOn() ? "On" : "Off" ~</button></span></td>
           </tr>
           <tr>
             <td>Power to Eternity Producer multiplier to EGs:</td>
             <td><span ~style.display=PermanenceUpgrade(2).atBoughtLimit() ? 'none' : ''~>~f PermanenceUpgrade(2).effect() ~ → ~f PermanenceUpgrade(2).nextEffect() ~</span><span ~style.display=PermanenceUpgrade(2).atBoughtLimit() ? '' : 'none'~>~f PermanenceUpgrade(2).effect() ~ (maxed)</span></td>
             <td><span ~style.display=PermanenceUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(2).buy()">Cost: ~f PermanenceUpgrade(2).cost() ~ permanence</button></span></td>
             <td><span ~style.display=PermanenceUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(2).buyMax()">Max</button></span></td>
-            <td><span ~style.display=EternityAutobuyer(15).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(15).toggle()">Auto: ~r EternityAutobuyer(15).isOn() ? "On" : "Off" ~</button></span></td>
+            <td><span ~style.display=EternityAutobuyer(18).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(18).toggle()">Auto: ~r EternityAutobuyer(18).isOn() ? "On" : "Off" ~</button></span></td>
           </tr>
           <tr>
             <td>Power to third-row study effects:</td>
             <td><span ~style.display=PermanenceUpgrade(3).atBoughtLimit() ? 'none' : ''~>~f PermanenceUpgrade(3).effect() ~ → ~f PermanenceUpgrade(3).nextEffect() ~</span><span ~style.display=PermanenceUpgrade(3).atBoughtLimit() ? '' : 'none'~>~f PermanenceUpgrade(3).effect() ~ (maxed)</span></td>
             <td><span ~style.display=PermanenceUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(3).buy()">Cost: ~f PermanenceUpgrade(3).cost() ~ permanence</button></span></td>
             <td><span ~style.display=PermanenceUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(3).buyMax()">Max</button></span></td>
-            <td><span ~style.display=EternityAutobuyer(16).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(16).toggle()">Auto: ~r EternityAutobuyer(16).isOn() ? "On" : "Off" ~</button></span></td>
+            <td><span ~style.display=EternityAutobuyer(19).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(19).toggle()">Auto: ~r EternityAutobuyer(19).isOn() ? "On" : "Off" ~</button></span></td>
           </tr>
           <tr>
             <td>Multiplier to permanence based on eternity stars:</td>
             <td><span ~style.display=PermanenceUpgrade(4).atBoughtLimit() ? 'none' : ''~>~f PermanenceUpgrade(4).effect() ~ → ~f PermanenceUpgrade(4).nextEffect() ~</span><span ~style.display=PermanenceUpgrade(4).atBoughtLimit() ? '' : 'none'~>~f PermanenceUpgrade(4).effect() ~ (maxed)</span></td>
             <td><span ~style.display=PermanenceUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(4).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(4).buy()">Cost: ~f PermanenceUpgrade(4).cost() ~ permanence</button></span></td>
             <td><span ~style.display=PermanenceUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(4).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(4).buyMax()">Max</button></span></td>
-            <td><span ~style.display=EternityAutobuyer(17).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(17).toggle()">Auto: ~r EternityAutobuyer(17).isOn() ? "On" : "Off" ~</button></span></td>
+            <td><span ~style.display=EternityAutobuyer(20).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(20).toggle()">Auto: ~r EternityAutobuyer(20).isOn() ? "On" : "Off" ~</button></span></td>
           </tr>
         </table>
       </div>
@@ -1956,12 +1973,20 @@
     </div>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'eternity-challenges' ? '' : 'none'~>
+    <span>You have completed ~f EternityChallenge.getTotalEternityChallengeCompletions() ~ eternity challenge tiers, giving you ~f EternityChallenge.extraTheorems() ~ extra theorems (~f 1 ~ per tier).</span>
+    <br/>
     <span>
-      You have completed ~f EternityChallenge.getTotalEternityChallengeCompletions() ~ eternity challenge tiers, giving you ~f EternityChallenge.extraTheorems() ~ extra theorems (~f 1 ~ per tier).
       <button ~style.display=EternityChallenge.canRespec() ? '' : 'none'~ onclick="EternityChallenge.toggleRespec()">Respec eternity challenge on next eternity: ~r EternityChallenge.isRespecOn() ? "On" : "Off" ~</button>
       <button ~style.display=ComplexityUpgrades.hasComplexityUpgrade(3, 2) ? '' : 'none'~ onclick="EternityChallenge.toggleRequirementDisplay()">Show (now unneeded) eternity challenge requirements: ~r EternityChallenge.isRequirementDisplayOn() ? "On" : "Off" ~</button>
     </span>
-    <br/>
+    <div ~style.display=EternityChallenge.hasAutoECCompletion() ? '' : 'none'~>
+      <span>You automatically complete an eternity challenge tier once every ~f Complexities.autoECCompletionTime() ~ seconds.</span>
+      <br/>
+      <span>It has been ~f EternityChallenge.timeSinceAutoECCompletion() ~ seconds since your last automatic eternity challenge completion.</span>
+      <br/>
+      <button onclick="EternityChallenge.toggleAutoECCompletion()">Automatic eternity challenge completion: ~r EternityChallenge.isAutoECCompletionOn() ? "On" : "Off" ~</button>
+    </div>
+    <br ~style.display=EternityChallenge.hasAutoECCompletion() ? 'none' : ''~/>
     <span>
       At ~f EternityChallenge.getTotalCompletionsRewardThreshold(1) ~ total eternity challenge tiers completed:
     </span>
@@ -2355,9 +2380,11 @@
     <br/>
     <span>You have produced ~f ComplexityPoints.totalCPProduced() ~ total complexity points (CP).</span>
     </br>
-    <span>You have ~f Complexities.amount() ~ complexities, multiplying all complexity generators (CGs) by ~f Complexities.complexityGeneratorMultiplier() ~</span>
+    <span>You have ~f Complexities.amount() ~ complexities, multiplying all complexity generators (CGs) by ~f Complexities.complexityGeneratorMultiplier() ~,</span>
     <br/>
-    <span>and multiplying permanence and chroma buildup speed by ~f Complexities.permanenceAndChromaMultiplier() ~.</span>
+    <span>multiplying permanence and chroma buildup speed by ~f Complexities.permanenceAndChromaMultiplier() ~,</span>
+    <br/>
+    <span>and automatically completing an eternity challenge tier every ~f Complexities.autoECCompletionTime() ~ seconds.</span>
     <br/>
     <span>You have ~f ComplexityStars.amount() ~ complexity stars, making all complexity challenge rewards ~f ComplexityStars.complexityChallengeMultiplier() ~x stronger.</span>
     <br/>
@@ -2638,7 +2665,7 @@
             <br/>
             ~r ComplexityUpgrades.complexityUpgradeStatusDescription(2, 2) ~
             <br/>
-            You always have autobuyers for eternity upgrades, eternity generators, and Eternity Producer upgrades, and you get autobuyers for permanence and permanence upgrades.
+            You always have autobuyers for eternity upgrades, eternity generators, and Eternity Producer upgrades, and you get autobuyers for theorems, permanence, and permanence upgrades.
           </div>
         </td>
         <td>

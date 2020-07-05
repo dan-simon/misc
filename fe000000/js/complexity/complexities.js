@@ -17,5 +17,8 @@ let Complexities = {
   },
   permanenceAndChromaMultiplier() {
     return Math.pow(4, Math.pow(Math.min(this.amount(), 256), 0.25));
+  },
+  autoECCompletionTime() {
+    return 8192 / Math.min(this.amount(), 256);
   }
 }

@@ -30,19 +30,30 @@ let EternityAutobuyer = function (i) {
     },
     tick() {
       if (!this.isActive()) return;
-      this.target().buyMax();
+      if (14 <= i && i <= 16) {
+        Studies.buyMax(i - 14);
+      } else {
+        this.target().buyMax();
+      }
     },
     tickBuyOne() {
       if (!this.isActive()) return;
-      this.target().buy();
+      if (14 <= i && i <= 16) {
+        Studies.buy(i - 14);
+      } else {
+        this.target().buy();
+      }
     }
   }
 }
 
 let EternityAutobuyers = {
-  eternityList: [...Array(17)].map((_, i) => EternityAutobuyer(i + 1)),
+  eternityList: [...Array(20)].map((_, i) => EternityAutobuyer(i + 1)),
   get: function (x) {
     return this.list[x - 1];
+  },
+  hasTheoremAutobuyers() {
+    return EternityAutobuyer(14).hasEternityAutobuyer();
   },
   tick() {
     while (EternityGenerators.highest() && EternityGenerators.highest().canBuy()) {
@@ -53,9 +64,9 @@ let EternityAutobuyers = {
         break;
       }
     }
-    for (let i = 0; i < 13; i++) {
-      EternityAutobuyer([9, 10, 11, 1, 2, 3, 4, 5, 6, 7, 8, 12, 13][i]).tick();
+    for (let i = 0; i < 17; i++) {
+      EternityAutobuyer([9, 10, 11, 1, 2, 3, 4, 5, 6, 7, 8, 12, 13, 14, 15, 16][i]).tick();
     }
-    Permanence.buyMaxOf([1, 2, 3, 4].filter(i => EternityAutobuyer(i + 13).isActive()));
+    Permanence.buyMaxOf([1, 2, 3, 4].filter(i => EternityAutobuyer(i + 16).isActive()));
   }
 }

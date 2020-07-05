@@ -307,5 +307,38 @@ let EternityChallenge = {
     if (ComplexityUpgrades.hasComplexityUpgrade(3, 2)) {
       player.isEternityChallengeRequirementDisplayOn = !player.isEternityChallengeRequirementDisplayOn;
     }
+  },
+  hasAutoECCompletion() {
+    return Complexities.amount() > 0;
+  },
+  isAutoECCompletionOn() {
+    return player.autoECCompletion;
+  },
+  isAutoECCompletionActive() {
+    return this.hasAutoECCompletion() && this.isAutoECCompletionOn();
+  },
+  toggleAutoECCompletion() {
+    player.autoECCompletion = !player.autoECCompletion;
+  },
+  timeSinceAutoECCompletion() {
+    return player.stats.timeSinceAutoECCompletion;
+  },
+  checkForAutoEternityChallengeCompletions() {
+    if (this.isAutoECCompletionActive()) {
+      let timePer = Complexities.autoECCompletionTime();
+      let autoCompletions = Math.floor(player.stats.timeSinceAutoECCompletion / timePer);
+      player.stats.timeSinceAutoECCompletion %= timePer;
+      for (let ec = 1; ec <= 8; ec++) {
+        if (autoCompletions === 0) {
+          break;
+        }
+        if (!this.isEternityChallengeCompleted(ec)) {
+          let newCompletions = Math.min(
+            4 - player.eternityChallengeCompletions[ec - 1], autoCompletions);
+          player.eternityChallengeCompletions[ec - 1] += newCompletions;
+          autoCompletions -= newCompletions;
+        }
+      }
+    }
   }
 }

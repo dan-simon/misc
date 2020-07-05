@@ -115,6 +115,7 @@ let initialPlayer = {
   eternityChallengeCompletions: [0, 0, 0, 0, 0, 0, 0, 0],
   respecEternityChallenge: false,
   isEternityChallengeRequirementDisplayOn: true,
+  autoECCompletion: true,
   permanence: new Decimal(0),
   permanenceUpgrades: [0, 0, 0, 0],
   hasGainedPermanence: false,
@@ -140,7 +141,8 @@ let initialPlayer = {
   ],
   eternityAutobuyers: [
     true, true, true, true, true, true, true, true,
-    true, true, true, true, true, true, true, true, true,
+    true, true, true, true, true, true, true, true,
+    true, true, true, true,
   ],
   options: {
     notation: 'Scientific',
@@ -162,6 +164,7 @@ let initialPlayer = {
     timeSincePrestige: 0,
     timeSinceInfinity: 0,
     timeSinceEternity: 0,
+    timeSinceAutoECCompletion: 0,
     timeSincePermanenceGain: 0,
     timeSinceComplexity: 0,
     timeSinceGameStart: 0,
@@ -186,7 +189,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.8125
+  version: 1.84375
 }
 
 let player;
