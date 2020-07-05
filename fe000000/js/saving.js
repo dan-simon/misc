@@ -276,6 +276,7 @@ let Saving = {
         [true, true, true], player.eternityAutobuyers.slice(13));
       player.stats.timeSinceAutoECCompletion = 0;
       player.autoECCompletion = true;
+      player.usedAutoECCompletionThisComplexity = false;
       player.version = 1.84375;
     }
   },

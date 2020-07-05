@@ -337,8 +337,12 @@ let EternityChallenge = {
             4 - player.eternityChallengeCompletions[ec - 1], autoCompletions);
           player.eternityChallengeCompletions[ec - 1] += newCompletions;
           autoCompletions -= newCompletions;
+          player.usedAutoECCompletionThisComplexity = true;
         }
       }
     }
+  },
+  usedAutoECCompletionThisComplexity() {
+    return player.usedAutoECCompletionThisComplexity;
   }
 }

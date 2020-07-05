@@ -14,13 +14,13 @@ let ComplexityUpgrades = {
     ],
     [
       () => Boost.bought() >= 1024 && EternityChallenge.isEternityChallengeRunning(2),
-      () => EternityChallenge.getTotalEternityChallengeCompletions() >= 32,
+      () => EternityChallenge.getTotalEternityChallengeCompletions() >= 32 && !EternityChallenge.usedAutoECCompletionThisComplexity(),
       () => ComplexityChallenge.getComplexityChallengeCompletions(4) >= 8,
       () => Generators.areAnyMultipliersNerfed()
     ],
     [
       () => false,
-      () => EternityChallenge.getTotalEternityChallengeCompletions() >= 4,
+      () => EternityChallenge.getTotalEternityChallengeCompletions() >= 4 && !EternityChallenge.usedAutoECCompletionThisComplexity(),
       () => false,
       () => Studies.totalTheorems() >= 168
     ]

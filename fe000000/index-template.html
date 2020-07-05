@@ -1982,7 +1982,7 @@
     <div ~style.display=EternityChallenge.hasAutoECCompletion() ? '' : 'none'~>
       <span>You automatically complete an eternity challenge tier once every ~f Complexities.autoECCompletionTime() ~ seconds.</span>
       <br/>
-      <span>It has been ~f EternityChallenge.timeSinceAutoECCompletion() ~ seconds since your last automatic eternity challenge completion.</span>
+      <span>It has been ~f EternityChallenge.timeSinceAutoECCompletion() ~ seconds since your last automatic eternity challenge completion<span ~style.display=EternityChallenge.usedAutoECCompletionThisComplexity() ? 'none' : ''~> (none this complexity)</span>.</span>
       <br/>
       <button onclick="EternityChallenge.toggleAutoECCompletion()">Automatic eternity challenge completion: ~r EternityChallenge.isAutoECCompletionOn() ? "On" : "Off" ~</button>
     </div>

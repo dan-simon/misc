@@ -88,6 +88,7 @@ let ComplexityPrestigeLayer = {
       player.eternityChallengeCompletions = [0, 0, 0, 0, 0, 0, 0, 0];
     }
     player.respecEternityChallenge = false;
+    player.usedAutoECCompletionThisComplexity = false;
     player.permanence = new Decimal(0);
     player.permanenceUpgrades = [0, 0, 0, 0];
     player.stats.lastPermanenceGain = new Decimal(0);

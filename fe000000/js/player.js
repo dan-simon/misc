@@ -116,6 +116,7 @@ let initialPlayer = {
   respecEternityChallenge: false,
   isEternityChallengeRequirementDisplayOn: true,
   autoECCompletion: true,
+  usedAutoECCompletionThisComplexity: false,
   permanence: new Decimal(0),
   permanenceUpgrades: [0, 0, 0, 0],
   hasGainedPermanence: false,
