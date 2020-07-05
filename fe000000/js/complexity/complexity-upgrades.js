@@ -46,16 +46,16 @@ let ComplexityUpgrades = {
     ],
     [
       () => 0,
-      () => Math.min(2 * Complexities.amount(), 32),
+      () => null,
       () => 0,
-      () => 0
+      () => null
     ]
   ],
   complexityUpgradeDefaults: [
     [1, 0, 0, 0],
     [1, null, 1, 1],
     [1, null, null, null],
-    [0, 0, 0, 0]
+    [0, null, 0, null]
   ],
   checkForComplexityUpgrades(situation) {
     for (let row = 1; row < 4; row++) {
@@ -81,18 +81,8 @@ let ComplexityUpgrades = {
       Eternities.add(this.effect(1, 2));
     }
     if (row === 4 && column === 2) {
-      this.giveStartingECs(this.effect(1, 4));
+      player.eternityChallengeCompletions = [4, 4, 4, 4, 4, 4, 4, 4];
     }
-  },
-  giveStartingECs(x) {
-    for (let i = 0; i < Math.floor(x / 4); i++) {
-      // This should always be 4, but let's be safe in case extra completions
-      // are added later or something.
-      player.eternityChallengeCompletions[i] = Math.max(
-        player.eternityChallengeCompletions[i], 4);
-    }
-    player.eternityChallengeCompletions[Math.floor(x / 4)] = Math.max(
-      player.eternityChallengeCompletions[Math.floor(x / 4)], x % 4);
   },
   hasComplexityUpgrade(row, column) {
     return player.complexityUpgrades[row - 1][column - 1];
