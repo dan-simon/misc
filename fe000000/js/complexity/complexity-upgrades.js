@@ -15,12 +15,12 @@ let ComplexityUpgrades = {
     [
       () => Boost.bought() >= 1024 && EternityChallenge.isEternityChallengeRunning(2),
       () => EternityChallenge.getTotalEternityChallengeCompletions() >= 32 && !EternityChallenge.usedAutoECCompletionThisComplexity(),
-      () => ComplexityChallenge.getComplexityChallengeCompletions(4) >= 8,
-      () => Generators.areAnyMultipliersNerfed()
+      () => ComplexityChallenge.getComplexityChallengeCompletions(4) >= 13,
+      () => Generators.list.some(x => x.multiplier().gte(Decimal.pow(Generators.nerfValue(), 3)))
     ],
     [
       () => false,
-      () => EternityChallenge.getTotalEternityChallengeCompletions() >= 4 && !EternityChallenge.usedAutoECCompletionThisComplexity(),
+      () => EternityChallenge.getTotalEternityChallengeCompletions() >= 12 && !EternityChallenge.usedAutoECCompletionThisComplexity(),
       () => false,
       () => Studies.totalTheorems() >= 168
     ]
@@ -58,9 +58,9 @@ let ComplexityUpgrades = {
     [0, null, 0, null]
   ],
   checkForComplexityUpgrades(situation) {
-    for (let row = 1; row < 4; row++) {
+    for (let row = 1; row <= 4; row++) {
       if (ComplexityChallenge.isComplexityChallengeRunning([2, 3, 4, 6][row - 1])) {
-        for (let column = 1; column < 4; column++) {
+        for (let column = 1; column <= 4; column++) {
           if (!this.hasComplexityUpgrade(row, column) &&
             this.canUnlockComplexityUpgrade(row, column, situation)) {
             this.unlockComplexityUpgrade(row, column);

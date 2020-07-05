@@ -2,7 +2,7 @@ let ComplexityChallenge = {
   goals: [Infinity,
     Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, 4096),
     Decimal.pow(2, Math.pow(2, 24)), Decimal.pow(2, Math.pow(2, 29)),
-    Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 20)),
+    Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 22)),
   ],
   requirements: [Infinity, 0, 2, 4, 6, 8, 12],
   rewards: [
