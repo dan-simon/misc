@@ -1409,7 +1409,7 @@ function updateDisplay() {
     e[683].textContent = ComplexityUpgrades.complexityUpgradeStatusDescription(2, 2);
     e[684].textContent = ComplexityUpgrades.complexityUpgradeStatusDescription(2, 3);
     e[685].textContent = format(ComplexityUpgrades.rawEffect(2, 3));
-    e[686].textContent = format(154);
+    e[686].textContent = format(231);
     e[687].textContent = ComplexityUpgrades.complexityUpgradeStatusDescription(2, 4);
     e[688].textContent = format(ComplexityUpgrades.rawEffect(2, 4));
     e[689].textContent = format(1024);
@@ -1422,7 +1422,7 @@ function updateDisplay() {
     e[696].textContent = format(Generators.nerfValue());
     e[697].textContent = ComplexityUpgrades.complexityUpgradeStatusDescription(3, 4);
     e[698].textContent = ComplexityUpgrades.complexityUpgradeStatusDescription(4, 1);
-    e[699].textContent = format(12);
+    e[699].textContent = format(16);
     e[700].textContent = ComplexityUpgrades.complexityUpgradeStatusDescription(4, 2);
     e[701].textContent = ComplexityUpgrades.complexityUpgradeStatusDescription(4, 3);
     e[702].textContent = format(168);

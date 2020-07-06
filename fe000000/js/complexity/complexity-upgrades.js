@@ -10,7 +10,7 @@ let ComplexityUpgrades = {
       () => Boost.multiplierPer() >= Math.pow(2, 24) && !InfinityChallenge.isInfinityChallengeRunning(7),
       () => Eternities.amount().gte(Math.pow(2, 24)),
       situation => situation === 'chroma',
-      () => Studies.totalTheorems() >= 154
+      () => Studies.totalTheorems() >= 231
     ],
     [
       () => Boost.bought() >= 1024 && EternityChallenge.isEternityChallengeRunning(2),
@@ -20,7 +20,7 @@ let ComplexityUpgrades = {
     ],
     [
       () => false,
-      () => EternityChallenge.getTotalEternityChallengeCompletions() >= 12 && !EternityChallenge.usedAutoECCompletionThisComplexity(),
+      () => EternityChallenge.getTotalEternityChallengeCompletions() >= 20 && !EternityChallenge.usedAutoECCompletionThisComplexity(),
       () => false,
       () => Studies.totalTheorems() >= 168
     ]
@@ -36,7 +36,7 @@ let ComplexityUpgrades = {
       () => 1 + Math.max(0, player.eternities.log(2) / 64),
       () => null,
       () => 1 + Math.max(0, player.eternities.log(2) / 16),
-      () => 2
+      () => 3
     ],
     [
       () => 1 + Math.log2(1 + Chroma.colorAmount(1) / Math.pow(2, 20)),

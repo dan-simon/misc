@@ -7,7 +7,7 @@ let Chroma = {
     Decimal.pow(2, 12288),
     Decimal.pow(2, Math.pow(2, 14)),
     Decimal.pow(2, Math.pow(2, 15)),
-    Decimal.pow(2, 1.5 * Math.pow(2, 16)),
+    Decimal.pow(2, Math.pow(2, 17)),
   ],
   colorEffectFormulas: [
     null,

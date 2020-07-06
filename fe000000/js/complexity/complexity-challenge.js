@@ -2,7 +2,7 @@ let ComplexityChallenge = {
   goals: [Infinity,
     Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, 4096),
     Decimal.pow(2, Math.pow(2, 24)), Decimal.pow(2, Math.pow(2, 29)),
-    Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 22)),
+    Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 24)),
   ],
   requirements: [Infinity, 0, 2, 4, 6, 8, 12],
   rewards: [
@@ -12,7 +12,7 @@ let ComplexityChallenge = {
     x => Decimal.pow(2, Math.sqrt(x) / 2),
     x => 1 + x / 64,
     x => 1 + x / 8,
-    x => Math.floor(x),
+    x => Math.floor(x / 2),
   ],
   colors: [null, 'yellow', 'grey', 'purple', 'orange', 'cyan', 'green'],
   isComplexityChallengeRunning(x) {
