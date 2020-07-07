@@ -35,8 +35,18 @@ let Chroma = {
     return this.effectOfColor(3) * EternityChallenge.getTotalCompletionsRewardEffect(4) *
       Study(16).effect() * Complexities.chromaMultiplier() * ComplexityUpgrades.effect(2, 3);
   },
-  extraTheorems() {
+  extraTheoremsRaw() {
     return this.effectOfColor(5);
+  },
+  extraTheoremsIndex() {
+    return 2;
+  },
+  extraTheoremsActualAndDisplay() {
+    if (ComplexityUpgrades.hasComplexityUpgrade(4, 4)) {
+      return player.extraTheorems[this.extraTheoremsIndex()];
+    } else {
+      return this.extraTheoremsRaw();
+    }
   },
   effectOfColor(x) {
     let effect = this.colorEffectFormulas[x](this.colorAmount(x));
@@ -126,7 +136,7 @@ let Chroma = {
     return this.amount() >= this.colorAmount(player.chroma.current);
   },
   nextExtraTheorem() {
-    return 4096 * (Math.pow(2, (1 + this.extraTheorems()) / 16) - 1);
+    return 4096 * (Math.pow(2, (1 + this.extraTheoremsActualAndDisplay()) / 16) - 1);
   },
   timeUntilProduction() {
     let c = this.colorAmount(player.chroma.current);

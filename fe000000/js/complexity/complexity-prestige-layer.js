@@ -61,21 +61,27 @@ let ComplexityPrestigeLayer = {
     ComplexityGenerators.list.forEach(x => x.resetAmount());
     player.isComplexityChallengeRunning = [true, true, true, true, true, true];
     player.boostPower = 1;
-    player.bestBoostPowerThisComplexity = 1;
-    player.eternityPoints = new Decimal(0);
+    if (!ComplexityUpgrades.hasComplexityUpgrade(4, 4)) {
+      player.bestBoostPower = 1;
+    }
+    player.eternityPoints = ComplexityUpgrades.effect(4, 4);
     player.eternityGenerators = initialEternityGenerators();
     player.highestEternityGenerator = 0;
     player.eternityUpgrades = [0, 0, 0];
     // Let the player keep eternity milestones off if they want.
     // Also let them keep their infinity autobuyers off if they want.
-    player.boughtTheorems = [0, 0, 0];
-    // It might be wise to respec studies if (1) studies are in general kept
-    // by something later in the game and (2) respec is on.
-    player.studies = [
-      false, false, false, false, false, false,
-      false, false, false, false, false, false,
-      0, 0, 0, 0
-    ];
+    // (That is, don't reset those things.)
+    if (!ComplexityUpgrades.hasComplexityUpgrade(4, 4) || player.respecStudies) {
+      player.boughtTheorems = [0, 0, 0];
+      player.studies = [
+        false, false, false, false, false, false,
+        false, false, false, false, false, false,
+        0, 0, 0, 0
+      ];
+    }
+    if (Studies.list.some(x => x.isBought())) {
+      ComplexityChallenge.exitComplexityChallenge(6);
+    }
     player.respecStudies = false;
     player.eternityProducer = {
       unlocked: false,
@@ -102,7 +108,7 @@ let ComplexityPrestigeLayer = {
     };
     // Small bonus, arguably unexpected but not that big in the grand scheme of things.
     player.stats.totalStarsProducedThisComplexity = new Decimal(2);
-    player.stats.totalEPProducedThisComplexity = new Decimal(0);
+    player.stats.totalEPProducedThisComplexity = ComplexityUpgrades.effect(4, 4);
     player.stats.totalEternitiesProducedThisComplexity = new Decimal(ComplexityUpgrades.effect(1, 2));
     player.stats.timeSinceAutoECCompletion = 0;
     player.stats.timeSincePermanenceGain = 0;

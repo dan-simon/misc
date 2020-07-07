@@ -152,8 +152,18 @@ let EternityChallenge = {
     }
     return 1;
   },
-  extraTheorems() {
+  extraTheoremsRaw() {
     return this.getTotalEternityChallengeCompletions();
+  },
+  extraTheoremsIndex() {
+    return 1;
+  },
+  extraTheoremsActualAndDisplay() {
+    if (ComplexityUpgrades.hasComplexityUpgrade(4, 4)) {
+      return player.extraTheorems[this.extraTheoremsIndex()];
+    } else {
+      return this.extraTheoremsRaw();
+    }
   },
   getEternityChallengeResourceAmount(x) {
     return this.resourceAmounts[x]();

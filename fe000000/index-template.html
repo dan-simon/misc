@@ -117,7 +117,7 @@
           <br/>
           <span>You are generating ~r formatWithPrecision(Boost.boostPowerPerSecond(), 5) ~ boost power per second (~r formatWithPrecision(Boost.boostPowerPerBoost(), 5) ~ per boost above ~f Boost.boostPowerStart() ~).</span>
           <br/>
-          <span>Your best boost power this complexity is ~f Boost.bestBoostPowerThisComplexity() ~ (giving ~f Boost.extraTheorems() ~ extra theorems, next at ~f Boost.nextExtraTheorem() ~).</span>
+          <span>Your ~r Boost.bestBoostPowerDescription() ~ is ~f Boost.bestBoostPower() ~ (giving ~f Boost.extraTheoremsActualAndDisplay() ~ extra theorems, next at ~f Boost.nextExtraTheorem() ~).</span>
         </div>
         <span ~style.display=Boost.isBoostPowerVisible() ? 'none' : ''~>You will start generating boost power for each boost above ~f Boost.boostPowerStart() ~ boosts.</span>
       </div>
@@ -898,7 +898,26 @@
             <span><input type="text" ~!value=Autobuyer(14).priority().toString()~ ~!onchange=function() {Autobuyer(14).setPriority(new Decimal(this.value))}~></input></span>
           </div>
         </td>
-        <td/>
+        <td>
+          <div class="autobuyerdiv" ~style.display=Autobuyer(15).hasAutobuyer() ? '' : 'none'~>
+            <span>Complexity Autobuyer</span>
+            <br/>
+            <span>On: <input type="checkbox" class="autobuyer-checkbox-15" ~!checked=Autobuyer(15).isOn()~ ~!onchange=function() {Autobuyer(15).setIsOn(this.checked)}~></input></span>
+            <br/>
+            <span>Mode: <select ~!value=Autobuyer(15).mode()~ ~!onchange=function() {Autobuyer(15).setMode(this.value)}~>
+              <option value="Amount">Amount</option>
+              <option value="Time">Time</option>
+              <option value="X times last">X times last</option>
+              <option value="X times best of last ten">X times best of last ten</option>
+              <option value="Time past peak/sec">Time past peak/sec</option>
+              <option value="Fraction of peak/sec">Fraction of peak/sec</option>
+            </select></span>
+            <br/>
+            <span>~r Autobuyer(15).mode() ~:</span>
+            <br/>
+            <span><input type="text" ~!value=Autobuyer(15).priority().toString()~ ~!onchange=function() {Autobuyer(15).setPriority(new Decimal(this.value))}~></input></span>
+          </div>
+        </td>
       </tr>
     </table>
   </tab>
@@ -1973,7 +1992,7 @@
     </div>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'eternity-challenges' ? '' : 'none'~>
-    <span>You have completed ~f EternityChallenge.getTotalEternityChallengeCompletions() ~ eternity challenge tiers, giving you ~f EternityChallenge.extraTheorems() ~ extra theorems (~f 1 ~ per tier).</span>
+    <span>You have completed ~f EternityChallenge.getTotalEternityChallengeCompletions() ~ eternity challenge tiers, giving you ~f EternityChallenge.extraTheoremsActualAndDisplay() ~ extra theorems (~f 1 ~ per tier).</span>
     <br/>
     <span>
       <button ~style.display=EternityChallenge.canRespec() ? '' : 'none'~ onclick="EternityChallenge.toggleRespec()">Respec eternity challenge on next eternity: ~r EternityChallenge.isRespecOn() ? "On" : "Off" ~</button>
@@ -2344,7 +2363,7 @@
               <div class="greendiv" ~style.display=Chroma.isColorUnlocked(5) ? '' : 'none'~>
                 <span>~r Chroma.colorName(5, true) ~: ~f Chroma.colorAmount(5) ~</span>
                 <br/>
-                <span>~f Chroma.effectOfColor(5) ~ extra theorems, next at ~f Chroma.nextExtraTheorem() ~</span>
+                <span>~f Chroma.extraTheoremsActualAndDisplay() ~ extra theorems, next at ~f Chroma.nextExtraTheorem() ~</span>
                 <br/>
                 <br/>
                 <button ~style.display=Chroma.producingAll() ? 'none' : ''~ onclick="Chroma.setNextColor(5)">Produce ~r Chroma.colorName(5) ~ next</button>
@@ -2567,8 +2586,10 @@
             <span>Reward: Extra theorems.</span>
             <br/>
             <span>Current: +~f ComplexityChallenge.getComplexityChallengeReward(6) ~ theorems, Next: +~f ComplexityChallenge.getComplexityChallengeNextReward(6) ~ theorems</span>
-            <br/>
-            <span ~style.display=Number.isFinite(ComplexityChallenge.complexityStarsForNextExtraTheorem()) ? '' : 'none'~>Next extra theorem at ~f ComplexityChallenge.complexityStarsForNextExtraTheorem() ~ complexity stars.</span>
+            <br ~style.display=ComplexityChallenge.showActualExtraTheorems() ? '' : 'none'~/>
+            <span ~style.display=ComplexityChallenge.showActualExtraTheorems() ? '' : 'none'~>(actually +~f ComplexityChallenge.extraTheoremsActualAndDisplay() ~, from "On the other side")<span>
+            <br ~style.display=ComplexityChallenge.complexityStarsForNextExtraTheorem().neq(Infinity) ? '' : 'none'~/>
+            <span ~style.display=ComplexityChallenge.complexityStarsForNextExtraTheorem().neq(Infinity) ? '' : 'none'~>Next extra theorem at ~f ComplexityChallenge.complexityStarsForNextExtraTheorem() ~ complexity stars.</span>
           </div>
         </td>
       </tr>
@@ -2639,13 +2660,13 @@
         </td>
         <td>
           <div class="complexityupgradediv">
-            <span class="greytogreen">Boosting to the min</span>
+            <span class="greytogreen">Forgot something</span>
             <br/>
-            Default requirement
+            Get ~f 11 ~ studies in Complexity Challenge 2.
             <br/>
             ~r ComplexityUpgrades.complexityUpgradeStatusDescription(1, 4) ~
             <br/>
-            Default effect
+            Power to fourth-row study effects based on boost multiplier (currently ^~f ComplexityUpgrades.rawEffect(1, 4) ~)
           </div>
         </td>
       </tr>
@@ -2783,7 +2804,7 @@
             <br/>
             ~r ComplexityUpgrades.complexityUpgradeStatusDescription(4, 4) ~
             <br/>
-            You keep your theorems and studies on complexity (unimplemented).
+            You keep your theorems, studies, and best boost power on complexity, you start every complexity with ~f ComplexityUpgrades.rawEffect(4, 4) ~ EP, and you get a complexity autobuyer.
           </div>
         </td>
       </tr>

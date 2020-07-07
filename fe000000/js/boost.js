@@ -116,15 +116,32 @@ let Boost = {
   },
   produceBoostPower(diff) {
     player.boostPower += this.boostPowerPerSecond() * diff;
-    player.bestBoostPowerThisComplexity = Math.max(player.boostPower, player.bestBoostPowerThisComplexity);
+    player.bestBoostPower = Math.max(player.boostPower, player.bestBoostPower);
   },
-  bestBoostPowerThisComplexity() {
-    return player.bestBoostPowerThisComplexity;
+  bestBoostPower() {
+    return player.bestBoostPower;
   },
-  extraTheorems() {
-    return Studies.theoremsFrom(Math.log2(this.bestBoostPowerThisComplexity()), 3);
+  bestBoostPowerDescription() {
+    if (ComplexityUpgrades.hasComplexityUpgrade(4, 4)) {
+      return 'best boost power ever';
+    } else {
+      return 'best boost power this complexity';
+    }
+  },
+  extraTheoremsRaw() {
+    return Studies.theoremsFrom(Math.log2(this.bestBoostPower()), 3);
+  },
+  extraTheoremsIndex() {
+    return 0;
+  },
+  extraTheoremsActualAndDisplay() {
+    if (ComplexityUpgrades.hasComplexityUpgrade(4, 4)) {
+      return player.extraTheorems[this.extraTheoremsIndex()];
+    } else {
+      return this.extraTheoremsRaw();
+    }
   },
   nextExtraTheorem() {
-    return Math.pow(2, Studies.costPow(this.extraTheorems(), 3));
+    return Math.pow(2, Studies.costPow(this.extraTheoremsActualAndDisplay(), 3));
   }
 };

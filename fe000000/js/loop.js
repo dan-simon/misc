@@ -36,6 +36,7 @@ function gameLoop(diff, display) {
   if (EternityChallenge.isTotalCompletionsRewardActive(3)) {
     InfinityPoints.addAmount(InfinityPrestigeLayer.infinityPointGain().times(diff));
   }
+  Studies.updateExtraTheorems();
   EternityChallenge.checkForAutoEternityChallengeCompletions();
   ComplexityChallenge.checkForComplexityChallengeCompletions();
   ComplexityUpgrades.checkForComplexityUpgrades();

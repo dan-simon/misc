@@ -8,6 +8,8 @@ let Autobuyer = function (i) {
         return EternityMilestones.isEternityMilestoneActive(16);
       } else if (i === 14) {
         return ComplexityUpgrades.hasComplexityUpgrade(2, 2);
+      } else if (i === 15) {
+        return ComplexityUpgrades.hasComplexityUpgrade(4, 4);
       } else if (i > 9) {
         return Challenge.isChallengeCompleted(i);
       } else {
@@ -209,6 +211,28 @@ let Autobuyers = {
       Permanence.gainPermanence();
     }
   },
+  complexity() {
+    if (!Autobuyer(15).isActive() || !ComplexityPrestigeLayer.canComplexity()) return;
+    let shouldComplexity;
+    let mode = Autobuyer(15).mode();
+    let priority = Autobuyer(15).priority();
+    if (mode === 'Amount') {
+      shouldComplexity = ComplexityPrestigeLayer.complexityPointGain().gte(priority);
+    } else if (mode === 'Time') {
+      shouldComplexity = player.stats.timeSinceComplexity >= priority.toNumber();
+    } else if (mode === 'X times last') {
+      shouldComplexity = ComplexityPrestigeLayer.complexityPointGain().gte(player.stats.lastTenComplexities[0][1].times(priority));
+    }  else if (mode === 'X times best of last ten') {
+      shouldComplexity = ComplexityPrestigeLayer.complexityPointGain().gte(player.stats.lastTenComplexities.map(x => x[1]).reduce(Decimal.max).times(priority));
+    } else if (mode === 'Time past peak/sec') {
+      shouldComplexity = player.stats.timeSinceLastPeakEPPerSec >= priority.toNumber();
+    } else if (mode === 'Fraction of peak/sec') {
+      shouldComplexity = ComplexityPrestigeLayer.currentEPPerSec().lte(ComplexityPrestigeLayer.peakEPPerSec().times(priority));
+    }
+    if (shouldComplexity) {
+      ComplexityPrestigeLayer.complexity();
+    }
+  },
   slowAutobuyersTimerLength() {
     return Math.max(16, player.autobuyersTimerLength);
   },
@@ -240,6 +264,7 @@ let Autobuyers = {
     let triggerFastAutobuyers = player.fastAutobuyersTimer >= this.fastAutobuyersTimerLength();
     player.fastAutobuyersTimer = this.mod(player.fastAutobuyersTimer, this.fastAutobuyersTimerLength());
     if (triggerFastAutobuyers) {
+      Autobuyers.complexity();
       Autobuyers.gainPermanence();
       Autobuyers.eternity();
       Autobuyers.infinity();

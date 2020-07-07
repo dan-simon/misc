@@ -279,6 +279,13 @@ let Saving = {
       player.usedAutoECCompletionThisComplexity = false;
       player.version = 1.84375;
     }
+    if (player.version < 1.859375) {
+      player.autobuyers.push({isOn: true, mode: 'Amount', priority: new Decimal(2)});
+      player.bestBoostPower = player.bestBoostPowerThisComplexity;
+      delete player.bestBoostPowerThisComplexity;
+      player.extraTheorems = [0, 0, 0, 0];
+      player.version = 1.859375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

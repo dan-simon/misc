@@ -49,10 +49,12 @@ let Study = function (i) {
       return Math.floor((i + 3) / 4);
     },
     rawEffect() {
+      let effect;
       if (this.row() === 4) {
-        return STUDY_EFFECTS[i - 1](this.timesBought());
+        effect = STUDY_EFFECTS[i - 1](this.timesBought());
+      } else {
+        effect = STUDY_EFFECTS[i - 1]();
       }
-      let effect = STUDY_EFFECTS[i - 1]();
       if (i === 7 || i === 11) {
         if (ComplexityUpgrades.hasComplexityUpgrade(2, 4)) {
           effect = effect.pow(ComplexityUpgrades.effect(2, 4));
@@ -62,6 +64,9 @@ let Study = function (i) {
       }
       if (this.row() === 3) {
         effect = Decimal.pow(effect, PermanenceUpgrade(3).effect());
+      }
+      if (this.row() === 4) {
+        effect = Decimal.pow(effect, ComplexityUpgrades.effect(1, 4));
       }
       return effect;
     },
@@ -80,7 +85,12 @@ let Study = function (i) {
     },
     nextEffect() {
       // This should only ever be called on fourth-row studies.
-      return STUDY_EFFECTS[i - 1](this.timesBought() + 1);
+      // However, it's coded as it is just to be safe.
+      let effect = STUDY_EFFECTS[i - 1](this.timesBought() + 1);
+      if (this.row() === 4) {
+        effect = Decimal.pow(effect, ComplexityUpgrades.effect(1, 4));
+      }
+      return effect;
     },
     isCapped() {
       // Note that if a third study gets capped this won't handle it.
@@ -120,8 +130,22 @@ let Studies = {
     return player.boughtTheorems.reduce((a, b) => a + b) + this.extraTheorems();
   },
   extraTheorems() {
-    return Boost.extraTheorems() + EternityChallenge.extraTheorems() + Chroma.extraTheorems() +
-      ComplexityChallenge.extraTheorems();
+    if (ComplexityUpgrades.hasComplexityUpgrade(4, 4)) {
+      return player.extraTheorems.reduce((a, b) => a + b);
+    } else {
+      return this.extraTheoremsByType().reduce((a, b) => a + b);
+    }
+  },
+  extraTheoremsByType() {
+    return [Boost.extraTheoremsRaw(), EternityChallenge.extraTheoremsRaw(), Chroma.extraTheoremsRaw(), ComplexityChallenge.extraTheoremsRaw()];
+  },
+  updateExtraTheorems() {
+    if (ComplexityUpgrades.hasComplexityUpgrade(4, 4)) {
+      let extraTheoremsByType = this.extraTheoremsByType();
+      for (let i = 0; i < 4; i++) {
+        player.extraTheorems[i] = Math.max(player.extraTheorems[i], extraTheoremsByType[i]);
+      }
+    }
   },
   unspentTheorems() {
     return this.totalTheorems() - this.spentTheorems();

@@ -43,15 +43,28 @@ let ComplexityChallenge = {
   getTotalComplexityChallengeCompletions() {
     return [1, 2, 3, 4, 5, 6].map(x => this.getComplexityChallengeCompletions(x)).reduce((a, b) => a + b);
   },
-  extraTheorems() {
+  extraTheoremsRaw() {
     return this.getComplexityChallengeReward(6);
+  },
+  extraTheoremsIndex() {
+    return 3;
+  },
+  extraTheoremsActualAndDisplay() {
+    if (ComplexityUpgrades.hasComplexityUpgrade(4, 4)) {
+      return player.extraTheorems[this.extraTheoremsIndex()];
+    } else {
+      return this.extraTheoremsRaw();
+    }
+  },
+  showActualExtraTheorems() {
+    return this.extraTheoremsActualAndDisplay() !== this.extraTheoremsRaw();
   },
   complexityStarsForNextExtraTheorem() {
     let cc6 = this.getComplexityChallengeCompletions(6);
     if (cc6 === 0) {
-      return Infinity;
+      return new Decimal(Infinity);
     }
-    return Decimal.pow(2, Math.pow((this.extraTheorems() + 1) / cc6, 2));
+    return Decimal.pow(2, Math.pow(2 * (this.extraTheoremsActualAndDisplay() + 1) / cc6, 2));
   },
   complexityChallengeStatusDescription(x) {
     if (!this.isComplexityChallengeUnlocked(x)) {

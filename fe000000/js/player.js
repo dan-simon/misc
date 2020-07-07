@@ -21,8 +21,9 @@ function initialAutobuyers() {
     {isOn: true, mode: 'Buy max', priority: 5}, {isOn: true, mode: 'Buy max', priority: 6},
     {isOn: true, mode: 'Buy max', priority: 7}, {isOn: true, mode: 'Buy max', priority: 8},
     {isOn: true, mode: 'Buy max', priority: 9}, {isOn: true, mode: 'Multiplier', priority: new Decimal(2)},
-    {isOn: true, mode: 'Multiplier', priority: new Decimal(2)}, {isOn: true, mode: 'Amount', priority: new Decimal(2)},
-    {isOn: true, mode: 'Amount', priority: new Decimal(2)}, {isOn: true, mode: 'X times last', priority: new Decimal(2)},
+    {isOn: true, mode: 'Multiplier', priority: new Decimal(2)},
+    {isOn: true, mode: 'Amount', priority: new Decimal(2)}, {isOn: true, mode: 'Amount', priority: new Decimal(2)},
+    {isOn: true, mode: 'X times last', priority: new Decimal(2)}, {isOn: true, mode: 'Amount', priority: new Decimal(2)},
   ];
 }
 
@@ -60,7 +61,7 @@ let initialPlayer = {
   stars: new Decimal(2),
   boost: {bought: 0},
   boostPower: 1,
-  bestBoostPowerThisComplexity: 1,
+  bestBoostPower: 1,
   generators: initialGenerators(),
   highestGenerator: 0,
   sacrificeMultiplier: new Decimal(1),
@@ -99,6 +100,7 @@ let initialPlayer = {
     true, true, true, true, true, true, true, true, true, true,
   ],
   boughtTheorems: [0, 0, 0],
+  extraTheorems: [0, 0, 0, 0],
   studies: [
     false, false, false, false, false, false,
     false, false, false, false, false, false,
@@ -190,7 +192,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.84375
+  version: 1.859375
 }
 
 let player;
