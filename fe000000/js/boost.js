@@ -2,8 +2,12 @@ let Boost = {
   bought() {
     return player.boost.bought;
   },
+  highestBought() {
+    return player.highestBoostsBought;
+  },
   addBought(n) {
-    player.boost.bought = player.boost.bought + n;
+    player.boost.bought += n;
+    player.highestBoostsBought = Math.max(player.highestBoostsBought, player.boost.bought);
     ComplexityChallenge.exitComplexityChallenge(2);
   },
   costForOne(n) {

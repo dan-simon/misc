@@ -64,15 +64,17 @@ let ComplexityPrestigeLayer = {
     if (!ComplexityUpgrades.hasComplexityUpgrade(4, 4)) {
       player.bestBoostPower = 1;
     }
-    player.eternityPoints = ComplexityUpgrades.effect(4, 4);
+    player.eternityPoints = ComplexityUpgrades.startingEternityPoints();
     player.eternityGenerators = initialEternityGenerators();
     player.highestEternityGenerator = 0;
     player.eternityUpgrades = [0, 0, 0];
     // Let the player keep eternity milestones off if they want.
     // Also let them keep their infinity autobuyers off if they want.
     // (That is, don't reset those things.)
-    if (!ComplexityUpgrades.hasComplexityUpgrade(4, 4) || player.respecStudies) {
+    if (!ComplexityUpgrades.hasComplexityUpgrade(4, 4)) {
       player.boughtTheorems = [0, 0, 0];
+    }
+    if (!ComplexityUpgrades.hasComplexityUpgrade(4, 4) || player.respecStudies) {
       player.studies = [
         false, false, false, false, false, false,
         false, false, false, false, false, false,
@@ -83,6 +85,7 @@ let ComplexityPrestigeLayer = {
       ComplexityChallenge.exitComplexityChallenge(6);
     }
     player.respecStudies = false;
+    player.boughtTheoremsThisComplexity = false;
     player.eternityProducer = {
       unlocked: false,
       upgrades: [0, 0]

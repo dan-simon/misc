@@ -9,7 +9,7 @@ let Autobuyer = function (i) {
       } else if (i === 14) {
         return ComplexityUpgrades.hasComplexityUpgrade(2, 2);
       } else if (i === 15) {
-        return ComplexityUpgrades.hasComplexityUpgrade(4, 4);
+        return ComplexityUpgrades.isUpgradesUnlockedRewardActive(4);
       } else if (i > 9) {
         return Challenge.isChallengeCompleted(i);
       } else {

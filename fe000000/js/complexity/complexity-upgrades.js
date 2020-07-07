@@ -16,7 +16,7 @@ let ComplexityUpgrades = {
       () => Boost.bought() >= 1024 && EternityChallenge.isEternityChallengeRunning(2),
       () => EternityChallenge.getTotalEternityChallengeCompletions() >= 32 && !EternityChallenge.usedAutoECCompletionThisComplexity(),
       () => ComplexityChallenge.getComplexityChallengeCompletions(4) >= 13,
-      () => Generators.list.some(x => x.multiplier().gte(Decimal.pow(Generators.nerfValue(), 3)))
+      () => EternityPoints.totalEPProducedThisComplexity().gte(Decimal.pow(2, 1.75 * Math.pow(2, 16))) && !Studies.boughtTheoremsThisComplexity()
     ],
     [
       () => Boost.boostPower() >= Math.pow(2, 18),
@@ -42,7 +42,7 @@ let ComplexityUpgrades = {
       () => 1 + Math.log2(1 + Chroma.colorAmount(1) / Math.pow(2, 20)),
       () => null,
       () => null,
-      () => null
+      () => 1.125
     ],
     [
       () => Math.max(Math.pow(2, 1 / 8), Math.pow(Math.max(0, Math.log2(Boost.bestBoostPower())), 1 / 4)),
@@ -54,9 +54,10 @@ let ComplexityUpgrades = {
   complexityUpgradeDefaults: [
     [1, 0, null, 1],
     [1, null, 1, 1],
-    [1, null, null, null],
+    [1, null, null, 1],
     [Math.pow(2, 1 / 8), null, 1, new Decimal(0)]
   ],
+  UpgradesUnlockedRewardThresholds: [4, 8, 12, 16],
   checkForComplexityUpgrades(situation) {
     for (let row = 1; row <= 4; row++) {
       if (ComplexityChallenge.isComplexityChallengeRunning([2, 3, 4, 6][row - 1])) {
@@ -84,8 +85,13 @@ let ComplexityUpgrades = {
       player.eternityChallengeCompletions = [4, 4, 4, 4, 4, 4, 4, 4];
     }
     if (row == 4 && column === 4) {
-      EternityPoints.add(this.effect(4, 4));
       Studies.updateExtraTheorems();
+    }
+    if (this.getTotalUpgradesUnlocked() === this.getTotalCompletionsRewardThreshold(1)) {
+      EternityPoints.add(this.getUpgradesUnlockedRewardEffect(1));
+    }
+    if (this.getTotalUpgradesUnlocked() === this.getTotalCompletionsRewardThreshold(4)) {
+      EternityPoints.add(this.getUpgradesUnlockedRewardEffect(4));
     }
   },
   hasComplexityUpgrade(row, column) {
@@ -106,5 +112,33 @@ let ComplexityUpgrades = {
       return this.rawEffect(row, column);
     }
     return this.complexityUpgradeDefaults[row - 1][column - 1];
-  }
+  },
+  getTotalUpgradesUnlocked() {
+    return [1, 2, 3, 4].map(x => [1, 2, 3, 4].filter(y => this.hasComplexityUpgrade(x, y)).length).reduce((a, b) => a + b);
+  },
+  getUpgradesUnlockedRewardThreshold(x) {
+    return this.UpgradesUnlockedRewardThresholds[x - 1];
+  },
+  getUpgradesUnlockedRewardRawEffect(x) {
+    if (x === 1) {
+      return new Decimal(Boost.highestBought());
+    } else if (x === 2) {
+      return 1 + this.getTotalUpgradesUnlocked() / 4;
+    } else if (x === 4) {
+      return Decimal.pow(2, 1024);
+    }
+    return null;
+  },
+  isUpgradesUnlockedRewardActive(x) {
+    return this.getTotalUpgradesUnlocked() >= this.getUpgradesUnlockedRewardThreshold(x);
+  },
+  getUpgradesUnlockedRewardEffect(x) {
+    if (this.isUpgradesUnlockedRewardActive(x)) {
+      return this.getUpgradesUnlockedRewardRawEffect(x);
+    }
+    return [new Decimal(0), 1, null, new Decimal(0)][x - 1];
+  },
+  startingEternityPoints() {
+    return this.getUpgradesUnlockedRewardEffect(1).add(this.getUpgradesUnlockedRewardEffect(4));
+  },
 }

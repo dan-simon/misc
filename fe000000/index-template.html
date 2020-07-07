@@ -2623,6 +2623,41 @@
     </span>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'complexity-upgrades' ? '' : 'none'~>
+    <span>
+      You have unlocked ~f ComplexityUpgrades.getTotalUpgradesUnlocked(1) ~ complexity upgrades.
+    </span>
+    <br/>
+    <span>
+      At ~f ComplexityUpgrades.getUpgradesUnlockedRewardThreshold(1) ~ complexity upgrades bought:
+    </span>
+    <br/>
+    <span>
+       You start every complexity with EP equal to your highest-ever number of boosts (~f ComplexityUpgrades.getUpgradesUnlockedRewardRawEffect(1) ~)
+    </span>
+    <br/>
+    <span>
+      At ~f ComplexityUpgrades.getUpgradesUnlockedRewardThreshold(2) ~ complexity upgrades bought:
+    </span>
+    <br/>
+    <span>
+      Multiplier to eternity gain based on complexity upgrades bought (~f ComplexityUpgrades.getUpgradesUnlockedRewardRawEffect(2) ~)
+    </span>
+    <br/>
+    <span>
+      At ~f ComplexityUpgrades.getUpgradesUnlockedRewardThreshold(3) ~ complexity upgrades bought:
+    </span>
+    <br/>
+    <span>
+      Unlock a new color of chroma.
+    </span>
+    <br/>
+    <span>
+      At ~f ComplexityUpgrades.getUpgradesUnlockedRewardThreshold(4) ~ complexity upgrades bought:
+    </span>
+    <br/>
+    <span>
+      You start every complexity with ~f ComplexityUpgrades.getUpgradesUnlockedRewardRawEffect(4) ~ EP, and you get a complexity autobuyer.
+    </span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
         <td>
@@ -2752,13 +2787,13 @@
         </td>
         <td>
           <div class="complexityupgradediv">
-            <span class="orangetogreen">Chroma as pal</span>
+            <span class="orangetogreen">Thousand-theorem twilight</span>
             <br/>
-            Get some generator multiplier over the cube (~f Decimal.pow(Generators.nerfValue(), 3) ~) of the multiplier softcap (~f Generators.nerfValue() ~) in Complexity Challenge 4.
+            Get ~f Decimal.pow(2, 1.75 * Math.pow(2, 16)) ~ eternity points, without buying theorems, in Complexity Challenge 4.
             <br/>
             ~r ComplexityUpgrades.complexityUpgradeStatusDescription(3, 4) ~
             <br/>
-            Unlock another color of chroma.
+            Extra theorems from green ^~f ComplexityUpgrades.rawEffect(3, 4) ~.
           </div>
         </td>
       </tr>
@@ -2804,7 +2839,7 @@
             <br/>
             ~r ComplexityUpgrades.complexityUpgradeStatusDescription(4, 4) ~
             <br/>
-            You keep your theorems, studies, and best boost power on complexity, you start every complexity with ~f ComplexityUpgrades.rawEffect(4, 4) ~ EP, and you get a complexity autobuyer.
+            You keep your theorems, studies, and best boost power on complexity.
           </div>
         </td>
       </tr>

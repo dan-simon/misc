@@ -275,13 +275,18 @@ let Studies = {
     if (this.canBuy(x)) {
       this.setStat(x, this.getStat(x).minus(this.cost(x)));
       player.boughtTheorems[x] += 1;
+      player.boughtTheoremsThisComplexity = true;
     }
   },
   buyMax(x) {
     while (this.canBuy(x)) {
       this.setStat(x, this.getStat(x).minus(this.cost(x)));
       player.boughtTheorems[x] += 1;
+      player.boughtTheoremsThisComplexity = true;
     }
+  },
+  boughtTheoremsThisComplexity() {
+    return player.boughtTheoremsThisComplexity;
   },
   hasPreset(x) {
     return player.presets.length >= x;

@@ -15,7 +15,8 @@ let Eternities = {
   },
   commonEternityGainMultiplier() {
     return EternityChallenge.getTotalCompletionsRewardEffect(2) * PermanenceUpgrade(1).effect() *
-      Chroma.effectOfColor(2) * ComplexityChallenge.getComplexityChallengeReward(3);
+      Chroma.effectOfColor(2) * ComplexityChallenge.getComplexityChallengeReward(3) *
+      ComplexityUpgrades.getUpgradesUnlockedRewardEffect(2);
   },
   eternityGeneratorMultiplier() {
     // This is intentionally always at most 1, and often less.

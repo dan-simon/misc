@@ -62,6 +62,7 @@ let initialPlayer = {
   boost: {bought: 0},
   boostPower: 1,
   bestBoostPower: 1,
+  highestBoostsBought: 0,
   generators: initialGenerators(),
   highestGenerator: 0,
   sacrificeMultiplier: new Decimal(1),
@@ -107,6 +108,7 @@ let initialPlayer = {
     0, 0, 0, 0
   ],
   respecStudies: false,
+  boughtTheoremsThisComplexity: false,
   presets: [],
   eternityProducer: {
     unlocked: false,
@@ -192,7 +194,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.859375
+  version: 1.875
 }
 
 let player;

@@ -16,7 +16,7 @@ let Chroma = {
     x => Math.pow(Math.max(EternityPoints.totalEPProducedThisComplexity().log2() / 4096, 1),
       Math.log2(1 + x / 256) / 4),
     x => Decimal.pow(EternityGenerator(8).amount().max(1), 2 * Math.sqrt(x)),
-    x => Math.floor(16 * Math.log2(1 + x / 4096)),
+    x => Math.floor(Math.pow(16 * Math.log2(1 + x / 4096), ComplexityUpgrades.effect(3, 4))),
     x => 1 + Math.log2(x / Math.pow(2, 18) + 1) * Eternities.totalEternitiesProducedThisComplexity().div(Math.pow(2, 54)).plus(1).log2() / 32
   ],
   amount() {
@@ -92,7 +92,7 @@ let Chroma = {
     return this.colorCosts[x];
   },
   canSeeThatColorExists(x) {
-    return x !== 6 || ComplexityUpgrades.hasComplexityUpgrade(3, 4);
+    return x !== 6 || ComplexityUpgrades.isUpgradesUnlockedRewardActive(3);
   },
   canUnlockColor(x) {
     // You can't unlock any colors but the first without unlocking the first (that is, unlocking chroma) first.
@@ -136,7 +136,7 @@ let Chroma = {
     return this.amount() >= this.colorAmount(player.chroma.current);
   },
   nextExtraTheorem() {
-    return 4096 * (Math.pow(2, (1 + this.extraTheoremsActualAndDisplay()) / 16) - 1);
+    return 4096 * (Math.pow(2, Math.pow(1 + this.extraTheoremsActualAndDisplay(), 1 / ComplexityUpgrades.effect(3, 4)) / 16) - 1);
   },
   timeUntilProduction() {
     let c = this.colorAmount(player.chroma.current);

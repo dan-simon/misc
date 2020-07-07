@@ -286,6 +286,11 @@ let Saving = {
       player.extraTheorems = [0, 0, 0, 0];
       player.version = 1.859375;
     }
+    if (player.version < 1.875) {
+      player.highestBoostsBought = 0;
+      player.boughtTheoremsThisComplexity = player.boughtTheorems.some(x => x !== 0);
+      player.version = 1.875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
