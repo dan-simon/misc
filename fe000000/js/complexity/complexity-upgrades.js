@@ -3,7 +3,7 @@ let ComplexityUpgrades = {
     [
       () => ComplexityChallenge.getComplexityChallengeCompletions(2) >= 8,
       situation => situation === 'eternity',
-      () => false,
+      situation => situation === 'chroma',
       () => false
     ],
     [
@@ -19,9 +19,9 @@ let ComplexityUpgrades = {
       () => Generators.list.some(x => x.multiplier().gte(Decimal.pow(Generators.nerfValue(), 3)))
     ],
     [
-      () => false,
+      () => Boost.boostPower() >= Math.pow(2, 18),
       () => EternityChallenge.getTotalEternityChallengeCompletions() >= 20 && !EternityChallenge.usedAutoECCompletionThisComplexity(),
-      () => false,
+      situation => situation === 'chroma',
       () => Studies.totalTheorems() >= 168
     ]
   ],
@@ -29,7 +29,7 @@ let ComplexityUpgrades = {
     [
       () => Complexities.permanenceAndChromaMultiplier(),
       () => Math.pow(Math.min(16, player.complexities), 2),
-      () => 0,
+      () => null,
       () => 0
     ],
     [
@@ -45,17 +45,17 @@ let ComplexityUpgrades = {
       () => null
     ],
     [
-      () => 0,
+      () => Math.max(Math.pow(2, 1 / 8), Math.pow(Math.max(0, Math.log2(Boost.bestBoostPowerThisComplexity())), 1 / 4)),
       () => null,
-      () => 0,
+      () => 1 + Studies.totalTheorems() / 1024,
       () => null
     ]
   ],
   complexityUpgradeDefaults: [
-    [1, 0, 0, 0],
+    [1, 0, null, 0],
     [1, null, 1, 1],
     [1, null, null, null],
-    [0, null, 0, null]
+    [Math.pow(2, 1 / 8), null, 1, null]
   ],
   checkForComplexityUpgrades(situation) {
     for (let row = 1; row <= 4; row++) {

@@ -68,5 +68,11 @@ let EternityAutobuyers = {
       EternityAutobuyer([9, 10, 11, 1, 2, 3, 4, 5, 6, 7, 8, 12, 13, 14, 15, 16][i]).tick();
     }
     Permanence.buyMaxOf([1, 2, 3, 4].filter(i => EternityAutobuyer(i + 16).isActive()));
+    if (ComplexityUpgrades.hasComplexityUpgrade(1, 3)) {
+      EternityProducer.unlock();
+      for (let i = 1; i <= 6; i++) {
+        Chroma.unlockColor(i);
+      }
+    }
   }
 }
