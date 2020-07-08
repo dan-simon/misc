@@ -14,7 +14,7 @@ let ComplexityUpgrades = {
     ],
     [
       () => Boost.bought() >= 1024 && EternityChallenge.isEternityChallengeRunning(2),
-      () => EternityChallenge.getTotalEternityChallengeCompletions() >= 32 && !EternityChallenge.usedAutoECCompletionThisComplexity(),
+      () => EternityChallenge.areAllEternityChallengesCompleted() && !EternityChallenge.usedAutoECCompletionThisComplexity(),
       () => ComplexityChallenge.getComplexityChallengeCompletions(4) >= 13,
       () => EternityPoints.totalEPProducedThisComplexity().gte(Decimal.pow(2, 1.75 * Math.pow(2, 16))) && !Studies.boughtTheoremsThisComplexity()
     ],

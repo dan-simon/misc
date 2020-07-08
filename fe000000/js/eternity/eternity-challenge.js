@@ -130,6 +130,9 @@ let EternityChallenge = {
   getTotalEternityChallengeCompletions() {
     return [1, 2, 3, 4, 5, 6, 7, 8].map(x => this.getEternityChallengeCompletions(x)).reduce((a, b) => a + b);
   },
+  areAllEternityChallengesCompleted() {
+    return this.getTotalEternityChallengeCompletions() >= 32;
+  },
   getTotalCompletionsRewardThreshold(x) {
     return this.totalCompletionsRewardThresholds[x];
   },
