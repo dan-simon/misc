@@ -356,6 +356,11 @@ let EternityChallenge = {
       player.stats.timeSinceAutoECCompletion -= timePer * (startingAutoCompletions - autoCompletions);
     }
   },
+  imminentAutoECCompletionTiers() {
+    return Math.min(
+      32 - this.getTotalEternityChallengeCompletions(),
+      Math.floor(player.stats.timeSinceAutoECCompletion / Complexities.autoECCompletionTime()));
+  },
   usedAutoECCompletionThisComplexity() {
     return player.usedAutoECCompletionThisComplexity;
   }

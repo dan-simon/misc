@@ -2004,6 +2004,8 @@
       <span ~style.display=EternityChallenge.areAllEternityChallengesCompleted() ? 'none' : ''~>It has been ~f EternityChallenge.timeSinceAutoECCompletion() ~ seconds since your last automatic eternity challenge completion<span ~style.display=EternityChallenge.usedAutoECCompletionThisComplexity() ? 'none' : ''~> (none this complexity)</span>.</span>
       <span ~style.display=EternityChallenge.areAllEternityChallengesCompleted() ? '' : 'none'~>All eternity challenges are fully complete<span ~style.display=EternityChallenge.usedAutoECCompletionThisComplexity() ? 'none' : ''~> (and none were automatically completed)</span>.</span>
       <br/>
+      <span ~style.display=!EternityChallenge.isAutoECCompletionOn() && EternityChallenge.imminentAutoECCompletionTiers() !== 0 ? '' : 'none'~>Turning automatic eternity challenge completion on would complete ~f EternityChallenge.imminentAutoECCompletionTiers() ~ eternity challenge tiers.</span>
+      <br ~style.display=!EternityChallenge.isAutoECCompletionOn() && EternityChallenge.imminentAutoECCompletionTiers() !== 0 ? '' : 'none'~/>
       <button onclick="EternityChallenge.toggleAutoECCompletion()">Automatic eternity challenge completion: ~r EternityChallenge.isAutoECCompletionOn() ? "On" : "Off" ~</button>
     </div>
     <br ~style.display=EternityChallenge.hasAutoECCompletion() ? 'none' : ''~/>
