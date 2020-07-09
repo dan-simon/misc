@@ -57,7 +57,7 @@ let ComplexityChallenge = {
     }
   },
   showActualExtraTheorems() {
-    return this.extraTheoremsActualAndDisplay() !== this.extraTheoremsRaw();
+    return this.extraTheoremsRaw() < this.extraTheoremsActualAndDisplay();
   },
   complexityStarsForNextExtraTheorem() {
     let cc6 = this.getComplexityChallengeCompletions(6);
