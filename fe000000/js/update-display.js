@@ -1384,8 +1384,8 @@ function updateDisplay() {
     e[649].textContent = format(ComplexityChallenge.getComplexityChallengeGoal(2));
     e[650].textContent = ComplexityChallenge.complexityChallengeStatusDescription(2);
     e[651].textContent = ComplexityChallenge.isSafeguardOn(2) ? "Disabled" : "Enabled";
-    e[652].textContent = format(ComplexityChallenge.getComplexityChallengeReward(2));
-    e[653].textContent = format(ComplexityChallenge.getComplexityChallengeNextReward(2));
+    e[652].textContent = formatWithPrecision(ComplexityChallenge.getComplexityChallengeReward(2), 5);
+    e[653].textContent = formatWithPrecision(ComplexityChallenge.getComplexityChallengeNextReward(2), 5);
     e[654].textContent = format(ComplexityChallenge.getComplexityChallengeGoal(3));
     e[655].textContent = ComplexityChallenge.complexityChallengeStatusDescription(3);
     e[656].textContent = ComplexityChallenge.isSafeguardOn(3) ? "Disabled" : "Enabled";

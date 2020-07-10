@@ -17,7 +17,7 @@ let Chroma = {
       Math.log2(1 + x / 256) / 4),
     x => Decimal.pow(EternityGenerator(8).amount().max(1), 2 * Math.sqrt(x)),
     x => Math.floor(Math.pow(16 * Math.log2(1 + x / 4096), ComplexityUpgrades.effect(3, 4))),
-    x => 1 + Math.log2(x / Math.pow(2, 18) + 1) * Eternities.totalEternitiesProducedThisComplexity().div(Math.pow(2, 54)).plus(1).log2() / 32
+    x => 1 + 3 * Math.pow(Math.log2(x / Math.pow(2, 18) + 1) * Eternities.totalEternitiesProducedThisComplexity().div(Math.pow(2, 54)).plus(1).log2(), 0.75) / 32
   ],
   amount() {
     if (!this.isUnlocked()) {
