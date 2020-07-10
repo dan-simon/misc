@@ -69,7 +69,7 @@
   </div>
   <div style="height: 56px;">
     <span ~style.display=ComplexityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~r ComplexityPrestigeLayer.requirementForComplexity() ~ to complexity.</span>
-    <button ~style.display=ComplexityPrestigeLayer.canComplexity() ? '' : 'none'~ style="height: 48px;" onclick="ComplexityPrestigeLayer.complexity()">Complexity: Gain ~f ComplexityPrestigeLayer.complexityPointGain() ~ complexity points<br/>~f ComplexityPrestigeLayer.currentCPPerSec() ~ CP/sec, ~f ComplexityPrestigeLayer.peakCPPerSec() ~ peak CP/sec</button>
+    <button ~style.display=ComplexityPrestigeLayer.canComplexity() ? '' : 'none'~ style="height: 48px;" onclick="ComplexityPrestigeLayer.complexity()">Complexity: Gain ~f ComplexityPrestigeLayer.complexityPointGain() ~ complexity points<br/>~f ComplexityPrestigeLayer.currentCPPerSec() ~ ℂP/sec, ~f ComplexityPrestigeLayer.peakCPPerSec() ~ peak ℂP/sec</button>
   </div>
   <div>
     <span>
@@ -2400,9 +2400,9 @@
       <button ~class=ComplexityMaxAll.anythingToBuy() ? "" : "disabled"~ onclick="ComplexityMaxAll.maxAll()">Max all</button>
     </span>
     <br/>
-    <span>You have produced ~f ComplexityPoints.totalCPProduced() ~ total complexity points (CP).</span>
+    <span>You have produced ~f ComplexityPoints.totalCPProduced() ~ total complexity points (ℂP).</span>
     </br>
-    <span>You have ~f Complexities.amount() ~ complexities, multiplying all complexity generators (CGs) by ~f Complexities.complexityGeneratorMultiplier() ~,</span>
+    <span>You have ~f Complexities.amount() ~ complexities, multiplying all complexity generators (ℂGs) by ~f Complexities.complexityGeneratorMultiplier() ~,</span>
     <br/>
     <span>multiplying permanence and chroma buildup speed by ~f Complexities.permanenceAndChromaMultiplier() ~,</span>
     <br/>
@@ -2419,7 +2419,7 @@
         <td>~f ComplexityGenerator(1).amount() ~</td>
         <td>~f ComplexityGenerator(1).perSecond() ~/s</td>
         <td>~f ComplexityGenerator(1).multiplier() ~x</td>
-        <td><button ~class=ComplexityGenerator(1).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(1).buy()">Cost: ~f ComplexityGenerator(1).cost() ~ CP</button></td>
+        <td><button ~class=ComplexityGenerator(1).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(1).buy()">Cost: ~f ComplexityGenerator(1).cost() ~ ℂP</button></td>
         <td><button ~class=ComplexityGenerator(1).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(1).buyMax()">Max</button></td>
       </tr>
       <tr ~style.display=ComplexityGenerator(2).isVisible() ? '' : 'none'~>
@@ -2427,7 +2427,7 @@
         <td>~f ComplexityGenerator(2).amount() ~</td>
         <td>~f ComplexityGenerator(2).perSecond() ~/s</td>
         <td>~f ComplexityGenerator(2).multiplier() ~x</td>
-        <td><button ~class=ComplexityGenerator(2).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(2).buy()">Cost: ~f ComplexityGenerator(2).cost() ~ CP</button></td>
+        <td><button ~class=ComplexityGenerator(2).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(2).buy()">Cost: ~f ComplexityGenerator(2).cost() ~ ℂP</button></td>
         <td><button ~class=ComplexityGenerator(2).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(2).buyMax()">Max</button></td>
       </tr>
       <tr ~style.display=ComplexityGenerator(3).isVisible() ? '' : 'none'~>
@@ -2435,7 +2435,7 @@
         <td>~f ComplexityGenerator(3).amount() ~</td>
         <td>~f ComplexityGenerator(3).perSecond() ~/s</td>
         <td>~f ComplexityGenerator(3).multiplier() ~x</td>
-        <td><button ~class=ComplexityGenerator(3).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(3).buy()">Cost: ~f ComplexityGenerator(3).cost() ~ CP</button></td>
+        <td><button ~class=ComplexityGenerator(3).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(3).buy()">Cost: ~f ComplexityGenerator(3).cost() ~ ℂP</button></td>
         <td><button ~class=ComplexityGenerator(3).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(3).buyMax()">Max</button></td>
       </tr>
       <tr ~style.display=ComplexityGenerator(4).isVisible() ? '' : 'none'~>
@@ -2443,7 +2443,7 @@
         <td>~f ComplexityGenerator(4).amount() ~</td>
         <td>~f ComplexityGenerator(4).perSecond() ~/s</td>
         <td>~f ComplexityGenerator(4).multiplier() ~x</td>
-        <td><button ~class=ComplexityGenerator(4).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(4).buy()">Cost: ~f ComplexityGenerator(4).cost() ~ CP</button></td>
+        <td><button ~class=ComplexityGenerator(4).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(4).buy()">Cost: ~f ComplexityGenerator(4).cost() ~ ℂP</button></td>
         <td><button ~class=ComplexityGenerator(4).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(4).buyMax()">Max</button></td>
       </tr>
       <tr ~style.display=ComplexityGenerator(5).isVisible() ? '' : 'none'~>
@@ -2451,7 +2451,7 @@
         <td>~f ComplexityGenerator(5).amount() ~</td>
         <td>~f ComplexityGenerator(5).perSecond() ~/s</td>
         <td>~f ComplexityGenerator(5).multiplier() ~x</td>
-        <td><button ~class=ComplexityGenerator(5).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(5).buy()">Cost: ~f ComplexityGenerator(5).cost() ~ CP</button></td>
+        <td><button ~class=ComplexityGenerator(5).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(5).buy()">Cost: ~f ComplexityGenerator(5).cost() ~ ℂP</button></td>
         <td><button ~class=ComplexityGenerator(5).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(5).buyMax()">Max</button></td>
       </tr>
       <tr ~style.display=ComplexityGenerator(6).isVisible() ? '' : 'none'~>
@@ -2459,7 +2459,7 @@
         <td>~f ComplexityGenerator(6).amount() ~</td>
         <td>~f ComplexityGenerator(6).perSecond() ~/s</td>
         <td>~f ComplexityGenerator(6).multiplier() ~x</td>
-        <td><button ~class=ComplexityGenerator(6).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(6).buy()">Cost: ~f ComplexityGenerator(6).cost() ~ CP</button></td>
+        <td><button ~class=ComplexityGenerator(6).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(6).buy()">Cost: ~f ComplexityGenerator(6).cost() ~ ℂP</button></td>
         <td><button ~class=ComplexityGenerator(6).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(6).buyMax()">Max</button></td>
       </tr>
       <tr ~style.display=ComplexityGenerator(7).isVisible() ? '' : 'none'~>
@@ -2467,7 +2467,7 @@
         <td>~f ComplexityGenerator(7).amount() ~</td>
         <td>~f ComplexityGenerator(7).perSecond() ~/s</td>
         <td>~f ComplexityGenerator(7).multiplier() ~x</td>
-        <td><button ~class=ComplexityGenerator(7).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(7).buy()">Cost: ~f ComplexityGenerator(7).cost() ~ CP</button></td>
+        <td><button ~class=ComplexityGenerator(7).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(7).buy()">Cost: ~f ComplexityGenerator(7).cost() ~ ℂP</button></td>
         <td><button ~class=ComplexityGenerator(7).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(7).buyMax()">Max</button></td>
       </tr>
       <tr ~style.display=ComplexityGenerator(8).isVisible() ? '' : 'none'~>
@@ -2475,7 +2475,7 @@
         <td>~f ComplexityGenerator(8).amount() ~</td>
         <td>~f ComplexityGenerator(8).perSecond() ~/s</td>
         <td>~f ComplexityGenerator(8).multiplier() ~x</td>
-        <td><button ~class=ComplexityGenerator(8).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(8).buy()">Cost: ~f ComplexityGenerator(8).cost() ~ CP</button></td>
+        <td><button ~class=ComplexityGenerator(8).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(8).buy()">Cost: ~f ComplexityGenerator(8).cost() ~ ℂP</button></td>
         <td><button ~class=ComplexityGenerator(8).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(8).buyMax()">Max</button></td>
       </tr>
     </table>
@@ -2927,25 +2927,25 @@
       <br/>
     </div>
     <div ~style.display=player.stats.lastTenComplexities[0][0] !== -1 ? '' : 'none'~>
-      <span>Last complexity took ~f player.stats.lastTenComplexities[0][0] ~ seconds and gave ~f player.stats.lastTenComplexities[0][1] ~ CP, giving ~f player.stats.lastTenComplexities[0][2] ~ CP/second.</span>
+      <span>Last complexity took ~f player.stats.lastTenComplexities[0][0] ~ seconds and gave ~f player.stats.lastTenComplexities[0][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[0][2] ~ ℂP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenComplexities[1][0] !== -1 ? '' : 'none'~>The complexity two complexities ago took ~f player.stats.lastTenComplexities[1][0] ~ seconds and gave ~f player.stats.lastTenComplexities[1][1] ~ CP, giving ~f player.stats.lastTenComplexities[1][2] ~ CP/second.</span>
+      <span ~style.display=player.stats.lastTenComplexities[1][0] !== -1 ? '' : 'none'~>The complexity two complexities ago took ~f player.stats.lastTenComplexities[1][0] ~ seconds and gave ~f player.stats.lastTenComplexities[1][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[1][2] ~ ℂP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenComplexities[2][0] !== -1 ? '' : 'none'~>The complexity three complexities ago took ~f player.stats.lastTenComplexities[2][0] ~ seconds and gave ~f player.stats.lastTenComplexities[2][1] ~ CP, giving ~f player.stats.lastTenComplexities[2][2] ~ CP/second.</span>
+      <span ~style.display=player.stats.lastTenComplexities[2][0] !== -1 ? '' : 'none'~>The complexity three complexities ago took ~f player.stats.lastTenComplexities[2][0] ~ seconds and gave ~f player.stats.lastTenComplexities[2][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[2][2] ~ ℂP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenComplexities[3][0] !== -1  ? '' : 'none'~>The complexity four complexities ago took ~f player.stats.lastTenComplexities[3][0] ~ seconds and gave ~f player.stats.lastTenComplexities[3][1] ~ CP, giving ~f player.stats.lastTenComplexities[3][2] ~ CP/second.</span>
+      <span ~style.display=player.stats.lastTenComplexities[3][0] !== -1  ? '' : 'none'~>The complexity four complexities ago took ~f player.stats.lastTenComplexities[3][0] ~ seconds and gave ~f player.stats.lastTenComplexities[3][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[3][2] ~ ℂP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenComplexities[4][0] !== -1 ? '' : 'none'~>The complexity five complexities ago took ~f player.stats.lastTenComplexities[4][0] ~ seconds and gave ~f player.stats.lastTenComplexities[4][1] ~ CP, giving ~f player.stats.lastTenComplexities[4][2] ~ CP/second.</span>
+      <span ~style.display=player.stats.lastTenComplexities[4][0] !== -1 ? '' : 'none'~>The complexity five complexities ago took ~f player.stats.lastTenComplexities[4][0] ~ seconds and gave ~f player.stats.lastTenComplexities[4][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[4][2] ~ ℂP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenComplexities[5][0] !== -1 ? '' : 'none'~>The complexity six complexities ago took ~f player.stats.lastTenComplexities[5][0] ~ seconds and gave ~f player.stats.lastTenComplexities[5][1] ~ CP, giving ~f player.stats.lastTenComplexities[5][2] ~ CP/second.</span>
+      <span ~style.display=player.stats.lastTenComplexities[5][0] !== -1 ? '' : 'none'~>The complexity six complexities ago took ~f player.stats.lastTenComplexities[5][0] ~ seconds and gave ~f player.stats.lastTenComplexities[5][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[5][2] ~ ℂP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenComplexities[6][0] !== -1 ? '' : 'none'~>The complexity seven complexities ago took ~f player.stats.lastTenComplexities[6][0] ~ seconds and gave ~f player.stats.lastTenComplexities[6][1] ~ CP, giving ~f player.stats.lastTenComplexities[6][2] ~ CP/second.</span>
+      <span ~style.display=player.stats.lastTenComplexities[6][0] !== -1 ? '' : 'none'~>The complexity seven complexities ago took ~f player.stats.lastTenComplexities[6][0] ~ seconds and gave ~f player.stats.lastTenComplexities[6][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[6][2] ~ ℂP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenComplexities[7][0] !== -1  ? '' : 'none'~>The complexity eight complexities ago took ~f player.stats.lastTenComplexities[7][0] ~ seconds and gave ~f player.stats.lastTenComplexities[7][1] ~ CP, giving ~f player.stats.lastTenComplexities[7][2] ~ CP/second.</span>
+      <span ~style.display=player.stats.lastTenComplexities[7][0] !== -1  ? '' : 'none'~>The complexity eight complexities ago took ~f player.stats.lastTenComplexities[7][0] ~ seconds and gave ~f player.stats.lastTenComplexities[7][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[7][2] ~ ℂP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenComplexities[8][0] !== -1  ? '' : 'none'~>The complexity nine complexities ago took ~f player.stats.lastTenComplexities[8][0] ~ seconds and gave ~f player.stats.lastTenComplexities[8][1] ~ CP, giving ~f player.stats.lastTenComplexities[8][2] ~ CP/second.</span>
+      <span ~style.display=player.stats.lastTenComplexities[8][0] !== -1  ? '' : 'none'~>The complexity nine complexities ago took ~f player.stats.lastTenComplexities[8][0] ~ seconds and gave ~f player.stats.lastTenComplexities[8][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[8][2] ~ ℂP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenComplexities[9][0] !== -1  ? '' : 'none'~>The complexity ten complexities ago took ~f player.stats.lastTenComplexities[9][0] ~ seconds and gave ~f player.stats.lastTenComplexities[9][1] ~ CP, giving ~f player.stats.lastTenComplexities[9][2] ~ CP/second.</span>
+      <span ~style.display=player.stats.lastTenComplexities[9][0] !== -1  ? '' : 'none'~>The complexity ten complexities ago took ~f player.stats.lastTenComplexities[9][0] ~ seconds and gave ~f player.stats.lastTenComplexities[9][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[9][2] ~ ℂP/second.</span>
       <br/>
     </div>
   </tab>
