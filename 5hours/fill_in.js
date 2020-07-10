@@ -30,6 +30,7 @@ function fillInAutoAssignUpdatePoints() {
     document.getElementById('auto-assign-update-points-' + i).value = player.auto.assignUpdatePoints.settings[i];
   }
   document.getElementById('auto-assign-update-points-on').checked = player.auto.assignUpdatePoints.on;
+  document.getElementById('auto-assign-update-points-2-on').checked = player.auto.assignUpdatePoints.on;
 }
 
 function fillInDilationUpgrades() {

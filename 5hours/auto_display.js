@@ -1,5 +1,9 @@
 function toggleAutoOn(x) {
   player.auto[x].on = !player.auto[x].on;
+  if (x === 'assignUpdatePoints') {
+    document.getElementById('auto-assign-update-points-on').checked = player.auto.assignUpdatePoints.on;
+    document.getElementById('auto-assign-update-points-2-on').checked = player.auto.assignUpdatePoints.on;
+  }
 }
 
 function updateAutoDev(i) {
@@ -62,9 +66,11 @@ function updateAutoDisplay() {
   if (hasAuto('assign-update-points')) {
     document.getElementById('auto-assign-update-points-row').style.display = '';
     document.getElementById('auto-assign-update-points-span').style.display = '';
+    document.getElementById('auto-assign-update-points-2-span').style.display = '';
   } else {
     document.getElementById('auto-assign-update-points-row').style.display = 'none';
     document.getElementById('auto-assign-update-points-span').style.display = 'none';
+    document.getElementById('auto-assign-update-points-2-span').style.display = 'none';
   }
   if (hasAuto(AUTO_LIST[0])) {
     document.getElementById('auto-help-span').style.display = '';
