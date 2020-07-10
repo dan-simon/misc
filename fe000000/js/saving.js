@@ -390,5 +390,5 @@ let Saving = {
     }
   },
   // Not sure where this should live, honestly.
-  gameEnd: Decimal.pow(2, Math.pow(2, 32))
+  gameEnd: Decimal.pow(2, 1.5 * Math.pow(2, 37))
 }
