@@ -5,9 +5,13 @@ let Stats = {
     player.stats.timeSincePrestige += diff;
     player.stats.timeSinceInfinity += diff;
     player.stats.timeSinceEternity += diff;
+    player.stats.timeSinceAutoECCompletion += diff;
+    player.stats.timeSincePermanenceGain += diff;
+    player.stats.timeSinceComplexity += diff;
     player.stats.timeSinceGameStart += diff;
     player.stats.timeSinceLastPeakIPPerSec += diff;
     player.stats.timeSinceLastPeakEPPerSec += diff;
+    player.stats.timeSinceLastPeakCPPerSec += diff;
   },
   recordPurchase(i, n) {
     player.stats.timeSincePurchase = 0;
@@ -23,5 +27,10 @@ let Stats = {
     player.stats.fastestEternity = Math.min(time, player.stats.fastestEternity);
     player.stats.lastTenEternities.unshift([time, gain, gain.div(time)]);
     player.stats.lastTenEternities.pop();
+  },
+  addComplexity(time, gain) {
+    player.stats.fastestComplexity = Math.min(time, player.stats.fastestComplexity);
+    player.stats.lastTenComplexities.unshift([time, gain, gain.div(time)]);
+    player.stats.lastTenComplexities.pop();
   }
 }

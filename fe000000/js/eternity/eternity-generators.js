@@ -20,6 +20,9 @@ let EternityGenerator = function (i) {
     },
     addBought(n) {
       player.eternityGenerators[i - 1].bought += n;
+      if (i === 8) {
+        ComplexityChallenge.exitComplexityChallenge(5);
+      }
     },
     costIncreasePer() {
       return Decimal.pow(2, i);
@@ -37,8 +40,10 @@ let EternityGenerator = function (i) {
       if (EternityChallenge.isEternityChallengeRunning(8)) {
         return new Decimal(0);
       }
+      let perPurchaseMultiplier = Math.pow(2, EternityUpgrade(1).effect() / 8) *
+        (i === 8 ? ComplexityChallenge.getComplexityChallengeReward(5) : 1);
       let factors = [
-        Decimal.pow(2, this.bought() * EternityUpgrade(1).effect() / 8), Eternities.eternityGeneratorMultiplier(),
+        Decimal.pow(perPurchaseMultiplier, this.bought()), Eternities.eternityGeneratorMultiplier(),
         Study(9).effect(), Study(10).effect(), Study(11).effect(), Study(12).effect(),  Study(15).effect(),
         EternityUpgrade(3).effect(), EternityProducer.multiplier(), EternityChallenge.getEternityChallengeReward(8),
         (i === 8) ? Chroma.effectOfColor(4) : 1,
@@ -71,7 +76,7 @@ let EternityGenerator = function (i) {
       return n <= this.maxBuyable();
     },
     maxBuyable() {
-      if (!this.isVisible()) return 0;
+      if (!this.isVisible() || (i == 8 && ComplexityChallenge.isSafeguardOn(5))) return 0;
       let num = Math.floor(player.eternityPoints.div(this.cost()).times(
         Decimal.minus(this.costIncreasePer(), 1)).plus(1).log(this.costIncreasePer()));
       num = Math.max(num, 0);

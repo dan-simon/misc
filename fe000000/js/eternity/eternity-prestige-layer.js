@@ -10,7 +10,7 @@ let EternityPrestigeLayer = {
     return InfinityPoints.totalIPProducedThisEternity().gte(this.infinityPointRequirementForEternity());
   },
   isRequirementVisible() {
-    return !this.canEternity() && (player.infinities > 0 || player.eternities > 0);
+    return !this.canEternity() && (player.infinities > 0 || player.eternities.gt(0) || player.complexities > 0);
   },
   resetText() {
     if (this.canEternity()) {
@@ -41,6 +41,7 @@ let EternityPrestigeLayer = {
     let gain = this.eternityPointGain();
     EternityPoints.addAmount(gain);
     Eternities.add(Eternities.commonEternityGainMultiplier());
+    ComplexityUpgrades.checkForComplexityUpgrades('eternity');
     Stats.addEternity(player.stats.timeSinceEternity, gain);
     // Eternity challenge handling
     EternityChallenge.checkForEternityChallengeCompletion();

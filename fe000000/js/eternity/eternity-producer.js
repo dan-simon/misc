@@ -98,12 +98,13 @@ let EternityProducer = {
     return Math.pow(2, 20);
   },
   canUnlock() {
-    return player.eternityPoints.gte(this.unlockCost());
+    return player.eternityPoints.gte(this.unlockCost()) && !ComplexityChallenge.isSafeguardOn(3);
   },
   unlock() {
     if (!this.canUnlock()) return;
     player.eternityPoints = player.eternityPoints.minus(this.unlockCost());
     player.eternityProducer.unlocked = true;
+    ComplexityChallenge.exitComplexityChallenge(3);
   },
   productionPerSecond() {
     return EternityProducerUpgrade(1).effect() * Eternities.commonEternityGainMultiplier();
@@ -127,4 +128,3 @@ let EternityProducer = {
     this.upgradeList.forEach(x => x.buyMax());
   }
 }
-

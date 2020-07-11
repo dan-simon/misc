@@ -35,7 +35,7 @@ let EternityUpgrade = function (i) {
         // This formula is annoyingly complicated, but I think it might have to be.
         // The first upgrade is really good (roughly 16x), and the second is decent (roughly 4x),
         // but after that they start being junk fairly quickly.
-        return Decimal.pow(Math.max(EternityPoints.totalEPProduced().log2(), 1), Math.pow(x, 0.5));
+        return Decimal.pow(Math.max(EternityPoints.totalEPProducedThisComplexity().log2(), 1), Math.pow(x, 0.5));
       } else {
         return x;
       }

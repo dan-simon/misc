@@ -1,21 +1,23 @@
 let Chroma = {
-  colors: [null, 'grey', 'purple', 'orange', 'yellow', 'green'],
+  colors: [null, 'grey', 'purple', 'orange', 'cyan', 'green', 'red'],
   colorCosts: [
     null,
     Decimal.pow(2, 4096),
     Decimal.pow(2, 8192),
     Decimal.pow(2, 12288),
     Decimal.pow(2, Math.pow(2, 14)),
-    Decimal.pow(2, Math.pow(2, 15))
+    Decimal.pow(2, Math.pow(2, 15)),
+    Decimal.pow(2, Math.pow(2, 17)),
   ],
   colorEffectFormulas: [
     null,
     x => Math.pow(1 + x / 1024, 2.5),
     x => Math.pow(1 + x / 64, 0.5),
-    x => Math.pow(Math.max(EternityPoints.totalEPProduced().log2() / 4096, 1),
+    x => Math.pow(Math.max(EternityPoints.totalEPProducedThisComplexity().log2() / 4096, 1),
       Math.log2(1 + x / 256) / 4),
     x => Decimal.pow(EternityGenerator(8).amount().max(1), 2 * Math.sqrt(x)),
-    x => Math.floor(16 * Math.log2(1 + x / 4096))
+    x => Math.floor(Math.pow(16 * Math.log2(1 + x / 4096), ComplexityUpgrades.effect(3, 4))),
+    x => 1 + 3 * Math.pow(Math.log2(x / Math.pow(2, 18) + 1) * Eternities.totalEternitiesProducedThisComplexity().div(Math.pow(2, 54)).plus(1).log2(), 0.75) / 32
   ],
   amount() {
     if (!this.isUnlocked()) {
@@ -26,16 +28,32 @@ let Chroma = {
     return cap * (1 - Math.exp(-t / cap));
   },
   cap() {
-    return Math.max(EternityPoints.totalEPProduced().log2(), 1);
+    return Math.max(EternityPoints.totalEPProducedThisComplexity().log2(), 1) *
+      ComplexityChallenge.getComplexityChallengeReward(4) * ComplexityUpgrades.effect(4, 3);
   },
   chromaSpeedMultiplier() {
-    return this.effectOfColor(3) * EternityChallenge.getTotalCompletionsRewardEffect(4) * Study(16).effect();
+    return this.effectOfColor(3) * EternityChallenge.getTotalCompletionsRewardEffect(4) *
+      Study(16).effect() * Complexities.chromaMultiplier() * ComplexityUpgrades.effect(2, 3);
   },
-  extraTheorems() {
+  extraTheoremsRaw() {
     return this.effectOfColor(5);
   },
+  extraTheoremsIndex() {
+    return 2;
+  },
+  extraTheoremsActualAndDisplay() {
+    if (ComplexityUpgrades.hasComplexityUpgrade(4, 4)) {
+      return player.extraTheorems[this.extraTheoremsIndex()];
+    } else {
+      return this.extraTheoremsRaw();
+    }
+  },
   effectOfColor(x) {
-    return this.colorEffectFormulas[x](this.colorAmount(x));
+    let effect = this.colorEffectFormulas[x](this.colorAmount(x));
+    if (x === 2 || x === 3) {
+      effect = Math.pow(effect, ComplexityUpgrades.effect(3, 1));
+    }
+    return effect;
   },
   colorAmount(x) {
     return player.chroma.colors[x - 1];
@@ -53,12 +71,17 @@ let Chroma = {
     return this.isColorUnlocked(1);
   },
   updateColors() {
-    let color = player.chroma.current;
-    if (color === 0) return;
-    let oldExtraTheorems = this.extraTheorems();
-    this.setColorAmount(color, Math.max(this.colorAmount(color), this.amount()));
-    let newExtraTheorems = this.extraTheorems();
-    player.unspentTheorems += newExtraTheorems - oldExtraTheorems;
+    if (this.producingAll()) {
+      for (let color = 1; color <= 6; color++) {
+        if (this.isColorUnlocked(color)) {
+          this.setColorAmount(color, Math.max(this.colorAmount(color), this.amount()));
+        }
+      }
+     } else {
+      let color = player.chroma.current;
+      if (color === 0) return;
+      this.setColorAmount(color, Math.max(this.colorAmount(color), this.amount()));
+    }
   },
   setNextColor(x) {
     if (this.isColorUnlocked(x)) {
@@ -68,8 +91,15 @@ let Chroma = {
   getUnlockColorCost(x) {
     return this.colorCosts[x];
   },
+  canSeeThatColorExists(x) {
+    return x !== 6 || ComplexityUpgrades.isUpgradesUnlockedRewardActive(3);
+  },
   canUnlockColor(x) {
-    return !this.isColorUnlocked(x) && player.eternityPoints.gte(this.getUnlockColorCost(x));
+    // You can't unlock any colors but the first without unlocking the first (that is, unlocking chroma) first.
+    // Also, the Complexity Challenge 4 safeguard prevents any colors from being unlocked.
+    return !this.isColorUnlocked(x) && player.eternityPoints.gte(this.getUnlockColorCost(x)) &&
+      !ComplexityChallenge.isSafeguardOn(4) && (x === 1 || this.isUnlocked()) &&
+      this.canSeeThatColorExists(x);
   },
   unlockColor(x) {
     if (!this.canUnlockColor(x)) return;
@@ -80,6 +110,10 @@ let Chroma = {
     }
     if (player.chroma.next === 0) {
       player.chroma.next = x;
+    }
+    if (x === 1) {
+      ComplexityChallenge.exitComplexityChallenge(4);
+      ComplexityUpgrades.checkForComplexityUpgrades('chroma');
     }
   },
   updateChromaOnEternity() {
@@ -102,7 +136,7 @@ let Chroma = {
     return this.amount() >= this.colorAmount(player.chroma.current);
   },
   nextExtraTheorem() {
-    return 4096 * (Math.pow(2, (1 + this.extraTheorems()) / 16) - 1);
+    return 4096 * (Math.pow(2, Math.pow(1 + this.extraTheoremsActualAndDisplay(), 1 / ComplexityUpgrades.effect(3, 4)) / 16) - 1);
   },
   timeUntilProduction() {
     let c = this.colorAmount(player.chroma.current);
@@ -118,5 +152,8 @@ let Chroma = {
     } else {
       return 'will start to produce ' + Chroma.currentColorName() + ' in ' + format(Chroma.timeUntilProduction()) + ' seconds';
     }
+  },
+  producingAll() {
+    return ComplexityUpgrades.hasComplexityUpgrade(3, 3);
   }
 }

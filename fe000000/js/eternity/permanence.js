@@ -1,18 +1,21 @@
 let Permanence = {
   getRequiredEternities() {
-    return this.getLeftoverEternities() + this.getEternitiesPerPermanence();
+    return this.getEternitiesPerPermanence() + this.getLeftoverEternities();
   },
   getLeftoverEternities() {
     return 16;
   },
+  getTotalPermanenceMultiplier() {
+    return PermanenceUpgrade(4).effect() * Complexities.permanenceMultiplier();
+  },
   getEternitiesPerPermanence() {
-    return Math.pow(2, 24) / PermanenceUpgrade(4).effect();
+    return Math.pow(2, 24) / this.getTotalPermanenceMultiplier();
   },
   canGainPermanence() {
-    return Eternities.amount() >= this.getRequiredEternities();
+    return EternityProducer.isUnlocked() && Eternities.amount().gte(this.getRequiredEternities());
   },
   permanenceGain() {
-    return (Eternities.amount() - this.getLeftoverEternities()) / this.getEternitiesPerPermanence();
+    return Eternities.amount().minus(this.getLeftoverEternities()).div(this.getEternitiesPerPermanence());
   },
   hasGainedPermanence() {
     return player.hasGainedPermanence;
@@ -20,19 +23,33 @@ let Permanence = {
   gainPermanence() {
     if (!this.canGainPermanence()) return;
     player.hasGainedPermanence = true;
-    this.add(this.permanenceGain());
+    let gain = this.permanenceGain();
+    player.stats.lastPermanenceGain = gain;
+    player.stats.timeSincePermanenceGain = 0;
+    this.add(gain);
     Eternities.setAmount(this.getLeftoverEternities());
   },
   amount() {
     return player.permanence;
   },
   add(x) {
-    player.permanence += x;
+    player.permanence = player.permanence.plus(x);
   },
   anythingToBuy() {
     return PermanenceUpgrades.list.some(x => x.canBuy());
   },
   maxAll() {
-    PermanenceUpgrades.list.forEach(x => x.buyMax());
+    this.buyMaxOf([1, 2, 3, 4])
+  },
+  buyMaxOf(ids) {
+    let list = ids.map(x => PermanenceUpgrades.list[x - 1]);
+    // Buying short of max
+    list.forEach(x => x.buyShortOfMax(3));
+    while (list.some(x => x.canBuy())) {
+      // We copy it so that sorting doesn't rearrange the list, which would be a subtle source of bugs
+      // (lettign current costs influence future buy order even after costs change).
+      // Note: This nonly buys in the expected order if sort is stable.
+      [...list].sort((x, y) => x.bought() - y.bought())[0].buy();
+    }
   }
 }

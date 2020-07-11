@@ -29,7 +29,7 @@ let EternityChallenge = {
     x => Decimal.pow(2, x * Math.pow(InfinityPoints.totalIPProducedThisEternity().max(1).log2(), 0.5) / 2),
     x => 1 + x / 64,
     x => 1 + x / 16,
-    x => EternityPoints.totalEPProduced().max(1).pow(x / 4),
+    x => EternityPoints.totalEPProducedThisComplexity().max(1).pow(x / 4),
     x => Decimal.pow(2, 32 * x),
   ],
   resourceAmounts: [
@@ -70,7 +70,7 @@ let EternityChallenge = {
       return 'Another EC already unlocked';
     } else if (Decimal.lt(this.getEternityChallengeResourceAmount(x), this.getEternityChallengeRequirement(x))) {
       return 'Requires more ' + this.getEternityChallengeResourceName(x);
-    } else if (player.unspentTheorems < this.getEternityChallengeCost(x)) {
+    } else if (Studies.unspentTheorems() < this.getEternityChallengeCost(x)) {
       return 'Requires more unspent theorems';
     }
   },
@@ -95,6 +95,9 @@ let EternityChallenge = {
     return this.rewards[x](this.getNextRewardCalculationEternityChallengeCompletions(x));
   },
   getEternityChallengeCost(x) {
+    if (ComplexityUpgrades.hasComplexityUpgrade(3, 2)) {
+      return 0;
+    }
     return this.costs[x];
   },
   getUnlockedEternityChallenge() {
@@ -127,6 +130,9 @@ let EternityChallenge = {
   getTotalEternityChallengeCompletions() {
     return [1, 2, 3, 4, 5, 6, 7, 8].map(x => this.getEternityChallengeCompletions(x)).reduce((a, b) => a + b);
   },
+  areAllEternityChallengesCompleted() {
+    return this.getTotalEternityChallengeCompletions() >= 32;
+  },
   getTotalCompletionsRewardThreshold(x) {
     return this.totalCompletionsRewardThresholds[x];
   },
@@ -149,8 +155,18 @@ let EternityChallenge = {
     }
     return 1;
   },
-  extraTheorems() {
+  extraTheoremsRaw() {
     return this.getTotalEternityChallengeCompletions();
+  },
+  extraTheoremsIndex() {
+    return 1;
+  },
+  extraTheoremsActualAndDisplay() {
+    if (ComplexityUpgrades.hasComplexityUpgrade(4, 4)) {
+      return player.extraTheorems[this.extraTheoremsIndex()];
+    } else {
+      return this.extraTheoremsRaw();
+    }
   },
   getEternityChallengeResourceAmount(x) {
     return this.resourceAmounts[x]();
@@ -159,7 +175,7 @@ let EternityChallenge = {
     return this.resourceNames[x];
   },
   canEternityChallengeBeStarted(x) {
-    return this.getUnlockedEternityChallenge() === x;
+    return ComplexityUpgrades.hasComplexityUpgrade(3, 2) || this.getUnlockedEternityChallenge() === x;
   },
   isEternityChallengeRunning(x) {
     return this.currentEternityChallenge() === x;
@@ -187,23 +203,24 @@ let EternityChallenge = {
     }
     return description;
   },
-  eternityChallengeCompletionsDescription(x) {
-    // This could be done as easily in the HTML but it seems nice to have a method (also applies to some things below)
-    return 'Completed ' + format(this.getEternityChallengeCompletions(x)) + '/' + format(4) + ' times';
-  },
   setEternityChallenge(x) {
     player.currentEternityChallenge = x;
   },
   canEternityChallengeBeUnlocked(x) {
+    if (ComplexityUpgrades.hasComplexityUpgrade(3, 2)) {
+      return true;
+    }
     return this.getUnlockedEternityChallenge() === 0 &&
       Decimal.gte(this.getEternityChallengeResourceAmount(x), this.getEternityChallengeRequirement(x)) &&
-      player.unspentTheorems >= this.getEternityChallengeCost(x);
+      Studies.unspentTheorems() >= this.getEternityChallengeCost(x);
   },
   unlockEternityChallenge(x) {
     // This function should only be called if the eternity challenge
     // has previously been confirmed to be unlockable.
-    player.unspentTheorems -= this.getEternityChallengeCost(x);
     player.unlockedEternityChallenge = x;
+  },
+  canRespec() {
+    return !ComplexityUpgrades.hasComplexityUpgrade(3, 2);
   },
   isRespecOn() {
     return player.respecEternityChallenge;
@@ -212,7 +229,10 @@ let EternityChallenge = {
     player.respecEternityChallenge = !player.respecEternityChallenge;
   },
   respec() {
-    this.lockUnlockedEternityChallenge();
+    // This fails in situations where ECs being locked is no longer a thing.
+    if (this.canRespec()) {
+      this.lockUnlockedEternityChallenge();
+    }
   },
   maybeRespec() {
     if (this.isRespecOn()) {
@@ -231,7 +251,6 @@ let EternityChallenge = {
   lockUnlockedEternityChallenge() {
     // This can happen if we're respeccing and doing an eternity reset.
     this.setEternityChallenge(0);
-    player.unspentTheorems += this.getUnlockedEternityChallengeCost();
     player.unlockedEternityChallenge = 0;
   },
   startEternityChallenge(x) {
@@ -251,9 +270,8 @@ let EternityChallenge = {
   completeEternityChallenge(x) {
     if (player.eternityChallengeCompletions[x - 1] < 4) {
       player.eternityChallengeCompletions[x - 1]++;
-      player.unspentTheorems++;
     }
-    this.setEternityChallenge(0);
+    // Current eternity challenge is set to 0 as part of lockUnlockedEternityChallenge.
     this.lockUnlockedEternityChallenge();
   },
   eternityChallenge1InfinityStarsEffect() {
@@ -286,5 +304,64 @@ let EternityChallenge = {
     } else {
       return 'This text should never appear.';
     }
+  },
+  eternityChallengeTotalCompletionsReward4Text() {
+    if (ComplexityUpgrades.hasComplexityUpgrade(2, 2)) {
+      return 'Chroma buildup speed ' + format(this.getTotalCompletionsRewardRawEffect(4)) + 'x.';
+    } else {
+      return 'Autobuyers for eternity upgrades, eternity generators, and Eternity Producer upgrades, and chroma buildup speed ' + format(this.getTotalCompletionsRewardRawEffect(4)) + 'x.';
+    }
+  },
+  // Technically this is a bit redundant.
+  isRequirementDisplayOn() {
+    return player.isEternityChallengeRequirementDisplayOn || !ComplexityUpgrades.hasComplexityUpgrade(3, 2);
+  },
+  toggleRequirementDisplay() {
+    if (ComplexityUpgrades.hasComplexityUpgrade(3, 2)) {
+      player.isEternityChallengeRequirementDisplayOn = !player.isEternityChallengeRequirementDisplayOn;
+    }
+  },
+  hasAutoECCompletion() {
+    return Complexities.amount() > 0;
+  },
+  isAutoECCompletionOn() {
+    return player.autoECCompletion;
+  },
+  isAutoECCompletionActive() {
+    return this.hasAutoECCompletion() && this.isAutoECCompletionOn();
+  },
+  toggleAutoECCompletion() {
+    player.autoECCompletion = !player.autoECCompletion;
+  },
+  timeSinceAutoECCompletion() {
+    return player.stats.timeSinceAutoECCompletion;
+  },
+  checkForAutoEternityChallengeCompletions() {
+    if (this.isAutoECCompletionActive()) {
+      let timePer = Complexities.autoECCompletionTime();
+      let startingAutoCompletions = Math.floor(player.stats.timeSinceAutoECCompletion / timePer);
+      let autoCompletions = startingAutoCompletions;
+      for (let ec = 1; ec <= 8; ec++) {
+        if (autoCompletions === 0) {
+          break;
+        }
+        if (!this.isEternityChallengeCompleted(ec)) {
+          let newCompletions = Math.min(
+            4 - player.eternityChallengeCompletions[ec - 1], autoCompletions);
+          player.eternityChallengeCompletions[ec - 1] += newCompletions;
+          autoCompletions -= newCompletions;
+          player.usedAutoECCompletionThisComplexity = true;
+        }
+      }
+      player.stats.timeSinceAutoECCompletion -= timePer * (startingAutoCompletions - autoCompletions);
+    }
+  },
+  imminentAutoECCompletionTiers() {
+    return Math.min(
+      32 - this.getTotalEternityChallengeCompletions(),
+      Math.floor(player.stats.timeSinceAutoECCompletion / Complexities.autoECCompletionTime()));
+  },
+  usedAutoECCompletionThisComplexity() {
+    return player.usedAutoECCompletionThisComplexity;
   }
 }

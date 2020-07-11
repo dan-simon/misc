@@ -5,7 +5,16 @@
   <meta content="utf-8" http-equiv="encoding">
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/break_infinity.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@antimatter-dimensions/notations"></script>
+  <script src="js/complexity/complexities.js"></script>
+  <script src="js/complexity/complexity-challenge.js"></script>
+  <script src="js/complexity/complexity-generators.js"></script>
+  <script src="js/complexity/complexity-max-all.js"></script>
+  <script src="js/complexity/complexity-points.js"></script>
+  <script src="js/complexity/complexity-prestige-layer.js"></script>
+  <script src="js/complexity/complexity-stars.js"></script>
+  <script src="js/complexity/complexity-upgrades.js"></script>
   <script src="js/eternity/eternities.js"></script>
+  <script src="js/eternity/eternity-autobuyers.js"></script>
   <script src="js/eternity/eternity-challenge.js"></script>
   <script src="js/eternity/eternity-generators.js"></script>
   <script src="js/eternity/eternity-max-all.js"></script>
@@ -58,6 +67,10 @@
     <span ~style.display=EternityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~f EternityPrestigeLayer.infinityPointRequirementForEternity() ~ total infinity points this eternity to eternity.</span>
     <button ~style.display=EternityPrestigeLayer.canEternity() ? '' : 'none'~ style="height: 48px;" onclick="EternityPrestigeLayer.eternity()">Eternity: Gain ~f EternityPrestigeLayer.eternityPointGain() ~ eternity points<br/>~f EternityPrestigeLayer.currentEPPerSec() ~ EP/sec, ~f EternityPrestigeLayer.peakEPPerSec() ~ peak EP/sec</button>
   </div>
+  <div style="height: 56px;">
+    <span ~style.display=ComplexityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~r ComplexityPrestigeLayer.requirementForComplexity() ~ to complexity.</span>
+    <button ~style.display=ComplexityPrestigeLayer.canComplexity() ? '' : 'none'~ style="height: 48px;" onclick="ComplexityPrestigeLayer.complexity()">Complexity: Gain ~f ComplexityPrestigeLayer.complexityPointGain() ~ complexity points<br/>~f ComplexityPrestigeLayer.currentCPPerSec() ~ ℂP/sec, ~f ComplexityPrestigeLayer.peakCPPerSec() ~ peak ℂP/sec</button>
+  </div>
   <div>
     <span>
       <button onclick="Tabs.setTab('main')">Main</button>
@@ -79,6 +92,13 @@
       <button ~style.display=Tabs.isTabVisible('chroma') ? '' : 'none'~ onclick="Tabs.setTab('chroma')">Chroma</button>
     </span>
   </div>
+  <div ~style.display=Tabs.isTabVisible('complexity') ? '' : 'none'~>
+    <span>
+      <button ~style.display=Tabs.isTabVisible('complexity') ? '' : 'none'~ onclick="Tabs.setTab('complexity')">Complexity</button>
+      <button ~style.display=Tabs.isTabVisible('complexity-challenges') ? '' : 'none'~ onclick="Tabs.setTab('complexity-challenges')">Complexity Challenges</button>
+      <button ~style.display=Tabs.isTabVisible('complexity-upgrades') ? '' : 'none'~ onclick="Tabs.setTab('complexity-upgrades')">Complexity Upgrades</button>
+    </span>
+  </div>
   <tab ~style.display=Tabs.currentTab() === 'main' ? '' : 'none'~>
     <div ~style.display=InfinityPrestigeLayer.mustInfinity() ? 'none' : ''~>
       <span>You have ~f Stars.amount() ~ stars. You are getting ~f Stars.perSecond() ~ stars per second. <button ~class=MaxAll.anythingToBuy() ? "" : "disabled"~ onclick="MaxAll.maxAll()">Max all</button></span>
@@ -97,7 +117,7 @@
           <br/>
           <span>You are generating ~r formatWithPrecision(Boost.boostPowerPerSecond(), 5) ~ boost power per second (~r formatWithPrecision(Boost.boostPowerPerBoost(), 5) ~ per boost above ~f Boost.boostPowerStart() ~).</span>
           <br/>
-          <span>Your best boost power ever is ~f Boost.bestBoostPowerEver() ~ (giving ~f Boost.extraTheorems() ~ extra theorems, next at ~f Boost.nextExtraTheorem() ~).</span>
+          <span>Your ~r Boost.bestBoostPowerDescription() ~ is ~f Boost.bestBoostPower() ~ (giving ~f Boost.extraTheoremsActualAndDisplay() ~ extra theorems, next at ~f Boost.nextExtraTheorem() ~).</span>
         </div>
         <span ~style.display=Boost.isBoostPowerVisible() ? 'none' : ''~>You will start generating boost power for each boost above ~f Boost.boostPowerStart() ~ boosts.</span>
       </div>
@@ -184,19 +204,21 @@
         <span ~style.display=Prestige.canPrestige() ? 'none' : ''~>You need ~f Prestige.prestigeRequirement() ~ stars to prestige.</span>
       </div>
       <br/>
-      <span>Generator multipliers above ~f Generators.nerfValue ~ are reduced.</span>
+      <span>Generator multipliers are reduced above ~f Generators.nerfValue() ~ (the multiplier softcap).</span>
       <br/>
       <div ~style.display=Generators.areAnyMultipliersNerfed() ? '' : 'none'~>
-        Given a multiplier x, let y be log(x, ~f Generators.nerfValue ~). x is reduced to ~f Generators.nerfValue ~^y^y^~r formatWithPrecision(Generators.nerfExponent, 5) ~.
+        Given a multiplier x, let y be log(x, ~f Generators.nerfValue() ~). x is reduced to ~f Generators.nerfValue() ~^y^y^~r formatWithPrecision(Generators.nerfExponent, 5) ~.
       </div>
-      <span>Currently the game ends at ~f Saving.gameEnd ~ stars (if you get to this point then you will be able to start new content).</span>
+      <span>Currently the game ends at ~f Saving.gameEnd ~ stars.</span>
+      <br/>
+      <span>(You can keep going beyond that, but you'll be able to start new content just by getting to that point.)</span>
     </div>
     <div ~style.display=InfinityPrestigeLayer.mustInfinity() ? '' : 'none'~>
       <span>The universe has collapsed due to an excess of stars.</span>
     </div>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'infinity' ? '' : 'none'~>
-    <span>You have ~f InfinityPoints.amount() ~ infinity points.
+    <span>You have ~f InfinityPoints.amount() ~ infinity points (IP).
       <button ~class=InfinityMaxAll.anythingToBuy() ? "" : "disabled"~ onclick="InfinityMaxAll.maxAll()">Max all</button>
       <button ~class=InfinityMaxAll.anyUpgradesToBuy() ? "" : "disabled"~ onclick="InfinityMaxAll.maxUpgrades()">Max upgrades</button>
       <button ~class=InfinityMaxAll.anyGeneratorsToBuy() ? "" : "disabled"~ onclick="InfinityMaxAll.maxGenerators()">Max generators</button>
@@ -204,7 +226,7 @@
     <br/>
     <span>You have produced ~f InfinityPoints.totalIPProducedThisEternity() ~ infinity points this eternity, multiplying all generators by ~f InfinityPoints.multiplier() ~.</span>
     <br/>
-    <span>You have ~f Infinities.amount() ~ infinities, multiplying all infinity generators by ~f Infinities.infinityGeneratorMultiplier() ~.</span>
+    <span>You have ~f Infinities.amount() ~ infinities, multiplying all infinity generators (IGs) by ~f Infinities.infinityGeneratorMultiplier() ~.</span>
     <br/>
     <span ~style.display=InfinityPrestigeLayer.canInfinityBeBroken() ? '' : 'none'~><button style="height: 48px;" onclick="InfinityPrestigeLayer.toggleBreakInfinity()">~r InfinityPrestigeLayer.breakInfinityButtonText() ~</button></span>
     <span ~style.display=InfinityPrestigeLayer.canInfinityBeBroken() ? 'none' : ''~>You need to complete all the challenges to be able to break infinity.</span>
@@ -215,7 +237,7 @@
     <br/>
     <br/>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
-      <th colspan="4">Infinity Upgrades:</th>
+      <th colspan="5">Infinity Upgrades:</th>
       <tr>
         <td>Increase the base multiplier per boost:</td>
         <td><span ~style.display=InfinityUpgrade(1).atBoughtLimit() ? 'none' : ''~>~f InfinityUpgrade(1).effect() ~ → ~f InfinityUpgrade(1).nextEffect() ~</span><span ~style.display=InfinityUpgrade(1).atBoughtLimit() ? '' : 'none'~>~f InfinityUpgrade(1).effect() ~ (maxed)</span></td>
@@ -841,7 +863,6 @@
         </td>
       </tr>
       <tr>
-        <td/>
         <td>
           <div class="autobuyerdiv" ~style.display=Autobuyer(13).hasAutobuyer() ? '' : 'none'~>
             <span>Eternity Autobuyer</span>
@@ -862,7 +883,43 @@
             <span><input type="text" ~!value=Autobuyer(13).priority().toString()~ ~!onchange=function() {Autobuyer(13).setPriority(new Decimal(this.value))}~></input></span>
           </div>
         </td>
-        <td/>
+        <td>
+          <div class="autobuyerdiv" ~style.display=Autobuyer(14).hasAutobuyer() ? '' : 'none'~>
+            <span>Permanence Autobuyer</span>
+            <br/>
+            <span>On: <input type="checkbox" class="autobuyer-checkbox-14" ~!checked=Autobuyer(14).isOn()~ ~!onchange=function() {Autobuyer(14).setIsOn(this.checked)}~></input></span>
+            <br/>
+            <span>Mode: <select ~!value=Autobuyer(14).mode()~ ~!onchange=function() {Autobuyer(14).setMode(this.value)}~>
+              <option value="Amount">Amount</option>
+              <option value="Time">Time</option>
+              <option value="X times last">X times last</option>
+            </select></span>
+            <br/>
+            <span>~r Autobuyer(14).mode() ~:</span>
+            <br/>
+            <span><input type="text" ~!value=Autobuyer(14).priority().toString()~ ~!onchange=function() {Autobuyer(14).setPriority(new Decimal(this.value))}~></input></span>
+          </div>
+        </td>
+        <td>
+          <div class="autobuyerdiv" ~style.display=Autobuyer(15).hasAutobuyer() ? '' : 'none'~>
+            <span>Complexity Autobuyer</span>
+            <br/>
+            <span>On: <input type="checkbox" class="autobuyer-checkbox-15" ~!checked=Autobuyer(15).isOn()~ ~!onchange=function() {Autobuyer(15).setIsOn(this.checked)}~></input></span>
+            <br/>
+            <span>Mode: <select ~!value=Autobuyer(15).mode()~ ~!onchange=function() {Autobuyer(15).setMode(this.value)}~>
+              <option value="Amount">Amount</option>
+              <option value="Time">Time</option>
+              <option value="X times last">X times last</option>
+              <option value="X times best of last ten">X times best of last ten</option>
+              <option value="Time past peak/sec">Time past peak/sec</option>
+              <option value="Fraction of peak/sec">Fraction of peak/sec</option>
+            </select></span>
+            <br/>
+            <span>~r Autobuyer(15).mode() ~:</span>
+            <br/>
+            <span><input type="text" ~!value=Autobuyer(15).priority().toString()~ ~!onchange=function() {Autobuyer(15).setPriority(new Decimal(this.value))}~></input></span>
+          </div>
+        </td>
       </tr>
     </table>
   </tab>
@@ -1018,15 +1075,15 @@
     </table>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'eternity' ? '' : 'none'~>
-    <span>You have ~f EternityPoints.amount() ~ eternity points.
+    <span>You have ~f EternityPoints.amount() ~ eternity points (EP).
       <button ~class=EternityMaxAll.anythingToBuy() ? "" : "disabled"~ onclick="EternityMaxAll.maxAll()">Max all</button>
       <button ~class=EternityMaxAll.anyUpgradesToBuy() ? "" : "disabled"~ onclick="EternityMaxAll.maxUpgrades()">Max upgrades</button>
       <button ~class=EternityMaxAll.anyGeneratorsToBuy() ? "" : "disabled"~ onclick="EternityMaxAll.maxGenerators()">Max generators</button>
     </span>
     <br/>
-    <span>You have produced ~f EternityPoints.totalEPProduced() ~ total eternity points.</span>
+    <span>You have produced ~f EternityPoints.totalEPProducedThisComplexity() ~ eternity points this complexity.</span>
     </br>
-    <span>You have ~f Eternities.amount() ~ eternities, multiplying all eternity generators by ~f Eternities.eternityGeneratorMultiplierForDisplay() ~.</span>
+    <span>You have ~f Eternities.amount() ~ eternities, multiplying all eternity generators (EGs) by ~f Eternities.eternityGeneratorMultiplierForDisplay() ~.</span>
     <br/>
     <span>You have ~f EternityStars.amount() ~ eternity stars, multiplying all normal and infinity generators by ~f EternityStars.multiplier() ~</span>
     <br/>
@@ -1036,24 +1093,27 @@
     <br/>
     <br/>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
-      <th colspan="4">Eternity Upgrades:</th>
+      <th colspan="5">Eternity Upgrades:</th>
       <tr>
-        <td>Increase the per-purchase multiplier for eternity generators:</td>
+        <td>Increase the per-purchase multiplier for EGs:</td>
         <td><span ~style.display=EternityUpgrade(1).atBoughtLimit() ? 'none' : ''~>^~f EternityUpgrade(1).effect() ~ → ^~f EternityUpgrade(1).nextEffect() ~</span><span ~style.display=EternityUpgrade(1).atBoughtLimit() ? '' : 'none'~>^~f EternityUpgrade(1).effect() ~ (maxed)</span></td>
         <td><span ~style.display=EternityUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=EternityUpgrade(1).canBuy() ? "" : "disabled"~ onclick="EternityUpgrade(1).buy()">Cost: ~f EternityUpgrade(1).cost() ~ EP</button></span></td>
         <td><span ~style.display=EternityUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=EternityUpgrade(1).canBuy() ? "" : "disabled"~ onclick="EternityUpgrade(1).buyMax()">Max</button></span></td>
+        <td><span ~style.display=EternityAutobuyer(9).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(9).toggle()">Auto: ~r EternityAutobuyer(9).isOn() ? "On" : "Off" ~</button></span></td>
       </tr>
       <tr>
         <td>Increase the multiplier per boost:</td>
         <td><span ~style.display=EternityUpgrade(2).atBoughtLimit() ? 'none' : ''~>~f EternityUpgrade(2).effect() ~x → ~f EternityUpgrade(2).nextEffect() ~x</span><span ~style.display=EternityUpgrade(2).atBoughtLimit() ? '' : 'none'~>~f EternityUpgrade(2).effect() ~x (maxed)</span></td>
         <td><span ~style.display=EternityUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=EternityUpgrade(2).canBuy() ? "" : "disabled"~ onclick="EternityUpgrade(2).buy()">Cost: ~f EternityUpgrade(2).cost() ~ EP</button></span></td>
         <td><span ~style.display=EternityUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=EternityUpgrade(2).canBuy() ? "" : "disabled"~ onclick="EternityUpgrade(2).buyMax()">Max</button></span></td>
+        <td><span ~style.display=EternityAutobuyer(10).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(10).toggle()">Auto: ~r EternityAutobuyer(10).isOn() ? "On" : "Off" ~</button></span></td>
       </tr>
       <tr>
-        <td>Multiplier to eternity generators based on total EP produced:</td>
+        <td>Multiplier to EGs based on total EP this complexity:</td>
         <td><span ~style.display=EternityUpgrade(3).atBoughtLimit() ? 'none' : ''~>~f EternityUpgrade(3).effect() ~x → ~f EternityUpgrade(3).nextEffect() ~x</span><span ~style.display=EternityUpgrade(3).atBoughtLimit() ? '' : 'none'~>~f EternityUpgrade(3).effect() ~x (maxed)</span></td>
         <td><span ~style.display=EternityUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=EternityUpgrade(3).canBuy() ? "" : "disabled"~ onclick="EternityUpgrade(3).buy()">Cost: ~f EternityUpgrade(3).cost() ~ EP</button></span></td>
         <td><span ~style.display=EternityUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=EternityUpgrade(3).canBuy() ? "" : "disabled"~ onclick="EternityUpgrade(3).buyMax()">Max</button></span></td>
+        <td><span ~style.display=EternityAutobuyer(11).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(11).toggle()">Auto: ~r EternityAutobuyer(11).isOn() ? "On" : "Off" ~</button></span></td>
       </tr>
     </table>
     <br/>
@@ -1065,6 +1125,7 @@
         <td>~f EternityGenerator(1).multiplier() ~x</td>
         <td><button ~class=EternityGenerator(1).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(1).buy()">Cost: ~f EternityGenerator(1).cost() ~ EP</button></td>
         <td><button ~class=EternityGenerator(1).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(1).buyMax()">Max</button></td>
+        <td><button ~style.display=EternityAutobuyer(1).hasEternityAutobuyer() ? '' : 'none'~ onclick="EternityAutobuyer(1).toggle()">Auto: ~r EternityAutobuyer(1).isOn() ? "On" : "Off" ~</button></td>
       </tr>
       <tr ~style.display=EternityGenerator(2).isVisible() ? '' : 'none'~>
         <td>Eternity Generator 2</td>
@@ -1073,6 +1134,7 @@
         <td>~f EternityGenerator(2).multiplier() ~x</td>
         <td><button ~class=EternityGenerator(2).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(2).buy()">Cost: ~f EternityGenerator(2).cost() ~ EP</button></td>
         <td><button ~class=EternityGenerator(2).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(2).buyMax()">Max</button></td>
+        <td><button ~style.display=EternityAutobuyer(2).hasEternityAutobuyer() ? '' : 'none'~ onclick="EternityAutobuyer(2).toggle()">Auto: ~r EternityAutobuyer(2).isOn() ? "On" : "Off" ~</button></td>
       </tr>
       <tr ~style.display=EternityGenerator(3).isVisible() ? '' : 'none'~>
         <td>Eternity Generator 3</td>
@@ -1081,6 +1143,7 @@
         <td>~f EternityGenerator(3).multiplier() ~x</td>
         <td><button ~class=EternityGenerator(3).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(3).buy()">Cost: ~f EternityGenerator(3).cost() ~ EP</button></td>
         <td><button ~class=EternityGenerator(3).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(3).buyMax()">Max</button></td>
+        <td><button ~style.display=EternityAutobuyer(3).hasEternityAutobuyer() ? '' : 'none'~ onclick="EternityAutobuyer(3).toggle()">Auto: ~r EternityAutobuyer(3).isOn() ? "On" : "Off" ~</button></td>
       </tr>
       <tr ~style.display=EternityGenerator(4).isVisible() ? '' : 'none'~>
         <td>Eternity Generator 4</td>
@@ -1089,6 +1152,7 @@
         <td>~f EternityGenerator(4).multiplier() ~x</td>
         <td><button ~class=EternityGenerator(4).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(4).buy()">Cost: ~f EternityGenerator(4).cost() ~ EP</button></td>
         <td><button ~class=EternityGenerator(4).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(4).buyMax()">Max</button></td>
+        <td><button ~style.display=EternityAutobuyer(4).hasEternityAutobuyer() ? '' : 'none'~ onclick="EternityAutobuyer(4).toggle()">Auto: ~r EternityAutobuyer(4).isOn() ? "On" : "Off" ~</button></td>
       </tr>
       <tr ~style.display=EternityGenerator(5).isVisible() ? '' : 'none'~>
         <td>Eternity Generator 5</td>
@@ -1097,6 +1161,7 @@
         <td>~f EternityGenerator(5).multiplier() ~x</td>
         <td><button ~class=EternityGenerator(5).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(5).buy()">Cost: ~f EternityGenerator(5).cost() ~ EP</button></td>
         <td><button ~class=EternityGenerator(5).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(5).buyMax()">Max</button></td>
+        <td><button ~style.display=EternityAutobuyer(5).hasEternityAutobuyer() ? '' : 'none'~ onclick="EternityAutobuyer(5).toggle()">Auto: ~r EternityAutobuyer(5).isOn() ? "On" : "Off" ~</button></td>
       </tr>
       <tr ~style.display=EternityGenerator(6).isVisible() ? '' : 'none'~>
         <td>Eternity Generator 6</td>
@@ -1105,6 +1170,7 @@
         <td>~f EternityGenerator(6).multiplier() ~x</td>
         <td><button ~class=EternityGenerator(6).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(6).buy()">Cost: ~f EternityGenerator(6).cost() ~ EP</button></td>
         <td><button ~class=EternityGenerator(6).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(6).buyMax()">Max</button></td>
+        <td><button ~style.display=EternityAutobuyer(6).hasEternityAutobuyer() ? '' : 'none'~ onclick="EternityAutobuyer(6).toggle()">Auto: ~r EternityAutobuyer(6).isOn() ? "On" : "Off" ~</button></td>
       </tr>
       <tr ~style.display=EternityGenerator(7).isVisible() ? '' : 'none'~>
         <td>Eternity Generator 7</td>
@@ -1113,6 +1179,7 @@
         <td>~f EternityGenerator(7).multiplier() ~x</td>
         <td><button ~class=EternityGenerator(7).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(7).buy()">Cost: ~f EternityGenerator(7).cost() ~ EP</button></td>
         <td><button ~class=EternityGenerator(7).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(7).buyMax()">Max</button></td>
+        <td><button ~style.display=EternityAutobuyer(7).hasEternityAutobuyer() ? '' : 'none'~ onclick="EternityAutobuyer(7).toggle()">Auto: ~r EternityAutobuyer(7).isOn() ? "On" : "Off" ~</button></td>
       </tr>
       <tr ~style.display=EternityGenerator(8).isVisible() ? '' : 'none'~>
         <td>Eternity Generator 8</td>
@@ -1121,6 +1188,7 @@
         <td>~f EternityGenerator(8).multiplier() ~x</td>
         <td><button ~class=EternityGenerator(8).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(8).buy()">Cost: ~f EternityGenerator(8).cost() ~ EP</button></td>
         <td><button ~class=EternityGenerator(8).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(8).buyMax()">Max</button></td>
+        <td><button ~style.display=EternityAutobuyer(8).hasEternityAutobuyer() ? '' : 'none'~ onclick="EternityAutobuyer(8).toggle()">Auto: ~r EternityAutobuyer(8).isOn() ? "On" : "Off" ~</button></td>
       </tr>
     </table>
   </tab>
@@ -1296,6 +1364,47 @@
       <br ~style.display=EternityPrestigeLayer.canEternity() ? 'none' : ''~/>
       <button onclick="Studies.export()">Export studies</button> <button onclick="Studies.import()">Import studies</button> <button onclick="Studies.tryToBuyFirstTwelve()">Try to buy all of studies 1-12 (in order)</button>
     </span>
+    <br/>
+    <span>Click on the name of a study preset on the line below to load that study list:</span>
+    <div style="width: 1024px; margin-left: auto; margin-right: auto;">
+      <div ~style.display=Studies.hasPreset(1) ? 'none' : ''~>
+        You don't currently have any study presets. You can create presets at the bottom of this tab.
+        <br/>
+        Presets can be used to load study lists more easily.
+      </div>
+      <button ~style.display=Studies.hasPreset(1) ? '' : 'none'~ onclick="Studies.presetLoad(1)">~r Studies.presetName(1) ~</button>
+      <button ~style.display=Studies.hasPreset(2) ? '' : 'none'~ onclick="Studies.presetLoad(2)">~r Studies.presetName(2) ~</button>
+      <button ~style.display=Studies.hasPreset(3) ? '' : 'none'~ onclick="Studies.presetLoad(3)">~r Studies.presetName(3) ~</button>
+      <button ~style.display=Studies.hasPreset(4) ? '' : 'none'~ onclick="Studies.presetLoad(4)">~r Studies.presetName(4) ~</button>
+      <button ~style.display=Studies.hasPreset(5) ? '' : 'none'~ onclick="Studies.presetLoad(5)">~r Studies.presetName(5) ~</button>
+      <button ~style.display=Studies.hasPreset(6) ? '' : 'none'~ onclick="Studies.presetLoad(6)">~r Studies.presetName(6) ~</button>
+      <button ~style.display=Studies.hasPreset(7) ? '' : 'none'~ onclick="Studies.presetLoad(7)">~r Studies.presetName(7) ~</button>
+      <button ~style.display=Studies.hasPreset(8) ? '' : 'none'~ onclick="Studies.presetLoad(8)">~r Studies.presetName(8) ~</button>
+      <button ~style.display=Studies.hasPreset(9) ? '' : 'none'~ onclick="Studies.presetLoad(9)">~r Studies.presetName(9) ~</button>
+      <button ~style.display=Studies.hasPreset(10) ? '' : 'none'~ onclick="Studies.presetLoad(10)">~r Studies.presetName(10) ~</button>
+      <button ~style.display=Studies.hasPreset(11) ? '' : 'none'~ onclick="Studies.presetLoad(11)">~r Studies.presetName(11) ~</button>
+      <button ~style.display=Studies.hasPreset(12) ? '' : 'none'~ onclick="Studies.presetLoad(12)">~r Studies.presetName(12) ~</button>
+      <button ~style.display=Studies.hasPreset(13) ? '' : 'none'~ onclick="Studies.presetLoad(13)">~r Studies.presetName(13) ~</button>
+      <button ~style.display=Studies.hasPreset(14) ? '' : 'none'~ onclick="Studies.presetLoad(14)">~r Studies.presetName(14) ~</button>
+      <button ~style.display=Studies.hasPreset(15) ? '' : 'none'~ onclick="Studies.presetLoad(15)">~r Studies.presetName(15) ~</button>
+      <button ~style.display=Studies.hasPreset(16) ? '' : 'none'~ onclick="Studies.presetLoad(16)">~r Studies.presetName(16) ~</button>
+      <button ~style.display=Studies.hasPreset(17) ? '' : 'none'~ onclick="Studies.presetLoad(17)">~r Studies.presetName(17) ~</button>
+      <button ~style.display=Studies.hasPreset(18) ? '' : 'none'~ onclick="Studies.presetLoad(18)">~r Studies.presetName(18) ~</button>
+      <button ~style.display=Studies.hasPreset(19) ? '' : 'none'~ onclick="Studies.presetLoad(19)">~r Studies.presetName(19) ~</button>
+      <button ~style.display=Studies.hasPreset(20) ? '' : 'none'~ onclick="Studies.presetLoad(20)">~r Studies.presetName(20) ~</button>
+      <button ~style.display=Studies.hasPreset(21) ? '' : 'none'~ onclick="Studies.presetLoad(21)">~r Studies.presetName(21) ~</button>
+      <button ~style.display=Studies.hasPreset(22) ? '' : 'none'~ onclick="Studies.presetLoad(22)">~r Studies.presetName(22) ~</button>
+      <button ~style.display=Studies.hasPreset(23) ? '' : 'none'~ onclick="Studies.presetLoad(23)">~r Studies.presetName(23) ~</button>
+      <button ~style.display=Studies.hasPreset(24) ? '' : 'none'~ onclick="Studies.presetLoad(24)">~r Studies.presetName(24) ~</button>
+      <button ~style.display=Studies.hasPreset(25) ? '' : 'none'~ onclick="Studies.presetLoad(25)">~r Studies.presetName(25) ~</button>
+      <button ~style.display=Studies.hasPreset(26) ? '' : 'none'~ onclick="Studies.presetLoad(26)">~r Studies.presetName(26) ~</button>
+      <button ~style.display=Studies.hasPreset(27) ? '' : 'none'~ onclick="Studies.presetLoad(27)">~r Studies.presetName(27) ~</button>
+      <button ~style.display=Studies.hasPreset(28) ? '' : 'none'~ onclick="Studies.presetLoad(28)">~r Studies.presetName(28) ~</button>
+      <button ~style.display=Studies.hasPreset(29) ? '' : 'none'~ onclick="Studies.presetLoad(29)">~r Studies.presetName(29) ~</button>
+      <button ~style.display=Studies.hasPreset(30) ? '' : 'none'~ onclick="Studies.presetLoad(30)">~r Studies.presetName(30) ~</button>
+      <button ~style.display=Studies.hasPreset(31) ? '' : 'none'~ onclick="Studies.presetLoad(31)">~r Studies.presetName(31) ~</button>
+      <button ~style.display=Studies.hasPreset(32) ? '' : 'none'~ onclick="Studies.presetLoad(32)">~r Studies.presetName(32) ~</button>
+    </div>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 8px; border-collapse: separate;">
       <tr>
         <td>
@@ -1324,7 +1433,7 @@
           <button ~class=Study(3).className()~ onclick="Study(3).buy()">
             Study 3
             <br/>
-            Multiplier to normal generators based on total stars
+            Multiplier to normal generators based on total stars this complexity
             <br/>
             Currently: ~f Study(3).rawEffect() ~x
             <br/>
@@ -1531,6 +1640,23 @@
           </button>
         </td>
       </tr>
+      <tr ~style.display=EternityAutobuyers.hasTheoremAutobuyers() ? '' : 'none'~>
+        <td>
+          <button style="width: 256px; height: 48px;" onclick="EternityAutobuyer(14).toggle()">
+            Auto buy theorems with stars: ~r EternityAutobuyer(14).isOn() ? "On" : "Off" ~
+          </button>
+        </td>
+        <td>
+          <button style="width: 256px; height: 48px;" onclick="EternityAutobuyer(15).toggle()">
+            Auto buy theorems with infinity points: ~r EternityAutobuyer(15).isOn() ? "On" : "Off" ~
+          </button>
+        </td>
+        <td>
+          <button style="width: 256px; height: 48px;" onclick="EternityAutobuyer(16).toggle()">
+            Auto buy theorems with eternity points: ~r EternityAutobuyer(16).isOn() ? "On" : "Off" ~
+          </button>
+        </td>
+      </tr>
     </table>
     <span>
       Buying a study will increase the costs of all studies on other rows by ~f 2 ~ theorems.
@@ -1563,6 +1689,236 @@
       </span>
     </div>
     <br/>
+    <span>Presets:</span>
+    <br/>
+    <div ~style.display=Studies.hasPreset(1) ? '' : 'none'~>
+      Name: <input class="presetname1" type="text" ~!value=Studies.presetName(1)~ ~!onchange=function() {Studies.setPresetName(1, this.value)}~></input>
+      Study list: <input class="presetstudylist1" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(1)~ ~!onchange=function() {Studies.setPresetStudyList(1, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(1)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(1)">Load</button>
+      <button onclick="Studies.presetDelete(1)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(2) ? '' : 'none'~>
+      Name: <input class="presetname2" type="text" ~!value=Studies.presetName(2)~ ~!onchange=function() {Studies.setPresetName(2, this.value)}~></input>
+      Study list: <input class="presetstudylist2" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(2)~ ~!onchange=function() {Studies.setPresetStudyList(2, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(2)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(2)">Load</button>
+      <button onclick="Studies.presetDelete(2)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(3) ? '' : 'none'~>
+      Name: <input class="presetname3" type="text" ~!value=Studies.presetName(3)~ ~!onchange=function() {Studies.setPresetName(3, this.value)}~></input>
+      Study list: <input class="presetstudylist3" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(3)~ ~!onchange=function() {Studies.setPresetStudyList(3, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(3)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(3)">Load</button>
+      <button onclick="Studies.presetDelete(3)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(4) ? '' : 'none'~>
+      Name: <input class="presetname4" type="text" ~!value=Studies.presetName(4)~ ~!onchange=function() {Studies.setPresetName(4, this.value)}~></input>
+      Study list: <input class="presetstudylist4" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(4)~ ~!onchange=function() {Studies.setPresetStudyList(4, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(4)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(4)">Load</button>
+      <button onclick="Studies.presetDelete(4)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(5) ? '' : 'none'~>
+      Name: <input class="presetname5" type="text" ~!value=Studies.presetName(5)~ ~!onchange=function() {Studies.setPresetName(5, this.value)}~></input>
+      Study list: <input class="presetstudylist5" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(5)~ ~!onchange=function() {Studies.setPresetStudyList(5, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(5)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(5)">Load</button>
+      <button onclick="Studies.presetDelete(5)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(6) ? '' : 'none'~>
+      Name: <input class="presetname6" type="text" ~!value=Studies.presetName(6)~ ~!onchange=function() {Studies.setPresetName(6, this.value)}~></input>
+      Study list: <input class="presetstudylist6" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(6)~ ~!onchange=function() {Studies.setPresetStudyList(6, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(6)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(6)">Load</button>
+      <button onclick="Studies.presetDelete(6)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(7) ? '' : 'none'~>
+      Name: <input class="presetname7" type="text" ~!value=Studies.presetName(7)~ ~!onchange=function() {Studies.setPresetName(7, this.value)}~></input>
+      Study list: <input class="presetstudylist7" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(7)~ ~!onchange=function() {Studies.setPresetStudyList(7, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(7)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(7)">Load</button>
+      <button onclick="Studies.presetDelete(7)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(8) ? '' : 'none'~>
+      Name: <input class="presetname8" type="text" ~!value=Studies.presetName(8)~ ~!onchange=function() {Studies.setPresetName(8, this.value)}~></input>
+      Study list: <input class="presetstudylist8" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(8)~ ~!onchange=function() {Studies.setPresetStudyList(8, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(8)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(8)">Load</button>
+      <button onclick="Studies.presetDelete(8)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(9) ? '' : 'none'~>
+      Name: <input class="presetname9" type="text" ~!value=Studies.presetName(9)~ ~!onchange=function() {Studies.setPresetName(9, this.value)}~></input>
+      Study list: <input class="presetstudylist9" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(9)~ ~!onchange=function() {Studies.setPresetStudyList(9, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(9)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(9)">Load</button>
+      <button onclick="Studies.presetDelete(9)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(10) ? '' : 'none'~>
+      Name: <input class="presetname10" type="text" ~!value=Studies.presetName(10)~ ~!onchange=function() {Studies.setPresetName(10, this.value)}~></input>
+      Study list: <input class="presetstudylist10" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(10)~ ~!onchange=function() {Studies.setPresetStudyList(10, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(10)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(10)">Load</button>
+      <button onclick="Studies.presetDelete(10)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(11) ? '' : 'none'~>
+      Name: <input class="presetname11" type="text" ~!value=Studies.presetName(11)~ ~!onchange=function() {Studies.setPresetName(11, this.value)}~></input>
+      Study list: <input class="presetstudylist11" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(11)~ ~!onchange=function() {Studies.setPresetStudyList(11, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(11)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(11)">Load</button>
+      <button onclick="Studies.presetDelete(11)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(12) ? '' : 'none'~>
+      Name: <input class="presetname12" type="text" ~!value=Studies.presetName(12)~ ~!onchange=function() {Studies.setPresetName(12, this.value)}~></input>
+      Study list: <input class="presetstudylist12" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(12)~ ~!onchange=function() {Studies.setPresetStudyList(12, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(12)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(12)">Load</button>
+      <button onclick="Studies.presetDelete(12)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(13) ? '' : 'none'~>
+      Name: <input class="presetname13" type="text" ~!value=Studies.presetName(13)~ ~!onchange=function() {Studies.setPresetName(13, this.value)}~></input>
+      Study list: <input class="presetstudylist13" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(13)~ ~!onchange=function() {Studies.setPresetStudyList(13, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(13)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(13)">Load</button>
+      <button onclick="Studies.presetDelete(13)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(14) ? '' : 'none'~>
+      Name: <input class="presetname14" type="text" ~!value=Studies.presetName(14)~ ~!onchange=function() {Studies.setPresetName(14, this.value)}~></input>
+      Study list: <input class="presetstudylist14" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(14)~ ~!onchange=function() {Studies.setPresetStudyList(14, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(14)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(14)">Load</button>
+      <button onclick="Studies.presetDelete(14)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(15) ? '' : 'none'~>
+      Name: <input class="presetname15" type="text" ~!value=Studies.presetName(15)~ ~!onchange=function() {Studies.setPresetName(15, this.value)}~></input>
+      Study list: <input class="presetstudylist15" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(15)~ ~!onchange=function() {Studies.setPresetStudyList(15, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(15)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(15)">Load</button>
+      <button onclick="Studies.presetDelete(15)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(16) ? '' : 'none'~>
+      Name: <input class="presetname16" type="text" ~!value=Studies.presetName(16)~ ~!onchange=function() {Studies.setPresetName(16, this.value)}~></input>
+      Study list: <input class="presetstudylist16" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(16)~ ~!onchange=function() {Studies.setPresetStudyList(16, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(16)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(16)">Load</button>
+      <button onclick="Studies.presetDelete(16)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(17) ? '' : 'none'~>
+      Name: <input class="presetname17" type="text" ~!value=Studies.presetName(17)~ ~!onchange=function() {Studies.setPresetName(17, this.value)}~></input>
+      Study list: <input class="presetstudylist17" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(17)~ ~!onchange=function() {Studies.setPresetStudyList(17, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(17)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(17)">Load</button>
+      <button onclick="Studies.presetDelete(17)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(18) ? '' : 'none'~>
+      Name: <input class="presetname18" type="text" ~!value=Studies.presetName(18)~ ~!onchange=function() {Studies.setPresetName(18, this.value)}~></input>
+      Study list: <input class="presetstudylist18" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(18)~ ~!onchange=function() {Studies.setPresetStudyList(18, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(18)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(18)">Load</button>
+      <button onclick="Studies.presetDelete(18)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(19) ? '' : 'none'~>
+      Name: <input class="presetname19" type="text" ~!value=Studies.presetName(19)~ ~!onchange=function() {Studies.setPresetName(19, this.value)}~></input>
+      Study list: <input class="presetstudylist19" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(19)~ ~!onchange=function() {Studies.setPresetStudyList(19, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(19)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(19)">Load</button>
+      <button onclick="Studies.presetDelete(19)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(20) ? '' : 'none'~>
+      Name: <input class="presetname20" type="text" ~!value=Studies.presetName(20)~ ~!onchange=function() {Studies.setPresetName(20, this.value)}~></input>
+      Study list: <input class="presetstudylist20" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(20)~ ~!onchange=function() {Studies.setPresetStudyList(20, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(20)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(20)">Load</button>
+      <button onclick="Studies.presetDelete(20)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(21) ? '' : 'none'~>
+      Name: <input class="presetname21" type="text" ~!value=Studies.presetName(21)~ ~!onchange=function() {Studies.setPresetName(21, this.value)}~></input>
+      Study list: <input class="presetstudylist21" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(21)~ ~!onchange=function() {Studies.setPresetStudyList(21, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(21)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(21)">Load</button>
+      <button onclick="Studies.presetDelete(21)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(22) ? '' : 'none'~>
+      Name: <input class="presetname22" type="text" ~!value=Studies.presetName(22)~ ~!onchange=function() {Studies.setPresetName(22, this.value)}~></input>
+      Study list: <input class="presetstudylist22" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(22)~ ~!onchange=function() {Studies.setPresetStudyList(22, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(22)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(22)">Load</button>
+      <button onclick="Studies.presetDelete(22)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(23) ? '' : 'none'~>
+      Name: <input class="presetname23" type="text" ~!value=Studies.presetName(23)~ ~!onchange=function() {Studies.setPresetName(23, this.value)}~></input>
+      Study list: <input class="presetstudylist23" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(23)~ ~!onchange=function() {Studies.setPresetStudyList(23, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(23)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(23)">Load</button>
+      <button onclick="Studies.presetDelete(23)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(24) ? '' : 'none'~>
+      Name: <input class="presetname24" type="text" ~!value=Studies.presetName(24)~ ~!onchange=function() {Studies.setPresetName(24, this.value)}~></input>
+      Study list: <input class="presetstudylist24" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(24)~ ~!onchange=function() {Studies.setPresetStudyList(24, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(24)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(24)">Load</button>
+      <button onclick="Studies.presetDelete(24)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(25) ? '' : 'none'~>
+      Name: <input class="presetname25" type="text" ~!value=Studies.presetName(25)~ ~!onchange=function() {Studies.setPresetName(25, this.value)}~></input>
+      Study list: <input class="presetstudylist25" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(25)~ ~!onchange=function() {Studies.setPresetStudyList(25, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(25)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(25)">Load</button>
+      <button onclick="Studies.presetDelete(25)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(26) ? '' : 'none'~>
+      Name: <input class="presetname26" type="text" ~!value=Studies.presetName(26)~ ~!onchange=function() {Studies.setPresetName(26, this.value)}~></input>
+      Study list: <input class="presetstudylist26" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(26)~ ~!onchange=function() {Studies.setPresetStudyList(26, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(26)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(26)">Load</button>
+      <button onclick="Studies.presetDelete(26)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(27) ? '' : 'none'~>
+      Name: <input class="presetname27" type="text" ~!value=Studies.presetName(27)~ ~!onchange=function() {Studies.setPresetName(27, this.value)}~></input>
+      Study list: <input class="presetstudylist27" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(27)~ ~!onchange=function() {Studies.setPresetStudyList(27, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(27)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(27)">Load</button>
+      <button onclick="Studies.presetDelete(27)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(28) ? '' : 'none'~>
+      Name: <input class="presetname28" type="text" ~!value=Studies.presetName(28)~ ~!onchange=function() {Studies.setPresetName(28, this.value)}~></input>
+      Study list: <input class="presetstudylist28" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(28)~ ~!onchange=function() {Studies.setPresetStudyList(28, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(28)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(28)">Load</button>
+      <button onclick="Studies.presetDelete(28)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(29) ? '' : 'none'~>
+      Name: <input class="presetname29" type="text" ~!value=Studies.presetName(29)~ ~!onchange=function() {Studies.setPresetName(29, this.value)}~></input>
+      Study list: <input class="presetstudylist29" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(29)~ ~!onchange=function() {Studies.setPresetStudyList(29, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(29)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(29)">Load</button>
+      <button onclick="Studies.presetDelete(29)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(30) ? '' : 'none'~>
+      Name: <input class="presetname30" type="text" ~!value=Studies.presetName(30)~ ~!onchange=function() {Studies.setPresetName(30, this.value)}~></input>
+      Study list: <input class="presetstudylist30" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(30)~ ~!onchange=function() {Studies.setPresetStudyList(30, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(30)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(30)">Load</button>
+      <button onclick="Studies.presetDelete(30)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(31) ? '' : 'none'~>
+      Name: <input class="presetname31" type="text" ~!value=Studies.presetName(31)~ ~!onchange=function() {Studies.setPresetName(31, this.value)}~></input>
+      Study list: <input class="presetstudylist31" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(31)~ ~!onchange=function() {Studies.setPresetStudyList(31, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(31)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(31)">Load</button>
+      <button onclick="Studies.presetDelete(31)">Delete</button>
+    </div>
+    <div ~style.display=Studies.hasPreset(32) ? '' : 'none'~>
+      Name: <input class="presetname32" type="text" ~!value=Studies.presetName(32)~ ~!onchange=function() {Studies.setPresetName(32, this.value)}~></input>
+      Study list: <input class="presetstudylist32" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(32)~ ~!onchange=function() {Studies.setPresetStudyList(32, this.value)}~></input>
+      <button onclick="Studies.presetSetToCurrentStudies(32)">Set to current studies</button>
+      <button onclick="Studies.presetLoad(32)">Load</button>
+      <button onclick="Studies.presetDelete(32)">Delete</button>
+    </div>
+    <span>
+      <button ~style.display=Studies.hasPreset(32) ? 'none' : ''~ onclick="Studies.presetCreate()">Create a preset</button>
+      <span ~style.display=Studies.hasPreset(32) ? '' : 'none'~>You can create at most ~f 32 ~ presets. Delete existing presets to create more.</span>
+    </span>
     <span style="display: none;">Exported studies: <input id="study-export-output"></input></span>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'eternity-producer' ? '' : 'none'~>
@@ -1585,16 +1941,18 @@
       <span>You have ~f EternityPoints.amount() ~ eternity points. <button ~class=EternityProducer.anythingToBuy() ? "" : "disabled"~ onclick="EternityProducer.maxAll()">Max Eternity Producer upgrades</button></span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
-          <td>Increase Eternity Producer base production per second:</td>
+          <td>Eternity Producer base production per second:</td>
           <td><span ~style.display=EternityProducerUpgrade(1).atBoughtLimit() ? 'none' : ''~>~f EternityProducerUpgrade(1).effect() ~ → ~f EternityProducerUpgrade(1).nextEffect() ~</span><span ~style.display=EternityProducerUpgrade(1).atBoughtLimit() ? '' : 'none'~>~f EternityProducerUpgrade(1).effect() ~ (maxed)</span></td>
           <td><span ~style.display=EternityProducerUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=EternityProducerUpgrade(1).canBuy() ? "" : "disabled"~ onclick="EternityProducerUpgrade(1).buy()">Cost: ~f EternityProducerUpgrade(1).cost() ~ EP</button></span></td>
           <td><span ~style.display=EternityProducerUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=EternityProducerUpgrade(1).canBuy() ? "" : "disabled"~ onclick="EternityProducerUpgrade(1).buyMax()">Max</button></span></td>
+          <td><span ~style.display=EternityAutobuyer(12).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(12).toggle()">Auto: ~r EternityAutobuyer(12).isOn() ? "On" : "Off" ~</button></span></td>
         </tr>
         <tr>
-          <td>Increase Eternity Producer multiplier to eternity generators:</td>
+          <td>Eternity Producer multiplier to EGs:</td>
           <td><span ~style.display=EternityProducerUpgrade(2).atBoughtLimit() ? 'none' : ''~>~f EternityProducerUpgrade(2).effect() ~ → ~f EternityProducerUpgrade(2).nextEffect() ~</span><span ~style.display=EternityProducerUpgrade(2).atBoughtLimit() ? '' : 'none'~>~f EternityProducerUpgrade(2).effect() ~ (maxed)</span></td>
           <td><span ~style.display=EternityProducerUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=EternityProducerUpgrade(2).canBuy() ? "" : "disabled"~ onclick="EternityProducerUpgrade(2).buy()">Cost: ~f EternityProducerUpgrade(2).cost() ~ EP</button></span></td>
           <td><span ~style.display=EternityProducerUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=EternityProducerUpgrade(2).canBuy() ? "" : "disabled"~ onclick="EternityProducerUpgrade(2).buyMax()">Max</button></span></td>
+          <td><span ~style.display=EternityAutobuyer(13).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(13).toggle()">Auto: ~r EternityAutobuyer(13).isOn() ? "On" : "Off" ~</button></span></td>
         </tr>
       </table>
       <br/>
@@ -1606,24 +1964,28 @@
             <td><span ~style.display=PermanenceUpgrade(1).atBoughtLimit() ? 'none' : ''~>~f PermanenceUpgrade(1).effect() ~ → ~f PermanenceUpgrade(1).nextEffect() ~</span><span ~style.display=PermanenceUpgrade(1).atBoughtLimit() ? '' : 'none'~>~f PermanenceUpgrade(1).effect() ~ (maxed)</span></td>
             <td><span ~style.display=PermanenceUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(1).buy()">Cost: ~f PermanenceUpgrade(1).cost() ~ permanence</button></span></td>
             <td><span ~style.display=PermanenceUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(1).buyMax()">Max</button></span></td>
+            <td><span ~style.display=EternityAutobuyer(17).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(17).toggle()">Auto: ~r EternityAutobuyer(17).isOn() ? "On" : "Off" ~</button></span></td>
           </tr>
           <tr>
-            <td>Power to Eternity Producer multiplier to eternity generators:</td>
+            <td>Power to Eternity Producer multiplier to EGs:</td>
             <td><span ~style.display=PermanenceUpgrade(2).atBoughtLimit() ? 'none' : ''~>~f PermanenceUpgrade(2).effect() ~ → ~f PermanenceUpgrade(2).nextEffect() ~</span><span ~style.display=PermanenceUpgrade(2).atBoughtLimit() ? '' : 'none'~>~f PermanenceUpgrade(2).effect() ~ (maxed)</span></td>
             <td><span ~style.display=PermanenceUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(2).buy()">Cost: ~f PermanenceUpgrade(2).cost() ~ permanence</button></span></td>
             <td><span ~style.display=PermanenceUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(2).buyMax()">Max</button></span></td>
+            <td><span ~style.display=EternityAutobuyer(18).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(18).toggle()">Auto: ~r EternityAutobuyer(18).isOn() ? "On" : "Off" ~</button></span></td>
           </tr>
           <tr>
             <td>Power to third-row study effects:</td>
             <td><span ~style.display=PermanenceUpgrade(3).atBoughtLimit() ? 'none' : ''~>~f PermanenceUpgrade(3).effect() ~ → ~f PermanenceUpgrade(3).nextEffect() ~</span><span ~style.display=PermanenceUpgrade(3).atBoughtLimit() ? '' : 'none'~>~f PermanenceUpgrade(3).effect() ~ (maxed)</span></td>
             <td><span ~style.display=PermanenceUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(3).buy()">Cost: ~f PermanenceUpgrade(3).cost() ~ permanence</button></span></td>
             <td><span ~style.display=PermanenceUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(3).buyMax()">Max</button></span></td>
+            <td><span ~style.display=EternityAutobuyer(19).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(19).toggle()">Auto: ~r EternityAutobuyer(19).isOn() ? "On" : "Off" ~</button></span></td>
           </tr>
           <tr>
-            <td>Multiplier to permanence gain based on eternity stars:</td>
+            <td>Multiplier to permanence based on eternity stars:</td>
             <td><span ~style.display=PermanenceUpgrade(4).atBoughtLimit() ? 'none' : ''~>~f PermanenceUpgrade(4).effect() ~ → ~f PermanenceUpgrade(4).nextEffect() ~</span><span ~style.display=PermanenceUpgrade(4).atBoughtLimit() ? '' : 'none'~>~f PermanenceUpgrade(4).effect() ~ (maxed)</span></td>
             <td><span ~style.display=PermanenceUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(4).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(4).buy()">Cost: ~f PermanenceUpgrade(4).cost() ~ permanence</button></span></td>
             <td><span ~style.display=PermanenceUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(4).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(4).buyMax()">Max</button></span></td>
+            <td><span ~style.display=EternityAutobuyer(20).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(20).toggle()">Auto: ~r EternityAutobuyer(20).isOn() ? "On" : "Off" ~</button></span></td>
           </tr>
         </table>
       </div>
@@ -1632,28 +1994,56 @@
     </div>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'eternity-challenges' ? '' : 'none'~>
+    <span>You have completed ~f EternityChallenge.getTotalEternityChallengeCompletions() ~ eternity challenge tiers, giving you ~f EternityChallenge.extraTheoremsActualAndDisplay() ~ extra theorems (~f 1 ~ per tier).</span>
+    <br/>
     <span>
-      You have completed ~f EternityChallenge.getTotalEternityChallengeCompletions() ~ eternity challenge tiers, giving you ~f EternityChallenge.extraTheorems() ~ extra theorems (~f 1 ~ per tier).
-      <button onclick="EternityChallenge.toggleRespec()">Respec eternity challenge on next eternity: ~r EternityChallenge.isRespecOn() ? "On" : "Off" ~</button>
+      <button ~style.display=EternityChallenge.canRespec() ? '' : 'none'~ onclick="EternityChallenge.toggleRespec()">Respec eternity challenge on next eternity: ~r EternityChallenge.isRespecOn() ? "On" : "Off" ~</button>
+      <button ~style.display=ComplexityUpgrades.hasComplexityUpgrade(3, 2) ? '' : 'none'~ onclick="EternityChallenge.toggleRequirementDisplay()">Show (now unneeded) eternity challenge requirements: ~r EternityChallenge.isRequirementDisplayOn() ? "On" : "Off" ~</button>
+    </span>
+    <div ~style.display=EternityChallenge.hasAutoECCompletion() ? '' : 'none'~>
+      <span>You automatically complete an eternity challenge tier once every ~f Complexities.autoECCompletionTime() ~ seconds.</span>
+      <br/>
+      <span ~style.display=EternityChallenge.areAllEternityChallengesCompleted() ? 'none' : ''~>It has been ~f EternityChallenge.timeSinceAutoECCompletion() ~ seconds since your last automatic eternity challenge completion<span ~style.display=EternityChallenge.usedAutoECCompletionThisComplexity() ? 'none' : ''~> (none this complexity)</span>.</span>
+      <span ~style.display=EternityChallenge.areAllEternityChallengesCompleted() ? '' : 'none'~>All eternity challenges are fully complete<span ~style.display=EternityChallenge.usedAutoECCompletionThisComplexity() ? 'none' : ''~> (and none were automatically completed)</span>.</span>
+      <br/>
+      <span ~style.display=!EternityChallenge.isAutoECCompletionOn() && EternityChallenge.imminentAutoECCompletionTiers() !== 0 ? '' : 'none'~>Turning automatic eternity challenge completion on would complete ~f EternityChallenge.imminentAutoECCompletionTiers() ~ eternity challenge tiers.</span>
+      <br ~style.display=!EternityChallenge.isAutoECCompletionOn() && EternityChallenge.imminentAutoECCompletionTiers() !== 0 ? '' : 'none'~/>
+      <button onclick="EternityChallenge.toggleAutoECCompletion()">Automatic eternity challenge completion: ~r EternityChallenge.isAutoECCompletionOn() ? "On" : "Off" ~</button>
+    </div>
+    <br ~style.display=EternityChallenge.hasAutoECCompletion() ? 'none' : ''~/>
+    <span>
+      At ~f EternityChallenge.getTotalCompletionsRewardThreshold(1) ~ total eternity challenge tiers completed:
     </span>
     <br/>
     <span>
-      At ~f EternityChallenge.getTotalCompletionsRewardThreshold(1) ~ total eternity challenge tiers completed: Multiplier to boost power gain based on eternity challenge tiers completed (~f EternityChallenge.getTotalCompletionsRewardRawEffect(1) ~)
+      Multiplier to boost power gain based on eternity challenge tiers completed (~f EternityChallenge.getTotalCompletionsRewardRawEffect(1) ~)
     </span>
     <br/>
     <span>
-      At ~f EternityChallenge.getTotalCompletionsRewardThreshold(2) ~ total eternity challenge tiers completed: Multiplier to eternity gain based on eternity challenge tiers completed (~f EternityChallenge.getTotalCompletionsRewardRawEffect(2) ~)
+      At ~f EternityChallenge.getTotalCompletionsRewardThreshold(2) ~ total eternity challenge tiers completed:
     </span>
     <br/>
     <span>
-      At ~f EternityChallenge.getTotalCompletionsRewardThreshold(3) ~ total eternity challenge tiers completed: You gain your infinity points on infinity every second, without needing to infinity.
+      Multiplier to eternity gain based on eternity challenge tiers completed (~f EternityChallenge.getTotalCompletionsRewardRawEffect(2) ~)
     </span>
     <br/>
     <span>
-      At ~f EternityChallenge.getTotalCompletionsRewardThreshold(4) ~ total eternity challenge tiers completed: Chroma buildup speed ~f EternityChallenge.getTotalCompletionsRewardRawEffect(4) ~x
+      At ~f EternityChallenge.getTotalCompletionsRewardThreshold(3) ~ total eternity challenge tiers completed:
     </span>
     <br/>
     <span>
+      You gain your infinity points on infinity every second, without needing to infinity.
+    </span>
+    <br/>
+    <span>
+      At ~f EternityChallenge.getTotalCompletionsRewardThreshold(4) ~ total eternity challenge tiers completed:
+    </span>
+    <br/>
+    <span>
+      ~r EternityChallenge.eternityChallengeTotalCompletionsReward4Text() ~
+    </span>
+    <br/>
+    <span ~style.display=EternityChallenge.canRespec() ? '' : 'none'~>
       <button onclick="EternityChallenge.respecAndReset()">Respec eternity challenge and ~r EternityPrestigeLayer.resetText() ~</button>
     </span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
@@ -1664,12 +2054,14 @@
             <br/>
             <span>There are exponents on all normal generators multipliers based on infinity stars and on all infinity generator multipliers based on eternity stars (both less than ~f 1 ~).</span>
             <br/>
-            <span>Requirement to start:</span>
-            <br/>
-            <span>~r EternityChallenge.eternityChallengeRequirementDescription(1) ~</span>
-            <br/>
-            <span>Cost: ~f EternityChallenge.getEternityChallengeCost(1) ~ theorems</span>
-            <br/>
+            <div ~style.display=EternityChallenge.isRequirementDisplayOn() ? '' : 'none'~>
+              <span>Requirement to start:</span>
+              <br/>
+              <span>~r EternityChallenge.eternityChallengeRequirementDescription(1) ~</span>
+            </div>
+            <div ~style.display=ComplexityUpgrades.hasComplexityUpgrade(3, 2) ? 'none' : ''~>
+              <span>Cost: ~f EternityChallenge.getEternityChallengeCost(1) ~ theorems</span>
+            </div>
             <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(1) ~ IP</span>
             <br/>
             <span>~r EternityChallenge.eternityChallengeStatusDescription(1) ~</span>
@@ -1682,170 +2074,184 @@
           </div>
         </td>
         <td>
-            <div class="eternitychallengediv">
-              <span>Eternity Challenge 2</span>
-              <br/>
-              <span>Boost costs are massively increased.</span>
-              <br/>
+          <div class="eternitychallengediv">
+            <span>Eternity Challenge 2</span>
+            <br/>
+            <span>Boost costs are massively increased.</span>
+            <br/>
+            <div ~style.display=EternityChallenge.isRequirementDisplayOn() ? '' : 'none'~>
               <span>Requirement to start:</span>
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(2) ~</span>
-              <br/>
-              <span>Cost: ~f EternityChallenge.getEternityChallengeCost(2) ~ theorems</span>
-              <br/>
-              <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(2) ~ IP</span>
-              <br/>
-              <span>~r EternityChallenge.eternityChallengeStatusDescription(2) ~</span>
-              <br/>
-              <span><button onclick="EternityChallenge.pressEternityChallengeButton(2)">~r EternityChallenge.eternityChallengeButtonText(2) ~</button></span>
-              <br/>
-              <span>Reward: Boosts are cheaper.</span>
-              <br/>
-              <span>Current: Cost ^~f EternityChallenge.getEternityChallengeReward(2) ~<span ~style.display=EternityChallenge.isEternityChallengeCompleted(2) ? 'none' : ''~>, Next: Cost ^~f EternityChallenge.getEternityChallengeNextReward(2) ~</span></span>
             </div>
+            <div ~style.display=ComplexityUpgrades.hasComplexityUpgrade(3, 2) ? 'none' : ''~>
+              <span>Cost: ~f EternityChallenge.getEternityChallengeCost(2) ~ theorems</span>
+            </div>
+            <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(2) ~ IP</span>
+            <br/>
+            <span>~r EternityChallenge.eternityChallengeStatusDescription(2) ~</span>
+            <br/>
+            <span><button onclick="EternityChallenge.pressEternityChallengeButton(2)">~r EternityChallenge.eternityChallengeButtonText(2) ~</button></span>
+            <br/>
+            <span>Reward: Boosts are cheaper.</span>
+            <br/>
+            <span>Current: Cost ^~f EternityChallenge.getEternityChallengeReward(2) ~<span ~style.display=EternityChallenge.isEternityChallengeCompleted(2) ? 'none' : ''~>, Next: Cost ^~f EternityChallenge.getEternityChallengeNextReward(2) ~</span></span>
+          </div>
         </td>
       </tr>
       <tr>
         <td>
           <div class="eternitychallengediv">
-              <span>Eternity Challenge 3</span>
-              <br/>
-              <span>You can't prestige.</span>
-              <br/>
+            <span>Eternity Challenge 3</span>
+            <br/>
+            <span>You can't prestige.</span>
+            <br/>
+            <div ~style.display=EternityChallenge.isRequirementDisplayOn() ? '' : 'none'~>
               <span>Requirement to start:</span>
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(3) ~</span>
-              <br/>
+            </div>
+            <div ~style.display=ComplexityUpgrades.hasComplexityUpgrade(3, 2) ? 'none' : ''~>
               <span>Cost: ~f EternityChallenge.getEternityChallengeCost(3) ~ theorems</span>
-              <br/>
-              <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(3) ~ IP</span>
-              <br/>
-              <span>~r EternityChallenge.eternityChallengeStatusDescription(3) ~</span>
-              <br/>
-              <span><button onclick="EternityChallenge.pressEternityChallengeButton(3)">~r EternityChallenge.eternityChallengeButtonText(3) ~</button></span>
-              <br/>
-              <span>Reward: Exponent to prestige power.</span>
-              <br/>
-              <span>Current: ^~r formatWithPrecision(EternityChallenge.getEternityChallengeReward(3), 5) ~<span ~style.display=EternityChallenge.isEternityChallengeCompleted(3) ? 'none' : ''~>, Next: ^~r formatWithPrecision(EternityChallenge.getEternityChallengeNextReward(3), 5) ~</span></span>
+            </div>
+            <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(3) ~ IP</span>
+            <br/>
+            <span>~r EternityChallenge.eternityChallengeStatusDescription(3) ~</span>
+            <br/>
+            <span><button onclick="EternityChallenge.pressEternityChallengeButton(3)">~r EternityChallenge.eternityChallengeButtonText(3) ~</button></span>
+            <br/>
+            <span>Reward: Exponent to prestige power.</span>
+            <br/>
+            <span>Current: ^~r formatWithPrecision(EternityChallenge.getEternityChallengeReward(3), 5) ~<span ~style.display=EternityChallenge.isEternityChallengeCompleted(3) ? 'none' : ''~>, Next: ^~r formatWithPrecision(EternityChallenge.getEternityChallengeNextReward(3), 5) ~</span></span>
           </div>
         </td>
         <td>
           <div class="eternitychallengediv">
-              <span>Eternity Challenge 4</span>
-              <br/>
-              <span>You can infinity at most ~f EternityChallenge.eternityChallenge4AllowedInfinities() ~ times. If you infinity more, you will automatically exit the challenge.</span>
-              <br/>
+            <span>Eternity Challenge 4</span>
+            <br/>
+            <span>You can infinity at most ~f EternityChallenge.eternityChallenge4AllowedInfinities() ~ times. If you infinity more, you will automatically exit the challenge.</span>
+            <br/>
+            <div ~style.display=EternityChallenge.isRequirementDisplayOn() ? '' : 'none'~>
               <span>Requirement to start:</span>
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(4) ~</span>
-              <br/>
+            </div>
+            <div ~style.display=ComplexityUpgrades.hasComplexityUpgrade(3, 2) ? 'none' : ''~>
               <span>Cost: ~f EternityChallenge.getEternityChallengeCost(4) ~ theorems</span>
-              <br/>
-              <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(4) ~ IP</span>
-              <br/>
-              <span>~r EternityChallenge.eternityChallengeStatusDescription(4) ~</span>
-              <br/>
-              <span><button onclick="EternityChallenge.pressEternityChallengeButton(4)">~r EternityChallenge.eternityChallengeButtonText(4) ~</button></span>
-              <br/>
-              <span>Reward: Multiplier to infinity generators based on total infinity points produced this eternity.</span>
-              <br/>
-              <span>Current: ~f EternityChallenge.getEternityChallengeReward(4) ~x<span ~style.display=EternityChallenge.isEternityChallengeCompleted(4) ? 'none' : ''~>, Next: ~f EternityChallenge.getEternityChallengeNextReward(4) ~x</span></span>
+            </div>
+            <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(4) ~ IP</span>
+            <br/>
+            <span>~r EternityChallenge.eternityChallengeStatusDescription(4) ~</span>
+            <br/>
+            <span><button onclick="EternityChallenge.pressEternityChallengeButton(4)">~r EternityChallenge.eternityChallengeButtonText(4) ~</button></span>
+            <br/>
+            <span>Reward: Multiplier to infinity generators based on total infinity points produced this eternity.</span>
+            <br/>
+            <span>Current: ~f EternityChallenge.getEternityChallengeReward(4) ~x<span ~style.display=EternityChallenge.isEternityChallengeCompleted(4) ? 'none' : ''~>, Next: ~f EternityChallenge.getEternityChallengeNextReward(4) ~x</span></span>
           </div>
         </td>
       </tr>
       <tr>
         <td>
           <div class="eternitychallengediv">
-              <span>Eternity Challenge 5</span>
-              <br/>
-              <span>Infinity generator multipliers are square-rooted (^~f 0.5 ~).</span>
-              <br/>
+            <span>Eternity Challenge 5</span>
+            <br/>
+            <span>Infinity generator multipliers are square-rooted (^~f 0.5 ~).</span>
+            <br/>
+            <div ~style.display=EternityChallenge.isRequirementDisplayOn() ? '' : 'none'~>
               <span>Requirement to start:</span>
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(5) ~</span>
-              <br/>
+            </div>
+            <div ~style.display=ComplexityUpgrades.hasComplexityUpgrade(3, 2) ? 'none' : ''~>
               <span>Cost: ~f EternityChallenge.getEternityChallengeCost(5) ~ theorems</span>
-              <br/>
-              <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(5) ~ IP</span>
-              <br/>
-              <span>~r EternityChallenge.eternityChallengeStatusDescription(5) ~</span>
-              <br/>
-              <span><button onclick="EternityChallenge.pressEternityChallengeButton(5)">~r EternityChallenge.eternityChallengeButtonText(5) ~</button></span>
-              <br/>
-              <span>Reward: Exponent to infinity generator multipliers.</span>
-              <br/>
-              <span>Current: ^~f EternityChallenge.getEternityChallengeReward(5) ~<span ~style.display=EternityChallenge.isEternityChallengeCompleted(5) ? 'none' : ''~>, Next: ^~f EternityChallenge.getEternityChallengeNextReward(5) ~</span></span>
+            </div>
+            <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(5) ~ IP</span>
+            <br/>
+            <span>~r EternityChallenge.eternityChallengeStatusDescription(5) ~</span>
+            <br/>
+            <span><button onclick="EternityChallenge.pressEternityChallengeButton(5)">~r EternityChallenge.eternityChallengeButtonText(5) ~</button></span>
+            <br/>
+            <span>Reward: Exponent to infinity generator multipliers.</span>
+            <br/>
+            <span>Current: ^~f EternityChallenge.getEternityChallengeReward(5) ~<span ~style.display=EternityChallenge.isEternityChallengeCompleted(5) ? 'none' : ''~>, Next: ^~f EternityChallenge.getEternityChallengeNextReward(5) ~</span></span>
           </div>
         </td>
         <td>
           <div class="eternitychallengediv">
-              <span>Eternity Challenge 6</span>
-              <br/>
-              <span>All eternity challenge rewards are disabled.</span>
-              <br/>
+            <span>Eternity Challenge 6</span>
+            <br/>
+            <span>All eternity challenge rewards are disabled.</span>
+            <br/>
+            <div ~style.display=EternityChallenge.isRequirementDisplayOn() ? '' : 'none'~>
               <span>Requirement to start:</span>
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(6) ~</span>
-              <br/>
+            </div>
+            <div ~style.display=ComplexityUpgrades.hasComplexityUpgrade(3, 2) ? 'none' : ''~>
               <span>Cost: ~f EternityChallenge.getEternityChallengeCost(6) ~ theorems</span>
-              <br/>
-              <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(6) ~ IP</span>
-              <br/>
-              <span>~r EternityChallenge.eternityChallengeStatusDescription(6) ~</span>
-              <br/>
-              <span><button onclick="EternityChallenge.pressEternityChallengeButton(6)">~r EternityChallenge.eternityChallengeButtonText(6) ~</button></span>
-              <br/>
-              <span>Reward: All other eternity challenge rewards are stronger.</span>
-              <br/>
-              <span>Current: ~f EternityChallenge.getEternityChallengeReward(6) ~x<span ~style.display=EternityChallenge.isEternityChallengeCompleted(6) ? 'none' : ''~>, Next: ~f EternityChallenge.getEternityChallengeNextReward(6) ~x</span></span>
+            </div>
+            <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(6) ~ IP</span>
+            <br/>
+            <span>~r EternityChallenge.eternityChallengeStatusDescription(6) ~</span>
+            <br/>
+            <span><button onclick="EternityChallenge.pressEternityChallengeButton(6)">~r EternityChallenge.eternityChallengeButtonText(6) ~</button></span>
+            <br/>
+            <span>Reward: All other eternity challenge rewards are stronger.</span>
+            <br/>
+            <span>Current: ~f EternityChallenge.getEternityChallengeReward(6) ~x<span ~style.display=EternityChallenge.isEternityChallengeCompleted(6) ? 'none' : ''~>, Next: ~f EternityChallenge.getEternityChallengeNextReward(6) ~x</span></span>
           </div>
         </td>
       </tr>
       <tr>
         <td>
           <div class="eternitychallengediv">
-              <span>Eternity Challenge 7</span>
-              <br/>
-              <span>Infinity generator per-purchase multipliers are disabled.</span>
-              <br/>
+            <span>Eternity Challenge 7</span>
+            <br/>
+            <span>Infinity generator per-purchase multipliers are disabled.</span>
+            <br/>
+            <div ~style.display=EternityChallenge.isRequirementDisplayOn() ? '' : 'none'~>
               <span>Requirement to start:</span>
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(7) ~</span>
-              <br/>
+            </div>
+            <div ~style.display=ComplexityUpgrades.hasComplexityUpgrade(3, 2) ? 'none' : ''~>
               <span>Cost: ~f EternityChallenge.getEternityChallengeCost(7) ~ theorems</span>
-              <br/>
-              <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(7) ~ IP</span>
-              <br/>
-              <span>~r EternityChallenge.eternityChallengeStatusDescription(7) ~</span>
-              <br/>
-              <span><button onclick="EternityChallenge.pressEternityChallengeButton(7)">~r EternityChallenge.eternityChallengeButtonText(7) ~</button></span>
-              <br/>
-              <span>Reward: Multiplier to infinity generators based on total eternity points produced.</span>
-              <br/>
-              <span>Current: ~f EternityChallenge.getEternityChallengeReward(7) ~x<span ~style.display=EternityChallenge.isEternityChallengeCompleted(7) ? 'none' : ''~>, Next: ~f EternityChallenge.getEternityChallengeNextReward(7) ~x</span></span>
+            </div>
+            <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(7) ~ IP</span>
+            <br/>
+            <span>~r EternityChallenge.eternityChallengeStatusDescription(7) ~</span>
+            <br/>
+            <span><button onclick="EternityChallenge.pressEternityChallengeButton(7)">~r EternityChallenge.eternityChallengeButtonText(7) ~</button></span>
+            <br/>
+            <span>Reward: Multiplier to infinity generators based on eternity points produced this complexity.</span>
+            <br/>
+            <span>Current: ~f EternityChallenge.getEternityChallengeReward(7) ~x<span ~style.display=EternityChallenge.isEternityChallengeCompleted(7) ? 'none' : ''~>, Next: ~f EternityChallenge.getEternityChallengeNextReward(7) ~x</span></span>
           </div>
         </td>
         <td>
           <div class="eternitychallengediv">
-              <span>Eternity Challenge 8</span>
-              <br/>
-              <span>Eternity generators are disabled.</span>
-              <br/>
+            <span>Eternity Challenge 8</span>
+            <br/>
+            <span>Eternity generators are disabled.</span>
+            <br/>
+            <div ~style.display=EternityChallenge.isRequirementDisplayOn() ? '' : 'none'~>
               <span>Requirement to start:</span>
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(8) ~</span>
-              <br/>
+            </div>
+            <div ~style.display=ComplexityUpgrades.hasComplexityUpgrade(3, 2) ? 'none' : ''~>
               <span>Cost: ~f EternityChallenge.getEternityChallengeCost(8) ~ theorems</span>
-              <br/>
-              <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(8) ~ IP</span>
-              <br/>
-              <span>~r EternityChallenge.eternityChallengeStatusDescription(8) ~</span>
-              <br/>
-              <span><button onclick="EternityChallenge.pressEternityChallengeButton(8)">~r EternityChallenge.eternityChallengeButtonText(8) ~</button></span>
-              <br/>
-              <span>Reward: Multiplier to eternity generators.</span>
-              <br/>
-              <span>Current: ~f EternityChallenge.getEternityChallengeReward(8) ~x<span ~style.display=EternityChallenge.isEternityChallengeCompleted(8) ? 'none' : ''~>, Next: ~f EternityChallenge.getEternityChallengeNextReward(8) ~x</span></span>
+            </div>
+            <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(8) ~ IP</span>
+            <br/>
+            <span>~r EternityChallenge.eternityChallengeStatusDescription(8) ~</span>
+            <br/>
+            <span><button onclick="EternityChallenge.pressEternityChallengeButton(8)">~r EternityChallenge.eternityChallengeButtonText(8) ~</button></span>
+            <br/>
+            <span>Reward: Multiplier to eternity generators.</span>
+            <br/>
+            <span>Current: ~f EternityChallenge.getEternityChallengeReward(8) ~x<span ~style.display=EternityChallenge.isEternityChallengeCompleted(8) ? 'none' : ''~>, Next: ~f EternityChallenge.getEternityChallengeNextReward(8) ~x</span></span>
           </div>
         </td>
       </tr>
@@ -1869,111 +2275,587 @@
       <br/>
       <span>The distance between your chroma and its cap decreases exponentially.</span>
       <br/>
-      <span>You ~r Chroma.currentProductionText() ~, and will produce ~r Chroma.nextColorName() ~ after next eternity reset.</span>
-      <br/>
-      <span>The value of whatever color you are producing is constantly set to your chroma (unless your chroma is lower).</span>
+      <span ~style.display=Chroma.producingAll() ? 'none' : ''~>You ~r Chroma.currentProductionText() ~, and will produce ~r Chroma.nextColorName() ~ after next eternity reset.</span>
+      <br ~style.display=Chroma.producingAll() ? 'none' : ''~/>
+      <span>
+        <span ~style.display=Chroma.producingAll() ? 'none' : ''~>The value of whatever color you are producing is</span>
+        <span ~style.display=Chroma.producingAll() ? '' : 'none'~>The values of all colors are</span>
+        constantly set to your chroma (unless your chroma is lower).</span>
+      </span>
       <br/>
       <span>All sources of chroma buildup speed act retroactively in the current eternity.</span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 0px; border-collapse: separate;">
         <tr>
           <td>
-            <div class="chromadiv">
+            <div class="chromadiv" ~style.display=Chroma.canSeeThatColorExists(1) ? '' : 'none'~>
               <div ~style.display=Chroma.isColorUnlocked(1) ? 'none' : ''~>
                 <button style="height: 48px;" onclick="Chroma.unlockColor(1)" ~class=Chroma.canUnlockColor(1) ? '' : 'disabled'~>
                   Unlock ~r Chroma.colorName(1) ~<br/>Cost: ~f Chroma.getUnlockColorCost(1) ~ eternity points
                 </button>
               </div>
-              <div ~style.display=Chroma.isColorUnlocked(1) ? '' : 'none'~>
-                <span class="greyspan">~r Chroma.colorName(1, true) ~: ~f Chroma.colorAmount(1) ~</span>
+              <div class="greydiv" ~style.display=Chroma.isColorUnlocked(1) ? '' : 'none'~>
+                <span>~r Chroma.colorName(1, true) ~: ~f Chroma.colorAmount(1) ~</span>
                 <br/>
-                <span class="greyspan">Multiplier per boost ~f Chroma.effectOfColor(1) ~x</span>
+                <span>Multiplier per boost ~f Chroma.effectOfColor(1) ~x</span>
                 <br/>
                 <br/>
-                <button onclick="Chroma.setNextColor(1)">Produce ~r Chroma.colorName(1) ~ next</button>
+                <button ~style.display=Chroma.producingAll() ? 'none' : ''~ onclick="Chroma.setNextColor(1)">Produce ~r Chroma.colorName(1) ~ next</button>
               </div>
             </div>
           </td>
           <td>
-            <div class="chromadiv">
+            <div class="chromadiv" ~style.display=Chroma.canSeeThatColorExists(2) ? '' : 'none'~>
               <div ~style.display=Chroma.isColorUnlocked(2) ? 'none' : ''~>
                 <button style="height: 48px;" onclick="Chroma.unlockColor(2)" ~class=Chroma.canUnlockColor(2) ? '' : 'disabled'~>
                   Unlock ~r Chroma.colorName(2) ~<br/>Cost: ~f Chroma.getUnlockColorCost(2) ~ eternity points
                 </button>
               </div>
-              <div ~style.display=Chroma.isColorUnlocked(2) ? '' : 'none'~>
-                <span class="purplespan">~r Chroma.colorName(2, true) ~: ~f Chroma.colorAmount(2) ~</span>
+              <div class="purplediv" ~style.display=Chroma.isColorUnlocked(2) ? '' : 'none'~>
+                <span>~r Chroma.colorName(2, true) ~: ~f Chroma.colorAmount(2) ~</span>
                 <br/>
-                <span class="purplespan">Eternity production ~f Chroma.effectOfColor(2) ~x</span>
+                <span>Eternity production ~f Chroma.effectOfColor(2) ~x</span>
                 <br/>
                 <br/>
-                <button onclick="Chroma.setNextColor(2)">Produce ~r Chroma.colorName(2) ~ next</button>
+                <button ~style.display=Chroma.producingAll() ? 'none' : ''~ onclick="Chroma.setNextColor(2)">Produce ~r Chroma.colorName(2) ~ next</button>
               </div>
             </div>
           </td>
           <td>
-            <div class="chromadiv">
+            <div class="chromadiv" ~style.display=Chroma.canSeeThatColorExists(3) ? '' : 'none'~>
               <div ~style.display=Chroma.isColorUnlocked(3) ? 'none' : ''~>
                 <button style="height: 48px;" onclick="Chroma.unlockColor(3)" ~class=Chroma.canUnlockColor(3) ? '' : 'disabled'~>
                   Unlock ~r Chroma.colorName(3) ~<br/>Cost: ~f Chroma.getUnlockColorCost(3) ~ eternity points
                 </button>
               </div>
-              <div ~style.display=Chroma.isColorUnlocked(3) ? '' : 'none'~>
-                <span class="orangespan">~r Chroma.colorName(3, true) ~: ~f Chroma.colorAmount(3) ~</span>
+              <div class="orangediv" ~style.display=Chroma.isColorUnlocked(3) ? '' : 'none'~>
+                <span>~r Chroma.colorName(3, true) ~: ~f Chroma.colorAmount(3) ~</span>
                 <br/>
-                <span class="orangespan">Chroma buildup speed ~f Chroma.effectOfColor(3) ~x</span>
+                <span>Chroma buildup speed ~f Chroma.effectOfColor(3) ~x</span>
                 <br/>
-                <span class="orangespan">(based on total eternity points)</span>
+                <span>(based on total EP this complexity)</span>
                 <br/>
-                <button onclick="Chroma.setNextColor(3)">Produce ~r Chroma.colorName(3) ~ next</button>
+                <button ~style.display=Chroma.producingAll() ? 'none' : ''~ onclick="Chroma.setNextColor(3)">Produce ~r Chroma.colorName(3) ~ next</button>
               </div>
             </div>
           </td>
         </tr>
         <tr>
           <td>
-            <div class="chromadiv">
+            <div class="chromadiv" ~style.display=Chroma.canSeeThatColorExists(4) ? '' : 'none'~>
               <div ~style.display=Chroma.isColorUnlocked(4) ? 'none' : ''~>
                 <button style="height: 48px;" onclick="Chroma.unlockColor(4)" ~class=Chroma.canUnlockColor(4) ? '' : 'disabled'~>
                   Unlock ~r Chroma.colorName(4) ~<br/>Cost: ~f Chroma.getUnlockColorCost(4) ~ eternity points
                 </button>
               </div>
-              <div ~style.display=Chroma.isColorUnlocked(4) ? '' : 'none'~>
-                <span class="yellowspan">~r Chroma.colorName(4, true) ~: ~f Chroma.colorAmount(4) ~</span>
+              <div class="cyandiv" ~style.display=Chroma.isColorUnlocked(4) ? '' : 'none'~>
+                <span>~r Chroma.colorName(4, true) ~: ~f Chroma.colorAmount(4) ~</span>
                 <br/>
-                <span class="yellowspan">Eternity Generator 8 ~f Chroma.effectOfColor(4) ~x</span>
+                <span>Eternity Generator 8 ~f Chroma.effectOfColor(4) ~x</span>
                 <br/>
-                <span class="yellowspan">(based on Eternity Generator 8 amount)</span>
+                <span>(based on Eternity Generator 8 amount)</span>
                 <br/>
-                <button onclick="Chroma.setNextColor(4)">Produce ~r Chroma.colorName(4) ~ next</button>
+                <button ~style.display=Chroma.producingAll() ? 'none' : ''~ onclick="Chroma.setNextColor(4)">Produce ~r Chroma.colorName(4) ~ next</button>
               </div>
             </div>
           </td>
           <td>
-            <div class="chromadiv">
+            <div class="chromadiv" ~style.display=Chroma.canSeeThatColorExists(5) ? '' : 'none'~>
               <div ~style.display=Chroma.isColorUnlocked(5) ? 'none' : ''~>
                 <button style="height: 48px;" onclick="Chroma.unlockColor(5)" ~class=Chroma.canUnlockColor(5) ? '' : 'disabled'~>
                   Unlock ~r Chroma.colorName(5) ~<br/>Cost: ~f Chroma.getUnlockColorCost(5) ~ eternity points
                 </button>
               </div>
-              <div ~style.display=Chroma.isColorUnlocked(5) ? '' : 'none'~>
-                <span class="greenspan">~r Chroma.colorName(5, true) ~: ~f Chroma.colorAmount(5) ~</span>
+              <div class="greendiv" ~style.display=Chroma.isColorUnlocked(5) ? '' : 'none'~>
+                <span>~r Chroma.colorName(5, true) ~: ~f Chroma.colorAmount(5) ~</span>
                 <br/>
-                <span class="greenspan">~f Chroma.effectOfColor(5) ~ extra theorems, next at ~f Chroma.nextExtraTheorem() ~</span>
+                <span>~f Chroma.extraTheoremsActualAndDisplay() ~ extra theorems, next at ~f Chroma.nextExtraTheorem() ~</span>
                 <br/>
                 <br/>
-                <button onclick="Chroma.setNextColor(5)">Produce ~r Chroma.colorName(5) ~ next</button>
+                <button ~style.display=Chroma.producingAll() ? 'none' : ''~ onclick="Chroma.setNextColor(5)">Produce ~r Chroma.colorName(5) ~ next</button>
               </div>
             </div>
           </td>
-          <td/>
+          <td>
+            <div class="chromadiv" ~style.display=Chroma.canSeeThatColorExists(6) ? '' : 'none'~>
+              <div ~style.display=Chroma.isColorUnlocked(6) ? 'none' : ''~>
+                <button style="height: 48px;" onclick="Chroma.unlockColor(6)" ~class=Chroma.canUnlockColor(6) ? '' : 'disabled'~>
+                  Unlock ~r Chroma.colorName(6) ~<br/>Cost: ~f Chroma.getUnlockColorCost(6) ~ eternity points
+                </button>
+              </div>
+              <div class="reddiv" ~style.display=Chroma.isColorUnlocked(6) ? '' : 'none'~>
+                <span>~r Chroma.colorName(6, true) ~: ~f Chroma.colorAmount(6) ~</span>
+                <br/>
+                <span>Multiplier softcap ^~f Chroma.effectOfColor(6) ~</span>
+                <br/>
+                <span>(based on eternities this complexity)</span>
+                <br/>
+                <button ~style.display=Chroma.producingAll() ? 'none' : ''~ onclick="Chroma.setNextColor(6)">Produce ~r Chroma.colorName(6) ~ next</button>
+              </div>
+            </div>
+          </td>
         </tr>
       </table>
     </div>
+  </tab>
+  <tab ~style.display=Tabs.currentTab() === 'complexity' ? '' : 'none'~>
+    <span>You have ~f ComplexityPoints.amount() ~ complexity points.
+      <button ~class=ComplexityMaxAll.anythingToBuy() ? "" : "disabled"~ onclick="ComplexityMaxAll.maxAll()">Max all</button>
+    </span>
+    <br/>
+    <span>You have produced ~f ComplexityPoints.totalCPProduced() ~ total complexity points (ℂP).</span>
+    </br>
+    <span>You have ~f Complexities.amount() ~ complexities, multiplying all complexity generators (ℂGs) by ~f Complexities.complexityGeneratorMultiplier() ~,</span>
+    <br/>
+    <span>multiplying permanence and chroma buildup speed by ~f Complexities.permanenceAndChromaMultiplier() ~,</span>
+    <br/>
+    <span>and automatically completing an eternity challenge tier every ~f Complexities.autoECCompletionTime() ~ seconds.</span>
+    <br/>
+    <span>You have ~f ComplexityStars.amount() ~ complexity stars, making all complexity challenge rewards ~f ComplexityStars.complexityChallengeMultiplier() ~x stronger.</span>
+    <br/>
+    <span>You are getting ~f ComplexityStars.perSecond() ~ complexity stars per second.</span>
+    <br/>
+    <br/>
+    <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
+      <tr ~style.display=ComplexityGenerator(1).isVisible() ? '' : 'none'~>
+        <td>Complexity Generator 1</td>
+        <td>~f ComplexityGenerator(1).amount() ~</td>
+        <td>~f ComplexityGenerator(1).perSecond() ~/s</td>
+        <td>~f ComplexityGenerator(1).multiplier() ~x</td>
+        <td><button ~class=ComplexityGenerator(1).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(1).buy()">Cost: ~f ComplexityGenerator(1).cost() ~ ℂP</button></td>
+        <td><button ~class=ComplexityGenerator(1).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(1).buyMax()">Max</button></td>
+      </tr>
+      <tr ~style.display=ComplexityGenerator(2).isVisible() ? '' : 'none'~>
+        <td>Complexity Generator 2</td>
+        <td>~f ComplexityGenerator(2).amount() ~</td>
+        <td>~f ComplexityGenerator(2).perSecond() ~/s</td>
+        <td>~f ComplexityGenerator(2).multiplier() ~x</td>
+        <td><button ~class=ComplexityGenerator(2).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(2).buy()">Cost: ~f ComplexityGenerator(2).cost() ~ ℂP</button></td>
+        <td><button ~class=ComplexityGenerator(2).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(2).buyMax()">Max</button></td>
+      </tr>
+      <tr ~style.display=ComplexityGenerator(3).isVisible() ? '' : 'none'~>
+        <td>Complexity Generator 3</td>
+        <td>~f ComplexityGenerator(3).amount() ~</td>
+        <td>~f ComplexityGenerator(3).perSecond() ~/s</td>
+        <td>~f ComplexityGenerator(3).multiplier() ~x</td>
+        <td><button ~class=ComplexityGenerator(3).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(3).buy()">Cost: ~f ComplexityGenerator(3).cost() ~ ℂP</button></td>
+        <td><button ~class=ComplexityGenerator(3).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(3).buyMax()">Max</button></td>
+      </tr>
+      <tr ~style.display=ComplexityGenerator(4).isVisible() ? '' : 'none'~>
+        <td>Complexity Generator 4</td>
+        <td>~f ComplexityGenerator(4).amount() ~</td>
+        <td>~f ComplexityGenerator(4).perSecond() ~/s</td>
+        <td>~f ComplexityGenerator(4).multiplier() ~x</td>
+        <td><button ~class=ComplexityGenerator(4).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(4).buy()">Cost: ~f ComplexityGenerator(4).cost() ~ ℂP</button></td>
+        <td><button ~class=ComplexityGenerator(4).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(4).buyMax()">Max</button></td>
+      </tr>
+      <tr ~style.display=ComplexityGenerator(5).isVisible() ? '' : 'none'~>
+        <td>Complexity Generator 5</td>
+        <td>~f ComplexityGenerator(5).amount() ~</td>
+        <td>~f ComplexityGenerator(5).perSecond() ~/s</td>
+        <td>~f ComplexityGenerator(5).multiplier() ~x</td>
+        <td><button ~class=ComplexityGenerator(5).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(5).buy()">Cost: ~f ComplexityGenerator(5).cost() ~ ℂP</button></td>
+        <td><button ~class=ComplexityGenerator(5).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(5).buyMax()">Max</button></td>
+      </tr>
+      <tr ~style.display=ComplexityGenerator(6).isVisible() ? '' : 'none'~>
+        <td>Complexity Generator 6</td>
+        <td>~f ComplexityGenerator(6).amount() ~</td>
+        <td>~f ComplexityGenerator(6).perSecond() ~/s</td>
+        <td>~f ComplexityGenerator(6).multiplier() ~x</td>
+        <td><button ~class=ComplexityGenerator(6).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(6).buy()">Cost: ~f ComplexityGenerator(6).cost() ~ ℂP</button></td>
+        <td><button ~class=ComplexityGenerator(6).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(6).buyMax()">Max</button></td>
+      </tr>
+      <tr ~style.display=ComplexityGenerator(7).isVisible() ? '' : 'none'~>
+        <td>Complexity Generator 7</td>
+        <td>~f ComplexityGenerator(7).amount() ~</td>
+        <td>~f ComplexityGenerator(7).perSecond() ~/s</td>
+        <td>~f ComplexityGenerator(7).multiplier() ~x</td>
+        <td><button ~class=ComplexityGenerator(7).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(7).buy()">Cost: ~f ComplexityGenerator(7).cost() ~ ℂP</button></td>
+        <td><button ~class=ComplexityGenerator(7).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(7).buyMax()">Max</button></td>
+      </tr>
+      <tr ~style.display=ComplexityGenerator(8).isVisible() ? '' : 'none'~>
+        <td>Complexity Generator 8</td>
+        <td>~f ComplexityGenerator(8).amount() ~</td>
+        <td>~f ComplexityGenerator(8).perSecond() ~/s</td>
+        <td>~f ComplexityGenerator(8).multiplier() ~x</td>
+        <td><button ~class=ComplexityGenerator(8).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(8).buy()">Cost: ~f ComplexityGenerator(8).cost() ~ ℂP</button></td>
+        <td><button ~class=ComplexityGenerator(8).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(8).buyMax()">Max</button></td>
+      </tr>
+    </table>
+  </tab>
+  <tab ~style.display=Tabs.currentTab() === 'complexity-challenges' ? '' : 'none'~>
+    <span>
+      You have completed ~f ComplexityChallenge.getTotalComplexityChallengeCompletions() ~ complexity challenge tiers.
+      <button onclick="ComplexityChallenge.complexityReset()">Restart complexity and re-enter all complexity challenges</button>
+    </span>
+    <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
+      <tr>
+        <td>
+          <div class="complexitychallengediv yellowdiv">
+            <span>Complexity Challenge 1</span>
+            <br/>
+            <span>No requirement (you're always in this challenge).</span>
+            <br/>
+            <span>Goal: ~f ComplexityChallenge.getComplexityChallengeGoal(1) ~ stars</span>
+            <br/>
+            <span>~r ComplexityChallenge.complexityChallengeStatusDescription(1) ~</span>
+            <br/>
+            <span>Reward: Multiplier to normal generators based on stars.</span>
+            <br/>
+            <span>Current: ~f ComplexityChallenge.getComplexityChallengeReward(1) ~x, Next: ~f ComplexityChallenge.getComplexityChallengeNextReward(1) ~x</span>
+          </div>
+        </td>
+        <td>
+          <div class="complexitychallengediv greydiv">
+            <span>Complexity Challenge 2</span>
+            <br/>
+            <span>You can't buy boosts.</span>
+            <br/>
+            <span>Goal: ~f ComplexityChallenge.getComplexityChallengeGoal(2) ~ stars</span>
+            <br/>
+            <span>~r ComplexityChallenge.complexityChallengeStatusDescription(2) ~</span>
+            <br/>
+            <span><button onclick="ComplexityChallenge.toggleSafeguard(2)">Buying boosts: ~r ComplexityChallenge.isSafeguardOn(2) ? "Disabled" : "Enabled" ~</button></span>
+            <br/>
+            <span>Reward: Boosts are cheaper.</span>
+            <br/>
+            <span>Current: Cost ^~r formatWithPrecision(ComplexityChallenge.getComplexityChallengeReward(2), 5) ~, Next: Cost ^~r formatWithPrecision(ComplexityChallenge.getComplexityChallengeNextReward(2), 5) ~</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="complexitychallengediv purplediv">
+            <span>Complexity Challenge 3</span>
+            <br/>
+            <span>You can't unlock the Eternity Producer.</span>
+            <br/>
+            <span>Goal: ~f ComplexityChallenge.getComplexityChallengeGoal(3) ~ stars</span>
+            <br/>
+            <span>~r ComplexityChallenge.complexityChallengeStatusDescription(3) ~</span>
+            <br/>
+            <span><button onclick="ComplexityChallenge.toggleSafeguard(3)">Unlocking the Eternity Producer: ~r ComplexityChallenge.isSafeguardOn(3) ? "Disabled" : "Enabled" ~</button></span>
+            <br/>
+            <span>Reward: Multiplier to eternity production.</span>
+            <br/>
+            <span>Current: ~f ComplexityChallenge.getComplexityChallengeReward(3) ~x, Next: ~f ComplexityChallenge.getComplexityChallengeNextReward(3) ~x</span>
+          </div>
+        </td>
+        <td>
+          <div class="complexitychallengediv orangediv">
+            <span>Complexity Challenge 4</span>
+            <br/>
+            <span>You can't unlock chroma.</span>
+            <br/>
+            <span>Goal: ~f ComplexityChallenge.getComplexityChallengeGoal(4) ~ stars</span>
+            <br/>
+            <span>~r ComplexityChallenge.complexityChallengeStatusDescription(4) ~</span>
+            <br/>
+            <span><button onclick="ComplexityChallenge.toggleSafeguard(4)">Unlocking chroma and colors: ~r ComplexityChallenge.isSafeguardOn(4) ? "Disabled" : "Enabled" ~</button></span>
+            <br/>
+            <span>Reward: Multiplier to chroma cap.</span>
+            <br/>
+            <span>Current: ~f ComplexityChallenge.getComplexityChallengeReward(4) ~x, Next: ~f ComplexityChallenge.getComplexityChallengeNextReward(4) ~x</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="complexitychallengediv cyandiv">
+            <span>Complexity Challenge 5</span>
+            <br/>
+            <span>You can't buy Eternity Generator 8.</span>
+            <br/>
+            <span>Goal: ~f ComplexityChallenge.getComplexityChallengeGoal(5) ~ stars</span>
+            <br/>
+            <span>~r ComplexityChallenge.complexityChallengeStatusDescription(5) ~</span>
+            <br/>
+            <span><button onclick="ComplexityChallenge.toggleSafeguard(5)">Buying Eternity Generator 8: ~r ComplexityChallenge.isSafeguardOn(5) ? "Disabled" : "Enabled" ~</button></span>
+            <br/>
+            <span>Reward: Multiplier to per-purchase Eternity Generator 8 multiplier.</span>
+            <br/>
+            <span>Current: ~f ComplexityChallenge.getComplexityChallengeReward(5) ~x, Next: ~f ComplexityChallenge.getComplexityChallengeNextReward(5) ~x</span>
+          </div>
+        </td>
+        <td>
+          <div class="complexitychallengediv greendiv">
+            <span>Complexity Challenge 6</span>
+            <br/>
+            <span>You can't buy or have studies.</span>
+            <br/>
+            <span>Goal: ~f ComplexityChallenge.getComplexityChallengeGoal(6) ~ stars</span>
+            <br/>
+            <span>~r ComplexityChallenge.complexityChallengeStatusDescription(6) ~</span>
+            <br/>
+            <span><button onclick="ComplexityChallenge.toggleSafeguard(6)">Buying studies: ~r ComplexityChallenge.isSafeguardOn(6) ? "Disabled" : "Enabled" ~</button></span>
+            <br/>
+            <span>Reward: Extra theorems.</span>
+            <br/>
+            <span>Current: +~f ComplexityChallenge.getComplexityChallengeReward(6) ~ theorems, Next: +~f ComplexityChallenge.getComplexityChallengeNextReward(6) ~</span>
+            <br ~style.display=ComplexityChallenge.showActualExtraTheorems() ? '' : 'none'~/>
+            <span ~style.display=ComplexityChallenge.showActualExtraTheorems() ? '' : 'none'~>(actually +~f ComplexityChallenge.extraTheoremsActualAndDisplay() ~, from "On the other side")</span>
+            <br ~style.display=ComplexityChallenge.complexityStarsForNextExtraTheorem().neq(Infinity) ? '' : 'none'~/>
+            <span ~style.display=ComplexityChallenge.complexityStarsForNextExtraTheorem().neq(Infinity) ? '' : 'none'~>Next extra theorem at ~f ComplexityChallenge.complexityStarsForNextExtraTheorem() ~ complexity stars.</span>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <span>
+      Being in a complexity challenge doesn't prevent you from violating its condition.
+    <span>
+    <br/>
+    <span>
+      Instead, violating the condition makes you exit the challenge.
+    </span>
+    <br/>
+    <span>
+      Thus, you are automatically in whichever complexity challenges you have not yet violated the condition of this complexity.
+    </span>
+    <br/>
+    <span>
+      In particular, when starting a new complexity, you will be in all complexity challenges that you've unlocked at once.
+    </span>
+    <br/>
+    <span>
+      You can complete Complexity Challenge 1 even pre-complexity.
+    </span>
+    <br/>
+    <span>
+      This allows you to start with a Complexity Challenge 1 completion.
+    </span>
+    <br/>
+    <span>
+      The ability to disable certain things is there to prevent accidental violation of complexity challenge requirements.
+    </span>
+  </tab>
+  <tab ~style.display=Tabs.currentTab() === 'complexity-upgrades' ? '' : 'none'~>
+    <span>
+      You have unlocked ~f ComplexityUpgrades.getTotalUpgradesUnlocked(1) ~ complexity upgrades.
+    </span>
+    <br/>
+    <span>
+      At ~f ComplexityUpgrades.getUpgradesUnlockedRewardThreshold(1) ~ complexity upgrades bought:
+    </span>
+    <br/>
+    <span>
+       You start every complexity with EP equal to your highest-ever number of boosts (~f ComplexityUpgrades.getUpgradesUnlockedRewardRawEffect(1) ~)
+    </span>
+    <br/>
+    <span>
+      At ~f ComplexityUpgrades.getUpgradesUnlockedRewardThreshold(2) ~ complexity upgrades bought:
+    </span>
+    <br/>
+    <span>
+      Multiplier to eternity gain based on complexity upgrades bought (~f ComplexityUpgrades.getUpgradesUnlockedRewardRawEffect(2) ~)
+    </span>
+    <br/>
+    <span>
+      At ~f ComplexityUpgrades.getUpgradesUnlockedRewardThreshold(3) ~ complexity upgrades bought:
+    </span>
+    <br/>
+    <span>
+      Unlock a new color of chroma.
+    </span>
+    <br/>
+    <span>
+      At ~f ComplexityUpgrades.getUpgradesUnlockedRewardThreshold(4) ~ complexity upgrades bought:
+    </span>
+    <br/>
+    <span>
+      You start every complexity with ~f ComplexityUpgrades.getUpgradesUnlockedRewardRawEffect(4) ~ EP, and you get a complexity autobuyer.
+    </span>
+    <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
+      <tr>
+        <td>
+          <div class="complexityupgradediv">
+            <span class="greytogrey">One per generator</span>
+            <br/>
+            Complete Complexity Challenge 2 ~f 8 ~ times.
+            <br/>
+            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(1, 1) ~
+            <br/>
+            The multiplier to permanence and chroma from complexities also applies to boost power (currently ~f ComplexityUpgrades.rawEffect(1, 1) ~x)
+          </div>
+        </td>
+        <td>
+          <div class="complexityupgradediv">
+            <span class="greytopurple">Forever isn't too long</span>
+            <br/>
+            Eternity in Complexity Challenge 2.
+            <br/>
+            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(1, 2) ~
+            <br/>
+            You start every complexity with eternities based on your complexities (currently ~f ComplexityUpgrades.rawEffect(1, 2) ~)
+          </div>
+        </td>
+        <td>
+          <div class="complexityupgradediv">
+            <span class="greytoorange">More colorful than a potato</span>
+            <br/>
+            Unlock chroma in Complexity Challenge 2.
+            <br/>
+            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(1, 3) ~
+            <br/>
+            Automatically unlock the Eternity Producer, chroma, and colors of chroma when possible.
+          </div>
+        </td>
+        <td>
+          <div class="complexityupgradediv">
+            <span class="greytogreen">Forgot something</span>
+            <br/>
+            Get ~f 11 ~ studies in Complexity Challenge 2.
+            <br/>
+            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(1, 4) ~
+            <br/>
+            Power to fourth-row study effects based on boost multiplier (currently ^~f ComplexityUpgrades.rawEffect(1, 4) ~)
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="complexityupgradediv">
+            <span class="purpletogrey">Actually a boost</span>
+            <br/>
+            Get a per-boost multiplier of ~f Math.pow(2, 24) ~ outside of Infinity Challenge 7 in Complexity Challenge 3.
+            <br/>
+            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(2, 1) ~
+            <br/>
+            Multiplier to the per-boost multiplier based on eternities (currently ~f ComplexityUpgrades.rawEffect(2, 1) ~x)
+          </div>
+        </td>
+        <td>
+          <div class="complexityupgradediv">
+            <span class="purpletopurple">Time after time</span>
+            <br/>
+            Get ~f Math.pow(2, 24) ~ eternities in Complexity Challenge 3.
+            <br/>
+            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(2, 2) ~
+            <br/>
+            You always have autobuyers for eternity upgrades, eternity generators, and Eternity Producer upgrades, and you get autobuyers for theorems, permanence, and permanence upgrades.
+          </div>
+        </td>
+        <td>
+          <div class="complexityupgradediv">
+            <span class="purpletoorange">After a hurricane</span>
+            <br/>
+            Unlock chroma in Complexity Challenge 3.
+            <br/>
+            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(2, 3) ~
+            <br/>
+            Multiplier to chroma buildup speed based on eternities (currently ~f ComplexityUpgrades.rawEffect(2, 3) ~x)
+          </div>
+        </td>
+        <td>
+          <div class="complexityupgradediv">
+            <span class="purpletogreen">3 * 7 * 11</span>
+            <br/>
+            Get ~f 231 ~ theorems in Complexity Challenge 3.
+            <br/>
+            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(2, 4) ~
+            <br/>
+            Study 7 and Study 11 effects are uncapped and raised ^~f ComplexityUpgrades.rawEffect(2, 4) ~.
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="complexityupgradediv">
+            <span class="orangetogrey">No rest</span>
+            <br/>
+            Get ~f 1024 ~ boosts in Eternity Challenge 2 in Complexity Challenge 4.
+            <br/>
+            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(3, 1) ~
+            <br/>
+            Grey chroma powers purple and orange chroma effects (currently ^~f ComplexityUpgrades.rawEffect(3, 1) ~)
+          </div>
+        </td>
+        <td>
+          <div class="complexityupgradediv">
+            <span class="orangetopurple">Broke every stone</span>
+            <br/>
+            Complete all eternity challenges, without using automatic eternity challenge completion, in Complexity Challenge 4.
+            <br/>
+            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(3, 2) ~
+            <br/>
+            Eternity challenge requirements and costs are removed.
+          </div>
+        </td>
+        <td>
+          <div class="complexityupgradediv">
+            <span class="orangetoorange">Shadeless</span>
+            <br/>
+            Complete Complexity Challenge 4 ~f 13 ~ times.
+            <br/>
+            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(3, 3) ~
+            <br/>
+            Chroma always produces all colors at once.
+          </div>
+        </td>
+        <td>
+          <div class="complexityupgradediv">
+            <span class="orangetogreen">Thousand-theorem twilight</span>
+            <br/>
+            Get ~f Decimal.pow(2, 1.75 * Math.pow(2, 16)) ~ eternity points, without buying theorems, in Complexity Challenge 4.
+            <br/>
+            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(3, 4) ~
+            <br/>
+            Extra theorems from green ^~f ComplexityUpgrades.rawEffect(3, 4) ~.
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="complexityupgradediv">
+            <span class="greentogrey">Power beats knowledge</span>
+            <br/>
+            Get ~f Math.pow(2, 18) ~ boost power in Complexity Challenge 6.
+            <br/>
+            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(4, 1) ~
+            <br/>
+            Increase the per-purchase complexity generator multiplier based on best boost power (currently ~f ComplexityUpgrades.rawEffect(4, 1) ~x)
+          </div>
+        </td>
+        <td>
+          <div class="complexityupgradediv">
+            <span class="greentopurple">Calm EC</span>
+            <br/>
+            Complete ~f 20 ~ eternity challenge tiers, without using automatic eternity challenge completion, in Complexity Challenge 6.
+            <br/>
+            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(4, 2) ~
+            <br/>
+            You start each complexity with all eternity challenges completed.
+          </div>
+        </td>
+        <td>
+          <div class="complexityupgradediv">
+            <span class="greentoorange">Nonzero-color theorem</span>
+            <br/>
+            Unlock chroma in Complexity Challenge 6.
+            <br/>
+            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(4, 3) ~
+            <br/>
+            Multiplier to chroma cap based on theorems (currently ~f ComplexityUpgrades.rawEffect(4, 3) ~x)
+          </div>
+        </td>
+        <td>
+          <div class="complexityupgradediv">
+            <span class="greentogreen">On the other side</span>
+            <br/>
+            Get ~f 168 ~ theorems in Complexity Challenge 6.
+            <br/>
+            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(4, 4) ~
+            <br/>
+            You keep your theorems, studies, and best boost power on complexity.
+          </div>
+        </td>
+      </tr>
+    </table>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'statistics' ? '' : 'none'~>
     <span>You have produced ~f player.stats.totalStarsProduced ~ total stars.</span>
     <br/>
     <span>You have produced ~f player.stats.totalStarsProducedThisEternity ~ stars this eternity.</span>
+    <br/>
+    <span>You have produced ~f player.stats.totalStarsProducedThisComplexity ~ stars this complexity.</span>
     <br/>
     <span>You have produced ~f player.stats.totalIPProduced ~ total infinity points.</span>
     <br/>
@@ -1981,9 +2863,13 @@
     <br/>
     <span>You have produced ~f player.stats.totalEPProduced ~ total eternity points.</span>
     <br/>
+    <span>You have produced ~f player.stats.totalEPProducedThisComplexity ~ total eternity points this complexity.</span>
+    <br/>
     <span>Your fastest infinity took ~f player.stats.fastestInfinity ~ seconds.</span>
     <br/>
     <span>Your fastest eternity took ~f player.stats.fastestEternity ~ seconds.</span>
+    <br/>
+    <span>Your fastest complexity took ~f player.stats.fastestComplexity ~ seconds.</span>
     <br/>
     <span>You have spent ~f player.stats.timeSincePurchase ~ seconds without purchasing anything.</span>
     <br/>
@@ -1994,6 +2880,8 @@
     <span>You have spent ~f player.stats.timeSinceInfinity ~ seconds in this infinity.</span>
     <br/>
     <span>You have spent ~f player.stats.timeSinceEternity ~ seconds in this eternity.</span>
+    <br/>
+    <span>You have spent ~f player.stats.timeSinceComplexity ~ seconds in this complexity.</span>
     <br/>
     <span>You have spent ~f player.stats.timeSinceGameStart ~ seconds playing this game (counting time offline).</span>
     <div ~style.display=player.stats.lastTenInfinities[0][0] !== -1 ? '' : 'none'~>
@@ -2038,6 +2926,28 @@
       <span ~style.display=player.stats.lastTenEternities[8][0] !== -1  ? '' : 'none'~>The eternity nine eternities ago took ~f player.stats.lastTenEternities[8][0] ~ seconds and gave ~f player.stats.lastTenEternities[8][1] ~ EP, giving ~f player.stats.lastTenEternities[8][2] ~ EP/second.</span>
       <br/>
       <span ~style.display=player.stats.lastTenEternities[9][0] !== -1  ? '' : 'none'~>The eternity ten eternities ago took ~f player.stats.lastTenEternities[9][0] ~ seconds and gave ~f player.stats.lastTenEternities[9][1] ~ EP, giving ~f player.stats.lastTenEternities[9][2] ~ EP/second.</span>
+      <br/>
+    </div>
+    <div ~style.display=player.stats.lastTenComplexities[0][0] !== -1 ? '' : 'none'~>
+      <span>Last complexity took ~f player.stats.lastTenComplexities[0][0] ~ seconds and gave ~f player.stats.lastTenComplexities[0][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[0][2] ~ ℂP/second.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenComplexities[1][0] !== -1 ? '' : 'none'~>The complexity two complexities ago took ~f player.stats.lastTenComplexities[1][0] ~ seconds and gave ~f player.stats.lastTenComplexities[1][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[1][2] ~ ℂP/second.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenComplexities[2][0] !== -1 ? '' : 'none'~>The complexity three complexities ago took ~f player.stats.lastTenComplexities[2][0] ~ seconds and gave ~f player.stats.lastTenComplexities[2][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[2][2] ~ ℂP/second.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenComplexities[3][0] !== -1  ? '' : 'none'~>The complexity four complexities ago took ~f player.stats.lastTenComplexities[3][0] ~ seconds and gave ~f player.stats.lastTenComplexities[3][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[3][2] ~ ℂP/second.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenComplexities[4][0] !== -1 ? '' : 'none'~>The complexity five complexities ago took ~f player.stats.lastTenComplexities[4][0] ~ seconds and gave ~f player.stats.lastTenComplexities[4][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[4][2] ~ ℂP/second.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenComplexities[5][0] !== -1 ? '' : 'none'~>The complexity six complexities ago took ~f player.stats.lastTenComplexities[5][0] ~ seconds and gave ~f player.stats.lastTenComplexities[5][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[5][2] ~ ℂP/second.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenComplexities[6][0] !== -1 ? '' : 'none'~>The complexity seven complexities ago took ~f player.stats.lastTenComplexities[6][0] ~ seconds and gave ~f player.stats.lastTenComplexities[6][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[6][2] ~ ℂP/second.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenComplexities[7][0] !== -1  ? '' : 'none'~>The complexity eight complexities ago took ~f player.stats.lastTenComplexities[7][0] ~ seconds and gave ~f player.stats.lastTenComplexities[7][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[7][2] ~ ℂP/second.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenComplexities[8][0] !== -1  ? '' : 'none'~>The complexity nine complexities ago took ~f player.stats.lastTenComplexities[8][0] ~ seconds and gave ~f player.stats.lastTenComplexities[8][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[8][2] ~ ℂP/second.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenComplexities[9][0] !== -1  ? '' : 'none'~>The complexity ten complexities ago took ~f player.stats.lastTenComplexities[9][0] ~ seconds and gave ~f player.stats.lastTenComplexities[9][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[9][2] ~ ℂP/second.</span>
       <br/>
     </div>
   </tab>

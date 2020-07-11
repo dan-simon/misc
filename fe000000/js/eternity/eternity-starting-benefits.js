@@ -8,7 +8,7 @@ let EternityStartingBenefits = {
   },
   rawStars() {
     // This is written this way for consistency with starting IP.
-    return Decimal.pow(2, Math.min(128, 2 * player.eternities));
+    return Decimal.pow(2, Math.min(128, 2 * player.eternities.toNumber()));
   },
   infinityPoints() {
     if (EternityMilestones.isEternityMilestoneActive(3)) {
@@ -18,7 +18,7 @@ let EternityStartingBenefits = {
     }
   },
   rawInfinityPoints() {
-    return Decimal.pow(2, Math.min(128, player.eternities / 2)).floor();
+    return Decimal.pow(2, Math.min(128, player.eternities.toNumber() / 2)).floor();
   },
   infinities() {
     if (EternityMilestones.isEternityMilestoneActive(5)) {
@@ -28,6 +28,6 @@ let EternityStartingBenefits = {
     }
   },
   rawInfinities() {
-    return Math.pow(Math.min(16, player.eternities), 2);
+    return Math.pow(Math.min(16, player.eternities.toNumber()), 2);
   }
 }

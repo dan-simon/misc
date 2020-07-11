@@ -54,8 +54,8 @@ let PermanenceUpgrade = function (i) {
       return n <= this.maxBuyable();
     },
     maxBuyable() {
-      let num = Math.floor(Math.log(player.permanence / this.cost() * (this.costIncreasePer() - 1) + 1)
-        / Math.log(this.costIncreasePer()));
+      let num = Math.floor(player.permanence.div(this.cost()).times(
+        Decimal.minus(this.costIncreasePer(), 1)).plus(1).log(this.costIncreasePer()));
       num = Math.min(num, this.boughtLimit() - this.bought());
       num = Math.max(num, 0);
       return num;
@@ -65,11 +65,14 @@ let PermanenceUpgrade = function (i) {
         n = 1;
       }
       if (n === 0 || (!guaranteedBuyable && !this.canBuy(n))) return;
-      player.permanence = player.permanence - this.costFor(n);
+      player.permanence = player.permanence.minus(this.costFor(n));
       this.addBought(n);
     },
     buyMax() {
       this.buy(this.maxBuyable(), true);
+    },
+    buyShortOfMax(n) {
+      this.buy(Math.max(0, this.maxBuyable() - n), true);
     }
   }
 }

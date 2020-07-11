@@ -8,6 +8,9 @@ function gameLoop(diff, display) {
   EternityProducer.produce(diff);
   Boost.produceBoostPower(diff);
   for (let i = 8; i >= 1; i--) {
+    ComplexityGenerator(i).produce(diff);
+  }
+  for (let i = 8; i >= 1; i--) {
     EternityGenerator(i).produce(diff);
   }
   for (let i = 8; i >= 1; i--) {
@@ -23,14 +26,20 @@ function gameLoop(diff, display) {
   Chroma.updateColors();
   InfinityPrestigeLayer.updatePeakIPPerSec();
   EternityPrestigeLayer.updatePeakEPPerSec();
+  ComplexityPrestigeLayer.updatePeakCPPerSec();
   Autobuyers.tick(diff);
   InfinityAutobuyers.tick();
+  EternityAutobuyers.tick();
   if (EternityMilestones.isEternityMilestoneActive(6)) {
     InfinityChallenge.checkForAllAutoInfinityChallengeCompletions();
   }
   if (EternityChallenge.isTotalCompletionsRewardActive(3)) {
     InfinityPoints.addAmount(InfinityPrestigeLayer.infinityPointGain().times(diff));
   }
+  Studies.updateExtraTheorems();
+  EternityChallenge.checkForAutoEternityChallengeCompletions();
+  ComplexityChallenge.checkForComplexityChallengeCompletions();
+  ComplexityUpgrades.checkForComplexityUpgrades();
   if (display !== false) {
     updateDisplay();
   }
