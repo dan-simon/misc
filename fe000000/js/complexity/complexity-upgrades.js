@@ -87,10 +87,10 @@ let ComplexityUpgrades = {
     if (row == 4 && column === 4) {
       Studies.updateExtraTheorems();
     }
-    if (this.getTotalUpgradesUnlocked() === this.getTotalCompletionsRewardThreshold(1)) {
+    if (this.getTotalUpgradesUnlocked() === this.getUpgradesUnlockedRewardThreshold(1)) {
       EternityPoints.add(this.getUpgradesUnlockedRewardEffect(1));
     }
-    if (this.getTotalUpgradesUnlocked() === this.getTotalCompletionsRewardThreshold(4)) {
+    if (this.getTotalUpgradesUnlocked() === this.getUpgradesUnlockedRewardThreshold(4)) {
       EternityPoints.add(this.getUpgradesUnlockedRewardEffect(4));
     }
   },
