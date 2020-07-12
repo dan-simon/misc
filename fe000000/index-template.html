@@ -2516,6 +2516,8 @@
             <br/>
             <span><button onclick="ComplexityChallenge.toggleSafeguard(2)">Buying boosts: ~r ComplexityChallenge.isSafeguardOn(2) ? "Disabled" : "Enabled" ~</button></span>
             <br/>
+            <span ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(2) ? 'none' : ''~>(Disabling this doesn't put you in this challenge yet, since the challenge is locked.)</span>
+            <br ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(2) ? 'none' : ''~/>
             <span>Reward: Boosts are cheaper.</span>
             <br/>
             <span>Current: Cost ^~r formatWithPrecision(ComplexityChallenge.getComplexityChallengeReward(2), 5) ~, Next: Cost ^~r formatWithPrecision(ComplexityChallenge.getComplexityChallengeNextReward(2), 5) ~</span>
@@ -2535,6 +2537,8 @@
             <br/>
             <span><button onclick="ComplexityChallenge.toggleSafeguard(3)">Unlocking the Eternity Producer: ~r ComplexityChallenge.isSafeguardOn(3) ? "Disabled" : "Enabled" ~</button></span>
             <br/>
+            <span ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(3) ? 'none' : ''~>(Disabling this doesn't put you in this challenge yet, since the challenge is locked.)</span>
+            <br ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(3) ? 'none' : ''~/>
             <span>Reward: Multiplier to eternity production.</span>
             <br/>
             <span>Current: ~f ComplexityChallenge.getComplexityChallengeReward(3) ~x, Next: ~f ComplexityChallenge.getComplexityChallengeNextReward(3) ~x</span>
@@ -2552,6 +2556,8 @@
             <br/>
             <span><button onclick="ComplexityChallenge.toggleSafeguard(4)">Unlocking chroma and colors: ~r ComplexityChallenge.isSafeguardOn(4) ? "Disabled" : "Enabled" ~</button></span>
             <br/>
+            <span ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(4) ? 'none' : ''~>(Disabling this doesn't put you in this challenge yet, since the challenge is locked.)</span>
+            <br ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(4) ? 'none' : ''~/>
             <span>Reward: Multiplier to chroma cap.</span>
             <br/>
             <span>Current: ~f ComplexityChallenge.getComplexityChallengeReward(4) ~x, Next: ~f ComplexityChallenge.getComplexityChallengeNextReward(4) ~x</span>
@@ -2571,6 +2577,8 @@
             <br/>
             <span><button onclick="ComplexityChallenge.toggleSafeguard(5)">Buying Eternity Generator 8: ~r ComplexityChallenge.isSafeguardOn(5) ? "Disabled" : "Enabled" ~</button></span>
             <br/>
+            <span ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(5) ? 'none' : ''~>(Disabling this doesn't put you in this challenge yet, since the challenge is locked.)</span>
+            <br ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(5) ? 'none' : ''~/>
             <span>Reward: Multiplier to per-purchase Eternity Generator 8 multiplier.</span>
             <br/>
             <span>Current: ~f ComplexityChallenge.getComplexityChallengeReward(5) ~x, Next: ~f ComplexityChallenge.getComplexityChallengeNextReward(5) ~x</span>
@@ -2588,6 +2596,10 @@
             <br/>
             <span><button onclick="ComplexityChallenge.toggleSafeguard(6)">Buying studies: ~r ComplexityChallenge.isSafeguardOn(6) ? "Disabled" : "Enabled" ~</button></span>
             <br/>
+            <span ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(6) ? 'none' : ''~>(Disabling this doesn't put you in this challenge yet, since the challenge is locked.)</span>
+            <br ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(6) ? 'none' : ''~/>
+            <span ~style.display=ComplexityUpgrades.hasComplexityUpgrade(4, 4) ? '' : 'none'~>(Due to "On the other side", you also need to respec studies to enter this challenge.)</span>
+            <br ~style.display=ComplexityUpgrades.hasComplexityUpgrade(4, 4)  ? '' : 'none'~/>
             <span>Reward: Extra theorems.</span>
             <br/>
             <span>Current: +~f ComplexityChallenge.getComplexityChallengeReward(6) ~ theorems, Next: +~f ComplexityChallenge.getComplexityChallengeNextReward(6) ~</span>
