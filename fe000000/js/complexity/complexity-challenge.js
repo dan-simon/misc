@@ -50,7 +50,7 @@ let ComplexityChallenge = {
     return 3;
   },
   extraTheoremsActualAndDisplay() {
-    if (ComplexityUpgrades.hasComplexityUpgrade(4, 4)) {
+    if (ComplexityAchievements.hasComplexityAchievement(4, 4)) {
       return player.extraTheorems[this.extraTheoremsIndex()];
     } else {
       return this.extraTheoremsRaw();

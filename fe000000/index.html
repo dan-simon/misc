@@ -6,13 +6,13 @@
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/break_infinity.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@antimatter-dimensions/notations"></script>
   <script src="js/complexity/complexities.js"></script>
+  <script src="js/complexity/complexity-achievements.js"></script>
   <script src="js/complexity/complexity-challenge.js"></script>
   <script src="js/complexity/complexity-generators.js"></script>
   <script src="js/complexity/complexity-max-all.js"></script>
   <script src="js/complexity/complexity-points.js"></script>
   <script src="js/complexity/complexity-prestige-layer.js"></script>
   <script src="js/complexity/complexity-stars.js"></script>
-  <script src="js/complexity/complexity-upgrades.js"></script>
   <script src="js/eternity/eternities.js"></script>
   <script src="js/eternity/eternity-autobuyers.js"></script>
   <script src="js/eternity/eternity-challenge.js"></script>
@@ -96,7 +96,7 @@
     <span>
       <button id="b18" onclick="Tabs.setTab('complexity')">Complexity</button>
       <button id="b19" onclick="Tabs.setTab('complexity-challenges')">Complexity Challenges</button>
-      <button id="b20" onclick="Tabs.setTab('complexity-upgrades')">Complexity Upgrades</button>
+      <button id="b20" onclick="Tabs.setTab('complexity-achievements')">Complexity Achievements</button>
     </span>
   </div>
   <div id="b21">
@@ -2641,11 +2641,11 @@
   </div>
   <div id="b591">
     <span>
-      You have unlocked <span id="e676"></span> complexity upgrades.
+      You have unlocked <span id="e676"></span> complexity achievements.
     </span>
     <br/>
     <span>
-      At <span id="e677"></span> complexity upgrades bought:
+      At <span id="e677"></span> complexity achievements unlocked:
     </span>
     <br/>
     <span>
@@ -2653,15 +2653,15 @@
     </span>
     <br/>
     <span>
-      At <span id="e679"></span> complexity upgrades bought:
+      At <span id="e679"></span> complexity achievements unlocked:
     </span>
     <br/>
     <span>
-      Multiplier to eternity gain based on complexity upgrades bought (<span id="e680"></span>)
+      Multiplier to eternity gain based on complexity achievements unlocked (<span id="e680"></span>)
     </span>
     <br/>
     <span>
-      At <span id="e681"></span> complexity upgrades bought:
+      At <span id="e681"></span> complexity achievements unlocked:
     </span>
     <br/>
     <span>
@@ -2669,7 +2669,7 @@
     </span>
     <br/>
     <span>
-      At <span id="e682"></span> complexity upgrades bought:
+      At <span id="e682"></span> complexity achievements unlocked:
     </span>
     <br/>
     <span>
@@ -2678,7 +2678,7 @@
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="greytogrey">One per generator</span>
             <br/>
             Complete Complexity Challenge 2 <span id="e684"></span> times.
@@ -2689,7 +2689,7 @@
           </div>
         </td>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="greytopurple">Forever isn't too long</span>
             <br/>
             Eternity in Complexity Challenge 2.
@@ -2700,7 +2700,7 @@
           </div>
         </td>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="greytoorange">More colorful than a potato</span>
             <br/>
             Unlock chroma in Complexity Challenge 2.
@@ -2711,7 +2711,7 @@
           </div>
         </td>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="greytogreen">Forgot something</span>
             <br/>
             Get <span id="e690"></span> studies in Complexity Challenge 2.
@@ -2724,7 +2724,7 @@
       </tr>
       <tr>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="purpletogrey">Actually a boost</span>
             <br/>
             Get a per-boost multiplier of <span id="e693"></span> outside of Infinity Challenge 7 in Complexity Challenge 3.
@@ -2735,7 +2735,7 @@
           </div>
         </td>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="purpletopurple">Time after time</span>
             <br/>
             Get <span id="e696"></span> eternities in Complexity Challenge 3.
@@ -2746,7 +2746,7 @@
           </div>
         </td>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="purpletoorange">After a hurricane</span>
             <br/>
             Unlock chroma in Complexity Challenge 3.
@@ -2757,7 +2757,7 @@
           </div>
         </td>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="purpletogreen">3 * 7 * 11</span>
             <br/>
             Get <span id="e700"></span> theorems in Complexity Challenge 3.
@@ -2770,7 +2770,7 @@
       </tr>
       <tr>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="orangetogrey">No rest</span>
             <br/>
             Get <span id="e703"></span> boosts in Eternity Challenge 2 in Complexity Challenge 4.
@@ -2781,7 +2781,7 @@
           </div>
         </td>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="orangetopurple">Broke every stone</span>
             <br/>
             Complete all eternity challenges, without using automatic eternity challenge completion, in Complexity Challenge 4.
@@ -2792,7 +2792,7 @@
           </div>
         </td>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="orangetoorange">Shadeless</span>
             <br/>
             Complete Complexity Challenge 4 <span id="e707"></span> times.
@@ -2803,7 +2803,7 @@
           </div>
         </td>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="orangetogreen">Thousand-theorem twilight</span>
             <br/>
             Get <span id="e709"></span> eternity points, without buying theorems, in Complexity Challenge 4.
@@ -2816,7 +2816,7 @@
       </tr>
       <tr>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="greentogrey">Power beats knowledge</span>
             <br/>
             Get <span id="e712"></span> boost power in Complexity Challenge 6.
@@ -2827,7 +2827,7 @@
           </div>
         </td>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="greentopurple">Calm EC</span>
             <br/>
             Complete <span id="e715"></span> eternity challenge tiers, without using automatic eternity challenge completion, in Complexity Challenge 6.
@@ -2838,7 +2838,7 @@
           </div>
         </td>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="greentoorange">Nonzero-color theorem</span>
             <br/>
             Unlock chroma in Complexity Challenge 6.
@@ -2849,7 +2849,7 @@
           </div>
         </td>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="greentogreen">On the other side</span>
             <br/>
             Get <span id="e719"></span> theorems in Complexity Challenge 6.

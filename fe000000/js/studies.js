@@ -56,8 +56,8 @@ let Study = function (i) {
         effect = STUDY_EFFECTS[i - 1]();
       }
       if (i === 7 || i === 11) {
-        if (ComplexityUpgrades.hasComplexityUpgrade(2, 4)) {
-          effect = effect.pow(ComplexityUpgrades.effect(2, 4));
+        if (ComplexityAchievements.hasComplexityAchievement(2, 4)) {
+          effect = effect.pow(ComplexityAchievements.effect(2, 4));
         } else {
           effect = effect.min(Math.pow(2, {7: 64, 11: 16}[i]));
         }
@@ -66,7 +66,7 @@ let Study = function (i) {
         effect = Decimal.pow(effect, PermanenceUpgrade(3).effect());
       }
       if (this.row() === 4) {
-        effect = Decimal.pow(effect, ComplexityUpgrades.effect(1, 4));
+        effect = Decimal.pow(effect, ComplexityAchievements.effect(1, 4));
       }
       return effect;
     },
@@ -88,7 +88,7 @@ let Study = function (i) {
       // However, it's coded as it is just to be safe.
       let effect = STUDY_EFFECTS[i - 1](this.timesBought() + 1);
       if (this.row() === 4) {
-        effect = Decimal.pow(effect, ComplexityUpgrades.effect(1, 4));
+        effect = Decimal.pow(effect, ComplexityAchievements.effect(1, 4));
       }
       return effect;
     },
@@ -96,7 +96,7 @@ let Study = function (i) {
       // Note that if a third study gets capped this won't handle it.
       // Note also that we use STUDY_EFFECTS[i - 1]() directly since the raw effect of study 11
       // is modified by an upgrade that boosts third-row studies.
-      return (i === 7 || i === 11) && !ComplexityUpgrades.hasComplexityUpgrade(2, 4) &&
+      return (i === 7 || i === 11) && !ComplexityAchievements.hasComplexityAchievement(2, 4) &&
         STUDY_EFFECTS[i - 1]().gte(Math.pow(2, {7: 64, 11: 16}[i]));
     },
     cappedText() {
@@ -130,7 +130,7 @@ let Studies = {
     return player.boughtTheorems.reduce((a, b) => a + b) + this.extraTheorems();
   },
   extraTheorems() {
-    if (ComplexityUpgrades.hasComplexityUpgrade(4, 4)) {
+    if (ComplexityAchievements.hasComplexityAchievement(4, 4)) {
       return player.extraTheorems.reduce((a, b) => a + b);
     } else {
       return this.extraTheoremsByType().reduce((a, b) => a + b);
@@ -140,7 +140,7 @@ let Studies = {
     return [Boost.extraTheoremsRaw(), EternityChallenge.extraTheoremsRaw(), Chroma.extraTheoremsRaw(), ComplexityChallenge.extraTheoremsRaw()];
   },
   updateExtraTheorems() {
-    if (ComplexityUpgrades.hasComplexityUpgrade(4, 4)) {
+    if (ComplexityAchievements.hasComplexityAchievement(4, 4)) {
       let extraTheoremsByType = this.extraTheoremsByType();
       for (let i = 0; i < 4; i++) {
         player.extraTheorems[i] = Math.max(player.extraTheorems[i], extraTheoremsByType[i]);

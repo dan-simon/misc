@@ -53,7 +53,7 @@ let ComplexityPrestigeLayer = {
   },
   complexityReset() {
     // We need to do this here to avoid eternity milestones being applied in the eternity reset.
-    player.eternities = new Decimal(ComplexityUpgrades.effect(1, 2));
+    player.eternities = new Decimal(ComplexityAchievements.effect(1, 2));
     EternityPrestigeLayer.eternityReset();
     // Not handled by Eternity.eternityReset().
     EternityChallenge.setEternityChallenge(0);
@@ -61,20 +61,20 @@ let ComplexityPrestigeLayer = {
     ComplexityGenerators.list.forEach(x => x.resetAmount());
     player.isComplexityChallengeRunning = [true, true, true, true, true, true];
     player.boostPower = 1;
-    if (!ComplexityUpgrades.hasComplexityUpgrade(4, 4)) {
+    if (!ComplexityAchievements.hasComplexityAchievement(4, 4)) {
       player.bestBoostPower = 1;
     }
-    player.eternityPoints = ComplexityUpgrades.startingEternityPoints();
+    player.eternityPoints = ComplexityAchievements.startingEternityPoints();
     player.eternityGenerators = initialEternityGenerators();
     player.highestEternityGenerator = 0;
     player.eternityUpgrades = [0, 0, 0];
     // Let the player keep eternity milestones off if they want.
     // Also let them keep their infinity autobuyers off if they want.
     // (That is, don't reset those things.)
-    if (!ComplexityUpgrades.hasComplexityUpgrade(4, 4)) {
+    if (!ComplexityAchievements.hasComplexityAchievement(4, 4)) {
       player.boughtTheorems = [0, 0, 0];
     }
-    if (!ComplexityUpgrades.hasComplexityUpgrade(4, 4) || player.respecStudies) {
+    if (!ComplexityAchievements.hasComplexityAchievement(4, 4) || player.respecStudies) {
       player.studies = [
         false, false, false, false, false, false,
         false, false, false, false, false, false,
@@ -91,7 +91,7 @@ let ComplexityPrestigeLayer = {
       upgrades: [0, 0]
     };
     player.unlockedEternityChallenge = 0;
-    if (ComplexityUpgrades.hasComplexityUpgrade(4, 2)) {
+    if (ComplexityAchievements.hasComplexityAchievement(4, 2)) {
       player.eternityChallengeCompletions = [4, 4, 4, 4, 4, 4, 4, 4];
     } else {
       player.eternityChallengeCompletions = [0, 0, 0, 0, 0, 0, 0, 0];
@@ -111,8 +111,8 @@ let ComplexityPrestigeLayer = {
     };
     // Small bonus, arguably unexpected but not that big in the grand scheme of things.
     player.stats.totalStarsProducedThisComplexity = new Decimal(2);
-    player.stats.totalEPProducedThisComplexity = ComplexityUpgrades.startingEternityPoints();
-    player.stats.totalEternitiesProducedThisComplexity = new Decimal(ComplexityUpgrades.effect(1, 2));
+    player.stats.totalEPProducedThisComplexity = ComplexityAchievements.startingEternityPoints();
+    player.stats.totalEternitiesProducedThisComplexity = new Decimal(ComplexityAchievements.effect(1, 2));
     player.stats.timeSinceAutoECCompletion = 0;
     player.stats.timeSincePermanenceGain = 0;
     player.stats.timeSinceComplexity = 0;

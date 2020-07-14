@@ -1,5 +1,5 @@
-let ComplexityUpgrades = {
-  complexityUpgradeRequirements: [
+let ComplexityAchievements = {
+  complexityAchievementRequirements: [
     [
       () => ComplexityChallenge.getComplexityChallengeCompletions(2) >= 8,
       situation => situation === 'eternity',
@@ -25,7 +25,7 @@ let ComplexityUpgrades = {
       () => Studies.totalTheorems() >= 168
     ]
   ],
-  complexityUpgradeEffects: [
+  complexityAchievementEffects: [
     [
       () => Complexities.permanenceAndChromaMultiplier(),
       () => Math.pow(Math.min(16, player.complexities), 2),
@@ -51,32 +51,32 @@ let ComplexityUpgrades = {
       () => Decimal.pow(2, 1024)
     ]
   ],
-  complexityUpgradeDefaults: [
+  complexityAchievementDefaults: [
     [1, 0, null, 1],
     [1, null, 1, 1],
     [1, null, null, 1],
     [Math.pow(2, 1 / 8), null, 1, new Decimal(0)]
   ],
-  UpgradesUnlockedRewardThresholds: [4, 8, 12, 16],
-  checkForComplexityUpgrades(situation) {
+  achievementsUnlockedRewardThresholds: [4, 8, 12, 16],
+  checkForComplexityAchievements(situation) {
     for (let row = 1; row <= 4; row++) {
       if (ComplexityChallenge.isComplexityChallengeRunning([2, 3, 4, 6][row - 1])) {
         for (let column = 1; column <= 4; column++) {
-          if (!this.hasComplexityUpgrade(row, column) &&
-            this.canUnlockComplexityUpgrade(row, column, situation)) {
-            this.unlockComplexityUpgrade(row, column);
+          if (!this.hasComplexityAchievement(row, column) &&
+            this.canUnlockComplexityAchievement(row, column, situation)) {
+            this.unlockComplexityAchievement(row, column);
           }
         }
       }
     }
   },
-  canUnlockComplexityUpgrade(row, column, situation) {
+  canUnlockComplexityAchievement(row, column, situation) {
     // This doesn't check being in the challenge so make sure to check that first.
-    // It also doesn't check whether the player already has the complexity upgrade.
-    return this.complexityUpgradeRequirements[row - 1][column - 1](situation);
+    // It also doesn't check whether the player already has the complexity achievement.
+    return this.complexityAchievementRequirements[row - 1][column - 1](situation);
   },
-  unlockComplexityUpgrade(row, column) {
-    player.complexityUpgrades[row - 1][column - 1] = true;
+  unlockComplexityAchievement(row, column) {
+    player.complexityAchievements[row - 1][column - 1] = true;
     if (row === 1 && column === 2) {
       // Give the starting eternities, belatedly, as if the player had started with them.
       Eternities.add(this.effect(1, 2));
@@ -87,58 +87,58 @@ let ComplexityUpgrades = {
     if (row == 4 && column === 4) {
       Studies.updateExtraTheorems();
     }
-    if (this.getTotalUpgradesUnlocked() === this.getUpgradesUnlockedRewardThreshold(1)) {
-      EternityPoints.add(this.getUpgradesUnlockedRewardEffect(1));
+    if (this.getTotalAchievementsUnlocked() === this.getAchievementsUnlockedRewardThreshold(1)) {
+      EternityPoints.addAmount(this.getAchievementsUnlockedRewardEffect(1));
     }
-    if (this.getTotalUpgradesUnlocked() === this.getUpgradesUnlockedRewardThreshold(4)) {
-      EternityPoints.add(this.getUpgradesUnlockedRewardEffect(4));
+    if (this.getTotalAchievementsUnlocked() === this.getAchievementsUnlockedRewardThreshold(4)) {
+      EternityPoints.addAmount(this.getAchievementsUnlockedRewardEffect(4));
     }
   },
-  hasComplexityUpgrade(row, column) {
-    return player.complexityUpgrades[row - 1][column - 1];
+  hasComplexityAchievement(row, column) {
+    return player.complexityAchievements[row - 1][column - 1];
   },
-  complexityUpgradeStatusDescription(row, column) {
-    if (this.hasComplexityUpgrade(row, column)) {
+  complexityAchievementStatusDescription(row, column) {
+    if (this.hasComplexityAchievement(row, column)) {
       return 'Active';
     } else {
       return 'Locked';
     }
   },
   rawEffect(row, column) {
-    return this.complexityUpgradeEffects[row - 1][column - 1]();
+    return this.complexityAchievementEffects[row - 1][column - 1]();
   },
   effect(row, column) {
-    if (this.hasComplexityUpgrade(row, column)) {
+    if (this.hasComplexityAchievement(row, column)) {
       return this.rawEffect(row, column);
     }
-    return this.complexityUpgradeDefaults[row - 1][column - 1];
+    return this.complexityAchievementDefaults[row - 1][column - 1];
   },
-  getTotalUpgradesUnlocked() {
-    return [1, 2, 3, 4].map(x => [1, 2, 3, 4].filter(y => this.hasComplexityUpgrade(x, y)).length).reduce((a, b) => a + b);
+  getTotalAchievementsUnlocked() {
+    return [1, 2, 3, 4].map(x => [1, 2, 3, 4].filter(y => this.hasComplexityAchievement(x, y)).length).reduce((a, b) => a + b);
   },
-  getUpgradesUnlockedRewardThreshold(x) {
-    return this.UpgradesUnlockedRewardThresholds[x - 1];
+  getAchievementsUnlockedRewardThreshold(x) {
+    return this.achievementsUnlockedRewardThresholds[x - 1];
   },
-  getUpgradesUnlockedRewardRawEffect(x) {
+  getAchievementsUnlockedRewardRawEffect(x) {
     if (x === 1) {
       return new Decimal(Boost.highestBought());
     } else if (x === 2) {
-      return 1 + this.getTotalUpgradesUnlocked() / 4;
+      return 1 + this.getTotalAchievementsUnlocked() / 4;
     } else if (x === 4) {
       return Decimal.pow(2, 1024);
     }
     return null;
   },
-  isUpgradesUnlockedRewardActive(x) {
-    return this.getTotalUpgradesUnlocked() >= this.getUpgradesUnlockedRewardThreshold(x);
+  isAchievementsUnlockedRewardActive(x) {
+    return this.getTotalAchievementsUnlocked() >= this.getAchievementsUnlockedRewardThreshold(x);
   },
-  getUpgradesUnlockedRewardEffect(x) {
-    if (this.isUpgradesUnlockedRewardActive(x)) {
-      return this.getUpgradesUnlockedRewardRawEffect(x);
+  getAchievementsUnlockedRewardEffect(x) {
+    if (this.isAchievementsUnlockedRewardActive(x)) {
+      return this.getAchievementsUnlockedRewardRawEffect(x);
     }
     return [new Decimal(0), 1, null, new Decimal(0)][x - 1];
   },
   startingEternityPoints() {
-    return this.getUpgradesUnlockedRewardEffect(1).add(this.getUpgradesUnlockedRewardEffect(4));
+    return this.getAchievementsUnlockedRewardEffect(1).add(this.getAchievementsUnlockedRewardEffect(4));
   },
 }

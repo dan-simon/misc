@@ -20,7 +20,7 @@ let Tabs = {
       'chroma': () => player.eternities.gt(0) || player.complexities > 0,
       'complexity': () => player.complexities > 0,
       'complexity-challenges': () => player.complexities > 0,
-      'complexity-upgrades': () => player.complexities > 0,
+      'complexity-achievements': () => player.complexities > 0,
       'statistics': () => true,
       'options': () => true,
     }[x]();

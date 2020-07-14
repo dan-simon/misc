@@ -42,7 +42,7 @@ let Boost = {
       mult += 2;
     }
     mult *= Study(1).effect() * EternityUpgrade(2).effect() * Chroma.effectOfColor(1) *
-      ComplexityUpgrades.effect(2, 1) * this.boostPowerEffect();
+      ComplexityAchievements.effect(2, 1) * this.boostPowerEffect();
     if (InfinityChallenge.isInfinityChallengeRunning(7)) {
       mult = Math.pow(mult, 2);
     }
@@ -113,7 +113,7 @@ let Boost = {
     return this.boostPowerPerBoost() * Math.max(0, this.bought() - this.boostPowerStart());
   },
   boostPowerPerBoost() {
-    return EternityChallenge.getTotalCompletionsRewardEffect(1) * ComplexityUpgrades.effect(1, 1) / 16384;
+    return EternityChallenge.getTotalCompletionsRewardEffect(1) * ComplexityAchievements.effect(1, 1) / 16384;
   },
   boostPowerStart() {
     return 320;
@@ -126,7 +126,7 @@ let Boost = {
     return player.bestBoostPower;
   },
   bestBoostPowerDescription() {
-    if (ComplexityUpgrades.hasComplexityUpgrade(4, 4)) {
+    if (ComplexityAchievements.hasComplexityAchievement(4, 4)) {
       return 'best boost power ever';
     } else {
       return 'best boost power this complexity';
@@ -139,7 +139,7 @@ let Boost = {
     return 0;
   },
   extraTheoremsActualAndDisplay() {
-    if (ComplexityUpgrades.hasComplexityUpgrade(4, 4)) {
+    if (ComplexityAchievements.hasComplexityAchievement(4, 4)) {
       return player.extraTheorems[this.extraTheoremsIndex()];
     } else {
       return this.extraTheoremsRaw();

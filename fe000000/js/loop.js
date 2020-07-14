@@ -39,7 +39,7 @@ function gameLoop(diff, display) {
   Studies.updateExtraTheorems();
   EternityChallenge.checkForAutoEternityChallengeCompletions();
   ComplexityChallenge.checkForComplexityChallengeCompletions();
-  ComplexityUpgrades.checkForComplexityUpgrades();
+  ComplexityAchievements.checkForComplexityAchievements();
   if (display !== false) {
     updateDisplay();
   }

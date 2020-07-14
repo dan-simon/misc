@@ -138,7 +138,7 @@ let initialPlayer = {
   complexityChallengeCompletions: [0, 0, 0, 0, 0, 0],
   isComplexityChallengeRunning: [true, true, true, true, true, true],
   complexityChallengeSafeguards: [false, false, false, false, false],
-  complexityUpgrades: [
+  complexityAchievements: [
     [false, false, false, false],
     [false, false, false, false],
     [false, false, false, false],
@@ -194,7 +194,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.875
+  version: 1.890625
 }
 
 let player;

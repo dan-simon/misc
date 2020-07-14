@@ -291,6 +291,11 @@ let Saving = {
       player.boughtTheoremsThisComplexity = player.boughtTheorems.some(x => x !== 0);
       player.version = 1.875;
     }
+    if (player.version < 1.890625) {
+      player.complexityAchievements = player.complexityUpgrades;
+      delete player.complexityUpgrades;
+      player.version = 1.890625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

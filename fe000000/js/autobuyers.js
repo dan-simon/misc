@@ -7,9 +7,9 @@ let Autobuyer = function (i) {
       if (i === 13) {
         return EternityMilestones.isEternityMilestoneActive(16);
       } else if (i === 14) {
-        return ComplexityUpgrades.hasComplexityUpgrade(2, 2);
+        return ComplexityAchievements.hasComplexityAchievement(2, 2);
       } else if (i === 15) {
-        return ComplexityUpgrades.isUpgradesUnlockedRewardActive(4);
+        return ComplexityAchievements.isAchievementsUnlockedRewardActive(4);
       } else if (i > 9) {
         return Challenge.isChallengeCompleted(i);
       } else {

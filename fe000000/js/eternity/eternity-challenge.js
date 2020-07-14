@@ -95,7 +95,7 @@ let EternityChallenge = {
     return this.rewards[x](this.getNextRewardCalculationEternityChallengeCompletions(x));
   },
   getEternityChallengeCost(x) {
-    if (ComplexityUpgrades.hasComplexityUpgrade(3, 2)) {
+    if (ComplexityAchievements.hasComplexityAchievement(3, 2)) {
       return 0;
     }
     return this.costs[x];
@@ -162,7 +162,7 @@ let EternityChallenge = {
     return 1;
   },
   extraTheoremsActualAndDisplay() {
-    if (ComplexityUpgrades.hasComplexityUpgrade(4, 4)) {
+    if (ComplexityAchievements.hasComplexityAchievement(4, 4)) {
       return player.extraTheorems[this.extraTheoremsIndex()];
     } else {
       return this.extraTheoremsRaw();
@@ -175,7 +175,7 @@ let EternityChallenge = {
     return this.resourceNames[x];
   },
   canEternityChallengeBeStarted(x) {
-    return ComplexityUpgrades.hasComplexityUpgrade(3, 2) || this.getUnlockedEternityChallenge() === x;
+    return ComplexityAchievements.hasComplexityAchievement(3, 2) || this.getUnlockedEternityChallenge() === x;
   },
   isEternityChallengeRunning(x) {
     return this.currentEternityChallenge() === x;
@@ -207,7 +207,7 @@ let EternityChallenge = {
     player.currentEternityChallenge = x;
   },
   canEternityChallengeBeUnlocked(x) {
-    if (ComplexityUpgrades.hasComplexityUpgrade(3, 2)) {
+    if (ComplexityAchievements.hasComplexityAchievement(3, 2)) {
       return true;
     }
     return this.getUnlockedEternityChallenge() === 0 &&
@@ -220,7 +220,7 @@ let EternityChallenge = {
     player.unlockedEternityChallenge = x;
   },
   canRespec() {
-    return !ComplexityUpgrades.hasComplexityUpgrade(3, 2);
+    return !ComplexityAchievements.hasComplexityAchievement(3, 2);
   },
   isRespecOn() {
     return player.respecEternityChallenge;
@@ -306,7 +306,7 @@ let EternityChallenge = {
     }
   },
   eternityChallengeTotalCompletionsReward4Text() {
-    if (ComplexityUpgrades.hasComplexityUpgrade(2, 2)) {
+    if (ComplexityAchievements.hasComplexityAchievement(2, 2)) {
       return 'Chroma buildup speed ' + format(this.getTotalCompletionsRewardRawEffect(4)) + 'x.';
     } else {
       return 'Autobuyers for eternity upgrades, eternity generators, and Eternity Producer upgrades, and chroma buildup speed ' + format(this.getTotalCompletionsRewardRawEffect(4)) + 'x.';
@@ -314,10 +314,10 @@ let EternityChallenge = {
   },
   // Technically this is a bit redundant.
   isRequirementDisplayOn() {
-    return player.isEternityChallengeRequirementDisplayOn || !ComplexityUpgrades.hasComplexityUpgrade(3, 2);
+    return player.isEternityChallengeRequirementDisplayOn || !ComplexityAchievements.hasComplexityAchievement(3, 2);
   },
   toggleRequirementDisplay() {
-    if (ComplexityUpgrades.hasComplexityUpgrade(3, 2)) {
+    if (ComplexityAchievements.hasComplexityAchievement(3, 2)) {
       player.isEternityChallengeRequirementDisplayOn = !player.isEternityChallengeRequirementDisplayOn;
     }
   },

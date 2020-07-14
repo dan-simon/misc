@@ -34,7 +34,7 @@ let ComplexityGenerator = function (i) {
       return this.cost().times(Decimal.pow(this.costIncreasePer(), n).minus(1)).div(Decimal.minus(this.costIncreasePer(), 1));
     },
     multiplier() {
-      let perPurchaseMultiplier = ComplexityUpgrades.effect(4, 1);
+      let perPurchaseMultiplier = ComplexityAchievements.effect(4, 1);
       return Decimal.pow(perPurchaseMultiplier, this.bought()) * Complexities.complexityGeneratorMultiplier();
     },
     productionPerSecond() {

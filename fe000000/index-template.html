@@ -6,13 +6,13 @@
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/break_infinity.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@antimatter-dimensions/notations"></script>
   <script src="js/complexity/complexities.js"></script>
+  <script src="js/complexity/complexity-achievements.js"></script>
   <script src="js/complexity/complexity-challenge.js"></script>
   <script src="js/complexity/complexity-generators.js"></script>
   <script src="js/complexity/complexity-max-all.js"></script>
   <script src="js/complexity/complexity-points.js"></script>
   <script src="js/complexity/complexity-prestige-layer.js"></script>
   <script src="js/complexity/complexity-stars.js"></script>
-  <script src="js/complexity/complexity-upgrades.js"></script>
   <script src="js/eternity/eternities.js"></script>
   <script src="js/eternity/eternity-autobuyers.js"></script>
   <script src="js/eternity/eternity-challenge.js"></script>
@@ -96,7 +96,7 @@
     <span>
       <button ~style.display=Tabs.isTabVisible('complexity') ? '' : 'none'~ onclick="Tabs.setTab('complexity')">Complexity</button>
       <button ~style.display=Tabs.isTabVisible('complexity-challenges') ? '' : 'none'~ onclick="Tabs.setTab('complexity-challenges')">Complexity Challenges</button>
-      <button ~style.display=Tabs.isTabVisible('complexity-upgrades') ? '' : 'none'~ onclick="Tabs.setTab('complexity-upgrades')">Complexity Upgrades</button>
+      <button ~style.display=Tabs.isTabVisible('complexity-achievements') ? '' : 'none'~ onclick="Tabs.setTab('complexity-achievements')">Complexity Achievements</button>
     </span>
   </div>
   <tab ~style.display=Tabs.currentTab() === 'main' ? '' : 'none'~>
@@ -1998,7 +1998,7 @@
     <br/>
     <span>
       <button ~style.display=EternityChallenge.canRespec() ? '' : 'none'~ onclick="EternityChallenge.toggleRespec()">Respec eternity challenge on next eternity: ~r EternityChallenge.isRespecOn() ? "On" : "Off" ~</button>
-      <button ~style.display=ComplexityUpgrades.hasComplexityUpgrade(3, 2) ? '' : 'none'~ onclick="EternityChallenge.toggleRequirementDisplay()">Show (now unneeded) eternity challenge requirements: ~r EternityChallenge.isRequirementDisplayOn() ? "On" : "Off" ~</button>
+      <button ~style.display=ComplexityAchievements.hasComplexityAchievement(3, 2) ? '' : 'none'~ onclick="EternityChallenge.toggleRequirementDisplay()">Show (now unneeded) eternity challenge requirements: ~r EternityChallenge.isRequirementDisplayOn() ? "On" : "Off" ~</button>
     </span>
     <div ~style.display=EternityChallenge.hasAutoECCompletion() ? '' : 'none'~>
       <span>You automatically complete an eternity challenge tier once every ~f Complexities.autoECCompletionTime() ~ seconds.</span>
@@ -2059,7 +2059,7 @@
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(1) ~</span>
             </div>
-            <div ~style.display=ComplexityUpgrades.hasComplexityUpgrade(3, 2) ? 'none' : ''~>
+            <div ~style.display=ComplexityAchievements.hasComplexityAchievement(3, 2) ? 'none' : ''~>
               <span>Cost: ~f EternityChallenge.getEternityChallengeCost(1) ~ theorems</span>
             </div>
             <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(1) ~ IP</span>
@@ -2084,7 +2084,7 @@
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(2) ~</span>
             </div>
-            <div ~style.display=ComplexityUpgrades.hasComplexityUpgrade(3, 2) ? 'none' : ''~>
+            <div ~style.display=ComplexityAchievements.hasComplexityAchievement(3, 2) ? 'none' : ''~>
               <span>Cost: ~f EternityChallenge.getEternityChallengeCost(2) ~ theorems</span>
             </div>
             <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(2) ~ IP</span>
@@ -2111,7 +2111,7 @@
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(3) ~</span>
             </div>
-            <div ~style.display=ComplexityUpgrades.hasComplexityUpgrade(3, 2) ? 'none' : ''~>
+            <div ~style.display=ComplexityAchievements.hasComplexityAchievement(3, 2) ? 'none' : ''~>
               <span>Cost: ~f EternityChallenge.getEternityChallengeCost(3) ~ theorems</span>
             </div>
             <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(3) ~ IP</span>
@@ -2136,7 +2136,7 @@
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(4) ~</span>
             </div>
-            <div ~style.display=ComplexityUpgrades.hasComplexityUpgrade(3, 2) ? 'none' : ''~>
+            <div ~style.display=ComplexityAchievements.hasComplexityAchievement(3, 2) ? 'none' : ''~>
               <span>Cost: ~f EternityChallenge.getEternityChallengeCost(4) ~ theorems</span>
             </div>
             <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(4) ~ IP</span>
@@ -2163,7 +2163,7 @@
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(5) ~</span>
             </div>
-            <div ~style.display=ComplexityUpgrades.hasComplexityUpgrade(3, 2) ? 'none' : ''~>
+            <div ~style.display=ComplexityAchievements.hasComplexityAchievement(3, 2) ? 'none' : ''~>
               <span>Cost: ~f EternityChallenge.getEternityChallengeCost(5) ~ theorems</span>
             </div>
             <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(5) ~ IP</span>
@@ -2188,7 +2188,7 @@
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(6) ~</span>
             </div>
-            <div ~style.display=ComplexityUpgrades.hasComplexityUpgrade(3, 2) ? 'none' : ''~>
+            <div ~style.display=ComplexityAchievements.hasComplexityAchievement(3, 2) ? 'none' : ''~>
               <span>Cost: ~f EternityChallenge.getEternityChallengeCost(6) ~ theorems</span>
             </div>
             <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(6) ~ IP</span>
@@ -2215,7 +2215,7 @@
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(7) ~</span>
             </div>
-            <div ~style.display=ComplexityUpgrades.hasComplexityUpgrade(3, 2) ? 'none' : ''~>
+            <div ~style.display=ComplexityAchievements.hasComplexityAchievement(3, 2) ? 'none' : ''~>
               <span>Cost: ~f EternityChallenge.getEternityChallengeCost(7) ~ theorems</span>
             </div>
             <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(7) ~ IP</span>
@@ -2240,7 +2240,7 @@
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(8) ~</span>
             </div>
-            <div ~style.display=ComplexityUpgrades.hasComplexityUpgrade(3, 2) ? 'none' : ''~>
+            <div ~style.display=ComplexityAchievements.hasComplexityAchievement(3, 2) ? 'none' : ''~>
               <span>Cost: ~f EternityChallenge.getEternityChallengeCost(8) ~ theorems</span>
             </div>
             <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(8) ~ IP</span>
@@ -2598,8 +2598,8 @@
             <br/>
             <span ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(6) ? 'none' : ''~>(Disabling this doesn't put you in this challenge yet, since the challenge is locked.)</span>
             <br ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(6) ? 'none' : ''~/>
-            <span ~style.display=ComplexityUpgrades.hasComplexityUpgrade(4, 4) ? '' : 'none'~>(Due to "On the other side", you also need to respec studies to enter this challenge.)</span>
-            <br ~style.display=ComplexityUpgrades.hasComplexityUpgrade(4, 4)  ? '' : 'none'~/>
+            <span ~style.display=ComplexityAchievements.hasComplexityAchievement(4, 4) ? '' : 'none'~>(Due to "On the other side", you also need to respec studies to enter this challenge.)</span>
+            <br ~style.display=ComplexityAchievements.hasComplexityAchievement(4, 4)  ? '' : 'none'~/>
             <span>Reward: Extra theorems.</span>
             <br/>
             <span>Current: +~f ComplexityChallenge.getComplexityChallengeReward(6) ~ theorems, Next: +~f ComplexityChallenge.getComplexityChallengeNextReward(6) ~</span>
@@ -2639,29 +2639,29 @@
       The ability to disable certain things is there to prevent accidental violation of complexity challenge requirements.
     </span>
   </tab>
-  <tab ~style.display=Tabs.currentTab() === 'complexity-upgrades' ? '' : 'none'~>
+  <tab ~style.display=Tabs.currentTab() === 'complexity-achievements' ? '' : 'none'~>
     <span>
-      You have unlocked ~f ComplexityUpgrades.getTotalUpgradesUnlocked(1) ~ complexity upgrades.
+      You have unlocked ~f ComplexityAchievements.getTotalAchievementsUnlocked(1) ~ complexity achievements.
     </span>
     <br/>
     <span>
-      At ~f ComplexityUpgrades.getUpgradesUnlockedRewardThreshold(1) ~ complexity upgrades bought:
+      At ~f ComplexityAchievements.getAchievementsUnlockedRewardThreshold(1) ~ complexity achievements unlocked:
     </span>
     <br/>
     <span>
-       You start every complexity with EP equal to your highest-ever number of boosts (~f ComplexityUpgrades.getUpgradesUnlockedRewardRawEffect(1) ~)
+       You start every complexity with EP equal to your highest-ever number of boosts (~f ComplexityAchievements.getAchievementsUnlockedRewardRawEffect(1) ~)
     </span>
     <br/>
     <span>
-      At ~f ComplexityUpgrades.getUpgradesUnlockedRewardThreshold(2) ~ complexity upgrades bought:
+      At ~f ComplexityAchievements.getAchievementsUnlockedRewardThreshold(2) ~ complexity achievements unlocked:
     </span>
     <br/>
     <span>
-      Multiplier to eternity gain based on complexity upgrades bought (~f ComplexityUpgrades.getUpgradesUnlockedRewardRawEffect(2) ~)
+      Multiplier to eternity gain based on complexity achievements unlocked (~f ComplexityAchievements.getAchievementsUnlockedRewardRawEffect(2) ~)
     </span>
     <br/>
     <span>
-      At ~f ComplexityUpgrades.getUpgradesUnlockedRewardThreshold(3) ~ complexity upgrades bought:
+      At ~f ComplexityAchievements.getAchievementsUnlockedRewardThreshold(3) ~ complexity achievements unlocked:
     </span>
     <br/>
     <span>
@@ -2669,192 +2669,192 @@
     </span>
     <br/>
     <span>
-      At ~f ComplexityUpgrades.getUpgradesUnlockedRewardThreshold(4) ~ complexity upgrades bought:
+      At ~f ComplexityAchievements.getAchievementsUnlockedRewardThreshold(4) ~ complexity achievements unlocked:
     </span>
     <br/>
     <span>
-      You start every complexity with ~f ComplexityUpgrades.getUpgradesUnlockedRewardRawEffect(4) ~ EP, and you get a complexity autobuyer.
+      You start every complexity with ~f ComplexityAchievements.getAchievementsUnlockedRewardRawEffect(4) ~ EP, and you get a complexity autobuyer.
     </span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="greytogrey">One per generator</span>
             <br/>
             Complete Complexity Challenge 2 ~f 8 ~ times.
             <br/>
-            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(1, 1) ~
+            ~r ComplexityAchievements.complexityAchievementStatusDescription(1, 1) ~
             <br/>
-            The multiplier to permanence and chroma from complexities also applies to boost power (currently ~f ComplexityUpgrades.rawEffect(1, 1) ~x)
+            The multiplier to permanence and chroma from complexities also applies to boost power (currently ~f ComplexityAchievements.rawEffect(1, 1) ~x)
           </div>
         </td>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="greytopurple">Forever isn't too long</span>
             <br/>
             Eternity in Complexity Challenge 2.
             <br/>
-            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(1, 2) ~
+            ~r ComplexityAchievements.complexityAchievementStatusDescription(1, 2) ~
             <br/>
-            You start every complexity with eternities based on your complexities (currently ~f ComplexityUpgrades.rawEffect(1, 2) ~)
+            You start every complexity with eternities based on your complexities (currently ~f ComplexityAchievements.rawEffect(1, 2) ~)
           </div>
         </td>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="greytoorange">More colorful than a potato</span>
             <br/>
             Unlock chroma in Complexity Challenge 2.
             <br/>
-            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(1, 3) ~
+            ~r ComplexityAchievements.complexityAchievementStatusDescription(1, 3) ~
             <br/>
             Automatically unlock the Eternity Producer, chroma, and colors of chroma when possible.
           </div>
         </td>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="greytogreen">Forgot something</span>
             <br/>
             Get ~f 11 ~ studies in Complexity Challenge 2.
             <br/>
-            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(1, 4) ~
+            ~r ComplexityAchievements.complexityAchievementStatusDescription(1, 4) ~
             <br/>
-            Power to fourth-row study effects based on boost multiplier (currently ^~f ComplexityUpgrades.rawEffect(1, 4) ~)
+            Power to fourth-row study effects based on boost multiplier (currently ^~f ComplexityAchievements.rawEffect(1, 4) ~)
           </div>
         </td>
       </tr>
       <tr>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="purpletogrey">Actually a boost</span>
             <br/>
             Get a per-boost multiplier of ~f Math.pow(2, 24) ~ outside of Infinity Challenge 7 in Complexity Challenge 3.
             <br/>
-            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(2, 1) ~
+            ~r ComplexityAchievements.complexityAchievementStatusDescription(2, 1) ~
             <br/>
-            Multiplier to the per-boost multiplier based on eternities (currently ~f ComplexityUpgrades.rawEffect(2, 1) ~x)
+            Multiplier to the per-boost multiplier based on eternities (currently ~f ComplexityAchievements.rawEffect(2, 1) ~x)
           </div>
         </td>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="purpletopurple">Time after time</span>
             <br/>
             Get ~f Math.pow(2, 24) ~ eternities in Complexity Challenge 3.
             <br/>
-            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(2, 2) ~
+            ~r ComplexityAchievements.complexityAchievementStatusDescription(2, 2) ~
             <br/>
             You always have autobuyers for eternity upgrades, eternity generators, and Eternity Producer upgrades, and you get autobuyers for theorems, permanence, and permanence upgrades.
           </div>
         </td>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="purpletoorange">After a hurricane</span>
             <br/>
             Unlock chroma in Complexity Challenge 3.
             <br/>
-            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(2, 3) ~
+            ~r ComplexityAchievements.complexityAchievementStatusDescription(2, 3) ~
             <br/>
-            Multiplier to chroma buildup speed based on eternities (currently ~f ComplexityUpgrades.rawEffect(2, 3) ~x)
+            Multiplier to chroma buildup speed based on eternities (currently ~f ComplexityAchievements.rawEffect(2, 3) ~x)
           </div>
         </td>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="purpletogreen">3 * 7 * 11</span>
             <br/>
             Get ~f 231 ~ theorems in Complexity Challenge 3.
             <br/>
-            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(2, 4) ~
+            ~r ComplexityAchievements.complexityAchievementStatusDescription(2, 4) ~
             <br/>
-            Study 7 and Study 11 effects are uncapped and raised ^~f ComplexityUpgrades.rawEffect(2, 4) ~.
+            Study 7 and Study 11 effects are uncapped and raised ^~f ComplexityAchievements.rawEffect(2, 4) ~.
           </div>
         </td>
       </tr>
       <tr>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="orangetogrey">No rest</span>
             <br/>
             Get ~f 1024 ~ boosts in Eternity Challenge 2 in Complexity Challenge 4.
             <br/>
-            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(3, 1) ~
+            ~r ComplexityAchievements.complexityAchievementStatusDescription(3, 1) ~
             <br/>
-            Grey chroma powers purple and orange chroma effects (currently ^~f ComplexityUpgrades.rawEffect(3, 1) ~)
+            Grey chroma powers purple and orange chroma effects (currently ^~f ComplexityAchievements.rawEffect(3, 1) ~)
           </div>
         </td>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="orangetopurple">Broke every stone</span>
             <br/>
             Complete all eternity challenges, without using automatic eternity challenge completion, in Complexity Challenge 4.
             <br/>
-            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(3, 2) ~
+            ~r ComplexityAchievements.complexityAchievementStatusDescription(3, 2) ~
             <br/>
             Eternity challenge requirements and costs are removed.
           </div>
         </td>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="orangetoorange">Shadeless</span>
             <br/>
             Complete Complexity Challenge 4 ~f 13 ~ times.
             <br/>
-            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(3, 3) ~
+            ~r ComplexityAchievements.complexityAchievementStatusDescription(3, 3) ~
             <br/>
             Chroma always produces all colors at once.
           </div>
         </td>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="orangetogreen">Thousand-theorem twilight</span>
             <br/>
             Get ~f Decimal.pow(2, 1.75 * Math.pow(2, 16)) ~ eternity points, without buying theorems, in Complexity Challenge 4.
             <br/>
-            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(3, 4) ~
+            ~r ComplexityAchievements.complexityAchievementStatusDescription(3, 4) ~
             <br/>
-            Extra theorems from green ^~f ComplexityUpgrades.rawEffect(3, 4) ~.
+            Extra theorems from green ^~f ComplexityAchievements.rawEffect(3, 4) ~.
           </div>
         </td>
       </tr>
       <tr>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="greentogrey">Power beats knowledge</span>
             <br/>
             Get ~f Math.pow(2, 18) ~ boost power in Complexity Challenge 6.
             <br/>
-            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(4, 1) ~
+            ~r ComplexityAchievements.complexityAchievementStatusDescription(4, 1) ~
             <br/>
-            Increase the per-purchase complexity generator multiplier based on best boost power (currently ~f ComplexityUpgrades.rawEffect(4, 1) ~x)
+            Increase the per-purchase complexity generator multiplier based on best boost power (currently ~f ComplexityAchievements.rawEffect(4, 1) ~x)
           </div>
         </td>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="greentopurple">Calm EC</span>
             <br/>
             Complete ~f 20 ~ eternity challenge tiers, without using automatic eternity challenge completion, in Complexity Challenge 6.
             <br/>
-            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(4, 2) ~
+            ~r ComplexityAchievements.complexityAchievementStatusDescription(4, 2) ~
             <br/>
             You start each complexity with all eternity challenges completed.
           </div>
         </td>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="greentoorange">Nonzero-color theorem</span>
             <br/>
             Unlock chroma in Complexity Challenge 6.
             <br/>
-            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(4, 3) ~
+            ~r ComplexityAchievements.complexityAchievementStatusDescription(4, 3) ~
             <br/>
-            Multiplier to chroma cap based on theorems (currently ~f ComplexityUpgrades.rawEffect(4, 3) ~x)
+            Multiplier to chroma cap based on theorems (currently ~f ComplexityAchievements.rawEffect(4, 3) ~x)
           </div>
         </td>
         <td>
-          <div class="complexityupgradediv">
+          <div class="complexityachievementdiv">
             <span class="greentogreen">On the other side</span>
             <br/>
             Get ~f 168 ~ theorems in Complexity Challenge 6.
             <br/>
-            ~r ComplexityUpgrades.complexityUpgradeStatusDescription(4, 4) ~
+            ~r ComplexityAchievements.complexityAchievementStatusDescription(4, 4) ~
             <br/>
             You keep your theorems, studies, and best boost power on complexity.
           </div>
