@@ -147,6 +147,8 @@ let Chroma = {
   currentProductionText() {
     if (this.amount() === this.cap()) {
       return 'would be producing ' + this.currentColorName() + ' but are at the chroma cap';
+    } else if (this.colorAmount(player.chroma.current) === this.cap()) {
+      return 'would produce ' + Chroma.currentColorName() + ' except that it\'s already at the chroma cap';
     } else if (this.isProducing()) {
       return 'are currently producing ' + this.currentColorName();
     } else {
