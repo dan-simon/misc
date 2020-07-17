@@ -61,16 +61,24 @@
 <body>
   <div style="height: 56px;">
     <span ~style.display=InfinityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~f InfinityPrestigeLayer.starRequirementForInfinity() ~ stars to infinity.</span>
-    <button ~style.display=InfinityPrestigeLayer.canInfinity() ? '' : 'none'~ style="height: 48px;" onclick="InfinityPrestigeLayer.infinity()">Infinity: Gain ~f InfinityPrestigeLayer.infinityPointGain() ~ infinity points<br/>~f InfinityPrestigeLayer.currentIPPerSec() ~ IP/sec, ~f InfinityPrestigeLayer.peakIPPerSec() ~ peak IP/sec</button>
+    <br ~style.display=InfinityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
+    <span ~style.display=InfinityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~f InfinityPrestigeLayer.infinityPoints() ~ infinity points (~f InfinityPrestigeLayer.totalInfinityPoints() ~ total this eternity)</span>
+    <button ~style.display=InfinityPrestigeLayer.canInfinity() ? '' : 'none'~ style="height: 48px;" onclick="InfinityPrestigeLayer.infinity()">Infinity: Gain ~f InfinityPrestigeLayer.infinityPointGain() ~ infinity points (~r InfinityPrestigeLayer.infinityPointGainRatioText() ~~f InfinityPrestigeLayer.infinityPoints() ~ → ~f InfinityPrestigeLayer.newInfinityPoints() ~)<br/>~f InfinityPrestigeLayer.currentIPPerSec() ~ IP/sec, ~f InfinityPrestigeLayer.peakIPPerSec() ~ peak IP/sec</button>
   </div>
   <div style="height: 56px;">
     <span ~style.display=EternityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~f EternityPrestigeLayer.infinityPointRequirementForEternity() ~ total infinity points this eternity to eternity.</span>
-    <button ~style.display=EternityPrestigeLayer.canEternity() ? '' : 'none'~ style="height: 48px;" onclick="EternityPrestigeLayer.eternity()">Eternity: Gain ~f EternityPrestigeLayer.eternityPointGain() ~ eternity points<br/>~f EternityPrestigeLayer.currentEPPerSec() ~ EP/sec, ~f EternityPrestigeLayer.peakEPPerSec() ~ peak EP/sec</button>
+    <br ~style.display=EternityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
+    <span ~style.display=EternityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~f EternityPrestigeLayer.eternityPoints() ~ eternity points (~f EternityPrestigeLayer.totalEternityPoints() ~ total this complexity)</span>
+    <button ~style.display=EternityPrestigeLayer.canEternity() ? '' : 'none'~ style="height: 48px;" onclick="EternityPrestigeLayer.eternity()">Eternity: Gain ~f EternityPrestigeLayer.eternityPointGain() ~ eternity points (~r EternityPrestigeLayer.eternityPointGainRatioText() ~~f EternityPrestigeLayer.eternityPoints() ~ → ~f EternityPrestigeLayer.newEternityPoints() ~)<br/>~f EternityPrestigeLayer.currentEPPerSec() ~ EP/sec, ~f EternityPrestigeLayer.peakEPPerSec() ~ peak EP/sec</button>
   </div>
   <div style="height: 56px;">
     <span ~style.display=ComplexityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~r ComplexityPrestigeLayer.requirementForComplexity() ~ to complexity.</span>
-    <button ~style.display=ComplexityPrestigeLayer.canComplexity() ? '' : 'none'~ style="height: 48px;" onclick="ComplexityPrestigeLayer.complexity()">Complexity: Gain ~f ComplexityPrestigeLayer.complexityPointGain() ~ complexity points<br/>~f ComplexityPrestigeLayer.currentCPPerSec() ~ ℂP/sec, ~f ComplexityPrestigeLayer.peakCPPerSec() ~ peak ℂP/sec</button>
+    <br ~style.display=ComplexityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
+    <span ~style.display=ComplexityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~f ComplexityPrestigeLayer.complexityPoints() ~ complexity points (~f ComplexityPrestigeLayer.totalComplexityPoints() ~ total)</span>
+    <button ~style.display=ComplexityPrestigeLayer.canComplexity() ? '' : 'none'~ style="height: 48px;" onclick="ComplexityPrestigeLayer.complexity()">Complexity: Gain ~f ComplexityPrestigeLayer.complexityPointGain() ~ complexity points (~r ComplexityPrestigeLayer.complexityPointGainRatioText() ~~f ComplexityPrestigeLayer.complexityPoints() ~ → ~f ComplexityPrestigeLayer.newComplexityPoints() ~)<br/>~f ComplexityPrestigeLayer.currentCPPerSec() ~ ℂP/sec, ~f ComplexityPrestigeLayer.peakCPPerSec() ~ peak ℂP/sec</button>
   </div>
+  <br/>
+  <br/>
   <div>
     <span>
       <button onclick="Tabs.setTab('main')">Main</button>
@@ -99,6 +107,8 @@
       <button ~style.display=Tabs.isTabVisible('complexity-achievements') ? '' : 'none'~ onclick="Tabs.setTab('complexity-achievements')">Complexity Achievements</button>
     </span>
   </div>
+  <br/>
+  <br/>
   <tab ~style.display=Tabs.currentTab() === 'main' ? '' : 'none'~>
     <div ~style.display=InfinityPrestigeLayer.mustInfinity() ? 'none' : ''~>
       <span>You have ~f Stars.amount() ~ stars. You are getting ~f Stars.perSecond() ~ stars per second. <button ~class=MaxAll.anythingToBuy() ? "" : "disabled"~ onclick="MaxAll.maxAll()">Max all</button></span>

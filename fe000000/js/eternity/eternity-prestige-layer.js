@@ -12,6 +12,9 @@ let EternityPrestigeLayer = {
   isRequirementVisible() {
     return !this.canEternity() && (player.infinities > 0 || player.eternities.gt(0) || player.complexities > 0);
   },
+  isAmountSpanVisible() {
+    return this.isRequirementVisible() && (player.eternities.gt(0) || player.complexities > 0);
+  },
   resetText() {
     if (this.canEternity()) {
       return 'eternity';
@@ -22,6 +25,25 @@ let EternityPrestigeLayer = {
   eternityPointGain() {
     let oom = InfinityPoints.totalIPProducedThisEternity().max(1).log(2) / 256;
     return Decimal.pow(2, oom).floor();
+  },
+  eternityPoints() {
+    return EternityPoints.amount();
+  },
+  newEternityPoints() {
+    return this.eternityPoints().plus(this.eternityPointGain());
+  },
+  totalEternityPoints() {
+    return EternityPoints.totalEPProducedThisComplexity();
+  },
+  eternityPointGainRatio() {
+    return this.eternityPointGain().div(this.totalEternityPoints());
+  },
+  eternityPointGainRatioText() {
+    if (this.totalEternityPoints().neq(0)) {
+      return format(this.eternityPointGainRatio()) + 'x total, ';
+    } else {
+      return '';
+    }
   },
   currentEPPerSec() {
     return this.eternityPointGain().div(player.stats.timeSinceEternity);

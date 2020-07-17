@@ -32,9 +32,31 @@ let InfinityPrestigeLayer = {
   isRequirementVisible() {
     return !this.canInfinity();
   },
+  isAmountSpanVisible() {
+    return this.isRequirementVisible() && (player.infinities > 0 || player.eternities.gt(0) || player.complexities > 0);
+  },
   infinityPointGain() {
     let oom = (this.isInfinityBroken() ? Stars.amount() : this.starRequirementForInfinity()).max(1).log(2) / 256;
     return Decimal.pow(2, oom).floor();
+  },
+  infinityPoints() {
+    return InfinityPoints.amount();
+  },
+  newInfinityPoints() {
+    return this.infinityPoints().plus(this.infinityPointGain());
+  },
+  totalInfinityPoints() {
+    return InfinityPoints.totalIPProducedThisEternity();
+  },
+  infinityPointGainRatio() {
+    return this.infinityPointGain().div(this.totalInfinityPoints());
+  },
+  infinityPointGainRatioText() {
+    if (this.totalInfinityPoints().neq(0)) {
+      return format(this.infinityPointGainRatio()) + 'x total, ';
+    } else {
+      return '';
+    }
   },
   currentIPPerSec() {
     return this.infinityPointGain().div(player.stats.timeSinceInfinity);

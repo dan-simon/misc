@@ -26,9 +26,31 @@ let ComplexityPrestigeLayer = {
   isRequirementVisible() {
     return !this.canComplexity() && (player.eternities.gt(0) || player.complexities > 0);
   },
+  isAmountSpanVisible() {
+    return this.isRequirementVisible() && player.complexities > 0;
+  },
   complexityPointGain() {
     let oom = EternityPoints.totalEPProducedThisComplexity().max(1).log(2) / Math.pow(2, 16);
     return Decimal.pow(2, oom).floor();
+  },
+  complexityPoints() {
+    return ComplexityPoints.amount();
+  },
+  newComplexityPoints() {
+    return this.complexityPoints().plus(this.complexityPointGain());
+  },
+  totalComplexityPoints() {
+    return ComplexityPoints.totalCPProduced();
+  },
+  complexityPointGainRatio() {
+    return this.complexityPointGain().div(this.totalComplexityPoints());
+  },
+  complexityPointGainRatioText() {
+    if (this.totalComplexityPoints().neq(0)) {
+      return format(this.complexityPointGainRatio()) + 'x total, ';
+    } else {
+      return '';
+    }
   },
   currentCPPerSec() {
     return this.complexityPointGain().div(player.stats.timeSinceComplexity);
