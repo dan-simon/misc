@@ -149,6 +149,12 @@ let initialPlayer = {
     true, true, true, true, true, true, true, true,
     true, true, true, true,
   ],
+  powers: {
+    seed: RNG.createSeed(),
+    unlocked: false,
+    upgrades: [0, 0, 0],
+    list: []
+  },
   options: {
     notation: 'Scientific',
     offlineProgress: true,

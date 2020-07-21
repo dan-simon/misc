@@ -296,6 +296,15 @@ let Saving = {
       delete player.complexityUpgrades;
       player.version = 1.890625;
     }
+    if (player.version < 1.90625) {
+      player.powers = {
+        seed: RNG.createSeed(),
+        unlocked: false,
+        upgrades: [0, 0, 0],
+        list: []
+      };
+      player.version = 1.90625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

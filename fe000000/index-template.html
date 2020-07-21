@@ -36,6 +36,7 @@
   <script src="js/infinity/infinity-prestige-layer.js"></script>
   <script src="js/infinity/infinity-stars.js"></script>
   <script src="js/infinity/infinity-upgrades.js"></script>
+  <script src="js/rng.js"></script>
   <script src="js/autobuyers.js"></script>
   <script src="js/boost.js"></script>
   <script src="js/challenge.js"></script>
@@ -48,6 +49,7 @@
   <script src="js/max-all.js"></script>
   <script src="js/options.js"></script>
   <script src="js/player.js"></script>
+  <script src="js/powers.js"></script>
   <script src="js/prestige.js"></script>
   <script src="js/sacrifice.js"></script>
   <script src="js/saving.js"></script>
@@ -105,6 +107,7 @@
       <button ~style.display=Tabs.isTabVisible('complexity') ? '' : 'none'~ onclick="Tabs.setTab('complexity')">Complexity</button>
       <button ~style.display=Tabs.isTabVisible('complexity-challenges') ? '' : 'none'~ onclick="Tabs.setTab('complexity-challenges')">Complexity Challenges</button>
       <button ~style.display=Tabs.isTabVisible('complexity-achievements') ? '' : 'none'~ onclick="Tabs.setTab('complexity-achievements')">Complexity Achievements</button>
+      <button ~style.display=Tabs.isTabVisible('powers') ? '' : 'none'~ onclick="Tabs.setTab('powers')">Powers</button>
     </span>
   </div>
   <br/>
@@ -2871,6 +2874,16 @@
         </td>
       </tr>
     </table>
+  </tab>
+  <tab ~style.display=Tabs.currentTab() === 'powers' ? '' : 'none'~>
+    <div ~style.display=Powers.isUnlocked() ? 'none' : ''~>
+      <button style="height: 48px;" onclick="Powers.unlock()" ~class=Powers.canUnlock() ? '' : 'disabled'~>
+        Unlock Powers<br/>Cost: ~f Powers.unlockCost() ~ complexity points
+      </button>
+    </div>
+    <div ~style.display=Powers.isUnlocked() ? '' : 'none'~>
+      <span>This was a triumph</span>
+    </div>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'statistics' ? '' : 'none'~>
     <span>You have produced ~f player.stats.totalStarsProduced ~ total stars.</span>

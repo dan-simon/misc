@@ -252,6 +252,14 @@ button {
   color: #ff0000;
 }
 
+.magentaspan, .magentadiv > span {
+  color: #ff00ff;
+}
+
+.brownspan, .browndiv > span {
+  color: #aa3333;
+}
+
 .greytogrey {
    background-image: linear-gradient(to right, #aaaaaa, #aaaaaa);
    color: transparent;
