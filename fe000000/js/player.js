@@ -157,7 +157,11 @@ let initialPlayer = {
     stored: [],
     next: RNG.initialPower(),
     gain: true,
-    respec: false
+    respec: false,
+    hasGainedShards: false,
+    shards: 0,
+    shardUpgrades: [0, 0, 0, 0],
+    powerDeletionMode: 'Confirmation',
   },
   options: {
     notation: 'Scientific',
@@ -205,7 +209,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.890625
+  version: 1.9140625
 }
 
 let player;

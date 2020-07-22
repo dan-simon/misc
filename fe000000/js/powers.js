@@ -101,6 +101,12 @@ let PowerUpgrade = function (i) {
 }
 
 let Powers = {
+  indexData: {
+    'normal': 1,
+    'infinity': 2,
+    'eternity': 3,
+    'complexity': 4,
+  },
   extraMultipliers: {
     'normal': () => 1,
     'infinity': () => Math.sqrt(Math.log2(1 + InfinityStars.amount().log2() / Math.pow(2, 32))),
@@ -188,6 +194,10 @@ let Powers = {
         p => this.strength(p) * this.rarity(p)).sort((a, b) => b - a)[
           this.maximumActivatedLimit() - 1] || 0;
     }
+    let toRemove = this.stored().filter(p => this.strength(p) * this.rarity(p) < cutoffs[p.type]);
+    for (let p of toRemove) {
+      PowerShards.gainShards(p);
+    }
     player.powers.stored = this.stored().filter(p => this.strength(p) * this.rarity(p) >= cutoffs[p.type]);
   },
   nextKept() {
@@ -238,6 +248,7 @@ let Powers = {
     if (this.canAccessPower(type, i)) {
       let power = this.accessPower(type, i);
       return '(strength ' + format(this.strength(power)) + ', rarity ' + format(this.rarity(power)) +
+      (this.powerShardBonus(power) > 0 ? ', power shard upgrades +' + format(this.powerShardBonus(power)) : '') +
       ', extra multiplier ' + format(this.extraMultiplier(power)) + 'x, total multiplier ' + format(this.getOverallMultiplier(power)) + 'x)'
     }
   },
@@ -254,10 +265,12 @@ let Powers = {
     }
   },
   canDelete(i) {
-    return this.stored().length >= i;
+    return this.stored().length >= i && this.powerDeletionMode() !== 'Disabled';
   },
   delete(i) {
-    if (this.canDelete(i) && confirm('Are you sure you want to delete this power?')) {
+    if (this.canDelete(i) && (this.powerDeletionMode() === 'No confirmation' ||
+      confirm('Are you sure you want to delete this power for ' + format(PowerShards.shardGainStored(i)) + ' shards?'))) {
+      PowerShards.gainShardsStored(i);
       player.powers.stored = player.powers.stored.slice(0, i - 1).concat(player.powers.stored.slice(i));
     }
   },
@@ -316,6 +329,9 @@ let Powers = {
   next() {
     return player.powers.next;
   },
+  index(x) {
+    return this.indexData[x];
+  },
   getExtraMultiplier(x) {
     return this.extraMultipliers[x]();
   },
@@ -325,11 +341,14 @@ let Powers = {
   strength(p) {
     return p.strength;
   },
+  powerShardBonus(p) {
+    return PowerShardUpgrade(this.index(p.type)).effect();
+  },
   extraMultiplier(p) {
     return this.getExtraMultiplier(p.type);
   },
   getOverallMultiplier(p) {
-    return this.rarity(p) * this.strength(p) * this.extraMultiplier(p);
+    return (this.rarity(p) * this.strength(p) + this.powerShardBonus(p)) * this.extraMultiplier(p);
   },
   getEffect(p) {
     return 1 + this.baseEffects[p.type] * this.getOverallMultiplier(p);
@@ -342,5 +361,12 @@ let Powers = {
   },
   maxAll() {
     this.upgradeList.forEach(x => x.buyMax());
+  },
+  powerDeletionMode() {
+    return player.powers.powerDeletionMode;
+  },
+  changePowerDeletionMode() {
+    let modes = ['Confirmation', 'No confirmation', 'Disabled'];
+    player.powers.powerDeletionMode = modes[(modes.indexOf(player.powers.powerDeletionMode) + 1) % 3];
   }
 }

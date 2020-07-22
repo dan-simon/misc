@@ -1,6 +1,6 @@
 let PermanenceUpgrade = function (i) {
-  if ('PermanenceUpgrade' in window) {
-    return PermanenceUpgrade.get(i);
+  if ('PermanenceUpgrades' in window) {
+    return PermanenceUpgrades.get(i);
   }
   return {
     bought() {

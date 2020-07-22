@@ -310,6 +310,13 @@ let Saving = {
       player.stats.timeSincePowerGain = 0;
       player.version = 1.90625;
     }
+    if (player.version < 1.9140625) {
+      player.powers.hasGainedShards = false;
+      player.powers.shards = 0;
+      player.powers.shardUpgrades = [0, 0, 0, 0];
+      player.powers.powerDeletionMode = 'Confirmation';
+      player.version = 1.9140625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

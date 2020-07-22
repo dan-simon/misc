@@ -50,6 +50,7 @@
   <script src="js/multiverse-collapse.js"></script>
   <script src="js/options.js"></script>
   <script src="js/player.js"></script>
+  <script src="js/power-shards.js"></script>
   <script src="js/powers.js"></script>
   <script src="js/prestige.js"></script>
   <script src="js/sacrifice.js"></script>
@@ -2888,6 +2889,10 @@
     <div ~style.display=Powers.isUnlocked() ? '' : 'none'~>
       <span>You have ~f Powers.active().length ~/~f Powers.activatedLimit() ~ active powers.</span>
       <br/>
+      <span>Active powers raise various dimension multipliers to powers.</span>
+      <br/>
+      <span>Stored powers do not, but can be activated to make them active.</span>
+      <br/>
       <button onclick="Powers.toggleRespec()">Deactivate active powers on next complexity: ~r Powers.isRespecOn() ? "On" : "Off" ~</button>
       <br ~style.display=ComplexityPrestigeLayer.canComplexity() ? 'none' : ''~/>
       <button onclick="Powers.respecAndReset()">Deactivate active powers and ~r ComplexityPrestigeLayer.resetText() ~</button></button>
@@ -2986,7 +2991,7 @@
           <br/>
           <span ~class=Powers.color('stored', 1)~>~r Powers.details('stored', 1) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(1)" ~class=Powers.canActivate(1) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(1)" ~class=Powers.canDelete(1) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(1)" ~class=Powers.canActivate(1) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(1)" ~class=Powers.canDelete(1) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(1) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 2) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 2) ? '' : 'none'~>
@@ -2994,7 +2999,7 @@
           <br/>
           <span ~class=Powers.color('stored', 2)~>~r Powers.details('stored', 2) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(2)" ~class=Powers.canActivate(2) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(2)" ~class=Powers.canDelete(2) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(2)" ~class=Powers.canActivate(2) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(2)" ~class=Powers.canDelete(2) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(2) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 3) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 3) ? '' : 'none'~>
@@ -3002,7 +3007,7 @@
           <br/>
           <span ~class=Powers.color('stored', 3)~>~r Powers.details('stored', 3) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(3)" ~class=Powers.canActivate(3) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(3)" ~class=Powers.canDelete(3) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(3)" ~class=Powers.canActivate(3) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(3)" ~class=Powers.canDelete(3) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(3) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 4) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 4) ? '' : 'none'~>
@@ -3010,7 +3015,7 @@
           <br/>
           <span ~class=Powers.color('stored', 4)~>~r Powers.details('stored', 4) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(4)" ~class=Powers.canActivate(4) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(4)" ~class=Powers.canDelete(4) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(4)" ~class=Powers.canActivate(4) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(4)" ~class=Powers.canDelete(4) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(4) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 5) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 5) ? '' : 'none'~>
@@ -3018,7 +3023,7 @@
           <br/>
           <span ~class=Powers.color('stored', 5)~>~r Powers.details('stored', 5) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(5)" ~class=Powers.canActivate(5) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(5)" ~class=Powers.canDelete(5) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(5)" ~class=Powers.canActivate(5) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(5)" ~class=Powers.canDelete(5) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(5) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 6) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 6) ? '' : 'none'~>
@@ -3026,7 +3031,7 @@
           <br/>
           <span ~class=Powers.color('stored', 6)~>~r Powers.details('stored', 6) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(6)" ~class=Powers.canActivate(6) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(6)" ~class=Powers.canDelete(6) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(6)" ~class=Powers.canActivate(6) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(6)" ~class=Powers.canDelete(6) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(6) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 7) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 7) ? '' : 'none'~>
@@ -3034,7 +3039,7 @@
           <br/>
           <span ~class=Powers.color('stored', 7)~>~r Powers.details('stored', 7) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(7)" ~class=Powers.canActivate(7) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(7)" ~class=Powers.canDelete(7) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(7)" ~class=Powers.canActivate(7) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(7)" ~class=Powers.canDelete(7) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(7) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 8) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 8) ? '' : 'none'~>
@@ -3042,7 +3047,7 @@
           <br/>
           <span ~class=Powers.color('stored', 8)~>~r Powers.details('stored', 8) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(8)" ~class=Powers.canActivate(8) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(8)" ~class=Powers.canDelete(8) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(8)" ~class=Powers.canActivate(8) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(8)" ~class=Powers.canDelete(8) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(8) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 9) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 9) ? '' : 'none'~>
@@ -3050,7 +3055,7 @@
           <br/>
           <span ~class=Powers.color('stored', 9)~>~r Powers.details('stored', 9) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(9)" ~class=Powers.canActivate(9) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(9)" ~class=Powers.canDelete(9) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(9)" ~class=Powers.canActivate(9) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(9)" ~class=Powers.canDelete(9) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(9) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 10) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 10) ? '' : 'none'~>
@@ -3058,7 +3063,7 @@
           <br/>
           <span ~class=Powers.color('stored', 10)~>~r Powers.details('stored', 10) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(10)" ~class=Powers.canActivate(10) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(10)" ~class=Powers.canDelete(10) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(10)" ~class=Powers.canActivate(10) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(10)" ~class=Powers.canDelete(10) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(10) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 11) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 11) ? '' : 'none'~>
@@ -3066,7 +3071,7 @@
           <br/>
           <span ~class=Powers.color('stored', 11)~>~r Powers.details('stored', 11) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(11)" ~class=Powers.canActivate(11) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(11)" ~class=Powers.canDelete(11) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(11)" ~class=Powers.canActivate(11) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(11)" ~class=Powers.canDelete(11) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(11) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 12) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 12) ? '' : 'none'~>
@@ -3074,7 +3079,7 @@
           <br/>
           <span ~class=Powers.color('stored', 12)~>~r Powers.details('stored', 12) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(12)" ~class=Powers.canActivate(12) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(12)" ~class=Powers.canDelete(12) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(12)" ~class=Powers.canActivate(12) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(12)" ~class=Powers.canDelete(12) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(12) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 13) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 13) ? '' : 'none'~>
@@ -3082,7 +3087,7 @@
           <br/>
           <span ~class=Powers.color('stored', 13)~>~r Powers.details('stored', 13) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(13)" ~class=Powers.canActivate(13) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(13)" ~class=Powers.canDelete(13) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(13)" ~class=Powers.canActivate(13) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(13)" ~class=Powers.canDelete(13) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(13) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 14) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 14) ? '' : 'none'~>
@@ -3090,7 +3095,7 @@
           <br/>
           <span ~class=Powers.color('stored', 14)~>~r Powers.details('stored', 14) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(14)" ~class=Powers.canActivate(14) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(14)" ~class=Powers.canDelete(14) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(14)" ~class=Powers.canActivate(14) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(14)" ~class=Powers.canDelete(14) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(14) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 15) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 15) ? '' : 'none'~>
@@ -3098,7 +3103,7 @@
           <br/>
           <span ~class=Powers.color('stored', 15)~>~r Powers.details('stored', 15) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(15)" ~class=Powers.canActivate(15) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(15)" ~class=Powers.canDelete(15) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(15)" ~class=Powers.canActivate(15) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(15)" ~class=Powers.canDelete(15) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(15) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 16) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 16) ? '' : 'none'~>
@@ -3106,7 +3111,7 @@
           <br/>
           <span ~class=Powers.color('stored', 16)~>~r Powers.details('stored', 16) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(16)" ~class=Powers.canActivate(16) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(16)" ~class=Powers.canDelete(16) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(16)" ~class=Powers.canActivate(16) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(16)" ~class=Powers.canDelete(16) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(16) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 17) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 17) ? '' : 'none'~>
@@ -3114,7 +3119,7 @@
           <br/>
           <span ~class=Powers.color('stored', 17)~>~r Powers.details('stored', 17) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(17)" ~class=Powers.canActivate(17) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(17)" ~class=Powers.canDelete(17) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(17)" ~class=Powers.canActivate(17) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(17)" ~class=Powers.canDelete(17) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(17) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 18) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 18) ? '' : 'none'~>
@@ -3122,7 +3127,7 @@
           <br/>
           <span ~class=Powers.color('stored', 18)~>~r Powers.details('stored', 18) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(18)" ~class=Powers.canActivate(18) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(18)" ~class=Powers.canDelete(18) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(18)" ~class=Powers.canActivate(18) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(18)" ~class=Powers.canDelete(18) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(18) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 19) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 19) ? '' : 'none'~>
@@ -3130,7 +3135,7 @@
           <br/>
           <span ~class=Powers.color('stored', 19)~>~r Powers.details('stored', 19) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(19)" ~class=Powers.canActivate(19) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(19)" ~class=Powers.canDelete(19) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(19)" ~class=Powers.canActivate(19) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(19)" ~class=Powers.canDelete(19) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(19) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 20) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 20) ? '' : 'none'~>
@@ -3138,7 +3143,7 @@
           <br/>
           <span ~class=Powers.color('stored', 20)~>~r Powers.details('stored', 20) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(20)" ~class=Powers.canActivate(20) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(20)" ~class=Powers.canDelete(20) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(20)" ~class=Powers.canActivate(20) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(20)" ~class=Powers.canDelete(20) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(20) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 21) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 21) ? '' : 'none'~>
@@ -3146,7 +3151,7 @@
           <br/>
           <span ~class=Powers.color('stored', 21)~>~r Powers.details('stored', 21) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(21)" ~class=Powers.canActivate(21) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(21)" ~class=Powers.canDelete(21) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(21)" ~class=Powers.canActivate(21) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(21)" ~class=Powers.canDelete(21) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(21) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 22) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 22) ? '' : 'none'~>
@@ -3154,7 +3159,7 @@
           <br/>
           <span ~class=Powers.color('stored', 22)~>~r Powers.details('stored', 22) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(22)" ~class=Powers.canActivate(22) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(22)" ~class=Powers.canDelete(22) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(22)" ~class=Powers.canActivate(22) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(22)" ~class=Powers.canDelete(22) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(22) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 23) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 23) ? '' : 'none'~>
@@ -3162,7 +3167,7 @@
           <br/>
           <span ~class=Powers.color('stored', 23)~>~r Powers.details('stored', 23) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(23)" ~class=Powers.canActivate(23) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(23)" ~class=Powers.canDelete(23) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(23)" ~class=Powers.canActivate(23) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(23)" ~class=Powers.canDelete(23) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(23) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 24) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 24) ? '' : 'none'~>
@@ -3170,7 +3175,7 @@
           <br/>
           <span ~class=Powers.color('stored', 24)~>~r Powers.details('stored', 24) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(24)" ~class=Powers.canActivate(24) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(24)" ~class=Powers.canDelete(24) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(24)" ~class=Powers.canActivate(24) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(24)" ~class=Powers.canDelete(24) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(24) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 25) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 25) ? '' : 'none'~>
@@ -3178,7 +3183,7 @@
           <br/>
           <span ~class=Powers.color('stored', 25)~>~r Powers.details('stored', 25) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(25)" ~class=Powers.canActivate(25) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(25)" ~class=Powers.canDelete(25) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(25)" ~class=Powers.canActivate(25) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(25)" ~class=Powers.canDelete(25) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(25) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 26) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 26) ? '' : 'none'~>
@@ -3186,7 +3191,7 @@
           <br/>
           <span ~class=Powers.color('stored', 26)~>~r Powers.details('stored', 26) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(26)" ~class=Powers.canActivate(26) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(26)" ~class=Powers.canDelete(26) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(26)" ~class=Powers.canActivate(26) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(26)" ~class=Powers.canDelete(26) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(26) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 27) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 27) ? '' : 'none'~>
@@ -3194,7 +3199,7 @@
           <br/>
           <span ~class=Powers.color('stored', 27)~>~r Powers.details('stored', 27) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(27)" ~class=Powers.canActivate(27) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(27)" ~class=Powers.canDelete(27) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(27)" ~class=Powers.canActivate(27) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(27)" ~class=Powers.canDelete(27) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(27) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 28) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 28) ? '' : 'none'~>
@@ -3202,7 +3207,7 @@
           <br/>
           <span ~class=Powers.color('stored', 28)~>~r Powers.details('stored', 28) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(28)" ~class=Powers.canActivate(28) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(28)" ~class=Powers.canDelete(28) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(28)" ~class=Powers.canActivate(28) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(28)" ~class=Powers.canDelete(28) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(28) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 29) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 29) ? '' : 'none'~>
@@ -3210,7 +3215,7 @@
           <br/>
           <span ~class=Powers.color('stored', 29)~>~r Powers.details('stored', 29) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(29)" ~class=Powers.canActivate(29) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(29)" ~class=Powers.canDelete(29) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(29)" ~class=Powers.canActivate(29) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(29)" ~class=Powers.canDelete(29) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(29) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 30) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 30) ? '' : 'none'~>
@@ -3218,7 +3223,7 @@
           <br/>
           <span ~class=Powers.color('stored', 30)~>~r Powers.details('stored', 30) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(30)" ~class=Powers.canActivate(30) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(30)" ~class=Powers.canDelete(30) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(30)" ~class=Powers.canActivate(30) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(30)" ~class=Powers.canDelete(30) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(30) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 31) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 31) ? '' : 'none'~>
@@ -3226,7 +3231,7 @@
           <br/>
           <span ~class=Powers.color('stored', 31)~>~r Powers.details('stored', 31) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(31)" ~class=Powers.canActivate(31) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(31)" ~class=Powers.canDelete(31) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(31)" ~class=Powers.canActivate(31) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(31)" ~class=Powers.canDelete(31) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(31) ~ power shards)</button></span>
         </div>
         <br ~style.display=Powers.canAccessPower('stored', 32) ? '' : 'none'~/>
         <div ~style.display=Powers.canAccessPower('stored', 32) ? '' : 'none'~>
@@ -3234,8 +3239,42 @@
           <br/>
           <span ~class=Powers.color('stored', 32)~>~r Powers.details('stored', 32) ~</span>
           <br/>
-          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(32)" ~class=Powers.canActivate(32) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(32)" ~class=Powers.canDelete(32) ? '' : 'disabled'~>Delete</button></span>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(32)" ~class=Powers.canActivate(32) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(32)" ~class=Powers.canDelete(32) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(32) ~ power shards)</button></span>
         </div>
+      </div>
+      <br/>
+      <button onclick="Powers.changePowerDeletionMode()">Manual power deletion mode: ~r Powers.powerDeletionMode() ~</button>
+      <br/>
+      <br/>
+      <div ~style.display=PowerShards.hasGainedShards() ? '' : 'none'~>
+        <span>You have ~f PowerShards.amount() ~ power shards. <button ~class=PowerShards.anythingToBuy() ? "" : "disabled"~ onclick="PowerShards.maxAll()">Max power shard upgrades</button></span>
+        <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
+          <tr>
+            <td class="yellowspan">Additional multiplier to normal generator powers:</td>
+            <td><span ~style.display=PowerShardUpgrade(1).atBoughtLimit() ? 'none' : ''~>+~f PowerShardUpgrade(1).effect() ~ → +~f PowerShardUpgrade(1).nextEffect() ~</span><span ~style.display=PowerShardUpgrade(1).atBoughtLimit() ? '' : 'none'~>~f PowerShardUpgrade(1).effect() ~ (maxed)</span></td>
+            <td><span ~style.display=PowerShardUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(1).buy()">Cost: ~f PowerShardUpgrade(1).cost() ~ power shards</button></span></td>
+            <td><span ~style.display=PowerShardUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(1).buyMax()">Max</button></span></td>
+          </tr>
+          <tr>
+            <td class="magentaspan">Additional multiplier to infinity generator powers:</td>
+            <td><span ~style.display=PowerShardUpgrade(2).atBoughtLimit() ? 'none' : ''~>+~f PowerShardUpgrade(2).effect() ~ → +~f PowerShardUpgrade(2).nextEffect() ~</span><span ~style.display=PowerShardUpgrade(2).atBoughtLimit() ? '' : 'none'~>~f PowerShardUpgrade(2).effect() ~ (maxed)</span></td>
+            <td><span ~style.display=PowerShardUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(2).buy()">Cost: ~f PowerShardUpgrade(2).cost() ~ power shards</button></span></td>
+            <td><span ~style.display=PowerShardUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(2).buyMax()">Max</button></span></td>
+          </tr>
+          <tr>
+            <td class="cyanspan">Additional multiplier to eternity generator powers:</td>
+            <td><span ~style.display=PowerShardUpgrade(3).atBoughtLimit() ? 'none' : ''~>+~f PowerShardUpgrade(3).effect() ~ → +~f PowerShardUpgrade(3).nextEffect() ~</span><span ~style.display=PowerShardUpgrade(3).atBoughtLimit() ? '' : 'none'~>~f PowerShardUpgrade(3).effect() ~ (maxed)</span></td>
+            <td><span ~style.display=PowerShardUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(3).buy()">Cost: ~f PowerShardUpgrade(3).cost() ~ power shards</button></span></td>
+            <td><span ~style.display=PowerShardUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(3).buyMax()">Max</button></span></td>
+          </tr>
+          <tr>
+            <td class="brownspan">Additional multiplier to complexity generator powers:</td>
+            <td><span ~style.display=PowerShardUpgrade(4).atBoughtLimit() ? 'none' : ''~>+~f PowerShardUpgrade(4).effect() ~ → +~f PowerShardUpgrade(4).nextEffect() ~</span><span ~style.display=PowerShardUpgrade(4).atBoughtLimit() ? '' : 'none'~>~f PowerShardUpgrade(4).effect() ~ (maxed)</span></td>
+            <td><span ~style.display=PowerShardUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(4).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(4).buy()">Cost: ~f PowerShardUpgrade(4).cost() ~ power shards</button></span></td>
+            <td><span ~style.display=PowerShardUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(4).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(4).buyMax()">Max</button></span></td>
+          </tr>
+        </table>
+        <span>Power shard upgrade multipliers take effect after power and rarity, but before extra multipliers.</span>
       </div>
     </div>
   </tab>
