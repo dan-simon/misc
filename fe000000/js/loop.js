@@ -16,7 +16,7 @@ function gameLoop(diff, display) {
   for (let i = 8; i >= 1; i--) {
     InfinityGenerator(i).produce(diff);
   }
-  if (!InfinityPrestigeLayer.mustInfinity()) {
+  if (!InfinityPrestigeLayer.mustInfinity() && !MultiverseCollapse.hasHappened()) {
     for (let i = 8; i >= 1; i--) {
       Generator(i).produce(diff);
     }
@@ -40,6 +40,7 @@ function gameLoop(diff, display) {
   EternityChallenge.checkForAutoEternityChallengeCompletions();
   ComplexityChallenge.checkForComplexityChallengeCompletions();
   ComplexityAchievements.checkForComplexityAchievements();
+  Powers.checkForPowerGain();
   if (display !== false) {
     updateDisplay();
   }

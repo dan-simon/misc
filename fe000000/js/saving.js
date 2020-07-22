@@ -301,8 +301,13 @@ let Saving = {
         seed: RNG.createSeed(),
         unlocked: false,
         upgrades: [0, 0, 0],
-        list: []
+        active: [],
+        stored: [],
+        next: RNG.initialPower(),
+        gain: true,
+        respec: false
       };
+      player.stats.timeSincePowerGain = 0;
       player.version = 1.90625;
     }
   },

@@ -153,7 +153,11 @@ let initialPlayer = {
     seed: RNG.createSeed(),
     unlocked: false,
     upgrades: [0, 0, 0],
-    list: []
+    active: [],
+    stored: [],
+    next: RNG.initialPower(),
+    gain: true,
+    respec: false
   },
   options: {
     notation: 'Scientific',
@@ -178,6 +182,7 @@ let initialPlayer = {
     timeSinceAutoECCompletion: 0,
     timeSincePermanenceGain: 0,
     timeSinceComplexity: 0,
+    timeSincePowerGain: 0,
     timeSinceGameStart: 0,
     timeSinceLastPeakIPPerSec: Math.pow(2, 256),
     timeSinceLastPeakEPPerSec: Math.pow(2, 256),

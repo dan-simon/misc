@@ -47,6 +47,7 @@
   <script src="js/loop.js"></script>
   <script src="js/main.js"></script>
   <script src="js/max-all.js"></script>
+  <script src="js/multiverse-collapse.js"></script>
   <script src="js/options.js"></script>
   <script src="js/player.js"></script>
   <script src="js/powers.js"></script>
@@ -113,7 +114,7 @@
   <br/>
   <br/>
   <tab ~style.display=Tabs.currentTab() === 'main' ? '' : 'none'~>
-    <div ~style.display=InfinityPrestigeLayer.mustInfinity() ? 'none' : ''~>
+    <div ~style.display=InfinityPrestigeLayer.mustInfinity() || MultiverseCollapse.hasHappened() ? 'none' : ''~>
       <span>You have ~f Stars.amount() ~ stars. You are getting ~f Stars.perSecond() ~ stars per second. <button ~class=MaxAll.anythingToBuy() ? "" : "disabled"~ onclick="MaxAll.maxAll()">Max all</button></span>
       <br/>
       <div ~style.display=Challenge.isThereChallengeText() ? '' : 'none'~>
@@ -228,6 +229,9 @@
     </div>
     <div ~style.display=InfinityPrestigeLayer.mustInfinity() ? '' : 'none'~>
       <span>The universe has collapsed due to an excess of stars.</span>
+    </div>
+    <div ~style.display=MultiverseCollapse.hasHappened() ? '' : 'none'~>
+      <span>The multiverse has collapsed due to an excess of stars.</span>
     </div>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'infinity' ? '' : 'none'~>
@@ -2882,7 +2886,357 @@
       </button>
     </div>
     <div ~style.display=Powers.isUnlocked() ? '' : 'none'~>
-      <span>This was a triumph</span>
+      <span>You have ~f Powers.active().length ~/~f Powers.activatedLimit() ~ active powers.</span>
+      <br/>
+      <button onclick="Powers.toggleRespec()">Deactivate active powers on next complexity: ~r Powers.isRespecOn() ? "On" : "Off" ~</button>
+      <br ~style.display=ComplexityPrestigeLayer.canComplexity() ? 'none' : ''~/>
+      <button onclick="Powers.respecAndReset()">Deactivate active powers and ~r ComplexityPrestigeLayer.resetText() ~</button></button>
+      <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
+        <th colspan="4">Power Upgrades:</th>
+        <tr>
+          <td>Strength of new powers:</td>
+          <td><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? 'none' : ''~>~f PowerUpgrade(1).effect() ~ → ~f PowerUpgrade(1).nextEffect() ~</span><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? '' : 'none'~>^~f PowerUpgrade(1).effect() ~ (maxed)</span></td>
+          <td><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(1).buy()">Cost: ~f PowerUpgrade(1).cost() ~ ℂP</button></span></td>
+          <td><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(1).buyMax()">Max</button></span></td>
+        </tr>
+        <tr>
+          <td>Speed of gaining new powers:</td>
+          <td><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? 'none' : ''~>~f PowerUpgrade(2).effect() ~x → ~f PowerUpgrade(2).nextEffect() ~x</span><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? '' : 'none'~>~f PowerUpgrade(2).effect() ~x (maxed)</span></td>
+          <td><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(2).buy()">Cost: ~f PowerUpgrade(2).cost() ~ ℂP</button></span></td>
+          <td><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(2).buyMax()">Max</button></span></td>
+        </tr>
+        <tr>
+          <td>Maximum active powers:</td>
+          <td><span ~style.display=PowerUpgrade(3).atBoughtLimit() ? 'none' : ''~>~f PowerUpgrade(3).effect() ~ → ~f PowerUpgrade(3).nextEffect() ~</span><span ~style.display=PowerUpgrade(3).atBoughtLimit() ? '' : 'none'~>~f PowerUpgrade(3).effect() ~x (maxed)</span></td>
+          <td><span ~style.display=PowerUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(3).buy()">Cost: ~f PowerUpgrade(3).cost() ~ ℂP</button></span></td>
+          <td><span ~style.display=PowerUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(3).buyMax()">Max</button></span></td>
+        </tr>
+      </table>
+      <br/>
+      <span>You gain a new power once every ~f Powers.interval() ~ seconds. <button onclick="Powers.togglePowerGain()">Power gain: ~r Powers.isPowerGainOn() ? "On" : "Off" ~</button></span>
+      <br/>
+      <span>It has been ~f Powers.timeSincePowerGain() ~ seconds since you last gained a new power.</span>
+      <br ~style.display=!Powers.isPowerGainOn() && Powers.imminentPowerGain() !== 0 ? '' : 'none'~/>
+      <span ~style.display=!Powers.isPowerGainOn() && Powers.imminentPowerGain() !== 0 ? '' : 'none'~>Turning power gain on would give you ~f Powers.imminentPowerGain() ~ new powers.</span>
+      <br/>
+      <br/>
+      <span>Next power<span ~style.display=Powers.nextKept() ? 'none' : ''~> (will be automatically deleted due to being bed enough to be useless)</span>:</span>
+      <br/>
+      <span ~class=Powers.color('next', 1)~>~r Powers.description('next', 1) ~</span>
+      <br/>
+      <span ~class=Powers.color('next', 1)~>~r Powers.details('next', 1) ~</span>
+      <br/>
+      <br/>
+      <span>Current effects of active powers:</span>
+      <br/>
+      <span class="yellowspan">~r Powers.totalEffectDescription('normal') ~</span>
+      <br/>
+      <span class="magentaspan">~r Powers.totalEffectDescription('infinity') ~</span>
+      <br/>
+      <span class="cyanspan">~r Powers.totalEffectDescription('eternity') ~</span>
+      <br/>
+      <span class="brownspan">~r Powers.totalEffectDescription('complexity') ~</span>
+      <br/>
+      <br/>
+      <span>Active powers (<button onclick="Powers.sortActive()">Sort</button>):</span>
+      <div style="margin-left: auto; margin-right: auto;">
+        <span ~style.display=Powers.canAccessPower('active', 1) ? 'none' : ''~>You don't currently have any active powers.</span>
+        <div ~style.display=Powers.canAccessPower('active', 1) ? '' : 'none'~>
+          <span ~class=Powers.color('active', 1)~>~r Powers.description('active', 1) ~</span>
+          <br/>
+          <span ~class=Powers.color('active', 1)~>~r Powers.details('active', 1) ~</span>
+        </div>
+        <div ~style.display=Powers.canAccessPower('active', 2) ? '' : 'none'~>
+          <span ~class=Powers.color('active', 2)~>~r Powers.description('active', 2) ~</span>
+          <br/>
+          <span ~class=Powers.color('active', 2)~>~r Powers.details('active', 2) ~</span>
+        </div>
+        <div ~style.display=Powers.canAccessPower('active', 3) ? '' : 'none'~>
+          <span ~class=Powers.color('active', 3)~>~r Powers.description('active', 3) ~</span>
+          <br/>
+          <span ~class=Powers.color('active', 3)~>~r Powers.details('active', 3) ~</span>
+        </div>
+        <div ~style.display=Powers.canAccessPower('active', 4) ? '' : 'none'~>
+          <span ~class=Powers.color('active', 4)~>~r Powers.description('active', 4) ~</span>
+          <br/>
+          <span ~class=Powers.color('active', 4)~>~r Powers.details('active', 4) ~</span>
+        </div>
+        <div ~style.display=Powers.canAccessPower('active', 5) ? '' : 'none'~>
+          <span ~class=Powers.color('active', 1)~>~r Powers.description('active', 5) ~</span>
+          <br/>
+          <span ~class=Powers.color('active', 5)~>~r Powers.details('active', 5) ~</span>
+        </div>
+        <div ~style.display=Powers.canAccessPower('active', 6) ? '' : 'none'~>
+          <span ~class=Powers.color('active', 6)~>~r Powers.description('active', 6) ~</span>
+          <br/>
+          <span ~class=Powers.color('active', 6)~>~r Powers.details('active', 6) ~</span>
+        </div>
+        <div ~style.display=Powers.canAccessPower('active', 7) ? '' : 'none'~>
+          <span ~class=Powers.color('active', 7)~>~r Powers.description('active', 7) ~</span>
+          <br/>
+          <span ~class=Powers.color('active', 7)~>~r Powers.details('active', 7) ~</span>
+        </div>
+      </div>
+      <br/>
+      <span>Stored powers (<button onclick="Powers.sortStored()">Sort</button>):</span>
+      <div style="margin-left: auto; margin-right: auto;">
+        <span ~style.display=Powers.canAccessPower('stored', 1) ? 'none' : ''~>You don't currently have any stored powers.</span>
+        <div ~style.display=Powers.canAccessPower('stored', 1) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 1)~>~r Powers.description('stored', 1) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 1)~>~r Powers.details('stored', 1) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(1)" ~class=Powers.canActivate(1) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(1)" ~class=Powers.canDelete(1) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 2) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 2) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 2)~>~r Powers.description('stored', 2) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 2)~>~r Powers.details('stored', 2) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(2)" ~class=Powers.canActivate(2) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(2)" ~class=Powers.canDelete(2) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 3) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 3) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 3)~>~r Powers.description('stored', 3) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 3)~>~r Powers.details('stored', 3) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(3)" ~class=Powers.canActivate(3) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(3)" ~class=Powers.canDelete(3) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 4) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 4) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 4)~>~r Powers.description('stored', 4) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 4)~>~r Powers.details('stored', 4) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(4)" ~class=Powers.canActivate(4) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(4)" ~class=Powers.canDelete(4) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 5) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 5) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 5)~>~r Powers.description('stored', 5) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 5)~>~r Powers.details('stored', 5) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(5)" ~class=Powers.canActivate(5) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(5)" ~class=Powers.canDelete(5) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 6) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 6) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 6)~>~r Powers.description('stored', 6) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 6)~>~r Powers.details('stored', 6) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(6)" ~class=Powers.canActivate(6) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(6)" ~class=Powers.canDelete(6) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 7) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 7) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 7)~>~r Powers.description('stored', 7) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 7)~>~r Powers.details('stored', 7) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(7)" ~class=Powers.canActivate(7) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(7)" ~class=Powers.canDelete(7) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 8) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 8) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 8)~>~r Powers.description('stored', 8) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 8)~>~r Powers.details('stored', 8) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(8)" ~class=Powers.canActivate(8) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(8)" ~class=Powers.canDelete(8) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 9) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 9) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 9)~>~r Powers.description('stored', 9) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 9)~>~r Powers.details('stored', 9) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(9)" ~class=Powers.canActivate(9) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(9)" ~class=Powers.canDelete(9) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 10) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 10) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 10)~>~r Powers.description('stored', 10) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 10)~>~r Powers.details('stored', 10) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(10)" ~class=Powers.canActivate(10) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(10)" ~class=Powers.canDelete(10) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 11) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 11) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 11)~>~r Powers.description('stored', 11) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 11)~>~r Powers.details('stored', 11) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(11)" ~class=Powers.canActivate(11) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(11)" ~class=Powers.canDelete(11) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 12) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 12) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 12)~>~r Powers.description('stored', 12) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 12)~>~r Powers.details('stored', 12) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(12)" ~class=Powers.canActivate(12) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(12)" ~class=Powers.canDelete(12) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 13) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 13) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 13)~>~r Powers.description('stored', 13) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 13)~>~r Powers.details('stored', 13) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(13)" ~class=Powers.canActivate(13) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(13)" ~class=Powers.canDelete(13) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 14) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 14) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 14)~>~r Powers.description('stored', 14) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 14)~>~r Powers.details('stored', 14) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(14)" ~class=Powers.canActivate(14) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(14)" ~class=Powers.canDelete(14) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 15) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 15) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 15)~>~r Powers.description('stored', 15) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 15)~>~r Powers.details('stored', 15) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(15)" ~class=Powers.canActivate(15) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(15)" ~class=Powers.canDelete(15) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 16) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 16) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 16)~>~r Powers.description('stored', 16) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 16)~>~r Powers.details('stored', 16) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(16)" ~class=Powers.canActivate(16) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(16)" ~class=Powers.canDelete(16) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 17) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 17) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 17)~>~r Powers.description('stored', 17) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 17)~>~r Powers.details('stored', 17) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(17)" ~class=Powers.canActivate(17) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(17)" ~class=Powers.canDelete(17) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 18) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 18) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 18)~>~r Powers.description('stored', 18) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 18)~>~r Powers.details('stored', 18) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(18)" ~class=Powers.canActivate(18) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(18)" ~class=Powers.canDelete(18) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 19) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 19) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 19)~>~r Powers.description('stored', 19) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 19)~>~r Powers.details('stored', 19) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(19)" ~class=Powers.canActivate(19) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(19)" ~class=Powers.canDelete(19) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 20) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 20) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 20)~>~r Powers.description('stored', 20) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 20)~>~r Powers.details('stored', 20) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(20)" ~class=Powers.canActivate(20) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(20)" ~class=Powers.canDelete(20) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 21) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 21) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 21)~>~r Powers.description('stored', 21) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 21)~>~r Powers.details('stored', 21) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(21)" ~class=Powers.canActivate(21) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(21)" ~class=Powers.canDelete(21) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 22) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 22) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 22)~>~r Powers.description('stored', 22) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 22)~>~r Powers.details('stored', 22) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(22)" ~class=Powers.canActivate(22) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(22)" ~class=Powers.canDelete(22) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 23) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 23) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 23)~>~r Powers.description('stored', 23) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 23)~>~r Powers.details('stored', 23) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(23)" ~class=Powers.canActivate(23) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(23)" ~class=Powers.canDelete(23) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 24) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 24) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 24)~>~r Powers.description('stored', 24) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 24)~>~r Powers.details('stored', 24) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(24)" ~class=Powers.canActivate(24) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(24)" ~class=Powers.canDelete(24) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 25) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 25) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 25)~>~r Powers.description('stored', 25) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 25)~>~r Powers.details('stored', 25) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(25)" ~class=Powers.canActivate(25) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(25)" ~class=Powers.canDelete(25) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 26) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 26) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 26)~>~r Powers.description('stored', 26) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 26)~>~r Powers.details('stored', 26) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(26)" ~class=Powers.canActivate(26) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(26)" ~class=Powers.canDelete(26) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 27) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 27) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 27)~>~r Powers.description('stored', 27) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 27)~>~r Powers.details('stored', 27) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(27)" ~class=Powers.canActivate(27) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(27)" ~class=Powers.canDelete(27) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 28) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 28) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 28)~>~r Powers.description('stored', 28) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 28)~>~r Powers.details('stored', 28) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(28)" ~class=Powers.canActivate(28) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(28)" ~class=Powers.canDelete(28) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 29) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 29) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 29)~>~r Powers.description('stored', 29) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 29)~>~r Powers.details('stored', 29) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(29)" ~class=Powers.canActivate(29) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(29)" ~class=Powers.canDelete(29) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 30) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 30) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 30)~>~r Powers.description('stored', 30) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 30)~>~r Powers.details('stored', 30) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(30)" ~class=Powers.canActivate(30) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(30)" ~class=Powers.canDelete(30) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 31) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 31) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 31)~>~r Powers.description('stored', 31) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 31)~>~r Powers.details('stored', 31) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(31)" ~class=Powers.canActivate(31) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(31)" ~class=Powers.canDelete(31) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 32) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 32) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 32)~>~r Powers.description('stored', 32) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 32)~>~r Powers.details('stored', 32) ~</span>
+          <br/>
+          <span style="width: 320px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(32)" ~class=Powers.canActivate(32) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(32)" ~class=Powers.canDelete(32) ? '' : 'disabled'~>Delete</button></span>
+        </div>
+      </div>
     </div>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'statistics' ? '' : 'none'~>

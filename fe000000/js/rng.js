@@ -1,6 +1,6 @@
 let RNG = {
   uniform() {
-    let result = player.seed / Math.pow(2, 32);
+    let result = player.powers.seed / Math.pow(2, 32);
     this.advanceSeed();
     return result;
   },
@@ -8,11 +8,12 @@ let RNG = {
     return Math.floor(Date.now() * Math.random() % Math.pow(2, 32)) || 1;
   },
   advanceSeed() {
-    let x = player.seed;
+    let x = player.powers.seed;
     x ^= x << 13;
   	x ^= x >> 17;
   	x ^= x << 5;
-    player.seed = x;
+    x = (x + Math.pow(2, 32)) % Math.pow(2, 32);
+    player.powers.seed = x;
   },
   rarity() {
     return Math.sqrt(-Math.log2(this.uniform()));
@@ -23,7 +24,7 @@ let RNG = {
   randomPower() {
     return {
       'type': this.randomType(),
-      'strength': Powers.strength(),
+      'strength': Powers.newStrength(),
       'rarity': this.rarity(),
     };
   },

@@ -52,7 +52,7 @@ let Generator = function (i) {
         InfinityChallenge.isInfinityChallengeRunning(4) ? InfinityChallenge.infinityChallenge4Pow() : 1,
         InfinityChallenge.isInfinityChallengeRunning(5) ? InfinityChallenge.infinityChallenge5Pow() : 1,
         EternityChallenge.isEternityChallengeRunning(1) ? EternityChallenge.eternityChallenge1InfinityStarsEffect() : 1,
-        EternityStars.power(),
+        EternityStars.power(), Powers.getTotalEffect('normal'),
       ];
       return Generators.nerf(multiplier.pow(powFactors.reduce((a, b) => a * b)));
     },
@@ -80,7 +80,7 @@ let Generator = function (i) {
       return n <= this.maxBuyable();
     },
     maxBuyable() {
-      if (!this.isVisible() || InfinityPrestigeLayer.mustInfinity()) return 0;
+      if (!this.isVisible() || InfinityPrestigeLayer.mustInfinity() || MultiverseCollapse.hasHappened()) return 0;
       let num = Math.floor(player.stars.div(this.cost()).times(
         Decimal.minus(this.costIncreasePer(), 1)).plus(1).log(this.costIncreasePer()));
       num = Math.min(num,

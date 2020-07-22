@@ -132,6 +132,7 @@ button {
   display: table;
   text-align: center;
   background: #555555;
+  font-size: 0.875rem;
   width: 256px;
   height: 160px;
 }
@@ -140,6 +141,7 @@ button {
   display: table;
   text-align: center;
   background: radial-gradient(#cccc33, #aaaaaa);
+  font-size: 0.875rem;
   width: 256px;
   height: 160px;
 }
@@ -148,6 +150,7 @@ button {
   display: table;
   text-align: center;
   background: #cccc33;
+  font-size: 0.875rem;
   width: 256px;
   height: 160px;
 }
@@ -156,6 +159,7 @@ button {
   display: table;
   text-align: center;
   background: #555555;
+  font-size: 0.875rem;
   width: 256px;
   height: 160px;
 }
@@ -164,6 +168,7 @@ button {
   display: table;
   text-align: center;
   background: radial-gradient(#cc33cc, #aaaaaa);
+  font-size: 0.875rem;
   width: 256px;
   height: 160px;
 }
@@ -172,6 +177,7 @@ button {
   display: table;
   text-align: center;
   background: #cc33cc;
+  font-size: 0.875rem;
   width: 256px;
   height: 160px;
 }
@@ -180,6 +186,7 @@ button {
   display: table;
   text-align: center;
   background: #555555;
+  font-size: 0.875rem;
   width: 256px;
   height: 160px;
 }
@@ -188,6 +195,7 @@ button {
   display: table;
   text-align: center;
   background: radial-gradient(#33cccc, #aaaaaa);
+  font-size: 0.875rem;
   width: 256px;
   height: 160px;
 }
@@ -196,6 +204,7 @@ button {
   display: table;
   text-align: center;
   background: #33cccc;
+  font-size: 0.875rem;
   width: 256px;
   height: 160px;
 }
@@ -204,6 +213,7 @@ button {
   display: table;
   text-align: center;
   background: #555555;
+  font-size: 0.875rem;
   width: 256px;
   height: 160px;
 }
@@ -212,6 +222,7 @@ button {
   display: table;
   text-align: center;
   background: radial-gradient(#33cc33, #aaaaaa);
+  font-size: 0.875rem;
   width: 256px;
   height: 160px;
 }
@@ -220,6 +231,7 @@ button {
   display: table;
   text-align: center;
   background: #33cc33;
+  font-size: 0.875rem;
   width: 256px;
   height: 160px;
 }
@@ -257,7 +269,7 @@ button {
 }
 
 .brownspan, .browndiv > span {
-  color: #aa3333;
+  color: #aa7777;
 }
 
 .greytogrey {

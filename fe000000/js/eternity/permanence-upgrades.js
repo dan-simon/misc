@@ -22,13 +22,13 @@ let PermanenceUpgrade = function (i) {
       return [1, 1, 1, 0][i - 1];
     },
     initialCost() {
-      return 1;
+      return new Decimal(1);
     },
     cost() {
-      return this.initialCost() * Math.pow(this.costIncreasePer(), this.bought());
+      return this.initialCost().times(Decimal.pow(this.costIncreasePer(), this.bought()));
     },
     costFor(n) {
-      return this.cost() * (Math.pow(this.costIncreasePer(), n) - 1) / (this.costIncreasePer() - 1);
+      return this.cost().times(Decimal.pow(this.costIncreasePer(), n).minus(1)).div(this.costIncreasePer() - 1);
     },
     processEffect(x) {
       if (i === 4) {
