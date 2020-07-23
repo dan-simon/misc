@@ -1956,6 +1956,7 @@
       <br/>
       <span>The Eternity Producer is producing ~f EternityProducer.productionPerSecond() ~ eternities per second.</span>
       <br/>
+      <br/>
       <span>You have ~f EternityPoints.amount() ~ eternity points. <button ~class=EternityProducer.anythingToBuy() ? "" : "disabled"~ onclick="EternityProducer.maxAll()">Max Eternity Producer upgrades</button></span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
@@ -2624,7 +2625,7 @@
             <br ~style.display=ComplexityChallenge.showActualExtraTheorems() ? '' : 'none'~/>
             <span ~style.display=ComplexityChallenge.showActualExtraTheorems() ? '' : 'none'~>(actually +~f ComplexityChallenge.extraTheoremsActualAndDisplay() ~, from "On the other side")</span>
             <br ~style.display=ComplexityChallenge.complexityStarsForNextExtraTheorem().neq(Infinity) ? '' : 'none'~/>
-            <span ~style.display=ComplexityChallenge.complexityStarsForNextExtraTheorem().neq(Infinity) ? '' : 'none'~>Next extra theorem at ~f ComplexityChallenge.complexityStarsForNextExtraTheorem() ~ complexity stars.</span>
+            <span ~style.display=ComplexityChallenge.complexityStarsForNextExtraTheorem().neq(Infinity) ? '' : 'none'~>Next theorem at ~f ComplexityChallenge.complexityStarsForNextExtraTheorem() ~ complexity stars.</span>
           </div>
         </td>
       </tr>
@@ -2896,8 +2897,10 @@
       <button onclick="Powers.toggleRespec()">Deactivate active powers on next complexity: ~r Powers.isRespecOn() ? "On" : "Off" ~</button>
       <br ~style.display=ComplexityPrestigeLayer.canComplexity() ? 'none' : ''~/>
       <button onclick="Powers.respecAndReset()">Deactivate active powers and ~r ComplexityPrestigeLayer.resetText() ~</button></button>
+      <br/>
+      <br/>
+      <span>You have ~f ComplexityPoints.amount() ~ complexity points. <button ~class=Powers.anythingToBuy() ? "" : "disabled"~ onclick="Powers.maxAll()">Max power upgrades</button></span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
-        <th colspan="4">Power Upgrades:</th>
         <tr>
           <td>Strength of new powers:</td>
           <td><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? 'none' : ''~>~f PowerUpgrade(1).effect() ~ → ~f PowerUpgrade(1).nextEffect() ~</span><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? '' : 'none'~>^~f PowerUpgrade(1).effect() ~ (maxed)</span></td>
