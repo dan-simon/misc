@@ -2911,10 +2911,16 @@
           <td><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(2).buyMax()">Max</button></span></td>
         </tr>
         <tr>
-          <td>Maximum active powers:</td>
+          <td>Minimum rarity of new powers:</td>
           <td><span ~style.display=PowerUpgrade(3).atBoughtLimit() ? 'none' : ''~>~f PowerUpgrade(3).effect() ~ → ~f PowerUpgrade(3).nextEffect() ~</span><span ~style.display=PowerUpgrade(3).atBoughtLimit() ? '' : 'none'~>~f PowerUpgrade(3).effect() ~x (maxed)</span></td>
           <td><span ~style.display=PowerUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(3).buy()">Cost: ~f PowerUpgrade(3).cost() ~ ℂP</button></span></td>
           <td><span ~style.display=PowerUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(3).buyMax()">Max</button></span></td>
+        </tr>
+        <tr>
+          <td>Maximum active powers:</td>
+          <td><span ~style.display=PowerUpgrade(4).atBoughtLimit() ? 'none' : ''~>~f PowerUpgrade(4).effect() ~ → ~f PowerUpgrade(4).nextEffect() ~</span><span ~style.display=PowerUpgrade(4).atBoughtLimit() ? '' : 'none'~>~f PowerUpgrade(4).effect() ~x (maxed)</span></td>
+          <td><span ~style.display=PowerUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(4).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(4).buy()">Cost: ~f PowerUpgrade(4).cost() ~ ℂP</button></span></td>
+          <td><span ~style.display=PowerUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(4).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(4).buyMax()">Max</button></span></td>
         </tr>
       </table>
       <br/>

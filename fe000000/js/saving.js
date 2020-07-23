@@ -317,6 +317,10 @@ let Saving = {
       player.powers.powerDeletionMode = 'Confirmation';
       player.version = 1.9140625;
     }
+    if (player.version < 1.921875) {
+      player.powers.upgrades = player.powers.upgrades.slice(0, 2).concat([0, player.powers.upgrades[2]]);
+      player.version = 1.921875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

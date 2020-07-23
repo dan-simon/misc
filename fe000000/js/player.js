@@ -152,7 +152,7 @@ let initialPlayer = {
   powers: {
     seed: RNG.createSeed(),
     unlocked: false,
-    upgrades: [0, 0, 0],
+    upgrades: [0, 0, 0, 0],
     active: [],
     stored: [],
     next: RNG.initialPower(),
@@ -209,7 +209,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9140625
+  version: 1.921875
 }
 
 let player;

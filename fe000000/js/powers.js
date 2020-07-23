@@ -7,60 +7,59 @@ let PowerUpgrade = function (i) {
       return player.powers.upgrades[i - 1];
     },
     addBought(n) {
+      if (i === 1) {
+        Powers.next().strength = Powers.newStrength();
+      }
+      if (i === 3) {
+        player.powers.next.rarity = Math.sqrt(Math.pow(this.laterEffect(n), 2) - Math.pow(this.effect(), 2) + Math.pow(player.powers.next.rarity, 2));
+      }
       player.powers.upgrades[i - 1] += n;
     },
     boughtLimit() {
-      return Powers.isUnlocked() ? [Infinity, Infinity, 5][i - 1] : 0;
+      return Powers.isUnlocked() ? [Infinity, Infinity, 8, 5][i - 1] : 0;
     },
     costIncreasePer() {
-      return [Decimal.pow(2, 16), Decimal.pow(2, 64), null][i - 1];
+      return [Decimal.pow(2, 16), Decimal.pow(2, 64), null, null][i - 1];
     },
     effectIncreasePer() {
       return 1;
     },
     initialEffect() {
-      return [0, 1, 2][i - 1];
+      return [0, 1, 0, 2][i - 1];
     },
     initialCost() {
       return Decimal.pow(2, 64);
     },
     cost() {
-      if (i === 3) {
-        return this.initialCost().pow(Math.pow(4, this.bought()));
+      if (i >= 3) {
+        return this.initialCost().pow(Math.pow(2 * i - 4, this.bought()));
       }
       return this.initialCost().times(Decimal.pow(this.costIncreasePer(), this.bought()));
     },
     costFor(n) {
-      // The cost increase for this one is so rapid, it's clearly not an issue to just say "The only one that matters is the most expensive".
-      if (i === 3) {
-        return this.initialCost().pow(Math.pow(4, this.bought()));
+      // The cost increase for these are so rapid, it's clearly not an issue to just say "The only one that matters is the most expensive".
+      if (i >= 3) {
+        return this.initialCost().pow(Math.pow(2 * i - 4, this.bought()));
       }
       return this.cost().times(Decimal.pow(this.costIncreasePer(), n).minus(1)).div(Decimal.minus(this.costIncreasePer(), 1));
     },
     processEffect(x) {
       if (i === 1) {
         return 1 + Math.sqrt(Math.log2(1 + x / 4));
+      } else if (i === 3) {
+        return Math.sqrt(-Math.log2(4 / (4 + x)));
       } else {
         return x;
       }
     },
-    rawEffect() {
+    effect() {
       return this.processEffect(this.initialEffect() + this.effectIncreasePer() * this.bought());
     },
-    nextRawEffect() {
-      return this.processEffect(this.initialEffect() + this.effectIncreasePer() * (this.bought() + 1));
-    },
-    effect() {
-      if (!Powers.isUnlocked() && i === 2) {
-        return 0;
-      }
-      return this.rawEffect();
-    },
     nextEffect() {
-      if (!Powers.isUnlocked() && i === 2) {
-        return 0;
-      }
-      return this.nextRawEffect();
+      return this.laterEffect(1);
+    },
+    laterEffect(n) {
+      return this.processEffect(this.initialEffect() + this.effectIncreasePer() * (this.bought() + n));
     },
     atBoughtLimit() {
       return this.bought() >= this.boughtLimit();
@@ -72,10 +71,9 @@ let PowerUpgrade = function (i) {
       return n <= this.maxBuyable();
     },
     maxBuyable() {
-      if (i === 3) {
-        // This is a messy log4 implementation, which may fail due to precision
-        // if the player has barely not enough CP.
-        return Math.max(Math.floor(1 + Math.log2(player.complexityPoints.log2() / this.initialCost().log2()) / 2) - this.bought(), 0);
+      if (i >= 3) {
+        // This may fail due to precision if the player has barely not enough CP.
+        return Math.max(Math.floor(1 + Math.log(player.complexityPoints.log2() / this.initialCost().log2()) / Math.log(2 * i - 4)) - this.bought(), 0);
       }
       let num = Math.floor(player.complexityPoints.div(this.cost()).times(
         Decimal.minus(this.costIncreasePer(), 1)).plus(1).log(this.costIncreasePer()));
@@ -90,9 +88,6 @@ let PowerUpgrade = function (i) {
       if (n === 0 || (!guaranteedBuyable && !this.canBuy(n))) return;
       player.complexityPoints = player.complexityPoints.minus(this.costFor(n));
       this.addBought(n);
-      if (i === 1) {
-        Powers.next().strength = Powers.newStrength();
-      }
     },
     buyMax() {
       this.buy(this.maxBuyable(), true);
@@ -137,7 +132,7 @@ let Powers = {
     'eternity': 'Eternity generator multiplier power',
     'complexity': 'Complexity generator multiplier power',
   },
-  upgradeList: [1, 2, 3].map((x) => PowerUpgrade(x)),
+  upgradeList: [1, 2, 3, 4].map((x) => PowerUpgrade(x)),
   getUpgrade: function (x) {
     return this.upgradeList[x - 1];
   },
@@ -311,14 +306,17 @@ let Powers = {
   speed() {
     return PowerUpgrade(2).effect();
   },
-  activatedLimit() {
+  minimumRarity() {
     return PowerUpgrade(3).effect();
+  },
+  activatedLimit() {
+    return PowerUpgrade(4).effect();
   },
   interval() {
     return 4096 / this.speed();
   },
   maximumActivatedLimit() {
-    return PowerUpgrade(3).initialEffect() + PowerUpgrade(3).effectIncreasePer() * PowerUpgrade(3).boughtLimit()
+    return PowerUpgrade(4).initialEffect() + PowerUpgrade(4).effectIncreasePer() * PowerUpgrade(4).boughtLimit()
   },
   active() {
     return player.powers.active;
