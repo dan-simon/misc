@@ -16,7 +16,7 @@ let RNG = {
     player.powers.seed = x;
   },
   rarity() {
-    return Math.sqrt(-Math.log2(this.uniform()));
+    return Math.sqrt(Powers.minimumRarity() - Math.log2(this.uniform()));
   },
   randomType() {
     return ['normal', 'infinity', 'eternity', 'complexity'][Math.floor(4 * this.uniform())]
