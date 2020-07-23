@@ -264,7 +264,7 @@ let Powers = {
   },
   delete(i) {
     if (this.canDelete(i) && (this.powerDeletionMode() === 'No confirmation' ||
-      confirm('Are you sure you want to delete this power for ' + format(PowerShards.shardGainStored(i)) + ' shards?'))) {
+      confirm('Are you sure you want to delete this power for ' + format(PowerShards.shardGainStored(i)) + ' power shards?'))) {
       PowerShards.gainShardsStored(i);
       player.powers.stored = player.powers.stored.slice(0, i - 1).concat(player.powers.stored.slice(i));
     }
