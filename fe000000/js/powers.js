@@ -16,7 +16,7 @@ let PowerUpgrade = function (i) {
       player.powers.upgrades[i - 1] += n;
     },
     boughtLimit() {
-      return Powers.isUnlocked() ? [Infinity, Infinity, 8, 5][i - 1] : 0;
+      return Powers.isUnlocked() ? [Infinity, Infinity, 10, 5][i - 1] : 0;
     },
     costIncreasePer() {
       return [Decimal.pow(2, 16), Decimal.pow(2, 64), null, null][i - 1];
