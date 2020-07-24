@@ -105,7 +105,7 @@ let Powers = {
   extraMultipliers: {
     'normal': () => 1,
     'infinity': () => Math.log2(1 + InfinityStars.amount().log2() / Math.pow(2, 32)),
-    'eternity': () => Math.pow(Math.log2(1 + player.stats.timeSinceComplexity * (1 + ComplexityStars.amount().max(1).log2() / 1024) / 64) / 4, 1.25),
+    'eternity': () => Math.min(3, Math.pow(Math.log2(1 + player.stats.timeSinceComplexity * (1 + ComplexityStars.amount().max(1).log2() / 1024) / 64) / 4, 1.25)),
     'complexity': () => Math.sqrt(Powers.active().map(p => Powers.strength(p) * Powers.rarity(p)).reduce((a, b) => a + b, 0))
   },
   baseEffects: {
