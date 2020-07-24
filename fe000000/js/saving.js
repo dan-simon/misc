@@ -321,6 +321,10 @@ let Saving = {
       player.powers.upgrades = player.powers.upgrades.slice(0, 2).concat([0, player.powers.upgrades[2]]);
       player.version = 1.921875;
     }
+    if (player.version < 1.9296875) {
+      player.powers.upgrades.pop();
+      player.version = 1.9296875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

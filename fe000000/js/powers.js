@@ -16,10 +16,10 @@ let PowerUpgrade = function (i) {
       player.powers.upgrades[i - 1] += n;
     },
     boughtLimit() {
-      return Powers.isUnlocked() ? [Infinity, Infinity, 10, 5][i - 1] : 0;
+      return Powers.isUnlocked() ? [Infinity, Infinity, 8][i - 1] : 0;
     },
     costIncreasePer() {
-      return [Decimal.pow(2, 16), Decimal.pow(2, 64), null, null][i - 1];
+      return [Decimal.pow(2, 16), Decimal.pow(2, 64), null][i - 1];
     },
     effectIncreasePer() {
       return 1;
@@ -31,15 +31,15 @@ let PowerUpgrade = function (i) {
       return Decimal.pow(2, 64);
     },
     cost() {
-      if (i >= 3) {
-        return this.initialCost().pow(Math.pow(2 * i - 4, this.bought()));
+      if (i === 3) {
+        return this.initialCost().pow(Math.pow(2, this.bought()));
       }
       return this.initialCost().times(Decimal.pow(this.costIncreasePer(), this.bought()));
     },
     costFor(n) {
       // The cost increase for these are so rapid, it's clearly not an issue to just say "The only one that matters is the most expensive".
-      if (i >= 3) {
-        return this.initialCost().pow(Math.pow(2 * i - 4, this.bought()));
+      if (i === 3) {
+        return this.initialCost().pow(Math.pow(2, this.bought()));
       }
       return this.cost().times(Decimal.pow(this.costIncreasePer(), n).minus(1)).div(Decimal.minus(this.costIncreasePer(), 1));
     },
@@ -71,9 +71,9 @@ let PowerUpgrade = function (i) {
       return n <= this.maxBuyable();
     },
     maxBuyable() {
-      if (i >= 3) {
+      if (i === 3) {
         // This may fail due to precision if the player has barely not enough CP.
-        return Math.max(Math.floor(1 + Math.log(player.complexityPoints.log2() / this.initialCost().log2()) / Math.log(2 * i - 4)) - this.bought(), 0);
+        return Math.max(Math.floor(1 + Math.log2(player.complexityPoints.log2() / this.initialCost().log2())) - this.bought(), 0);
       }
       let num = Math.floor(player.complexityPoints.div(this.cost()).times(
         Decimal.minus(this.costIncreasePer(), 1)).plus(1).log(this.costIncreasePer()));
@@ -104,8 +104,8 @@ let Powers = {
   },
   extraMultipliers: {
     'normal': () => 1,
-    'infinity': () => Math.sqrt(Math.log2(1 + InfinityStars.amount().log2() / Math.pow(2, 32))),
-    'eternity': () => Math.log2(1 + player.stats.timeSinceComplexity * (1 + ComplexityStars.amount().max(1).log2() / 1024) / 64) / 4,
+    'infinity': () => Math.log2(1 + InfinityStars.amount().log2() / Math.pow(2, 32)),
+    'eternity': () => Math.pow(Math.log2(1 + player.stats.timeSinceComplexity * (1 + ComplexityStars.amount().max(1).log2() / 1024) / 64) / 4, 2),
     'complexity': () => Math.sqrt(Powers.active().map(p => Powers.strength(p) * Powers.rarity(p)).reduce((a, b) => a + b, 0))
   },
   baseEffects: {
@@ -283,8 +283,8 @@ let Powers = {
   },
   respec() {
     player.powers.stored = this.stored().concat(this.active());
-    this.cleanStored();
     player.powers.active = [];
+    this.cleanStored();
   },
   maybeRespec() {
     if (this.isRespecOn()) {
@@ -310,13 +310,13 @@ let Powers = {
     return PowerUpgrade(3).effect();
   },
   activatedLimit() {
-    return PowerUpgrade(4).effect();
+    return 3;
   },
   interval() {
     return 4096 / this.speed();
   },
   maximumActivatedLimit() {
-    return PowerUpgrade(4).initialEffect() + PowerUpgrade(4).effectIncreasePer() * PowerUpgrade(4).boughtLimit()
+    return 7;
   },
   active() {
     return player.powers.active;

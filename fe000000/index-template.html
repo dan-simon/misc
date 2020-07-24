@@ -2919,12 +2919,6 @@
           <td><span ~style.display=PowerUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(3).buy()">Cost: ~f PowerUpgrade(3).cost() ~ ℂP</button></span></td>
           <td><span ~style.display=PowerUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(3).buyMax()">Max</button></span></td>
         </tr>
-        <tr>
-          <td>Maximum active powers:</td>
-          <td><span ~style.display=PowerUpgrade(4).atBoughtLimit() ? 'none' : ''~>~f PowerUpgrade(4).effect() ~ → ~f PowerUpgrade(4).nextEffect() ~</span><span ~style.display=PowerUpgrade(4).atBoughtLimit() ? '' : 'none'~>~f PowerUpgrade(4).effect() ~x (maxed)</span></td>
-          <td><span ~style.display=PowerUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(4).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(4).buy()">Cost: ~f PowerUpgrade(4).cost() ~ ℂP</button></span></td>
-          <td><span ~style.display=PowerUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(4).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(4).buyMax()">Max</button></span></td>
-        </tr>
       </table>
       <br/>
       <span>You gain a new power once every ~f Powers.interval() ~ seconds. <button onclick="Powers.togglePowerGain()">Power gain: ~r Powers.isPowerGainOn() ? "On" : "Off" ~</button></span>
@@ -2969,26 +2963,6 @@
           <span ~class=Powers.color('active', 3)~>~r Powers.description('active', 3) ~</span>
           <br/>
           <span ~class=Powers.color('active', 3)~>~r Powers.details('active', 3) ~</span>
-        </div>
-        <div ~style.display=Powers.canAccessPower('active', 4) ? '' : 'none'~>
-          <span ~class=Powers.color('active', 4)~>~r Powers.description('active', 4) ~</span>
-          <br/>
-          <span ~class=Powers.color('active', 4)~>~r Powers.details('active', 4) ~</span>
-        </div>
-        <div ~style.display=Powers.canAccessPower('active', 5) ? '' : 'none'~>
-          <span ~class=Powers.color('active', 1)~>~r Powers.description('active', 5) ~</span>
-          <br/>
-          <span ~class=Powers.color('active', 5)~>~r Powers.details('active', 5) ~</span>
-        </div>
-        <div ~style.display=Powers.canAccessPower('active', 6) ? '' : 'none'~>
-          <span ~class=Powers.color('active', 6)~>~r Powers.description('active', 6) ~</span>
-          <br/>
-          <span ~class=Powers.color('active', 6)~>~r Powers.details('active', 6) ~</span>
-        </div>
-        <div ~style.display=Powers.canAccessPower('active', 7) ? '' : 'none'~>
-          <span ~class=Powers.color('active', 7)~>~r Powers.description('active', 7) ~</span>
-          <br/>
-          <span ~class=Powers.color('active', 7)~>~r Powers.details('active', 7) ~</span>
         </div>
       </div>
       <br/>
