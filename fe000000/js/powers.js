@@ -242,9 +242,11 @@ let Powers = {
   details(type, i) {
     if (this.canAccessPower(type, i)) {
       let power = this.accessPower(type, i);
+      let extraMultiplier = this.extraMultiplier(power);
       return '(strength ' + format(this.strength(power)) + ', rarity ' + format(this.rarity(power)) +
       (this.powerShardBonus(power) > 0 ? ', power shard upgrades +' + format(this.powerShardBonus(power)) : '') +
-      ', extra multiplier ' + format(this.extraMultiplier(power)) + 'x, total multiplier ' + format(this.getOverallMultiplier(power)) + 'x)'
+      ', extra multiplier ' + format(this.extraMultiplier(power)) + 'x' + (extraMultiplier === this.cap(power) ? ' (capped)' : '') +
+      ', total multiplier ' + format(this.getOverallMultiplier(power)) + 'x)'
     }
   },
   totalEffectDescription(type) {
@@ -326,6 +328,9 @@ let Powers = {
   },
   next() {
     return player.powers.next;
+  },
+  cap(p) {
+    return p.type === 'eternity' ? 3 : Infinity;
   },
   index(x) {
     return this.indexData[x];

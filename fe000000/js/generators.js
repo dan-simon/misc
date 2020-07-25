@@ -99,7 +99,13 @@ let Generator = function (i) {
         n = 1;
       }
       if (n === 0 || (!guaranteedBuyable && !this.canBuy(n))) return;
-      player.stars = player.stars.minus(this.costFor(n));
+      let cost = this.costFor(n);
+      if (player.stars.gte(Decimal.pow(2, Math.pow(2, 32))) && cost.gte(player.stars.times(15 / 16))) {
+        // Avoid spending of all stars, which can cause issues and can often happen with a large number of stars.
+        player.stars = player.stars.div(16);
+      } else {
+        player.stars = player.stars.minus(this.costFor(n));
+      }
       this.addAmount(n);
       this.addBought(n);
       if (player.highestGenerator < i) {

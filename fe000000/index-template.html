@@ -224,9 +224,11 @@
       <div ~style.display=Generators.areAnyMultipliersNerfed() ? '' : 'none'~>
         Given a multiplier x, let y be log(x, ~f Generators.nerfValue() ~). x is reduced to ~f Generators.nerfValue() ~^y^y^~r formatWithPrecision(Generators.nerfExponent, 5) ~.
       </div>
-      <span>Currently the game ends at ~f Saving.gameEnd ~ stars.</span>
+      <span>Currently the game ends at ~f Saving.gameEnd() ~ stars. (It hasn't yet been developed this far; fix before release.)</span>
       <br/>
-      <span>(You can keep going beyond that, but you'll be able to start new content just by getting to that point.)</span>
+      <span>You cannot meaningfully keep going beyond that because you cannot get more stars than that.</span>
+      <br/>
+      <span>Next update will have a prestige layer there.</span>
     </div>
     <div ~style.display=InfinityPrestigeLayer.mustInfinity() ? '' : 'none'~>
       <span>The universe has collapsed due to an excess of stars.</span>
@@ -3225,6 +3227,10 @@
           <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(32)" ~class=Powers.canActivate(32) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(32)" ~class=Powers.canDelete(32) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(32) ~ power shards)</button></span>
         </div>
       </div>
+      <br/>
+      <span>At most ~f Powers.maximumActivatedLimit() ~ powers can be active at once. (Yes, right now this is an overestimate; fix before release.)</span>
+      <br/>
+      <span>Thus, all but the best ~f Powers.maximumActivatedLimit() ~ powers of each type are useless and are thus automatically deleted for power shards.</span>
       <br/>
       <button onclick="Powers.changePowerDeletionMode()">Manual power deletion mode: ~r Powers.powerDeletionMode() ~</button>
       <br/>
