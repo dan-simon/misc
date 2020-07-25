@@ -12,8 +12,8 @@ let Chroma = {
   colorEffectFormulas: [
     null,
     x => Math.pow(1 + x / 1024, 2.5),
-    x => Math.pow(1 + x / 64, 0.5),
-    x => Math.pow(Math.max(EternityPoints.totalEPProducedThisComplexity().log2() / 4096, 1),
+    x => Decimal.pow(1 + x / 64, 0.5),
+    x => Decimal.pow(Math.max(EternityPoints.totalEPProducedThisComplexity().log2() / 4096, 1),
       Math.log2(1 + x / 256) / 4),
     x => Decimal.pow(EternityGenerator(8).amount().max(1), 2 * Math.sqrt(x)),
     x => Math.floor(Math.pow(16 * Math.log2(1 + x / 4096), ComplexityAchievements.effect(3, 4))),
@@ -23,7 +23,10 @@ let Chroma = {
     if (!this.isUnlocked()) {
       return 0;
     }
-    let t = player.stats.timeSinceEternity * this.chromaSpeedMultiplier();
+    if (this.chromaSpeedMultiplier().gte(Decimal.pow(2, 256))) {
+      return this.cap();
+    }
+    let t = player.stats.timeSinceEternity * this.chromaSpeedMultiplier().toNumber();
     let cap = this.cap();
     return cap * (1 - Math.exp(-t / cap));
   },
@@ -32,8 +35,11 @@ let Chroma = {
       ComplexityChallenge.getComplexityChallengeReward(4) * ComplexityAchievements.effect(4, 3);
   },
   chromaSpeedMultiplier() {
-    return this.effectOfColor(3) * EternityChallenge.getTotalCompletionsRewardEffect(4) *
-      Study(16).effect() * Complexities.chromaMultiplier() * ComplexityAchievements.effect(2, 3);
+    let factors = [
+      this.effectOfColor(3), EternityChallenge.getTotalCompletionsRewardEffect(4),
+      Study(16).effect(), Complexities.chromaMultiplier(), ComplexityAchievements.effect(2, 3)
+    ];
+    return factors.reduce((a, b) => a.times(b));
   },
   extraTheoremsRaw() {
     return this.effectOfColor(5);
@@ -51,7 +57,7 @@ let Chroma = {
   effectOfColor(x) {
     let effect = this.colorEffectFormulas[x](this.colorAmount(x));
     if (x === 2 || x === 3) {
-      effect = Math.pow(effect, ComplexityAchievements.effect(3, 1));
+      effect = Decimal.pow(effect, ComplexityAchievements.effect(3, 1));
     }
     return effect;
   },
@@ -139,6 +145,9 @@ let Chroma = {
     return 4096 * (Math.pow(2, Math.pow(1 + this.extraTheoremsActualAndDisplay(), 1 / ComplexityAchievements.effect(3, 4)) / 16) - 1);
   },
   timeUntilProduction() {
+    if (this.chromaSpeedMultiplier().gte(Decimal.pow(2, 256))) {
+      return 0;
+    }
     let c = this.colorAmount(player.chroma.current);
     let cap = this.cap();
     let t = -cap * Math.log(1 - c / cap);

@@ -107,10 +107,10 @@ let EternityProducer = {
     ComplexityChallenge.exitComplexityChallenge(3);
   },
   productionPerSecond() {
-    return EternityProducerUpgrade(1).effect() * Eternities.commonEternityGainMultiplier();
+    return Eternities.commonEternityGainMultiplier().times(EternityProducerUpgrade(1).effect());
   },
   produce(diff) {
-    Eternities.add(diff * this.productionPerSecond());
+    Eternities.add(this.productionPerSecond().times(diff));
   },
   multiplier() {
     return EternityProducerUpgrade(2).effect();

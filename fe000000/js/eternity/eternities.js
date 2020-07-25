@@ -14,9 +14,13 @@ let Eternities = {
     player.eternities = new Decimal(x);
   },
   commonEternityGainMultiplier() {
-    return EternityChallenge.getTotalCompletionsRewardEffect(2) * PermanenceUpgrade(1).effect() *
-      Chroma.effectOfColor(2) * ComplexityChallenge.getComplexityChallengeReward(3) *
-      ComplexityAchievements.getAchievementsUnlockedRewardEffect(2);
+    let factors = [
+      EternityChallenge.getTotalCompletionsRewardEffect(2), PermanenceUpgrade(1).effect(),
+      Chroma.effectOfColor(2), ComplexityChallenge.getComplexityChallengeReward(3),
+      ComplexityAchievements.getAchievementsUnlockedRewardEffect(2)
+    ];
+    // We use Decimal.times because the first factor is not a Decimal.
+    return factors.reduce((a, b) => Decimal.times(a, b));
   },
   eternityGeneratorMultiplier() {
     // This is intentionally always at most 1, and often less.
