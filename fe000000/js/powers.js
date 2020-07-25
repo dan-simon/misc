@@ -104,13 +104,13 @@ let Powers = {
   },
   extraMultipliers: {
     'normal': () => 1,
-    'infinity': () => Math.log2(1 + InfinityStars.amount().log2() / Math.pow(2, 32)),
+    'infinity': () => Math.log2(1 + InfinityStars.amount().max(1).log2() / Math.pow(2, 16)) / 16,
     'eternity': () => Math.min(3, Math.pow(Math.log2(1 + player.stats.timeSinceComplexity * (1 + ComplexityStars.amount().max(1).log2() / 1024) / 64) / 4, 1.25)),
     'complexity': () => Math.sqrt(Powers.active().map(p => Powers.strength(p) * Powers.rarity(p)).reduce((a, b) => a + b, 0))
   },
   baseEffects: {
     'normal': 1 / 512,
-    'infinity': 1 / 64,
+    'infinity': 1 / 32,
     'eternity': 1 / 16,
     'complexity': 1 / 16,
   },
