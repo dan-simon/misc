@@ -182,19 +182,22 @@ let Powers = {
     player.powers.stored.push(this.next());
     player.powers.next = RNG.randomPower();
   },
-  getSortedPowerList(x, includeActive, mapped) {
+  getSortedPowerList(x, includeActive, noIndex) {
     let startingList = includeActive ? this.active().concat(this.stored()) : this.stored();
+    if (!noIndex) {
+      startingList = startingList.map((p, i) => ({'index': 1 + i, ...p}));
+    }
     let f = p => this.strength(p) * this.rarity(p);
     let result = startingList.filter(p => p.type === x).sort((a, b) => f(b) - f(a));
-    if (mapped) {
-      result = result.map(f);
-    }
     return result;
+  },
+  cutoff(x) {
+    return  this.getSortedPowerList(x, true, true).map(p => this.strength(p) * this.rarity(p))[this.maximumActivatedLimit() - 1] || 0;
   },
   cleanStored() {
     let cutoffs = {};
     for (let x of ['normal', 'infinity', 'eternity', 'complexity']) {
-      cutoffs[x] = this.getSortedPowerList(x, true, true)[this.maximumActivatedLimit() - 1] || 0;
+      cutoffs[x] = this.cutoff(x);
     }
     let toRemove = this.stored().filter(p => this.strength(p) * this.rarity(p) < cutoffs[p.type]);
     for (let p of toRemove) {
@@ -203,7 +206,7 @@ let Powers = {
     player.powers.stored = this.stored().filter(p => this.strength(p) * this.rarity(p) >= cutoffs[p.type]);
   },
   nextKept() {
-    let cutoff = this.getSortedPowerList(this.next().type, true, true)[this.maximumActivatedLimit() - 1] || 0;
+    let cutoff = this.cutoff(this.next().type);
     return this.strength(this.next()) * this.rarity(this.next()) >= cutoff;
   },
   sortActive() {
@@ -404,8 +407,9 @@ let Powers = {
   importString(importString) {
     let counts = importString.split(',').map(x => this.toNumber(x));
     let toActivateByType = [0, 1, 2, 3].map(i => this.getSortedPowerList(['normal', 'infinity', 'eternity', 'complexity'][i], false, false).slice(0, counts[i]));
-    let toActivate = [].concat.apply([], toActivateByType).slice(0, this.activatedLimit() - this.active().length);
-    player.powers.active = player.powers.active.concat(toActivate);
+    let indicesToActivate = [].concat.apply([], toActivateByType).slice(0, this.activatedLimit() - this.active().length).map(x => x.index);
+    player.powers.active = this.active().concat(indicesToActivate.map(i => this.accessPower('stored', i)));
+    player.powers.stored = this.stored().filter((_, i) => !indicesToActivate.includes(1 + i));
   },
   import() {
     this.importString(prompt('Enter your active powers (as previously exported):'));
