@@ -2897,384 +2897,388 @@
       <br/>
       <span>Stored powers do not, but can be activated to make them active.</span>
       <br/>
+      <br/>
+      <span>You gain a new power once every <span id="e739"></span> seconds. <button onclick="Powers.togglePowerGain()">Power gain: <span id="e740"></span></button></span>
+      <br/>
+      <span>It has been <span id="e741"></span> seconds since you last gained a new power.</span>
+      <br id="b604"/>
+      <span id="b605">Turning power gain on would give you <span id="e742"></span> new powers.</span>
+      <br/>
+      <br/>
+      <span>Next power<span id="b606"> (will be automatically deleted due to being bad enough to be useless)</span>:</span>
+      <br/>
+      <span id="b607"><span id="e743"></span></span>
+      <br/>
+      <span id="b608"><span id="e744"></span></span>
+      <br/>
+      <br/>
       <span>The powers activated by importing powers will be the strongest stored powers of the same types as those exported.</span>
       <br/>
-      <br id="b604"/>
       <button onclick="Powers.export()">Export active powers</button> <button onclick="Powers.import()">Import active powers</button>
-      <button onclick="Powers.toggleRespec()">Deactivate active powers on next complexity: <span id="e739"></span></button>
-      <br/>
-      <button onclick="Powers.respecAndReset()">Deactivate active powers and <span id="e740"></span></button></button>
-      <br/>
-      <br/>
-      <span>You have <span id="e741"></span> complexity points. <button id="b605" onclick="Powers.maxAll()">Max power upgrades</button></span>
-      <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
-        <tr>
-          <td>Strength of new powers:</td>
-          <td><span id="b606"><span id="e742"></span> → <span id="e743"></span></span><span id="b607">^<span id="e744"></span> (maxed)</span></td>
-          <td><span id="b608"><button id="b609" onclick="PowerUpgrade(1).buy()">Cost: <span id="e745"></span> ℂP</button></span></td>
-          <td><span id="b610"><button id="b611" onclick="PowerUpgrade(1).buyMax()">Max</button></span></td>
-        </tr>
-        <tr>
-          <td>Speed of gaining new powers:</td>
-          <td><span id="b612"><span id="e746"></span>x → <span id="e747"></span>x</span><span id="b613"><span id="e748"></span>x (maxed)</span></td>
-          <td><span id="b614"><button id="b615" onclick="PowerUpgrade(2).buy()">Cost: <span id="e749"></span> ℂP</button></span></td>
-          <td><span id="b616"><button id="b617" onclick="PowerUpgrade(2).buyMax()">Max</button></span></td>
-        </tr>
-        <tr>
-          <td>Minimum rarity of new powers:</td>
-          <td><span id="b618"><span id="e750"></span> → <span id="e751"></span></span><span id="b619"><span id="e752"></span>x (maxed)</span></td>
-          <td><span id="b620"><button id="b621" onclick="PowerUpgrade(3).buy()">Cost: <span id="e753"></span> ℂP</button></span></td>
-          <td><span id="b622"><button id="b623" onclick="PowerUpgrade(3).buyMax()">Max</button></span></td>
-        </tr>
-      </table>
-      <br/>
-      <span>You gain a new power once every <span id="e754"></span> seconds. <button onclick="Powers.togglePowerGain()">Power gain: <span id="e755"></span></button></span>
-      <br/>
-      <span>It has been <span id="e756"></span> seconds since you last gained a new power.</span>
-      <br id="b624"/>
-      <span id="b625">Turning power gain on would give you <span id="e757"></span> new powers.</span>
+      <button onclick="Powers.toggleRespec()">Deactivate active powers on next complexity: <span id="e745"></span></button>
+      <br id="b609"/>
+      <button onclick="Powers.respecAndReset()">Deactivate active powers and <span id="e746"></span></button></button>
       <br/>
       <br/>
-      <span>Next power<span id="b626"> (will be automatically deleted due to being bad enough to be useless)</span>:</span>
-      <br/>
-      <span id="b627"><span id="e758"></span></span>
-      <br/>
-      <span id="b628"><span id="e759"></span></span>
-      <br/>
-      <br/>
-      <span>Current effects of active powers:</span>
-      <br/>
-      <span class="yellowspan"><span id="e760"></span></span>
-      <br/>
-      <span class="magentaspan"><span id="e761"></span></span>
-      <br/>
-      <span class="cyanspan"><span id="e762"></span></span>
-      <br/>
-      <span class="brownspan"><span id="e763"></span></span>
-      <br/>
-      <br/>
-      <button id="b629" onclick="Powers.presetLoad(1)"><span id="e764"></span></button>
-      <button id="b630" onclick="Powers.presetLoad(2)"><span id="e765"></span></button>
-      <button id="b631" onclick="Powers.presetLoad(3)"><span id="e766"></span></button>
-      <button id="b632" onclick="Powers.presetLoad(4)"><span id="e767"></span></button>
-      <button id="b633" onclick="Powers.presetLoad(5)"><span id="e768"></span></button>
-      <button id="b634" onclick="Powers.presetLoad(6)"><span id="e769"></span></button>
-      <button id="b635" onclick="Powers.presetLoad(7)"><span id="e770"></span></button>
-      <button id="b636" onclick="Powers.presetLoad(8)"><span id="e771"></span></button>
-      <button id="b637" onclick="Powers.presetLoad(9)"><span id="e772"></span></button>
-      <button id="b638" onclick="Powers.presetLoad(10)"><span id="e773"></span></button>
-      <button id="b639" onclick="Powers.presetLoad(11)"><span id="e774"></span></button>
-      <button id="b640" onclick="Powers.presetLoad(12)"><span id="e775"></span></button>
-      <button id="b641" onclick="Powers.presetLoad(13)"><span id="e776"></span></button>
-      <button id="b642" onclick="Powers.presetLoad(14)"><span id="e777"></span></button>
-      <button id="b643" onclick="Powers.presetLoad(15)"><span id="e778"></span></button>
-      <button id="b644" onclick="Powers.presetLoad(16)"><span id="e779"></span></button>
-      <button id="b645" onclick="Powers.presetLoad(17)"><span id="e780"></span></button>
-      <button id="b646" onclick="Powers.presetLoad(18)"><span id="e781"></span></button>
-      <button id="b647" onclick="Powers.presetLoad(19)"><span id="e782"></span></button>
-      <button id="b648" onclick="Powers.presetLoad(20)"><span id="e783"></span></button>
-      <button id="b649" onclick="Powers.presetLoad(21)"><span id="e784"></span></button>
-      <button id="b650" onclick="Powers.presetLoad(22)"><span id="e785"></span></button>
-      <button id="b651" onclick="Powers.presetLoad(23)"><span id="e786"></span></button>
-      <button id="b652" onclick="Powers.presetLoad(24)"><span id="e787"></span></button>
-      <button id="b653" onclick="Powers.presetLoad(25)"><span id="e788"></span></button>
-      <button id="b654" onclick="Powers.presetLoad(26)"><span id="e789"></span></button>
-      <button id="b655" onclick="Powers.presetLoad(27)"><span id="e790"></span></button>
-      <button id="b656" onclick="Powers.presetLoad(28)"><span id="e791"></span></button>
-      <button id="b657" onclick="Powers.presetLoad(29)"><span id="e792"></span></button>
-      <button id="b658" onclick="Powers.presetLoad(30)"><span id="e793"></span></button>
-      <button id="b659" onclick="Powers.presetLoad(31)"><span id="e794"></span></button>
-      <button id="b660" onclick="Powers.presetLoad(32)"><span id="e795"></span></button>
-      <div id="b661">
-        You don't currently have any power presets. You can create presets at the bottom of this tab.
+      <div style="width: 1024px; margin-left: auto; margin-right: auto;">
+        <span>Click on the name of a power preset on the line below to activate those powers:</span>
+        <br/>
+        <button id="b610" onclick="Powers.presetLoad(1)"><span id="e747"></span></button>
+        <button id="b611" onclick="Powers.presetLoad(2)"><span id="e748"></span></button>
+        <button id="b612" onclick="Powers.presetLoad(3)"><span id="e749"></span></button>
+        <button id="b613" onclick="Powers.presetLoad(4)"><span id="e750"></span></button>
+        <button id="b614" onclick="Powers.presetLoad(5)"><span id="e751"></span></button>
+        <button id="b615" onclick="Powers.presetLoad(6)"><span id="e752"></span></button>
+        <button id="b616" onclick="Powers.presetLoad(7)"><span id="e753"></span></button>
+        <button id="b617" onclick="Powers.presetLoad(8)"><span id="e754"></span></button>
+        <button id="b618" onclick="Powers.presetLoad(9)"><span id="e755"></span></button>
+        <button id="b619" onclick="Powers.presetLoad(10)"><span id="e756"></span></button>
+        <button id="b620" onclick="Powers.presetLoad(11)"><span id="e757"></span></button>
+        <button id="b621" onclick="Powers.presetLoad(12)"><span id="e758"></span></button>
+        <button id="b622" onclick="Powers.presetLoad(13)"><span id="e759"></span></button>
+        <button id="b623" onclick="Powers.presetLoad(14)"><span id="e760"></span></button>
+        <button id="b624" onclick="Powers.presetLoad(15)"><span id="e761"></span></button>
+        <button id="b625" onclick="Powers.presetLoad(16)"><span id="e762"></span></button>
+        <button id="b626" onclick="Powers.presetLoad(17)"><span id="e763"></span></button>
+        <button id="b627" onclick="Powers.presetLoad(18)"><span id="e764"></span></button>
+        <button id="b628" onclick="Powers.presetLoad(19)"><span id="e765"></span></button>
+        <button id="b629" onclick="Powers.presetLoad(20)"><span id="e766"></span></button>
+        <button id="b630" onclick="Powers.presetLoad(21)"><span id="e767"></span></button>
+        <button id="b631" onclick="Powers.presetLoad(22)"><span id="e768"></span></button>
+        <button id="b632" onclick="Powers.presetLoad(23)"><span id="e769"></span></button>
+        <button id="b633" onclick="Powers.presetLoad(24)"><span id="e770"></span></button>
+        <button id="b634" onclick="Powers.presetLoad(25)"><span id="e771"></span></button>
+        <button id="b635" onclick="Powers.presetLoad(26)"><span id="e772"></span></button>
+        <button id="b636" onclick="Powers.presetLoad(27)"><span id="e773"></span></button>
+        <button id="b637" onclick="Powers.presetLoad(28)"><span id="e774"></span></button>
+        <button id="b638" onclick="Powers.presetLoad(29)"><span id="e775"></span></button>
+        <button id="b639" onclick="Powers.presetLoad(30)"><span id="e776"></span></button>
+        <button id="b640" onclick="Powers.presetLoad(31)"><span id="e777"></span></button>
+        <button id="b641" onclick="Powers.presetLoad(32)"><span id="e778"></span></button>
+        <div id="b642">
+          You don't currently have any power presets. You can create presets at the bottom of this tab.
+        </div>
       </div>
       <br/>
       <span>Active powers (<button onclick="Powers.sortActive()">Sort</button>):</span>
       <div style="margin-left: auto; margin-right: auto;">
-        <span id="b662">You don't currently have any active powers.</span>
-        <div id="b663">
-          <span id="b664"><span id="e796"></span></span>
+        <span id="b643">You don't currently have any active powers.</span>
+        <div id="b644">
+          <span id="b645"><span id="e779"></span></span>
           <br/>
-          <span id="b665"><span id="e797"></span></span>
+          <span id="b646"><span id="e780"></span></span>
         </div>
-        <div id="b666">
-          <span id="b667"><span id="e798"></span></span>
+        <div id="b647">
+          <span id="b648"><span id="e781"></span></span>
           <br/>
-          <span id="b668"><span id="e799"></span></span>
+          <span id="b649"><span id="e782"></span></span>
         </div>
-        <div id="b669">
-          <span id="b670"><span id="e800"></span></span>
+        <div id="b650">
+          <span id="b651"><span id="e783"></span></span>
           <br/>
-          <span id="b671"><span id="e801"></span></span>
+          <span id="b652"><span id="e784"></span></span>
         </div>
       </div>
+      <br/>
+      <span>Current effects of active powers:</span>
+      <br/>
+      <span class="yellowspan"><span id="e785"></span></span>
+      <br/>
+      <span class="magentaspan"><span id="e786"></span></span>
+      <br/>
+      <span class="cyanspan"><span id="e787"></span></span>
+      <br/>
+      <span class="brownspan"><span id="e788"></span></span>
+      <br/>
       <br/>
       <span>Stored powers (<button onclick="Powers.sortStored()">Sort</button>):</span>
       <div style="margin-left: auto; margin-right: auto;">
-        <span id="b672">You don't currently have any stored powers.</span>
-        <div id="b673">
-          <span id="b674"><span id="e802"></span></span>
+        <span id="b653">You don't currently have any stored powers.</span>
+        <div id="b654">
+          <span id="b655"><span id="e789"></span></span>
           <br/>
-          <span id="b675"><span id="e803"></span></span>
+          <span id="b656"><span id="e790"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b676" style="float: left;" onclick="Powers.activate(1)">Activate</button> <button id="b677" style="float: right;" onclick="Powers.delete(1)">Delete (+<span id="e804"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b657" style="float: left;" onclick="Powers.activate(1)">Activate</button> <button id="b658" style="float: right;" onclick="Powers.delete(1)">Delete (+<span id="e791"></span> power shards)</button></span>
         </div>
-        <br id="b678"/>
-        <div id="b679">
-          <span id="b680"><span id="e805"></span></span>
+        <br id="b659"/>
+        <div id="b660">
+          <span id="b661"><span id="e792"></span></span>
           <br/>
-          <span id="b681"><span id="e806"></span></span>
+          <span id="b662"><span id="e793"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b682" style="float: left;" onclick="Powers.activate(2)">Activate</button> <button id="b683" style="float: right;" onclick="Powers.delete(2)">Delete (+<span id="e807"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b663" style="float: left;" onclick="Powers.activate(2)">Activate</button> <button id="b664" style="float: right;" onclick="Powers.delete(2)">Delete (+<span id="e794"></span> power shards)</button></span>
         </div>
-        <br id="b684"/>
-        <div id="b685">
-          <span id="b686"><span id="e808"></span></span>
+        <br id="b665"/>
+        <div id="b666">
+          <span id="b667"><span id="e795"></span></span>
           <br/>
-          <span id="b687"><span id="e809"></span></span>
+          <span id="b668"><span id="e796"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b688" style="float: left;" onclick="Powers.activate(3)">Activate</button> <button id="b689" style="float: right;" onclick="Powers.delete(3)">Delete (+<span id="e810"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b669" style="float: left;" onclick="Powers.activate(3)">Activate</button> <button id="b670" style="float: right;" onclick="Powers.delete(3)">Delete (+<span id="e797"></span> power shards)</button></span>
         </div>
-        <br id="b690"/>
-        <div id="b691">
-          <span id="b692"><span id="e811"></span></span>
+        <br id="b671"/>
+        <div id="b672">
+          <span id="b673"><span id="e798"></span></span>
           <br/>
-          <span id="b693"><span id="e812"></span></span>
+          <span id="b674"><span id="e799"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b694" style="float: left;" onclick="Powers.activate(4)">Activate</button> <button id="b695" style="float: right;" onclick="Powers.delete(4)">Delete (+<span id="e813"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b675" style="float: left;" onclick="Powers.activate(4)">Activate</button> <button id="b676" style="float: right;" onclick="Powers.delete(4)">Delete (+<span id="e800"></span> power shards)</button></span>
         </div>
-        <br id="b696"/>
-        <div id="b697">
-          <span id="b698"><span id="e814"></span></span>
+        <br id="b677"/>
+        <div id="b678">
+          <span id="b679"><span id="e801"></span></span>
           <br/>
-          <span id="b699"><span id="e815"></span></span>
+          <span id="b680"><span id="e802"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b700" style="float: left;" onclick="Powers.activate(5)">Activate</button> <button id="b701" style="float: right;" onclick="Powers.delete(5)">Delete (+<span id="e816"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b681" style="float: left;" onclick="Powers.activate(5)">Activate</button> <button id="b682" style="float: right;" onclick="Powers.delete(5)">Delete (+<span id="e803"></span> power shards)</button></span>
         </div>
-        <br id="b702"/>
-        <div id="b703">
-          <span id="b704"><span id="e817"></span></span>
+        <br id="b683"/>
+        <div id="b684">
+          <span id="b685"><span id="e804"></span></span>
           <br/>
-          <span id="b705"><span id="e818"></span></span>
+          <span id="b686"><span id="e805"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b706" style="float: left;" onclick="Powers.activate(6)">Activate</button> <button id="b707" style="float: right;" onclick="Powers.delete(6)">Delete (+<span id="e819"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b687" style="float: left;" onclick="Powers.activate(6)">Activate</button> <button id="b688" style="float: right;" onclick="Powers.delete(6)">Delete (+<span id="e806"></span> power shards)</button></span>
         </div>
-        <br id="b708"/>
-        <div id="b709">
-          <span id="b710"><span id="e820"></span></span>
+        <br id="b689"/>
+        <div id="b690">
+          <span id="b691"><span id="e807"></span></span>
           <br/>
-          <span id="b711"><span id="e821"></span></span>
+          <span id="b692"><span id="e808"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b712" style="float: left;" onclick="Powers.activate(7)">Activate</button> <button id="b713" style="float: right;" onclick="Powers.delete(7)">Delete (+<span id="e822"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b693" style="float: left;" onclick="Powers.activate(7)">Activate</button> <button id="b694" style="float: right;" onclick="Powers.delete(7)">Delete (+<span id="e809"></span> power shards)</button></span>
         </div>
-        <br id="b714"/>
-        <div id="b715">
-          <span id="b716"><span id="e823"></span></span>
+        <br id="b695"/>
+        <div id="b696">
+          <span id="b697"><span id="e810"></span></span>
           <br/>
-          <span id="b717"><span id="e824"></span></span>
+          <span id="b698"><span id="e811"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b718" style="float: left;" onclick="Powers.activate(8)">Activate</button> <button id="b719" style="float: right;" onclick="Powers.delete(8)">Delete (+<span id="e825"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b699" style="float: left;" onclick="Powers.activate(8)">Activate</button> <button id="b700" style="float: right;" onclick="Powers.delete(8)">Delete (+<span id="e812"></span> power shards)</button></span>
         </div>
-        <br id="b720"/>
-        <div id="b721">
-          <span id="b722"><span id="e826"></span></span>
+        <br id="b701"/>
+        <div id="b702">
+          <span id="b703"><span id="e813"></span></span>
           <br/>
-          <span id="b723"><span id="e827"></span></span>
+          <span id="b704"><span id="e814"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b724" style="float: left;" onclick="Powers.activate(9)">Activate</button> <button id="b725" style="float: right;" onclick="Powers.delete(9)">Delete (+<span id="e828"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b705" style="float: left;" onclick="Powers.activate(9)">Activate</button> <button id="b706" style="float: right;" onclick="Powers.delete(9)">Delete (+<span id="e815"></span> power shards)</button></span>
         </div>
-        <br id="b726"/>
-        <div id="b727">
-          <span id="b728"><span id="e829"></span></span>
+        <br id="b707"/>
+        <div id="b708">
+          <span id="b709"><span id="e816"></span></span>
           <br/>
-          <span id="b729"><span id="e830"></span></span>
+          <span id="b710"><span id="e817"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b730" style="float: left;" onclick="Powers.activate(10)">Activate</button> <button id="b731" style="float: right;" onclick="Powers.delete(10)">Delete (+<span id="e831"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b711" style="float: left;" onclick="Powers.activate(10)">Activate</button> <button id="b712" style="float: right;" onclick="Powers.delete(10)">Delete (+<span id="e818"></span> power shards)</button></span>
         </div>
-        <br id="b732"/>
-        <div id="b733">
-          <span id="b734"><span id="e832"></span></span>
+        <br id="b713"/>
+        <div id="b714">
+          <span id="b715"><span id="e819"></span></span>
           <br/>
-          <span id="b735"><span id="e833"></span></span>
+          <span id="b716"><span id="e820"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b736" style="float: left;" onclick="Powers.activate(11)">Activate</button> <button id="b737" style="float: right;" onclick="Powers.delete(11)">Delete (+<span id="e834"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b717" style="float: left;" onclick="Powers.activate(11)">Activate</button> <button id="b718" style="float: right;" onclick="Powers.delete(11)">Delete (+<span id="e821"></span> power shards)</button></span>
         </div>
-        <br id="b738"/>
-        <div id="b739">
-          <span id="b740"><span id="e835"></span></span>
+        <br id="b719"/>
+        <div id="b720">
+          <span id="b721"><span id="e822"></span></span>
           <br/>
-          <span id="b741"><span id="e836"></span></span>
+          <span id="b722"><span id="e823"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b742" style="float: left;" onclick="Powers.activate(12)">Activate</button> <button id="b743" style="float: right;" onclick="Powers.delete(12)">Delete (+<span id="e837"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b723" style="float: left;" onclick="Powers.activate(12)">Activate</button> <button id="b724" style="float: right;" onclick="Powers.delete(12)">Delete (+<span id="e824"></span> power shards)</button></span>
         </div>
-        <br id="b744"/>
-        <div id="b745">
-          <span id="b746"><span id="e838"></span></span>
+        <br id="b725"/>
+        <div id="b726">
+          <span id="b727"><span id="e825"></span></span>
           <br/>
-          <span id="b747"><span id="e839"></span></span>
+          <span id="b728"><span id="e826"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b748" style="float: left;" onclick="Powers.activate(13)">Activate</button> <button id="b749" style="float: right;" onclick="Powers.delete(13)">Delete (+<span id="e840"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b729" style="float: left;" onclick="Powers.activate(13)">Activate</button> <button id="b730" style="float: right;" onclick="Powers.delete(13)">Delete (+<span id="e827"></span> power shards)</button></span>
         </div>
-        <br id="b750"/>
-        <div id="b751">
-          <span id="b752"><span id="e841"></span></span>
+        <br id="b731"/>
+        <div id="b732">
+          <span id="b733"><span id="e828"></span></span>
           <br/>
-          <span id="b753"><span id="e842"></span></span>
+          <span id="b734"><span id="e829"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b754" style="float: left;" onclick="Powers.activate(14)">Activate</button> <button id="b755" style="float: right;" onclick="Powers.delete(14)">Delete (+<span id="e843"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b735" style="float: left;" onclick="Powers.activate(14)">Activate</button> <button id="b736" style="float: right;" onclick="Powers.delete(14)">Delete (+<span id="e830"></span> power shards)</button></span>
         </div>
-        <br id="b756"/>
-        <div id="b757">
-          <span id="b758"><span id="e844"></span></span>
+        <br id="b737"/>
+        <div id="b738">
+          <span id="b739"><span id="e831"></span></span>
           <br/>
-          <span id="b759"><span id="e845"></span></span>
+          <span id="b740"><span id="e832"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b760" style="float: left;" onclick="Powers.activate(15)">Activate</button> <button id="b761" style="float: right;" onclick="Powers.delete(15)">Delete (+<span id="e846"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b741" style="float: left;" onclick="Powers.activate(15)">Activate</button> <button id="b742" style="float: right;" onclick="Powers.delete(15)">Delete (+<span id="e833"></span> power shards)</button></span>
         </div>
-        <br id="b762"/>
-        <div id="b763">
-          <span id="b764"><span id="e847"></span></span>
+        <br id="b743"/>
+        <div id="b744">
+          <span id="b745"><span id="e834"></span></span>
           <br/>
-          <span id="b765"><span id="e848"></span></span>
+          <span id="b746"><span id="e835"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b766" style="float: left;" onclick="Powers.activate(16)">Activate</button> <button id="b767" style="float: right;" onclick="Powers.delete(16)">Delete (+<span id="e849"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b747" style="float: left;" onclick="Powers.activate(16)">Activate</button> <button id="b748" style="float: right;" onclick="Powers.delete(16)">Delete (+<span id="e836"></span> power shards)</button></span>
         </div>
-        <br id="b768"/>
-        <div id="b769">
-          <span id="b770"><span id="e850"></span></span>
+        <br id="b749"/>
+        <div id="b750">
+          <span id="b751"><span id="e837"></span></span>
           <br/>
-          <span id="b771"><span id="e851"></span></span>
+          <span id="b752"><span id="e838"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b772" style="float: left;" onclick="Powers.activate(17)">Activate</button> <button id="b773" style="float: right;" onclick="Powers.delete(17)">Delete (+<span id="e852"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b753" style="float: left;" onclick="Powers.activate(17)">Activate</button> <button id="b754" style="float: right;" onclick="Powers.delete(17)">Delete (+<span id="e839"></span> power shards)</button></span>
         </div>
-        <br id="b774"/>
-        <div id="b775">
-          <span id="b776"><span id="e853"></span></span>
+        <br id="b755"/>
+        <div id="b756">
+          <span id="b757"><span id="e840"></span></span>
           <br/>
-          <span id="b777"><span id="e854"></span></span>
+          <span id="b758"><span id="e841"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b778" style="float: left;" onclick="Powers.activate(18)">Activate</button> <button id="b779" style="float: right;" onclick="Powers.delete(18)">Delete (+<span id="e855"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b759" style="float: left;" onclick="Powers.activate(18)">Activate</button> <button id="b760" style="float: right;" onclick="Powers.delete(18)">Delete (+<span id="e842"></span> power shards)</button></span>
         </div>
-        <br id="b780"/>
-        <div id="b781">
-          <span id="b782"><span id="e856"></span></span>
+        <br id="b761"/>
+        <div id="b762">
+          <span id="b763"><span id="e843"></span></span>
           <br/>
-          <span id="b783"><span id="e857"></span></span>
+          <span id="b764"><span id="e844"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b784" style="float: left;" onclick="Powers.activate(19)">Activate</button> <button id="b785" style="float: right;" onclick="Powers.delete(19)">Delete (+<span id="e858"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b765" style="float: left;" onclick="Powers.activate(19)">Activate</button> <button id="b766" style="float: right;" onclick="Powers.delete(19)">Delete (+<span id="e845"></span> power shards)</button></span>
         </div>
-        <br id="b786"/>
-        <div id="b787">
-          <span id="b788"><span id="e859"></span></span>
+        <br id="b767"/>
+        <div id="b768">
+          <span id="b769"><span id="e846"></span></span>
           <br/>
-          <span id="b789"><span id="e860"></span></span>
+          <span id="b770"><span id="e847"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b790" style="float: left;" onclick="Powers.activate(20)">Activate</button> <button id="b791" style="float: right;" onclick="Powers.delete(20)">Delete (+<span id="e861"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b771" style="float: left;" onclick="Powers.activate(20)">Activate</button> <button id="b772" style="float: right;" onclick="Powers.delete(20)">Delete (+<span id="e848"></span> power shards)</button></span>
         </div>
-        <br id="b792"/>
-        <div id="b793">
-          <span id="b794"><span id="e862"></span></span>
+        <br id="b773"/>
+        <div id="b774">
+          <span id="b775"><span id="e849"></span></span>
           <br/>
-          <span id="b795"><span id="e863"></span></span>
+          <span id="b776"><span id="e850"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b796" style="float: left;" onclick="Powers.activate(21)">Activate</button> <button id="b797" style="float: right;" onclick="Powers.delete(21)">Delete (+<span id="e864"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b777" style="float: left;" onclick="Powers.activate(21)">Activate</button> <button id="b778" style="float: right;" onclick="Powers.delete(21)">Delete (+<span id="e851"></span> power shards)</button></span>
         </div>
-        <br id="b798"/>
-        <div id="b799">
-          <span id="b800"><span id="e865"></span></span>
+        <br id="b779"/>
+        <div id="b780">
+          <span id="b781"><span id="e852"></span></span>
           <br/>
-          <span id="b801"><span id="e866"></span></span>
+          <span id="b782"><span id="e853"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b802" style="float: left;" onclick="Powers.activate(22)">Activate</button> <button id="b803" style="float: right;" onclick="Powers.delete(22)">Delete (+<span id="e867"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b783" style="float: left;" onclick="Powers.activate(22)">Activate</button> <button id="b784" style="float: right;" onclick="Powers.delete(22)">Delete (+<span id="e854"></span> power shards)</button></span>
         </div>
-        <br id="b804"/>
-        <div id="b805">
-          <span id="b806"><span id="e868"></span></span>
+        <br id="b785"/>
+        <div id="b786">
+          <span id="b787"><span id="e855"></span></span>
           <br/>
-          <span id="b807"><span id="e869"></span></span>
+          <span id="b788"><span id="e856"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b808" style="float: left;" onclick="Powers.activate(23)">Activate</button> <button id="b809" style="float: right;" onclick="Powers.delete(23)">Delete (+<span id="e870"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b789" style="float: left;" onclick="Powers.activate(23)">Activate</button> <button id="b790" style="float: right;" onclick="Powers.delete(23)">Delete (+<span id="e857"></span> power shards)</button></span>
         </div>
-        <br id="b810"/>
-        <div id="b811">
-          <span id="b812"><span id="e871"></span></span>
+        <br id="b791"/>
+        <div id="b792">
+          <span id="b793"><span id="e858"></span></span>
           <br/>
-          <span id="b813"><span id="e872"></span></span>
+          <span id="b794"><span id="e859"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b814" style="float: left;" onclick="Powers.activate(24)">Activate</button> <button id="b815" style="float: right;" onclick="Powers.delete(24)">Delete (+<span id="e873"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b795" style="float: left;" onclick="Powers.activate(24)">Activate</button> <button id="b796" style="float: right;" onclick="Powers.delete(24)">Delete (+<span id="e860"></span> power shards)</button></span>
         </div>
-        <br id="b816"/>
-        <div id="b817">
-          <span id="b818"><span id="e874"></span></span>
+        <br id="b797"/>
+        <div id="b798">
+          <span id="b799"><span id="e861"></span></span>
           <br/>
-          <span id="b819"><span id="e875"></span></span>
+          <span id="b800"><span id="e862"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b820" style="float: left;" onclick="Powers.activate(25)">Activate</button> <button id="b821" style="float: right;" onclick="Powers.delete(25)">Delete (+<span id="e876"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b801" style="float: left;" onclick="Powers.activate(25)">Activate</button> <button id="b802" style="float: right;" onclick="Powers.delete(25)">Delete (+<span id="e863"></span> power shards)</button></span>
         </div>
-        <br id="b822"/>
-        <div id="b823">
-          <span id="b824"><span id="e877"></span></span>
+        <br id="b803"/>
+        <div id="b804">
+          <span id="b805"><span id="e864"></span></span>
           <br/>
-          <span id="b825"><span id="e878"></span></span>
+          <span id="b806"><span id="e865"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b826" style="float: left;" onclick="Powers.activate(26)">Activate</button> <button id="b827" style="float: right;" onclick="Powers.delete(26)">Delete (+<span id="e879"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b807" style="float: left;" onclick="Powers.activate(26)">Activate</button> <button id="b808" style="float: right;" onclick="Powers.delete(26)">Delete (+<span id="e866"></span> power shards)</button></span>
         </div>
-        <br id="b828"/>
-        <div id="b829">
-          <span id="b830"><span id="e880"></span></span>
+        <br id="b809"/>
+        <div id="b810">
+          <span id="b811"><span id="e867"></span></span>
           <br/>
-          <span id="b831"><span id="e881"></span></span>
+          <span id="b812"><span id="e868"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b832" style="float: left;" onclick="Powers.activate(27)">Activate</button> <button id="b833" style="float: right;" onclick="Powers.delete(27)">Delete (+<span id="e882"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b813" style="float: left;" onclick="Powers.activate(27)">Activate</button> <button id="b814" style="float: right;" onclick="Powers.delete(27)">Delete (+<span id="e869"></span> power shards)</button></span>
         </div>
-        <br id="b834"/>
-        <div id="b835">
-          <span id="b836"><span id="e883"></span></span>
+        <br id="b815"/>
+        <div id="b816">
+          <span id="b817"><span id="e870"></span></span>
           <br/>
-          <span id="b837"><span id="e884"></span></span>
+          <span id="b818"><span id="e871"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b838" style="float: left;" onclick="Powers.activate(28)">Activate</button> <button id="b839" style="float: right;" onclick="Powers.delete(28)">Delete (+<span id="e885"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b819" style="float: left;" onclick="Powers.activate(28)">Activate</button> <button id="b820" style="float: right;" onclick="Powers.delete(28)">Delete (+<span id="e872"></span> power shards)</button></span>
         </div>
-        <br id="b840"/>
-        <div id="b841">
-          <span id="b842"><span id="e886"></span></span>
+        <br id="b821"/>
+        <div id="b822">
+          <span id="b823"><span id="e873"></span></span>
           <br/>
-          <span id="b843"><span id="e887"></span></span>
+          <span id="b824"><span id="e874"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b844" style="float: left;" onclick="Powers.activate(29)">Activate</button> <button id="b845" style="float: right;" onclick="Powers.delete(29)">Delete (+<span id="e888"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b825" style="float: left;" onclick="Powers.activate(29)">Activate</button> <button id="b826" style="float: right;" onclick="Powers.delete(29)">Delete (+<span id="e875"></span> power shards)</button></span>
         </div>
-        <br id="b846"/>
-        <div id="b847">
-          <span id="b848"><span id="e889"></span></span>
+        <br id="b827"/>
+        <div id="b828">
+          <span id="b829"><span id="e876"></span></span>
           <br/>
-          <span id="b849"><span id="e890"></span></span>
+          <span id="b830"><span id="e877"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b850" style="float: left;" onclick="Powers.activate(30)">Activate</button> <button id="b851" style="float: right;" onclick="Powers.delete(30)">Delete (+<span id="e891"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b831" style="float: left;" onclick="Powers.activate(30)">Activate</button> <button id="b832" style="float: right;" onclick="Powers.delete(30)">Delete (+<span id="e878"></span> power shards)</button></span>
         </div>
-        <br id="b852"/>
-        <div id="b853">
-          <span id="b854"><span id="e892"></span></span>
+        <br id="b833"/>
+        <div id="b834">
+          <span id="b835"><span id="e879"></span></span>
           <br/>
-          <span id="b855"><span id="e893"></span></span>
+          <span id="b836"><span id="e880"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b856" style="float: left;" onclick="Powers.activate(31)">Activate</button> <button id="b857" style="float: right;" onclick="Powers.delete(31)">Delete (+<span id="e894"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b837" style="float: left;" onclick="Powers.activate(31)">Activate</button> <button id="b838" style="float: right;" onclick="Powers.delete(31)">Delete (+<span id="e881"></span> power shards)</button></span>
         </div>
-        <br id="b858"/>
-        <div id="b859">
-          <span id="b860"><span id="e895"></span></span>
+        <br id="b839"/>
+        <div id="b840">
+          <span id="b841"><span id="e882"></span></span>
           <br/>
-          <span id="b861"><span id="e896"></span></span>
+          <span id="b842"><span id="e883"></span></span>
           <br/>
-          <span style="width: 640px; display: inline-block;"><button id="b862" style="float: left;" onclick="Powers.activate(32)">Activate</button> <button id="b863" style="float: right;" onclick="Powers.delete(32)">Delete (+<span id="e897"></span> power shards)</button></span>
+          <span style="width: 640px; display: inline-block;"><button id="b843" style="float: left;" onclick="Powers.activate(32)">Activate</button> <button id="b844" style="float: right;" onclick="Powers.delete(32)">Delete (+<span id="e884"></span> power shards)</button></span>
         </div>
       </div>
       <br/>
-      <span>At most <span id="e898"></span> powers can be active at once. (Yes, right now this is an overestimate; fix before release.)</span>
+      <span>At most <span id="e885"></span> powers can be active at once. (Yes, right now this is an overestimate; fix before release.)</span>
       <br/>
-      <span>Thus, all but the best <span id="e899"></span> powers of each type are useless and are thus automatically deleted for power shards.</span>
+      <span>Thus, all but the best <span id="e886"></span> powers of each type are useless and are thus automatically deleted for power shards.</span>
       <br/>
-      <button onclick="Powers.changePowerDeletionMode()">Manual power deletion mode: <span id="e900"></span></button>
+      <button onclick="Powers.changePowerDeletionMode()">Manual power deletion mode: <span id="e887"></span></button>
       <br/>
+      <br/>
+      <span>You have <span id="e888"></span> complexity points. <button id="b845" onclick="Powers.maxAll()">Max power upgrades</button></span>
+      <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
+        <tr>
+          <td>Strength of new powers:</td>
+          <td><span id="b846"><span id="e889"></span> → <span id="e890"></span></span><span id="b847">^<span id="e891"></span> (maxed)</span></td>
+          <td><span id="b848"><button id="b849" onclick="PowerUpgrade(1).buy()">Cost: <span id="e892"></span> ℂP</button></span></td>
+          <td><span id="b850"><button id="b851" onclick="PowerUpgrade(1).buyMax()">Max</button></span></td>
+        </tr>
+        <tr>
+          <td>Speed of gaining new powers:</td>
+          <td><span id="b852"><span id="e893"></span>x → <span id="e894"></span>x</span><span id="b853"><span id="e895"></span>x (maxed)</span></td>
+          <td><span id="b854"><button id="b855" onclick="PowerUpgrade(2).buy()">Cost: <span id="e896"></span> ℂP</button></span></td>
+          <td><span id="b856"><button id="b857" onclick="PowerUpgrade(2).buyMax()">Max</button></span></td>
+        </tr>
+        <tr>
+          <td>Minimum rarity of new powers:</td>
+          <td><span id="b858"><span id="e897"></span> → <span id="e898"></span></span><span id="b859"><span id="e899"></span>x (maxed)</span></td>
+          <td><span id="b860"><button id="b861" onclick="PowerUpgrade(3).buy()">Cost: <span id="e900"></span> ℂP</button></span></td>
+          <td><span id="b862"><button id="b863" onclick="PowerUpgrade(3).buyMax()">Max</button></span></td>
+        </tr>
+      </table>
       <br/>
       <div id="b864">
         <span>You have <span id="e901"></span> power shards. <button id="b865" onclick="PowerShards.maxAll()">Max power shard upgrades</button></span>
