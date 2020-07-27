@@ -325,6 +325,10 @@ let Saving = {
       player.powers.upgrades.pop();
       player.version = 1.9296875;
     }
+    if (player.version < 1.93359375) {
+      player.powers.presets = [];
+      player.version = 1.93359375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
@@ -403,7 +407,7 @@ let Saving = {
   exportGame () {
     let output = document.getElementById('export-output');
     let parent = output.parentElement;
-    parent.style.display = "";
+    parent.style.display = '';
     output.value = btoa(JSON.stringify(player));
     output.focus();
     output.select();

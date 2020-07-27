@@ -162,6 +162,7 @@ let initialPlayer = {
     shards: 0,
     shardUpgrades: [0, 0, 0, 0],
     powerDeletionMode: 'Confirmation',
+    presets: []
   },
   options: {
     notation: 'Scientific',
@@ -209,7 +210,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9296875
+  version: 1.93359375
 }
 
 let player;

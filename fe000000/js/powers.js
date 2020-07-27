@@ -182,12 +182,19 @@ let Powers = {
     player.powers.stored.push(this.next());
     player.powers.next = RNG.randomPower();
   },
+  getSortedPowerList(x, includeActive, mapped) {
+    let startingList = includeActive ? this.active().concat(this.stored()) : this.stored();
+    let f = p => this.strength(p) * this.rarity(p);
+    let result = startingList.filter(p => p.type === x).sort((a, b) => f(b) - f(a));
+    if (mapped) {
+      result = result.map(f);
+    }
+    return result;
+  },
   cleanStored() {
     let cutoffs = {};
     for (let x of ['normal', 'infinity', 'eternity', 'complexity']) {
-      cutoffs[x] = this.active().concat(this.stored()).filter(p => p.type === x).map(
-        p => this.strength(p) * this.rarity(p)).sort((a, b) => b - a)[
-          this.maximumActivatedLimit() - 1] || 0;
+      cutoffs[x] = this.getSortedPowerList(x, true, true)[this.maximumActivatedLimit() - 1] || 0;
     }
     let toRemove = this.stored().filter(p => this.strength(p) * this.rarity(p) < cutoffs[p.type]);
     for (let p of toRemove) {
@@ -196,9 +203,7 @@ let Powers = {
     player.powers.stored = this.stored().filter(p => this.strength(p) * this.rarity(p) >= cutoffs[p.type]);
   },
   nextKept() {
-    let cutoff = this.active().concat(this.stored()).filter(p => p.type === this.next().type).map(
-      p => this.strength(p) * this.rarity(p)).sort((a, b) => b - a)[
-        this.maximumActivatedLimit() - 1] || 0;
+    let cutoff = this.getSortedPowerList(this.next().type, true, true)[this.maximumActivatedLimit() - 1] || 0;
     return this.strength(this.next()) * this.rarity(this.next()) >= cutoff;
   },
   sortActive() {
@@ -371,5 +376,84 @@ let Powers = {
   changePowerDeletionMode() {
     let modes = ['Confirmation', 'No confirmation', 'Disabled'];
     player.powers.powerDeletionMode = modes[(modes.indexOf(player.powers.powerDeletionMode) + 1) % 3];
+  },
+  exportString() {
+    let typeCount = [0, 0, 0, 0];
+    for (let p of this.active()) {
+      typeCount[this.index(p.type) - 1]++;
+    }
+    return typeCount.join(',');
+  },
+  export() {
+    let output = document.getElementById('powers-export-output');
+    let parent = output.parentElement;
+    parent.style.display = '';
+    output.value = this.exportString();
+    output.focus();
+    output.select();
+    try {
+      document.execCommand('copy');
+    } catch(ex) {
+      alert('Copying to clipboard failed.');
+    }
+  },
+  toNumber(x) {
+    let result = Math.max(0, Math.floor(+x));
+    return Number.isFinite(result) ? result : 0;
+  },
+  importString(importString) {
+    let counts = importString.split(',').map(x => this.toNumber(x));
+    let toActivateByType = [0, 1, 2, 3].map(i => this.getSortedPowerList(['normal', 'infinity', 'eternity', 'complexity'][i], false, false).slice(0, counts[i]));
+    let toActivate = [].concat.apply([], toActivateByType).slice(0, this.activatedLimit() - this.active().length);
+    player.powers.active = player.powers.active.concat(toActivate);
+  },
+  import() {
+    this.importString(prompt('Enter your active powers (as previously exported):'));
+  },
+  hasPreset(x) {
+    return player.powers.presets.length >= x;
+  },
+  presetName(x) {
+    if (!this.hasPreset(x)) return 'Untitled';
+    return player.powers.presets[x - 1].name;
+  },
+  presetStudyList(x) {
+    if (!this.hasPreset(x)) return '';
+    return player.powers.presets[x - 1].powers;
+  },
+  setPresetName(x, name) {
+    player.powers.presets[x - 1].name = name;
+  },
+  setPresetStudyList(x, activePowers) {
+    player.powers.presets[x - 1].powers = activePowers;
+  },
+  presetSetToCurrentStudies(x) {
+    this.setPresetStudyList(x, this.exportString());
+    this.redisplayPresetStudyList(x);
+  },
+  presetLoad(x) {
+    this.importString(this.presetStudyList(x));
+  },
+  presetDelete(x) {
+    player.powers.presets = player.powers.presets.slice(0, x - 1).concat(player.powers.presets.slice(x));
+    for (let i = x; i <= player.powers.presets.length; i++) {
+      this.redisplayPreset(i);
+    }
+  },
+  presetCreate() {
+    if (!this.hasPreset(32)) {
+      player.powers.presets.push({'name': 'Untitled', 'powers': this.exportString()});
+      this.redisplayPreset(player.powers.presets.length);
+    }
+  },
+  redisplayPreset(x) {
+    this.redisplayPresetName(x);
+    this.redisplayPresetStudyList(x);
+  },
+  redisplayPresetName(x) {
+    document.getElementsByClassName('presetpowername' + x)[0].value = this.presetName(x);
+  },
+  redisplayPresetStudyList(x) {
+    document.getElementsByClassName('presetpowerlist' + x)[0].value = this.presetStudyList(x);
   }
 }
