@@ -168,6 +168,7 @@ let initialPlayer = {
     notation: 'Scientific',
     offlineProgress: true,
     hotkeys: true,
+    completionColors: true,
   },
   stats: {
     totalStarsProduced: new Decimal(0),

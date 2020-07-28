@@ -296,6 +296,10 @@ let Saving = {
       delete player.complexityUpgrades;
       player.version = 1.890625;
     }
+    if (player.version < 1.89453125 || !player.options.completionColors) {
+      player.options.completionColors = true;
+      player.version = Math.max(player.version, 1.89453125);
+    }
     if (player.version < 1.90625) {
       player.powers = {
         seed: RNG.createSeed(),

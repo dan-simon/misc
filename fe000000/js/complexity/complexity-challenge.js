@@ -97,5 +97,9 @@ let ComplexityChallenge = {
   },
   toggleSafeguard(x) {
     player.complexityChallengeSafeguards[x - 2] = !player.complexityChallengeSafeguards[x - 2];
+  },
+  color(x) {
+    if (!player.options.completionColors) return '';
+    return 'radial-gradient(#000000, ' + Colors.makeColor(1 - 2 / (2 + Math.log2(1 + this.getComplexityChallengeCompletions(x) / 2))) + ')';
   }
 }
