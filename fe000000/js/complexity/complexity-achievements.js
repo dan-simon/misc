@@ -19,7 +19,7 @@ let ComplexityAchievements = {
       () => EternityPoints.totalEPProducedThisComplexity().gte(Decimal.pow(2, 1.75 * Math.pow(2, 16))) && !Studies.boughtTheoremsThisComplexity()
     ],
     [
-      () => Boost.boostPower() >= Math.pow(2, 18),
+      () => Boost.boostPower() >= Math.pow(2, 16),
       () => EternityChallenge.getTotalEternityChallengeCompletions() >= 20 && !EternityChallenge.usedAutoECCompletionThisComplexity(),
       situation => situation === 'chroma',
       () => Studies.totalTheorems() >= 168
