@@ -1614,7 +1614,7 @@ function updateDisplay() {
     e[724].textContent = format(Decimal.pow(2, 1.75 * Math.pow(2, 16)));
     e[725].textContent = ComplexityAchievements.complexityAchievementStatusDescription(3, 4);
     e[726].textContent = format(ComplexityAchievements.rawEffect(3, 4));
-    e[727].textContent = format(Math.pow(2, 18));
+    e[727].textContent = format(Math.pow(2, 16));
     e[728].textContent = ComplexityAchievements.complexityAchievementStatusDescription(4, 1);
     e[729].textContent = format(ComplexityAchievements.rawEffect(4, 1));
     e[730].textContent = format(20);
