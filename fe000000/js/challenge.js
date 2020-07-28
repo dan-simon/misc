@@ -115,7 +115,7 @@ let Challenge = {
     }
   },
   color(x) {
-    if (!player.options.completionColors) return '#000000';
-    return Colors.makeColor(this.isChallengeCompleted(x));
+    if (!player.options.completionColors) return '';
+    return 'radial-gradient(#000000, ' + Colors.makeColor(this.isChallengeCompleted(x)) + ')';
   }
 }
