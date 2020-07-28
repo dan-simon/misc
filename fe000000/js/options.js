@@ -9,6 +9,9 @@ let Options = {
   toggleHotkeys() {
     player.options.hotkeys = !player.options.hotkeys;
   },
+  toggleCompletionColors() {
+    player.options.completionColors = !player.options.completionColors;
+  },
   nextNotation() {
     player.options.notation = NOTATION_LIST[(NOTATION_LIST.indexOf(player.options.notation) + 1) % NOTATION_LIST.length];
   }

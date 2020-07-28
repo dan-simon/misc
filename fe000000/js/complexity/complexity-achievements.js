@@ -141,4 +141,8 @@ let ComplexityAchievements = {
   startingEternityPoints() {
     return this.getAchievementsUnlockedRewardEffect(1).add(this.getAchievementsUnlockedRewardEffect(4));
   },
+  color(row, column) {
+    if (!player.options.completionColors) return '';
+    return 'radial-gradient(' + Colors.makeColor(this.hasComplexityAchievement(row, column)) + ', #000000)';
+  }
 }

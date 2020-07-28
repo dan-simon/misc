@@ -131,4 +131,8 @@ let InfinityChallenge = {
   infinityChallenge8PurchasesLeft() {
     return 7 - player.stats.purchasesThisInfinity + 9 * player.stats.purchasesThisInfinityByType[8];
   },
+  color(x) {
+    if (!player.options.completionColors) return '#000000';
+    return Colors.makeColor(this.isInfinityChallengeCompleted(x));
+  }
 }

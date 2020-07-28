@@ -40,6 +40,7 @@
   <script src="js/boost.js"></script>
   <script src="js/challenge.js"></script>
   <script src="js/chroma.js"></script>
+  <script src="js/colors.js"></script>
   <script src="js/format.js"></script>
   <script src="js/generators.js"></script>
   <script src="js/hotkeys.js"></script>
@@ -344,7 +345,7 @@
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
         <td>
-          <div class="challengediv">
+          <div class="challengediv" ~style.background-color=Challenge.color(1)~>
             <span>Challenge 1</span>
             <br/>
             <span>Generator 1 multiplier is raised ^~f 4 ~. All other generator multipliers are always ~f 1 ~x.</span>
@@ -357,7 +358,7 @@
           </div>
         </td>
         <td>
-          <div class="challengediv">
+          <div class="challengediv" ~style.background-color=Challenge.color(2)~>
             <span>Challenge 2</span>
             <br/>
             <span>There's a multiplier on all generators increasing linearly from ~f 0 ~ to ~f 1 ~ over ~f 256 ~ seconds. Every time you buy a generator or boost, or sacrifice or prestige, this multiplier resets to ~f 0 ~.</span>
@@ -372,7 +373,7 @@
       </tr>
       <tr>
         <td>
-          <div class="challengediv">
+          <div class="challengediv" ~style.background-color=Challenge.color(3)~>
             <span>Challenge 3</span>
             <br/>
             <span>There's a multiplier on Generator 1, starting at ~f 1 / 256 ~ and doubling every ~f 256 ~ seconds. Every time you prestige, this multiplier resets to ~f 1 / 256 ~.</span>
@@ -385,7 +386,7 @@
           </div>
         </td>
         <td>
-          <div class="challengediv">
+          <div class="challengediv" ~style.background-color=Challenge.color(4)~>
             <span>Challenge 4</span>
             <br/>
             <span>Every time you buy a generator, the amounts of all lower generators are reset, like a sacrifice without the benefit.</span>
@@ -400,7 +401,7 @@
       </tr>
       <tr>
         <td>
-          <div class="challengediv">
+          <div class="challengediv" ~style.background-color=Challenge.color(5)~>
             <span>Challenge 5</span>
             <br/>
             <span>All generator cost increases are raised ^~f 2 ~.</span>
@@ -413,7 +414,7 @@
           </div>
         </td>
         <td>
-          <div class="challengediv">
+          <div class="challengediv" ~style.background-color=Challenge.color(6)~>
             <span>Challenge 6</span>
             <br/>
             <span>There are only 6 generators. (Generator 7 and Generator 8 don't exist.)</span>
@@ -428,7 +429,7 @@
       </tr>
       <tr>
         <td>
-          <div class="challengediv">
+          <div class="challengediv" ~style.background-color=Challenge.color(7)~>
             <span>Challenge 7</span>
             <br/>
             <span>You can only buy ~f 343 ~ total generators and boosts throughout the challenge. This count does not reset on prestige.</span>
@@ -441,7 +442,7 @@
           </div>
         </td>
         <td>
-          <div class="challengediv">
+          <div class="challengediv" ~style.background-color=Challenge.color(8)~>
             <span>Challenge 8</span>
             <br/>
             <span>You can't buy boosts, the boost multiplier is ~f 1 ~x, and prestige power is raised ^~f 0.5 ~, but all generators (including Generator 8) are multiplied by your amount of Generator 8.</span>
@@ -456,7 +457,7 @@
       </tr>
       <tr>
         <td>
-          <div class="challengediv">
+          <div class="challengediv" ~style.background-color=Challenge.color(9)~>
             <span>Challenge 9</span>
             <br/>
             <span>You can't buy boosts and the boost multiplier is ~f 1 ~x.</span>
@@ -469,7 +470,7 @@
           </div>
         </td>
         <td>
-          <div class="challengediv">
+          <div class="challengediv" ~style.background-color=Challenge.color(10)~>
             <span>Challenge 10</span>
             <br/>
             <span>You can't buy boosts or more than one of each generator, and you can't prestige. You can sacrifice multiple times at the same point and the sacrifice bonuses multiply, but sacrifice resets everything like prestige.</span>
@@ -484,7 +485,7 @@
       </tr>
       <tr>
         <td>
-          <div class="challengediv">
+          <div class="challengediv" ~style.background-color=Challenge.color(11)~>
             <span>Challenge 11</span>
             <br/>
             <span>Prestige power is raised ^~f 0.5 ~.</span>
@@ -497,7 +498,7 @@
           </div>
         </td>
         <td>
-          <div class="challengediv">
+          <div class="challengediv" ~style.background-color=Challenge.color(12)~>
             <span>Challenge 12</span>
             <br/>
             <span>Infinity generators are disabled.</span>
@@ -940,7 +941,7 @@
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
         <td>
-          <div class="infinitychallengediv">
+          <div class="infinitychallengediv" ~style.background-color=InfinityChallenge.color(1)~>
             <span>Infinity Challenge 1</span>
             <br/>
             <span>Challenges 2, 3, 4, 5, 6, and 7 all apply.</span>
@@ -957,7 +958,7 @@
           </div>
         </td>
         <td>
-          <div class="infinitychallengediv">
+          <div class="infinitychallengediv" ~style.background-color=InfinityChallenge.color(2)~>
             <span>Infinity Challenge 2</span>
             <br/>
             <span>Prestige power is raised ^~f 0.5 ~, but sacrifice is far stronger.</span>
@@ -976,7 +977,7 @@
       </tr>
       <tr>
         <td>
-          <div class="infinitychallengediv">
+          <div class="infinitychallengediv" ~style.background-color=InfinityChallenge.color(3)~>
             <span>Infinity Challenge 3</span>
             <br/>
             <span>The prestige power formula is worse the more prestiges you do.</span>
@@ -993,7 +994,7 @@
           </div>
         </td>
         <td>
-          <div class="infinitychallengediv">
+          <div class="infinitychallengediv" ~style.background-color=InfinityChallenge.color(4)~>
             <span>Infinity Challenge 4</span>
             <br/>
             <span>There's an exponent on the multipliers of all generators increasing linearly from ~f 0 ~ to ~f 1 ~ over ~f 16 ~ seconds. Every time you buy a generator or boost, or sacrifice or prestige, this exponent resets to ~f 0 ~.</span>
@@ -1012,7 +1013,7 @@
       </tr>
       <tr>
         <td>
-          <div class="infinitychallengediv">
+          <div class="infinitychallengediv" ~style.background-color=InfinityChallenge.color(5)~>
             <span>Infinity Challenge 5</span>
             <br/>
             <span>There's an exponent on the multipliers of all generators based on stars, capping at ~f 1 ~.</span>
@@ -1029,7 +1030,7 @@
           </div>
         </td>
         <td>
-          <div class="infinitychallengediv">
+          <div class="infinitychallengediv" ~style.background-color=InfinityChallenge.color(6)~>
             <span>Infinity Challenge 6</span>
             <br/>
             <span>The prestige power formula alternates between being raised ^~f 1 ~ (as usual) and ^~f 0.5 ~ every time you prestige.</span>
@@ -1048,7 +1049,7 @@
       </tr>
       <tr>
         <td>
-          <div class="infinitychallengediv">
+          <div class="infinitychallengediv" ~style.background-color=InfinityChallenge.color(7)~>
             <span>Infinity Challenge 7</span>
             <br/>
             <span>Prestige power is raised ^~f 0.5 ~, but the multiplier per boost is squared.</span>
@@ -1065,7 +1066,7 @@
           </div>
         </td>
         <td>
-          <div class="infinitychallengediv">
+          <div class="infinitychallengediv" ~style.background-color=InfinityChallenge.color(8)~>
             <span>Infinity Challenge 8</span>
             <br/>
             <span>You can only buy ~f 7 ~ total generators (apart from Generator 8) and boosts throughout the challenge. Each Generator 8 you buy gives you 8 extra purchases.</span>
@@ -1211,7 +1212,7 @@
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
         <td>
-          <div class="eternitymilestonediv">
+          <div class="eternitymilestonediv" ~style.background-color=EternityMilestones.color(1)~>
             ~f 1 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(1) ~
@@ -1220,7 +1221,7 @@
           </div>
         </td>
         <td>
-          <div class="eternitymilestonediv">
+          <div class="eternitymilestonediv" ~style.background-color=EternityMilestones.color(2)~>
             ~f 2 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(2) ~
@@ -1229,7 +1230,7 @@
           </div>
         </td>
         <td>
-          <div class="eternitymilestonediv">
+          <div class="eternitymilestonediv" ~style.background-color=EternityMilestones.color(3)~>
             ~f 3 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(3) ~
@@ -1238,7 +1239,7 @@
           </div>
         </td>
         <td>
-          <div class="eternitymilestonediv">
+          <div class="eternitymilestonediv" ~style.background-color=EternityMilestones.color(4)~>
             ~f 4 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(4) ~
@@ -1249,7 +1250,7 @@
       </tr>
       <tr>
         <td>
-          <div class="eternitymilestonediv">
+          <div class="eternitymilestonediv" ~style.background-color=EternityMilestones.color(5)~>
             ~f 5 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(5) ~
@@ -1258,7 +1259,7 @@
           </div>
         </td>
         <td>
-          <div class="eternitymilestonediv">
+          <div class="eternitymilestonediv" ~style.background-color=EternityMilestones.color(6)~>
             ~f 6 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(6) ~
@@ -1267,7 +1268,7 @@
           </div>
         </td>
         <td>
-          <div class="eternitymilestonediv">
+          <div class="eternitymilestonediv" ~style.background-color=EternityMilestones.color(7)~>
             ~f 7 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(7) ~
@@ -1276,7 +1277,7 @@
           </div>
         </td>
         <td>
-          <div class="eternitymilestonediv">
+          <div class="eternitymilestonediv" ~style.background-color=EternityMilestones.color(8)~>
             ~f 8 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(8) ~
@@ -1287,7 +1288,7 @@
       </tr>
       <tr>
         <td>
-          <div class="eternitymilestonediv">
+          <div class="eternitymilestonediv" ~style.background-color=EternityMilestones.color(9)~>
             ~f 9 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(9) ~
@@ -1296,7 +1297,7 @@
           </div>
         </td>
         <td>
-          <div class="eternitymilestonediv">
+          <div class="eternitymilestonediv" ~style.background-color=EternityMilestones.color(10)~>
             ~f 10 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(10) ~
@@ -1305,7 +1306,7 @@
           </div>
         </td>
         <td>
-          <div class="eternitymilestonediv">
+          <div class="eternitymilestonediv" ~style.background-color=EternityMilestones.color(11)~>
             ~f 11 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(11) ~
@@ -1314,7 +1315,7 @@
           </div>
         </td>
         <td>
-          <div class="eternitymilestonediv">
+          <div class="eternitymilestonediv" ~style.background-color=EternityMilestones.color(12)~>
             ~f 12 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(12) ~
@@ -1325,7 +1326,7 @@
       </tr>
       <tr>
         <td>
-          <div class="eternitymilestonediv">
+          <div class="eternitymilestonediv" ~style.background-color=EternityMilestones.color(13)~>
             ~f 13 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(13) ~
@@ -1334,7 +1335,7 @@
           </div>
         </td>
         <td>
-          <div class="eternitymilestonediv">
+          <div class="eternitymilestonediv" ~style.background-color=EternityMilestones.color(14)~>
             ~f 14 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(14) ~
@@ -1343,7 +1344,7 @@
           </div>
         </td>
         <td>
-          <div class="eternitymilestonediv">
+          <div class="eternitymilestonediv" ~style.background-color=EternityMilestones.color(15)~>
             ~f 15 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(15) ~
@@ -1352,7 +1353,7 @@
           </div>
         </td>
         <td>
-          <div class="eternitymilestonediv">
+          <div class="eternitymilestonediv" ~style.background-color=EternityMilestones.color(16)~>
             ~f 16 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(16) ~
@@ -2059,7 +2060,7 @@
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
         <td>
-          <div class="eternitychallengediv">
+          <div class="eternitychallengediv" ~style.background-color=EternityChallenge.color(1)~>
             <span>Eternity Challenge 1</span>
             <br/>
             <span>There are exponents on all normal generators multipliers based on infinity stars and on all infinity generator multipliers based on eternity stars (both less than ~f 1 ~).</span>
@@ -2084,7 +2085,7 @@
           </div>
         </td>
         <td>
-          <div class="eternitychallengediv">
+          <div class="eternitychallengediv" ~style.background-color=EternityChallenge.color(2)~>
             <span>Eternity Challenge 2</span>
             <br/>
             <span>Boost costs are massively increased.</span>
@@ -2111,7 +2112,7 @@
       </tr>
       <tr>
         <td>
-          <div class="eternitychallengediv">
+          <div class="eternitychallengediv" ~style.background-color=EternityChallenge.color(3)~>
             <span>Eternity Challenge 3</span>
             <br/>
             <span>You can't prestige.</span>
@@ -2136,7 +2137,7 @@
           </div>
         </td>
         <td>
-          <div class="eternitychallengediv">
+          <div class="eternitychallengediv" ~style.background-color=EternityChallenge.color(4)~>
             <span>Eternity Challenge 4</span>
             <br/>
             <span>You can infinity at most ~f EternityChallenge.eternityChallenge4AllowedInfinities() ~ times. If you infinity more, you will automatically exit the challenge.</span>
@@ -2163,7 +2164,7 @@
       </tr>
       <tr>
         <td>
-          <div class="eternitychallengediv">
+          <div class="eternitychallengediv" ~style.background-color=EternityChallenge.color(5)~>
             <span>Eternity Challenge 5</span>
             <br/>
             <span>Infinity generator multipliers are square-rooted (^~f 0.5 ~).</span>
@@ -2188,7 +2189,7 @@
           </div>
         </td>
         <td>
-          <div class="eternitychallengediv">
+          <div class="eternitychallengediv" ~style.background-color=EternityChallenge.color(6)~>
             <span>Eternity Challenge 6</span>
             <br/>
             <span>All eternity challenge rewards are disabled.</span>
@@ -2215,7 +2216,7 @@
       </tr>
       <tr>
         <td>
-          <div class="eternitychallengediv">
+          <div class="eternitychallengediv" ~style.background-color=EternityChallenge.color(7)~>
             <span>Eternity Challenge 7</span>
             <br/>
             <span>Infinity generator per-purchase multipliers are disabled.</span>
@@ -2240,7 +2241,7 @@
           </div>
         </td>
         <td>
-          <div class="eternitychallengediv">
+          <div class="eternitychallengediv" ~style.background-color=EternityChallenge.color(8)~>
             <span>Eternity Challenge 8</span>
             <br/>
             <span>Eternity generators are disabled.</span>
@@ -2500,7 +2501,7 @@
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
         <td>
-          <div class="complexitychallengediv yellowdiv">
+          <div class="complexitychallengediv yellowdiv" ~style.background=ComplexityChallenge.color(1)~>
             <span>Complexity Challenge 1</span>
             <br/>
             <span>No requirement (you're always in this challenge).</span>
@@ -2515,7 +2516,7 @@
           </div>
         </td>
         <td>
-          <div class="complexitychallengediv greydiv">
+          <div class="complexitychallengediv greydiv" ~style.background=ComplexityChallenge.color(2)~>
             <span>Complexity Challenge 2</span>
             <br/>
             <span>You can't buy boosts.</span>
@@ -2536,7 +2537,7 @@
       </tr>
       <tr>
         <td>
-          <div class="complexitychallengediv purplediv">
+          <div class="complexitychallengediv purplediv" ~style.background=ComplexityChallenge.color(3)~>
             <span>Complexity Challenge 3</span>
             <br/>
             <span>You can't unlock the Eternity Producer.</span>
@@ -2555,7 +2556,7 @@
           </div>
         </td>
         <td>
-          <div class="complexitychallengediv orangediv">
+          <div class="complexitychallengediv orangediv" ~style.background=ComplexityChallenge.color(4)~>
             <span>Complexity Challenge 4</span>
             <br/>
             <span>You can't unlock chroma.</span>
@@ -2576,7 +2577,7 @@
       </tr>
       <tr>
         <td>
-          <div class="complexitychallengediv cyandiv">
+          <div class="complexitychallengediv cyandiv" ~style.background=ComplexityChallenge.color(5)~>
             <span>Complexity Challenge 5</span>
             <br/>
             <span>You can't buy Eternity Generator 8.</span>
@@ -2595,7 +2596,7 @@
           </div>
         </td>
         <td>
-          <div class="complexitychallengediv greendiv">
+          <div class="complexitychallengediv greendiv" ~style.background=ComplexityChallenge.color(6)~>
             <span>Complexity Challenge 6</span>
             <br/>
             <span>You can't buy or have studies.</span>
@@ -2688,7 +2689,7 @@
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
         <td>
-          <div class="complexityachievementdiv">
+          <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(1, 1)~>
             <span class="greytogrey">One per generator</span>
             <br/>
             Complete Complexity Challenge 2 ~f 8 ~ times.
@@ -2699,7 +2700,7 @@
           </div>
         </td>
         <td>
-          <div class="complexityachievementdiv">
+          <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(1, 2)~>
             <span class="greytopurple">Forever isn't too long</span>
             <br/>
             Eternity in Complexity Challenge 2.
@@ -2710,7 +2711,7 @@
           </div>
         </td>
         <td>
-          <div class="complexityachievementdiv">
+          <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(1, 3)~>
             <span class="greytoorange">More colorful than a potato</span>
             <br/>
             Unlock chroma in Complexity Challenge 2.
@@ -2721,7 +2722,7 @@
           </div>
         </td>
         <td>
-          <div class="complexityachievementdiv">
+          <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(1, 4)~>
             <span class="greytogreen">Forgot something</span>
             <br/>
             Get ~f 11 ~ studies in Complexity Challenge 2.
@@ -2734,7 +2735,7 @@
       </tr>
       <tr>
         <td>
-          <div class="complexityachievementdiv">
+          <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(2, 1)~>
             <span class="purpletogrey">Actually a boost</span>
             <br/>
             Get a per-boost multiplier of ~f Math.pow(2, 24) ~ outside of Infinity Challenge 7 in Complexity Challenge 3.
@@ -2745,7 +2746,7 @@
           </div>
         </td>
         <td>
-          <div class="complexityachievementdiv">
+          <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(2, 2)~>
             <span class="purpletopurple">Time after time</span>
             <br/>
             Get ~f Math.pow(2, 24) ~ eternities in Complexity Challenge 3.
@@ -2756,7 +2757,7 @@
           </div>
         </td>
         <td>
-          <div class="complexityachievementdiv">
+          <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(2, 3)~>
             <span class="purpletoorange">After a hurricane</span>
             <br/>
             Unlock chroma in Complexity Challenge 3.
@@ -2767,7 +2768,7 @@
           </div>
         </td>
         <td>
-          <div class="complexityachievementdiv">
+          <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(2, 4)~>
             <span class="purpletogreen">3 * 7 * 11</span>
             <br/>
             Get ~f 231 ~ theorems in Complexity Challenge 3.
@@ -2780,7 +2781,7 @@
       </tr>
       <tr>
         <td>
-          <div class="complexityachievementdiv">
+          <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(3, 1)~>
             <span class="orangetogrey">No rest</span>
             <br/>
             Get ~f 1024 ~ boosts in Eternity Challenge 2 in Complexity Challenge 4.
@@ -2791,7 +2792,7 @@
           </div>
         </td>
         <td>
-          <div class="complexityachievementdiv">
+          <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(3, 2)~>
             <span class="orangetopurple">Broke every stone</span>
             <br/>
             Complete all eternity challenges, without using automatic eternity challenge completion, in Complexity Challenge 4.
@@ -2802,7 +2803,7 @@
           </div>
         </td>
         <td>
-          <div class="complexityachievementdiv">
+          <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(3, 3)~>
             <span class="orangetoorange">Shadeless</span>
             <br/>
             Complete Complexity Challenge 4 ~f 13 ~ times.
@@ -2813,7 +2814,7 @@
           </div>
         </td>
         <td>
-          <div class="complexityachievementdiv">
+          <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(3, 4)~>
             <span class="orangetogreen">Thousand-theorem twilight</span>
             <br/>
             Get ~f Decimal.pow(2, 1.75 * Math.pow(2, 16)) ~ eternity points, without buying theorems, in Complexity Challenge 4.
@@ -2826,7 +2827,7 @@
       </tr>
       <tr>
         <td>
-          <div class="complexityachievementdiv">
+          <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(4, 1)~>
             <span class="greentogrey">Power beats knowledge</span>
             <br/>
             Get ~f Math.pow(2, 16) ~ boost power in Complexity Challenge 6.
@@ -2837,7 +2838,7 @@
           </div>
         </td>
         <td>
-          <div class="complexityachievementdiv">
+          <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(4, 2)~>
             <span class="greentopurple">Calm EC</span>
             <br/>
             Complete ~f 20 ~ eternity challenge tiers, without using automatic eternity challenge completion, in Complexity Challenge 6.
@@ -2848,7 +2849,7 @@
           </div>
         </td>
         <td>
-          <div class="complexityachievementdiv">
+          <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(4, 3)~>
             <span class="greentoorange">Nonzero-color theorem</span>
             <br/>
             Unlock chroma in Complexity Challenge 6.
@@ -2859,7 +2860,7 @@
           </div>
         </td>
         <td>
-          <div class="complexityachievementdiv">
+          <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(4, 4)~>
             <span class="greentogreen">On the other side</span>
             <br/>
             Get ~f 168 ~ theorems in Complexity Challenge 6.
@@ -2983,10 +2984,10 @@
       <tr>
         <td><button class="options-button" onclick="Options.toggleOfflineProgress()">Offline progress: ~r player.options.offlineProgress ? "On" : "Off" ~</button></td>
         <td><button class="options-button" onclick="Options.toggleHotkeys()">Hotkeys: ~r player.options.hotkeys ? "On" : "Off" ~</button></td>
-        <td><button class="options-button" onclick="Options.nextNotation()">Notation: ~r player.options.notation ~</button></td>
+        <td><button class="options-button" onclick="Options.toggleCompletionColors()">Completion colors: ~r player.options.completionColors? "On" : "Off" ~</button></td>
       </tr>
       <tr>
-        <td></td>
+        <td><button class="options-button" onclick="Options.nextNotation()">Notation: ~r player.options.notation ~</button></td>
         <td><button class="options-button" onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></td>
         <td></td>
       </tr>

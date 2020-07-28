@@ -25,5 +25,18 @@ let EternityMilestones = {
     } else if (this.isEternityMilestoneDisabled(x)) {
       return 'Disabled';
     }
+  },
+  milestoneStatusNumber(x) {
+    if (this.isEternityMilestoneActive(x)) {
+      return 1;
+    } else if (!this.hasEternityMilestone(x)) {
+      return 0;
+    } else if (this.isEternityMilestoneDisabled(x)) {
+      return 0.5;
+    }
+  },
+  color(x) {
+    if (!player.options.completionColors) return '#000000';
+    return Colors.makeColor(this.milestoneStatusNumber(x));
   }
 }

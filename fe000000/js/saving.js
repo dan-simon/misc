@@ -296,6 +296,10 @@ let Saving = {
       delete player.complexityUpgrades;
       player.version = 1.890625;
     }
+    if (player.version < 1.89453125) {
+      player.options.completionColors = true;
+      player.version = 1.89453125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

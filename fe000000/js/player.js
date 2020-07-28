@@ -153,6 +153,7 @@ let initialPlayer = {
     notation: 'Scientific',
     offlineProgress: true,
     hotkeys: true,
+    completionColors: true,
   },
   stats: {
     totalStarsProduced: new Decimal(0),
@@ -194,7 +195,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.890625
+  version: 1.89453125
 }
 
 let player;

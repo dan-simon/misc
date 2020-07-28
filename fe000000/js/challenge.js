@@ -113,5 +113,9 @@ let Challenge = {
     } else {
       return 'This text should never appear.';
     }
+  },
+  color(x) {
+    if (!player.options.completionColors) return '#000000';
+    return Colors.makeColor(this.isChallengeCompleted(x));
   }
 }
