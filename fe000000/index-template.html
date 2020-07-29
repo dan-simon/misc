@@ -43,6 +43,7 @@
   <script src="js/chroma.js"></script>
   <script src="js/colors.js"></script>
   <script src="js/format.js"></script>
+  <script src="js/galaxy.js"></script>
   <script src="js/generators.js"></script>
   <script src="js/hotkeys.js"></script>
   <script src="js/loop.js"></script>
@@ -111,6 +112,7 @@
       <button ~style.display=Tabs.isTabVisible('complexity-challenges') ? '' : 'none'~ onclick="Tabs.setTab('complexity-challenges')">Complexity Challenges</button>
       <button ~style.display=Tabs.isTabVisible('complexity-achievements') ? '' : 'none'~ onclick="Tabs.setTab('complexity-achievements')">Complexity Achievements</button>
       <button ~style.display=Tabs.isTabVisible('powers') ? '' : 'none'~ onclick="Tabs.setTab('powers')">Powers</button>
+      <button ~style.display=Tabs.isTabVisible('galaxies') ? '' : 'none'~ onclick="Tabs.setTab('galaxies')">Galaxies</button>
     </span>
   </div>
   <br/>
@@ -2917,7 +2919,7 @@
       <br/>
       <button onclick="Powers.export()">Export active powers</button> <button onclick="Powers.import()">Import active powers</button>
       <button onclick="Powers.toggleRespec()">Deactivate active powers on next complexity: ~r Powers.isRespecOn() ? "On" : "Off" ~</button>
-      <br ~style.display=ComplexityPrestigeLayer.canComplexity() ? 'none' : ''~/>
+      <br/>
       <button onclick="Powers.respecAndReset()">Deactivate active powers and ~r ComplexityPrestigeLayer.resetText() ~</button></button>
       <br/>
       <br/>
@@ -3544,6 +3546,31 @@
       </span>
       <br/>
       <span style="display: none;">Exported active powers: <input id="powers-export-output"></input></span>
+    </div>
+  </tab>
+  <tab ~style.display=Tabs.currentTab() === 'galaxies' ? '' : 'none'~>
+    <div ~style.display=Galaxy.isUnlocked() ? 'none' : ''~>
+      <button style="height: 48px;" onclick="Galaxy.unlock()" ~class=Galaxy.canUnlock() ? '' : 'disabled'~>
+        Unlock Galaxies<br/>Cost: ~f Galaxy.unlockCost() ~ complexity points
+      </button>
+    </div>
+    <div ~style.display=Galaxy.isUnlocked() ? '' : 'none'~>
+      <span>You have produced ~f Galaxy.totalStarsProduced() ~ total stars, making your star factor ~f Galaxy.starFactor() ~.</span>
+      <br/>
+      <span>You have produced ~f Galaxy.totalInfinityStarsProduced() ~ total infinity stars, making your infinity star factor ~f Galaxy.infinityStarFactor() ~.</span>
+      <br/>
+      <span>You have produced ~f Galaxy.totalEternityStarsProduced() ~ total eternity stars, making your eternity star factor ~f Galaxy.eternityStarFactor() ~.</span>
+      <br/>
+      <span>You have produced ~f Galaxy.totalComplexityStarsProduced() ~ total complexity stars, making your complexity star factor ~f Galaxy.complexityStarFactor() ~.</span>
+      <br/>
+      <span>Your stellar product is ~f Galaxy.starFactor() ~ x ~f Galaxy.infinityStarFactor() ~ x ~f Galaxy.eternityStarFactor() ~ x ~f Galaxy.complexityStarFactor() ~ = ~f Galaxy.stellarProduct() ~.</span>
+      <br/>
+      <br/>
+      <span>You have ~f Galaxy.stellarProductAmount() ~ (based on stellar product) + ~f Galaxy.complexityPointAmount() ~ (based on total ℂP produced) = ~f Galaxy.amount() ~ galaxies.</span>
+      <br/>
+      <span>Next galaxies are at ~f Galaxy.nextStellarProductGalaxy() ~ stellar product and ~f Galaxy.nextComplexityPointGalaxy() ~ total ℂP produced.</span>
+      <br/>
+      <span>Right now galaxies don't do anything.</span>
     </div>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'statistics' ? '' : 'none'~>

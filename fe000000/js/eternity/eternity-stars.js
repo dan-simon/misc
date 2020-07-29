@@ -4,6 +4,7 @@ let EternityStars = {
   },
   addAmount(x) {
     player.eternityStars = player.eternityStars.plus(x);
+    player.stats.totalEternityStarsProduced = player.stats.totalEternityStarsProduced.plus(x);
   },
   perSecond() {
     return EternityGenerator(1).productionPerSecond();

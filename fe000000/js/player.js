@@ -164,6 +164,9 @@ let initialPlayer = {
     powerDeletionMode: 'Confirmation',
     presets: []
   },
+  galaxies: {
+    unlocked: false
+  },
   options: {
     notation: 'Scientific',
     offlineProgress: true,
@@ -176,10 +179,13 @@ let initialPlayer = {
     totalStarsProducedThisComplexity: new Decimal(0),
     totalIPProduced: new Decimal(0),
     totalIPProducedThisEternity: new Decimal(0),
+    totalInfinityStarsProduced: new Decimal(0),
     totalEPProduced: new Decimal(0),
     totalEPProducedThisComplexity: new Decimal(0),
     totalEternitiesProducedThisComplexity: new Decimal(0),
+    totalEternityStarsProduced: new Decimal(0),
     totalCPProduced: new Decimal(0),
+    totalComplexityStarsProduced: new Decimal(0),
     timeSincePurchase: 0,
     timeSinceSacrifice: 0,
     timeSincePrestige: 0,
@@ -211,7 +217,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.93359375
+  version: 1.9345703125
 }
 
 let player;
