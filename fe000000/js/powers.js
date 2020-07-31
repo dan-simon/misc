@@ -7,12 +7,6 @@ let PowerUpgrade = function (i) {
       return player.powers.upgrades[i - 1];
     },
     addBought(n) {
-      if (i === 1) {
-        Powers.next().strength = Powers.newStrength();
-      }
-      if (i === 3) {
-        player.powers.next.rarity = Math.sqrt(Math.pow(this.laterEffect(n), 2) - Math.pow(this.effect(), 2) + Math.pow(player.powers.next.rarity, 2));
-      }
       player.powers.upgrades[i - 1] += n;
     },
     boughtLimit() {
@@ -45,7 +39,7 @@ let PowerUpgrade = function (i) {
     },
     processEffect(x) {
       if (i === 1) {
-        return 1 + Math.sqrt(Math.log2(1 + x / 4));
+        return 1 + Math.sqrt(Math.log2(1 + x / 4)) + Galaxy.getAmountRewardEffect(1);
       } else if (i === 3) {
         return Math.sqrt(-Math.log2(4 / (4 + x)));
       } else {
@@ -57,6 +51,20 @@ let PowerUpgrade = function (i) {
     },
     nextEffect() {
       return this.laterEffect(1);
+    },
+    effectDisplay() {
+      if (i === 3) {
+        return this.effect() + Galaxy.getAmountRewardEffect(2);
+      } else {
+        return this.effect();
+      }
+    },
+    nextEffectDisplay() {
+      if (i === 3) {
+        return this.nextEffect() + Galaxy.getAmountRewardEffect(2);
+      } else {
+        return this.nextEffect();
+      }
     },
     laterEffect(n) {
       return this.processEffect(this.initialEffect() + this.effectIncreasePer() * (this.bought() + n));
@@ -149,7 +157,7 @@ let Powers = {
     if (!this.canUnlock()) return;
     player.complexityPoints = player.complexityPoints.minus(this.unlockCost());
     player.powers.unlocked = true;
-    this.gainNewPower();
+    player.powers.stored.push(RNG.initialPower());
     player.stats.timeSincePowerGain = 0;
   },
   isPowerGainOn() {
@@ -179,8 +187,7 @@ let Powers = {
     }
   },
   gainNewPower() {
-    player.powers.stored.push(this.next());
-    player.powers.next = RNG.randomPower();
+    player.powers.stored.push(RNG.randomPower(true));
   },
   getSortedPowerList(x, includeActive, noIndex) {
     let startingList = includeActive ? this.active().concat(this.stored()) : this.stored();
@@ -335,7 +342,7 @@ let Powers = {
     return player.powers.stored;
   },
   next() {
-    return player.powers.next;
+    return RNG.randomPower(false);
   },
   cap(p) {
     return p.type === 'eternity' ? 3 : Infinity;

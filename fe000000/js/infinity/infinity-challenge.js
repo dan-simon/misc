@@ -132,7 +132,6 @@ let InfinityChallenge = {
     return 7 - player.stats.purchasesThisInfinity + 9 * player.stats.purchasesThisInfinityByType[8];
   },
   color(x) {
-    if (!player.options.completionColors) return '';
-    return 'radial-gradient(#000000, ' + Colors.makeColor(this.isInfinityChallengeCompleted(x)) + ')';
+    return Colors.makeStyle(this.isInfinityChallengeCompleted(x), true);
   }
 }

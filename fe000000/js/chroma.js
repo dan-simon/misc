@@ -31,8 +31,8 @@ let Chroma = {
     return cap * (1 - Math.exp(-t / cap));
   },
   cap() {
-    return Math.max(EternityPoints.totalEPProducedThisComplexity().log2(), 1) *
-      ComplexityChallenge.getComplexityChallengeReward(4) * ComplexityAchievements.effect(4, 3);
+    return Math.pow(Math.max(EternityPoints.totalEPProducedThisComplexity().log2(), 1) *
+      ComplexityChallenge.getComplexityChallengeReward(4) * ComplexityAchievements.effect(4, 3), Galaxy.effect());
   },
   chromaSpeedMultiplier() {
     let factors = [

@@ -149,5 +149,7 @@ let ComplexityPrestigeLayer = {
     player.stats.timeSinceLastPeakCPPerSec = Math.pow(2, 256);
     player.stats.peakCPPerSec = new Decimal(0);
     player.stats.lastTenEternities = initialLastTenEternities();
+    // Not sure where to do this, might as well be here.
+    player.galaxies.dilated = Galaxy.nextDilated();
   }
 }

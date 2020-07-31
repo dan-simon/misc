@@ -36,7 +36,6 @@ let EternityMilestones = {
     }
   },
   color(x) {
-    if (!player.options.completionColors) return '';
-    return 'radial-gradient(' + Colors.makeColor(this.milestoneStatusNumber(x)) + ', #000000)';
+    return Colors.makeStyle(this.milestoneStatusNumber(x), false);
   }
 }

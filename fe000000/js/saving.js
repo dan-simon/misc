@@ -342,6 +342,13 @@ let Saving = {
       };
       player.version = 1.9345703125;
     }
+    if (player.version < 1.935546875) {
+      player.galaxies.dilated = 0;
+      player.galaxies.nextDilated = 0;
+      delete player.powers.next;
+      player.options.completionColors = player.options.completionColors ? 'On (gradient)' : 'Off'
+      player.version = 1.935546875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

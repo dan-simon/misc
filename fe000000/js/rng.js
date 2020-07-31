@@ -1,7 +1,9 @@
 let RNG = {
-  uniform() {
+  uniform(real) {
     let result = player.powers.seed / Math.pow(2, 32);
-    this.advanceSeed();
+    if (real) {
+      this.advanceSeed();
+    }
     return result;
   },
   createSeed() {
@@ -15,17 +17,17 @@ let RNG = {
     x = (x + Math.pow(2, 32)) % Math.pow(2, 32);
     player.powers.seed = x;
   },
-  rarity() {
-    return Math.sqrt(Math.pow(Powers.minimumRarity(), 2) - Math.log2(this.uniform()));
+  rarity(real) {
+    return Math.sqrt(Math.pow(Powers.minimumRarity(), 2) - Math.log2(this.uniform(real))) + Galaxy.getAmountRewardEffect(2);
   },
-  randomType() {
-    return ['normal', 'infinity', 'eternity', 'complexity'][Math.floor(4 * this.uniform())]
+  randomType(real) {
+    return ['normal', 'infinity', 'eternity', 'complexity'][Math.floor(4 * this.uniform(real))]
   },
-  randomPower() {
+  randomPower(real) {
     return {
-      'type': this.randomType(),
+      'type': this.randomType(real),
       'strength': Powers.newStrength(),
-      'rarity': this.rarity(),
+      'rarity': this.rarity(real),
     };
   },
   initialPower() {

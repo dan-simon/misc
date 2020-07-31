@@ -155,7 +155,6 @@ let initialPlayer = {
     upgrades: [0, 0, 0],
     active: [],
     stored: [],
-    next: RNG.initialPower(),
     gain: true,
     respec: false,
     hasGainedShards: false,
@@ -165,13 +164,15 @@ let initialPlayer = {
     presets: []
   },
   galaxies: {
-    unlocked: false
+    unlocked: false,
+    dilated: 0,
+    nextDilated: 0
   },
   options: {
     notation: 'Scientific',
     offlineProgress: true,
     hotkeys: true,
-    completionColors: true,
+    completionColors: 'On (gradient)',
   },
   stats: {
     totalStarsProduced: new Decimal(0),
@@ -217,7 +218,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9345703125
+  version: 1.935546875
 }
 
 let player;
