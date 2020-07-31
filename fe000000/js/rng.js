@@ -18,7 +18,7 @@ let RNG = {
     player.powers.seed = x;
   },
   rarity(real) {
-    return Math.sqrt(Math.pow(Powers.minimumRarity(), 2) - Math.log2(this.uniform(real))) + Galaxy.getAmountRewardEffect(2);
+    return Math.sqrt(Math.pow(Powers.minimumRarity(), 2) - Math.log2(this.uniform(real))) + Prism.getAmountRewardEffect(2);
   },
   randomType(real) {
     return ['normal', 'infinity', 'eternity', 'complexity'][Math.floor(4 * this.uniform(real))]

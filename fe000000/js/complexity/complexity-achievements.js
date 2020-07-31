@@ -47,7 +47,7 @@ let ComplexityAchievements = {
     [
       () => Math.max(Math.pow(2, 1 / 8), Math.pow(Math.max(0, Math.log2(Boost.bestBoostPower())), 1 / 4)),
       () => null,
-      () => 1 + Studies.totalTheorems() / 1024,
+      () => 1 + Studies.totalTheorems() / 2048,
       () => Decimal.pow(2, 1024)
     ]
   ],

@@ -43,7 +43,7 @@ function gameLoop(diff, display) {
   EternityChallenge.checkForAutoEternityChallengeCompletions();
   ComplexityChallenge.checkForComplexityChallengeCompletions();
   ComplexityAchievements.checkForComplexityAchievements();
-  Powers.checkForPowerGain();
+  Powers.tick(diff);
   if (display !== false) {
     updateDisplay();
   }

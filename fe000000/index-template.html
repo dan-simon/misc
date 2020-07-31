@@ -43,7 +43,7 @@
   <script src="js/chroma.js"></script>
   <script src="js/colors.js"></script>
   <script src="js/format.js"></script>
-  <script src="js/galaxy.js"></script>
+  <script src="js/prism.js"></script>
   <script src="js/generators.js"></script>
   <script src="js/hotkeys.js"></script>
   <script src="js/loop.js"></script>
@@ -112,7 +112,7 @@
       <button ~style.display=Tabs.isTabVisible('complexity-challenges') ? '' : 'none'~ onclick="Tabs.setTab('complexity-challenges')">Complexity Challenges</button>
       <button ~style.display=Tabs.isTabVisible('complexity-achievements') ? '' : 'none'~ onclick="Tabs.setTab('complexity-achievements')">Complexity Achievements</button>
       <button ~style.display=Tabs.isTabVisible('powers') ? '' : 'none'~ onclick="Tabs.setTab('powers')">Powers</button>
-      <button ~style.display=Tabs.isTabVisible('galaxies') ? '' : 'none'~ onclick="Tabs.setTab('galaxies')">Galaxies</button>
+      <button ~style.display=Tabs.isTabVisible('prisms') ? '' : 'none'~ onclick="Tabs.setTab('prisms')">Prisms</button>
     </span>
   </div>
   <br/>
@@ -2905,11 +2905,13 @@
       <span>Due to unlocking powers, you gain your eternity points on eternity every second, without needing to eternity.</span>
       <br/>
       <br/>
-      <span>You gain a new power once every ~f Powers.interval() ~ seconds. <button onclick="Powers.togglePowerGain()">Power gain: ~r Powers.isPowerGainOn() ? "On" : "Off" ~</button></span>
+      <span>You have ~f PowerShards.amount() ~ power shards. You get ~r formatWithPrecision(Powers.powerShardGainSpeed(), 5) ~ power shards per second.</span>
       <br/>
-      <span>It has been ~f Powers.timeSincePowerGain() ~ seconds since you last gained a new power.</span>
+      <span>This lets you gain a new power once every ~f Powers.interval() ~ seconds.</span>
+      <br/>
+      <span><button onclick="Powers.togglePowerGain()">Automatically gain powers when affordable: ~r Powers.isPowerGainOn() ? "On" : "Off" ~</button> <button ~class=Powers.canManuallyGainNewPower() ? '' : 'disabled'~ onclick="Powers.manuallyGainNewPower()">Manually gain a new power for ~f 16 ~ power shards</button></span>
       <br ~style.display=!Powers.isPowerGainOn() && Powers.imminentPowerGain() !== 0 ? '' : 'none'~/>
-      <span ~style.display=!Powers.isPowerGainOn() && Powers.imminentPowerGain() !== 0 ? '' : 'none'~>Turning power gain on would give you ~f Powers.imminentPowerGain() ~ new powers.</span>
+      <span ~style.display=!Powers.isPowerGainOn() && Powers.imminentPowerGain() !== 0 ? '' : 'none'~>You can currently afford to gain ~f Powers.imminentPowerGain() ~ new powers.</span>
       <br/>
       <br/>
       <span>Next power<span ~style.display=Powers.nextKept() ? 'none' : ''~> (will be automatically deleted due to being bad enough to be useless)</span>:</span>
@@ -3274,8 +3276,8 @@
           <td><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(1).buyMax()">Max</button></span></td>
         </tr>
         <tr>
-          <td>Speed of gaining new powers:</td>
-          <td><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? 'none' : ''~>~f PowerUpgrade(2).effectDisplay() ~x → ~f PowerUpgrade(2).nextEffectDisplay() ~x</span><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? '' : 'none'~>~f PowerUpgrade(2).effectDisplay() ~x (maxed)</span></td>
+          <td>Speed of gaining power shards:</td>
+          <td><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? 'none' : ''~>~r formatWithPrecision(PowerUpgrade(2).effectDisplay(), 5) ~/s → ~r formatWithPrecision(PowerUpgrade(2).nextEffectDisplay(), 5) ~/s</span><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? '' : 'none'~>~r formatWithPrecision(PowerUpgrade(2).effectDisplay(), 5) ~/s (maxed)</span></td>
           <td><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(2).buy()">Cost: ~f PowerUpgrade(2).cost() ~ ℂP</button></span></td>
           <td><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(2).buyMax()">Max</button></span></td>
         </tr>
@@ -3287,36 +3289,35 @@
         </tr>
       </table>
       <br/>
-      <div ~style.display=PowerShards.hasGainedShards() ? '' : 'none'~>
-        <span>You have ~f PowerShards.amount() ~ power shards. <button ~class=PowerShards.anythingToBuy() ? "" : "disabled"~ onclick="PowerShards.maxAll()">Max power shard upgrades</button></span>
-        <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
-          <tr>
-            <td class="yellowspan">Additional multiplier to normal generator powers:</td>
-            <td><span ~style.display=PowerShardUpgrade(1).atBoughtLimit() ? 'none' : ''~>+~f PowerShardUpgrade(1).effect() ~ → +~f PowerShardUpgrade(1).nextEffect() ~</span><span ~style.display=PowerShardUpgrade(1).atBoughtLimit() ? '' : 'none'~>~f PowerShardUpgrade(1).effect() ~ (maxed)</span></td>
-            <td><span ~style.display=PowerShardUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(1).buy()">Cost: ~f PowerShardUpgrade(1).cost() ~ power shards</button></span></td>
-            <td><span ~style.display=PowerShardUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(1).buyMax()">Max</button></span></td>
-          </tr>
-          <tr>
-            <td class="magentaspan">Additional multiplier to infinity generator powers:</td>
-            <td><span ~style.display=PowerShardUpgrade(2).atBoughtLimit() ? 'none' : ''~>+~f PowerShardUpgrade(2).effect() ~ → +~f PowerShardUpgrade(2).nextEffect() ~</span><span ~style.display=PowerShardUpgrade(2).atBoughtLimit() ? '' : 'none'~>~f PowerShardUpgrade(2).effect() ~ (maxed)</span></td>
-            <td><span ~style.display=PowerShardUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(2).buy()">Cost: ~f PowerShardUpgrade(2).cost() ~ power shards</button></span></td>
-            <td><span ~style.display=PowerShardUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(2).buyMax()">Max</button></span></td>
-          </tr>
-          <tr>
-            <td class="cyanspan">Additional multiplier to eternity generator powers:</td>
-            <td><span ~style.display=PowerShardUpgrade(3).atBoughtLimit() ? 'none' : ''~>+~f PowerShardUpgrade(3).effect() ~ → +~f PowerShardUpgrade(3).nextEffect() ~</span><span ~style.display=PowerShardUpgrade(3).atBoughtLimit() ? '' : 'none'~>~f PowerShardUpgrade(3).effect() ~ (maxed)</span></td>
-            <td><span ~style.display=PowerShardUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(3).buy()">Cost: ~f PowerShardUpgrade(3).cost() ~ power shards</button></span></td>
-            <td><span ~style.display=PowerShardUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(3).buyMax()">Max</button></span></td>
-          </tr>
-          <tr>
-            <td class="brownspan">Additional multiplier to complexity generator powers:</td>
-            <td><span ~style.display=PowerShardUpgrade(4).atBoughtLimit() ? 'none' : ''~>+~f PowerShardUpgrade(4).effect() ~ → +~f PowerShardUpgrade(4).nextEffect() ~</span><span ~style.display=PowerShardUpgrade(4).atBoughtLimit() ? '' : 'none'~>~f PowerShardUpgrade(4).effect() ~ (maxed)</span></td>
-            <td><span ~style.display=PowerShardUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(4).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(4).buy()">Cost: ~f PowerShardUpgrade(4).cost() ~ power shards</button></span></td>
-            <td><span ~style.display=PowerShardUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(4).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(4).buyMax()">Max</button></span></td>
-          </tr>
-        </table>
-        <span>Power shard upgrade multipliers take effect after power and rarity, but before extra multipliers.</span>
-      </div>
+      <br/>
+      <span>You have ~f PowerShards.amount() ~ power shards. <button ~class=PowerShards.anythingToBuy() ? "" : "disabled"~ onclick="PowerShards.maxAll()">Max power shard upgrades</button></span>
+      <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
+        <tr>
+          <td class="yellowspan">Additional multiplier to normal generator powers:</td>
+          <td><span ~style.display=PowerShardUpgrade(1).atBoughtLimit() ? 'none' : ''~>+~f PowerShardUpgrade(1).effect() ~ → +~f PowerShardUpgrade(1).nextEffect() ~</span><span ~style.display=PowerShardUpgrade(1).atBoughtLimit() ? '' : 'none'~>~f PowerShardUpgrade(1).effect() ~ (maxed)</span></td>
+          <td><span ~style.display=PowerShardUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(1).buy()">Cost: ~f PowerShardUpgrade(1).cost() ~ power shards</button></span></td>
+          <td><span ~style.display=PowerShardUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(1).buyMax()">Max</button></span></td>
+        </tr>
+        <tr>
+          <td class="magentaspan">Additional multiplier to infinity generator powers:</td>
+          <td><span ~style.display=PowerShardUpgrade(2).atBoughtLimit() ? 'none' : ''~>+~f PowerShardUpgrade(2).effect() ~ → +~f PowerShardUpgrade(2).nextEffect() ~</span><span ~style.display=PowerShardUpgrade(2).atBoughtLimit() ? '' : 'none'~>~f PowerShardUpgrade(2).effect() ~ (maxed)</span></td>
+          <td><span ~style.display=PowerShardUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(2).buy()">Cost: ~f PowerShardUpgrade(2).cost() ~ power shards</button></span></td>
+          <td><span ~style.display=PowerShardUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(2).buyMax()">Max</button></span></td>
+        </tr>
+        <tr>
+          <td class="cyanspan">Additional multiplier to eternity generator powers:</td>
+          <td><span ~style.display=PowerShardUpgrade(3).atBoughtLimit() ? 'none' : ''~>+~f PowerShardUpgrade(3).effect() ~ → +~f PowerShardUpgrade(3).nextEffect() ~</span><span ~style.display=PowerShardUpgrade(3).atBoughtLimit() ? '' : 'none'~>~f PowerShardUpgrade(3).effect() ~ (maxed)</span></td>
+          <td><span ~style.display=PowerShardUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(3).buy()">Cost: ~f PowerShardUpgrade(3).cost() ~ power shards</button></span></td>
+          <td><span ~style.display=PowerShardUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(3).buyMax()">Max</button></span></td>
+        </tr>
+        <tr>
+          <td class="brownspan">Additional multiplier to complexity generator powers:</td>
+          <td><span ~style.display=PowerShardUpgrade(4).atBoughtLimit() ? 'none' : ''~>+~f PowerShardUpgrade(4).effect() ~ → +~f PowerShardUpgrade(4).nextEffect() ~</span><span ~style.display=PowerShardUpgrade(4).atBoughtLimit() ? '' : 'none'~>~f PowerShardUpgrade(4).effect() ~ (maxed)</span></td>
+          <td><span ~style.display=PowerShardUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(4).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(4).buy()">Cost: ~f PowerShardUpgrade(4).cost() ~ power shards</button></span></td>
+          <td><span ~style.display=PowerShardUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(4).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(4).buyMax()">Max</button></span></td>
+        </tr>
+      </table>
+      <span>Power shard upgrade multipliers take effect after power and rarity, but before extra multipliers.</span>
       <br/>
       <span>Power presets:</span>
       <br/>
@@ -3552,47 +3553,47 @@
       <span style="display: none;">Exported active powers: <input id="powers-export-output"></input></span>
     </div>
   </tab>
-  <tab ~style.display=Tabs.currentTab() === 'galaxies' ? '' : 'none'~>
-    <div ~style.display=Galaxy.isUnlocked() ? 'none' : ''~>
-      <button style="height: 48px;" onclick="Galaxy.unlock()" ~class=Galaxy.canUnlock() ? '' : 'disabled'~>
-        Unlock Galaxies<br/>Cost: ~f Galaxy.unlockCost() ~ complexity points
+  <tab ~style.display=Tabs.currentTab() === 'prisms' ? '' : 'none'~>
+    <div ~style.display=Prism.isUnlocked() ? 'none' : ''~>
+      <button style="height: 48px;" onclick="Prism.unlock()" ~class=Prism.canUnlock() ? '' : 'disabled'~>
+        Unlock Prisms<br/>Cost: ~f Prism.unlockCost() ~ complexity points
       </button>
     </div>
-    <div ~style.display=Galaxy.isUnlocked() ? '' : 'none'~>
-      <span>You have produced ~f Galaxy.totalStarsProduced() ~ total stars, making your star factor ~f Galaxy.starFactor() ~.</span>
+    <div ~style.display=Prism.isUnlocked() ? '' : 'none'~>
+      <span>You have produced ~f Prism.totalStarsProduced() ~ total stars, making your star factor ~f Prism.starFactor() ~.</span>
       <br/>
-      <span>You have produced ~f Galaxy.totalInfinityStarsProduced() ~ total infinity stars, making your infinity star factor ~f Galaxy.infinityStarFactor() ~.</span>
+      <span>You have produced ~f Prism.totalInfinityStarsProduced() ~ total infinity stars, making your infinity star factor ~f Prism.infinityStarFactor() ~.</span>
       <br/>
-      <span>You have produced ~f Galaxy.totalEternityStarsProduced() ~ total eternity stars, making your eternity star factor ~f Galaxy.eternityStarFactor() ~.</span>
+      <span>You have produced ~f Prism.totalEternityStarsProduced() ~ total eternity stars, making your eternity star factor ~f Prism.eternityStarFactor() ~.</span>
       <br/>
-      <span>You have produced ~f Galaxy.totalComplexityStarsProduced() ~ total complexity stars, making your complexity star factor ~f Galaxy.complexityStarFactor() ~.</span>
+      <span>You have produced ~f Prism.totalComplexityStarsProduced() ~ total complexity stars, making your complexity star factor ~f Prism.complexityStarFactor() ~.</span>
       <br/>
-      <span>Your stellar product is ~f Galaxy.starFactor() ~ x ~f Galaxy.infinityStarFactor() ~ x ~f Galaxy.eternityStarFactor() ~ x ~f Galaxy.complexityStarFactor() ~ = ~f Galaxy.stellarProduct() ~.</span>
-      <br/>
-      <br/>
-      <span>You have ~f Galaxy.stellarProductAmount() ~ (based on stellar product) + ~f Galaxy.complexityPointAmount() ~ (based on total ℂP produced) = ~f Galaxy.amount() ~ galaxies.</span>
-      <br/>
-      <span>Next galaxies are at ~f Galaxy.nextStellarProductGalaxy() ~ stellar product and ~f Galaxy.nextComplexityPointGalaxy() ~ total ℂP produced.</span>
-      <br/>
-      <span>At ~f Galaxy.getAmountRewardThreshold(1) ~ galaxies: Strength of new powers is increased by ~f Galaxy.getAmountRewardRawEffect(2) ~.</span>
-      <br/>
-      <span>At ~f Galaxy.getAmountRewardThreshold(2) ~ galaxies: Rarity of new powers is increased by ~f Galaxy.getAmountRewardRawEffect(3) ~.</span>
-      <br/>
-      <span>At ~f Galaxy.getAmountRewardThreshold(3) ~ galaxies: Power shard upgrades bonuses are multiplied by ~f Galaxy.getAmountRewardRawEffect(4) ~.</span>
+      <span>Your stellar product is ~f Prism.starFactor() ~ x ~f Prism.infinityStarFactor() ~ x ~f Prism.eternityStarFactor() ~ x ~f Prism.complexityStarFactor() ~ = ~f Prism.stellarProduct() ~.</span>
       <br/>
       <br/>
-      <span>You have spent ~f player.stats.timeSinceComplexity ~ seconds in this complexity, increasing chroma caps ^~r formatWithPrecision(Galaxy.effect(), 5) ~</span>
+      <span>You have ~f Prism.stellarProductAmount() ~ (based on stellar product) + ~f Prism.complexityPointAmount() ~ (based on total ℂP produced) = ~f Prism.amount() ~ prisms.</span>
       <br/>
-      <span>(capped at ~r formatWithPrecision(Galaxy.effectCap(), 5) ~, reached at ~f Galaxy.timeToReachEffectCap() ~ seconds in complexity).</span>
+      <span>Next prisms are at ~f Prism.nextStellarProductPrism() ~ stellar product and ~f Prism.nextComplexityPointPrism() ~ total ℂP produced.</span>
+      <br/>
+      <span>At ~f Prism.getAmountRewardThreshold(1) ~ prisms: Strength of new powers is increased by ~f Prism.getAmountRewardRawEffect(2) ~.</span>
+      <br/>
+      <span>At ~f Prism.getAmountRewardThreshold(2) ~ prisms: Rarity of new powers is increased by ~f Prism.getAmountRewardRawEffect(3) ~.</span>
+      <br/>
+      <span>At ~f Prism.getAmountRewardThreshold(3) ~ prisms: Power shard upgrades bonuses are multiplied by ~f Prism.getAmountRewardRawEffect(4) ~.</span>
       <br/>
       <br/>
-      <span>You can make some of your galaxies dilated to make the galaxy effect increase faster, but have a lower cap.</span>
+      <span>You have spent ~f player.stats.timeSinceComplexity ~ seconds in this complexity, increasing chroma caps ^~r formatWithPrecision(Prism.effect(), 5) ~</span>
       <br/>
-      <span>Currently ~f Galaxy.dilated() ~ galaxies are dilated, making the galaxy effect increase ~f Galaxy.effectSpeed() ~x quicker.</span>
+      <span>(capped at ~r formatWithPrecision(Prism.effectCap(), 5) ~, reached at ~f Prism.timeToReachEffectCap() ~ seconds in complexity).</span>
       <br/>
-      <span>Galaxies to make dilated next complexity reset: <input type="text" ~!value=Galaxy.nextDilated()~ ~!onchange=function() {Galaxy.setNextDilated(+this.value)}~></input> (Set this to ~f 0 ~ to un-dilate all dilated galaxies.)</span>
       <br/>
-      <span>Next complexity, the galaxy effect will increase ~f Galaxy.nextEffectSpeed() ~x quicker and have a cap of ~r formatWithPrecision(Galaxy.nextEffectCap(), 5) ~, reached at ~f Galaxy.nextTimeToReachEffectCap() ~ seconds in complexity.</span>
+      <span>You can incorporate some of your prisms into grisms to make the prism effect increase faster, but have a lower cap.</span>
+      <br/>
+      <span>Currently you have ~f Prism.grisms() ~ grisms, making the prism effect increase ~f Prism.effectSpeed() ~x quicker.</span>
+      <br/>
+      <span>Grisms to create next complexity reset: <input type="text" ~!value=Prism.nextGrisms()~ ~!onchange=function() {Prism.setNextGrisms(+this.value)}~></input> (Set this to ~f 0 ~ to remove all your grisms.)</span>
+      <br/>
+      <span>Next complexity, the prism effect will increase ~f Prism.nextEffectSpeed() ~x quicker and have a cap of ~r formatWithPrecision(Prism.nextEffectCap(), 5) ~, reached at ~f Prism.nextTimeToReachEffectCap() ~ seconds in complexity.</span>
     </div>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'statistics' ? '' : 'none'~>

@@ -1,4 +1,4 @@
-let Galaxy = {
+let Prism = {
   amountRewardThresholds: [null, 8, 16, 32],
   totalStarsProduced() {
     return player.stats.totalStarsProduced;
@@ -28,30 +28,30 @@ let Galaxy = {
     return this.starFactor() * this.infinityStarFactor() *
       this.eternityStarFactor() * this.complexityStarFactor();
   },
-  baseGalaxyRequirement() {
-    return Math.pow(2, 120);
+  basePrismRequirement() {
+    return Math.pow(2, 128);
   },
   amount() {
     if (!this.isUnlocked()) return 0;
     return this.stellarProductAmount() + this.complexityPointAmount();
   },
   stellarProductAmount() {
-    return Math.floor(Math.max(Math.log2(this.stellarProduct() / this.baseGalaxyRequirement()) + 1, 0));
+    return Math.floor(Math.max(Math.log2(this.stellarProduct() / this.basePrismRequirement()) + 1, 0));
   },
   complexityPointAmount() {
     return Math.floor(Math.max(Math.log2(ComplexityPoints.totalCPProduced().max(1).log2() / this.unlockCost().log2()) + 1, 0));
   },
-  nextStellarProductGalaxy() {
-    return this.baseGalaxyRequirement() * Math.pow(2, this.stellarProductAmount());
+  nextStellarProductPrism() {
+    return this.basePrismRequirement() * Math.pow(2, this.stellarProductAmount());
   },
-  nextComplexityPointGalaxy() {
+  nextComplexityPointPrism() {
     return this.unlockCost().pow(Math.pow(2, this.complexityPointAmount()))
   },
   isUnlocked() {
-    return player.galaxies.unlocked;
+    return player.prisms.unlocked;
   },
   unlockCost() {
-    return Decimal.pow(2, 1024);
+    return Decimal.pow(2, 4096);
   },
   canUnlock() {
     return player.complexityPoints.gte(this.unlockCost());
@@ -59,37 +59,37 @@ let Galaxy = {
   unlock() {
     if (!this.canUnlock()) return;
     player.complexityPoints = player.complexityPoints.minus(this.unlockCost());
-    player.galaxies.unlocked = true;
+    player.prisms.unlocked = true;
   },
   effect() {
     return Math.min(1 + Math.log2(1 + this.effectSpeed() * player.stats.timeSinceComplexity / 1024) / 64, this.effectCap());
   },
   effectCap() {
-    return 1 + Math.sqrt(this.amount() - this.dilated()) / 64;
+    return 1 + Math.sqrt(this.amount() - this.grisms()) / 64;
   },
   effectSpeed() {
-    return Math.pow(1 + this.dilated(), 2);
+    return Math.pow(1 + this.grisms(), 2);
   },
   timeToReachEffectCap() {
     return 1024 * (Math.pow(2, 64 * (this.effectCap() - 1)) - 1) /  this.effectSpeed();
   },
   nextEffectCap() {
-    return 1 + Math.sqrt(this.amount() - this.nextDilated()) / 64;
+    return 1 + Math.sqrt(this.amount() - this.nextGrisms()) / 64;
   },
   nextEffectSpeed() {
-    return Math.pow(1 + this.nextDilated(), 2);
+    return Math.pow(1 + this.nextGrisms(), 2);
   },
   nextTimeToReachEffectCap() {
     return 1024 * (Math.pow(2, 64 * (this.nextEffectCap() - 1)) - 1) / this.nextEffectSpeed()
   },
-  dilated() {
-    return player.galaxies.dilated;
+  grisms() {
+    return player.prisms.grisms;
   },
-  nextDilated() {
-    return Math.min(player.galaxies.nextDilated, this.amount());
+  nextGrisms() {
+    return Math.min(player.prisms.nextGrisms, this.amount());
   },
-  setNextDilated(x) {
-    player.galaxies.nextDilated = Math.floor(Math.max(x || 0, 0));
+  setNextGrisms(x) {
+    player.prisms.nextGrisms = Math.floor(Math.max(x || 0, 0));
   },
   getAmountRewardThreshold(x) {
     return this.amountRewardThresholds[x];
