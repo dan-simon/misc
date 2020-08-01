@@ -39,7 +39,7 @@ let PowerUpgrade = function (i) {
     },
     processEffect(x) {
       if (i === 1) {
-        return 1 + Math.sqrt(Math.log2(1 + x / 4)) + Galaxy.getAmountRewardEffect(1);
+        return 1 + Math.sqrt(Math.log2(1 + x / 4)) + Galaxy.getStrengthIncrease();
       } else if (i === 3) {
         return Math.sqrt(-Math.log2(4 / (4 + x)));
       } else {
@@ -53,18 +53,11 @@ let PowerUpgrade = function (i) {
       return this.laterEffect(1);
     },
     effectDisplay() {
-      if (i === 3) {
-        return this.effect() + Galaxy.getAmountRewardEffect(2);
-      } else {
-        return this.effect();
-      }
+      // This is coded like this to make it easy to handle something later that increases rarity.
+      return this.effect();
     },
     nextEffectDisplay() {
-      if (i === 3) {
-        return this.nextEffect() + Galaxy.getAmountRewardEffect(2);
-      } else {
-        return this.nextEffect();
-      }
+      return this.nextEffect();
     },
     laterEffect(n) {
       return this.processEffect(this.initialEffect() + this.effectIncreasePer() * (this.bought() + n));
@@ -333,7 +326,7 @@ let Powers = {
     return 4096 / this.speed();
   },
   maximumActivatedLimit() {
-    return 7;
+    return 3;
   },
   active() {
     return player.powers.active;

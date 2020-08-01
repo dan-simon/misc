@@ -3,6 +3,7 @@ let Stars = {
     return player.stars;
   },
   addAmount(x) {
+    x = x.min(MultiverseCollapse.stars().minus(this.amount())).max(0);
     player.stars = player.stars.plus(x);
     player.stats.totalStarsProduced = player.stats.totalStarsProduced.plus(x);
     player.stats.totalStarsProducedThisEternity = player.stats.totalStarsProducedThisEternity.plus(x);
