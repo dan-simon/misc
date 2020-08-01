@@ -1,5 +1,4 @@
 let Galaxy = {
-  amountRewardThresholds: [null, 8, 16, 32],
   totalStarsProduced() {
     return player.stats.totalStarsProduced;
   },
@@ -91,19 +90,7 @@ let Galaxy = {
   setNextDilated(x) {
     player.galaxies.nextDilated = Math.floor(Math.max(x || 0, 0));
   },
-  getAmountRewardThreshold(x) {
-    return this.amountRewardThresholds[x];
-  },
-  getAmountRewardRawEffect(x) {
-    return [null, 0.5, 0.5, 1.5][x];
-  },
-  isAmountRewardActive(x) {
-    return this.amount() >= this.getAmountRewardThreshold(x);
-  },
-  getAmountRewardEffect(x) {
-    if (this.isAmountRewardActive(x)) {
-      return this.getAmountRewardRawEffect(x);
-    }
-    return [null, 0, 0, 1][x];
+  getStrengthIncrease() {
+    return Math.pow(this.amount() / 128, 0.5);
   }
 }

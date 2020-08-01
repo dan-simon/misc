@@ -227,7 +227,8 @@
       <div ~style.display=Generators.areAnyMultipliersNerfed() ? '' : 'none'~>
         Given a multiplier x, let y be log(x, ~f Generators.nerfValue() ~). x is reduced to ~f Generators.nerfValue() ~^y^y^~r formatWithPrecision(Generators.nerfExponent, 5) ~.
       </div>
-      <span>Currently the game ends at ~f Saving.gameEnd() ~ stars. (It hasn't yet been developed this far; fix before release.)</span>
+      <br/>
+      <span>Currently the game ends at ~f Saving.gameEnd() ~ stars.</span>
       <br/>
       <span>You cannot meaningfully keep going beyond that because you cannot get more stars than that.</span>
       <br/>
@@ -3258,7 +3259,7 @@
         </div>
       </div>
       <br/>
-      <span>At most ~f Powers.maximumActivatedLimit() ~ powers can be active at once. (Yes, right now this is an overestimate; fix before release.)</span>
+      <span>At most ~f Powers.maximumActivatedLimit() ~ powers can be active at once.</span>
       <br/>
       <span>Thus, all but the best ~f Powers.maximumActivatedLimit() ~ powers of each type are useless and are thus automatically deleted for power shards.</span>
       <br/>
@@ -3269,7 +3270,7 @@
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>Strength of new powers:</td>
-          <td><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? 'none' : ''~>~f PowerUpgrade(1).effectDisplay() ~ → ~f PowerUpgrade(1).nextEffectDisplay() ~</span><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? '' : 'none'~>^~f PowerUpgrade(1).effectDisplay() ~ (maxed)</span></td>
+          <td><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? 'none' : ''~>~r formatWithPrecision(PowerUpgrade(1).effectDisplay(), 5) ~ → ~r formatWithPrecision(PowerUpgrade(1).nextEffectDisplay(), 5) ~</span><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? '' : 'none'~>~r formatWithPrecision(PowerUpgrade(1).effectDisplay(), 5) ~ (maxed)</span></td>
           <td><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(1).buy()">Cost: ~f PowerUpgrade(1).cost() ~ ℂP</button></span></td>
           <td><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(1).buyMax()">Max</button></span></td>
         </tr>
@@ -3281,7 +3282,7 @@
         </tr>
         <tr>
           <td>Minimum rarity of new powers:</td>
-          <td><span ~style.display=PowerUpgrade(3).atBoughtLimit() ? 'none' : ''~>~f PowerUpgrade(3).effectDisplay() ~ → ~f PowerUpgrade(3).nextEffectDisplay() ~</span><span ~style.display=PowerUpgrade(3).atBoughtLimit() ? '' : 'none'~>~f PowerUpgrade(3).effectDisplay() ~x (maxed)</span></td>
+          <td><span ~style.display=PowerUpgrade(3).atBoughtLimit() ? 'none' : ''~>~f PowerUpgrade(3).effectDisplay() ~ → ~f PowerUpgrade(3).nextEffectDisplay() ~</span><span ~style.display=PowerUpgrade(3).atBoughtLimit() ? '' : 'none'~>~f PowerUpgrade(3).effectDisplay() ~ (maxed)</span></td>
           <td><span ~style.display=PowerUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(3).buy()">Cost: ~f PowerUpgrade(3).cost() ~ ℂP</button></span></td>
           <td><span ~style.display=PowerUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(3).buyMax()">Max</button></span></td>
         </tr>
@@ -3574,11 +3575,7 @@
       <br/>
       <span>Next galaxies are at ~f Galaxy.nextStellarProductGalaxy() ~ stellar product and ~f Galaxy.nextComplexityPointGalaxy() ~ total ℂP produced.</span>
       <br/>
-      <span>At ~f Galaxy.getAmountRewardThreshold(1) ~ galaxies: Strength of new powers is increased by ~f Galaxy.getAmountRewardRawEffect(2) ~.</span>
-      <br/>
-      <span>At ~f Galaxy.getAmountRewardThreshold(2) ~ galaxies: Rarity of new powers is increased by ~f Galaxy.getAmountRewardRawEffect(3) ~.</span>
-      <br/>
-      <span>At ~f Galaxy.getAmountRewardThreshold(3) ~ galaxies: Power shard upgrades bonuses are multiplied by ~f Galaxy.getAmountRewardRawEffect(4) ~.</span>
+      <span>Your galaxies are increasing the strength of new powers by ~r formatWithPrecision(Galaxy.getStrengthIncrease(), 5) ~.</span>
       <br/>
       <br/>
       <span>You have spent ~f player.stats.timeSinceComplexity ~ seconds in this complexity, increasing chroma caps ^~r formatWithPrecision(Galaxy.effect(), 5) ~</span>

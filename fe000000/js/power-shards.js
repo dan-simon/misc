@@ -16,7 +16,7 @@ let PowerShardUpgrade = function (i) {
       return 2;
     },
     effectIncreasePer() {
-      return 0.125 * Galaxy.getAmountRewardEffect(3);
+      return 0.125;
     },
     initialEffect() {
       return 0;
