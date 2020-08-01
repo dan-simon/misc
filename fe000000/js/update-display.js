@@ -2225,11 +2225,11 @@ function updateDisplay() {
     e[936].textContent = format(Galaxy.nextStellarProductGalaxy());
     e[937].textContent = format(Galaxy.nextComplexityPointGalaxy());
     e[938].textContent = format(Galaxy.getAmountRewardThreshold(1));
-    e[939].textContent = format(Galaxy.getAmountRewardRawEffect(2));
+    e[939].textContent = format(Galaxy.getAmountRewardRawEffect(1));
     e[940].textContent = format(Galaxy.getAmountRewardThreshold(2));
-    e[941].textContent = format(Galaxy.getAmountRewardRawEffect(3));
+    e[941].textContent = format(Galaxy.getAmountRewardRawEffect(2));
     e[942].textContent = format(Galaxy.getAmountRewardThreshold(3));
-    e[943].textContent = format(Galaxy.getAmountRewardRawEffect(4));
+    e[943].textContent = format(Galaxy.getAmountRewardRawEffect(3));
     e[944].textContent = format(player.stats.timeSinceComplexity);
     e[945].textContent = formatWithPrecision(Galaxy.effect(), 5);
     e[946].textContent = formatWithPrecision(Galaxy.effectCap(), 5);
