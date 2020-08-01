@@ -19,7 +19,7 @@ let PowerUpgrade = function (i) {
       return 1;
     },
     initialEffect() {
-      return [0, 1, 0, 2][i - 1];
+      return [0, 1, 0][i - 1];
     },
     initialCost() {
       return Decimal.pow(2, 64);
