@@ -349,17 +349,6 @@ let Saving = {
       player.options.completionColors = player.options.completionColors ? 'On (gradient)' : 'Off'
       player.version = 1.935546875;
     }
-    if (player.version < 1.9365234375) {
-      delete player.powers.hasGainedShards;
-      delete player.stats.timeSincePowerGain;
-      player.prisms = player.galaxies;
-      player.prisms.grisms = player.prisms.dilated;
-      player.prisms.nextGrisms = player.prisms.nextDilated;
-      delete player.galaxies;
-      delete player.prisms.dilated;
-      delete player.prisms.nextDilated;
-      player.version = 1.9365234375;
-    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

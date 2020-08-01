@@ -16,7 +16,7 @@ let PowerShardUpgrade = function (i) {
       return 2;
     },
     effectIncreasePer() {
-      return 0.125 * Prism.getAmountRewardEffect(3);
+      return 0.125 * Galaxy.getAmountRewardEffect(3);
     },
     initialEffect() {
       return 0;
@@ -76,6 +76,9 @@ let PowerShardUpgrades = {
 }
 
 let PowerShards = {
+  hasGainedShards() {
+    return player.powers.hasGainedShards;
+  },
   amount() {
     return player.powers.shards;
   },
@@ -89,6 +92,7 @@ let PowerShards = {
   },
   gainShards(p) {
     player.powers.shards += this.shardGain(p);
+    player.powers.hasGainedShards = true;
   },
   gainShardsStored(i) {
     if (Powers.canAccessStored(i)) {

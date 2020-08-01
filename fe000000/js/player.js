@@ -157,15 +157,16 @@ let initialPlayer = {
     stored: [],
     gain: true,
     respec: false,
+    hasGainedShards: false,
     shards: 0,
     shardUpgrades: [0, 0, 0, 0],
     powerDeletionMode: 'Confirmation',
     presets: []
   },
-  prisms: {
+  galaxies: {
     unlocked: false,
-    grisms: 0,
-    nextGrisms: 0
+    dilated: 0,
+    nextDilated: 0
   },
   options: {
     notation: 'Scientific',
@@ -194,6 +195,7 @@ let initialPlayer = {
     timeSinceAutoECCompletion: 0,
     timeSincePermanenceGain: 0,
     timeSinceComplexity: 0,
+    timeSincePowerGain: 0,
     timeSinceGameStart: 0,
     timeSinceLastPeakIPPerSec: Math.pow(2, 256),
     timeSinceLastPeakEPPerSec: Math.pow(2, 256),
@@ -216,7 +218,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9365234375
+  version: 1.935546875
 }
 
 let player;

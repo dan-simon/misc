@@ -150,6 +150,6 @@ let ComplexityPrestigeLayer = {
     player.stats.peakCPPerSec = new Decimal(0);
     player.stats.lastTenEternities = initialLastTenEternities();
     // Not sure where to do this, might as well be here.
-    player.prisms.grisms = Prism.nextGrisms();
+    player.galaxies.dilated = Galaxy.nextDilated();
   }
 }

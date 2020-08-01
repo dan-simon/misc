@@ -16,10 +16,10 @@ let PowerUpgrade = function (i) {
       return [Decimal.pow(2, 16), Decimal.pow(2, 64), null][i - 1];
     },
     effectIncreasePer() {
-      return [1, 1 / 512, 1][i - 1];
+      return 1;
     },
     initialEffect() {
-      return [0, 1 / 512, 0][i - 1];
+      return [0, 1, 0, 2][i - 1];
     },
     initialCost() {
       return Decimal.pow(2, 64);
@@ -39,7 +39,7 @@ let PowerUpgrade = function (i) {
     },
     processEffect(x) {
       if (i === 1) {
-        return 1 + Math.pow(Math.log2(1 + x / 4), 0.25) + Prism.getAmountRewardEffect(1);
+        return 1 + Math.sqrt(Math.log2(1 + x / 4)) + Galaxy.getAmountRewardEffect(1);
       } else if (i === 3) {
         return Math.sqrt(-Math.log2(4 / (4 + x)));
       } else {
@@ -54,14 +54,14 @@ let PowerUpgrade = function (i) {
     },
     effectDisplay() {
       if (i === 3) {
-        return this.effect() + Prism.getAmountRewardEffect(2);
+        return this.effect() + Galaxy.getAmountRewardEffect(2);
       } else {
         return this.effect();
       }
     },
     nextEffectDisplay() {
       if (i === 3) {
-        return this.nextEffect() + Prism.getAmountRewardEffect(2);
+        return this.nextEffect() + Galaxy.getAmountRewardEffect(2);
       } else {
         return this.nextEffect();
       }
@@ -119,7 +119,7 @@ let Powers = {
   baseEffects: {
     'normal': 1 / 512,
     'infinity': 1 / 32,
-    'eternity': 1 / 32,
+    'eternity': 1 / 16,
     'complexity': 1 / 16,
   },
   colorData: {
@@ -140,7 +140,7 @@ let Powers = {
     'eternity': 'Eternity generator multiplier power',
     'complexity': 'Complexity generator multiplier power',
   },
-  upgradeList: [1, 2, 3, 4].map(x => PowerUpgrade(x)),
+  upgradeList: [1, 2, 3, 4].map((x) => PowerUpgrade(x)),
   getUpgrade: function (x) {
     return this.upgradeList[x - 1];
   },
@@ -148,7 +148,7 @@ let Powers = {
     return player.powers.unlocked;
   },
   unlockCost() {
-    return Math.pow(2, 64);
+    return Math.pow(2, 48);
   },
   canUnlock() {
     return player.complexityPoints.gte(this.unlockCost());
@@ -158,6 +158,7 @@ let Powers = {
     player.complexityPoints = player.complexityPoints.minus(this.unlockCost());
     player.powers.unlocked = true;
     player.powers.stored.push(RNG.initialPower());
+    player.stats.timeSincePowerGain = 0;
   },
   isPowerGainOn() {
     return player.powers.gain;
@@ -168,32 +169,20 @@ let Powers = {
   isPowerGainActive() {
     return this.isUnlocked() && this.isPowerGainOn();
   },
-  imminentPowerGain() {
-    return Math.floor(player.powers.shards / 16);
+  timeSincePowerGain() {
+    return player.stats.timeSincePowerGain;
   },
-  tick(diff) {
-    if (this.isUnlocked()) {
-      player.powers.shards += diff * this.powerShardGainSpeed();
-      this.checkForPowerGain();
-    }
+  imminentPowerGain() {
+    return Math.floor(player.stats.timeSincePowerGain / this.interval());
   },
   checkForPowerGain() {
     if (this.isPowerGainActive()) {
+      let timePer = this.interval();
       let newPowers = this.imminentPowerGain();
-      player.powers.shards -= newPowers * 16;
+      player.stats.timeSincePowerGain -= newPowers * timePer;
       for (let i = 0; i < newPowers; i++) {
         this.gainNewPower();
       }
-      this.cleanStored();
-    }
-  },
-  canManuallyGainNewPower() {
-    return player.powers.shards >= 16;
-  },
-  manuallyGainNewPower() {
-    if (this.canManuallyGainNewPower()) {
-      player.powers.shards -= 16;
-      this.gainNewPower();
       this.cleanStored();
     }
   },
@@ -331,7 +320,7 @@ let Powers = {
   newStrength() {
     return PowerUpgrade(1).effect();
   },
-  powerShardGainSpeed() {
+  speed() {
     return PowerUpgrade(2).effect();
   },
   minimumRarity() {
@@ -341,7 +330,7 @@ let Powers = {
     return 3;
   },
   interval() {
-    return 16 / this.powerShardGainSpeed();
+    return 4096 / this.speed();
   },
   maximumActivatedLimit() {
     return 7;
