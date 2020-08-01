@@ -1,5 +1,5 @@
 let Galaxy = {
-  amountRewardThresholds: [null, 8, 16, 32],
+  amountRewardThresholds: [null, 8, 24, 40],
   totalStarsProduced() {
     return player.stats.totalStarsProduced;
   },
