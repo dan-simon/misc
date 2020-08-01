@@ -115,5 +115,59 @@ let PowerShards = {
       // Note: This nonly buys in the expected order if sort is stable.
       [...list].sort((x, y) => x.bought() - y.bought())[0].buy();
     }
+  },
+  setCraftedType(x) {
+    player.powers.craft.type = x;
+  },
+  setCraftedStrength(x) {
+    player.powers.craft.strength = (x === 'max') ? x : Math.max(+x || 0, 0);
+  },
+  setCraftedRarity(x) {
+    player.powers.craft.rarity = (x === 'max' || x === 'min') ? x : Math.max(+x || 0, 0);
+  },
+  craftedType() {
+    return player.powers.craft.type;
+  },
+  craftedStrengthDisplay() {
+    return player.powers.craft.strength;
+  },
+  craftedRarityDisplay() {
+    return player.powers.craft.rarity;
+  },
+  craftedStrength() {
+    if (player.powers.craft.strength === 'max') {
+      return Powers.newStrength();
+    }
+    return Math.min(Powers.newStrength(), player.powers.craft.strength);
+  },
+  craftedRarity() {
+    if (player.powers.craft.rarity === 'min') {
+      return Powers.minimumRarity();
+    }
+    if (player.powers.craft.rarity === 'max') {
+      return Powers.maximumRarity();
+    }
+    return Math.min(Powers.maximumRarity(), player.powers.craft.rarity);
+  },
+  craftedPower() {
+    return {
+      'type': this.craftedType(),
+      'strength': this.craftedStrength(),
+      'rarity': this.craftedRarity(),
+    }
+  },
+  craftedPowerCost() {
+    return Math.max(
+      2 * this.shardGain(this.craftedPower()),
+      4 * Math.pow(2, Math.pow(this.craftedRarity(), 2) - Math.pow(Powers.minimumRarity(), 2)));
+  },
+  canCraft() {
+    return player.powers.shards >= this.craftedPowerCost();
+  },
+  craft() {
+    if (!this.canCraft()) return;
+    player.powers.shards -= this.craftedPowerCost();
+    player.powers.stored.push(this.craftedPower());
+    Powers.cleanStored();
   }
 }

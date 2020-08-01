@@ -182,32 +182,60 @@ let Powers = {
   gainNewPower() {
     player.powers.stored.push(RNG.randomPower(true));
   },
-  getSortedPowerList(x, includeActive, noIndex) {
+  getUnsortedPowerList(x, includeActive, noIndex) {
     let startingList = includeActive ? this.active().concat(this.stored()) : this.stored();
     if (!noIndex) {
       startingList = startingList.map((p, i) => ({'index': 1 + i, ...p}));
     }
+    return startingList.filter(p => p.type === x);
+  },
+  getSortedPowerList(x, includeActive, noIndex) {
+    let startingList = this.getUnsortedPowerList(x, includeActive, noIndex);
     let f = p => this.strength(p) * this.rarity(p);
-    let result = startingList.filter(p => p.type === x).sort((a, b) => f(b) - f(a));
+    let result = startingList.sort((a, b) => f(b) - f(a));
     return result;
   },
   cutoff(x) {
-    return  this.getSortedPowerList(x, true, true).map(p => this.strength(p) * this.rarity(p))[this.maximumActivatedLimit() - 1] || 0;
+    return this.getSortedPowerList(x, true, true).map(p => this.strength(p) * this.rarity(p))[this.maximumActivatedLimit() - 1] || 0;
+  },
+  cutoffIndex(x, cutoff) {
+    let over = this.active().concat(this.stored()).filter(p => p.type === x && this.strength(p) * this.rarity(p) > cutoff);
+    let equal = this.getUnsortedPowerList(x, true, false).filter(p => p.type === x && this.strength(p) * this.rarity(p) === cutoff);
+    // Indices start at 1 and include active powers.
+    let equalIndex = this.maximumActivatedLimit() - over.length - 1;
+    if (equalIndex < 0) {
+      return -1;
+    }
+    if (equalIndex >= equal.length) {
+      return this.stored().length;
+    }
+    return equal[this.maximumActivatedLimit() - over.length - 1].index - this.active().length - 1;
   },
   cleanStored() {
     let cutoffs = {};
+    let cutoffIndices = {};
     for (let x of ['normal', 'infinity', 'eternity', 'complexity']) {
       cutoffs[x] = this.cutoff(x);
+      cutoffIndices[x] = this.cutoffIndex(x, cutoffs[x]);
     }
-    let toRemove = this.stored().filter(p => this.strength(p) * this.rarity(p) < cutoffs[p.type]);
+    let keep = (p, i) => this.strength(p) * this.rarity(p) > cutoffs[p.type] ||
+      (this.strength(p) * this.rarity(p) === cutoffs[p.type] && i <= cutoffIndices[p.type]);
+    let toRemove = this.stored().filter((p, i) => !keep(p, i));
     for (let p of toRemove) {
       PowerShards.gainShards(p);
     }
-    player.powers.stored = this.stored().filter(p => this.strength(p) * this.rarity(p) >= cutoffs[p.type]);
+    // For symmetry, and to remember the second parameter.
+    player.powers.stored = this.stored().filter((p, i) => keep(p, i));
   },
   nextKept() {
-    let cutoff = this.cutoff(this.next().type);
-    return this.strength(this.next()) * this.rarity(this.next()) >= cutoff;
+    let p = this.next();
+    let cutoff = this.cutoff(p.type);
+    return this.strength(p) * this.rarity(p) > cutoff;
+  },
+  craftedKept() {
+    let p = PowerShards.craftedPower();
+    let cutoff = this.cutoff(p.type);
+    return this.strength(p) * this.rarity(p) > cutoff;
   },
   sortActive() {
     // Put higher strength and rarity on the top.
@@ -223,8 +251,8 @@ let Powers = {
       return this.canAccessActive(i);
     } else if (type === 'stored') {
       return this.canAccessStored(i);
-    } else if (type === 'next') {
-      return this.isUnlocked()
+    } else if (type === 'next' || type === 'crafted') {
+      return this.isUnlocked();
     }
   },
   accessPower(type, i) {
@@ -234,6 +262,8 @@ let Powers = {
       return this.stored()[i - 1];
     } else if (type === 'next') {
       return this.next();
+    } else if (type === 'crafted') {
+      return PowerShards.craftedPower();
     }
   },
   color(type, i) {
@@ -318,6 +348,9 @@ let Powers = {
   },
   minimumRarity() {
     return PowerUpgrade(3).effect();
+  },
+  maximumRarity() {
+    return 4;
   },
   activatedLimit() {
     return 3;

@@ -349,6 +349,14 @@ let Saving = {
       player.options.completionColors = player.options.completionColors ? 'On (gradient)' : 'Off'
       player.version = 1.935546875;
     }
+    if (player.version < 1.9365234375) {
+      player.powers.craft = {
+        type: 'normal',
+        strength: 'max',
+        rarity: 1,
+      };
+      player.version = 1.9365234375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

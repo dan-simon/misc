@@ -1219,8 +1219,8 @@
   <tab ~style.display=Tabs.currentTab() === 'eternity-milestones' ? '' : 'none'~>
     <span>
       You have ~f Eternities.amount() ~ eternities.
-      <button ~style.display=EternityMilestones.hasEternityMilestone(4) ? '' : 'none'~ onclick="EternityMilestones.toggleMilestone(4)">Eternity Milestone 4: ~r EternityMilestones.isEternityMilestoneDisabled(4) ? "Disabled" : "Enabled" ~</button>
-      <button ~style.display=EternityMilestones.hasEternityMilestone(8) ? '' : 'none'~ onclick="EternityMilestones.toggleMilestone(8)">Eternity Milestone 8: ~r EternityMilestones.isEternityMilestoneDisabled(8) ? "Disabled" : "Enabled" ~</button>
+      <button ~style.display=EternityMilestones.hasEternityMilestone(4) ? '' : 'none'~ onclick="EternityMilestones.toggleMilestone(4)">Eternity Milestone ~f 4 ~: ~r EternityMilestones.isEternityMilestoneDisabled(4) ? "Disabled" : "Enabled" ~</button>
+      <button ~style.display=EternityMilestones.hasEternityMilestone(8) ? '' : 'none'~ onclick="EternityMilestones.toggleMilestone(8)">Eternity Milestone ~f 8 ~: ~r EternityMilestones.isEternityMilestoneDisabled(8) ? "Disabled" : "Enabled" ~</button>
     </span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
@@ -3318,6 +3318,27 @@
         </table>
         <span>Power shard upgrade multipliers take effect after power and rarity, but before extra multipliers.</span>
       </div>
+      <br/>
+      <span>Craft a power with type <select ~!value=PowerShards.craftedType()~ ~!onchange=function() {PowerShards.setCraftedType(this.value)}~>
+        <option value="normal">normal</option>
+        <option value="infinity">infinity</option>
+        <option value="eternity">eternity</option>
+        <option value="complexity">complexity</option>
+      </select>,
+      strength <input type="text" ~!value=PowerShards.craftedStrengthDisplay()~ ~!onchange=function() {PowerShards.setCraftedStrength(this.value)}~></input>,
+      and rarity <input type="text" ~!value=PowerShards.craftedRarityDisplay()~ ~!onchange=function() {PowerShards.setCraftedRarity(this.value)}~></input>:
+      <button ~class=PowerShards.canCraft() ? '' : 'disabled'~ onclick="PowerShards.craft()">Cost: ~f PowerShards.craftedPowerCost() ~ power shards</button></span>
+      <br/>
+      <span>You cannot craft powers with negative strength or rarity, with strength greater than the strength of generated powers, or with rarity greater than ~ Powers.maximumRarity() ~.</span>
+      <br/>
+      <span>You can set strength to "max" (without the quotes) to craft a power with the strength of generated powers.</span>
+      <br/>
+      <span>Crafted power<span ~style.display=Powers.craftedKept() ? 'none' : ''~> (will be automatically deleted due to being bad enough to be useless)</span>:</span>
+      <br/>
+      <span ~class=Powers.color('crafted', 1)~>~r Powers.description('crafted', 1) ~</span>
+      <br/>
+      <span ~class=Powers.color('crafted', 1)~>~r Powers.details('crafted', 1) ~</span>
+      <br/>
       <br/>
       <span>Power presets:</span>
       <br/>

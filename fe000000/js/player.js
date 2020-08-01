@@ -161,7 +161,12 @@ let initialPlayer = {
     shards: 0,
     shardUpgrades: [0, 0, 0, 0],
     powerDeletionMode: 'Confirmation',
-    presets: []
+    presets: [],
+    craft: {
+      type: 'normal',
+      strength: 'max',
+      rarity: 1,
+    }
   },
   galaxies: {
     unlocked: false,
@@ -218,7 +223,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.935546875
+  version: 1.9365234375
 }
 
 let player;
