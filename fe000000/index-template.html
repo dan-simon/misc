@@ -3288,6 +3288,11 @@
         </tr>
       </table>
       <br/>
+      <div ~style.display=PowerShards.hasGainedShards() ? 'none' : ''~>
+        <span>Power shards can be used to buy upgrades that give powers small additional multipliers, and to craft new powers.</span>
+        <br/>
+        <span>It is generally not recommended to delete any of your first few powers to get power shards.</span>
+      </div>
       <div ~style.display=PowerShards.hasGainedShards() ? '' : 'none'~>
         <span>You have ~f PowerShards.amount() ~ power shards. <button ~class=PowerShards.anythingToBuy() ? "" : "disabled"~ onclick="PowerShards.maxAll()">Max power shard upgrades</button></span>
         <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
@@ -3317,28 +3322,37 @@
           </tr>
         </table>
         <span>Power shard upgrade multipliers take effect after power and rarity, but before extra multipliers.</span>
+        <br/>
+        <br/>
+        <span>Craft a power with type <select ~!value=PowerShards.craftedType()~ ~!onchange=function() {PowerShards.setCraftedType(this.value)}~>
+          <option value="normal">normal</option>
+          <option value="infinity">infinity</option>
+          <option value="eternity">eternity</option>
+          <option value="complexity">complexity</option>
+        </select>,
+        strength <input type="text" ~!value=PowerShards.craftedStrengthDisplay()~ ~!onchange=function() {PowerShards.setCraftedStrength(this.value)}~></input>,
+        and rarity <input type="text" ~!value=PowerShards.craftedRarityDisplay()~ ~!onchange=function() {PowerShards.setCraftedRarity(this.value)}~></input>:
+        <button ~class=PowerShards.canCraft() ? '' : 'disabled'~ onclick="PowerShards.craft()">Cost: ~f PowerShards.craftedPowerCost() ~ power shards</button></span>
+        <br/>
+        <span>You cannot craft the following types of powers:</span>
+        <br/>
+        <span>(a) powers with negative strength or rarity</span>
+        <br/>
+        <span>(b) powers with strength greater than ~f formatWithPrecision(Powers.newStrength(), 5) ~ (the strength of generated powers)</span>
+        <br/>
+        <span>(c) powers with rarity greater than ~f Powers.maximumRarity() ~ (the maximum rarity of generated powers).</span>
+        <br/>
+        <span>You can set strength to "max" (without the quotes) to craft a power with exactly the strength of generated powers.</span>
+        <br/>
+        <span>Crafting cost depends only on rarity, except that it is always at least twice the power shards gained from deletion.</span>
+        <br/>
+        <br/>
+        <span>Crafted power<span ~style.display=Powers.craftedKept() ? 'none' : ''~> (will be automatically deleted due to being bad enough to be useless)</span>:</span>
+        <br/>
+        <span ~class=Powers.color('crafted', 1)~>~r Powers.description('crafted', 1) ~</span>
+        <br/>
+        <span ~class=Powers.color('crafted', 1)~>~r Powers.details('crafted', 1) ~</span>
       </div>
-      <br/>
-      <span>Craft a power with type <select ~!value=PowerShards.craftedType()~ ~!onchange=function() {PowerShards.setCraftedType(this.value)}~>
-        <option value="normal">normal</option>
-        <option value="infinity">infinity</option>
-        <option value="eternity">eternity</option>
-        <option value="complexity">complexity</option>
-      </select>,
-      strength <input type="text" ~!value=PowerShards.craftedStrengthDisplay()~ ~!onchange=function() {PowerShards.setCraftedStrength(this.value)}~></input>,
-      and rarity <input type="text" ~!value=PowerShards.craftedRarityDisplay()~ ~!onchange=function() {PowerShards.setCraftedRarity(this.value)}~></input>:
-      <button ~class=PowerShards.canCraft() ? '' : 'disabled'~ onclick="PowerShards.craft()">Cost: ~f PowerShards.craftedPowerCost() ~ power shards</button></span>
-      <br/>
-      <span>You cannot craft powers with negative strength or rarity, with strength greater than the strength of generated powers, or with rarity greater than ~ Powers.maximumRarity() ~.</span>
-      <br/>
-      <span>You can set strength to "max" (without the quotes) to craft a power with the strength of generated powers.</span>
-      <br/>
-      <span>Crafted power<span ~style.display=Powers.craftedKept() ? 'none' : ''~> (will be automatically deleted due to being bad enough to be useless)</span>:</span>
-      <br/>
-      <span ~class=Powers.color('crafted', 1)~>~r Powers.description('crafted', 1) ~</span>
-      <br/>
-      <span ~class=Powers.color('crafted', 1)~>~r Powers.details('crafted', 1) ~</span>
-      <br/>
       <br/>
       <span>Power presets:</span>
       <br/>
