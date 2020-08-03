@@ -365,7 +365,6 @@ let EternityChallenge = {
     return player.usedAutoECCompletionThisComplexity;
   },
   color(x) {
-    if (!player.options.completionColors) return '';
-    return 'radial-gradient(#000000, ' + Colors.makeColor(this.getEternityChallengeCompletions(x) / 4) + ')';
+    return Colors.makeStyle(this.getEternityChallengeCompletions(x) / 4, true);
   }
 }

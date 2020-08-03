@@ -149,11 +149,35 @@ let initialPlayer = {
     true, true, true, true, true, true, true, true,
     true, true, true, true,
   ],
+  powers: {
+    seed: RNG.createSeed(),
+    unlocked: false,
+    upgrades: [0, 0, 0],
+    active: [],
+    stored: [],
+    gain: true,
+    respec: false,
+    hasGainedShards: false,
+    shards: 0,
+    shardUpgrades: [0, 0, 0, 0],
+    powerDeletionMode: 'Confirmation',
+    presets: [],
+    craft: {
+      type: 'normal',
+      strength: 'max',
+      rarity: 1,
+    }
+  },
+  galaxies: {
+    unlocked: false,
+    dilated: 0,
+    nextDilated: 0
+  },
   options: {
     notation: 'Scientific',
     offlineProgress: true,
     hotkeys: true,
-    completionColors: true,
+    completionColors: 'On (gradient)',
   },
   stats: {
     totalStarsProduced: new Decimal(0),
@@ -161,10 +185,13 @@ let initialPlayer = {
     totalStarsProducedThisComplexity: new Decimal(0),
     totalIPProduced: new Decimal(0),
     totalIPProducedThisEternity: new Decimal(0),
+    totalInfinityStarsProduced: new Decimal(0),
     totalEPProduced: new Decimal(0),
     totalEPProducedThisComplexity: new Decimal(0),
     totalEternitiesProducedThisComplexity: new Decimal(0),
+    totalEternityStarsProduced: new Decimal(0),
     totalCPProduced: new Decimal(0),
+    totalComplexityStarsProduced: new Decimal(0),
     timeSincePurchase: 0,
     timeSinceSacrifice: 0,
     timeSincePrestige: 0,
@@ -173,6 +200,7 @@ let initialPlayer = {
     timeSinceAutoECCompletion: 0,
     timeSincePermanenceGain: 0,
     timeSinceComplexity: 0,
+    timeSincePowerGain: 0,
     timeSinceGameStart: 0,
     timeSinceLastPeakIPPerSec: Math.pow(2, 256),
     timeSinceLastPeakEPPerSec: Math.pow(2, 256),
@@ -195,7 +223,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.89453125
+  version: 1.9365234375
 }
 
 let player;

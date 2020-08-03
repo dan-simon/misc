@@ -296,9 +296,66 @@ let Saving = {
       delete player.complexityUpgrades;
       player.version = 1.890625;
     }
-    if (player.version < 1.89453125) {
+    if (player.version < 1.89453125 || !player.options.completionColors) {
       player.options.completionColors = true;
-      player.version = 1.89453125;
+      player.version = Math.max(player.version, 1.89453125);
+    }
+    if (player.version < 1.90625) {
+      player.powers = {
+        seed: RNG.createSeed(),
+        unlocked: false,
+        upgrades: [0, 0, 0],
+        active: [],
+        stored: [],
+        next: RNG.initialPower(),
+        gain: true,
+        respec: false
+      };
+      player.stats.timeSincePowerGain = 0;
+      player.version = 1.90625;
+    }
+    if (player.version < 1.9140625) {
+      player.powers.hasGainedShards = false;
+      player.powers.shards = 0;
+      player.powers.shardUpgrades = [0, 0, 0, 0];
+      player.powers.powerDeletionMode = 'Confirmation';
+      player.version = 1.9140625;
+    }
+    if (player.version < 1.921875) {
+      player.powers.upgrades = player.powers.upgrades.slice(0, 2).concat([0, player.powers.upgrades[2]]);
+      player.version = 1.921875;
+    }
+    if (player.version < 1.9296875) {
+      player.powers.upgrades.pop();
+      player.version = 1.9296875;
+    }
+    if (player.version < 1.93359375) {
+      player.powers.presets = [];
+      player.version = 1.93359375;
+    }
+    if (player.version < 1.9345703125) {
+      player.stats.totalInfinityStarsProduced = player.infinityStars;
+      player.stats.totalEternityStarsProduced = player.eternityStars;
+      player.stats.totalComplexityStarsProduced = player.complexityStars;
+      player.galaxies = {
+        unlocked: false
+      };
+      player.version = 1.9345703125;
+    }
+    if (player.version < 1.935546875) {
+      player.galaxies.dilated = 0;
+      player.galaxies.nextDilated = 0;
+      delete player.powers.next;
+      player.options.completionColors = player.options.completionColors ? 'On (gradient)' : 'Off'
+      player.version = 1.935546875;
+    }
+    if (player.version < 1.9365234375) {
+      player.powers.craft = {
+        type: 'normal',
+        strength: 'max',
+        rarity: 1,
+      };
+      player.version = 1.9365234375;
     }
   },
   convertSaveToDecimal() {
@@ -325,10 +382,13 @@ let Saving = {
     player.stats.totalStarsProducedThisComplexity = new Decimal(player.stats.totalStarsProducedThisComplexity);
     player.stats.totalIPProduced = new Decimal(player.stats.totalIPProduced);
     player.stats.totalIPProducedThisEternity = new Decimal(player.stats.totalIPProducedThisEternity);
+    player.stats.totalInfinityStarsProduced = new Decimal(player.stats.totalInfinityStarsProduced);
     player.stats.totalEPProduced = new Decimal(player.stats.totalEPProduced);
     player.stats.totalEPProducedThisComplexity = new Decimal(player.stats.totalEPProducedThisComplexity);
     player.stats.totalEternitiesProducedThisComplexity = new Decimal(player.stats.totalEternitiesProducedThisComplexity);
+    player.stats.totalEternityStarsProduced = new Decimal(player.stats.totalEternityStarsProduced);
     player.stats.totalCPProduced = new Decimal(player.stats.totalCPProduced);
+    player.stats.totalComplexityStarsProduced = new Decimal(player.stats.totalComplexityStarsProduced);
     player.stats.peakIPPerSec = new Decimal(player.stats.peakIPPerSec);
     player.stats.peakEPPerSec = new Decimal(player.stats.peakEPPerSec);
     player.stats.peakCPPerSec = new Decimal(player.stats.peakCPPerSec);
@@ -378,7 +438,7 @@ let Saving = {
   exportGame () {
     let output = document.getElementById('export-output');
     let parent = output.parentElement;
-    parent.style.display = "";
+    parent.style.display = '';
     output.value = btoa(JSON.stringify(player));
     output.focus();
     output.select();
@@ -399,5 +459,7 @@ let Saving = {
     }
   },
   // Not sure where this should live, honestly.
-  gameEnd: Decimal.pow(2, 1.5 * Math.pow(2, 37))
+  gameEnd() {
+    return MultiverseCollapse.stars();
+  }
 }

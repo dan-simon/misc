@@ -204,7 +204,7 @@ let Studies = {
   export() {
     let output = document.getElementById('study-export-output');
     let parent = output.parentElement;
-    parent.style.display = "";
+    parent.style.display = '';
     output.value = this.exportString();
     output.focus();
     output.select();

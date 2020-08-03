@@ -12,6 +12,7 @@ let Stats = {
     player.stats.timeSinceLastPeakIPPerSec += diff;
     player.stats.timeSinceLastPeakEPPerSec += diff;
     player.stats.timeSinceLastPeakCPPerSec += diff;
+    player.stats.timeSincePowerGain += diff;
   },
   recordPurchase(i, n) {
     player.stats.timeSincePurchase = 0;

@@ -29,6 +29,13 @@ let ComplexityPrestigeLayer = {
   isAmountSpanVisible() {
     return this.isRequirementVisible() && player.complexities > 0;
   },
+  resetText() {
+    if (this.canComplexity()) {
+      return 'complexity';
+    } else {
+      return 'do an complexity reset (no complexity point gain or complexity gain)';
+    }
+  },
   complexityPointGain() {
     let oom = EternityPoints.totalEPProducedThisComplexity().max(1).log(2) / Math.pow(2, 16);
     return Decimal.pow(2, oom).floor();
@@ -71,6 +78,7 @@ let ComplexityPrestigeLayer = {
     ComplexityPoints.addAmount(gain);
     Complexities.increment();
     Stats.addComplexity(player.stats.timeSinceComplexity, gain);
+    Powers.maybeRespec();
     this.complexityReset();
   },
   complexityReset() {
@@ -141,5 +149,7 @@ let ComplexityPrestigeLayer = {
     player.stats.timeSinceLastPeakCPPerSec = Math.pow(2, 256);
     player.stats.peakCPPerSec = new Decimal(0);
     player.stats.lastTenEternities = initialLastTenEternities();
+    // Not sure where to do this, might as well be here.
+    player.galaxies.dilated = Galaxy.nextDilated();
   }
 }

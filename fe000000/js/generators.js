@@ -52,7 +52,7 @@ let Generator = function (i) {
         InfinityChallenge.isInfinityChallengeRunning(4) ? InfinityChallenge.infinityChallenge4Pow() : 1,
         InfinityChallenge.isInfinityChallengeRunning(5) ? InfinityChallenge.infinityChallenge5Pow() : 1,
         EternityChallenge.isEternityChallengeRunning(1) ? EternityChallenge.eternityChallenge1InfinityStarsEffect() : 1,
-        EternityStars.power(),
+        EternityStars.power(), Powers.getTotalEffect('normal'),
       ];
       return Generators.nerf(multiplier.pow(powFactors.reduce((a, b) => a * b)));
     },
@@ -80,7 +80,7 @@ let Generator = function (i) {
       return n <= this.maxBuyable();
     },
     maxBuyable() {
-      if (!this.isVisible() || InfinityPrestigeLayer.mustInfinity()) return 0;
+      if (!this.isVisible() || InfinityPrestigeLayer.mustInfinity() || MultiverseCollapse.hasHappened()) return 0;
       let num = Math.floor(player.stars.div(this.cost()).times(
         Decimal.minus(this.costIncreasePer(), 1)).plus(1).log(this.costIncreasePer()));
       num = Math.min(num,
@@ -99,7 +99,13 @@ let Generator = function (i) {
         n = 1;
       }
       if (n === 0 || (!guaranteedBuyable && !this.canBuy(n))) return;
-      player.stars = player.stars.minus(this.costFor(n));
+      let cost = this.costFor(n);
+      if (player.stars.gte(Decimal.pow(2, Math.pow(2, 32))) && cost.gte(player.stars.times(15 / 16))) {
+        // Avoid spending of all stars, which can cause issues and can often happen with a large number of stars.
+        player.stars = player.stars.div(16);
+      } else {
+        player.stars = player.stars.minus(this.costFor(n));
+      }
       this.addAmount(n);
       this.addBought(n);
       if (player.highestGenerator < i) {

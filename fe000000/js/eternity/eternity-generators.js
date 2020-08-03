@@ -50,7 +50,9 @@ let EternityGenerator = function (i) {
       ];
       // Most of these are numbers but that's fine, the first one is a Decimal
       // so the below code works.
-      return factors.reduce((a, b) => a.times(b));
+      let multiplier = factors.reduce((a, b) => a.times(b));
+      let powFactors = [Powers.getTotalEffect('eternity')];
+      return multiplier.pow(powFactors.reduce((a, b) => a * b));
     },
     productionPerSecond() {
       return this.amount().times(this.multiplier());

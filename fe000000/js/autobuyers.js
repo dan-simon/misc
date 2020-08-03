@@ -251,7 +251,7 @@ let Autobuyers = {
     return this.fastAutobuyersTimerLength() - player.fastAutobuyersTimer;
   },
   setAutobuyersTimerLength(x) {
-    player.autobuyersTimerLength = x;
+    player.autobuyersTimerLength = x || 0;
   },
   mod(a, b) {
     return (b > 0) ? a % b : 0;

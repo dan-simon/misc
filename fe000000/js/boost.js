@@ -75,7 +75,7 @@ let Boost = {
   isNotBuyableAtAll() {
     // This function is a bit misleadingly named. It checks if there's some condition making boosts completely unbuyable
     // independent of how many stars you have.
-    return !this.isVisible() || InfinityPrestigeLayer.mustInfinity() || !Generators.anyGenerators() || ComplexityChallenge.isSafeguardOn(2);
+    return !this.isVisible() || InfinityPrestigeLayer.mustInfinity() || MultiverseCollapse.hasHappened() || !Generators.anyGenerators() || ComplexityChallenge.isSafeguardOn(2);
   },
   maxBuyable() {
     if (this.isNotBuyableAtAll()) return 0;
@@ -93,7 +93,13 @@ let Boost = {
       n = 1;
     }
     if (n === 0 || (!guaranteedBuyable && !this.canBuy(n))) return;
-    player.stars = player.stars.minus(this.costFor(n));
+    let cost = this.costFor(n);
+    if (player.stars.gte(Decimal.pow(2, Math.pow(2, 32))) && cost.gte(player.stars.times(15 / 16))) {
+      // Avoid spending of all stars, which can cause issues and can often happen with a large number of stars.
+      player.stars = player.stars.div(16);
+    } else {
+      player.stars = player.stars.minus(this.costFor(n));
+    }
     this.addBought(n);
     Stats.recordPurchase(0, n);
   },

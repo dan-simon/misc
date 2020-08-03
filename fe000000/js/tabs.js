@@ -21,6 +21,8 @@ let Tabs = {
       'complexity': () => player.complexities > 0,
       'complexity-challenges': () => player.complexities > 0,
       'complexity-achievements': () => player.complexities > 0,
+      'powers': () => player.complexities > 0,
+      'galaxies': () => player.complexities > 0,
       'statistics': () => true,
       'options': () => true,
     }[x]();

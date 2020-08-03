@@ -36,19 +36,24 @@
   <script src="js/infinity/infinity-prestige-layer.js"></script>
   <script src="js/infinity/infinity-stars.js"></script>
   <script src="js/infinity/infinity-upgrades.js"></script>
+  <script src="js/rng.js"></script>
   <script src="js/autobuyers.js"></script>
   <script src="js/boost.js"></script>
   <script src="js/challenge.js"></script>
   <script src="js/chroma.js"></script>
   <script src="js/colors.js"></script>
   <script src="js/format.js"></script>
+  <script src="js/galaxy.js"></script>
   <script src="js/generators.js"></script>
   <script src="js/hotkeys.js"></script>
   <script src="js/loop.js"></script>
   <script src="js/main.js"></script>
   <script src="js/max-all.js"></script>
+  <script src="js/multiverse-collapse.js"></script>
   <script src="js/options.js"></script>
   <script src="js/player.js"></script>
+  <script src="js/power-shards.js"></script>
+  <script src="js/powers.js"></script>
   <script src="js/prestige.js"></script>
   <script src="js/sacrifice.js"></script>
   <script src="js/saving.js"></script>
@@ -106,12 +111,14 @@
       <button ~style.display=Tabs.isTabVisible('complexity') ? '' : 'none'~ onclick="Tabs.setTab('complexity')">Complexity</button>
       <button ~style.display=Tabs.isTabVisible('complexity-challenges') ? '' : 'none'~ onclick="Tabs.setTab('complexity-challenges')">Complexity Challenges</button>
       <button ~style.display=Tabs.isTabVisible('complexity-achievements') ? '' : 'none'~ onclick="Tabs.setTab('complexity-achievements')">Complexity Achievements</button>
+      <button ~style.display=Tabs.isTabVisible('powers') ? '' : 'none'~ onclick="Tabs.setTab('powers')">Powers</button>
+      <button ~style.display=Tabs.isTabVisible('galaxies') ? '' : 'none'~ onclick="Tabs.setTab('galaxies')">Galaxies</button>
     </span>
   </div>
   <br/>
   <br/>
   <tab ~style.display=Tabs.currentTab() === 'main' ? '' : 'none'~>
-    <div ~style.display=InfinityPrestigeLayer.mustInfinity() ? 'none' : ''~>
+    <div ~style.display=InfinityPrestigeLayer.mustInfinity() || MultiverseCollapse.hasHappened() ? 'none' : ''~>
       <span>You have ~f Stars.amount() ~ stars. You are getting ~f Stars.perSecond() ~ stars per second. <button ~class=MaxAll.anythingToBuy() ? "" : "disabled"~ onclick="MaxAll.maxAll()">Max all</button></span>
       <br/>
       <div ~style.display=Challenge.isThereChallengeText() ? '' : 'none'~>
@@ -220,12 +227,18 @@
       <div ~style.display=Generators.areAnyMultipliersNerfed() ? '' : 'none'~>
         Given a multiplier x, let y be log(x, ~f Generators.nerfValue() ~). x is reduced to ~f Generators.nerfValue() ~^y^y^~r formatWithPrecision(Generators.nerfExponent, 5) ~.
       </div>
-      <span>Currently the game ends at ~f Saving.gameEnd ~ stars.</span>
       <br/>
-      <span>(You can keep going beyond that, but you'll be able to start new content just by getting to that point.)</span>
+      <span>Currently the game ends at ~f Saving.gameEnd() ~ stars.</span>
+      <br/>
+      <span>You cannot meaningfully keep going beyond that because you cannot get more stars than that.</span>
+      <br/>
+      <span>Next update will have a prestige layer there.</span>
     </div>
     <div ~style.display=InfinityPrestigeLayer.mustInfinity() ? '' : 'none'~>
       <span>The universe has collapsed due to an excess of stars.</span>
+    </div>
+    <div ~style.display=MultiverseCollapse.hasHappened() ? '' : 'none'~>
+      <span>The multiverse has collapsed due to an excess of stars.</span>
     </div>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'infinity' ? '' : 'none'~>
@@ -1206,8 +1219,8 @@
   <tab ~style.display=Tabs.currentTab() === 'eternity-milestones' ? '' : 'none'~>
     <span>
       You have ~f Eternities.amount() ~ eternities.
-      <button ~style.display=EternityMilestones.hasEternityMilestone(4) ? '' : 'none'~ onclick="EternityMilestones.toggleMilestone(4)">Eternity Milestone 4: ~r EternityMilestones.isEternityMilestoneDisabled(4) ? "Disabled" : "Enabled" ~</button>
-      <button ~style.display=EternityMilestones.hasEternityMilestone(8) ? '' : 'none'~ onclick="EternityMilestones.toggleMilestone(8)">Eternity Milestone 8: ~r EternityMilestones.isEternityMilestoneDisabled(8) ? "Disabled" : "Enabled" ~</button>
+      <button ~style.display=EternityMilestones.hasEternityMilestone(4) ? '' : 'none'~ onclick="EternityMilestones.toggleMilestone(4)">Eternity Milestone ~f 4 ~: ~r EternityMilestones.isEternityMilestoneDisabled(4) ? "Disabled" : "Enabled" ~</button>
+      <button ~style.display=EternityMilestones.hasEternityMilestone(8) ? '' : 'none'~ onclick="EternityMilestones.toggleMilestone(8)">Eternity Milestone ~f 8 ~: ~r EternityMilestones.isEternityMilestoneDisabled(8) ? "Disabled" : "Enabled" ~</button>
     </span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
@@ -1930,6 +1943,7 @@
       <button ~style.display=Studies.hasPreset(32) ? 'none' : ''~ onclick="Studies.presetCreate()">Create a preset</button>
       <span ~style.display=Studies.hasPreset(32) ? '' : 'none'~>You can create at most ~f 32 ~ presets. Delete existing presets to create more.</span>
     </span>
+    <br/>
     <span style="display: none;">Exported studies: <input id="study-export-output"></input></span>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'eternity-producer' ? '' : 'none'~>
@@ -1948,6 +1962,7 @@
       <span>You have ~f Eternities.amount() ~ eternities. Due to the Eternity Producer, they multiply all eternity generators by ~f EternityProducer.multiplier() ~.</span>
       <br/>
       <span>The Eternity Producer is producing ~f EternityProducer.productionPerSecond() ~ eternities per second.</span>
+      <br/>
       <br/>
       <span>You have ~f EternityPoints.amount() ~ eternity points. <button ~class=EternityProducer.anythingToBuy() ? "" : "disabled"~ onclick="EternityProducer.maxAll()">Max Eternity Producer upgrades</button></span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
@@ -2617,7 +2632,7 @@
             <br ~style.display=ComplexityChallenge.showActualExtraTheorems() ? '' : 'none'~/>
             <span ~style.display=ComplexityChallenge.showActualExtraTheorems() ? '' : 'none'~>(actually +~f ComplexityChallenge.extraTheoremsActualAndDisplay() ~, from "On the other side")</span>
             <br ~style.display=ComplexityChallenge.complexityStarsForNextExtraTheorem().neq(Infinity) ? '' : 'none'~/>
-            <span ~style.display=ComplexityChallenge.complexityStarsForNextExtraTheorem().neq(Infinity) ? '' : 'none'~>Next extra theorem at ~f ComplexityChallenge.complexityStarsForNextExtraTheorem() ~ complexity stars.</span>
+            <span ~style.display=ComplexityChallenge.complexityStarsForNextExtraTheorem().neq(Infinity) ? '' : 'none'~>Next theorem at ~f ComplexityChallenge.complexityStarsForNextExtraTheorem() ~ complexity stars.</span>
           </div>
         </td>
       </tr>
@@ -2873,6 +2888,745 @@
       </tr>
     </table>
   </tab>
+  <tab ~style.display=Tabs.currentTab() === 'powers' ? '' : 'none'~>
+    <div ~style.display=Powers.isUnlocked() ? 'none' : ''~>
+      <button style="height: 48px;" onclick="Powers.unlock()" ~class=Powers.canUnlock() ? '' : 'disabled'~>
+        Unlock Powers<br/>Cost: ~f Powers.unlockCost() ~ complexity points
+      </button>
+      <br/>
+      <span>Unlocking powers will also let you gain your eternity points on eternity every second, without needing to eternity.</span>
+    </div>
+    <div ~style.display=Powers.isUnlocked() ? '' : 'none'~>
+      <span>You have ~f Powers.active().length ~/~f Powers.activatedLimit() ~ active powers.</span>
+      <br/>
+      <span>Active powers raise various dimension multipliers to powers.</span>
+      <br/>
+      <span>Stored powers do not, but can be activated to make them active.</span>
+      <br/>
+      <span>Due to unlocking powers, you gain your eternity points on eternity every second, without needing to eternity.</span>
+      <br/>
+      <br/>
+      <span>You gain a new power once every ~f Powers.interval() ~ seconds. <button onclick="Powers.togglePowerGain()">Power gain: ~r Powers.isPowerGainOn() ? "On" : "Off" ~</button></span>
+      <br/>
+      <span>It has been ~f Powers.timeSincePowerGain() ~ seconds since you last gained a new power.</span>
+      <br ~style.display=!Powers.isPowerGainOn() && Powers.imminentPowerGain() !== 0 ? '' : 'none'~/>
+      <span ~style.display=!Powers.isPowerGainOn() && Powers.imminentPowerGain() !== 0 ? '' : 'none'~>Turning power gain on would give you ~f Powers.imminentPowerGain() ~ new powers.</span>
+      <br/>
+      <br/>
+      <span>Next power<span ~style.display=Powers.nextKept() ? 'none' : ''~> (will be automatically deleted due to being bad enough to be useless)</span>:</span>
+      <br/>
+      <span ~class=Powers.color('next', 1)~>~r Powers.description('next', 1) ~</span>
+      <br/>
+      <span ~class=Powers.color('next', 1)~>~r Powers.details('next', 1) ~</span>
+      <br/>
+      <br/>
+      <span>The powers activated by importing powers will be the strongest stored powers of the same types as those exported.</span>
+      <br/>
+      <button onclick="Powers.export()">Export active powers</button> <button onclick="Powers.import()">Import active powers</button>
+      <button onclick="Powers.toggleRespec()">Deactivate active powers on next complexity: ~r Powers.isRespecOn() ? "On" : "Off" ~</button>
+      <br/>
+      <button onclick="Powers.respecAndReset()">Deactivate active powers and ~r ComplexityPrestigeLayer.resetText() ~</button></button>
+      <br/>
+      <br/>
+      <div style="width: 1024px; margin-left: auto; margin-right: auto;">
+        <span>Click on the name of a power preset on the line below to activate those powers:</span>
+        <br/>
+        <button ~style.display=Powers.hasPreset(1) ? '' : 'none'~ onclick="Powers.presetLoad(1)">~r Powers.presetName(1) ~</button>
+        <button ~style.display=Powers.hasPreset(2) ? '' : 'none'~ onclick="Powers.presetLoad(2)">~r Powers.presetName(2) ~</button>
+        <button ~style.display=Powers.hasPreset(3) ? '' : 'none'~ onclick="Powers.presetLoad(3)">~r Powers.presetName(3) ~</button>
+        <button ~style.display=Powers.hasPreset(4) ? '' : 'none'~ onclick="Powers.presetLoad(4)">~r Powers.presetName(4) ~</button>
+        <button ~style.display=Powers.hasPreset(5) ? '' : 'none'~ onclick="Powers.presetLoad(5)">~r Powers.presetName(5) ~</button>
+        <button ~style.display=Powers.hasPreset(6) ? '' : 'none'~ onclick="Powers.presetLoad(6)">~r Powers.presetName(6) ~</button>
+        <button ~style.display=Powers.hasPreset(7) ? '' : 'none'~ onclick="Powers.presetLoad(7)">~r Powers.presetName(7) ~</button>
+        <button ~style.display=Powers.hasPreset(8) ? '' : 'none'~ onclick="Powers.presetLoad(8)">~r Powers.presetName(8) ~</button>
+        <button ~style.display=Powers.hasPreset(9) ? '' : 'none'~ onclick="Powers.presetLoad(9)">~r Powers.presetName(9) ~</button>
+        <button ~style.display=Powers.hasPreset(10) ? '' : 'none'~ onclick="Powers.presetLoad(10)">~r Powers.presetName(10) ~</button>
+        <button ~style.display=Powers.hasPreset(11) ? '' : 'none'~ onclick="Powers.presetLoad(11)">~r Powers.presetName(11) ~</button>
+        <button ~style.display=Powers.hasPreset(12) ? '' : 'none'~ onclick="Powers.presetLoad(12)">~r Powers.presetName(12) ~</button>
+        <button ~style.display=Powers.hasPreset(13) ? '' : 'none'~ onclick="Powers.presetLoad(13)">~r Powers.presetName(13) ~</button>
+        <button ~style.display=Powers.hasPreset(14) ? '' : 'none'~ onclick="Powers.presetLoad(14)">~r Powers.presetName(14) ~</button>
+        <button ~style.display=Powers.hasPreset(15) ? '' : 'none'~ onclick="Powers.presetLoad(15)">~r Powers.presetName(15) ~</button>
+        <button ~style.display=Powers.hasPreset(16) ? '' : 'none'~ onclick="Powers.presetLoad(16)">~r Powers.presetName(16) ~</button>
+        <button ~style.display=Powers.hasPreset(17) ? '' : 'none'~ onclick="Powers.presetLoad(17)">~r Powers.presetName(17) ~</button>
+        <button ~style.display=Powers.hasPreset(18) ? '' : 'none'~ onclick="Powers.presetLoad(18)">~r Powers.presetName(18) ~</button>
+        <button ~style.display=Powers.hasPreset(19) ? '' : 'none'~ onclick="Powers.presetLoad(19)">~r Powers.presetName(19) ~</button>
+        <button ~style.display=Powers.hasPreset(20) ? '' : 'none'~ onclick="Powers.presetLoad(20)">~r Powers.presetName(20) ~</button>
+        <button ~style.display=Powers.hasPreset(21) ? '' : 'none'~ onclick="Powers.presetLoad(21)">~r Powers.presetName(21) ~</button>
+        <button ~style.display=Powers.hasPreset(22) ? '' : 'none'~ onclick="Powers.presetLoad(22)">~r Powers.presetName(22) ~</button>
+        <button ~style.display=Powers.hasPreset(23) ? '' : 'none'~ onclick="Powers.presetLoad(23)">~r Powers.presetName(23) ~</button>
+        <button ~style.display=Powers.hasPreset(24) ? '' : 'none'~ onclick="Powers.presetLoad(24)">~r Powers.presetName(24) ~</button>
+        <button ~style.display=Powers.hasPreset(25) ? '' : 'none'~ onclick="Powers.presetLoad(25)">~r Powers.presetName(25) ~</button>
+        <button ~style.display=Powers.hasPreset(26) ? '' : 'none'~ onclick="Powers.presetLoad(26)">~r Powers.presetName(26) ~</button>
+        <button ~style.display=Powers.hasPreset(27) ? '' : 'none'~ onclick="Powers.presetLoad(27)">~r Powers.presetName(27) ~</button>
+        <button ~style.display=Powers.hasPreset(28) ? '' : 'none'~ onclick="Powers.presetLoad(28)">~r Powers.presetName(28) ~</button>
+        <button ~style.display=Powers.hasPreset(29) ? '' : 'none'~ onclick="Powers.presetLoad(29)">~r Powers.presetName(29) ~</button>
+        <button ~style.display=Powers.hasPreset(30) ? '' : 'none'~ onclick="Powers.presetLoad(30)">~r Powers.presetName(30) ~</button>
+        <button ~style.display=Powers.hasPreset(31) ? '' : 'none'~ onclick="Powers.presetLoad(31)">~r Powers.presetName(31) ~</button>
+        <button ~style.display=Powers.hasPreset(32) ? '' : 'none'~ onclick="Powers.presetLoad(32)">~r Powers.presetName(32) ~</button>
+        <div ~style.display=Powers.hasPreset(1) ? 'none' : ''~>
+          You don't currently have any power presets. You can create presets at the bottom of this tab.
+        </div>
+      </div>
+      <br/>
+      <span>Active powers (<button onclick="Powers.sortActive()">Sort</button>):</span>
+      <div style="margin-left: auto; margin-right: auto;">
+        <span ~style.display=Powers.canAccessPower('active', 1) ? 'none' : ''~>You don't currently have any active powers.</span>
+        <div ~style.display=Powers.canAccessPower('active', 1) ? '' : 'none'~>
+          <span ~class=Powers.color('active', 1)~>~r Powers.description('active', 1) ~</span>
+          <br/>
+          <span ~class=Powers.color('active', 1)~>~r Powers.details('active', 1) ~</span>
+        </div>
+        <div ~style.display=Powers.canAccessPower('active', 2) ? '' : 'none'~>
+          <span ~class=Powers.color('active', 2)~>~r Powers.description('active', 2) ~</span>
+          <br/>
+          <span ~class=Powers.color('active', 2)~>~r Powers.details('active', 2) ~</span>
+        </div>
+        <div ~style.display=Powers.canAccessPower('active', 3) ? '' : 'none'~>
+          <span ~class=Powers.color('active', 3)~>~r Powers.description('active', 3) ~</span>
+          <br/>
+          <span ~class=Powers.color('active', 3)~>~r Powers.details('active', 3) ~</span>
+        </div>
+      </div>
+      <br/>
+      <span>Current effects of active powers:</span>
+      <br/>
+      <span class="yellowspan">~r Powers.totalEffectDescription('normal') ~</span>
+      <br/>
+      <span class="magentaspan">~r Powers.totalEffectDescription('infinity') ~</span>
+      <br/>
+      <span class="cyanspan">~r Powers.totalEffectDescription('eternity') ~</span>
+      <br/>
+      <span class="brownspan">~r Powers.totalEffectDescription('complexity') ~</span>
+      <br/>
+      <br/>
+      <span>Stored powers (<button onclick="Powers.sortStored()">Sort</button>):</span>
+      <div style="margin-left: auto; margin-right: auto;">
+        <span ~style.display=Powers.canAccessPower('stored', 1) ? 'none' : ''~>You don't currently have any stored powers.</span>
+        <div ~style.display=Powers.canAccessPower('stored', 1) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 1)~>~r Powers.description('stored', 1) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 1)~>~r Powers.details('stored', 1) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(1)" ~class=Powers.canActivate(1) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(1)" ~class=Powers.canDelete(1) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(1) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 2) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 2) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 2)~>~r Powers.description('stored', 2) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 2)~>~r Powers.details('stored', 2) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(2)" ~class=Powers.canActivate(2) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(2)" ~class=Powers.canDelete(2) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(2) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 3) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 3) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 3)~>~r Powers.description('stored', 3) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 3)~>~r Powers.details('stored', 3) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(3)" ~class=Powers.canActivate(3) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(3)" ~class=Powers.canDelete(3) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(3) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 4) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 4) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 4)~>~r Powers.description('stored', 4) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 4)~>~r Powers.details('stored', 4) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(4)" ~class=Powers.canActivate(4) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(4)" ~class=Powers.canDelete(4) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(4) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 5) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 5) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 5)~>~r Powers.description('stored', 5) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 5)~>~r Powers.details('stored', 5) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(5)" ~class=Powers.canActivate(5) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(5)" ~class=Powers.canDelete(5) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(5) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 6) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 6) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 6)~>~r Powers.description('stored', 6) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 6)~>~r Powers.details('stored', 6) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(6)" ~class=Powers.canActivate(6) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(6)" ~class=Powers.canDelete(6) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(6) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 7) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 7) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 7)~>~r Powers.description('stored', 7) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 7)~>~r Powers.details('stored', 7) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(7)" ~class=Powers.canActivate(7) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(7)" ~class=Powers.canDelete(7) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(7) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 8) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 8) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 8)~>~r Powers.description('stored', 8) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 8)~>~r Powers.details('stored', 8) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(8)" ~class=Powers.canActivate(8) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(8)" ~class=Powers.canDelete(8) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(8) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 9) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 9) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 9)~>~r Powers.description('stored', 9) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 9)~>~r Powers.details('stored', 9) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(9)" ~class=Powers.canActivate(9) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(9)" ~class=Powers.canDelete(9) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(9) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 10) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 10) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 10)~>~r Powers.description('stored', 10) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 10)~>~r Powers.details('stored', 10) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(10)" ~class=Powers.canActivate(10) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(10)" ~class=Powers.canDelete(10) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(10) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 11) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 11) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 11)~>~r Powers.description('stored', 11) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 11)~>~r Powers.details('stored', 11) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(11)" ~class=Powers.canActivate(11) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(11)" ~class=Powers.canDelete(11) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(11) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 12) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 12) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 12)~>~r Powers.description('stored', 12) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 12)~>~r Powers.details('stored', 12) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(12)" ~class=Powers.canActivate(12) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(12)" ~class=Powers.canDelete(12) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(12) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 13) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 13) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 13)~>~r Powers.description('stored', 13) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 13)~>~r Powers.details('stored', 13) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(13)" ~class=Powers.canActivate(13) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(13)" ~class=Powers.canDelete(13) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(13) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 14) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 14) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 14)~>~r Powers.description('stored', 14) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 14)~>~r Powers.details('stored', 14) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(14)" ~class=Powers.canActivate(14) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(14)" ~class=Powers.canDelete(14) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(14) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 15) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 15) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 15)~>~r Powers.description('stored', 15) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 15)~>~r Powers.details('stored', 15) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(15)" ~class=Powers.canActivate(15) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(15)" ~class=Powers.canDelete(15) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(15) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 16) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 16) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 16)~>~r Powers.description('stored', 16) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 16)~>~r Powers.details('stored', 16) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(16)" ~class=Powers.canActivate(16) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(16)" ~class=Powers.canDelete(16) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(16) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 17) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 17) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 17)~>~r Powers.description('stored', 17) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 17)~>~r Powers.details('stored', 17) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(17)" ~class=Powers.canActivate(17) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(17)" ~class=Powers.canDelete(17) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(17) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 18) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 18) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 18)~>~r Powers.description('stored', 18) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 18)~>~r Powers.details('stored', 18) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(18)" ~class=Powers.canActivate(18) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(18)" ~class=Powers.canDelete(18) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(18) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 19) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 19) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 19)~>~r Powers.description('stored', 19) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 19)~>~r Powers.details('stored', 19) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(19)" ~class=Powers.canActivate(19) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(19)" ~class=Powers.canDelete(19) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(19) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 20) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 20) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 20)~>~r Powers.description('stored', 20) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 20)~>~r Powers.details('stored', 20) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(20)" ~class=Powers.canActivate(20) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(20)" ~class=Powers.canDelete(20) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(20) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 21) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 21) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 21)~>~r Powers.description('stored', 21) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 21)~>~r Powers.details('stored', 21) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(21)" ~class=Powers.canActivate(21) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(21)" ~class=Powers.canDelete(21) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(21) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 22) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 22) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 22)~>~r Powers.description('stored', 22) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 22)~>~r Powers.details('stored', 22) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(22)" ~class=Powers.canActivate(22) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(22)" ~class=Powers.canDelete(22) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(22) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 23) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 23) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 23)~>~r Powers.description('stored', 23) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 23)~>~r Powers.details('stored', 23) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(23)" ~class=Powers.canActivate(23) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(23)" ~class=Powers.canDelete(23) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(23) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 24) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 24) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 24)~>~r Powers.description('stored', 24) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 24)~>~r Powers.details('stored', 24) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(24)" ~class=Powers.canActivate(24) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(24)" ~class=Powers.canDelete(24) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(24) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 25) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 25) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 25)~>~r Powers.description('stored', 25) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 25)~>~r Powers.details('stored', 25) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(25)" ~class=Powers.canActivate(25) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(25)" ~class=Powers.canDelete(25) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(25) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 26) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 26) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 26)~>~r Powers.description('stored', 26) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 26)~>~r Powers.details('stored', 26) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(26)" ~class=Powers.canActivate(26) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(26)" ~class=Powers.canDelete(26) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(26) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 27) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 27) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 27)~>~r Powers.description('stored', 27) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 27)~>~r Powers.details('stored', 27) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(27)" ~class=Powers.canActivate(27) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(27)" ~class=Powers.canDelete(27) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(27) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 28) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 28) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 28)~>~r Powers.description('stored', 28) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 28)~>~r Powers.details('stored', 28) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(28)" ~class=Powers.canActivate(28) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(28)" ~class=Powers.canDelete(28) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(28) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 29) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 29) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 29)~>~r Powers.description('stored', 29) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 29)~>~r Powers.details('stored', 29) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(29)" ~class=Powers.canActivate(29) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(29)" ~class=Powers.canDelete(29) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(29) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 30) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 30) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 30)~>~r Powers.description('stored', 30) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 30)~>~r Powers.details('stored', 30) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(30)" ~class=Powers.canActivate(30) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(30)" ~class=Powers.canDelete(30) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(30) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 31) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 31) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 31)~>~r Powers.description('stored', 31) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 31)~>~r Powers.details('stored', 31) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(31)" ~class=Powers.canActivate(31) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(31)" ~class=Powers.canDelete(31) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(31) ~ power shards)</button></span>
+        </div>
+        <br ~style.display=Powers.canAccessPower('stored', 32) ? '' : 'none'~/>
+        <div ~style.display=Powers.canAccessPower('stored', 32) ? '' : 'none'~>
+          <span ~class=Powers.color('stored', 32)~>~r Powers.description('stored', 32) ~</span>
+          <br/>
+          <span ~class=Powers.color('stored', 32)~>~r Powers.details('stored', 32) ~</span>
+          <br/>
+          <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(32)" ~class=Powers.canActivate(32) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(32)" ~class=Powers.canDelete(32) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(32) ~ power shards)</button></span>
+        </div>
+      </div>
+      <br/>
+      <span>At most ~f Powers.maximumActivatedLimit() ~ powers can be active at once.</span>
+      <br/>
+      <span>Thus, all but the best ~f Powers.maximumActivatedLimit() ~ powers of each type are useless and are thus automatically deleted for power shards.</span>
+      <br/>
+      <button onclick="Powers.changePowerDeletionMode()">Manual power deletion mode: ~r Powers.powerDeletionMode() ~</button>
+      <br/>
+      <br/>
+      <span>You have ~f ComplexityPoints.amount() ~ complexity points. <button ~class=Powers.anythingToBuy() ? "" : "disabled"~ onclick="Powers.maxAll()">Max power upgrades</button></span>
+      <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
+        <tr>
+          <td>Strength of new powers:</td>
+          <td><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? 'none' : ''~>~r formatWithPrecision(PowerUpgrade(1).effectDisplay(), 5) ~ → ~r formatWithPrecision(PowerUpgrade(1).nextEffectDisplay(), 5) ~</span><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? '' : 'none'~>~r formatWithPrecision(PowerUpgrade(1).effectDisplay(), 5) ~ (maxed)</span></td>
+          <td><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(1).buy()">Cost: ~f PowerUpgrade(1).cost() ~ ℂP</button></span></td>
+          <td><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(1).buyMax()">Max</button></span></td>
+        </tr>
+        <tr>
+          <td>Speed of gaining new powers:</td>
+          <td><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? 'none' : ''~>~f PowerUpgrade(2).effectDisplay() ~x → ~f PowerUpgrade(2).nextEffectDisplay() ~x</span><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? '' : 'none'~>~f PowerUpgrade(2).effectDisplay() ~x (maxed)</span></td>
+          <td><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(2).buy()">Cost: ~f PowerUpgrade(2).cost() ~ ℂP</button></span></td>
+          <td><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(2).buyMax()">Max</button></span></td>
+        </tr>
+        <tr>
+          <td>Minimum rarity of new powers:</td>
+          <td><span ~style.display=PowerUpgrade(3).atBoughtLimit() ? 'none' : ''~>~f PowerUpgrade(3).effectDisplay() ~ → ~f PowerUpgrade(3).nextEffectDisplay() ~</span><span ~style.display=PowerUpgrade(3).atBoughtLimit() ? '' : 'none'~>~f PowerUpgrade(3).effectDisplay() ~ (maxed)</span></td>
+          <td><span ~style.display=PowerUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(3).buy()">Cost: ~f PowerUpgrade(3).cost() ~ ℂP</button></span></td>
+          <td><span ~style.display=PowerUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(3).buyMax()">Max</button></span></td>
+        </tr>
+      </table>
+      <br/>
+      <div ~style.display=PowerShards.hasGainedShards() ? 'none' : ''~>
+        <span>Power shards can be used to buy upgrades that give powers small additional multipliers, and to craft new powers.</span>
+        <br/>
+        <span>It is generally not recommended to delete any of your first few powers to get power shards.</span>
+      </div>
+      <div ~style.display=PowerShards.hasGainedShards() ? '' : 'none'~>
+        <span>You have ~f PowerShards.amount() ~ power shards. <button ~class=PowerShards.anythingToBuy() ? "" : "disabled"~ onclick="PowerShards.maxAll()">Max power shard upgrades</button></span>
+        <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
+          <tr>
+            <td class="yellowspan">Additional multiplier to normal generator powers:</td>
+            <td><span ~style.display=PowerShardUpgrade(1).atBoughtLimit() ? 'none' : ''~>+~f PowerShardUpgrade(1).effect() ~ → +~f PowerShardUpgrade(1).nextEffect() ~</span><span ~style.display=PowerShardUpgrade(1).atBoughtLimit() ? '' : 'none'~>~f PowerShardUpgrade(1).effect() ~ (maxed)</span></td>
+            <td><span ~style.display=PowerShardUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(1).buy()">Cost: ~f PowerShardUpgrade(1).cost() ~ power shards</button></span></td>
+            <td><span ~style.display=PowerShardUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(1).buyMax()">Max</button></span></td>
+          </tr>
+          <tr>
+            <td class="magentaspan">Additional multiplier to infinity generator powers:</td>
+            <td><span ~style.display=PowerShardUpgrade(2).atBoughtLimit() ? 'none' : ''~>+~f PowerShardUpgrade(2).effect() ~ → +~f PowerShardUpgrade(2).nextEffect() ~</span><span ~style.display=PowerShardUpgrade(2).atBoughtLimit() ? '' : 'none'~>~f PowerShardUpgrade(2).effect() ~ (maxed)</span></td>
+            <td><span ~style.display=PowerShardUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(2).buy()">Cost: ~f PowerShardUpgrade(2).cost() ~ power shards</button></span></td>
+            <td><span ~style.display=PowerShardUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(2).buyMax()">Max</button></span></td>
+          </tr>
+          <tr>
+            <td class="cyanspan">Additional multiplier to eternity generator powers:</td>
+            <td><span ~style.display=PowerShardUpgrade(3).atBoughtLimit() ? 'none' : ''~>+~f PowerShardUpgrade(3).effect() ~ → +~f PowerShardUpgrade(3).nextEffect() ~</span><span ~style.display=PowerShardUpgrade(3).atBoughtLimit() ? '' : 'none'~>~f PowerShardUpgrade(3).effect() ~ (maxed)</span></td>
+            <td><span ~style.display=PowerShardUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(3).buy()">Cost: ~f PowerShardUpgrade(3).cost() ~ power shards</button></span></td>
+            <td><span ~style.display=PowerShardUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(3).buyMax()">Max</button></span></td>
+          </tr>
+          <tr>
+            <td class="brownspan">Additional multiplier to complexity generator powers:</td>
+            <td><span ~style.display=PowerShardUpgrade(4).atBoughtLimit() ? 'none' : ''~>+~f PowerShardUpgrade(4).effect() ~ → +~f PowerShardUpgrade(4).nextEffect() ~</span><span ~style.display=PowerShardUpgrade(4).atBoughtLimit() ? '' : 'none'~>~f PowerShardUpgrade(4).effect() ~ (maxed)</span></td>
+            <td><span ~style.display=PowerShardUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(4).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(4).buy()">Cost: ~f PowerShardUpgrade(4).cost() ~ power shards</button></span></td>
+            <td><span ~style.display=PowerShardUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(4).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(4).buyMax()">Max</button></span></td>
+          </tr>
+        </table>
+        <span>Power shard upgrade multipliers take effect after power and rarity, but before extra multipliers.</span>
+        <br/>
+        <br/>
+        <span>Craft a power with type <select ~!value=PowerShards.craftedType()~ ~!onchange=function() {PowerShards.setCraftedType(this.value)}~>
+          <option value="normal">normal</option>
+          <option value="infinity">infinity</option>
+          <option value="eternity">eternity</option>
+          <option value="complexity">complexity</option>
+        </select>,
+        strength <input type="text" ~!value=PowerShards.craftedStrengthDisplay()~ ~!onchange=function() {PowerShards.setCraftedStrength(this.value)}~></input>,
+        and rarity <input type="text" ~!value=PowerShards.craftedRarityDisplay()~ ~!onchange=function() {PowerShards.setCraftedRarity(this.value)}~></input>:
+        <button ~class=PowerShards.canCraft() ? '' : 'disabled'~ onclick="PowerShards.craft()">Cost: ~f PowerShards.craftedPowerCost() ~ power shards</button></span>
+        <br/>
+        <span>You cannot craft the following types of powers:</span>
+        <br/>
+        <span>(a) powers with negative strength or rarity</span>
+        <br/>
+        <span>(b) powers with strength greater than ~f formatWithPrecision(Powers.newStrength(), 5) ~ (the strength of generated powers)</span>
+        <br/>
+        <span>(c) powers with rarity greater than ~f Powers.maximumRarity() ~ (the maximum rarity of generated powers).</span>
+        <br/>
+        <span>You can set strength to "max" (without the quotes) to craft a power with exactly the strength of generated powers.</span>
+        <br/>
+        <span>Crafting cost depends only on rarity, except that it is always at least twice the power shards gained from deletion.</span>
+        <br/>
+        <br/>
+        <span>Crafted power<span ~style.display=Powers.craftedKept() ? 'none' : ''~> (will be automatically deleted due to being bad enough to be useless)</span>:</span>
+        <br/>
+        <span ~class=Powers.color('crafted', 1)~>~r Powers.description('crafted', 1) ~</span>
+        <br/>
+        <span ~class=Powers.color('crafted', 1)~>~r Powers.details('crafted', 1) ~</span>
+      </div>
+      <br/>
+      <span>Power presets:</span>
+      <br/>
+      <div ~style.display=Powers.hasPreset(1) ? '' : 'none'~>
+        Name: <input class="presetpowername1" type="text" ~!value=Powers.presetName(1)~ ~!onchange=function() {Powers.setPresetName(1, this.value)}~></input>
+        Powers: <input class="presetpowerlist1" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(1)~ ~!onchange=function() {Powers.setPresetStudyList(1, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(1)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(1)">Load</button>
+        <button onclick="Powers.presetDelete(1)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(2) ? '' : 'none'~>
+        Name: <input class="presetpowername2" type="text" ~!value=Powers.presetName(2)~ ~!onchange=function() {Powers.setPresetName(2, this.value)}~></input>
+        Powers: <input class="presetpowerlist2" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(2)~ ~!onchange=function() {Powers.setPresetStudyList(2, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(2)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(2)">Load</button>
+        <button onclick="Powers.presetDelete(2)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(3) ? '' : 'none'~>
+        Name: <input class="presetpowername3" type="text" ~!value=Powers.presetName(3)~ ~!onchange=function() {Powers.setPresetName(3, this.value)}~></input>
+        Powers: <input class="presetpowerlist3" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(3)~ ~!onchange=function() {Powers.setPresetStudyList(3, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(3)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(3)">Load</button>
+        <button onclick="Powers.presetDelete(3)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(4) ? '' : 'none'~>
+        Name: <input class="presetpowername4" type="text" ~!value=Powers.presetName(4)~ ~!onchange=function() {Powers.setPresetName(4, this.value)}~></input>
+        Powers: <input class="presetpowerlist4" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(4)~ ~!onchange=function() {Powers.setPresetStudyList(4, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(4)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(4)">Load</button>
+        <button onclick="Powers.presetDelete(4)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(5) ? '' : 'none'~>
+        Name: <input class="presetpowername5" type="text" ~!value=Powers.presetName(5)~ ~!onchange=function() {Powers.setPresetName(5, this.value)}~></input>
+        Powers: <input class="presetpowerlist5" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(5)~ ~!onchange=function() {Powers.setPresetStudyList(5, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(5)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(5)">Load</button>
+        <button onclick="Powers.presetDelete(5)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(6) ? '' : 'none'~>
+        Name: <input class="presetpowername6" type="text" ~!value=Powers.presetName(6)~ ~!onchange=function() {Powers.setPresetName(6, this.value)}~></input>
+        Powers: <input class="presetpowerlist6" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(6)~ ~!onchange=function() {Powers.setPresetStudyList(6, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(6)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(6)">Load</button>
+        <button onclick="Powers.presetDelete(6)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(7) ? '' : 'none'~>
+        Name: <input class="presetpowername7" type="text" ~!value=Powers.presetName(7)~ ~!onchange=function() {Powers.setPresetName(7, this.value)}~></input>
+        Powers: <input class="presetpowerlist7" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(7)~ ~!onchange=function() {Powers.setPresetStudyList(7, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(7)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(7)">Load</button>
+        <button onclick="Powers.presetDelete(7)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(8) ? '' : 'none'~>
+        Name: <input class="presetpowername8" type="text" ~!value=Powers.presetName(8)~ ~!onchange=function() {Powers.setPresetName(8, this.value)}~></input>
+        Powers: <input class="presetpowerlist8" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(8)~ ~!onchange=function() {Powers.setPresetStudyList(8, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(8)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(8)">Load</button>
+        <button onclick="Powers.presetDelete(8)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(9) ? '' : 'none'~>
+        Name: <input class="presetpowername9" type="text" ~!value=Powers.presetName(9)~ ~!onchange=function() {Powers.setPresetName(9, this.value)}~></input>
+        Powers: <input class="presetpowerlist9" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(9)~ ~!onchange=function() {Powers.setPresetStudyList(9, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(9)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(9)">Load</button>
+        <button onclick="Powers.presetDelete(9)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(10) ? '' : 'none'~>
+        Name: <input class="presetpowername10" type="text" ~!value=Powers.presetName(10)~ ~!onchange=function() {Powers.setPresetName(10, this.value)}~></input>
+        Powers: <input class="presetpowerlist10" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(10)~ ~!onchange=function() {Powers.setPresetStudyList(10, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(10)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(10)">Load</button>
+        <button onclick="Powers.presetDelete(10)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(11) ? '' : 'none'~>
+        Name: <input class="presetpowername11" type="text" ~!value=Powers.presetName(11)~ ~!onchange=function() {Powers.setPresetName(11, this.value)}~></input>
+        Powers: <input class="presetpowerlist11" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(11)~ ~!onchange=function() {Powers.setPresetStudyList(11, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(11)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(11)">Load</button>
+        <button onclick="Powers.presetDelete(11)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(12) ? '' : 'none'~>
+        Name: <input class="presetpowername12" type="text" ~!value=Powers.presetName(12)~ ~!onchange=function() {Powers.setPresetName(12, this.value)}~></input>
+        Powers: <input class="presetpowerlist12" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(12)~ ~!onchange=function() {Powers.setPresetStudyList(12, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(12)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(12)">Load</button>
+        <button onclick="Powers.presetDelete(12)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(13) ? '' : 'none'~>
+        Name: <input class="presetpowername13" type="text" ~!value=Powers.presetName(13)~ ~!onchange=function() {Powers.setPresetName(13, this.value)}~></input>
+        Powers: <input class="presetpowerlist13" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(13)~ ~!onchange=function() {Powers.setPresetStudyList(13, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(13)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(13)">Load</button>
+        <button onclick="Powers.presetDelete(13)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(14) ? '' : 'none'~>
+        Name: <input class="presetpowername14" type="text" ~!value=Powers.presetName(14)~ ~!onchange=function() {Powers.setPresetName(14, this.value)}~></input>
+        Powers: <input class="presetpowerlist14" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(14)~ ~!onchange=function() {Powers.setPresetStudyList(14, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(14)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(14)">Load</button>
+        <button onclick="Powers.presetDelete(14)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(15) ? '' : 'none'~>
+        Name: <input class="presetpowername15" type="text" ~!value=Powers.presetName(15)~ ~!onchange=function() {Powers.setPresetName(15, this.value)}~></input>
+        Powers: <input class="presetpowerlist15" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(15)~ ~!onchange=function() {Powers.setPresetStudyList(15, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(15)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(15)">Load</button>
+        <button onclick="Powers.presetDelete(15)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(16) ? '' : 'none'~>
+        Name: <input class="presetpowername16" type="text" ~!value=Powers.presetName(16)~ ~!onchange=function() {Powers.setPresetName(16, this.value)}~></input>
+        Powers: <input class="presetpowerlist16" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(16)~ ~!onchange=function() {Powers.setPresetStudyList(16, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(16)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(16)">Load</button>
+        <button onclick="Powers.presetDelete(16)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(17) ? '' : 'none'~>
+        Name: <input class="presetpowername17" type="text" ~!value=Powers.presetName(17)~ ~!onchange=function() {Powers.setPresetName(17, this.value)}~></input>
+        Powers: <input class="presetpowerlist17" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(17)~ ~!onchange=function() {Powers.setPresetStudyList(17, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(17)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(17)">Load</button>
+        <button onclick="Powers.presetDelete(17)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(18) ? '' : 'none'~>
+        Name: <input class="presetpowername18" type="text" ~!value=Powers.presetName(18)~ ~!onchange=function() {Powers.setPresetName(18, this.value)}~></input>
+        Powers: <input class="presetpowerlist18" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(18)~ ~!onchange=function() {Powers.setPresetStudyList(18, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(18)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(18)">Load</button>
+        <button onclick="Powers.presetDelete(18)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(19) ? '' : 'none'~>
+        Name: <input class="presetpowername19" type="text" ~!value=Powers.presetName(19)~ ~!onchange=function() {Powers.setPresetName(19, this.value)}~></input>
+        Powers: <input class="presetpowerlist19" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(19)~ ~!onchange=function() {Powers.setPresetStudyList(19, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(19)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(19)">Load</button>
+        <button onclick="Powers.presetDelete(19)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(20) ? '' : 'none'~>
+        Name: <input class="presetpowername20" type="text" ~!value=Powers.presetName(20)~ ~!onchange=function() {Powers.setPresetName(20, this.value)}~></input>
+        Powers: <input class="presetpowerlist20" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(20)~ ~!onchange=function() {Powers.setPresetStudyList(20, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(20)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(20)">Load</button>
+        <button onclick="Powers.presetDelete(20)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(21) ? '' : 'none'~>
+        Name: <input class="presetpowername21" type="text" ~!value=Powers.presetName(21)~ ~!onchange=function() {Powers.setPresetName(21, this.value)}~></input>
+        Powers: <input class="presetpowerlist21" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(21)~ ~!onchange=function() {Powers.setPresetStudyList(21, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(21)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(21)">Load</button>
+        <button onclick="Powers.presetDelete(21)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(22) ? '' : 'none'~>
+        Name: <input class="presetpowername22" type="text" ~!value=Powers.presetName(22)~ ~!onchange=function() {Powers.setPresetName(22, this.value)}~></input>
+        Powers: <input class="presetpowerlist22" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(22)~ ~!onchange=function() {Powers.setPresetStudyList(22, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(22)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(22)">Load</button>
+        <button onclick="Powers.presetDelete(22)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(23) ? '' : 'none'~>
+        Name: <input class="presetpowername23" type="text" ~!value=Powers.presetName(23)~ ~!onchange=function() {Powers.setPresetName(23, this.value)}~></input>
+        Powers: <input class="presetpowerlist23" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(23)~ ~!onchange=function() {Powers.setPresetStudyList(23, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(23)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(23)">Load</button>
+        <button onclick="Powers.presetDelete(23)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(24) ? '' : 'none'~>
+        Name: <input class="presetpowername24" type="text" ~!value=Powers.presetName(24)~ ~!onchange=function() {Powers.setPresetName(24, this.value)}~></input>
+        Powers: <input class="presetpowerlist24" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(24)~ ~!onchange=function() {Powers.setPresetStudyList(24, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(24)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(24)">Load</button>
+        <button onclick="Powers.presetDelete(24)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(25) ? '' : 'none'~>
+        Name: <input class="presetpowername25" type="text" ~!value=Powers.presetName(25)~ ~!onchange=function() {Powers.setPresetName(25, this.value)}~></input>
+        Powers: <input class="presetpowerlist25" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(25)~ ~!onchange=function() {Powers.setPresetStudyList(25, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(25)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(25)">Load</button>
+        <button onclick="Powers.presetDelete(25)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(26) ? '' : 'none'~>
+        Name: <input class="presetpowername26" type="text" ~!value=Powers.presetName(26)~ ~!onchange=function() {Powers.setPresetName(26, this.value)}~></input>
+        Powers: <input class="presetpowerlist26" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(26)~ ~!onchange=function() {Powers.setPresetStudyList(26, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(26)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(26)">Load</button>
+        <button onclick="Powers.presetDelete(26)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(27) ? '' : 'none'~>
+        Name: <input class="presetpowername27" type="text" ~!value=Powers.presetName(27)~ ~!onchange=function() {Powers.setPresetName(27, this.value)}~></input>
+        Powers: <input class="presetpowerlist27" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(27)~ ~!onchange=function() {Powers.setPresetStudyList(27, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(27)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(27)">Load</button>
+        <button onclick="Powers.presetDelete(27)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(28) ? '' : 'none'~>
+        Name: <input class="presetpowername28" type="text" ~!value=Powers.presetName(28)~ ~!onchange=function() {Powers.setPresetName(28, this.value)}~></input>
+        Powers: <input class="presetpowerlist28" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(28)~ ~!onchange=function() {Powers.setPresetStudyList(28, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(28)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(28)">Load</button>
+        <button onclick="Powers.presetDelete(28)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(29) ? '' : 'none'~>
+        Name: <input class="presetpowername29" type="text" ~!value=Powers.presetName(29)~ ~!onchange=function() {Powers.setPresetName(29, this.value)}~></input>
+        Powers: <input class="presetpowerlist29" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(29)~ ~!onchange=function() {Powers.setPresetStudyList(29, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(29)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(29)">Load</button>
+        <button onclick="Powers.presetDelete(29)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(30) ? '' : 'none'~>
+        Name: <input class="presetpowername30" type="text" ~!value=Powers.presetName(30)~ ~!onchange=function() {Powers.setPresetName(30, this.value)}~></input>
+        Powers: <input class="presetpowerlist30" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(30)~ ~!onchange=function() {Powers.setPresetStudyList(30, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(30)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(30)">Load</button>
+        <button onclick="Powers.presetDelete(30)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(31) ? '' : 'none'~>
+        Name: <input class="presetpowername31" type="text" ~!value=Powers.presetName(31)~ ~!onchange=function() {Powers.setPresetName(31, this.value)}~></input>
+        Powers: <input class="presetpowerlist31" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(31)~ ~!onchange=function() {Powers.setPresetStudyList(31, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(31)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(31)">Load</button>
+        <button onclick="Powers.presetDelete(31)">Delete</button>
+      </div>
+      <div ~style.display=Powers.hasPreset(32) ? '' : 'none'~>
+        Name: <input class="presetpowername32" type="text" ~!value=Powers.presetName(32)~ ~!onchange=function() {Powers.setPresetName(32, this.value)}~></input>
+        Powers: <input class="presetpowerlist32" style="width: 256px;" type="text" ~!value=Powers.presetStudyList(32)~ ~!onchange=function() {Powers.setPresetStudyList(32, this.value)}~></input>
+        <button onclick="Powers.presetSetToCurrentPowers(32)">Set to current active powers</button>
+        <button onclick="Powers.presetLoad(32)">Load</button>
+        <button onclick="Powers.presetDelete(32)">Delete</button>
+      </div>
+      <span>
+        <button ~style.display=Powers.hasPreset(32) ? 'none' : ''~ onclick="Powers.presetCreate()">Create a power preset</button>
+        <span ~style.display=Powers.hasPreset(32) ? '' : 'none'~>You can create at most ~f 32 ~ power presets. Delete existing presets to create more.</span>
+      </span>
+      <br/>
+      <span style="display: none;">Exported active powers: <input id="powers-export-output"></input></span>
+    </div>
+  </tab>
+  <tab ~style.display=Tabs.currentTab() === 'galaxies' ? '' : 'none'~>
+    <div ~style.display=Galaxy.isUnlocked() ? 'none' : ''~>
+      <button style="height: 48px;" onclick="Galaxy.unlock()" ~class=Galaxy.canUnlock() ? '' : 'disabled'~>
+        Unlock Galaxies<br/>Cost: ~f Galaxy.unlockCost() ~ complexity points
+      </button>
+    </div>
+    <div ~style.display=Galaxy.isUnlocked() ? '' : 'none'~>
+      <span>You have produced ~f Galaxy.totalStarsProduced() ~ total stars, making your star factor ~f Galaxy.starFactor() ~.</span>
+      <br/>
+      <span>You have produced ~f Galaxy.totalInfinityStarsProduced() ~ total infinity stars, making your infinity star factor ~f Galaxy.infinityStarFactor() ~.</span>
+      <br/>
+      <span>You have produced ~f Galaxy.totalEternityStarsProduced() ~ total eternity stars, making your eternity star factor ~f Galaxy.eternityStarFactor() ~.</span>
+      <br/>
+      <span>You have produced ~f Galaxy.totalComplexityStarsProduced() ~ total complexity stars, making your complexity star factor ~f Galaxy.complexityStarFactor() ~.</span>
+      <br/>
+      <span>Your stellar product is ~f Galaxy.starFactor() ~ x ~f Galaxy.infinityStarFactor() ~ x ~f Galaxy.eternityStarFactor() ~ x ~f Galaxy.complexityStarFactor() ~ = ~f Galaxy.stellarProduct() ~.</span>
+      <br/>
+      <br/>
+      <span>You have ~f Galaxy.stellarProductAmount() ~ (based on stellar product) + ~f Galaxy.complexityPointAmount() ~ (based on total ℂP produced) = ~f Galaxy.amount() ~ galaxies.</span>
+      <br/>
+      <span>Next galaxies are at ~f Galaxy.nextStellarProductGalaxy() ~ stellar product and ~f Galaxy.nextComplexityPointGalaxy() ~ total ℂP produced.</span>
+      <br/>
+      <span>Your galaxies are increasing the strength of new powers by ~r formatWithPrecision(Galaxy.getStrengthIncrease(), 5) ~.</span>
+      <br/>
+      <br/>
+      <span>You have spent ~f player.stats.timeSinceComplexity ~ seconds in this complexity, increasing chroma caps ^~r formatWithPrecision(Galaxy.effect(), 5) ~</span>
+      <br/>
+      <span>(capped at ~r formatWithPrecision(Galaxy.effectCap(), 5) ~, reached at ~f Galaxy.timeToReachEffectCap() ~ seconds in complexity).</span>
+      <br/>
+      <br/>
+      <span>You can make some of your galaxies dilated to make the galaxy effect increase faster, but have a lower cap.</span>
+      <br/>
+      <span>Currently ~f Galaxy.dilated() ~ galaxies are dilated, making the galaxy effect increase ~f Galaxy.effectSpeed() ~x quicker.</span>
+      <br/>
+      <span>Galaxies to make dilated next complexity reset: <input type="text" ~!value=Galaxy.nextDilated()~ ~!onchange=function() {Galaxy.setNextDilated(+this.value)}~></input> (Set this to ~f 0 ~ to un-dilate all dilated galaxies.)</span>
+      <br/>
+      <span>Next complexity, the galaxy effect will increase ~f Galaxy.nextEffectSpeed() ~x quicker and have a cap of ~r formatWithPrecision(Galaxy.nextEffectCap(), 5) ~, reached at ~f Galaxy.nextTimeToReachEffectCap() ~ seconds in complexity.</span>
+    </div>
+  </tab>
   <tab ~style.display=Tabs.currentTab() === 'statistics' ? '' : 'none'~>
     <span>You have produced ~f player.stats.totalStarsProduced ~ total stars.</span>
     <br/>
@@ -2984,7 +3738,7 @@
       <tr>
         <td><button class="options-button" onclick="Options.toggleOfflineProgress()">Offline progress: ~r player.options.offlineProgress ? "On" : "Off" ~</button></td>
         <td><button class="options-button" onclick="Options.toggleHotkeys()">Hotkeys: ~r player.options.hotkeys ? "On" : "Off" ~</button></td>
-        <td><button class="options-button" onclick="Options.toggleCompletionColors()">Completion colors: ~r player.options.completionColors? "On" : "Off" ~</button></td>
+        <td><button class="options-button" onclick="Options.nextCompletionColors()">Completion colors: ~r player.options.completionColors ~</button></td>
       </tr>
       <tr>
         <td><button class="options-button" onclick="Options.nextNotation()">Notation: ~r player.options.notation ~</button></td>

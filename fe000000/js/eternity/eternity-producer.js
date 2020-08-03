@@ -33,7 +33,7 @@ let EternityProducerUpgrade = function (i) {
     processEffect(x) {
       if (i === 2) {
         return Decimal.pow(Math.max(1, 16 * Math.pow(x, 2)),
-          PermanenceUpgrade(2).effect() * Math.sqrt(Math.log2(1 + Eternities.amount() / Math.pow(2, 16))));
+          PermanenceUpgrade(2).effect() * Math.sqrt(Eternities.amount().div(Math.pow(2, 16)).plus(1).log2()));
       } else {
         return x;
       }
@@ -107,10 +107,10 @@ let EternityProducer = {
     ComplexityChallenge.exitComplexityChallenge(3);
   },
   productionPerSecond() {
-    return EternityProducerUpgrade(1).effect() * Eternities.commonEternityGainMultiplier();
+    return Eternities.commonEternityGainMultiplier().times(EternityProducerUpgrade(1).effect());
   },
   produce(diff) {
-    Eternities.add(diff * this.productionPerSecond());
+    Eternities.add(this.productionPerSecond().times(diff));
   },
   multiplier() {
     return EternityProducerUpgrade(2).effect();
