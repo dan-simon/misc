@@ -3337,7 +3337,7 @@
         strength ~r formatWithPrecision(PowerShards.craftedStrength(), 5) ~, and rarity <input type="text" ~!value=PowerShards.craftedRarityDisplay()~ ~!onchange=function() {PowerShards.setCraftedRarity(this.value)}~></input>:
         <button ~class=PowerShards.canCraft() ? '' : 'disabled'~ onclick="PowerShards.craft()">Cost: ~f PowerShards.craftedPowerCost() ~ power shards</button></span>
         <br/>
-        <span>You cannot craft owers with negative rarity or powers with rarity greater than ~f Powers.maximumRarity() ~ (the maximum rarity of generated powers).</span>
+        <span>You cannot craft powers with negative rarity or powers with rarity greater than ~f Powers.maximumRarity() ~ (the maximum rarity of generated powers).</span>
         <br/>
         <span>Crafting cost depends only on rarity (not on type), and is always at least twice the power shards gained from deletion.</span>
         <br/>
