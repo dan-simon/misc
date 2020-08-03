@@ -54,6 +54,7 @@
   <script src="js/player.js"></script>
   <script src="js/power-shards.js"></script>
   <script src="js/powers.js"></script>
+  <script src="js/prestige-layer-names.js"></script>
   <script src="js/prestige.js"></script>
   <script src="js/sacrifice.js"></script>
   <script src="js/saving.js"></script>
@@ -1230,7 +1231,7 @@
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(1) ~
             <br/>
-            Start each prestige, infinity and eternity with stars based on your eternities (currently ~f EternityStartingBenefits.rawStars() ~)
+            Start each ~r PrestigeLayerNames.layersAbove('prestige') ~ with stars based on your eternities (currently ~f EternityStartingBenefits.rawStars() ~)
           </div>
         </td>
         <td>
@@ -1239,7 +1240,7 @@
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(2) ~
             <br/>
-            Start each eternity with all challenges completed. (You also keep autobuyers and infinity remains broken.)
+            Start each ~r PrestigeLayerNames.layersAbove('eternity') ~ with all challenges completed. (You also keep autobuyers and infinity remains broken.)
           </div>
         </td>
         <td>
@@ -1248,7 +1249,7 @@
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(3) ~
             <br/>
-            Start each eternity with infinity points based on your eternities (currently ~f EternityStartingBenefits.rawInfinityPoints() ~)
+            Start each ~r PrestigeLayerNames.layersAbove('eternity') ~ with infinity points based on your eternities (currently ~f EternityStartingBenefits.rawInfinityPoints() ~)
           </div>
         </td>
         <td>
@@ -1268,7 +1269,7 @@
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(5) ~
             <br/>
-            Start each eternity with infinities based on your eternities (currently ~f EternityStartingBenefits.rawInfinities() ~)
+            Start each ~r PrestigeLayerNames.layersAbove('eternity') ~ with infinities based on your eternities (currently ~f EternityStartingBenefits.rawInfinities() ~)
           </div>
         </td>
         <td>
@@ -2899,9 +2900,7 @@
     <div ~style.display=Powers.isUnlocked() ? '' : 'none'~>
       <span>You have ~f Powers.active().length ~/~f Powers.activatedLimit() ~ active powers.</span>
       <br/>
-      <span>Active powers raise various dimension multipliers to powers.</span>
-      <br/>
-      <span>Stored powers do not, but can be activated to make them active.</span>
+      <span>Active powers raise various dimension multipliers to powers. Stored powers do not, but can be activated.</span>
       <br/>
       <span>Due to unlocking powers, you gain your eternity points on eternity every second, without needing to eternity.</span>
       <br/>
@@ -2994,13 +2993,13 @@
       <br/>
       <span>Current effects of active powers:</span>
       <br/>
-      <span class="yellowspan">~r Powers.totalEffectDescription('normal') ~</span>
+      <span style="margin-left: 19px;" class="yellowspan">~r Powers.totalEffectDescription('normal') ~</span>
       <br/>
       <span class="magentaspan">~r Powers.totalEffectDescription('infinity') ~</span>
       <br/>
       <span class="cyanspan">~r Powers.totalEffectDescription('eternity') ~</span>
       <br/>
-      <span class="brownspan">~r Powers.totalEffectDescription('complexity') ~</span>
+      <span style="margin-left: -19px;" class="brownspan">~r Powers.totalEffectDescription('complexity') ~</span>
       <br/>
       <br/>
       <span>Stored powers (<button onclick="Powers.sortStored()">Sort</button>):</span>
