@@ -356,7 +356,7 @@ let Powers = {
     return 3;
   },
   interval() {
-    return 4096 / this.speed();
+    return 8192 / this.speed();
   },
   maximumActivatedLimit() {
     return 3;
@@ -418,7 +418,7 @@ let Powers = {
     for (let p of this.active()) {
       typeCount[this.index(p.type) - 1]++;
     }
-    return typeCount.join(',');
+    return typeCount.map((n, i) => 'NIEC'[i].repeat(n)).join('');
   },
   export() {
     let output = document.getElementById('powers-export-output');
@@ -434,11 +434,15 @@ let Powers = {
     }
   },
   toNumber(x) {
-    let result = Math.max(0, Math.floor(+x));
-    return Number.isFinite(result) ? result : 0;
+    return Math.max(0, Math.floor(+x)) || 0;
+  },
+  importStringCounts(importString) {
+    importString = importString.toUpperCase();
+    let initialCounts = importString.replace(/[NIEC]/g, '').split(',').map(x => this.toNumber(x));
+    return [0, 1, 2, 3].map(i => (importString.match(new RegExp('NIEC'[i], 'g')) || []).length + (initialCounts[i] || 0));
   },
   importString(importString) {
-    let counts = importString.split(',').map(x => this.toNumber(x));
+    let counts = this.importStringCounts(importString);
     let toActivateByType = [0, 1, 2, 3].map(i => this.getSortedPowerList(['normal', 'infinity', 'eternity', 'complexity'][i], false, false).slice(0, counts[i]));
     let indicesToActivate = [].concat.apply([], toActivateByType).slice(0, this.activatedLimit() - this.active().length).map(x => x.index);
     player.powers.active = this.active().concat(indicesToActivate.map(i => this.accessPower('stored', i)));
