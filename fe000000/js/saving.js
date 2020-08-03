@@ -364,6 +364,10 @@ let Saving = {
       }
       player.version = 1.9375;
     }
+    if (player.version < 1.9384765625) {
+      delete player.powers.craft.strength;
+      player.version = 1.9384765625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

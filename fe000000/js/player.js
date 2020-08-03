@@ -164,7 +164,6 @@ let initialPlayer = {
     presets: [],
     craft: {
       type: 'normal',
-      strength: 'max',
       rarity: 1,
     },
     lastData: {
@@ -227,7 +226,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9375
+  version: 1.9384765625
 }
 
 let player;

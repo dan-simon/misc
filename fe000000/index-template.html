@@ -3334,21 +3334,12 @@
           <option value="eternity">eternity</option>
           <option value="complexity">complexity</option>
         </select>,
-        strength <input type="text" ~!value=PowerShards.craftedStrengthDisplay()~ ~!onchange=function() {PowerShards.setCraftedStrength(this.value)}~></input>,
-        and rarity <input type="text" ~!value=PowerShards.craftedRarityDisplay()~ ~!onchange=function() {PowerShards.setCraftedRarity(this.value)}~></input>:
+        strength ~r formatWithPrecision(PowerShards.craftedStrength(), 5) ~, and rarity <input type="text" ~!value=PowerShards.craftedRarityDisplay()~ ~!onchange=function() {PowerShards.setCraftedRarity(this.value)}~></input>:
         <button ~class=PowerShards.canCraft() ? '' : 'disabled'~ onclick="PowerShards.craft()">Cost: ~f PowerShards.craftedPowerCost() ~ power shards</button></span>
         <br/>
-        <span>You cannot craft the following types of powers:</span>
+        <span>You cannot craft owers with negative rarity or powers with rarity greater than ~f Powers.maximumRarity() ~ (the maximum rarity of generated powers).</span>
         <br/>
-        <span>(a) powers with negative strength or rarity</span>
-        <br/>
-        <span>(b) powers with strength greater than ~f formatWithPrecision(Powers.newStrength(), 5) ~ (the strength of generated powers)</span>
-        <br/>
-        <span>(c) powers with rarity greater than ~f Powers.maximumRarity() ~ (the maximum rarity of generated powers).</span>
-        <br/>
-        <span>You can set strength to "max" (without the quotes) to craft a power with exactly the strength of generated powers.</span>
-        <br/>
-        <span>Crafting cost depends only on rarity, except that it is always at least twice the power shards gained from deletion.</span>
+        <span>Crafting cost depends only on rarity (not on type), and is always at least twice the power shards gained from deletion.</span>
         <br/>
         <br/>
         <span>Crafted power<span ~style.display=Powers.craftedKept() ? 'none' : ''~> (will be automatically deleted due to being bad enough to be useless)</span>:</span>
