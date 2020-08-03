@@ -166,6 +166,10 @@ let initialPlayer = {
       type: 'normal',
       strength: 'max',
       rarity: 1,
+    },
+    lastData: {
+      lowRarity: false,
+      type: 'normal'
     }
   },
   galaxies: {
@@ -223,7 +227,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9365234375
+  version: 1.9375
 }
 
 let player;

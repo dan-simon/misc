@@ -20,11 +20,26 @@ let RNG = {
       this.seed = x;
     }
   },
+  lowRarityThreshold() {
+    return 1 / 4;
+  },
   rarity(real) {
-    return Math.min(Powers.maximumRarity(), Math.sqrt(Math.pow(Powers.minimumRarity(), 2) - Math.log2(this.uniform(real))));
+    let r = this.uniform(real);
+    if (player.powers.lastData.lowRarity) {
+      r = (1 - this.lowRarityThreshold()) * r + this.lowRarityThreshold();
+    }
+    if (real) {
+      player.powers.lastData.lowRarity = r < this.lowRarityThreshold();
+    }
+    return Math.min(Powers.maximumRarity(), Math.sqrt(Math.pow(Powers.minimumRarity(), 2) - Math.log2(1 - r)));
   },
   randomType(real) {
-    return ['normal', 'infinity', 'eternity', 'complexity'][Math.floor(4 * this.uniform(real))]
+    let type = ['normal', 'infinity', 'eternity', 'complexity'].filter(
+      i => i !== player.powers.lastData.type)[Math.floor(3 * this.uniform(real))];
+    if (real) {
+      player.powers.lastData.type = type;
+    }
+    return type;
   },
   randomPower(real) {
     this.seed = player.powers.seed;

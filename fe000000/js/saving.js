@@ -357,6 +357,13 @@ let Saving = {
       };
       player.version = 1.9365234375;
     }
+    if (player.version < 1.9375) {
+      player.powers.lastData = {
+        lowRarity: false,
+        type: 'normal'
+      }
+      player.version = 1.9375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
