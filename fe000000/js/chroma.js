@@ -31,7 +31,7 @@ let Chroma = {
     return cap * (1 - Math.exp(-t / cap));
   },
   cap() {
-    return Math.pow(Math.max(EternityPoints.totalEPProducedThisComplexity().log2(), 1) *
+    return Math.pow(Math.max(EternityPoints.totalEPProducedThisComplexity().log2(), 1) * Studies.chromaCapMultiplier() *
       ComplexityChallenge.getComplexityChallengeReward(4) * ComplexityAchievements.effect(4, 3), Galaxy.effect());
   },
   chromaSpeedMultiplier() {
@@ -154,7 +154,9 @@ let Chroma = {
     return t / this.chromaSpeedMultiplier() - player.stats.timeSinceEternity;
   },
   currentProductionText() {
-    if (this.amount() === this.cap()) {
+    if (this.colorAmount(player.chroma.current) > this.cap()) {
+      return 'would be producing ' + this.currentColorName() + ' except that it\'s already above the current chroma cap'
+    } else if (this.amount() === this.cap()) {
       return 'would be producing ' + this.currentColorName() + ' but are at the chroma cap';
     } else if (this.colorAmount(player.chroma.current) === this.cap()) {
       return 'would produce ' + Chroma.currentColorName() + ' except that it\'s already at the chroma cap';

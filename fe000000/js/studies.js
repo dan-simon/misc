@@ -246,6 +246,9 @@ let Studies = {
   canAccessFourthRow() {
     return this.totalTheorems() >= this.totalStudyCost();
   },
+  chromaCapMultiplier() {
+    return 1 + [13, 14, 15, 16].map(i => Study(i).timesBought()).reduce((a, b) => a + b) / 1024;
+  },
   costPow(n, type) {
     // Should only be called in getting the cost, otherwise
     // what it does probably isn't what you think it does.
