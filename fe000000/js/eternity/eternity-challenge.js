@@ -299,8 +299,8 @@ let EternityChallenge = {
         formatWithPrecision(this.eternityChallenge1InfinityStarsEffect(), 5) + ' to normal generators, ' +
         formatWithPrecision(this.eternityChallenge1EternityStarsEffect(), 5) + ' to infinity generators';
     } else if (cc === 4) {
-      return 'Eternity Challenge 4: ' + format(this.eternityChallenge4DoneInfinities()) + '/' +
-        format(this.eternityChallenge4AllowedInfinities()) + ' infinities done';
+      return 'Eternity Challenge 4: ' + formatInt(this.eternityChallenge4DoneInfinities()) + '/' +
+        formatInt(this.eternityChallenge4AllowedInfinities()) + ' infinities done';
     } else {
       return 'This text should never appear.';
     }

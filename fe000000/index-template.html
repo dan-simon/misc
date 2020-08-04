@@ -69,20 +69,20 @@
   <div style="height: 56px;">
     <span ~style.display=InfinityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~f InfinityPrestigeLayer.starRequirementForInfinity() ~ stars to infinity.</span>
     <br ~style.display=InfinityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
-    <span ~style.display=InfinityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~f InfinityPrestigeLayer.infinityPoints() ~ infinity points (~f InfinityPrestigeLayer.totalInfinityPoints() ~ total this eternity)</span>
-    <button ~style.display=InfinityPrestigeLayer.canInfinity() ? '' : 'none'~ style="height: 48px;" onclick="InfinityPrestigeLayer.infinity()">Infinity: Gain ~f InfinityPrestigeLayer.infinityPointGain() ~ infinity points (~r InfinityPrestigeLayer.infinityPointGainRatioText() ~~f InfinityPrestigeLayer.infinityPoints() ~ → ~f InfinityPrestigeLayer.newInfinityPoints() ~)<br/>~f InfinityPrestigeLayer.currentIPPerSec() ~ IP/sec, ~f InfinityPrestigeLayer.peakIPPerSec() ~ peak IP/sec</button>
+    <span ~style.display=InfinityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i InfinityPrestigeLayer.infinityPoints() ~ infinity point~s InfinityPrestigeLayer.infinityPoints() ~ (~i InfinityPrestigeLayer.totalInfinityPoints() ~ total this eternity)</span>
+    <button ~style.display=InfinityPrestigeLayer.canInfinity() ? '' : 'none'~ style="height: 48px;" onclick="InfinityPrestigeLayer.infinity()">Infinity: Gain ~f InfinityPrestigeLayer.infinityPointGain() ~ infinity points (~r InfinityPrestigeLayer.infinityPointGainRatioText() ~~i InfinityPrestigeLayer.infinityPoints() ~ → ~i InfinityPrestigeLayer.newInfinityPoints() ~)<br/>~f InfinityPrestigeLayer.currentIPPerSec() ~ IP/sec, ~f InfinityPrestigeLayer.peakIPPerSec() ~ peak IP/sec</button>
   </div>
   <div style="height: 56px;">
     <span ~style.display=EternityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~f EternityPrestigeLayer.infinityPointRequirementForEternity() ~ total infinity points this eternity to eternity.</span>
     <br ~style.display=EternityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
-    <span ~style.display=EternityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~f EternityPrestigeLayer.eternityPoints() ~ eternity points (~f EternityPrestigeLayer.totalEternityPoints() ~ total this complexity)</span>
-    <button ~style.display=EternityPrestigeLayer.canEternity() ? '' : 'none'~ style="height: 48px;" onclick="EternityPrestigeLayer.eternity()">Eternity: Gain ~f EternityPrestigeLayer.eternityPointGain() ~ eternity points (~r EternityPrestigeLayer.eternityPointGainRatioText() ~~f EternityPrestigeLayer.eternityPoints() ~ → ~f EternityPrestigeLayer.newEternityPoints() ~)<br/>~f EternityPrestigeLayer.currentEPPerSec() ~ EP/sec, ~f EternityPrestigeLayer.peakEPPerSec() ~ peak EP/sec</button>
+    <span ~style.display=EternityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i EternityPrestigeLayer.eternityPoints() ~ eternity point~s EternityPrestigeLayer.eternityPoints() ~ (~i EternityPrestigeLayer.totalEternityPoints() ~ total this complexity)</span>
+    <button ~style.display=EternityPrestigeLayer.canEternity() ? '' : 'none'~ style="height: 48px;" onclick="EternityPrestigeLayer.eternity()">Eternity: Gain ~f EternityPrestigeLayer.eternityPointGain() ~ eternity points (~r EternityPrestigeLayer.eternityPointGainRatioText() ~~i EternityPrestigeLayer.eternityPoints() ~ → ~i EternityPrestigeLayer.newEternityPoints() ~)<br/>~f EternityPrestigeLayer.currentEPPerSec() ~ EP/sec, ~f EternityPrestigeLayer.peakEPPerSec() ~ peak EP/sec</button>
   </div>
   <div style="height: 56px;">
     <span ~style.display=ComplexityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~r ComplexityPrestigeLayer.requirementForComplexity() ~ to complexity.</span>
     <br ~style.display=ComplexityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
-    <span ~style.display=ComplexityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~f ComplexityPrestigeLayer.complexityPoints() ~ complexity points (~f ComplexityPrestigeLayer.totalComplexityPoints() ~ total)</span>
-    <button ~style.display=ComplexityPrestigeLayer.canComplexity() ? '' : 'none'~ style="height: 48px;" onclick="ComplexityPrestigeLayer.complexity()">Complexity: Gain ~f ComplexityPrestigeLayer.complexityPointGain() ~ complexity points (~r ComplexityPrestigeLayer.complexityPointGainRatioText() ~~f ComplexityPrestigeLayer.complexityPoints() ~ → ~f ComplexityPrestigeLayer.newComplexityPoints() ~)<br/>~f ComplexityPrestigeLayer.currentCPPerSec() ~ ℂP/sec, ~f ComplexityPrestigeLayer.peakCPPerSec() ~ peak ℂP/sec</button>
+    <span ~style.display=ComplexityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i ComplexityPrestigeLayer.complexityPoints() ~ complexity point~s ComplexityPrestigeLayer.complexityPoints() ~ (~i ComplexityPrestigeLayer.totalComplexityPoints() ~ total)</span>
+    <button ~style.display=ComplexityPrestigeLayer.canComplexity() ? '' : 'none'~ style="height: 48px;" onclick="ComplexityPrestigeLayer.complexity()">Complexity: Gain ~f ComplexityPrestigeLayer.complexityPointGain() ~ complexity points (~r ComplexityPrestigeLayer.complexityPointGainRatioText() ~~i ComplexityPrestigeLayer.complexityPoints() ~ → ~i ComplexityPrestigeLayer.newComplexityPoints() ~)<br/>~f ComplexityPrestigeLayer.currentCPPerSec() ~ ℂP/sec, ~f ComplexityPrestigeLayer.peakCPPerSec() ~ peak ℂP/sec</button>
   </div>
   <br/>
   <br/>
@@ -129,16 +129,16 @@
         <span>~r EternityChallenge.eternityChallengeText() ~</span>
       </div>
       <div ~style.display=Boost.isVisible() ? '' : 'none'~>
-        <span/>You have ~f Boost.bought() ~ boosts, multiplying all generators by ~f Boost.multiplier() ~x (~f Boost.multiplierPer() ~x each). <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buy()">Cost: ~f Boost.cost() ~</button> <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buyMax()">Max</button></span>
+        <span/>You have ~i Boost.bought() ~ boost~s Boost.bought() ~, multiplying all generators by ~f Boost.multiplier() ~x (~f Boost.multiplierPer() ~x each). <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buy()">Cost: ~f Boost.cost() ~</button> <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buyMax()">Max</button></span>
         <br/>
         <div ~style.display=Boost.isBoostPowerVisible() ? '' : 'none'~>
           <span>You have ~f Boost.boostPower() ~ boost power, increasing the per-boost multiplier by ~f Boost.boostPowerEffect() ~x.</span>
           <br/>
-          <span>You are generating ~r formatWithPrecision(Boost.boostPowerPerSecond(), 5) ~ boost power per second (~r formatWithPrecision(Boost.boostPowerPerBoost(), 5) ~ per boost above ~f Boost.boostPowerStart() ~).</span>
+          <span>You are generating ~r formatWithPrecision(Boost.boostPowerPerSecond(), 5) ~ boost power per second (~r formatWithPrecision(Boost.boostPowerPerBoost(), 5) ~ per boost above ~i Boost.boostPowerStart() ~).</span>
           <br/>
-          <span>Your ~r Boost.bestBoostPowerDescription() ~ is ~f Boost.bestBoostPower() ~ (giving ~f Boost.extraTheoremsActualAndDisplay() ~ extra theorems, next at ~f Boost.nextExtraTheorem() ~).</span>
+          <span>Your ~r Boost.bestBoostPowerDescription() ~ is ~f Boost.bestBoostPower() ~ (giving ~i Boost.extraTheoremsActualAndDisplay() ~ extra theorem~s Boost.extraTheoremsActualAndDisplay() ~, next at ~f Boost.nextExtraTheorem() ~).</span>
         </div>
-        <span ~style.display=Boost.isBoostPowerVisible() ? 'none' : ''~>You will start generating boost power for each boost above ~f Boost.boostPowerStart() ~ boosts.</span>
+        <span ~style.display=Boost.isBoostPowerVisible() ? 'none' : ''~>You will start generating boost power for each boost above ~i Boost.boostPowerStart() ~ boost~s Boost.boostPowerStart() ~.</span>
       </div>
       <br/>
       <br/>
@@ -148,7 +148,7 @@
           <td>~f Generator(1).amount() ~</td>
           <td>~f Generator(1).perSecond() ~/s</td>
           <td>~f Generator(1).multiplier() ~x</td>
-          <td><button ~class=Generator(1).canBuy() ? "" : "disabled"~ onclick="Generator(1).buy()">Cost: ~f Generator(1).cost() ~</button></td>
+          <td><button ~class=Generator(1).canBuy() ? "" : "disabled"~ onclick="Generator(1).buy()">Cost: ~i Generator(1).cost() ~</button></td>
           <td><button ~class=Generator(1).canBuy() ? "" : "disabled"~ onclick="Generator(1).buyMax()">Max</button></td>
         </tr>
         <tr ~style.display=Generator(2).isVisible() ? '' : 'none'~>
@@ -156,7 +156,7 @@
           <td>~f Generator(2).amount() ~</td>
           <td>~f Generator(2).perSecond() ~/s</td>
           <td>~f Generator(2).multiplier() ~x</td>
-          <td><button ~class=Generator(2).canBuy() ? "" : "disabled"~ onclick="Generator(2).buy()">Cost: ~f Generator(2).cost() ~</button></td>
+          <td><button ~class=Generator(2).canBuy() ? "" : "disabled"~ onclick="Generator(2).buy()">Cost: ~i Generator(2).cost() ~</button></td>
           <td><button ~class=Generator(2).canBuy() ? "" : "disabled"~ onclick="Generator(2).buyMax()">Max</button></td>
         </tr>
         <tr ~style.display=Generator(3).isVisible() ? '' : 'none'~>
@@ -164,7 +164,7 @@
           <td>~f Generator(3).amount() ~</td>
           <td>~f Generator(3).perSecond() ~/s</td>
           <td>~f Generator(3).multiplier() ~x</td>
-          <td><button ~class=Generator(3).canBuy() ? "" : "disabled"~ onclick="Generator(3).buy()">Cost: ~f Generator(3).cost() ~</button></td>
+          <td><button ~class=Generator(3).canBuy() ? "" : "disabled"~ onclick="Generator(3).buy()">Cost: ~i Generator(3).cost() ~</button></td>
           <td><button ~class=Generator(3).canBuy() ? "" : "disabled"~ onclick="Generator(3).buyMax()">Max</button></td>
         </tr>
         <tr ~style.display=Generator(4).isVisible() ? '' : 'none'~>
@@ -172,7 +172,7 @@
           <td>~f Generator(4).amount() ~</td>
           <td>~f Generator(4).perSecond() ~/s</td>
           <td>~f Generator(4).multiplier() ~x</td>
-          <td><button ~class=Generator(4).canBuy() ? "" : "disabled"~ onclick="Generator(4).buy()">Cost: ~f Generator(4).cost() ~</button></td>
+          <td><button ~class=Generator(4).canBuy() ? "" : "disabled"~ onclick="Generator(4).buy()">Cost: ~i Generator(4).cost() ~</button></td>
           <td><button ~class=Generator(4).canBuy() ? "" : "disabled"~ onclick="Generator(4).buyMax()">Max</button></td>
         </tr>
         <tr ~style.display=Generator(5).isVisible() ? '' : 'none'~>
@@ -180,7 +180,7 @@
           <td>~f Generator(5).amount() ~</td>
           <td>~f Generator(5).perSecond() ~/s</td>
           <td>~f Generator(5).multiplier() ~x</td>
-          <td><button ~class=Generator(5).canBuy() ? "" : "disabled"~ onclick="Generator(5).buy()">Cost: ~f Generator(5).cost() ~</button></td>
+          <td><button ~class=Generator(5).canBuy() ? "" : "disabled"~ onclick="Generator(5).buy()">Cost: ~i Generator(5).cost() ~</button></td>
           <td><button ~class=Generator(5).canBuy() ? "" : "disabled"~ onclick="Generator(5).buyMax()">Max</button></td>
         </tr>
         <tr ~style.display=Generator(6).isVisible() ? '' : 'none'~>
@@ -188,7 +188,7 @@
           <td>~f Generator(6).amount() ~</td>
           <td>~f Generator(6).perSecond() ~/s</td>
           <td>~f Generator(6).multiplier() ~x</td>
-          <td><button ~class=Generator(6).canBuy() ? "" : "disabled"~ onclick="Generator(6).buy()">Cost: ~f Generator(6).cost() ~</button></td>
+          <td><button ~class=Generator(6).canBuy() ? "" : "disabled"~ onclick="Generator(6).buy()">Cost: ~i Generator(6).cost() ~</button></td>
           <td><button ~class=Generator(6).canBuy() ? "" : "disabled"~ onclick="Generator(6).buyMax()">Max</button></td>
         </tr>
         <tr ~style.display=Generator(7).isVisible() ? '' : 'none'~>
@@ -196,7 +196,7 @@
           <td>~f Generator(7).amount() ~</td>
           <td>~f Generator(7).perSecond() ~/s</td>
           <td>~f Generator(7).multiplier() ~x</td>
-          <td><button ~class=Generator(7).canBuy() ? "" : "disabled"~ onclick="Generator(7).buy()">Cost: ~f Generator(7).cost() ~</button></td>
+          <td><button ~class=Generator(7).canBuy() ? "" : "disabled"~ onclick="Generator(7).buy()">Cost: ~i Generator(7).cost() ~</button></td>
           <td><button ~class=Generator(7).canBuy() ? "" : "disabled"~ onclick="Generator(7).buyMax()">Max</button></td>
         </tr>
         <tr ~style.display=Generator(8).isVisible() ? '' : 'none'~>
@@ -204,7 +204,7 @@
           <td>~f Generator(8).amount() ~</td>
           <td>~f Generator(8).perSecond() ~/s</td>
           <td>~f Generator(8).multiplier() ~x</td>
-          <td><button ~class=Generator(8).canBuy() ? "" : "disabled"~ onclick="Generator(8).buy()">Cost: ~f Generator(8).cost() ~</button></td>
+          <td><button ~class=Generator(8).canBuy() ? "" : "disabled"~ onclick="Generator(8).buy()">Cost: ~i Generator(8).cost() ~</button></td>
           <td><button ~class=Generator(8).canBuy() ? "" : "disabled"~ onclick="Generator(8).buyMax()">Max</button></td>
         </tr>
       </table>
@@ -243,15 +243,15 @@
     </div>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'infinity' ? '' : 'none'~>
-    <span>You have ~f InfinityPoints.amount() ~ infinity points (IP).
+    <span>You have ~i InfinityPoints.amount() ~ infinity point~s InfinityPoints.amount() ~ (IP).
       <button ~class=InfinityMaxAll.anythingToBuy() ? "" : "disabled"~ onclick="InfinityMaxAll.maxAll()">Max all</button>
       <button ~class=InfinityMaxAll.anyUpgradesToBuy() ? "" : "disabled"~ onclick="InfinityMaxAll.maxUpgrades()">Max upgrades</button>
       <button ~class=InfinityMaxAll.anyGeneratorsToBuy() ? "" : "disabled"~ onclick="InfinityMaxAll.maxGenerators()">Max generators</button>
     </span>
     <br/>
-    <span>You have produced ~f InfinityPoints.totalIPProducedThisEternity() ~ infinity points this eternity, multiplying all generators by ~f InfinityPoints.multiplier() ~.</span>
+    <span>You have produced ~i InfinityPoints.totalIPProducedThisEternity() ~ infinity point~s InfinityPoints.totalIPProducedThisEternity() ~ this eternity, multiplying all generators by ~f InfinityPoints.multiplier() ~.</span>
     <br/>
-    <span>You have ~f Infinities.amount() ~ infinities, multiplying all infinity generators (IGs) by ~f Infinities.infinityGeneratorMultiplier() ~.</span>
+    <span>You have ~i Infinities.amount() ~ infinit~y Infinities.amount() ~, multiplying all infinity generators (IGs) by ~f Infinities.infinityGeneratorMultiplier() ~.</span>
     <br/>
     <span ~style.display=InfinityPrestigeLayer.canInfinityBeBroken() ? '' : 'none'~><button style="height: 48px;" onclick="InfinityPrestigeLayer.toggleBreakInfinity()">~r InfinityPrestigeLayer.breakInfinityButtonText() ~</button></span>
     <span ~style.display=InfinityPrestigeLayer.canInfinityBeBroken() ? 'none' : ''~>You need to complete all the challenges to be able to break infinity.</span>
@@ -266,14 +266,14 @@
       <tr>
         <td>Increase the base multiplier per boost:</td>
         <td><span ~style.display=InfinityUpgrade(1).atBoughtLimit() ? 'none' : ''~>~f InfinityUpgrade(1).effect() ~ → ~f InfinityUpgrade(1).nextEffect() ~</span><span ~style.display=InfinityUpgrade(1).atBoughtLimit() ? '' : 'none'~>~f InfinityUpgrade(1).effect() ~ (maxed)</span></td>
-        <td><span ~style.display=InfinityUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=InfinityUpgrade(1).canBuy() ? "" : "disabled"~ onclick="InfinityUpgrade(1).buy()">Cost: ~f InfinityUpgrade(1).cost() ~ IP</button></span></td>
+        <td><span ~style.display=InfinityUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=InfinityUpgrade(1).canBuy() ? "" : "disabled"~ onclick="InfinityUpgrade(1).buy()">Cost: ~i InfinityUpgrade(1).cost() ~ IP</button></span></td>
         <td><span ~style.display=InfinityUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=InfinityUpgrade(1).canBuy() ? "" : "disabled"~ onclick="InfinityUpgrade(1).buyMax()">Max</button></span></td>
         <td><span ~style.display=InfinityAutobuyer(9).hasInfinityAutobuyer() ? '' : 'none'~><button onclick="InfinityAutobuyer(9).toggle()">Auto: ~r InfinityAutobuyer(9).isOn() ? "On" : "Off" ~</button></span></td>
       </tr>
       <tr>
         <td>Increase the power of infinity stars:</td>
         <td><span ~style.display=InfinityUpgrade(2).atBoughtLimit() ? 'none' : ''~>~f InfinityUpgrade(2).effect() ~ → ~f InfinityUpgrade(2).nextEffect() ~</span><span ~style.display=InfinityUpgrade(2).atBoughtLimit() ? '' : 'none'~>~f InfinityUpgrade(2).effect() ~ (maxed)</span></td>
-        <td><span ~style.display=InfinityUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=InfinityUpgrade(2).canBuy() ? "" : "disabled"~ onclick="InfinityUpgrade(2).buy()">Cost: ~f InfinityUpgrade(2).cost() ~ IP</button></span></td>
+        <td><span ~style.display=InfinityUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=InfinityUpgrade(2).canBuy() ? "" : "disabled"~ onclick="InfinityUpgrade(2).buy()">Cost: ~i InfinityUpgrade(2).cost() ~ IP</button></span></td>
         <td><span ~style.display=InfinityUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=InfinityUpgrade(2).canBuy() ? "" : "disabled"~ onclick="InfinityUpgrade(2).buyMax()">Max</button></span></td>
         <td><span ~style.display=InfinityAutobuyer(10).hasInfinityAutobuyer() ? '' : 'none'~><button onclick="InfinityAutobuyer(10).toggle()">Auto: ~r InfinityAutobuyer(10).isOn() ? "On" : "Off" ~</button></span></td>
       </tr>
@@ -285,7 +285,7 @@
         <td>~f InfinityGenerator(1).amount() ~</td>
         <td>~f InfinityGenerator(1).perSecond() ~/s</td>
         <td>~f InfinityGenerator(1).multiplier() ~x</td>
-        <td><button ~class=InfinityGenerator(1).canBuy() ? "" : "disabled"~ onclick="InfinityGenerator(1).buy()">Cost: ~f InfinityGenerator(1).cost() ~ IP</button></td>
+        <td><button ~class=InfinityGenerator(1).canBuy() ? "" : "disabled"~ onclick="InfinityGenerator(1).buy()">Cost: ~i InfinityGenerator(1).cost() ~ IP</button></td>
         <td><button ~class=InfinityGenerator(1).canBuy() ? "" : "disabled"~ onclick="InfinityGenerator(1).buyMax()">Max</button></td>
         <td><button ~style.display=InfinityAutobuyer(1).hasInfinityAutobuyer() ? '' : 'none'~ onclick="InfinityAutobuyer(1).toggle()">Auto: ~r InfinityAutobuyer(1).isOn() ? "On" : "Off" ~</button></td>
       </tr>
@@ -294,7 +294,7 @@
         <td>~f InfinityGenerator(2).amount() ~</td>
         <td>~f InfinityGenerator(2).perSecond() ~/s</td>
         <td>~f InfinityGenerator(2).multiplier() ~x</td>
-        <td><button ~class=InfinityGenerator(2).canBuy() ? "" : "disabled"~ onclick="InfinityGenerator(2).buy()">Cost: ~f InfinityGenerator(2).cost() ~ IP</button></td>
+        <td><button ~class=InfinityGenerator(2).canBuy() ? "" : "disabled"~ onclick="InfinityGenerator(2).buy()">Cost: ~i InfinityGenerator(2).cost() ~ IP</button></td>
         <td><button ~class=InfinityGenerator(2).canBuy() ? "" : "disabled"~ onclick="InfinityGenerator(2).buyMax()">Max</button></td>
         <td><button ~style.display=InfinityAutobuyer(2).hasInfinityAutobuyer() ? '' : 'none'~ onclick="InfinityAutobuyer(2).toggle()">Auto: ~r InfinityAutobuyer(2).isOn() ? "On" : "Off" ~</button></td>
       </tr>
@@ -303,7 +303,7 @@
         <td>~f InfinityGenerator(3).amount() ~</td>
         <td>~f InfinityGenerator(3).perSecond() ~/s</td>
         <td>~f InfinityGenerator(3).multiplier() ~x</td>
-        <td><button ~class=InfinityGenerator(3).canBuy() ? "" : "disabled"~ onclick="InfinityGenerator(3).buy()">Cost: ~f InfinityGenerator(3).cost() ~ IP</button></td>
+        <td><button ~class=InfinityGenerator(3).canBuy() ? "" : "disabled"~ onclick="InfinityGenerator(3).buy()">Cost: ~i InfinityGenerator(3).cost() ~ IP</button></td>
         <td><button ~class=InfinityGenerator(3).canBuy() ? "" : "disabled"~ onclick="InfinityGenerator(3).buyMax()">Max</button></td>
         <td><button ~style.display=InfinityAutobuyer(3).hasInfinityAutobuyer() ? '' : 'none'~ onclick="InfinityAutobuyer(3).toggle()">Auto: ~r InfinityAutobuyer(3).isOn() ? "On" : "Off" ~</button></td>
       </tr>
@@ -312,7 +312,7 @@
         <td>~f InfinityGenerator(4).amount() ~</td>
         <td>~f InfinityGenerator(4).perSecond() ~/s</td>
         <td>~f InfinityGenerator(4).multiplier() ~x</td>
-        <td><button ~class=InfinityGenerator(4).canBuy() ? "" : "disabled"~ onclick="InfinityGenerator(4).buy()">Cost: ~f InfinityGenerator(4).cost() ~ IP</button></td>
+        <td><button ~class=InfinityGenerator(4).canBuy() ? "" : "disabled"~ onclick="InfinityGenerator(4).buy()">Cost: ~i InfinityGenerator(4).cost() ~ IP</button></td>
         <td><button ~class=InfinityGenerator(4).canBuy() ? "" : "disabled"~ onclick="InfinityGenerator(4).buyMax()">Max</button></td>
         <td><button ~style.display=InfinityAutobuyer(4).hasInfinityAutobuyer() ? '' : 'none'~ onclick="InfinityAutobuyer(4).toggle()">Auto: ~r InfinityAutobuyer(4).isOn() ? "On" : "Off" ~</button></td>
       </tr>
@@ -321,7 +321,7 @@
         <td>~f InfinityGenerator(5).amount() ~</td>
         <td>~f InfinityGenerator(5).perSecond() ~/s</td>
         <td>~f InfinityGenerator(5).multiplier() ~x</td>
-        <td><button ~class=InfinityGenerator(5).canBuy() ? "" : "disabled"~ onclick="InfinityGenerator(5).buy()">Cost: ~f InfinityGenerator(5).cost() ~ IP</button></td>
+        <td><button ~class=InfinityGenerator(5).canBuy() ? "" : "disabled"~ onclick="InfinityGenerator(5).buy()">Cost: ~i InfinityGenerator(5).cost() ~ IP</button></td>
         <td><button ~class=InfinityGenerator(5).canBuy() ? "" : "disabled"~ onclick="InfinityGenerator(5).buyMax()">Max</button></td>
         <td><button ~style.display=InfinityAutobuyer(5).hasInfinityAutobuyer() ? '' : 'none'~ onclick="InfinityAutobuyer(5).toggle()">Auto: ~r InfinityAutobuyer(5).isOn() ? "On" : "Off" ~</button></td>
       </tr>
@@ -330,7 +330,7 @@
         <td>~f InfinityGenerator(6).amount() ~</td>
         <td>~f InfinityGenerator(6).perSecond() ~/s</td>
         <td>~f InfinityGenerator(6).multiplier() ~x</td>
-        <td><button ~class=InfinityGenerator(6).canBuy() ? "" : "disabled"~ onclick="InfinityGenerator(6).buy()">Cost: ~f InfinityGenerator(6).cost() ~ IP</button></td>
+        <td><button ~class=InfinityGenerator(6).canBuy() ? "" : "disabled"~ onclick="InfinityGenerator(6).buy()">Cost: ~i InfinityGenerator(6).cost() ~ IP</button></td>
         <td><button ~class=InfinityGenerator(6).canBuy() ? "" : "disabled"~ onclick="InfinityGenerator(6).buyMax()">Max</button></td>
         <td><button ~style.display=InfinityAutobuyer(6).hasInfinityAutobuyer() ? '' : 'none'~ onclick="InfinityAutobuyer(6).toggle()">Auto: ~r InfinityAutobuyer(6).isOn() ? "On" : "Off" ~</button></td>
       </tr>
@@ -339,7 +339,7 @@
         <td>~f InfinityGenerator(7).amount() ~</td>
         <td>~f InfinityGenerator(7).perSecond() ~/s</td>
         <td>~f InfinityGenerator(7).multiplier() ~x</td>
-        <td><button ~class=InfinityGenerator(7).canBuy() ? "" : "disabled"~ onclick="InfinityGenerator(7).buy()">Cost: ~f InfinityGenerator(7).cost() ~ IP</button></td>
+        <td><button ~class=InfinityGenerator(7).canBuy() ? "" : "disabled"~ onclick="InfinityGenerator(7).buy()">Cost: ~i InfinityGenerator(7).cost() ~ IP</button></td>
         <td><button ~class=InfinityGenerator(7).canBuy() ? "" : "disabled"~ onclick="InfinityGenerator(7).buyMax()">Max</button></td>
         <td><button ~style.display=InfinityAutobuyer(7).hasInfinityAutobuyer() ? '' : 'none'~ onclick="InfinityAutobuyer(7).toggle()">Auto: ~r InfinityAutobuyer(7).isOn() ? "On" : "Off" ~</button></td>
       </tr>
@@ -348,21 +348,21 @@
         <td>~f InfinityGenerator(8).amount() ~</td>
         <td>~f InfinityGenerator(8).perSecond() ~/s</td>
         <td>~f InfinityGenerator(8).multiplier() ~x</td>
-        <td><button ~class=InfinityGenerator(8).canBuy() ? "" : "disabled"~ onclick="InfinityGenerator(8).buy()">Cost: ~f InfinityGenerator(8).cost() ~ IP</button></td>
+        <td><button ~class=InfinityGenerator(8).canBuy() ? "" : "disabled"~ onclick="InfinityGenerator(8).buy()">Cost: ~i InfinityGenerator(8).cost() ~ IP</button></td>
         <td><button ~class=InfinityGenerator(8).canBuy() ? "" : "disabled"~ onclick="InfinityGenerator(8).buyMax()">Max</button></td>
         <td><button ~style.display=InfinityAutobuyer(8).hasInfinityAutobuyer() ? '' : 'none'~ onclick="InfinityAutobuyer(8).toggle()">Auto: ~r InfinityAutobuyer(8).isOn() ? "On" : "Off" ~</button></td>
       </tr>
     </table>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'challenges' ? '' : 'none'~>
-    <span>You have completed ~f Challenge.numberOfChallengesCompleted() ~ challenges, multiplying all generators by ~f Challenge.multiplier() ~.</span>
+    <span>You have completed ~i Challenge.numberOfChallengesCompleted() ~ challenge~s Challenge.numberOfChallengesCompleted() ~, multiplying all generators by ~f Challenge.multiplier() ~.</span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
         <td>
           <div class="challengediv" ~style.background=Challenge.color(1)~>
             <span>Challenge 1</span>
             <br/>
-            <span>Generator 1 multiplier is raised ^~f 4 ~. All other generator multipliers are always ~f 1 ~x.</span>
+            <span>Generator 1 multiplier is raised ^~i 4 ~. All other generator multipliers are always ~i 1 ~x.</span>
             <br/>
             <span>~r Challenge.challengeStatusDescription(1) ~</span>
             <br/>
@@ -375,7 +375,7 @@
           <div class="challengediv" ~style.background=Challenge.color(2)~>
             <span>Challenge 2</span>
             <br/>
-            <span>There's a multiplier on all generators increasing linearly from ~f 0 ~ to ~f 1 ~ over ~f 256 ~ seconds. Every time you buy a generator or boost, or sacrifice or prestige, this multiplier resets to ~f 0 ~.</span>
+            <span>There's a multiplier on all generators increasing linearly from ~i 0 ~ to ~i 1 ~ over ~i 256 ~ seconds. Every time you buy a generator or boost, or sacrifice or prestige, this multiplier resets to ~i 0 ~.</span>
             <br/>
             <span>~r Challenge.challengeStatusDescription(2) ~</span>
             <br/>
@@ -390,7 +390,7 @@
           <div class="challengediv" ~style.background=Challenge.color(3)~>
             <span>Challenge 3</span>
             <br/>
-            <span>There's a multiplier on Generator 1, starting at ~f 1 / 256 ~ and doubling every ~f 256 ~ seconds. Every time you prestige, this multiplier resets to ~f 1 / 256 ~.</span>
+            <span>There's a multiplier on Generator 1, starting at ~r formatWithPrecision(1 / 256, 5) ~ and doubling every ~i 256 ~ seconds. Every time you prestige, this multiplier resets to ~r formatWithPrecision(1 / 256, 5) ~.</span>
             <br/>
             <span>~r Challenge.challengeStatusDescription(3) ~</span>
             <br/>
@@ -418,7 +418,7 @@
           <div class="challengediv" ~style.background=Challenge.color(5)~>
             <span>Challenge 5</span>
             <br/>
-            <span>All generator cost increases are raised ^~f 2 ~.</span>
+            <span>All generator cost increases are raised ^~i 2 ~.</span>
             <br/>
             <span>~r Challenge.challengeStatusDescription(5) ~</span>
             <br/>
@@ -446,7 +446,7 @@
           <div class="challengediv" ~style.background=Challenge.color(7)~>
             <span>Challenge 7</span>
             <br/>
-            <span>You can only buy ~f 343 ~ total generators and boosts throughout the challenge. This count does not reset on prestige.</span>
+            <span>You can only buy ~i 343 ~ total generators and boosts throughout the challenge. This count does not reset on prestige.</span>
             <br/>
             <span>~r Challenge.challengeStatusDescription(7) ~</span>
             <br/>
@@ -459,7 +459,7 @@
           <div class="challengediv" ~style.background=Challenge.color(8)~>
             <span>Challenge 8</span>
             <br/>
-            <span>You can't buy boosts, the boost multiplier is ~f 1 ~x, and prestige power is raised ^~f 0.5 ~, but all generators (including Generator 8) are multiplied by your amount of Generator 8.</span>
+            <span>You can't buy boosts, the boost multiplier is ~i 1 ~x, and prestige power is raised ^~f 0.5 ~, but all generators (including Generator 8) are multiplied by your amount of Generator 8.</span>
             <br/>
             <span>~r Challenge.challengeStatusDescription(8) ~</span>
             <br/>
@@ -474,7 +474,7 @@
           <div class="challengediv" ~style.background=Challenge.color(9)~>
             <span>Challenge 9</span>
             <br/>
-            <span>You can't buy boosts and the boost multiplier is ~f 1 ~x.</span>
+            <span>You can't buy boosts and the boost multiplier is ~i 1 ~x.</span>
             <br/>
             <span>~r Challenge.challengeStatusDescription(9) ~</span>
             <br/>
@@ -528,7 +528,7 @@
     </table>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'autobuyers' ? '' : 'none'~>
-    <span>You have ~f Autobuyers.numberOfAutobuyers() ~ autobuyers.</span>
+    <span>You have ~i Autobuyers.numberOfAutobuyers() ~ autobuyer~s Autobuyers.numberOfAutobuyers() ~.</span>
     <br/>
     <span>Newly unlocked autobuyers are on when unlocked.</span>
     <br/>
@@ -543,7 +543,7 @@
       <br/>
     </div>
     <div ~style.display=Autobuyers.areThereAnyAutobuyers() ? '' : 'none'~>
-      <span>Make autobuyers trigger at most every X seconds (0 to always trigger): <input type="text" ~!value=Autobuyers.autobuyersTimerLength()~ ~!onchange=function() {Autobuyers.setAutobuyersTimerLength(+this.value)}~></input></span>
+      <span>Make autobuyers trigger at most every X seconds (~i 0 ~ to always trigger): <input type="text" ~!value=Autobuyers.autobuyersTimerLength()~ ~!onchange=function() {Autobuyers.setAutobuyersTimerLength(+this.value)}~></input></span>
       <br/>
     </div>
     <span><button onclick="Autobuyers.setAll(true)">Turn all autobuyers on</button> <button onclick="Autobuyers.setAll(false)">Turn all autobuyers off</button> <button onclick="Autobuyers.toggleAll()">Toggle all autobuyers</button></span>
@@ -575,9 +575,9 @@
           <button ~style.display=Autobuyer(1).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(1).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(1).unlockSlow()">
             Unlock Slow Generator 1 Autobuyer
             <br/>
-            (triggering every ~f 16 ~ seconds)
+            (triggering every ~i 16 ~ seconds)
             <br/>
-            Cost: ~f Autobuyer(1).unlockSlowCost() ~ stars
+            Cost: ~i Autobuyer(1).unlockSlowCost() ~ stars
           </button>
         </td>
         <td>
@@ -606,9 +606,9 @@
           <button class="autobuyerunlockbutton" ~style.display=Autobuyer(2).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(2).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(2).unlockSlow()">
             Unlock Slow Generator 2 Autobuyer
             <br/>
-            (triggering every ~f 16 ~ seconds)
+            (triggering every ~i 16 ~ seconds)
             <br/>
-            Cost: ~f Autobuyer(2).unlockSlowCost() ~ stars
+            Cost: ~i Autobuyer(2).unlockSlowCost() ~ stars
           </button>
         </td>
         <td>
@@ -637,9 +637,9 @@
           <button class="autobuyerunlockbutton" ~style.display=Autobuyer(3).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(3).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(3).unlockSlow()">
             Unlock Slow Generator 3 Autobuyer
             <br/>
-            (triggering every ~f 16 ~ seconds)
+            (triggering every ~i 16 ~ seconds)
             <br/>
-            Cost: ~f Autobuyer(3).unlockSlowCost() ~ stars
+            Cost: ~i Autobuyer(3).unlockSlowCost() ~ stars
           </button>
         </td>
       </tr>
@@ -670,9 +670,9 @@
           <button class="autobuyerunlockbutton" ~style.display=Autobuyer(4).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(4).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(4).unlockSlow()">
             Unlock Slow Generator 4 Autobuyer
             <br/>
-            (triggering every ~f 16 ~ seconds)
+            (triggering every ~i 16 ~ seconds)
             <br/>
-            Cost: ~f Autobuyer(4).unlockSlowCost() ~ stars
+            Cost: ~i Autobuyer(4).unlockSlowCost() ~ stars
           </button>
         </td>
         <td>
@@ -701,9 +701,9 @@
           <button class="autobuyerunlockbutton" ~style.display=Autobuyer(5).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(5).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(5).unlockSlow()">
             Unlock Slow Generator 5 Autobuyer
             <br/>
-            (triggering every ~f 16 ~ seconds)
+            (triggering every ~i 16 ~ seconds)
             <br/>
-            Cost: ~f Autobuyer(5).unlockSlowCost() ~ stars
+            Cost: ~i Autobuyer(5).unlockSlowCost() ~ stars
           </button>
         </td>
         <td>
@@ -732,9 +732,9 @@
           <button class="autobuyerunlockbutton" ~style.display=Autobuyer(6).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(6).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(6).unlockSlow()">
             Unlock Slow Generator 6 Autobuyer
             <br/>
-            (triggering every ~f 16 ~ seconds)
+            (triggering every ~i 16 ~ seconds)
             <br/>
-            Cost: ~f Autobuyer(6).unlockSlowCost() ~ stars
+            Cost: ~i Autobuyer(6).unlockSlowCost() ~ stars
           </button>
         </td>
       </tr>
@@ -765,9 +765,9 @@
           <button class="autobuyerunlockbutton" ~style.display=Autobuyer(7).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(7).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(7).unlockSlow()">
             Unlock Slow Generator 7 Autobuyer
             <br/>
-            (triggering every ~f 16 ~ seconds)
+            (triggering every ~i 16 ~ seconds)
             <br/>
-            Cost: ~f Autobuyer(7).unlockSlowCost() ~ stars
+            Cost: ~i Autobuyer(7).unlockSlowCost() ~ stars
           </button>
         </td>
         <td>
@@ -796,9 +796,9 @@
           <button class="autobuyerunlockbutton" ~style.display=Autobuyer(8).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(8).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(8).unlockSlow()">
             Unlock Slow Generator 8 Autobuyer
             <br/>
-            (triggering every ~f 16 ~ seconds)
+            (triggering every ~i 16 ~ seconds)
             <br/>
-            Cost: ~f Autobuyer(8).unlockSlowCost() ~ stars
+            Cost: ~i Autobuyer(8).unlockSlowCost() ~ stars
           </button>
         </td>
         <td>
@@ -827,9 +827,9 @@
           <button class="autobuyerunlockbutton" ~style.display=Autobuyer(9).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(9).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(9).unlockSlow()">
             Unlock Slow Boost Autobuyer
             <br/>
-            (triggering every ~f 16 ~ seconds)
+            (triggering every ~i 16 ~ seconds)
             <br/>
-            Cost: ~f Autobuyer(9).unlockSlowCost() ~ stars
+            Cost: ~i Autobuyer(9).unlockSlowCost() ~ stars
           </button>
         </td>
       </tr>
@@ -949,7 +949,7 @@
     </table>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'infinity-challenges' ? '' : 'none'~>
-    <span>You have completed ~f InfinityChallenge.numberOfInfinityChallengesCompleted() ~ infinity challenges, multiplying all infinity generators by ~f InfinityChallenge.multiplier() ~.</span>
+    <span>You have completed ~i InfinityChallenge.numberOfInfinityChallengesCompleted() ~ infinity challenge~s InfinityChallenge.numberOfInfinityChallengesCompleted() ~, multiplying all infinity generators by ~f InfinityChallenge.multiplier() ~.</span>
     <br/>
     <span>You have produced ~f InfinityChallenge.totalStarsProducedThisEternity() ~ stars this eternity.</span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
@@ -1011,7 +1011,7 @@
           <div class="infinitychallengediv" ~style.background=InfinityChallenge.color(4)~>
             <span>Infinity Challenge 4</span>
             <br/>
-            <span>There's an exponent on the multipliers of all generators increasing linearly from ~f 0 ~ to ~f 1 ~ over ~f 16 ~ seconds. Every time you buy a generator or boost, or sacrifice or prestige, this exponent resets to ~f 0 ~.</span>
+            <span>There's an exponent on the multipliers of all generators increasing linearly from ~i 0 ~ to ~i 1 ~ over ~i 16 ~ seconds. Every time you buy a generator or boost, or sacrifice or prestige, this exponent resets to ~i 0 ~.</span>
             <br/>
             <span>Requirement to start: ~f InfinityChallenge.getInfinityChallengeRequirement(4) ~ stars this eternity</span>
             <br/>
@@ -1030,7 +1030,7 @@
           <div class="infinitychallengediv" ~style.background=InfinityChallenge.color(5)~>
             <span>Infinity Challenge 5</span>
             <br/>
-            <span>There's an exponent on the multipliers of all generators based on stars, capping at ~f 1 ~.</span>
+            <span>There's an exponent on the multipliers of all generators based on stars, capping at ~i 1 ~.</span>
             <br/>
             <span>Requirement to start: ~f InfinityChallenge.getInfinityChallengeRequirement(5) ~ stars this eternity</span>
             <br/>
@@ -1047,7 +1047,7 @@
           <div class="infinitychallengediv" ~style.background=InfinityChallenge.color(6)~>
             <span>Infinity Challenge 6</span>
             <br/>
-            <span>The prestige power formula alternates between being raised ^~f 1 ~ (as usual) and ^~f 0.5 ~ every time you prestige.</span>
+            <span>The prestige power formula alternates between being raised ^~i 1 ~ (as usual) and ^~f 0.5 ~ every time you prestige.</span>
             <br/>
             <span>Requirement to start: ~f InfinityChallenge.getInfinityChallengeRequirement(6) ~ stars this eternity</span>
             <br/>
@@ -1076,14 +1076,14 @@
             <br/>
             <span><button onclick="InfinityChallenge.startOrExitInfinityChallenge(7)">~r InfinityChallenge.isInfinityChallengeRunning(7) ? "Exit challenge" : (InfinityChallenge.isInfinityChallengeRequirementReached(7) ? "Start challenge" : "Requires more stars") ~</button></span>
             <br/>
-            <span>Reward: ~f 2 ~ is added to the multiplier per boost.</span>
+            <span>Reward: ~i 2 ~ is added to the multiplier per boost.</span>
           </div>
         </td>
         <td>
           <div class="infinitychallengediv" ~style.background=InfinityChallenge.color(8)~>
             <span>Infinity Challenge 8</span>
             <br/>
-            <span>You can only buy ~f 7 ~ total generators (apart from Generator 8) and boosts throughout the challenge. Each Generator 8 you buy gives you 8 extra purchases.</span>
+            <span>You can only buy ~i 7 ~ total generators (apart from Generator 8) and boosts throughout the challenge. Each Generator 8 you buy gives you ~i 8 ~ extra purchases.</span>
             <br/>
             <span>Requirement to start: ~f InfinityChallenge.getInfinityChallengeRequirement(8) ~ stars this eternity</span>
             <br/>
@@ -1093,22 +1093,22 @@
             <br/>
             <span><button onclick="InfinityChallenge.startOrExitInfinityChallenge(8)">~r InfinityChallenge.isInfinityChallengeRunning(8) ? "Exit challenge" : (InfinityChallenge.isInfinityChallengeRequirementReached(8) ? "Start challenge" : "Requires more stars") ~</button></span>
             <br/>
-            <span>Reward: Multiplier to Infinity Generator 8 equal to number of Generator 8 (lower-bounded by ~f 1 ~).</span>
+            <span>Reward: Multiplier to Infinity Generator 8 equal to number of Generator 8 (lower-bounded by ~i 1 ~).</span>
           </div>
         </td>
       </tr>
     </table>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'eternity' ? '' : 'none'~>
-    <span>You have ~f EternityPoints.amount() ~ eternity points (EP).
+    <span>You have ~i EternityPoints.amount() ~ eternity point~s EternityPoints.amount() ~ (EP).
       <button ~class=EternityMaxAll.anythingToBuy() ? "" : "disabled"~ onclick="EternityMaxAll.maxAll()">Max all</button>
       <button ~class=EternityMaxAll.anyUpgradesToBuy() ? "" : "disabled"~ onclick="EternityMaxAll.maxUpgrades()">Max upgrades</button>
       <button ~class=EternityMaxAll.anyGeneratorsToBuy() ? "" : "disabled"~ onclick="EternityMaxAll.maxGenerators()">Max generators</button>
     </span>
     <br/>
-    <span>You have produced ~f EternityPoints.totalEPProducedThisComplexity() ~ eternity points this complexity.</span>
+    <span>You have produced ~i EternityPoints.totalEPProducedThisComplexity() ~ eternity point~s EternityPoints.totalEPProducedThisComplexity() ~ this complexity.</span>
     </br>
-    <span>You have ~f Eternities.amount() ~ eternities, multiplying all eternity generators (EGs) by ~f Eternities.eternityGeneratorMultiplierForDisplay() ~.</span>
+    <span>You have ~q Eternities.amount() ~ eternit~y Eternities.amount() ~, multiplying all eternity generators (EGs) by ~f Eternities.eternityGeneratorMultiplierForDisplay() ~.</span>
     <br/>
     <span>You have ~f EternityStars.amount() ~ eternity stars, multiplying all normal and infinity generators by ~f EternityStars.multiplier() ~</span>
     <br/>
@@ -1121,22 +1121,22 @@
       <th colspan="5">Eternity Upgrades:</th>
       <tr>
         <td>Increase the per-purchase multiplier for EGs:</td>
-        <td><span ~style.display=EternityUpgrade(1).atBoughtLimit() ? 'none' : ''~>^~f EternityUpgrade(1).effect() ~ → ^~f EternityUpgrade(1).nextEffect() ~</span><span ~style.display=EternityUpgrade(1).atBoughtLimit() ? '' : 'none'~>^~f EternityUpgrade(1).effect() ~ (maxed)</span></td>
-        <td><span ~style.display=EternityUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=EternityUpgrade(1).canBuy() ? "" : "disabled"~ onclick="EternityUpgrade(1).buy()">Cost: ~f EternityUpgrade(1).cost() ~ EP</button></span></td>
+        <td><span ~style.display=EternityUpgrade(1).atBoughtLimit() ? 'none' : ''~>^~i EternityUpgrade(1).effect() ~ → ^~i EternityUpgrade(1).nextEffect() ~</span><span ~style.display=EternityUpgrade(1).atBoughtLimit() ? '' : 'none'~>^~i EternityUpgrade(1).effect() ~ (maxed)</span></td>
+        <td><span ~style.display=EternityUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=EternityUpgrade(1).canBuy() ? "" : "disabled"~ onclick="EternityUpgrade(1).buy()">Cost: ~i EternityUpgrade(1).cost() ~ EP</button></span></td>
         <td><span ~style.display=EternityUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=EternityUpgrade(1).canBuy() ? "" : "disabled"~ onclick="EternityUpgrade(1).buyMax()">Max</button></span></td>
         <td><span ~style.display=EternityAutobuyer(9).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(9).toggle()">Auto: ~r EternityAutobuyer(9).isOn() ? "On" : "Off" ~</button></span></td>
       </tr>
       <tr>
         <td>Increase the multiplier per boost:</td>
         <td><span ~style.display=EternityUpgrade(2).atBoughtLimit() ? 'none' : ''~>~f EternityUpgrade(2).effect() ~x → ~f EternityUpgrade(2).nextEffect() ~x</span><span ~style.display=EternityUpgrade(2).atBoughtLimit() ? '' : 'none'~>~f EternityUpgrade(2).effect() ~x (maxed)</span></td>
-        <td><span ~style.display=EternityUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=EternityUpgrade(2).canBuy() ? "" : "disabled"~ onclick="EternityUpgrade(2).buy()">Cost: ~f EternityUpgrade(2).cost() ~ EP</button></span></td>
+        <td><span ~style.display=EternityUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=EternityUpgrade(2).canBuy() ? "" : "disabled"~ onclick="EternityUpgrade(2).buy()">Cost: ~i EternityUpgrade(2).cost() ~ EP</button></span></td>
         <td><span ~style.display=EternityUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=EternityUpgrade(2).canBuy() ? "" : "disabled"~ onclick="EternityUpgrade(2).buyMax()">Max</button></span></td>
         <td><span ~style.display=EternityAutobuyer(10).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(10).toggle()">Auto: ~r EternityAutobuyer(10).isOn() ? "On" : "Off" ~</button></span></td>
       </tr>
       <tr>
         <td>Multiplier to EGs based on total EP this complexity:</td>
         <td><span ~style.display=EternityUpgrade(3).atBoughtLimit() ? 'none' : ''~>~f EternityUpgrade(3).effect() ~x → ~f EternityUpgrade(3).nextEffect() ~x</span><span ~style.display=EternityUpgrade(3).atBoughtLimit() ? '' : 'none'~>~f EternityUpgrade(3).effect() ~x (maxed)</span></td>
-        <td><span ~style.display=EternityUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=EternityUpgrade(3).canBuy() ? "" : "disabled"~ onclick="EternityUpgrade(3).buy()">Cost: ~f EternityUpgrade(3).cost() ~ EP</button></span></td>
+        <td><span ~style.display=EternityUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=EternityUpgrade(3).canBuy() ? "" : "disabled"~ onclick="EternityUpgrade(3).buy()">Cost: ~i EternityUpgrade(3).cost() ~ EP</button></span></td>
         <td><span ~style.display=EternityUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=EternityUpgrade(3).canBuy() ? "" : "disabled"~ onclick="EternityUpgrade(3).buyMax()">Max</button></span></td>
         <td><span ~style.display=EternityAutobuyer(11).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(11).toggle()">Auto: ~r EternityAutobuyer(11).isOn() ? "On" : "Off" ~</button></span></td>
       </tr>
@@ -1148,7 +1148,7 @@
         <td>~f EternityGenerator(1).amount() ~</td>
         <td>~f EternityGenerator(1).perSecond() ~/s</td>
         <td>~f EternityGenerator(1).multiplier() ~x</td>
-        <td><button ~class=EternityGenerator(1).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(1).buy()">Cost: ~f EternityGenerator(1).cost() ~ EP</button></td>
+        <td><button ~class=EternityGenerator(1).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(1).buy()">Cost: ~i EternityGenerator(1).cost() ~ EP</button></td>
         <td><button ~class=EternityGenerator(1).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(1).buyMax()">Max</button></td>
         <td><button ~style.display=EternityAutobuyer(1).hasEternityAutobuyer() ? '' : 'none'~ onclick="EternityAutobuyer(1).toggle()">Auto: ~r EternityAutobuyer(1).isOn() ? "On" : "Off" ~</button></td>
       </tr>
@@ -1157,7 +1157,7 @@
         <td>~f EternityGenerator(2).amount() ~</td>
         <td>~f EternityGenerator(2).perSecond() ~/s</td>
         <td>~f EternityGenerator(2).multiplier() ~x</td>
-        <td><button ~class=EternityGenerator(2).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(2).buy()">Cost: ~f EternityGenerator(2).cost() ~ EP</button></td>
+        <td><button ~class=EternityGenerator(2).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(2).buy()">Cost: ~i EternityGenerator(2).cost() ~ EP</button></td>
         <td><button ~class=EternityGenerator(2).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(2).buyMax()">Max</button></td>
         <td><button ~style.display=EternityAutobuyer(2).hasEternityAutobuyer() ? '' : 'none'~ onclick="EternityAutobuyer(2).toggle()">Auto: ~r EternityAutobuyer(2).isOn() ? "On" : "Off" ~</button></td>
       </tr>
@@ -1166,7 +1166,7 @@
         <td>~f EternityGenerator(3).amount() ~</td>
         <td>~f EternityGenerator(3).perSecond() ~/s</td>
         <td>~f EternityGenerator(3).multiplier() ~x</td>
-        <td><button ~class=EternityGenerator(3).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(3).buy()">Cost: ~f EternityGenerator(3).cost() ~ EP</button></td>
+        <td><button ~class=EternityGenerator(3).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(3).buy()">Cost: ~i EternityGenerator(3).cost() ~ EP</button></td>
         <td><button ~class=EternityGenerator(3).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(3).buyMax()">Max</button></td>
         <td><button ~style.display=EternityAutobuyer(3).hasEternityAutobuyer() ? '' : 'none'~ onclick="EternityAutobuyer(3).toggle()">Auto: ~r EternityAutobuyer(3).isOn() ? "On" : "Off" ~</button></td>
       </tr>
@@ -1175,7 +1175,7 @@
         <td>~f EternityGenerator(4).amount() ~</td>
         <td>~f EternityGenerator(4).perSecond() ~/s</td>
         <td>~f EternityGenerator(4).multiplier() ~x</td>
-        <td><button ~class=EternityGenerator(4).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(4).buy()">Cost: ~f EternityGenerator(4).cost() ~ EP</button></td>
+        <td><button ~class=EternityGenerator(4).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(4).buy()">Cost: ~i EternityGenerator(4).cost() ~ EP</button></td>
         <td><button ~class=EternityGenerator(4).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(4).buyMax()">Max</button></td>
         <td><button ~style.display=EternityAutobuyer(4).hasEternityAutobuyer() ? '' : 'none'~ onclick="EternityAutobuyer(4).toggle()">Auto: ~r EternityAutobuyer(4).isOn() ? "On" : "Off" ~</button></td>
       </tr>
@@ -1184,7 +1184,7 @@
         <td>~f EternityGenerator(5).amount() ~</td>
         <td>~f EternityGenerator(5).perSecond() ~/s</td>
         <td>~f EternityGenerator(5).multiplier() ~x</td>
-        <td><button ~class=EternityGenerator(5).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(5).buy()">Cost: ~f EternityGenerator(5).cost() ~ EP</button></td>
+        <td><button ~class=EternityGenerator(5).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(5).buy()">Cost: ~i EternityGenerator(5).cost() ~ EP</button></td>
         <td><button ~class=EternityGenerator(5).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(5).buyMax()">Max</button></td>
         <td><button ~style.display=EternityAutobuyer(5).hasEternityAutobuyer() ? '' : 'none'~ onclick="EternityAutobuyer(5).toggle()">Auto: ~r EternityAutobuyer(5).isOn() ? "On" : "Off" ~</button></td>
       </tr>
@@ -1193,7 +1193,7 @@
         <td>~f EternityGenerator(6).amount() ~</td>
         <td>~f EternityGenerator(6).perSecond() ~/s</td>
         <td>~f EternityGenerator(6).multiplier() ~x</td>
-        <td><button ~class=EternityGenerator(6).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(6).buy()">Cost: ~f EternityGenerator(6).cost() ~ EP</button></td>
+        <td><button ~class=EternityGenerator(6).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(6).buy()">Cost: ~i EternityGenerator(6).cost() ~ EP</button></td>
         <td><button ~class=EternityGenerator(6).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(6).buyMax()">Max</button></td>
         <td><button ~style.display=EternityAutobuyer(6).hasEternityAutobuyer() ? '' : 'none'~ onclick="EternityAutobuyer(6).toggle()">Auto: ~r EternityAutobuyer(6).isOn() ? "On" : "Off" ~</button></td>
       </tr>
@@ -1202,7 +1202,7 @@
         <td>~f EternityGenerator(7).amount() ~</td>
         <td>~f EternityGenerator(7).perSecond() ~/s</td>
         <td>~f EternityGenerator(7).multiplier() ~x</td>
-        <td><button ~class=EternityGenerator(7).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(7).buy()">Cost: ~f EternityGenerator(7).cost() ~ EP</button></td>
+        <td><button ~class=EternityGenerator(7).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(7).buy()">Cost: ~i EternityGenerator(7).cost() ~ EP</button></td>
         <td><button ~class=EternityGenerator(7).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(7).buyMax()">Max</button></td>
         <td><button ~style.display=EternityAutobuyer(7).hasEternityAutobuyer() ? '' : 'none'~ onclick="EternityAutobuyer(7).toggle()">Auto: ~r EternityAutobuyer(7).isOn() ? "On" : "Off" ~</button></td>
       </tr>
@@ -1211,7 +1211,7 @@
         <td>~f EternityGenerator(8).amount() ~</td>
         <td>~f EternityGenerator(8).perSecond() ~/s</td>
         <td>~f EternityGenerator(8).multiplier() ~x</td>
-        <td><button ~class=EternityGenerator(8).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(8).buy()">Cost: ~f EternityGenerator(8).cost() ~ EP</button></td>
+        <td><button ~class=EternityGenerator(8).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(8).buy()">Cost: ~i EternityGenerator(8).cost() ~ EP</button></td>
         <td><button ~class=EternityGenerator(8).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(8).buyMax()">Max</button></td>
         <td><button ~style.display=EternityAutobuyer(8).hasEternityAutobuyer() ? '' : 'none'~ onclick="EternityAutobuyer(8).toggle()">Auto: ~r EternityAutobuyer(8).isOn() ? "On" : "Off" ~</button></td>
       </tr>
@@ -1219,24 +1219,24 @@
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'eternity-milestones' ? '' : 'none'~>
     <span>
-      You have ~f Eternities.amount() ~ eternities.
-      <button ~style.display=EternityMilestones.hasEternityMilestone(4) ? '' : 'none'~ onclick="EternityMilestones.toggleMilestone(4)">Eternity Milestone ~f 4 ~: ~r EternityMilestones.isEternityMilestoneDisabled(4) ? "Disabled" : "Enabled" ~</button>
-      <button ~style.display=EternityMilestones.hasEternityMilestone(8) ? '' : 'none'~ onclick="EternityMilestones.toggleMilestone(8)">Eternity Milestone ~f 8 ~: ~r EternityMilestones.isEternityMilestoneDisabled(8) ? "Disabled" : "Enabled" ~</button>
+      You have ~q Eternities.amount() ~ eternit~y Eternities.amount() ~.
+      <button ~style.display=EternityMilestones.hasEternityMilestone(4) ? '' : 'none'~ onclick="EternityMilestones.toggleMilestone(4)">Eternity Milestone ~i 4 ~: ~r EternityMilestones.isEternityMilestoneDisabled(4) ? "Disabled" : "Enabled" ~</button>
+      <button ~style.display=EternityMilestones.hasEternityMilestone(8) ? '' : 'none'~ onclick="EternityMilestones.toggleMilestone(8)">Eternity Milestone ~i 8 ~: ~r EternityMilestones.isEternityMilestoneDisabled(8) ? "Disabled" : "Enabled" ~</button>
     </span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
         <td>
           <div class="eternitymilestonediv" ~style.background=EternityMilestones.color(1)~>
-            ~f 1 ~ eternities
+            ~i 1 ~ eternity
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(1) ~
             <br/>
-            Start each ~r PrestigeLayerNames.layersAbove('prestige') ~ with stars based on your eternities (currently ~f EternityStartingBenefits.rawStars() ~)
+            Start each ~r PrestigeLayerNames.layersAbove('prestige') ~ with stars based on your eternities (currently ~i EternityStartingBenefits.rawStars() ~)
           </div>
         </td>
         <td>
           <div class="eternitymilestonediv" ~style.background=EternityMilestones.color(2)~>
-            ~f 2 ~ eternities
+            ~i 2 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(2) ~
             <br/>
@@ -1245,16 +1245,16 @@
         </td>
         <td>
           <div class="eternitymilestonediv" ~style.background=EternityMilestones.color(3)~>
-            ~f 3 ~ eternities
+            ~i 3 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(3) ~
             <br/>
-            Start each ~r PrestigeLayerNames.layersAbove('eternity') ~ with infinity points based on your eternities (currently ~f EternityStartingBenefits.rawInfinityPoints() ~)
+            Start each ~r PrestigeLayerNames.layersAbove('eternity') ~ with infinity points based on your eternities (currently ~i EternityStartingBenefits.rawInfinityPoints() ~)
           </div>
         </td>
         <td>
           <div class="eternitymilestonediv" ~style.background=EternityMilestones.color(4)~>
-            ~f 4 ~ eternities
+            ~i 4 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(4) ~
             <br/>
@@ -1265,16 +1265,16 @@
       <tr>
         <td>
           <div class="eternitymilestonediv" ~style.background=EternityMilestones.color(5)~>
-            ~f 5 ~ eternities
+            ~i 5 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(5) ~
             <br/>
-            Start each ~r PrestigeLayerNames.layersAbove('eternity') ~ with infinities based on your eternities (currently ~f EternityStartingBenefits.rawInfinities() ~)
+            Start each ~r PrestigeLayerNames.layersAbove('eternity') ~ with infinities based on your eternities (currently ~i EternityStartingBenefits.rawInfinities() ~)
           </div>
         </td>
         <td>
           <div class="eternitymilestonediv" ~style.background=EternityMilestones.color(6)~>
-            ~f 6 ~ eternities
+            ~i 6 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(6) ~
             <br/>
@@ -1283,7 +1283,7 @@
         </td>
         <td>
           <div class="eternitymilestonediv" ~style.background=EternityMilestones.color(7)~>
-            ~f 7 ~ eternities
+            ~i 7 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(7) ~
             <br/>
@@ -1292,7 +1292,7 @@
         </td>
         <td>
           <div class="eternitymilestonediv" ~style.background=EternityMilestones.color(8)~>
-            ~f 8 ~ eternities
+            ~i 8 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(8) ~
             <br/>
@@ -1303,7 +1303,7 @@
       <tr>
         <td>
           <div class="eternitymilestonediv" ~style.background=EternityMilestones.color(9)~>
-            ~f 9 ~ eternities
+            ~i 9 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(9) ~
             <br/>
@@ -1312,7 +1312,7 @@
         </td>
         <td>
           <div class="eternitymilestonediv" ~style.background=EternityMilestones.color(10)~>
-            ~f 10 ~ eternities
+            ~i 10 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(10) ~
             <br/>
@@ -1321,7 +1321,7 @@
         </td>
         <td>
           <div class="eternitymilestonediv" ~style.background=EternityMilestones.color(11)~>
-            ~f 11 ~ eternities
+            ~i 11 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(11) ~
             <br/>
@@ -1330,7 +1330,7 @@
         </td>
         <td>
           <div class="eternitymilestonediv" ~style.background=EternityMilestones.color(12)~>
-            ~f 12 ~ eternities
+            ~i 12 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(12) ~
             <br/>
@@ -1341,7 +1341,7 @@
       <tr>
         <td>
           <div class="eternitymilestonediv" ~style.background=EternityMilestones.color(13)~>
-            ~f 13 ~ eternities
+            ~i 13 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(13) ~
             <br/>
@@ -1350,7 +1350,7 @@
         </td>
         <td>
           <div class="eternitymilestonediv" ~style.background=EternityMilestones.color(14)~>
-            ~f 14 ~ eternities
+            ~i 14 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(14) ~
             <br/>
@@ -1359,7 +1359,7 @@
         </td>
         <td>
           <div class="eternitymilestonediv" ~style.background=EternityMilestones.color(15)~>
-            ~f 15 ~ eternities
+            ~i 15 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(15) ~
             <br/>
@@ -1368,7 +1368,7 @@
         </td>
         <td>
           <div class="eternitymilestonediv" ~style.background=EternityMilestones.color(16)~>
-            ~f 16 ~ eternities
+            ~i 16 ~ eternities
             <br/>
             ~r EternityMilestones.milestoneStatusDescription(16) ~
             <br/>
@@ -1380,7 +1380,7 @@
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'studies' ? '' : 'none'~>
     <span>
-      You have ~f Studies.totalTheorems() ~ total theorems and ~f Studies.unspentTheorems() ~ unspent theorems.
+      You have ~i Studies.totalTheorems() ~ total theorem~s Studies.totalTheorems() ~ and ~i Studies.unspentTheorems() ~ unspent theorem~s Studies.unspentTheorems() ~.
       <button onclick="Studies.toggleRespec()">Respec studies on next eternity: ~r Studies.isRespecOn() ? "On" : "Off" ~</button>
     </span>
     <br/>
@@ -1440,7 +1440,7 @@
             <br/>
             Currently: ~f Study(1).rawTotalEffect() ~x
             <br/>
-            Cost: ~f Study(1).cost() ~ theorems
+            Cost: ~i Study(1).cost() ~ theorem~s Study(1).cost() ~
           </button>
         </td>
         <td>
@@ -1451,7 +1451,7 @@
             <br/>
             Currently: ~f Study(2).rawEffect() ~x
             <br/>
-            Cost: ~f Study(2).cost() ~ theorems
+            Cost: ~i Study(2).cost() ~ theorem~s Study(2).cost() ~
           </button>
         </td>
         <td>
@@ -1462,7 +1462,7 @@
             <br/>
             Currently: ~f Study(3).rawEffect() ~x
             <br/>
-            Cost: ~f Study(3).cost() ~ theorems
+            Cost: ~i Study(3).cost() ~ theorem~s Study(3).cost() ~
           </button>
         </td>
         <td>
@@ -1473,7 +1473,7 @@
             <br/>
             Currently: ~f Study(4).rawEffect() ~x
             <br/>
-            Cost: ~f Study(4).cost() ~ theorems
+            Cost: ~i Study(4).cost() ~ theorem~s Study(4).cost() ~
           </button>
         </td>
       </tr>
@@ -1486,7 +1486,7 @@
             <br/>
             Currently: ~f Study(5).rawEffect() ~x
             <br/>
-            Cost: ~f Study(5).cost() ~ theorems
+            Cost: ~i Study(5).cost() ~ theorem~s Study(5).cost() ~
           </button>
         </td>
         <td>
@@ -1497,7 +1497,7 @@
             <br/>
             Currently: ~f Study(6).rawEffect() ~x
             <br/>
-            Cost: ~f Study(6).cost() ~ theorems
+            Cost: ~i Study(6).cost() ~ theorem~s Study(6).cost() ~
           </button>
         </td>
         <td>
@@ -1508,7 +1508,7 @@
             <br/>
             ~r Study(7).cappedText() ~: ~f Study(7).rawEffect() ~x
             <br/>
-            Cost: ~f Study(7).cost() ~ theorems
+            Cost: ~i Study(7).cost() ~ theorem~s Study(7).cost() ~
           </button>
         </td>
         <td>
@@ -1519,7 +1519,7 @@
             <br/>
             Currently: ~f Study(8).rawEffect() ~x
             <br/>
-            Cost: ~f Study(8).cost() ~ theorems
+            Cost: ~i Study(8).cost() ~ theorem~s Study(8).cost() ~
           </button>
         </td>
       </tr>
@@ -1532,7 +1532,7 @@
             <br/>
             Currently: ~f Study(9).rawEffect() ~x
             <br/>
-            Cost: ~f Study(9).cost() ~ theorems
+            Cost: ~i Study(9).cost() ~ theorem~s Study(9).cost() ~
           </button>
         </td>
         <td>
@@ -1543,7 +1543,7 @@
             <br/>
             Currently: ~f Study(10).rawEffect() ~x
             <br/>
-            Cost: ~f Study(10).cost() ~ theorems
+            Cost: ~i Study(10).cost() ~ theorem~s Study(10).cost() ~
           </button>
         </td>
         <td>
@@ -1554,7 +1554,7 @@
             <br/>
             ~r Study(11).cappedText() ~: ~f Study(11).rawEffect() ~x
             <br/>
-            Cost: ~f Study(11).cost() ~ theorems
+            Cost: ~i Study(11).cost() ~ theorem~s Study(11).cost() ~
           </button>
         </td>
         <td>
@@ -1565,7 +1565,7 @@
             <br/>
             Currently: ~f Study(12).rawEffect() ~x
             <br/>
-            Cost: ~f Study(12).cost() ~ theorems
+            Cost: ~i Study(12).cost() ~ theorem~s Study(12).cost() ~
           </button>
         </td>
       </tr>
@@ -1580,7 +1580,7 @@
             <br/>
             Next: ~f Study(13).nextEffect() ~x
             <br/>
-            Cost: ~f Study(13).cost() ~ theorems
+            Cost: ~i Study(13).cost() ~ theorem~s Study(13).cost() ~
           </button>
         </td>
         <td>
@@ -1593,7 +1593,7 @@
             <br/>
             Next: ~f Study(14).nextEffect() ~x
             <br/>
-            Cost: ~f Study(14).cost() ~ theorems
+            Cost: ~i Study(14).cost() ~ theorem~s Study(14).cost() ~
           </button>
         </td>
         <td>
@@ -1606,7 +1606,7 @@
             <br/>
             Next: ~f Study(15).nextEffect() ~x
             <br/>
-            Cost: ~f Study(15).cost() ~ theorems
+            Cost: ~i Study(15).cost() ~ theorem~s Study(15).cost() ~
           </button>
         </td>
         <td>
@@ -1619,7 +1619,7 @@
             <br/>
             Next: ~f Study(16).nextEffect() ~x
             <br/>
-            Cost: ~f Study(16).cost() ~ theorems
+            Cost: ~i Study(16).cost() ~ theorem~s Study(16).cost() ~
           </button>
         </td>
       </tr>
@@ -1630,21 +1630,21 @@
           <button ~class=Studies.canBuy(0) ? '' : 'disabled'~ style="width: 256px; height: 96px;" onclick="Studies.buy(0)">
             Buy a theorem with stars
             <br/>
-            Cost: ~f Studies.cost(0) ~ stars
+            Cost: ~i Studies.cost(0) ~ stars
           </button>
         </td>
         <td>
           <button ~class=Studies.canBuy(1) ? '' : 'disabled'~ style="width: 256px; height: 96px;" onclick="Studies.buy(1)">
             Buy a theorem with infinity points
             <br/>
-            Cost: ~f Studies.cost(1) ~ IP
+            Cost: ~i Studies.cost(1) ~ IP
           </button>
         </td>
         <td>
           <button ~class=Studies.canBuy(2) ? '' : 'disabled'~ style="width: 256px; height: 96px;" onclick="Studies.buy(2)">
             Buy a theorem with eternity points
             <br/>
-            Cost: ~f Studies.cost(2) ~ EP
+            Cost: ~i Studies.cost(2) ~ EP
           </button>
         </td>
       </tr>
@@ -1684,7 +1684,7 @@
       </tr>
     </table>
     <span>
-      Buying a study will increase the costs of all studies on other rows by ~f 2 ~ theorems.
+      Buying a study will increase the costs of all studies on other rows by ~i 2 ~ theorems.
     </span>
     <br/>
     <span>
@@ -1692,7 +1692,7 @@
     </span>
     <br/>
     <span>
-      After ~f 4 ~ theorem purchases of a certain type, theorem costs of that type start increasing far more quickly.
+      After ~i 4 ~ theorem purchases of a certain type, theorem costs of that type start increasing far more quickly.
     </span>
     <br/>
     <div ~style.display=Studies.canAccessFourthRow() ? 'none' : ''~>
@@ -1953,7 +1953,7 @@
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'eternity-producer' ? '' : 'none'~>
     <div ~style.display=EternityProducer.isUnlocked() ? 'none' : ''~>
-      <span>The Eternity Producer, when unlocked, will produce ~f EternityProducer.rawProductionPerSecond() ~ eternities per second.</span>
+      <span>The Eternity Producer, when unlocked, will produce ~q EternityProducer.productionPerSecond() ~ eternities per second.</span>
       <br/>
       <span>It will also multiply all eternity generators by ~f EternityProducer.rawMultiplier() ~ (based on eternities).</span>
       <br/>
@@ -1964,24 +1964,24 @@
       </button>
     </div>
     <div ~style.display=EternityProducer.isUnlocked() ? '' : 'none'~>
-      <span>You have ~f Eternities.amount() ~ eternities. Due to the Eternity Producer, they multiply all eternity generators by ~f EternityProducer.multiplier() ~.</span>
+      <span>You have ~q Eternities.amount() ~ eternit~y Eternities.amount() ~. Due to the Eternity Producer, they multiply all eternity generators by ~f EternityProducer.multiplier() ~.</span>
       <br/>
-      <span>The Eternity Producer is producing ~f EternityProducer.productionPerSecond() ~ eternities per second.</span>
+      <span>The Eternity Producer is producing ~q EternityProducer.productionPerSecond() ~ eternit~y EternityProducer.productionPerSecond() ~ per second.</span>
       <br/>
       <br/>
-      <span>You have ~f EternityPoints.amount() ~ eternity points. <button ~class=EternityProducer.anythingToBuy() ? "" : "disabled"~ onclick="EternityProducer.maxAll()">Max Eternity Producer upgrades</button></span>
+      <span>You have ~i EternityPoints.amount() ~ eternity point~s EternityPoints.amount() ~. <button ~class=EternityProducer.anythingToBuy() ? "" : "disabled"~ onclick="EternityProducer.maxAll()">Max Eternity Producer upgrades</button></span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>Eternity Producer base production per second:</td>
-          <td><span ~style.display=EternityProducerUpgrade(1).atBoughtLimit() ? 'none' : ''~>~f EternityProducerUpgrade(1).effect() ~ → ~f EternityProducerUpgrade(1).nextEffect() ~</span><span ~style.display=EternityProducerUpgrade(1).atBoughtLimit() ? '' : 'none'~>~f EternityProducerUpgrade(1).effect() ~ (maxed)</span></td>
-          <td><span ~style.display=EternityProducerUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=EternityProducerUpgrade(1).canBuy() ? "" : "disabled"~ onclick="EternityProducerUpgrade(1).buy()">Cost: ~f EternityProducerUpgrade(1).cost() ~ EP</button></span></td>
+          <td><span ~style.display=EternityProducerUpgrade(1).atBoughtLimit() ? 'none' : ''~>~i EternityProducerUpgrade(1).effect() ~ → ~i EternityProducerUpgrade(1).nextEffect() ~</span><span ~style.display=EternityProducerUpgrade(1).atBoughtLimit() ? '' : 'none'~>~i EternityProducerUpgrade(1).effect() ~ (maxed)</span></td>
+          <td><span ~style.display=EternityProducerUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=EternityProducerUpgrade(1).canBuy() ? "" : "disabled"~ onclick="EternityProducerUpgrade(1).buy()">Cost: ~i EternityProducerUpgrade(1).cost() ~ EP</button></span></td>
           <td><span ~style.display=EternityProducerUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=EternityProducerUpgrade(1).canBuy() ? "" : "disabled"~ onclick="EternityProducerUpgrade(1).buyMax()">Max</button></span></td>
           <td><span ~style.display=EternityAutobuyer(12).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(12).toggle()">Auto: ~r EternityAutobuyer(12).isOn() ? "On" : "Off" ~</button></span></td>
         </tr>
         <tr>
           <td>Eternity Producer multiplier to EGs:</td>
           <td><span ~style.display=EternityProducerUpgrade(2).atBoughtLimit() ? 'none' : ''~>~f EternityProducerUpgrade(2).effect() ~ → ~f EternityProducerUpgrade(2).nextEffect() ~</span><span ~style.display=EternityProducerUpgrade(2).atBoughtLimit() ? '' : 'none'~>~f EternityProducerUpgrade(2).effect() ~ (maxed)</span></td>
-          <td><span ~style.display=EternityProducerUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=EternityProducerUpgrade(2).canBuy() ? "" : "disabled"~ onclick="EternityProducerUpgrade(2).buy()">Cost: ~f EternityProducerUpgrade(2).cost() ~ EP</button></span></td>
+          <td><span ~style.display=EternityProducerUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=EternityProducerUpgrade(2).canBuy() ? "" : "disabled"~ onclick="EternityProducerUpgrade(2).buy()">Cost: ~i EternityProducerUpgrade(2).cost() ~ EP</button></span></td>
           <td><span ~style.display=EternityProducerUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=EternityProducerUpgrade(2).canBuy() ? "" : "disabled"~ onclick="EternityProducerUpgrade(2).buyMax()">Max</button></span></td>
           <td><span ~style.display=EternityAutobuyer(13).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(13).toggle()">Auto: ~r EternityAutobuyer(13).isOn() ? "On" : "Off" ~</button></span></td>
         </tr>
@@ -1992,35 +1992,35 @@
         <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
           <tr>
             <td>Multiplier to eternity production:</td>
-            <td><span ~style.display=PermanenceUpgrade(1).atBoughtLimit() ? 'none' : ''~>~f PermanenceUpgrade(1).effect() ~ → ~f PermanenceUpgrade(1).nextEffect() ~</span><span ~style.display=PermanenceUpgrade(1).atBoughtLimit() ? '' : 'none'~>~f PermanenceUpgrade(1).effect() ~ (maxed)</span></td>
-            <td><span ~style.display=PermanenceUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(1).buy()">Cost: ~f PermanenceUpgrade(1).cost() ~ permanence</button></span></td>
+            <td><span ~style.display=PermanenceUpgrade(1).atBoughtLimit() ? 'none' : ''~>~i PermanenceUpgrade(1).effect() ~ → ~i PermanenceUpgrade(1).nextEffect() ~</span><span ~style.display=PermanenceUpgrade(1).atBoughtLimit() ? '' : 'none'~>~i PermanenceUpgrade(1).effect() ~ (maxed)</span></td>
+            <td><span ~style.display=PermanenceUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(1).buy()">Cost: ~i PermanenceUpgrade(1).cost() ~ permanence</button></span></td>
             <td><span ~style.display=PermanenceUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(1).buyMax()">Max</button></span></td>
             <td><span ~style.display=EternityAutobuyer(17).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(17).toggle()">Auto: ~r EternityAutobuyer(17).isOn() ? "On" : "Off" ~</button></span></td>
           </tr>
           <tr>
             <td>Power to Eternity Producer multiplier to EGs:</td>
             <td><span ~style.display=PermanenceUpgrade(2).atBoughtLimit() ? 'none' : ''~>~f PermanenceUpgrade(2).effect() ~ → ~f PermanenceUpgrade(2).nextEffect() ~</span><span ~style.display=PermanenceUpgrade(2).atBoughtLimit() ? '' : 'none'~>~f PermanenceUpgrade(2).effect() ~ (maxed)</span></td>
-            <td><span ~style.display=PermanenceUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(2).buy()">Cost: ~f PermanenceUpgrade(2).cost() ~ permanence</button></span></td>
+            <td><span ~style.display=PermanenceUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(2).buy()">Cost: ~i PermanenceUpgrade(2).cost() ~ permanence</button></span></td>
             <td><span ~style.display=PermanenceUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(2).buyMax()">Max</button></span></td>
             <td><span ~style.display=EternityAutobuyer(18).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(18).toggle()">Auto: ~r EternityAutobuyer(18).isOn() ? "On" : "Off" ~</button></span></td>
           </tr>
           <tr>
             <td>Power to third-row study effects:</td>
             <td><span ~style.display=PermanenceUpgrade(3).atBoughtLimit() ? 'none' : ''~>~f PermanenceUpgrade(3).effect() ~ → ~f PermanenceUpgrade(3).nextEffect() ~</span><span ~style.display=PermanenceUpgrade(3).atBoughtLimit() ? '' : 'none'~>~f PermanenceUpgrade(3).effect() ~ (maxed)</span></td>
-            <td><span ~style.display=PermanenceUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(3).buy()">Cost: ~f PermanenceUpgrade(3).cost() ~ permanence</button></span></td>
+            <td><span ~style.display=PermanenceUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(3).buy()">Cost: ~i PermanenceUpgrade(3).cost() ~ permanence</button></span></td>
             <td><span ~style.display=PermanenceUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(3).buyMax()">Max</button></span></td>
             <td><span ~style.display=EternityAutobuyer(19).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(19).toggle()">Auto: ~r EternityAutobuyer(19).isOn() ? "On" : "Off" ~</button></span></td>
           </tr>
           <tr>
             <td>Multiplier to permanence based on eternity stars:</td>
             <td><span ~style.display=PermanenceUpgrade(4).atBoughtLimit() ? 'none' : ''~>~f PermanenceUpgrade(4).effect() ~ → ~f PermanenceUpgrade(4).nextEffect() ~</span><span ~style.display=PermanenceUpgrade(4).atBoughtLimit() ? '' : 'none'~>~f PermanenceUpgrade(4).effect() ~ (maxed)</span></td>
-            <td><span ~style.display=PermanenceUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(4).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(4).buy()">Cost: ~f PermanenceUpgrade(4).cost() ~ permanence</button></span></td>
+            <td><span ~style.display=PermanenceUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(4).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(4).buy()">Cost: ~i PermanenceUpgrade(4).cost() ~ permanence</button></span></td>
             <td><span ~style.display=PermanenceUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(4).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(4).buyMax()">Max</button></span></td>
             <td><span ~style.display=EternityAutobuyer(20).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(20).toggle()">Auto: ~r EternityAutobuyer(20).isOn() ? "On" : "Off" ~</button></span></td>
           </tr>
         </table>
       </div>
-      <span ~style.display=Permanence.canGainPermanence() ? '' : 'none'~><button style="height: 48px;" onclick="Permanence.gainPermanence()">Lose all but ~f Permanence.getLeftoverEternities() ~ eternities,<br/>but gain ~f Permanence.permanenceGain() ~ permanence.</button></span>
+      <span ~style.display=Permanence.canGainPermanence() ? '' : 'none'~><button style="height: 48px;" onclick="Permanence.gainPermanence()">Lose all but ~i Permanence.getLeftoverEternities() ~ eternities,<br/>but gain ~f Permanence.permanenceGain() ~ permanence.</button></span>
       <span ~style.display=Permanence.canGainPermanence() ? 'none' : ''~>You need ~f Permanence.getRequiredEternities() ~ eternities to gain permanence.<span ~style.display=Permanence.hasGainedPermanence() ? 'none' : ''~> Permanence can be spent on a variety of upgrades.</span></span>
     </div>
   </tab>

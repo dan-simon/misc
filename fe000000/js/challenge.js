@@ -88,13 +88,13 @@ let Challenge = {
     if (cc === 2) {
       return 'Challenge 2 multiplier: ' + format(this.challenge2Mult());
     } else if (cc === 3) {
-      return 'Challenge 3 multiplier: ' + format(this.challenge3Mult());
+      return 'Challenge 3 multiplier: ' + formatWithPrecision(this.challenge3Mult(), 5);
     } else if (cc === 7) {
-      return 'Challenge 7 purchases left: ' + format(this.challenge7PurchasesLeft());
+      return 'Challenge 7 purchases left: ' + formatInt(this.challenge7PurchasesLeft());
     } else if (ic === 1) {
       return 'Challenge 2 multiplier: ' + format(this.challenge2Mult()) + ', ' +
-      'Challenge 3 multiplier: ' + format(this.challenge3Mult()) + ', ' +
-      'Challenge 7 purchases left: ' + format(this.challenge7PurchasesLeft());
+      'Challenge 3 multiplier: ' + formatWithPrecision(this.challenge3Mult(), 5) + ', ' +
+      'Challenge 7 purchases left: ' + formatInt(this.challenge7PurchasesLeft());
     } else if (ic === 3) {
       return 'Infinity Challenge 3 prestige power exponent: ' +
       format(InfinityChallenge.infinityChallenge3PrestigePowerExponent());
@@ -109,7 +109,7 @@ let Challenge = {
       format(InfinityChallenge.infinityChallenge6PrestigePowerExponent());
     } else if (ic === 8) {
       return 'Infinity Challenge 8 purchases left: ' +
-      format(InfinityChallenge.infinityChallenge8PurchasesLeft());
+      formatInt(InfinityChallenge.infinityChallenge8PurchasesLeft());
     } else {
       return 'This text should never appear.';
     }

@@ -4,10 +4,22 @@ function format (x) {
   return formatWithPrecision(x, 3);
 }
 
-function formatWithPrecision(x, n) {
+function formatInt (x) {
+  return getNotation().format(x, 3, 0);
+}
+
+function formatMaybeInt (x) {
+  return Decimal.eq(x, Decimal.round(x)) ? formatInt(x) : format(x);
+}
+
+function getNotation() {
   if (!(player.options.notation in NOTATIONS)) {
     NOTATIONS[player.options.notation] = new ADNotations[
       player.options.notation.replace(/ [a-z]/g, (x) => x[1].toUpperCase()) + 'Notation']();
   }
-  return NOTATIONS[player.options.notation].format(x, n, n);
+  return NOTATIONS[player.options.notation];
+}
+
+function formatWithPrecision(x, n) {
+  return getNotation().format(x, n, n);
 }
