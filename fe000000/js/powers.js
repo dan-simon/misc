@@ -172,11 +172,13 @@ let Powers = {
     if (this.isPowerGainActive()) {
       let timePer = this.interval();
       let newPowers = this.imminentPowerGain();
+      if (newPowers === 0) return;
       player.stats.timeSincePowerGain -= newPowers * timePer;
       for (let i = 0; i < newPowers; i++) {
         this.gainNewPower();
       }
       this.cleanStored();
+      this.maybeAutoSort();
     }
   },
   gainNewPower() {
@@ -246,6 +248,28 @@ let Powers = {
     let f = p => 1000 * ['normal', 'infinity', 'eternity', 'complexity'].indexOf(p.type) - this.strength(p) * this.rarity(p);
     player.powers.stored.sort((a, b) => f(a) - f(b));
   },
+  isAutoSortActiveOn() {
+    return player.powers.autoSort.active;
+  },
+  isAutoSortStoredOn() {
+    return player.powers.autoSort.stored;
+  },
+  toggleAutoSortActive() {
+    player.powers.autoSort.active = !player.powers.autoSort.active;
+    this.maybeAutoSort();
+  },
+  toggleAutoSortStored() {
+    player.powers.autoSort.stored = !player.powers.autoSort.stored;
+    this.maybeAutoSort();
+  },
+  maybeAutoSort() {
+    if (this.isAutoSortActiveOn()) {
+      this.sortActive();
+    }
+    if (this.isAutoSortStoredOn()) {
+      this.sortStored();
+    }
+  },
   canAccessPower(type, i) {
     if (type === 'active') {
       return this.canAccessActive(i);
@@ -297,6 +321,7 @@ let Powers = {
     if (this.canActivate(i)) {
       player.powers.active.push(player.powers.stored[i - 1]);
       player.powers.stored = player.powers.stored.slice(0, i - 1).concat(player.powers.stored.slice(i));
+      this.maybeAutoSort();
     }
   },
   canDelete(i) {
@@ -307,6 +332,7 @@ let Powers = {
       confirm('Are you sure you want to delete this power for ' + format(PowerShards.shardGainStored(i)) + ' power shards?'))) {
       PowerShards.gainShardsStored(i);
       player.powers.stored = player.powers.stored.slice(0, i - 1).concat(player.powers.stored.slice(i));
+      this.maybeAutoSort();
     }
   },
   canAccessActive(i) {
@@ -325,6 +351,7 @@ let Powers = {
     player.powers.stored = this.stored().concat(this.active());
     player.powers.active = [];
     this.cleanStored();
+    this.maybeAutoSort();
   },
   maybeRespec() {
     if (this.isRespecOn()) {
@@ -414,6 +441,9 @@ let Powers = {
     player.powers.powerDeletionMode = modes[(modes.indexOf(player.powers.powerDeletionMode) + 1) % 3];
   },
   exportString() {
+    if (this.active().length === 0) {
+      return 'none';
+    }
     let typeCount = [0, 0, 0, 0];
     for (let p of this.active()) {
       typeCount[this.index(p.type) - 1]++;
@@ -425,12 +455,15 @@ let Powers = {
     let parent = output.parentElement;
     parent.style.display = '';
     output.value = this.exportString();
-    output.focus();
     output.select();
     try {
       document.execCommand('copy');
     } catch(ex) {
       alert('Copying to clipboard failed.');
+    }
+    if (!player.options.exportDisplay) {
+      parent.style.display = 'none';
+      document.getElementsByClassName('powers-export-button')[0].focus();
     }
   },
   toNumber(x) {
@@ -438,6 +471,9 @@ let Powers = {
   },
   importStringCounts(importString) {
     importString = importString.toUpperCase();
+    if (importString === 'NONE') {
+      return [0, 0, 0, 0];
+    }
     let initialCounts = importString.replace(/[NIEC]/g, '').split(',').map(x => this.toNumber(x));
     return [0, 1, 2, 3].map(i => (importString.match(new RegExp('NIEC'[i], 'g')) || []).length + (initialCounts[i] || 0));
   },
@@ -447,6 +483,7 @@ let Powers = {
     let indicesToActivate = [].concat.apply([], toActivateByType).slice(0, this.activatedLimit() - this.active().length).map(x => x.index);
     player.powers.active = this.active().concat(indicesToActivate.map(i => this.accessPower('stored', i)));
     player.powers.stored = this.stored().filter((_, i) => !indicesToActivate.includes(1 + i));
+    this.maybeAutoSort();
   },
   import() {
     this.importString(prompt('Enter your active powers (as previously exported):'));

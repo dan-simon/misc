@@ -169,6 +169,10 @@ let initialPlayer = {
     lastData: {
       lowRarity: false,
       type: 'normal'
+    },
+    autoSort: {
+      active: false,
+      stored: false
     }
   },
   galaxies: {
@@ -181,6 +185,7 @@ let initialPlayer = {
     offlineProgress: true,
     hotkeys: true,
     completionColors: 'On (gradient)',
+    exportDisplay: false,
   },
   stats: {
     totalStarsProduced: new Decimal(0),
@@ -226,7 +231,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9384765625
+  version: 1.939453125
 }
 
 let player;

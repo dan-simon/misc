@@ -160,5 +160,6 @@ let PowerShards = {
     player.powers.shards -= this.craftedPowerCost();
     player.powers.stored.push(this.craftedPower());
     Powers.cleanStored();
+    Powers.maybeAutoSort();
   }
 }

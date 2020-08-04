@@ -206,12 +206,15 @@ let Studies = {
     let parent = output.parentElement;
     parent.style.display = '';
     output.value = this.exportString();
-    output.focus();
     output.select();
     try {
       document.execCommand('copy');
     } catch(ex) {
       alert('Copying to clipboard failed.');
+    }
+    if (!player.options.exportDisplay) {
+      parent.style.display = 'none';
+      document.getElementsByClassName('studies-export-button')[0].focus();
     }
   },
   toNumber(x) {

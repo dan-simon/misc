@@ -11,6 +11,9 @@ let Options = {
   toggleHotkeys() {
     player.options.hotkeys = !player.options.hotkeys;
   },
+  toggleExportDisplay() {
+    player.options.exportDisplay = !player.options.exportDisplay;
+  },
   nextCompletionColors() {
     player.options.completionColors = COMPLETION_COLOR_LIST[(COMPLETION_COLOR_LIST.indexOf(player.options.completionColors) + 1) % COMPLETION_COLOR_LIST.length];
   },

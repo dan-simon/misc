@@ -1387,7 +1387,7 @@
     <span>
       <button onclick="Studies.respecAndReset()">Respec studies and ~r EternityPrestigeLayer.resetText() ~</button>
       <br ~style.display=EternityPrestigeLayer.canEternity() ? 'none' : ''~/>
-      <button onclick="Studies.export()">Export studies</button> <button onclick="Studies.import()">Import studies</button> <button onclick="Studies.tryToBuyFirstTwelve()">Try to buy all of studies 1-12 (in order)</button>
+      <button class="studies-export-button" onclick="Studies.export()">Export studies</button> <button onclick="Studies.import()">Import studies</button> <button onclick="Studies.tryToBuyFirstTwelve()">Try to buy all of studies 1-12 (in order)</button>
     </span>
     <br/>
     <span>Click on the name of a study preset on the line below to load that study list:</span>
@@ -2929,7 +2929,7 @@
       <br/>
       <span>The powers activated by importing powers will be the strongest stored powers of the same types as those exported.</span>
       <br/>
-      <button onclick="Powers.export()">Export active powers</button> <button onclick="Powers.import()">Import active powers</button>
+      <button class="powers-export-button" onclick="Powers.export()">Export active powers</button> <button onclick="Powers.import()">Import active powers</button>
       <button onclick="Powers.toggleRespec()">Deactivate active powers on next complexity: ~r Powers.isRespecOn() ? "On" : "Off" ~</button>
       <br/>
       <button onclick="Powers.respecAndReset()">Deactivate active powers and ~r ComplexityPrestigeLayer.resetText() ~</button></button>
@@ -2975,7 +2975,7 @@
         </div>
       </div>
       <br/>
-      <span>Active powers (<button onclick="Powers.sortActive()">Sort</button>):</span>
+      <span>Active powers (<button onclick="Powers.sortActive()">Sort</button>, <button onclick="Powers.toggleAutoSortActive()">Auto-sort: ~r Powers.isAutoSortActiveOn() ? "On" : "Off" ~</button>):</span>
       <div style="margin-left: auto; margin-right: auto;">
         <span ~style.display=Powers.canAccessPower('active', 1) ? 'none' : ''~>You don't currently have any active powers.</span>
         <div ~style.display=Powers.canAccessPower('active', 1) ? '' : 'none'~>
@@ -3006,7 +3006,7 @@
       <span style="margin-left: -19px;" class="brownspan">~r Powers.totalEffectDescription('complexity') ~</span>
       <br/>
       <br/>
-      <span>Stored powers (<button onclick="Powers.sortStored()">Sort</button>):</span>
+      <span>Stored powers (<button onclick="Powers.sortStored()">Sort</button>, <button onclick="Powers.toggleAutoSortStored()">Auto-sort: ~r Powers.isAutoSortStoredOn() ? "On" : "Off" ~</button>):</span>
       <div style="margin-left: auto; margin-right: auto;">
         <span ~style.display=Powers.canAccessPower('stored', 1) ? 'none' : ''~>You don't currently have any stored powers.</span>
         <div ~style.display=Powers.canAccessPower('stored', 1) ? '' : 'none'~>
@@ -3733,18 +3733,18 @@
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 8px; border-collapse: separate;">
       <tr>
         <td><button class="options-button" onclick="Saving.saveGame()">Save</button></td>
-        <td><button class="options-button" onclick="Saving.exportGame()">Export</button></td>
+        <td><button class="options-button export-button" onclick="Saving.exportGame()">Export</button></td>
         <td><button class="options-button" onclick="Saving.loadGamePrompt()">Load</button></td>
       </tr>
       <tr>
         <td><button class="options-button" onclick="Options.toggleOfflineProgress()">Offline progress: ~r player.options.offlineProgress ? "On" : "Off" ~</button></td>
         <td><button class="options-button" onclick="Options.toggleHotkeys()">Hotkeys: ~r player.options.hotkeys ? "On" : "Off" ~</button></td>
-        <td><button class="options-button" onclick="Options.nextCompletionColors()">Completion colors: ~r player.options.completionColors ~</button></td>
+        <td><button class="options-button" onclick="Options.toggleExportDisplay()" style="font-size: 0.75rem;">Show export text (as opposed to just copying it): ~r player.options.exportDisplay ? "On" : "Off" ~</button></td>
       </tr>
       <tr>
+        <td><button class="options-button" onclick="Options.nextCompletionColors()">Completion colors: ~r player.options.completionColors ~</button></td>
         <td><button class="options-button" onclick="Options.nextNotation()">Notation: ~r player.options.notation ~</button></td>
         <td><button class="options-button" onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></td>
-        <td></td>
       </tr>
     </table>
     <span style="display: none;">Exported save (also copied to clipboard): <input id="export-output"></input></span>

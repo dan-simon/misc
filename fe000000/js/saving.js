@@ -368,6 +368,14 @@ let Saving = {
       delete player.powers.craft.strength;
       player.version = 1.9384765625;
     }
+    if (player.version < 1.939453125) {
+      player.powers.autoSort = {
+        active: false,
+        stored: false
+      }
+      player.options.exportDisplay = false;
+      player.version = 1.939453125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
@@ -451,12 +459,15 @@ let Saving = {
     let parent = output.parentElement;
     parent.style.display = '';
     output.value = btoa(JSON.stringify(player));
-    output.focus();
     output.select();
     try {
       document.execCommand('copy');
     } catch(ex) {
       alert('Copying to clipboard failed.');
+    }
+    if (!player.options.exportDisplay) {
+      parent.style.display = 'none';
+      document.getElementsByClassName('export-button')[0].focus();
     }
   },
   resetGame() {
