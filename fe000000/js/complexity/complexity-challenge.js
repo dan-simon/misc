@@ -70,7 +70,8 @@ let ComplexityChallenge = {
     if (!this.isComplexityChallengeUnlocked(x)) {
       return 'Locked (requires ' + format(this.requirements[x]) + ' complexities)';
     }
-    let description = format(this.getComplexityChallengeCompletions(x)) + ' completions';
+    let description = formatInt(this.getComplexityChallengeCompletions(x)) + ' completion' +
+      pluralize(this.getComplexityChallengeCompletions(x), '', 's');
     if (this.isComplexityChallengeRunning(x)) {
       description += ', running';
     }

@@ -10,9 +10,9 @@ function extractCode(x) {
   } else if (x[1] === 'r') {
     return x.slice(3, -2);
   } else if (x[1] === 's') {
-    return 'Decimal.eq(' + x.slice(3, -2) + ', 1) ? \'\' : \'s\'';
+    return 'pluralize(' + x.slice(3, -2) + ', \'\', \'s\')';
   } else if (x[1] === 'y') {
-    return 'Decimal.eq(' + x.slice(3, -2) + ', 1) ? \'y\' : \'ies\'';
+    return 'pluralize(' + x.slice(3, -2) + ', \'y\', \'ies\')';
   }
 }
 

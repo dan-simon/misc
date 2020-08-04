@@ -187,16 +187,18 @@ let EternityChallenge = {
     return this.currentEternityChallenge() === 0;
   },
   eternityChallengeRequirementDescription(x) {
-    // This could be done as easily in the HTML but it seems nice to have a method
-    return format(this.getEternityChallengeResourceAmount(x)) + '/' + format(this.getEternityChallengeRequirement(x)) +
+    // This could be done as easily in the HTML but it seems nice to have a method.
+    // Also, we don't use formatInt because it might show the current resource amount incorrectly
+    // (for example, 2 stars rather than 1.75).
+    return formatMaybeInt(this.getEternityChallengeResourceAmount(x)) + '/' + formatMaybeInt(this.getEternityChallengeRequirement(x)) +
       ' ' + this.getEternityChallengeResourceName(x);
   },
   eternityChallengeStatusDescription(x) {
     let description;
     if (this.isEternityChallengeCompleted(x)) {
-      description = 'Completed (' + format(this.getEternityChallengeCompletions(x)) + '/' + format(4) + ')';
+      description = 'Completed (' + formatInt(this.getEternityChallengeCompletions(x)) + '/' + formatInt(4) + ')';
     } else {
-      description = format(this.getEternityChallengeCompletions(x)) + '/' + format(4) + ' completions';
+      description = formatInt(this.getEternityChallengeCompletions(x)) + '/' + formatInt(4) + ' completions';
     }
     if (this.isEternityChallengeRunning(x)) {
       description += ', running';
@@ -307,9 +309,9 @@ let EternityChallenge = {
   },
   eternityChallengeTotalCompletionsReward4Text() {
     if (ComplexityAchievements.hasComplexityAchievement(2, 2)) {
-      return 'Chroma buildup speed ' + format(this.getTotalCompletionsRewardRawEffect(4)) + 'x.';
+      return 'Chroma buildup speed ' + formatInt(this.getTotalCompletionsRewardRawEffect(4)) + 'x.';
     } else {
-      return 'Autobuyers for eternity upgrades, eternity generators, and Eternity Producer upgrades, and chroma buildup speed ' + format(this.getTotalCompletionsRewardRawEffect(4)) + 'x.';
+      return 'Autobuyers for eternity upgrades, eternity generators, and Eternity Producer upgrades, and chroma buildup speed ' + formatInt(this.getTotalCompletionsRewardRawEffect(4)) + 'x.';
     }
   },
   // Technically this is a bit redundant.

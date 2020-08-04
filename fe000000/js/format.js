@@ -23,3 +23,7 @@ function getNotation() {
 function formatWithPrecision(x, n) {
   return getNotation().format(x, n, n);
 }
+
+function pluralize(x, singular, plural) {
+  return Decimal.eq(x, 1) ? singular : plural;
+}

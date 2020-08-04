@@ -138,7 +138,7 @@
           <br/>
           <span>Your ~r Boost.bestBoostPowerDescription() ~ is ~f Boost.bestBoostPower() ~ (giving ~i Boost.extraTheoremsActualAndDisplay() ~ extra theorem~s Boost.extraTheoremsActualAndDisplay() ~, next at ~f Boost.nextExtraTheorem() ~).</span>
         </div>
-        <span ~style.display=Boost.isBoostPowerVisible() ? 'none' : ''~>You will start generating boost power for each boost above ~i Boost.boostPowerStart() ~ boost~s Boost.boostPowerStart() ~.</span>
+        <span ~style.display=Boost.isBoostPowerVisible() ? 'none' : ''~>You will start generating boost power for each boost above ~i Boost.boostPowerStart() ~ boosts.</span>
       </div>
       <br/>
       <br/>
@@ -1946,7 +1946,7 @@
     </div>
     <span>
       <button ~style.display=Studies.hasPreset(32) ? 'none' : ''~ onclick="Studies.presetCreate()">Create a preset</button>
-      <span ~style.display=Studies.hasPreset(32) ? '' : 'none'~>You can create at most ~f 32 ~ presets. Delete existing presets to create more.</span>
+      <span ~style.display=Studies.hasPreset(32) ? '' : 'none'~>You can create at most ~i 32 ~ presets. Delete existing presets to create more.</span>
     </span>
     <br/>
     <span style="display: none;">Exported studies: <input id="study-export-output"></input></span>
@@ -2025,7 +2025,7 @@
     </div>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'eternity-challenges' ? '' : 'none'~>
-    <span>You have completed ~f EternityChallenge.getTotalEternityChallengeCompletions() ~ eternity challenge tiers, giving you ~f EternityChallenge.extraTheoremsActualAndDisplay() ~ extra theorems (~f 1 ~ per tier).</span>
+    <span>You have completed ~i EternityChallenge.getTotalEternityChallengeCompletions() ~ eternity challenge tier~s EternityChallenge.getTotalEternityChallengeCompletions() ~, giving you ~i EternityChallenge.extraTheoremsActualAndDisplay() ~ extra theorem~s EternityChallenge.extraTheoremsActualAndDisplay() ~ (~i 1 ~ per tier).</span>
     <br/>
     <span>
       <button ~style.display=EternityChallenge.canRespec() ? '' : 'none'~ onclick="EternityChallenge.toggleRespec()">Respec eternity challenge on next eternity: ~r EternityChallenge.isRespecOn() ? "On" : "Off" ~</button>
@@ -2037,29 +2037,29 @@
       <span ~style.display=EternityChallenge.areAllEternityChallengesCompleted() ? 'none' : ''~>It has been ~f EternityChallenge.timeSinceAutoECCompletion() ~ seconds since your last automatic eternity challenge completion<span ~style.display=EternityChallenge.usedAutoECCompletionThisComplexity() ? 'none' : ''~> (none this complexity)</span>.</span>
       <span ~style.display=EternityChallenge.areAllEternityChallengesCompleted() ? '' : 'none'~>All eternity challenges are fully complete<span ~style.display=EternityChallenge.usedAutoECCompletionThisComplexity() ? 'none' : ''~> (and none were automatically completed)</span>.</span>
       <br/>
-      <span ~style.display=!EternityChallenge.isAutoECCompletionOn() && EternityChallenge.imminentAutoECCompletionTiers() !== 0 ? '' : 'none'~>Turning automatic eternity challenge completion on would complete ~f EternityChallenge.imminentAutoECCompletionTiers() ~ eternity challenge tiers.</span>
+      <span ~style.display=!EternityChallenge.isAutoECCompletionOn() && EternityChallenge.imminentAutoECCompletionTiers() !== 0 ? '' : 'none'~>Turning automatic eternity challenge completion on would complete ~i EternityChallenge.imminentAutoECCompletionTiers() ~ eternity challenge tier~s EternityChallenge.imminentAutoECCompletionTiers() ~.</span>
       <br ~style.display=!EternityChallenge.isAutoECCompletionOn() && EternityChallenge.imminentAutoECCompletionTiers() !== 0 ? '' : 'none'~/>
       <button onclick="EternityChallenge.toggleAutoECCompletion()">Automatic eternity challenge completion: ~r EternityChallenge.isAutoECCompletionOn() ? "On" : "Off" ~</button>
     </div>
     <br ~style.display=EternityChallenge.hasAutoECCompletion() ? 'none' : ''~/>
     <span>
-      At ~f EternityChallenge.getTotalCompletionsRewardThreshold(1) ~ total eternity challenge tiers completed:
+      At ~i EternityChallenge.getTotalCompletionsRewardThreshold(1) ~ total eternity challenge tiers completed:
     </span>
     <br/>
     <span>
-      Multiplier to boost power gain based on eternity challenge tiers completed (~f EternityChallenge.getTotalCompletionsRewardRawEffect(1) ~)
+      Multiplier to boost power gain based on eternity challenge tiers completed (~q EternityChallenge.getTotalCompletionsRewardRawEffect(1) ~)
     </span>
     <br/>
     <span>
-      At ~f EternityChallenge.getTotalCompletionsRewardThreshold(2) ~ total eternity challenge tiers completed:
+      At ~i EternityChallenge.getTotalCompletionsRewardThreshold(2) ~ total eternity challenge tiers completed:
     </span>
     <br/>
     <span>
-      Multiplier to eternity gain based on eternity challenge tiers completed (~f EternityChallenge.getTotalCompletionsRewardRawEffect(2) ~)
+      Multiplier to eternity gain based on eternity challenge tiers completed (~q EternityChallenge.getTotalCompletionsRewardRawEffect(2) ~)
     </span>
     <br/>
     <span>
-      At ~f EternityChallenge.getTotalCompletionsRewardThreshold(3) ~ total eternity challenge tiers completed:
+      At ~i EternityChallenge.getTotalCompletionsRewardThreshold(3) ~ total eternity challenge tiers completed:
     </span>
     <br/>
     <span>
@@ -2067,7 +2067,7 @@
     </span>
     <br/>
     <span>
-      At ~f EternityChallenge.getTotalCompletionsRewardThreshold(4) ~ total eternity challenge tiers completed:
+      At ~i EternityChallenge.getTotalCompletionsRewardThreshold(4) ~ total eternity challenge tiers completed:
     </span>
     <br/>
     <span>
@@ -2083,15 +2083,15 @@
           <div class="eternitychallengediv" ~style.background=EternityChallenge.color(1)~>
             <span>Eternity Challenge 1</span>
             <br/>
-            <span>There are exponents on all normal generators multipliers based on infinity stars and on all infinity generator multipliers based on eternity stars (both less than ~f 1 ~).</span>
+            <span>There are exponents on all normal generators multipliers based on infinity stars and on all infinity generator multipliers based on eternity stars (both less than ~i 1 ~).</span>
             <br/>
             <div ~style.display=EternityChallenge.isRequirementDisplayOn() ? '' : 'none'~>
-              <span>Requirement to start:</span>
+              <span>Requirement to unlock:</span>
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(1) ~</span>
             </div>
             <div ~style.display=ComplexityAchievements.hasComplexityAchievement(3, 2) ? 'none' : ''~>
-              <span>Cost: ~f EternityChallenge.getEternityChallengeCost(1) ~ theorems</span>
+              <span>Cost: ~i EternityChallenge.getEternityChallengeCost(1) ~ theorem~s EternityChallenge.getEternityChallengeCost(1) ~</span>
             </div>
             <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(1) ~ IP</span>
             <br/>
@@ -2111,12 +2111,12 @@
             <span>Boost costs are massively increased.</span>
             <br/>
             <div ~style.display=EternityChallenge.isRequirementDisplayOn() ? '' : 'none'~>
-              <span>Requirement to start:</span>
+              <span>Requirement to unlock:</span>
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(2) ~</span>
             </div>
             <div ~style.display=ComplexityAchievements.hasComplexityAchievement(3, 2) ? 'none' : ''~>
-              <span>Cost: ~f EternityChallenge.getEternityChallengeCost(2) ~ theorems</span>
+              <span>Cost: ~i EternityChallenge.getEternityChallengeCost(2) ~ theorem~s EternityChallenge.getEternityChallengeCost(2) ~</span>
             </div>
             <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(2) ~ IP</span>
             <br/>
@@ -2138,12 +2138,12 @@
             <span>You can't prestige.</span>
             <br/>
             <div ~style.display=EternityChallenge.isRequirementDisplayOn() ? '' : 'none'~>
-              <span>Requirement to start:</span>
+              <span>Requirement to unlock:</span>
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(3) ~</span>
             </div>
             <div ~style.display=ComplexityAchievements.hasComplexityAchievement(3, 2) ? 'none' : ''~>
-              <span>Cost: ~f EternityChallenge.getEternityChallengeCost(3) ~ theorems</span>
+              <span>Cost: ~i EternityChallenge.getEternityChallengeCost(3) ~ theorem~s EternityChallenge.getEternityChallengeCost(3) ~</span>
             </div>
             <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(3) ~ IP</span>
             <br/>
@@ -2163,12 +2163,12 @@
             <span>You can infinity at most ~f EternityChallenge.eternityChallenge4AllowedInfinities() ~ times. If you infinity more, you will automatically exit the challenge.</span>
             <br/>
             <div ~style.display=EternityChallenge.isRequirementDisplayOn() ? '' : 'none'~>
-              <span>Requirement to start:</span>
+              <span>Requirement to unlock:</span>
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(4) ~</span>
             </div>
             <div ~style.display=ComplexityAchievements.hasComplexityAchievement(3, 2) ? 'none' : ''~>
-              <span>Cost: ~f EternityChallenge.getEternityChallengeCost(4) ~ theorems</span>
+              <span>Cost: ~i EternityChallenge.getEternityChallengeCost(4) ~ theorem~s EternityChallenge.getEternityChallengeCost(4) ~</span>
             </div>
             <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(4) ~ IP</span>
             <br/>
@@ -2190,12 +2190,12 @@
             <span>Infinity generator multipliers are square-rooted (^~f 0.5 ~).</span>
             <br/>
             <div ~style.display=EternityChallenge.isRequirementDisplayOn() ? '' : 'none'~>
-              <span>Requirement to start:</span>
+              <span>Requirement to unlock:</span>
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(5) ~</span>
             </div>
             <div ~style.display=ComplexityAchievements.hasComplexityAchievement(3, 2) ? 'none' : ''~>
-              <span>Cost: ~f EternityChallenge.getEternityChallengeCost(5) ~ theorems</span>
+              <span>Cost: ~i EternityChallenge.getEternityChallengeCost(5) ~ theorem~s EternityChallenge.getEternityChallengeCost(5) ~</span>
             </div>
             <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(5) ~ IP</span>
             <br/>
@@ -2215,12 +2215,12 @@
             <span>All eternity challenge rewards are disabled.</span>
             <br/>
             <div ~style.display=EternityChallenge.isRequirementDisplayOn() ? '' : 'none'~>
-              <span>Requirement to start:</span>
+              <span>Requirement to unlock:</span>
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(6) ~</span>
             </div>
             <div ~style.display=ComplexityAchievements.hasComplexityAchievement(3, 2) ? 'none' : ''~>
-              <span>Cost: ~f EternityChallenge.getEternityChallengeCost(6) ~ theorems</span>
+              <span>Cost: ~i EternityChallenge.getEternityChallengeCost(6) ~ theorem~s EternityChallenge.getEternityChallengeCost(6) ~</span>
             </div>
             <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(6) ~ IP</span>
             <br/>
@@ -2242,12 +2242,12 @@
             <span>Infinity generator per-purchase multipliers are disabled.</span>
             <br/>
             <div ~style.display=EternityChallenge.isRequirementDisplayOn() ? '' : 'none'~>
-              <span>Requirement to start:</span>
+              <span>Requirement to unlock:</span>
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(7) ~</span>
             </div>
             <div ~style.display=ComplexityAchievements.hasComplexityAchievement(3, 2) ? 'none' : ''~>
-              <span>Cost: ~f EternityChallenge.getEternityChallengeCost(7) ~ theorems</span>
+              <span>Cost: ~i EternityChallenge.getEternityChallengeCost(7) ~ theorem~s EternityChallenge.getEternityChallengeCost(7) ~</span>
             </div>
             <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(7) ~ IP</span>
             <br/>
@@ -2267,12 +2267,12 @@
             <span>Eternity generators are disabled.</span>
             <br/>
             <div ~style.display=EternityChallenge.isRequirementDisplayOn() ? '' : 'none'~>
-              <span>Requirement to start:</span>
+              <span>Requirement to unlock:</span>
               <br/>
               <span>~r EternityChallenge.eternityChallengeRequirementDescription(8) ~</span>
             </div>
             <div ~style.display=ComplexityAchievements.hasComplexityAchievement(3, 2) ? 'none' : ''~>
-              <span>Cost: ~f EternityChallenge.getEternityChallengeCost(8) ~ theorems</span>
+              <span>Cost: ~i EternityChallenge.getEternityChallengeCost(8) ~ theorem~s EternityChallenge.getEternityChallengeCost(8) ~</span>
             </div>
             <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(8) ~ IP</span>
             <br/>
@@ -2399,7 +2399,7 @@
               <div class="greendiv" ~style.display=Chroma.isColorUnlocked(5) ? '' : 'none'~>
                 <span>~r Chroma.colorName(5, true) ~: ~f Chroma.colorAmount(5) ~</span>
                 <br/>
-                <span>~f Chroma.extraTheoremsActualAndDisplay() ~ extra theorems, next at ~f Chroma.nextExtraTheorem() ~</span>
+                <span>~i Chroma.extraTheoremsActualAndDisplay() ~ extra theorem~s Chroma.extraTheoremsActualAndDisplay() ~, next at ~f Chroma.nextExtraTheorem() ~</span>
                 <br/>
                 <br/>
                 <button ~style.display=Chroma.producingAll() ? 'none' : ''~ onclick="Chroma.setNextColor(5)">Produce ~r Chroma.colorName(5) ~ next</button>
@@ -2429,15 +2429,15 @@
     </div>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'complexity' ? '' : 'none'~>
-    <span>You have ~f ComplexityPoints.amount() ~ complexity points.
+    <span>You have ~i ComplexityPoints.amount() ~ complexity point~s ComplexityPoints.amount() ~ (ℂP).
       <button ~class=ComplexityMaxAll.anythingToBuy() ? "" : "disabled"~ onclick="ComplexityMaxAll.maxAll()">Max all</button>
     </span>
     <br/>
-    <span>You have produced ~f ComplexityPoints.totalCPProduced() ~ total complexity points (ℂP).</span>
+    <span>You have produced ~i ComplexityPoints.totalCPProduced() ~ total complexity point~s ComplexityPoints.totalCPProduced() ~.</span>
     </br>
-    <span>You have ~f Complexities.amount() ~ complexities, multiplying all complexity generators (ℂGs) by ~f Complexities.complexityGeneratorMultiplier() ~,</span>
+    <span>You have ~i Complexities.amount() ~ complexit~y Complexities.amount() ~, multiplying all complexity generators (ℂGs) by ~f Complexities.complexityGeneratorMultiplier() ~,</span>
     <br/>
-    <span>multiplying permanence and chroma buildup speed by ~f Complexities.permanenceAndChromaMultiplier() ~,</span>
+    <span>multiplying permanence and chroma buildup speed by ~q Complexities.permanenceAndChromaMultiplier() ~,</span>
     <br/>
     <span>and automatically completing an eternity challenge tier every ~f Complexities.autoECCompletionTime() ~ seconds.</span>
     <br/>
@@ -2452,7 +2452,7 @@
         <td>~f ComplexityGenerator(1).amount() ~</td>
         <td>~f ComplexityGenerator(1).perSecond() ~/s</td>
         <td>~f ComplexityGenerator(1).multiplier() ~x</td>
-        <td><button ~class=ComplexityGenerator(1).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(1).buy()">Cost: ~f ComplexityGenerator(1).cost() ~ ℂP</button></td>
+        <td><button ~class=ComplexityGenerator(1).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(1).buy()">Cost: ~i ComplexityGenerator(1).cost() ~ ℂP</button></td>
         <td><button ~class=ComplexityGenerator(1).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(1).buyMax()">Max</button></td>
       </tr>
       <tr ~style.display=ComplexityGenerator(2).isVisible() ? '' : 'none'~>
@@ -2460,7 +2460,7 @@
         <td>~f ComplexityGenerator(2).amount() ~</td>
         <td>~f ComplexityGenerator(2).perSecond() ~/s</td>
         <td>~f ComplexityGenerator(2).multiplier() ~x</td>
-        <td><button ~class=ComplexityGenerator(2).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(2).buy()">Cost: ~f ComplexityGenerator(2).cost() ~ ℂP</button></td>
+        <td><button ~class=ComplexityGenerator(2).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(2).buy()">Cost: ~i ComplexityGenerator(2).cost() ~ ℂP</button></td>
         <td><button ~class=ComplexityGenerator(2).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(2).buyMax()">Max</button></td>
       </tr>
       <tr ~style.display=ComplexityGenerator(3).isVisible() ? '' : 'none'~>
@@ -2468,7 +2468,7 @@
         <td>~f ComplexityGenerator(3).amount() ~</td>
         <td>~f ComplexityGenerator(3).perSecond() ~/s</td>
         <td>~f ComplexityGenerator(3).multiplier() ~x</td>
-        <td><button ~class=ComplexityGenerator(3).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(3).buy()">Cost: ~f ComplexityGenerator(3).cost() ~ ℂP</button></td>
+        <td><button ~class=ComplexityGenerator(3).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(3).buy()">Cost: ~i ComplexityGenerator(3).cost() ~ ℂP</button></td>
         <td><button ~class=ComplexityGenerator(3).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(3).buyMax()">Max</button></td>
       </tr>
       <tr ~style.display=ComplexityGenerator(4).isVisible() ? '' : 'none'~>
@@ -2476,7 +2476,7 @@
         <td>~f ComplexityGenerator(4).amount() ~</td>
         <td>~f ComplexityGenerator(4).perSecond() ~/s</td>
         <td>~f ComplexityGenerator(4).multiplier() ~x</td>
-        <td><button ~class=ComplexityGenerator(4).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(4).buy()">Cost: ~f ComplexityGenerator(4).cost() ~ ℂP</button></td>
+        <td><button ~class=ComplexityGenerator(4).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(4).buy()">Cost: ~i ComplexityGenerator(4).cost() ~ ℂP</button></td>
         <td><button ~class=ComplexityGenerator(4).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(4).buyMax()">Max</button></td>
       </tr>
       <tr ~style.display=ComplexityGenerator(5).isVisible() ? '' : 'none'~>
@@ -2484,7 +2484,7 @@
         <td>~f ComplexityGenerator(5).amount() ~</td>
         <td>~f ComplexityGenerator(5).perSecond() ~/s</td>
         <td>~f ComplexityGenerator(5).multiplier() ~x</td>
-        <td><button ~class=ComplexityGenerator(5).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(5).buy()">Cost: ~f ComplexityGenerator(5).cost() ~ ℂP</button></td>
+        <td><button ~class=ComplexityGenerator(5).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(5).buy()">Cost: ~i ComplexityGenerator(5).cost() ~ ℂP</button></td>
         <td><button ~class=ComplexityGenerator(5).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(5).buyMax()">Max</button></td>
       </tr>
       <tr ~style.display=ComplexityGenerator(6).isVisible() ? '' : 'none'~>
@@ -2492,7 +2492,7 @@
         <td>~f ComplexityGenerator(6).amount() ~</td>
         <td>~f ComplexityGenerator(6).perSecond() ~/s</td>
         <td>~f ComplexityGenerator(6).multiplier() ~x</td>
-        <td><button ~class=ComplexityGenerator(6).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(6).buy()">Cost: ~f ComplexityGenerator(6).cost() ~ ℂP</button></td>
+        <td><button ~class=ComplexityGenerator(6).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(6).buy()">Cost: ~i ComplexityGenerator(6).cost() ~ ℂP</button></td>
         <td><button ~class=ComplexityGenerator(6).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(6).buyMax()">Max</button></td>
       </tr>
       <tr ~style.display=ComplexityGenerator(7).isVisible() ? '' : 'none'~>
@@ -2500,7 +2500,7 @@
         <td>~f ComplexityGenerator(7).amount() ~</td>
         <td>~f ComplexityGenerator(7).perSecond() ~/s</td>
         <td>~f ComplexityGenerator(7).multiplier() ~x</td>
-        <td><button ~class=ComplexityGenerator(7).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(7).buy()">Cost: ~f ComplexityGenerator(7).cost() ~ ℂP</button></td>
+        <td><button ~class=ComplexityGenerator(7).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(7).buy()">Cost: ~i ComplexityGenerator(7).cost() ~ ℂP</button></td>
         <td><button ~class=ComplexityGenerator(7).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(7).buyMax()">Max</button></td>
       </tr>
       <tr ~style.display=ComplexityGenerator(8).isVisible() ? '' : 'none'~>
@@ -2508,14 +2508,14 @@
         <td>~f ComplexityGenerator(8).amount() ~</td>
         <td>~f ComplexityGenerator(8).perSecond() ~/s</td>
         <td>~f ComplexityGenerator(8).multiplier() ~x</td>
-        <td><button ~class=ComplexityGenerator(8).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(8).buy()">Cost: ~f ComplexityGenerator(8).cost() ~ ℂP</button></td>
+        <td><button ~class=ComplexityGenerator(8).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(8).buy()">Cost: ~i ComplexityGenerator(8).cost() ~ ℂP</button></td>
         <td><button ~class=ComplexityGenerator(8).canBuy() ? "" : "disabled"~ onclick="ComplexityGenerator(8).buyMax()">Max</button></td>
       </tr>
     </table>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'complexity-challenges' ? '' : 'none'~>
     <span>
-      You have completed ~f ComplexityChallenge.getTotalComplexityChallengeCompletions() ~ complexity challenge tiers.
+      You have completed ~i ComplexityChallenge.getTotalComplexityChallengeCompletions() ~ complexity challenge tier~s ComplexityChallenge.getTotalComplexityChallengeCompletions() ~.
       <button onclick="ComplexityChallenge.complexityReset()">Restart complexity and re-enter all complexity challenges</button>
     </span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
@@ -2633,9 +2633,9 @@
             <br ~style.display=ComplexityAchievements.hasComplexityAchievement(4, 4)  ? '' : 'none'~/>
             <span>Reward: Extra theorems.</span>
             <br/>
-            <span>Current: +~f ComplexityChallenge.getComplexityChallengeReward(6) ~ theorems, Next: +~f ComplexityChallenge.getComplexityChallengeNextReward(6) ~</span>
+            <span>Current: +~i ComplexityChallenge.getComplexityChallengeReward(6) ~ theorem~s ComplexityChallenge.getComplexityChallengeReward(6) ~, Next: +~i ComplexityChallenge.getComplexityChallengeNextReward(6) ~</span>
             <br ~style.display=ComplexityChallenge.showActualExtraTheorems() ? '' : 'none'~/>
-            <span ~style.display=ComplexityChallenge.showActualExtraTheorems() ? '' : 'none'~>(actually +~f ComplexityChallenge.extraTheoremsActualAndDisplay() ~, from "On the other side")</span>
+            <span ~style.display=ComplexityChallenge.showActualExtraTheorems() ? '' : 'none'~>(actually +~i ComplexityChallenge.extraTheoremsActualAndDisplay() ~, from "On the other side")</span>
             <br ~style.display=ComplexityChallenge.complexityStarsForNextExtraTheorem().neq(Infinity) ? '' : 'none'~/>
             <span ~style.display=ComplexityChallenge.complexityStarsForNextExtraTheorem().neq(Infinity) ? '' : 'none'~>Next theorem at ~f ComplexityChallenge.complexityStarsForNextExtraTheorem() ~ complexity stars.</span>
           </div>
@@ -2672,27 +2672,27 @@
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'complexity-achievements' ? '' : 'none'~>
     <span>
-      You have unlocked ~f ComplexityAchievements.getTotalAchievementsUnlocked(1) ~ complexity achievements.
+      You have unlocked ~i ComplexityAchievements.getTotalAchievementsUnlocked() ~ complexity achievement~s ComplexityAchievements.getTotalAchievementsUnlocked() ~.
     </span>
     <br/>
     <span>
-      At ~f ComplexityAchievements.getAchievementsUnlockedRewardThreshold(1) ~ complexity achievements unlocked:
+      At ~i ComplexityAchievements.getAchievementsUnlockedRewardThreshold(1) ~ complexity achievements unlocked:
     </span>
     <br/>
     <span>
-       You start every complexity with EP equal to your highest-ever number of boosts (~f ComplexityAchievements.getAchievementsUnlockedRewardRawEffect(1) ~)
+       You start every complexity with EP equal to your highest-ever number of boosts (~i ComplexityAchievements.getAchievementsUnlockedRewardRawEffect(1) ~)
     </span>
     <br/>
     <span>
-      At ~f ComplexityAchievements.getAchievementsUnlockedRewardThreshold(2) ~ complexity achievements unlocked:
+      At ~i ComplexityAchievements.getAchievementsUnlockedRewardThreshold(2) ~ complexity achievements unlocked:
     </span>
     <br/>
     <span>
-      Multiplier to eternity gain based on complexity achievements unlocked (~f ComplexityAchievements.getAchievementsUnlockedRewardRawEffect(2) ~)
+      Multiplier to eternity gain based on complexity achievements unlocked (~q ComplexityAchievements.getAchievementsUnlockedRewardRawEffect(2) ~)
     </span>
     <br/>
     <span>
-      At ~f ComplexityAchievements.getAchievementsUnlockedRewardThreshold(3) ~ complexity achievements unlocked:
+      At ~i ComplexityAchievements.getAchievementsUnlockedRewardThreshold(3) ~ complexity achievements unlocked:
     </span>
     <br/>
     <span>
@@ -2700,7 +2700,7 @@
     </span>
     <br/>
     <span>
-      At ~f ComplexityAchievements.getAchievementsUnlockedRewardThreshold(4) ~ complexity achievements unlocked:
+      At ~i ComplexityAchievements.getAchievementsUnlockedRewardThreshold(4) ~ complexity achievements unlocked:
     </span>
     <br/>
     <span>
@@ -2712,11 +2712,11 @@
           <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(1, 1)~>
             <span class="greytogrey">One per generator</span>
             <br/>
-            Complete Complexity Challenge 2 ~f 8 ~ times.
+            Complete Complexity Challenge 2 ~i 8 ~ times.
             <br/>
             ~r ComplexityAchievements.complexityAchievementStatusDescription(1, 1) ~
             <br/>
-            The multiplier to permanence and chroma from complexities also applies to boost power (currently ~f ComplexityAchievements.rawEffect(1, 1) ~x)
+            The multiplier to permanence and chroma from complexities also applies to boost power (currently ~q ComplexityAchievements.rawEffect(1, 1) ~x)
           </div>
         </td>
         <td>
@@ -2727,7 +2727,7 @@
             <br/>
             ~r ComplexityAchievements.complexityAchievementStatusDescription(1, 2) ~
             <br/>
-            You start every complexity with eternities based on your complexities (currently ~f ComplexityAchievements.rawEffect(1, 2) ~)
+            You start every complexity with eternities based on your complexities (currently ~i ComplexityAchievements.rawEffect(1, 2) ~)
           </div>
         </td>
         <td>
@@ -2745,7 +2745,7 @@
           <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(1, 4)~>
             <span class="greytogreen">Forgot something</span>
             <br/>
-            Get ~f 11 ~ studies in Complexity Challenge 2.
+            Get ~i 11 ~ studies in Complexity Challenge 2.
             <br/>
             ~r ComplexityAchievements.complexityAchievementStatusDescription(1, 4) ~
             <br/>
@@ -2791,11 +2791,11 @@
           <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(2, 4)~>
             <span class="purpletogreen">3 * 7 * 11</span>
             <br/>
-            Get ~f 231 ~ theorems in Complexity Challenge 3.
+            Get ~i 231 ~ theorems in Complexity Challenge 3.
             <br/>
             ~r ComplexityAchievements.complexityAchievementStatusDescription(2, 4) ~
             <br/>
-            Study 7 and Study 11 effects are uncapped and raised ^~f ComplexityAchievements.rawEffect(2, 4) ~.
+            Study 7 and Study 11 effects are uncapped and raised ^~i ComplexityAchievements.rawEffect(2, 4) ~.
           </div>
         </td>
       </tr>
@@ -2826,7 +2826,7 @@
           <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(3, 3)~>
             <span class="orangetoorange">Shadeless</span>
             <br/>
-            Complete Complexity Challenge 4 ~f 13 ~ times.
+            Complete Complexity Challenge 4 ~i 13 ~ times.
             <br/>
             ~r ComplexityAchievements.complexityAchievementStatusDescription(3, 3) ~
             <br/>
@@ -2861,7 +2861,7 @@
           <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(4, 2)~>
             <span class="greentopurple">Calm EC</span>
             <br/>
-            Complete ~f 20 ~ eternity challenge tiers, without using automatic eternity challenge completion, in Complexity Challenge 6.
+            Complete ~i 20 ~ eternity challenge tiers, without using automatic eternity challenge completion, in Complexity Challenge 6.
             <br/>
             ~r ComplexityAchievements.complexityAchievementStatusDescription(4, 2) ~
             <br/>
@@ -2883,7 +2883,7 @@
           <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(4, 4)~>
             <span class="greentogreen">On the other side</span>
             <br/>
-            Get ~f 168 ~ theorems in Complexity Challenge 6.
+            Get ~i 168 ~ theorems in Complexity Challenge 6.
             <br/>
             ~r ComplexityAchievements.complexityAchievementStatusDescription(4, 4) ~
             <br/>
@@ -2902,7 +2902,7 @@
       <span>Unlocking powers will also let you gain your eternity points on eternity every second, without needing to eternity.</span>
     </div>
     <div ~style.display=Powers.isUnlocked() ? '' : 'none'~>
-      <span>You have ~f Powers.active().length ~/~f Powers.activatedLimit() ~ active powers.</span>
+      <span>You have ~i Powers.active().length ~/~i Powers.activatedLimit() ~ active power~s Powers.activatedLimit() ~.</span>
       <br/>
       <span>Active powers raise various dimension multipliers to powers. Stored powers do not, but can be activated.</span>
       <br/>
@@ -2913,7 +2913,7 @@
       <br/>
       <span>It has been ~f Powers.timeSincePowerGain() ~ seconds since you last gained a new power.</span>
       <br ~style.display=!Powers.isPowerGainOn() && Powers.imminentPowerGain() !== 0 ? '' : 'none'~/>
-      <span ~style.display=!Powers.isPowerGainOn() && Powers.imminentPowerGain() !== 0 ? '' : 'none'~>Turning power gain on would give you ~f Powers.imminentPowerGain() ~ new powers.</span>
+      <span ~style.display=!Powers.isPowerGainOn() && Powers.imminentPowerGain() !== 0 ? '' : 'none'~>Turning power gain on would give you ~i Powers.imminentPowerGain() ~ new power~s Powers.imminentPowerGain() ~.</span>
       <br/>
       <span>New powers generally have a random type and random rarity.</span>
       <br>
@@ -3266,31 +3266,31 @@
         </div>
       </div>
       <br/>
-      <span>At most ~f Powers.maximumActivatedLimit() ~ powers can be active at once.</span>
+      <span>At most ~i Powers.maximumActivatedLimit() ~ power~s Powers.maximumActivatedLimit() ~ can be active at once.</span>
       <br/>
-      <span>Thus, all but the best ~f Powers.maximumActivatedLimit() ~ powers of each type are useless and are thus automatically deleted for power shards.</span>
+      <span>Thus, all but the best ~i Powers.maximumActivatedLimit() ~ power~s Powers.maximumActivatedLimit() ~ of each type are useless and are thus automatically deleted for power shards.</span>
       <br/>
       <button onclick="Powers.changePowerDeletionMode()">Manual power deletion mode: ~r Powers.powerDeletionMode() ~</button>
       <br/>
       <br/>
-      <span>You have ~f ComplexityPoints.amount() ~ complexity points. <button ~class=Powers.anythingToBuy() ? "" : "disabled"~ onclick="Powers.maxAll()">Max power upgrades</button></span>
+      <span>You have ~i ComplexityPoints.amount() ~ complexity point~s ComplexityPoints.amount() ~. <button ~class=Powers.anythingToBuy() ? "" : "disabled"~ onclick="Powers.maxAll()">Max power upgrades</button></span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>Strength of new powers:</td>
           <td><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? 'none' : ''~>~r formatWithPrecision(PowerUpgrade(1).effectDisplay(), 5) ~ → ~r formatWithPrecision(PowerUpgrade(1).nextEffectDisplay(), 5) ~</span><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? '' : 'none'~>~r formatWithPrecision(PowerUpgrade(1).effectDisplay(), 5) ~ (maxed)</span></td>
-          <td><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(1).buy()">Cost: ~f PowerUpgrade(1).cost() ~ ℂP</button></span></td>
+          <td><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(1).buy()">Cost: ~i PowerUpgrade(1).cost() ~ ℂP</button></span></td>
           <td><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(1).buyMax()">Max</button></span></td>
         </tr>
         <tr>
           <td>Speed of gaining new powers:</td>
-          <td><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? 'none' : ''~>~f PowerUpgrade(2).effectDisplay() ~x → ~f PowerUpgrade(2).nextEffectDisplay() ~x</span><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? '' : 'none'~>~f PowerUpgrade(2).effectDisplay() ~x (maxed)</span></td>
-          <td><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(2).buy()">Cost: ~f PowerUpgrade(2).cost() ~ ℂP</button></span></td>
+          <td><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? 'none' : ''~>~i PowerUpgrade(2).effectDisplay() ~x → ~i PowerUpgrade(2).nextEffectDisplay() ~x</span><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? '' : 'none'~>~i PowerUpgrade(2).effectDisplay() ~x (maxed)</span></td>
+          <td><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(2).buy()">Cost: ~i PowerUpgrade(2).cost() ~ ℂP</button></span></td>
           <td><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(2).buyMax()">Max</button></span></td>
         </tr>
         <tr>
           <td>Minimum rarity of new powers:</td>
           <td><span ~style.display=PowerUpgrade(3).atBoughtLimit() ? 'none' : ''~>~f PowerUpgrade(3).effectDisplay() ~ → ~f PowerUpgrade(3).nextEffectDisplay() ~</span><span ~style.display=PowerUpgrade(3).atBoughtLimit() ? '' : 'none'~>~f PowerUpgrade(3).effectDisplay() ~ (maxed)</span></td>
-          <td><span ~style.display=PowerUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(3).buy()">Cost: ~f PowerUpgrade(3).cost() ~ ℂP</button></span></td>
+          <td><span ~style.display=PowerUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(3).buy()">Cost: ~i PowerUpgrade(3).cost() ~ ℂP</button></span></td>
           <td><span ~style.display=PowerUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(3).buyMax()">Max</button></span></td>
         </tr>
       </table>
@@ -3306,25 +3306,25 @@
           <tr>
             <td class="yellowspan">Additional multiplier to normal generator powers:</td>
             <td><span ~style.display=PowerShardUpgrade(1).atBoughtLimit() ? 'none' : ''~>+~f PowerShardUpgrade(1).effect() ~ → +~f PowerShardUpgrade(1).nextEffect() ~</span><span ~style.display=PowerShardUpgrade(1).atBoughtLimit() ? '' : 'none'~>~f PowerShardUpgrade(1).effect() ~ (maxed)</span></td>
-            <td><span ~style.display=PowerShardUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(1).buy()">Cost: ~f PowerShardUpgrade(1).cost() ~ power shards</button></span></td>
+            <td><span ~style.display=PowerShardUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(1).buy()">Cost: ~i PowerShardUpgrade(1).cost() ~ power shards</button></span></td>
             <td><span ~style.display=PowerShardUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(1).buyMax()">Max</button></span></td>
           </tr>
           <tr>
             <td class="magentaspan">Additional multiplier to infinity generator powers:</td>
             <td><span ~style.display=PowerShardUpgrade(2).atBoughtLimit() ? 'none' : ''~>+~f PowerShardUpgrade(2).effect() ~ → +~f PowerShardUpgrade(2).nextEffect() ~</span><span ~style.display=PowerShardUpgrade(2).atBoughtLimit() ? '' : 'none'~>~f PowerShardUpgrade(2).effect() ~ (maxed)</span></td>
-            <td><span ~style.display=PowerShardUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(2).buy()">Cost: ~f PowerShardUpgrade(2).cost() ~ power shards</button></span></td>
+            <td><span ~style.display=PowerShardUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(2).buy()">Cost: ~i PowerShardUpgrade(2).cost() ~ power shards</button></span></td>
             <td><span ~style.display=PowerShardUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(2).buyMax()">Max</button></span></td>
           </tr>
           <tr>
             <td class="cyanspan">Additional multiplier to eternity generator powers:</td>
             <td><span ~style.display=PowerShardUpgrade(3).atBoughtLimit() ? 'none' : ''~>+~f PowerShardUpgrade(3).effect() ~ → +~f PowerShardUpgrade(3).nextEffect() ~</span><span ~style.display=PowerShardUpgrade(3).atBoughtLimit() ? '' : 'none'~>~f PowerShardUpgrade(3).effect() ~ (maxed)</span></td>
-            <td><span ~style.display=PowerShardUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(3).buy()">Cost: ~f PowerShardUpgrade(3).cost() ~ power shards</button></span></td>
+            <td><span ~style.display=PowerShardUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(3).buy()">Cost: ~i PowerShardUpgrade(3).cost() ~ power shards</button></span></td>
             <td><span ~style.display=PowerShardUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(3).buyMax()">Max</button></span></td>
           </tr>
           <tr>
             <td class="brownspan">Additional multiplier to complexity generator powers:</td>
             <td><span ~style.display=PowerShardUpgrade(4).atBoughtLimit() ? 'none' : ''~>+~f PowerShardUpgrade(4).effect() ~ → +~f PowerShardUpgrade(4).nextEffect() ~</span><span ~style.display=PowerShardUpgrade(4).atBoughtLimit() ? '' : 'none'~>~f PowerShardUpgrade(4).effect() ~ (maxed)</span></td>
-            <td><span ~style.display=PowerShardUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(4).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(4).buy()">Cost: ~f PowerShardUpgrade(4).cost() ~ power shards</button></span></td>
+            <td><span ~style.display=PowerShardUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(4).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(4).buy()">Cost: ~i PowerShardUpgrade(4).cost() ~ power shards</button></span></td>
             <td><span ~style.display=PowerShardUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(4).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(4).buyMax()">Max</button></span></td>
           </tr>
         </table>
@@ -3580,7 +3580,7 @@
       </div>
       <span>
         <button ~style.display=Powers.hasPreset(32) ? 'none' : ''~ onclick="Powers.presetCreate()">Create a power preset</button>
-        <span ~style.display=Powers.hasPreset(32) ? '' : 'none'~>You can create at most ~f 32 ~ power presets. Delete existing presets to create more.</span>
+        <span ~style.display=Powers.hasPreset(32) ? '' : 'none'~>You can create at most ~i 32 ~ power presets. Delete existing presets to create more.</span>
       </span>
       <br/>
       <span style="display: none;">Exported active powers: <input id="powers-export-output"></input></span>
@@ -3604,7 +3604,7 @@
       <span>Your stellar product is ~f Galaxy.starFactor() ~ x ~f Galaxy.infinityStarFactor() ~ x ~f Galaxy.eternityStarFactor() ~ x ~f Galaxy.complexityStarFactor() ~ = ~f Galaxy.stellarProduct() ~.</span>
       <br/>
       <br/>
-      <span>You have ~f Galaxy.stellarProductAmount() ~ (based on stellar product) + ~f Galaxy.complexityPointAmount() ~ (based on total ℂP produced) = ~f Galaxy.amount() ~ galaxies.</span>
+      <span>You have ~i Galaxy.stellarProductAmount() ~ (based on stellar product) + ~i Galaxy.complexityPointAmount() ~ (based on total ℂP produced) = ~i Galaxy.amount() ~ galax~y Galaxy.amount() ~.</span>
       <br/>
       <span>Next galaxies are at ~f Galaxy.nextStellarProductGalaxy() ~ stellar product and ~f Galaxy.nextComplexityPointGalaxy() ~ total ℂP produced.</span>
       <br/>
@@ -3618,11 +3618,14 @@
       <br/>
       <span>You can make some of your galaxies dilated to make the galaxy effect increase faster, but have a lower cap.</span>
       <br/>
-      <span>Currently ~f Galaxy.dilated() ~ galaxies are dilated, making the galaxy effect increase ~f Galaxy.effectSpeed() ~x quicker.</span>
+      <span>Currently ~i Galaxy.dilated() ~ galaxies are dilated, making the galaxy effect increase ~i Galaxy.effectSpeed() ~x quicker.</span>
       <br/>
-      <span>Galaxies to make dilated next complexity reset: <input type="text" ~!value=Galaxy.nextDilated()~ ~!onchange=function() {Galaxy.setNextDilated(+this.value)}~></input> (Set this to ~f 0 ~ to un-dilate all dilated galaxies.)</span>
+      <span>Galaxies to make dilated next complexity reset: <input type="text" ~!value=Galaxy.nextDilated()~ ~!onchange=function() {Galaxy.setNextDilated(+this.value)}~></input> (Set this to ~i 0 ~ to un-dilate all dilated galaxies.)</span>
       <br/>
-      <span>Next complexity, the galaxy effect will increase ~f Galaxy.nextEffectSpeed() ~x quicker and have a cap of ~r formatWithPrecision(Galaxy.nextEffectCap(), 5) ~, reached at ~f Galaxy.nextTimeToReachEffectCap() ~ seconds in complexity.</span>
+      <br/>
+      <span>Next complexity, ~i Galaxy.nextDilated() ~ galaxies will be dilated.</span>
+      <br/>
+      <span>The galaxy effect will increase ~i Galaxy.nextEffectSpeed() ~x quicker and have a cap of ~r formatWithPrecision(Galaxy.nextEffectCap(), 5) ~, reached at ~f Galaxy.nextTimeToReachEffectCap() ~ seconds in complexity.</span>
     </div>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'statistics' ? '' : 'none'~>
@@ -3632,13 +3635,13 @@
     <br/>
     <span>You have produced ~f player.stats.totalStarsProducedThisComplexity ~ stars this complexity.</span>
     <br/>
-    <span>You have produced ~f player.stats.totalIPProduced ~ total infinity points.</span>
+    <span>You have produced ~i player.stats.totalIPProduced ~ total infinity point~s player.stats.totalIPProduced ~.</span>
     <br/>
-    <span>You have produced ~f player.stats.totalIPProducedThisEternity ~ infinity points this eternity.</span>
+    <span>You have produced ~i player.stats.totalIPProducedThisEternity ~ infinity point~s player.stats.totalIPProducedThisEternity ~ this eternity.</span>
     <br/>
-    <span>You have produced ~f player.stats.totalEPProduced ~ total eternity points.</span>
+    <span>You have produced ~i player.stats.totalEPProduced ~ total eternity point~s player.stats.totalEPProduced ~.</span>
     <br/>
-    <span>You have produced ~f player.stats.totalEPProducedThisComplexity ~ total eternity points this complexity.</span>
+    <span>You have produced ~i player.stats.totalEPProducedThisComplexity ~ total eternity point~s player.stats.totalEPProducedThisComplexity ~ this complexity.</span>
     <br/>
     <span>Your fastest infinity took ~f player.stats.fastestInfinity ~ seconds.</span>
     <br/>
@@ -3660,69 +3663,69 @@
     <br/>
     <span>You have spent ~f player.stats.timeSinceGameStart ~ seconds playing this game (counting time offline).</span>
     <div ~style.display=player.stats.lastTenInfinities[0][0] !== -1 ? '' : 'none'~>
-      <span>Last infinity took ~f player.stats.lastTenInfinities[0][0] ~ seconds and gave ~f player.stats.lastTenInfinities[0][1] ~ IP, giving ~f player.stats.lastTenInfinities[0][2] ~ IP/second.</span>
+      <span>Last infinity took ~f player.stats.lastTenInfinities[0][0] ~ seconds and gave ~i player.stats.lastTenInfinities[0][1] ~ IP, giving ~f player.stats.lastTenInfinities[0][2] ~ IP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenInfinities[1][0] !== -1 ? '' : 'none'~>The infinity two infinities ago took ~f player.stats.lastTenInfinities[1][0] ~ seconds and gave ~f player.stats.lastTenInfinities[1][1] ~ IP, giving ~f player.stats.lastTenInfinities[1][2] ~ IP/second.</span>
+      <span ~style.display=player.stats.lastTenInfinities[1][0] !== -1 ? '' : 'none'~>The infinity two infinities ago took ~f player.stats.lastTenInfinities[1][0] ~ seconds and gave ~i player.stats.lastTenInfinities[1][1] ~ IP, giving ~f player.stats.lastTenInfinities[1][2] ~ IP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenInfinities[2][0] !== -1 ? '' : 'none'~>The infinity three infinities ago took ~f player.stats.lastTenInfinities[2][0] ~ seconds and gave ~f player.stats.lastTenInfinities[2][1] ~ IP, giving ~f player.stats.lastTenInfinities[2][2] ~ IP/second.</span>
+      <span ~style.display=player.stats.lastTenInfinities[2][0] !== -1 ? '' : 'none'~>The infinity three infinities ago took ~f player.stats.lastTenInfinities[2][0] ~ seconds and gave ~i player.stats.lastTenInfinities[2][1] ~ IP, giving ~f player.stats.lastTenInfinities[2][2] ~ IP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenInfinities[3][0] !== -1  ? '' : 'none'~>The infinity four infinities ago took ~f player.stats.lastTenInfinities[3][0] ~ seconds and gave ~f player.stats.lastTenInfinities[3][1] ~ IP, giving ~f player.stats.lastTenInfinities[3][2] ~ IP/second.</span>
+      <span ~style.display=player.stats.lastTenInfinities[3][0] !== -1  ? '' : 'none'~>The infinity four infinities ago took ~f player.stats.lastTenInfinities[3][0] ~ seconds and gave ~i player.stats.lastTenInfinities[3][1] ~ IP, giving ~f player.stats.lastTenInfinities[3][2] ~ IP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenInfinities[4][0] !== -1 ? '' : 'none'~>The infinity five infinities ago took ~f player.stats.lastTenInfinities[4][0] ~ seconds and gave ~f player.stats.lastTenInfinities[4][1] ~ IP, giving ~f player.stats.lastTenInfinities[4][2] ~ IP/second.</span>
+      <span ~style.display=player.stats.lastTenInfinities[4][0] !== -1 ? '' : 'none'~>The infinity five infinities ago took ~f player.stats.lastTenInfinities[4][0] ~ seconds and gave ~i player.stats.lastTenInfinities[4][1] ~ IP, giving ~f player.stats.lastTenInfinities[4][2] ~ IP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenInfinities[5][0] !== -1 ? '' : 'none'~>The infinity six infinities ago took ~f player.stats.lastTenInfinities[5][0] ~ seconds and gave ~f player.stats.lastTenInfinities[5][1] ~ IP, giving ~f player.stats.lastTenInfinities[5][2] ~ IP/second.</span>
+      <span ~style.display=player.stats.lastTenInfinities[5][0] !== -1 ? '' : 'none'~>The infinity six infinities ago took ~f player.stats.lastTenInfinities[5][0] ~ seconds and gave ~i player.stats.lastTenInfinities[5][1] ~ IP, giving ~f player.stats.lastTenInfinities[5][2] ~ IP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenInfinities[6][0] !== -1 ? '' : 'none'~>The infinity seven infinities ago took ~f player.stats.lastTenInfinities[6][0] ~ seconds and gave ~f player.stats.lastTenInfinities[6][1] ~ IP, giving ~f player.stats.lastTenInfinities[6][2] ~ IP/second.</span>
+      <span ~style.display=player.stats.lastTenInfinities[6][0] !== -1 ? '' : 'none'~>The infinity seven infinities ago took ~f player.stats.lastTenInfinities[6][0] ~ seconds and gave ~i player.stats.lastTenInfinities[6][1] ~ IP, giving ~f player.stats.lastTenInfinities[6][2] ~ IP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenInfinities[7][0] !== -1  ? '' : 'none'~>The infinity eight infinities ago took ~f player.stats.lastTenInfinities[7][0] ~ seconds and gave ~f player.stats.lastTenInfinities[7][1] ~ IP, giving ~f player.stats.lastTenInfinities[7][2] ~ IP/second.</span>
+      <span ~style.display=player.stats.lastTenInfinities[7][0] !== -1  ? '' : 'none'~>The infinity eight infinities ago took ~f player.stats.lastTenInfinities[7][0] ~ seconds and gave ~i player.stats.lastTenInfinities[7][1] ~ IP, giving ~f player.stats.lastTenInfinities[7][2] ~ IP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenInfinities[8][0] !== -1  ? '' : 'none'~>The infinity nine infinities ago took ~f player.stats.lastTenInfinities[8][0] ~ seconds and gave ~f player.stats.lastTenInfinities[8][1] ~ IP, giving ~f player.stats.lastTenInfinities[8][2] ~ IP/second.</span>
+      <span ~style.display=player.stats.lastTenInfinities[8][0] !== -1  ? '' : 'none'~>The infinity nine infinities ago took ~f player.stats.lastTenInfinities[8][0] ~ seconds and gave ~i player.stats.lastTenInfinities[8][1] ~ IP, giving ~f player.stats.lastTenInfinities[8][2] ~ IP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenInfinities[9][0] !== -1  ? '' : 'none'~>The infinity ten infinities ago took ~f player.stats.lastTenInfinities[9][0] ~ seconds and gave ~f player.stats.lastTenInfinities[9][1] ~ IP, giving ~f player.stats.lastTenInfinities[9][2] ~ IP/second.</span>
+      <span ~style.display=player.stats.lastTenInfinities[9][0] !== -1  ? '' : 'none'~>The infinity ten infinities ago took ~f player.stats.lastTenInfinities[9][0] ~ seconds and gave ~i player.stats.lastTenInfinities[9][1] ~ IP, giving ~f player.stats.lastTenInfinities[9][2] ~ IP/second.</span>
       <br/>
     </div>
     <div ~style.display=player.stats.lastTenEternities[0][0] !== -1 ? '' : 'none'~>
-      <span>Last eternity took ~f player.stats.lastTenEternities[0][0] ~ seconds and gave ~f player.stats.lastTenEternities[0][1] ~ EP, giving ~f player.stats.lastTenEternities[0][2] ~ EP/second.</span>
+      <span>Last eternity took ~f player.stats.lastTenEternities[0][0] ~ seconds and gave ~i player.stats.lastTenEternities[0][1] ~ EP, giving ~f player.stats.lastTenEternities[0][2] ~ EP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenEternities[1][0] !== -1 ? '' : 'none'~>The eternity two eternities ago took ~f player.stats.lastTenEternities[1][0] ~ seconds and gave ~f player.stats.lastTenEternities[1][1] ~ EP, giving ~f player.stats.lastTenEternities[1][2] ~ EP/second.</span>
+      <span ~style.display=player.stats.lastTenEternities[1][0] !== -1 ? '' : 'none'~>The eternity two eternities ago took ~f player.stats.lastTenEternities[1][0] ~ seconds and gave ~i player.stats.lastTenEternities[1][1] ~ EP, giving ~f player.stats.lastTenEternities[1][2] ~ EP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenEternities[2][0] !== -1 ? '' : 'none'~>The eternity three eternities ago took ~f player.stats.lastTenEternities[2][0] ~ seconds and gave ~f player.stats.lastTenEternities[2][1] ~ EP, giving ~f player.stats.lastTenEternities[2][2] ~ EP/second.</span>
+      <span ~style.display=player.stats.lastTenEternities[2][0] !== -1 ? '' : 'none'~>The eternity three eternities ago took ~f player.stats.lastTenEternities[2][0] ~ seconds and gave ~i player.stats.lastTenEternities[2][1] ~ EP, giving ~f player.stats.lastTenEternities[2][2] ~ EP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenEternities[3][0] !== -1  ? '' : 'none'~>The eternity four eternities ago took ~f player.stats.lastTenEternities[3][0] ~ seconds and gave ~f player.stats.lastTenEternities[3][1] ~ EP, giving ~f player.stats.lastTenEternities[3][2] ~ EP/second.</span>
+      <span ~style.display=player.stats.lastTenEternities[3][0] !== -1  ? '' : 'none'~>The eternity four eternities ago took ~f player.stats.lastTenEternities[3][0] ~ seconds and gave ~i player.stats.lastTenEternities[3][1] ~ EP, giving ~f player.stats.lastTenEternities[3][2] ~ EP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenEternities[4][0] !== -1 ? '' : 'none'~>The eternity five eternities ago took ~f player.stats.lastTenEternities[4][0] ~ seconds and gave ~f player.stats.lastTenEternities[4][1] ~ EP, giving ~f player.stats.lastTenEternities[4][2] ~ EP/second.</span>
+      <span ~style.display=player.stats.lastTenEternities[4][0] !== -1 ? '' : 'none'~>The eternity five eternities ago took ~f player.stats.lastTenEternities[4][0] ~ seconds and gave ~i player.stats.lastTenEternities[4][1] ~ EP, giving ~f player.stats.lastTenEternities[4][2] ~ EP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenEternities[5][0] !== -1 ? '' : 'none'~>The eternity six eternities ago took ~f player.stats.lastTenEternities[5][0] ~ seconds and gave ~f player.stats.lastTenEternities[5][1] ~ EP, giving ~f player.stats.lastTenEternities[5][2] ~ EP/second.</span>
+      <span ~style.display=player.stats.lastTenEternities[5][0] !== -1 ? '' : 'none'~>The eternity six eternities ago took ~f player.stats.lastTenEternities[5][0] ~ seconds and gave ~i player.stats.lastTenEternities[5][1] ~ EP, giving ~f player.stats.lastTenEternities[5][2] ~ EP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenEternities[6][0] !== -1 ? '' : 'none'~>The eternity seven eternities ago took ~f player.stats.lastTenEternities[6][0] ~ seconds and gave ~f player.stats.lastTenEternities[6][1] ~ EP, giving ~f player.stats.lastTenEternities[6][2] ~ EP/second.</span>
+      <span ~style.display=player.stats.lastTenEternities[6][0] !== -1 ? '' : 'none'~>The eternity seven eternities ago took ~f player.stats.lastTenEternities[6][0] ~ seconds and gave ~i player.stats.lastTenEternities[6][1] ~ EP, giving ~f player.stats.lastTenEternities[6][2] ~ EP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenEternities[7][0] !== -1  ? '' : 'none'~>The eternity eight eternities ago took ~f player.stats.lastTenEternities[7][0] ~ seconds and gave ~f player.stats.lastTenEternities[7][1] ~ EP, giving ~f player.stats.lastTenEternities[7][2] ~ EP/second.</span>
+      <span ~style.display=player.stats.lastTenEternities[7][0] !== -1  ? '' : 'none'~>The eternity eight eternities ago took ~f player.stats.lastTenEternities[7][0] ~ seconds and gave ~i player.stats.lastTenEternities[7][1] ~ EP, giving ~f player.stats.lastTenEternities[7][2] ~ EP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenEternities[8][0] !== -1  ? '' : 'none'~>The eternity nine eternities ago took ~f player.stats.lastTenEternities[8][0] ~ seconds and gave ~f player.stats.lastTenEternities[8][1] ~ EP, giving ~f player.stats.lastTenEternities[8][2] ~ EP/second.</span>
+      <span ~style.display=player.stats.lastTenEternities[8][0] !== -1  ? '' : 'none'~>The eternity nine eternities ago took ~f player.stats.lastTenEternities[8][0] ~ seconds and gave ~i player.stats.lastTenEternities[8][1] ~ EP, giving ~f player.stats.lastTenEternities[8][2] ~ EP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenEternities[9][0] !== -1  ? '' : 'none'~>The eternity ten eternities ago took ~f player.stats.lastTenEternities[9][0] ~ seconds and gave ~f player.stats.lastTenEternities[9][1] ~ EP, giving ~f player.stats.lastTenEternities[9][2] ~ EP/second.</span>
+      <span ~style.display=player.stats.lastTenEternities[9][0] !== -1  ? '' : 'none'~>The eternity ten eternities ago took ~f player.stats.lastTenEternities[9][0] ~ seconds and gave ~i player.stats.lastTenEternities[9][1] ~ EP, giving ~f player.stats.lastTenEternities[9][2] ~ EP/second.</span>
       <br/>
     </div>
     <div ~style.display=player.stats.lastTenComplexities[0][0] !== -1 ? '' : 'none'~>
-      <span>Last complexity took ~f player.stats.lastTenComplexities[0][0] ~ seconds and gave ~f player.stats.lastTenComplexities[0][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[0][2] ~ ℂP/second.</span>
+      <span>Last complexity took ~f player.stats.lastTenComplexities[0][0] ~ seconds and gave ~i player.stats.lastTenComplexities[0][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[0][2] ~ ℂP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenComplexities[1][0] !== -1 ? '' : 'none'~>The complexity two complexities ago took ~f player.stats.lastTenComplexities[1][0] ~ seconds and gave ~f player.stats.lastTenComplexities[1][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[1][2] ~ ℂP/second.</span>
+      <span ~style.display=player.stats.lastTenComplexities[1][0] !== -1 ? '' : 'none'~>The complexity two complexities ago took ~f player.stats.lastTenComplexities[1][0] ~ seconds and gave ~i player.stats.lastTenComplexities[1][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[1][2] ~ ℂP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenComplexities[2][0] !== -1 ? '' : 'none'~>The complexity three complexities ago took ~f player.stats.lastTenComplexities[2][0] ~ seconds and gave ~f player.stats.lastTenComplexities[2][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[2][2] ~ ℂP/second.</span>
+      <span ~style.display=player.stats.lastTenComplexities[2][0] !== -1 ? '' : 'none'~>The complexity three complexities ago took ~f player.stats.lastTenComplexities[2][0] ~ seconds and gave ~i player.stats.lastTenComplexities[2][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[2][2] ~ ℂP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenComplexities[3][0] !== -1  ? '' : 'none'~>The complexity four complexities ago took ~f player.stats.lastTenComplexities[3][0] ~ seconds and gave ~f player.stats.lastTenComplexities[3][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[3][2] ~ ℂP/second.</span>
+      <span ~style.display=player.stats.lastTenComplexities[3][0] !== -1  ? '' : 'none'~>The complexity four complexities ago took ~f player.stats.lastTenComplexities[3][0] ~ seconds and gave ~i player.stats.lastTenComplexities[3][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[3][2] ~ ℂP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenComplexities[4][0] !== -1 ? '' : 'none'~>The complexity five complexities ago took ~f player.stats.lastTenComplexities[4][0] ~ seconds and gave ~f player.stats.lastTenComplexities[4][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[4][2] ~ ℂP/second.</span>
+      <span ~style.display=player.stats.lastTenComplexities[4][0] !== -1 ? '' : 'none'~>The complexity five complexities ago took ~f player.stats.lastTenComplexities[4][0] ~ seconds and gave ~i player.stats.lastTenComplexities[4][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[4][2] ~ ℂP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenComplexities[5][0] !== -1 ? '' : 'none'~>The complexity six complexities ago took ~f player.stats.lastTenComplexities[5][0] ~ seconds and gave ~f player.stats.lastTenComplexities[5][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[5][2] ~ ℂP/second.</span>
+      <span ~style.display=player.stats.lastTenComplexities[5][0] !== -1 ? '' : 'none'~>The complexity six complexities ago took ~f player.stats.lastTenComplexities[5][0] ~ seconds and gave ~i player.stats.lastTenComplexities[5][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[5][2] ~ ℂP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenComplexities[6][0] !== -1 ? '' : 'none'~>The complexity seven complexities ago took ~f player.stats.lastTenComplexities[6][0] ~ seconds and gave ~f player.stats.lastTenComplexities[6][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[6][2] ~ ℂP/second.</span>
+      <span ~style.display=player.stats.lastTenComplexities[6][0] !== -1 ? '' : 'none'~>The complexity seven complexities ago took ~f player.stats.lastTenComplexities[6][0] ~ seconds and gave ~i player.stats.lastTenComplexities[6][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[6][2] ~ ℂP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenComplexities[7][0] !== -1  ? '' : 'none'~>The complexity eight complexities ago took ~f player.stats.lastTenComplexities[7][0] ~ seconds and gave ~f player.stats.lastTenComplexities[7][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[7][2] ~ ℂP/second.</span>
+      <span ~style.display=player.stats.lastTenComplexities[7][0] !== -1  ? '' : 'none'~>The complexity eight complexities ago took ~f player.stats.lastTenComplexities[7][0] ~ seconds and gave ~i player.stats.lastTenComplexities[7][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[7][2] ~ ℂP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenComplexities[8][0] !== -1  ? '' : 'none'~>The complexity nine complexities ago took ~f player.stats.lastTenComplexities[8][0] ~ seconds and gave ~f player.stats.lastTenComplexities[8][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[8][2] ~ ℂP/second.</span>
+      <span ~style.display=player.stats.lastTenComplexities[8][0] !== -1  ? '' : 'none'~>The complexity nine complexities ago took ~f player.stats.lastTenComplexities[8][0] ~ seconds and gave ~i player.stats.lastTenComplexities[8][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[8][2] ~ ℂP/second.</span>
       <br/>
-      <span ~style.display=player.stats.lastTenComplexities[9][0] !== -1  ? '' : 'none'~>The complexity ten complexities ago took ~f player.stats.lastTenComplexities[9][0] ~ seconds and gave ~f player.stats.lastTenComplexities[9][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[9][2] ~ ℂP/second.</span>
+      <span ~style.display=player.stats.lastTenComplexities[9][0] !== -1  ? '' : 'none'~>The complexity ten complexities ago took ~f player.stats.lastTenComplexities[9][0] ~ seconds and gave ~i player.stats.lastTenComplexities[9][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[9][2] ~ ℂP/second.</span>
       <br/>
     </div>
   </tab>
