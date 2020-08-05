@@ -25,11 +25,17 @@ let Oracle = {
   alert() {
     return player.oracle.alert;
   },
+  powerDisplay() {
+    return player.oracle.powerDisplay;
+  },
   powers() {
     return player.oracle.powers;
   },
   toggleAlert() {
     player.oracle.alert = !player.oracle.alert;
+  },
+  togglePowerDisplay() {
+    player.oracle.powerDisplay = !player.oracle.powerDisplay;
   },
   setTime(x) {
     player.oracle.time = x || 0;

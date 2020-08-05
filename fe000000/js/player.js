@@ -183,6 +183,7 @@ let initialPlayer = {
     complexityPointGain: new Decimal(0),
     used: false,
     alert: false,
+    powerDisplay: true,
     powers: []
   },
   galaxies: {

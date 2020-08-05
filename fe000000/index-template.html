@@ -3481,7 +3481,9 @@
       <span>The Oracle is a quality-of-life feature that will let you see the future.</span>
     </div>
     <div ~style.display=Oracle.isUnlocked() ? '' : 'none'~>
-      <span>Ask the Oracle to look <input type="text" ~!value=Oracle.time()~ ~!onchange=function() {Oracle.setTime(+this.value)}~></input> seconds into the future. <button onclick="Oracle.invoke()">Get prediction</button> <button onclick="Oracle.toggleAlert()">Alert on prediction: ~r Oracle.alert() ? "On" : "Off" ~</button></span>
+      <span>Ask the Oracle to look <input type="text" ~!value=Oracle.time()~ ~!onchange=function() {Oracle.setTime(+this.value)}~></input> seconds into the future.</span>
+      <br/>
+      <span><button onclick="Oracle.invoke()">Get prediction</button> <button onclick="Oracle.toggleAlert()">Alert on prediction: ~r Oracle.alert() ? "On" : "Off" ~</button> <button onclick="Oracle.togglePowerDisplay()">Show future powers on prediction: ~r Oracle.powerDisplay() ? "On" : "Off" ~</button></span>
       <br/>
       <span>The Oracle can look between ~i 0 ~ and ~f Oracle.maxTime() ~ seconds into the future. You can press O to get a prediction from the Oracle on any tab.</span>
       <br/>
@@ -3489,7 +3491,7 @@
       <span>~r Oracle.longMessage() ~</span>
       <br/>
       <br/>
-      <div ~style.display=Oracle.isUsed() ? '' : 'none'~>
+      <div ~style.display=(Oracle.isUsed() && Oracle.powerDisplay()) ? '' : 'none'~>
         <span>Stored powers from the future (with extra multipliers as they would be now):</span>
         <br/>
         <div style="margin-left: auto; margin-right: auto;">
