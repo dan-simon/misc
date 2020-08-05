@@ -30,6 +30,7 @@ function gameLoop(diff, display) {
   Autobuyers.tick(diff);
   InfinityAutobuyers.tick();
   EternityAutobuyers.tick();
+  ComplexityAutobuyers.tick();
   if (EternityMilestones.isEternityMilestoneActive(6)) {
     InfinityChallenge.checkForAllAutoInfinityChallengeCompletions();
   }

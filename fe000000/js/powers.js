@@ -10,7 +10,7 @@ let PowerUpgrade = function (i) {
       player.powers.upgrades[i - 1] += n;
     },
     boughtLimit() {
-      return Powers.isUnlocked() ? [Infinity, Infinity, Infinity][i - 1] : 0;
+      return Powers.isUnlocked() ? Infinity : 0;
     },
     costIncreasePer() {
       return [Decimal.pow(2, 16), Decimal.pow(2, 64), null][i - 1];
@@ -275,6 +275,8 @@ let Powers = {
       return this.canAccessActive(i);
     } else if (type === 'stored') {
       return this.canAccessStored(i);
+    } else if (type === 'oracle') {
+      return this.isUnlocked() && Oracle.powers().length >= i;
     } else if (type === 'next' || type === 'crafted') {
       return this.isUnlocked();
     }
@@ -286,6 +288,8 @@ let Powers = {
       return this.stored()[i - 1];
     } else if (type === 'next') {
       return this.next();
+    } else if (type === 'oracle') {
+      return Oracle.powers()[i - 1];
     } else if (type === 'crafted') {
       return PowerShards.craftedPower();
     }

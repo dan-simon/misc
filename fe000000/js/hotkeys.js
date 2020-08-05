@@ -44,6 +44,10 @@ window.addEventListener('keydown', function(event) {
       MaxAll.maxAll();
     break;
 
+    case 79: // O
+      Oracle.invoke();
+    break;
+
     case 80: // P
       Prestige.prestige();
     break;

@@ -175,11 +175,25 @@ let initialPlayer = {
       stored: false
     }
   },
+  oracle: {
+    unlocked: false,
+    time: 256,
+    timeSimulated: 256,
+    complexityPoints: new Decimal(0),
+    complexityPointGain: new Decimal(0),
+    used: false,
+    alert: false,
+    powers: []
+  },
   galaxies: {
     unlocked: false,
     dilated: 0,
     nextDilated: 0
   },
+  complexityAutobuyers: [
+    true, true, true, true, true, true, true, true,
+    true, true, true
+  ],
   options: {
     notation: 'Scientific',
     offlineProgress: true,
@@ -231,7 +245,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.939453125
+  version: 1.9404296875
 }
 
 let player;

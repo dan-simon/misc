@@ -2,7 +2,7 @@ let Saving = {
   saveGame () {
     localStorage.setItem('fe000000-save', btoa(JSON.stringify(player)))
   },
-  loadGame(s, offlineProgress) {
+  loadGame(s, offlineProgress, isOracle) {
     // offlineProgress = null means leave it up to the save.
     player = JSON.parse(atob(s));
     if (offlineProgress === null) {
@@ -10,14 +10,16 @@ let Saving = {
     }
     this.fixPlayer();
     this.convertSaveToDecimal();
-    // We can do this after fixing Decimal.
-    let now = Date.now();
-    if (offlineProgress) {
-      this.simulateTime((now - player.lastUpdate) / 1000);
+    if (!isOracle) {
+      // We can do this after fixing Decimal.
+      let now = Date.now();
+      if (offlineProgress) {
+        this.simulateTime((now - player.lastUpdate) / 1000);
+      }
+      player.lastUpdate = now;
+      this.saveGame();
+      updateDisplaySaveLoadSetup();
     }
-    player.lastUpdate = now;
-    this.saveGame();
-    updateDisplaySaveLoadSetup();
   },
   simulateTime(totalDiff) {
     let baseTickLength = 1 / 16;
@@ -26,6 +28,10 @@ let Saving = {
     for (let i = 0; i < ticks; i++) {
       gameLoop(tickLength, false);
     }
+  },
+  oracleSimulateTime(totalDiff) {
+    this.simulateTime(Math.max(0, totalDiff - 16));
+    this.simulateTime(Math.min(16, totalDiff));
   },
   fixPlayer() {
     if (player.version < 1.25) {
@@ -376,6 +382,23 @@ let Saving = {
       player.options.exportDisplay = false;
       player.version = 1.939453125;
     }
+    if (player.version < 1.9404296875) {
+      player.oracle = {
+        unlocked: false,
+        time: 256,
+        timeSimulated: 256,
+        complexityPoints: new Decimal(0),
+        complexityPointGain: new Decimal(0),
+        used: false,
+        alert: false,
+        powers: []
+      };
+      player.complexityAutobuyers = [
+        true, true, true, true, true, true, true, true,
+        true, true, true
+      ];
+      player.version = 1.9404296875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
@@ -428,6 +451,8 @@ let Saving = {
     for (let i = 9; i < 13; i++) {
       player.autobuyers[i].priority = new Decimal(player.autobuyers[i].priority);
     }
+    player.oracle.complexityPoints = new Decimal(player.oracle.complexityPoints);
+    player.oracle.complexityPointGain = new Decimal(player.oracle.complexityPointGain);
   },
   loadGameStorage () {
     if (!localStorage.getItem('fe000000-save')) {
