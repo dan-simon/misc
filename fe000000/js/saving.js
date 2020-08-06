@@ -542,9 +542,5 @@ let Saving = {
     if (confirm('Do you really want to reset the game? You will lose all your progress, and get no benefit.')) {
       this.resetGame();
     }
-  },
-  // Not sure where this should live, honestly.
-  gameEnd() {
-    return MultiverseCollapse.stars();
   }
 }

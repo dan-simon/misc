@@ -91,8 +91,14 @@
   <div style="height: 56px;">
     <span ~style.display=ComplexityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~r ComplexityPrestigeLayer.requirementForComplexity() ~ to complexity.</span>
     <br ~style.display=ComplexityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
-    <span ~style.display=ComplexityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i ComplexityPrestigeLayer.complexityPoints() ~ complexity point~s ComplexityPrestigeLayer.complexityPoints() ~ (~i ComplexityPrestigeLayer.totalComplexityPoints() ~ total)</span>
+    <span ~style.display=ComplexityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i ComplexityPrestigeLayer.complexityPoints() ~ complexity point~s ComplexityPrestigeLayer.complexityPoints() ~ (~i ComplexityPrestigeLayer.totalComplexityPoints() ~ total this finality)</span>
     <button ~style.display=ComplexityPrestigeLayer.canComplexity() ? '' : 'none'~ style="height: 48px;" onclick="ComplexityPrestigeLayer.complexity()">Complexity: Gain ~f ComplexityPrestigeLayer.complexityPointGain() ~ complexity points (~r ComplexityPrestigeLayer.complexityPointGainRatioText() ~~i ComplexityPrestigeLayer.complexityPoints() ~ → ~i ComplexityPrestigeLayer.newComplexityPoints() ~)<br/>~f ComplexityPrestigeLayer.currentCPPerSec() ~ ℂP/sec, ~f ComplexityPrestigeLayer.peakCPPerSec() ~ peak ℂP/sec</button>
+  </div>
+  <div style="height: 56px;">
+    <span ~style.display=FinalityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~f FinalityPrestigeLayer.complexityPointRequirementForFinality() ~ total complexity points this finality to finality.</span>
+    <br ~style.display=FinalityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
+    <span ~style.display=FinalityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i FinalityPrestigeLayer.finalityPoints() ~ finality point~s FinalityPrestigeLayer.finalityPoints() ~ (~i FinalityPrestigeLayer.totalFinalityPoints() ~ total)</span>
+    <button ~style.display=FinalityPrestigeLayer.canFinality() ? '' : 'none'~ style="height: 48px;" onclick="FinalityPrestigeLayer.finality()">Finality: Gain ~f FinalityPrestigeLayer.finalityPointGain() ~ finality points (~r FinalityPrestigeLayer.finalityPointGainRatioText() ~~i FinalityPrestigeLayer.finalityPoints() ~ → ~i FinalityPrestigeLayer.newFinalityPoints() ~)<br/>and some finality shards</button>
   </div>
   <br/>
   <br/>
@@ -240,11 +246,7 @@
         Given a multiplier x, let y be log(x, ~f Generators.nerfValue() ~). x is reduced to ~f Generators.nerfValue() ~^y^y^~r formatWithPrecision(Generators.nerfExponent, 5) ~.
       </div>
       <br/>
-      <span>Currently the game ends at ~f Saving.gameEnd() ~ stars.</span>
-      <br/>
-      <span>You cannot meaningfully keep going beyond that because you cannot get more stars than that.</span>
-      <br/>
-      <span>Next update will have a prestige layer there.</span>
+      <span>It is impossible to get more than ~f MultiverseCollapse.stars() ~ stars.</span>
     </div>
     <div ~style.display=InfinityPrestigeLayer.mustInfinity() ? '' : 'none'~>
       <span>The universe has collapsed due to an excess of stars.</span>
