@@ -44,7 +44,7 @@ let InfinityGenerator = function (i) {
         InfinityChallenge.isInfinityChallengeCompleted(4) ? InfinityChallenge.infinityChallenge4Reward() : 1,
         (i === 8 && InfinityChallenge.isInfinityChallengeCompleted(8)) ? Math.max(1, Generator(8).amount().toNumber()) : 1,
         EternityStars.multiplier(), Study(5).effect(), Study(6).effect(), Study(7).effect(), Study(8).effect(), Study(14).effect(),
-        EternityChallenge.getEternityChallengeReward(4), EternityChallenge.getEternityChallengeReward(7),
+        EternityChallenge.getEternityChallengeReward(4), EternityChallenge.getEternityChallengeReward(7), FinalityStars.multiplier(),
       ];
       let multiplier = factors.reduce((a, b) => a.times(b));
       let powFactors = [

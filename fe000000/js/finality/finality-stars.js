@@ -9,6 +9,6 @@ let FinalityStars = {
     return FinalityGenerator(1).productionPerSecond();
   },
   multiplier() {
-    return Decimal.pow(2, Math.pow(this.amount.log2(), 1.5));
+    return Decimal.pow(2, Math.pow(this.amount().log2(), 1.5));
   }
 }

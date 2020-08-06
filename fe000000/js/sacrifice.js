@@ -54,6 +54,7 @@ let Sacrifice = {
   sacrifice() {
     if (!this.canSacrifice()) return;
     this.setSacrificeMultiplier(this.newSacrificeMultiplier());
+    Goals.recordPrestige('sacrifice');
     this.sacrificeReset();
   },
   sacrificeReset() {

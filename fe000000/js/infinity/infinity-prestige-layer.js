@@ -2,9 +2,13 @@ let InfinityPrestigeLayer = {
   canInfinityBeBroken() {
     return Challenge.areAllChallengesCompleted();
   },
+  isBreakInfinityOn() {
+    // Don't credit the player with breaking infinity if they couldn't have done it.
+    return this.canInfinityBeBroken() && player.breakInfinity;
+  },
   isInfinityBroken() {
-    return this.canInfinityBeBroken() && player.breakInfinity &&
-    Challenge.isNoChallengeRunning() && InfinityChallenge.isNoInfinityChallengeRunning();
+    return this.isBreakInfinityOn() && Challenge.isNoChallengeRunning() &&
+      InfinityChallenge.isNoInfinityChallengeRunning();
   },
   breakInfinityButtonText() {
     return player.breakInfinity ?
@@ -86,6 +90,7 @@ let InfinityPrestigeLayer = {
     InfinityChallenge.checkForInfinityChallengeCompletion();
     Challenge.setChallenge(0);
     InfinityChallenge.setInfinityChallenge(0);
+    Goals.recordPrestige('infinity');
     this.infinityReset();
   },
   infinityReset() {

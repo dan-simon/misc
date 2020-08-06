@@ -217,6 +217,11 @@ let initialPlayer = {
     true, true, true, true, true, true, true, true,
     true, true, true, true, true, true, true
   ],
+  goals: [
+    false, false, false, false, false, false, false, false,
+    false, false, false, false, false, false, false, false
+  ],
+  displayAllGoals: false,
   options: {
     notation: 'Scientific',
     offlineProgress: true,

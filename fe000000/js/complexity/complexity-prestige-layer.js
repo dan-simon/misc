@@ -79,6 +79,7 @@ let ComplexityPrestigeLayer = {
     Complexities.increment();
     Stats.addComplexity(player.stats.timeSinceComplexity, gain);
     Powers.maybeRespec();
+    Goals.recordPrestige('complexity');
     this.complexityReset();
   },
   complexityReset() {

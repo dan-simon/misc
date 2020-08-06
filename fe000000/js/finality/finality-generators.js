@@ -37,7 +37,7 @@ let FinalityGenerator = function (i) {
       return Finalities.finalityGeneratorPerPurchaseMultiplier();
     },
     multiplier() {
-      return Decimal.pow(this.perPurchaseMultiplier(), this.bought());
+      return Decimal.pow(this.perPurchaseMultiplier(), this.bought()).times(Finalities.finalityGeneratorMultiplier());;
     },
     productionPerSecond() {
       return this.amount().times(this.multiplier());

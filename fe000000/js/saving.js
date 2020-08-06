@@ -410,6 +410,11 @@ let Saving = {
       player.highestFinalityGenerator = 0;
       player.finalityShardUpgrades = [0, 0, 0, 0, 0, 0, 0, 0];
       player.complexityAutobuyers = player.complexityAutobuyers.concat([true, true, true, true]);
+      player.goals = [
+        false, false, false, false, false, false, false, false,
+        false, false, false, false, false, false, false, false
+      ];
+      player.displayAllGoals = false;
       player.stats.totalStarsProducedThisFinality = player.stats.totalStarsProduced;
       player.stats.totalInfinityStarsProducedThisFinality = player.stats.totalInfinityStarsProduced;
       player.stats.totalEternityStarsProducedThisFinality = player.stats.totalEternityStarsProduced;

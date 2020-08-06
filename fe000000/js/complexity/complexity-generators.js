@@ -35,8 +35,13 @@ let ComplexityGenerator = function (i) {
     },
     multiplier() {
       let perPurchaseMultiplier = ComplexityAchievements.effect(4, 1);
-      let multiplier = Decimal.pow(perPurchaseMultiplier, this.bought()).times(Complexities.complexityGeneratorMultiplier());
-      return multiplier.pow(Powers.getTotalEffect('complexity'));
+      let factors = [
+        Decimal.pow(perPurchaseMultiplier, this.bought()), Complexities.complexityGeneratorMultiplier(),
+        FinalityStars.multiplier(),
+      ];
+      let multiplier = factors.reduce((a, b) => a.times(b));
+      let powFactors = [Powers.getTotalEffect('complexity')];
+      return multiplier.pow(powFactors.reduce((a, b) => a * b));
     },
     productionPerSecond() {
       return this.amount().times(this.multiplier());

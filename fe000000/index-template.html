@@ -30,6 +30,7 @@
   <script src="js/eternity/permanence.js"></script>
   <script src="js/finality/finalities.js"></script>
   <script src="js/finality/finality-generators.js"></script>
+  <script src="js/finality/finality-max-all.js"></script>
   <script src="js/finality/finality-points.js"></script>
   <script src="js/finality/finality-prestige-layer.js"></script>
   <script src="js/finality/finality-shards.js"></script>
@@ -53,6 +54,7 @@
   <script src="js/format.js"></script>
   <script src="js/galaxy.js"></script>
   <script src="js/generators.js"></script>
+  <script src="js/goals.js"></script>
   <script src="js/hotkeys.js"></script>
   <script src="js/loop.js"></script>
   <script src="js/main.js"></script>
@@ -110,6 +112,7 @@
       <button ~style.display=Tabs.isTabVisible('challenges') ? '' : 'none'~ onclick="Tabs.setTab('challenges')">Challenges</button>
       <button ~style.display=Tabs.isTabVisible('autobuyers') ? '' : 'none'~ onclick="Tabs.setTab('autobuyers')">Autobuyers</button>
       <button ~style.display=Tabs.isTabVisible('infinity-challenges') ? '' : 'none'~ onclick="Tabs.setTab('infinity-challenges')">Infinity Challenges</button>
+      <button onclick="Tabs.setTab('goals')">Goals</button>
       <button onclick="Tabs.setTab('statistics')">Statistics</button>
       <button onclick="Tabs.setTab('options')">Options</button>
     </span>
@@ -132,6 +135,12 @@
       <button ~style.display=Tabs.isTabVisible('powers') ? '' : 'none'~ onclick="Tabs.setTab('powers')">Powers</button>
       <button ~style.display=Tabs.isTabVisible('oracle') ? '' : 'none'~ onclick="Tabs.setTab('oracle')">Oracle</button>
       <button ~style.display=Tabs.isTabVisible('galaxies') ? '' : 'none'~ onclick="Tabs.setTab('galaxies')">Galaxies</button>
+    </span>
+  </div>
+  <div ~style.display=Tabs.isTabVisible('finality') ? '' : 'none'~>
+    <span>
+      <button ~style.display=Tabs.isTabVisible('finality') ? '' : 'none'~ onclick="Tabs.setTab('finality')">Finality</button>
+      <button ~style.display=Tabs.isTabVisible('finality-shards') ? '' : 'none'~ onclick="Tabs.setTab('finality-shards')">Finality Shards</button>
     </span>
   </div>
   <br/>
@@ -3642,6 +3651,221 @@
       <br/>
       <span>The galaxy effect will increase ~i Galaxy.nextEffectSpeed() ~x quicker and have a cap of ~r formatWithPrecision(Galaxy.nextEffectCap(), 5) ~, reached at ~f Galaxy.nextTimeToReachEffectCap() ~ seconds in complexity.</span>
     </div>
+  </tab>
+  <tab ~style.display=Tabs.currentTab() === 'finality' ? '' : 'none'~>
+    <span>You have ~i FinalityPoints.amount() ~ finality point~s FinalityPoints.amount() ~ (FP).
+      <button ~class=FinalityMaxAll.anythingToBuy() ? "" : "disabled"~ onclick="FinalityMaxAll.maxAll()">Max all</button>
+    </span>
+    <br/>
+    <span>You have produced ~i FinalityPoints.totalFPProduced() ~ total complexity point~s FinalityPoints.totalFPProduced() ~.</span>
+    </br>
+    <span>You have ~i Finalities.amount() ~ finalit~y Finalities.amount() ~, multiplying all finality generators (FGs) by ~q Finalities.finalityGeneratorMultiplier() ~</span>
+    <br/>
+    <span>and making the finality generator per-purchase multiplier ~q Finalities.finalityGeneratorPerPurchaseMultiplier() ~x.</span>
+    <br/>
+    <span>You have ~f FinalityStars.amount() ~ finality stars, multiplying all non-finality generators by ~f FinalityStars.multiplier() ~x.</span>
+    <br/>
+    <span>You are getting ~f FinalityStars.perSecond() ~ finality stars per second.</span>
+    <br/>
+    <br/>
+    <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
+      <tr ~style.display=FinalityGenerator(1).isVisible() ? '' : 'none'~>
+        <td>Finality Generator 1</td>
+        <td>~f FinalityGenerator(1).amount() ~</td>
+        <td>~f FinalityGenerator(1).perSecond() ~/s</td>
+        <td>~f FinalityGenerator(1).multiplier() ~x</td>
+        <td><button ~class=FinalityGenerator(1).canBuy() ? "" : "disabled"~ onclick="FinalityGenerator(1).buy()">Cost: ~i FinalityGenerator(1).cost() ~ FP</button></td>
+        <td><button ~class=FinalityGenerator(1).canBuy() ? "" : "disabled"~ onclick="FinalityGenerator(1).buyMax()">Max</button></td>
+      </tr>
+      <tr ~style.display=FinalityGenerator(2).isVisible() ? '' : 'none'~>
+        <td>Finality Generator 2</td>
+        <td>~f FinalityGenerator(2).amount() ~</td>
+        <td>~f FinalityGenerator(2).perSecond() ~/s</td>
+        <td>~f FinalityGenerator(2).multiplier() ~x</td>
+        <td><button ~class=FinalityGenerator(2).canBuy() ? "" : "disabled"~ onclick="FinalityGenerator(2).buy()">Cost: ~i FinalityGenerator(2).cost() ~ FP</button></td>
+        <td><button ~class=FinalityGenerator(2).canBuy() ? "" : "disabled"~ onclick="FinalityGenerator(2).buyMax()">Max</button></td>
+      </tr>
+      <tr ~style.display=FinalityGenerator(3).isVisible() ? '' : 'none'~>
+        <td>Finality Generator 3</td>
+        <td>~f FinalityGenerator(3).amount() ~</td>
+        <td>~f FinalityGenerator(3).perSecond() ~/s</td>
+        <td>~f FinalityGenerator(3).multiplier() ~x</td>
+        <td><button ~class=FinalityGenerator(3).canBuy() ? "" : "disabled"~ onclick="FinalityGenerator(3).buy()">Cost: ~i FinalityGenerator(3).cost() ~ FP</button></td>
+        <td><button ~class=FinalityGenerator(3).canBuy() ? "" : "disabled"~ onclick="FinalityGenerator(3).buyMax()">Max</button></td>
+      </tr>
+      <tr ~style.display=FinalityGenerator(4).isVisible() ? '' : 'none'~>
+        <td>Finality Generator 4</td>
+        <td>~f FinalityGenerator(4).amount() ~</td>
+        <td>~f FinalityGenerator(4).perSecond() ~/s</td>
+        <td>~f FinalityGenerator(4).multiplier() ~x</td>
+        <td><button ~class=FinalityGenerator(4).canBuy() ? "" : "disabled"~ onclick="FinalityGenerator(4).buy()">Cost: ~i FinalityGenerator(4).cost() ~ FP</button></td>
+        <td><button ~class=FinalityGenerator(4).canBuy() ? "" : "disabled"~ onclick="FinalityGenerator(4).buyMax()">Max</button></td>
+      </tr>
+      <tr ~style.display=FinalityGenerator(5).isVisible() ? '' : 'none'~>
+        <td>Finality Generator 5</td>
+        <td>~f FinalityGenerator(5).amount() ~</td>
+        <td>~f FinalityGenerator(5).perSecond() ~/s</td>
+        <td>~f FinalityGenerator(5).multiplier() ~x</td>
+        <td><button ~class=FinalityGenerator(5).canBuy() ? "" : "disabled"~ onclick="FinalityGenerator(5).buy()">Cost: ~i FinalityGenerator(5).cost() ~ FP</button></td>
+        <td><button ~class=FinalityGenerator(5).canBuy() ? "" : "disabled"~ onclick="FinalityGenerator(5).buyMax()">Max</button></td>
+      </tr>
+      <tr ~style.display=FinalityGenerator(6).isVisible() ? '' : 'none'~>
+        <td>Finality Generator 6</td>
+        <td>~f FinalityGenerator(6).amount() ~</td>
+        <td>~f FinalityGenerator(6).perSecond() ~/s</td>
+        <td>~f FinalityGenerator(6).multiplier() ~x</td>
+        <td><button ~class=FinalityGenerator(6).canBuy() ? "" : "disabled"~ onclick="FinalityGenerator(6).buy()">Cost: ~i FinalityGenerator(6).cost() ~ FP</button></td>
+        <td><button ~class=FinalityGenerator(6).canBuy() ? "" : "disabled"~ onclick="FinalityGenerator(6).buyMax()">Max</button></td>
+      </tr>
+      <tr ~style.display=FinalityGenerator(7).isVisible() ? '' : 'none'~>
+        <td>Finality Generator 7</td>
+        <td>~f FinalityGenerator(7).amount() ~</td>
+        <td>~f FinalityGenerator(7).perSecond() ~/s</td>
+        <td>~f FinalityGenerator(7).multiplier() ~x</td>
+        <td><button ~class=FinalityGenerator(7).canBuy() ? "" : "disabled"~ onclick="FinalityGenerator(7).buy()">Cost: ~i FinalityGenerator(7).cost() ~ FP</button></td>
+        <td><button ~class=FinalityGenerator(7).canBuy() ? "" : "disabled"~ onclick="FinalityGenerator(7).buyMax()">Max</button></td>
+      </tr>
+      <tr ~style.display=FinalityGenerator(8).isVisible() ? '' : 'none'~>
+        <td>Finality Generator 8</td>
+        <td>~f FinalityGenerator(8).amount() ~</td>
+        <td>~f FinalityGenerator(8).perSecond() ~/s</td>
+        <td>~f FinalityGenerator(8).multiplier() ~x</td>
+        <td><button ~class=FinalityGenerator(8).canBuy() ? "" : "disabled"~ onclick="FinalityGenerator(8).buy()">Cost: ~i FinalityGenerator(8).cost() ~ FP</button></td>
+        <td><button ~class=FinalityGenerator(8).canBuy() ? "" : "disabled"~ onclick="FinalityGenerator(8).buyMax()">Max</button></td>
+      </tr>
+    </table>
+  </tab>
+  <tab ~style.display=Tabs.currentTab() === 'finality-shards' ? '' : 'none'~>
+    <span>This tab has nothing useful on it yet.</span>
+  </tab>
+  <tab ~style.display=Tabs.currentTab() === 'goals' ? '' : 'none'~>
+    <span>You have completed ~i Goals.numberOfGoalsCompleted() ~/~i Goals.numberOfGoals() ~ goals.</span>
+    <br/>
+    <span>By default, only goals up to the next goal after the last completed goal are displayed. <button onclick="Goals.toggleDisplayAllGoals()">Display all goals: ~r Goals.displayAllGoals() ? "On" : "Off" ~</button></span>
+    <br/>
+    <span>There is no in-game reward for completing goals, but you win the game (and have finished it) when you complete the last one.</span>
+    <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
+      <tr>
+        <td>
+          <div class="goaldiv" ~style.background=Goals.color(1)~>
+            ~r Goals.getGoalText(1) ~
+            <br/>
+            ~r Goals.getGoalStatusDescription(1) ~
+          </div>
+        </td>
+        <td>
+          <div class="goaldiv" ~style.background=Goals.color(2)~>
+            ~r Goals.getGoalText(2) ~
+            <br/>
+            ~r Goals.getGoalStatusDescription(2) ~
+          </div>
+        </td>
+        <td>
+          <div class="goaldiv" ~style.background=Goals.color(3)~>
+            ~r Goals.getGoalText(3) ~
+            <br/>
+            ~r Goals.getGoalStatusDescription(3) ~
+          </div>
+        </td>
+        <td>
+          <div class="goaldiv" ~style.background=Goals.color(4)~>
+            ~r Goals.getGoalText(4) ~
+            <br/>
+            ~r Goals.getGoalStatusDescription(4) ~
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="goaldiv" ~style.background=Goals.color(5)~>
+            ~r Goals.getGoalText(5) ~
+            <br/>
+            ~r Goals.getGoalStatusDescription(5) ~
+          </div>
+        </td>
+        <td>
+          <div class="goaldiv" ~style.background=Goals.color(6)~>
+            ~r Goals.getGoalText(6) ~
+            <br/>
+            ~r Goals.getGoalStatusDescription(6) ~
+          </div>
+        </td>
+        <td>
+          <div class="goaldiv" ~style.background=Goals.color(7)~>
+            ~r Goals.getGoalText(7) ~
+            <br/>
+            ~r Goals.getGoalStatusDescription(7) ~
+          </div>
+        </td>
+        <td>
+          <div class="goaldiv" ~style.background=Goals.color(8)~>
+            ~r Goals.getGoalText(8) ~
+            <br/>
+            ~r Goals.getGoalStatusDescription(8) ~
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="goaldiv" ~style.background=Goals.color(9)~>
+            ~r Goals.getGoalText(9) ~
+            <br/>
+            ~r Goals.getGoalStatusDescription(9) ~
+          </div>
+        </td>
+        <td>
+          <div class="goaldiv" ~style.background=Goals.color(10)~>
+            ~r Goals.getGoalText(10) ~
+            <br/>
+            ~r Goals.getGoalStatusDescription(10) ~
+          </div>
+        </td>
+        <td>
+          <div class="goaldiv" ~style.background=Goals.color(11)~>
+            ~r Goals.getGoalText(11) ~
+            <br/>
+            ~r Goals.getGoalStatusDescription(11) ~
+          </div>
+        </td>
+        <td>
+          <div class="goaldiv" ~style.background=Goals.color(12)~>
+            ~r Goals.getGoalText(12) ~
+            <br/>
+            ~r Goals.getGoalStatusDescription(12) ~
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="goaldiv" ~style.background=Goals.color(13)~>
+            ~r Goals.getGoalText(13) ~
+            <br/>
+            ~r Goals.getGoalStatusDescription(13) ~
+          </div>
+        </td>
+        <td>
+          <div class="goaldiv" ~style.background=Goals.color(14)~>
+            ~r Goals.getGoalText(14) ~
+            <br/>
+            ~r Goals.getGoalStatusDescription(14) ~
+          </div>
+        </td>
+        <td>
+          <div class="goaldiv" ~style.background=Goals.color(15)~>
+            ~r Goals.getGoalText(15) ~
+            <br/>
+            ~r Goals.getGoalStatusDescription(15) ~
+          </div>
+        </td>
+        <td>
+          <div class="goaldiv" ~style.background=Goals.color(16)~>
+            ~r Goals.getGoalText(16) ~
+            <br/>
+            ~r Goals.getGoalStatusDescription(16) ~
+          </div>
+        </td>
+      </tr>
+    </table>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'statistics' ? '' : 'none'~>
     <span>You have produced ~f player.stats.totalStarsProduced ~ total stars.</span>

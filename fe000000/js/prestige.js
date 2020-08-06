@@ -49,6 +49,7 @@ let Prestige = {
     if (!this.canPrestige()) return;
     this.setPrestigePower(this.newPrestigePower());
     player.stats.prestigesThisInfinity++;
+    Goals.recordPrestige('prestige');
     this.prestigeReset(false);
   },
   prestigeReset(fromHigher) {

@@ -46,10 +46,10 @@ let EternityGenerator = function (i) {
         Decimal.pow(perPurchaseMultiplier, this.bought()), Eternities.eternityGeneratorMultiplier(),
         Study(9).effect(), Study(10).effect(), Study(11).effect(), Study(12).effect(),  Study(15).effect(),
         EternityUpgrade(3).effect(), EternityProducer.multiplier(), EternityChallenge.getEternityChallengeReward(8),
-        (i === 8) ? Chroma.effectOfColor(4) : 1,
+        (i === 8) ? Chroma.effectOfColor(4) : 1, FinalityStars.multiplier(),
       ];
       // Most of these are numbers but that's fine, the first one is a Decimal
-      // so the below code works.
+      // so the code works.
       let multiplier = factors.reduce((a, b) => a.times(b));
       let powFactors = [Powers.getTotalEffect('eternity')];
       return multiplier.pow(powFactors.reduce((a, b) => a * b));

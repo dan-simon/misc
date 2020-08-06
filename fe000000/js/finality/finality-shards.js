@@ -41,5 +41,9 @@ let FinalityShards = {
   totalUpgrades() {
     // Write this later.
     return 0;
+  },
+  areAllUpgradesCapped() {
+    // Write this later.
+    return false;
   }
 }

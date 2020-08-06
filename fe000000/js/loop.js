@@ -8,6 +8,9 @@ function gameLoop(diff, display) {
   EternityProducer.produce(diff);
   Boost.produceBoostPower(diff);
   for (let i = 8; i >= 1; i--) {
+    FinalityGenerator(i).produce(diff);
+  }
+  for (let i = 8; i >= 1; i--) {
     ComplexityGenerator(i).produce(diff);
   }
   for (let i = 8; i >= 1; i--) {
@@ -45,6 +48,7 @@ function gameLoop(diff, display) {
   ComplexityChallenge.checkForComplexityChallengeCompletions();
   ComplexityAchievements.checkForComplexityAchievements();
   Powers.checkForPowerGain();
+  Goals.checkForGoals();
   if (display !== false) {
     updateDisplay();
   }

@@ -2,6 +2,9 @@ let EternityMilestones = {
   hasEternityMilestone(x) {
     return player.eternities.gte(x);
   },
+  hasAllEternityMilestones() {
+    return this.hasEternityMilestone(16);
+  },
   isEternityMilestoneDisabled(x) {
     if (x === 4 || x === 8) {
       return !player.eternityMilestonesOn[[4, 8].indexOf(x)];

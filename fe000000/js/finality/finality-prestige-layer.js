@@ -74,6 +74,7 @@ let FinalityPrestigeLayer = {
     Finalities.increment();
     Stats.addFinality(player.stats.timeSinceFinality, pointGain, shardGain);
     FinalityShards.maybeRespec();
+    Goals.recordPrestige('finality');
     this.finalityReset();
   },
   finalityReset() {

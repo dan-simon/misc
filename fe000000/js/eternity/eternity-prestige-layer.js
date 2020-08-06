@@ -70,6 +70,7 @@ let EternityPrestigeLayer = {
     // I'm not sure whether or not this should go in the reset function.
     Studies.maybeRespec();
     EternityChallenge.maybeRespec();
+    Goals.recordPrestige('eternity');
     this.eternityReset();
   },
   eternityReset() {
