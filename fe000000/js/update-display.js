@@ -408,7 +408,7 @@ function updateDisplay() {
   b[6].style.display = EternityPrestigeLayer.isAmountSpanVisible() ? '' : 'none';
   b[7].style.display = EternityPrestigeLayer.isAmountSpanVisible() ? '' : 'none';
   b[8].style.display = EternityPrestigeLayer.canEternity() ? '' : 'none';
-  b[9].style.display = PrestigeLayerProgress.hasReached('complexity') ? '' : 'none';
+  b[9].style.display = PrestigeLayerProgress.hasReached('eternity') ? '' : 'none';
   b[10].style.display = ComplexityPrestigeLayer.isRequirementVisible() ? '' : 'none';
   b[11].style.display = ComplexityPrestigeLayer.isAmountSpanVisible() ? '' : 'none';
   b[12].style.display = ComplexityPrestigeLayer.isAmountSpanVisible() ? '' : 'none';

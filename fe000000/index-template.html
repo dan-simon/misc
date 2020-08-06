@@ -81,7 +81,7 @@
     <span ~style.display=EternityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i EternityPrestigeLayer.eternityPoints() ~ eternity point~s EternityPrestigeLayer.eternityPoints() ~ (~i EternityPrestigeLayer.totalEternityPoints() ~ total this complexity)</span>
     <button ~style.display=EternityPrestigeLayer.canEternity() ? '' : 'none'~ style="height: 48px;" onclick="EternityPrestigeLayer.eternity()">Eternity: Gain ~i EternityPrestigeLayer.eternityPointGain() ~ eternity point~s EternityPrestigeLayer.eternityPointGain() ~ (~r EternityPrestigeLayer.eternityPointGainRatioText() ~~i EternityPrestigeLayer.eternityPoints() ~ → ~i EternityPrestigeLayer.newEternityPoints() ~)<br/>~f EternityPrestigeLayer.currentEPPerSec() ~ EP/sec, ~f EternityPrestigeLayer.peakEPPerSec() ~ peak EP/sec</button>
   </div>
-  <div style="height: 56px;" ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~>
+  <div style="height: 56px;" ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>
     <span ~style.display=ComplexityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~r ComplexityPrestigeLayer.requirementForComplexity() ~ to complexity.</span>
     <br ~style.display=ComplexityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
     <span ~style.display=ComplexityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i ComplexityPrestigeLayer.complexityPoints() ~ complexity point~s ComplexityPrestigeLayer.complexityPoints() ~ (~i ComplexityPrestigeLayer.totalComplexityPoints() ~ total)</span>
