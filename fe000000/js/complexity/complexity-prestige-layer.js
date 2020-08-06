@@ -13,9 +13,6 @@ let ComplexityPrestigeLayer = {
   canComplexity() {
     return this.hasEnoughEP() && this.hasComplexityChallenge1Completion();
   },
-  isComplexityUnlocked() {
-    return this.hasEnoughEP() || PrestigeLayerProgress.hasReached('complexity');
-  },
   requirementForComplexity() {
     if (this.hasEnoughEP()) {
       // Formulate the requirement in terms the player can understand without knowing about complexity challenges.
@@ -33,7 +30,7 @@ let ComplexityPrestigeLayer = {
     if (this.canComplexity()) {
       return 'complexity';
     } else {
-      return 'do an complexity reset (no complexity point gain or complexity gain)';
+      return 'do a complexity reset (no complexity point gain or complexity gain)';
     }
   },
   complexityPointGain() {
