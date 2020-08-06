@@ -41,10 +41,10 @@ let FinalityPrestigeLayer = {
     }
   },
   areFinalityShardsDoubled() {
-    return (Finalities.amount() + 1) % 64 === 0;
+    return (1 + Finalities.amount()) % 64 === 0;
   },
   finalityShardGain() {
-    return 16 * Finalities.amount() * (this.areFinalityShardsDoubled() ? 2 : 1);
+    return 16 * (1 + Finalities.amount()) * (this.areFinalityShardsDoubled() ? 2 : 1);
   },
   finalityShards() {
     return FinalityShards.amount();

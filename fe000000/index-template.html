@@ -3644,6 +3644,8 @@
     <br/>
     <span>You have produced ~f player.stats.totalStarsProducedThisComplexity ~ stars this complexity.</span>
     <br/>
+    <span>You have produced ~f player.stats.totalStarsProducedThisFinality ~ stars this finality.</span>
+    <br/>
     <span>You have produced ~i player.stats.totalIPProduced ~ total infinity point~s player.stats.totalIPProduced ~.</span>
     <br/>
     <span>You have produced ~i player.stats.totalIPProducedThisEternity ~ infinity point~s player.stats.totalIPProducedThisEternity ~ this eternity.</span>
@@ -3652,11 +3654,17 @@
     <br/>
     <span>You have produced ~i player.stats.totalEPProducedThisComplexity ~ total eternity point~s player.stats.totalEPProducedThisComplexity ~ this complexity.</span>
     <br/>
+    <span>You have produced ~i player.stats.totalCPProduced ~ total complexity point~s player.stats.totalCPProduced ~.</span>
+    <br/>
+    <span>You have produced ~i player.stats.totalCPProducedThisFinality ~ total complexity point~s player.stats.totalCPProducedThisFinality ~ this finality.</span>
+    <br/>
     <span>Your fastest infinity took ~f player.stats.fastestInfinity ~ seconds.</span>
     <br/>
     <span>Your fastest eternity took ~f player.stats.fastestEternity ~ seconds.</span>
     <br/>
     <span>Your fastest complexity took ~f player.stats.fastestComplexity ~ seconds.</span>
+    <br/>
+    <span>Your fastest finality took ~f player.stats.fastestComplexity ~ seconds.</span>
     <br/>
     <span>You have spent ~f player.stats.timeSincePurchase ~ seconds without purchasing anything.</span>
     <br/>
@@ -3669,6 +3677,8 @@
     <span>You have spent ~f player.stats.timeSinceEternity ~ seconds in this eternity.</span>
     <br/>
     <span>You have spent ~f player.stats.timeSinceComplexity ~ seconds in this complexity.</span>
+    <br/>
+    <span>You have spent ~f player.stats.timeSinceFinality ~ seconds in this finality.</span>
     <br/>
     <span>You have spent ~f player.stats.timeSinceGameStart ~ seconds playing this game (counting time offline).</span>
     <div ~style.display=player.stats.lastTenInfinities[0][0] !== -1 ? '' : 'none'~>
@@ -3735,6 +3745,28 @@
       <span ~style.display=player.stats.lastTenComplexities[8][0] !== -1  ? '' : 'none'~>The complexity nine complexities ago took ~f player.stats.lastTenComplexities[8][0] ~ seconds and gave ~i player.stats.lastTenComplexities[8][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[8][2] ~ ℂP/second.</span>
       <br/>
       <span ~style.display=player.stats.lastTenComplexities[9][0] !== -1  ? '' : 'none'~>The complexity ten complexities ago took ~f player.stats.lastTenComplexities[9][0] ~ seconds and gave ~i player.stats.lastTenComplexities[9][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[9][2] ~ ℂP/second.</span>
+      <br/>
+    </div>
+    <div ~style.display=player.stats.lastTenFinalities[0][0] !== -1 ? '' : 'none'~>
+      <span>Last finality took ~f player.stats.lastTenFinalities[0][0] ~ seconds and gave ~i player.stats.lastTenFinalities[0][1] ~ FP and ~i player.stats.lastTenComplexities[0][2] ~ FS.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenFinalities[1][0] !== -1 ? '' : 'none'~>The finality two finalities ago took ~f player.stats.lastTenFinalities[1][0] ~ seconds and gave ~i player.stats.lastTenFinalities[1][1] ~ FP and ~i player.stats.lastTenComplexities[1][2] ~ FS.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenFinalities[2][0] !== -1 ? '' : 'none'~>The finality three finalities ago took ~f player.stats.lastTenFinalities[2][0] ~ seconds and gave ~i player.stats.lastTenFinalities[2][1] ~ FP and ~i player.stats.lastTenComplexities[2][2] ~ FS.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenFinalities[3][0] !== -1 ? '' : 'none'~>The finality four finalities ago took ~f player.stats.lastTenFinalities[3][0] ~ seconds and gave ~i player.stats.lastTenFinalities[3][1] ~ FP and ~i player.stats.lastTenComplexities[3][2] ~ FS.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenFinalities[4][0] !== -1 ? '' : 'none'~>The finality five finalities ago took ~f player.stats.lastTenFinalities[4][0] ~ seconds and gave ~i player.stats.lastTenFinalities[4][1] ~ FP and ~i player.stats.lastTenComplexities[4][2] ~ FS.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenFinalities[5][0] !== -1 ? '' : 'none'~>The finality six finalities ago took ~f player.stats.lastTenFinalities[5][0] ~ seconds and gave ~i player.stats.lastTenFinalities[5][1] ~ FP and ~i player.stats.lastTenComplexities[5][2] ~ FS.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenFinalities[6][0] !== -1 ? '' : 'none'~>The finality seven finalities ago took ~f player.stats.lastTenFinalities[6][0] ~ seconds and gave ~i player.stats.lastTenFinalities[6][1] ~ FP and ~i player.stats.lastTenComplexities[6][2] ~ FS.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenFinalities[7][0] !== -1 ? '' : 'none'~>The finality eight finalities ago took ~f player.stats.lastTenFinalities[7][0] ~ seconds and gave ~i player.stats.lastTenFinalities[7][1] ~ FP and ~i player.stats.lastTenComplexities[7][2] ~ FS.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenFinalities[8][0] !== -1 ? '' : 'none'~>The finality nine finalities ago took ~f player.stats.lastTenFinalities[8][0] ~ seconds and gave ~i player.stats.lastTenFinalities[8][1] ~ FP and ~i player.stats.lastTenComplexities[8][2] ~ FS.</span>
+      <br/>
+      <span ~style.display=player.stats.lastTenFinalities[9][0] !== -1 ? '' : 'none'~>The finality ten finalities ago took ~f player.stats.lastTenFinalities[9][0] ~ seconds and gave ~i player.stats.lastTenFinalities[9][1] ~ FP and ~i player.stats.lastTenComplexities[9][2] ~ FS.</span>
       <br/>
     </div>
   </tab>

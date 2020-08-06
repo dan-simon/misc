@@ -1,9 +1,9 @@
 let Finalities = {
   amount() {
-    return player.complexities;
+    return player.finalities;
   },
   increment() {
-    player.complexities++;
+    player.finalities++;
   },
   finalityGeneratorMultiplier() {
     // This is intentionally always at most 1, and often less.
