@@ -36,6 +36,10 @@ window.addEventListener('keydown', function(event) {
       EternityPrestigeLayer.eternity();
     break;
 
+    case 70: // F
+      FinalityPrestigeLayer.finality();
+    break;
+
     case 73: // I
       InfinityPrestigeLayer.infinity();
     break;

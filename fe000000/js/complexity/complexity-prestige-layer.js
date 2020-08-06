@@ -46,6 +46,9 @@ let ComplexityPrestigeLayer = {
   totalComplexityPoints() {
     return ComplexityPoints.totalCPProduced();
   },
+  totalComplexityPointsThisFinality() {
+    return ComplexityPoints.totalCPProducedThisFinality();
+  },
   complexityPointGainRatio() {
     return this.complexityPointGain().div(this.totalComplexityPoints());
   },

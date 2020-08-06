@@ -14,6 +14,10 @@ function initialComplexityGenerators() {
   return [...Array(8)].map(_ => ({amount: new Decimal(0), bought: 0}));
 }
 
+function initialFinalityGenerators() {
+  return [...Array(8)].map(_ => ({amount: new Decimal(0), bought: 0}));
+}
+
 function initialAutobuyers() {
   return [
     {isOn: true, mode: 'Buy max', priority: 1}, {isOn: true, mode: 'Buy max', priority: 2},
@@ -54,6 +58,16 @@ function initialLastTenComplexities() {
     [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
     [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
     [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
+  ];
+}
+
+function initialLastTenFinalities() {
+  return [
+    [-1, new Decimal(-1), -1], [-1, new Decimal(-1), -1],
+    [-1, new Decimal(-1), -1], [-1, new Decimal(-1), -1],
+    [-1, new Decimal(-1), -1], [-1, new Decimal(-1), -1],
+    [-1, new Decimal(-1), -1], [-1, new Decimal(-1), -1],
+    [-1, new Decimal(-1), -1], [-1, new Decimal(-1), -1],
   ];
 }
 
@@ -191,9 +205,16 @@ let initialPlayer = {
     dilated: 0,
     nextDilated: 0
   },
+  finalityPoints: new Decimal(0),
+  totalFinalityShards: 0,
+  finalities: 0,
+  finalityStars: new Decimal(1),
+  finalityGenerators: initialFinalityGenerators(),
+  highestFinalityGenerator: 0,
+  finalityShardUpgrades: [0, 0, 0, 0, 0, 0, 0, 0],
   complexityAutobuyers: [
     true, true, true, true, true, true, true, true,
-    true, true, true
+    true, true, true, true, true, true, true
   ],
   options: {
     notation: 'Scientific',
@@ -206,20 +227,24 @@ let initialPlayer = {
     totalStarsProduced: new Decimal(0),
     totalStarsProducedThisEternity: new Decimal(0),
     totalStarsProducedThisComplexity: new Decimal(0),
+    totalStarsProducedThisFinality: new Decimal(0),
     totalIPProduced: new Decimal(0),
     totalIPProducedThisEternity: new Decimal(0),
-    totalInfinityStarsProduced: new Decimal(0),
+    totalInfinityStarsProducedThisFinality: new Decimal(0),
     totalEPProduced: new Decimal(0),
     totalEPProducedThisComplexity: new Decimal(0),
     totalEternitiesProducedThisComplexity: new Decimal(0),
-    totalEternityStarsProduced: new Decimal(0),
+    totalEternityStarsProducedThisFinality: new Decimal(0),
     totalCPProduced: new Decimal(0),
-    totalComplexityStarsProduced: new Decimal(0),
+    totalCPProducedThisFinality: new Decimal(0),
+    totalComplexityStarsProducedThisFinality: new Decimal(0),
+    totalFPProduced: new Decimal(0),
     timeSincePurchase: 0,
     timeSinceSacrifice: 0,
     timeSincePrestige: 0,
     timeSinceInfinity: 0,
     timeSinceEternity: 0,
+    timeSinceFinality: 0,
     timeSinceAutoECCompletion: 0,
     timeSincePermanenceGain: 0,
     timeSinceComplexity: 0,
@@ -231,6 +256,7 @@ let initialPlayer = {
     fastestInfinity: Math.pow(2, 256),
     fastestEternity: Math.pow(2, 256),
     fastestComplexity: Math.pow(2, 256),
+    fastestFinality: Math.pow(2, 256),
     peakIPPerSec: new Decimal(0),
     peakEPPerSec: new Decimal(0),
     peakCPPerSec: new Decimal(0),
@@ -240,6 +266,7 @@ let initialPlayer = {
     lastTenInfinities: initialLastTenInfinities(),
     lastTenEternities: initialLastTenEternities(),
     lastTenComplexities: initialLastTenComplexities(),
+    lastTenFinalities: initialLastTenFinalities(),
     lastPermanenceGain: new Decimal(0),
   },
   cheats: {

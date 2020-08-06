@@ -212,7 +212,7 @@ let Saving = {
       player.version = 1.703125;
     }
     if (player.version < 1.71875) {
-      // This variable was accidentally not defined in the inital save, with no consequence at all.
+      // This variable was accidentally not defined in the initial save, with no consequence at all.
       // Still, best to define it.
       player.respecStudies = false;
       player.bestBoostPowerThisComplexity = player.bestBoostPowerEver;
@@ -228,7 +228,7 @@ let Saving = {
       player.complexityChallengeCompletions = [0, 0, 0, 0, 0, 0];
       player.isComplexityChallengeRunning = [true, true, true, true, true, true];
       player.stats.totalStarsProducedThisComplexity = player.stats.totalStarsProduced;
-      player.stats.totalEPProducedThisComplexity = player.stats.totalEPProduced
+      player.stats.totalEPProducedThisComplexity = player.stats.totalEPProduced;
       player.stats.totalCPProduced = new Decimal(0);
       player.stats.timeSinceComplexity = player.stats.timeSinceGameStart;
       player.stats.timeSinceLastPeakCPPerSec = Math.pow(2, 256);
@@ -400,15 +400,40 @@ let Saving = {
       ];
       player.version = 1.9404296875;
     }
+    if (player.version < 1.94140625) {
+      player.finalityPoints = new Decimal(0);
+      player.totalFinalityShards = 0;
+      player.finalities = 0;
+      player.finalityStars = new Decimal(1);
+      player.finalityGenerators = initialFinalityGenerators();
+      player.highestFinalityGenerator = 0;
+      player.finalityShardUpgrades = [0, 0, 0, 0, 0, 0, 0, 0];
+      player.complexityAutobuyers = player.complexityAutobuyers.concat([true, true, true, true]);
+      player.stats.totalStarsProducedThisFinality = player.stats.totalStarsProduced;
+      player.stats.totalInfinityStarsProducedThisFinality = player.stats.totalInfinityStarsProduced;
+      player.stats.totalEternityStarsProducedThisFinality = player.stats.totalEternityStarsProduced;
+      player.stats.totalComplexityStarsProducedThisFinality = player.stats.totalComplexityStarsProduced;
+      delete player.stats.totalInfinityStarsProduced;
+      delete player.stats.totalEternityStarsProduced;
+      delete player.stats.totalComplexityStarsProduced;
+      player.stats.totalCPProducedThisFinality = player.stats.totalCPProduced;
+      player.stats.totalFPProduced = new Decimal(0);
+      player.stats.timeSinceFinality = player.stats.timeSinceGameStart;
+      player.stats.fastestFinality = Math.pow(2, 256);
+      player.stats.lastTenFinalities = initialLastTenFinalities();
+      player.version = 1.94140625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
     player.infinityStars = new Decimal(player.infinityStars);
     player.eternityStars = new Decimal(player.eternityStars);
     player.complexityStars = new Decimal(player.complexityStars);
+    player.finalityStars = new Decimal(player.complexityStars);
     player.infinityPoints = new Decimal(player.infinityPoints);
     player.eternityPoints = new Decimal(player.eternityPoints);
     player.complexityPoints = new Decimal(player.complexityPoints);
+    player.finalityPoints = new Decimal(player.finalityPoints);
     player.sacrificeMultiplier = new Decimal(player.sacrificeMultiplier);
     player.prestigePower = new Decimal(player.prestigePower);
     for (let i = 0; i < 8; i++) {
@@ -416,6 +441,7 @@ let Saving = {
       player.infinityGenerators[i].amount = new Decimal(player.infinityGenerators[i].amount);
       player.eternityGenerators[i].amount = new Decimal(player.eternityGenerators[i].amount);
       player.complexityGenerators[i].amount = new Decimal(player.complexityGenerators[i].amount);
+      player.finalityGenerators[i].amount = new Decimal(player.finalityGenerators[i].amount);
     }
     player.eternities = new Decimal(player.eternities);
     player.permanence = new Decimal(player.permanence);
@@ -423,15 +449,18 @@ let Saving = {
     player.stats.totalStarsProduced = new Decimal(player.stats.totalStarsProduced);
     player.stats.totalStarsProducedThisEternity = new Decimal(player.stats.totalStarsProducedThisEternity);
     player.stats.totalStarsProducedThisComplexity = new Decimal(player.stats.totalStarsProducedThisComplexity);
+    player.stats.totalStarsProducedThisFinality = new Decimal(player.stats.totalStarsProducedThisFinality);
     player.stats.totalIPProduced = new Decimal(player.stats.totalIPProduced);
     player.stats.totalIPProducedThisEternity = new Decimal(player.stats.totalIPProducedThisEternity);
-    player.stats.totalInfinityStarsProduced = new Decimal(player.stats.totalInfinityStarsProduced);
+    player.stats.totalInfinityStarsProducedThisFinality = new Decimal(player.stats.totalInfinityStarsProducedThisFinality);
     player.stats.totalEPProduced = new Decimal(player.stats.totalEPProduced);
     player.stats.totalEPProducedThisComplexity = new Decimal(player.stats.totalEPProducedThisComplexity);
     player.stats.totalEternitiesProducedThisComplexity = new Decimal(player.stats.totalEternitiesProducedThisComplexity);
-    player.stats.totalEternityStarsProduced = new Decimal(player.stats.totalEternityStarsProduced);
+    player.stats.totalEternityStarsProducedThisFinality = new Decimal(player.stats.totalEternityStarsProducedThisFinality);
     player.stats.totalCPProduced = new Decimal(player.stats.totalCPProduced);
-    player.stats.totalComplexityStarsProduced = new Decimal(player.stats.totalComplexityStarsProduced);
+    player.stats.totalCPProducedThisFinality = new Decimal(player.stats.totalCPProducedThisFinality);
+    player.stats.totalComplexityStarsProducedThisFinality = new Decimal(player.stats.totalComplexityStarsProducedThisFinality);
+    player.stats.totalFPProduced = new Decimal(player.stats.totalFPProduced);
     player.stats.peakIPPerSec = new Decimal(player.stats.peakIPPerSec);
     player.stats.peakEPPerSec = new Decimal(player.stats.peakEPPerSec);
     player.stats.peakCPPerSec = new Decimal(player.stats.peakCPPerSec);
@@ -447,6 +476,10 @@ let Saving = {
       if (player.stats.lastTenComplexities[i] !== -1) {
         player.stats.lastTenComplexities[i][1] = new Decimal(player.stats.lastTenComplexities[i][1]);
         player.stats.lastTenComplexities[i][2] = new Decimal(player.stats.lastTenComplexities[i][2]);
+      }
+      if (player.stats.lastTenFinalities[i] !== -1) {
+        // There's no missing line here. Finalities are just stored slightly differently.
+        player.stats.lastTenFinalities[i][1] = new Decimal(player.stats.lastTenFinalities[i][1]);
       }
     }
     for (let i = 9; i < 13; i++) {

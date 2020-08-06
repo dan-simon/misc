@@ -1,27 +1,27 @@
 let Galaxy = {
-  totalStarsProduced() {
-    return player.stats.totalStarsProduced;
+  totalStarsProducedThisFinality() {
+    return player.stats.totalStarsProducedThisFinality;
   },
-  totalInfinityStarsProduced() {
-    return player.stats.totalInfinityStarsProduced;
+  totalInfinityStarsProducedThisFinality() {
+    return player.stats.totalInfinityStarsProducedThisFinality;
   },
-  totalEternityStarsProduced() {
-    return player.stats.totalEternityStarsProduced;
+  totalEternityStarsProducedThisFinality() {
+    return player.stats.totalEternityStarsProducedThisFinality;
   },
-  totalComplexityStarsProduced() {
-    return player.stats.totalComplexityStarsProduced;
+  totalComplexityStarsProducedThisFinality() {
+    return player.stats.totalComplexityStarsProducedThisFinality;
   },
   starFactor() {
-    return this.totalStarsProduced().max(1).log2();
+    return this.totalStarsProducedThisFinality().max(1).log2();
   },
   infinityStarFactor() {
-    return this.totalInfinityStarsProduced().max(1).log2();
+    return this.totalInfinityStarsProducedThisFinality().max(1).log2();
   },
   eternityStarFactor() {
-    return this.totalEternityStarsProduced().max(1).log2();
+    return this.totalEternityStarsProducedThisFinality().max(1).log2();
   },
   complexityStarFactor() {
-    return this.totalComplexityStarsProduced().max(1).log2();
+    return this.totalComplexityStarsProducedThisFinality().max(1).log2();
   },
   stellarProduct() {
     return this.starFactor() * this.infinityStarFactor() *

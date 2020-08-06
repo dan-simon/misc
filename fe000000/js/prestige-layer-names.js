@@ -1,7 +1,9 @@
 let PrestigeLayerNames = {
-  layers: ['prestige', 'infinity', 'eternity', 'complexity'],
+  layers: ['prestige', 'infinity', 'eternity', 'complexity', 'finality'],
   highestLayer() {
-    if (player.complexities > 0) {
+    if (player.finalities > 0) {
+      return 'finality';
+    } else if (player.complexities > 0) {
       return 'complexity';
     } else if (player.eternities.gt(0)) {
       return 'eternity';

@@ -133,7 +133,7 @@ let Boost = {
   },
   bestBoostPowerDescription() {
     if (ComplexityAchievements.hasComplexityAchievement(4, 4)) {
-      return 'best boost power ever';
+      return 'best boost power this finality';
     } else {
       return 'best boost power this complexity';
     }

@@ -24,6 +24,8 @@ let Tabs = {
       'powers': () => PrestigeLayerProgress.hasReached('complexity'),
       'oracle': () => PrestigeLayerProgress.hasReached('complexity'),
       'galaxies': () => PrestigeLayerProgress.hasReached('complexity'),
+      'finality': () => PrestigeLayerProgress.hasReached('finality'),
+      'finality-shards': () => PrestigeLayerProgress.hasReached('finality'),
       'statistics': () => true,
       'options': () => true,
     }[x]();

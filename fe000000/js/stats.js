@@ -5,6 +5,7 @@ let Stats = {
     player.stats.timeSincePrestige += diff;
     player.stats.timeSinceInfinity += diff;
     player.stats.timeSinceEternity += diff;
+    player.stats.timeSinceFinality += diff;
     player.stats.timeSinceAutoECCompletion += diff;
     player.stats.timeSincePermanenceGain += diff;
     player.stats.timeSinceComplexity += diff;
@@ -33,5 +34,10 @@ let Stats = {
     player.stats.fastestComplexity = Math.min(time, player.stats.fastestComplexity);
     player.stats.lastTenComplexities.unshift([time, gain, gain.div(time)]);
     player.stats.lastTenComplexities.pop();
+  },
+  addFinality(time, pointGain, shardGain) {
+    player.stats.fastestFinality = Math.min(time, player.stats.fastestFinality);
+    player.stats.lastTenFinalities.unshift([time, pointGain, shardGain]);
+    player.stats.lastTenFinalities.pop();
   }
 }

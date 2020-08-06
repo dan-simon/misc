@@ -4,7 +4,7 @@ let ComplexityStars = {
   },
   addAmount(x) {
     player.complexityStars = player.complexityStars.plus(x);
-    player.stats.totalComplexityStarsProduced = player.stats.totalComplexityStarsProduced.plus(x);
+    player.stats.totalComplexityStarsProducedThisFinality = player.stats.totalComplexityStarsProducedThisFinality.plus(x);
   },
   perSecond() {
     return ComplexityGenerator(1).productionPerSecond();
