@@ -28,7 +28,7 @@ let ComplexityAchievements = {
   complexityAchievementEffects: [
     [
       () => Complexities.permanenceAndChromaMultiplier(),
-      () => Math.pow(Math.min(16, player.complexities), 2),
+      () => Decimal.pow(Math.min(16, player.complexities), 2),
       () => null,
       () => Math.pow(Math.max(1, Math.log2(Boost.multiplierPer())), 0.5)
     ],

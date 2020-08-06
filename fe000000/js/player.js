@@ -207,6 +207,7 @@ let initialPlayer = {
   },
   finalityPoints: new Decimal(0),
   totalFinalityShards: 0,
+  respecFinalityShards: false,
   finalities: 0,
   finalityStars: new Decimal(1),
   finalityGenerators: initialFinalityGenerators(),

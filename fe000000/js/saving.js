@@ -403,6 +403,7 @@ let Saving = {
     if (player.version < 1.94140625) {
       player.finalityPoints = new Decimal(0);
       player.totalFinalityShards = 0;
+      player.respecFinalityShards = false;
       player.finalities = 0;
       player.finalityStars = new Decimal(1);
       player.finalityGenerators = initialFinalityGenerators();
@@ -429,7 +430,7 @@ let Saving = {
     player.infinityStars = new Decimal(player.infinityStars);
     player.eternityStars = new Decimal(player.eternityStars);
     player.complexityStars = new Decimal(player.complexityStars);
-    player.finalityStars = new Decimal(player.complexityStars);
+    player.finalityStars = new Decimal(player.finalityStars);
     player.infinityPoints = new Decimal(player.infinityPoints);
     player.eternityPoints = new Decimal(player.eternityPoints);
     player.complexityPoints = new Decimal(player.complexityPoints);

@@ -97,6 +97,65 @@ let FinalityPrestigeLayer = {
     // This function takes care of applying the rewards for certain numbers of achievements,
     // so don't do it in initializeStartingComplexityAchievements().
     ComplexityPrestigeLayer.complexityReset();
-    // Lots of stuff needs to go here, but that's hopefully pretty clear.
+    player.finalityStars = new Decimal(1);
+    FinalityGenerators.list.forEach(x => x.resetAmount());
+    player.complexityPoints = FinalityStartingBenefits.complexityPoints();
+    player.complexities = FinalityStartingBenefits.complexities();
+    player.complexityStars = new Decimal(1);
+    player.complexityGenerators = initialComplexityGenerators(),
+    player.highestComplexityGenerator = 0;
+    player.complexityChallengeCompletions = [0, 0, 0, 0, 0, 0];
+    player.powers = {
+      seed: player.powers.seed,
+      unlocked: false,
+      upgrades: [0, 0, 0],
+      active: [],
+      stored: [],
+      gain: true,
+      respec: false,
+      hasGainedShards: false,
+      shards: 0,
+      shardUpgrades: [0, 0, 0, 0],
+      powerDeletionMode: player.powers.powerDeletionMode,
+      presets: [],
+      craft: {
+        type: 'normal',
+        rarity: 1,
+      },
+      lastData: {
+        lowRarity: false,
+        type: 'normal'
+      },
+      autoSort: {
+        active: player.powers.autoSort.active,
+        stored: player.powers.autoSort.stored
+      }
+    };
+    // Note that player.oracle.timeSimulated doesn't matter here at all.
+    // We let the player keep their settings since they probably want to.
+    player.oracle = {
+      unlocked: false,
+      time: player.oracle.time,
+      timeSimulated: 256,
+      complexityPoints: new Decimal(0),
+      complexityPointGain: new Decimal(0),
+      used: false,
+      alert: player.oracle.alert,
+      powerDisplay: player.oracle.powerDisplay,
+      powers: []
+    };
+    // Don't keep player.galaxy.nextDilated, since it's probably out of date.
+    player.galaxies = {
+      unlocked: false,
+      dilated: 0,
+      nextDilated: 0
+    };
+    player.stats.totalStarsProducedThisFinality = EternityStartingBenefits.stars().plus(FinalityStartingBenefits.stars());
+    player.stats.totalInfinityStarsProducedThisFinality = new Decimal(0);
+    player.stats.totalEternityStarsProducedThisFinality = new Decimal(0);
+    player.stats.totalComplexityStarsProducedThisFinality = new Decimal(0);
+    player.stats.totalCPProducedThisFinality = ComplexityAchievements.startingEternityPoints().plus(FinalityStartingBenefits.eternityPoints());
+    player.stats.timeSinceFinality = 0;
+    player.stats.lastTenComplexities = initialLastTenComplexities();
   }
 }
