@@ -2,7 +2,7 @@ let FinalityPoints = {
   amount() {
     return player.finalityPoints;
   },
-  totalEPProduced() {
+  totalFPProduced() {
     return player.stats.totalFPProduced;
   },
   addAmount(x) {

@@ -88,17 +88,17 @@
     <span ~style.display=EternityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i EternityPrestigeLayer.eternityPoints() ~ eternity point~s EternityPrestigeLayer.eternityPoints() ~ (~i EternityPrestigeLayer.totalEternityPoints() ~ total this complexity)</span>
     <button ~style.display=EternityPrestigeLayer.canEternity() ? '' : 'none'~ style="height: 48px;" onclick="EternityPrestigeLayer.eternity()">Eternity: Gain ~i EternityPrestigeLayer.eternityPointGain() ~ eternity point~s EternityPrestigeLayer.eternityPointGain() ~ (~r EternityPrestigeLayer.eternityPointGainRatioText() ~~i EternityPrestigeLayer.eternityPoints() ~ → ~i EternityPrestigeLayer.newEternityPoints() ~)<br/>~f EternityPrestigeLayer.currentEPPerSec() ~ EP/sec, ~f EternityPrestigeLayer.peakEPPerSec() ~ peak EP/sec</button>
   </div>
-  <div style="height: 56px;" ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~>
+  <div style="height: 56px;" ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>
     <span ~style.display=ComplexityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~r ComplexityPrestigeLayer.requirementForComplexity() ~ to complexity.</span>
     <br ~style.display=ComplexityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
     <span ~style.display=ComplexityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i ComplexityPrestigeLayer.complexityPoints() ~ complexity point~s ComplexityPrestigeLayer.complexityPoints() ~ (~i ComplexityPrestigeLayer.totalComplexityPoints() ~ total this finality)</span>
     <button ~style.display=ComplexityPrestigeLayer.canComplexity() ? '' : 'none'~ style="height: 48px;" onclick="ComplexityPrestigeLayer.complexity()">Complexity: Gain ~f ComplexityPrestigeLayer.complexityPointGain() ~ complexity points (~r ComplexityPrestigeLayer.complexityPointGainRatioText() ~~i ComplexityPrestigeLayer.complexityPoints() ~ → ~i ComplexityPrestigeLayer.newComplexityPoints() ~)<br/>~f ComplexityPrestigeLayer.currentCPPerSec() ~ ℂP/sec, ~f ComplexityPrestigeLayer.peakCPPerSec() ~ peak ℂP/sec</button>
   </div>
-  <div style="height: 56px;">
+  <div style="height: 56px;" ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~>
     <span ~style.display=FinalityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~f FinalityPrestigeLayer.complexityPointRequirementForFinality() ~ total complexity points this finality to finality.</span>
     <br ~style.display=FinalityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
     <span ~style.display=FinalityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i FinalityPrestigeLayer.finalityPoints() ~ finality point~s FinalityPrestigeLayer.finalityPoints() ~ (~i FinalityPrestigeLayer.totalFinalityPoints() ~ total)</span>
-    <button ~style.display=FinalityPrestigeLayer.canFinality() ? '' : 'none'~ style="height: 48px;" onclick="FinalityPrestigeLayer.finality()">Finality: Gain ~f FinalityPrestigeLayer.finalityPointGain() ~ finality points (~r FinalityPrestigeLayer.finalityPointGainRatioText() ~~i FinalityPrestigeLayer.finalityPoints() ~ → ~i FinalityPrestigeLayer.newFinalityPoints() ~)<br/>and some finality shards</button>
+    <button ~style.display=FinalityPrestigeLayer.canFinality() ? '' : 'none'~ style="height: 48px;" onclick="FinalityPrestigeLayer.finality()">Finality: Gain ~i FinalityPrestigeLayer.finalityPointGain() ~ finality point~s FinalityPrestigeLayer.finalityPointGain() ~ (~r FinalityPrestigeLayer.finalityPointGainRatioText() ~~i FinalityPrestigeLayer.finalityPoints() ~ → ~i FinalityPrestigeLayer.newFinalityPoints() ~)<br/>and ~i FinalityPrestigeLayer.finalityShardGain() ~ finality shard~s FinalityPrestigeLayer.finalityShardGain() ~ (~r FinalityPrestigeLayer.finalityShardGainRatioText() ~~i FinalityPrestigeLayer.finalityShards() ~ → ~i FinalityPrestigeLayer.newFinalityShards() ~)</button>
   </div>
   <br/>
   <br/>

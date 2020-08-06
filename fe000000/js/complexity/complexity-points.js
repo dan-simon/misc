@@ -6,7 +6,7 @@ let ComplexityPoints = {
     return player.stats.totalCPProduced;
   },
   totalCPProducedThisFinality() {
-    return player.stats.totalCPProduced;
+    return player.stats.totalCPProducedThisFinality;
   },
   addAmount(x) {
     player.complexityPoints = player.complexityPoints.plus(x);

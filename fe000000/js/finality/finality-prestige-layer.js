@@ -5,8 +5,8 @@ let FinalityPrestigeLayer = {
   canFinality() {
     return ComplexityPoints.totalCPProducedThisFinality().gte(this.complexityPointRequirementForFinality());
   },
-  requirementVisible() {
-    return !this.canComplexity() && PrestigeLayerProgress.hasReached('complexity');
+  isRequirementVisible() {
+    return !this.canFinality() && PrestigeLayerProgress.hasReached('complexity');
   },
   isAmountSpanVisible() {
     return this.isRequirementVisible() && PrestigeLayerProgress.hasReached('finality');
@@ -44,7 +44,7 @@ let FinalityPrestigeLayer = {
     return (Finalities.amount() + 1) % 64 === 0;
   },
   finalityShardGain() {
-    return 16 * Finalities.amount() * (areFinalityShardsDoubled ? 2 : 1);
+    return 16 * Finalities.amount() * (this.areFinalityShardsDoubled() ? 2 : 1);
   },
   finalityShards() {
     return FinalityShards.amount();
@@ -52,7 +52,7 @@ let FinalityPrestigeLayer = {
   newFinalityShards() {
     return this.finalityShards() + this.finalityShardGain();
   },
-  totalFinalityPoints() {
+  totalFinalityShards() {
     return FinalityShards.total();
   },
   finalityPointGainRatio() {
