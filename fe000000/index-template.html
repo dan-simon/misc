@@ -65,6 +65,7 @@
   <script src="js/stats.js"></script>
   <script src="js/studies.js"></script>
   <script src="js/tabs.js"></script>
+  <script src="js/trivia.js"></script>
   <script src="js/update-display.js"></script>
   <link rel="stylesheet" href="styles.css"></link>
 </head>
@@ -1692,6 +1693,10 @@
     </span>
     <br/>
     <span>
+      Despite this, the total cost of studies does not depend on the order you buy them in.
+    </span>
+    <br ~style.display=Trivia.show('EG requirement for theorems') ? '' : 'none'~/>
+    <span ~style.display=Trivia.show('EG requirement for theorems') ? '' : 'none'~>
       You need to buy at least one eternity generator before you can buy theorems with eternity points.
     </span>
     <br/>
@@ -2669,15 +2674,16 @@
     <span>
       In particular, when starting a new complexity, you will be in all complexity challenges that you've unlocked at once.
     </span>
-    <br/>
-    <span>
-      You can complete Complexity Challenge 1 even pre-complexity.
-    </span>
-    <br/>
-    <span>
-      This allows you to start with a Complexity Challenge 1 completion.
-    </span>
-    <br/>
+    <br ~style.display=Trivia.show('CC1 pre-complexity completion') ? 'none' : ''~/>
+    <div ~style.display=Trivia.show('CC1 pre-complexity completion') ? '' : 'none'~/>
+      <span>
+        You can complete Complexity Challenge 1 even pre-complexity.
+      </span>
+      <br/>
+      <span>
+        This allows you to start with a Complexity Challenge 1 completion.
+      </span>
+    </div>
     <span>
       The ability to disable certain things is there to prevent accidental violation of complexity challenge requirements.
     </span>
@@ -3642,6 +3648,8 @@
     <span>You have produced ~i player.stats.totalEPProduced ~ total eternity point~s player.stats.totalEPProduced ~.</span>
     <br/>
     <span>You have produced ~i player.stats.totalEPProducedThisComplexity ~ total eternity point~s player.stats.totalEPProducedThisComplexity ~ this complexity.</span>
+    <br/>
+    <span>You have produced ~i player.stats.totalCPProduced ~ total complexity point~s player.stats.totalCPProduced ~.</span>
     <br/>
     <span>Your fastest infinity took ~f player.stats.fastestInfinity ~ seconds.</span>
     <br/>
