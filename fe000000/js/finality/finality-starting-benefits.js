@@ -1,23 +1,45 @@
 let FinalityStartingBenefits = {
-  benefit(required) {
-    if (FinalityShards.totalUpgradeBonuses() < required || player.finalities === 0) {
+  anyStartingBenefits() {
+    return FinalityShards.totalUpgradeBonuses() > 0;
+  },
+  benefitAt(required, x) {
+    if (x < required || player.finalities === 0) {
       return new Decimal(0);
     }
-    return Decimal.pow(2, Math.pow(2, FinalityShards.totalUpgradeBonuses() - required));
+    return Decimal.pow(2, Math.pow(2, x - required));
   },
   stars() {
-    return this.benefit(0);
+    return this.starsAt(FinalityShards.totalUpgradeBonuses());
+  },
+  starsAt(x) {
+    return this.benefitAt(0, x);
   },
   infinityPoints() {
-    return this.benefit(8);
+    return this.infinityPointsAt(FinalityShards.totalUpgradeBonuses());
+  },
+  infinityPointsAt(x) {
+    return this.benefitAt(8, x);
   },
   eternityPoints() {
-    return this.benefit(16);
+    return this.eternityPointsAt(FinalityShards.totalUpgradeBonuses());
+  },
+  eternityPointsAt(x) {
+    return this.benefitAt(16, x);
   },
   complexityPoints() {
-    return this.benefit(32);
+    return this.complexityPointsAt(FinalityShards.totalUpgradeBonuses());
+  },
+  complexityPointsAt(x) {
+    return this.benefitAt(32, x);
   },
   complexities() {
-    return Math.pow(Math.min(16, FinalityShards.totalUpgradeBonuses()), 2);
+    return this.complexitiesAt(FinalityShards.totalUpgradeBonuses());
+  },
+  complexitiesAt(x) {
+    return Math.floor(Math.pow(Math.min(4, x / 4), 4));
+  },
+  anyComplexities() {
+    // This exists because having a greater-than sign in HTML isn't great.
+    return this.complexities() > 0;
   }
 }
