@@ -91,6 +91,9 @@ let FinalityPrestigeLayer = {
       false, false, false, false, false, false,
       0, 0, 0, 0
     ];
+    // Extra theorems seem to fit in best here, because they're theorem-related, even though
+    // nothing resets them other than finality.
+    player.extraTheorems = [0, 0, 0, 0];
     // This function takes care of applying the rewards for certain numbers of achievements,
     // so don't do it in initializeStartingComplexityAchievements().
     ComplexityPrestigeLayer.complexityReset();
