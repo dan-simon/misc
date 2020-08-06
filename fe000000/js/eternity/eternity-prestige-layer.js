@@ -10,10 +10,10 @@ let EternityPrestigeLayer = {
     return InfinityPoints.totalIPProducedThisEternity().gte(this.infinityPointRequirementForEternity());
   },
   isRequirementVisible() {
-    return !this.canEternity() && (player.infinities > 0 || player.eternities.gt(0) || player.complexities > 0);
+    return !this.canEternity() && PrestigeLayerProgress.hasReached('infinity');
   },
   isAmountSpanVisible() {
-    return this.isRequirementVisible() && (player.eternities.gt(0) || player.complexities > 0);
+    return this.isRequirementVisible() && PrestigeLayerProgress.hasReached('eternity');
   },
   resetText() {
     if (this.canEternity()) {

@@ -33,7 +33,7 @@ let InfinityPrestigeLayer = {
     return !this.canInfinity();
   },
   isAmountSpanVisible() {
-    return this.isRequirementVisible() && (player.infinities > 0 || player.eternities.gt(0) || player.complexities > 0);
+    return this.isRequirementVisible() && PrestigeLayerProgress.hasReached('infinity');
   },
   infinityPointGain() {
     let oom = (this.isInfinityBroken() ? Stars.amount() : this.starRequirementForInfinity()).max(1).log(2) / 256;

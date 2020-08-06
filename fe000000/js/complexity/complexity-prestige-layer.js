@@ -14,7 +14,7 @@ let ComplexityPrestigeLayer = {
     return this.hasEnoughEP() && this.hasComplexityChallenge1Completion();
   },
   isComplexityUnlocked() {
-    return this.hasEnoughEP() || player.complexities > 0;
+    return this.hasEnoughEP() || PrestigeLayerProgress.hasReached('complexity');
   },
   requirementForComplexity() {
     if (this.hasEnoughEP()) {
@@ -24,10 +24,10 @@ let ComplexityPrestigeLayer = {
     return format(this.eternityPointRequirementForComplexity()) + ' total eternity points this complexity';
   },
   isRequirementVisible() {
-    return !this.canComplexity() && (player.eternities.gt(0) || player.complexities > 0);
+    return !this.canComplexity() && PrestigeLayerProgress.hasReached('eternity');
   },
   isAmountSpanVisible() {
-    return this.isRequirementVisible() && player.complexities > 0;
+    return this.isRequirementVisible() && PrestigeLayerProgress.hasReached('complexity');
   },
   resetText() {
     if (this.canComplexity()) {
