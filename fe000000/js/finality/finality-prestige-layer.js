@@ -55,7 +55,7 @@ let FinalityPrestigeLayer = {
   totalFinalityShards() {
     return FinalityShards.total();
   },
-  finalityPointGainRatio() {
+  finalityShardGainRatio() {
     return this.finalityShardGain() / this.totalFinalityShards();
   },
   finalityShardGainRatioText() {

@@ -52,7 +52,7 @@ let ComplexityAchievements = {
     ]
   ],
   complexityAchievementDefaults: [
-    [1, 0, null, 1],
+    [1, new Decimal(0), null, 1],
     [1, null, 1, 1],
     [1, null, null, 1],
     [Math.pow(2, 1 / 8), null, 1, new Decimal(0)]

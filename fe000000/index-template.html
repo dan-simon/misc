@@ -72,6 +72,7 @@
   <script src="js/stats.js"></script>
   <script src="js/studies.js"></script>
   <script src="js/tabs.js"></script>
+  <script src="js/trivia.js"></script>
   <script src="js/update-display.js"></script>
   <link rel="stylesheet" href="styles.css"></link>
 </head>
@@ -1701,6 +1702,10 @@
     </span>
     <br/>
     <span>
+      Despite this, the total cost of studies does not depend on the order you buy them in.
+    </span>
+    <br ~style.display=Trivia.show('EG requirement for theorems') ? '' : 'none'~/>
+    <span ~style.display=Trivia.show('EG requirement for theorems') ? '' : 'none'~>
       You need to buy at least one eternity generator before you can buy theorems with eternity points.
     </span>
     <br/>
@@ -2650,8 +2655,8 @@
             <br/>
             <span ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(6) ? 'none' : ''~>(Disabling this doesn't put you in this challenge yet, since the challenge is locked.)</span>
             <br ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(6) ? 'none' : ''~/>
-            <span ~style.display=ComplexityAchievements.hasComplexityAchievement(4, 4) ? '' : 'none'~>(Due to "On the other side", you also need to respec studies to enter this challenge.)</span>
-            <br ~style.display=ComplexityAchievements.hasComplexityAchievement(4, 4)  ? '' : 'none'~/>
+            <span ~style.display=(ComplexityAchievements.hasComplexityAchievement(4, 4) && ComplexityChallenge.isComplexityChallengeUnlocked(6)) ? '' : 'none'~>(Due to "On the other side", you also need to respec studies to enter this challenge.)</span>
+            <br ~style.display=(ComplexityAchievements.hasComplexityAchievement(4, 4) && ComplexityChallenge.isComplexityChallengeUnlocked(6)) ? '' : 'none'~/>
             <span>Reward: Extra theorems.</span>
             <br/>
             <span>Current: +~i ComplexityChallenge.getComplexityChallengeReward(6) ~ theorem~s ComplexityChallenge.getComplexityChallengeReward(6) ~, Next: +~i ComplexityChallenge.getComplexityChallengeNextReward(6) ~</span>
@@ -2678,15 +2683,16 @@
     <span>
       In particular, when starting a new complexity, you will be in all complexity challenges that you've unlocked at once.
     </span>
-    <br/>
-    <span>
-      You can complete Complexity Challenge 1 even pre-complexity.
-    </span>
-    <br/>
-    <span>
-      This allows you to start with a Complexity Challenge 1 completion.
-    </span>
-    <br/>
+    <br ~style.display=Trivia.show('CC1 pre-complexity completion') ? 'none' : ''~/>
+    <div ~style.display=Trivia.show('CC1 pre-complexity completion') ? '' : 'none'~/>
+      <span>
+        You can complete Complexity Challenge 1 even pre-complexity.
+      </span>
+      <br/>
+      <span>
+        This allows you to start with a Complexity Challenge 1 completion.
+      </span>
+    </div>
     <span>
       The ability to disable certain things is there to prevent accidental violation of complexity challenge requirements.
     </span>
