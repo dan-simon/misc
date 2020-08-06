@@ -598,7 +598,7 @@ function updateDisplay() {
     e[119].textContent = format(InfinityPoints.multiplier());
     e[120].textContent = formatInt(Infinities.amount());
     e[121].textContent = pluralize(Infinities.amount(), 'y', 'ies');
-    e[122].textContent = format(Infinities.infinityGeneratorMultiplier());
+    e[122].textContent = formatMaybeInt(Infinities.infinityGeneratorMultiplier());
     b[87].style.display = InfinityPrestigeLayer.canInfinityBeBroken() ? '' : 'none';
     e[123].textContent = InfinityPrestigeLayer.breakInfinityButtonText();
     b[88].style.display = InfinityPrestigeLayer.canInfinityBeBroken() ? 'none' : '';
@@ -910,7 +910,7 @@ function updateDisplay() {
     e[305].textContent = pluralize(EternityPoints.totalEPProducedThisComplexity(), '', 's');
     e[306].textContent = formatMaybeInt(Eternities.amount());
     e[307].textContent = pluralize(Eternities.amount(), 'y', 'ies');
-    e[308].textContent = format(Eternities.eternityGeneratorMultiplierForDisplay());
+    e[308].textContent = formatMaybeInt(Eternities.eternityGeneratorMultiplierForDisplay());
     e[309].textContent = format(EternityStars.amount());
     e[310].textContent = format(EternityStars.multiplier());
     e[311].textContent = formatWithPrecision(EternityStars.power(), 5);
@@ -1399,7 +1399,7 @@ function updateDisplay() {
     b[534].style.display = ComplexityAchievements.hasComplexityAchievement(3, 2) ? '' : 'none';
     e[566].textContent = EternityChallenge.isRequirementDisplayOn() ? "On" : "Off";
     b[535].style.display = EternityChallenge.hasAutoECCompletion() ? '' : 'none';
-    e[567].textContent = format(Complexities.autoECCompletionTime());
+    e[567].textContent = formatMaybeInt(Complexities.autoECCompletionTime());
     b[536].style.display = EternityChallenge.areAllEternityChallengesCompleted() ? 'none' : '';
     e[568].textContent = format(EternityChallenge.timeSinceAutoECCompletion());
     b[537].style.display = EternityChallenge.usedAutoECCompletionThisComplexity() ? 'none' : '';
@@ -1611,9 +1611,9 @@ function updateDisplay() {
     e[694].textContent = pluralize(ComplexityPoints.totalCPProduced(), '', 's');
     e[695].textContent = formatInt(Complexities.amount());
     e[696].textContent = pluralize(Complexities.amount(), 'y', 'ies');
-    e[697].textContent = format(Complexities.complexityGeneratorMultiplier());
+    e[697].textContent = formatMaybeInt(Complexities.complexityGeneratorMultiplier());
     e[698].textContent = formatMaybeInt(Complexities.permanenceAndChromaMultiplier());
-    e[699].textContent = format(Complexities.autoECCompletionTime());
+    e[699].textContent = formatMaybeInt(Complexities.autoECCompletionTime());
     e[700].textContent = format(ComplexityStars.amount());
     e[701].textContent = format(ComplexityStars.complexityChallengeMultiplier());
     e[702].textContent = format(ComplexityStars.perSecond());
