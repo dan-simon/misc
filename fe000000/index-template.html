@@ -256,7 +256,7 @@
     <br/>
     <span>You have produced ~i InfinityPoints.totalIPProducedThisEternity() ~ infinity point~s InfinityPoints.totalIPProducedThisEternity() ~ this eternity, multiplying all generators by ~f InfinityPoints.multiplier() ~.</span>
     <br/>
-    <span>You have ~i Infinities.amount() ~ infinit~y Infinities.amount() ~, multiplying all infinity generators (IGs) by ~f Infinities.infinityGeneratorMultiplier() ~.</span>
+    <span>You have ~i Infinities.amount() ~ infinit~y Infinities.amount() ~, multiplying all infinity generators (IGs) by ~q Infinities.infinityGeneratorMultiplier() ~.</span>
     <br/>
     <span ~style.display=InfinityPrestigeLayer.canInfinityBeBroken() ? '' : 'none'~><button style="height: 48px;" onclick="InfinityPrestigeLayer.toggleBreakInfinity()">~r InfinityPrestigeLayer.breakInfinityButtonText() ~</button></span>
     <span ~style.display=InfinityPrestigeLayer.canInfinityBeBroken() ? 'none' : ''~>You need to complete all the challenges to be able to break infinity.</span>
@@ -1113,7 +1113,7 @@
     <br/>
     <span>You have produced ~i EternityPoints.totalEPProducedThisComplexity() ~ eternity point~s EternityPoints.totalEPProducedThisComplexity() ~ this complexity.</span>
     </br>
-    <span>You have ~q Eternities.amount() ~ eternit~y Eternities.amount() ~, multiplying all eternity generators (EGs) by ~f Eternities.eternityGeneratorMultiplierForDisplay() ~.</span>
+    <span>You have ~q Eternities.amount() ~ eternit~y Eternities.amount() ~, multiplying all eternity generators (EGs) by ~q Eternities.eternityGeneratorMultiplierForDisplay() ~.</span>
     <br/>
     <span>You have ~f EternityStars.amount() ~ eternity stars, multiplying all normal and infinity generators by ~f EternityStars.multiplier() ~</span>
     <br/>
@@ -2041,7 +2041,7 @@
       <button ~style.display=ComplexityAchievements.hasComplexityAchievement(3, 2) ? '' : 'none'~ onclick="EternityChallenge.toggleRequirementDisplay()">Show (now unneeded) eternity challenge requirements: ~r EternityChallenge.isRequirementDisplayOn() ? "On" : "Off" ~</button>
     </span>
     <div ~style.display=EternityChallenge.hasAutoECCompletion() ? '' : 'none'~>
-      <span>You automatically complete an eternity challenge tier once every ~f Complexities.autoECCompletionTime() ~ seconds.</span>
+      <span>You automatically complete an eternity challenge tier once every ~q Complexities.autoECCompletionTime() ~ seconds.</span>
       <br/>
       <span ~style.display=EternityChallenge.areAllEternityChallengesCompleted() ? 'none' : ''~>It has been ~f EternityChallenge.timeSinceAutoECCompletion() ~ seconds since your last automatic eternity challenge completion<span ~style.display=EternityChallenge.usedAutoECCompletionThisComplexity() ? 'none' : ''~> (none this complexity)</span>.</span>
       <span ~style.display=EternityChallenge.areAllEternityChallengesCompleted() ? '' : 'none'~>All eternity challenges are fully complete<span ~style.display=EternityChallenge.usedAutoECCompletionThisComplexity() ? 'none' : ''~> (and none were automatically completed)</span>.</span>
@@ -2444,11 +2444,11 @@
     <br/>
     <span>You have produced ~i ComplexityPoints.totalCPProduced() ~ total complexity point~s ComplexityPoints.totalCPProduced() ~.</span>
     </br>
-    <span>You have ~i Complexities.amount() ~ complexit~y Complexities.amount() ~, multiplying all complexity generators (ℂGs) by ~f Complexities.complexityGeneratorMultiplier() ~,</span>
+    <span>You have ~i Complexities.amount() ~ complexit~y Complexities.amount() ~, multiplying all complexity generators (ℂGs) by ~q Complexities.complexityGeneratorMultiplier() ~,</span>
     <br/>
     <span>multiplying permanence and chroma buildup speed by ~q Complexities.permanenceAndChromaMultiplier() ~,</span>
     <br/>
-    <span>and automatically completing an eternity challenge tier every ~f Complexities.autoECCompletionTime() ~ seconds.</span>
+    <span>and automatically completing an eternity challenge tier every ~q Complexities.autoECCompletionTime() ~ seconds.</span>
     <br/>
     <span>You have ~f ComplexityStars.amount() ~ complexity stars, making all complexity challenge rewards ~f ComplexityStars.complexityChallengeMultiplier() ~x stronger.</span>
     <br/>

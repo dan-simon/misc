@@ -86,27 +86,27 @@ let Challenge = {
     let cc = this.currentChallenge();
     let ic = InfinityChallenge.currentInfinityChallenge();
     if (cc === 2) {
-      return 'Challenge 2 multiplier: ' + format(this.challenge2Mult());
+      return 'Challenge 2 multiplier: ' + formatMaybeInt(this.challenge2Mult());
     } else if (cc === 3) {
       return 'Challenge 3 multiplier: ' + formatWithPrecision(this.challenge3Mult(), 5);
     } else if (cc === 7) {
       return 'Challenge 7 purchases left: ' + formatInt(this.challenge7PurchasesLeft());
     } else if (ic === 1) {
-      return 'Challenge 2 multiplier: ' + format(this.challenge2Mult()) + ', ' +
+      return 'Challenge 2 multiplier: ' + formatMaybeInt(this.challenge2Mult()) + ', ' +
       'Challenge 3 multiplier: ' + formatWithPrecision(this.challenge3Mult(), 5) + ', ' +
       'Challenge 7 purchases left: ' + formatInt(this.challenge7PurchasesLeft());
     } else if (ic === 3) {
       return 'Infinity Challenge 3 prestige power exponent: ' +
-      format(InfinityChallenge.infinityChallenge3PrestigePowerExponent());
+      formatMaybeInt(InfinityChallenge.infinityChallenge3PrestigePowerExponent());
     } else if (ic === 4) {
       return 'Infinity Challenge 4 multiplier exponent: ' +
-      format(InfinityChallenge.infinityChallenge4Pow());
+      formatMaybeInt(InfinityChallenge.infinityChallenge4Pow());
     } else if (ic === 5) {
       return 'Infinity Challenge 5 multiplier exponent: ' +
-      format(InfinityChallenge.infinityChallenge5Pow());
+      formatMaybeInt(InfinityChallenge.infinityChallenge5Pow());
     } else if (ic === 6) {
       return 'Infinity Challenge 6 prestige power exponent: ' +
-      format(InfinityChallenge.infinityChallenge6PrestigePowerExponent());
+      formatMaybeInt(InfinityChallenge.infinityChallenge6PrestigePowerExponent());
     } else if (ic === 8) {
       return 'Infinity Challenge 8 purchases left: ' +
       formatInt(InfinityChallenge.infinityChallenge8PurchasesLeft());
