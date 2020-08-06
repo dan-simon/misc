@@ -499,22 +499,22 @@ let Powers = {
     if (!this.hasPreset(x)) return 'Untitled';
     return player.powers.presets[x - 1].name;
   },
-  presetStudyList(x) {
+  presetPowerList(x) {
     if (!this.hasPreset(x)) return '';
     return player.powers.presets[x - 1].powers;
   },
   setPresetName(x, name) {
     player.powers.presets[x - 1].name = name;
   },
-  setPresetStudyList(x, activePowers) {
+  setPresetPowerList(x, activePowers) {
     player.powers.presets[x - 1].powers = activePowers;
   },
-  presetSetToCurrentStudies(x) {
-    this.setPresetStudyList(x, this.exportString());
-    this.redisplayPresetStudyList(x);
+  presetSetToCurrentPowers(x) {
+    this.setPresetPowerList(x, this.exportString());
+    this.redisplayPresetPowerList(x);
   },
   presetLoad(x) {
-    this.importString(this.presetStudyList(x));
+    this.importString(this.presetPowerList(x));
   },
   presetDelete(x) {
     player.powers.presets = player.powers.presets.slice(0, x - 1).concat(player.powers.presets.slice(x));
@@ -530,12 +530,12 @@ let Powers = {
   },
   redisplayPreset(x) {
     this.redisplayPresetName(x);
-    this.redisplayPresetStudyList(x);
+    this.redisplayPresetPowerList(x);
   },
   redisplayPresetName(x) {
     document.getElementsByClassName('presetpowername' + x)[0].value = this.presetName(x);
   },
-  redisplayPresetStudyList(x) {
-    document.getElementsByClassName('presetpowerlist' + x)[0].value = this.presetStudyList(x);
+  redisplayPresetPowerList(x) {
+    document.getElementsByClassName('presetpowerlist' + x)[0].value = this.presetPowerList(x);
   }
 }
