@@ -76,34 +76,11 @@ let FinalityShards = {
   addAmount(x) {
     player.totalFinalityShards += x;
   },
-  isRespecOn() {
-    return player.respecFinalityShards;
-  },
-  toggleRespec() {
-    player.respecFinalityShards = !player.respecFinalityShards;
-  },
-  respec() {
-    player.finalityShardUpgrades = [0, 0, 0, 0, 0, 0, 0, 0];
-  },
-  maybeRespec() {
-    if (this.isRespecOn()) {
-      this.respec();
-    }
-    player.respecFinalityShards = false;
-  },
-  respecAndReset() {
-    this.respec();
-    if (FinalityPrestigeLayer.canFinality()) {
-      FinalityPrestigeLayer.finality();
-    } else {
-      FinalityPrestigeLayer.finalityReset();
-    }
-  },
   initializeStartingComplexityAchievements() {
-    let totalUpgradeBonuses = this.totalUpgradeBonuses();
+    let startingComplexityAchievements = FinalityStartingBenefits.complexityAchievements();
     for (let row = 0; row < 4; row++) {
       for (let column = 0; column < 4; column++) {
-        player.complexityAchievements[row][column] = 4 * row + column < totalUpgradeBonuses;
+        player.complexityAchievements[row][column] = 4 * row + column < startingComplexityAchievements;
       }
     }
   },
@@ -127,7 +104,9 @@ let FinalityShards = {
       FinalityStartingBenefits.complexityPointsAt(old)))
     Complexities.add(FinalityStartingBenefits.complexitiesAt(current) -
       FinalityStartingBenefits.complexitiesAt(old));
-    for (let i = old; i < current; i++) {
+    for (
+      let i = FinalityStartingBenefits.complexityAchievementsAt(old);
+      i < FinalityStartingBenefits.complexityAchievementsAt(current); i++) {
       let row = Math.floor(i / 4) + 1;
       let column = i % 4 + 1;
       if (!ComplexityAchievements.hasComplexityAchievement(row, column)) {
@@ -151,8 +130,32 @@ let FinalityShards = {
 }
 
 let FinalityShardPresets = {
+  isRespecOn() {
+    return player.respecFinalityShards;
+  },
+  toggleRespec() {
+    player.respecFinalityShards = !player.respecFinalityShards;
+  },
+  respec() {
+    player.finalityShardUpgrades = [0, 0, 0, 0, 0, 0, 0, 0];
+  },
+  maybeRespec() {
+    if (this.isRespecOn()) {
+      this.respec();
+    }
+    player.respecFinalityShards = false;
+  },
+  respecAndReset() {
+    this.respec();
+    if (FinalityPrestigeLayer.canFinality()) {
+      FinalityPrestigeLayer.finality();
+    } else {
+      FinalityPrestigeLayer.finalityReset();
+    }
+  },
   exportString() {
-    return FinalityShard.upgradeList.map(x => x.bought()).join(',');
+    if (FinalityShards.totalUpgrades() === 0) return 'none';
+    return FinalityShards.upgradeList.map(x => x.bought()).join(',');
   },
   export() {
     let output = document.getElementById('finality-shard-upgrades-export-output');
@@ -174,6 +177,7 @@ let FinalityShardPresets = {
     return Math.max(0, Math.floor(+x)) || 0;
   },
   importStringCounts(importString) {
+    if (importString === 'none') importString = '';
     let result = importString.split(',').map(x => this.toNumber(x));
     return result.concat([0, 0, 0, 0, 0, 0, 0, 0].slice(result.length));
   },

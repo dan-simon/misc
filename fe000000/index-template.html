@@ -3674,7 +3674,9 @@
     <br/>
     <span>You have ~i Finalities.amount() ~ finalit~y Finalities.amount() ~, multiplying all finality generators (FGs) by ~q Finalities.finalityGeneratorMultiplier() ~</span>
     <br/>
-    <span>and making the finality generator per-purchase multiplier ~q Finalities.finalityGeneratorPerPurchaseMultiplier() ~x.</span>
+    <span>making the finality generator per-purchase multiplier ~q Finalities.finalityGeneratorPerPurchaseMultiplier() ~x,</span>
+    <br/>
+    <span>and automatically completing an eternity challenge tier every ~q Finalities.autoECCompletionTime() ~ seconds.</span>
     <br/>
     <span>You have ~f FinalityStars.amount() ~ finality stars, multiplying all non-finality generators by ~f FinalityStars.multiplier() ~x.</span>
     <br/>
@@ -3757,6 +3759,11 @@
     <br/>
     <span>(This gain of finality shards is ~i 16 ~ times (~i 1 ~ + finalities), doubled if (~i 1 ~ + finalities) is a multiple of ~i 64 ~.)</span>
     <br/>
+    <button class="finality-shard-upgrades-export-button" onclick="FinalityShardPresets.export()">Export finality shard upgrades</button> <button onclick="FinalityShardPresets.import()">Import finality shard upgrades</button>
+    <button onclick="FinalityShardPresets.toggleRespec()">Respec finality shard upgrades on next finality: ~r FinalityShardPresets.isRespecOn() ? "On" : "Off" ~</button>
+    <br/>
+    <button onclick="FinalityShardPresets.respecAndReset()">Respec finality shard upgrades and ~r FinalityPrestigeLayer.resetText() ~</button></button>
+    <br/>
     <br/>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
@@ -3808,6 +3815,21 @@
         <td><span ~style.display=FinalityShardUpgrade(8).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(8).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(8).buyMax()">Max</button></span></td>
       </tr>
     </table>
+    <br/>
+    <br/>
+    <span>You have made ~i FinalityShards.totalUpgrades() ~ total finality shard upgrade purchase~s FinalityShards.totalUpgrades() ~, giving you starting bonuses with a strength of ~i FinalityShards.totalUpgradeBonuses() ~ (~i 1 ~ per ~i 4 ~ purchases):</span>
+    <br ~style.display=FinalityStartingBenefits.stars().gt(0) ? '' : 'none'~>
+    <span ~style.display=FinalityStartingBenefits.stars().gt(0) ? '' : 'none'~>You start each ~r PrestigeLayerNames.layersAbove('prestige') ~ with ~i FinalityStartingBenefits.stars() ~ star~s FinalityStartingBenefits.stars() ~.</span>
+    <br ~style.display=FinalityStartingBenefits.infinityPoints().gt(0) ? '' : 'none'~/>
+    <span ~style.display=FinalityStartingBenefits.infinityPoints().gt(0) ? '' : 'none'~>You start each ~r PrestigeLayerNames.layersAbove('eternity') ~ with ~i FinalityStartingBenefits.infinityPoints() ~ infinity point~s FinalityStartingBenefits.infinityPoints() ~ .</span>
+    <br ~style.display=FinalityStartingBenefits.eternityPoints().gt(0) ? '' : 'none'~/>
+    <span ~style.display=FinalityStartingBenefits.eternityPoints().gt(0) ? '' : 'none'~>You start each ~r PrestigeLayerNames.layersAbove('complexity') ~ with ~i FinalityStartingBenefits.eternityPoints() ~ eternity point~s FinalityStartingBenefits.eternityPoints() ~ .</span>
+    <br ~style.display=FinalityStartingBenefits.anyComplexityStartingBenefits() ? '' : 'none'~/>
+    <span ~style.display=FinalityStartingBenefits.anyComplexityStartingBenefits() ? '' : 'none'~>You start each ~r PrestigeLayerNames.layersAbove('finality') ~ with ~r FinalityStartingBenefits.complexityStartingBenefitsDisplay() ~.</span>
+    <br ~style.display=Trivia.show('complexity achievement order') ? '' : 'none'~/>
+    <span ~style.display=Trivia.show('complexity achievement order') ? '' : 'none'~>(Starting complexity achievements are given top-to-bottom, and left-to-right within each row.)</span>
+    <br/>
+    <span style="display: none;">Exported finality shard upgrades (also copied to clipboard): <input id="finality-shard-upgrades-export-output"></input></span>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'goals' ? '' : 'none'~>
     <span>You have completed ~i Goals.numberOfGoalsCompleted() ~/~i Goals.numberOfGoals() ~ goals.</span>

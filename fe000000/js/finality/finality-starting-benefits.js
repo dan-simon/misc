@@ -38,8 +38,30 @@ let FinalityStartingBenefits = {
   complexitiesAt(x) {
     return Math.floor(Math.pow(Math.min(4, x / 4), 4));
   },
-  anyComplexities() {
-    // This exists because having a greater-than sign in HTML isn't great.
-    return this.complexities() > 0;
+  complexityAchievements() {
+    return this.complexityAchievementsAt(FinalityShards.totalUpgradeBonuses());
+  },
+  complexityAchievementsAt(x) {
+    return Math.min(16, x);
+  },
+  anyComplexityStartingBenefits() {
+    return this.complexityPoints().gt(0) || this.complexities() > 0 || this.complexityAchievements() > 0;
+  },
+  complexityStartingBenefitsDisplay() {
+    let benefits = [];
+    if (this.complexityPoints().gt(0)) {
+      benefits.push(formatInt(this.complexityPoints()) + ' complexity point' + pluralize(this.complexityPoints(), '', 's'));
+    }
+    if (this.complexities() > 0) {
+      benefits.push(formatInt(this.complexities()) + ' complexit' + pluralize(this.complexities(), 'y', 'ies'));
+    }
+    if (this.complexityAchievements() > 0) {
+      benefits.push(formatInt(this.complexityAchievements()) + ' complexity achievement' + pluralize(this.complexityAchievements(), '', 's'));
+    }
+    if (benefits.length < 3) {
+      return benefits.join(' and ');
+    } else {
+      return benefits.slice(0, -1).join(', ') + ', and ' + benefits[benefits.length - 1];
+    }
   }
 }
