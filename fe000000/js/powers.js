@@ -174,15 +174,30 @@ let Powers = {
       let newPowers = this.imminentPowerGain();
       if (newPowers === 0) return;
       player.stats.timeSincePowerGain -= newPowers * timePer;
-      for (let i = 0; i < newPowers; i++) {
-        this.gainNewPower();
+      let maxedPowers = ['normal', 'infinity', 'eternity', 'complexity'].map(
+        x => this.active().concat(this.stored()).filter(y => y.type === x && this.isMaxed(y)).length);
+      while (newPowers > 0 && maxedPowers.some(x => x < this.maximumActivatedLimit())) {
+        let newPower = this.gainNewPower(true);
+        if (this.isMaxed(newPower)) {
+          maxedPowers[this.index(newPower.type) - 1]++;
+        }
+        newPowers--;
       }
+      PowerShards.gainPowerShards(RNG.averagePowerShardValue() * newPowers);
+      RNG.jump(2 * newPowers);
       this.cleanStored();
       this.maybeAutoSort();
     }
   },
-  gainNewPower() {
+  gainNewPower(returnPower) {
+    let newPower = RNG.randomPower(true);
     player.powers.stored.push(RNG.randomPower(true));
+    if (returnPower) {
+      return newPower;
+    }
+  },
+  isMaxed(p) {
+    return p.strength === this.newStrength() && p.rarity === this.maximumRarity()
   },
   getUnsortedPowerList(x, includeActive, noIndex) {
     let startingList = includeActive ? this.active().concat(this.stored()) : this.stored();
