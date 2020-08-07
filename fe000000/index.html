@@ -3211,25 +3211,25 @@
           <tr>
             <td class="yellowspan">Additional multiplier to normal generator powers:</td>
             <td><span id="b857">+<span id="e947"></span> → +<span id="e948"></span></span><span id="b858"><span id="e949"></span> (maxed)</span></td>
-            <td><span id="b859"><button id="b860" onclick="PowerShardUpgrade(1).buy()">Cost: <span id="e950"></span> power shards</button></span></td>
+            <td><span id="b859"><button id="b860" onclick="PowerShardUpgrade(1).buy()">Cost: <span id="e950"></span> power shard<span id="e951"></span></button></span></td>
             <td><span id="b861"><button id="b862" onclick="PowerShardUpgrade(1).buyMax()">Max</button></span></td>
           </tr>
           <tr>
             <td class="magentaspan">Additional multiplier to infinity generator powers:</td>
-            <td><span id="b863">+<span id="e951"></span> → +<span id="e952"></span></span><span id="b864"><span id="e953"></span> (maxed)</span></td>
-            <td><span id="b865"><button id="b866" onclick="PowerShardUpgrade(2).buy()">Cost: <span id="e954"></span> power shards</button></span></td>
+            <td><span id="b863">+<span id="e952"></span> → +<span id="e953"></span></span><span id="b864"><span id="e954"></span> (maxed)</span></td>
+            <td><span id="b865"><button id="b866" onclick="PowerShardUpgrade(2).buy()">Cost: <span id="e955"></span> power shard<span id="e956"></span></button></span></td>
             <td><span id="b867"><button id="b868" onclick="PowerShardUpgrade(2).buyMax()">Max</button></span></td>
           </tr>
           <tr>
             <td class="cyanspan">Additional multiplier to eternity generator powers:</td>
-            <td><span id="b869">+<span id="e955"></span> → +<span id="e956"></span></span><span id="b870"><span id="e957"></span> (maxed)</span></td>
-            <td><span id="b871"><button id="b872" onclick="PowerShardUpgrade(3).buy()">Cost: <span id="e958"></span> power shards</button></span></td>
+            <td><span id="b869">+<span id="e957"></span> → +<span id="e958"></span></span><span id="b870"><span id="e959"></span> (maxed)</span></td>
+            <td><span id="b871"><button id="b872" onclick="PowerShardUpgrade(3).buy()">Cost: <span id="e960"></span> power shard<span id="e961"></span></button></span></td>
             <td><span id="b873"><button id="b874" onclick="PowerShardUpgrade(3).buyMax()">Max</button></span></td>
           </tr>
           <tr>
             <td class="brownspan">Additional multiplier to complexity generator powers:</td>
-            <td><span id="b875">+<span id="e959"></span> → +<span id="e960"></span></span><span id="b876"><span id="e961"></span> (maxed)</span></td>
-            <td><span id="b877"><button id="b878" onclick="PowerShardUpgrade(4).buy()">Cost: <span id="e962"></span> power shards</button></span></td>
+            <td><span id="b875">+<span id="e962"></span> → +<span id="e963"></span></span><span id="b876"><span id="e964"></span> (maxed)</span></td>
+            <td><span id="b877"><button id="b878" onclick="PowerShardUpgrade(4).buy()">Cost: <span id="e965"></span> power shard<span id="e966"></span></button></span></td>
             <td><span id="b879"><button id="b880" onclick="PowerShardUpgrade(4).buyMax()">Max</button></span></td>
           </tr>
         </table>
@@ -3242,19 +3242,19 @@
           <option value="eternity">eternity</option>
           <option value="complexity">complexity</option>
         </select>,
-        strength <span id="e963"></span>, and rarity <input id="b882" type="text"></input>:
-        <button id="b883" onclick="PowerShards.craft()">Cost: <span id="e964"></span> power shards</button></span>
+        strength <span id="e967"></span>, and rarity <input id="b882" type="text"></input>:
+        <button id="b883" onclick="PowerShards.craft()">Cost: <span id="e968"></span> power shards</button></span>
         <br/>
-        <span>You cannot craft powers with negative rarity or powers with rarity greater than <span id="e965"></span> (the maximum rarity of generated powers).</span>
+        <span>You cannot craft powers with negative rarity or powers with rarity greater than <span id="e969"></span> (the maximum rarity of generated powers).</span>
         <br/>
         <span>Crafting cost depends only on rarity (not on type), and is always at least twice the power shards gained from deletion.</span>
         <br/>
         <br/>
         <span>Crafted power<span id="b884"> (will be automatically deleted due to being bad enough to be useless)</span>:</span>
         <br/>
-        <span id="b885"><span id="e966"></span></span>
+        <span id="b885"><span id="e970"></span></span>
         <br/>
-        <span id="b886"><span id="e967"></span></span>
+        <span id="b886"><span id="e971"></span></span>
       </div>
       <br/>
       <span>Power presets:</span>
@@ -3485,7 +3485,7 @@
       </div>
       <span>
         <button id="b983" onclick="Powers.presetCreate()">Create a power preset</button>
-        <span id="b984">You can create at most <span id="e968"></span> power presets. Delete existing presets to create more.</span>
+        <span id="b984">You can create at most <span id="e972"></span> power presets. Delete existing presets to create more.</span>
       </span>
       <br/>
       <span style="display: none;">Exported active powers: <input id="powers-export-output"></input></span>
@@ -3494,7 +3494,7 @@
   <div id="b985">
     <div id="b986">
       <button id="b987" style="height: 48px;" onclick="Oracle.unlock()">
-        Unlock the Oracle<br/>Cost: <span id="e969"></span> complexity points
+        Unlock the Oracle<br/>Cost: <span id="e973"></span> complexity points
       </button>
       <br/>
       <span>The Oracle is a quality-of-life feature that will let you see the future.</span>
@@ -3502,12 +3502,12 @@
     <div id="b988">
       <span>Ask the Oracle to look <input id="b989" type="text"></input> seconds into the future.</span>
       <br/>
-      <span><button onclick="Oracle.invoke()">Get prediction</button> <button onclick="Oracle.toggleAlert()">Alert on prediction: <span id="e970"></span></button> <button onclick="Oracle.togglePowerDisplay()">Show future powers on prediction: <span id="e971"></span></button></span>
+      <span><button onclick="Oracle.invoke()">Get prediction</button> <button onclick="Oracle.toggleAlert()">Alert on prediction: <span id="e974"></span></button> <button onclick="Oracle.togglePowerDisplay()">Show future powers on prediction: <span id="e975"></span></button></span>
       <br/>
-      <span>The Oracle can look between <span id="e972"></span> and <span id="e973"></span> seconds into the future. You can press O to get a prediction from the Oracle on any tab.</span>
+      <span>The Oracle can look between <span id="e976"></span> and <span id="e977"></span> seconds into the future. You can press O to get a prediction from the Oracle on any tab.</span>
       <br/>
       <br/>
-      <span><span id="e974"></span></span>
+      <span><span id="e978"></span></span>
       <br/>
       <br/>
       <div id="b990">
@@ -3516,84 +3516,84 @@
         <div style="margin-left: auto; margin-right: auto;">
           <span id="b991">You won't have any stored powers.</span>
           <div id="b992">
-            <span id="b993"><span id="e975"></span></span>
+            <span id="b993"><span id="e979"></span></span>
             <br/>
-            <span id="b994"><span id="e976"></span></span>
+            <span id="b994"><span id="e980"></span></span>
           </div>
           <div id="b995">
-            <span id="b996"><span id="e977"></span></span>
+            <span id="b996"><span id="e981"></span></span>
             <br/>
-            <span id="b997"><span id="e978"></span></span>
+            <span id="b997"><span id="e982"></span></span>
           </div>
           <div id="b998">
-            <span id="b999"><span id="e979"></span></span>
+            <span id="b999"><span id="e983"></span></span>
             <br/>
-            <span id="b1000"><span id="e980"></span></span>
+            <span id="b1000"><span id="e984"></span></span>
           </div>
           <div id="b1001">
-            <span id="b1002"><span id="e981"></span></span>
+            <span id="b1002"><span id="e985"></span></span>
             <br/>
-            <span id="b1003"><span id="e982"></span></span>
+            <span id="b1003"><span id="e986"></span></span>
           </div>
           <div id="b1004">
-            <span id="b1005"><span id="e983"></span></span>
+            <span id="b1005"><span id="e987"></span></span>
             <br/>
-            <span id="b1006"><span id="e984"></span></span>
+            <span id="b1006"><span id="e988"></span></span>
           </div>
           <div id="b1007">
-            <span id="b1008"><span id="e985"></span></span>
+            <span id="b1008"><span id="e989"></span></span>
             <br/>
-            <span id="b1009"><span id="e986"></span></span>
+            <span id="b1009"><span id="e990"></span></span>
           </div>
           <div id="b1010">
-            <span id="b1011"><span id="e987"></span></span>
+            <span id="b1011"><span id="e991"></span></span>
             <br/>
-            <span id="b1012"><span id="e988"></span></span>
+            <span id="b1012"><span id="e992"></span></span>
           </div>
           <div id="b1013">
-            <span id="b1014"><span id="e989"></span></span>
+            <span id="b1014"><span id="e993"></span></span>
             <br/>
-            <span id="b1015"><span id="e990"></span></span>
+            <span id="b1015"><span id="e994"></span></span>
           </div>
           <div id="b1016">
-            <span id="b1017"><span id="e991"></span></span>
+            <span id="b1017"><span id="e995"></span></span>
             <br/>
-            <span id="b1018"><span id="e992"></span></span>
+            <span id="b1018"><span id="e996"></span></span>
           </div>
           <div id="b1019">
-            <span id="b1020"><span id="e993"></span></span>
+            <span id="b1020"><span id="e997"></span></span>
             <br/>
-            <span id="b1021"><span id="e994"></span></span>
+            <span id="b1021"><span id="e998"></span></span>
           </div>
           <div id="b1022">
-            <span id="b1023"><span id="e995"></span></span>
+            <span id="b1023"><span id="e999"></span></span>
             <br/>
-            <span id="b1024"><span id="e996"></span></span>
+            <span id="b1024"><span id="e1000"></span></span>
           </div>
           <div id="b1025">
-            <span id="b1026"><span id="e997"></span></span>
+            <span id="b1026"><span id="e1001"></span></span>
             <br/>
-            <span id="b1027"><span id="e998"></span></span>
+            <span id="b1027"><span id="e1002"></span></span>
           </div>
           <div id="b1028">
-            <span id="b1029"><span id="e999"></span></span>
+            <span id="b1029"><span id="e1003"></span></span>
             <br/>
-            <span id="b1030"><span id="e1000"></span></span>
+            <span id="b1030"><span id="e1004"></span></span>
           </div>
           <div id="b1031">
-            <span id="b1032"><span id="e1001"></span></span>
+            <span id="b1032"><span id="e1005"></span></span>
             <br/>
-            <span id="b1033"><span id="e1002"></span></span>
+            <span id="b1033"><span id="e1006"></span></span>
           </div>
           <div id="b1034">
-            <span id="b1035"><span id="e1003"></span></span>
+            <span id="b1035"><span id="e1007"></span></span>
             <br/>
-            <span id="b1036"><span id="e1004"></span></span>
+            <span id="b1036"><span id="e1008"></span></span>
           </div>
           <div id="b1037">
-            <span id="b1038"><span id="e1005"></span></span>
+            <span id="b1038"><span id="e1009"></span></span>
             <br/>
-            <span id="b1039"><span id="e1006"></span></span>
+            <span id="b1039"><span id="e1010"></span></span>
           </div>
         </div>
       </div>
@@ -3602,7 +3602,7 @@
   <div id="b1040">
     <div id="b1041">
       <button id="b1042" style="height: 48px;" onclick="Galaxy.unlock()">
-        Unlock Galaxies<br/>Cost: <span id="e1007"></span> complexity points
+        Unlock Galaxies<br/>Cost: <span id="e1011"></span> complexity points
       </button>
       <br/>
       <span>Unlocking galaxies will also give you autobuyers for complexity generators and power upgrades.</span>
@@ -3611,141 +3611,141 @@
       <span>Due to unlocking galaxies, you have autobuyers for complexity generators and power upgrades.</span>
       <br/>
       <br/>
-      <span>You have produced <span id="e1008"></span> total stars, making your star factor <span id="e1009"></span>.</span>
+      <span>You have produced <span id="e1012"></span> total stars, making your star factor <span id="e1013"></span>.</span>
       <br/>
-      <span>You have produced <span id="e1010"></span> total infinity stars, making your infinity star factor <span id="e1011"></span>.</span>
+      <span>You have produced <span id="e1014"></span> total infinity stars, making your infinity star factor <span id="e1015"></span>.</span>
       <br/>
-      <span>You have produced <span id="e1012"></span> total eternity stars, making your eternity star factor <span id="e1013"></span>.</span>
+      <span>You have produced <span id="e1016"></span> total eternity stars, making your eternity star factor <span id="e1017"></span>.</span>
       <br/>
-      <span>You have produced <span id="e1014"></span> total complexity stars, making your complexity star factor <span id="e1015"></span>.</span>
+      <span>You have produced <span id="e1018"></span> total complexity stars, making your complexity star factor <span id="e1019"></span>.</span>
       <br/>
-      <span>Your stellar product is <span id="e1016"></span> x <span id="e1017"></span> x <span id="e1018"></span> x <span id="e1019"></span> = <span id="e1020"></span>.</span>
-      <br/>
-      <br/>
-      <span>You have <span id="e1021"></span> (based on stellar product) + <span id="e1022"></span> (based on total ℂP produced) = <span id="e1023"></span> galax<span id="e1024"></span>.</span>
-      <br/>
-      <span>Next galaxies are at <span id="e1025"></span> stellar product and <span id="e1026"></span> total ℂP produced.</span>
-      <br/>
-      <span>Your galaxies are increasing the strength of new powers by <span id="e1027"></span>.</span>
+      <span>Your stellar product is <span id="e1020"></span> x <span id="e1021"></span> x <span id="e1022"></span> x <span id="e1023"></span> = <span id="e1024"></span>.</span>
       <br/>
       <br/>
-      <span>You have spent <span id="e1028"></span> seconds in this complexity, increasing chroma caps ^<span id="e1029"></span></span>
+      <span>You have <span id="e1025"></span> (based on stellar product) + <span id="e1026"></span> (based on total ℂP produced) = <span id="e1027"></span> galax<span id="e1028"></span>.</span>
       <br/>
-      <span>(capped at <span id="e1030"></span>, reached at <span id="e1031"></span> seconds in complexity).</span>
+      <span>Next galaxies are at <span id="e1029"></span> stellar product and <span id="e1030"></span> total ℂP produced.</span>
+      <br/>
+      <span>Your galaxies are increasing the strength of new powers by <span id="e1031"></span>.</span>
+      <br/>
+      <br/>
+      <span>You have spent <span id="e1032"></span> seconds in this complexity, increasing chroma caps ^<span id="e1033"></span></span>
+      <br/>
+      <span>(capped at <span id="e1034"></span>, reached at <span id="e1035"></span> seconds in complexity).</span>
       <br/>
       <br/>
       <span>You can make some of your galaxies dilated to make the galaxy effect increase faster, but have a lower cap.</span>
       <br/>
-      <span>Currently <span id="e1032"></span> galaxies are dilated, making the galaxy effect increase <span id="e1033"></span>x quicker.</span>
+      <span>Currently <span id="e1036"></span> galaxies are dilated, making the galaxy effect increase <span id="e1037"></span>x quicker.</span>
       <br/>
-      <span>Galaxies to make dilated next complexity reset: <input id="b1044" type="text"></input> (Set this to <span id="e1034"></span> to un-dilate all dilated galaxies.)</span>
+      <span>Galaxies to make dilated next complexity reset: <input id="b1044" type="text"></input> (Set this to <span id="e1038"></span> to un-dilate all dilated galaxies.)</span>
       <br/>
       <br/>
-      <span>Next complexity, <span id="e1035"></span> galaxies will be dilated.</span>
+      <span>Next complexity, <span id="e1039"></span> galaxies will be dilated.</span>
       <br/>
-      <span>The galaxy effect will increase <span id="e1036"></span>x quicker and have a cap of <span id="e1037"></span>, reached at <span id="e1038"></span> seconds in complexity.</span>
+      <span>The galaxy effect will increase <span id="e1040"></span>x quicker and have a cap of <span id="e1041"></span>, reached at <span id="e1042"></span> seconds in complexity.</span>
     </div>
   </div>
   <div id="b1045">
-    <span>You have produced <span id="e1039"></span> total stars.</span>
+    <span>You have produced <span id="e1043"></span> total stars.</span>
     <br/>
-    <span>You have produced <span id="e1040"></span> stars this eternity.</span>
+    <span>You have produced <span id="e1044"></span> stars this eternity.</span>
     <br/>
-    <span>You have produced <span id="e1041"></span> stars this complexity.</span>
+    <span>You have produced <span id="e1045"></span> stars this complexity.</span>
     <br/>
-    <span>You have produced <span id="e1042"></span> total infinity point<span id="e1043"></span>.</span>
+    <span>You have produced <span id="e1046"></span> total infinity point<span id="e1047"></span>.</span>
     <br/>
-    <span>You have produced <span id="e1044"></span> infinity point<span id="e1045"></span> this eternity.</span>
+    <span>You have produced <span id="e1048"></span> infinity point<span id="e1049"></span> this eternity.</span>
     <br/>
-    <span>You have produced <span id="e1046"></span> total eternity point<span id="e1047"></span>.</span>
+    <span>You have produced <span id="e1050"></span> total eternity point<span id="e1051"></span>.</span>
     <br/>
-    <span>You have produced <span id="e1048"></span> total eternity point<span id="e1049"></span> this complexity.</span>
+    <span>You have produced <span id="e1052"></span> total eternity point<span id="e1053"></span> this complexity.</span>
     <br/>
-    <span>You have produced <span id="e1050"></span> total complexity point<span id="e1051"></span>.</span>
+    <span>You have produced <span id="e1054"></span> total complexity point<span id="e1055"></span>.</span>
     <br/>
-    <span>Your fastest infinity took <span id="e1052"></span> seconds.</span>
+    <span>Your fastest infinity took <span id="e1056"></span> seconds.</span>
     <br/>
-    <span>Your fastest eternity took <span id="e1053"></span> seconds.</span>
+    <span>Your fastest eternity took <span id="e1057"></span> seconds.</span>
     <br/>
-    <span>Your fastest complexity took <span id="e1054"></span> seconds.</span>
+    <span>Your fastest complexity took <span id="e1058"></span> seconds.</span>
     <br/>
-    <span>You have spent <span id="e1055"></span> seconds without purchasing anything.</span>
+    <span>You have spent <span id="e1059"></span> seconds without purchasing anything.</span>
     <br/>
-    <span>You have spent <span id="e1056"></span> seconds without sacrificing.</span>
+    <span>You have spent <span id="e1060"></span> seconds without sacrificing.</span>
     <br/>
-    <span>You have spent <span id="e1057"></span> seconds in this prestige.</span>
+    <span>You have spent <span id="e1061"></span> seconds in this prestige.</span>
     <br/>
-    <span>You have spent <span id="e1058"></span> seconds in this infinity.</span>
+    <span>You have spent <span id="e1062"></span> seconds in this infinity.</span>
     <br/>
-    <span>You have spent <span id="e1059"></span> seconds in this eternity.</span>
+    <span>You have spent <span id="e1063"></span> seconds in this eternity.</span>
     <br/>
-    <span>You have spent <span id="e1060"></span> seconds in this complexity.</span>
+    <span>You have spent <span id="e1064"></span> seconds in this complexity.</span>
     <br/>
-    <span>You have spent <span id="e1061"></span> seconds playing this game (counting time offline).</span>
+    <span>You have spent <span id="e1065"></span> seconds playing this game (counting time offline).</span>
     <div id="b1046">
-      <span>Last infinity took <span id="e1062"></span> seconds and gave <span id="e1063"></span> IP, giving <span id="e1064"></span> IP/second.</span>
+      <span>Last infinity took <span id="e1066"></span> seconds and gave <span id="e1067"></span> IP, giving <span id="e1068"></span> IP/second.</span>
       <br/>
-      <span id="b1047">The infinity two infinities ago took <span id="e1065"></span> seconds and gave <span id="e1066"></span> IP, giving <span id="e1067"></span> IP/second.</span>
+      <span id="b1047">The infinity two infinities ago took <span id="e1069"></span> seconds and gave <span id="e1070"></span> IP, giving <span id="e1071"></span> IP/second.</span>
       <br/>
-      <span id="b1048">The infinity three infinities ago took <span id="e1068"></span> seconds and gave <span id="e1069"></span> IP, giving <span id="e1070"></span> IP/second.</span>
+      <span id="b1048">The infinity three infinities ago took <span id="e1072"></span> seconds and gave <span id="e1073"></span> IP, giving <span id="e1074"></span> IP/second.</span>
       <br/>
-      <span id="b1049">The infinity four infinities ago took <span id="e1071"></span> seconds and gave <span id="e1072"></span> IP, giving <span id="e1073"></span> IP/second.</span>
+      <span id="b1049">The infinity four infinities ago took <span id="e1075"></span> seconds and gave <span id="e1076"></span> IP, giving <span id="e1077"></span> IP/second.</span>
       <br/>
-      <span id="b1050">The infinity five infinities ago took <span id="e1074"></span> seconds and gave <span id="e1075"></span> IP, giving <span id="e1076"></span> IP/second.</span>
+      <span id="b1050">The infinity five infinities ago took <span id="e1078"></span> seconds and gave <span id="e1079"></span> IP, giving <span id="e1080"></span> IP/second.</span>
       <br/>
-      <span id="b1051">The infinity six infinities ago took <span id="e1077"></span> seconds and gave <span id="e1078"></span> IP, giving <span id="e1079"></span> IP/second.</span>
+      <span id="b1051">The infinity six infinities ago took <span id="e1081"></span> seconds and gave <span id="e1082"></span> IP, giving <span id="e1083"></span> IP/second.</span>
       <br/>
-      <span id="b1052">The infinity seven infinities ago took <span id="e1080"></span> seconds and gave <span id="e1081"></span> IP, giving <span id="e1082"></span> IP/second.</span>
+      <span id="b1052">The infinity seven infinities ago took <span id="e1084"></span> seconds and gave <span id="e1085"></span> IP, giving <span id="e1086"></span> IP/second.</span>
       <br/>
-      <span id="b1053">The infinity eight infinities ago took <span id="e1083"></span> seconds and gave <span id="e1084"></span> IP, giving <span id="e1085"></span> IP/second.</span>
+      <span id="b1053">The infinity eight infinities ago took <span id="e1087"></span> seconds and gave <span id="e1088"></span> IP, giving <span id="e1089"></span> IP/second.</span>
       <br/>
-      <span id="b1054">The infinity nine infinities ago took <span id="e1086"></span> seconds and gave <span id="e1087"></span> IP, giving <span id="e1088"></span> IP/second.</span>
+      <span id="b1054">The infinity nine infinities ago took <span id="e1090"></span> seconds and gave <span id="e1091"></span> IP, giving <span id="e1092"></span> IP/second.</span>
       <br/>
-      <span id="b1055">The infinity ten infinities ago took <span id="e1089"></span> seconds and gave <span id="e1090"></span> IP, giving <span id="e1091"></span> IP/second.</span>
+      <span id="b1055">The infinity ten infinities ago took <span id="e1093"></span> seconds and gave <span id="e1094"></span> IP, giving <span id="e1095"></span> IP/second.</span>
       <br/>
     </div>
     <div id="b1056">
-      <span>Last eternity took <span id="e1092"></span> seconds and gave <span id="e1093"></span> EP, giving <span id="e1094"></span> EP/second.</span>
+      <span>Last eternity took <span id="e1096"></span> seconds and gave <span id="e1097"></span> EP, giving <span id="e1098"></span> EP/second.</span>
       <br/>
-      <span id="b1057">The eternity two eternities ago took <span id="e1095"></span> seconds and gave <span id="e1096"></span> EP, giving <span id="e1097"></span> EP/second.</span>
+      <span id="b1057">The eternity two eternities ago took <span id="e1099"></span> seconds and gave <span id="e1100"></span> EP, giving <span id="e1101"></span> EP/second.</span>
       <br/>
-      <span id="b1058">The eternity three eternities ago took <span id="e1098"></span> seconds and gave <span id="e1099"></span> EP, giving <span id="e1100"></span> EP/second.</span>
+      <span id="b1058">The eternity three eternities ago took <span id="e1102"></span> seconds and gave <span id="e1103"></span> EP, giving <span id="e1104"></span> EP/second.</span>
       <br/>
-      <span id="b1059">The eternity four eternities ago took <span id="e1101"></span> seconds and gave <span id="e1102"></span> EP, giving <span id="e1103"></span> EP/second.</span>
+      <span id="b1059">The eternity four eternities ago took <span id="e1105"></span> seconds and gave <span id="e1106"></span> EP, giving <span id="e1107"></span> EP/second.</span>
       <br/>
-      <span id="b1060">The eternity five eternities ago took <span id="e1104"></span> seconds and gave <span id="e1105"></span> EP, giving <span id="e1106"></span> EP/second.</span>
+      <span id="b1060">The eternity five eternities ago took <span id="e1108"></span> seconds and gave <span id="e1109"></span> EP, giving <span id="e1110"></span> EP/second.</span>
       <br/>
-      <span id="b1061">The eternity six eternities ago took <span id="e1107"></span> seconds and gave <span id="e1108"></span> EP, giving <span id="e1109"></span> EP/second.</span>
+      <span id="b1061">The eternity six eternities ago took <span id="e1111"></span> seconds and gave <span id="e1112"></span> EP, giving <span id="e1113"></span> EP/second.</span>
       <br/>
-      <span id="b1062">The eternity seven eternities ago took <span id="e1110"></span> seconds and gave <span id="e1111"></span> EP, giving <span id="e1112"></span> EP/second.</span>
+      <span id="b1062">The eternity seven eternities ago took <span id="e1114"></span> seconds and gave <span id="e1115"></span> EP, giving <span id="e1116"></span> EP/second.</span>
       <br/>
-      <span id="b1063">The eternity eight eternities ago took <span id="e1113"></span> seconds and gave <span id="e1114"></span> EP, giving <span id="e1115"></span> EP/second.</span>
+      <span id="b1063">The eternity eight eternities ago took <span id="e1117"></span> seconds and gave <span id="e1118"></span> EP, giving <span id="e1119"></span> EP/second.</span>
       <br/>
-      <span id="b1064">The eternity nine eternities ago took <span id="e1116"></span> seconds and gave <span id="e1117"></span> EP, giving <span id="e1118"></span> EP/second.</span>
+      <span id="b1064">The eternity nine eternities ago took <span id="e1120"></span> seconds and gave <span id="e1121"></span> EP, giving <span id="e1122"></span> EP/second.</span>
       <br/>
-      <span id="b1065">The eternity ten eternities ago took <span id="e1119"></span> seconds and gave <span id="e1120"></span> EP, giving <span id="e1121"></span> EP/second.</span>
+      <span id="b1065">The eternity ten eternities ago took <span id="e1123"></span> seconds and gave <span id="e1124"></span> EP, giving <span id="e1125"></span> EP/second.</span>
       <br/>
     </div>
     <div id="b1066">
-      <span>Last complexity took <span id="e1122"></span> seconds and gave <span id="e1123"></span> ℂP, giving <span id="e1124"></span> ℂP/second.</span>
+      <span>Last complexity took <span id="e1126"></span> seconds and gave <span id="e1127"></span> ℂP, giving <span id="e1128"></span> ℂP/second.</span>
       <br/>
-      <span id="b1067">The complexity two complexities ago took <span id="e1125"></span> seconds and gave <span id="e1126"></span> ℂP, giving <span id="e1127"></span> ℂP/second.</span>
+      <span id="b1067">The complexity two complexities ago took <span id="e1129"></span> seconds and gave <span id="e1130"></span> ℂP, giving <span id="e1131"></span> ℂP/second.</span>
       <br/>
-      <span id="b1068">The complexity three complexities ago took <span id="e1128"></span> seconds and gave <span id="e1129"></span> ℂP, giving <span id="e1130"></span> ℂP/second.</span>
+      <span id="b1068">The complexity three complexities ago took <span id="e1132"></span> seconds and gave <span id="e1133"></span> ℂP, giving <span id="e1134"></span> ℂP/second.</span>
       <br/>
-      <span id="b1069">The complexity four complexities ago took <span id="e1131"></span> seconds and gave <span id="e1132"></span> ℂP, giving <span id="e1133"></span> ℂP/second.</span>
+      <span id="b1069">The complexity four complexities ago took <span id="e1135"></span> seconds and gave <span id="e1136"></span> ℂP, giving <span id="e1137"></span> ℂP/second.</span>
       <br/>
-      <span id="b1070">The complexity five complexities ago took <span id="e1134"></span> seconds and gave <span id="e1135"></span> ℂP, giving <span id="e1136"></span> ℂP/second.</span>
+      <span id="b1070">The complexity five complexities ago took <span id="e1138"></span> seconds and gave <span id="e1139"></span> ℂP, giving <span id="e1140"></span> ℂP/second.</span>
       <br/>
-      <span id="b1071">The complexity six complexities ago took <span id="e1137"></span> seconds and gave <span id="e1138"></span> ℂP, giving <span id="e1139"></span> ℂP/second.</span>
+      <span id="b1071">The complexity six complexities ago took <span id="e1141"></span> seconds and gave <span id="e1142"></span> ℂP, giving <span id="e1143"></span> ℂP/second.</span>
       <br/>
-      <span id="b1072">The complexity seven complexities ago took <span id="e1140"></span> seconds and gave <span id="e1141"></span> ℂP, giving <span id="e1142"></span> ℂP/second.</span>
+      <span id="b1072">The complexity seven complexities ago took <span id="e1144"></span> seconds and gave <span id="e1145"></span> ℂP, giving <span id="e1146"></span> ℂP/second.</span>
       <br/>
-      <span id="b1073">The complexity eight complexities ago took <span id="e1143"></span> seconds and gave <span id="e1144"></span> ℂP, giving <span id="e1145"></span> ℂP/second.</span>
+      <span id="b1073">The complexity eight complexities ago took <span id="e1147"></span> seconds and gave <span id="e1148"></span> ℂP, giving <span id="e1149"></span> ℂP/second.</span>
       <br/>
-      <span id="b1074">The complexity nine complexities ago took <span id="e1146"></span> seconds and gave <span id="e1147"></span> ℂP, giving <span id="e1148"></span> ℂP/second.</span>
+      <span id="b1074">The complexity nine complexities ago took <span id="e1150"></span> seconds and gave <span id="e1151"></span> ℂP, giving <span id="e1152"></span> ℂP/second.</span>
       <br/>
-      <span id="b1075">The complexity ten complexities ago took <span id="e1149"></span> seconds and gave <span id="e1150"></span> ℂP, giving <span id="e1151"></span> ℂP/second.</span>
+      <span id="b1075">The complexity ten complexities ago took <span id="e1153"></span> seconds and gave <span id="e1154"></span> ℂP, giving <span id="e1155"></span> ℂP/second.</span>
       <br/>
     </div>
   </div>
@@ -3757,13 +3757,13 @@
         <td><button class="options-button" onclick="Saving.loadGamePrompt()">Load</button></td>
       </tr>
       <tr>
-        <td><button class="options-button" onclick="Options.toggleOfflineProgress()">Offline progress: <span id="e1152"></span></button></td>
-        <td><button class="options-button" onclick="Options.toggleHotkeys()">Hotkeys: <span id="e1153"></span></button></td>
-        <td><button class="options-button" onclick="Options.toggleExportDisplay()" style="font-size: 0.75rem;">Show export text (as opposed to just copying it): <span id="e1154"></span></button></td>
+        <td><button class="options-button" onclick="Options.toggleOfflineProgress()">Offline progress: <span id="e1156"></span></button></td>
+        <td><button class="options-button" onclick="Options.toggleHotkeys()">Hotkeys: <span id="e1157"></span></button></td>
+        <td><button class="options-button" onclick="Options.toggleExportDisplay()" style="font-size: 0.75rem;">Show export text (as opposed to just copying it): <span id="e1158"></span></button></td>
       </tr>
       <tr>
-        <td><button class="options-button" onclick="Options.nextCompletionColors()">Completion colors: <span id="e1155"></span></button></td>
-        <td><button class="options-button" onclick="Options.nextNotation()">Notation: <span id="e1156"></span></button></td>
+        <td><button class="options-button" onclick="Options.nextCompletionColors()">Completion colors: <span id="e1159"></span></button></td>
+        <td><button class="options-button" onclick="Options.nextNotation()">Notation: <span id="e1160"></span></button></td>
         <td><button class="options-button" onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></td>
       </tr>
     </table>
