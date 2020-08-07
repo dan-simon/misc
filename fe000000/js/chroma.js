@@ -138,6 +138,12 @@ let Chroma = {
   nextColorName(title) {
     return this.colorName(player.chroma.next, title);
   },
+  currentColorClass() {
+    return this.currentColorName() + 'span';
+  },
+  nextColorClass() {
+    return this.nextColorName() + 'span';
+  },
   isProducing() {
     return this.amount() >= this.colorAmount(player.chroma.current);
   },
@@ -159,11 +165,28 @@ let Chroma = {
     } else if (this.amount() === this.cap()) {
       return 'would be producing ' + this.currentColorName() + ' but are at the chroma cap';
     } else if (this.colorAmount(player.chroma.current) === this.cap()) {
-      return 'would produce ' + Chroma.currentColorName() + ' except that it\'s already at the chroma cap';
+      return 'would produce ' + this.currentColorName() + ' except that it\'s already at the chroma cap';
     } else if (this.isProducing()) {
       return 'are currently producing ' + this.currentColorName();
     } else {
-      return 'will start to produce ' + Chroma.currentColorName() + ' in ' + format(Chroma.timeUntilProduction()) + ' seconds';
+      return 'will start to produce ' + this.currentColorName() + ' in ' + format(Chroma.timeUntilProduction()) + ' seconds';
+    }
+  },
+  currentProductionTextPrefix() {
+    return this.currentProductionText().split(this.currentColorName())[0];
+  },
+  currentProductionTextSuffix() {
+    return this.currentProductionText().split(this.currentColorName())[1];
+  },
+  colorProductionStatus(color) {
+    if (this.producingAll() || (color === player.chroma.current && color === player.chroma.next)) {
+      return 'Being produced, will be produced next';
+    } else if (color === player.chroma.current) {
+      return 'Being produced';
+    } else if (color === player.chroma.next) {
+      return 'Will be produced next';
+    } else {
+      return '';
     }
   },
   producingAll() {
