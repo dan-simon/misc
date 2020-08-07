@@ -185,6 +185,7 @@ let FinalityShardPresets = {
     return result.concat([0, 0, 0, 0, 0, 0, 0, 0].slice(result.length));
   },
   importString(importString) {
+    if (!importString) return;
     let importStringCounts = this.importStringCounts(importString);
     let old = FinalityShards.totalUpgradeBonuses();
     for (let i = 1; i <= 8; i++) {
