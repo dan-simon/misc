@@ -137,6 +137,16 @@ let FinalityShards = {
   },
   areAllUpgradesCapped() {
     return this.upgradeList.every(x => x.atBoughtLimit());
+  },
+  anythingToBuy() {
+    return this.upgradeList.some(x => x.canBuy());
+  },
+  maxAll() {
+    // Buy the one bought least as long as it's possible to buy one. This isn't too expensive computationally
+    // and only happens on user input.
+    while (this.anythingToBuy()) {
+      [...this.upgradeList].filter(x => x.canBuy()).sort((x, y) => x.bought() - y.bought())[0].buy();
+    }
   }
 }
 

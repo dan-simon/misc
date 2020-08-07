@@ -3748,7 +3748,13 @@
     </table>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'finality-shards' ? '' : 'none'~>
-    <span>This tab has nothing useful on it yet.</span>
+    <span>You have ~i FinalityShards.total() ~ total finality shard~s FinalityShards.total() ~ and ~i FinalityShards.amount() ~ unspent finality shard~s FinalityShards.amount() ~ (FS).
+      <button ~class=FinalityShards.anythingToBuy() ? "" : "disabled"~ onclick="FinalityShards.maxAll()">Max all</button>
+    </span>
+    <br/>
+    <span>You will get ~i FinalityPrestigeLayer.finalityShardGain() ~ finality shard~s FinalityPrestigeLayer.finalityShardGain() ~ next finality.</span>
+    <br/>
+    <span>(This gain of finality shards is ~i 16 ~ times (~i 1 ~ + finalities), doubled if (~i 1 ~ + finalities) is a multiple of ~i 64 ~.)</span>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'goals' ? '' : 'none'~>
     <span>You have completed ~i Goals.numberOfGoalsCompleted() ~/~i Goals.numberOfGoals() ~ goals.</span>
