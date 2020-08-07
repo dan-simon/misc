@@ -483,7 +483,9 @@ let Powers = {
   },
   importString(importString) {
     let counts = this.importStringCounts(importString);
-    let toActivateByType = [0, 1, 2, 3].map(i => this.getSortedPowerList(['normal', 'infinity', 'eternity', 'complexity'][i], false, false).slice(0, counts[i]));
+    let realCounts = [0, 1, 2, 3].map(i => Math.max(0, counts[i] - this.active().filter(
+      x => x.type === ['normal', 'infinity', 'eternity', 'complexity'][i]).length));
+    let toActivateByType = [0, 1, 2, 3].map(i => this.getSortedPowerList(['normal', 'infinity', 'eternity', 'complexity'][i], false, false).slice(0, realCounts[i]));
     let indicesToActivate = [].concat.apply([], toActivateByType).slice(0, this.activatedLimit() - this.active().length).map(x => x.index);
     player.powers.active = this.active().concat(indicesToActivate.map(i => this.accessPower('stored', i)));
     player.powers.stored = this.stored().filter((_, i) => !indicesToActivate.includes(1 + i));
