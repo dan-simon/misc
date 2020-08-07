@@ -364,7 +364,7 @@ let EternityChallenge = {
   imminentAutoECCompletionTiers() {
     return Math.min(
       32 - this.getTotalEternityChallengeCompletions(),
-      Math.floor(player.stats.timeSinceAutoECCompletion / Complexities.autoECCompletionTime()));
+      Math.floor(player.stats.timeSinceAutoECCompletion / this.autoECCompletionTime()));
   },
   usedAutoECCompletionThisComplexity() {
     return player.usedAutoECCompletionThisComplexity;
