@@ -497,6 +497,7 @@ let Powers = {
     return [0, 1, 2, 3].map(i => (importString.match(new RegExp('NIEC'[i], 'g')) || []).length + (initialCounts[i] || 0));
   },
   importString(importString) {
+    if (!importString) return;
     let counts = this.importStringCounts(importString);
     let realCounts = [0, 1, 2, 3].map(i => Math.max(0, counts[i] - this.active().filter(
       x => x.type === ['normal', 'infinity', 'eternity', 'complexity'][i]).length));
