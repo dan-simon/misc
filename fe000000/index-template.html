@@ -2315,7 +2315,7 @@
       <br/>
       <span>The distance between your chroma and its cap decreases exponentially.</span>
       <br/>
-      <span ~style.display=Chroma.producingAll() ? 'none' : ''~>You ~r Chroma.currentProductionText() ~, and will produce ~r Chroma.nextColorName() ~ after next eternity reset.</span>
+      <span ~style.display=Chroma.producingAll() ? 'none' : ''~>You ~r Chroma.currentProductionTextPrefix() ~<span ~class=Chroma.currentColorClass()~>~r Chroma.currentColorName() ~</span>~r Chroma.currentProductionTextSuffix() ~, and will produce <span ~class=Chroma.nextColorClass()~>~r Chroma.nextColorName() ~</span> after next eternity reset.</span>
       <br ~style.display=Chroma.producingAll() ? 'none' : ''~/>
       <span>
         <span ~style.display=Chroma.producingAll() ? 'none' : ''~>The value of whatever color you are producing is</span>
@@ -2340,6 +2340,8 @@
                 <br/>
                 <br/>
                 <button ~style.display=Chroma.producingAll() ? 'none' : ''~ onclick="Chroma.setNextColor(1)">Produce ~r Chroma.colorName(1) ~ next</button>
+                <br/>
+                <span>~r Chroma.colorProductionStatus(1) ~</span>
               </div>
             </div>
           </td>
@@ -2357,6 +2359,8 @@
                 <br/>
                 <br/>
                 <button ~style.display=Chroma.producingAll() ? 'none' : ''~ onclick="Chroma.setNextColor(2)">Produce ~r Chroma.colorName(2) ~ next</button>
+                <br/>
+                <span>~r Chroma.colorProductionStatus(2) ~</span>
               </div>
             </div>
           </td>
@@ -2375,6 +2379,8 @@
                 <span>(based on total EP this complexity)</span>
                 <br/>
                 <button ~style.display=Chroma.producingAll() ? 'none' : ''~ onclick="Chroma.setNextColor(3)">Produce ~r Chroma.colorName(3) ~ next</button>
+                <br/>
+                <span>~r Chroma.colorProductionStatus(3) ~</span>
               </div>
             </div>
           </td>
@@ -2395,6 +2401,8 @@
                 <span>(based on Eternity Generator 8 amount)</span>
                 <br/>
                 <button ~style.display=Chroma.producingAll() ? 'none' : ''~ onclick="Chroma.setNextColor(4)">Produce ~r Chroma.colorName(4) ~ next</button>
+                <br/>
+                <span>~r Chroma.colorProductionStatus(4) ~</span>
               </div>
             </div>
           </td>
@@ -2412,6 +2420,8 @@
                 <br/>
                 <br/>
                 <button ~style.display=Chroma.producingAll() ? 'none' : ''~ onclick="Chroma.setNextColor(5)">Produce ~r Chroma.colorName(5) ~ next</button>
+                <br/>
+                <span>~r Chroma.colorProductionStatus(5) ~</span>
               </div>
             </div>
           </td>
@@ -2430,6 +2440,8 @@
                 <span>(based on eternities this complexity)</span>
                 <br/>
                 <button ~style.display=Chroma.producingAll() ? 'none' : ''~ onclick="Chroma.setNextColor(6)">Produce ~r Chroma.colorName(6) ~ next</button>
+                <br/>
+                <span>~r Chroma.colorProductionStatus(6) ~</span>
               </div>
             </div>
           </td>
