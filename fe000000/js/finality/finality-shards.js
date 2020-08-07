@@ -188,7 +188,7 @@ let FinalityShardPresets = {
     let importStringCounts = this.importStringCounts(importString);
     let old = FinalityShards.totalUpgradeBonuses();
     for (let i = 1; i <= 8; i++) {
-      let times = Math.max(importStringCounts[i - 1], FinalityShardUpgrade(i).boughtLimit()) -
+      let times = Math.min(importStringCounts[i - 1], FinalityShardUpgrade(i).boughtLimit()) -
         FinalityShardUpgrade(i).bought();
       for (let j = 0; j < times; j++) {
         FinalityShardUpgrade(i).buy(true);
