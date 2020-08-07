@@ -40,7 +40,7 @@ let ComplexityGenerator = function (i) {
         FinalityStars.multiplier(),
       ];
       let multiplier = factors.reduce((a, b) => a.times(b));
-      let powFactors = [Powers.getTotalEffect('complexity')];
+      let powFactors = [Powers.getTotalEffect('complexity'), FinalityShardUpgrade(1).effect()];
       return multiplier.pow(powFactors.reduce((a, b) => a * b));
     },
     productionPerSecond() {

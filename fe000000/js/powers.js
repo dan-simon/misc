@@ -39,7 +39,7 @@ let PowerUpgrade = function (i) {
     },
     processEffect(x) {
       if (i === 1) {
-        return 1 + Math.sqrt(Math.log2(1 + x / 4)) + Galaxy.getStrengthIncrease();
+        return 1 + Math.sqrt(Math.log2(1 + x / 4)) + Galaxy.getStrengthIncrease() + FinalityShardUpgrade(6).effect();
       } else if (i === 3) {
         return Math.sqrt(-Math.log2(4 / (4 + x)));
       } else {
@@ -375,7 +375,7 @@ let Powers = {
     return PowerUpgrade(1).effect();
   },
   speed() {
-    return PowerUpgrade(2).effect();
+    return PowerUpgrade(2).effect() * FinalityShardUpgrade(5).effect();
   },
   minimumRarity() {
     return PowerUpgrade(3).effect();

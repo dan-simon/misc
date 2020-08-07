@@ -51,7 +51,7 @@ let InfinityGenerator = function (i) {
         (i === 5 && InfinityChallenge.isInfinityChallengeCompleted(5)) ? InfinityChallenge.infinityChallenge5Reward() : 1,
         EternityChallenge.isEternityChallengeRunning(1) ? EternityChallenge.eternityChallenge1EternityStarsEffect() : 1,
         EternityChallenge.isEternityChallengeRunning(5) ? 0.5 : 1, EternityChallenge.getEternityChallengeReward(5),
-        EternityStars.power(), Powers.getTotalEffect('infinity'),
+        EternityStars.power(), Powers.getTotalEffect('infinity'), FinalityShardUpgrade(1).effect(),
       ];
       return multiplier.pow(powFactors.reduce((a, b) => a * b));
     },

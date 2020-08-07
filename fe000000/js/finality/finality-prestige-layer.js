@@ -19,7 +19,7 @@ let FinalityPrestigeLayer = {
     }
   },
   finalityPointGain() {
-    return new Decimal(2);
+    return FinalityShardUpgrade(2).effect();
   },
   finalityPoints() {
     return FinalityPoints.amount();

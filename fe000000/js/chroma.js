@@ -31,13 +31,18 @@ let Chroma = {
     return cap * (1 - Math.exp(-t / cap));
   },
   cap() {
-    return Math.pow(Math.max(EternityPoints.totalEPProducedThisComplexity().log2(), 1) * Studies.chromaCapMultiplier() *
-      ComplexityChallenge.getComplexityChallengeReward(4) * ComplexityAchievements.effect(4, 3), Galaxy.effect());
+    let factors = [
+      Math.max(EternityPoints.totalEPProducedThisComplexity().log2(), 1),
+      Studies.chromaCapMultiplier(), ComplexityChallenge.getComplexityChallengeReward(4),
+      ComplexityAchievements.effect(4, 3), FinalityShardUpgrade(4).effect()
+    ];
+    return Math.pow(factors.reduce((a, b) => a * b), Galaxy.effect());
   },
   chromaSpeedMultiplier() {
     let factors = [
       this.effectOfColor(3), EternityChallenge.getTotalCompletionsRewardEffect(4),
-      Study(16).effect(), Complexities.chromaMultiplier(), ComplexityAchievements.effect(2, 3)
+      Study(16).effect(), Complexities.chromaMultiplier(), ComplexityAchievements.effect(2, 3),
+      FinalityShardUpgrade(3).effect()
     ];
     return factors.reduce((a, b) => a.times(b));
   },

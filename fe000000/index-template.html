@@ -3640,7 +3640,7 @@
       <span>Your stellar product is ~f Galaxy.starFactor() ~ x ~f Galaxy.infinityStarFactor() ~ x ~f Galaxy.eternityStarFactor() ~ x ~f Galaxy.complexityStarFactor() ~ = ~f Galaxy.stellarProduct() ~.</span>
       <br/>
       <br/>
-      <span>You have ~i Galaxy.stellarProductAmount() ~ (based on stellar product) + ~i Galaxy.complexityPointAmount() ~ (based on total ℂP produced) = ~i Galaxy.amount() ~ galax~y Galaxy.amount() ~.</span>
+      <span>You have ~i Galaxy.stellarProductAmount() ~ (based on stellar product) + ~i Galaxy.complexityPointAmount() ~ (based on total ℂP produced) <span ~style.display=Galaxy.finalityShardUpgradeAmount() === 0 ? 'none' : ''~>+ ~i Galaxy.finalityShardUpgradeAmount() ~ (from a finality shard upgrade)</span> = ~i Galaxy.amount() ~ galax~y Galaxy.amount() ~.</span>
       <br/>
       <span>Next galaxies are at ~f Galaxy.nextStellarProductGalaxy() ~ stellar product and ~f Galaxy.nextComplexityPointGalaxy() ~ total ℂP produced.</span>
       <br/>
@@ -3755,6 +3755,57 @@
     <span>You will get ~i FinalityPrestigeLayer.finalityShardGain() ~ finality shard~s FinalityPrestigeLayer.finalityShardGain() ~ next finality.</span>
     <br/>
     <span>(This gain of finality shards is ~i 16 ~ times (~i 1 ~ + finalities), doubled if (~i 1 ~ + finalities) is a multiple of ~i 64 ~.)</span>
+    <br/>
+    <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
+      <tr>
+        <td>Power to non-finality generator multipliers (~i FinalityShardUpgrade(1).bought() ~):</td>
+        <td><span ~style.display=FinalityShardUpgrade(1).atBoughtLimit() ? 'none' : ''~>^~f formatWithPrecision(FinalityShardUpgrade(1).effect(), 5) ~ → ^~f formatWithPrecision(FinalityShardUpgrade(1).nextEffect(), 5) ~</span><span ~style.display=FinalityShardUpgrade(1).atBoughtLimit() ? '' : 'none'~>^~f formatWithPrecision(FinalityShardUpgrade(1).effect(), 5) ~ (maxed)</span></td>
+        <td><span ~style.display=FinalityShardUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(1).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(1).buy()">Cost: ~i FinalityShardUpgrade(1).cost() ~ finality shards</button></span></td>
+        <td><span ~style.display=FinalityShardUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(1).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(1).buyMax()">Max</button></span></td>
+      </tr>
+      <tr>
+        <td>Finality point gain on finality (~i FinalityShardUpgrade(2).bought() ~):</td>
+        <td><span ~style.display=FinalityShardUpgrade(2).atBoughtLimit() ? 'none' : ''~>~i FinalityShardUpgrade(2).effect() ~ FP → ~i FinalityShardUpgrade(2).nextEffect() ~ FP</span><span ~style.display=FinalityShardUpgrade(2).atBoughtLimit() ? '' : 'none'~>~i FinalityShardUpgrade(2).effect() ~ FP (maxed)</span></td>
+        <td><span ~style.display=FinalityShardUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(2).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(2).buy()">Cost: ~i FinalityShardUpgrade(2).cost() ~ finality shards</button></span></td>
+        <td><span ~style.display=FinalityShardUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(2).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(2).buyMax()">Max</button></span></td>
+      </tr>
+      <tr>
+        <td>Multiplier to chroma buildup speed (~i FinalityShardUpgrade(3).bought() ~):</td>
+        <td><span ~style.display=FinalityShardUpgrade(3).atBoughtLimit() ? 'none' : ''~>~i FinalityShardUpgrade(3).effect() ~x → ~i FinalityShardUpgrade(3).nextEffect() ~x</span><span ~style.display=FinalityShardUpgrade(3).atBoughtLimit() ? '' : 'none'~>~i FinalityShardUpgrade(3).effect() ~x (maxed)</span></td>
+        <td><span ~style.display=FinalityShardUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(3).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(3).buy()">Cost: ~i FinalityShardUpgrade(3).cost() ~ finality shards</button></span></td>
+        <td><span ~style.display=FinalityShardUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(3).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(3).buyMax()">Max</button></span></td>
+      </tr>
+      <tr>
+        <td>Multiplier to chroma cap (~i FinalityShardUpgrade(4).bought() ~):</td>
+        <td><span ~style.display=FinalityShardUpgrade(4).atBoughtLimit() ? 'none' : ''~>~f FinalityShardUpgrade(4).effect() ~x → ~f FinalityShardUpgrade(4).nextEffect() ~x</span><span ~style.display=FinalityShardUpgrade(4).atBoughtLimit() ? '' : 'none'~>~f FinalityShardUpgrade(4).effect() ~x (maxed)</span></td>
+        <td><span ~style.display=FinalityShardUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(4).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(4).buy()">Cost: ~i FinalityShardUpgrade(4).cost() ~ finality shards</button></span></td>
+        <td><span ~style.display=FinalityShardUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(4).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(4).buyMax()">Max</button></span></td>
+      </tr>
+      <tr>
+        <td>Multiplier to power gain speed (~i FinalityShardUpgrade(5).bought() ~):</td>
+        <td><span ~style.display=FinalityShardUpgrade(5).atBoughtLimit() ? 'none' : ''~>~i FinalityShardUpgrade(5).effect() ~x → ~i FinalityShardUpgrade(5).nextEffect() ~x</span><span ~style.display=FinalityShardUpgrade(5).atBoughtLimit() ? '' : 'none'~>~i FinalityShardUpgrade(5).effect() ~x (maxed)</span></td>
+        <td><span ~style.display=FinalityShardUpgrade(5).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(5).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(5).buy()">Cost: ~i FinalityShardUpgrade(5).cost() ~ finality shards</button></span></td>
+        <td><span ~style.display=FinalityShardUpgrade(5).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(5).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(5).buyMax()">Max</button></span></td>
+      </tr>
+      <tr>
+        <td>Increase to strength of new powers (~i FinalityShardUpgrade(6).bought() ~):</td>
+        <td><span ~style.display=FinalityShardUpgrade(6).atBoughtLimit() ? 'none' : ''~>+~f FinalityShardUpgrade(6).effect() ~ → +~f FinalityShardUpgrade(6).nextEffect() ~</span><span ~style.display=FinalityShardUpgrade(6).atBoughtLimit() ? '' : 'none'~>+~f FinalityShardUpgrade(6).effect() ~ (maxed)</span></td>
+        <td><span ~style.display=FinalityShardUpgrade(6).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(6).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(6).buy()">Cost: ~i FinalityShardUpgrade(6).cost() ~ finality shards</button></span></td>
+        <td><span ~style.display=FinalityShardUpgrade(6).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(6).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(6).buyMax()">Max</button></span></td>
+      </tr>
+      <tr>
+        <td>Multiplier to galaxy effect buildup speed (~i FinalityShardUpgrade(7).bought() ~):</td>
+        <td><span ~style.display=FinalityShardUpgrade(7).atBoughtLimit() ? 'none' : ''~>~i FinalityShardUpgrade(7).effect() ~x → ~i FinalityShardUpgrade(7).nextEffect() ~x</span><span ~style.display=FinalityShardUpgrade(7).atBoughtLimit() ? '' : 'none'~>~i FinalityShardUpgrade(7).effect() ~x (maxed)</span></td>
+        <td><span ~style.display=FinalityShardUpgrade(7).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(7).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(7).buy()">Cost: ~i FinalityShardUpgrade(7).cost() ~ finality shards</button></span></td>
+        <td><span ~style.display=FinalityShardUpgrade(7).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(7).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(7).buyMax()">Max</button></span></td>
+      </tr>
+      <tr>
+        <td>Extra galaxies (~i FinalityShardUpgrade(8).bought() ~):</td>
+        <td><span ~style.display=FinalityShardUpgrade(8).atBoughtLimit() ? 'none' : ''~>+~f FinalityShardUpgrade(8).effect() ~ → +~f FinalityShardUpgrade(8).nextEffect() ~</span><span ~style.display=FinalityShardUpgrade(8).atBoughtLimit() ? '' : 'none'~>+~f FinalityShardUpgrade(8).effect() ~ (maxed)</span></td>
+        <td><span ~style.display=FinalityShardUpgrade(8).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(8).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(8).buy()">Cost: ~i FinalityShardUpgrade(8).cost() ~ finality shards</button></span></td>
+        <td><span ~style.display=FinalityShardUpgrade(8).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(8).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(8).buyMax()">Max</button></span></td>
+      </tr>
+    </table>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'goals' ? '' : 'none'~>
     <span>You have completed ~i Goals.numberOfGoalsCompleted() ~/~i Goals.numberOfGoals() ~ goals.</span>
