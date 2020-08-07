@@ -21,8 +21,11 @@ let FinalityShardUpgrade = function (i) {
     cost() {
       return this.costAfterBought(this.bought());
     },
+    spentForFirst(x) {
+      return [...Array(x)].map((_, i) => this.costAfterBought(i)).reduce((a, b) => a + b, 0);
+    },
     spentSoFar() {
-      return [...Array(this.bought())].map((_, i) => this.costAfterBought(i)).reduce((a, b) => a + b, 0);
+      return this.spentForFirst(this.bought());
     },
     effect() {
       // The apparently extra parentheses are intentional.
@@ -35,7 +38,7 @@ let FinalityShardUpgrade = function (i) {
       return this.bought() >= this.boughtLimit();
     },
     canBuy() {
-      return this.cost() <= FinalityShards.amount();
+      return this.cost() <= FinalityShards.amount() && !this.atBoughtLimit();
     },
     buy(areUpgradeBonusesHandledElsewhere) {
       let old = FinalityShards.totalUpgradeBonuses();
@@ -184,8 +187,10 @@ let FinalityShardPresets = {
   importString(importString) {
     let importStringCounts = this.importStringCounts(importString);
     let old = FinalityShards.totalUpgradeBonuses();
-    for (let i = 1; i < 8; i++) {
-      for (let j = 0; j < importStringCounts[i - 1] - FinalityShardUpgrade(i).bought(); j++) {
+    for (let i = 1; i <= 8; i++) {
+      let times = Math.max(importStringCounts[i - 1], FinalityShardUpgrade(i).boughtLimit()) -
+        FinalityShardUpgrade(i).bought();
+      for (let j = 0; j < times; j++) {
         FinalityShardUpgrade(i).buy(true);
       }
     }
@@ -227,7 +232,7 @@ let FinalityShardPresets = {
   },
   presetCreate() {
     if (!this.hasPreset(32)) {
-      player.finalityShardUpgradePresets.push({'name': 'Untitled', 'finalityshardupgrade': this.exportString()});
+      player.finalityShardUpgradePresets.push({'name': 'Untitled', 'upgrades': this.exportString()});
       this.redisplayPreset(player.finalityShardUpgradePresets.length);
     }
   },
