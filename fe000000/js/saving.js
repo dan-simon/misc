@@ -409,6 +409,7 @@ let Saving = {
       player.finalityGenerators = initialFinalityGenerators();
       player.highestFinalityGenerator = 0;
       player.finalityShardUpgrades = [0, 0, 0, 0, 0, 0, 0, 0];
+      player.finalityShardUpgradePresets = [];
       player.complexityAutobuyers = player.complexityAutobuyers.concat([true, true, true, true]);
       player.goals = [
         false, false, false, false, false, false, false, false,

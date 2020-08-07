@@ -139,3 +139,92 @@ let FinalityShards = {
     return this.upgradeList.every(x => x.atBoughtLimit());
   }
 }
+
+let FinalityShardPresets = {
+  exportString() {
+    return FinalityShard.upgradeList.map(x => x.bought()).join(',');
+  },
+  export() {
+    let output = document.getElementById('finality-shard-upgrades-export-output');
+    let parent = output.parentElement;
+    parent.style.display = '';
+    output.value = this.exportString();
+    output.select();
+    try {
+      document.execCommand('copy');
+    } catch(ex) {
+      alert('Copying to clipboard failed.');
+    }
+    if (!player.options.exportDisplay) {
+      parent.style.display = 'none';
+      document.getElementsByClassName('finality-shard-upgrades-export-button')[0].focus();
+    }
+  },
+  toNumber(x) {
+    return Math.max(0, Math.floor(+x)) || 0;
+  },
+  importStringCounts(importString) {
+    let result = importString.split(',').map(x => this.toNumber(x));
+    return result.concat([0, 0, 0, 0, 0, 0, 0, 0].slice(result.length));
+  },
+  importString(importString) {
+    let importStringCounts = this.importStringCounts(importString);
+    let old = FinalityShards.totalUpgradeBonuses();
+    for (let i = 1; i < 8; i++) {
+      for (let j = 0; j < importStringCounts[i - 1] - FinalityShardUpgrade(i).bought(); j++) {
+        FinalityShardUpgrade(i).buy(true);
+      }
+    }
+    FinalityShards.handleNewUpgradeBonuses(old);
+  },
+  import() {
+    this.importString(prompt('Enter your finality shard upgrades (as previously exported):'));
+  },
+  hasPreset(x) {
+    return player.finalityShardUpgradePresets.length >= x;
+  },
+  presetName(x) {
+    if (!this.hasPreset(x)) return 'Untitled';
+    return player.finalityShardUpgradePresets[x - 1].name;
+  },
+  presetFinalityShardUpgradeList(x) {
+    if (!this.hasPreset(x)) return '';
+    return player.finalityShardUpgradePresets[x - 1].upgrades;
+  },
+  setPresetName(x, name) {
+    player.finalityShardUpgradePresets[x - 1].name = name;
+  },
+  setPresetFinalityShardUpgradeList(x, finalityShardUpgrades) {
+    player.finalityShardUpgradePresets[x - 1].upgrades = finalityShardUpgrades;
+  },
+  presetSetToCurrentFinalityShardUpgrades(x) {
+    this.setPresetFinalityShardUpgradeList(x, this.exportString());
+    this.redisplayPresetFinalityShardUpgradeList(x);
+  },
+  presetLoad(x) {
+    this.importString(this.presetFinalityShardUpgradeList(x));
+  },
+  presetDelete(x) {
+    player.finalityShardUpgradePresets = player.finalityShardUpgradePresets.slice(0, x - 1).concat(
+      player.finalityShardUpgradePresets.slice(x));
+    for (let i = x; i <= player.finalityShardUpgradePresets.length; i++) {
+      this.redisplayPreset(i);
+    }
+  },
+  presetCreate() {
+    if (!this.hasPreset(32)) {
+      player.finalityShardUpgradePresets.push({'name': 'Untitled', 'finalityshardupgrade': this.exportString()});
+      this.redisplayPreset(player.finalityShardUpgradePresets.length);
+    }
+  },
+  redisplayPreset(x) {
+    this.redisplayPresetName(x);
+    this.redisplayPresetFinalityShardUpgradeList(x);
+  },
+  redisplayPresetName(x) {
+    document.getElementsByClassName('presetfinalityshardupgradename' + x)[0].value = this.presetName(x);
+  },
+  redisplayPresetFinalityShardUpgradeList(x) {
+    document.getElementsByClassName('presetfinalityshardupgradelist' + x)[0].value = this.presetFinalityShardUpgradeList(x);
+  }
+}

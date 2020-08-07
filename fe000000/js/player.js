@@ -213,6 +213,7 @@ let initialPlayer = {
   finalityGenerators: initialFinalityGenerators(),
   highestFinalityGenerator: 0,
   finalityShardUpgrades: [0, 0, 0, 0, 0, 0, 0, 0],
+  finalityShardUpgradePresets: [],
   complexityAutobuyers: [
     true, true, true, true, true, true, true, true,
     true, true, true, true, true, true, true
