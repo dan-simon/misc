@@ -2478,7 +2478,8 @@
     <br/>
     <span>multiplying permanence and chroma buildup speed by ~q Complexities.permanenceAndChromaMultiplier() ~,</span>
     <br/>
-    <span>and automatically completing an eternity challenge tier every ~q Complexities.autoECCompletionTime() ~ seconds.</span>
+    <span ~style.display=Complexities.autoECCompletionTime() === Infinity ? 'none' : ''~>and automatically completing an eternity challenge tier every ~q Complexities.autoECCompletionTime() ~ seconds.</span>
+    <span ~style.display=Complexities.autoECCompletionTime() === Infinity ? '' : 'none'~>and never automatically completing an eternity challenge tier.</span>
     <br/>
     <span>You have ~f ComplexityStars.amount() ~ complexity stars, making all complexity challenge rewards ~f ComplexityStars.complexityChallengeMultiplier() ~x stronger.</span>
     <br/>
@@ -3229,25 +3230,25 @@
           <tr>
             <td class="yellowspan">Additional multiplier to normal generator powers:</td>
             <td><span ~style.display=PowerShardUpgrade(1).atBoughtLimit() ? 'none' : ''~>+~f PowerShardUpgrade(1).effect() ~ → +~f PowerShardUpgrade(1).nextEffect() ~</span><span ~style.display=PowerShardUpgrade(1).atBoughtLimit() ? '' : 'none'~>~f PowerShardUpgrade(1).effect() ~ (maxed)</span></td>
-            <td><span ~style.display=PowerShardUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(1).buy()">Cost: ~i PowerShardUpgrade(1).cost() ~ power shards</button></span></td>
+            <td><span ~style.display=PowerShardUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(1).buy()">Cost: ~i PowerShardUpgrade(1).cost() ~ power shard~s PowerShardUpgrade(1).cost() ~</button></span></td>
             <td><span ~style.display=PowerShardUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(1).buyMax()">Max</button></span></td>
           </tr>
           <tr>
             <td class="magentaspan">Additional multiplier to infinity generator powers:</td>
             <td><span ~style.display=PowerShardUpgrade(2).atBoughtLimit() ? 'none' : ''~>+~f PowerShardUpgrade(2).effect() ~ → +~f PowerShardUpgrade(2).nextEffect() ~</span><span ~style.display=PowerShardUpgrade(2).atBoughtLimit() ? '' : 'none'~>~f PowerShardUpgrade(2).effect() ~ (maxed)</span></td>
-            <td><span ~style.display=PowerShardUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(2).buy()">Cost: ~i PowerShardUpgrade(2).cost() ~ power shards</button></span></td>
+            <td><span ~style.display=PowerShardUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(2).buy()">Cost: ~i PowerShardUpgrade(2).cost() ~ power shard~s PowerShardUpgrade(2).cost() ~</button></span></td>
             <td><span ~style.display=PowerShardUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(2).buyMax()">Max</button></span></td>
           </tr>
           <tr>
             <td class="cyanspan">Additional multiplier to eternity generator powers:</td>
             <td><span ~style.display=PowerShardUpgrade(3).atBoughtLimit() ? 'none' : ''~>+~f PowerShardUpgrade(3).effect() ~ → +~f PowerShardUpgrade(3).nextEffect() ~</span><span ~style.display=PowerShardUpgrade(3).atBoughtLimit() ? '' : 'none'~>~f PowerShardUpgrade(3).effect() ~ (maxed)</span></td>
-            <td><span ~style.display=PowerShardUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(3).buy()">Cost: ~i PowerShardUpgrade(3).cost() ~ power shards</button></span></td>
+            <td><span ~style.display=PowerShardUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(3).buy()">Cost: ~i PowerShardUpgrade(3).cost() ~ power shard~s PowerShardUpgrade(3).cost() ~</button></span></td>
             <td><span ~style.display=PowerShardUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(3).buyMax()">Max</button></span></td>
           </tr>
           <tr>
             <td class="brownspan">Additional multiplier to complexity generator powers:</td>
             <td><span ~style.display=PowerShardUpgrade(4).atBoughtLimit() ? 'none' : ''~>+~f PowerShardUpgrade(4).effect() ~ → +~f PowerShardUpgrade(4).nextEffect() ~</span><span ~style.display=PowerShardUpgrade(4).atBoughtLimit() ? '' : 'none'~>~f PowerShardUpgrade(4).effect() ~ (maxed)</span></td>
-            <td><span ~style.display=PowerShardUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(4).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(4).buy()">Cost: ~i PowerShardUpgrade(4).cost() ~ power shards</button></span></td>
+            <td><span ~style.display=PowerShardUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(4).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(4).buy()">Cost: ~i PowerShardUpgrade(4).cost() ~ power shard~s PowerShardUpgrade(4).cost() ~</button></span></td>
             <td><span ~style.display=PowerShardUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=PowerShardUpgrade(4).canBuy() ? "" : "disabled"~ onclick="PowerShardUpgrade(4).buyMax()">Max</button></span></td>
           </tr>
         </table>
@@ -3756,53 +3757,54 @@
     <br/>
     <span>(This gain of finality shards is ~i 16 ~ times (~i 1 ~ + finalities), doubled if (~i 1 ~ + finalities) is a multiple of ~i 64 ~.)</span>
     <br/>
+    <br/>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
         <td>Power to non-finality generator multipliers (~i FinalityShardUpgrade(1).bought() ~):</td>
-        <td><span ~style.display=FinalityShardUpgrade(1).atBoughtLimit() ? 'none' : ''~>^~f formatWithPrecision(FinalityShardUpgrade(1).effect(), 5) ~ → ^~f formatWithPrecision(FinalityShardUpgrade(1).nextEffect(), 5) ~</span><span ~style.display=FinalityShardUpgrade(1).atBoughtLimit() ? '' : 'none'~>^~f formatWithPrecision(FinalityShardUpgrade(1).effect(), 5) ~ (maxed)</span></td>
-        <td><span ~style.display=FinalityShardUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(1).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(1).buy()">Cost: ~i FinalityShardUpgrade(1).cost() ~ finality shards</button></span></td>
+        <td><span ~style.display=FinalityShardUpgrade(1).atBoughtLimit() ? 'none' : ''~>^~r formatWithPrecision(FinalityShardUpgrade(1).effect(), 5) ~ → ^~r formatWithPrecision(FinalityShardUpgrade(1).nextEffect(), 5) ~</span><span ~style.display=FinalityShardUpgrade(1).atBoughtLimit() ? '' : 'none'~>^~r formatWithPrecision(FinalityShardUpgrade(1).effect(), 5) ~ (maxed)</span></td>
+        <td><span ~style.display=FinalityShardUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(1).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(1).buy()">Cost: ~i FinalityShardUpgrade(1).cost() ~ finality shard~s FinalityShardUpgrade(1).cost() ~</button></span></td>
         <td><span ~style.display=FinalityShardUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(1).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(1).buyMax()">Max</button></span></td>
       </tr>
       <tr>
         <td>Finality point gain on finality (~i FinalityShardUpgrade(2).bought() ~):</td>
         <td><span ~style.display=FinalityShardUpgrade(2).atBoughtLimit() ? 'none' : ''~>~i FinalityShardUpgrade(2).effect() ~ FP → ~i FinalityShardUpgrade(2).nextEffect() ~ FP</span><span ~style.display=FinalityShardUpgrade(2).atBoughtLimit() ? '' : 'none'~>~i FinalityShardUpgrade(2).effect() ~ FP (maxed)</span></td>
-        <td><span ~style.display=FinalityShardUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(2).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(2).buy()">Cost: ~i FinalityShardUpgrade(2).cost() ~ finality shards</button></span></td>
+        <td><span ~style.display=FinalityShardUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(2).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(2).buy()">Cost: ~i FinalityShardUpgrade(2).cost() ~ finality shard~s FinalityShardUpgrade(2).cost() ~</button></span></td>
         <td><span ~style.display=FinalityShardUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(2).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(2).buyMax()">Max</button></span></td>
       </tr>
       <tr>
         <td>Multiplier to chroma buildup speed (~i FinalityShardUpgrade(3).bought() ~):</td>
         <td><span ~style.display=FinalityShardUpgrade(3).atBoughtLimit() ? 'none' : ''~>~i FinalityShardUpgrade(3).effect() ~x → ~i FinalityShardUpgrade(3).nextEffect() ~x</span><span ~style.display=FinalityShardUpgrade(3).atBoughtLimit() ? '' : 'none'~>~i FinalityShardUpgrade(3).effect() ~x (maxed)</span></td>
-        <td><span ~style.display=FinalityShardUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(3).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(3).buy()">Cost: ~i FinalityShardUpgrade(3).cost() ~ finality shards</button></span></td>
+        <td><span ~style.display=FinalityShardUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(3).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(3).buy()">Cost: ~i FinalityShardUpgrade(3).cost() ~ finality shard~s FinalityShardUpgrade(3).cost() ~</button></span></td>
         <td><span ~style.display=FinalityShardUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(3).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(3).buyMax()">Max</button></span></td>
       </tr>
       <tr>
         <td>Multiplier to chroma cap (~i FinalityShardUpgrade(4).bought() ~):</td>
         <td><span ~style.display=FinalityShardUpgrade(4).atBoughtLimit() ? 'none' : ''~>~f FinalityShardUpgrade(4).effect() ~x → ~f FinalityShardUpgrade(4).nextEffect() ~x</span><span ~style.display=FinalityShardUpgrade(4).atBoughtLimit() ? '' : 'none'~>~f FinalityShardUpgrade(4).effect() ~x (maxed)</span></td>
-        <td><span ~style.display=FinalityShardUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(4).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(4).buy()">Cost: ~i FinalityShardUpgrade(4).cost() ~ finality shards</button></span></td>
+        <td><span ~style.display=FinalityShardUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(4).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(4).buy()">Cost: ~i FinalityShardUpgrade(4).cost() ~ finality shard~s FinalityShardUpgrade(4).cost() ~</button></span></td>
         <td><span ~style.display=FinalityShardUpgrade(4).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(4).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(4).buyMax()">Max</button></span></td>
       </tr>
       <tr>
         <td>Multiplier to power gain speed (~i FinalityShardUpgrade(5).bought() ~):</td>
         <td><span ~style.display=FinalityShardUpgrade(5).atBoughtLimit() ? 'none' : ''~>~i FinalityShardUpgrade(5).effect() ~x → ~i FinalityShardUpgrade(5).nextEffect() ~x</span><span ~style.display=FinalityShardUpgrade(5).atBoughtLimit() ? '' : 'none'~>~i FinalityShardUpgrade(5).effect() ~x (maxed)</span></td>
-        <td><span ~style.display=FinalityShardUpgrade(5).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(5).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(5).buy()">Cost: ~i FinalityShardUpgrade(5).cost() ~ finality shards</button></span></td>
+        <td><span ~style.display=FinalityShardUpgrade(5).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(5).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(5).buy()">Cost: ~i FinalityShardUpgrade(5).cost() ~ finality shard~s FinalityShardUpgrade(5).cost() ~</button></span></td>
         <td><span ~style.display=FinalityShardUpgrade(5).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(5).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(5).buyMax()">Max</button></span></td>
       </tr>
       <tr>
         <td>Increase to strength of new powers (~i FinalityShardUpgrade(6).bought() ~):</td>
         <td><span ~style.display=FinalityShardUpgrade(6).atBoughtLimit() ? 'none' : ''~>+~f FinalityShardUpgrade(6).effect() ~ → +~f FinalityShardUpgrade(6).nextEffect() ~</span><span ~style.display=FinalityShardUpgrade(6).atBoughtLimit() ? '' : 'none'~>+~f FinalityShardUpgrade(6).effect() ~ (maxed)</span></td>
-        <td><span ~style.display=FinalityShardUpgrade(6).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(6).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(6).buy()">Cost: ~i FinalityShardUpgrade(6).cost() ~ finality shards</button></span></td>
+        <td><span ~style.display=FinalityShardUpgrade(6).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(6).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(6).buy()">Cost: ~i FinalityShardUpgrade(6).cost() ~ finality shard~s FinalityShardUpgrade(6).cost() ~</button></span></td>
         <td><span ~style.display=FinalityShardUpgrade(6).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(6).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(6).buyMax()">Max</button></span></td>
       </tr>
       <tr>
         <td>Multiplier to galaxy effect buildup speed (~i FinalityShardUpgrade(7).bought() ~):</td>
         <td><span ~style.display=FinalityShardUpgrade(7).atBoughtLimit() ? 'none' : ''~>~i FinalityShardUpgrade(7).effect() ~x → ~i FinalityShardUpgrade(7).nextEffect() ~x</span><span ~style.display=FinalityShardUpgrade(7).atBoughtLimit() ? '' : 'none'~>~i FinalityShardUpgrade(7).effect() ~x (maxed)</span></td>
-        <td><span ~style.display=FinalityShardUpgrade(7).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(7).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(7).buy()">Cost: ~i FinalityShardUpgrade(7).cost() ~ finality shards</button></span></td>
+        <td><span ~style.display=FinalityShardUpgrade(7).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(7).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(7).buy()">Cost: ~i FinalityShardUpgrade(7).cost() ~ finality shard~s FinalityShardUpgrade(7).cost() ~</button></span></td>
         <td><span ~style.display=FinalityShardUpgrade(7).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(7).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(7).buyMax()">Max</button></span></td>
       </tr>
       <tr>
         <td>Extra galaxies (~i FinalityShardUpgrade(8).bought() ~):</td>
         <td><span ~style.display=FinalityShardUpgrade(8).atBoughtLimit() ? 'none' : ''~>+~f FinalityShardUpgrade(8).effect() ~ → +~f FinalityShardUpgrade(8).nextEffect() ~</span><span ~style.display=FinalityShardUpgrade(8).atBoughtLimit() ? '' : 'none'~>+~f FinalityShardUpgrade(8).effect() ~ (maxed)</span></td>
-        <td><span ~style.display=FinalityShardUpgrade(8).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(8).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(8).buy()">Cost: ~i FinalityShardUpgrade(8).cost() ~ finality shards</button></span></td>
+        <td><span ~style.display=FinalityShardUpgrade(8).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(8).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(8).buy()">Cost: ~i FinalityShardUpgrade(8).cost() ~ finality shard~s FinalityShardUpgrade(8).cost() ~</button></span></td>
         <td><span ~style.display=FinalityShardUpgrade(8).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(8).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(8).buyMax()">Max</button></span></td>
       </tr>
     </table>
