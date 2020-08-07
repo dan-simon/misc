@@ -2059,7 +2059,7 @@
       <button ~style.display=ComplexityAchievements.hasComplexityAchievement(3, 2) ? '' : 'none'~ onclick="EternityChallenge.toggleRequirementDisplay()">Show (now unneeded) eternity challenge requirements: ~r EternityChallenge.isRequirementDisplayOn() ? "On" : "Off" ~</button>
     </span>
     <div ~style.display=EternityChallenge.hasAutoECCompletion() ? '' : 'none'~>
-      <span>You automatically complete an eternity challenge tier once every ~q Complexities.autoECCompletionTime() ~ seconds.</span>
+      <span>You automatically complete an eternity challenge tier once every ~q EternityChallenge.autoECCompletionTime() ~ seconds.</span>
       <br/>
       <span ~style.display=EternityChallenge.areAllEternityChallengesCompleted() ? 'none' : ''~>It has been ~f EternityChallenge.timeSinceAutoECCompletion() ~ seconds since your last automatic eternity challenge completion<span ~style.display=EternityChallenge.usedAutoECCompletionThisComplexity() ? 'none' : ''~> (none this complexity)</span>.</span>
       <span ~style.display=EternityChallenge.areAllEternityChallengesCompleted() ? '' : 'none'~>All eternity challenges are fully complete<span ~style.display=EternityChallenge.usedAutoECCompletionThisComplexity() ? 'none' : ''~> (and none were automatically completed)</span>.</span>

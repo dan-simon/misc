@@ -1527,7 +1527,7 @@ function updateDisplay() {
     b[534].style.display = ComplexityAchievements.hasComplexityAchievement(3, 2) ? '' : 'none';
     e[566].textContent = EternityChallenge.isRequirementDisplayOn() ? "On" : "Off";
     b[535].style.display = EternityChallenge.hasAutoECCompletion() ? '' : 'none';
-    e[567].textContent = formatMaybeInt(Complexities.autoECCompletionTime());
+    e[567].textContent = formatMaybeInt(EternityChallenge.autoECCompletionTime());
     b[536].style.display = EternityChallenge.areAllEternityChallengesCompleted() ? 'none' : '';
     e[568].textContent = format(EternityChallenge.timeSinceAutoECCompletion());
     b[537].style.display = EternityChallenge.usedAutoECCompletionThisComplexity() ? 'none' : '';

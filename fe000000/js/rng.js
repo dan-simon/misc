@@ -115,7 +115,7 @@ let RNG = {
   initialPower() {
     return {
       'type': 'normal',
-      'strength': 1,
+      'strength': Powers.newStrength(),
       'rarity': 1,
     };
   }

@@ -324,7 +324,7 @@ let EternityChallenge = {
     }
   },
   hasAutoECCompletion() {
-    return Complexities.amount() > 0;
+    return Complexities.amount() > 0 || Finalities.amount() > 0;
   },
   isAutoECCompletionOn() {
     return player.autoECCompletion;
