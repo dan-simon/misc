@@ -94,6 +94,10 @@ let PowerShards = {
     player.powers.shards += this.shardGain(p);
     player.powers.hasGainedShards = true;
   },
+  gainPowerShards(x) {
+    player.powers.shards += x;
+    player.powers.hasGainedShards = true;
+  },
   gainShardsStored(i) {
     if (Powers.canAccessStored(i)) {
       this.gainShards(Powers.stored()[i - 1]);
