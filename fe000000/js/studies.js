@@ -11,7 +11,7 @@ let STUDY_EFFECTS = [
   () => Decimal.pow(Math.max(1, Math.log2(Prestige.prestigePower().log2())), 3),
   () => Decimal.pow(2, Math.pow(Math.log2(
     1 + player.stats.timeSinceEternity * (1 + EternityStars.amount().max(1).log2() / 1024) / 64), 4 / 3)),
-  () => Decimal.pow(Studies.totalTheorems(), 2),
+  () => Decimal.pow(Math.max(1, Studies.totalTheorems()), 2),
   x => Decimal.pow(2, 4096 * x),
   x => Decimal.pow(2, x * Math.sqrt(Chroma.totalColorAmount()) / 2),
   x => Decimal.pow(Math.max(Chroma.amount(), 1), x),
