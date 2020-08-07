@@ -222,6 +222,7 @@ let Studies = {
     return Number.isFinite(result) ? result : 0;
   },
   importString(importString) {
+    if (!importString) return;
     let parts = importString.split('&');
     // You can put any study id between 1 and 16 in the initial part of the import list; this is intended.
     // Also, none should be handled as buying no studies based on current code even without a special case,
