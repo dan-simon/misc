@@ -3,7 +3,7 @@ let Goals = {
     'Sacrifice.', 'Prestige.', 'Infinity.', 'Break infinity.',
     'Complete an infinity challenge.', 'Eternity.', 'Complete all eternity milestones.', 'Unlock the Eternity Producer.',
     'Complete an eternity challenge.', 'Unlock chroma.', 'Complexity.', 'Complete all complexity achievements.',
-    'Unlock powers.', 'Unlock galaxies.', 'Finality.', 'Finality 256 times.'
+    'Unlock powers.', 'Unlock galaxies.', 'Finality.', 'Buy the maximum possible of all finality upgrades.'
   ],
   goalConditions: [
     null, null, null, () => InfinityPrestigeLayer.isBreakInfinityOn(),
