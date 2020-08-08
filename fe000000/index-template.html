@@ -1629,22 +1629,33 @@
     </table>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 0px; border-collapse: separate;">
       <tr>
+        <td style="text-align: center;">
+          You have ~f Stars.amount() ~ stars.
+        </td>
+        <td style="text-align: center;">
+          You have ~i InfinityPoints.amount() ~ IP.
+        </td>
+        <td style="text-align: center;">
+          You have ~i EternityPoints.amount() ~ EP.
+        </td>
+      </tr>
+      <tr>
         <td>
-          <button ~class=Studies.canBuy(0) ? '' : 'disabled'~ style="width: 256px; height: 96px;" onclick="Studies.buy(0)">
+          <button ~class=Studies.canBuy(0) ? '' : 'disabled'~ style="width: 288px; height: 96px;" onclick="Studies.buy(0)">
             Buy a theorem with stars
             <br/>
             Cost: ~i Studies.cost(0) ~ stars
           </button>
         </td>
         <td>
-          <button ~class=Studies.canBuy(1) ? '' : 'disabled'~ style="width: 256px; height: 96px;" onclick="Studies.buy(1)">
+          <button ~class=Studies.canBuy(1) ? '' : 'disabled'~ style="width: 288px; height: 96px;" onclick="Studies.buy(1)">
             Buy a theorem with infinity points
             <br/>
             Cost: ~i Studies.cost(1) ~ IP
           </button>
         </td>
         <td>
-          <button ~class=Studies.canBuy(2) ? '' : 'disabled'~ style="width: 256px; height: 96px;" onclick="Studies.buy(2)">
+          <button ~class=Studies.canBuy(2) ? '' : 'disabled'~ style="width: 288px; height: 96px;" onclick="Studies.buy(2)">
             Buy a theorem with eternity points
             <br/>
             Cost: ~i Studies.cost(2) ~ EP
@@ -1653,34 +1664,34 @@
       </tr>
       <tr>
         <td>
-          <button ~class=Studies.canBuy(0) ? '' : 'disabled'~ style="width: 256px; height: 48px;" onclick="Studies.buyMax(0)">
+          <button ~class=Studies.canBuy(0) ? '' : 'disabled'~ style="width: 288px; height: 48px;" onclick="Studies.buyMax(0)">
             Buy max theorems with stars
           </button>
         </td>
         <td>
-          <button ~class=Studies.canBuy(1) ? '' : 'disabled'~ style="width: 256px; height: 48px;" onclick="Studies.buyMax(1)">
+          <button ~class=Studies.canBuy(1) ? '' : 'disabled'~ style="width: 288px; height: 48px;" onclick="Studies.buyMax(1)">
             Buy max theorems with infinity points
           </button>
         </td>
         <td>
-          <button ~class=Studies.canBuy(2) ? '' : 'disabled'~ style="width: 256px; height: 48px;" onclick="Studies.buyMax(2)">
+          <button ~class=Studies.canBuy(2) ? '' : 'disabled'~ style="width: 288px; height: 48px;" onclick="Studies.buyMax(2)">
             Buy max theorems with eternity points
           </button>
         </td>
       </tr>
       <tr ~style.display=EternityAutobuyers.hasTheoremAutobuyers() ? '' : 'none'~>
         <td>
-          <button style="width: 256px; height: 48px;" onclick="EternityAutobuyer(14).toggle()">
+          <button style="width: 288px; height: 48px;" onclick="EternityAutobuyer(14).toggle()">
             Auto buy theorems with stars: ~r EternityAutobuyer(14).isOn() ? "On" : "Off" ~
           </button>
         </td>
         <td>
-          <button style="width: 256px; height: 48px;" onclick="EternityAutobuyer(15).toggle()">
+          <button style="width: 288px; height: 48px;" onclick="EternityAutobuyer(15).toggle()">
             Auto buy theorems with infinity points: ~r EternityAutobuyer(15).isOn() ? "On" : "Off" ~
           </button>
         </td>
         <td>
-          <button style="width: 256px; height: 48px;" onclick="EternityAutobuyer(16).toggle()">
+          <button style="width: 288px; height: 48px;" onclick="EternityAutobuyer(16).toggle()">
             Auto buy theorems with eternity points: ~r EternityAutobuyer(16).isOn() ? "On" : "Off" ~
           </button>
         </td>
@@ -2545,6 +2556,12 @@
       You have completed ~i ComplexityChallenge.getTotalComplexityChallengeCompletions() ~ complexity challenge tier~s ComplexityChallenge.getTotalComplexityChallengeCompletions() ~.
       <button onclick="ComplexityChallenge.complexityReset()">Restart complexity and re-enter all complexity challenges</button>
     </span>
+    <br/>
+    <span>You have ~i Complexities.amount() ~ complexit~y Complexities.amount() ~ (allowing you to enter ~i ComplexityChallenge.numberUnlocked() ~ complexity challenge~s ComplexityChallenge.numberUnlocked() ~) and ~f Stars.amount() ~ stars.</span>
+    <br/>
+    <span>Complexity challenge rewards are currently ~f ComplexityStars.complexityChallengeMultiplier() ~x stronger (from complexity stars).</span>
+    <br/>
+    <br/>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
         <td>

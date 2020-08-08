@@ -25,6 +25,9 @@ let ComplexityChallenge = {
     // Yes, you can complete Complexity Challenge 1 before knowing that it exists.
     return player.complexities >= this.requirements[x];
   },
+  numberUnlocked() {
+    return [1, 2, 3, 4, 5, 6].filter(i => this.isComplexityChallengeUnlocked(i)).length;
+  },
   getComplexityChallengeGoal(x) {
     return this.goals[x].pow(Math.pow(2, this.getComplexityChallengeCompletions(x) / 4));
   },
