@@ -1384,16 +1384,14 @@
     </table>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'studies' ? '' : 'none'~>
-    <span>
-      You have ~i Studies.totalTheorems() ~ total theorem~s Studies.totalTheorems() ~ and ~i Studies.unspentTheorems() ~ unspent theorem~s Studies.unspentTheorems() ~.
-      <button onclick="Studies.toggleRespec()">Respec studies on next eternity: ~r Studies.isRespecOn() ? "On" : "Off" ~</button>
-    </span>
+    <span>You have ~i Studies.totalTheorems() ~ total theorem~s Studies.totalTheorems() ~ and ~i Studies.unspentTheorems() ~ unspent theorem~s Studies.unspentTheorems() ~.</span>
     <br/>
-    <span>
-      <button onclick="Studies.respecAndReset()">Respec studies and ~r EternityPrestigeLayer.resetText() ~</button>
-      <br ~style.display=EternityPrestigeLayer.canEternity() ? 'none' : ''~/>
-      <button class="studies-export-button" onclick="Studies.export()">Export studies</button> <button onclick="Studies.import()">Import studies</button> <button onclick="Studies.tryToBuyFirstTwelve()">Try to buy all of studies 1-12 (in order)</button>
-    </span>
+    <button class="studies-export-button" onclick="Studies.export()">Export studies</button> <button onclick="Studies.import()">Import studies</button>
+    <button onclick="Studies.toggleRespec()">Respec studies on next eternity: ~r Studies.isRespecOn() ? "On" : "Off" ~</button></span>
+    <br/>
+    <button onclick="Studies.respecAndReset()">Respec studies and ~r EternityPrestigeLayer.resetText() ~</button>
+    <br ~style.display=!EternityPrestigeLayer.canEternity() && Studies.canAccessFourthRow() ? '' : 'none'~/>
+    <button onclick="Studies.respecFourthRowAndReset()" ~style.display=Studies.canAccessFourthRow() ? '' : 'none'~>Respec fourth-row studies and ~r EternityPrestigeLayer.resetText() ~</button>
     <br/>
     <span>Click on the name of a study preset on the line below to load that study list:</span>
     <div style="width: 1024px; margin-left: auto; margin-right: auto;">
@@ -1962,15 +1960,15 @@
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'eternity-producer' ? '' : 'none'~>
     <div ~style.display=EternityProducer.isUnlocked() ? 'none' : ''~>
+      <button style="height: 48px;" onclick="EternityProducer.unlock()" ~class=EternityProducer.canUnlock() ? '' : 'disabled'~>
+        Unlock the Eternity Producer<br/>Cost: ~f EternityProducer.unlockCost() ~ eternity points
+      </button>
+      <br/>
       <span>The Eternity Producer, when unlocked, will produce ~q EternityProducer.rawProductionPerSecond() ~ eternit~y EternityProducer.rawProductionPerSecond() ~ per second.</span>
       <br/>
       <span>It will also multiply all eternity generators by ~f EternityProducer.rawMultiplier() ~ (based on eternities).</span>
       <br/>
       <span>It can be improved via upgrades.</span>
-      <br/>
-      <button style="height: 48px;" onclick="EternityProducer.unlock()" ~class=EternityProducer.canUnlock() ? '' : 'disabled'~>
-        Unlock the Eternity Producer<br/>Cost: ~f EternityProducer.unlockCost() ~ eternity points
-      </button>
     </div>
     <div ~style.display=EternityProducer.isUnlocked() ? '' : 'none'~>
       <span>You have ~q Eternities.amount() ~ eternit~y Eternities.amount() ~. Due to the Eternity Producer, they multiply all eternity generators by ~f EternityProducer.multiplier() ~.</span>
