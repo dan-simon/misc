@@ -1,0 +1,86 @@
+@font-face {
+  font-family: Typewriter;
+  src: url('MonospaceTypewriter.ttf');
+}
+
+body {
+  text-align: center;
+  font-family: Typewriter, serif;
+  font-size: 1rem;
+  background-color: #008888;
+}
+
+button {
+  border: 0px;
+	border-radius: 10px;
+  font-family: Typewriter, serif;
+  font-size: 1rem;
+  margin: 2px;
+  background-color: #00cc00;
+}
+
+.disabled {
+  background-color: #cc0000;
+}
+
+.buildingdiv {
+  display: table;
+  text-align: center;
+  width: 700px;
+  height: 616px;
+  padding: 4px;
+  margin: 4px;
+  border-radius: 10px;
+  border: solid;
+  border-width: 1px 1px;
+}
+
+.buildingtable {
+  margin: 0 auto;
+}
+
+.buildingtable td {
+  text-align: center;
+}
+
+.trimdiv {
+  display: table;
+  text-align: center;
+  width: 500px;
+  height: 100px;
+  padding: 4px;
+  margin: 4px;
+  border-radius: 10px;
+  border: solid;
+  border-width: 1px 1px;
+}
+
+.zonediv {
+  display: table;
+  text-align: center;
+  width: 500px;
+  height: 500px;
+  padding: 4px;
+  margin: 4px;
+  border-radius: 10px;
+  border: solid;
+  border-width: 1px 1px;
+}
+
+.zonetable {
+  margin: 0 auto;
+  border: 1px solid black;
+  width: 400px;
+  height: 400px;
+  border-spacing: 0px;
+}
+
+.zonetable tr {
+  height: 50px;
+}
+
+.zonetable td {
+  border: 1px solid black;
+  text-align: center;
+  width: 50px;
+}

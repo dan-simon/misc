@@ -1,0 +1,224 @@
+<html>
+<head>
+  <title>Trims</title>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/break_infinity.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@antimatter-dimensions/notations"></script>
+  <script src="js/equip.js"></script>
+  <script src="js/format.js"></script>
+  <script src="js/loop.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/options.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/saving.js"></script>
+  <script src="js/shrink-level.js"></script>
+  <script src="js/stuff.js"></script>
+  <script src="js/traps.js"></script>
+  <script src="js/trims.js"></script>
+  <script src="js/zone.js"></script>
+  <script src="js/update-display.js"></script>
+  <link rel="stylesheet" href="styles.css"></link>
+</head>
+<body>
+  <button class="options-button" onclick="Saving.saveGame()">Save</button>
+  <button class="options-button export-button" onclick="Saving.exportGame()">Export</button>
+  <button class="options-button" onclick="Saving.loadGamePrompt()">Load</button>
+  <button class="options-button" onclick="Options.toggleOfflineProgress()">Offline progress: ~r player.options.offlineProgress ? "On" : "Off" ~</button>
+  Notation: <select ~!value=Options.notation()~ ~!onchange=function() {Options.setNotation(this.value)}~>
+    <option value="Scientific">Scientific</option>
+    <option value="Engineering">Engineering</option>
+    <option value="Letters">Letter</option>
+    <option value="Standard">Standard</option>
+    <option value="Cancer">Cancer</option>
+    <option value="Logarithm">Logarithm</option>
+    <option value="Hex">Hex</option>
+    <option value="Blind">Blind</option>
+  </select></span>
+  <span style="display:inline-block; width: 150px;"></span>
+  <button class="options-button" onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button>
+  <span style="display: none;">Exported save (also copied to clipboard): <input id="export-output"></input></span>
+  <br/>
+  <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 0px; border-collapse: separate;"><tr>
+    <td><div class="buildingdiv">
+      Stuff: ~i Stuff.amount() ~<span style="display:inline-block; width:200px;"></span>Build amount: <select ~!value=Options.buildAmount()~ ~!onchange=function() {Options.setBuildAmount(+this.value)}~>
+        <option value="1">1</option>
+        <option value="3">3</option>
+        <option value="10">10</option>
+        <option value="30">30</option>
+        <option value="100">100</option>
+        <option value="300">300</option>
+        <option value="1000">1000</option>
+        <option value="Infinity">Max</option>
+      </select>
+      <br/>
+      Trap storage: <meter min="0" max="1" low="0.2" high="0.8" optimum="0.1" ~value=Equip.fractionSpaceOfType('trap')~></meter>
+      <br/>
+      Armor storage: <meter min="0" max="1" low="0.2" high="0.8" optimum="0.1" ~value=Equip.fractionSpaceOfType('armor')~></meter>
+      <br/>
+      Housing storage: <meter min="0" max="1" low="0.2" high="0.8" optimum="0.1" ~value=Equip.fractionSpaceOfType('housing')~></meter>
+      <br/>
+      Weapon storage: <meter min="0" max="1" low="0.2" high="0.8" optimum="0.1" ~value=Equip.fractionSpaceOfType('weapon')~></meter>
+      <br/>
+      <table class="buildingtable">
+        <tr>
+          <td>
+            T-shirts: ~i Equip.amount('tshirt', ShrinkLevel.level()) ~
+            <br/>
+            (~r Equip.spaceDisplay('tshirt', ShrinkLevel.level()) ~)
+            <br/>
+            <button ~class=Equip.buildAmount('tshirt', ShrinkLevel.level()) === 0 ? 'disabled' : ''~ onclick="Equip.build('tshirt', ShrinkLevel.level())">
+              Build ~i Equip.buildAmount('tshirt', ShrinkLevel.level()) ~ T-shirt~s Equip.buildAmount('tshirt', ShrinkLevel.level()) ~
+              <br/>
+              Cost: ~i Equip.costForAllDisplay('tshirt', ShrinkLevel.level()) ~ stuff
+              <br/>
+            </button>
+          </td>
+          <td>
+            Tents: ~i Equip.amount('tent', ShrinkLevel.level()) ~
+            <br/>
+            (~r Equip.spaceDisplay('tent', ShrinkLevel.level()) ~)
+            <br/>
+            <button ~class=Equip.buildAmount('tent', ShrinkLevel.level()) === 0 ? 'disabled' : ''~ onclick="Equip.build('tent', ShrinkLevel.level())">
+              Build ~i Equip.buildAmount('tent', ShrinkLevel.level()) ~ tent~s Equip.buildAmount('tent', ShrinkLevel.level()) ~
+              <br/>
+              Cost: ~i Equip.costForAllDisplay('tent', ShrinkLevel.level()) ~ stuff
+              <br/>
+            </button>
+          </td>
+          <td>
+            Darts: ~i Equip.amount('dart', ShrinkLevel.level()) ~
+            <br/>
+            (~r Equip.spaceDisplay('dart', ShrinkLevel.level()) ~)
+            <br/>
+            <button ~class=Equip.buildAmount('dart', ShrinkLevel.level()) === 0 ? 'disabled' : ''~ onclick="Equip.build('dart', ShrinkLevel.level())">
+              Build ~i Equip.buildAmount('dart', ShrinkLevel.level()) ~ dart~s Equip.buildAmount('dart', ShrinkLevel.level()) ~
+              <br/>
+              Cost: ~i Equip.costForAllDisplay('dart', ShrinkLevel.level()) ~ stuff
+              <br/>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td/>
+          <td>
+            Traps: ~i Equip.amount('trap', ShrinkLevel.level()) ~
+            <br/>
+            (~r Equip.spaceDisplay('trap', ShrinkLevel.level()) ~)
+            <br/>
+            <button ~class=Equip.buildAmount('trap', ShrinkLevel.level()) === 0 ? 'disabled' : ''~ onclick="Equip.build('trap', ShrinkLevel.level())">
+              Build ~i Equip.buildAmount('trap', ShrinkLevel.level()) ~ trap~s Equip.buildAmount('trap', ShrinkLevel.level()) ~
+              <br/>
+              Cost: ~i Equip.costForAllDisplay('trap', ShrinkLevel.level()) ~ stuff
+              <br/>
+            </button>
+          </td>
+          <td/>
+        </tr>
+      </table>
+    </div></td>
+    <td><div class="trimdiv">
+      <button onclick="Traps.toggleTrapping()">Trapping: ~r Traps.isTrapping() ? "On" : "Off" ~</button><span style="display:inline-block; width: 50px;"></span>
+      Trims: ~i Trims.amount() ~<span style="display:inline-block; width: 20px;"></span>
+      <meter min="0" max="1" low="0.2" high="0.8" optimum="0.1" ~value=Trims.fraction()~></meter>
+      <br/>
+      <br/>
+      Gathering ~f Trims.gatheringProduction() ~ stuff/second
+      <br/>
+      Breeding ~f Trims.breedingProduction() ~ Trims/second
+    </div><div class="zonediv">
+      Zone ~i Zone.zone() ~<span style="display:inline-block; width: 50px;"></span>Cell ~i Zone.cell() ~
+      <br/>
+      <button ~class=Zone.canSendGroupToFight() ? '' : 'disabled'~ onclick="Zone.sendGroupToFight()">Send ~i Zone.fightingGroupSize() ~ Trim~s Zone.fightingGroupSize() ~ to fight</button>
+      <span style="display:inline-block; width: 50px;"></span>
+      <button onclick="Zone.toggleAutoFight()">Auto-fight: ~r Zone.isAutoFightOn() ? "On" : "Off" ~</button>
+      <br/>
+      ~i Zone.trimCount() ~ Trim~s Zone.trimCount() ~: ~i Zone.trimAttack() ~ attack, ~i Zone.trimHealth() ~/~i Zone.trimMaxHealth() ~ health <meter min="0" max="1" low="0.2" high="0.8" optimum="0.9" ~value=Zone.trimHealthFraction()~></meter>
+      <br/>
+      ~r Zone.enemyName() ~: ~i Zone.enemyAttack() ~ attack, ~i Zone.enemyHealth() ~/~i Zone.enemyMaxHealth() ~ health <meter min="0" max="1" low="0.2" high="0.8" optimum="0.9" ~value=Zone.enemyHealthFraction()~></meter>
+      <br/>
+      <table class="zonetable">
+        <tr>
+          <td ~style.background-color=Zone.getCellColor(8, 1)~></td>
+          <td ~style.background-color=Zone.getCellColor(8, 2)~></td>
+          <td ~style.background-color=Zone.getCellColor(8, 3)~></td>
+          <td ~style.background-color=Zone.getCellColor(8, 4)~></td>
+          <td ~style.background-color=Zone.getCellColor(8, 5)~></td>
+          <td ~style.background-color=Zone.getCellColor(8, 6)~></td>
+          <td ~style.background-color=Zone.getCellColor(8, 7)~></td>
+          <td ~style.background-color=Zone.getCellColor(8, 8)~>~r Zone.book(4) ~</td>
+        </tr>
+        <tr>
+          <td ~style.background-color=Zone.getCellColor(7, 1)~></td>
+          <td ~style.background-color=Zone.getCellColor(7, 2)~></td>
+          <td ~style.background-color=Zone.getCellColor(7, 3)~></td>
+          <td ~style.background-color=Zone.getCellColor(7, 4)~></td>
+          <td ~style.background-color=Zone.getCellColor(7, 5)~></td>
+          <td ~style.background-color=Zone.getCellColor(7, 6)~></td>
+          <td ~style.background-color=Zone.getCellColor(7, 7)~></td>
+          <td ~style.background-color=Zone.getCellColor(7, 8)~></td>
+        </tr>
+        <tr>
+          <td ~style.background-color=Zone.getCellColor(6, 1)~></td>
+          <td ~style.background-color=Zone.getCellColor(6, 2)~></td>
+          <td ~style.background-color=Zone.getCellColor(6, 3)~></td>
+          <td ~style.background-color=Zone.getCellColor(6, 4)~></td>
+          <td ~style.background-color=Zone.getCellColor(6, 5)~></td>
+          <td ~style.background-color=Zone.getCellColor(6, 6)~></td>
+          <td ~style.background-color=Zone.getCellColor(6, 7)~></td>
+          <td ~style.background-color=Zone.getCellColor(6, 8)~>~r Zone.book(3) ~</td>
+        </tr>
+        <tr>
+          <td ~style.background-color=Zone.getCellColor(5, 1)~></td>
+          <td ~style.background-color=Zone.getCellColor(5, 2)~></td>
+          <td ~style.background-color=Zone.getCellColor(5, 3)~></td>
+          <td ~style.background-color=Zone.getCellColor(5, 4)~></td>
+          <td ~style.background-color=Zone.getCellColor(5, 5)~></td>
+          <td ~style.background-color=Zone.getCellColor(5, 6)~></td>
+          <td ~style.background-color=Zone.getCellColor(5, 7)~></td>
+          <td ~style.background-color=Zone.getCellColor(5, 8)~></td>
+        </tr>
+        <tr>
+          <td ~style.background-color=Zone.getCellColor(4, 1)~></td>
+          <td ~style.background-color=Zone.getCellColor(4, 2)~></td>
+          <td ~style.background-color=Zone.getCellColor(4, 3)~></td>
+          <td ~style.background-color=Zone.getCellColor(4, 4)~></td>
+          <td ~style.background-color=Zone.getCellColor(4, 5)~></td>
+          <td ~style.background-color=Zone.getCellColor(4, 6)~></td>
+          <td ~style.background-color=Zone.getCellColor(4, 7)~></td>
+          <td ~style.background-color=Zone.getCellColor(4, 8)~>~r Zone.book(2) ~</td>
+        </tr>
+        <tr>
+          <td ~style.background-color=Zone.getCellColor(3, 1)~></td>
+          <td ~style.background-color=Zone.getCellColor(3, 2)~></td>
+          <td ~style.background-color=Zone.getCellColor(3, 3)~></td>
+          <td ~style.background-color=Zone.getCellColor(3, 4)~></td>
+          <td ~style.background-color=Zone.getCellColor(3, 5)~></td>
+          <td ~style.background-color=Zone.getCellColor(3, 6)~></td>
+          <td ~style.background-color=Zone.getCellColor(3, 7)~></td>
+          <td ~style.background-color=Zone.getCellColor(3, 8)~></td>
+        </tr>
+        <tr>
+          <td ~style.background-color=Zone.getCellColor(2, 1)~></td>
+          <td ~style.background-color=Zone.getCellColor(2, 2)~></td>
+          <td ~style.background-color=Zone.getCellColor(2, 3)~></td>
+          <td ~style.background-color=Zone.getCellColor(2, 4)~></td>
+          <td ~style.background-color=Zone.getCellColor(2, 5)~></td>
+          <td ~style.background-color=Zone.getCellColor(2, 6)~></td>
+          <td ~style.background-color=Zone.getCellColor(2, 7)~></td>
+          <td ~style.background-color=Zone.getCellColor(2, 8)~>~r Zone.book(1) ~</td>
+        </tr>
+        <tr>
+          <td ~style.background-color=Zone.getCellColor(1, 1)~></td>
+          <td ~style.background-color=Zone.getCellColor(1, 2)~></td>
+          <td ~style.background-color=Zone.getCellColor(1, 3)~></td>
+          <td ~style.background-color=Zone.getCellColor(1, 4)~></td>
+          <td ~style.background-color=Zone.getCellColor(1, 5)~></td>
+          <td ~style.background-color=Zone.getCellColor(1, 6)~></td>
+          <td ~style.background-color=Zone.getCellColor(1, 7)~></td>
+          <td ~style.background-color=Zone.getCellColor(1, 8)~></td>
+        </tr>
+      </table>
+    </div></td>
+  </tr></table>
+</body>

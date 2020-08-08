@@ -1,0 +1,224 @@
+<html>
+<head>
+  <title>Trims</title>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/break_infinity.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@antimatter-dimensions/notations"></script>
+  <script src="js/equip.js"></script>
+  <script src="js/format.js"></script>
+  <script src="js/loop.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/options.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/saving.js"></script>
+  <script src="js/shrink-level.js"></script>
+  <script src="js/stuff.js"></script>
+  <script src="js/traps.js"></script>
+  <script src="js/trims.js"></script>
+  <script src="js/zone.js"></script>
+  <script src="js/update-display.js"></script>
+  <link rel="stylesheet" href="styles.css"></link>
+</head>
+<body>
+  <button class="options-button" onclick="Saving.saveGame()">Save</button>
+  <button class="options-button export-button" onclick="Saving.exportGame()">Export</button>
+  <button class="options-button" onclick="Saving.loadGamePrompt()">Load</button>
+  <button class="options-button" onclick="Options.toggleOfflineProgress()">Offline progress: <span id="e0"></span></button>
+  Notation: <select id="b0">
+    <option value="Scientific">Scientific</option>
+    <option value="Engineering">Engineering</option>
+    <option value="Letters">Letter</option>
+    <option value="Standard">Standard</option>
+    <option value="Cancer">Cancer</option>
+    <option value="Logarithm">Logarithm</option>
+    <option value="Hex">Hex</option>
+    <option value="Blind">Blind</option>
+  </select></span>
+  <span style="display:inline-block; width: 150px;"></span>
+  <button class="options-button" onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button>
+  <span style="display: none;">Exported save (also copied to clipboard): <input id="export-output"></input></span>
+  <br/>
+  <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 0px; border-collapse: separate;"><tr>
+    <td><div class="buildingdiv">
+      Stuff: <span id="e1"></span><span style="display:inline-block; width:200px;"></span>Build amount: <select id="b1">
+        <option value="1">1</option>
+        <option value="3">3</option>
+        <option value="10">10</option>
+        <option value="30">30</option>
+        <option value="100">100</option>
+        <option value="300">300</option>
+        <option value="1000">1000</option>
+        <option value="Infinity">Max</option>
+      </select>
+      <br/>
+      Trap storage: <meter id="b2" min="0" max="1" low="0.2" high="0.8" optimum="0.1"></meter>
+      <br/>
+      Armor storage: <meter id="b3" min="0" max="1" low="0.2" high="0.8" optimum="0.1"></meter>
+      <br/>
+      Housing storage: <meter id="b4" min="0" max="1" low="0.2" high="0.8" optimum="0.1"></meter>
+      <br/>
+      Weapon storage: <meter id="b5" min="0" max="1" low="0.2" high="0.8" optimum="0.1"></meter>
+      <br/>
+      <table class="buildingtable">
+        <tr>
+          <td>
+            T-shirts: <span id="e2"></span>
+            <br/>
+            (<span id="e3"></span>)
+            <br/>
+            <button id="b6" onclick="Equip.build('tshirt', ShrinkLevel.level())">
+              Build <span id="e4"></span> T-shirt<span id="e5"></span>
+              <br/>
+              Cost: <span id="e6"></span> stuff
+              <br/>
+            </button>
+          </td>
+          <td>
+            Tents: <span id="e7"></span>
+            <br/>
+            (<span id="e8"></span>)
+            <br/>
+            <button id="b7" onclick="Equip.build('tent', ShrinkLevel.level())">
+              Build <span id="e9"></span> tent<span id="e10"></span>
+              <br/>
+              Cost: <span id="e11"></span> stuff
+              <br/>
+            </button>
+          </td>
+          <td>
+            Darts: <span id="e12"></span>
+            <br/>
+            (<span id="e13"></span>)
+            <br/>
+            <button id="b8" onclick="Equip.build('dart', ShrinkLevel.level())">
+              Build <span id="e14"></span> dart<span id="e15"></span>
+              <br/>
+              Cost: <span id="e16"></span> stuff
+              <br/>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td/>
+          <td>
+            Traps: <span id="e17"></span>
+            <br/>
+            (<span id="e18"></span>)
+            <br/>
+            <button id="b9" onclick="Equip.build('trap', ShrinkLevel.level())">
+              Build <span id="e19"></span> trap<span id="e20"></span>
+              <br/>
+              Cost: <span id="e21"></span> stuff
+              <br/>
+            </button>
+          </td>
+          <td/>
+        </tr>
+      </table>
+    </div></td>
+    <td><div class="trimdiv">
+      <button onclick="Traps.toggleTrapping()">Trapping: <span id="e22"></span></button><span style="display:inline-block; width: 50px;"></span>
+      Trims: <span id="e23"></span><span style="display:inline-block; width: 20px;"></span>
+      <meter id="b10" min="0" max="1" low="0.2" high="0.8" optimum="0.1"></meter>
+      <br/>
+      <br/>
+      Gathering <span id="e24"></span> stuff/second
+      <br/>
+      Breeding <span id="e25"></span> Trims/second
+    </div><div class="zonediv">
+      Zone <span id="e26"></span><span style="display:inline-block; width: 50px;"></span>Cell <span id="e27"></span>
+      <br/>
+      <button id="b11" onclick="Zone.sendGroupToFight()">Send <span id="e28"></span> Trim<span id="e29"></span> to fight</button>
+      <span style="display:inline-block; width: 50px;"></span>
+      <button onclick="Zone.toggleAutoFight()">Auto-fight: <span id="e30"></span></button>
+      <br/>
+      <span id="e31"></span> Trim<span id="e32"></span>: <span id="e33"></span> attack, <span id="e34"></span>/<span id="e35"></span> health <meter id="b12" min="0" max="1" low="0.2" high="0.8" optimum="0.9"></meter>
+      <br/>
+      <span id="e36"></span>: <span id="e37"></span> attack, <span id="e38"></span>/<span id="e39"></span> health <meter id="b13" min="0" max="1" low="0.2" high="0.8" optimum="0.9"></meter>
+      <br/>
+      <table class="zonetable">
+        <tr>
+          <td id="b14"></td>
+          <td id="b15"></td>
+          <td id="b16"></td>
+          <td id="b17"></td>
+          <td id="b18"></td>
+          <td id="b19"></td>
+          <td id="b20"></td>
+          <td id="b21"><span id="e40"></span></td>
+        </tr>
+        <tr>
+          <td id="b22"></td>
+          <td id="b23"></td>
+          <td id="b24"></td>
+          <td id="b25"></td>
+          <td id="b26"></td>
+          <td id="b27"></td>
+          <td id="b28"></td>
+          <td id="b29"></td>
+        </tr>
+        <tr>
+          <td id="b30"></td>
+          <td id="b31"></td>
+          <td id="b32"></td>
+          <td id="b33"></td>
+          <td id="b34"></td>
+          <td id="b35"></td>
+          <td id="b36"></td>
+          <td id="b37"><span id="e41"></span></td>
+        </tr>
+        <tr>
+          <td id="b38"></td>
+          <td id="b39"></td>
+          <td id="b40"></td>
+          <td id="b41"></td>
+          <td id="b42"></td>
+          <td id="b43"></td>
+          <td id="b44"></td>
+          <td id="b45"></td>
+        </tr>
+        <tr>
+          <td id="b46"></td>
+          <td id="b47"></td>
+          <td id="b48"></td>
+          <td id="b49"></td>
+          <td id="b50"></td>
+          <td id="b51"></td>
+          <td id="b52"></td>
+          <td id="b53"><span id="e42"></span></td>
+        </tr>
+        <tr>
+          <td id="b54"></td>
+          <td id="b55"></td>
+          <td id="b56"></td>
+          <td id="b57"></td>
+          <td id="b58"></td>
+          <td id="b59"></td>
+          <td id="b60"></td>
+          <td id="b61"></td>
+        </tr>
+        <tr>
+          <td id="b62"></td>
+          <td id="b63"></td>
+          <td id="b64"></td>
+          <td id="b65"></td>
+          <td id="b66"></td>
+          <td id="b67"></td>
+          <td id="b68"></td>
+          <td id="b69"><span id="e43"></span></td>
+        </tr>
+        <tr>
+          <td id="b70"></td>
+          <td id="b71"></td>
+          <td id="b72"></td>
+          <td id="b73"></td>
+          <td id="b74"></td>
+          <td id="b75"></td>
+          <td id="b76"></td>
+          <td id="b77"></td>
+        </tr>
+      </table>
+    </div></td>
+  </tr></table>
+</body>
