@@ -170,6 +170,9 @@ let Studies = {
     for (let i = 0; i < 12; i++) {
       player.studies[i] = false;
     }
+    this.respecFourthRow();
+  },
+  respecFourthRow() {
     for (let i = 12; i < 16; i++) {
       player.studies[i] = 0;
     }
@@ -188,13 +191,16 @@ let Studies = {
       EternityPrestigeLayer.eternityReset();
     }
   },
+  respecFourthRowAndReset() {
+    this.respecFourthRow();
+    if (EternityPrestigeLayer.canEternity()) {
+      EternityPrestigeLayer.eternity();
+    } else {
+      EternityPrestigeLayer.eternityReset();
+    }
+  },
   boughtThatAreNotOnRow(x) {
     return this.list.slice(0, 12).filter(y => y.isBought() && y.row() !== x).length;
-  },
-  tryToBuyFirstTwelve() {
-    for (let study of this.list.slice(0, 12)) {
-      study.buy();
-    }
   },
   exportString() {
     let extraList = [13, 14, 15, 16].map(x => Study(x).timesBought());
