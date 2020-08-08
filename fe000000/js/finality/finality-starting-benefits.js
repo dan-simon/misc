@@ -63,5 +63,15 @@ let FinalityStartingBenefits = {
     } else {
       return benefits.slice(0, -1).join(', ') + ', and ' + benefits[benefits.length - 1];
     }
+  },
+  galaxies() {
+    // Not really a starting benefit in the same sense.
+    return this.galaxiesAt(FinalityShards.totalUpgradeBonuses());
+  },
+  galaxiesAt(x) {
+    return Math.floor(x / 4);
+  },
+  anyGalaxies() {
+    return this.galaxies() > 0;
   }
 }

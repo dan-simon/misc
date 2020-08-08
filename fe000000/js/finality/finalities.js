@@ -13,6 +13,6 @@ let Finalities = {
     return Math.pow(2, Math.min(16, Math.max(1, Math.sqrt(player.finalities))) / 8);
   },
   autoECCompletionTime() {
-    return 8192 / Math.min(this.amount(), 256);
+    return 4096 / Math.min(this.amount(), 256);
   }
 }

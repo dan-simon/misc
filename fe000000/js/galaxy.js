@@ -41,7 +41,7 @@ let Galaxy = {
     return Math.floor(Math.max(Math.log2(ComplexityPoints.totalCPProduced().max(1).log2() / this.unlockCost().log2()) + 1, 0));
   },
   finalityShardUpgradeAmount() {
-    return FinalityShardUpgrade(8).effect();
+    return FinalityStartingBenefits.galaxies();
   },
   nextStellarProductGalaxy() {
     return this.baseGalaxyRequirement() * Math.pow(2, this.stellarProductAmount());
@@ -73,7 +73,7 @@ let Galaxy = {
     return Math.pow(1 + this.dilated(), 2);
   },
   timeToReachEffectCap() {
-    return 1024 * (Math.pow(2, 64 * (this.effectCap() - 1)) - 1) / (this.effectSpeed() * FinalityShardUpgrade(7).effect());
+    return 1024 * (Math.pow(2, 64 * (this.effectCap() - 1)) - 1) / (this.effectSpeed() * FinalityShardUpgrade(8).effect());
   },
   nextEffectCap() {
     return 1 + Math.sqrt(this.amount() - this.nextDilated()) / 64;
@@ -82,7 +82,7 @@ let Galaxy = {
     return Math.pow(1 + this.nextDilated(), 2);
   },
   nextTimeToReachEffectCap() {
-    return 1024 * (Math.pow(2, 64 * (this.nextEffectCap() - 1)) - 1) / (this.nextEffectSpeed() * FinalityShardUpgrade(7).effect());
+    return 1024 * (Math.pow(2, 64 * (this.nextEffectCap() - 1)) - 1) / (this.nextEffectSpeed() * FinalityShardUpgrade(8).effect());
   },
   dilated() {
     return player.galaxies.dilated;

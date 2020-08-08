@@ -17,7 +17,8 @@ let Eternities = {
     let factors = [
       EternityChallenge.getTotalCompletionsRewardEffect(2), PermanenceUpgrade(1).effect(),
       Chroma.effectOfColor(2), ComplexityChallenge.getComplexityChallengeReward(3),
-      ComplexityAchievements.getAchievementsUnlockedRewardEffect(2)
+      ComplexityAchievements.getAchievementsUnlockedRewardEffect(2),
+      FinalityShardUpgrade(3).effect()
     ];
     // We use Decimal.times because the first factor is not a Decimal.
     return factors.reduce((a, b) => Decimal.times(a, b));

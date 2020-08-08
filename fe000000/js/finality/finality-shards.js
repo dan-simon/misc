@@ -59,9 +59,9 @@ let FinalityShardUpgrade = function (i) {
 let FinalityShards = {
   upgradeEffectFormulas: [
     x => 1 + x / 2048, x => Decimal.pow(2, Math.pow(x, 1.5) / 8).floor().max(2 + x),
-    x => Math.pow(1 + x, 2), x => 1 + x / 8,
-    x => Math.pow(1 + x, 2), x => x / 8,
-    x => Math.pow(1 + x, 2), x => x
+    x => Math.pow(1 + x, 2), x => Math.pow(1 + x, 2),
+    x => 1 + x / 8, x => Math.pow(1 + x, 2),
+    x => x / 8, x => Math.pow(1 + x, 2),
   ],
   upgradeList: [1, 2, 3, 4, 5, 6, 7, 8].map((x) => FinalityShardUpgrade(x)),
   getUpgrade: function (x) {
