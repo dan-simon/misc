@@ -162,6 +162,10 @@ let Powers = {
   isPowerGainActive() {
     return this.isUnlocked() && this.isPowerGainOn();
   },
+  timeUntilPowerGain() {
+    let timePer = this.interval();
+    return timePer - this.timeSincePowerGain() % timePer;
+  },
   timeSincePowerGain() {
     return player.stats.timeSincePowerGain;
   },
