@@ -1659,21 +1659,21 @@
       </tr>
       <tr>
         <td>
-          <button ~class=Studies.canBuy(0) ? '' : 'disabled'~ style="width: 288px; height: 96px;" onclick="Studies.buy(0)">
+          <button ~class=Studies.canBuy(0) ? '' : 'disabled'~ style="width: 320px; height: 96px;" onclick="Studies.buy(0)">
             Buy a theorem with stars
             <br/>
             Cost: ~i Studies.cost(0) ~ stars
           </button>
         </td>
         <td>
-          <button ~class=Studies.canBuy(1) ? '' : 'disabled'~ style="width: 288px; height: 96px;" onclick="Studies.buy(1)">
+          <button ~class=Studies.canBuy(1) ? '' : 'disabled'~ style="width: 320px; height: 96px;" onclick="Studies.buy(1)">
             Buy a theorem with infinity points
             <br/>
             Cost: ~i Studies.cost(1) ~ IP
           </button>
         </td>
         <td>
-          <button ~class=Studies.canBuy(2) ? '' : 'disabled'~ style="width: 288px; height: 96px;" onclick="Studies.buy(2)">
+          <button ~class=Studies.canBuy(2) ? '' : 'disabled'~ style="width: 320px; height: 96px;" onclick="Studies.buy(2)">
             Buy a theorem with eternity points
             <br/>
             Cost: ~i Studies.cost(2) ~ EP
@@ -1682,34 +1682,34 @@
       </tr>
       <tr>
         <td>
-          <button ~class=Studies.canBuy(0) ? '' : 'disabled'~ style="width: 288px; height: 48px;" onclick="Studies.buyMax(0)">
+          <button ~class=Studies.canBuy(0) ? '' : 'disabled'~ style="width: 320px; height: 48px;" onclick="Studies.buyMax(0)">
             Buy max theorems with stars
           </button>
         </td>
         <td>
-          <button ~class=Studies.canBuy(1) ? '' : 'disabled'~ style="width: 288px; height: 48px;" onclick="Studies.buyMax(1)">
+          <button ~class=Studies.canBuy(1) ? '' : 'disabled'~ style="width: 320px; height: 48px;" onclick="Studies.buyMax(1)">
             Buy max theorems with infinity points
           </button>
         </td>
         <td>
-          <button ~class=Studies.canBuy(2) ? '' : 'disabled'~ style="width: 288px; height: 48px;" onclick="Studies.buyMax(2)">
+          <button ~class=Studies.canBuy(2) ? '' : 'disabled'~ style="width: 320px; height: 48px;" onclick="Studies.buyMax(2)">
             Buy max theorems with eternity points
           </button>
         </td>
       </tr>
       <tr ~style.display=EternityAutobuyers.hasTheoremAutobuyers() ? '' : 'none'~>
         <td>
-          <button style="width: 288px; height: 48px;" onclick="EternityAutobuyer(14).toggle()">
+          <button style="width: 320px; height: 48px;" onclick="EternityAutobuyer(14).toggle()">
             Auto buy theorems with stars: ~r EternityAutobuyer(14).isOn() ? "On" : "Off" ~
           </button>
         </td>
         <td>
-          <button style="width: 288px; height: 48px;" onclick="EternityAutobuyer(15).toggle()">
+          <button style="width: 320px; height: 48px;" onclick="EternityAutobuyer(15).toggle()">
             Auto buy theorems with infinity points: ~r EternityAutobuyer(15).isOn() ? "On" : "Off" ~
           </button>
         </td>
         <td>
-          <button style="width: 288px; height: 48px;" onclick="EternityAutobuyer(16).toggle()">
+          <button style="width: 320px; height: 48px;" onclick="EternityAutobuyer(16).toggle()">
             Auto buy theorems with eternity points: ~r EternityAutobuyer(16).isOn() ? "On" : "Off" ~
           </button>
         </td>
