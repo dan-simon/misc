@@ -70,6 +70,7 @@
   <link rel="stylesheet" href="styles.css"></link>
 </head>
 <body>
+  <span>You have ~f Stars.amount() ~ stars.</span>
   <div style="height: 56px;">
     <span ~style.display=InfinityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~f InfinityPrestigeLayer.starRequirementForInfinity() ~ stars to infinity.</span>
     <br ~style.display=InfinityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
@@ -2043,21 +2044,18 @@
     </div>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'eternity-challenges' ? '' : 'none'~>
-    <span>You have completed ~i EternityChallenge.getTotalEternityChallengeCompletions() ~ eternity challenge tier~s EternityChallenge.getTotalEternityChallengeCompletions() ~, giving you ~i EternityChallenge.extraTheoremsActualAndDisplay() ~ extra theorem~s EternityChallenge.extraTheoremsActualAndDisplay() ~ (~i 1 ~ per tier).</span>
+    <span>You have completed ~i EternityChallenge.getTotalEternityChallengeCompletions() ~ eternity challenge (EC) tier~s EternityChallenge.getTotalEternityChallengeCompletions() ~, giving you ~i EternityChallenge.extraTheoremsActualAndDisplay() ~ extra theorem~s EternityChallenge.extraTheoremsActualAndDisplay() ~ (~i 1 ~ per tier).</span>
     <br/>
     <span>
       <button ~style.display=EternityChallenge.canRespec() ? '' : 'none'~ onclick="EternityChallenge.toggleRespec()">Respec eternity challenge on next eternity: ~r EternityChallenge.isRespecOn() ? "On" : "Off" ~</button>
       <button ~style.display=ComplexityAchievements.hasComplexityAchievement(3, 2) ? '' : 'none'~ onclick="EternityChallenge.toggleRequirementDisplay()">Show (now unneeded) eternity challenge requirements: ~r EternityChallenge.isRequirementDisplayOn() ? "On" : "Off" ~</button>
     </span>
     <div ~style.display=EternityChallenge.hasAutoECCompletion() ? '' : 'none'~>
-      <span>You automatically complete an eternity challenge tier once every ~q Complexities.autoECCompletionTime() ~ seconds.</span>
+      <span>You auto-complete an EC tier once every ~q Complexities.autoECCompletionTime() ~  seconds, <span ~style.display=EternityChallenge.areAllEternityChallengesCompleted() ? 'none' : ''~>next in ~f EternityChallenge.timeUntilAutoECCompletion() ~ seconds</span><span ~style.display=EternityChallenge.areAllEternityChallengesCompleted() ? '' : 'none'~>and they're now fully complete</span><span ~style.display=EternityChallenge.usedAutoECCompletionThisComplexity() ? 'none' : ''~>  (no auto-completions this complexity)</span>.</span>
       <br/>
-      <span ~style.display=EternityChallenge.areAllEternityChallengesCompleted() ? 'none' : ''~>It has been ~f EternityChallenge.timeSinceAutoECCompletion() ~ seconds since your last automatic eternity challenge completion<span ~style.display=EternityChallenge.usedAutoECCompletionThisComplexity() ? 'none' : ''~> (none this complexity)</span>.</span>
-      <span ~style.display=EternityChallenge.areAllEternityChallengesCompleted() ? '' : 'none'~>All eternity challenges are fully complete<span ~style.display=EternityChallenge.usedAutoECCompletionThisComplexity() ? 'none' : ''~> (and none were automatically completed)</span>.</span>
-      <br/>
-      <span ~style.display=!EternityChallenge.isAutoECCompletionOn() && EternityChallenge.imminentAutoECCompletionTiers() !== 0 ? '' : 'none'~>Turning automatic eternity challenge completion on would complete ~i EternityChallenge.imminentAutoECCompletionTiers() ~ eternity challenge tier~s EternityChallenge.imminentAutoECCompletionTiers() ~.</span>
+      <span ~style.display=!EternityChallenge.isAutoECCompletionOn() && EternityChallenge.imminentAutoECCompletionTiers() !== 0 ? '' : 'none'~>Turning auto-EC completion on would complete ~i EternityChallenge.imminentAutoECCompletionTiers() ~ eternity challenge tier~s EternityChallenge.imminentAutoECCompletionTiers() ~.</span>
       <br ~style.display=!EternityChallenge.isAutoECCompletionOn() && EternityChallenge.imminentAutoECCompletionTiers() !== 0 ? '' : 'none'~/>
-      <button onclick="EternityChallenge.toggleAutoECCompletion()">Automatic eternity challenge completion: ~r EternityChallenge.isAutoECCompletionOn() ? "On" : "Off" ~</button>
+      <button onclick="EternityChallenge.toggleAutoECCompletion()">Auto-EC completion: ~r EternityChallenge.isAutoECCompletionOn() ? "On" : "Off" ~</button>
     </div>
     <br ~style.display=EternityChallenge.hasAutoECCompletion() ? 'none' : ''~/>
     <span>
@@ -2469,7 +2467,7 @@
     <br/>
     <span>multiplying permanence and chroma buildup speed by ~q Complexities.permanenceAndChromaMultiplier() ~,</span>
     <br/>
-    <span>and automatically completing an eternity challenge tier every ~q Complexities.autoECCompletionTime() ~ seconds.</span>
+    <span>and auto-completing an EC tier every ~q Complexities.autoECCompletionTime() ~ seconds.</span>
     <br/>
     <span>You have ~f ComplexityStars.amount() ~ complexity stars, making all complexity challenge rewards ~f ComplexityStars.complexityChallengeMultiplier() ~x stronger.</span>
     <br/>
@@ -2557,7 +2555,7 @@
       <button onclick="ComplexityChallenge.complexityReset()">Restart complexity and re-enter all complexity challenges</button>
     </span>
     <br/>
-    <span>You have ~i Complexities.amount() ~ complexit~y Complexities.amount() ~ (allowing you to enter ~i ComplexityChallenge.numberUnlocked() ~ complexity challenge~s ComplexityChallenge.numberUnlocked() ~) and ~f Stars.amount() ~ stars.</span>
+    <span>You have ~i Complexities.amount() ~ complexit~y Complexities.amount() ~ (allowing you to enter ~i ComplexityChallenge.numberUnlocked() ~ complexity challenge~s ComplexityChallenge.numberUnlocked() ~).</span>
     <br/>
     <span>Complexity challenge rewards are currently ~f ComplexityStars.complexityChallengeMultiplier() ~x stronger (from complexity stars).</span>
     <br/>
@@ -2954,9 +2952,7 @@
       <span>Due to unlocking powers, you gain your eternity points on eternity every second, without needing to eternity.</span>
       <br/>
       <br/>
-      <span>You gain a new power once every ~f Powers.interval() ~ seconds. <button onclick="Powers.togglePowerGain()">Power gain: ~r Powers.isPowerGainOn() ? "On" : "Off" ~</button></span>
-      <br/>
-      <span>It has been ~f Powers.timeSincePowerGain() ~ seconds since you last gained a new power.</span>
+      <span>You gain a new power once every ~f Powers.interval() ~ seconds, next in ~f Powers.timeUntilPowerGain() ~ seconds. <button onclick="Powers.togglePowerGain()">Power gain: ~r Powers.isPowerGainOn() ? "On" : "Off" ~</button></span>
       <br ~style.display=!Powers.isPowerGainOn() && Powers.imminentPowerGain() !== 0 ? '' : 'none'~/>
       <span ~style.display=!Powers.isPowerGainOn() && Powers.imminentPowerGain() !== 0 ? '' : 'none'~>Turning power gain on would give you ~i Powers.imminentPowerGain() ~ new power~s Powers.imminentPowerGain() ~.</span>
       <br/>
