@@ -82,13 +82,29 @@ let Galaxy = {
     return 1024 * (Math.pow(2, 64 * (this.nextEffectCap() - 1)) - 1) / this.nextEffectSpeed()
   },
   dilated() {
+    return this.dilatedRawToActual(this.dilatedRaw());
+  },
+  dilatedRaw() {
     return player.galaxies.dilated;
   },
   nextDilated() {
-    return Math.min(player.galaxies.nextDilated, this.amount());
+    return this.dilatedRawToActual(this.nextDilatedRaw());
+  },
+  nextDilatedRaw() {
+    return player.galaxies.nextDilated;
+  },
+  dilatedRawToActual(x) {
+    if (x < 0) {
+      return Math.max(0, x + this.amount());
+    } else {
+      return Math.min(x, this.amount());
+    }
+  },
+  updateDilated() {
+    player.galaxies.dilated = player.galaxies.nextDilated;
   },
   setNextDilated(x) {
-    player.galaxies.nextDilated = Math.floor(Math.max(x || 0, 0));
+    player.galaxies.nextDilated = Math.floor(x || 0);
   },
   getStrengthIncrease() {
     return Math.pow(this.amount() / 128, 0.5);
