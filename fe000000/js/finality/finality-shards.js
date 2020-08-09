@@ -102,11 +102,14 @@ let FinalityShards = {
     InfinityPoints.addAmount(FinalityStartingBenefits.infinityPointsAt(current).minus(
       FinalityStartingBenefits.infinityPointsAt(old)));
     EternityPoints.addAmount(FinalityStartingBenefits.eternityPointsAt(current).minus(
-      FinalityStartingBenefits.eternityPointsAt(old)))
+      FinalityStartingBenefits.eternityPointsAt(old)));
     ComplexityPoints.addAmount(FinalityStartingBenefits.complexityPointsAt(current).minus(
-      FinalityStartingBenefits.complexityPointsAt(old)))
+      FinalityStartingBenefits.complexityPointsAt(old)));
     Complexities.add(FinalityStartingBenefits.complexitiesAt(current) -
       FinalityStartingBenefits.complexitiesAt(old));
+    ComplexityAchievements.handleComplexityIncrease(
+      FinalityStartingBenefits.complexitiesAt(old),
+      FinalityStartingBenefits.complexitiesAt(current));
     for (
       let i = FinalityStartingBenefits.complexityAchievementsAt(old);
       i < FinalityStartingBenefits.complexityAchievementsAt(current); i++) {

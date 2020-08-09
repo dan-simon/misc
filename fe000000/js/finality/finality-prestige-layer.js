@@ -95,13 +95,15 @@ let FinalityPrestigeLayer = {
     // Extra theorems seem to fit in best here, because they're theorem-related, even though
     // nothing resets them other than finality.
     player.extraTheorems = [0, 0, 0, 0];
+    // Complexities are here because they're used by a complexity achievement
+    // to determine starting eternities.
+    player.complexities = FinalityStartingBenefits.complexities();
     // This function takes care of applying the rewards for certain numbers of achievements,
     // so don't do it in initializeStartingComplexityAchievements().
     ComplexityPrestigeLayer.complexityReset();
     player.finalityStars = new Decimal(1);
     FinalityGenerators.list.forEach(x => x.resetAmount());
     player.complexityPoints = FinalityStartingBenefits.complexityPoints();
-    player.complexities = FinalityStartingBenefits.complexities();
     player.complexityStars = new Decimal(1);
     player.complexityGenerators = initialComplexityGenerators(),
     player.highestComplexityGenerator = 0;

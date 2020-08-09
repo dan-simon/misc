@@ -25,10 +25,11 @@ let ComplexityAchievements = {
       () => Studies.totalTheorems() >= 168
     ]
   ],
+  // The round is here because Decimal.pow(16, 2) isn't exactly new Decimal(256).
   complexityAchievementEffects: [
     [
       () => Complexities.permanenceAndChromaMultiplier(),
-      () => Decimal.pow(Math.min(16, player.complexities), 2),
+      () => ComplexityAchievements.complexityAchievementRow1Column2Formula(),
       () => null,
       () => Math.pow(Math.max(1, Math.log2(Boost.multiplierPer())), 0.5)
     ],
@@ -143,5 +144,15 @@ let ComplexityAchievements = {
   },
   color(row, column) {
     return Colors.makeStyle(this.hasComplexityAchievement(row, column), false);
+  },
+  complexityAchievementRow1Column2Formula(x) {
+    if (x === undefined) x = player.complexities;
+    return Decimal.pow(Math.min(16, x), 2).round();
+  },
+  handleComplexityIncrease(old, current) {
+    if (this.hasComplexityAchievement(1, 2)) {
+      Eternities.add(this.complexityAchievementRow1Column2Formula(current).minus(
+        this.complexityAchievementRow1Column2Formula(old)));
+    }
   }
 }
