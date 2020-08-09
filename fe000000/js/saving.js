@@ -430,6 +430,10 @@ let Saving = {
       player.stats.lastTenFinalities = initialLastTenFinalities();
       player.version = 1.94140625;
     }
+    if (player.version < 1.9423828125) {
+      player.resetDilatedOnFinality = true;
+      player.version = 1.9423828125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

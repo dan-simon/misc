@@ -145,12 +145,12 @@ let FinalityPrestigeLayer = {
       powerDisplay: player.oracle.powerDisplay,
       powers: []
     };
-    // Don't keep player.galaxy.nextDilated, since it's probably out of date.
-    player.galaxies = {
-      unlocked: false,
-      dilated: 0,
-      nextDilated: 0
-    };
+    player.galaxies.unlocked = false;
+    if (Galaxy.isResetDilatedOnFinalityOn()) {
+      Galaxy.resetDilated();
+    } else {
+      Galaxy.updateDilated();
+    }
     player.stats.totalStarsProducedThisFinality = EternityStartingBenefits.stars().plus(FinalityStartingBenefits.stars());
     player.stats.totalInfinityStarsProducedThisFinality = new Decimal(0);
     player.stats.totalEternityStarsProducedThisFinality = new Decimal(0);

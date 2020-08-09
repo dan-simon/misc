@@ -111,5 +111,15 @@ let Galaxy = {
   },
   getStrengthIncrease() {
     return Math.pow(this.amount() / 128, 0.5);
+  },
+  toggleResetDilatedOnFinality() {
+    player.galaxies.resetDilatedOnFinality = !player.galaxies.resetDilatedOnFinality;
+  },
+  isResetDilatedOnFinalityOn() {
+    return player.galaxies.resetDilatedOnFinality;
+  },
+  resetDilated() {
+    player.galaxies.dilated = 0;
+    player.galaxies.nextDilated = 0;
   }
 }

@@ -3672,6 +3672,8 @@
       <span>Galaxies to make dilated next complexity reset: <input type="text" ~!value=Galaxy.nextDilatedRaw()~ ~!onchange=function() {Galaxy.setNextDilated(+this.value)}~></input></span>
       <br/>
       <span>(Set this to ~i 0 ~ to un-dilate all galaxies, or -x to dilate all but x galaxies.)</span>
+      <br/>
+      <span><button onclick="Galaxy.toggleResetDilatedOnFinality()">Reset dilated galaxies to ~i 0 ~ on finality: ~r Galaxy.isResetDilatedOnFinalityOn() ? "On" : "Off" ~</button></span>
     </div>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'finality' ? '' : 'none'~>
