@@ -40,10 +40,25 @@ let Study = function (i) {
     },
     cost() {
       if (this.row() === 4) {
-        return Math.floor(Math.pow(2, this.timesBought() / 2));
+        return this.costAtBought(this.timesBought())
       } else {
         return 2 * (1 + this.row() + Studies.boughtThatAreNotOnRow(this.row()));
       }
+    },
+    costAtBought(x) {
+      if (this.row() !== 4) return;
+      return Math.floor(Math.pow(2, x / 2));
+    },
+    costSoFar() {
+      if (this.row() !== 4) return;
+      return this.costUpTo(this.timesBought());
+    },
+    costUpTo(x) {
+      if (this.row() !== 4) return;
+      if (x > 1e4) {
+        return Infinity;
+      }
+      return [...Array(x)].map((_, i) => this.costAtBought(i)).reduce((a, b) => a + b, 0);
     },
     row() {
       return Math.floor((i + 3) / 4);
@@ -108,6 +123,7 @@ let Study = function (i) {
           player.studies[i - 1]++;
         } else {
           player.studies[i - 1] = true;
+          player.firstTwelveStudyPurchaseOrder.push(i);
         }
         ComplexityChallenge.exitComplexityChallenge(6);
       }
@@ -170,6 +186,7 @@ let Studies = {
     for (let i = 0; i < 12; i++) {
       player.studies[i] = false;
     }
+    player.firstTwelveStudyPurchaseOrder = [];
     this.respecFourthRow();
   },
   respecFourthRow() {
@@ -204,8 +221,8 @@ let Studies = {
   },
   exportString() {
     let extraList = [13, 14, 15, 16].map(x => Study(x).timesBought());
-    let extraString = extraList.some(x => x !== 0) ? '&' + extraList.join(',') : '';
-    return ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].filter(x => Study(x).isBought()).join(',') || 'none') + extraString;
+    let extraString = extraList.some(x => x !== 0) ? '&s' + extraList.join(',') : '';
+    return (player.firstTwelveStudyPurchaseOrder.join(',') || 'none') + extraString;
   },
   export() {
     let output = document.getElementById('study-export-output');
@@ -239,10 +256,24 @@ let Studies = {
       }
     }
     if (parts.length > 1) {
-      for (let j = 0; j < 4; j++) {
-        let times = this.toNumber(parts[1].split(',')[j]) - Study(13 + j).timesBought();
-        for (let k = 0; k < times; k++) {
-          Study(13 + j).buy();
+      let startsWithS = parts[1][0] === 's';
+      if (startsWithS) {
+        parts[1] = parts[1].slice(1);
+      }
+      let counts = parts[1].split(',').map(x => this.toNumber(x));
+      if (startsWithS) {
+        let costs = counts.map((x, j) => Study(13 + j).costUpTo(x));
+        let studies = [0, 1, 2, 3].map(j => ({'study': Study(13 + j), 'cost': costs[j]}));
+        let f = x => x.cost / x.study.costSoFar() || 0;
+        while (studies.some(x => x.study.isBuyable())) {
+          [...studies.filter(x => x.study.isBuyable())].sort((a, b) => f(b) - f(a))[0].study.buy();
+        }
+      } else {
+        for (let j = 0; j < 4; j++) {
+          let times = this.toNumber(counts[j]) - Study(13 + j).timesBought();
+          for (let k = 0; k < times; k++) {
+            Study(13 + j).buy();
+          }
         }
       }
     }

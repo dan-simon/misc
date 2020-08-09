@@ -400,6 +400,11 @@ let Saving = {
       ];
       player.version = 1.9404296875;
     }
+    if (player.version < 1.940673828125) {
+      player.firstTwelveStudyPurchaseOrder = player.studies.slice(0, 12).map(
+        (x, i) => x ? i + 1 : 0).filter(x => x);
+      player.version = 1.940673828125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

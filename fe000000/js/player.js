@@ -107,6 +107,7 @@ let initialPlayer = {
     false, false, false, false, false, false,
     0, 0, 0, 0
   ],
+  firstTwelveStudyPurchaseOrder: [],
   respecStudies: false,
   boughtTheoremsThisComplexity: false,
   presets: [],
@@ -246,7 +247,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9404296875
+  version: 1.940673828125
 }
 
 let player;
