@@ -38,7 +38,7 @@ let Galaxy = {
     return Math.floor(Math.max(Math.log2(this.stellarProduct() / this.baseGalaxyRequirement()) + 1, 0));
   },
   complexityPointAmount() {
-    return Math.floor(Math.max(Math.log2(ComplexityPoints.totalCPProduced().max(1).log2() / this.unlockCost().log2()) + 1, 0));
+    return Math.floor(Math.max(Math.log2(ComplexityPoints.totalCPProducedThisFinality().max(1).log2() / this.unlockCost().log2()) + 1, 0));
   },
   finalityShardUpgradeAmount() {
     return FinalityStartingBenefits.galaxies();
