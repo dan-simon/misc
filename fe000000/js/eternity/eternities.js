@@ -9,6 +9,31 @@ let Eternities = {
     player.eternities = player.eternities.plus(x);
     player.stats.totalEternitiesProducedThisComplexity = player.stats.totalEternitiesProducedThisComplexity.plus(x);
   },
+  addSudden(x) {
+    let oldRewards = {
+      stars: EternityStartingBenefits.stars(),
+      infinityPoints: EternityStartingBenefits.infinityPoints(),
+      infinities: EternityStartingBenefits.infinities()
+    }
+    let gainedAutobuyers = !EternityMilestones.hasEternityMilestone(2);
+    this.add(x);
+    let newRewards = {
+      stars: EternityStartingBenefits.stars(),
+      infinityPoints: EternityStartingBenefits.infinityPoints(),
+      infinities: EternityStartingBenefits.infinities()
+    }
+    gainedAutobuyers = gainedAutobuyers && EternityMilestones.hasEternityMilestone(2);
+    Stars.addAmount(newRewards.stars.minus(oldRewards.stars));
+    InfinityPoints.addAmount(newRewards.infinityPoints.minus(oldRewards.infinityPoints));
+    Infinities.add(newRewards.infinities - oldRewards.infinities);
+    if (gainedAutobuyers) {
+      player.challengesCompleted = [
+        true, true, true, true, true, true,
+        true, true, true, true, true, true,
+      ];
+      player.breakInfinity = true;
+    }
+  },
   setAmount(x) {
     // This is apparently only called in one place, where it represents a loss of eternities.
     player.eternities = new Decimal(x);

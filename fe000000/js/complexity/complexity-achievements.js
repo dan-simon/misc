@@ -29,7 +29,7 @@ let ComplexityAchievements = {
   complexityAchievementEffects: [
     [
       () => Complexities.permanenceAndChromaMultiplier(),
-      () => ComplexityAchievements.complexityAchievementRow1Column2Formula(),
+      () => ComplexityAchievements.complexityAchievementRow1Column2EffectFormula(Complexities.amount()),
       () => null,
       () => Math.pow(Math.max(1, Math.log2(Boost.multiplierPer())), 0.5)
     ],
@@ -65,7 +65,7 @@ let ComplexityAchievements = {
         for (let column = 1; column <= 4; column++) {
           if (!this.hasComplexityAchievement(row, column) &&
             this.canUnlockComplexityAchievement(row, column, situation)) {
-            this.unlockComplexityAchievement(row, column);
+            this.unlockComplexityAchievement(row, column, false);
           }
         }
       }
@@ -76,11 +76,17 @@ let ComplexityAchievements = {
     // It also doesn't check whether the player already has the complexity achievement.
     return this.complexityAchievementRequirements[row - 1][column - 1](situation);
   },
-  unlockComplexityAchievement(row, column) {
+  unlockComplexityAchievement(row, column, fromFinalityShardUpgrades) {
     player.complexityAchievements[row - 1][column - 1] = true;
     if (row === 1 && column === 2) {
       // Give the starting eternities, belatedly, as if the player had started with them.
-      Eternities.add(this.effect(1, 2));
+      if (fromFinalityShardUpgrades) {
+        Eternities.addSudden(this.effect(1, 2));
+      } else {
+        // If we're getting this naturally, we're doing an eternity reset immediately, so
+        // the player is practically just getting a lot more eternities from that reset.
+        Eternities.add(this.effect(1, 2));
+      }
     }
     if (row === 4 && column === 2) {
       player.eternityChallengeCompletions = [4, 4, 4, 4, 4, 4, 4, 4];
@@ -145,14 +151,7 @@ let ComplexityAchievements = {
   color(row, column) {
     return Colors.makeStyle(this.hasComplexityAchievement(row, column), false);
   },
-  complexityAchievementRow1Column2Formula(x) {
-    if (x === undefined) x = player.complexities;
+  complexityAchievementRow1Column2EffectFormula(x) {
     return Decimal.pow(Math.min(16, x), 2).round();
-  },
-  handleComplexityIncrease(old, current) {
-    if (this.hasComplexityAchievement(1, 2)) {
-      Eternities.add(this.complexityAchievementRow1Column2Formula(current).minus(
-        this.complexityAchievementRow1Column2Formula(old)));
-    }
   }
 }

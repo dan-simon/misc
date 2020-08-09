@@ -105,18 +105,15 @@ let FinalityShards = {
       FinalityStartingBenefits.eternityPointsAt(old)));
     ComplexityPoints.addAmount(FinalityStartingBenefits.complexityPointsAt(current).minus(
       FinalityStartingBenefits.complexityPointsAt(old)));
-    Complexities.add(FinalityStartingBenefits.complexitiesAt(current) -
+    Complexities.addSudden(FinalityStartingBenefits.complexitiesAt(current) -
       FinalityStartingBenefits.complexitiesAt(old));
-    ComplexityAchievements.handleComplexityIncrease(
-      FinalityStartingBenefits.complexitiesAt(old),
-      FinalityStartingBenefits.complexitiesAt(current));
     for (
       let i = FinalityStartingBenefits.complexityAchievementsAt(old);
       i < FinalityStartingBenefits.complexityAchievementsAt(current); i++) {
       let row = Math.floor(i / 4) + 1;
       let column = i % 4 + 1;
       if (!ComplexityAchievements.hasComplexityAchievement(row, column)) {
-        ComplexityAchievements.unlockComplexityAchievement(row, column);
+        ComplexityAchievements.unlockComplexityAchievement(row, column, true);
       }
     }
   },
