@@ -41,6 +41,7 @@ let Oracle = {
     player.oracle.time = x || 0;
   },
   invoke() {
+    if (!this.isUnlocked()) return;
     let save = btoa(JSON.stringify(player));
     let time = this.time();
     Saving.oracleSimulateTime(time);
