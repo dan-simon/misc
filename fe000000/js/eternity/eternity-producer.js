@@ -110,7 +110,7 @@ let EternityProducer = {
     return Eternities.commonEternityGainMultiplier().times(EternityProducerUpgrade(1).effect());
   },
   produce(diff) {
-    Eternities.add(this.productionPerSecond().times(diff));
+    Eternities.addSudden(this.productionPerSecond().times(diff));
   },
   multiplier() {
     return EternityProducerUpgrade(2).effect();
