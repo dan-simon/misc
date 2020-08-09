@@ -108,6 +108,7 @@ let ComplexityPrestigeLayer = {
         false, false, false, false, false, false,
         0, 0, 0, 0
       ];
+      player.firstTwelveStudyPurchaseOrder = [];
     }
     if (Studies.list.some(x => x.isBought())) {
       ComplexityChallenge.exitComplexityChallenge(6);

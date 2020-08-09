@@ -121,6 +121,7 @@ let initialPlayer = {
     false, false, false, false, false, false,
     0, 0, 0, 0
   ],
+  firstTwelveStudyPurchaseOrder: [],
   respecStudies: false,
   boughtTheoremsThisComplexity: false,
   presets: [],
