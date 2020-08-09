@@ -270,7 +270,7 @@ let Studies = {
         }
       } else {
         for (let j = 0; j < 4; j++) {
-          let times = this.toNumber(counts[j]) - Study(13 + j).timesBought();
+          let times = counts[j] - Study(13 + j).timesBought();
           for (let k = 0; k < times; k++) {
             Study(13 + j).buy();
           }
