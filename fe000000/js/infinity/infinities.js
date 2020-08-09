@@ -9,6 +9,10 @@ let Infinities = {
     player.infinities++;
     player.realInfinities++;
   },
+  add(x) {
+    // Only call this when adding starting infinities.
+    player.infinities += x;
+  },
   infinityGeneratorMultiplier() {
     // This is intentionally always at most 1, and often less.
     // The max with 1 allows for infinity generators to produce

@@ -28,7 +28,7 @@ let ComplexityAchievements = {
   complexityAchievementEffects: [
     [
       () => Complexities.permanenceAndChromaMultiplier(),
-      () => Math.pow(Math.min(16, player.complexities), 2),
+      () => ComplexityAchievements.complexityAchievementRow1Column2EffectFormula(Complexities.amount()),
       () => null,
       () => Math.pow(Math.max(1, Math.log2(Boost.multiplierPer())), 0.5)
     ],
@@ -143,5 +143,8 @@ let ComplexityAchievements = {
   },
   color(row, column) {
     return Colors.makeStyle(this.hasComplexityAchievement(row, column), false);
+  },
+  complexityAchievementRow1Column2EffectFormula(x) {
+    return Decimal.pow(Math.min(16, x), 2).round();
   }
 }

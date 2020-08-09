@@ -80,7 +80,7 @@ let ComplexityPrestigeLayer = {
   },
   complexityReset() {
     // We need to do this here to avoid eternity milestones being applied in the eternity reset.
-    player.eternities = new Decimal(ComplexityAchievements.effect(1, 2));
+    player.eternities = ComplexityAchievements.effect(1, 2);
     EternityPrestigeLayer.eternityReset();
     // Not handled by Eternity.eternityReset().
     EternityChallenge.setEternityChallenge(0);
