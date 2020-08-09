@@ -70,7 +70,7 @@ let Oracle = {
     if (this.isUsed()) {
       return 'The Oracle most recently said "' + this.shortMessage() + '"';
     } else {
-      return 'The Oracle has not said anything.'
+      return 'The Oracle has not said anything yet in this finality.'
     }
   }
 }
