@@ -100,8 +100,9 @@ let EternityProducer = {
   canUnlock() {
     return player.eternityPoints.gte(this.unlockCost()) && !ComplexityChallenge.isSafeguardOn(3);
   },
-  unlock() {
-    if (!this.canUnlock()) return;
+  unlock(auto) {
+    if (!this.canUnlock() || (
+      auto && player.eternityPoints.minus(this.unlockCost()).lt(2) && EternityGenerator(1).bought() === 0)) return;
     player.eternityPoints = player.eternityPoints.minus(this.unlockCost());
     player.eternityProducer.unlocked = true;
     ComplexityChallenge.exitComplexityChallenge(3);

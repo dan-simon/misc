@@ -69,9 +69,9 @@ let EternityAutobuyers = {
     }
     Permanence.buyMaxOf([1, 2, 3, 4].filter(i => EternityAutobuyer(i + 16).isActive()));
     if (ComplexityAchievements.hasComplexityAchievement(1, 3)) {
-      EternityProducer.unlock();
+      EternityProducer.unlock(true);
       for (let i = 1; i <= 6; i++) {
-        Chroma.unlockColor(i);
+        Chroma.unlockColor(i, true);
       }
     }
   }
