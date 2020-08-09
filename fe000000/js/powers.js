@@ -195,7 +195,7 @@ let Powers = {
   },
   gainNewPower(returnPower) {
     let newPower = RNG.randomPower(true);
-    player.powers.stored.push(RNG.randomPower(true));
+    player.powers.stored.push(newPower);
     if (returnPower) {
       return newPower;
     }
