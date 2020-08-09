@@ -361,7 +361,7 @@ function updateDisplaySaveLoadSetup() {
   b[992].onchange = function() {Powers.setPresetPowerList(32, this.value)};
   b[999].value = Oracle.time();
   b[999].onchange = function() {Oracle.setTime(+this.value)};
-  b[1055].value = Galaxy.nextDilated();
+  b[1055].value = Galaxy.nextDilatedRaw();
   b[1055].onchange = function() {Galaxy.setNextDilated(+this.value)};
   b[1180].value = FinalityShardPresets.presetName(1);
   b[1180].onchange = function() {FinalityShardPresets.setPresetName(1, this.value)};
@@ -2484,15 +2484,15 @@ function updateDisplay() {
     e[1062].textContent = formatWithPrecision(Galaxy.getStrengthIncrease(), 5);
     e[1063].textContent = format(player.stats.timeSinceComplexity);
     e[1064].textContent = formatWithPrecision(Galaxy.effect(), 5);
-    e[1065].textContent = formatWithPrecision(Galaxy.effectCap(), 5);
-    e[1066].textContent = format(Galaxy.timeToReachEffectCap());
-    e[1067].textContent = formatInt(Galaxy.dilated());
-    e[1068].textContent = formatInt(Galaxy.effectSpeed());
-    e[1069].textContent = formatInt(0);
-    e[1070].textContent = formatInt(Galaxy.nextDilated());
-    e[1071].textContent = formatInt(Galaxy.nextEffectSpeed());
-    e[1072].textContent = formatWithPrecision(Galaxy.nextEffectCap(), 5);
-    e[1073].textContent = format(Galaxy.nextTimeToReachEffectCap());
+    e[1065].textContent = formatInt(Galaxy.dilated());
+    e[1066].textContent = formatInt(Galaxy.effectSpeed());
+    e[1067].textContent = formatWithPrecision(Galaxy.effectCap(), 5);
+    e[1068].textContent = format(Galaxy.timeToReachEffectCap());
+    e[1069].textContent = formatInt(Galaxy.nextDilated());
+    e[1070].textContent = formatInt(Galaxy.nextEffectSpeed());
+    e[1071].textContent = formatWithPrecision(Galaxy.nextEffectCap(), 5);
+    e[1072].textContent = format(Galaxy.nextTimeToReachEffectCap());
+    e[1073].textContent = formatInt(0);
   }
   if (b[1056].style.display !== "none") {
     e[1074].textContent = formatInt(FinalityPoints.amount());
