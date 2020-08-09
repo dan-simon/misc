@@ -56,7 +56,8 @@ let Galaxy = {
     return player.complexityPoints.gte(this.unlockCost());
   },
   unlock() {
-    if (!this.canUnlock()) return;
+    if (!this.canUnlock() || (
+      auto && player.complexityPoints.minus(this.unlockCost()).lt(2) && ComplexityGenerator(1).bought() === 0)) return;
     player.complexityPoints = player.complexityPoints.minus(this.unlockCost());
     player.galaxies.unlocked = true;
   },

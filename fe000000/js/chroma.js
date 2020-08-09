@@ -107,8 +107,9 @@ let Chroma = {
       !ComplexityChallenge.isSafeguardOn(4) && (x === 1 || this.isUnlocked()) &&
       this.canSeeThatColorExists(x);
   },
-  unlockColor(x) {
-    if (!this.canUnlockColor(x)) return;
+  unlockColor(x, auto) {
+    if (!this.canUnlockColor(x) || (
+      auto && player.eternityPoints.minus(this.getUnlockColorCost(x)).lt(2) && EternityGenerator(1).bought() === 0)) return;
     player.eternityPoints = player.eternityPoints.minus(this.getUnlockColorCost(x));
     player.chroma.unlocked[x - 1] = true;
     if (player.chroma.current === 0) {
