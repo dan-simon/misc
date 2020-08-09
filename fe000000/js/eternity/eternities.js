@@ -10,6 +10,11 @@ let Eternities = {
     player.stats.totalEternitiesProducedThisComplexity = player.stats.totalEternitiesProducedThisComplexity.plus(x);
   },
   addSudden(x) {
+    if (this.amount().gte(256)) {
+      // We already have all the eternities we need for milestones and starting benefits.
+      this.add(x);
+      return;
+    }
     let oldRewards = {
       stars: EternityStartingBenefits.stars(),
       infinityPoints: EternityStartingBenefits.infinityPoints(),
