@@ -20,14 +20,14 @@ let Eternities = {
       infinityPoints: EternityStartingBenefits.infinityPoints(),
       infinities: EternityStartingBenefits.infinities()
     }
-    let gainedAutobuyers = !EternityMilestones.hasEternityMilestone(2);
+    let gainedAutobuyers = !EternityMilestones.isEternityMilestoneActive(2);
     this.add(x);
     let newRewards = {
       stars: EternityStartingBenefits.stars(),
       infinityPoints: EternityStartingBenefits.infinityPoints(),
       infinities: EternityStartingBenefits.infinities()
     }
-    gainedAutobuyers = gainedAutobuyers && EternityMilestones.hasEternityMilestone(2);
+    gainedAutobuyers = gainedAutobuyers && EternityMilestones.isEternityMilestoneActive(2);
     Stars.addAmount(newRewards.stars.minus(oldRewards.stars));
     InfinityPoints.addAmount(newRewards.infinityPoints.minus(oldRewards.infinityPoints));
     Infinities.add(newRewards.infinities - oldRewards.infinities);
