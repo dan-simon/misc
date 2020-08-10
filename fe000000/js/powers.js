@@ -73,6 +73,10 @@ let PowerUpgrade = function (i) {
     },
     maxBuyable() {
       if (i === 3) {
+        if (player.complexityPoints.lt(this.initialCost())) {
+          // This avoids issues with log of -Infinity and potentially other fun things like that.
+          return 0;
+        }
         // This may fail due to precision if the player has barely not enough CP.
         return Math.max(Math.floor(1 + Math.log2(player.complexityPoints.log2() / this.initialCost().log2())) - this.bought(), 0);
       }
