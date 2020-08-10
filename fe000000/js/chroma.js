@@ -185,7 +185,7 @@ let Chroma = {
     return this.currentProductionText().split(this.currentColorName())[1];
   },
   colorProductionStatus(color) {
-    if (this.producingAll() || (color === player.chroma.current && color === player.chroma.next)) {
+    if ((this.producingAll() && this.isColorUnlocked(color)) || (color === player.chroma.current && color === player.chroma.next)) {
       return 'Being produced, will be produced next';
     } else if (color === player.chroma.current) {
       return 'Being produced';
@@ -199,7 +199,7 @@ let Chroma = {
     return ComplexityAchievements.hasComplexityAchievement(3, 3);
   },
   chromaDivClass(color) {
-    if (this.producingAll() || color === player.chroma.current) {
+    if ((this.producingAll() && this.isColorUnlocked(color)) || color === player.chroma.current) {
       return 'chromadiv chromacurrent' + this.colorName(color) + 'div';
     } else if (color === player.chroma.next) {
       return 'chromadiv chromanext' + this.colorName(color) + 'div';
