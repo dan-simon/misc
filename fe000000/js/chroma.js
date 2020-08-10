@@ -197,5 +197,14 @@ let Chroma = {
   },
   producingAll() {
     return ComplexityAchievements.hasComplexityAchievement(3, 3);
+  },
+  chromaDivClass(color) {
+    if (this.producingAll() || color === player.chroma.current) {
+      return 'chromadiv chromacurrent' + this.colorName(color) + 'div';
+    } else if (color === player.chroma.next) {
+      return 'chromadiv chromanext' + this.colorName(color) + 'div';
+    } else {
+      return 'chromadiv';
+    }
   }
 }
