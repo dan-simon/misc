@@ -125,7 +125,7 @@
   <br/>
   <br/>
   <tab ~style.display=Tabs.currentTab() === 'main' ? '' : 'none'~>
-    <div ~style.display=InfinityPrestigeLayer.mustInfinity() || MultiverseCollapse.hasHappened() ? 'none' : ''~>
+    <div ~style.display=Stars.atLimit() ? 'none' : ''~>
       <span>You have ~f Stars.amount() ~ stars. You are getting ~f Stars.perSecond() ~ stars per second. <button ~class=MaxAll.anythingToBuy() ? "" : "disabled"~ onclick="MaxAll.maxAll()">Max all</button></span>
       <br/>
       <div ~style.display=Challenge.isThereChallengeText() ? '' : 'none'~>
@@ -241,11 +241,8 @@
       <br/>
       <span>Next update will have a prestige layer there.</span>
     </div>
-    <div ~style.display=InfinityPrestigeLayer.mustInfinity() ? '' : 'none'~>
-      <span>The universe has collapsed due to an excess of stars.</span>
-    </div>
-    <div ~style.display=MultiverseCollapse.hasHappened() ? '' : 'none'~>
-      <span>The multiverse has collapsed due to an excess of stars.</span>
+    <div ~style.display=Stars.atLimit() ? '' : 'none'~>
+      <span>The ~r Stars.collapsedText() ~ collapsed due to an excess of stars.</span>
     </div>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'infinity' ? '' : 'none'~>
