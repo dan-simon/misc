@@ -10,7 +10,8 @@ let PowerShardUpgrade = function (i) {
       player.powers.shardUpgrades[i - 1] += n;
     },
     boughtLimit() {
-      return Infinity;
+      // This should never really matter, but we put it in to be safe.
+      return Powers.isUnlocked() ? Infinity : 0;
     },
     costIncreasePer() {
       return 2;
