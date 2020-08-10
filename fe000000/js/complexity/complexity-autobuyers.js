@@ -4,7 +4,7 @@ let ComplexityAutobuyer = function (i) {
   }
   return {
     hasComplexityAutobuyer() {
-      return Galaxy.isUnlocked();
+      return i <= 11 && (Galaxy.isUnlocked() || FinalityMilestones.hasFinalityMilestone(1));
     },
     isOn() {
       return player.complexityAutobuyers[i - 1];
@@ -37,7 +37,7 @@ let ComplexityAutobuyer = function (i) {
 }
 
 let ComplexityAutobuyers = {
-  complexityList: [...Array(11)].map((_, i) => ComplexityAutobuyer(i + 1)),
+  complexityList: [...Array(15)].map((_, i) => ComplexityAutobuyer(i + 1)),
   get: function (x) {
     return this.list[x - 1];
   },
@@ -54,5 +54,6 @@ let ComplexityAutobuyers = {
       // This could be simpler, but the order might change later.
       ComplexityAutobuyer([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11][i]).tick();
     }
+    // Right now the last four complexity autobuyers do nothing; this will change later.
   }
 }

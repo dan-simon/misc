@@ -3633,12 +3633,11 @@
       <button style="height: 48px;" onclick="Galaxy.unlock()" ~class=Galaxy.canUnlock() ? '' : 'disabled'~>
         Unlock Galaxies<br/>Cost: ~f Galaxy.unlockCost() ~ complexity points
       </button>
-      <br/>
+      <br ~style.display=FinalityMilestones.isFinalityMilestoneActive(1) ? ~/>
       <span>Unlocking galaxies will also give you autobuyers for complexity generators and power upgrades.</span>
     </div>
     <div ~style.display=Galaxy.isUnlocked() ? '' : 'none'~>
-      <span>Due to unlocking galaxies, you have autobuyers for complexity generators and power upgrades.</span>
-      <br/>
+      <div>Due to unlocking galaxies, you have autobuyers for complexity generators and power upgrades.</div>
       <br/>
       <span>You have produced ~f Galaxy.totalStarsProducedThisFinality() ~ total stars this finality, making your star factor ~f Galaxy.starFactor() ~.</span>
       <br/>
@@ -4116,6 +4115,89 @@
     </span>
     <br/>
     <span style="display: none;">Exported finality shard upgrades (also copied to clipboard): <input id="finality-shard-upgrades-export-output"></input></span>
+  </tab>
+  <tab ~style.display=Tabs.currentTab() === 'finality-milestones' ? '' : 'none'~>
+    <span>
+      You have ~q Finalities.amount() ~ finalit~y Finalities.amount() ~.
+    </span>
+    <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
+      <tr>
+        <td>
+          <div class="finalitymilestonediv" ~style.background=FinalityMilestones.color(1)~>
+            ~i 2 ~ finalities
+            <br/>
+            ~r FinalityMilestones.milestoneStatusDescription(1) ~
+            <br/>
+            Always have autobuyers for complexity generator and power upgrades.
+          </div>
+        </td>
+        <td>
+          <div class="eternitymilestonediv" ~style.background=FinalityMilestones.color(2)~>
+            ~i 4 ~ finalities
+            <br/>
+            ~r FinalityMilestones.milestoneStatusDescription(2) ~
+            <br/>
+            Start each ~r PrestigeLayerNames.layersAbove('finality') ~ with ~i FinalityMilestones.startingComplexityPoints() ~ complexity points, and keep completions of each complexity challenge on ~r PrestigeLayerNames.layersAbove('finality') ~ based on finalities (currently ~i FinalityMilestones.keptComplexityChallenges() ~)
+          </div>
+        </td>
+        <td>
+          <div class="eternitymilestonediv" ~style.background=FinalityMilestones.color(3)~>
+            ~i 6 ~ finalities
+            <br/>
+            ~r FinalityMilestones.milestoneStatusDescription(3) ~
+            <br/>
+            This was a triumph
+          </div>
+        </td>
+        <td>
+          <div class="eternitymilestonediv" ~style.background=FinalityMilestones.color(4)~>
+            ~i 8 ~ finalities
+            <br/>
+            ~r FinalityMilestones.milestoneStatusDescription(4) ~
+            <br/>
+            I'm making a note here / Huge success
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="eternitymilestonediv" ~style.background=FinalityMilestones.color(5)~>
+            ~i 10 ~ finalities
+            <br/>
+            ~r FinalityMilestones.milestoneStatusDescription(5) ~
+            <br/>
+            It's hard to overstate my satisfaction
+          </div>
+        </td>
+        <td>
+          <div class="eternitymilestonediv" ~style.background=FinalityMilestones.color(6)~>
+            ~i 12 ~ finalities
+            <br/>
+            ~r FinalityMilestones.milestoneStatusDescription(6) ~
+            <br/>
+            Aperature Science / We do what we can because we must
+          </div>
+        </td>
+        <td>
+          <div class="eternitymilestonediv" ~style.background=FinalityMilestones.color(7)~>
+            ~i 14 ~ finalities
+            <br/>
+            ~r FinalityMilestones.milestoneStatusDescription(7) ~
+            <br/>
+            For the good of all of us...
+          </div>
+        </td>
+        <td>
+          <div class="eternitymilestonediv" ~style.background=FinalityMilestones.color(8)~>
+            ~i 16 ~ finalities
+            <br/>
+            ~r FinalityMilestones.milestoneStatusDescription(8) ~
+            <br/>
+            ...except the ones who are dead
+          </div>
+        </td>
+      </tr>
+    </table>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'goals' ? '' : 'none'~>
     <span>You have completed ~i Goals.numberOfGoalsCompleted() ~/~i Goals.numberOfGoals() ~ goals.</span>

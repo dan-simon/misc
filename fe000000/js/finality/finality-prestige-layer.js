@@ -103,11 +103,12 @@ let FinalityPrestigeLayer = {
     ComplexityPrestigeLayer.complexityReset();
     player.finalityStars = new Decimal(1);
     FinalityGenerators.list.forEach(x => x.resetAmount());
-    player.complexityPoints = FinalityStartingBenefits.complexityPoints();
+    player.complexityPoints = FinalityStartingBenefits.complexityPoints().plus(FinalityMilestones.startingComplexityPoints());
     player.complexityStars = new Decimal(1);
     player.complexityGenerators = initialComplexityGenerators(),
     player.highestComplexityGenerator = 0;
-    player.complexityChallengeCompletions = [0, 0, 0, 0, 0, 0];
+    player.complexityChallengeCompletions = player.complexityChallengeCompletions.map(
+      x => Math.min(x, FinalityMilestones.keptComplexityChallenges()));
     player.powers = {
       seed: player.powers.seed,
       unlocked: false,
@@ -157,7 +158,7 @@ let FinalityPrestigeLayer = {
     player.stats.totalInfinityStarsProducedThisFinality = new Decimal(0);
     player.stats.totalEternityStarsProducedThisFinality = new Decimal(0);
     player.stats.totalComplexityStarsProducedThisFinality = new Decimal(0);
-    player.stats.totalCPProducedThisFinality = ComplexityAchievements.startingEternityPoints().plus(FinalityStartingBenefits.eternityPoints());
+    player.stats.totalCPProducedThisFinality = FinalityStartingBenefits.complexityPoints().plus(FinalityMilestones.startingComplexityPoints());
     player.stats.timeSinceFinality = 0;
     player.stats.lastTenComplexities = initialLastTenComplexities();
   }
