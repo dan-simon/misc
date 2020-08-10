@@ -31,7 +31,7 @@ let Stars = {
   addAmount(x) {
     let oldStars = player.stars;
     player.stars = player.stars.plus(x).min(this.limit());
-    let change = player.stars.minus(oldStars)
+    let change = player.stars.minus(oldStars).max(0);
     player.stats.totalStarsProduced = player.stats.totalStarsProduced.plus(change);
     player.stats.totalStarsProducedThisEternity = player.stats.totalStarsProducedThisEternity.plus(change);
     player.stats.totalStarsProducedThisComplexity = player.stats.totalStarsProducedThisComplexity.plus(change);
