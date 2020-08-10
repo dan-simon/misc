@@ -54,7 +54,7 @@ let Prestige = {
   },
   prestigeReset(fromHigher) {
     if (fromHigher || !EternityMilestones.isEternityMilestoneActive(8)) {
-      player.stars = EternityStartingBenefits.stars().plus(FinalityStartingBenefits.stars());
+      Stars.setAmount(Stars.startingAmount());
       player.boost = {bought: 0};
       player.generators = initialGenerators();
       player.highestGenerator = 0;

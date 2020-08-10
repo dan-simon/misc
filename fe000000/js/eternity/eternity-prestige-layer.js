@@ -114,7 +114,7 @@ let EternityPrestigeLayer = {
     // Reset color being generated, as the player desired.
     Chroma.updateChromaOnEternity();
     // Small bonus, arguably unexpected but not that big in the grand scheme of things.
-    player.stats.totalStarsProducedThisEternity = EternityStartingBenefits.stars().plus(FinalityStartingBenefits.stars());
+    player.stats.totalStarsProducedThisEternity = Stars.startingAmount();
     player.stats.totalIPProducedThisEternity = EternityStartingBenefits.infinityPoints().plus(FinalityStartingBenefits.infinityPoints());
     player.stats.timeSinceEternity = 0;
     player.stats.timeSinceLastPeakEPPerSec = Math.pow(2, 256);

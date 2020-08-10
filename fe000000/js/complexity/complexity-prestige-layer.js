@@ -139,7 +139,7 @@ let ComplexityPrestigeLayer = {
       next: 0
     };
     // Small bonus, arguably unexpected but not that big in the grand scheme of things.
-    player.stats.totalStarsProducedThisComplexity = EternityStartingBenefits.stars().plus(FinalityStartingBenefits.stars());
+    player.stats.totalStarsProducedThisComplexity = Stars.startingAmount();
     player.stats.totalEPProducedThisComplexity = ComplexityAchievements.startingEternityPoints().plus(FinalityStartingBenefits.eternityPoints());
     player.stats.totalEternitiesProducedThisComplexity = ComplexityAchievements.effect(1, 2);
     player.stats.timeSinceAutoECCompletion = 0;

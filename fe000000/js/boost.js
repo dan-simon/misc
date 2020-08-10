@@ -75,7 +75,7 @@ let Boost = {
   isNotBuyableAtAll() {
     // This function is a bit misleadingly named. It checks if there's some condition making boosts completely unbuyable
     // independent of how many stars you have.
-    return !this.isVisible() || InfinityPrestigeLayer.mustInfinity() || MultiverseCollapse.hasHappened() || !Generators.anyGenerators() || ComplexityChallenge.isSafeguardOn(2);
+    return !this.isVisible() || Stars.atLimit() || !Generators.anyGenerators() || ComplexityChallenge.isSafeguardOn(2);
   },
   maxBuyable() {
     if (this.isNotBuyableAtAll()) return 0;

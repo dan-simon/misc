@@ -156,7 +156,7 @@ let FinalityPrestigeLayer = {
     } else {
       Galaxy.updateDilated();
     }
-    player.stats.totalStarsProducedThisFinality = EternityStartingBenefits.stars().plus(FinalityStartingBenefits.stars());
+    player.stats.totalStarsProducedThisFinality = Stars.startingAmount();
     player.stats.totalInfinityStarsProducedThisFinality = new Decimal(0);
     player.stats.totalEternityStarsProducedThisFinality = new Decimal(0);
     player.stats.totalComplexityStarsProducedThisFinality = new Decimal(0);

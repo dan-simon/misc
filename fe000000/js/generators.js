@@ -81,7 +81,7 @@ let Generator = function (i) {
       return n <= this.maxBuyable();
     },
     maxBuyable() {
-      if (!this.isVisible() || InfinityPrestigeLayer.mustInfinity() || MultiverseCollapse.hasHappened()) return 0;
+      if (!this.isVisible() || Stars.atLimit()) return 0;
       let num = Math.floor(player.stars.div(this.cost()).times(
         Decimal.minus(this.costIncreasePer(), 1)).plus(1).log(this.costIncreasePer()));
       num = Math.min(num,
