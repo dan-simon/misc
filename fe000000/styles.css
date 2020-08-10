@@ -128,6 +128,17 @@ button {
   border-width: 1px 1px;
 }
 
+.finalitymilestonediv {
+  display: table;
+  text-align: center;
+  width: 256px;
+  height: 224px;
+  padding: 4px;
+  margin: 4px;
+  border: solid;
+  border-width: 1px 1px;
+}
+
 .goaldiv {
   display: table;
   text-align: center;

@@ -4,7 +4,7 @@ let ComplexityAutobuyer = function (i) {
   }
   return {
     hasComplexityAutobuyer() {
-      return i <= 11 && (Galaxy.isUnlocked() || FinalityMilestones.hasFinalityMilestone(1));
+      return i <= 11 && (Galaxy.isUnlocked() || FinalityMilestones.isFinalityMilestoneActive(1));
     },
     isOn() {
       return player.complexityAutobuyers[i - 1];

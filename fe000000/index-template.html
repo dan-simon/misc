@@ -31,6 +31,7 @@
   <script src="js/finality/finalities.js"></script>
   <script src="js/finality/finality-generators.js"></script>
   <script src="js/finality/finality-max-all.js"></script>
+  <script src="js/finality/finality-milestones.js"></script>
   <script src="js/finality/finality-points.js"></script>
   <script src="js/finality/finality-prestige-layer.js"></script>
   <script src="js/finality/finality-shards.js"></script>
@@ -142,6 +143,7 @@
     <span>
       <button ~style.display=Tabs.isTabVisible('finality') ? '' : 'none'~ onclick="Tabs.setTab('finality')">Finality</button>
       <button ~style.display=Tabs.isTabVisible('finality-shards') ? '' : 'none'~ onclick="Tabs.setTab('finality-shards')">Finality Shards</button>
+      <button ~style.display=Tabs.isTabVisible('finality-milestones') ? '' : 'none'~ onclick="Tabs.setTab('finality-milestones')">Finality Milestones</button>
     </span>
   </div>
   <br/>
@@ -3633,12 +3635,11 @@
       <button style="height: 48px;" onclick="Galaxy.unlock()" ~class=Galaxy.canUnlock() ? '' : 'disabled'~>
         Unlock Galaxies<br/>Cost: ~f Galaxy.unlockCost() ~ complexity points
       </button>
-      <br ~style.display=FinalityMilestones.isFinalityMilestoneActive(1) ? ~/>
-      <span>Unlocking galaxies will also give you autobuyers for complexity generators and power upgrades.</span>
+      <div ~style.display=FinalityMilestones.isFinalityMilestoneActive(1) ? 'none' : ''~>Unlocking galaxies will also give you autobuyers for complexity generators and power upgrades.</div>
     </div>
     <div ~style.display=Galaxy.isUnlocked() ? '' : 'none'~>
-      <div>Due to unlocking galaxies, you have autobuyers for complexity generators and power upgrades.</div>
-      <br/>
+      <div ~style.display=FinalityMilestones.isFinalityMilestoneActive(1) ? 'none' : ''~>Due to unlocking galaxies, you have autobuyers for complexity generators and power upgrades.</div>
+      <br ~style.display=FinalityMilestones.isFinalityMilestoneActive(1) ? 'none' : ''~/>
       <span>You have produced ~f Galaxy.totalStarsProducedThisFinality() ~ total stars this finality, making your star factor ~f Galaxy.starFactor() ~.</span>
       <br/>
       <span>You have produced ~f Galaxy.totalInfinityStarsProducedThisFinality() ~ total infinity stars this finality, making your infinity star factor ~f Galaxy.infinityStarFactor() ~.</span>
@@ -4132,16 +4133,16 @@
           </div>
         </td>
         <td>
-          <div class="eternitymilestonediv" ~style.background=FinalityMilestones.color(2)~>
+          <div class="finalitymilestonediv" ~style.background=FinalityMilestones.color(2)~>
             ~i 4 ~ finalities
             <br/>
             ~r FinalityMilestones.milestoneStatusDescription(2) ~
             <br/>
-            Start each ~r PrestigeLayerNames.layersAbove('finality') ~ with ~i FinalityMilestones.startingComplexityPoints() ~ complexity points, and keep completions of each complexity challenge on ~r PrestigeLayerNames.layersAbove('finality') ~ based on finalities (currently ~i FinalityMilestones.keptComplexityChallenges() ~)
+            Start each ~r PrestigeLayerNames.layersAbove('finality') ~ with ~i FinalityMilestones.rawStartingComplexityPoints() ~ ℂP, and keep completions of each complexity challenge on ~r PrestigeLayerNames.layersAbove('finality') ~ based on your finalities (currently ~i FinalityMilestones.rawKeptComplexityChallenges() ~)
           </div>
         </td>
         <td>
-          <div class="eternitymilestonediv" ~style.background=FinalityMilestones.color(3)~>
+          <div class="finalitymilestonediv" ~style.background=FinalityMilestones.color(3)~>
             ~i 6 ~ finalities
             <br/>
             ~r FinalityMilestones.milestoneStatusDescription(3) ~
@@ -4150,7 +4151,7 @@
           </div>
         </td>
         <td>
-          <div class="eternitymilestonediv" ~style.background=FinalityMilestones.color(4)~>
+          <div class="finalitymilestonediv" ~style.background=FinalityMilestones.color(4)~>
             ~i 8 ~ finalities
             <br/>
             ~r FinalityMilestones.milestoneStatusDescription(4) ~
@@ -4161,7 +4162,7 @@
       </tr>
       <tr>
         <td>
-          <div class="eternitymilestonediv" ~style.background=FinalityMilestones.color(5)~>
+          <div class="finalitymilestonediv" ~style.background=FinalityMilestones.color(5)~>
             ~i 10 ~ finalities
             <br/>
             ~r FinalityMilestones.milestoneStatusDescription(5) ~
@@ -4170,7 +4171,7 @@
           </div>
         </td>
         <td>
-          <div class="eternitymilestonediv" ~style.background=FinalityMilestones.color(6)~>
+          <div class="finalitymilestonediv" ~style.background=FinalityMilestones.color(6)~>
             ~i 12 ~ finalities
             <br/>
             ~r FinalityMilestones.milestoneStatusDescription(6) ~
@@ -4179,7 +4180,7 @@
           </div>
         </td>
         <td>
-          <div class="eternitymilestonediv" ~style.background=FinalityMilestones.color(7)~>
+          <div class="finalitymilestonediv" ~style.background=FinalityMilestones.color(7)~>
             ~i 14 ~ finalities
             <br/>
             ~r FinalityMilestones.milestoneStatusDescription(7) ~
@@ -4188,7 +4189,7 @@
           </div>
         </td>
         <td>
-          <div class="eternitymilestonediv" ~style.background=FinalityMilestones.color(8)~>
+          <div class="finalitymilestonediv" ~style.background=FinalityMilestones.color(8)~>
             ~i 16 ~ finalities
             <br/>
             ~r FinalityMilestones.milestoneStatusDescription(8) ~

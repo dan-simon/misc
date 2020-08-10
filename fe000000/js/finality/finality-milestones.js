@@ -1,6 +1,6 @@
 let FinalityMilestones = {
   hasFinalityMilestone(x) {
-    return player.finalities.gte(2 * x);
+    return player.finalities >= 2 * x;
   },
   hasAllFinalityMilestones() {
     return this.hasEternityMilestone(8);
@@ -27,10 +27,16 @@ let FinalityMilestones = {
     }
   },
   startingComplexityPoints() {
-    return this.hasFinalityMilestone(2) ? new Decimal(2) : new Decimal(0);
+    return this.isFinalityMilestoneActive(2) ? this.rawStartingComplexityPoints() : new Decimal(0);
+  },
+  rawStartingComplexityPoints() {
+    return new Decimal(2);
   },
   keptComplexityChallenges() {
-    return this.hasFinalityMilestone(2) ? Math.floor(Math.pow(2, Math.min(16, player.finalities) / 2)) : 0;
+    return this.isFinalityMilestoneActive(2) ? this.rawKeptComplexityChallenges() : 0;
+  },
+  rawKeptComplexityChallenges() {
+    return Math.floor(Math.pow(2, Math.min(16, player.finalities) / 2));
   },
   color(x) {
     return Colors.makeStyle(this.milestoneStatusNumber(x), false);

@@ -26,6 +26,7 @@ let Tabs = {
       'galaxies': () => PrestigeLayerProgress.hasReached('complexity'),
       'finality': () => PrestigeLayerProgress.hasReached('finality'),
       'finality-shards': () => PrestigeLayerProgress.hasReached('finality'),
+      'finality-milestones': () => PrestigeLayerProgress.hasReached('finality'),
       'goals': () => true,
       'statistics': () => true,
       'options': () => true,
