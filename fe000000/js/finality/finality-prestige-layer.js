@@ -109,6 +109,8 @@ let FinalityPrestigeLayer = {
     player.highestComplexityGenerator = 0;
     player.complexityChallengeCompletions = player.complexityChallengeCompletions.map(
       x => Math.min(x, FinalityMilestones.keptComplexityChallenges()));
+    // We keep hasGainedShards for the same reason we keep hasGainedPermanence in complexity;
+    // it's used only for display.
     player.powers = {
       seed: player.powers.seed,
       unlocked: false,
@@ -117,7 +119,7 @@ let FinalityPrestigeLayer = {
       stored: [],
       gain: true,
       respec: false,
-      hasGainedShards: false,
+      hasGainedShards: player.powers.hasGainedShards,
       shards: 0,
       shardUpgrades: [0, 0, 0, 0],
       powerDeletionMode: player.powers.powerDeletionMode,
