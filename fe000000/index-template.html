@@ -105,6 +105,7 @@
     <span ~style.display=FinalityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i FinalityPrestigeLayer.finalityPoints() ~ finality point~s FinalityPrestigeLayer.finalityPoints() ~ (~i FinalityPrestigeLayer.totalFinalityPoints() ~ total)</span>
     <button ~style.display=FinalityPrestigeLayer.canFinality() ? '' : 'none'~ style="height: 48px;" onclick="FinalityPrestigeLayer.finality()">Finality: Gain ~i FinalityPrestigeLayer.finalityPointGain() ~ finality point~s FinalityPrestigeLayer.finalityPointGain() ~ (~r FinalityPrestigeLayer.finalityPointGainRatioText() ~~i FinalityPrestigeLayer.finalityPoints() ~ → ~i FinalityPrestigeLayer.newFinalityPoints() ~)<br/>and ~i FinalityPrestigeLayer.finalityShardGain() ~ finality shard~s FinalityPrestigeLayer.finalityShardGain() ~ (~r FinalityPrestigeLayer.finalityShardGainRatioText() ~~i FinalityPrestigeLayer.finalityShards() ~ → ~i FinalityPrestigeLayer.newFinalityShards() ~)</button>
   </div>
+  <div ~style.display=Goals.areAllGoalsCompleted() ? '' : 'none'~>You have won the game! Congratulations!</div>
   <br/>
   <br/>
   <div>
@@ -4205,7 +4206,7 @@
     <br/>
     <span>By default, only goals up to the next goal after the last completed goal are displayed. <button onclick="Goals.toggleDisplayAllGoals()">Display all goals: ~r Goals.displayAllGoals() ? "On" : "Off" ~</button></span>
     <br/>
-    <span>There is no in-game reward for completing goals, but you win the game (and have finished it) when you complete the last one.</span>
+    <span>There is no in-game reward for completing goals, but you win the game (and have finished it) when you complete them all.</span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
       <tr>
         <td>

@@ -57,6 +57,9 @@ let Goals = {
   numberOfGoalsCompleted() {
     return player.goals.reduce((a, b) => a + b)
   },
+  areAllGoalsCompleted() {
+    return this.numberOfGoalsCompleted() === 16;
+  },
   getGoalText(i) {
     if (this.displayGoal(i)) {
       return this.goalText[i - 1].replace(/\d+/g, x => formatInt(+x));
