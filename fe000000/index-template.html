@@ -1628,6 +1628,9 @@
         </td>
       </tr>
     </table>
+    <span ~style.display=Studies.canAccessFourthRow() ? '' : 'none'~ class="greenspan">
+      There is also a small multiplier to the chroma cap based on total fourth-row study purchases (currently ~r formatWithPrecision(Studies.chromaCapMultiplier(), 5) ~x).
+    </span>
     <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 0px; border-collapse: separate;">
       <tr>
         <td style="text-align: center;">
@@ -1730,10 +1733,6 @@
       <br/>
       <span>
         However, they can only be bought if all studies above are bought.
-      </span>
-      <br/>
-      <span>
-        There is also a small multiplier to the chroma cap based on total fourth-row study purchases (currently ~r formatWithPrecision(Studies.chromaCapMultiplier(), 5) ~x).
       </span>
     </div>
     <br/>
@@ -2320,7 +2319,7 @@
     <div ~style.display=Chroma.isUnlocked() ? '' : 'none'~>
       <span>You have spent ~f player.stats.timeSinceEternity ~ seconds in this eternity, giving you ~f Chroma.amount() ~ chroma (capped at ~f Chroma.cap() ~, based on eternity points).</span>
       <br/>
-      <span>The distance between your chroma and its cap decreases exponentially.</span>
+      <span>Chroma gain will slow down over time, gradually approaching its cap but never reaching it.</span>
       <br/>
       <span ~style.display=Chroma.producingAll() ? 'none' : ''~>You ~r Chroma.currentProductionTextPrefix() ~<span ~class=Chroma.currentColorClass()~>~r Chroma.currentColorName() ~</span>~r Chroma.currentProductionTextSuffix() ~, and will produce <span ~class=Chroma.nextColorClass()~>~r Chroma.nextColorName() ~</span> after next eternity reset.</span>
       <br ~style.display=Chroma.producingAll() ? 'none' : ''~/>
@@ -2334,7 +2333,7 @@
       <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 0px; border-collapse: separate;">
         <tr>
           <td>
-            <div class="chromadiv" ~style.display=Chroma.canSeeThatColorExists(1) ? '' : 'none'~>
+            <div ~class=Chroma.chromaDivClass(1)~ ~style.display=Chroma.canSeeThatColorExists(1) ? '' : 'none'~>
               <div ~style.display=Chroma.isColorUnlocked(1) ? 'none' : ''~>
                 <button style="height: 48px;" onclick="Chroma.unlockColor(1)" ~class=Chroma.canUnlockColor(1) ? '' : 'disabled'~>
                   Unlock ~r Chroma.colorName(1) ~<br/>Cost: ~f Chroma.getUnlockColorCost(1) ~ eternity points
@@ -2353,7 +2352,7 @@
             </div>
           </td>
           <td>
-            <div class="chromadiv" ~style.display=Chroma.canSeeThatColorExists(2) ? '' : 'none'~>
+            <div ~class=Chroma.chromaDivClass(2)~ ~style.display=Chroma.canSeeThatColorExists(2) ? '' : 'none'~>
               <div ~style.display=Chroma.isColorUnlocked(2) ? 'none' : ''~>
                 <button style="height: 48px;" onclick="Chroma.unlockColor(2)" ~class=Chroma.canUnlockColor(2) ? '' : 'disabled'~>
                   Unlock ~r Chroma.colorName(2) ~<br/>Cost: ~f Chroma.getUnlockColorCost(2) ~ eternity points
@@ -2372,7 +2371,7 @@
             </div>
           </td>
           <td>
-            <div class="chromadiv" ~style.display=Chroma.canSeeThatColorExists(3) ? '' : 'none'~>
+            <div ~class=Chroma.chromaDivClass(3)~ ~style.display=Chroma.canSeeThatColorExists(3) ? '' : 'none'~>
               <div ~style.display=Chroma.isColorUnlocked(3) ? 'none' : ''~>
                 <button style="height: 48px;" onclick="Chroma.unlockColor(3)" ~class=Chroma.canUnlockColor(3) ? '' : 'disabled'~>
                   Unlock ~r Chroma.colorName(3) ~<br/>Cost: ~f Chroma.getUnlockColorCost(3) ~ eternity points
@@ -2394,7 +2393,7 @@
         </tr>
         <tr>
           <td>
-            <div class="chromadiv" ~style.display=Chroma.canSeeThatColorExists(4) ? '' : 'none'~>
+            <div ~class=Chroma.chromaDivClass(4)~ ~style.display=Chroma.canSeeThatColorExists(4) ? '' : 'none'~>
               <div ~style.display=Chroma.isColorUnlocked(4) ? 'none' : ''~>
                 <button style="height: 48px;" onclick="Chroma.unlockColor(4)" ~class=Chroma.canUnlockColor(4) ? '' : 'disabled'~>
                   Unlock ~r Chroma.colorName(4) ~<br/>Cost: ~f Chroma.getUnlockColorCost(4) ~ eternity points
@@ -2414,7 +2413,7 @@
             </div>
           </td>
           <td>
-            <div class="chromadiv" ~style.display=Chroma.canSeeThatColorExists(5) ? '' : 'none'~>
+            <div ~class=Chroma.chromaDivClass(5)~ ~style.display=Chroma.canSeeThatColorExists(5) ? '' : 'none'~>
               <div ~style.display=Chroma.isColorUnlocked(5) ? 'none' : ''~>
                 <button style="height: 48px;" onclick="Chroma.unlockColor(5)" ~class=Chroma.canUnlockColor(5) ? '' : 'disabled'~>
                   Unlock ~r Chroma.colorName(5) ~<br/>Cost: ~f Chroma.getUnlockColorCost(5) ~ eternity points
@@ -2433,7 +2432,7 @@
             </div>
           </td>
           <td>
-            <div class="chromadiv" ~style.display=Chroma.canSeeThatColorExists(6) ? '' : 'none'~>
+            <div ~class=Chroma.chromaDivClass(6)~ ~style.display=Chroma.canSeeThatColorExists(6) ? '' : 'none'~>
               <div ~style.display=Chroma.isColorUnlocked(6) ? 'none' : ''~>
                 <button style="height: 48px;" onclick="Chroma.unlockColor(6)" ~class=Chroma.canUnlockColor(6) ? '' : 'disabled'~>
                   Unlock ~r Chroma.colorName(6) ~<br/>Cost: ~f Chroma.getUnlockColorCost(6) ~ eternity points
