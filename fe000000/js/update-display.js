@@ -2510,7 +2510,6 @@ function updateDisplay() {
     e[1076].textContent = formatInt(0);
     b[1061].style.display = PrestigeLayerProgress.hasReached('finality') ? '' : 'none';
     b[1062].style.display = PrestigeLayerProgress.hasReached('finality') ? '' : 'none';
-    b[1062].onclick = "Galaxy.toggleResetDilatedOnFinality()";
     e[1077].textContent = formatInt(0);
     e[1078].textContent = Galaxy.isResetDilatedOnFinalityOn() ? "On" : "Off";
   }
