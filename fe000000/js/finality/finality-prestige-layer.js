@@ -123,7 +123,7 @@ let FinalityPrestigeLayer = {
       shards: 0,
       shardUpgrades: [0, 0, 0, 0],
       powerDeletionMode: player.powers.powerDeletionMode,
-      presets: [],
+      presets: player.powers.presets,
       craft: {
         type: 'normal',
         rarity: 1,
