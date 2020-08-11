@@ -2956,13 +2956,14 @@
       <br/>
       <span>However, no two consecutive new powers can have the same type or have a rarity in the bottom ~f RNG.lowRarityThreshold() ~ of rarities.</span>
       <br/>
-      <br/>
-      <span>Next power<span ~style.display=Powers.nextKept() ? 'none' : ''~> (will be automatically deleted due to being bad enough to be useless)</span>:</span>
-      <br/>
-      <span ~class=Powers.color('next', 1)~>~r Powers.description('next', 1) ~</span>
-      <br/>
-      <span ~class=Powers.color('next', 1)~>~r Powers.details('next', 1) ~</span>
-      <br/>
+      <div ~style.display=Powers.showNextPower() ? '' : 'none'~>
+        <br/>
+        <span>Next power<span ~style.display=Powers.nextKept() ? 'none' : ''~> (will be automatically deleted due to being bad enough to be useless)</span>:</span>
+        <br/>
+        <span ~class=Powers.color('next', 1)~>~r Powers.description('next', 1) ~</span>
+        <br/>
+        <span ~class=Powers.color('next', 1)~>~r Powers.details('next', 1) ~</span>
+      </div>
       <br/>
       <span>The powers activated by importing powers will be the strongest stored powers of the same types as those exported.</span>
       <br/>

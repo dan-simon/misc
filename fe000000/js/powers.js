@@ -417,6 +417,9 @@ let Powers = {
   interval() {
     return 8192 / this.speed();
   },
+  showNextPower() {
+    return this.interval() > 1;
+  },
   maximumActivatedLimit() {
     return 3;
   },
