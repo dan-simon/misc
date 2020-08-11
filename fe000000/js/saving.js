@@ -436,7 +436,7 @@ let Saving = {
       player.version = 1.94140625;
     }
     if (player.version < 1.9423828125) {
-      player.resetDilatedOnFinality = true;
+      player.galaxies.resetDilatedOnFinality = true;
       player.version = 1.9423828125;
     }
   },
