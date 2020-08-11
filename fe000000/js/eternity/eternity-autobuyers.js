@@ -74,5 +74,6 @@ let EternityAutobuyers = {
         Chroma.unlockColor(i, true);
       }
     }
+    Studies.autoLoadStudyList();
   }
 }

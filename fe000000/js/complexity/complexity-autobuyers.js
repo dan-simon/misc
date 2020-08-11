@@ -4,7 +4,8 @@ let ComplexityAutobuyer = function (i) {
   }
   return {
     hasComplexityAutobuyer() {
-      return i <= 11 && (Galaxy.isUnlocked() || FinalityMilestones.isFinalityMilestoneActive(1));
+      return (i <= 11 && (Galaxy.isUnlocked() || FinalityMilestones.isFinalityMilestoneActive(1))) ||
+        (i > 11 && FinalityMilestones.isFinalityMilestoneActive(4));
     },
     isOn() {
       return player.complexityAutobuyers[i - 1];
@@ -54,6 +55,6 @@ let ComplexityAutobuyers = {
       // This could be simpler, but the order might change later.
       ComplexityAutobuyer([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11][i]).tick();
     }
-    // Right now the last four complexity autobuyers do nothing; this will change later.
+    PowerShards.buyMaxOf([1, 2, 3, 4].filter(i => ComplexityAutobuyer(i + 11).isActive()));
   }
 }

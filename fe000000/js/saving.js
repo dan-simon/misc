@@ -439,6 +439,13 @@ let Saving = {
       player.galaxies.resetDilatedOnFinality = true;
       player.version = 1.9423828125;
     }
+    if (player.version < 1.943359375) {
+      player.studyListAutoLoad = {
+        studyList: '',
+        on: true
+      };
+      player.version = 1.943359375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

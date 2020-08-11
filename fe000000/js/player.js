@@ -129,6 +129,10 @@ let initialPlayer = {
     unlocked: false,
     upgrades: [0, 0]
   },
+  studyListAutoLoad: {
+    studyList: '',
+    on: true
+  },
   unlockedEternityChallenge: 0,
   currentEternityChallenge: 0,
   eternityChallengeCompletions: [0, 0, 0, 0, 0, 0, 0, 0],
@@ -282,7 +286,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9423828125
+  version: 1.943359375
 }
 
 let player;

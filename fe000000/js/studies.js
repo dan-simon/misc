@@ -332,6 +332,28 @@ let Studies = {
   boughtTheoremsThisComplexity() {
     return player.boughtTheoremsThisComplexity;
   },
+  isAutoLoadUnlocked() {
+    return FinalityMilestones.isFinalityMilestoneActive(3);
+  },
+  isAutoLoadActive() {
+    return this.isAutoLoadUnlocked() && this.isAutoLoadOn();
+  },
+  autoLoadStudyList() {
+    if (!this.isAutoLoadActive()) return;
+    this.importString(this.studyListToAutoLoad());
+  },
+  studyListToAutoLoad() {
+    return player.studyListAutoLoad.studyList;
+  },
+  setStudyListToAutoLoad(x) {
+    player.studyListAutoLoad.studyList = x;
+  },
+  isAutoLoadOn() {
+    return player.studyListAutoLoad.on;
+  },
+  toggleAutoLoad() {
+    player.studyListAutoLoad.on = !player.studyListAutoLoad.on;
+  },
   hasPreset(x) {
     return player.presets.length >= x;
   },
