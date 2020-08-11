@@ -128,5 +128,9 @@ let Galaxy = {
   resetDilated() {
     player.galaxies.dilated = 0;
     player.galaxies.nextDilated = 0;
+    this.updateNextDilatedInputDisplay();
+  },
+  updateNextDilatedInputDisplay() {
+    document.getElementsByClassName('nextdilatedinput')[0].value = this.nextDilatedRaw();
   }
 }
