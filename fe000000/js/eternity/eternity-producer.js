@@ -77,7 +77,7 @@ let EternityProducerUpgrade = function (i) {
         n = 1;
       }
       if (n === 0 || (!guaranteedBuyable && !this.canBuy(n))) return;
-      player.eternityPoints = player.eternityPoints.minus(this.costFor(n));
+      player.eternityPoints = player.eternityPoints.safeMinus(this.costFor(n));
       this.addBought(n);
     },
     buyMax() {
@@ -103,7 +103,7 @@ let EternityProducer = {
   unlock(auto) {
     if (!this.canUnlock() || (
       auto && player.eternityPoints.minus(this.unlockCost()).lt(2) && EternityGenerator(1).bought() === 0)) return;
-    player.eternityPoints = player.eternityPoints.minus(this.unlockCost());
+    player.eternityPoints = player.eternityPoints.safeMinus(this.unlockCost());
     player.eternityProducer.unlocked = true;
     ComplexityChallenge.exitComplexityChallenge(3);
   },

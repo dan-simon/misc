@@ -89,7 +89,7 @@ let EternityGenerator = function (i) {
         n = 1;
       }
       if (n === 0 || (!guaranteedBuyable && !this.canBuy(n))) return;
-      player.eternityPoints = player.eternityPoints.minus(this.costFor(n));
+      player.eternityPoints = player.eternityPoints.safeMinus(this.costFor(n));
       this.addAmount(n);
       this.addBought(n);
       if (player.highestEternityGenerator < i) {
