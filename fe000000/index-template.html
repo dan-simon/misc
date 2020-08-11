@@ -2963,24 +2963,14 @@
       <button style="height: 48px;" onclick="Powers.unlock()" ~class=Powers.canUnlock() ? '' : 'disabled'~>
         Unlock Powers<br/>Cost: ~f Powers.unlockCost() ~ complexity points
       </button>
-<<<<<<< HEAD
       <div ~style.display=FinalityMilestones.isFinalityMilestoneActive(6) ? 'none' : ''~>Unlocking powers will also let you gain your eternity points on eternity every second, without needing to eternity.</div>
-=======
-      <br/>
-      <span>Unlocking powers will also let you gain your eternity points on eternity every second, without needing to eternity (EP generation).</span>
->>>>>>> master
     </div>
     <div ~style.display=Powers.isUnlocked() ? '' : 'none'~>
       <span>You have ~i Powers.active().length ~/~i Powers.activatedLimit() ~ active power~s Powers.activatedLimit() ~.</span>
       <br/>
       <span>Active powers raise various dimension multipliers to powers. Stored powers do not, but can be activated.</span>
-<<<<<<< HEAD
       <br ~style.display=FinalityMilestones.isFinalityMilestoneActive(6) ? 'none' : ''~/>
       <span ~style.display=FinalityMilestones.isFinalityMilestoneActive(6) ? 'none' : ''~>Due to unlocking powers, you gain your eternity points on eternity every second, without needing to eternity.</span>
-=======
-      <br/>
-      <span>Due to unlocking powers, you gain your eternity points on eternity every second, without needing to eternity (EP generation).</span>
->>>>>>> master
       <br/>
       <br/>
       <span>You gain a new power once every ~f Powers.interval() ~ seconds, next in ~f Powers.timeUntilPowerGain() ~ seconds. <button onclick="Powers.togglePowerGain()">Power gain: ~r Powers.isPowerGainOn() ? "On" : "Off" ~</button></span>
