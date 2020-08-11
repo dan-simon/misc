@@ -198,8 +198,7 @@ let Powers = {
       }
       PowerShards.gainPowerShards(RNG.averagePowerShardValue() * newPowers);
       RNG.jump(2 * newPowers);
-      this.cleanStored();
-      this.maybeAutoSort();
+      this.onPowerChange(true, true);
     }
   },
   gainNewPower(returnPower) {
@@ -267,6 +266,14 @@ let Powers = {
     let cutoff = this.cutoff(p.type);
     return this.strength(p) * this.rarity(p) > cutoff;
   },
+  maybeActiveSwap() {
+    if (FinalityMilestones.isFinalityMilestoneActive(6)) {
+      this.activeSwap();
+    }
+  },
+  activeSwap() {
+    // Implement this later.
+  },
   sortActive() {
     // Put higher strength and rarity on the top.
     let f = p => 1000 * ['normal', 'infinity', 'eternity', 'complexity'].indexOf(p.type) - this.strength(p) * this.rarity(p);
@@ -297,6 +304,15 @@ let Powers = {
     if (this.isAutoSortStoredOn()) {
       this.sortStored();
     }
+  },
+  onPowerChange(cleaning, potentialNewActiveReplacements) {
+    if (cleaning) {
+      this.cleanStored();
+    }
+    if (potentialNewActiveReplacements) {
+      this.maybeActiveSwap();
+    }
+    this.maybeAutoSort();
   },
   canAccessPower(type, i) {
     if (type === 'active') {
@@ -353,7 +369,7 @@ let Powers = {
     if (this.canActivate(i)) {
       player.powers.active.push(player.powers.stored[i - 1]);
       player.powers.stored = player.powers.stored.slice(0, i - 1).concat(player.powers.stored.slice(i));
-      this.maybeAutoSort();
+      this.onPowerChange(false, true);
     }
   },
   canDelete(i) {
@@ -364,7 +380,7 @@ let Powers = {
       confirm('Are you sure you want to delete this power for ' + format(PowerShards.shardGainStored(i)) + ' power shards?'))) {
       PowerShards.gainShardsStored(i);
       player.powers.stored = player.powers.stored.slice(0, i - 1).concat(player.powers.stored.slice(i));
-      this.maybeAutoSort();
+      this.onPowerChange(false, false);
     }
   },
   canAccessActive(i) {
@@ -382,8 +398,7 @@ let Powers = {
   respec() {
     player.powers.stored = this.stored().concat(this.active());
     player.powers.active = [];
-    this.cleanStored();
-    this.maybeAutoSort();
+    this.onPowerChange(true, false);
   },
   maybeRespec() {
     if (this.isRespecOn()) {
@@ -531,7 +546,9 @@ let Powers = {
     let indicesToActivate = [].concat.apply([], toActivateByType).slice(0, this.activatedLimit() - this.active().length).map(x => x.index);
     player.powers.active = this.active().concat(indicesToActivate.map(i => this.accessPower('stored', i)));
     player.powers.stored = this.stored().filter((_, i) => !indicesToActivate.includes(1 + i));
-    this.maybeAutoSort();
+    // The second parameter is false here because import already selects the best powers of each type,
+    // so there's no need to do any swapping.
+    this.onPowerChange(false, false);
   },
   import() {
     this.importString(prompt('Enter your active powers (as previously exported):'));

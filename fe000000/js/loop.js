@@ -40,7 +40,7 @@ function gameLoop(diff, display) {
   if (EternityChallenge.isTotalCompletionsRewardActive(3)) {
     InfinityPoints.addAmount(InfinityPrestigeLayer.infinityPointGain().times(diff));
   }
-  if (Powers.isUnlocked()) {
+  if (Powers.isUnlocked() || FinalityMilestones.isFinalityMilestoneActive(6)) {
     EternityPoints.addAmount(EternityPrestigeLayer.eternityPointGain().times(diff));
   }
   Studies.updateExtraTheorems();
