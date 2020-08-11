@@ -229,6 +229,15 @@ let initialPlayer = {
     false, false, false, false, false, false, false, false
   ],
   displayAllGoals: false,
+  isTabVisible: {
+    'infinity-challenges': false,
+    'eternity-producer': false,
+    'eternity-challenges': false,
+    'chroma': false,
+    'powers': false,
+    'oracle': false,
+    'galaxies': false,
+  },
   options: {
     notation: 'Scientific',
     offlineProgress: true,

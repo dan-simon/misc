@@ -78,14 +78,20 @@ let EternityChallenge = {
     return player.currentEternityChallenge;
   },
   getEternityChallengeGoal(x) {
-    return this.goals[x].times(Decimal.pow(this.goalIncreases[x], this.getEternityChallengeCompletions(x)));
+    return this.getEternityChallengeGoalAtTier(x, this.getEternityChallengeCompletions(x));
+  },
+  getEternityChallengeGoalAtTier(x, y) {
+    return this.goals[x].times(Decimal.pow(this.goalIncreases[x], y));
   },
   getEternityChallengeRequirement(x) {
+    return this.getEternityChallengeRequirementAtTier(x, this.getEternityChallengeCompletions(x));
+  },
+  getEternityChallengeRequirementAtTier(x, y) {
     let initialRequirement = this.requirements[x];
     if (Decimal.gt(initialRequirement, 1e10)) {
-      return initialRequirement.times(Decimal.pow(this.requirementIncreases[x], this.getEternityChallengeCompletions(x)));
+      return initialRequirement.times(Decimal.pow(this.requirementIncreases[x], y));
     } else {
-      return initialRequirement + this.requirementIncreases[x] * this.getEternityChallengeCompletions(x);
+      return initialRequirement + this.requirementIncreases[x] * y;
     }
   },
   getEternityChallengeReward(x) {

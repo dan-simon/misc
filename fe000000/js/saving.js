@@ -405,6 +405,18 @@ let Saving = {
         (x, i) => x ? i + 1 : 0).filter(x => x);
       player.version = Math.max(player.version, 1.940673828125);
     }
+    if (player.version < 1.94091796875 || !player.isTabVisible) {
+      player.isTabVisible = {
+        'infinity-challenges': false,
+        'eternity-producer': false,
+        'eternity-challenges': false,
+        'chroma': false,
+        'powers': false,
+        'oracle': false,
+        'galaxies': false,
+      };
+      player.version = Math.max(player.version, 1.94091796875);
+    }
     if (player.version < 1.94140625) {
       player.finalityPoints = new Decimal(0);
       player.totalFinalityShards = 0;
