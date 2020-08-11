@@ -42,11 +42,12 @@ let FinalityShardUpgrade = function (i) {
     },
     buy(areUpgradeBonusesHandledElsewhere) {
       let old = FinalityShards.totalUpgradeBonuses();
-      if (!this.canBuy()) return;
+      if (!this.canBuy()) return false;
       this.addBought(1);
       if (!areUpgradeBonusesHandledElsewhere) {
         FinalityShards.handleNewUpgradeBonuses(old);
       }
+      return true;
     },
     buyMax() {
       let old = FinalityShards.totalUpgradeBonuses();
