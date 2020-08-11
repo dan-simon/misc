@@ -2317,7 +2317,7 @@
     <div ~style.display=Chroma.isUnlocked() ? '' : 'none'~>
       <span>You have spent ~f player.stats.timeSinceEternity ~ seconds in this eternity, giving you ~f Chroma.amount() ~ chroma (capped at ~f Chroma.cap() ~, based on eternity points).</span>
       <br/>
-      <span>Chroma gain will slow down over time, gradually approaching its cap but never reaching it.</span>
+      <span>Chroma gain will slow down over time, gradually approaching its cap but taking a very long time to reach it.</span>
       <br/>
       <span ~style.display=Chroma.producingAll() ? 'none' : ''~>You ~r Chroma.currentProductionTextPrefix() ~<span ~class=Chroma.currentColorClass()~>~r Chroma.currentColorName() ~</span>~r Chroma.currentProductionTextSuffix() ~, and will produce <span ~class=Chroma.nextColorClass()~>~r Chroma.nextColorName() ~</span> after next eternity reset.</span>
       <br ~style.display=Chroma.producingAll() ? 'none' : ''~/>
