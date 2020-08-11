@@ -2,8 +2,17 @@ let FinalityPrestigeLayer = {
   complexityPointRequirementForFinality() {
     return Decimal.pow(2, Math.pow(2, 16));
   },
+  actualComplexityPointRequirementForFinality() {
+    // What's going on here is that due to EP gen, after reaching the star limit,
+    // your EP will, after a few ticks, increase to almost, but not quite,
+    // enough to get enough complexity points to finality. After a second or so
+    // EP will get high enough. But for that second, if you complexity,
+    // total complexity points and complexity points requirement will look the same,
+    // and it'll be confusing. Hence, this.
+    return this.complexityPointRequirementForFinality().times(255 / 256);
+  },
   canFinality() {
-    return ComplexityPoints.totalCPProducedThisFinality().gte(this.complexityPointRequirementForFinality());
+    return ComplexityPoints.totalCPProducedThisFinality().gte(this.actualComplexityPointRequirementForFinality());
   },
   isRequirementVisible() {
     return !this.canFinality() && PrestigeLayerProgress.hasReached('complexity');
