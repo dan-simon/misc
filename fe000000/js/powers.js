@@ -272,7 +272,21 @@ let Powers = {
     }
   },
   activeSwap() {
-    // Implement this later.
+    let numberActive = this.active().length;
+    for (let x of ['normal', 'infinity', 'eternity', 'complexity']) {
+      let sortedOfType = this.getSortedPowerList(x, true, false);
+      let numberActiveOfType = sortedOfType.filter(i => i.index <= numberActive).length;
+      let activeToReplace = sortedOfType.slice(numberActiveOfType).filter(i => i.index <= numberActive);
+      let storedToReplace = sortedOfType.slice(0, numberActiveOfType).filter(i => i.index > numberActive);
+      for (let i = 0; i < activeToReplace.length; i++) {
+        this.swap(activeToReplace[i].index - 1, storedToReplace[i].index - numberActive - 1);
+      }
+    }
+  },
+  swap(activeIndex, storedIndex) {
+    let temp = this.active()[activeIndex];
+    this.active()[activeIndex] = this.stored()[storedIndex];
+    this.stored()[storedIndex] = temp;
   },
   sortActive() {
     // Put higher strength and rarity on the top.
