@@ -420,6 +420,24 @@ let Saving = {
         false, false, false, false, false, false, false, false,
         false, false, false, false, false, false, false, false
       ];
+      if (player.sacrificeMultiplier !== '1') {
+        player.goals[0] = true;
+      }
+      if (player.prestigePower !== '1') {
+        player.goals[1] = true;
+      }
+      if (player.infinities > 0 || player.eternities !== '0' || player.complexities > 0) {
+        // We don't technically know that the player has done all these things but it's a fair guess.
+        player.goals[0] = true;
+        player.goals[1] = true;
+        player.goals[2] = true;
+      }
+      if (player.eternities !== '0' || player.complexities > 0) {
+        player.goals[5] = true;
+      }
+      if (player.complexities > 0) {
+        player.goals[10] = true;
+      }
       player.displayAllGoals = false;
       player.stats.totalStarsProducedThisFinality = player.stats.totalStarsProduced;
       player.stats.totalInfinityStarsProducedThisFinality = player.stats.totalInfinityStarsProduced;
