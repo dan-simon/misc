@@ -460,13 +460,23 @@ let Powers = {
     return 1 + this.baseEffects[p.type] * this.getOverallMultiplier(p);
   },
   getTotalEffect(x) {
-    return this.active().filter(p => p.type === x).map(p => this.getEffect(p)).reduce((a, b) => a + b - 1, 1);
+    return this.getTotalEffectFrom(this.active().filter(p => p.type === x));
+  },
+  getTotalEffectFrom(x) {
+    return x.map(p => this.getEffect(p)).reduce((a, b) => a + b - 1, 1);
   },
   anythingToBuy() {
     return this.upgradeList.some(x => x.canBuy());
   },
   maxAll() {
     this.upgradeList.forEach(x => x.buyMax());
+  },
+  effectOfBestComplexityPowers() {
+    let best = this.getSortedPowerList('complexity', true, true).slice(0, this.activatedLimit());
+    return this.getTotalEffectFrom(best);
+  },
+  complexityStarsForFinalityMilestone5() {
+    return ComplexityStars.amount().pow(this.effectOfBestComplexityPowers() / this.getTotalEffect('complexity'));
   },
   powerDeletionMode() {
     return player.powers.powerDeletionMode;

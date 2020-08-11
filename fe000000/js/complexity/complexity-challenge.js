@@ -35,10 +35,10 @@ let ComplexityChallenge = {
     return 1 + Math.floor(4 * Math.log2(stars.max(1).log2() / this.goals[x].log2()));
   },
   getComplexityChallengeReward(x) {
-    return this.rewards[x](this.getComplexityChallengeCompletions(x) * ComplexityStars.complexityChallengeMultiplier());
+    return this.rewards[x](this.getComplexityChallengeCompletions(x) * ComplexityStars.complexityChallengeRewardMultiplier(x));
   },
   getComplexityChallengeNextReward(x) {
-    return this.rewards[x]((1 + this.getComplexityChallengeCompletions(x)) * ComplexityStars.complexityChallengeMultiplier());
+    return this.rewards[x]((1 + this.getComplexityChallengeCompletions(x)) * ComplexityStars.complexityChallengeRewardMultiplier(x));
   },
   getComplexityChallengeCompletions(x) {
     return player.complexityChallengeCompletions[x - 1];
