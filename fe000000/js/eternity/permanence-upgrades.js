@@ -65,7 +65,7 @@ let PermanenceUpgrade = function (i) {
         n = 1;
       }
       if (n === 0 || (!guaranteedBuyable && !this.canBuy(n))) return;
-      player.permanence = player.permanence.minus(this.costFor(n));
+      player.permanence = player.permanence.safeMinus(this.costFor(n));
       this.addBought(n);
     },
     buyMax() {

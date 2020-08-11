@@ -104,7 +104,7 @@ let Generator = function (i) {
         // Avoid spending of all stars, which can cause issues and can often happen with a large number of stars.
         player.stars = player.stars.div(16);
       } else {
-        player.stars = player.stars.minus(this.costFor(n));
+        player.stars = player.stars.safeMinus(this.costFor(n));
       }
       this.addAmount(n);
       this.addBought(n);

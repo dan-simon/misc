@@ -95,7 +95,7 @@ let PowerUpgrade = function (i) {
         n = 1;
       }
       if (n === 0 || (!guaranteedBuyable && !this.canBuy(n))) return;
-      player.complexityPoints = player.complexityPoints.minus(this.costFor(n));
+      player.complexityPoints = player.complexityPoints.safeMinus(this.costFor(n));
       this.addBought(n);
     },
     buyMax() {
@@ -157,7 +157,7 @@ let Powers = {
   unlock(auto) {
     if (!this.canUnlock() || (
       auto && player.complexityPoints.minus(this.unlockCost()).lt(2) && ComplexityGenerator(1).bought() === 0)) return;
-    player.complexityPoints = player.complexityPoints.minus(this.unlockCost());
+    player.complexityPoints = player.complexityPoints.safeMinus(this.unlockCost());
     player.powers.unlocked = true;
     player.powers.stored.push(RNG.initialPower());
     player.stats.timeSincePowerGain = 0;

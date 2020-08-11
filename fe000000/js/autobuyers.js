@@ -25,7 +25,7 @@ let Autobuyer = function (i) {
     unlockSlow() {
       if (!this.canUnlockSlow()) return;
       player.slowAutobuyers[i] = true;
-      player.stars = player.stars.minus(this.unlockSlowCost());
+      player.stars = player.stars.safeMinus(this.unlockSlowCost());
     },
     unlockSlowCost() {
       return Decimal.pow(2, 2 * Math.pow(i, 2));

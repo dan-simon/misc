@@ -73,7 +73,7 @@ let ComplexityGenerator = function (i) {
         n = 1;
       }
       if (n === 0 || (!guaranteedBuyable && !this.canBuy(n))) return;
-      player.complexityPoints = player.complexityPoints.minus(this.costFor(n));
+      player.complexityPoints = player.complexityPoints.safeMinus(this.costFor(n));
       this.addAmount(n);
       this.addBought(n);
       if (player.highestComplexityGenerator < i) {

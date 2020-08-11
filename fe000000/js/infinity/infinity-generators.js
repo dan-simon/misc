@@ -90,7 +90,7 @@ let InfinityGenerator = function (i) {
         n = 1;
       }
       if (n === 0 || (!guaranteedBuyable && !this.canBuy(n))) return;
-      player.infinityPoints = player.infinityPoints.minus(this.costFor(n));
+      player.infinityPoints = player.infinityPoints.safeMinus(this.costFor(n));
       this.addAmount(n);
       this.addBought(n);
       if (player.highestInfinityGenerator < i) {
