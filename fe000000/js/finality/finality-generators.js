@@ -74,7 +74,7 @@ let FinalityGenerator = function (i) {
         n = 1;
       }
       if (n === 0 || (!guaranteedBuyable && !this.canBuy(n))) return;
-      player.finalityPoints = player.finalityPoints.minus(this.costFor(n));
+      player.finalityPoints = player.finalityPoints.safeMinus(this.costFor(n));
       this.addAmount(n);
       this.addBought(n);
       if (player.highestFinalityGenerator < i) {
