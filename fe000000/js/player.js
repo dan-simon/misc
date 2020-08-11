@@ -196,6 +196,15 @@ let initialPlayer = {
     true, true, true, true, true, true, true, true,
     true, true, true
   ],
+  isTabVisible: {
+    'infinity-challenges': false,
+    'eternity-producer': false,
+    'eternity-challenges': false,
+    'chroma': false,
+    'powers': false,
+    'oracle': false,
+    'galaxies': false,
+  },
   options: {
     notation: 'Scientific',
     offlineProgress: true,
@@ -247,7 +256,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.940673828125
+  version: 1.94091796875
 }
 
 let player;

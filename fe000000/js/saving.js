@@ -405,6 +405,18 @@ let Saving = {
         (x, i) => x ? i + 1 : 0).filter(x => x);
       player.version = 1.940673828125;
     }
+    if (player.version < 1.94091796875) {
+      player.isTabVisible = {
+        'infinity-challenges': false,
+        'eternity-producer': false,
+        'eternity-challenges': false,
+        'chroma': false,
+        'powers': false,
+        'oracle': false,
+        'galaxies': false,
+      };
+      player.version = 1.94091796875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

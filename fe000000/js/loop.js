@@ -45,6 +45,7 @@ function gameLoop(diff, display) {
   ComplexityChallenge.checkForComplexityChallengeCompletions();
   ComplexityAchievements.checkForComplexityAchievements();
   Powers.checkForPowerGain();
+  SpecialTabs.makeTabsVisible();
   if (display !== false) {
     updateDisplay();
   }
