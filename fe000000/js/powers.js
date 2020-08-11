@@ -504,9 +504,6 @@ let Powers = {
     let best = this.getSortedPowerList('complexity', true, true).slice(0, this.activatedLimit());
     return this.getTotalEffectFrom(best);
   },
-  complexityStarsForFinalityMilestone5() {
-    return ComplexityStars.amount().pow(this.effectOfBestComplexityPowers() / this.getTotalEffect('complexity'));
-  },
   powerDeletionMode() {
     return player.powers.powerDeletionMode;
   },

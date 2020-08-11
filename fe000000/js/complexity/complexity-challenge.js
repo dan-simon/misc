@@ -67,7 +67,8 @@ let ComplexityChallenge = {
     if (cc6 === 0) {
       return new Decimal(Infinity);
     }
-    return Decimal.pow(2, Math.pow(2 * (this.extraTheoremsActualAndDisplay() + 1) / cc6, 2));
+    let rewardStars = Decimal.pow(2, Math.pow(2 * (this.extraTheoremsActualAndDisplay() + 1) / cc6, 2));
+    return ComplexityStars.complexityChallengeRewardStarsToActualStars(rewardStars, 6);
   },
   complexityChallengeStatusDescription(x) {
     if (!this.isComplexityChallengeUnlocked(x)) {
