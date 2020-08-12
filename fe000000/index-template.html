@@ -4157,7 +4157,7 @@
         <tr>
           <td>
             <div class="finalitymilestonediv" ~style.background=FinalityMilestones.color(1)~>
-              ~i 2 ~ finalities
+              ~i FinalityMilestones.getFinalityMilestoneRequirement(1) ~ finalities
               <br/>
               ~r FinalityMilestones.milestoneStatusDescription(1) ~
               <br/>
@@ -4166,7 +4166,7 @@
           </td>
           <td>
             <div class="finalitymilestonediv" ~style.background=FinalityMilestones.color(2)~>
-              ~i 4 ~ finalities
+              ~i FinalityMilestones.getFinalityMilestoneRequirement(2) ~ finalities
               <br/>
               ~r FinalityMilestones.milestoneStatusDescription(2) ~
               <br/>
@@ -4175,7 +4175,7 @@
           </td>
           <td>
             <div class="finalitymilestonediv" ~style.background=FinalityMilestones.color(3)~>
-              ~i 6 ~ finalities
+              ~i FinalityMilestones.getFinalityMilestoneRequirement(3) ~ finalities
               <br/>
               ~r FinalityMilestones.milestoneStatusDescription(3) ~
               <br/>
@@ -4184,7 +4184,7 @@
           </td>
           <td>
             <div class="finalitymilestonediv" ~style.background=FinalityMilestones.color(4)~>
-              ~i 8 ~ finalities
+              ~i FinalityMilestones.getFinalityMilestoneRequirement(4) ~ finalities
               <br/>
               ~r FinalityMilestones.milestoneStatusDescription(4) ~
               <br/>
@@ -4195,7 +4195,7 @@
         <tr>
           <td>
             <div class="finalitymilestonediv" ~style.background=FinalityMilestones.color(5)~>
-              ~i 10 ~ finalities
+              ~i FinalityMilestones.getFinalityMilestoneRequirement(5) ~ finalities
               <br/>
               ~r FinalityMilestones.milestoneStatusDescription(5) ~
               <br/>
@@ -4204,7 +4204,7 @@
           </td>
           <td>
             <div class="finalitymilestonediv" ~style.background=FinalityMilestones.color(6)~>
-              ~i 12 ~ finalities
+              ~i FinalityMilestones.getFinalityMilestoneRequirement(6) ~ finalities
               <br/>
               ~r FinalityMilestones.milestoneStatusDescription(6) ~
               <br/>
@@ -4213,7 +4213,7 @@
           </td>
           <td>
             <div class="finalitymilestonediv" ~style.background=FinalityMilestones.color(7)~>
-              ~i 14 ~ finalities
+              ~i FinalityMilestones.getFinalityMilestoneRequirement(7) ~ finalities
               <br/>
               ~r FinalityMilestones.milestoneStatusDescription(7) ~
               <br/>
@@ -4222,13 +4222,35 @@
           </td>
           <td>
             <div class="finalitymilestonediv" ~style.background=FinalityMilestones.color(8)~>
-              ~i 16 ~ finalities
+              ~i FinalityMilestones.getFinalityMilestoneRequirement(8) ~ finalities
               <br/>
               ~r FinalityMilestones.milestoneStatusDescription(8) ~
               <br/>
               Automatically unlock powers, the Oracle, and galaxies when possible, and get a finality autobuyer.
             </div>
           </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <div class="finalitymilestonediv" ~style.background=FinalityMilestones.color(9)~>
+              ~i FinalityMilestones.getFinalityMilestoneRequirement(9) ~ finalities
+              <br/>
+              ~r FinalityMilestones.milestoneStatusDescription(9) ~
+              <br/>
+              For galaxy effect and eternity power extra multipliers, you start each ~r PrestigeLayerNames.layersAbove('complexy') ~ with time in complexity based on your finalities (currently ~f FinalityMilestones.rawFreeTimeInComplexity() ~ seconds)
+            </div>
+          </td>
+          <td>
+            <div class="finalitymilestonediv" ~style.background=FinalityMilestones.color(10)~>
+              ~i FinalityMilestones.getFinalityMilestoneRequirement(10) ~ finalities
+              <br/>
+              ~r FinalityMilestones.milestoneStatusDescription(10) ~
+              <br/>
+              You gain your complexity points on complexity every second, without needing to complexity (ℂP generation).
+            </div>
+          </td>
+          <td></td>
         </tr>
       </table>
     </tab>
@@ -4382,13 +4404,15 @@
       <br/>
       <span>You have produced ~i player.stats.totalCPProducedThisFinality ~ total complexity point~s player.stats.totalCPProducedThisFinality ~ this finality.</span>
       <br/>
+      <span>You have produced ~i player.stats.totalFPProduced ~ total finality point~s player.stats.totalFPProduced ~.</span>
+      <br/>
       <span>Your fastest infinity took ~f player.stats.fastestInfinity ~ seconds.</span>
       <br/>
       <span>Your fastest eternity took ~f player.stats.fastestEternity ~ seconds.</span>
       <br/>
       <span>Your fastest complexity took ~f player.stats.fastestComplexity ~ seconds.</span>
       <br/>
-      <span>Your fastest finality took ~f player.stats.fastestComplexity ~ seconds.</span>
+      <span>Your fastest finality took ~f player.stats.fastestFinality ~ seconds.</span>
       <br/>
       <span>You have spent ~f player.stats.timeSincePurchase ~ seconds without purchasing anything.</span>
       <br/>

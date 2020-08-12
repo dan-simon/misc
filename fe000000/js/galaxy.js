@@ -65,7 +65,7 @@ let Galaxy = {
     player.galaxies.unlocked = true;
   },
   effect() {
-    return Math.min(1 + Math.log2(1 + this.actualSpeed() * player.stats.timeSinceComplexity / 1024) / 64, this.effectCap());
+    return Math.min(1 + Math.log2(1 + this.actualSpeed() * (player.stats.timeSinceComplexity + FinalityMilestones.freeTimeInComplexity()) / 1024) / 64, this.effectCap());
   },
   effectCap() {
     return 1 + Math.sqrt(this.amount() - this.dilated()) / 64;
@@ -77,7 +77,7 @@ let Galaxy = {
     return this.effectSpeed() * FinalityShardUpgrade(8).effect();
   },
   timeToReachEffectCap() {
-    return 1024 * (Math.pow(2, 64 * (this.effectCap() - 1)) - 1) / this.actualSpeed();
+    return Math.max(0, 1024 * (Math.pow(2, 64 * (this.effectCap() - 1)) - 1) / this.actualSpeed() - FinalityMilestones.freeTimeInComplexity());
   },
   nextEffectCap() {
     return 1 + Math.sqrt(this.amount() - this.nextDilated()) / 64;
@@ -89,7 +89,7 @@ let Galaxy = {
     return this.nextEffectSpeed() * FinalityShardUpgrade(8).effect();
   },
   nextTimeToReachEffectCap() {
-    return 1024 * (Math.pow(2, 64 * (this.nextEffectCap() - 1)) - 1) / this.nextActualSpeed();
+    return Math.max(0, 1024 * (Math.pow(2, 64 * (this.nextEffectCap() - 1)) - 1) / this.nextActualSpeed() - FinalityMilestones.freeTimeInComplexity());
   },
   dilated() {
     return this.dilatedRawToActual(this.dilatedRaw());

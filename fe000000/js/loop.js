@@ -43,6 +43,9 @@ function gameLoop(diff, display) {
   if (Powers.isUnlocked() || FinalityMilestones.isFinalityMilestoneActive(6)) {
     EternityPoints.addAmount(EternityPrestigeLayer.eternityPointGain().times(diff));
   }
+  if (FinalityMilestones.isFinalityMilestoneActive(10)) {
+    ComplexityPoints.addAmount(ComplexityPrestigeLayer.complexityPointGain().times(diff));
+  }
   Studies.updateExtraTheorems();
   EternityChallenge.checkForAutoEternityChallengeCompletions();
   ComplexityChallenge.checkForComplexityChallengeCompletions();
