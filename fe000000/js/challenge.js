@@ -15,7 +15,7 @@ let Challenge = {
   isChallengeEffectActive(x) {
     return this.isChallengeRunning(x) || (2 <= x && x <= 7 && InfinityChallenge.isInfinityChallengeRunning(1));
   },
-  isSomeChallengeRunning(x) {
+  isSomeChallengeRunning() {
     return this.currentChallenge() !== 0;
   },
   isNoChallengeRunning() {

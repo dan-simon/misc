@@ -32,7 +32,7 @@ let InfinityChallenge = {
   isInfinityChallengeRunning(x) {
     return this.currentInfinityChallenge() === x;
   },
-  isSomeInfinityChallengeRunning(x) {
+  isSomeInfinityChallengeRunning() {
     return this.currentInfinityChallenge() !== 0;
   },
   isNoInfinityChallengeRunning() {

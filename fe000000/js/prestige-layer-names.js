@@ -13,10 +13,6 @@ let PrestigeLayerNames = {
   },
   layersAbove(x) {
     let layers = this.layers.slice(this.layers.indexOf(x), this.layers.indexOf(this.highestLayer()) + 1);
-    if (layers.length < 3) {
-      return layers.join(' and ');
-    } else {
-      return layers.slice(0, -1).join(', ') + ', and ' + layers[layers.length - 1];
-    }
+    return coordinate('*', '', layers);
   }
 }

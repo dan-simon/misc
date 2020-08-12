@@ -186,7 +186,7 @@ let EternityChallenge = {
   isEternityChallengeRunning(x) {
     return this.currentEternityChallenge() === x;
   },
-  isSomeEternityChallengeRunning(x) {
+  isSomeEternityChallengeRunning() {
     return this.currentEternityChallenge() !== 0;
   },
   isNoEternityChallengeRunning() {
