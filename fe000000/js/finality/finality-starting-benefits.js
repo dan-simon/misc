@@ -58,11 +58,7 @@ let FinalityStartingBenefits = {
     if (this.complexityAchievements() > 0) {
       benefits.push(formatInt(this.complexityAchievements()) + ' complexity achievement' + pluralize(this.complexityAchievements(), '', 's'));
     }
-    if (benefits.length < 3) {
-      return benefits.join(' and ');
-    } else {
-      return benefits.slice(0, -1).join(', ') + ', and ' + benefits[benefits.length - 1];
-    }
+    return coordinate('*', '', benefits);
   },
   galaxies() {
     // Not really a starting benefit in the same sense.
