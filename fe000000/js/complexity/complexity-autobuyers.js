@@ -56,5 +56,11 @@ let ComplexityAutobuyers = {
       ComplexityAutobuyer([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11][i]).tick();
     }
     PowerShards.buyMaxOf([1, 2, 3, 4].filter(i => ComplexityAutobuyer(i + 11).isActive()));
+    if (FinalityMilestones.isFinalityMilestoneActive(8)) {
+      Powers.unlock(true);
+      Oracle.unlock(true);
+      Galaxy.unlock(true);
+    }
+    Powers.autoLoadPowerList();
   }
 }

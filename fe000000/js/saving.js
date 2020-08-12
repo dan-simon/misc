@@ -476,6 +476,14 @@ let Saving = {
       };
       player.version = 1.943359375;
     }
+    if (player.version < 1.9443359375) {
+      player.powerListAutoLoad = {
+        powerList: '',
+        on: true
+      };
+      player.autobuyers.push({isOn: true, mode: 'none', priority: 'none'});
+      player.version = 1.9443359375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
@@ -535,7 +543,7 @@ let Saving = {
         player.stats.lastTenFinalities[i][1] = new Decimal(player.stats.lastTenFinalities[i][1]);
       }
     }
-    for (let i = 9; i < 13; i++) {
+    for (let i = 9; i < 15; i++) {
       player.autobuyers[i].priority = new Decimal(player.autobuyers[i].priority);
     }
     player.oracle.complexityPoints = new Decimal(player.oracle.complexityPoints);

@@ -511,6 +511,28 @@ let Powers = {
     let modes = ['Confirmation', 'No confirmation', 'Disabled'];
     player.powers.powerDeletionMode = modes[(modes.indexOf(player.powers.powerDeletionMode) + 1) % 3];
   },
+  isAutoLoadUnlocked() {
+    return FinalityMilestones.isFinalityMilestoneActive(7);
+  },
+  isAutoLoadActive() {
+    return this.isAutoLoadUnlocked() && this.isAutoLoadOn();
+  },
+  autoLoadPowerList() {
+    if (!this.isAutoLoadActive()) return;
+    this.importString(this.powerListToAutoLoad());
+  },
+  powerListToAutoLoad() {
+    return player.powerListAutoLoad.powerList;
+  },
+  setPowerListToAutoLoad(x) {
+    player.powerListAutoLoad.powerList = x;
+  },
+  isAutoLoadOn() {
+    return player.powerListAutoLoad.on;
+  },
+  toggleAutoLoad() {
+    player.powerListAutoLoad.on = !player.powerListAutoLoad.on;
+  },
   exportString() {
     if (this.active().length === 0) {
       return 'none';

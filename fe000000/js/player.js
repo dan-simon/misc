@@ -28,6 +28,7 @@ function initialAutobuyers() {
     {isOn: true, mode: 'Multiplier', priority: new Decimal(2)},
     {isOn: true, mode: 'Amount', priority: new Decimal(2)}, {isOn: true, mode: 'Amount', priority: new Decimal(2)},
     {isOn: true, mode: 'X times last', priority: new Decimal(2)}, {isOn: true, mode: 'Amount', priority: new Decimal(2)},
+    {isOn: true, mode: 'none', priority: 'none'}
   ];
 }
 
@@ -194,6 +195,10 @@ let initialPlayer = {
       stored: false
     }
   },
+  powerListAutoLoad: {
+    powerList: '',
+    on: true
+  },
   oracle: {
     unlocked: false,
     time: 256,
@@ -295,7 +300,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.943359375
+  version: 1.9443359375
 }
 
 let player;

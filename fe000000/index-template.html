@@ -971,6 +971,17 @@
           </div>
         </td>
       </tr>
+      <tr>
+        <td/>
+        <td>
+        <div class="autobuyerdiv" ~style.display=Autobuyer(16).hasAutobuyer() ? '' : 'none'~>
+          <span>Finality Autobuyer</span>
+          <br/>
+          <span>On: <input type="checkbox" class="autobuyer-checkbox-16" ~!checked=Autobuyer(16).isOn()~ ~!onchange=function() {Autobuyer(16).setIsOn(this.checked)}~></input></span>
+        </div>
+      </td>
+      <td/>
+    </tr>
     </table>
   </tab>
   <tab ~style.display=Tabs.currentTab() === 'infinity-challenges' ? '' : 'none'~>
@@ -3037,6 +3048,9 @@
           You don't currently have any power presets. You can create presets at the bottom of this tab.
         </div>
       </div>
+      <div ~style.display=Powers.isAutoLoadUnlocked() ? '' : 'none'~>
+        Active powers to constantly load: <input style="width: 256px;" type="text" ~!value=Powers.powerListToAutoLoad()~ ~!onchange=function() {Powers.setPowerListToAutoLoad(this.value)}~></input> <button onclick="Powers.toggleAutoLoad()">Auto-load: ~r Powers.isAutoLoadOn() ? "On" : "Off" ~</button>
+      </div>
       <br/>
       <span>Active powers (<button onclick="Powers.sortActive()">Sort</button>, <button onclick="Powers.toggleAutoSortActive()">Auto-sort: ~r Powers.isAutoSortActiveOn() ? "On" : "Off" ~</button>):</span>
       <div style="margin-left: auto; margin-right: auto;">
@@ -4193,7 +4207,7 @@
             <br/>
             ~r FinalityMilestones.milestoneStatusDescription(7) ~
             <br/>
-            For the good of all of us...
+            Unlock active powers auto-load.
           </div>
         </td>
         <td>
@@ -4202,7 +4216,7 @@
             <br/>
             ~r FinalityMilestones.milestoneStatusDescription(8) ~
             <br/>
-            ...except the ones who are dead
+            Automatically unlock powers, the Oracle, and galaxies when possible, and get a finality autobuyer.
           </div>
         </td>
       </tr>

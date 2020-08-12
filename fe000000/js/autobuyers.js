@@ -10,6 +10,8 @@ let Autobuyer = function (i) {
         return ComplexityAchievements.hasComplexityAchievement(2, 2);
       } else if (i === 15) {
         return ComplexityAchievements.isAchievementsUnlockedRewardActive(4);
+      } else if (i === 16) {
+        return FinalityMilestones.isFinalityMilestoneActive(8);
       } else if (i > 9) {
         return Challenge.isChallengeCompleted(i);
       } else {
@@ -80,7 +82,7 @@ let Autobuyer = function (i) {
 }
 
 let Autobuyers = {
-  list: [...Array(13)].map((_, i) => Autobuyer(i + 1)),
+  list: [...Array(16)].map((_, i) => Autobuyer(i + 1)),
   get: function (x) {
     return this.list[x - 1];
   },
@@ -232,6 +234,10 @@ let Autobuyers = {
     if (shouldComplexity) {
       ComplexityPrestigeLayer.complexity();
     }
+  },
+  finality() {
+    if (!Autobuyer(16).isActive() || !FinalityPrestigeLayer.canFinality()) return;
+    FinalityPrestigeLayer.finality();
   },
   slowAutobuyersTimerLength() {
     return Math.max(16, player.autobuyersTimerLength);
