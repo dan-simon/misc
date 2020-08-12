@@ -56,6 +56,16 @@ let ComplexityPrestigeLayer = {
       return '';
     }
   },
+  complexityPointNext() {
+    return Decimal.pow(this.complexityPointGain().plus(1), Math.pow(2, 16));
+  },
+  complexityPointNextText() {
+    if (this.complexityPointGain().lt(256)) {
+      return ', next at ' + format(this.complexityPointNext()) + ' EP';
+    } else {
+      return '';
+    }
+  },
   currentCPPerSec() {
     return this.complexityPointGain().div(player.stats.timeSinceComplexity);
   },
