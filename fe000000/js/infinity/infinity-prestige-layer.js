@@ -62,6 +62,16 @@ let InfinityPrestigeLayer = {
       return '';
     }
   },
+  infinityPointNext() {
+    return Decimal.pow(this.infinityPointGain().plus(1), 256);
+  },
+  infinityPointNextText() {
+    if (this.infinityPointGain().lt(256)) {
+      return ', next at ' + format(this.infinityPointNext()) + ' stars';
+    } else {
+      return '';
+    }
+  },
   currentIPPerSec() {
     return this.infinityPointGain().div(player.stats.timeSinceInfinity);
   },

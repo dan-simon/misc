@@ -45,6 +45,16 @@ let EternityPrestigeLayer = {
       return '';
     }
   },
+  eternityPointNext() {
+    return Decimal.pow(this.eternityPointGain().plus(1), 256);
+  },
+  eternityPointNextText() {
+    if (this.eternityPointGain().lt(256)) {
+      return ', next at ' + format(this.eternityPointNext()) + ' IP';
+    } else {
+      return '';
+    }
+  },
   currentEPPerSec() {
     return this.eternityPointGain().div(player.stats.timeSinceEternity);
   },
