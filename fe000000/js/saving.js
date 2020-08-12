@@ -501,6 +501,12 @@ let Saving = {
     }
   },
   exportGame () {
+    // How can this happen? Well, it can happen if something went wrong.
+    let loading = document.getElementById('loading').style.display === '';
+    if (loading) {
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('main').style.display = '';
+    }
     let output = document.getElementById('export-output');
     let parent = output.parentElement;
     parent.style.display = '';
@@ -514,6 +520,10 @@ let Saving = {
     if (!player.options.exportDisplay) {
       parent.style.display = 'none';
       document.getElementsByClassName('export-button')[0].focus();
+    }
+    if (loading) {
+      document.getElementById('loading').style.display = '';
+      document.getElementById('main').style.display = 'none';
     }
   },
   resetGame() {
