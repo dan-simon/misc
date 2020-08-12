@@ -49,9 +49,11 @@
   <script src="js/rng.js"></script>
   <script src="js/autobuyers.js"></script>
   <script src="js/boost.js"></script>
+  <script src="js/challenge-header-text.js"></script>
   <script src="js/challenge.js"></script>
   <script src="js/chroma.js"></script>
   <script src="js/colors.js"></script>
+  <script src="js/coordinate.js"></script>
   <script src="js/format.js"></script>
   <script src="js/galaxy.js"></script>
   <script src="js/generators.js"></script>
@@ -89,7 +91,7 @@
     <span><button class="export-button" onclick="Saving.exportGame()">Export</button> <button onclick="Saving.loadGamePrompt()">Load</button> <button onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></span>
   </div>
   <div id="main" style="display: none;">
-    <span>You have ~f Stars.amount() ~ stars.</span>
+    <span>You have ~f Stars.amount() ~ stars.<span ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~> ~r ChallengeHeaderText.getText() ~</span></span>
     <div style="height: 56px;">
       <span ~style.display=InfinityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~f InfinityPrestigeLayer.starRequirementForInfinity() ~ stars to infinity.</span>
       <br ~style.display=InfinityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
