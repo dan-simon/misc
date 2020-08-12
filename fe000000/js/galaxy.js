@@ -56,7 +56,7 @@ let Galaxy = {
     return Decimal.pow(2, 1024);
   },
   canUnlock() {
-    return player.complexityPoints.gte(this.unlockCost());
+    return !this.isUnlocked() && player.complexityPoints.gte(this.unlockCost());
   },
   unlock(auto) {
     if (!this.canUnlock() || (

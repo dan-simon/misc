@@ -6,7 +6,7 @@ let Oracle = {
     return Decimal.pow(2, 256);
   },
   canUnlock() {
-    return player.complexityPoints.gte(this.unlockCost());
+    return !this.isUnlocked() && player.complexityPoints.gte(this.unlockCost());
   },
   unlock(auto) {
     if (!this.canUnlock() || (

@@ -152,7 +152,7 @@ let Powers = {
     return Math.pow(2, 48);
   },
   canUnlock() {
-    return player.complexityPoints.gte(this.unlockCost());
+    return !this.isUnlocked() && player.complexityPoints.gte(this.unlockCost());
   },
   unlock(auto) {
     if (!this.canUnlock() || (
