@@ -112,7 +112,7 @@ let ComplexityPrestigeLayer = {
     if (!ComplexityAchievements.hasComplexityAchievement(4, 4)) {
       player.boughtTheorems = [0, 0, 0];
     }
-    if (!ComplexityAchievements.hasComplexityAchievement(4, 4) || player.respecStudies) {
+    if (!ComplexityAchievements.hasComplexityAchievement(4, 4) || player.respecStudies || ComplexityChallenge.isSafeguardOn(6)) {
       player.studies = [
         false, false, false, false, false, false,
         false, false, false, false, false, false,

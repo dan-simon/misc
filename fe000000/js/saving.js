@@ -563,15 +563,19 @@ let Saving = {
     if (!localStorage.getItem('fe000000-save')) {
       // The save doesn't exist.
       this.resetGame();
+      // It worked, I guess?
+      return true;
     } else {
       try {
         // We're loading from storage, player.options.offlineProgress isn't set yet.
         this.loadGame(localStorage.getItem('fe000000-save'), null);
+        return true;
       } catch (ex) {
         console.log('Error while loading game, please report this.', ex);
         alert('There was an error while loading the game, please report this. ' +
         'If the game seems broken, export your save (and reset if you want). ' +
         'More detail on error: ' + ex.toString() + ', stack: ' + ex.stack.toString());
+        return false;
       }
     }
   },
