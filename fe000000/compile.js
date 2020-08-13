@@ -89,7 +89,9 @@ function dealWithElement(x) {
   return x.includes('~') ? x.replace(/^<[-a-z]+/, (y) => y + ' id="b' + el2Number++ + '"').replace(/ ~[-!.a-z]+=[^~]+~/g, '') : x;
 }
 
-fs.readFile('index-template.html', 'utf8', function(err, contents) {
+let files = process.argv.length > 2 ? process.argv.slice(2) : ['index-template.html', 'index.html', 'js/update-display.js']
+
+fs.readFile(files[0], 'utf8', function(err, contents) {
   let newContents = contents.replace(
     /<[-a-z]+( [-a-z]+="[^"]+"| ~[-!.a-z]+=[^~]+~)*\/?>/g, dealWithElement).replace(
     /~[fiqrsy] [^~]+ ~/g, (x) => '<span id="e' + el1Number++ + '"></span>');
@@ -106,6 +108,6 @@ fs.readFile('index-template.html', 'utf8', function(err, contents) {
     console.log('context for first tilde:\n' + newContents.slice(Math.max(0, index - 100), index + 100));
     throw new Error('tilde found in output, check above for context');
   }
-  fs.writeFile('index.html', newContents, function (err) {console.log(err)});
-  fs.writeFile('js/update-display.js', updateDisplay, function (err) {console.log(err)});
+  fs.writeFile(files[1], newContents, function (err) {console.log(err)});
+  fs.writeFile(files[2], updateDisplay, function (err) {console.log(err)});
 });

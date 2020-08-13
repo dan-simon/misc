@@ -11,6 +11,10 @@ body {
   color: #ffffff;
 }
 
+a {
+  color: #3366ff;
+}
+
 button {
 	border: 0;
   font-family: Typewriter, serif;
