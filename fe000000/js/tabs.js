@@ -47,12 +47,15 @@ let Tabs = {
   displayTabRow(i) {
     return this.rows[i - 1].some(x => this.isTabVisible(x));
   },
-  displayTabBreak(i) {
+  getSpace(x) {
+    return x.map(s => s.length).reduce((a, b) => a + b) + 2 * x.length;
+  },
+  getTabBreaks(i) {
     let tabBreaks = [];
     let display = [[]]
     for (let rawRow of this.rows) {
       row = rawRow.filter(x => this.isTabVisible(x));
-      if (display[display.length - 1].length + row.length > 8) {
+      if (this.getSpace(display[display.length - 1].concat(row)) > 96) {
         display.push(row);
         tabBreaks.push(true);
       } else {
@@ -60,8 +63,11 @@ let Tabs = {
         tabBreaks.push(false);
       }
     }
-    // First entry is just always false.
-    return tabBreaks[i];
+    // First entry is always false.
+    return tabBreaks.slice(1);
+  },
+  displayTabBreak(i) {
+    return this.getTabBreaks()[i - 1];
   },
   setTabOption(x, b) {
     player.tabOptions[x] = b;

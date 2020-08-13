@@ -4551,7 +4551,7 @@
           <span ~style.display=Tabs.isTabOptionVisible('options') ? '' : 'none'~>Options: cannot be hidden</span> 
         </span>
       </div>
-      <div ~style.display=Tabs.isTabVisible('eternity') ? '' : 'none'~>
+      <div ~style.display=Tabs.isTabOptionVisible('eternity') ? '' : 'none'~>
         <span>
           <span ~style.display=Tabs.isTabOptionVisible('eternity') ? '' : 'none'~>Eternity: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('eternity')~ ~!onchange=function() {Tabs.setTabOption('eternity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
           <span ~style.display=Tabs.isTabOptionVisible('eternity-milestones') ? '' : 'none'~>Eternity Milestones: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('eternity-milestones')~ ~!onchange=function() {Tabs.setTabOption('eternity-milestones', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
@@ -4561,7 +4561,7 @@
           <span ~style.display=Tabs.isTabOptionVisible('chroma') ? '' : 'none'~>Chroma: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('chroma')~ ~!onchange=function() {Tabs.setTabOption('chroma', this.checked)}~></input></span>
         </span>
       </div>
-      <div ~style.display=Tabs.isTabVisible('complexity') ? '' : 'none'~>
+      <div ~style.display=Tabs.isTabOptionVisible('complexity') ? '' : 'none'~>
         <span>
           <span ~style.display=Tabs.isTabOptionVisible('complexity') ? '' : 'none'~>Complexity: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('complexity')~ ~!onchange=function() {Tabs.setTabOption('complexity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
           <span ~style.display=Tabs.isTabOptionVisible('complexity-challenges') ? '' : 'none'~>Complexity Challenges: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('complexity-challenges')~ ~!onchange=function() {Tabs.setTabOption('complexity-challenges', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
@@ -4571,7 +4571,7 @@
           <span ~style.display=Tabs.isTabOptionVisible('galaxies') ? '' : 'none'~>Galaxies: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('galaxies')~ ~!onchange=function() {Tabs.setTabOption('galaxies', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
         </span>
       </div>
-      <div ~style.display=Tabs.isTabVisible('finality') ? '' : 'none'~>
+      <div ~style.display=Tabs.isTabOptionVisible('finality') ? '' : 'none'~>
         <span>
           <span ~style.display=Tabs.isTabOptionVisible('finality') ? '' : 'none'~>Finality: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('finality')~ ~!onchange=function() {Tabs.setTabOption('finality', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
           <span ~style.display=Tabs.isTabOptionVisible('finality-shards') ? '' : 'none'~>Finality Shards: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('finality-shards')~ ~!onchange=function() {Tabs.setTabOption('finality-shards', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
