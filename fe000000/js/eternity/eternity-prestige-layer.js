@@ -112,15 +112,7 @@ let EternityPrestigeLayer = {
       ];
       player.breakInfinity = false;
     }
-    // Doesn't need to be part of eternity milestone 2,
-    // since after eternity milestone 2 you have all the
-    // normal autobuyers anyway (plus the slow autobuyers have
-    // nothing to do with challenges).
-    // Honestly resetting autobuyer timers feels really bad
-    // to me for some reason.
-    player.slowAutobuyers = [
-      false, false, false, false, false, false, false, false, false,
-    ];
+    // Don't reset the slow autobuyers; let the player keep those.
     // Reset color being generated, as the player desired.
     Chroma.updateChromaOnEternity();
     // Small bonus, arguably unexpected but not that big in the grand scheme of things.
