@@ -494,6 +494,34 @@ let Saving = {
       player.firstTwelveStudyPurchaseOrder = newList;
       player.version = 1.9453125;
     }
+    if (player.version < 1.9462890625) {
+      player.tabOptions = {
+        'main': true,
+        'infinity': true,
+        'challenges': true,
+        'autobuyers': true,
+        'infinity-challenges': true,
+        'goals': true,
+        'statistics': true,
+        'options': true,
+        'eternity': true,
+        'eternity-milestones': true,
+        'studies': true,
+        'eternity-producer': true,
+        'eternity-challenges': true,
+        'chroma': true,
+        'complexity': true,
+        'complexity-challenges': true,
+        'complexity-achievements': true,
+        'powers': true,
+        'oracle': true,
+        'galaxies': true,
+        'finality': true,
+        'finality-shards': true,
+        'finality-milestones': true,
+      };
+      player.version = 1.9462890625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

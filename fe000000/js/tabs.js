@@ -1,17 +1,26 @@
 let Tabs = {
+  rows: [
+    ['main', 'infinity', 'challenges', 'autobuyers', 'infinity-challenges', 'goals', 'statistics', 'options'],
+    ['eternity', 'eternity-milestones', 'studies', 'eternity-producer', 'eternity-challenges', 'chroma'],
+    ['complexity', 'complexity-challenges', 'complexity-achievements', 'powers', 'oracle', 'galaxies'],
+    ['finality', 'finality-shards', 'finality-milestones']
+  ],
   currentTab() {
     return player.currentTab;
   },
   setTab(x) {
     player.currentTab = x;
   },
-  isTabVisible(x) {
+  isTabOptionVisible(x) {
     return {
       'main': () => true,
       'infinity': () => PrestigeLayerProgress.hasReached('infinity'),
       'challenges': () => PrestigeLayerProgress.hasReached('infinity'),
       'autobuyers': () => true,
       'infinity-challenges': () => SpecialTabs.isTabVisible('infinity-challenges'),
+      'goals': () => true,
+      'statistics': () => true,
+      'options': () => true,
       'eternity': () => PrestigeLayerProgress.hasReached('eternity'),
       'eternity-milestones': () => PrestigeLayerProgress.hasReached('eternity'),
       'studies': () => PrestigeLayerProgress.hasReached('eternity'),
@@ -27,10 +36,35 @@ let Tabs = {
       'finality': () => PrestigeLayerProgress.hasReached('finality'),
       'finality-shards': () => PrestigeLayerProgress.hasReached('finality'),
       'finality-milestones': () => PrestigeLayerProgress.hasReached('finality'),
-      'goals': () => true,
-      'statistics': () => true,
-      'options': () => true,
     }[x]();
+  },
+  isTabOptionOn(x) {
+    return player.tabOptions[x];
+  },
+  isTabVisible(x) {
+    return this.isTabOptionVisible(x) && this.isTabOptionOn(x);
+  },
+  displayTabRow(i) {
+    return this.rows[i - 1].some(x => this.isTabVisible(x));
+  },
+  displayTabBreak(i) {
+    let tabBreaks = [];
+    let display = [[]]
+    for (let rawRow of this.rows) {
+      row = rawRow.filter(x => this.isTabVisible(x));
+      if (display[display.length - 1].length + row.length > 8) {
+        display.push(row);
+        tabBreaks.push(true);
+      } else {
+        display[display.length - 1] = display[display.length - 1].concat(row);
+        tabBreaks.push(false);
+      }
+    }
+    // First entry is just always false.
+    return tabBreaks[i];
+  },
+  setTabOption(x, b) {
+    player.tabOptions[x] = b;
   }
 }
 

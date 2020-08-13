@@ -122,45 +122,40 @@
     <div ~style.display=Goals.areAllGoalsCompleted() ? '' : 'none'~>You have won the game! Congratulations!</div>
     <br/>
     <br/>
-    <div>
-      <span>
-        <button onclick="Tabs.setTab('main')">Main</button>
-        <button ~style.display=Tabs.isTabVisible('infinity') ? '' : 'none'~ onclick="Tabs.setTab('infinity')">Infinity</button>
-        <button ~style.display=Tabs.isTabVisible('challenges') ? '' : 'none'~ onclick="Tabs.setTab('challenges')">Challenges</button>
-        <button ~style.display=Tabs.isTabVisible('autobuyers') ? '' : 'none'~ onclick="Tabs.setTab('autobuyers')">Autobuyers</button>
-        <button ~style.display=Tabs.isTabVisible('infinity-challenges') ? '' : 'none'~ onclick="Tabs.setTab('infinity-challenges')">Infinity Challenges</button>
-        <button onclick="Tabs.setTab('goals')">Goals</button>
-        <button onclick="Tabs.setTab('statistics')">Statistics</button>
-        <button onclick="Tabs.setTab('options')">Options</button>
-      </span>
-    </div>
-    <div ~style.display=Tabs.isTabVisible('eternity') ? '' : 'none'~>
-      <span>
-        <button ~style.display=Tabs.isTabVisible('eternity') ? '' : 'none'~ onclick="Tabs.setTab('eternity')">Eternity</button>
-        <button ~style.display=Tabs.isTabVisible('eternity-milestones') ? '' : 'none'~ onclick="Tabs.setTab('eternity-milestones')">Eternity Milestones</button>
-        <button ~style.display=Tabs.isTabVisible('studies') ? '' : 'none'~ onclick="Tabs.setTab('studies')">Studies</button>
-        <button ~style.display=Tabs.isTabVisible('eternity-producer') ? '' : 'none'~ onclick="Tabs.setTab('eternity-producer')">Eternity Producer</button>
-        <button ~style.display=Tabs.isTabVisible('eternity-challenges') ? '' : 'none'~ onclick="Tabs.setTab('eternity-challenges')">Eternity Challenges</button>
-        <button ~style.display=Tabs.isTabVisible('chroma') ? '' : 'none'~ onclick="Tabs.setTab('chroma')">Chroma</button>
-      </span>
-    </div>
-    <div ~style.display=Tabs.isTabVisible('complexity') ? '' : 'none'~>
-      <span>
-        <button ~style.display=Tabs.isTabVisible('complexity') ? '' : 'none'~ onclick="Tabs.setTab('complexity')">Complexity</button>
-        <button ~style.display=Tabs.isTabVisible('complexity-challenges') ? '' : 'none'~ onclick="Tabs.setTab('complexity-challenges')">Complexity Challenges</button>
-        <button ~style.display=Tabs.isTabVisible('complexity-achievements') ? '' : 'none'~ onclick="Tabs.setTab('complexity-achievements')">Complexity Achievements</button>
-        <button ~style.display=Tabs.isTabVisible('powers') ? '' : 'none'~ onclick="Tabs.setTab('powers')">Powers</button>
-        <button ~style.display=Tabs.isTabVisible('oracle') ? '' : 'none'~ onclick="Tabs.setTab('oracle')">Oracle</button>
-        <button ~style.display=Tabs.isTabVisible('galaxies') ? '' : 'none'~ onclick="Tabs.setTab('galaxies')">Galaxies</button>
-      </span>
-    </div>
-    <div ~style.display=Tabs.isTabVisible('finality') ? '' : 'none'~>
-      <span>
-        <button ~style.display=Tabs.isTabVisible('finality') ? '' : 'none'~ onclick="Tabs.setTab('finality')">Finality</button>
-        <button ~style.display=Tabs.isTabVisible('finality-shards') ? '' : 'none'~ onclick="Tabs.setTab('finality-shards')">Finality Shards</button>
-        <button ~style.display=Tabs.isTabVisible('finality-milestones') ? '' : 'none'~ onclick="Tabs.setTab('finality-milestones')">Finality Milestones</button>
-      </span>
-    </div>
+    <span ~style.display=Tabs.displayTabRow(1) ? '' : 'none'~>
+      <button ~style.display=Tabs.isTabVisible('main') ? '' : 'none'~ onclick="Tabs.setTab('main')">Main</button>
+      <button ~style.display=Tabs.isTabVisible('infinity') ? '' : 'none'~ onclick="Tabs.setTab('infinity')">Infinity</button>
+      <button ~style.display=Tabs.isTabVisible('challenges') ? '' : 'none'~ onclick="Tabs.setTab('challenges')">Challenges</button>
+      <button ~style.display=Tabs.isTabVisible('autobuyers') ? '' : 'none'~ onclick="Tabs.setTab('autobuyers')">Autobuyers</button>
+      <button ~style.display=Tabs.isTabVisible('infinity-challenges') ? '' : 'none'~ onclick="Tabs.setTab('infinity-challenges')">Infinity Challenges</button>
+      <button ~style.display=Tabs.isTabVisible('goals') ? '' : 'none'~ onclick="Tabs.setTab('goals')">Goals</button>
+      <button ~style.display=Tabs.isTabVisible('statistics') ? '' : 'none'~ onclick="Tabs.setTab('statistics')">Statistics</button>
+      <button ~style.display=Tabs.isTabVisible('options') ? '' : 'none'~ onclick="Tabs.setTab('options')">Options</button>
+    </span>
+    <br ~style.display=Tabs.displayTabBreak(1) ? '' : 'none'~/>
+    <span ~style.display=Tabs.displayTabRow(2) ? '' : 'none'~>
+      <button ~style.display=Tabs.isTabVisible('eternity') ? '' : 'none'~ onclick="Tabs.setTab('eternity')">Eternity</button>
+      <button ~style.display=Tabs.isTabVisible('eternity-milestones') ? '' : 'none'~ onclick="Tabs.setTab('eternity-milestones')">Eternity Milestones</button>
+      <button ~style.display=Tabs.isTabVisible('studies') ? '' : 'none'~ onclick="Tabs.setTab('studies')">Studies</button>
+      <button ~style.display=Tabs.isTabVisible('eternity-producer') ? '' : 'none'~ onclick="Tabs.setTab('eternity-producer')">Eternity Producer</button>
+      <button ~style.display=Tabs.isTabVisible('eternity-challenges') ? '' : 'none'~ onclick="Tabs.setTab('eternity-challenges')">Eternity Challenges</button>
+      <button ~style.display=Tabs.isTabVisible('chroma') ? '' : 'none'~ onclick="Tabs.setTab('chroma')">Chroma</button>
+    </span>
+    <br ~style.display=Tabs.displayTabBreak(2) ? '' : 'none'~/>
+    <span ~style.display=Tabs.displayTabRow(3) ? '' : 'none'~>
+      <button ~style.display=Tabs.isTabVisible('complexity') ? '' : 'none'~ onclick="Tabs.setTab('complexity')">Complexity</button>
+      <button ~style.display=Tabs.isTabVisible('complexity-challenges') ? '' : 'none'~ onclick="Tabs.setTab('complexity-challenges')">Complexity Challenges</button>
+      <button ~style.display=Tabs.isTabVisible('complexity-achievements') ? '' : 'none'~ onclick="Tabs.setTab('complexity-achievements')">Complexity Achievements</button>
+      <button ~style.display=Tabs.isTabVisible('powers') ? '' : 'none'~ onclick="Tabs.setTab('powers')">Powers</button>
+      <button ~style.display=Tabs.isTabVisible('oracle') ? '' : 'none'~ onclick="Tabs.setTab('oracle')">Oracle</button>
+      <button ~style.display=Tabs.isTabVisible('galaxies') ? '' : 'none'~ onclick="Tabs.setTab('galaxies')">Galaxies</button>
+    </span>
+    <br ~style.display=Tabs.displayTabBreak(3) ? '' : 'none'~/>
+    <span ~style.display=Tabs.displayTabRow(4) ? '' : 'none'~>
+      <button ~style.display=Tabs.isTabVisible('finality') ? '' : 'none'~ onclick="Tabs.setTab('finality')">Finality</button>
+      <button ~style.display=Tabs.isTabVisible('finality-shards') ? '' : 'none'~ onclick="Tabs.setTab('finality-shards')">Finality Shards</button>
+      <button ~style.display=Tabs.isTabVisible('finality-milestones') ? '' : 'none'~ onclick="Tabs.setTab('finality-milestones')">Finality Milestones</button>
+    </span>
     <br/>
     <br/>
     <tab ~style.display=Tabs.currentTab() === 'main' ? '' : 'none'~>
@@ -4539,6 +4534,50 @@
           <td><button class="options-button" onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></td>
         </tr>
       </table>
+      <span>Tabs to show:
+      <div>
+        <span>
+          <span ~style.display=Tabs.isTabOptionVisible('main') ? '' : 'none'~>Main: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('main')~ ~!onchange=function() {Tabs.setTabOption('main', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span ~style.display=Tabs.isTabOptionVisible('infinity') ? '' : 'none'~>Infinity: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('infinity')~ ~!onchange=function() {Tabs.setTabOption('infinity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span ~style.display=Tabs.isTabOptionVisible('challenges') ? '' : 'none'~>Challenges: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('challenges')~ ~!onchange=function() {Tabs.setTabOption('challenges', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span ~style.display=Tabs.isTabOptionVisible('autobuyers') ? '' : 'none'~>Autobuyers: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('autobuyers')~ ~!onchange=function() {Tabs.setTabOption('autobuyers', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span ~style.display=Tabs.isTabOptionVisible('infinity-challenges') ? '' : 'none'~>Infinity Challenges: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('infinity-challenges')~ ~!onchange=function() {Tabs.setTabOption('infinity-challenges', this.checked)}~></input></span>
+        </span>
+      </div>
+      <div>
+        <span>
+          <span ~style.display=Tabs.isTabOptionVisible('goals') ? '' : 'none'~>Goals: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('goals')~ ~!onchange=function() {Tabs.setTabOption('goals', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span ~style.display=Tabs.isTabOptionVisible('statistics') ? '' : 'none'~>Statistics: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('statistics')~ ~!onchange=function() {Tabs.setTabOption('statistics', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span ~style.display=Tabs.isTabOptionVisible('options') ? '' : 'none'~>Options: cannot be hidden</span> 
+        </span>
+      </div>
+      <div ~style.display=Tabs.isTabVisible('eternity') ? '' : 'none'~>
+        <span>
+          <span ~style.display=Tabs.isTabOptionVisible('eternity') ? '' : 'none'~>Eternity: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('eternity')~ ~!onchange=function() {Tabs.setTabOption('eternity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span ~style.display=Tabs.isTabOptionVisible('eternity-milestones') ? '' : 'none'~>Eternity Milestones: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('eternity-milestones')~ ~!onchange=function() {Tabs.setTabOption('eternity-milestones', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span ~style.display=Tabs.isTabOptionVisible('studies') ? '' : 'none'~>Studies: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('studies')~ ~!onchange=function() {Tabs.setTabOption('studies', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span ~style.display=Tabs.isTabOptionVisible('eternity-producer') ? '' : 'none'~>Eternity Producer: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('eternity-producer')~ ~!onchange=function() {Tabs.setTabOption('eternity-producer', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span ~style.display=Tabs.isTabOptionVisible('eternity-challenges') ? '' : 'none'~>Eternity Challenges: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('eternity-challenges')~ ~!onchange=function() {Tabs.setTabOption('eternity-challenges', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span ~style.display=Tabs.isTabOptionVisible('chroma') ? '' : 'none'~>Chroma: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('chroma')~ ~!onchange=function() {Tabs.setTabOption('chroma', this.checked)}~></input></span>
+        </span>
+      </div>
+      <div ~style.display=Tabs.isTabVisible('complexity') ? '' : 'none'~>
+        <span>
+          <span ~style.display=Tabs.isTabOptionVisible('complexity') ? '' : 'none'~>Complexity: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('complexity')~ ~!onchange=function() {Tabs.setTabOption('complexity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span ~style.display=Tabs.isTabOptionVisible('complexity-challenges') ? '' : 'none'~>Complexity Challenges: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('complexity-challenges')~ ~!onchange=function() {Tabs.setTabOption('complexity-challenges', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span ~style.display=Tabs.isTabOptionVisible('complexity-achievements') ? '' : 'none'~>Complexity Achievements: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('complexity-achievements')~ ~!onchange=function() {Tabs.setTabOption('complexity-achievements', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span ~style.display=Tabs.isTabOptionVisible('powers') ? '' : 'none'~>Powers: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('powers')~ ~!onchange=function() {Tabs.setTabOption('powers', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span ~style.display=Tabs.isTabOptionVisible('oracle') ? '' : 'none'~>Oracle: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('oracle')~ ~!onchange=function() {Tabs.setTabOption('oracle', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span ~style.display=Tabs.isTabOptionVisible('galaxies') ? '' : 'none'~>Galaxies: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('galaxies')~ ~!onchange=function() {Tabs.setTabOption('galaxies', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        </span>
+      </div>
+      <div ~style.display=Tabs.isTabVisible('finality') ? '' : 'none'~>
+        <span>
+          <span ~style.display=Tabs.isTabOptionVisible('finality') ? '' : 'none'~>Finality: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('finality')~ ~!onchange=function() {Tabs.setTabOption('finality', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span ~style.display=Tabs.isTabOptionVisible('finality-shards') ? '' : 'none'~>Finality Shards: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('finality-shards')~ ~!onchange=function() {Tabs.setTabOption('finality-shards', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span ~style.display=Tabs.isTabOptionVisible('finality-milestones') ? '' : 'none'~>Finality Milestones: <input type="checkbox" ~!checked=Tabs.isTabOptionOn('finality-milestones')~ ~!onchange=function() {Tabs.setTabOption('finality-milestones', this.checked)}~></input></span>
+        </span>
+      </div>
       <span><a target="_blank" rel="noopener noreferrer" href="guide/index.html">Guide (currently very incomplete)</a></span>
       <br/>
       <span style="display: none;">Exported save (also copied to clipboard): <input id="export-output"></input></span>
