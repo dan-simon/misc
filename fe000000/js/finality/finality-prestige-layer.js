@@ -101,6 +101,7 @@ let FinalityPrestigeLayer = {
       false, false, false, false, false, false,
       0, 0, 0, 0
     ];
+    player.firstTwelveStudyPurchaseOrder = [];
     // Extra theorems seem to fit in best here, because they're theorem-related, even though
     // nothing resets them other than finality.
     player.extraTheorems = [0, 0, 0, 0];

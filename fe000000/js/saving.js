@@ -484,6 +484,16 @@ let Saving = {
       player.autobuyers.push({isOn: true, mode: 'none', priority: 'none'});
       player.version = 1.9443359375;
     }
+    if (player.version < 1.9453125) {
+      let newList = [];
+      for (let i of player.firstTwelveStudyPurchaseOrder) {
+        if (!newList.includes(i)) {
+          newList.push(i);
+        }
+      }
+      player.firstTwelveStudyPurchaseOrder = newList;
+      player.version = 1.9453125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
