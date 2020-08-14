@@ -307,13 +307,14 @@ let Saving = {
       player.version = Math.max(player.version, 1.89453125);
     }
     if (player.version < 1.90625) {
+      // player.powers.next will be deleted later
       player.powers = {
         seed: RNG.createSeed(),
         unlocked: false,
         upgrades: [0, 0, 0],
         active: [],
         stored: [],
-        next: RNG.initialPower(),
+        next: null,
         gain: true,
         respec: false
       };

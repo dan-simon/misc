@@ -9,12 +9,15 @@ let EternityStars = {
   perSecond() {
     return EternityGenerator(1).productionPerSecond();
   },
+  doEternityStarsDoAnything() {
+    return player.eternities.gt(0) || EternityGenerator(1).bought() > 0;
+  },
   multiplier() {
     // Only give a boost if the player has at least one eternity
     // (otherwise they don't even see this mechanic).
-    return player.eternities.gt(0) ? this.amount() : new Decimal(1);
+    return this.doEternityStarsDoAnything() ? this.amount() : new Decimal(1);
   },
   power() {
-    return 1 + Math.log2(this.amount().log(2)) / 512;
+    return this.doEternityStarsDoAnything() ? 1 + Math.log2(this.amount().log(2)) / 512 : 1;
   }
 }
