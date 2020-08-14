@@ -89,9 +89,11 @@
     <br/>
     <span>If it shows up for a longer time, that's probably a bug and you should use the buttons below.</span>
     <br/>
+    <span>Reloading might work, so probably try that first.</span>
+    <br/>
     <span>The page loads <span id="script-count"></span> scripts (should be 77).</span>
     <br/>
-    <span><button class="export-button" onclick="Saving.exportGame()">Export</button> <button onclick="Saving.loadGamePrompt()">Load</button> <button onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></span>
+    <span><button onclick="window.location.reload(true)">Reload window</button> <button class="export-button" onclick="Saving.exportGame()">Export</button> <button onclick="Saving.loadGamePrompt()">Load</button> <button onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></span>
   </div>
   <div id="main" style="display: none;">
     <span>You have ~f Stars.amount() ~ stars.<span ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~> ~r ChallengeHeaderText.getText() ~</span></span>
@@ -4262,6 +4264,11 @@
       <span>By default, only goals up to the next goal after the last completed goal are displayed. <button onclick="Goals.toggleDisplayAllGoals()">Display all goals: ~r Goals.displayAllGoals() ? "On" : "Off" ~</button></span>
       <br/>
       <span>There is no in-game reward for completing goals, but you win the game (and have finished it) when you complete them all.</span>
+      <div ~style.display=Goals.anySpecialTabGoals() ? '' : 'none'~>
+        <span>Some goals relate to tabs (such as ~r Goals.specialTabDisplay() ~) that may not be visible yet.</span>
+        <br/>
+        <span>Such tabs will always appear somewhat before anything on the tabs can actually be used.</span>
+      </div>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>

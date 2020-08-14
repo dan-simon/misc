@@ -89,9 +89,11 @@
     <br/>
     <span>If it shows up for a longer time, that's probably a bug and you should use the buttons below.</span>
     <br/>
+    <span>Reloading might work, so probably try that first.</span>
+    <br/>
     <span>The page loads <span id="script-count"></span> scripts (should be 77).</span>
     <br/>
-    <span><button class="export-button" onclick="Saving.exportGame()">Export</button> <button onclick="Saving.loadGamePrompt()">Load</button> <button onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></span>
+    <span><button onclick="window.location.reload(true)">Reload window</button> <button class="export-button" onclick="Saving.exportGame()">Export</button> <button onclick="Saving.loadGamePrompt()">Load</button> <button onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></span>
   </div>
   <div id="main" style="display: none;">
     <span>You have <span id="e0"></span> stars.<span id="b0"> <span id="e1"></span></span></span>
@@ -4262,265 +4264,270 @@
       <span>By default, only goals up to the next goal after the last completed goal are displayed. <button onclick="Goals.toggleDisplayAllGoals()">Display all goals: <span id="e1282"></span></button></span>
       <br/>
       <span>There is no in-game reward for completing goals, but you win the game (and have finished it) when you complete them all.</span>
+      <div id="b1319">
+        <span>Some goals relate to tabs (such as <span id="e1283"></span>) that may not be visible yet.</span>
+        <br/>
+        <span>Such tabs will always appear somewhat before anything on the tabs can actually be used.</span>
+      </div>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>
-            <div id="b1319" class="goaldiv">
-              <span id="e1283"></span>
-              <br/>
-              <span id="e1284"></span>
-            </div>
-          </td>
-          <td>
             <div id="b1320" class="goaldiv">
-              <span id="e1285"></span>
+              <span id="e1284"></span>
               <br/>
-              <span id="e1286"></span>
+              <span id="e1285"></span>
             </div>
           </td>
           <td>
             <div id="b1321" class="goaldiv">
-              <span id="e1287"></span>
+              <span id="e1286"></span>
               <br/>
-              <span id="e1288"></span>
+              <span id="e1287"></span>
             </div>
           </td>
           <td>
             <div id="b1322" class="goaldiv">
-              <span id="e1289"></span>
+              <span id="e1288"></span>
               <br/>
+              <span id="e1289"></span>
+            </div>
+          </td>
+          <td>
+            <div id="b1323" class="goaldiv">
               <span id="e1290"></span>
+              <br/>
+              <span id="e1291"></span>
             </div>
           </td>
         </tr>
         <tr>
           <td>
-            <div id="b1323" class="goaldiv">
-              <span id="e1291"></span>
-              <br/>
-              <span id="e1292"></span>
-            </div>
-          </td>
-          <td>
             <div id="b1324" class="goaldiv">
-              <span id="e1293"></span>
+              <span id="e1292"></span>
               <br/>
-              <span id="e1294"></span>
+              <span id="e1293"></span>
             </div>
           </td>
           <td>
             <div id="b1325" class="goaldiv">
-              <span id="e1295"></span>
+              <span id="e1294"></span>
               <br/>
-              <span id="e1296"></span>
+              <span id="e1295"></span>
             </div>
           </td>
           <td>
             <div id="b1326" class="goaldiv">
-              <span id="e1297"></span>
+              <span id="e1296"></span>
               <br/>
+              <span id="e1297"></span>
+            </div>
+          </td>
+          <td>
+            <div id="b1327" class="goaldiv">
               <span id="e1298"></span>
+              <br/>
+              <span id="e1299"></span>
             </div>
           </td>
         </tr>
         <tr>
           <td>
-            <div id="b1327" class="goaldiv">
-              <span id="e1299"></span>
-              <br/>
-              <span id="e1300"></span>
-            </div>
-          </td>
-          <td>
             <div id="b1328" class="goaldiv">
-              <span id="e1301"></span>
+              <span id="e1300"></span>
               <br/>
-              <span id="e1302"></span>
+              <span id="e1301"></span>
             </div>
           </td>
           <td>
             <div id="b1329" class="goaldiv">
-              <span id="e1303"></span>
+              <span id="e1302"></span>
               <br/>
-              <span id="e1304"></span>
+              <span id="e1303"></span>
             </div>
           </td>
           <td>
             <div id="b1330" class="goaldiv">
-              <span id="e1305"></span>
+              <span id="e1304"></span>
               <br/>
+              <span id="e1305"></span>
+            </div>
+          </td>
+          <td>
+            <div id="b1331" class="goaldiv">
               <span id="e1306"></span>
+              <br/>
+              <span id="e1307"></span>
             </div>
           </td>
         </tr>
         <tr>
           <td>
-            <div id="b1331" class="goaldiv">
-              <span id="e1307"></span>
-              <br/>
-              <span id="e1308"></span>
-            </div>
-          </td>
-          <td>
             <div id="b1332" class="goaldiv">
-              <span id="e1309"></span>
+              <span id="e1308"></span>
               <br/>
-              <span id="e1310"></span>
+              <span id="e1309"></span>
             </div>
           </td>
           <td>
             <div id="b1333" class="goaldiv">
-              <span id="e1311"></span>
+              <span id="e1310"></span>
               <br/>
-              <span id="e1312"></span>
+              <span id="e1311"></span>
             </div>
           </td>
           <td>
             <div id="b1334" class="goaldiv">
-              <span id="e1313"></span>
+              <span id="e1312"></span>
               <br/>
+              <span id="e1313"></span>
+            </div>
+          </td>
+          <td>
+            <div id="b1335" class="goaldiv">
               <span id="e1314"></span>
+              <br/>
+              <span id="e1315"></span>
             </div>
           </td>
         </tr>
       </table>
     </div>
-    <div id="b1335">
-      <span>You have produced <span id="e1315"></span> total stars.</span>
+    <div id="b1336">
+      <span>You have produced <span id="e1316"></span> total stars.</span>
       <br/>
-      <span>You have produced <span id="e1316"></span> stars this eternity.</span>
+      <span>You have produced <span id="e1317"></span> stars this eternity.</span>
       <br/>
-      <span>You have produced <span id="e1317"></span> stars this complexity.</span>
+      <span>You have produced <span id="e1318"></span> stars this complexity.</span>
       <br/>
-      <span>You have produced <span id="e1318"></span> stars this finality.</span>
+      <span>You have produced <span id="e1319"></span> stars this finality.</span>
       <br/>
-      <span>You have produced <span id="e1319"></span> total infinity point<span id="e1320"></span>.</span>
+      <span>You have produced <span id="e1320"></span> total infinity point<span id="e1321"></span>.</span>
       <br/>
-      <span>You have produced <span id="e1321"></span> infinity point<span id="e1322"></span> this eternity.</span>
+      <span>You have produced <span id="e1322"></span> infinity point<span id="e1323"></span> this eternity.</span>
       <br/>
-      <span>You have produced <span id="e1323"></span> total eternity point<span id="e1324"></span>.</span>
+      <span>You have produced <span id="e1324"></span> total eternity point<span id="e1325"></span>.</span>
       <br/>
-      <span>You have produced <span id="e1325"></span> total eternity point<span id="e1326"></span> this complexity.</span>
+      <span>You have produced <span id="e1326"></span> total eternity point<span id="e1327"></span> this complexity.</span>
       <br/>
-      <span>You have produced <span id="e1327"></span> total complexity point<span id="e1328"></span>.</span>
+      <span>You have produced <span id="e1328"></span> total complexity point<span id="e1329"></span>.</span>
       <br/>
-      <span>You have produced <span id="e1329"></span> total complexity point<span id="e1330"></span> this finality.</span>
+      <span>You have produced <span id="e1330"></span> total complexity point<span id="e1331"></span> this finality.</span>
       <br/>
-      <span>You have produced <span id="e1331"></span> total finality point<span id="e1332"></span>.</span>
+      <span>You have produced <span id="e1332"></span> total finality point<span id="e1333"></span>.</span>
       <br/>
-      <span>Your fastest infinity took <span id="e1333"></span> seconds.</span>
+      <span>Your fastest infinity took <span id="e1334"></span> seconds.</span>
       <br/>
-      <span>Your fastest eternity took <span id="e1334"></span> seconds.</span>
+      <span>Your fastest eternity took <span id="e1335"></span> seconds.</span>
       <br/>
-      <span>Your fastest complexity took <span id="e1335"></span> seconds.</span>
+      <span>Your fastest complexity took <span id="e1336"></span> seconds.</span>
       <br/>
-      <span>Your fastest finality took <span id="e1336"></span> seconds.</span>
+      <span>Your fastest finality took <span id="e1337"></span> seconds.</span>
       <br/>
-      <span>You have spent <span id="e1337"></span> seconds without purchasing anything.</span>
+      <span>You have spent <span id="e1338"></span> seconds without purchasing anything.</span>
       <br/>
-      <span>You have spent <span id="e1338"></span> seconds without sacrificing.</span>
+      <span>You have spent <span id="e1339"></span> seconds without sacrificing.</span>
       <br/>
-      <span>You have spent <span id="e1339"></span> seconds in this prestige.</span>
+      <span>You have spent <span id="e1340"></span> seconds in this prestige.</span>
       <br/>
-      <span>You have spent <span id="e1340"></span> seconds in this infinity.</span>
+      <span>You have spent <span id="e1341"></span> seconds in this infinity.</span>
       <br/>
-      <span>You have spent <span id="e1341"></span> seconds in this eternity.</span>
+      <span>You have spent <span id="e1342"></span> seconds in this eternity.</span>
       <br/>
-      <span>You have spent <span id="e1342"></span> seconds in this complexity.</span>
+      <span>You have spent <span id="e1343"></span> seconds in this complexity.</span>
       <br/>
-      <span>You have spent <span id="e1343"></span> seconds in this finality.</span>
+      <span>You have spent <span id="e1344"></span> seconds in this finality.</span>
       <br/>
-      <span>You have spent <span id="e1344"></span> seconds playing this game (counting time offline).</span>
-      <div id="b1336">
-        <span>Last infinity took <span id="e1345"></span> seconds and gave <span id="e1346"></span> IP, giving <span id="e1347"></span> IP/second.</span>
+      <span>You have spent <span id="e1345"></span> seconds playing this game (counting time offline).</span>
+      <div id="b1337">
+        <span>Last infinity took <span id="e1346"></span> seconds and gave <span id="e1347"></span> IP, giving <span id="e1348"></span> IP/second.</span>
         <br/>
-        <span id="b1337">The infinity two infinities ago took <span id="e1348"></span> seconds and gave <span id="e1349"></span> IP, giving <span id="e1350"></span> IP/second.</span>
+        <span id="b1338">The infinity two infinities ago took <span id="e1349"></span> seconds and gave <span id="e1350"></span> IP, giving <span id="e1351"></span> IP/second.</span>
         <br/>
-        <span id="b1338">The infinity three infinities ago took <span id="e1351"></span> seconds and gave <span id="e1352"></span> IP, giving <span id="e1353"></span> IP/second.</span>
+        <span id="b1339">The infinity three infinities ago took <span id="e1352"></span> seconds and gave <span id="e1353"></span> IP, giving <span id="e1354"></span> IP/second.</span>
         <br/>
-        <span id="b1339">The infinity four infinities ago took <span id="e1354"></span> seconds and gave <span id="e1355"></span> IP, giving <span id="e1356"></span> IP/second.</span>
+        <span id="b1340">The infinity four infinities ago took <span id="e1355"></span> seconds and gave <span id="e1356"></span> IP, giving <span id="e1357"></span> IP/second.</span>
         <br/>
-        <span id="b1340">The infinity five infinities ago took <span id="e1357"></span> seconds and gave <span id="e1358"></span> IP, giving <span id="e1359"></span> IP/second.</span>
+        <span id="b1341">The infinity five infinities ago took <span id="e1358"></span> seconds and gave <span id="e1359"></span> IP, giving <span id="e1360"></span> IP/second.</span>
         <br/>
-        <span id="b1341">The infinity six infinities ago took <span id="e1360"></span> seconds and gave <span id="e1361"></span> IP, giving <span id="e1362"></span> IP/second.</span>
+        <span id="b1342">The infinity six infinities ago took <span id="e1361"></span> seconds and gave <span id="e1362"></span> IP, giving <span id="e1363"></span> IP/second.</span>
         <br/>
-        <span id="b1342">The infinity seven infinities ago took <span id="e1363"></span> seconds and gave <span id="e1364"></span> IP, giving <span id="e1365"></span> IP/second.</span>
+        <span id="b1343">The infinity seven infinities ago took <span id="e1364"></span> seconds and gave <span id="e1365"></span> IP, giving <span id="e1366"></span> IP/second.</span>
         <br/>
-        <span id="b1343">The infinity eight infinities ago took <span id="e1366"></span> seconds and gave <span id="e1367"></span> IP, giving <span id="e1368"></span> IP/second.</span>
+        <span id="b1344">The infinity eight infinities ago took <span id="e1367"></span> seconds and gave <span id="e1368"></span> IP, giving <span id="e1369"></span> IP/second.</span>
         <br/>
-        <span id="b1344">The infinity nine infinities ago took <span id="e1369"></span> seconds and gave <span id="e1370"></span> IP, giving <span id="e1371"></span> IP/second.</span>
+        <span id="b1345">The infinity nine infinities ago took <span id="e1370"></span> seconds and gave <span id="e1371"></span> IP, giving <span id="e1372"></span> IP/second.</span>
         <br/>
-        <span id="b1345">The infinity ten infinities ago took <span id="e1372"></span> seconds and gave <span id="e1373"></span> IP, giving <span id="e1374"></span> IP/second.</span>
+        <span id="b1346">The infinity ten infinities ago took <span id="e1373"></span> seconds and gave <span id="e1374"></span> IP, giving <span id="e1375"></span> IP/second.</span>
         <br/>
       </div>
-      <div id="b1346">
-        <span>Last eternity took <span id="e1375"></span> seconds and gave <span id="e1376"></span> EP, giving <span id="e1377"></span> EP/second.</span>
+      <div id="b1347">
+        <span>Last eternity took <span id="e1376"></span> seconds and gave <span id="e1377"></span> EP, giving <span id="e1378"></span> EP/second.</span>
         <br/>
-        <span id="b1347">The eternity two eternities ago took <span id="e1378"></span> seconds and gave <span id="e1379"></span> EP, giving <span id="e1380"></span> EP/second.</span>
+        <span id="b1348">The eternity two eternities ago took <span id="e1379"></span> seconds and gave <span id="e1380"></span> EP, giving <span id="e1381"></span> EP/second.</span>
         <br/>
-        <span id="b1348">The eternity three eternities ago took <span id="e1381"></span> seconds and gave <span id="e1382"></span> EP, giving <span id="e1383"></span> EP/second.</span>
+        <span id="b1349">The eternity three eternities ago took <span id="e1382"></span> seconds and gave <span id="e1383"></span> EP, giving <span id="e1384"></span> EP/second.</span>
         <br/>
-        <span id="b1349">The eternity four eternities ago took <span id="e1384"></span> seconds and gave <span id="e1385"></span> EP, giving <span id="e1386"></span> EP/second.</span>
+        <span id="b1350">The eternity four eternities ago took <span id="e1385"></span> seconds and gave <span id="e1386"></span> EP, giving <span id="e1387"></span> EP/second.</span>
         <br/>
-        <span id="b1350">The eternity five eternities ago took <span id="e1387"></span> seconds and gave <span id="e1388"></span> EP, giving <span id="e1389"></span> EP/second.</span>
+        <span id="b1351">The eternity five eternities ago took <span id="e1388"></span> seconds and gave <span id="e1389"></span> EP, giving <span id="e1390"></span> EP/second.</span>
         <br/>
-        <span id="b1351">The eternity six eternities ago took <span id="e1390"></span> seconds and gave <span id="e1391"></span> EP, giving <span id="e1392"></span> EP/second.</span>
+        <span id="b1352">The eternity six eternities ago took <span id="e1391"></span> seconds and gave <span id="e1392"></span> EP, giving <span id="e1393"></span> EP/second.</span>
         <br/>
-        <span id="b1352">The eternity seven eternities ago took <span id="e1393"></span> seconds and gave <span id="e1394"></span> EP, giving <span id="e1395"></span> EP/second.</span>
+        <span id="b1353">The eternity seven eternities ago took <span id="e1394"></span> seconds and gave <span id="e1395"></span> EP, giving <span id="e1396"></span> EP/second.</span>
         <br/>
-        <span id="b1353">The eternity eight eternities ago took <span id="e1396"></span> seconds and gave <span id="e1397"></span> EP, giving <span id="e1398"></span> EP/second.</span>
+        <span id="b1354">The eternity eight eternities ago took <span id="e1397"></span> seconds and gave <span id="e1398"></span> EP, giving <span id="e1399"></span> EP/second.</span>
         <br/>
-        <span id="b1354">The eternity nine eternities ago took <span id="e1399"></span> seconds and gave <span id="e1400"></span> EP, giving <span id="e1401"></span> EP/second.</span>
+        <span id="b1355">The eternity nine eternities ago took <span id="e1400"></span> seconds and gave <span id="e1401"></span> EP, giving <span id="e1402"></span> EP/second.</span>
         <br/>
-        <span id="b1355">The eternity ten eternities ago took <span id="e1402"></span> seconds and gave <span id="e1403"></span> EP, giving <span id="e1404"></span> EP/second.</span>
-        <br/>
-      </div>
-      <div id="b1356">
-        <span>Last complexity took <span id="e1405"></span> seconds and gave <span id="e1406"></span> ℂP, giving <span id="e1407"></span> ℂP/second.</span>
-        <br/>
-        <span id="b1357">The complexity two complexities ago took <span id="e1408"></span> seconds and gave <span id="e1409"></span> ℂP, giving <span id="e1410"></span> ℂP/second.</span>
-        <br/>
-        <span id="b1358">The complexity three complexities ago took <span id="e1411"></span> seconds and gave <span id="e1412"></span> ℂP, giving <span id="e1413"></span> ℂP/second.</span>
-        <br/>
-        <span id="b1359">The complexity four complexities ago took <span id="e1414"></span> seconds and gave <span id="e1415"></span> ℂP, giving <span id="e1416"></span> ℂP/second.</span>
-        <br/>
-        <span id="b1360">The complexity five complexities ago took <span id="e1417"></span> seconds and gave <span id="e1418"></span> ℂP, giving <span id="e1419"></span> ℂP/second.</span>
-        <br/>
-        <span id="b1361">The complexity six complexities ago took <span id="e1420"></span> seconds and gave <span id="e1421"></span> ℂP, giving <span id="e1422"></span> ℂP/second.</span>
-        <br/>
-        <span id="b1362">The complexity seven complexities ago took <span id="e1423"></span> seconds and gave <span id="e1424"></span> ℂP, giving <span id="e1425"></span> ℂP/second.</span>
-        <br/>
-        <span id="b1363">The complexity eight complexities ago took <span id="e1426"></span> seconds and gave <span id="e1427"></span> ℂP, giving <span id="e1428"></span> ℂP/second.</span>
-        <br/>
-        <span id="b1364">The complexity nine complexities ago took <span id="e1429"></span> seconds and gave <span id="e1430"></span> ℂP, giving <span id="e1431"></span> ℂP/second.</span>
-        <br/>
-        <span id="b1365">The complexity ten complexities ago took <span id="e1432"></span> seconds and gave <span id="e1433"></span> ℂP, giving <span id="e1434"></span> ℂP/second.</span>
+        <span id="b1356">The eternity ten eternities ago took <span id="e1403"></span> seconds and gave <span id="e1404"></span> EP, giving <span id="e1405"></span> EP/second.</span>
         <br/>
       </div>
-      <div id="b1366">
-        <span>Last finality took <span id="e1435"></span> seconds and gave <span id="e1436"></span> FP and <span id="e1437"></span> FS.</span>
+      <div id="b1357">
+        <span>Last complexity took <span id="e1406"></span> seconds and gave <span id="e1407"></span> ℂP, giving <span id="e1408"></span> ℂP/second.</span>
         <br/>
-        <span id="b1367">The finality two finalities ago took <span id="e1438"></span> seconds and gave <span id="e1439"></span> FP and <span id="e1440"></span> FS.</span>
+        <span id="b1358">The complexity two complexities ago took <span id="e1409"></span> seconds and gave <span id="e1410"></span> ℂP, giving <span id="e1411"></span> ℂP/second.</span>
         <br/>
-        <span id="b1368">The finality three finalities ago took <span id="e1441"></span> seconds and gave <span id="e1442"></span> FP and <span id="e1443"></span> FS.</span>
+        <span id="b1359">The complexity three complexities ago took <span id="e1412"></span> seconds and gave <span id="e1413"></span> ℂP, giving <span id="e1414"></span> ℂP/second.</span>
         <br/>
-        <span id="b1369">The finality four finalities ago took <span id="e1444"></span> seconds and gave <span id="e1445"></span> FP and <span id="e1446"></span> FS.</span>
+        <span id="b1360">The complexity four complexities ago took <span id="e1415"></span> seconds and gave <span id="e1416"></span> ℂP, giving <span id="e1417"></span> ℂP/second.</span>
         <br/>
-        <span id="b1370">The finality five finalities ago took <span id="e1447"></span> seconds and gave <span id="e1448"></span> FP and <span id="e1449"></span> FS.</span>
+        <span id="b1361">The complexity five complexities ago took <span id="e1418"></span> seconds and gave <span id="e1419"></span> ℂP, giving <span id="e1420"></span> ℂP/second.</span>
         <br/>
-        <span id="b1371">The finality six finalities ago took <span id="e1450"></span> seconds and gave <span id="e1451"></span> FP and <span id="e1452"></span> FS.</span>
+        <span id="b1362">The complexity six complexities ago took <span id="e1421"></span> seconds and gave <span id="e1422"></span> ℂP, giving <span id="e1423"></span> ℂP/second.</span>
         <br/>
-        <span id="b1372">The finality seven finalities ago took <span id="e1453"></span> seconds and gave <span id="e1454"></span> FP and <span id="e1455"></span> FS.</span>
+        <span id="b1363">The complexity seven complexities ago took <span id="e1424"></span> seconds and gave <span id="e1425"></span> ℂP, giving <span id="e1426"></span> ℂP/second.</span>
         <br/>
-        <span id="b1373">The finality eight finalities ago took <span id="e1456"></span> seconds and gave <span id="e1457"></span> FP and <span id="e1458"></span> FS.</span>
+        <span id="b1364">The complexity eight complexities ago took <span id="e1427"></span> seconds and gave <span id="e1428"></span> ℂP, giving <span id="e1429"></span> ℂP/second.</span>
         <br/>
-        <span id="b1374">The finality nine finalities ago took <span id="e1459"></span> seconds and gave <span id="e1460"></span> FP and <span id="e1461"></span> FS.</span>
+        <span id="b1365">The complexity nine complexities ago took <span id="e1430"></span> seconds and gave <span id="e1431"></span> ℂP, giving <span id="e1432"></span> ℂP/second.</span>
         <br/>
-        <span id="b1375">The finality ten finalities ago took <span id="e1462"></span> seconds and gave <span id="e1463"></span> FP and <span id="e1464"></span> FS.</span>
+        <span id="b1366">The complexity ten complexities ago took <span id="e1433"></span> seconds and gave <span id="e1434"></span> ℂP, giving <span id="e1435"></span> ℂP/second.</span>
+        <br/>
+      </div>
+      <div id="b1367">
+        <span>Last finality took <span id="e1436"></span> seconds and gave <span id="e1437"></span> FP and <span id="e1438"></span> FS.</span>
+        <br/>
+        <span id="b1368">The finality two finalities ago took <span id="e1439"></span> seconds and gave <span id="e1440"></span> FP and <span id="e1441"></span> FS.</span>
+        <br/>
+        <span id="b1369">The finality three finalities ago took <span id="e1442"></span> seconds and gave <span id="e1443"></span> FP and <span id="e1444"></span> FS.</span>
+        <br/>
+        <span id="b1370">The finality four finalities ago took <span id="e1445"></span> seconds and gave <span id="e1446"></span> FP and <span id="e1447"></span> FS.</span>
+        <br/>
+        <span id="b1371">The finality five finalities ago took <span id="e1448"></span> seconds and gave <span id="e1449"></span> FP and <span id="e1450"></span> FS.</span>
+        <br/>
+        <span id="b1372">The finality six finalities ago took <span id="e1451"></span> seconds and gave <span id="e1452"></span> FP and <span id="e1453"></span> FS.</span>
+        <br/>
+        <span id="b1373">The finality seven finalities ago took <span id="e1454"></span> seconds and gave <span id="e1455"></span> FP and <span id="e1456"></span> FS.</span>
+        <br/>
+        <span id="b1374">The finality eight finalities ago took <span id="e1457"></span> seconds and gave <span id="e1458"></span> FP and <span id="e1459"></span> FS.</span>
+        <br/>
+        <span id="b1375">The finality nine finalities ago took <span id="e1460"></span> seconds and gave <span id="e1461"></span> FP and <span id="e1462"></span> FS.</span>
+        <br/>
+        <span id="b1376">The finality ten finalities ago took <span id="e1463"></span> seconds and gave <span id="e1464"></span> FP and <span id="e1465"></span> FS.</span>
         <br/>
       </div>
     </div>
-    <div id="b1376">
+    <div id="b1377">
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 8px; border-collapse: separate;">
         <tr>
           <td><button class="options-button" onclick="Saving.saveGame()">Save</button></td>
@@ -4528,58 +4535,58 @@
           <td><button class="options-button" onclick="Saving.loadGamePrompt()">Load</button></td>
         </tr>
         <tr>
-          <td><button class="options-button" onclick="Options.toggleOfflineProgress()">Offline progress: <span id="e1465"></span></button></td>
-          <td><button class="options-button" onclick="Options.toggleHotkeys()">Hotkeys: <span id="e1466"></span></button></td>
-          <td><button class="options-button" onclick="Options.toggleExportDisplay()" style="font-size: 0.75rem;">Show export text (as opposed to just copying it): <span id="e1467"></span></button></td>
+          <td><button class="options-button" onclick="Options.toggleOfflineProgress()">Offline progress: <span id="e1466"></span></button></td>
+          <td><button class="options-button" onclick="Options.toggleHotkeys()">Hotkeys: <span id="e1467"></span></button></td>
+          <td><button class="options-button" onclick="Options.toggleExportDisplay()" style="font-size: 0.75rem;">Show export text (as opposed to just copying it): <span id="e1468"></span></button></td>
         </tr>
         <tr>
-          <td><button class="options-button" onclick="Options.nextCompletionColors()">Completion colors: <span id="e1468"></span></button></td>
-          <td><button class="options-button" onclick="Options.nextNotation()">Notation: <span id="e1469"></span></button></td>
+          <td><button class="options-button" onclick="Options.nextCompletionColors()">Completion colors: <span id="e1469"></span></button></td>
+          <td><button class="options-button" onclick="Options.nextNotation()">Notation: <span id="e1470"></span></button></td>
           <td><button class="options-button" onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></td>
         </tr>
       </table>
       <span>Tabs to show:
       <div>
         <span>
-          <span id="b1377">Main: <input id="b1378" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1379">Infinity: <input id="b1380" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1381">Challenges: <input id="b1382" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1383">Autobuyers: <input id="b1384" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1385">Infinity Challenges: <input id="b1386" type="checkbox"></input></span>
+          <span id="b1378">Main: <input id="b1379" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1380">Infinity: <input id="b1381" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1382">Challenges: <input id="b1383" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1384">Autobuyers: <input id="b1385" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1386">Infinity Challenges: <input id="b1387" type="checkbox"></input></span>
         </span>
       </div>
       <div>
         <span>
-          <span id="b1387">Goals: <input id="b1388" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1389">Statistics: <input id="b1390" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1391">Options: cannot be hidden</span> 
+          <span id="b1388">Goals: <input id="b1389" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1390">Statistics: <input id="b1391" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1392">Options: cannot be hidden</span> 
         </span>
       </div>
-      <div id="b1392">
+      <div id="b1393">
         <span>
-          <span id="b1393">Eternity: <input id="b1394" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1395">Eternity Milestones: <input id="b1396" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1397">Studies: <input id="b1398" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1399">Eternity Producer: <input id="b1400" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1401">Eternity Challenges: <input id="b1402" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1403">Chroma: <input id="b1404" type="checkbox"></input></span>
+          <span id="b1394">Eternity: <input id="b1395" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1396">Eternity Milestones: <input id="b1397" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1398">Studies: <input id="b1399" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1400">Eternity Producer: <input id="b1401" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1402">Eternity Challenges: <input id="b1403" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1404">Chroma: <input id="b1405" type="checkbox"></input></span>
         </span>
       </div>
-      <div id="b1405">
+      <div id="b1406">
         <span>
-          <span id="b1406">Complexity: <input id="b1407" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1408">Complexity Challenges: <input id="b1409" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1410">Complexity Achievements: <input id="b1411" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1412">Powers: <input id="b1413" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1414">Oracle: <input id="b1415" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1416">Galaxies: <input id="b1417" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1407">Complexity: <input id="b1408" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1409">Complexity Challenges: <input id="b1410" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1411">Complexity Achievements: <input id="b1412" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1413">Powers: <input id="b1414" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1415">Oracle: <input id="b1416" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1417">Galaxies: <input id="b1418" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
         </span>
       </div>
-      <div id="b1418">
+      <div id="b1419">
         <span>
-          <span id="b1419">Finality: <input id="b1420" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1421">Finality Shards: <input id="b1422" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1423">Finality Milestones: <input id="b1424" type="checkbox"></input></span>
+          <span id="b1420">Finality: <input id="b1421" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1422">Finality Shards: <input id="b1423" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1424">Finality Milestones: <input id="b1425" type="checkbox"></input></span>
         </span>
       </div>
       <span><a target="_blank" rel="noopener noreferrer" href="guide/index.html">Guide (currently very incomplete)</a><span style="display: inline-block; width: 256px;"></span><a target="_blank" rel="noopener noreferrer" href="https://discord.gg/7JfmqF2">Discord</a></span>
