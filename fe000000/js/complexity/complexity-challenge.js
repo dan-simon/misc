@@ -81,6 +81,21 @@ let ComplexityChallenge = {
     }
     return description;
   },
+  showComplexityChallengeLastCompletionDescription(x) {
+    return this.getComplexityChallengeCompletions(x) > 0;
+  },
+  complexityChallengeLastCompletionDescription(x) {
+    if (player.complexityChallengeLastCompletion[x - 1][1] < Finalities.amount()) {
+      return 'Not completed this finality';
+    } else {
+      let complexities = Complexities.amount() - player.complexityChallengeLastCompletion[x - 1][0];
+      if (complexities === 0) {
+        return 'Completed this complexity'
+      } else {
+        return 'Last completed ' + formatInt(complexities) + ' complexit' + pluralize(complexities, 'y', 'ies') + ' ago';
+      }
+    }
+  },
   checkForComplexityChallengeCompletions() {
     for (let cc = 1; cc <= 6; cc++) {
       if (this.isComplexityChallengeRunning(cc)) {
@@ -90,6 +105,9 @@ let ComplexityChallenge = {
     }
   },
   makeComplexityChallengeCompletionsAtLeast(x, completions) {
+    if (player.complexityChallengeCompletions[x - 1] < completions) {
+      player.complexityChallengeLastCompletion[x - 1] = [Complexities.amount(), Finalities.amount()];
+    }
     player.complexityChallengeCompletions[x - 1] = Math.max(player.complexityChallengeCompletions[x - 1], completions);
   },
   complexityReset() {

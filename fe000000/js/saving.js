@@ -523,6 +523,10 @@ let Saving = {
       };
       player.version = 1.9462890625;
     }
+    if (player.version < 1.947265625) {
+      player.complexityChallengeLastCompletion = [[-1, -1], [-1, -1], [-1, -1], [-1, -1], [-1, -1], [-1, -1]],
+      player.version = 1.947265625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

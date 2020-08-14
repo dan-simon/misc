@@ -158,6 +158,7 @@ let initialPlayer = {
   complexityChallengeCompletions: [0, 0, 0, 0, 0, 0],
   isComplexityChallengeRunning: [true, true, true, true, true, true],
   complexityChallengeSafeguards: [false, false, false, false, false],
+  complexityChallengeLastCompletion: [[-1, -1], [-1, -1], [-1, -1], [-1, -1], [-1, -1], [-1, -1]],
   complexityAchievements: [
     [false, false, false, false],
     [false, false, false, false],
