@@ -241,7 +241,9 @@ let EternityChallenge = {
     player.respecEternityChallenge = !player.respecEternityChallenge;
   },
   respec() {
-    // This fails in situations where ECs being locked is no longer a thing.
+    // This fails in situations where ECs being locked is no longer a thing,
+    // which is why we then can't respec and so don't do anything when
+    // this function is called.
     if (this.canRespec()) {
       this.lockUnlockedEternityChallenge();
     }
@@ -291,7 +293,10 @@ let EternityChallenge = {
     return 1 - 1 / (1 + player.eternityStars.max(1).log2() / 256);
   },
   eternityChallenge4AllowedInfinities() {
-    return Math.max(0, 12 - 4 * this.getEternityChallengeCompletions(4));
+    return this.eternityChallenge4AllowedInfinitiesAtTier(this.getEternityChallengeCompletions(4));
+  },
+  eternityChallenge4AllowedInfinitiesAtTier(x) {
+    return Math.max(0, 12 - 4 * x);
   },
   eternityChallenge4DoneInfinities() {
     return Infinities.realAmount();
@@ -394,6 +399,9 @@ let EternityChallenge = {
     if (x === 0) return;
     return this.getNextEternityChallengeCompletions(x) - this.getEternityChallengeCompletions(x);
   },
+  eternityChallengeCompletionsIsTierPossible(x, tier) {
+    return x !== 4 || (this.eternityChallenge4DoneInfinities() <= this.eternityChallenge4AllowedInfinitiesAtTier(tier));
+  },
   getNextEternityChallengeCompletions(x) {
     if (x === undefined) {
       x = this.currentEternityChallenge();
@@ -403,7 +411,8 @@ let EternityChallenge = {
     // This could be a log, but I really don't trust logs.
     while (completions < 4) {
       let newGoal = this.getEternityChallengeGoalAtTier(x, completions);
-      if (InfinityPoints.totalIPProducedThisEternity().lt(newGoal)) {
+      if (InfinityPoints.totalIPProducedThisEternity().lt(newGoal) ||
+      !this.eternityChallengeCompletionsIsTierPossible(x, completions)) {
         break;
       }
       completions++;
@@ -420,10 +429,12 @@ let EternityChallenge = {
     }
     if (x === 0) return;
     let nextCompletions = this.getNextEternityChallengeCompletions(x);
-    if (nextCompletions < 4) {
+    if (nextCompletions === 4) {
+      return '';
+    } else if (this.eternityChallengeCompletionsIsTierPossible(x, nextCompletions)) {
       return ', next at ' + format(this.getEternityChallengeGoalAtTier(x, this.getNextEternityChallengeCompletions(x))) + ' IP';
     } else {
-      return '';
+      return ', too many infinities for more'
     }
   },
   color(x) {

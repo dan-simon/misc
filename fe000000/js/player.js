@@ -84,6 +84,7 @@ let initialPlayer = {
   prestigePower: new Decimal(1),
   infinityPoints: new Decimal(0),
   infinities: 0,
+  realInfinities: 0,
   infinityStars: new Decimal(1),
   infinityGenerators: initialInfinityGenerators(),
   highestInfinityGenerator: 0,
