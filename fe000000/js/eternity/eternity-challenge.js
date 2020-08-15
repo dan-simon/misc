@@ -114,6 +114,10 @@ let EternityChallenge = {
     return (challenge > 0) ? this.getEternityChallengeCost(challenge) : 0;
   },
   getEternityChallengeCompletions(x) {
+    if (x === undefined) {
+      x = this.currentEternityChallenge();
+    }
+    if (x === 0) return;
     return player.eternityChallengeCompletions[x - 1];
   },
   isEternityChallengeCompleted(x) {
@@ -276,9 +280,7 @@ let EternityChallenge = {
     }
   },
   completeEternityChallenge(x) {
-    if (player.eternityChallengeCompletions[x - 1] < 4) {
-      player.eternityChallengeCompletions[x - 1]++;
-    }
+    player.eternityChallengeCompletions[x - 1] = this.getNextEternityChallengeCompletions(x);
     // Current eternity challenge is set to 0 as part of lockUnlockedEternityChallenge.
     this.lockUnlockedEternityChallenge();
   },
@@ -378,6 +380,51 @@ let EternityChallenge = {
   },
   usedAutoECCompletionThisComplexity() {
     return player.usedAutoECCompletionThisComplexity;
+  },
+  canCompleteMultipleTiersAtOnce() {
+    return ComplexityAchievements.hasComplexityAchievement(3, 2);
+  },
+  displayTiersCompletedOnEternity() {
+    return this.canCompleteMultipleTiersAtOnce() && this.isSomeEternityChallengeRunning();
+  },
+  tiersCompletedOnEternity(x) {
+    if (x === undefined) {
+      x = this.currentEternityChallenge();
+    }
+    if (x === 0) return;
+    return this.getNextEternityChallengeCompletions(x) - this.getEternityChallengeCompletions(x);
+  },
+  getNextEternityChallengeCompletions(x) {
+    if (x === undefined) {
+      x = this.currentEternityChallenge();
+    }
+    if (x === 0) return;
+    let completions = this.getEternityChallengeCompletions(x);
+    // This could be a log, but I really don't trust logs.
+    while (completions < 4) {
+      let newGoal = this.getEternityChallengeGoalAtTier(x, completions);
+      if (InfinityPoints.totalIPProducedThisEternity().lt(newGoal)) {
+        break;
+      }
+      completions++;
+      // Break now if we can't get more than one tier.
+      if (!this.canCompleteMultipleTiersAtOnce()) {
+        break;
+      }
+    }
+    return completions;
+  },
+  eternityChallengeCompletionsNextText(x) {
+    if (x === undefined) {
+      x = this.currentEternityChallenge();
+    }
+    if (x === 0) return;
+    let nextCompletions = this.getNextEternityChallengeCompletions(x);
+    if (nextCompletions < 4) {
+      return ', next at ' + format(this.getEternityChallengeGoalAtTier(x, this.getNextEternityChallengeCompletions(x))) + ' IP';
+    } else {
+      return '';
+    }
   },
   color(x) {
     return Colors.makeStyle(this.getEternityChallengeCompletions(x) / 4, true);

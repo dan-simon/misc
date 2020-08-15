@@ -107,7 +107,7 @@
       <span ~style.display=EternityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~f EternityPrestigeLayer.infinityPointRequirementForEternity() ~ total infinity points this eternity to eternity.</span>
       <br ~style.display=EternityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
       <span ~style.display=EternityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i EternityPrestigeLayer.eternityPoints() ~ eternity point~s EternityPrestigeLayer.eternityPoints() ~ (~i EternityPrestigeLayer.totalEternityPoints() ~ total this complexity)</span>
-      <button ~style.display=EternityPrestigeLayer.canEternity() ? '' : 'none'~ style="height: 48px;" onclick="EternityPrestigeLayer.eternity()">Eternity: Gain ~i EternityPrestigeLayer.eternityPointGain() ~ eternity point~s EternityPrestigeLayer.eternityPointGain() ~ (~r EternityPrestigeLayer.eternityPointGainRatioText() ~~i EternityPrestigeLayer.eternityPoints() ~ → ~i EternityPrestigeLayer.newEternityPoints() ~~r EternityPrestigeLayer.eternityPointNextText() ~)<br/>~f EternityPrestigeLayer.currentEPPerSec() ~ EP/sec, ~f EternityPrestigeLayer.peakEPPerSec() ~ peak EP/sec</button>
+      <button ~style.display=EternityPrestigeLayer.canEternity() ? '' : 'none'~ style="height: 48px;" onclick="EternityPrestigeLayer.eternity()">Eternity: Gain ~i EternityPrestigeLayer.eternityPointGain() ~ eternity point~s EternityPrestigeLayer.eternityPointGain() ~ (~r EternityPrestigeLayer.eternityPointGainRatioText() ~~i EternityPrestigeLayer.eternityPoints() ~ → ~i EternityPrestigeLayer.newEternityPoints() ~~r EternityPrestigeLayer.eternityPointNextText() ~)<br/>~f EternityPrestigeLayer.currentEPPerSec() ~ EP/sec, ~f EternityPrestigeLayer.peakEPPerSec() ~ peak EP/sec<span ~style.display=EternityChallenge.displayTiersCompletedOnEternity() ? '' : 'none'~>, +~i EternityChallenge.tiersCompletedOnEternity() ~ EC tier~s EternityChallenge.tiersCompletedOnEternity() ~ (~i EternityChallenge.getEternityChallengeCompletions() ~ → ~i EternityChallenge.getNextEternityChallengeCompletions() ~~r EternityChallenge.eternityChallengeCompletionsNextText() ~)</span></button>
     </div>
     <div style="height: 56px;" ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>
       <span ~style.display=ComplexityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~r ComplexityPrestigeLayer.requirementForComplexity() ~ to complexity.</span>
@@ -2922,7 +2922,7 @@
               <br/>
               ~r ComplexityAchievements.complexityAchievementStatusDescription(3, 2) ~
               <br/>
-              Eternity challenge requirements and costs are removed.
+              Eternity challenge requirements and costs are removed, and you can complete multiple eternity challenge tiers at once.
             </div>
           </td>
           <td>
