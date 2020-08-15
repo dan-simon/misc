@@ -1428,7 +1428,8 @@
       <span>You have ~i Studies.totalTheorems() ~ total theorem~s Studies.totalTheorems() ~ and ~i Studies.unspentTheorems() ~ unspent theorem~s Studies.unspentTheorems() ~.</span>
       <br/>
       <button class="studies-export-button" onclick="Studies.export()">Export studies</button> <button onclick="Studies.import()">Import studies</button>
-      <button onclick="Studies.toggleRespec()">Respec studies on next eternity: ~r Studies.isRespecOn() ? "On" : "Off" ~</button></span>
+      <button onclick="Studies.toggleRespec()">Respec studies on next eternity: ~r Studies.isRespecOn() ? "On" : "Off" ~</button>
+      <button ~style.display=Studies.canAccessFourthRow() ? '' : 'none'~ ~class=Studies.canMaxFourthRowStudies() ? '' : 'disabled' ~ onclick="Studies.maxFourthRowStudies()">Max fourth-row studies</button>
       <br/>
       <button onclick="Studies.respecAndReset()">Respec studies and ~r EternityPrestigeLayer.resetText() ~</button>
       <br ~style.display=!EternityPrestigeLayer.canEternity() && Studies.canAccessFourthRow() ? '' : 'none'~/>

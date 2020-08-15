@@ -329,6 +329,13 @@ let Studies = {
       player.boughtTheoremsThisComplexity = true;
     }
   },
+  canMaxFourthRowStudies() {
+    return [13, 14, 15, 16].some(x => Study(x).isBuyable());
+  },
+  maxFourthRowStudies() {
+    // Yes, we are calling import.
+    this.importString('&s1,1,1,1');
+  },
   boughtTheoremsThisComplexity() {
     return player.boughtTheoremsThisComplexity;
   },
