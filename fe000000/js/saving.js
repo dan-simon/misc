@@ -532,6 +532,10 @@ let Saving = {
       player.oracle.originalComplexityChallengeCompletions = [0, 0, 0, 0, 0, 0];
       player.version = 1.9482421875;
     }
+    if (player.version < 1.94921875) {
+      player.areNewlyUnlockedAutobuyersOn = true;
+      player.version = 1.94921875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

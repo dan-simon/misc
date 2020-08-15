@@ -118,6 +118,19 @@ let Autobuyers = {
       }
     }
   },
+  areNewlyUnlockedAutobuyersOn() {
+    return player.areNewlyUnlockedAutobuyersOn;
+  },
+  setAreNewlyUnlockedAutobuyersOn(x) {
+    player.areNewlyUnlockedAutobuyersOn = x;
+    // This actually changes which locked autobuyers are on, behind the scenes.
+    for (let autobuyer of this.list) {
+      if (!autobuyer.hasAutobuyer()) {
+        autobuyer.setIsOn(x);
+        autobuyer.checkbox().checked = autobuyer.isOn();
+      }
+    }
+  },
   priorityOrder() {
     function cmp(a, b) {
       return (a < b) ? -1 : ((a > b) ? 1 : 0);
