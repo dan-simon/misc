@@ -49,29 +49,46 @@ let Oracle = {
     complexityPoints = ComplexityPoints.amount();
     complexityPointGain = ComplexityPrestigeLayer.canComplexity() ?
       ComplexityPrestigeLayer.complexityPointGain() : new Decimal(0);
+    complexityChallengeCompletions = ComplexityChallenge.getAllComplexityChallengeCompletions();
     powers = player.powers.stored;
     Saving.loadGame(save, null, true);
     player.oracle.used = true;
     player.oracle.timeSimulated = time;
     player.oracle.complexityPoints = complexityPoints;
     player.oracle.complexityPointGain = complexityPointGain;
+    player.oracle.originalComplexityChallengeCompletions = ComplexityChallenge.getAllComplexityChallengeCompletions();
+    player.oracle.complexityChallengeCompletions = complexityChallengeCompletions;
     player.oracle.powers = powers;
     if (this.alert()) {
-      alert(this.shortMessage());
+      alert(this.message());
     }
   },
-  shortMessage() {
-    let ending = player.oracle.complexityPointGain.gt(0) ?
-      ('be able to gain ' + formatInt(player.oracle.complexityPointGain) + ' ℂP.') : 'not yet be able to complexity.';
+  message() {
+    let messages = [this.complexityPointMessage(), this.complexityPointGainMessage(), this.complexityChallengeCompletionsMessage()];
     return 'After ' + formatMaybeInt(player.oracle.timeSimulated) + ' second' +
-      pluralize(player.oracle.timeSimulated, '', 's') + ', you will have ' +
-      formatInt(player.oracle.complexityPoints) + ' ℂP and will ' + ending;
+      pluralize(player.oracle.timeSimulated, '', 's') + ', you ' + coordinate('*', '', messages) + '.';
   },
-  longMessage() {
+  complexityPointMessage() {
+    return 'will have ' + formatInt(player.oracle.complexityPoints) + ' ℂP';
+  },
+  complexityPointGainMessage() {
+    return player.oracle.complexityPointGain.gt(0) ?
+      ('will be able to gain ' + formatInt(player.oracle.complexityPointGain) + ' ℂP') : 'will not yet be able to complexity';
+  },
+  complexityChallengeCompletionsMessage() {
+    // Note that we might, in theory, lose complexity challenge completions, if we finality.
+    // I'm not sure if this can happen in practice but it seems worth mentioning.
+    let gainedCompletions = [1, 2, 3, 4, 5, 6].map(
+      i => player.oracle.complexityChallengeCompletions[i - 1] - player.oracle.originalComplexityChallengeCompletions[i - 1]);
+    let completionText = gainedCompletions.map(
+      (x, i) => x > 0 ? formatInt(x) + ' completion' + pluralize(x, '', 's') + ' of Complexity Challenge ' + (i + 1) : null);
+    return coordinate('will have gained *', null, completionText);
+  },
+  messagePrequel() {
     if (this.isUsed()) {
-      return 'The Oracle most recently said "' + this.shortMessage() + '"';
+      return 'The Oracle most recently said:';
     } else {
-      return 'The Oracle has not said anything yet in this finality.'
+      return 'The Oracle has not said anything yet in this finality.';
     }
   }
 }

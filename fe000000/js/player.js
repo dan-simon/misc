@@ -206,6 +206,8 @@ let initialPlayer = {
     timeSimulated: 256,
     complexityPoints: new Decimal(0),
     complexityPointGain: new Decimal(0),
+    complexityChallengeCompletions: [0, 0, 0, 0, 0, 0],
+    originalComplexityChallengeCompletions: [0, 0, 0, 0, 0, 0],
     used: false,
     alert: false,
     powerDisplay: true,
@@ -326,7 +328,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9462890625
+  version: 1.9482421875
 }
 
 let player;

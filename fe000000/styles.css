@@ -132,6 +132,16 @@ button {
   border-width: 1px 1px;
 }
 
+.oraclediv {
+  margin: auto;
+  text-align: center;
+  width: 1024px;
+  height: 128px;
+  padding: 4px;
+  border: solid;
+  border-width: 1px 1px;
+}
+
 .finalitymilestonediv {
   display: table;
   text-align: center;

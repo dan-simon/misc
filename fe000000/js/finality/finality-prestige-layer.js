@@ -155,6 +155,8 @@ let FinalityPrestigeLayer = {
       timeSimulated: 256,
       complexityPoints: new Decimal(0),
       complexityPointGain: new Decimal(0),
+      complexityChallengeCompletions: [0, 0, 0, 0, 0, 0],
+      originalComplexityChallengeCompletions: [0, 0, 0, 0, 0, 0],
       used: false,
       alert: player.oracle.alert,
       powerDisplay: player.oracle.powerDisplay,

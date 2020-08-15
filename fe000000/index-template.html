@@ -3586,7 +3586,8 @@
         <span>You can press O to get a prediction from the Oracle on any tab.</span>
         <br/>
         <br/>
-        <span>~r Oracle.longMessage() ~</span>
+        <span>~r Oracle.messagePrequel() ~</span>
+        <div class="oraclediv" ~style.display=Oracle.isUsed() ? '' : 'none'~>~r Oracle.message() ~</div>
         <br/>
         <br/>
         <div ~style.display=(Oracle.isUsed() && Oracle.powerDisplay()) ? '' : 'none'~>

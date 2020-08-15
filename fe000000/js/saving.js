@@ -527,6 +527,11 @@ let Saving = {
       player.complexityChallengeLastCompletion = [[-1, -1], [-1, -1], [-1, -1], [-1, -1], [-1, -1], [-1, -1]],
       player.version = 1.947265625;
     }
+    if (player.version < 1.9482421875) {
+      player.oracle.complexityChallengeCompletions = [0, 0, 0, 0, 0, 0];
+      player.oracle.originalComplexityChallengeCompletions = [0, 0, 0, 0, 0, 0];
+      player.version = 1.9482421875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

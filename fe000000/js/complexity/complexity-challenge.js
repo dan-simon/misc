@@ -46,6 +46,9 @@ let ComplexityChallenge = {
   getTotalComplexityChallengeCompletions() {
     return [1, 2, 3, 4, 5, 6].map(x => this.getComplexityChallengeCompletions(x)).reduce((a, b) => a + b);
   },
+  getAllComplexityChallengeCompletions() {
+    return [1, 2, 3, 4, 5, 6].map(x => this.getComplexityChallengeCompletions(x));
+  },
   extraTheoremsRaw() {
     return this.getComplexityChallengeReward(6);
   },
