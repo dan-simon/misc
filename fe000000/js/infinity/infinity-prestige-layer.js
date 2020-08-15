@@ -93,6 +93,7 @@ let InfinityPrestigeLayer = {
     if (EternityChallenge.isEternityChallengeRunning(4) &&
       EternityChallenge.eternityChallenge4RemainingInfinities() === 0) {
       EternityChallenge.exitEternityChallenge();
+      return;
     }
     let gain = this.infinityPointGain();
     InfinityPoints.addAmount(gain);
