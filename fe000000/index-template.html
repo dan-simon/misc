@@ -290,6 +290,8 @@
       <br/>
       <span ~style.display=InfinityPrestigeLayer.canInfinityBeBroken() ? '' : 'none'~><button style="height: 48px;" onclick="InfinityPrestigeLayer.toggleBreakInfinity()">~r InfinityPrestigeLayer.breakInfinityButtonText() ~</button></span>
       <span ~style.display=InfinityPrestigeLayer.canInfinityBeBroken() ? 'none' : ''~>You need to complete all the challenges to be able to break infinity.</span>
+      <br ~style.display=(InfinityPrestigeLayer.canInfinityBeBroken() && !SpecialTabs.isTabVisible('infinity-challenges')) ? '' : 'none'~/>
+      <span ~style.display=(InfinityPrestigeLayer.canInfinityBeBroken() && !SpecialTabs.isTabVisible('infinity-challenges')) ? '' : 'none'~>Breaking infinity for the first time will also let you view the Infinity Challenges tab.</span>
       <br/>
       <span>You have ~f InfinityStars.amount() ~ infinity stars, multiplying all generators by their amount^~f InfinityStars.exponent() ~ = ~f InfinityStars.multiplier() ~.</span>
       <br/>
@@ -1423,6 +1425,7 @@
           </td>
         </tr>
       </table>
+      <span ~style.display=SpecialTabs.isTabVisible('eternity-producer') ? 'none' : ''~>Completing all eternity milestones for the first time will also let you view the Eternity Producer tab.</span>
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'studies' ? '' : 'none'~>
       <span>You have ~i Studies.totalTheorems() ~ total theorem~s Studies.totalTheorems() ~ and ~i Studies.unspentTheorems() ~ unspent theorem~s Studies.unspentTheorems() ~.</span>
@@ -2024,6 +2027,8 @@
         <span>It will also multiply all eternity generators by ~f EternityProducer.rawMultiplier() ~ (based on eternities).</span>
         <br/>
         <span>It can be improved via upgrades.</span>
+        <br ~style.display=SpecialTabs.isTabVisible('eternity-challenges') ? 'none' : ''~/>
+        <span ~style.display=SpecialTabs.isTabVisible('eternity-challenges') ? 'none' : ''~>Unlocking the Eternity Producer for the first time will also let you view the Eternity Challenges tab.</span>
       </div>
       <div ~style.display=EternityProducer.isUnlocked() ? '' : 'none'~>
         <span>You have ~q Eternities.amount() ~ eternit~y Eternities.amount() ~. Due to the Eternity Producer, they multiply all eternity generators by ~f EternityProducer.multiplier() ~.</span>
@@ -2114,7 +2119,7 @@
       </span>
       <br/>
       <span>
-        Multiplier to eternity gain based on eternity challenge tiers completed (~q EternityChallenge.getTotalCompletionsRewardRawEffect(2) ~)
+        Multiplier to eternity gain based on eternity challenge tiers completed (~q EternityChallenge.getTotalCompletionsRewardRawEffect(2) ~)<span ~style.display=PrestigeLayerProgress.hasReached('complexity') ? 'none' : ''~> and you can view the Chroma tab.</span>
       </span>
       <br/>
       <span>
@@ -2995,12 +3000,14 @@
           </td>
         </tr>
       </table>
+      <span ~style.display=SpecialTabs.isTabVisible('powers') ? 'none' : ''~>Completing all complexity achievements for the first time will also let you view the Powers tab.</span>
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'powers' ? '' : 'none'~>
       <div ~style.display=Powers.isUnlocked() ? 'none' : ''~>
         <button style="height: 48px;" onclick="Powers.unlock()" ~class=Powers.canUnlock() ? '' : 'disabled'~>
           Unlock Powers<br/>Cost: ~f Powers.unlockCost() ~ complexity points
         </button>
+        <div ~style.display=SpecialTabs.isTabVisible('oracle') ? 'none' : ''~>Unlocking powers for the first time will also let you view the Oracle tab.</div>
         <div ~style.display=FinalityMilestones.isFinalityMilestoneActive(6) ? 'none' : ''~>Unlocking powers will also let you gain your eternity points on eternity every second, without needing to eternity.</div>
       </div>
       <div ~style.display=Powers.isUnlocked() ? '' : 'none'~>
@@ -3574,8 +3581,8 @@
         <button style="height: 48px;" onclick="Oracle.unlock()" ~class=Oracle.canUnlock() ? '' : 'disabled'~>
           Unlock the Oracle<br/>Cost: ~f Oracle.unlockCost() ~ complexity points
         </button>
-        <br/>
-        <span>The Oracle is a quality-of-life feature that will let you see the future.</span>
+        <div>The Oracle is a quality-of-life feature that will let you see the future.</div>
+        <div ~style.display=SpecialTabs.isTabVisible('galaxies') ?  'none' : ''~>Unlocking the Oracle for the first time will also let you view the Galaxies tab.</div>
       </div>
       <div ~style.display=Oracle.isUnlocked() ? '' : 'none'~>
         <span>Ask the Oracle to look <input type="text" ~!value=Oracle.time()~ ~!onchange=function() {Oracle.setTime(+this.value)}~></input> seconds into the future.</span>
@@ -4278,11 +4285,6 @@
       <span>By default, only goals up to the next goal after the last completed goal are displayed. <button onclick="Goals.toggleDisplayAllGoals()">Display all goals: ~r Goals.displayAllGoals() ? "On" : "Off" ~</button></span>
       <br/>
       <span>There is no in-game reward for completing goals, but you win the game (and have finished it) when you complete them all.</span>
-      <div ~style.display=Goals.anySpecialTabGoals() ? '' : 'none'~>
-        <span>Some goals relate to tabs (such as ~r Goals.specialTabDisplay() ~) that may not be visible yet.</span>
-        <br/>
-        <span>Such tabs will always appear somewhat before anything on the tabs can actually be used.</span>
-      </div>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>

@@ -84,9 +84,19 @@ let SpecialTabs = {
     'oracle': Decimal.pow(Oracle.unlockCost(), Math.pow(2, 32)),
     'galaxies': Decimal.pow(Galaxy.unlockCost(), Math.pow(2, 32)),
   },
+  alternateRequirments: {
+    'infinity-challenges': () => Goals.hasGoal(4),
+    'eternity-producer': () => Goals.hasGoal(7),
+    'eternity-challenges': () => Goals.hasGoal(8),
+    'chroma': () => EternityChallenge.isTotalCompletionsRewardActive(2),
+    'powers': () => Goals.hasGoal(12),
+    'oracle': () => Powers.isUnlocked(),
+    'galaxies': () => Oracle.isUnlocked(),
+  },
   shouldMakeTabVisible(x) {
     let actualRequirement = this.starRequirements[x].pow(0.5);
-    return player.stats.totalStarsProduced.gte(actualRequirement) ||
+    return this.alternateRequirments[x]() ||
+    player.stats.totalStarsProduced.gte(actualRequirement) ||
     player.stats.totalIPProduced.gte(actualRequirement.pow(Math.pow(2, -8))) ||
     player.stats.totalEPProduced.gte(actualRequirement.pow(Math.pow(2, -16))) ||
     player.stats.totalCPProduced.gte(actualRequirement.pow(Math.pow(2, -32))) ||

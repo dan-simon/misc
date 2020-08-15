@@ -21,13 +21,6 @@ let Goals = {
     'complexity': 11,
     'finality': 15
   },
-  specialTabNameToGoalNumber: {
-    'Infinity Challenges': 5,
-    'Eternity Producer': 8,
-    'Eternity Challenges': 9,
-    'Powers': 13,
-    'Galaxies': 14
-  },
   checkForGoals() {
     for (let i = 1; i <= 16; i++) {
       if (this.goalConditions[i - 1] !== null && this.goalConditions[i - 1]()) this.giveGoal(i);
@@ -66,18 +59,6 @@ let Goals = {
   },
   areAllGoalsCompleted() {
     return this.numberOfGoalsCompleted() === 16;
-  },
-  specialTabList() {
-    return Object.keys(this.specialTabNameToGoalNumber).filter(
-      i => this.displayGoal(this.specialTabNameToGoalNumber[i])).sort(
-      (a, b) => this.specialTabNameToGoalNumber[a] - this.specialTabNameToGoalNumber[b]);
-  },
-  anySpecialTabGoals() {
-    return this.specialTabList().length > 0;
-  },
-  specialTabDisplay() {
-    // We don't have to give a complete list, and for the sake of space we don't.
-    return coordinate('*', '', this.specialTabList().slice(-3));
   },
   getGoalText(i) {
     if (this.displayGoal(i)) {
