@@ -1829,8 +1829,8 @@ function updateDisplay() {
     e[713].textContent = formatInt(ComplexityPoints.amount());
     e[714].textContent = pluralize(ComplexityPoints.amount(), '', 's');
     b[632].className = ComplexityMaxAll.anythingToBuy() ? "" : "disabled";
-    e[715].textContent = formatInt(ComplexityPoints.totalCPProduced());
-    e[716].textContent = pluralize(ComplexityPoints.totalCPProduced(), '', 's');
+    e[715].textContent = formatInt(ComplexityPoints.totalCPProducedThisFinality());
+    e[716].textContent = pluralize(ComplexityPoints.totalCPProducedThisFinality(), '', 's');
     e[717].textContent = formatInt(Complexities.amount());
     e[718].textContent = pluralize(Complexities.amount(), 'y', 'ies');
     e[719].textContent = formatMaybeInt(Complexities.complexityGeneratorMultiplier());
