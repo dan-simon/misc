@@ -96,7 +96,7 @@
     <span><button onclick="window.location.reload(true)">Reload window</button> <button class="export-button" onclick="Saving.exportGame()">Export</button> <button onclick="Saving.loadGamePrompt()">Load</button> <button onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></span>
   </div>
   <div id="main" style="display: none;">
-    <span>You have ~f Stars.amount() ~ stars.<span ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~> ~r ChallengeHeaderText.getText() ~</span></span>
+    <div style="height: 32px;">You have ~f Stars.amount() ~ stars.<span ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~> ~r ChallengeHeaderText.getText() ~</span></div>
     <div style="height: 56px;">
       <span ~style.display=InfinityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~f InfinityPrestigeLayer.starRequirementForInfinity() ~ stars to infinity.</span>
       <br ~style.display=InfinityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
@@ -121,7 +121,7 @@
       <span ~style.display=FinalityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i FinalityPrestigeLayer.finalityPoints() ~ finality point~s FinalityPrestigeLayer.finalityPoints() ~ (~i FinalityPrestigeLayer.totalFinalityPoints() ~ total)</span>
       <button ~style.display=FinalityPrestigeLayer.canFinality() ? '' : 'none'~ style="height: 48px;" onclick="FinalityPrestigeLayer.finality()">Finality: Gain ~i FinalityPrestigeLayer.finalityPointGain() ~ finality point~s FinalityPrestigeLayer.finalityPointGain() ~ (~r FinalityPrestigeLayer.finalityPointGainRatioText() ~~i FinalityPrestigeLayer.finalityPoints() ~ → ~i FinalityPrestigeLayer.newFinalityPoints() ~)<br/>and ~i FinalityPrestigeLayer.finalityShardGain() ~ finality shard~s FinalityPrestigeLayer.finalityShardGain() ~ (~r FinalityPrestigeLayer.finalityShardGainRatioText() ~~i FinalityPrestigeLayer.finalityShards() ~ → ~i FinalityPrestigeLayer.newFinalityShards() ~)</button>
     </div>
-    <div ~style.display=Goals.areAllGoalsCompleted() ? '' : 'none'~>You have won the game! Congratulations!</div>
+    <div style="height: 32px;" ~style.display=Goals.areAllGoalsCompleted() ? '' : 'none'~>You have won the game! Congratulations!</div>
     <br/>
     <br/>
     <span ~style.display=Tabs.displayTabRow(1) ? '' : 'none'~>
