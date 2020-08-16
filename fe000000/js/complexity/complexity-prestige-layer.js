@@ -98,7 +98,7 @@ let ComplexityPrestigeLayer = {
     EternityPrestigeLayer.eternityReset();
     // Not handled by Eternity.eternityReset().
     EternityChallenge.setEternityChallenge(0);
-    player.complexityStars = new Decimal(1);
+    player.complexityStars = new Decimal(2);
     ComplexityGenerators.list.forEach(x => x.resetAmount());
     player.isComplexityChallengeRunning = [true, true, true, true, true, true];
     player.boostPower = 1;

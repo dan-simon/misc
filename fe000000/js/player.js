@@ -154,7 +154,7 @@ let initialPlayer = {
   },
   complexityPoints: new Decimal(0),
   complexities: 0,
-  complexityStars: new Decimal(1),
+  complexityStars: new Decimal(2),
   complexityGenerators: initialComplexityGenerators(),
   highestComplexityGenerator: 0,
   complexityChallengeCompletions: [0, 0, 0, 0, 0, 0],
