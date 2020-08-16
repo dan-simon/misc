@@ -1635,8 +1635,8 @@ function updateDisplay() {
     e[591].textContent = formatMaybeInt(EternityChallenge.getTotalCompletionsRewardRawEffect(1));
     e[592].textContent = formatInt(EternityChallenge.getTotalCompletionsRewardThreshold(2));
     e[593].textContent = formatMaybeInt(EternityChallenge.getTotalCompletionsRewardRawEffect(2));
-    b[566].style.display = PrestigeLayerProgress.hasReached('complexity') ? 'none' : '';
     e[594].textContent = formatInt(EternityChallenge.getTotalCompletionsRewardThreshold(3));
+    b[566].style.display = PrestigeLayerProgress.hasReached('complexity') ? 'none' : '';
     e[595].textContent = formatInt(EternityChallenge.getTotalCompletionsRewardThreshold(4));
     e[596].textContent = EternityChallenge.eternityChallengeTotalCompletionsReward4Text();
     b[567].style.display = EternityChallenge.canRespec() ? '' : 'none';
