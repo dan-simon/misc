@@ -536,6 +536,10 @@ let Saving = {
       player.areNewlyUnlockedAutobuyersOn = true;
       player.version = 1.94921875;
     }
+    if (player.version < 1.9501953125) {
+      player.powers.initialSeed = player.powers.seed;
+      player.version = 1.9501953125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
@@ -659,10 +663,18 @@ let Saving = {
       document.getElementById('main').style.display = 'none';
     }
   },
+  reseedInitialPlayer() {
+    // This should only be called right after resetting the game,
+    // or otherwise using initialPlayer if it's later used elsewhere.
+    initialSeed = RNG.createSeed();
+    initialPlayer.powers.seed = initialSeed;
+    initialPlayer.powers.initialSeed = initialSeed;
+  },
   resetGame() {
     // The false here sets Date.now() to when the game was reset
     // rather than when the window was loaded.
     this.loadGame(btoa(JSON.stringify(initialPlayer)), false);
+    this.reseedInitialPlayer();
   },
   resetGameWithConfirmation() {
     if (confirm('Do you really want to reset the game? You will lose all your progress, and get no benefit.')) {

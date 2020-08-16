@@ -72,6 +72,8 @@ function initialLastTenFinalities() {
   ];
 }
 
+let initialSeed = RNG.createSeed();
+
 let initialPlayer = {
   stars: new Decimal(2),
   boost: {bought: 0},
@@ -173,7 +175,8 @@ let initialPlayer = {
     true, true, true, true,
   ],
   powers: {
-    seed: RNG.createSeed(),
+    seed: initialSeed,
+    initialSeed: initialSeed,
     unlocked: false,
     upgrades: [0, 0, 0],
     active: [],
@@ -330,7 +333,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.94921875
+  version: 1.9501953125
 }
 
 let player;

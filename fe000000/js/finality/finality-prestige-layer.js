@@ -122,7 +122,8 @@ let FinalityPrestigeLayer = {
     // We keep hasGainedShards for the same reason we keep hasGainedPermanence in complexity;
     // it's used only for display.
     player.powers = {
-      seed: player.powers.seed,
+      seed: player.powers.initialSeed,
+      initialSeed: player.powers.initialSeed,
       unlocked: false,
       upgrades: [0, 0, 0],
       active: [],
@@ -147,6 +148,9 @@ let FinalityPrestigeLayer = {
         stored: player.powers.autoSort.stored
       }
     };
+    // Jump to another seed, so each finality gets a new seed that doesn't depend
+    // on when finality happened to happen.
+    RNG.jump(Finalities.amount() * Math.pow(2, 20));
     // Note that player.oracle.timeSimulated doesn't matter here at all.
     // We let the player keep their settings since they probably want to.
     player.oracle = {
