@@ -128,7 +128,7 @@ let FinalityPrestigeLayer = {
       upgrades: [0, 0, 0],
       active: [],
       stored: [],
-      gain: true,
+      gain: player.powers.gain,
       respec: false,
       hasGainedShards: player.powers.hasGainedShards,
       shards: 0,
