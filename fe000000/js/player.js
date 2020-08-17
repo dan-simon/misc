@@ -152,7 +152,8 @@ let initialPlayer = {
     colors: [0, 0, 0, 0, 0, 0],
     unlocked: [false, false, false, false, false, false],
     current: 0,
-    next: 0
+    next: 0,
+    displayAmount: 0
   },
   complexityPoints: new Decimal(0),
   complexities: 0,
@@ -216,6 +217,7 @@ let initialPlayer = {
     used: false,
     alert: false,
     powerDisplay: true,
+    powerFutureExtraMultipliers: true,
     powers: []
   },
   galaxies: {
@@ -333,7 +335,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9501953125
+  version: 1.951171875
 }
 
 let player;

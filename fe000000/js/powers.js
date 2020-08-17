@@ -481,7 +481,11 @@ let Powers = {
     return PowerShardUpgrade(this.index(p.type)).effect();
   },
   extraMultiplier(p, active) {
-    return this.getExtraMultiplier(p.type, active);
+    if ('extraMultiplier' in p && Oracle.powerFutureExtraMultipliers()) {
+      return p.extraMultiplier;
+    } else {
+      return this.getExtraMultiplier(p.type, active);
+    }
   },
   getOverallMultiplier(p, active) {
     return (this.rarity(p) * this.strength(p) + this.powerShardBonus(p)) * this.extraMultiplier(p, active);
@@ -495,6 +499,14 @@ let Powers = {
   },
   getTotalEffectFrom(x, active) {
     return x.map(p => this.getEffect(p, active)).reduce((a, b) => a + b - 1, 1);
+  },
+  addExtraMultiplierToPower(p) {
+    return {
+      'type': p.type,
+      'strength': p.strength,
+      'rarity': p.rarity,
+      'extraMultiplier': this.extraMultiplier(p)
+    }
   },
   anythingToBuy() {
     return this.upgradeList.some(x => x.canBuy());
