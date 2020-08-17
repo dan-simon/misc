@@ -135,10 +135,7 @@ let FinalityPrestigeLayer = {
       shardUpgrades: [0, 0, 0, 0],
       powerDeletionMode: player.powers.powerDeletionMode,
       presets: player.powers.presets,
-      craft: {
-        type: 'normal',
-        rarity: 1,
-      },
+      craft: player.powers.craft,
       lastData: {
         lowRarity: false,
         type: 'normal'
