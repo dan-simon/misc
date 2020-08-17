@@ -2366,7 +2366,7 @@
         </button>
       </div>
       <div ~style.display=Chroma.isUnlocked() ? '' : 'none'~>
-        <span>You have spent ~f player.stats.timeSinceEternity ~ seconds in this eternity, giving you ~f Chroma.amount() ~ chroma (capped at ~f Chroma.cap() ~, based on eternity points).</span>
+        <span>You have spent ~f player.stats.timeSinceEternity ~ seconds in this eternity, giving you ~f Chroma.displayAmount() ~ chroma (capped at ~f Chroma.cap() ~, based on eternity points).</span>
         <br/>
         <span>Chroma gain will slow down over time, gradually approaching its cap but taking a very long time to reach it.</span>
         <br/>
@@ -3585,9 +3585,9 @@
         <div ~style.display=SpecialTabs.isTabVisible('galaxies') ?  'none' : ''~>Unlocking the Oracle for the first time will also let you view the Galaxies tab.</div>
       </div>
       <div ~style.display=Oracle.isUnlocked() ? '' : 'none'~>
-        <span>Ask the Oracle to look <input type="text" ~!value=Oracle.time()~ ~!onchange=function() {Oracle.setTime(+this.value)}~></input> seconds into the future.</span>
+        <span>Ask the Oracle to look <input type="text" ~!value=Oracle.time()~ ~!onchange=function() {Oracle.setTime(+this.value)}~></input> second~s Oracle.time() ~ into the future. <button onclick="Oracle.invoke()">Get prediction</button> <button onclick="Oracle.toggleAlert()">Alert on prediction: ~r Oracle.alert() ? "On" : "Off" ~</button></span>
         <br/>
-        <span><button onclick="Oracle.invoke()">Get prediction</button> <button onclick="Oracle.toggleAlert()">Alert on prediction: ~r Oracle.alert() ? "On" : "Off" ~</button> <button onclick="Oracle.togglePowerDisplay()">Show future powers on prediction: ~r Oracle.powerDisplay() ? "On" : "Off" ~</button></span>
+        <span><button onclick="Oracle.togglePowerDisplay()">Show future powers on prediction: ~r Oracle.powerDisplay() ? "On" : "Off" ~</button> <button onclick="Oracle.togglePowerFutureExtraMultipliers()">Show future power extra multipliers (as opposed to current): ~r Oracle.powerFutureExtraMultipliers() ? "On" : "Off" ~</button></span>
         <br/>
         <span>The Oracle can look between ~i 0 ~ and ~f Oracle.maxTime() ~ seconds into the future.</span>
         <br/>

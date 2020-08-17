@@ -29,6 +29,9 @@ let Oracle = {
   powerDisplay() {
     return player.oracle.powerDisplay;
   },
+  powerFutureExtraMultipliers() {
+    return player.oracle.powerFutureExtraMultipliers;
+  },
   powers() {
     return player.oracle.powers;
   },
@@ -37,6 +40,9 @@ let Oracle = {
   },
   togglePowerDisplay() {
     player.oracle.powerDisplay = !player.oracle.powerDisplay;
+  },
+  togglePowerFutureExtraMultipliers() {
+    player.oracle.powerFutureExtraMultipliers= !player.oracle.powerFutureExtraMultipliers;
   },
   setTime(x) {
     player.oracle.time = x || 0;
@@ -50,7 +56,7 @@ let Oracle = {
     complexityPointGain = ComplexityPrestigeLayer.canComplexity() ?
       ComplexityPrestigeLayer.complexityPointGain() : new Decimal(0);
     complexityChallengeCompletions = ComplexityChallenge.getAllComplexityChallengeCompletions();
-    powers = player.powers.stored;
+    powers = player.powers.stored.map(p => Powers.addExtraMultiplierToPower(p));
     Saving.loadGame(save, null, true);
     player.oracle.used = true;
     player.oracle.timeSimulated = time;

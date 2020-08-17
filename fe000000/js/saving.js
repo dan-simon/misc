@@ -540,6 +540,11 @@ let Saving = {
       player.powers.initialSeed = player.powers.seed;
       player.version = 1.9501953125;
     }
+    if (player.version < 1.951171875) {
+      player.chroma.displayAmount = 0;
+      player.oracle.powerFutureExtraMultipliers = true;
+      player.version = 1.951171875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

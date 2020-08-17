@@ -30,6 +30,9 @@ let Chroma = {
     let cap = this.cap();
     return cap * (1 - Math.exp(-t / cap));
   },
+  displayAmount() {
+    return player.chroma.displayAmount;
+  },
   cap() {
     let factors = [
       Math.max(EternityPoints.totalEPProducedThisComplexity().log2(), 1),
@@ -82,16 +85,18 @@ let Chroma = {
     return this.isColorUnlocked(1);
   },
   updateColors() {
+    let chromaAmount = this.amount();
+    player.chroma.displayAmount = chromaAmount;
     if (this.producingAll()) {
       for (let color = 1; color <= 6; color++) {
         if (this.isColorUnlocked(color)) {
-          this.setColorAmount(color, Math.max(this.colorAmount(color), this.amount()));
+          this.setColorAmount(color, Math.max(this.colorAmount(color), chromaAmount));
         }
       }
      } else {
       let color = player.chroma.current;
       if (color === 0) return;
-      this.setColorAmount(color, Math.max(this.colorAmount(color), this.amount()));
+      this.setColorAmount(color, Math.max(this.colorAmount(color), chromaAmount));
     }
   },
   setNextColor(x) {
