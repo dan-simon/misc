@@ -88,7 +88,7 @@ let PowerShards = {
   },
   shardGainStored(i) {
     if (Powers.canAccessStored(i)) {
-      return this.shardGain(Powers.stored()[i - 1]);
+      return this.shardGain(Powers.accessPower('stored', i));
     }
   },
   gainShards(p) {
@@ -101,7 +101,7 @@ let PowerShards = {
   },
   gainShardsStored(i) {
     if (Powers.canAccessStored(i)) {
-      this.gainShards(Powers.stored()[i - 1]);
+      this.gainShards(Powers.accessPower('stored', i));
     }
   },
   anythingToBuy() {
@@ -165,6 +165,6 @@ let PowerShards = {
     player.powers.shards -= this.craftedPowerCost();
     player.powers.stored.push(this.craftedPower());
     Powers.cleanStored();
-    Powers.maybeAutoSort();
+    Powers.autoSort();
   }
 }

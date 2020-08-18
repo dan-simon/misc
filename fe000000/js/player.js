@@ -196,10 +196,6 @@ let initialPlayer = {
     lastData: {
       lowRarity: false,
       type: 'normal'
-    },
-    autoSort: {
-      active: false,
-      stored: false
     }
   },
   powerListAutoLoad: {
@@ -218,7 +214,13 @@ let initialPlayer = {
     alert: false,
     powerDisplay: true,
     powerFutureExtraMultipliers: true,
-    powers: []
+    powers: [],
+    extraMultipliers: {
+      normal: 1,
+      infinity: 1,
+      eternity: 1,
+      complexity: 1
+    }
   },
   galaxies: {
     unlocked: false,
@@ -335,7 +337,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.951171875
+  version: 1.9521484375
 }
 
 let player;
