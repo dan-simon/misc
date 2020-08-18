@@ -2096,16 +2096,16 @@
       <br/>
       <span>
         <button ~style.display=EternityChallenge.canRespec() ? '' : 'none'~ onclick="EternityChallenge.toggleRespec()">Respec eternity challenge on next eternity: ~r EternityChallenge.isRespecOn() ? "On" : "Off" ~</button>
-        <button ~style.display=ComplexityAchievements.hasComplexityAchievement(3, 2) ? '' : 'none'~ onclick="EternityChallenge.toggleRequirementDisplay()">Show (now unneeded) eternity challenge requirements: ~r EternityChallenge.isRequirementDisplayOn() ? "On" : "Off" ~</button>
+        <button ~style.display=EternityChallenge.showRequirementDisplayToggle() ? '' : 'none'~ onclick="EternityChallenge.toggleRequirementDisplay()">Show (now unneeded) eternity challenge requirements: ~r EternityChallenge.isRequirementDisplayOn() ? "On" : "Off" ~</button>
       </span>
-      <div ~style.display=EternityChallenge.hasAutoECCompletion() ? '' : 'none'~>
+      <div ~style.display=EternityChallenge.showAutoECCompletion() ? '' : 'none'~>
         <span>You auto-complete an EC tier once every ~q EternityChallenge.autoECCompletionTime() ~ seconds, <span ~style.display=EternityChallenge.areAllEternityChallengesCompleted() ? 'none' : ''~>next in ~f EternityChallenge.timeUntilAutoECCompletion() ~ seconds</span><span ~style.display=EternityChallenge.areAllEternityChallengesCompleted() ? '' : 'none'~>and they're now fully complete</span><span ~style.display=EternityChallenge.usedAutoECCompletionThisComplexity() ? 'none' : ''~>  (no auto-completions this complexity)</span>.</span>
         <br/>
         <span ~style.display=!EternityChallenge.isAutoECCompletionOn() && EternityChallenge.imminentAutoECCompletionTiers() !== 0 ? '' : 'none'~>Turning auto-EC completion on would complete ~i EternityChallenge.imminentAutoECCompletionTiers() ~ eternity challenge tier~s EternityChallenge.imminentAutoECCompletionTiers() ~.</span>
         <br ~style.display=!EternityChallenge.isAutoECCompletionOn() && EternityChallenge.imminentAutoECCompletionTiers() !== 0 ? '' : 'none'~/>
         <button onclick="EternityChallenge.toggleAutoECCompletion()">Auto-EC completion: ~r EternityChallenge.isAutoECCompletionOn() ? "On" : "Off" ~</button>
       </div>
-      <br ~style.display=EternityChallenge.hasAutoECCompletion() ? 'none' : ''~/>
+      <br ~style.display=EternityChallenge.showAutoECCompletion() ? 'none' : ''~/>
       <span>
         At ~i EternityChallenge.getTotalCompletionsRewardThreshold(1) ~ total eternity challenge tiers completed:
       </span>

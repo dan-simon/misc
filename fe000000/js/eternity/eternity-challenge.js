@@ -327,6 +327,11 @@ let EternityChallenge = {
       return 'Autobuyers for eternity upgrades, eternity generators, and Eternity Producer upgrades, and chroma buildup speed ' + formatInt(this.getTotalCompletionsRewardRawEffect(4)) + 'x.';
     }
   },
+  hasAllECsForever() {
+    // Technically if you respec you lose ECs, so this should only be used for certain things,
+    // like display of options that don't make much sense with all ECs.
+    return FinalityStartingBenefits.complexityAchievements() >= 14;
+  },
   // Technically this is a bit redundant.
   isRequirementDisplayOn() {
     return player.isEternityChallengeRequirementDisplayOn || !ComplexityAchievements.hasComplexityAchievement(3, 2);
@@ -336,8 +341,15 @@ let EternityChallenge = {
       player.isEternityChallengeRequirementDisplayOn = !player.isEternityChallengeRequirementDisplayOn;
     }
   },
+  showRequirementDisplayToggle() {
+    // This option still does something, so we leave it even after all ECs.
+    return ComplexityAchievements.hasComplexityAchievement(3, 2);
+  },
   hasAutoECCompletion() {
     return Complexities.amount() > 0 || Finalities.amount() > 0;
+  },
+  showAutoECCompletion() {
+    return this.hasAutoECCompletion() && !this.hasAllECsForever();
   },
   isAutoECCompletionOn() {
     return player.autoECCompletion;

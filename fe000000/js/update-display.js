@@ -1617,9 +1617,9 @@ function updateDisplay() {
     e[582].textContent = formatInt(1);
     b[557].style.display = EternityChallenge.canRespec() ? '' : 'none';
     e[583].textContent = EternityChallenge.isRespecOn() ? "On" : "Off";
-    b[558].style.display = ComplexityAchievements.hasComplexityAchievement(3, 2) ? '' : 'none';
+    b[558].style.display = EternityChallenge.showRequirementDisplayToggle() ? '' : 'none';
     e[584].textContent = EternityChallenge.isRequirementDisplayOn() ? "On" : "Off";
-    b[559].style.display = EternityChallenge.hasAutoECCompletion() ? '' : 'none';
+    b[559].style.display = EternityChallenge.showAutoECCompletion() ? '' : 'none';
     e[585].textContent = formatMaybeInt(EternityChallenge.autoECCompletionTime());
     b[560].style.display = EternityChallenge.areAllEternityChallengesCompleted() ? 'none' : '';
     e[586].textContent = format(EternityChallenge.timeUntilAutoECCompletion());
@@ -1630,7 +1630,7 @@ function updateDisplay() {
     e[588].textContent = pluralize(EternityChallenge.imminentAutoECCompletionTiers(), '', 's');
     b[564].style.display = !EternityChallenge.isAutoECCompletionOn() && EternityChallenge.imminentAutoECCompletionTiers() !== 0 ? '' : 'none';
     e[589].textContent = EternityChallenge.isAutoECCompletionOn() ? "On" : "Off";
-    b[565].style.display = EternityChallenge.hasAutoECCompletion() ? 'none' : '';
+    b[565].style.display = EternityChallenge.showAutoECCompletion() ? 'none' : '';
     e[590].textContent = formatInt(EternityChallenge.getTotalCompletionsRewardThreshold(1));
     e[591].textContent = formatMaybeInt(EternityChallenge.getTotalCompletionsRewardRawEffect(1));
     e[592].textContent = formatInt(EternityChallenge.getTotalCompletionsRewardThreshold(2));
