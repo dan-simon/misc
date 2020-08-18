@@ -3087,31 +3087,34 @@
         </div>
         <br/>
         <span>Active powers:</span>
-        <br ~style.display=Powers.hasAnyPowers('active') ? 'none' : ''~/>
-        <span ~style.display=Powers.hasAnyPowers('active') ? 'none' : ''~>You don't currently have any active powers.</span>
-        <br ~style.display=Powers.hasAnyPowers('active') ? 'none' : ''~/>
-        <table ~style.display=Powers.hasAnyPowers('active') ? '' : 'none'~ style="margin-left: auto; margin-right: auto; border-collapse: collapse;">
+        <table style="margin-left: auto; margin-right: auto; border-collapse: collapse;">
           <tr>
-            <td class="smallpowertd" ~style.display=Powers.canAccessPower('active', 1) ? '' : 'none'~>
-              <span ~class=Powers.color('active', 1)~>~r Powers.descriptionFullEffect('active', 1) ~</span>
-              <br/>
-              <span ~class=Powers.color('active', 1)~>~r Powers.descriptionStrengthRarity('active', 1) ~</span>
-              <br/>
-              <span ~class=Powers.color('active', 1)~>~r Powers.descriptionMultiplier('active', 1) ~</span>
+            <td class="smallpowertd">
+              <div ~style.display=Powers.canAccessPower('active', 1) ? '' : 'none'~>
+                <span ~class=Powers.color('active', 1)~>~r Powers.descriptionFullEffect('active', 1) ~</span>
+                <br/>
+                <span ~class=Powers.color('active', 1)~>~r Powers.descriptionStrengthRarity('active', 1) ~</span>
+                <br/>
+                <span ~class=Powers.color('active', 1)~>~r Powers.descriptionMultiplier('active', 1) ~</span>
+              </div>
             </td>
-            <td class="smallpowertd" ~style.display=Powers.canAccessPower('active', 2) ? '' : 'none'~>
-              <span ~class=Powers.color('active', 2)~>~r Powers.descriptionFullEffect('active', 2) ~</span>
-              <br/>
-              <span ~class=Powers.color('active', 2)~>~r Powers.descriptionStrengthRarity('active', 2) ~</span>
-              <br/>
-              <span ~class=Powers.color('active', 2)~>~r Powers.descriptionMultiplier('active', 2) ~</span>
+            <td class="smallpowertd">
+              <div ~style.display=Powers.canAccessPower('active', 2) ? '' : 'none'~>
+                <span ~class=Powers.color('active', 2)~>~r Powers.descriptionFullEffect('active', 2) ~</span>
+                <br/>
+                <span ~class=Powers.color('active', 2)~>~r Powers.descriptionStrengthRarity('active', 2) ~</span>
+                <br/>
+                <span ~class=Powers.color('active', 2)~>~r Powers.descriptionMultiplier('active', 2) ~</span>
+              </div>
             </td>
-            <td class="smallpowertd" ~style.display=Powers.canAccessPower('active', 3) ? '' : 'none'~>
-              <span ~class=Powers.color('active', 3)~>~r Powers.descriptionFullEffect('active', 3) ~</span>
-              <br/>
-              <span ~class=Powers.color('active', 3)~>~r Powers.descriptionStrengthRarity('active', 3) ~</span>
-              <br/>
-              <span ~class=Powers.color('active', 3)~>~r Powers.descriptionMultiplier('active', 3) ~</span>
+            <td class="smallpowertd">
+              <div ~style.display=Powers.canAccessPower('active', 3) ? '' : 'none'~>
+                <span ~class=Powers.color('active', 3)~>~r Powers.descriptionFullEffect('active', 3) ~</span>
+                <br/>
+                <span ~class=Powers.color('active', 3)~>~r Powers.descriptionStrengthRarity('active', 3) ~</span>
+                <br/>
+                <span ~class=Powers.color('active', 3)~>~r Powers.descriptionMultiplier('active', 3) ~</span>
+              </div>
             </td>
           </tr>
         </table>
@@ -3127,10 +3130,7 @@
         <br/>
         <br/>
         <span>Stored powers:</span>
-        <br ~style.display=Powers.hasAnyPowers('stored') ? 'none' : ''~/>
-        <span ~style.display=Powers.hasAnyPowers('stored') ? 'none' : ''~>You don't currently have any stored powers.</span>
-        <br ~style.display=Powers.hasAnyPowers('stored') ? 'none' : ''~/>
-        <table ~style.display=Powers.hasAnyPowers('stored') ? '' : 'none'~ style="margin-left: auto; margin-right: auto; border-collapse: collapse;">
+        <table style="margin-left: auto; margin-right: auto; border-collapse: collapse;">
           <tr>
             <td class="largepowertd">
               <span class="yellowspan">Normal</span>
@@ -3651,10 +3651,7 @@
         <br/>
         <div ~style.display=(Oracle.isUsed() && Oracle.powerDisplay()) ? '' : 'none'~>
           <span>Stored powers from the future:</span>
-          <br ~style.display=Powers.hasAnyPowers('oracle') ? 'none' : ''~/>
-          <span ~style.display=Powers.hasAnyPowers('oracle') ? 'none' : ''~>You don't currently have any stored powers.</span>
-          <br ~style.display=Powers.hasAnyPowers('oracle') ? 'none' : ''~/>
-          <table ~style.display=Powers.hasAnyPowers('oracle') ? '' : 'none'~ style="margin-left: auto; margin-right: auto; border-collapse: collapse;">
+          <table style="margin-left: auto; margin-right: auto; border-collapse: collapse;">
             <tr>
               <td class="largepowertd">
                 <span class="yellowspan">Normal</span>
