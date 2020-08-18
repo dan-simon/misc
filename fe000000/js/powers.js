@@ -117,7 +117,7 @@ let Powers = {
     'normal': () => 1,
     'infinity': () => Math.log2(1 + InfinityStars.amount().max(1).log2() / Math.pow(2, 16)) / 16,
     'eternity': () => Math.min(3, Math.pow(Math.log2(1 + (player.stats.timeSinceComplexity + FinalityMilestones.freeTimeInComplexity()) * (1 + ComplexityStars.amount().max(1).log2() / 1024) / 64) / 4, 1.25)),
-    'complexity': () => Math.sqrt(Powers.active().map(p => Powers.strength(p) * Powers.rarity(p)).reduce((a, b) => a + b, 0))
+    'complexity': (active) => Math.sqrt((active || Powers.active()).map(p => Powers.strength(p) * Powers.rarity(p)).reduce((a, b) => a + b, 0))
   },
   baseEffects: {
     'normal': 1 / 512,
@@ -487,11 +487,11 @@ let Powers = {
   index(x) {
     return this.indexData[x];
   },
-  getExtraMultiplier(x, future) {
+  getExtraMultiplier(x, future, active) {
     if (future && Oracle.powerFutureExtraMultipliers()) {
       return Oracle.extraMultipliers()[x];
     } else {
-      return this.extraMultipliers[x]();
+      return this.extraMultipliers[x](active);
     }
   },
   getAllExtraMultipliers() {
@@ -513,17 +513,20 @@ let Powers = {
   preExtraMultiplier(p) {
     return this.rarity(p) * this.strength(p) + this.powerShardBonus(p);
   },
-  extraMultiplier(p) {
-    return this.getExtraMultiplier(p.type, p.future);
+  extraMultiplier(p, active) {
+    return this.getExtraMultiplier(p.type, p.future, active);
   },
-  getOverallMultiplier(p) {
-    return this.preExtraMultiplier(p) * this.extraMultiplier(p);
+  getOverallMultiplier(p, active) {
+    return this.preExtraMultiplier(p) * this.extraMultiplier(p, active);
   },
-  getEffect(p) {
-    return 1 + this.baseEffects[p.type] * this.getOverallMultiplier(p);
+  getEffect(p, active) {
+    return 1 + this.baseEffects[p.type] * this.getOverallMultiplier(p, active);
   },
-  getTotalEffect(x) {
-    return this.getTotalEffectFrom(Powers.active().filter(p => p.type === x));
+  getTotalEffect(x, active) {
+    if (active === undefined) {
+      active = Powers.active();
+    }
+    return this.getTotalEffectFrom(active.filter(p => p.type === x), active);
   },
   getTotalEffectFrom(x, active) {
     return x.map(p => this.getEffect(p, active)).reduce((a, b) => a + b - 1, 1);
