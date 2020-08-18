@@ -335,7 +335,7 @@ let Powers = {
     } else if (type === 'stored') {
       return this.canAccessStored(i);
     } else if (type === 'oracle') {
-      return this.isUnlocked() && Oracle.powers().length >= i;
+      return Oracle.isUnlocked() && Oracle.powers().length >= i;
     } else if (type === 'next' || type === 'crafted') {
       return this.isUnlocked();
     }
