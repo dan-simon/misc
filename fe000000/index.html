@@ -3013,7 +3013,7 @@
       <div id="b736">
         <span>You have <span id="e867"></span>/<span id="e868"></span> active power<span id="e869"></span>.</span>
         <br/>
-        <span>Active powers raise various dimension multipliers to powers. Stored powers do not, but can be activated.</span>
+        <span>Active powers raise various generator multipliers to powers. Stored powers do not, but can be activated.</span>
         <br id="b737"/>
         <span id="b738">Due to unlocking powers, you gain your eternity points on eternity every second, without needing to eternity.</span>
         <br/>
@@ -3031,1187 +3031,1315 @@
           <span>Next power<span id="b742"> (will be automatically deleted due to being bad enough to be useless)</span>:</span>
           <br/>
           <span id="b743"><span id="e876"></span></span>
-          <br/>
-          <span id="b744"><span id="e877"></span></span>
         </div>
         <br/>
         <span>The powers activated by importing powers will be the strongest stored powers of the same types as those exported.</span>
         <br/>
         <button class="powers-export-button" onclick="Powers.export()">Export active powers</button> <button onclick="Powers.import()">Import active powers</button>
-        <button onclick="Powers.toggleRespec()">Deactivate active powers on next complexity: <span id="e878"></span></button>
+        <button onclick="Powers.toggleRespec()">Deactivate active powers on next complexity: <span id="e877"></span></button>
         <br/>
-        <button onclick="Powers.respecAndReset()">Deactivate active powers and <span id="e879"></span></button></button>
+        <button onclick="Powers.respecAndReset()">Deactivate active powers and <span id="e878"></span></button></button>
         <br/>
         <br/>
         <div style="width: 1024px; margin-left: auto; margin-right: auto;">
           <span>Click on the name of a power preset on the line below to activate those powers:</span>
           <br/>
-          <button id="b745" onclick="Powers.presetLoad(1)"><span id="e880"></span></button>
-          <button id="b746" onclick="Powers.presetLoad(2)"><span id="e881"></span></button>
-          <button id="b747" onclick="Powers.presetLoad(3)"><span id="e882"></span></button>
-          <button id="b748" onclick="Powers.presetLoad(4)"><span id="e883"></span></button>
-          <button id="b749" onclick="Powers.presetLoad(5)"><span id="e884"></span></button>
-          <button id="b750" onclick="Powers.presetLoad(6)"><span id="e885"></span></button>
-          <button id="b751" onclick="Powers.presetLoad(7)"><span id="e886"></span></button>
-          <button id="b752" onclick="Powers.presetLoad(8)"><span id="e887"></span></button>
-          <button id="b753" onclick="Powers.presetLoad(9)"><span id="e888"></span></button>
-          <button id="b754" onclick="Powers.presetLoad(10)"><span id="e889"></span></button>
-          <button id="b755" onclick="Powers.presetLoad(11)"><span id="e890"></span></button>
-          <button id="b756" onclick="Powers.presetLoad(12)"><span id="e891"></span></button>
-          <button id="b757" onclick="Powers.presetLoad(13)"><span id="e892"></span></button>
-          <button id="b758" onclick="Powers.presetLoad(14)"><span id="e893"></span></button>
-          <button id="b759" onclick="Powers.presetLoad(15)"><span id="e894"></span></button>
-          <button id="b760" onclick="Powers.presetLoad(16)"><span id="e895"></span></button>
-          <button id="b761" onclick="Powers.presetLoad(17)"><span id="e896"></span></button>
-          <button id="b762" onclick="Powers.presetLoad(18)"><span id="e897"></span></button>
-          <button id="b763" onclick="Powers.presetLoad(19)"><span id="e898"></span></button>
-          <button id="b764" onclick="Powers.presetLoad(20)"><span id="e899"></span></button>
-          <button id="b765" onclick="Powers.presetLoad(21)"><span id="e900"></span></button>
-          <button id="b766" onclick="Powers.presetLoad(22)"><span id="e901"></span></button>
-          <button id="b767" onclick="Powers.presetLoad(23)"><span id="e902"></span></button>
-          <button id="b768" onclick="Powers.presetLoad(24)"><span id="e903"></span></button>
-          <button id="b769" onclick="Powers.presetLoad(25)"><span id="e904"></span></button>
-          <button id="b770" onclick="Powers.presetLoad(26)"><span id="e905"></span></button>
-          <button id="b771" onclick="Powers.presetLoad(27)"><span id="e906"></span></button>
-          <button id="b772" onclick="Powers.presetLoad(28)"><span id="e907"></span></button>
-          <button id="b773" onclick="Powers.presetLoad(29)"><span id="e908"></span></button>
-          <button id="b774" onclick="Powers.presetLoad(30)"><span id="e909"></span></button>
-          <button id="b775" onclick="Powers.presetLoad(31)"><span id="e910"></span></button>
-          <button id="b776" onclick="Powers.presetLoad(32)"><span id="e911"></span></button>
-          <div id="b777">
+          <button id="b744" onclick="Powers.presetLoad(1)"><span id="e879"></span></button>
+          <button id="b745" onclick="Powers.presetLoad(2)"><span id="e880"></span></button>
+          <button id="b746" onclick="Powers.presetLoad(3)"><span id="e881"></span></button>
+          <button id="b747" onclick="Powers.presetLoad(4)"><span id="e882"></span></button>
+          <button id="b748" onclick="Powers.presetLoad(5)"><span id="e883"></span></button>
+          <button id="b749" onclick="Powers.presetLoad(6)"><span id="e884"></span></button>
+          <button id="b750" onclick="Powers.presetLoad(7)"><span id="e885"></span></button>
+          <button id="b751" onclick="Powers.presetLoad(8)"><span id="e886"></span></button>
+          <button id="b752" onclick="Powers.presetLoad(9)"><span id="e887"></span></button>
+          <button id="b753" onclick="Powers.presetLoad(10)"><span id="e888"></span></button>
+          <button id="b754" onclick="Powers.presetLoad(11)"><span id="e889"></span></button>
+          <button id="b755" onclick="Powers.presetLoad(12)"><span id="e890"></span></button>
+          <button id="b756" onclick="Powers.presetLoad(13)"><span id="e891"></span></button>
+          <button id="b757" onclick="Powers.presetLoad(14)"><span id="e892"></span></button>
+          <button id="b758" onclick="Powers.presetLoad(15)"><span id="e893"></span></button>
+          <button id="b759" onclick="Powers.presetLoad(16)"><span id="e894"></span></button>
+          <button id="b760" onclick="Powers.presetLoad(17)"><span id="e895"></span></button>
+          <button id="b761" onclick="Powers.presetLoad(18)"><span id="e896"></span></button>
+          <button id="b762" onclick="Powers.presetLoad(19)"><span id="e897"></span></button>
+          <button id="b763" onclick="Powers.presetLoad(20)"><span id="e898"></span></button>
+          <button id="b764" onclick="Powers.presetLoad(21)"><span id="e899"></span></button>
+          <button id="b765" onclick="Powers.presetLoad(22)"><span id="e900"></span></button>
+          <button id="b766" onclick="Powers.presetLoad(23)"><span id="e901"></span></button>
+          <button id="b767" onclick="Powers.presetLoad(24)"><span id="e902"></span></button>
+          <button id="b768" onclick="Powers.presetLoad(25)"><span id="e903"></span></button>
+          <button id="b769" onclick="Powers.presetLoad(26)"><span id="e904"></span></button>
+          <button id="b770" onclick="Powers.presetLoad(27)"><span id="e905"></span></button>
+          <button id="b771" onclick="Powers.presetLoad(28)"><span id="e906"></span></button>
+          <button id="b772" onclick="Powers.presetLoad(29)"><span id="e907"></span></button>
+          <button id="b773" onclick="Powers.presetLoad(30)"><span id="e908"></span></button>
+          <button id="b774" onclick="Powers.presetLoad(31)"><span id="e909"></span></button>
+          <button id="b775" onclick="Powers.presetLoad(32)"><span id="e910"></span></button>
+          <div id="b776">
             You don't currently have any power presets. You can create presets at the bottom of this tab.
           </div>
         </div>
-        <div id="b778">
-          Active powers to constantly load: <input id="b779" style="width: 256px;" type="text"></input> <button onclick="Powers.toggleAutoLoad()">Auto-load: <span id="e912"></span></button>
+        <div id="b777">
+          Active powers to constantly load: <input id="b778" style="width: 256px;" type="text"></input> <button onclick="Powers.toggleAutoLoad()">Auto-load: <span id="e911"></span></button>
         </div>
         <br/>
-        <span>Active powers (<button onclick="Powers.sortActive()">Sort</button>, <button onclick="Powers.toggleAutoSortActive()">Auto-sort: <span id="e913"></span></button>):</span>
-        <div style="margin-left: auto; margin-right: auto;">
-          <span id="b780">You don't currently have any active powers.</span>
-          <div id="b781">
-            <span id="b782"><span id="e914"></span></span>
-            <br/>
-            <span id="b783"><span id="e915"></span></span>
-          </div>
-          <div id="b784">
-            <span id="b785"><span id="e916"></span></span>
-            <br/>
-            <span id="b786"><span id="e917"></span></span>
-          </div>
-          <div id="b787">
-            <span id="b788"><span id="e918"></span></span>
-            <br/>
-            <span id="b789"><span id="e919"></span></span>
-          </div>
-        </div>
-        <br/>
+        <span>Active powers:</span>
+        <br id="b779"/>
+        <span id="b780">You don't currently have any active powers.</span>
+        <br id="b781"/>
+        <table id="b782" style="margin-left: auto; margin-right: auto; border-collapse: collapse;">
+          <tr>
+            <td id="b783" class="smallpowertd">
+              <span id="b784"><span id="e912"></span></span>
+              <br/>
+              <span id="b785"><span id="e913"></span></span>
+              <br/>
+              <span id="b786"><span id="e914"></span></span>
+            </td>
+            <td id="b787" class="smallpowertd">
+              <span id="b788"><span id="e915"></span></span>
+              <br/>
+              <span id="b789"><span id="e916"></span></span>
+              <br/>
+              <span id="b790"><span id="e917"></span></span>
+            </td>
+            <td id="b791" class="smallpowertd">
+              <span id="b792"><span id="e918"></span></span>
+              <br/>
+              <span id="b793"><span id="e919"></span></span>
+              <br/>
+              <span id="b794"><span id="e920"></span></span>
+            </td>
+          </tr>
+        </table>
         <span>Current effects of active powers:</span>
         <br/>
-        <span style="margin-left: 19px;" class="yellowspan"><span id="e920"></span></span>
+        <span style="margin-left: 19px;" class="yellowspan"><span id="e921"></span></span>
         <br/>
-        <span class="magentaspan"><span id="e921"></span></span>
+        <span class="magentaspan"><span id="e922"></span></span>
         <br/>
-        <span class="cyanspan"><span id="e922"></span></span>
+        <span class="cyanspan"><span id="e923"></span></span>
         <br/>
-        <span style="margin-left: -19px;" class="brownspan"><span id="e923"></span></span>
-        <br/>
-        <br/>
-        <span>Stored powers (<button onclick="Powers.sortStored()">Sort</button>, <button onclick="Powers.toggleAutoSortStored()">Auto-sort: <span id="e924"></span></button>):</span>
-        <div style="margin-left: auto; margin-right: auto;">
-          <span id="b790">You don't currently have any stored powers.</span>
-          <div id="b791">
-            <span id="b792"><span id="e925"></span></span>
-            <br/>
-            <span id="b793"><span id="e926"></span></span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button id="b794" style="float: left;" onclick="Powers.activate(1)">Activate</button> <button id="b795" style="float: right;" onclick="Powers.delete(1)">Delete (+<span id="e927"></span> power shards)</button></span>
-          </div>
-          <br id="b796"/>
-          <div id="b797">
-            <span id="b798"><span id="e928"></span></span>
-            <br/>
-            <span id="b799"><span id="e929"></span></span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button id="b800" style="float: left;" onclick="Powers.activate(2)">Activate</button> <button id="b801" style="float: right;" onclick="Powers.delete(2)">Delete (+<span id="e930"></span> power shards)</button></span>
-          </div>
-          <br id="b802"/>
-          <div id="b803">
-            <span id="b804"><span id="e931"></span></span>
-            <br/>
-            <span id="b805"><span id="e932"></span></span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button id="b806" style="float: left;" onclick="Powers.activate(3)">Activate</button> <button id="b807" style="float: right;" onclick="Powers.delete(3)">Delete (+<span id="e933"></span> power shards)</button></span>
-          </div>
-          <br id="b808"/>
-          <div id="b809">
-            <span id="b810"><span id="e934"></span></span>
-            <br/>
-            <span id="b811"><span id="e935"></span></span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button id="b812" style="float: left;" onclick="Powers.activate(4)">Activate</button> <button id="b813" style="float: right;" onclick="Powers.delete(4)">Delete (+<span id="e936"></span> power shards)</button></span>
-          </div>
-          <br id="b814"/>
-          <div id="b815">
-            <span id="b816"><span id="e937"></span></span>
-            <br/>
-            <span id="b817"><span id="e938"></span></span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button id="b818" style="float: left;" onclick="Powers.activate(5)">Activate</button> <button id="b819" style="float: right;" onclick="Powers.delete(5)">Delete (+<span id="e939"></span> power shards)</button></span>
-          </div>
-          <br id="b820"/>
-          <div id="b821">
-            <span id="b822"><span id="e940"></span></span>
-            <br/>
-            <span id="b823"><span id="e941"></span></span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button id="b824" style="float: left;" onclick="Powers.activate(6)">Activate</button> <button id="b825" style="float: right;" onclick="Powers.delete(6)">Delete (+<span id="e942"></span> power shards)</button></span>
-          </div>
-          <br id="b826"/>
-          <div id="b827">
-            <span id="b828"><span id="e943"></span></span>
-            <br/>
-            <span id="b829"><span id="e944"></span></span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button id="b830" style="float: left;" onclick="Powers.activate(7)">Activate</button> <button id="b831" style="float: right;" onclick="Powers.delete(7)">Delete (+<span id="e945"></span> power shards)</button></span>
-          </div>
-          <br id="b832"/>
-          <div id="b833">
-            <span id="b834"><span id="e946"></span></span>
-            <br/>
-            <span id="b835"><span id="e947"></span></span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button id="b836" style="float: left;" onclick="Powers.activate(8)">Activate</button> <button id="b837" style="float: right;" onclick="Powers.delete(8)">Delete (+<span id="e948"></span> power shards)</button></span>
-          </div>
-          <br id="b838"/>
-          <div id="b839">
-            <span id="b840"><span id="e949"></span></span>
-            <br/>
-            <span id="b841"><span id="e950"></span></span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button id="b842" style="float: left;" onclick="Powers.activate(9)">Activate</button> <button id="b843" style="float: right;" onclick="Powers.delete(9)">Delete (+<span id="e951"></span> power shards)</button></span>
-          </div>
-          <br id="b844"/>
-          <div id="b845">
-            <span id="b846"><span id="e952"></span></span>
-            <br/>
-            <span id="b847"><span id="e953"></span></span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button id="b848" style="float: left;" onclick="Powers.activate(10)">Activate</button> <button id="b849" style="float: right;" onclick="Powers.delete(10)">Delete (+<span id="e954"></span> power shards)</button></span>
-          </div>
-          <br id="b850"/>
-          <div id="b851">
-            <span id="b852"><span id="e955"></span></span>
-            <br/>
-            <span id="b853"><span id="e956"></span></span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button id="b854" style="float: left;" onclick="Powers.activate(11)">Activate</button> <button id="b855" style="float: right;" onclick="Powers.delete(11)">Delete (+<span id="e957"></span> power shards)</button></span>
-          </div>
-          <br id="b856"/>
-          <div id="b857">
-            <span id="b858"><span id="e958"></span></span>
-            <br/>
-            <span id="b859"><span id="e959"></span></span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button id="b860" style="float: left;" onclick="Powers.activate(12)">Activate</button> <button id="b861" style="float: right;" onclick="Powers.delete(12)">Delete (+<span id="e960"></span> power shards)</button></span>
-          </div>
-          <br id="b862"/>
-          <div id="b863">
-            <span id="b864"><span id="e961"></span></span>
-            <br/>
-            <span id="b865"><span id="e962"></span></span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button id="b866" style="float: left;" onclick="Powers.activate(13)">Activate</button> <button id="b867" style="float: right;" onclick="Powers.delete(13)">Delete (+<span id="e963"></span> power shards)</button></span>
-          </div>
-          <br id="b868"/>
-          <div id="b869">
-            <span id="b870"><span id="e964"></span></span>
-            <br/>
-            <span id="b871"><span id="e965"></span></span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button id="b872" style="float: left;" onclick="Powers.activate(14)">Activate</button> <button id="b873" style="float: right;" onclick="Powers.delete(14)">Delete (+<span id="e966"></span> power shards)</button></span>
-          </div>
-          <br id="b874"/>
-          <div id="b875">
-            <span id="b876"><span id="e967"></span></span>
-            <br/>
-            <span id="b877"><span id="e968"></span></span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button id="b878" style="float: left;" onclick="Powers.activate(15)">Activate</button> <button id="b879" style="float: right;" onclick="Powers.delete(15)">Delete (+<span id="e969"></span> power shards)</button></span>
-          </div>
-          <br id="b880"/>
-          <div id="b881">
-            <span id="b882"><span id="e970"></span></span>
-            <br/>
-            <span id="b883"><span id="e971"></span></span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button id="b884" style="float: left;" onclick="Powers.activate(16)">Activate</button> <button id="b885" style="float: right;" onclick="Powers.delete(16)">Delete (+<span id="e972"></span> power shards)</button></span>
-          </div>
-        </div>
-        <br/>
-        <span>At most <span id="e973"></span> power<span id="e974"></span> can be active at once.</span>
-        <br/>
-        <span>Thus, all but the best <span id="e975"></span> power<span id="e976"></span> of each type are useless and are thus automatically deleted for power shards.</span>
-        <br/>
-        <button onclick="Powers.changePowerDeletionMode()">Manual power deletion mode: <span id="e977"></span></button>
+        <span style="margin-left: -19px;" class="brownspan"><span id="e924"></span></span>
         <br/>
         <br/>
-        <span>You have <span id="e978"></span> complexity point<span id="e979"></span>. <button id="b886" onclick="Powers.maxAll()">Max power upgrades</button></span>
+        <span>Stored powers:</span>
+        <br id="b795"/>
+        <span id="b796">You don't currently have any stored powers.</span>
+        <br id="b797"/>
+        <table id="b798" style="margin-left: auto; margin-right: auto; border-collapse: collapse;">
+          <tr>
+            <td class="largepowertd">
+              <span class="yellowspan">Normal</span>
+              <br/>
+              <span class="yellowspan">No extra multiplier</span>
+              <br/>
+              <br/>
+              <br/>
+            </td>
+            <td class="largepowertd">
+              <span class="magentaspan">Infinity</span>
+              <br/>
+              <span class="magentaspan">Extra multiplier from infinity stars</span>
+              <br/>
+              <br/>
+              <span class="magentaspan"><span id="e925"></span>x</span>
+            </td>
+            <td class="largepowertd">
+              <span class="cyanspan">Eternity</span>
+              <br/>
+              <span class="cyanspan">Extra multiplier from complexity stars and time in complexity</span>
+              <br/>
+              <span class="cyanspan"><span id="e926"></span>x<span id="b799"> (capped)</span></span>
+            </td>
+            <td class="largepowertd">
+              <span class="brownspan">Complexity</span>
+              <br/>
+              <span class="brownspan">Extra multiplier from total strength and rarity of active powers</span>
+              <br/>
+              <span class="brownspan"><span id="e927"></span>x</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="largepowertd">
+              <div id="b800">
+                <span id="b801"><span id="e928"></span> <button id="b802" onclick="Powers.activate(1)">Activate</button></span>
+                <br/>
+                <span id="b803"><span id="e929"></span></span>
+                <br/>
+                <span id="b804"><span id="e930"></span></span>
+                <br/>
+                <button id="b805" onclick="Powers.delete(1)">Delete (+<span id="e931"></span> power shards)</button>
+              </div>
+            </td>
+            <td class="largepowertd">
+              <div id="b806">
+                <span id="b807"><span id="e932"></span> <button id="b808" onclick="Powers.activate(2)">Activate</button></span>
+                <br/>
+                <span id="b809"><span id="e933"></span></span>
+                <br/>
+                <span id="b810"><span id="e934"></span></span>
+                <br/>
+                <button id="b811" onclick="Powers.delete(2)">Delete (+<span id="e935"></span> power shards)</button>
+              </div>
+            </td>
+            <td class="largepowertd">
+              <div id="b812">
+                <span id="b813"><span id="e936"></span> <button id="b814" onclick="Powers.activate(3)">Activate</button></span>
+                <br/>
+                <span id="b815"><span id="e937"></span></span>
+                <br/>
+                <span id="b816"><span id="e938"></span></span>
+                <br/>
+                <button id="b817" onclick="Powers.delete(3)">Delete (+<span id="e939"></span> power shards)</button>
+              </div>
+            </td>
+            <td class="largepowertd">
+              <div id="b818">
+                <span id="b819"><span id="e940"></span> <button id="b820" onclick="Powers.activate(4)">Activate</button></span>
+                <br/>
+                <span id="b821"><span id="e941"></span></span>
+                <br/>
+                <span id="b822"><span id="e942"></span></span>
+                <br/>
+                <button id="b823" onclick="Powers.delete(4)">Delete (+<span id="e943"></span> power shards)</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="largepowertd">
+              <div id="b824">
+                <span id="b825"><span id="e944"></span> <button id="b826" onclick="Powers.activate(5)">Activate</button></span>
+                <br/>
+                <span id="b827"><span id="e945"></span></span>
+                <br/>
+                <span id="b828"><span id="e946"></span></span>
+                <br/>
+                <button id="b829" onclick="Powers.delete(5)">Delete (+<span id="e947"></span> power shards)</button>
+              </div>
+            </td>
+            <td class="largepowertd">
+              <div id="b830">
+                <span id="b831"><span id="e948"></span> <button id="b832" onclick="Powers.activate(6)">Activate</button></span>
+                <br/>
+                <span id="b833"><span id="e949"></span></span>
+                <br/>
+                <span id="b834"><span id="e950"></span></span>
+                <br/>
+                <button id="b835" onclick="Powers.delete(6)">Delete (+<span id="e951"></span> power shards)</button>
+              </div>
+            </td>
+            <td class="largepowertd">
+              <div id="b836">
+                <span id="b837"><span id="e952"></span> <button id="b838" onclick="Powers.activate(7)">Activate</button></span>
+                <br/>
+                <span id="b839"><span id="e953"></span></span>
+                <br/>
+                <span id="b840"><span id="e954"></span></span>
+                <br/>
+                <button id="b841" onclick="Powers.delete(7)">Delete (+<span id="e955"></span> power shards)</button>
+              </div>
+            </td>
+            <td class="largepowertd">
+              <div id="b842">
+                <span id="b843"><span id="e956"></span>  <button id="b844" onclick="Powers.activate(8)">Activate</button></span>
+                <br/>
+                <span id="b845"><span id="e957"></span></span>
+                <br/>
+                <span id="b846"><span id="e958"></span></span>
+                <br/>
+                <button id="b847" onclick="Powers.delete(8)">Delete (+<span id="e959"></span> power shards)</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="largepowertd">
+              <div id="b848">
+                <span id="b849"><span id="e960"></span>  <button id="b850" onclick="Powers.activate(9)">Activate</button></span>
+                <br/>
+                <span id="b851"><span id="e961"></span></span>
+                <br/>
+                <span id="b852"><span id="e962"></span></span>
+                <br/>
+                <button id="b853" onclick="Powers.delete(9)">Delete (+<span id="e963"></span> power shards)</button>
+              </div>
+            </td>
+            <td class="largepowertd">
+              <div id="b854">
+                <span id="b855"><span id="e964"></span>  <button id="b856" onclick="Powers.activate(10)">Activate</button></span>
+                <br/>
+                <span id="b857"><span id="e965"></span></span>
+                <br/>
+                <span id="b858"><span id="e966"></span></span>
+                <br/>
+                <button id="b859" onclick="Powers.delete(10)">Delete (+<span id="e967"></span> power shards)</button>
+              </div>
+            </td>
+            <td class="largepowertd">
+              <div id="b860">
+                <span id="b861"><span id="e968"></span> <button id="b862" onclick="Powers.activate(11)">Activate</button></span>
+                <br/>
+                <span id="b863"><span id="e969"></span></span>
+                <br/>
+                <span id="b864"><span id="e970"></span></span>
+                <br/>
+                <button id="b865" onclick="Powers.delete(11)">Delete (+<span id="e971"></span> power shards)</button>
+              </div>
+            </td>
+            <td class="largepowertd">
+              <div id="b866">
+                <span id="b867"><span id="e972"></span> <button id="b868" onclick="Powers.activate(12)">Activate</button></span>
+                <br/>
+                <span id="b869"><span id="e973"></span></span>
+                <br/>
+                <span id="b870"><span id="e974"></span></span>
+                <br/>
+                <button id="b871" onclick="Powers.delete(12)">Delete (+<span id="e975"></span> power shards)</button>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <span>At most <span id="e976"></span> power<span id="e977"></span> can be active at once.</span>
+        <br/>
+        <span>Thus, all but the best <span id="e978"></span> power<span id="e979"></span> of each type are useless and are thus automatically deleted for power shards.</span>
+        <br/>
+        <button onclick="Powers.changePowerDeletionMode()">Manual power deletion mode: <span id="e980"></span></button>
+        <br/>
+        <br/>
+        <span>You have <span id="e981"></span> complexity point<span id="e982"></span>. <button id="b872" onclick="Powers.maxAll()">Max power upgrades</button></span>
         <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
           <tr>
             <td>Strength of new powers:</td>
-            <td><span id="b887"><span id="e980"></span> → <span id="e981"></span></span><span id="b888"><span id="e982"></span> (maxed)</span></td>
-            <td><span id="b889"><button id="b890" onclick="PowerUpgrade(1).buy()">Cost: <span id="e983"></span> ℂP</button></span></td>
-            <td><span id="b891"><button id="b892" onclick="PowerUpgrade(1).buyMax()">Max</button></span></td>
-            <td><span id="b893"><button onclick="ComplexityAutobuyer(9).toggle()">Auto: <span id="e984"></span></button></span></td>
+            <td><span id="b873"><span id="e983"></span> → <span id="e984"></span></span><span id="b874"><span id="e985"></span> (maxed)</span></td>
+            <td><span id="b875"><button id="b876" onclick="PowerUpgrade(1).buy()">Cost: <span id="e986"></span> ℂP</button></span></td>
+            <td><span id="b877"><button id="b878" onclick="PowerUpgrade(1).buyMax()">Max</button></span></td>
+            <td><span id="b879"><button onclick="ComplexityAutobuyer(9).toggle()">Auto: <span id="e987"></span></button></span></td>
           </tr>
           <tr>
             <td>Speed of gaining new powers:</td>
-            <td><span id="b894"><span id="e985"></span>x → <span id="e986"></span>x</span><span id="b895"><span id="e987"></span>x (maxed)</span></td>
-            <td><span id="b896"><button id="b897" onclick="PowerUpgrade(2).buy()">Cost: <span id="e988"></span> ℂP</button></span></td>
-            <td><span id="b898"><button id="b899" onclick="PowerUpgrade(2).buyMax()">Max</button></span></td>
-            <td><span id="b900"><button onclick="ComplexityAutobuyer(10).toggle()">Auto: <span id="e989"></span></button></span></td>
+            <td><span id="b880"><span id="e988"></span>x → <span id="e989"></span>x</span><span id="b881"><span id="e990"></span>x (maxed)</span></td>
+            <td><span id="b882"><button id="b883" onclick="PowerUpgrade(2).buy()">Cost: <span id="e991"></span> ℂP</button></span></td>
+            <td><span id="b884"><button id="b885" onclick="PowerUpgrade(2).buyMax()">Max</button></span></td>
+            <td><span id="b886"><button onclick="ComplexityAutobuyer(10).toggle()">Auto: <span id="e992"></span></button></span></td>
           </tr>
           <tr>
             <td>Minimum rarity of new powers:</td>
-            <td><span id="b901"><span id="e990"></span> → <span id="e991"></span></span><span id="b902"><span id="e992"></span> (maxed)</span></td>
-            <td><span id="b903"><button id="b904" onclick="PowerUpgrade(3).buy()">Cost: <span id="e993"></span> ℂP</button></span></td>
-            <td><span id="b905"><button id="b906" onclick="PowerUpgrade(3).buyMax()">Max</button></span></td>
-            <td><span id="b907"><button onclick="ComplexityAutobuyer(11).toggle()">Auto: <span id="e994"></span></button></span></td>
+            <td><span id="b887"><span id="e993"></span> → <span id="e994"></span></span><span id="b888"><span id="e995"></span> (maxed)</span></td>
+            <td><span id="b889"><button id="b890" onclick="PowerUpgrade(3).buy()">Cost: <span id="e996"></span> ℂP</button></span></td>
+            <td><span id="b891"><button id="b892" onclick="PowerUpgrade(3).buyMax()">Max</button></span></td>
+            <td><span id="b893"><button onclick="ComplexityAutobuyer(11).toggle()">Auto: <span id="e997"></span></button></span></td>
           </tr>
         </table>
         <br/>
-        <div id="b908">
+        <div id="b894">
           <span>Power shards can be used to buy upgrades that give powers small additional multipliers, and to craft new powers.</span>
           <br/>
           <span>It is generally not recommended to delete any of your first few powers to get power shards.</span>
         </div>
-        <div id="b909">
-          <span>You have <span id="e995"></span> power shards. <button id="b910" onclick="PowerShards.maxAll()">Max power shard upgrades</button></span>
+        <div id="b895">
+          <span>You have <span id="e998"></span> power shards. <button id="b896" onclick="PowerShards.maxAll()">Max power shard upgrades</button></span>
           <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
             <tr>
               <td class="yellowspan">Additional multiplier to normal generator powers:</td>
-              <td><span id="b911">+<span id="e996"></span> → +<span id="e997"></span></span><span id="b912"><span id="e998"></span> (maxed)</span></td>
-              <td><span id="b913"><button id="b914" onclick="PowerShardUpgrade(1).buy()">Cost: <span id="e999"></span> power shard<span id="e1000"></span></button></span></td>
-              <td><span id="b915"><button id="b916" onclick="PowerShardUpgrade(1).buyMax()">Max</button></span></td>
-              <td><span id="b917"><button onclick="ComplexityAutobuyer(12).toggle()">Auto: <span id="e1001"></span></button></span></td>
+              <td><span id="b897">+<span id="e999"></span> → +<span id="e1000"></span></span><span id="b898"><span id="e1001"></span> (maxed)</span></td>
+              <td><span id="b899"><button id="b900" onclick="PowerShardUpgrade(1).buy()">Cost: <span id="e1002"></span> power shard<span id="e1003"></span></button></span></td>
+              <td><span id="b901"><button id="b902" onclick="PowerShardUpgrade(1).buyMax()">Max</button></span></td>
+              <td><span id="b903"><button onclick="ComplexityAutobuyer(12).toggle()">Auto: <span id="e1004"></span></button></span></td>
             </tr>
             <tr>
               <td class="magentaspan">Additional multiplier to infinity generator powers:</td>
-              <td><span id="b918">+<span id="e1002"></span> → +<span id="e1003"></span></span><span id="b919"><span id="e1004"></span> (maxed)</span></td>
-              <td><span id="b920"><button id="b921" onclick="PowerShardUpgrade(2).buy()">Cost: <span id="e1005"></span> power shard<span id="e1006"></span></button></span></td>
-              <td><span id="b922"><button id="b923" onclick="PowerShardUpgrade(2).buyMax()">Max</button></span></td>
-              <td><span id="b924"><button onclick="ComplexityAutobuyer(13).toggle()">Auto: <span id="e1007"></span></button></span></td>
+              <td><span id="b904">+<span id="e1005"></span> → +<span id="e1006"></span></span><span id="b905"><span id="e1007"></span> (maxed)</span></td>
+              <td><span id="b906"><button id="b907" onclick="PowerShardUpgrade(2).buy()">Cost: <span id="e1008"></span> power shard<span id="e1009"></span></button></span></td>
+              <td><span id="b908"><button id="b909" onclick="PowerShardUpgrade(2).buyMax()">Max</button></span></td>
+              <td><span id="b910"><button onclick="ComplexityAutobuyer(13).toggle()">Auto: <span id="e1010"></span></button></span></td>
             </tr>
             <tr>
               <td class="cyanspan">Additional multiplier to eternity generator powers:</td>
-              <td><span id="b925">+<span id="e1008"></span> → +<span id="e1009"></span></span><span id="b926"><span id="e1010"></span> (maxed)</span></td>
-              <td><span id="b927"><button id="b928" onclick="PowerShardUpgrade(3).buy()">Cost: <span id="e1011"></span> power shard<span id="e1012"></span></button></span></td>
-              <td><span id="b929"><button id="b930" onclick="PowerShardUpgrade(3).buyMax()">Max</button></span></td>
-              <td><span id="b931"><button onclick="ComplexityAutobuyer(14).toggle()">Auto: <span id="e1013"></span></button></span></td>
+              <td><span id="b911">+<span id="e1011"></span> → +<span id="e1012"></span></span><span id="b912"><span id="e1013"></span> (maxed)</span></td>
+              <td><span id="b913"><button id="b914" onclick="PowerShardUpgrade(3).buy()">Cost: <span id="e1014"></span> power shard<span id="e1015"></span></button></span></td>
+              <td><span id="b915"><button id="b916" onclick="PowerShardUpgrade(3).buyMax()">Max</button></span></td>
+              <td><span id="b917"><button onclick="ComplexityAutobuyer(14).toggle()">Auto: <span id="e1016"></span></button></span></td>
             </tr>
             <tr>
               <td class="brownspan">Additional multiplier to complexity generator powers:</td>
-              <td><span id="b932">+<span id="e1014"></span> → +<span id="e1015"></span></span><span id="b933"><span id="e1016"></span> (maxed)</span></td>
-              <td><span id="b934"><button id="b935" onclick="PowerShardUpgrade(4).buy()">Cost: <span id="e1017"></span> power shard<span id="e1018"></span></button></span></td>
-              <td><span id="b936"><button id="b937" onclick="PowerShardUpgrade(4).buyMax()">Max</button></span></td>
-              <td><span id="b938"><button onclick="ComplexityAutobuyer(15).toggle()">Auto: <span id="e1019"></span></button></span></td>
+              <td><span id="b918">+<span id="e1017"></span> → +<span id="e1018"></span></span><span id="b919"><span id="e1019"></span> (maxed)</span></td>
+              <td><span id="b920"><button id="b921" onclick="PowerShardUpgrade(4).buy()">Cost: <span id="e1020"></span> power shard<span id="e1021"></span></button></span></td>
+              <td><span id="b922"><button id="b923" onclick="PowerShardUpgrade(4).buyMax()">Max</button></span></td>
+              <td><span id="b924"><button onclick="ComplexityAutobuyer(15).toggle()">Auto: <span id="e1022"></span></button></span></td>
             </tr>
           </table>
           <span>Power shard upgrade multipliers take effect after power and rarity, but before extra multipliers.</span>
           <br/>
           <br/>
-          <span>Craft a power with type <select id="b939">
+          <span>Craft a power with type <select id="b925">
             <option value="normal">normal</option>
             <option value="infinity">infinity</option>
             <option value="eternity">eternity</option>
             <option value="complexity">complexity</option>
           </select>,
-          strength <span id="e1020"></span>, and rarity <input id="b940" type="text"></input>:
-          <button id="b941" onclick="PowerShards.craft()">Cost: <span id="e1021"></span> power shards</button></span>
+          strength <span id="e1023"></span>, and rarity <input id="b926" type="text"></input>:
+          <button id="b927" onclick="PowerShards.craft()">Cost: <span id="e1024"></span> power shards</button></span>
           <br/>
-          <span>You cannot craft powers with negative rarity or powers with rarity greater than <span id="e1022"></span> (the maximum rarity of generated powers).</span>
+          <span>You cannot craft powers with negative rarity or powers with rarity greater than <span id="e1025"></span> (the maximum rarity of generated powers).</span>
           <br/>
           <span>Crafting cost depends only on rarity (not on type), and is always at least twice the power shards gained from deletion.</span>
           <br/>
           <br/>
-          <span>Crafted power<span id="b942"> (will be automatically deleted due to being bad enough to be useless)</span>:</span>
+          <span>Crafted power<span id="b928"> (will be automatically deleted due to being bad enough to be useless)</span>:</span>
           <br/>
-          <span id="b943"><span id="e1023"></span></span>
-          <br/>
-          <span id="b944"><span id="e1024"></span></span>
+          <span id="b929"><span id="e1026"></span></span>
         </div>
         <br/>
         <span>Power presets:</span>
         <br/>
-        <div id="b945">
-          Name: <input id="b946" class="presetpowername1" type="text"></input>
-          Powers: <input id="b947" class="presetpowerlist1" style="width: 256px;" type="text"></input>
+        <div id="b930">
+          Name: <input id="b931" class="presetpowername1" type="text"></input>
+          Powers: <input id="b932" class="presetpowerlist1" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(1)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(1)">Load</button>
           <button onclick="Powers.presetDelete(1)">Delete</button>
         </div>
-        <div id="b948">
-          Name: <input id="b949" class="presetpowername2" type="text"></input>
-          Powers: <input id="b950" class="presetpowerlist2" style="width: 256px;" type="text"></input>
+        <div id="b933">
+          Name: <input id="b934" class="presetpowername2" type="text"></input>
+          Powers: <input id="b935" class="presetpowerlist2" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(2)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(2)">Load</button>
           <button onclick="Powers.presetDelete(2)">Delete</button>
         </div>
-        <div id="b951">
-          Name: <input id="b952" class="presetpowername3" type="text"></input>
-          Powers: <input id="b953" class="presetpowerlist3" style="width: 256px;" type="text"></input>
+        <div id="b936">
+          Name: <input id="b937" class="presetpowername3" type="text"></input>
+          Powers: <input id="b938" class="presetpowerlist3" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(3)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(3)">Load</button>
           <button onclick="Powers.presetDelete(3)">Delete</button>
         </div>
-        <div id="b954">
-          Name: <input id="b955" class="presetpowername4" type="text"></input>
-          Powers: <input id="b956" class="presetpowerlist4" style="width: 256px;" type="text"></input>
+        <div id="b939">
+          Name: <input id="b940" class="presetpowername4" type="text"></input>
+          Powers: <input id="b941" class="presetpowerlist4" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(4)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(4)">Load</button>
           <button onclick="Powers.presetDelete(4)">Delete</button>
         </div>
-        <div id="b957">
-          Name: <input id="b958" class="presetpowername5" type="text"></input>
-          Powers: <input id="b959" class="presetpowerlist5" style="width: 256px;" type="text"></input>
+        <div id="b942">
+          Name: <input id="b943" class="presetpowername5" type="text"></input>
+          Powers: <input id="b944" class="presetpowerlist5" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(5)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(5)">Load</button>
           <button onclick="Powers.presetDelete(5)">Delete</button>
         </div>
-        <div id="b960">
-          Name: <input id="b961" class="presetpowername6" type="text"></input>
-          Powers: <input id="b962" class="presetpowerlist6" style="width: 256px;" type="text"></input>
+        <div id="b945">
+          Name: <input id="b946" class="presetpowername6" type="text"></input>
+          Powers: <input id="b947" class="presetpowerlist6" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(6)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(6)">Load</button>
           <button onclick="Powers.presetDelete(6)">Delete</button>
         </div>
-        <div id="b963">
-          Name: <input id="b964" class="presetpowername7" type="text"></input>
-          Powers: <input id="b965" class="presetpowerlist7" style="width: 256px;" type="text"></input>
+        <div id="b948">
+          Name: <input id="b949" class="presetpowername7" type="text"></input>
+          Powers: <input id="b950" class="presetpowerlist7" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(7)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(7)">Load</button>
           <button onclick="Powers.presetDelete(7)">Delete</button>
         </div>
-        <div id="b966">
-          Name: <input id="b967" class="presetpowername8" type="text"></input>
-          Powers: <input id="b968" class="presetpowerlist8" style="width: 256px;" type="text"></input>
+        <div id="b951">
+          Name: <input id="b952" class="presetpowername8" type="text"></input>
+          Powers: <input id="b953" class="presetpowerlist8" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(8)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(8)">Load</button>
           <button onclick="Powers.presetDelete(8)">Delete</button>
         </div>
-        <div id="b969">
-          Name: <input id="b970" class="presetpowername9" type="text"></input>
-          Powers: <input id="b971" class="presetpowerlist9" style="width: 256px;" type="text"></input>
+        <div id="b954">
+          Name: <input id="b955" class="presetpowername9" type="text"></input>
+          Powers: <input id="b956" class="presetpowerlist9" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(9)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(9)">Load</button>
           <button onclick="Powers.presetDelete(9)">Delete</button>
         </div>
-        <div id="b972">
-          Name: <input id="b973" class="presetpowername10" type="text"></input>
-          Powers: <input id="b974" class="presetpowerlist10" style="width: 256px;" type="text"></input>
+        <div id="b957">
+          Name: <input id="b958" class="presetpowername10" type="text"></input>
+          Powers: <input id="b959" class="presetpowerlist10" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(10)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(10)">Load</button>
           <button onclick="Powers.presetDelete(10)">Delete</button>
         </div>
-        <div id="b975">
-          Name: <input id="b976" class="presetpowername11" type="text"></input>
-          Powers: <input id="b977" class="presetpowerlist11" style="width: 256px;" type="text"></input>
+        <div id="b960">
+          Name: <input id="b961" class="presetpowername11" type="text"></input>
+          Powers: <input id="b962" class="presetpowerlist11" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(11)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(11)">Load</button>
           <button onclick="Powers.presetDelete(11)">Delete</button>
         </div>
-        <div id="b978">
-          Name: <input id="b979" class="presetpowername12" type="text"></input>
-          Powers: <input id="b980" class="presetpowerlist12" style="width: 256px;" type="text"></input>
+        <div id="b963">
+          Name: <input id="b964" class="presetpowername12" type="text"></input>
+          Powers: <input id="b965" class="presetpowerlist12" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(12)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(12)">Load</button>
           <button onclick="Powers.presetDelete(12)">Delete</button>
         </div>
-        <div id="b981">
-          Name: <input id="b982" class="presetpowername13" type="text"></input>
-          Powers: <input id="b983" class="presetpowerlist13" style="width: 256px;" type="text"></input>
+        <div id="b966">
+          Name: <input id="b967" class="presetpowername13" type="text"></input>
+          Powers: <input id="b968" class="presetpowerlist13" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(13)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(13)">Load</button>
           <button onclick="Powers.presetDelete(13)">Delete</button>
         </div>
-        <div id="b984">
-          Name: <input id="b985" class="presetpowername14" type="text"></input>
-          Powers: <input id="b986" class="presetpowerlist14" style="width: 256px;" type="text"></input>
+        <div id="b969">
+          Name: <input id="b970" class="presetpowername14" type="text"></input>
+          Powers: <input id="b971" class="presetpowerlist14" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(14)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(14)">Load</button>
           <button onclick="Powers.presetDelete(14)">Delete</button>
         </div>
-        <div id="b987">
-          Name: <input id="b988" class="presetpowername15" type="text"></input>
-          Powers: <input id="b989" class="presetpowerlist15" style="width: 256px;" type="text"></input>
+        <div id="b972">
+          Name: <input id="b973" class="presetpowername15" type="text"></input>
+          Powers: <input id="b974" class="presetpowerlist15" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(15)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(15)">Load</button>
           <button onclick="Powers.presetDelete(15)">Delete</button>
         </div>
-        <div id="b990">
-          Name: <input id="b991" class="presetpowername16" type="text"></input>
-          Powers: <input id="b992" class="presetpowerlist16" style="width: 256px;" type="text"></input>
+        <div id="b975">
+          Name: <input id="b976" class="presetpowername16" type="text"></input>
+          Powers: <input id="b977" class="presetpowerlist16" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(16)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(16)">Load</button>
           <button onclick="Powers.presetDelete(16)">Delete</button>
         </div>
-        <div id="b993">
-          Name: <input id="b994" class="presetpowername17" type="text"></input>
-          Powers: <input id="b995" class="presetpowerlist17" style="width: 256px;" type="text"></input>
+        <div id="b978">
+          Name: <input id="b979" class="presetpowername17" type="text"></input>
+          Powers: <input id="b980" class="presetpowerlist17" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(17)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(17)">Load</button>
           <button onclick="Powers.presetDelete(17)">Delete</button>
         </div>
-        <div id="b996">
-          Name: <input id="b997" class="presetpowername18" type="text"></input>
-          Powers: <input id="b998" class="presetpowerlist18" style="width: 256px;" type="text"></input>
+        <div id="b981">
+          Name: <input id="b982" class="presetpowername18" type="text"></input>
+          Powers: <input id="b983" class="presetpowerlist18" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(18)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(18)">Load</button>
           <button onclick="Powers.presetDelete(18)">Delete</button>
         </div>
-        <div id="b999">
-          Name: <input id="b1000" class="presetpowername19" type="text"></input>
-          Powers: <input id="b1001" class="presetpowerlist19" style="width: 256px;" type="text"></input>
+        <div id="b984">
+          Name: <input id="b985" class="presetpowername19" type="text"></input>
+          Powers: <input id="b986" class="presetpowerlist19" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(19)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(19)">Load</button>
           <button onclick="Powers.presetDelete(19)">Delete</button>
         </div>
-        <div id="b1002">
-          Name: <input id="b1003" class="presetpowername20" type="text"></input>
-          Powers: <input id="b1004" class="presetpowerlist20" style="width: 256px;" type="text"></input>
+        <div id="b987">
+          Name: <input id="b988" class="presetpowername20" type="text"></input>
+          Powers: <input id="b989" class="presetpowerlist20" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(20)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(20)">Load</button>
           <button onclick="Powers.presetDelete(20)">Delete</button>
         </div>
-        <div id="b1005">
-          Name: <input id="b1006" class="presetpowername21" type="text"></input>
-          Powers: <input id="b1007" class="presetpowerlist21" style="width: 256px;" type="text"></input>
+        <div id="b990">
+          Name: <input id="b991" class="presetpowername21" type="text"></input>
+          Powers: <input id="b992" class="presetpowerlist21" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(21)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(21)">Load</button>
           <button onclick="Powers.presetDelete(21)">Delete</button>
         </div>
-        <div id="b1008">
-          Name: <input id="b1009" class="presetpowername22" type="text"></input>
-          Powers: <input id="b1010" class="presetpowerlist22" style="width: 256px;" type="text"></input>
+        <div id="b993">
+          Name: <input id="b994" class="presetpowername22" type="text"></input>
+          Powers: <input id="b995" class="presetpowerlist22" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(22)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(22)">Load</button>
           <button onclick="Powers.presetDelete(22)">Delete</button>
         </div>
-        <div id="b1011">
-          Name: <input id="b1012" class="presetpowername23" type="text"></input>
-          Powers: <input id="b1013" class="presetpowerlist23" style="width: 256px;" type="text"></input>
+        <div id="b996">
+          Name: <input id="b997" class="presetpowername23" type="text"></input>
+          Powers: <input id="b998" class="presetpowerlist23" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(23)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(23)">Load</button>
           <button onclick="Powers.presetDelete(23)">Delete</button>
         </div>
-        <div id="b1014">
-          Name: <input id="b1015" class="presetpowername24" type="text"></input>
-          Powers: <input id="b1016" class="presetpowerlist24" style="width: 256px;" type="text"></input>
+        <div id="b999">
+          Name: <input id="b1000" class="presetpowername24" type="text"></input>
+          Powers: <input id="b1001" class="presetpowerlist24" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(24)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(24)">Load</button>
           <button onclick="Powers.presetDelete(24)">Delete</button>
         </div>
-        <div id="b1017">
-          Name: <input id="b1018" class="presetpowername25" type="text"></input>
-          Powers: <input id="b1019" class="presetpowerlist25" style="width: 256px;" type="text"></input>
+        <div id="b1002">
+          Name: <input id="b1003" class="presetpowername25" type="text"></input>
+          Powers: <input id="b1004" class="presetpowerlist25" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(25)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(25)">Load</button>
           <button onclick="Powers.presetDelete(25)">Delete</button>
         </div>
-        <div id="b1020">
-          Name: <input id="b1021" class="presetpowername26" type="text"></input>
-          Powers: <input id="b1022" class="presetpowerlist26" style="width: 256px;" type="text"></input>
+        <div id="b1005">
+          Name: <input id="b1006" class="presetpowername26" type="text"></input>
+          Powers: <input id="b1007" class="presetpowerlist26" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(26)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(26)">Load</button>
           <button onclick="Powers.presetDelete(26)">Delete</button>
         </div>
-        <div id="b1023">
-          Name: <input id="b1024" class="presetpowername27" type="text"></input>
-          Powers: <input id="b1025" class="presetpowerlist27" style="width: 256px;" type="text"></input>
+        <div id="b1008">
+          Name: <input id="b1009" class="presetpowername27" type="text"></input>
+          Powers: <input id="b1010" class="presetpowerlist27" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(27)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(27)">Load</button>
           <button onclick="Powers.presetDelete(27)">Delete</button>
         </div>
-        <div id="b1026">
-          Name: <input id="b1027" class="presetpowername28" type="text"></input>
-          Powers: <input id="b1028" class="presetpowerlist28" style="width: 256px;" type="text"></input>
+        <div id="b1011">
+          Name: <input id="b1012" class="presetpowername28" type="text"></input>
+          Powers: <input id="b1013" class="presetpowerlist28" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(28)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(28)">Load</button>
           <button onclick="Powers.presetDelete(28)">Delete</button>
         </div>
-        <div id="b1029">
-          Name: <input id="b1030" class="presetpowername29" type="text"></input>
-          Powers: <input id="b1031" class="presetpowerlist29" style="width: 256px;" type="text"></input>
+        <div id="b1014">
+          Name: <input id="b1015" class="presetpowername29" type="text"></input>
+          Powers: <input id="b1016" class="presetpowerlist29" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(29)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(29)">Load</button>
           <button onclick="Powers.presetDelete(29)">Delete</button>
         </div>
-        <div id="b1032">
-          Name: <input id="b1033" class="presetpowername30" type="text"></input>
-          Powers: <input id="b1034" class="presetpowerlist30" style="width: 256px;" type="text"></input>
+        <div id="b1017">
+          Name: <input id="b1018" class="presetpowername30" type="text"></input>
+          Powers: <input id="b1019" class="presetpowerlist30" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(30)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(30)">Load</button>
           <button onclick="Powers.presetDelete(30)">Delete</button>
         </div>
-        <div id="b1035">
-          Name: <input id="b1036" class="presetpowername31" type="text"></input>
-          Powers: <input id="b1037" class="presetpowerlist31" style="width: 256px;" type="text"></input>
+        <div id="b1020">
+          Name: <input id="b1021" class="presetpowername31" type="text"></input>
+          Powers: <input id="b1022" class="presetpowerlist31" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(31)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(31)">Load</button>
           <button onclick="Powers.presetDelete(31)">Delete</button>
         </div>
-        <div id="b1038">
-          Name: <input id="b1039" class="presetpowername32" type="text"></input>
-          Powers: <input id="b1040" class="presetpowerlist32" style="width: 256px;" type="text"></input>
+        <div id="b1023">
+          Name: <input id="b1024" class="presetpowername32" type="text"></input>
+          Powers: <input id="b1025" class="presetpowerlist32" style="width: 256px;" type="text"></input>
           <button onclick="Powers.presetSetToCurrentPowers(32)">Set to current active powers</button>
           <button onclick="Powers.presetLoad(32)">Load</button>
           <button onclick="Powers.presetDelete(32)">Delete</button>
         </div>
         <span>
-          <button id="b1041" onclick="Powers.presetCreate()">Create a power preset</button>
-          <span id="b1042">You can create at most <span id="e1025"></span> power presets. Delete existing presets to create more.</span>
+          <button id="b1026" onclick="Powers.presetCreate()">Create a power preset</button>
+          <span id="b1027">You can create at most <span id="e1027"></span> power presets. Delete existing presets to create more.</span>
         </span>
         <br/>
         <span style="display: none;">Exported active powers (also copied to clipboard): <input id="powers-export-output"></input></span>
       </div>
     </div>
-    <div id="b1043">
-      <div id="b1044">
-        <button id="b1045" style="height: 48px;" onclick="Oracle.unlock()">
-          Unlock the Oracle<br/>Cost: <span id="e1026"></span> complexity points
+    <div id="b1028">
+      <div id="b1029">
+        <button id="b1030" style="height: 48px;" onclick="Oracle.unlock()">
+          Unlock the Oracle<br/>Cost: <span id="e1028"></span> complexity points
         </button>
         <div>The Oracle is a quality-of-life feature that will let you see the future.</div>
-        <div id="b1046">Unlocking the Oracle for the first time will also let you view the Galaxies tab.</div>
+        <div id="b1031">Unlocking the Oracle for the first time will also let you view the Galaxies tab.</div>
       </div>
-      <div id="b1047">
-        <span>Ask the Oracle to look <input id="b1048" type="text"></input> second<span id="e1027"></span> into the future. <button onclick="Oracle.invoke()">Get prediction</button> <button onclick="Oracle.toggleAlert()">Alert on prediction: <span id="e1028"></span></button></span>
+      <div id="b1032">
+        <span>Ask the Oracle to look <input id="b1033" type="text"></input> second<span id="e1029"></span> into the future. <button onclick="Oracle.invoke()">Get prediction</button> <button onclick="Oracle.toggleAlert()">Alert on prediction: <span id="e1030"></span></button></span>
         <br/>
-        <span><button onclick="Oracle.togglePowerDisplay()">Show future powers on prediction: <span id="e1029"></span></button> <button onclick="Oracle.togglePowerFutureExtraMultipliers()">Show future power extra multipliers (as opposed to current): <span id="e1030"></span></button></span>
+        <span><button onclick="Oracle.togglePowerDisplay()">Show future powers on prediction: <span id="e1031"></span></button> <button onclick="Oracle.togglePowerFutureExtraMultipliers()">Show future power extra multipliers (as opposed to current): <span id="e1032"></span></button></span>
         <br/>
-        <span>The Oracle can look between <span id="e1031"></span> and <span id="e1032"></span> seconds into the future.</span>
+        <span>The Oracle can look between <span id="e1033"></span> and <span id="e1034"></span> seconds into the future.</span>
         <br/>
         <span>You can press O to get a prediction from the Oracle on any tab.</span>
         <br/>
         <br/>
-        <span><span id="e1033"></span></span>
-        <div id="b1049" class="oraclediv"><span id="e1034"></span></div>
+        <span><span id="e1035"></span></span>
+        <div id="b1034" class="oraclediv"><span id="e1036"></span></div>
         <br/>
         <br/>
-        <div id="b1050">
-          <span>Stored powers from the future (with extra multipliers as they would be now):</span>
-          <br/>
-          <div style="margin-left: auto; margin-right: auto;">
-            <span id="b1051">You won't have any stored powers.</span>
-            <div id="b1052">
-              <span id="b1053"><span id="e1035"></span></span>
-              <br/>
-              <span id="b1054"><span id="e1036"></span></span>
-            </div>
-            <div id="b1055">
-              <span id="b1056"><span id="e1037"></span></span>
-              <br/>
-              <span id="b1057"><span id="e1038"></span></span>
-            </div>
-            <div id="b1058">
-              <span id="b1059"><span id="e1039"></span></span>
-              <br/>
-              <span id="b1060"><span id="e1040"></span></span>
-            </div>
-            <div id="b1061">
-              <span id="b1062"><span id="e1041"></span></span>
-              <br/>
-              <span id="b1063"><span id="e1042"></span></span>
-            </div>
-            <div id="b1064">
-              <span id="b1065"><span id="e1043"></span></span>
-              <br/>
-              <span id="b1066"><span id="e1044"></span></span>
-            </div>
-            <div id="b1067">
-              <span id="b1068"><span id="e1045"></span></span>
-              <br/>
-              <span id="b1069"><span id="e1046"></span></span>
-            </div>
-            <div id="b1070">
-              <span id="b1071"><span id="e1047"></span></span>
-              <br/>
-              <span id="b1072"><span id="e1048"></span></span>
-            </div>
-            <div id="b1073">
-              <span id="b1074"><span id="e1049"></span></span>
-              <br/>
-              <span id="b1075"><span id="e1050"></span></span>
-            </div>
-            <div id="b1076">
-              <span id="b1077"><span id="e1051"></span></span>
-              <br/>
-              <span id="b1078"><span id="e1052"></span></span>
-            </div>
-            <div id="b1079">
-              <span id="b1080"><span id="e1053"></span></span>
-              <br/>
-              <span id="b1081"><span id="e1054"></span></span>
-            </div>
-            <div id="b1082">
-              <span id="b1083"><span id="e1055"></span></span>
-              <br/>
-              <span id="b1084"><span id="e1056"></span></span>
-            </div>
-            <div id="b1085">
-              <span id="b1086"><span id="e1057"></span></span>
-              <br/>
-              <span id="b1087"><span id="e1058"></span></span>
-            </div>
-            <div id="b1088">
-              <span id="b1089"><span id="e1059"></span></span>
-              <br/>
-              <span id="b1090"><span id="e1060"></span></span>
-            </div>
-            <div id="b1091">
-              <span id="b1092"><span id="e1061"></span></span>
-              <br/>
-              <span id="b1093"><span id="e1062"></span></span>
-            </div>
-            <div id="b1094">
-              <span id="b1095"><span id="e1063"></span></span>
-              <br/>
-              <span id="b1096"><span id="e1064"></span></span>
-            </div>
-            <div id="b1097">
-              <span id="b1098"><span id="e1065"></span></span>
-              <br/>
-              <span id="b1099"><span id="e1066"></span></span>
-            </div>
-          </div>
+        <div id="b1035">
+          <span>Stored powers from the future:</span>
+          <br id="b1036"/>
+          <span id="b1037">You don't currently have any stored powers.</span>
+          <br id="b1038"/>
+          <table id="b1039" style="margin-left: auto; margin-right: auto; border-collapse: collapse;">
+            <tr>
+              <td class="largepowertd">
+                <span class="yellowspan">Normal</span>
+                <br/>
+                <span class="yellowspan">No extra multiplier</span>
+                <br/>
+                <br/>
+                <br/>
+              </td>
+              <td class="largepowertd">
+                <span class="magentaspan">Infinity</span>
+                <br/>
+                <span class="magentaspan">Extra multiplier from infinity stars</span>
+                <br/>
+                <br/>
+                <span class="magentaspan"><span id="e1037"></span>x</span>
+              </td>
+              <td class="largepowertd">
+                <span class="cyanspan">Eternity</span>
+                <br/>
+                <span class="cyanspan">Extra multiplier from complexity stars and time in complexity</span>
+                <br/>
+                <span class="cyanspan"><span id="e1038"></span>x<span id="b1040"> (capped)</span></span>
+              </td>
+              <td class="largepowertd">
+                <span class="brownspan">Complexity</span>
+                <br/>
+                <span class="brownspan">Extra multiplier from total strength and rarity of active powers</span>
+                <br/>
+                <span class="brownspan"><span id="e1039"></span>x</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="smallpowertd">
+                <div id="b1041">
+                  <span id="b1042"><span id="e1040"></span></span>
+                  <br/>
+                  <span id="b1043"><span id="e1041"></span></span>
+                  <br/>
+                  <span id="b1044"><span id="e1042"></span></span>
+                  <br/>
+                </div>
+              </td>
+              <td class="smallpowertd">
+                <div id="b1045">
+                  <span id="b1046"><span id="e1043"></span></span>
+                  <br/>
+                  <span id="b1047"><span id="e1044"></span></span>
+                  <br/>
+                  <span id="b1048"><span id="e1045"></span></span>
+                  <br/>
+                </div>
+              </td>
+              <td class="smallpowertd">
+                <div id="b1049">
+                  <span id="b1050"><span id="e1046"></span></span>
+                  <br/>
+                  <span id="b1051"><span id="e1047"></span></span>
+                  <br/>
+                  <span id="b1052"><span id="e1048"></span></span>
+                  <br/>
+                </div>
+              </td>
+              <td class="smallpowertd">
+                <div id="b1053">
+                  <span id="b1054"><span id="e1049"></span></span>
+                  <br/>
+                  <span id="b1055"><span id="e1050"></span></span>
+                  <br/>
+                  <span id="b1056"><span id="e1051"></span></span>
+                  <br/>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="smallpowertd">
+                <div id="b1057">
+                  <span id="b1058"><span id="e1052"></span></span>
+                  <br/>
+                  <span id="b1059"><span id="e1053"></span></span>
+                  <br/>
+                  <span id="b1060"><span id="e1054"></span></span>
+                  <br/>
+                </div>
+              </td>
+              <td class="smallpowertd">
+                <div id="b1061">
+                  <span id="b1062"><span id="e1055"></span></span>
+                  <br/>
+                  <span id="b1063"><span id="e1056"></span></span>
+                  <br/>
+                  <span id="b1064"><span id="e1057"></span></span>
+                  <br/>
+                </div>
+              </td>
+              <td class="smallpowertd">
+                <div id="b1065">
+                  <span id="b1066"><span id="e1058"></span></span>
+                  <br/>
+                  <span id="b1067"><span id="e1059"></span></span>
+                  <br/>
+                  <span id="b1068"><span id="e1060"></span></span>
+                  <br/>
+                </div>
+              </td>
+              <td class="smallpowertd">
+                <div id="b1069">
+                  <span id="b1070"><span id="e1061"></span></span>
+                  <br/>
+                  <span id="b1071"><span id="e1062"></span></span>
+                  <br/>
+                  <span id="b1072"><span id="e1063"></span></span>
+                  <br/>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="smallpowertd">
+                <div id="b1073">
+                  <span id="b1074"><span id="e1064"></span></span>
+                  <br/>
+                  <span id="b1075"><span id="e1065"></span></span>
+                  <br/>
+                  <span id="b1076"><span id="e1066"></span></span>
+                  <br/>
+                </div>
+              </td>
+              <td class="smallpowertd">
+                <div id="b1077">
+                  <span id="b1078"><span id="e1067"></span></span>
+                  <br/>
+                  <span id="b1079"><span id="e1068"></span></span>
+                  <br/>
+                  <span id="b1080"><span id="e1069"></span></span>
+                  <br/>
+                </div>
+              </td>
+              <td class="smallpowertd">
+                <div id="b1081">
+                  <span id="b1082"><span id="e1070"></span></span>
+                  <br/>
+                  <span id="b1083"><span id="e1071"></span></span>
+                  <br/>
+                  <span id="b1084"><span id="e1072"></span></span>
+                  <br/>
+                </div>
+              </td>
+              <td class="smallpowertd">
+                <div id="b1085">
+                  <span id="b1086"><span id="e1073"></span></span>
+                  <br/>
+                  <span id="b1087"><span id="e1074"></span></span>
+                  <br/>
+                  <span id="b1088"><span id="e1075"></span></span>
+                  <br/>
+                </div>
+              </td>
+            </tr>
+          </table>
         </div>
       </div>
     </div>
-    <div id="b1100">
-      <div id="b1101">
-        <button id="b1102" style="height: 48px;" onclick="Galaxy.unlock()">
-          Unlock Galaxies<br/>Cost: <span id="e1067"></span> complexity points
+    <div id="b1089">
+      <div id="b1090">
+        <button id="b1091" style="height: 48px;" onclick="Galaxy.unlock()">
+          Unlock Galaxies<br/>Cost: <span id="e1076"></span> complexity points
         </button>
-        <div id="b1103">Unlocking galaxies will also give you autobuyers for complexity generators and power upgrades.</div>
+        <div id="b1092">Unlocking galaxies will also give you autobuyers for complexity generators and power upgrades.</div>
       </div>
-      <div id="b1104">
-        <div id="b1105">Due to unlocking galaxies, you have autobuyers for complexity generators and power upgrades.</div>
-        <br id="b1106"/>
-        <span>You have produced <span id="e1068"></span> total stars this finality, making your star factor <span id="e1069"></span>.</span>
+      <div id="b1093">
+        <div id="b1094">Due to unlocking galaxies, you have autobuyers for complexity generators and power upgrades.</div>
+        <br id="b1095"/>
+        <span>You have produced <span id="e1077"></span> total stars this finality, making your star factor <span id="e1078"></span>.</span>
         <br/>
-        <span>You have produced <span id="e1070"></span> total infinity stars this finality, making your infinity star factor <span id="e1071"></span>.</span>
+        <span>You have produced <span id="e1079"></span> total infinity stars this finality, making your infinity star factor <span id="e1080"></span>.</span>
         <br/>
-        <span>You have produced <span id="e1072"></span> total eternity stars this finality, making your eternity star factor <span id="e1073"></span>.</span>
+        <span>You have produced <span id="e1081"></span> total eternity stars this finality, making your eternity star factor <span id="e1082"></span>.</span>
         <br/>
-        <span>You have produced <span id="e1074"></span> total complexity stars this finality, making your complexity star factor <span id="e1075"></span>.</span>
+        <span>You have produced <span id="e1083"></span> total complexity stars this finality, making your complexity star factor <span id="e1084"></span>.</span>
         <br/>
-        <span>Your stellar product is <span id="e1076"></span> x <span id="e1077"></span> x <span id="e1078"></span> x <span id="e1079"></span> = <span id="e1080"></span>.</span>
-        <br/>
-        <br/>
-        <span>You have <span id="e1081"></span> (from stellar product) + <span id="e1082"></span> (from total ℂP this finality) <span id="b1107">+ <span id="e1083"></span> (from finality shard upgrade bonuses)</span> = <span id="e1084"></span> galax<span id="e1085"></span>.</span>
-        <br/>
-        <span>Next galaxies are at <span id="e1086"></span> stellar product and <span id="e1087"></span> total ℂP this finality.</span>
-        <br/>
-        <span>Your galaxies are increasing the strength of new powers by <span id="e1088"></span>.</span>
+        <span>Your stellar product is <span id="e1085"></span> x <span id="e1086"></span> x <span id="e1087"></span> x <span id="e1088"></span> = <span id="e1089"></span>.</span>
         <br/>
         <br/>
-        <span>You have spent <span id="e1089"></span> seconds in this complexity, increasing chroma caps ^<span id="e1090"></span>.</span>
+        <span>You have <span id="e1090"></span> (from stellar product) + <span id="e1091"></span> (from total ℂP this finality) <span id="b1096">+ <span id="e1092"></span> (from finality shard upgrade bonuses)</span> = <span id="e1093"></span> galax<span id="e1094"></span>.</span>
+        <br/>
+        <span>Next galaxies are at <span id="e1095"></span> stellar product and <span id="e1096"></span> total ℂP this finality.</span>
+        <br/>
+        <span>Your galaxies are increasing the strength of new powers by <span id="e1097"></span>.</span>
+        <br/>
+        <br/>
+        <span>You have spent <span id="e1098"></span> seconds in this complexity, increasing chroma caps ^<span id="e1099"></span>.</span>
         <br/>
         <br/>
         <span>You can make some of your galaxies dilated to make the galaxy effect increase faster, but have a lower cap.</span>
         <br/>
-        <span>Currently <span id="e1091"></span> galax<span id="e1092"></span> <span id="e1093"></span> dilated, making the galaxy effect have speed <span id="e1094"></span>x and cap <span id="e1095"></span>, capping in <span id="e1096"></span> seconds.</span>
+        <span>Currently <span id="e1100"></span> galax<span id="e1101"></span> <span id="e1102"></span> dilated, making the galaxy effect have speed <span id="e1103"></span>x and cap <span id="e1104"></span>, capping in <span id="e1105"></span> seconds.</span>
         <br/>
-        <span>Next complexity <span id="e1097"></span> galax<span id="e1098"></span> will be dilated, making the galaxy effect have speed <span id="e1099"></span>x and cap <span id="e1100"></span>, capping in <span id="e1101"></span> seconds.</span>
+        <span>Next complexity <span id="e1106"></span> galax<span id="e1107"></span> will be dilated, making the galaxy effect have speed <span id="e1108"></span>x and cap <span id="e1109"></span>, capping in <span id="e1110"></span> seconds.</span>
         <br/>
         <br/>
-        <span>Galaxies to make dilated next complexity reset: <input id="b1108" class="nextdilatedinput" type="text"></input></span>
+        <span>Galaxies to make dilated next complexity reset: <input id="b1097" class="nextdilatedinput" type="text"></input></span>
         <br/>
-        <span>(Set this to <span id="e1102"></span> to un-dilate all galaxies, or -x to dilate all but x galaxies.)</span>
-        <br id="b1109"/>
-        <span><button id="b1110" onclick="Galaxy.toggleResetDilatedOnFinality()">Reset dilated galaxies to <span id="e1103"></span> on finality: <span id="e1104"></span></button></span>
+        <span>(Set this to <span id="e1111"></span> to un-dilate all galaxies, or -x to dilate all but x galaxies.)</span>
+        <br id="b1098"/>
+        <span><button id="b1099" onclick="Galaxy.toggleResetDilatedOnFinality()">Reset dilated galaxies to <span id="e1112"></span> on finality: <span id="e1113"></span></button></span>
       </div>
     </div>
-    <div id="b1111">
-      <span>You have <span id="e1105"></span> finality point<span id="e1106"></span> (FP).
-        <button id="b1112" onclick="FinalityMaxAll.maxAll()">Max all</button>
+    <div id="b1100">
+      <span>You have <span id="e1114"></span> finality point<span id="e1115"></span> (FP).
+        <button id="b1101" onclick="FinalityMaxAll.maxAll()">Max all</button>
       </span>
       <br/>
-      <span>You have produced <span id="e1107"></span> total finality point<span id="e1108"></span>.</span>
+      <span>You have produced <span id="e1116"></span> total finality point<span id="e1117"></span>.</span>
       <br/>
-      <span>You have <span id="e1109"></span> finalit<span id="e1110"></span>, multiplying all finality generators (FGs) by <span id="e1111"></span></span>
+      <span>You have <span id="e1118"></span> finalit<span id="e1119"></span>, multiplying all finality generators (FGs) by <span id="e1120"></span></span>
       <br/>
-      <span>making the finality generator per-purchase multiplier <span id="e1112"></span>x,</span>
+      <span>making the finality generator per-purchase multiplier <span id="e1121"></span>x,</span>
       <br/>
-      <span>and auto-completing an EC tier every <span id="e1113"></span> seconds.</span>
+      <span>and auto-completing an EC tier every <span id="e1122"></span> seconds.</span>
       <br/>
-      <span>You have <span id="e1114"></span> finality stars, multiplying all non-finality generators by <span id="e1115"></span>x.</span>
+      <span>You have <span id="e1123"></span> finality stars, multiplying all non-finality generators by <span id="e1124"></span>x.</span>
       <br/>
-      <span>You are getting <span id="e1116"></span> finality stars per second.</span>
+      <span>You are getting <span id="e1125"></span> finality stars per second.</span>
       <br/>
       <br/>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
-        <tr id="b1113">
+        <tr id="b1102">
           <td>Finality Generator 1</td>
-          <td><span id="e1117"></span></td>
-          <td><span id="e1118"></span>/s</td>
-          <td><span id="e1119"></span>x</td>
-          <td><button id="b1114" onclick="FinalityGenerator(1).buy()">Cost: <span id="e1120"></span> FP</button></td>
-          <td><button id="b1115" onclick="FinalityGenerator(1).buyMax()">Max</button></td>
+          <td><span id="e1126"></span></td>
+          <td><span id="e1127"></span>/s</td>
+          <td><span id="e1128"></span>x</td>
+          <td><button id="b1103" onclick="FinalityGenerator(1).buy()">Cost: <span id="e1129"></span> FP</button></td>
+          <td><button id="b1104" onclick="FinalityGenerator(1).buyMax()">Max</button></td>
         </tr>
-        <tr id="b1116">
+        <tr id="b1105">
           <td>Finality Generator 2</td>
-          <td><span id="e1121"></span></td>
-          <td><span id="e1122"></span>/s</td>
-          <td><span id="e1123"></span>x</td>
-          <td><button id="b1117" onclick="FinalityGenerator(2).buy()">Cost: <span id="e1124"></span> FP</button></td>
-          <td><button id="b1118" onclick="FinalityGenerator(2).buyMax()">Max</button></td>
+          <td><span id="e1130"></span></td>
+          <td><span id="e1131"></span>/s</td>
+          <td><span id="e1132"></span>x</td>
+          <td><button id="b1106" onclick="FinalityGenerator(2).buy()">Cost: <span id="e1133"></span> FP</button></td>
+          <td><button id="b1107" onclick="FinalityGenerator(2).buyMax()">Max</button></td>
         </tr>
-        <tr id="b1119">
+        <tr id="b1108">
           <td>Finality Generator 3</td>
-          <td><span id="e1125"></span></td>
-          <td><span id="e1126"></span>/s</td>
-          <td><span id="e1127"></span>x</td>
-          <td><button id="b1120" onclick="FinalityGenerator(3).buy()">Cost: <span id="e1128"></span> FP</button></td>
-          <td><button id="b1121" onclick="FinalityGenerator(3).buyMax()">Max</button></td>
+          <td><span id="e1134"></span></td>
+          <td><span id="e1135"></span>/s</td>
+          <td><span id="e1136"></span>x</td>
+          <td><button id="b1109" onclick="FinalityGenerator(3).buy()">Cost: <span id="e1137"></span> FP</button></td>
+          <td><button id="b1110" onclick="FinalityGenerator(3).buyMax()">Max</button></td>
         </tr>
-        <tr id="b1122">
+        <tr id="b1111">
           <td>Finality Generator 4</td>
-          <td><span id="e1129"></span></td>
-          <td><span id="e1130"></span>/s</td>
-          <td><span id="e1131"></span>x</td>
-          <td><button id="b1123" onclick="FinalityGenerator(4).buy()">Cost: <span id="e1132"></span> FP</button></td>
-          <td><button id="b1124" onclick="FinalityGenerator(4).buyMax()">Max</button></td>
+          <td><span id="e1138"></span></td>
+          <td><span id="e1139"></span>/s</td>
+          <td><span id="e1140"></span>x</td>
+          <td><button id="b1112" onclick="FinalityGenerator(4).buy()">Cost: <span id="e1141"></span> FP</button></td>
+          <td><button id="b1113" onclick="FinalityGenerator(4).buyMax()">Max</button></td>
         </tr>
-        <tr id="b1125">
+        <tr id="b1114">
           <td>Finality Generator 5</td>
-          <td><span id="e1133"></span></td>
-          <td><span id="e1134"></span>/s</td>
-          <td><span id="e1135"></span>x</td>
-          <td><button id="b1126" onclick="FinalityGenerator(5).buy()">Cost: <span id="e1136"></span> FP</button></td>
-          <td><button id="b1127" onclick="FinalityGenerator(5).buyMax()">Max</button></td>
+          <td><span id="e1142"></span></td>
+          <td><span id="e1143"></span>/s</td>
+          <td><span id="e1144"></span>x</td>
+          <td><button id="b1115" onclick="FinalityGenerator(5).buy()">Cost: <span id="e1145"></span> FP</button></td>
+          <td><button id="b1116" onclick="FinalityGenerator(5).buyMax()">Max</button></td>
         </tr>
-        <tr id="b1128">
+        <tr id="b1117">
           <td>Finality Generator 6</td>
-          <td><span id="e1137"></span></td>
-          <td><span id="e1138"></span>/s</td>
-          <td><span id="e1139"></span>x</td>
-          <td><button id="b1129" onclick="FinalityGenerator(6).buy()">Cost: <span id="e1140"></span> FP</button></td>
-          <td><button id="b1130" onclick="FinalityGenerator(6).buyMax()">Max</button></td>
+          <td><span id="e1146"></span></td>
+          <td><span id="e1147"></span>/s</td>
+          <td><span id="e1148"></span>x</td>
+          <td><button id="b1118" onclick="FinalityGenerator(6).buy()">Cost: <span id="e1149"></span> FP</button></td>
+          <td><button id="b1119" onclick="FinalityGenerator(6).buyMax()">Max</button></td>
         </tr>
-        <tr id="b1131">
+        <tr id="b1120">
           <td>Finality Generator 7</td>
-          <td><span id="e1141"></span></td>
-          <td><span id="e1142"></span>/s</td>
-          <td><span id="e1143"></span>x</td>
-          <td><button id="b1132" onclick="FinalityGenerator(7).buy()">Cost: <span id="e1144"></span> FP</button></td>
-          <td><button id="b1133" onclick="FinalityGenerator(7).buyMax()">Max</button></td>
+          <td><span id="e1150"></span></td>
+          <td><span id="e1151"></span>/s</td>
+          <td><span id="e1152"></span>x</td>
+          <td><button id="b1121" onclick="FinalityGenerator(7).buy()">Cost: <span id="e1153"></span> FP</button></td>
+          <td><button id="b1122" onclick="FinalityGenerator(7).buyMax()">Max</button></td>
         </tr>
-        <tr id="b1134">
+        <tr id="b1123">
           <td>Finality Generator 8</td>
-          <td><span id="e1145"></span></td>
-          <td><span id="e1146"></span>/s</td>
-          <td><span id="e1147"></span>x</td>
-          <td><button id="b1135" onclick="FinalityGenerator(8).buy()">Cost: <span id="e1148"></span> FP</button></td>
-          <td><button id="b1136" onclick="FinalityGenerator(8).buyMax()">Max</button></td>
+          <td><span id="e1154"></span></td>
+          <td><span id="e1155"></span>/s</td>
+          <td><span id="e1156"></span>x</td>
+          <td><button id="b1124" onclick="FinalityGenerator(8).buy()">Cost: <span id="e1157"></span> FP</button></td>
+          <td><button id="b1125" onclick="FinalityGenerator(8).buyMax()">Max</button></td>
         </tr>
       </table>
     </div>
-    <div id="b1137">
-      <span>You have <span id="e1149"></span> total finality shard<span id="e1150"></span> and <span id="e1151"></span> unspent finality shard<span id="e1152"></span> (FS).
-        <button id="b1138" onclick="FinalityShards.maxAll()">Max all</button>
+    <div id="b1126">
+      <span>You have <span id="e1158"></span> total finality shard<span id="e1159"></span> and <span id="e1160"></span> unspent finality shard<span id="e1161"></span> (FS).
+        <button id="b1127" onclick="FinalityShards.maxAll()">Max all</button>
       </span>
       <br/>
-      <span>You will get <span id="e1153"></span> finality shard<span id="e1154"></span> next finality.</span>
+      <span>You will get <span id="e1162"></span> finality shard<span id="e1163"></span> next finality.</span>
       <br/>
-      <span>(This gain of finality shards is <span id="e1155"></span> times (<span id="e1156"></span> + finalities), doubled if (<span id="e1157"></span> + finalities) is a multiple of <span id="e1158"></span>.)</span>
+      <span>(This gain of finality shards is <span id="e1164"></span> times (<span id="e1165"></span> + finalities), doubled if (<span id="e1166"></span> + finalities) is a multiple of <span id="e1167"></span>.)</span>
       <br/>
       <button class="finality-shard-upgrades-export-button" onclick="FinalityShardPresets.export()">Export finality shard upgrades</button> <button onclick="FinalityShardPresets.import()">Import finality shard upgrades</button>
-      <button onclick="FinalityShardPresets.toggleRespec()">Respec finality shard upgrades on next finality: <span id="e1159"></span></button>
+      <button onclick="FinalityShardPresets.toggleRespec()">Respec finality shard upgrades on next finality: <span id="e1168"></span></button>
       <br/>
-      <button onclick="FinalityShardPresets.respecAndReset()">Respec finality shard upgrades and <span id="e1160"></span></button></button>
+      <button onclick="FinalityShardPresets.respecAndReset()">Respec finality shard upgrades and <span id="e1169"></span></button></button>
       <br/>
       <br/>
       <div style="width: 1024px; margin-left: auto; margin-right: auto;">
         <span>Click on the name of a finality preset on the line below to buy those finality upgrades:</span>
         <br/>
-        <button id="b1139" onclick="FinalityShardPresets.presetLoad(1)"><span id="e1161"></span></button>
-        <button id="b1140" onclick="FinalityShardPresets.presetLoad(2)"><span id="e1162"></span></button>
-        <button id="b1141" onclick="FinalityShardPresets.presetLoad(3)"><span id="e1163"></span></button>
-        <button id="b1142" onclick="FinalityShardPresets.presetLoad(4)"><span id="e1164"></span></button>
-        <button id="b1143" onclick="FinalityShardPresets.presetLoad(5)"><span id="e1165"></span></button>
-        <button id="b1144" onclick="FinalityShardPresets.presetLoad(6)"><span id="e1166"></span></button>
-        <button id="b1145" onclick="FinalityShardPresets.presetLoad(7)"><span id="e1167"></span></button>
-        <button id="b1146" onclick="FinalityShardPresets.presetLoad(8)"><span id="e1168"></span></button>
-        <button id="b1147" onclick="FinalityShardPresets.presetLoad(9)"><span id="e1169"></span></button>
-        <button id="b1148" onclick="FinalityShardPresets.presetLoad(10)"><span id="e1170"></span></button>
-        <button id="b1149" onclick="FinalityShardPresets.presetLoad(11)"><span id="e1171"></span></button>
-        <button id="b1150" onclick="FinalityShardPresets.presetLoad(12)"><span id="e1172"></span></button>
-        <button id="b1151" onclick="FinalityShardPresets.presetLoad(13)"><span id="e1173"></span></button>
-        <button id="b1152" onclick="FinalityShardPresets.presetLoad(14)"><span id="e1174"></span></button>
-        <button id="b1153" onclick="FinalityShardPresets.presetLoad(15)"><span id="e1175"></span></button>
-        <button id="b1154" onclick="FinalityShardPresets.presetLoad(16)"><span id="e1176"></span></button>
-        <button id="b1155" onclick="FinalityShardPresets.presetLoad(17)"><span id="e1177"></span></button>
-        <button id="b1156" onclick="FinalityShardPresets.presetLoad(18)"><span id="e1178"></span></button>
-        <button id="b1157" onclick="FinalityShardPresets.presetLoad(19)"><span id="e1179"></span></button>
-        <button id="b1158" onclick="FinalityShardPresets.presetLoad(20)"><span id="e1180"></span></button>
-        <button id="b1159" onclick="FinalityShardPresets.presetLoad(21)"><span id="e1181"></span></button>
-        <button id="b1160" onclick="FinalityShardPresets.presetLoad(22)"><span id="e1182"></span></button>
-        <button id="b1161" onclick="FinalityShardPresets.presetLoad(23)"><span id="e1183"></span></button>
-        <button id="b1162" onclick="FinalityShardPresets.presetLoad(24)"><span id="e1184"></span></button>
-        <button id="b1163" onclick="FinalityShardPresets.presetLoad(25)"><span id="e1185"></span></button>
-        <button id="b1164" onclick="FinalityShardPresets.presetLoad(26)"><span id="e1186"></span></button>
-        <button id="b1165" onclick="FinalityShardPresets.presetLoad(27)"><span id="e1187"></span></button>
-        <button id="b1166" onclick="FinalityShardPresets.presetLoad(28)"><span id="e1188"></span></button>
-        <button id="b1167" onclick="FinalityShardPresets.presetLoad(29)"><span id="e1189"></span></button>
-        <button id="b1168" onclick="FinalityShardPresets.presetLoad(30)"><span id="e1190"></span></button>
-        <button id="b1169" onclick="FinalityShardPresets.presetLoad(31)"><span id="e1191"></span></button>
-        <button id="b1170" onclick="FinalityShardPresets.presetLoad(32)"><span id="e1192"></span></button>
-        <div id="b1171">
+        <button id="b1128" onclick="FinalityShardPresets.presetLoad(1)"><span id="e1170"></span></button>
+        <button id="b1129" onclick="FinalityShardPresets.presetLoad(2)"><span id="e1171"></span></button>
+        <button id="b1130" onclick="FinalityShardPresets.presetLoad(3)"><span id="e1172"></span></button>
+        <button id="b1131" onclick="FinalityShardPresets.presetLoad(4)"><span id="e1173"></span></button>
+        <button id="b1132" onclick="FinalityShardPresets.presetLoad(5)"><span id="e1174"></span></button>
+        <button id="b1133" onclick="FinalityShardPresets.presetLoad(6)"><span id="e1175"></span></button>
+        <button id="b1134" onclick="FinalityShardPresets.presetLoad(7)"><span id="e1176"></span></button>
+        <button id="b1135" onclick="FinalityShardPresets.presetLoad(8)"><span id="e1177"></span></button>
+        <button id="b1136" onclick="FinalityShardPresets.presetLoad(9)"><span id="e1178"></span></button>
+        <button id="b1137" onclick="FinalityShardPresets.presetLoad(10)"><span id="e1179"></span></button>
+        <button id="b1138" onclick="FinalityShardPresets.presetLoad(11)"><span id="e1180"></span></button>
+        <button id="b1139" onclick="FinalityShardPresets.presetLoad(12)"><span id="e1181"></span></button>
+        <button id="b1140" onclick="FinalityShardPresets.presetLoad(13)"><span id="e1182"></span></button>
+        <button id="b1141" onclick="FinalityShardPresets.presetLoad(14)"><span id="e1183"></span></button>
+        <button id="b1142" onclick="FinalityShardPresets.presetLoad(15)"><span id="e1184"></span></button>
+        <button id="b1143" onclick="FinalityShardPresets.presetLoad(16)"><span id="e1185"></span></button>
+        <button id="b1144" onclick="FinalityShardPresets.presetLoad(17)"><span id="e1186"></span></button>
+        <button id="b1145" onclick="FinalityShardPresets.presetLoad(18)"><span id="e1187"></span></button>
+        <button id="b1146" onclick="FinalityShardPresets.presetLoad(19)"><span id="e1188"></span></button>
+        <button id="b1147" onclick="FinalityShardPresets.presetLoad(20)"><span id="e1189"></span></button>
+        <button id="b1148" onclick="FinalityShardPresets.presetLoad(21)"><span id="e1190"></span></button>
+        <button id="b1149" onclick="FinalityShardPresets.presetLoad(22)"><span id="e1191"></span></button>
+        <button id="b1150" onclick="FinalityShardPresets.presetLoad(23)"><span id="e1192"></span></button>
+        <button id="b1151" onclick="FinalityShardPresets.presetLoad(24)"><span id="e1193"></span></button>
+        <button id="b1152" onclick="FinalityShardPresets.presetLoad(25)"><span id="e1194"></span></button>
+        <button id="b1153" onclick="FinalityShardPresets.presetLoad(26)"><span id="e1195"></span></button>
+        <button id="b1154" onclick="FinalityShardPresets.presetLoad(27)"><span id="e1196"></span></button>
+        <button id="b1155" onclick="FinalityShardPresets.presetLoad(28)"><span id="e1197"></span></button>
+        <button id="b1156" onclick="FinalityShardPresets.presetLoad(29)"><span id="e1198"></span></button>
+        <button id="b1157" onclick="FinalityShardPresets.presetLoad(30)"><span id="e1199"></span></button>
+        <button id="b1158" onclick="FinalityShardPresets.presetLoad(31)"><span id="e1200"></span></button>
+        <button id="b1159" onclick="FinalityShardPresets.presetLoad(32)"><span id="e1201"></span></button>
+        <div id="b1160">
           You don't currently have any finality presets. You can create presets at the bottom of this tab.
         </div>
       </div>
       <br/>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
-          <td>Power to non-finality generator multipliers (<span id="e1193"></span>):</td>
-          <td><span id="b1172">^<span id="e1194"></span> → ^<span id="e1195"></span></span><span id="b1173">^<span id="e1196"></span> (maxed)</span></td>
-          <td><span id="b1174"><button id="b1175" onclick="FinalityShardUpgrade(1).buy()">Cost: <span id="e1197"></span> finality shard<span id="e1198"></span></button></span></td>
-          <td><span id="b1176"><button id="b1177" onclick="FinalityShardUpgrade(1).buyMax()">Max</button></span></td>
+          <td>Power to non-finality generator multipliers (<span id="e1202"></span>):</td>
+          <td><span id="b1161">^<span id="e1203"></span> → ^<span id="e1204"></span></span><span id="b1162">^<span id="e1205"></span> (maxed)</span></td>
+          <td><span id="b1163"><button id="b1164" onclick="FinalityShardUpgrade(1).buy()">Cost: <span id="e1206"></span> finality shard<span id="e1207"></span></button></span></td>
+          <td><span id="b1165"><button id="b1166" onclick="FinalityShardUpgrade(1).buyMax()">Max</button></span></td>
         </tr>
         <tr>
-          <td>Finality point gain on finality (<span id="e1199"></span>):</td>
-          <td><span id="b1178"><span id="e1200"></span> FP → <span id="e1201"></span> FP</span><span id="b1179"><span id="e1202"></span> FP (maxed)</span></td>
-          <td><span id="b1180"><button id="b1181" onclick="FinalityShardUpgrade(2).buy()">Cost: <span id="e1203"></span> finality shard<span id="e1204"></span></button></span></td>
-          <td><span id="b1182"><button id="b1183" onclick="FinalityShardUpgrade(2).buyMax()">Max</button></span></td>
+          <td>Finality point gain on finality (<span id="e1208"></span>):</td>
+          <td><span id="b1167"><span id="e1209"></span> FP → <span id="e1210"></span> FP</span><span id="b1168"><span id="e1211"></span> FP (maxed)</span></td>
+          <td><span id="b1169"><button id="b1170" onclick="FinalityShardUpgrade(2).buy()">Cost: <span id="e1212"></span> finality shard<span id="e1213"></span></button></span></td>
+          <td><span id="b1171"><button id="b1172" onclick="FinalityShardUpgrade(2).buyMax()">Max</button></span></td>
         </tr>
         <tr>
-          <td>Multiplier to eternity and permanence gain (<span id="e1205"></span>):</td>
-          <td><span id="b1184"><span id="e1206"></span>x → <span id="e1207"></span>x</span><span id="b1185"><span id="e1208"></span>x (maxed)</span></td>
-          <td><span id="b1186"><button id="b1187" onclick="FinalityShardUpgrade(3).buy()">Cost: <span id="e1209"></span> finality shard<span id="e1210"></span></button></span></td>
-          <td><span id="b1188"><button id="b1189" onclick="FinalityShardUpgrade(3).buyMax()">Max</button></span></td>
+          <td>Multiplier to eternity and permanence gain (<span id="e1214"></span>):</td>
+          <td><span id="b1173"><span id="e1215"></span>x → <span id="e1216"></span>x</span><span id="b1174"><span id="e1217"></span>x (maxed)</span></td>
+          <td><span id="b1175"><button id="b1176" onclick="FinalityShardUpgrade(3).buy()">Cost: <span id="e1218"></span> finality shard<span id="e1219"></span></button></span></td>
+          <td><span id="b1177"><button id="b1178" onclick="FinalityShardUpgrade(3).buyMax()">Max</button></span></td>
         </tr>
         <tr>
-          <td>Multiplier to chroma buildup speed (<span id="e1211"></span>):</td>
-          <td><span id="b1190"><span id="e1212"></span>x → <span id="e1213"></span>x</span><span id="b1191"><span id="e1214"></span>x (maxed)</span></td>
-          <td><span id="b1192"><button id="b1193" onclick="FinalityShardUpgrade(4).buy()">Cost: <span id="e1215"></span> finality shard<span id="e1216"></span></button></span></td>
-          <td><span id="b1194"><button id="b1195" onclick="FinalityShardUpgrade(4).buyMax()">Max</button></span></td>
+          <td>Multiplier to chroma buildup speed (<span id="e1220"></span>):</td>
+          <td><span id="b1179"><span id="e1221"></span>x → <span id="e1222"></span>x</span><span id="b1180"><span id="e1223"></span>x (maxed)</span></td>
+          <td><span id="b1181"><button id="b1182" onclick="FinalityShardUpgrade(4).buy()">Cost: <span id="e1224"></span> finality shard<span id="e1225"></span></button></span></td>
+          <td><span id="b1183"><button id="b1184" onclick="FinalityShardUpgrade(4).buyMax()">Max</button></span></td>
         </tr>
         <tr>
-          <td>Multiplier to chroma cap (<span id="e1217"></span>):</td>
-          <td><span id="b1196"><span id="e1218"></span>x → <span id="e1219"></span>x</span><span id="b1197"><span id="e1220"></span>x (maxed)</span></td>
-          <td><span id="b1198"><button id="b1199" onclick="FinalityShardUpgrade(5).buy()">Cost: <span id="e1221"></span> finality shard<span id="e1222"></span></button></span></td>
-          <td><span id="b1200"><button id="b1201" onclick="FinalityShardUpgrade(5).buyMax()">Max</button></span></td>
+          <td>Multiplier to chroma cap (<span id="e1226"></span>):</td>
+          <td><span id="b1185"><span id="e1227"></span>x → <span id="e1228"></span>x</span><span id="b1186"><span id="e1229"></span>x (maxed)</span></td>
+          <td><span id="b1187"><button id="b1188" onclick="FinalityShardUpgrade(5).buy()">Cost: <span id="e1230"></span> finality shard<span id="e1231"></span></button></span></td>
+          <td><span id="b1189"><button id="b1190" onclick="FinalityShardUpgrade(5).buyMax()">Max</button></span></td>
         </tr>
         <tr>
-          <td>Multiplier to power gain speed (<span id="e1223"></span>):</td>
-          <td><span id="b1202"><span id="e1224"></span>x → <span id="e1225"></span>x</span><span id="b1203"><span id="e1226"></span>x (maxed)</span></td>
-          <td><span id="b1204"><button id="b1205" onclick="FinalityShardUpgrade(6).buy()">Cost: <span id="e1227"></span> finality shard<span id="e1228"></span></button></span></td>
-          <td><span id="b1206"><button id="b1207" onclick="FinalityShardUpgrade(6).buyMax()">Max</button></span></td>
+          <td>Multiplier to power gain speed (<span id="e1232"></span>):</td>
+          <td><span id="b1191"><span id="e1233"></span>x → <span id="e1234"></span>x</span><span id="b1192"><span id="e1235"></span>x (maxed)</span></td>
+          <td><span id="b1193"><button id="b1194" onclick="FinalityShardUpgrade(6).buy()">Cost: <span id="e1236"></span> finality shard<span id="e1237"></span></button></span></td>
+          <td><span id="b1195"><button id="b1196" onclick="FinalityShardUpgrade(6).buyMax()">Max</button></span></td>
         </tr>
         <tr>
-          <td>Increase to strength of new powers (<span id="e1229"></span>):</td>
-          <td><span id="b1208">+<span id="e1230"></span> → +<span id="e1231"></span></span><span id="b1209">+<span id="e1232"></span> (maxed)</span></td>
-          <td><span id="b1210"><button id="b1211" onclick="FinalityShardUpgrade(7).buy()">Cost: <span id="e1233"></span> finality shard<span id="e1234"></span></button></span></td>
-          <td><span id="b1212"><button id="b1213" onclick="FinalityShardUpgrade(7).buyMax()">Max</button></span></td>
+          <td>Increase to strength of new powers (<span id="e1238"></span>):</td>
+          <td><span id="b1197">+<span id="e1239"></span> → +<span id="e1240"></span></span><span id="b1198">+<span id="e1241"></span> (maxed)</span></td>
+          <td><span id="b1199"><button id="b1200" onclick="FinalityShardUpgrade(7).buy()">Cost: <span id="e1242"></span> finality shard<span id="e1243"></span></button></span></td>
+          <td><span id="b1201"><button id="b1202" onclick="FinalityShardUpgrade(7).buyMax()">Max</button></span></td>
         </tr>
         <tr>
-          <td>Multiplier to galaxy effect buildup speed (<span id="e1235"></span>):</td>
-          <td><span id="b1214"><span id="e1236"></span>x → <span id="e1237"></span>x</span><span id="b1215"><span id="e1238"></span>x (maxed)</span></td>
-          <td><span id="b1216"><button id="b1217" onclick="FinalityShardUpgrade(8).buy()">Cost: <span id="e1239"></span> finality shard<span id="e1240"></span></button></span></td>
-          <td><span id="b1218"><button id="b1219" onclick="FinalityShardUpgrade(8).buyMax()">Max</button></span></td>
+          <td>Multiplier to galaxy effect buildup speed (<span id="e1244"></span>):</td>
+          <td><span id="b1203"><span id="e1245"></span>x → <span id="e1246"></span>x</span><span id="b1204"><span id="e1247"></span>x (maxed)</span></td>
+          <td><span id="b1205"><button id="b1206" onclick="FinalityShardUpgrade(8).buy()">Cost: <span id="e1248"></span> finality shard<span id="e1249"></span></button></span></td>
+          <td><span id="b1207"><button id="b1208" onclick="FinalityShardUpgrade(8).buyMax()">Max</button></span></td>
         </tr>
       </table>
-      <br id="b1220"/>
-      <span id="b1221">The first <span id="e1241"></span> finality shard upgrades can be bought up to <span id="e1242"></span> times; the other <span id="e1243"></span> can be bought up to <span id="e1244"></span> times.</span>
+      <br id="b1209"/>
+      <span id="b1210">The first <span id="e1250"></span> finality shard upgrades can be bought up to <span id="e1251"></span> times; the other <span id="e1252"></span> can be bought up to <span id="e1253"></span> times.</span>
       <br/>
       <br/>
-      <span>You have made <span id="e1245"></span> total finality shard upgrade purchase<span id="e1246"></span>, giving you starting bonuses with a strength of <span id="e1247"></span> (<span id="e1248"></span> per <span id="e1249"></span> purchases):</span>
-      <br id="b1222">
-      <span id="b1223">You start each <span id="e1250"></span> with <span id="e1251"></span> star<span id="e1252"></span>.</span>
-      <br id="b1224"/>
-      <span id="b1225">You start each <span id="e1253"></span> with <span id="e1254"></span> infinity point<span id="e1255"></span>.</span>
-      <br id="b1226"/>
-      <span id="b1227">You start each <span id="e1256"></span> with <span id="e1257"></span> eternity point<span id="e1258"></span>.</span>
-      <br id="b1228"/>
-      <span id="b1229">You start each <span id="e1259"></span> with <span id="e1260"></span>.</span>
-      <br id="b1230"/>
-      <span id="b1231">You start with <span id="e1261"></span> extra galax<span id="e1262"></span> after unlocking galaxies.</span>
-      <br id="b1232"/>
-      <span id="b1233">(Starting complexity achievements are given top-to-bottom, and left-to-right within each row.)</span>
+      <span>You have made <span id="e1254"></span> total finality shard upgrade purchase<span id="e1255"></span>, giving you starting bonuses with a strength of <span id="e1256"></span> (<span id="e1257"></span> per <span id="e1258"></span> purchases):</span>
+      <br id="b1211">
+      <span id="b1212">You start each <span id="e1259"></span> with <span id="e1260"></span> star<span id="e1261"></span>.</span>
+      <br id="b1213"/>
+      <span id="b1214">You start each <span id="e1262"></span> with <span id="e1263"></span> infinity point<span id="e1264"></span>.</span>
+      <br id="b1215"/>
+      <span id="b1216">You start each <span id="e1265"></span> with <span id="e1266"></span> eternity point<span id="e1267"></span>.</span>
+      <br id="b1217"/>
+      <span id="b1218">You start each <span id="e1268"></span> with <span id="e1269"></span>.</span>
+      <br id="b1219"/>
+      <span id="b1220">You start with <span id="e1270"></span> extra galax<span id="e1271"></span> after unlocking galaxies.</span>
+      <br id="b1221"/>
+      <span id="b1222">(Starting complexity achievements are given top-to-bottom, and left-to-right within each row.)</span>
       <br/>
       <br/>
       <span>Finality presets:</span>
       <br/>
-      <div id="b1234">
-        Name: <input id="b1235" class="presetfinalityshardupgradename1" type="text"></input>
-        Finality upgrades: <input id="b1236" class="presetfinalityshardupgradelist1" style="width: 256px;" type="text"></input>
+      <div id="b1223">
+        Name: <input id="b1224" class="presetfinalityshardupgradename1" type="text"></input>
+        Finality upgrades: <input id="b1225" class="presetfinalityshardupgradelist1" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(1)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(1)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(1)">Delete</button>
       </div>
-      <div id="b1237">
-        Name: <input id="b1238" class="presetfinalityshardupgradename2" type="text"></input>
-        Finality upgrades: <input id="b1239" class="presetfinalityshardupgradelist2" style="width: 256px;" type="text"></input>
+      <div id="b1226">
+        Name: <input id="b1227" class="presetfinalityshardupgradename2" type="text"></input>
+        Finality upgrades: <input id="b1228" class="presetfinalityshardupgradelist2" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(2)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(2)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(2)">Delete</button>
       </div>
-      <div id="b1240">
-        Name: <input id="b1241" class="presetfinalityshardupgradename3" type="text"></input>
-        Finality upgrades: <input id="b1242" class="presetfinalityshardupgradelist3" style="width: 256px;" type="text"></input>
+      <div id="b1229">
+        Name: <input id="b1230" class="presetfinalityshardupgradename3" type="text"></input>
+        Finality upgrades: <input id="b1231" class="presetfinalityshardupgradelist3" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(3)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(3)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(3)">Delete</button>
       </div>
-      <div id="b1243">
-        Name: <input id="b1244" class="presetfinalityshardupgradename4" type="text"></input>
-        Finality upgrades: <input id="b1245" class="presetfinalityshardupgradelist4" style="width: 256px;" type="text"></input>
+      <div id="b1232">
+        Name: <input id="b1233" class="presetfinalityshardupgradename4" type="text"></input>
+        Finality upgrades: <input id="b1234" class="presetfinalityshardupgradelist4" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(4)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(4)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(4)">Delete</button>
       </div>
-      <div id="b1246">
-        Name: <input id="b1247" class="presetfinalityshardupgradename5" type="text"></input>
-        Finality upgrades: <input id="b1248" class="presetfinalityshardupgradelist5" style="width: 256px;" type="text"></input>
+      <div id="b1235">
+        Name: <input id="b1236" class="presetfinalityshardupgradename5" type="text"></input>
+        Finality upgrades: <input id="b1237" class="presetfinalityshardupgradelist5" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(5)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(5)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(5)">Delete</button>
       </div>
-      <div id="b1249">
-        Name: <input id="b1250" class="presetfinalityshardupgradename6" type="text"></input>
-        Finality upgrades: <input id="b1251" class="presetfinalityshardupgradelist6" style="width: 256px;" type="text"></input>
+      <div id="b1238">
+        Name: <input id="b1239" class="presetfinalityshardupgradename6" type="text"></input>
+        Finality upgrades: <input id="b1240" class="presetfinalityshardupgradelist6" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(6)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(6)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(6)">Delete</button>
       </div>
-      <div id="b1252">
-        Name: <input id="b1253" class="presetfinalityshardupgradename7" type="text"></input>
-        Finality upgrades: <input id="b1254" class="presetfinalityshardupgradelist7" style="width: 256px;" type="text"></input>
+      <div id="b1241">
+        Name: <input id="b1242" class="presetfinalityshardupgradename7" type="text"></input>
+        Finality upgrades: <input id="b1243" class="presetfinalityshardupgradelist7" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(7)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(7)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(7)">Delete</button>
       </div>
-      <div id="b1255">
-        Name: <input id="b1256" class="presetfinalityshardupgradename8" type="text"></input>
-        Finality upgrades: <input id="b1257" class="presetfinalityshardupgradelist8" style="width: 256px;" type="text"></input>
+      <div id="b1244">
+        Name: <input id="b1245" class="presetfinalityshardupgradename8" type="text"></input>
+        Finality upgrades: <input id="b1246" class="presetfinalityshardupgradelist8" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(8)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(8)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(8)">Delete</button>
       </div>
-      <div id="b1258">
-        Name: <input id="b1259" class="presetfinalityshardupgradename9" type="text"></input>
-        Finality upgrades: <input id="b1260" class="presetfinalityshardupgradelist9" style="width: 256px;" type="text"></input>
+      <div id="b1247">
+        Name: <input id="b1248" class="presetfinalityshardupgradename9" type="text"></input>
+        Finality upgrades: <input id="b1249" class="presetfinalityshardupgradelist9" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(9)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(9)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(9)">Delete</button>
       </div>
-      <div id="b1261">
-        Name: <input id="b1262" class="presetfinalityshardupgradename10" type="text"></input>
-        Finality upgrades: <input id="b1263" class="presetfinalityshardupgradelist10" style="width: 256px;" type="text"></input>
+      <div id="b1250">
+        Name: <input id="b1251" class="presetfinalityshardupgradename10" type="text"></input>
+        Finality upgrades: <input id="b1252" class="presetfinalityshardupgradelist10" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(10)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(10)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(10)">Delete</button>
       </div>
-      <div id="b1264">
-        Name: <input id="b1265" class="presetfinalityshardupgradename11" type="text"></input>
-        Finality upgrades: <input id="b1266" class="presetfinalityshardupgradelist11" style="width: 256px;" type="text"></input>
+      <div id="b1253">
+        Name: <input id="b1254" class="presetfinalityshardupgradename11" type="text"></input>
+        Finality upgrades: <input id="b1255" class="presetfinalityshardupgradelist11" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(11)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(11)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(11)">Delete</button>
       </div>
-      <div id="b1267">
-        Name: <input id="b1268" class="presetfinalityshardupgradename12" type="text"></input>
-        Finality upgrades: <input id="b1269" class="presetfinalityshardupgradelist12" style="width: 256px;" type="text"></input>
+      <div id="b1256">
+        Name: <input id="b1257" class="presetfinalityshardupgradename12" type="text"></input>
+        Finality upgrades: <input id="b1258" class="presetfinalityshardupgradelist12" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(12)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(12)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(12)">Delete</button>
       </div>
-      <div id="b1270">
-        Name: <input id="b1271" class="presetfinalityshardupgradename13" type="text"></input>
-        Finality upgrades: <input id="b1272" class="presetfinalityshardupgradelist13" style="width: 256px;" type="text"></input>
+      <div id="b1259">
+        Name: <input id="b1260" class="presetfinalityshardupgradename13" type="text"></input>
+        Finality upgrades: <input id="b1261" class="presetfinalityshardupgradelist13" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(13)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(13)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(13)">Delete</button>
       </div>
-      <div id="b1273">
-        Name: <input id="b1274" class="presetfinalityshardupgradename14" type="text"></input>
-        Finality upgrades: <input id="b1275" class="presetfinalityshardupgradelist14" style="width: 256px;" type="text"></input>
+      <div id="b1262">
+        Name: <input id="b1263" class="presetfinalityshardupgradename14" type="text"></input>
+        Finality upgrades: <input id="b1264" class="presetfinalityshardupgradelist14" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(14)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(14)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(14)">Delete</button>
       </div>
-      <div id="b1276">
-        Name: <input id="b1277" class="presetfinalityshardupgradename15" type="text"></input>
-        Finality upgrades: <input id="b1278" class="presetfinalityshardupgradelist15" style="width: 256px;" type="text"></input>
+      <div id="b1265">
+        Name: <input id="b1266" class="presetfinalityshardupgradename15" type="text"></input>
+        Finality upgrades: <input id="b1267" class="presetfinalityshardupgradelist15" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(15)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(15)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(15)">Delete</button>
       </div>
-      <div id="b1279">
-        Name: <input id="b1280" class="presetfinalityshardupgradeame16" type="text"></input>
-        Finality upgrades: <input id="b1281" class="presetfinalityshardupgradelist16" style="width: 256px;" type="text"></input>
+      <div id="b1268">
+        Name: <input id="b1269" class="presetfinalityshardupgradeame16" type="text"></input>
+        Finality upgrades: <input id="b1270" class="presetfinalityshardupgradelist16" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(16)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(16)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(16)">Delete</button>
       </div>
-      <div id="b1282">
-        Name: <input id="b1283" class="presetfinalityshardupgradename17" type="text"></input>
-        Finality upgrades: <input id="b1284" class="presetfinalityshardupgradelist17" style="width: 256px;" type="text"></input>
+      <div id="b1271">
+        Name: <input id="b1272" class="presetfinalityshardupgradename17" type="text"></input>
+        Finality upgrades: <input id="b1273" class="presetfinalityshardupgradelist17" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(17)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(17)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(17)">Delete</button>
       </div>
-      <div id="b1285">
-        Name: <input id="b1286" class="presetfinalityshardupgradename18" type="text"></input>
-        Finality upgrades: <input id="b1287" class="presetfinalityshardupgradelist18" style="width: 256px;" type="text"></input>
+      <div id="b1274">
+        Name: <input id="b1275" class="presetfinalityshardupgradename18" type="text"></input>
+        Finality upgrades: <input id="b1276" class="presetfinalityshardupgradelist18" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(18)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(18)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(18)">Delete</button>
       </div>
-      <div id="b1288">
-        Name: <input id="b1289" class="presetfinalityshardupgradename19" type="text"></input>
-        Finality upgrades: <input id="b1290" class="presetfinalityshardupgradelist19" style="width: 256px;" type="text"></input>
+      <div id="b1277">
+        Name: <input id="b1278" class="presetfinalityshardupgradename19" type="text"></input>
+        Finality upgrades: <input id="b1279" class="presetfinalityshardupgradelist19" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(19)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(19)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(19)">Delete</button>
       </div>
-      <div id="b1291">
-        Name: <input id="b1292" class="presetfinalityshardupgradename20" type="text"></input>
-        Finality upgrades: <input id="b1293" class="presetfinalityshardupgradelist20" style="width: 256px;" type="text"></input>
+      <div id="b1280">
+        Name: <input id="b1281" class="presetfinalityshardupgradename20" type="text"></input>
+        Finality upgrades: <input id="b1282" class="presetfinalityshardupgradelist20" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(20)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(20)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(20)">Delete</button>
       </div>
-      <div id="b1294">
-        Name: <input id="b1295" class="presetfinalityshardupgradename21" type="text"></input>
-        Finality upgrades: <input id="b1296" class="presetfinalityshardupgradelist21" style="width: 256px;" type="text"></input>
+      <div id="b1283">
+        Name: <input id="b1284" class="presetfinalityshardupgradename21" type="text"></input>
+        Finality upgrades: <input id="b1285" class="presetfinalityshardupgradelist21" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(21)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(21)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(21)">Delete</button>
       </div>
-      <div id="b1297">
-        Name: <input id="b1298" class="presetfinalityshardupgradename22" type="text"></input>
-        Finality upgrades: <input id="b1299" class="presetfinalityshardupgradelist22" style="width: 256px;" type="text"></input>
+      <div id="b1286">
+        Name: <input id="b1287" class="presetfinalityshardupgradename22" type="text"></input>
+        Finality upgrades: <input id="b1288" class="presetfinalityshardupgradelist22" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(22)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(22)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(22)">Delete</button>
       </div>
-      <div id="b1300">
-        Name: <input id="b1301" class="presetfinalityshardupgradename23" type="text"></input>
-        Finality upgrades: <input id="b1302" class="presetfinalityshardupgradelist23" style="width: 256px;" type="text"></input>
+      <div id="b1289">
+        Name: <input id="b1290" class="presetfinalityshardupgradename23" type="text"></input>
+        Finality upgrades: <input id="b1291" class="presetfinalityshardupgradelist23" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(23)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(23)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(23)">Delete</button>
       </div>
-      <div id="b1303">
-        Name: <input id="b1304" class="presetfinalityshardupgradename24" type="text"></input>
-        Finality upgrades: <input id="b1305" class="presetfinalityshardupgradelist24" style="width: 256px;" type="text"></input>
+      <div id="b1292">
+        Name: <input id="b1293" class="presetfinalityshardupgradename24" type="text"></input>
+        Finality upgrades: <input id="b1294" class="presetfinalityshardupgradelist24" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(24)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(24)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(24)">Delete</button>
       </div>
-      <div id="b1306">
-        Name: <input id="b1307" class="presetfinalityshardupgradename25" type="text"></input>
-        Finality upgrades: <input id="b1308" class="presetfinalityshardupgradelist25" style="width: 256px;" type="text"></input>
+      <div id="b1295">
+        Name: <input id="b1296" class="presetfinalityshardupgradename25" type="text"></input>
+        Finality upgrades: <input id="b1297" class="presetfinalityshardupgradelist25" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(25)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(25)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(25)">Delete</button>
       </div>
-      <div id="b1309">
-        Name: <input id="b1310" class="presetfinalityshardupgradename26" type="text"></input>
-        Finality upgrades: <input id="b1311" class="presetfinalityshardupgradelist26" style="width: 256px;" type="text"></input>
+      <div id="b1298">
+        Name: <input id="b1299" class="presetfinalityshardupgradename26" type="text"></input>
+        Finality upgrades: <input id="b1300" class="presetfinalityshardupgradelist26" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(26)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(26)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(26)">Delete</button>
       </div>
-      <div id="b1312">
-        Name: <input id="b1313" class="presetfinalityshardupgradename27" type="text"></input>
-        Finality upgrades: <input id="b1314" class="presetfinalityshardupgradelist27" style="width: 256px;" type="text"></input>
+      <div id="b1301">
+        Name: <input id="b1302" class="presetfinalityshardupgradename27" type="text"></input>
+        Finality upgrades: <input id="b1303" class="presetfinalityshardupgradelist27" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(27)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(27)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(27)">Delete</button>
       </div>
-      <div id="b1315">
-        Name: <input id="b1316" class="presetfinalityshardupgradename28" type="text"></input>
-        Finality upgrades: <input id="b1317" class="presetfinalityshardupgradelist28" style="width: 256px;" type="text"></input>
+      <div id="b1304">
+        Name: <input id="b1305" class="presetfinalityshardupgradename28" type="text"></input>
+        Finality upgrades: <input id="b1306" class="presetfinalityshardupgradelist28" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(28)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(28)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(28)">Delete</button>
       </div>
-      <div id="b1318">
-        Name: <input id="b1319" class="presetfinalityshardupgradename29" type="text"></input>
-        Finality upgrades: <input id="b1320" class="presetfinalityshardupgradelist29" style="width: 256px;" type="text"></input>
+      <div id="b1307">
+        Name: <input id="b1308" class="presetfinalityshardupgradename29" type="text"></input>
+        Finality upgrades: <input id="b1309" class="presetfinalityshardupgradelist29" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(29)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(29)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(29)">Delete</button>
       </div>
-      <div id="b1321">
-        Name: <input id="b1322" class="presetfinalityshardupgradename30" type="text"></input>
-        Finality upgrades: <input id="b1323" class="presetfinalityshardupgradelist30" style="width: 256px;" type="text"></input>
+      <div id="b1310">
+        Name: <input id="b1311" class="presetfinalityshardupgradename30" type="text"></input>
+        Finality upgrades: <input id="b1312" class="presetfinalityshardupgradelist30" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(30)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(30)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(30)">Delete</button>
       </div>
-      <div id="b1324">
-        Name: <input id="b1325" class="presetfinalityshardupgradename31" type="text"></input>
-        Finality upgrades: <input id="b1326" class="presetfinalityshardupgradelist31" style="width: 256px;" type="text"></input>
+      <div id="b1313">
+        Name: <input id="b1314" class="presetfinalityshardupgradename31" type="text"></input>
+        Finality upgrades: <input id="b1315" class="presetfinalityshardupgradelist31" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(31)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(31)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(31)">Delete</button>
       </div>
-      <div id="b1327">
-        Name: <input id="b1328" class="presetfinalityshardupgradename32" type="text"></input>
-        Finality upgrades: <input id="b1329" class="presetfinalityshardupgradelist32" style="width: 256px;" type="text"></input>
+      <div id="b1316">
+        Name: <input id="b1317" class="presetfinalityshardupgradename32" type="text"></input>
+        Finality upgrades: <input id="b1318" class="presetfinalityshardupgradelist32" style="width: 256px;" type="text"></input>
         <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(32)">Set to current finality upgrades</button>
         <button onclick="FinalityShardPresets.presetLoad(32)">Load</button>
         <button onclick="FinalityShardPresets.presetDelete(32)">Delete</button>
       </div>
       <span>
-        <button id="b1330" onclick="FinalityShardPresets.presetCreate()">Create a finality preset</button>
-        <span id="b1331">You can create at most <span id="e1263"></span> finality presets. Delete existing presets to create more.</span>
+        <button id="b1319" onclick="FinalityShardPresets.presetCreate()">Create a finality preset</button>
+        <span id="b1320">You can create at most <span id="e1272"></span> finality presets. Delete existing presets to create more.</span>
       </span>
       <br/>
       <span style="display: none;">Exported finality shard upgrades (also copied to clipboard): <input id="finality-shard-upgrades-export-output"></input></span>
     </div>
-    <div id="b1332">
+    <div id="b1321">
       <span>
-        You have <span id="e1264"></span> finalit<span id="e1265"></span>.
+        You have <span id="e1273"></span> finalit<span id="e1274"></span>.
       </span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>
-            <div id="b1333" class="finalitymilestonediv">
-              <span id="e1266"></span> finalities
+            <div id="b1322" class="finalitymilestonediv">
+              <span id="e1275"></span> finalities
               <br/>
-              <span id="e1267"></span>
+              <span id="e1276"></span>
               <br/>
               Always have autobuyers for complexity generator and power upgrades.
             </div>
           </td>
           <td>
-            <div id="b1334" class="finalitymilestonediv">
-              <span id="e1268"></span> finalities
+            <div id="b1323" class="finalitymilestonediv">
+              <span id="e1277"></span> finalities
               <br/>
-              <span id="e1269"></span>
+              <span id="e1278"></span>
               <br/>
-              Start each <span id="e1270"></span> with <span id="e1271"></span> ℂP, and keep completions of each complexity challenge on <span id="e1272"></span> based on your finalities (currently <span id="e1273"></span>)
+              Start each <span id="e1279"></span> with <span id="e1280"></span> ℂP, and keep completions of each complexity challenge on <span id="e1281"></span> based on your finalities (currently <span id="e1282"></span>)
             </div>
           </td>
           <td>
-            <div id="b1335" class="finalitymilestonediv">
-              <span id="e1274"></span> finalities
+            <div id="b1324" class="finalitymilestonediv">
+              <span id="e1283"></span> finalities
               <br/>
-              <span id="e1275"></span>
+              <span id="e1284"></span>
               <br/>
               Unlock study list auto-load.
             </div>
           </td>
           <td>
-            <div id="b1336" class="finalitymilestonediv">
-              <span id="e1276"></span> finalities
+            <div id="b1325" class="finalitymilestonediv">
+              <span id="e1285"></span> finalities
               <br/>
-              <span id="e1277"></span>
+              <span id="e1286"></span>
               <br/>
               Unlock autobuyers for power shard upgrades.
             </div>
@@ -4219,37 +4347,37 @@
         </tr>
         <tr>
           <td>
-            <div id="b1337" class="finalitymilestonediv">
-              <span id="e1278"></span> finalities
+            <div id="b1326" class="finalitymilestonediv">
+              <span id="e1287"></span> finalities
               <br/>
-              <span id="e1279"></span>
+              <span id="e1288"></span>
               <br/>
-              For Complexity Challenge 6 reward strength and total complexity stars (for galaxies), complexity stars are what they would be if your best <span id="e1280"></span> complexity power<span id="e1281"></span> were active.
+              For Complexity Challenge 6 reward strength and total complexity stars (for galaxies), complexity stars are what they would be if your best <span id="e1289"></span> complexity power<span id="e1290"></span> were active.
             </div>
           </td>
           <td>
-            <div id="b1338" class="finalitymilestonediv">
-              <span id="e1282"></span> finalities
+            <div id="b1327" class="finalitymilestonediv">
+              <span id="e1291"></span> finalities
               <br/>
-              <span id="e1283"></span>
+              <span id="e1292"></span>
               <br/>
               Always have EP generation, and automatically swap active powers with better stored powers of the same type.
             </div>
           </td>
           <td>
-            <div id="b1339" class="finalitymilestonediv">
-              <span id="e1284"></span> finalities
+            <div id="b1328" class="finalitymilestonediv">
+              <span id="e1293"></span> finalities
               <br/>
-              <span id="e1285"></span>
+              <span id="e1294"></span>
               <br/>
               Unlock active powers auto-load.
             </div>
           </td>
           <td>
-            <div id="b1340" class="finalitymilestonediv">
-              <span id="e1286"></span> finalities
+            <div id="b1329" class="finalitymilestonediv">
+              <span id="e1295"></span> finalities
               <br/>
-              <span id="e1287"></span>
+              <span id="e1296"></span>
               <br/>
               Automatically unlock powers, the Oracle, and galaxies when possible, and get a finality autobuyer.
             </div>
@@ -4258,19 +4386,19 @@
         <tr>
           <td></td>
           <td>
-            <div id="b1341" class="finalitymilestonediv">
-              <span id="e1288"></span> finalities
+            <div id="b1330" class="finalitymilestonediv">
+              <span id="e1297"></span> finalities
               <br/>
-              <span id="e1289"></span>
+              <span id="e1298"></span>
               <br/>
-              For galaxy effect and eternity power extra multipliers, you start each <span id="e1290"></span> with time in complexity based on your finalities (currently <span id="e1291"></span> seconds)
+              For galaxy effect and eternity power extra multipliers, you start each <span id="e1299"></span> with time in complexity based on your finalities (currently <span id="e1300"></span> seconds)
             </div>
           </td>
           <td>
-            <div id="b1342" class="finalitymilestonediv">
-              <span id="e1292"></span> finalities
+            <div id="b1331" class="finalitymilestonediv">
+              <span id="e1301"></span> finalities
               <br/>
-              <span id="e1293"></span>
+              <span id="e1302"></span>
               <br/>
               You gain your complexity points on complexity every second, without needing to complexity (ℂP generation).
             </div>
@@ -4279,271 +4407,271 @@
         </tr>
       </table>
     </div>
-    <div id="b1343">
-      <span>You have completed <span id="e1294"></span>/<span id="e1295"></span> goals.</span>
+    <div id="b1332">
+      <span>You have completed <span id="e1303"></span>/<span id="e1304"></span> goals.</span>
       <br/>
-      <span>By default, only goals up to the next goal after the last completed goal are displayed. <button onclick="Goals.toggleDisplayAllGoals()">Display all goals: <span id="e1296"></span></button></span>
+      <span>By default, only goals up to the next goal after the last completed goal are displayed. <button onclick="Goals.toggleDisplayAllGoals()">Display all goals: <span id="e1305"></span></button></span>
       <br/>
       <span>There is no in-game reward for completing goals, but you win the game (and have finished it) when you complete them all.</span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>
-            <div id="b1344" class="goaldiv">
-              <span id="e1297"></span>
+            <div id="b1333" class="goaldiv">
+              <span id="e1306"></span>
               <br/>
-              <span id="e1298"></span>
+              <span id="e1307"></span>
             </div>
           </td>
           <td>
-            <div id="b1345" class="goaldiv">
-              <span id="e1299"></span>
+            <div id="b1334" class="goaldiv">
+              <span id="e1308"></span>
               <br/>
-              <span id="e1300"></span>
+              <span id="e1309"></span>
+            </div>
+          </td>
+          <td>
+            <div id="b1335" class="goaldiv">
+              <span id="e1310"></span>
+              <br/>
+              <span id="e1311"></span>
+            </div>
+          </td>
+          <td>
+            <div id="b1336" class="goaldiv">
+              <span id="e1312"></span>
+              <br/>
+              <span id="e1313"></span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div id="b1337" class="goaldiv">
+              <span id="e1314"></span>
+              <br/>
+              <span id="e1315"></span>
+            </div>
+          </td>
+          <td>
+            <div id="b1338" class="goaldiv">
+              <span id="e1316"></span>
+              <br/>
+              <span id="e1317"></span>
+            </div>
+          </td>
+          <td>
+            <div id="b1339" class="goaldiv">
+              <span id="e1318"></span>
+              <br/>
+              <span id="e1319"></span>
+            </div>
+          </td>
+          <td>
+            <div id="b1340" class="goaldiv">
+              <span id="e1320"></span>
+              <br/>
+              <span id="e1321"></span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div id="b1341" class="goaldiv">
+              <span id="e1322"></span>
+              <br/>
+              <span id="e1323"></span>
+            </div>
+          </td>
+          <td>
+            <div id="b1342" class="goaldiv">
+              <span id="e1324"></span>
+              <br/>
+              <span id="e1325"></span>
+            </div>
+          </td>
+          <td>
+            <div id="b1343" class="goaldiv">
+              <span id="e1326"></span>
+              <br/>
+              <span id="e1327"></span>
+            </div>
+          </td>
+          <td>
+            <div id="b1344" class="goaldiv">
+              <span id="e1328"></span>
+              <br/>
+              <span id="e1329"></span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div id="b1345" class="goaldiv">
+              <span id="e1330"></span>
+              <br/>
+              <span id="e1331"></span>
             </div>
           </td>
           <td>
             <div id="b1346" class="goaldiv">
-              <span id="e1301"></span>
+              <span id="e1332"></span>
               <br/>
-              <span id="e1302"></span>
+              <span id="e1333"></span>
             </div>
           </td>
           <td>
             <div id="b1347" class="goaldiv">
-              <span id="e1303"></span>
+              <span id="e1334"></span>
               <br/>
-              <span id="e1304"></span>
+              <span id="e1335"></span>
             </div>
           </td>
-        </tr>
-        <tr>
           <td>
             <div id="b1348" class="goaldiv">
-              <span id="e1305"></span>
+              <span id="e1336"></span>
               <br/>
-              <span id="e1306"></span>
-            </div>
-          </td>
-          <td>
-            <div id="b1349" class="goaldiv">
-              <span id="e1307"></span>
-              <br/>
-              <span id="e1308"></span>
-            </div>
-          </td>
-          <td>
-            <div id="b1350" class="goaldiv">
-              <span id="e1309"></span>
-              <br/>
-              <span id="e1310"></span>
-            </div>
-          </td>
-          <td>
-            <div id="b1351" class="goaldiv">
-              <span id="e1311"></span>
-              <br/>
-              <span id="e1312"></span>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div id="b1352" class="goaldiv">
-              <span id="e1313"></span>
-              <br/>
-              <span id="e1314"></span>
-            </div>
-          </td>
-          <td>
-            <div id="b1353" class="goaldiv">
-              <span id="e1315"></span>
-              <br/>
-              <span id="e1316"></span>
-            </div>
-          </td>
-          <td>
-            <div id="b1354" class="goaldiv">
-              <span id="e1317"></span>
-              <br/>
-              <span id="e1318"></span>
-            </div>
-          </td>
-          <td>
-            <div id="b1355" class="goaldiv">
-              <span id="e1319"></span>
-              <br/>
-              <span id="e1320"></span>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div id="b1356" class="goaldiv">
-              <span id="e1321"></span>
-              <br/>
-              <span id="e1322"></span>
-            </div>
-          </td>
-          <td>
-            <div id="b1357" class="goaldiv">
-              <span id="e1323"></span>
-              <br/>
-              <span id="e1324"></span>
-            </div>
-          </td>
-          <td>
-            <div id="b1358" class="goaldiv">
-              <span id="e1325"></span>
-              <br/>
-              <span id="e1326"></span>
-            </div>
-          </td>
-          <td>
-            <div id="b1359" class="goaldiv">
-              <span id="e1327"></span>
-              <br/>
-              <span id="e1328"></span>
+              <span id="e1337"></span>
             </div>
           </td>
         </tr>
       </table>
     </div>
-    <div id="b1360">
-      <span>You have produced <span id="e1329"></span> total stars.</span>
+    <div id="b1349">
+      <span>You have produced <span id="e1338"></span> total stars.</span>
       <br/>
-      <span>You have produced <span id="e1330"></span> stars this eternity.</span>
+      <span>You have produced <span id="e1339"></span> stars this eternity.</span>
       <br/>
-      <span>You have produced <span id="e1331"></span> stars this complexity.</span>
+      <span>You have produced <span id="e1340"></span> stars this complexity.</span>
       <br/>
-      <span>You have produced <span id="e1332"></span> stars this finality.</span>
+      <span>You have produced <span id="e1341"></span> stars this finality.</span>
       <br/>
-      <span>You have produced <span id="e1333"></span> total infinity point<span id="e1334"></span>.</span>
+      <span>You have produced <span id="e1342"></span> total infinity point<span id="e1343"></span>.</span>
       <br/>
-      <span>You have produced <span id="e1335"></span> infinity point<span id="e1336"></span> this eternity.</span>
+      <span>You have produced <span id="e1344"></span> infinity point<span id="e1345"></span> this eternity.</span>
       <br/>
-      <span>You have produced <span id="e1337"></span> total eternity point<span id="e1338"></span>.</span>
+      <span>You have produced <span id="e1346"></span> total eternity point<span id="e1347"></span>.</span>
       <br/>
-      <span>You have produced <span id="e1339"></span> total eternity point<span id="e1340"></span> this complexity.</span>
+      <span>You have produced <span id="e1348"></span> total eternity point<span id="e1349"></span> this complexity.</span>
       <br/>
-      <span>You have produced <span id="e1341"></span> total complexity point<span id="e1342"></span>.</span>
+      <span>You have produced <span id="e1350"></span> total complexity point<span id="e1351"></span>.</span>
       <br/>
-      <span>You have produced <span id="e1343"></span> total complexity point<span id="e1344"></span> this finality.</span>
+      <span>You have produced <span id="e1352"></span> total complexity point<span id="e1353"></span> this finality.</span>
       <br/>
-      <span>You have produced <span id="e1345"></span> total finality point<span id="e1346"></span>.</span>
+      <span>You have produced <span id="e1354"></span> total finality point<span id="e1355"></span>.</span>
       <br/>
-      <span>Your fastest infinity took <span id="e1347"></span> seconds.</span>
+      <span>Your fastest infinity took <span id="e1356"></span> seconds.</span>
       <br/>
-      <span>Your fastest eternity took <span id="e1348"></span> seconds.</span>
+      <span>Your fastest eternity took <span id="e1357"></span> seconds.</span>
       <br/>
-      <span>Your fastest complexity took <span id="e1349"></span> seconds.</span>
+      <span>Your fastest complexity took <span id="e1358"></span> seconds.</span>
       <br/>
-      <span>Your fastest finality took <span id="e1350"></span> seconds.</span>
+      <span>Your fastest finality took <span id="e1359"></span> seconds.</span>
       <br/>
-      <span>You have spent <span id="e1351"></span> seconds without purchasing anything.</span>
+      <span>You have spent <span id="e1360"></span> seconds without purchasing anything.</span>
       <br/>
-      <span>You have spent <span id="e1352"></span> seconds without sacrificing.</span>
+      <span>You have spent <span id="e1361"></span> seconds without sacrificing.</span>
       <br/>
-      <span>You have spent <span id="e1353"></span> seconds in this prestige.</span>
+      <span>You have spent <span id="e1362"></span> seconds in this prestige.</span>
       <br/>
-      <span>You have spent <span id="e1354"></span> seconds in this infinity.</span>
+      <span>You have spent <span id="e1363"></span> seconds in this infinity.</span>
       <br/>
-      <span>You have spent <span id="e1355"></span> seconds in this eternity.</span>
+      <span>You have spent <span id="e1364"></span> seconds in this eternity.</span>
       <br/>
-      <span>You have spent <span id="e1356"></span> seconds in this complexity.</span>
+      <span>You have spent <span id="e1365"></span> seconds in this complexity.</span>
       <br/>
-      <span>You have spent <span id="e1357"></span> seconds in this finality.</span>
+      <span>You have spent <span id="e1366"></span> seconds in this finality.</span>
       <br/>
-      <span>You have spent <span id="e1358"></span> seconds playing this game (counting time offline).</span>
-      <div id="b1361">
-        <span>Last infinity took <span id="e1359"></span> seconds and gave <span id="e1360"></span> IP, giving <span id="e1361"></span> IP/second.</span>
+      <span>You have spent <span id="e1367"></span> seconds playing this game (counting time offline).</span>
+      <div id="b1350">
+        <span>Last infinity took <span id="e1368"></span> seconds and gave <span id="e1369"></span> IP, giving <span id="e1370"></span> IP/second.</span>
         <br/>
-        <span id="b1362">The infinity two infinities ago took <span id="e1362"></span> seconds and gave <span id="e1363"></span> IP, giving <span id="e1364"></span> IP/second.</span>
+        <span id="b1351">The infinity two infinities ago took <span id="e1371"></span> seconds and gave <span id="e1372"></span> IP, giving <span id="e1373"></span> IP/second.</span>
         <br/>
-        <span id="b1363">The infinity three infinities ago took <span id="e1365"></span> seconds and gave <span id="e1366"></span> IP, giving <span id="e1367"></span> IP/second.</span>
+        <span id="b1352">The infinity three infinities ago took <span id="e1374"></span> seconds and gave <span id="e1375"></span> IP, giving <span id="e1376"></span> IP/second.</span>
         <br/>
-        <span id="b1364">The infinity four infinities ago took <span id="e1368"></span> seconds and gave <span id="e1369"></span> IP, giving <span id="e1370"></span> IP/second.</span>
+        <span id="b1353">The infinity four infinities ago took <span id="e1377"></span> seconds and gave <span id="e1378"></span> IP, giving <span id="e1379"></span> IP/second.</span>
         <br/>
-        <span id="b1365">The infinity five infinities ago took <span id="e1371"></span> seconds and gave <span id="e1372"></span> IP, giving <span id="e1373"></span> IP/second.</span>
+        <span id="b1354">The infinity five infinities ago took <span id="e1380"></span> seconds and gave <span id="e1381"></span> IP, giving <span id="e1382"></span> IP/second.</span>
         <br/>
-        <span id="b1366">The infinity six infinities ago took <span id="e1374"></span> seconds and gave <span id="e1375"></span> IP, giving <span id="e1376"></span> IP/second.</span>
+        <span id="b1355">The infinity six infinities ago took <span id="e1383"></span> seconds and gave <span id="e1384"></span> IP, giving <span id="e1385"></span> IP/second.</span>
         <br/>
-        <span id="b1367">The infinity seven infinities ago took <span id="e1377"></span> seconds and gave <span id="e1378"></span> IP, giving <span id="e1379"></span> IP/second.</span>
+        <span id="b1356">The infinity seven infinities ago took <span id="e1386"></span> seconds and gave <span id="e1387"></span> IP, giving <span id="e1388"></span> IP/second.</span>
         <br/>
-        <span id="b1368">The infinity eight infinities ago took <span id="e1380"></span> seconds and gave <span id="e1381"></span> IP, giving <span id="e1382"></span> IP/second.</span>
+        <span id="b1357">The infinity eight infinities ago took <span id="e1389"></span> seconds and gave <span id="e1390"></span> IP, giving <span id="e1391"></span> IP/second.</span>
         <br/>
-        <span id="b1369">The infinity nine infinities ago took <span id="e1383"></span> seconds and gave <span id="e1384"></span> IP, giving <span id="e1385"></span> IP/second.</span>
+        <span id="b1358">The infinity nine infinities ago took <span id="e1392"></span> seconds and gave <span id="e1393"></span> IP, giving <span id="e1394"></span> IP/second.</span>
         <br/>
-        <span id="b1370">The infinity ten infinities ago took <span id="e1386"></span> seconds and gave <span id="e1387"></span> IP, giving <span id="e1388"></span> IP/second.</span>
+        <span id="b1359">The infinity ten infinities ago took <span id="e1395"></span> seconds and gave <span id="e1396"></span> IP, giving <span id="e1397"></span> IP/second.</span>
         <br/>
       </div>
-      <div id="b1371">
-        <span>Last eternity took <span id="e1389"></span> seconds and gave <span id="e1390"></span> EP, giving <span id="e1391"></span> EP/second.</span>
+      <div id="b1360">
+        <span>Last eternity took <span id="e1398"></span> seconds and gave <span id="e1399"></span> EP, giving <span id="e1400"></span> EP/second.</span>
         <br/>
-        <span id="b1372">The eternity two eternities ago took <span id="e1392"></span> seconds and gave <span id="e1393"></span> EP, giving <span id="e1394"></span> EP/second.</span>
+        <span id="b1361">The eternity two eternities ago took <span id="e1401"></span> seconds and gave <span id="e1402"></span> EP, giving <span id="e1403"></span> EP/second.</span>
         <br/>
-        <span id="b1373">The eternity three eternities ago took <span id="e1395"></span> seconds and gave <span id="e1396"></span> EP, giving <span id="e1397"></span> EP/second.</span>
+        <span id="b1362">The eternity three eternities ago took <span id="e1404"></span> seconds and gave <span id="e1405"></span> EP, giving <span id="e1406"></span> EP/second.</span>
         <br/>
-        <span id="b1374">The eternity four eternities ago took <span id="e1398"></span> seconds and gave <span id="e1399"></span> EP, giving <span id="e1400"></span> EP/second.</span>
+        <span id="b1363">The eternity four eternities ago took <span id="e1407"></span> seconds and gave <span id="e1408"></span> EP, giving <span id="e1409"></span> EP/second.</span>
         <br/>
-        <span id="b1375">The eternity five eternities ago took <span id="e1401"></span> seconds and gave <span id="e1402"></span> EP, giving <span id="e1403"></span> EP/second.</span>
+        <span id="b1364">The eternity five eternities ago took <span id="e1410"></span> seconds and gave <span id="e1411"></span> EP, giving <span id="e1412"></span> EP/second.</span>
         <br/>
-        <span id="b1376">The eternity six eternities ago took <span id="e1404"></span> seconds and gave <span id="e1405"></span> EP, giving <span id="e1406"></span> EP/second.</span>
+        <span id="b1365">The eternity six eternities ago took <span id="e1413"></span> seconds and gave <span id="e1414"></span> EP, giving <span id="e1415"></span> EP/second.</span>
         <br/>
-        <span id="b1377">The eternity seven eternities ago took <span id="e1407"></span> seconds and gave <span id="e1408"></span> EP, giving <span id="e1409"></span> EP/second.</span>
+        <span id="b1366">The eternity seven eternities ago took <span id="e1416"></span> seconds and gave <span id="e1417"></span> EP, giving <span id="e1418"></span> EP/second.</span>
         <br/>
-        <span id="b1378">The eternity eight eternities ago took <span id="e1410"></span> seconds and gave <span id="e1411"></span> EP, giving <span id="e1412"></span> EP/second.</span>
+        <span id="b1367">The eternity eight eternities ago took <span id="e1419"></span> seconds and gave <span id="e1420"></span> EP, giving <span id="e1421"></span> EP/second.</span>
         <br/>
-        <span id="b1379">The eternity nine eternities ago took <span id="e1413"></span> seconds and gave <span id="e1414"></span> EP, giving <span id="e1415"></span> EP/second.</span>
+        <span id="b1368">The eternity nine eternities ago took <span id="e1422"></span> seconds and gave <span id="e1423"></span> EP, giving <span id="e1424"></span> EP/second.</span>
         <br/>
-        <span id="b1380">The eternity ten eternities ago took <span id="e1416"></span> seconds and gave <span id="e1417"></span> EP, giving <span id="e1418"></span> EP/second.</span>
-        <br/>
-      </div>
-      <div id="b1381">
-        <span>Last complexity took <span id="e1419"></span> seconds and gave <span id="e1420"></span> ℂP, giving <span id="e1421"></span> ℂP/second.</span>
-        <br/>
-        <span id="b1382">The complexity two complexities ago took <span id="e1422"></span> seconds and gave <span id="e1423"></span> ℂP, giving <span id="e1424"></span> ℂP/second.</span>
-        <br/>
-        <span id="b1383">The complexity three complexities ago took <span id="e1425"></span> seconds and gave <span id="e1426"></span> ℂP, giving <span id="e1427"></span> ℂP/second.</span>
-        <br/>
-        <span id="b1384">The complexity four complexities ago took <span id="e1428"></span> seconds and gave <span id="e1429"></span> ℂP, giving <span id="e1430"></span> ℂP/second.</span>
-        <br/>
-        <span id="b1385">The complexity five complexities ago took <span id="e1431"></span> seconds and gave <span id="e1432"></span> ℂP, giving <span id="e1433"></span> ℂP/second.</span>
-        <br/>
-        <span id="b1386">The complexity six complexities ago took <span id="e1434"></span> seconds and gave <span id="e1435"></span> ℂP, giving <span id="e1436"></span> ℂP/second.</span>
-        <br/>
-        <span id="b1387">The complexity seven complexities ago took <span id="e1437"></span> seconds and gave <span id="e1438"></span> ℂP, giving <span id="e1439"></span> ℂP/second.</span>
-        <br/>
-        <span id="b1388">The complexity eight complexities ago took <span id="e1440"></span> seconds and gave <span id="e1441"></span> ℂP, giving <span id="e1442"></span> ℂP/second.</span>
-        <br/>
-        <span id="b1389">The complexity nine complexities ago took <span id="e1443"></span> seconds and gave <span id="e1444"></span> ℂP, giving <span id="e1445"></span> ℂP/second.</span>
-        <br/>
-        <span id="b1390">The complexity ten complexities ago took <span id="e1446"></span> seconds and gave <span id="e1447"></span> ℂP, giving <span id="e1448"></span> ℂP/second.</span>
+        <span id="b1369">The eternity ten eternities ago took <span id="e1425"></span> seconds and gave <span id="e1426"></span> EP, giving <span id="e1427"></span> EP/second.</span>
         <br/>
       </div>
-      <div id="b1391">
-        <span>Last finality took <span id="e1449"></span> seconds and gave <span id="e1450"></span> FP and <span id="e1451"></span> FS.</span>
+      <div id="b1370">
+        <span>Last complexity took <span id="e1428"></span> seconds and gave <span id="e1429"></span> ℂP, giving <span id="e1430"></span> ℂP/second.</span>
         <br/>
-        <span id="b1392">The finality two finalities ago took <span id="e1452"></span> seconds and gave <span id="e1453"></span> FP and <span id="e1454"></span> FS.</span>
+        <span id="b1371">The complexity two complexities ago took <span id="e1431"></span> seconds and gave <span id="e1432"></span> ℂP, giving <span id="e1433"></span> ℂP/second.</span>
         <br/>
-        <span id="b1393">The finality three finalities ago took <span id="e1455"></span> seconds and gave <span id="e1456"></span> FP and <span id="e1457"></span> FS.</span>
+        <span id="b1372">The complexity three complexities ago took <span id="e1434"></span> seconds and gave <span id="e1435"></span> ℂP, giving <span id="e1436"></span> ℂP/second.</span>
         <br/>
-        <span id="b1394">The finality four finalities ago took <span id="e1458"></span> seconds and gave <span id="e1459"></span> FP and <span id="e1460"></span> FS.</span>
+        <span id="b1373">The complexity four complexities ago took <span id="e1437"></span> seconds and gave <span id="e1438"></span> ℂP, giving <span id="e1439"></span> ℂP/second.</span>
         <br/>
-        <span id="b1395">The finality five finalities ago took <span id="e1461"></span> seconds and gave <span id="e1462"></span> FP and <span id="e1463"></span> FS.</span>
+        <span id="b1374">The complexity five complexities ago took <span id="e1440"></span> seconds and gave <span id="e1441"></span> ℂP, giving <span id="e1442"></span> ℂP/second.</span>
         <br/>
-        <span id="b1396">The finality six finalities ago took <span id="e1464"></span> seconds and gave <span id="e1465"></span> FP and <span id="e1466"></span> FS.</span>
+        <span id="b1375">The complexity six complexities ago took <span id="e1443"></span> seconds and gave <span id="e1444"></span> ℂP, giving <span id="e1445"></span> ℂP/second.</span>
         <br/>
-        <span id="b1397">The finality seven finalities ago took <span id="e1467"></span> seconds and gave <span id="e1468"></span> FP and <span id="e1469"></span> FS.</span>
+        <span id="b1376">The complexity seven complexities ago took <span id="e1446"></span> seconds and gave <span id="e1447"></span> ℂP, giving <span id="e1448"></span> ℂP/second.</span>
         <br/>
-        <span id="b1398">The finality eight finalities ago took <span id="e1470"></span> seconds and gave <span id="e1471"></span> FP and <span id="e1472"></span> FS.</span>
+        <span id="b1377">The complexity eight complexities ago took <span id="e1449"></span> seconds and gave <span id="e1450"></span> ℂP, giving <span id="e1451"></span> ℂP/second.</span>
         <br/>
-        <span id="b1399">The finality nine finalities ago took <span id="e1473"></span> seconds and gave <span id="e1474"></span> FP and <span id="e1475"></span> FS.</span>
+        <span id="b1378">The complexity nine complexities ago took <span id="e1452"></span> seconds and gave <span id="e1453"></span> ℂP, giving <span id="e1454"></span> ℂP/second.</span>
         <br/>
-        <span id="b1400">The finality ten finalities ago took <span id="e1476"></span> seconds and gave <span id="e1477"></span> FP and <span id="e1478"></span> FS.</span>
+        <span id="b1379">The complexity ten complexities ago took <span id="e1455"></span> seconds and gave <span id="e1456"></span> ℂP, giving <span id="e1457"></span> ℂP/second.</span>
+        <br/>
+      </div>
+      <div id="b1380">
+        <span>Last finality took <span id="e1458"></span> seconds and gave <span id="e1459"></span> FP and <span id="e1460"></span> FS.</span>
+        <br/>
+        <span id="b1381">The finality two finalities ago took <span id="e1461"></span> seconds and gave <span id="e1462"></span> FP and <span id="e1463"></span> FS.</span>
+        <br/>
+        <span id="b1382">The finality three finalities ago took <span id="e1464"></span> seconds and gave <span id="e1465"></span> FP and <span id="e1466"></span> FS.</span>
+        <br/>
+        <span id="b1383">The finality four finalities ago took <span id="e1467"></span> seconds and gave <span id="e1468"></span> FP and <span id="e1469"></span> FS.</span>
+        <br/>
+        <span id="b1384">The finality five finalities ago took <span id="e1470"></span> seconds and gave <span id="e1471"></span> FP and <span id="e1472"></span> FS.</span>
+        <br/>
+        <span id="b1385">The finality six finalities ago took <span id="e1473"></span> seconds and gave <span id="e1474"></span> FP and <span id="e1475"></span> FS.</span>
+        <br/>
+        <span id="b1386">The finality seven finalities ago took <span id="e1476"></span> seconds and gave <span id="e1477"></span> FP and <span id="e1478"></span> FS.</span>
+        <br/>
+        <span id="b1387">The finality eight finalities ago took <span id="e1479"></span> seconds and gave <span id="e1480"></span> FP and <span id="e1481"></span> FS.</span>
+        <br/>
+        <span id="b1388">The finality nine finalities ago took <span id="e1482"></span> seconds and gave <span id="e1483"></span> FP and <span id="e1484"></span> FS.</span>
+        <br/>
+        <span id="b1389">The finality ten finalities ago took <span id="e1485"></span> seconds and gave <span id="e1486"></span> FP and <span id="e1487"></span> FS.</span>
         <br/>
       </div>
     </div>
-    <div id="b1401">
+    <div id="b1390">
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 8px; border-collapse: separate;">
         <tr>
           <td><button class="options-button" onclick="Saving.saveGame()">Save</button></td>
@@ -4551,58 +4679,58 @@
           <td><button class="options-button" onclick="Saving.loadGamePrompt()">Load</button></td>
         </tr>
         <tr>
-          <td><button class="options-button" onclick="Options.toggleOfflineProgress()">Offline progress: <span id="e1479"></span></button></td>
-          <td><button class="options-button" onclick="Options.toggleHotkeys()">Hotkeys: <span id="e1480"></span></button></td>
-          <td><button class="options-button" onclick="Options.toggleExportDisplay()" style="font-size: 0.75rem;">Show export text (as opposed to just copying it): <span id="e1481"></span></button></td>
+          <td><button class="options-button" onclick="Options.toggleOfflineProgress()">Offline progress: <span id="e1488"></span></button></td>
+          <td><button class="options-button" onclick="Options.toggleHotkeys()">Hotkeys: <span id="e1489"></span></button></td>
+          <td><button class="options-button" onclick="Options.toggleExportDisplay()" style="font-size: 0.75rem;">Show export text (as opposed to just copying it): <span id="e1490"></span></button></td>
         </tr>
         <tr>
-          <td><button class="options-button" onclick="Options.nextCompletionColors()">Completion colors: <span id="e1482"></span></button></td>
-          <td><button class="options-button" onclick="Options.nextNotation()">Notation: <span id="e1483"></span></button></td>
+          <td><button class="options-button" onclick="Options.nextCompletionColors()">Completion colors: <span id="e1491"></span></button></td>
+          <td><button class="options-button" onclick="Options.nextNotation()">Notation: <span id="e1492"></span></button></td>
           <td><button class="options-button" onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></td>
         </tr>
       </table>
       <span>Tabs to show:
       <div>
         <span>
-          <span id="b1402">Main: <input id="b1403" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1404">Infinity: <input id="b1405" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1406">Challenges: <input id="b1407" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1408">Autobuyers: <input id="b1409" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1410">Infinity Challenges: <input id="b1411" type="checkbox"></input></span>
+          <span id="b1391">Main: <input id="b1392" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1393">Infinity: <input id="b1394" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1395">Challenges: <input id="b1396" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1397">Autobuyers: <input id="b1398" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1399">Infinity Challenges: <input id="b1400" type="checkbox"></input></span>
         </span>
       </div>
       <div>
         <span>
-          <span id="b1412">Goals: <input id="b1413" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1414">Statistics: <input id="b1415" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1416">Options: cannot be hidden</span> 
+          <span id="b1401">Goals: <input id="b1402" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1403">Statistics: <input id="b1404" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1405">Options: cannot be hidden</span> 
         </span>
       </div>
-      <div id="b1417">
+      <div id="b1406">
         <span>
-          <span id="b1418">Eternity: <input id="b1419" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1420">Eternity Milestones: <input id="b1421" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1422">Studies: <input id="b1423" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1424">Eternity Producer: <input id="b1425" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1426">Eternity Challenges: <input id="b1427" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1428">Chroma: <input id="b1429" type="checkbox"></input></span>
+          <span id="b1407">Eternity: <input id="b1408" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1409">Eternity Milestones: <input id="b1410" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1411">Studies: <input id="b1412" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1413">Eternity Producer: <input id="b1414" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1415">Eternity Challenges: <input id="b1416" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1417">Chroma: <input id="b1418" type="checkbox"></input></span>
         </span>
       </div>
-      <div id="b1430">
+      <div id="b1419">
         <span>
-          <span id="b1431">Complexity: <input id="b1432" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1433">Complexity Challenges: <input id="b1434" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1435">Complexity Achievements: <input id="b1436" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1437">Powers: <input id="b1438" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1439">Oracle: <input id="b1440" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1441">Galaxies: <input id="b1442" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1420">Complexity: <input id="b1421" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1422">Complexity Challenges: <input id="b1423" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1424">Complexity Achievements: <input id="b1425" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1426">Powers: <input id="b1427" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1428">Oracle: <input id="b1429" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1430">Galaxies: <input id="b1431" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
         </span>
       </div>
-      <div id="b1443">
+      <div id="b1432">
         <span>
-          <span id="b1444">Finality: <input id="b1445" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1446">Finality Shards: <input id="b1447" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1448">Finality Milestones: <input id="b1449" type="checkbox"></input></span>
+          <span id="b1433">Finality: <input id="b1434" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1435">Finality Shards: <input id="b1436" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1437">Finality Milestones: <input id="b1438" type="checkbox"></input></span>
         </span>
       </div>
       <span><a target="_blank" rel="noopener noreferrer" href="guide/index.html">Guide (currently very incomplete)</a><span style="display: inline-block; width: 256px;"></span><a target="_blank" rel="noopener noreferrer" href="https://discord.gg/7JfmqF2">Discord</a></span>

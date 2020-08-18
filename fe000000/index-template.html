@@ -3013,7 +3013,7 @@
       <div ~style.display=Powers.isUnlocked() ? '' : 'none'~>
         <span>You have ~i Powers.active().length ~/~i Powers.activatedLimit() ~ active power~s Powers.activatedLimit() ~.</span>
         <br/>
-        <span>Active powers raise various dimension multipliers to powers. Stored powers do not, but can be activated.</span>
+        <span>Active powers raise various generator multipliers to powers. Stored powers do not, but can be activated.</span>
         <br ~style.display=FinalityMilestones.isFinalityMilestoneActive(6) ? 'none' : ''~/>
         <span ~style.display=FinalityMilestones.isFinalityMilestoneActive(6) ? 'none' : ''~>Due to unlocking powers, you gain your eternity points on eternity every second, without needing to eternity.</span>
         <br/>
@@ -3030,9 +3030,7 @@
           <br/>
           <span>Next power<span ~style.display=Powers.nextKept() ? 'none' : ''~> (will be automatically deleted due to being bad enough to be useless)</span>:</span>
           <br/>
-          <span ~class=Powers.color('next', 1)~>~r Powers.description('next', 1) ~</span>
-          <br/>
-          <span ~class=Powers.color('next', 1)~>~r Powers.details('next', 1) ~</span>
+          <span ~class=Powers.color('next', 1)~>~r Powers.descriptionFull('next', 1) ~</span>
         </div>
         <br/>
         <span>The powers activated by importing powers will be the strongest stored powers of the same types as those exported.</span>
@@ -3086,26 +3084,35 @@
           Active powers to constantly load: <input style="width: 256px;" type="text" ~!value=Powers.powerListToAutoLoad()~ ~!onchange=function() {Powers.setPowerListToAutoLoad(this.value)}~></input> <button onclick="Powers.toggleAutoLoad()">Auto-load: ~r Powers.isAutoLoadOn() ? "On" : "Off" ~</button>
         </div>
         <br/>
-        <span>Active powers (<button onclick="Powers.sortActive()">Sort</button>, <button onclick="Powers.toggleAutoSortActive()">Auto-sort: ~r Powers.isAutoSortActiveOn() ? "On" : "Off" ~</button>):</span>
-        <div style="margin-left: auto; margin-right: auto;">
-          <span ~style.display=Powers.canAccessPower('active', 1) ? 'none' : ''~>You don't currently have any active powers.</span>
-          <div ~style.display=Powers.canAccessPower('active', 1) ? '' : 'none'~>
-            <span ~class=Powers.color('active', 1)~>~r Powers.description('active', 1) ~</span>
-            <br/>
-            <span ~class=Powers.color('active', 1)~>~r Powers.details('active', 1) ~</span>
-          </div>
-          <div ~style.display=Powers.canAccessPower('active', 2) ? '' : 'none'~>
-            <span ~class=Powers.color('active', 2)~>~r Powers.description('active', 2) ~</span>
-            <br/>
-            <span ~class=Powers.color('active', 2)~>~r Powers.details('active', 2) ~</span>
-          </div>
-          <div ~style.display=Powers.canAccessPower('active', 3) ? '' : 'none'~>
-            <span ~class=Powers.color('active', 3)~>~r Powers.description('active', 3) ~</span>
-            <br/>
-            <span ~class=Powers.color('active', 3)~>~r Powers.details('active', 3) ~</span>
-          </div>
-        </div>
-        <br/>
+        <span>Active powers:</span>
+        <br ~style.display=Powers.hasAnyPowers('active') ? 'none' : ''~/>
+        <span ~style.display=Powers.hasAnyPowers('active') ? 'none' : ''~>You don't currently have any active powers.</span>
+        <br ~style.display=Powers.hasAnyPowers('active') ? 'none' : ''~/>
+        <table ~style.display=Powers.hasAnyPowers('active') ? '' : 'none'~ style="margin-left: auto; margin-right: auto; border-collapse: collapse;">
+          <tr>
+            <td class="smallpowertd" ~style.display=Powers.canAccessPower('active', 1) ? '' : 'none'~>
+              <span ~class=Powers.color('active', 1)~>~r Powers.descriptionFullEffect('active', 1) ~</span>
+              <br/>
+              <span ~class=Powers.color('active', 1)~>~r Powers.descriptionStrengthRarity('active', 1) ~</span>
+              <br/>
+              <span ~class=Powers.color('active', 1)~>~r Powers.descriptionMultiplier('active', 1) ~</span>
+            </td>
+            <td class="smallpowertd" ~style.display=Powers.canAccessPower('active', 2) ? '' : 'none'~>
+              <span ~class=Powers.color('active', 2)~>~r Powers.descriptionFullEffect('active', 2) ~</span>
+              <br/>
+              <span ~class=Powers.color('active', 2)~>~r Powers.descriptionStrengthRarity('active', 2) ~</span>
+              <br/>
+              <span ~class=Powers.color('active', 2)~>~r Powers.descriptionMultiplier('active', 2) ~</span>
+            </td>
+            <td class="smallpowertd" ~style.display=Powers.canAccessPower('active', 3) ? '' : 'none'~>
+              <span ~class=Powers.color('active', 3)~>~r Powers.descriptionFullEffect('active', 3) ~</span>
+              <br/>
+              <span ~class=Powers.color('active', 3)~>~r Powers.descriptionStrengthRarity('active', 3) ~</span>
+              <br/>
+              <span ~class=Powers.color('active', 3)~>~r Powers.descriptionMultiplier('active', 3) ~</span>
+            </td>
+          </tr>
+        </table>
         <span>Current effects of active powers:</span>
         <br/>
         <span style="margin-left: 19px;" class="yellowspan">~r Powers.totalEffectDescription('normal') ~</span>
@@ -3117,138 +3124,182 @@
         <span style="margin-left: -19px;" class="brownspan">~r Powers.totalEffectDescription('complexity') ~</span>
         <br/>
         <br/>
-        <span>Stored powers (<button onclick="Powers.sortStored()">Sort</button>, <button onclick="Powers.toggleAutoSortStored()">Auto-sort: ~r Powers.isAutoSortStoredOn() ? "On" : "Off" ~</button>):</span>
-        <div style="margin-left: auto; margin-right: auto;">
-          <span ~style.display=Powers.canAccessPower('stored', 1) ? 'none' : ''~>You don't currently have any stored powers.</span>
-          <div ~style.display=Powers.canAccessPower('stored', 1) ? '' : 'none'~>
-            <span ~class=Powers.color('stored', 1)~>~r Powers.description('stored', 1) ~</span>
-            <br/>
-            <span ~class=Powers.color('stored', 1)~>~r Powers.details('stored', 1) ~</span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(1)" ~class=Powers.canActivate(1) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(1)" ~class=Powers.canDelete(1) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(1) ~ power shards)</button></span>
-          </div>
-          <br ~style.display=Powers.canAccessPower('stored', 2) ? '' : 'none'~/>
-          <div ~style.display=Powers.canAccessPower('stored', 2) ? '' : 'none'~>
-            <span ~class=Powers.color('stored', 2)~>~r Powers.description('stored', 2) ~</span>
-            <br/>
-            <span ~class=Powers.color('stored', 2)~>~r Powers.details('stored', 2) ~</span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(2)" ~class=Powers.canActivate(2) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(2)" ~class=Powers.canDelete(2) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(2) ~ power shards)</button></span>
-          </div>
-          <br ~style.display=Powers.canAccessPower('stored', 3) ? '' : 'none'~/>
-          <div ~style.display=Powers.canAccessPower('stored', 3) ? '' : 'none'~>
-            <span ~class=Powers.color('stored', 3)~>~r Powers.description('stored', 3) ~</span>
-            <br/>
-            <span ~class=Powers.color('stored', 3)~>~r Powers.details('stored', 3) ~</span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(3)" ~class=Powers.canActivate(3) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(3)" ~class=Powers.canDelete(3) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(3) ~ power shards)</button></span>
-          </div>
-          <br ~style.display=Powers.canAccessPower('stored', 4) ? '' : 'none'~/>
-          <div ~style.display=Powers.canAccessPower('stored', 4) ? '' : 'none'~>
-            <span ~class=Powers.color('stored', 4)~>~r Powers.description('stored', 4) ~</span>
-            <br/>
-            <span ~class=Powers.color('stored', 4)~>~r Powers.details('stored', 4) ~</span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(4)" ~class=Powers.canActivate(4) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(4)" ~class=Powers.canDelete(4) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(4) ~ power shards)</button></span>
-          </div>
-          <br ~style.display=Powers.canAccessPower('stored', 5) ? '' : 'none'~/>
-          <div ~style.display=Powers.canAccessPower('stored', 5) ? '' : 'none'~>
-            <span ~class=Powers.color('stored', 5)~>~r Powers.description('stored', 5) ~</span>
-            <br/>
-            <span ~class=Powers.color('stored', 5)~>~r Powers.details('stored', 5) ~</span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(5)" ~class=Powers.canActivate(5) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(5)" ~class=Powers.canDelete(5) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(5) ~ power shards)</button></span>
-          </div>
-          <br ~style.display=Powers.canAccessPower('stored', 6) ? '' : 'none'~/>
-          <div ~style.display=Powers.canAccessPower('stored', 6) ? '' : 'none'~>
-            <span ~class=Powers.color('stored', 6)~>~r Powers.description('stored', 6) ~</span>
-            <br/>
-            <span ~class=Powers.color('stored', 6)~>~r Powers.details('stored', 6) ~</span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(6)" ~class=Powers.canActivate(6) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(6)" ~class=Powers.canDelete(6) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(6) ~ power shards)</button></span>
-          </div>
-          <br ~style.display=Powers.canAccessPower('stored', 7) ? '' : 'none'~/>
-          <div ~style.display=Powers.canAccessPower('stored', 7) ? '' : 'none'~>
-            <span ~class=Powers.color('stored', 7)~>~r Powers.description('stored', 7) ~</span>
-            <br/>
-            <span ~class=Powers.color('stored', 7)~>~r Powers.details('stored', 7) ~</span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(7)" ~class=Powers.canActivate(7) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(7)" ~class=Powers.canDelete(7) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(7) ~ power shards)</button></span>
-          </div>
-          <br ~style.display=Powers.canAccessPower('stored', 8) ? '' : 'none'~/>
-          <div ~style.display=Powers.canAccessPower('stored', 8) ? '' : 'none'~>
-            <span ~class=Powers.color('stored', 8)~>~r Powers.description('stored', 8) ~</span>
-            <br/>
-            <span ~class=Powers.color('stored', 8)~>~r Powers.details('stored', 8) ~</span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(8)" ~class=Powers.canActivate(8) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(8)" ~class=Powers.canDelete(8) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(8) ~ power shards)</button></span>
-          </div>
-          <br ~style.display=Powers.canAccessPower('stored', 9) ? '' : 'none'~/>
-          <div ~style.display=Powers.canAccessPower('stored', 9) ? '' : 'none'~>
-            <span ~class=Powers.color('stored', 9)~>~r Powers.description('stored', 9) ~</span>
-            <br/>
-            <span ~class=Powers.color('stored', 9)~>~r Powers.details('stored', 9) ~</span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(9)" ~class=Powers.canActivate(9) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(9)" ~class=Powers.canDelete(9) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(9) ~ power shards)</button></span>
-          </div>
-          <br ~style.display=Powers.canAccessPower('stored', 10) ? '' : 'none'~/>
-          <div ~style.display=Powers.canAccessPower('stored', 10) ? '' : 'none'~>
-            <span ~class=Powers.color('stored', 10)~>~r Powers.description('stored', 10) ~</span>
-            <br/>
-            <span ~class=Powers.color('stored', 10)~>~r Powers.details('stored', 10) ~</span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(10)" ~class=Powers.canActivate(10) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(10)" ~class=Powers.canDelete(10) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(10) ~ power shards)</button></span>
-          </div>
-          <br ~style.display=Powers.canAccessPower('stored', 11) ? '' : 'none'~/>
-          <div ~style.display=Powers.canAccessPower('stored', 11) ? '' : 'none'~>
-            <span ~class=Powers.color('stored', 11)~>~r Powers.description('stored', 11) ~</span>
-            <br/>
-            <span ~class=Powers.color('stored', 11)~>~r Powers.details('stored', 11) ~</span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(11)" ~class=Powers.canActivate(11) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(11)" ~class=Powers.canDelete(11) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(11) ~ power shards)</button></span>
-          </div>
-          <br ~style.display=Powers.canAccessPower('stored', 12) ? '' : 'none'~/>
-          <div ~style.display=Powers.canAccessPower('stored', 12) ? '' : 'none'~>
-            <span ~class=Powers.color('stored', 12)~>~r Powers.description('stored', 12) ~</span>
-            <br/>
-            <span ~class=Powers.color('stored', 12)~>~r Powers.details('stored', 12) ~</span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(12)" ~class=Powers.canActivate(12) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(12)" ~class=Powers.canDelete(12) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(12) ~ power shards)</button></span>
-          </div>
-          <br ~style.display=Powers.canAccessPower('stored', 13) ? '' : 'none'~/>
-          <div ~style.display=Powers.canAccessPower('stored', 13) ? '' : 'none'~>
-            <span ~class=Powers.color('stored', 13)~>~r Powers.description('stored', 13) ~</span>
-            <br/>
-            <span ~class=Powers.color('stored', 13)~>~r Powers.details('stored', 13) ~</span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(13)" ~class=Powers.canActivate(13) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(13)" ~class=Powers.canDelete(13) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(13) ~ power shards)</button></span>
-          </div>
-          <br ~style.display=Powers.canAccessPower('stored', 14) ? '' : 'none'~/>
-          <div ~style.display=Powers.canAccessPower('stored', 14) ? '' : 'none'~>
-            <span ~class=Powers.color('stored', 14)~>~r Powers.description('stored', 14) ~</span>
-            <br/>
-            <span ~class=Powers.color('stored', 14)~>~r Powers.details('stored', 14) ~</span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(14)" ~class=Powers.canActivate(14) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(14)" ~class=Powers.canDelete(14) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(14) ~ power shards)</button></span>
-          </div>
-          <br ~style.display=Powers.canAccessPower('stored', 15) ? '' : 'none'~/>
-          <div ~style.display=Powers.canAccessPower('stored', 15) ? '' : 'none'~>
-            <span ~class=Powers.color('stored', 15)~>~r Powers.description('stored', 15) ~</span>
-            <br/>
-            <span ~class=Powers.color('stored', 15)~>~r Powers.details('stored', 15) ~</span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(15)" ~class=Powers.canActivate(15) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(15)" ~class=Powers.canDelete(15) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(15) ~ power shards)</button></span>
-          </div>
-          <br ~style.display=Powers.canAccessPower('stored', 16) ? '' : 'none'~/>
-          <div ~style.display=Powers.canAccessPower('stored', 16) ? '' : 'none'~>
-            <span ~class=Powers.color('stored', 16)~>~r Powers.description('stored', 16) ~</span>
-            <br/>
-            <span ~class=Powers.color('stored', 16)~>~r Powers.details('stored', 16) ~</span>
-            <br/>
-            <span style="width: 640px; display: inline-block;"><button style="float: left;" onclick="Powers.activate(16)" ~class=Powers.canActivate(16) ? '' : 'disabled'~>Activate</button> <button style="float: right;" onclick="Powers.delete(16)" ~class=Powers.canDelete(16) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(16) ~ power shards)</button></span>
-          </div>
-        </div>
-        <br/>
+        <span>Stored powers:</span>
+        <br ~style.display=Powers.hasAnyPowers('stored') ? 'none' : ''~/>
+        <span ~style.display=Powers.hasAnyPowers('stored') ? 'none' : ''~>You don't currently have any stored powers.</span>
+        <br ~style.display=Powers.hasAnyPowers('stored') ? 'none' : ''~/>
+        <table ~style.display=Powers.hasAnyPowers('stored') ? '' : 'none'~ style="margin-left: auto; margin-right: auto; border-collapse: collapse;">
+          <tr>
+            <td class="largepowertd">
+              <span class="yellowspan">Normal</span>
+              <br/>
+              <span class="yellowspan">No extra multiplier</span>
+              <br/>
+              <br/>
+              <br/>
+            </td>
+            <td class="largepowertd">
+              <span class="magentaspan">Infinity</span>
+              <br/>
+              <span class="magentaspan">Extra multiplier from infinity stars</span>
+              <br/>
+              <br/>
+              <span class="magentaspan">~f Powers.getExtraMultiplier('infinity') ~x</span>
+            </td>
+            <td class="largepowertd">
+              <span class="cyanspan">Eternity</span>
+              <br/>
+              <span class="cyanspan">Extra multiplier from complexity stars and time in complexity</span>
+              <br/>
+              <span class="cyanspan">~f Powers.getExtraMultiplier('eternity') ~x<span ~style.display=Powers.isTypeAtCap('eternity') ? '' : 'none'~> (capped)</span></span>
+            </td>
+            <td class="largepowertd">
+              <span class="brownspan">Complexity</span>
+              <br/>
+              <span class="brownspan">Extra multiplier from total strength and rarity of active powers</span>
+              <br/>
+              <span class="brownspan">~f Powers.getExtraMultiplier('complexity') ~x</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="largepowertd">
+              <div ~style.display=Powers.canAccessPower('stored', 1) ? '' : 'none'~>
+                <span ~class=Powers.color('stored', 1)~>~r Powers.descriptionEffect('stored', 1) ~ <button onclick="Powers.activate(1)" ~class=Powers.canActivate(1) ? '' : 'disabled'~>Activate</button></span>
+                <br/>
+                <span ~class=Powers.color('stored', 1)~>~r Powers.descriptionStrengthRarity('stored', 1) ~</span>
+                <br/>
+                <span ~class=Powers.color('stored', 1)~>~r Powers.descriptionMultiplier('stored', 1) ~</span>
+                <br/>
+                <button onclick="Powers.delete(1)" ~class=Powers.canDelete(1) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(1) ~ power shards)</button>
+              </div>
+            </td>
+            <td class="largepowertd">
+              <div ~style.display=Powers.canAccessPower('stored', 2) ? '' : 'none'~>
+                <span ~class=Powers.color('stored', 2)~>~r Powers.descriptionEffect('stored', 2) ~ <button onclick="Powers.activate(2)" ~class=Powers.canActivate(2) ? '' : 'disabled'~>Activate</button></span>
+                <br/>
+                <span ~class=Powers.color('stored', 2)~>~r Powers.descriptionStrengthRarity('stored', 2) ~</span>
+                <br/>
+                <span ~class=Powers.color('stored', 2)~>~r Powers.descriptionMultiplier('stored', 2) ~</span>
+                <br/>
+                <button onclick="Powers.delete(2)" ~class=Powers.canDelete(2) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(2) ~ power shards)</button>
+              </div>
+            </td>
+            <td class="largepowertd">
+              <div ~style.display=Powers.canAccessPower('stored', 3) ? '' : 'none'~>
+                <span ~class=Powers.color('stored', 3)~>~r Powers.descriptionEffect('stored', 3) ~ <button onclick="Powers.activate(3)" ~class=Powers.canActivate(3) ? '' : 'disabled'~>Activate</button></span>
+                <br/>
+                <span ~class=Powers.color('stored', 3)~>~r Powers.descriptionStrengthRarity('stored', 3) ~</span>
+                <br/>
+                <span ~class=Powers.color('stored', 3)~>~r Powers.descriptionMultiplier('stored', 3) ~</span>
+                <br/>
+                <button onclick="Powers.delete(3)" ~class=Powers.canDelete(3) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(3) ~ power shards)</button>
+              </div>
+            </td>
+            <td class="largepowertd">
+              <div ~style.display=Powers.canAccessPower('stored', 4) ? '' : 'none'~>
+                <span ~class=Powers.color('stored', 4)~>~r Powers.descriptionEffect('stored', 4) ~ <button onclick="Powers.activate(4)" ~class=Powers.canActivate(4) ? '' : 'disabled'~>Activate</button></span>
+                <br/>
+                <span ~class=Powers.color('stored', 4)~>~r Powers.descriptionStrengthRarity('stored', 4) ~</span>
+                <br/>
+                <span ~class=Powers.color('stored', 4)~>~r Powers.descriptionMultiplier('stored', 4) ~</span>
+                <br/>
+                <button onclick="Powers.delete(4)" ~class=Powers.canDelete(4) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(4) ~ power shards)</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="largepowertd">
+              <div ~style.display=Powers.canAccessPower('stored', 5) ? '' : 'none'~>
+                <span ~class=Powers.color('stored', 5)~>~r Powers.descriptionEffect('stored', 5) ~ <button onclick="Powers.activate(5)" ~class=Powers.canActivate(5) ? '' : 'disabled'~>Activate</button></span>
+                <br/>
+                <span ~class=Powers.color('stored', 5)~>~r Powers.descriptionStrengthRarity('stored', 5) ~</span>
+                <br/>
+                <span ~class=Powers.color('stored', 5)~>~r Powers.descriptionMultiplier('stored', 5) ~</span>
+                <br/>
+                <button onclick="Powers.delete(5)" ~class=Powers.canDelete(5) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(5) ~ power shards)</button>
+              </div>
+            </td>
+            <td class="largepowertd">
+              <div ~style.display=Powers.canAccessPower('stored', 6) ? '' : 'none'~>
+                <span ~class=Powers.color('stored', 6)~>~r Powers.descriptionEffect('stored', 6) ~ <button onclick="Powers.activate(6)" ~class=Powers.canActivate(6) ? '' : 'disabled'~>Activate</button></span>
+                <br/>
+                <span ~class=Powers.color('stored', 6)~>~r Powers.descriptionStrengthRarity('stored', 6) ~</span>
+                <br/>
+                <span ~class=Powers.color('stored', 6)~>~r Powers.descriptionMultiplier('stored', 6) ~</span>
+                <br/>
+                <button onclick="Powers.delete(6)" ~class=Powers.canDelete(6) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(6) ~ power shards)</button>
+              </div>
+            </td>
+            <td class="largepowertd">
+              <div ~style.display=Powers.canAccessPower('stored', 7) ? '' : 'none'~>
+                <span ~class=Powers.color('stored', 7)~>~r Powers.descriptionEffect('stored', 7) ~ <button onclick="Powers.activate(7)" ~class=Powers.canActivate(7) ? '' : 'disabled'~>Activate</button></span>
+                <br/>
+                <span ~class=Powers.color('stored', 7)~>~r Powers.descriptionStrengthRarity('stored', 7) ~</span>
+                <br/>
+                <span ~class=Powers.color('stored', 7)~>~r Powers.descriptionMultiplier('stored', 7) ~</span>
+                <br/>
+                <button onclick="Powers.delete(7)" ~class=Powers.canDelete(7) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(7) ~ power shards)</button>
+              </div>
+            </td>
+            <td class="largepowertd">
+              <div ~style.display=Powers.canAccessPower('stored', 8) ? '' : 'none'~>
+                <span ~class=Powers.color('stored', 8)~>~r Powers.descriptionEffect('stored', 8) ~  <button onclick="Powers.activate(8)" ~class=Powers.canActivate(8) ? '' : 'disabled'~>Activate</button></span>
+                <br/>
+                <span ~class=Powers.color('stored', 8)~>~r Powers.descriptionStrengthRarity('stored', 8) ~</span>
+                <br/>
+                <span ~class=Powers.color('stored', 8)~>~r Powers.descriptionMultiplier('stored', 8) ~</span>
+                <br/>
+                <button onclick="Powers.delete(8)" ~class=Powers.canDelete(8) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(8) ~ power shards)</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="largepowertd">
+              <div ~style.display=Powers.canAccessPower('stored', 9) ? '' : 'none'~>
+                <span ~class=Powers.color('stored', 9)~>~r Powers.descriptionEffect('stored', 9) ~  <button onclick="Powers.activate(9)" ~class=Powers.canActivate(9) ? '' : 'disabled'~>Activate</button></span>
+                <br/>
+                <span ~class=Powers.color('stored', 9)~>~r Powers.descriptionStrengthRarity('stored', 9) ~</span>
+                <br/>
+                <span ~class=Powers.color('stored', 9)~>~r Powers.descriptionMultiplier('stored', 9) ~</span>
+                <br/>
+                <button onclick="Powers.delete(9)" ~class=Powers.canDelete(9) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(9) ~ power shards)</button>
+              </div>
+            </td>
+            <td class="largepowertd">
+              <div ~style.display=Powers.canAccessPower('stored', 10) ? '' : 'none'~>
+                <span ~class=Powers.color('stored', 10)~>~r Powers.descriptionEffect('stored', 10) ~  <button onclick="Powers.activate(10)" ~class=Powers.canActivate(10) ? '' : 'disabled'~>Activate</button></span>
+                <br/>
+                <span ~class=Powers.color('stored', 10)~>~r Powers.descriptionStrengthRarity('stored', 10) ~</span>
+                <br/>
+                <span ~class=Powers.color('stored', 10)~>~r Powers.descriptionMultiplier('stored', 10) ~</span>
+                <br/>
+                <button onclick="Powers.delete(10)" ~class=Powers.canDelete(10) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(10) ~ power shards)</button>
+              </div>
+            </td>
+            <td class="largepowertd">
+              <div ~style.display=Powers.canAccessPower('stored', 11) ? '' : 'none'~>
+                <span ~class=Powers.color('stored', 11)~>~r Powers.descriptionEffect('stored', 11) ~ <button onclick="Powers.activate(11)" ~class=Powers.canActivate(11) ? '' : 'disabled'~>Activate</button></span>
+                <br/>
+                <span ~class=Powers.color('stored', 11)~>~r Powers.descriptionStrengthRarity('stored', 11) ~</span>
+                <br/>
+                <span ~class=Powers.color('stored', 11)~>~r Powers.descriptionMultiplier('stored', 11) ~</span>
+                <br/>
+                <button onclick="Powers.delete(11)" ~class=Powers.canDelete(11) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(11) ~ power shards)</button>
+              </div>
+            </td>
+            <td class="largepowertd">
+              <div ~style.display=Powers.canAccessPower('stored', 12) ? '' : 'none'~>
+                <span ~class=Powers.color('stored', 12)~>~r Powers.descriptionEffect('stored', 12) ~ <button onclick="Powers.activate(12)" ~class=Powers.canActivate(12) ? '' : 'disabled'~>Activate</button></span>
+                <br/>
+                <span ~class=Powers.color('stored', 12)~>~r Powers.descriptionStrengthRarity('stored', 12) ~</span>
+                <br/>
+                <span ~class=Powers.color('stored', 12)~>~r Powers.descriptionMultiplier('stored', 12) ~</span>
+                <br/>
+                <button onclick="Powers.delete(12)" ~class=Powers.canDelete(12) ? '' : 'disabled'~>Delete (+~f PowerShards.shardGainStored(12) ~ power shards)</button>
+              </div>
+            </td>
+          </tr>
+        </table>
         <span>At most ~i Powers.maximumActivatedLimit() ~ power~s Powers.maximumActivatedLimit() ~ can be active at once.</span>
         <br/>
         <span>Thus, all but the best ~i Powers.maximumActivatedLimit() ~ power~s Powers.maximumActivatedLimit() ~ of each type are useless and are thus automatically deleted for power shards.</span>
@@ -3337,9 +3388,7 @@
           <br/>
           <span>Crafted power<span ~style.display=Powers.craftedKept() ? 'none' : ''~> (will be automatically deleted due to being bad enough to be useless)</span>:</span>
           <br/>
-          <span ~class=Powers.color('crafted', 1)~>~r Powers.description('crafted', 1) ~</span>
-          <br/>
-          <span ~class=Powers.color('crafted', 1)~>~r Powers.details('crafted', 1) ~</span>
+          <span ~class=Powers.color('crafted', 1)~>~r Powers.descriptionFull('crafted', 1) ~</span>
         </div>
         <br/>
         <span>Power presets:</span>
@@ -3599,91 +3648,170 @@
         <br/>
         <br/>
         <div ~style.display=(Oracle.isUsed() && Oracle.powerDisplay()) ? '' : 'none'~>
-          <span>Stored powers from the future (with extra multipliers as they would be now):</span>
-          <br/>
-          <div style="margin-left: auto; margin-right: auto;">
-            <span ~style.display=Powers.canAccessPower('oracle', 1) ? 'none' : ''~>You won't have any stored powers.</span>
-            <div ~style.display=Powers.canAccessPower('oracle', 1) ? '' : 'none'~>
-              <span ~class=Powers.color('oracle', 1)~>~r Powers.description('oracle', 1) ~</span>
-              <br/>
-              <span ~class=Powers.color('oracle', 1)~>~r Powers.details('oracle', 1) ~</span>
-            </div>
-            <div ~style.display=Powers.canAccessPower('oracle', 2) ? '' : 'none'~>
-              <span ~class=Powers.color('oracle', 2)~>~r Powers.description('oracle', 2) ~</span>
-              <br/>
-              <span ~class=Powers.color('oracle', 2)~>~r Powers.details('oracle', 2) ~</span>
-            </div>
-            <div ~style.display=Powers.canAccessPower('oracle', 3) ? '' : 'none'~>
-              <span ~class=Powers.color('oracle', 3)~>~r Powers.description('oracle', 3) ~</span>
-              <br/>
-              <span ~class=Powers.color('oracle', 3)~>~r Powers.details('oracle', 3) ~</span>
-            </div>
-            <div ~style.display=Powers.canAccessPower('oracle', 4) ? '' : 'none'~>
-              <span ~class=Powers.color('oracle', 4)~>~r Powers.description('oracle', 4) ~</span>
-              <br/>
-              <span ~class=Powers.color('oracle', 4)~>~r Powers.details('oracle', 4) ~</span>
-            </div>
-            <div ~style.display=Powers.canAccessPower('oracle', 5) ? '' : 'none'~>
-              <span ~class=Powers.color('oracle', 5)~>~r Powers.description('oracle', 5) ~</span>
-              <br/>
-              <span ~class=Powers.color('oracle', 5)~>~r Powers.details('oracle', 5) ~</span>
-            </div>
-            <div ~style.display=Powers.canAccessPower('oracle', 6) ? '' : 'none'~>
-              <span ~class=Powers.color('oracle', 6)~>~r Powers.description('oracle', 6) ~</span>
-              <br/>
-              <span ~class=Powers.color('oracle', 6)~>~r Powers.details('oracle', 6) ~</span>
-            </div>
-            <div ~style.display=Powers.canAccessPower('oracle', 7) ? '' : 'none'~>
-              <span ~class=Powers.color('oracle', 7)~>~r Powers.description('oracle', 7) ~</span>
-              <br/>
-              <span ~class=Powers.color('oracle', 7)~>~r Powers.details('oracle', 7) ~</span>
-            </div>
-            <div ~style.display=Powers.canAccessPower('oracle', 8) ? '' : 'none'~>
-              <span ~class=Powers.color('oracle', 8)~>~r Powers.description('oracle', 8) ~</span>
-              <br/>
-              <span ~class=Powers.color('oracle', 8)~>~r Powers.details('oracle', 8) ~</span>
-            </div>
-            <div ~style.display=Powers.canAccessPower('oracle', 9) ? '' : 'none'~>
-              <span ~class=Powers.color('oracle', 9)~>~r Powers.description('oracle', 9) ~</span>
-              <br/>
-              <span ~class=Powers.color('oracle', 9)~>~r Powers.details('oracle', 9) ~</span>
-            </div>
-            <div ~style.display=Powers.canAccessPower('oracle', 10) ? '' : 'none'~>
-              <span ~class=Powers.color('oracle', 10)~>~r Powers.description('oracle', 10) ~</span>
-              <br/>
-              <span ~class=Powers.color('oracle', 10)~>~r Powers.details('oracle', 10) ~</span>
-            </div>
-            <div ~style.display=Powers.canAccessPower('oracle', 11) ? '' : 'none'~>
-              <span ~class=Powers.color('oracle', 11)~>~r Powers.description('oracle', 11) ~</span>
-              <br/>
-              <span ~class=Powers.color('oracle', 11)~>~r Powers.details('oracle', 11) ~</span>
-            </div>
-            <div ~style.display=Powers.canAccessPower('oracle', 12) ? '' : 'none'~>
-              <span ~class=Powers.color('oracle', 12)~>~r Powers.description('oracle', 12) ~</span>
-              <br/>
-              <span ~class=Powers.color('oracle', 12)~>~r Powers.details('oracle', 12) ~</span>
-            </div>
-            <div ~style.display=Powers.canAccessPower('oracle', 13) ? '' : 'none'~>
-              <span ~class=Powers.color('oracle', 13)~>~r Powers.description('oracle', 13) ~</span>
-              <br/>
-              <span ~class=Powers.color('oracle', 13)~>~r Powers.details('oracle', 13) ~</span>
-            </div>
-            <div ~style.display=Powers.canAccessPower('oracle', 14) ? '' : 'none'~>
-              <span ~class=Powers.color('oracle', 14)~>~r Powers.description('oracle', 14) ~</span>
-              <br/>
-              <span ~class=Powers.color('oracle', 14)~>~r Powers.details('oracle', 14) ~</span>
-            </div>
-            <div ~style.display=Powers.canAccessPower('oracle', 15) ? '' : 'none'~>
-              <span ~class=Powers.color('oracle', 15)~>~r Powers.description('oracle', 15) ~</span>
-              <br/>
-              <span ~class=Powers.color('oracle', 15)~>~r Powers.details('oracle', 15) ~</span>
-            </div>
-            <div ~style.display=Powers.canAccessPower('oracle', 16) ? '' : 'none'~>
-              <span ~class=Powers.color('oracle', 16)~>~r Powers.description('oracle', 16) ~</span>
-              <br/>
-              <span ~class=Powers.color('oracle', 16)~>~r Powers.details('oracle', 16) ~</span>
-            </div>
-          </div>
+          <span>Stored powers from the future:</span>
+          <br ~style.display=Powers.hasAnyPowers('oracle') ? 'none' : ''~/>
+          <span ~style.display=Powers.hasAnyPowers('oracle') ? 'none' : ''~>You don't currently have any stored powers.</span>
+          <br ~style.display=Powers.hasAnyPowers('oracle') ? 'none' : ''~/>
+          <table ~style.display=Powers.hasAnyPowers('oracle') ? '' : 'none'~ style="margin-left: auto; margin-right: auto; border-collapse: collapse;">
+            <tr>
+              <td class="largepowertd">
+                <span class="yellowspan">Normal</span>
+                <br/>
+                <span class="yellowspan">No extra multiplier</span>
+                <br/>
+                <br/>
+                <br/>
+              </td>
+              <td class="largepowertd">
+                <span class="magentaspan">Infinity</span>
+                <br/>
+                <span class="magentaspan">Extra multiplier from infinity stars</span>
+                <br/>
+                <br/>
+                <span class="magentaspan">~f Powers.getExtraMultiplier('infinity', true) ~x</span>
+              </td>
+              <td class="largepowertd">
+                <span class="cyanspan">Eternity</span>
+                <br/>
+                <span class="cyanspan">Extra multiplier from complexity stars and time in complexity</span>
+                <br/>
+                <span class="cyanspan">~f Powers.getExtraMultiplier('eternity', true) ~x<span ~style.display=Powers.isTypeAtCap('eternity', true) ? '' : 'none'~> (capped)</span></span>
+              </td>
+              <td class="largepowertd">
+                <span class="brownspan">Complexity</span>
+                <br/>
+                <span class="brownspan">Extra multiplier from total strength and rarity of active powers</span>
+                <br/>
+                <span class="brownspan">~f Powers.getExtraMultiplier('complexity', true) ~x</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="smallpowertd">
+                <div ~style.display=Powers.canAccessPower('oracle', 1) ? '' : 'none'~>
+                  <span ~class=Powers.color('oracle', 1)~>~r Powers.descriptionEffect('oracle', 1) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle', 1)~>~r Powers.descriptionStrengthRarity('oracle', 1) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle', 1)~>~r Powers.descriptionMultiplier('oracle', 1) ~</span>
+                  <br/>
+                </div>
+              </td>
+              <td class="smallpowertd">
+                <div ~style.display=Powers.canAccessPower('oracle', 2) ? '' : 'none'~>
+                  <span ~class=Powers.color('oracle', 2)~>~r Powers.descriptionEffect('oracle', 2) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle', 2)~>~r Powers.descriptionStrengthRarity('oracle', 2) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle', 2)~>~r Powers.descriptionMultiplier('oracle', 2) ~</span>
+                  <br/>
+                </div>
+              </td>
+              <td class="smallpowertd">
+                <div ~style.display=Powers.canAccessPower('oracle', 3) ? '' : 'none'~>
+                  <span ~class=Powers.color('oracle', 3)~>~r Powers.descriptionEffect('oracle', 3) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle', 3)~>~r Powers.descriptionStrengthRarity('oracle', 3) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle', 3)~>~r Powers.descriptionMultiplier('oracle', 3) ~</span>
+                  <br/>
+                </div>
+              </td>
+              <td class="smallpowertd">
+                <div ~style.display=Powers.canAccessPower('oracle', 4) ? '' : 'none'~>
+                  <span ~class=Powers.color('oracle', 4)~>~r Powers.descriptionEffect('oracle', 4) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle', 4)~>~r Powers.descriptionStrengthRarity('oracle', 4) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle', 4)~>~r Powers.descriptionMultiplier('oracle', 4) ~</span>
+                  <br/>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="smallpowertd">
+                <div ~style.display=Powers.canAccessPower('oracle', 5) ? '' : 'none'~>
+                  <span ~class=Powers.color('oracle', 5)~>~r Powers.descriptionEffect('oracle', 5) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle', 5)~>~r Powers.descriptionStrengthRarity('oracle', 5) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle', 5)~>~r Powers.descriptionMultiplier('oracle', 5) ~</span>
+                  <br/>
+                </div>
+              </td>
+              <td class="smallpowertd">
+                <div ~style.display=Powers.canAccessPower('oracle', 6) ? '' : 'none'~>
+                  <span ~class=Powers.color('oracle', 6)~>~r Powers.descriptionEffect('oracle', 6) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle', 6)~>~r Powers.descriptionStrengthRarity('oracle', 6) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle', 6)~>~r Powers.descriptionMultiplier('oracle', 6) ~</span>
+                  <br/>
+                </div>
+              </td>
+              <td class="smallpowertd">
+                <div ~style.display=Powers.canAccessPower('oracle', 7) ? '' : 'none'~>
+                  <span ~class=Powers.color('oracle', 7)~>~r Powers.descriptionEffect('oracle', 7) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle', 7)~>~r Powers.descriptionStrengthRarity('oracle', 7) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle', 7)~>~r Powers.descriptionMultiplier('oracle', 7) ~</span>
+                  <br/>
+                </div>
+              </td>
+              <td class="smallpowertd">
+                <div ~style.display=Powers.canAccessPower('oracle', 8) ? '' : 'none'~>
+                  <span ~class=Powers.color('oracle', 8)~>~r Powers.descriptionEffect('oracle', 8) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle', 8)~>~r Powers.descriptionStrengthRarity('oracle', 8) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle', 8)~>~r Powers.descriptionMultiplier('oracle', 8) ~</span>
+                  <br/>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="smallpowertd">
+                <div ~style.display=Powers.canAccessPower('oracle', 9) ? '' : 'none'~>
+                  <span ~class=Powers.color('oracle', 9)~>~r Powers.descriptionEffect('oracle', 9) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle', 9)~>~r Powers.descriptionStrengthRarity('oracle', 9) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle', 9)~>~r Powers.descriptionMultiplier('oracle', 9) ~</span>
+                  <br/>
+                </div>
+              </td>
+              <td class="smallpowertd">
+                <div ~style.display=Powers.canAccessPower('oracle', 10) ? '' : 'none'~>
+                  <span ~class=Powers.color('oracle', 10)~>~r Powers.descriptionEffect('oracle', 10) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle', 10)~>~r Powers.descriptionStrengthRarity('oracle', 10) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle', 10)~>~r Powers.descriptionMultiplier('oracle', 10) ~</span>
+                  <br/>
+                </div>
+              </td>
+              <td class="smallpowertd">
+                <div ~style.display=Powers.canAccessPower('oracle', 11) ? '' : 'none'~>
+                  <span ~class=Powers.color('oracle', 11)~>~r Powers.descriptionEffect('oracle', 11) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle', 11)~>~r Powers.descriptionStrengthRarity('oracle', 11) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle', 11)~>~r Powers.descriptionMultiplier('oracle', 11) ~</span>
+                  <br/>
+                </div>
+              </td>
+              <td class="smallpowertd">
+                <div ~style.display=Powers.canAccessPower('oracle', 12) ? '' : 'none'~>
+                  <span ~class=Powers.color('oracle', 12)~>~r Powers.descriptionEffect('oracle', 12) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle', 12)~>~r Powers.descriptionStrengthRarity('oracle', 12) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle', 12)~>~r Powers.descriptionMultiplier('oracle', 12) ~</span>
+                  <br/>
+                </div>
+              </td>
+            </tr>
+          </table>
         </div>
       </div>
     </tab>

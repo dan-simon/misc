@@ -545,6 +545,16 @@ let Saving = {
       player.oracle.powerFutureExtraMultipliers = true;
       player.version = 1.951171875;
     }
+    if (player.version < 1.9521484375) {
+      delete player.powers.autoSort;
+      player.oracle.extraMultipliers = {
+        normal: 1,
+        infinity: 1,
+        eternity: 1,
+        complexity: 1
+      };
+      player.version = 1.9521484375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

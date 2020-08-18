@@ -132,26 +132,30 @@ button {
   border-width: 1px 1px;
 }
 
-.smallpowertd {
-  display: table;
+.smallpowertd  {
   text-align: center;
-  width: 384px;
-  height: 64px;
-  padding: 4px;
-  margin: 4px;
+  font-size: 0.875rem;
+  width: 320px;
+  height: 80px;
   border: solid;
   border-width: 1px 1px;
 }
 
+.smallpowertd button {
+  font-size: 0.875rem;
+}
+
 .largepowertd {
-  display: table;
   text-align: center;
-  width: 384px;
-  height: 96px;
-  padding: 4px;
-  margin: 4px;
+  font-size: 0.875rem;
+  width: 320px;
+  height: 112px;
   border: solid;
   border-width: 1px 1px;
+}
+
+.largepowertd button {
+  font-size: 0.875rem;
 }
 
 .oraclediv {

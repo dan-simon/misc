@@ -139,10 +139,6 @@ let FinalityPrestigeLayer = {
       lastData: {
         lowRarity: false,
         type: 'normal'
-      },
-      autoSort: {
-        active: player.powers.autoSort.active,
-        stored: player.powers.autoSort.stored
       }
     };
     // Jump to another seed, so each finality gets a new seed that doesn't depend
@@ -161,7 +157,13 @@ let FinalityPrestigeLayer = {
       used: false,
       alert: player.oracle.alert,
       powerDisplay: player.oracle.powerDisplay,
-      powers: []
+      powers: [],
+      extraMultipliers: {
+        normal: 1,
+        infinity: 1,
+        eternity: 1,
+        complexity: 1
+      }
     };
     player.galaxies.unlocked = false;
     if (Galaxy.isResetDilatedOnFinalityOn()) {
