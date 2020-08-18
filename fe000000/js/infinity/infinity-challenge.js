@@ -118,7 +118,7 @@ let InfinityChallenge = {
   // but I think that may have been before eternity stars coexisted with it.
   // It used to be stronger; I nerfed it (this was a while ago, at the time of
   // the eternity update), mostly because I didn't want it to get to ^16 and for
-  // infinity dimension multipliers from other sources to thus be 3x as strong.
+  // infinity generator multipliers from other sources to thus be 3x as strong.
   infinityChallenge5Reward() {
     return 1 + Math.sqrt(Math.log2(Math.max(Stars.amount().log(2) / 16384, 1)));
   },

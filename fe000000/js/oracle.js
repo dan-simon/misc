@@ -52,11 +52,11 @@ let Oracle = {
     let save = btoa(JSON.stringify(player));
     let time = this.time();
     Saving.oracleSimulateTime(time);
-    complexityPoints = ComplexityPoints.amount();
-    complexityPointGain = ComplexityPrestigeLayer.canComplexity() ?
+    let complexityPoints = ComplexityPoints.amount();
+    let complexityPointGain = ComplexityPrestigeLayer.canComplexity() ?
       ComplexityPrestigeLayer.complexityPointGain() : new Decimal(0);
-    complexityChallengeCompletions = ComplexityChallenge.getAllComplexityChallengeCompletions();
-    powers = player.powers.stored.map(p => Powers.addExtraMultiplierToPower(p));
+    let complexityChallengeCompletions = ComplexityChallenge.getAllComplexityChallengeCompletions();
+    let powers = player.powers.stored.map(p => Powers.addExtraMultiplierToPower(p));
     Saving.loadGame(save, null, true);
     player.oracle.used = true;
     player.oracle.timeSimulated = time;
