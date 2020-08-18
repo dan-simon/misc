@@ -329,7 +329,11 @@ let Powers = {
     } else if (type === 'stored') {
       return this.canAccessStored(i);
     } else if (type === 'oracle') {
+<<<<<<< HEAD
       return Oracle.isUnlocked() && Oracle.powers().filter(p => p.type === this.typeList[(i - 1) % 4]).length > Math.floor((i - 1) / 4);
+=======
+      return Oracle.isUnlocked() && Oracle.powers().length >= i;
+>>>>>>> master
     } else if (type === 'next' || type === 'crafted') {
       return this.isUnlocked();
     }
