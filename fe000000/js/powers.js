@@ -105,6 +105,7 @@ let PowerUpgrade = function (i) {
 }
 
 let Powers = {
+  typeList: ['normal', 'infinity', 'eternity', 'complexity'],
   indexData: {
     'normal': 1,
     'infinity': 2,
@@ -298,27 +299,9 @@ let Powers = {
     let f = p => 1000 * ['normal', 'infinity', 'eternity', 'complexity'].indexOf(p.type) - this.strength(p) * this.rarity(p);
     player.powers.stored.sort((a, b) => f(a) - f(b));
   },
-  isAutoSortActiveOn() {
-    return player.powers.autoSort.active;
-  },
-  isAutoSortStoredOn() {
-    return player.powers.autoSort.stored;
-  },
-  toggleAutoSortActive() {
-    player.powers.autoSort.active = !player.powers.autoSort.active;
-    this.maybeAutoSort();
-  },
-  toggleAutoSortStored() {
-    player.powers.autoSort.stored = !player.powers.autoSort.stored;
-    this.maybeAutoSort();
-  },
-  maybeAutoSort() {
-    if (this.isAutoSortActiveOn()) {
-      this.sortActive();
-    }
-    if (this.isAutoSortStoredOn()) {
-      this.sortStored();
-    }
+  autoSort() {
+    this.sortActive();
+    this.sortStored();
   },
   onPowerChange(cleaning, potentialNewActiveReplacements) {
     if (cleaning) {
@@ -327,7 +310,18 @@ let Powers = {
     if (potentialNewActiveReplacements) {
       this.maybeActiveSwap();
     }
-    this.maybeAutoSort();
+    this.autoSort();
+  },
+  hasAnyPowers(type) {
+    if (type === 'active') {
+      return this.active().length > 0;
+    } else if (type === 'stored') {
+      return this.stored().length > 0;
+    } else if (type === 'oracle') {
+      return this.isUnlocked() && Oracle.powers().filter(p => p.type === this.typeList[(i - 1) % 4]).length > Math.floor((i - 1) / 4);
+    } else if (type === 'next' || type === 'crafted') {
+      return this.isUnlocked();
+    }
   },
   canAccessPower(type, i) {
     if (type === 'active') {
@@ -335,7 +329,7 @@ let Powers = {
     } else if (type === 'stored') {
       return this.canAccessStored(i);
     } else if (type === 'oracle') {
-      return this.isUnlocked() && Oracle.powers().length >= i;
+      return this.isUnlocked() && Oracle.powers().filter(p => p.type === this.typeList[(i - 1) % 4]).length > Math.floor((i - 1) / 4);
     } else if (type === 'next' || type === 'crafted') {
       return this.isUnlocked();
     }
@@ -344,11 +338,11 @@ let Powers = {
     if (type === 'active') {
       return this.active()[i - 1];
     } else if (type === 'stored') {
-      return this.stored()[i - 1];
+      return this.getUnsortedPowerList(this.typeList[(i - 1) % 4], false, true)[Math.floor((i - 1) / 4)];
     } else if (type === 'next') {
       return this.next();
     } else if (type === 'oracle') {
-      return Oracle.powers()[i - 1];
+      return Oracle.powers().filter(p => p.type === this.typeList[(i - 1) % 4])[Math.floor((i - 1) / 4)];
     } else if (type === 'crafted') {
       return PowerShards.craftedPower();
     }
@@ -358,32 +352,53 @@ let Powers = {
       return this.colorData[this.accessPower(type, i).type] + 'span';
     }
   },
-  description(type, i) {
+  title(x) {
+    return x[0].toUpperCase() + x.slice(1);
+  },
+  descriptionFull(type, i) {
+    // WE have this conditional so that we return undefined when desired.
     if (this.canAccessPower(type, i)) {
-      let power = this.accessPower(type, i);
-      return this.descriptionData[power.type] + ': ^' + formatWithPrecision(this.getEffect(power), 5);
+      return [this.descriptionFullEffect(type, i), this.descriptionStrengthRarity(type, i), this.descriptionMultiplier(type, i)].join(', ');
     }
   },
-  details(type, i) {
+  descriptionFullEffect(type, i) {
     if (this.canAccessPower(type, i)) {
       let power = this.accessPower(type, i);
-      let extraMultiplier = this.extraMultiplier(power);
-      return '(strength ' + format(this.strength(power)) + ', rarity ' + format(this.rarity(power)) +
-      (this.powerShardBonus(power) > 0 ? ', power shard upgrades +' + format(this.powerShardBonus(power)) : '') +
-      ', extra multiplier ' + format(this.extraMultiplier(power)) + 'x' + (extraMultiplier === this.cap(power) ? ' (capped)' : '') +
-      ', total multiplier ' + format(this.getOverallMultiplier(power)) + 'x)'
+      return this.title(power.type) + ' ^' + formatWithPrecision(this.getEffect(power), 5);
+    }
+  },
+  descriptionEffect(type, i) {
+    if (this.canAccessPower(type, i)) {
+      let power = this.accessPower(type, i);
+      return '^' + formatWithPrecision(this.getEffect(power), 5);
+    }
+  },
+  descriptionStrengthRarity(type, i) {
+    if (this.canAccessPower(type, i)) {
+      let power = this.accessPower(type, i);
+      return 'strength ' + format(this.strength(power)) + ', rarity ' + format(this.rarity(power));
+    }
+  },
+  descriptionFull(type, i) {
+    if (this.canAccessPower(type, i)) {
+      let power = this.accessPower(type, i);
+      return 'multiplier ' + format(this.preExtraMultiplier(power)) + 'x (total ' + format(this.getOverallMultiplier(power)) + ')';
     }
   },
   totalEffectDescription(type) {
     return this.shortDescriptionData[type] + ': ^' + formatWithPrecision(this.getTotalEffect(type), 5);
   },
+  displayIndexToRealIndex(i) {
+    return this.getUnsortedPowerList(this.typeList[(i - 1) % 4], false, false)[Math.floor((i - 1) / 4)].index - 1;
+  },
   canActivate(i) {
-    return this.stored().length >= i && this.active().length < this.activatedLimit();
+    return this.stored().length >= this.displayIndexToRealIndex(i) && this.active().length < this.activatedLimit();
   },
   activate(i) {
     if (this.canActivate(i)) {
-      player.powers.active.push(player.powers.stored[i - 1]);
-      player.powers.stored = player.powers.stored.slice(0, i - 1).concat(player.powers.stored.slice(i));
+      let j = this.displayIndexToRealIndex(i);
+      player.powers.active.push(player.powers.stored[j - 1]);
+      player.powers.stored = player.powers.stored.slice(0, j - 1).concat(player.powers.stored.slice(j));
       this.onPowerChange(false, true);
     }
   },
@@ -394,7 +409,8 @@ let Powers = {
     if (this.canDelete(i) && (this.powerDeletionMode() === 'No confirmation' ||
       confirm('Are you sure you want to delete this power for ' + format(PowerShards.shardGainStored(i)) + ' power shards?'))) {
       PowerShards.gainShardsStored(i);
-      player.powers.stored = player.powers.stored.slice(0, i - 1).concat(player.powers.stored.slice(i));
+      let j = this.displayIndexToRealIndex(i);
+      player.powers.stored = player.powers.stored.slice(0, j - 1).concat(player.powers.stored.slice(j));
       this.onPowerChange(false, false);
     }
   },
@@ -402,7 +418,7 @@ let Powers = {
     return this.active().length >= i;
   },
   canAccessStored(i) {
-    return this.stored().length >= i;
+    return this.getUnsortedPowerList(this.typeList[(i - 1) % 4], false, true).length > Math.floor((i - 1) / 4);
   },
   isRespecOn() {
     return player.powers.respec;
@@ -480,6 +496,9 @@ let Powers = {
   powerShardBonus(p) {
     return PowerShardUpgrade(this.index(p.type)).effect();
   },
+  preExtraMultiplier(p) {
+    return this.rarity(p) * this.strength(p) + this.powerShardBonus(p);
+  },
   extraMultiplier(p, active) {
     if ('extraMultiplier' in p && Oracle.powerFutureExtraMultipliers()) {
       return p.extraMultiplier;
@@ -488,7 +507,7 @@ let Powers = {
     }
   },
   getOverallMultiplier(p, active) {
-    return (this.rarity(p) * this.strength(p) + this.powerShardBonus(p)) * this.extraMultiplier(p, active);
+    return this.preExtraMultiplier(p) * this.extraMultiplier(p, active);
   },
   getEffect(p, active) {
     return 1 + this.baseEffects[p.type] * this.getOverallMultiplier(p, active);
@@ -598,7 +617,7 @@ let Powers = {
       x => x.type === ['normal', 'infinity', 'eternity', 'complexity'][i]).length));
     let toActivateByType = [0, 1, 2, 3].map(i => this.getSortedPowerList(['normal', 'infinity', 'eternity', 'complexity'][i], false, false).slice(0, realCounts[i]));
     let indicesToActivate = [].concat.apply([], toActivateByType).slice(0, this.activatedLimit() - this.active().length).map(x => x.index);
-    player.powers.active = this.active().concat(indicesToActivate.map(i => this.accessPower('stored', i)));
+    player.powers.active = this.active().concat(indicesToActivate.map(i => this.stored()[i - 1]));
     player.powers.stored = this.stored().filter((_, i) => !indicesToActivate.includes(1 + i));
     // The second parameter is false here because import already selects the best powers of each type,
     // so there's no need to do any swapping.
