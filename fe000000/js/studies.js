@@ -317,14 +317,14 @@ let Studies = {
   },
   buy(x) {
     if (this.canBuy(x)) {
-      this.setStat(x, this.getStat(x).minus(this.cost(x)));
+      this.setStat(x, this.getStat(x).safeMinus(this.cost(x)));
       player.boughtTheorems[x] += 1;
       player.boughtTheoremsThisComplexity = true;
     }
   },
   buyMax(x) {
     while (this.canBuy(x)) {
-      this.setStat(x, this.getStat(x).minus(this.cost(x)));
+      this.setStat(x, this.getStat(x).safeMinus(this.cost(x)));
       player.boughtTheorems[x] += 1;
       player.boughtTheoremsThisComplexity = true;
     }
