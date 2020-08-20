@@ -29,6 +29,15 @@ button {
   height: 64px;
 }
 
+.options-div {
+  width: 256px;
+  height: 64px;
+  display: table;
+  text-align: center;
+  border: solid;
+  border-width: 1px 1px;
+}
+
 .disabled {
   background-color: #555555;
 }

@@ -332,12 +332,13 @@ let initialPlayer = {
     lastTenComplexities: initialLastTenComplexities(),
     lastTenFinalities: initialLastTenFinalities(),
     lastPermanenceGain: new Decimal(0),
+    lastResetsToShow: 10,
   },
   cheats: {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9521484375
+  version: 1.953125
 }
 
 let player;

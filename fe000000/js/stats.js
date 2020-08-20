@@ -39,5 +39,20 @@ let Stats = {
     player.stats.fastestFinality = Math.min(time, player.stats.fastestFinality);
     player.stats.lastTenFinalities.unshift([time, pointGain, shardGain]);
     player.stats.lastTenFinalities.pop();
+  },
+  lastResetsToShow() {
+    return player.stats.lastResetsToShow;
+  },
+  setLastResetsToShow(x) {
+    player.stats.lastResetsToShow = Math.min(10, Math.max(0, x || 0));
+  },
+  key(layer) {
+    return 'lastTen' + layer[0].toUpperCase() + layer.slice(1, -1) + 'ies';
+  },
+  showAnyResets(x) {
+    return this.lastResetsToShow() >= x;
+  },
+  showReset(x, layer) {
+    return this.showAnyResets(x) && player.stats[this.key(layer)][x - 1][0] !== -1;
   }
 }
