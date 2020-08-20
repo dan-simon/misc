@@ -37,8 +37,5 @@ let ComplexityStars = {
   },
   complexityChallengeRewardMultiplier(x) {
     return this.doComplexityStarsDoAnything() ? Math.sqrt(this.complexityChallengeRewardAmount(x).log(2)) : 0;
-  },
-  complexityChallengeRewardStarsToActualStars(stars, x) {
-    return stars.pow(1 / this.complexityChallengeRewardExtraComplexityStarPower(x));
   }
 }
