@@ -397,6 +397,6 @@ function updateDisplay() {
   e[383].textContent = formatInt(Math.pow(2, 25));
   e[384].textContent = formatInt(15);
   e[385].textContent = formatInt(2);
-  e[386].textContent = formatInt(16);
+  e[386].textContent = formatInt(4);
 
 }
