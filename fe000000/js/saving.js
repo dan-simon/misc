@@ -555,6 +555,10 @@ let Saving = {
       };
       player.version = 1.9521484375;
     }
+    if (player.version < 1.953125) {
+      player.stats.lastResetsToShow = 10;
+      player.version = 1.953125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

@@ -4,7 +4,8 @@
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
   <meta content="utf-8" http-equiv="encoding">
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/break_infinity.js"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@antimatter-dimensions/notations"></script>
+  <script src="js/ad-notations.min.js"></script>
+  <script src="js/ad-notations.community.min.js"></script>
   <script src="js/complexity/complexities.js"></script>
   <script src="js/complexity/complexity-achievements.js"></script>
   <script src="js/complexity/complexity-autobuyers.js"></script>
@@ -91,7 +92,7 @@
     <br/>
     <span>Reloading might work, so probably try that first.</span>
     <br/>
-    <span>The page loads <span id="script-count"></span> scripts (should be 77).</span>
+    <span>The page loads <span id="script-count"></span> scripts (should be 78).</span>
     <br/>
     <span><button onclick="window.location.reload(true)">Reload window</button> <button class="export-button" onclick="Saving.exportGame()">Export</button> <button onclick="Saving.loadGamePrompt()">Load</button> <button onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></span>
   </div>
@@ -4676,8 +4677,9 @@
         <span id="b1421">The finality ten finalities ago took <span id="e1490"></span> seconds and gave <span id="e1491"></span> FP and <span id="e1492"></span> FS.</span>
         <br/>
       </div>
+      <div id="b1422">Number of last resets of each type to show: <input id="b1423" type="text"></input></div>
     </div>
-    <div id="b1422">
+    <div id="b1424">
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 8px; border-collapse: separate;">
         <tr>
           <td><button class="options-button" onclick="Saving.saveGame()">Save</button></td>
@@ -4691,52 +4693,76 @@
         </tr>
         <tr>
           <td><button class="options-button" onclick="Options.nextCompletionColors()">Completion colors: <span id="e1496"></span></button></td>
-          <td><button class="options-button" onclick="Options.nextNotation()">Notation: <span id="e1497"></span></button></td>
+          <td><div class="options-div">Notation: <select id="b1425">
+            <option value="Scientific">Scientific</option>
+            <option value="Engineering">Engineering</option>
+            <option value="Letters">Letters</option>
+            <option value="Standard">Standard</option>
+            <option value="Cancer">Cancer</option>
+            <option value="Mixed scientific">Mixed scientific</option>
+            <option value="Mixed engineering">Mixed engineering</option>
+            <option value="Logarithm">Logarithm</option>
+            <option value="Binary">Binary</option>
+            <option value="Hexadecimal">Hexadecimal</option>
+            <option value="Evil">Evil</option>
+            <option value="Brackets">Brackets</option>
+            <option value="Infinity">Infinity</option>
+            <option value="Roman">Roman</option>
+            <option value="Dots">Dots</option>
+            <option value="Zalgo">Zalgo</option>
+            <option value="Hex">Hex</option>
+            <option value="Imperial">Imperial</option>
+            <option value="Clock">Clock</option>
+            <option value="Prime">Prime</option>
+            <option value="Bar">Bar</option>
+            <option value="Shi">Shi</option>
+            <option value="Blind">Blind</option>
+          </select></div></td>
           <td><button class="options-button" onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></td>
         </tr>
       </table>
       <span>Tabs to show:
       <div>
         <span>
-          <span id="b1423">Main: <input id="b1424" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1425">Infinity: <input id="b1426" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1427">Challenges: <input id="b1428" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1429">Autobuyers: <input id="b1430" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1431">Infinity Challenges: <input id="b1432" type="checkbox"></input></span>
+          <span id="b1426">Main: <input id="b1427" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1428">Infinity: <input id="b1429" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1430">Challenges: <input id="b1431" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1432">Autobuyers: <input id="b1433" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1434">Infinity Challenges: <input id="b1435" type="checkbox"></input></span>
         </span>
       </div>
       <div>
         <span>
-          <span id="b1433">Goals: <input id="b1434" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1435">Statistics: <input id="b1436" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1437">Options: cannot be hidden</span> 
+          <span id="b1436">Goals: <input id="b1437" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1438">Statistics: <input id="b1439" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1440">Options: cannot be hidden</span> 
         </span>
       </div>
-      <div id="b1438">
+      <div id="b1441">
         <span>
-          <span id="b1439">Eternity: <input id="b1440" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1441">Eternity Milestones: <input id="b1442" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1443">Studies: <input id="b1444" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1445">Eternity Producer: <input id="b1446" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1447">Eternity Challenges: <input id="b1448" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1449">Chroma: <input id="b1450" type="checkbox"></input></span>
+          <span id="b1442">Eternity: <input id="b1443" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1444">Eternity Milestones: <input id="b1445" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1446">Studies: <input id="b1447" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1448">Eternity Producer: <input id="b1449" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1450">Eternity Challenges: <input id="b1451" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1452">Chroma: <input id="b1453" type="checkbox"></input></span>
         </span>
       </div>
-      <div id="b1451">
+      <div id="b1454">
         <span>
-          <span id="b1452">Complexity: <input id="b1453" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1454">Complexity Challenges: <input id="b1455" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1456">Complexity Achievements: <input id="b1457" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1458">Powers: <input id="b1459" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1460">Oracle: <input id="b1461" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1462">Galaxies: <input id="b1463" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1455">Complexity: <input id="b1456" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1457">Complexity Challenges: <input id="b1458" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1459">Complexity Achievements: <input id="b1460" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1461">Powers: <input id="b1462" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1463">Oracle: <input id="b1464" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1465">Galaxies: <input id="b1466" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
         </span>
       </div>
-      <div id="b1464">
+      <div id="b1467">
         <span>
-          <span id="b1465">Finality: <input id="b1466" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1467">Finality Shards: <input id="b1468" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span id="b1469">Finality Milestones: <input id="b1470" type="checkbox"></input></span>
+          <span id="b1468">Finality: <input id="b1469" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1470">Finality Shards: <input id="b1471" type="checkbox"></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span id="b1472">Finality Milestones: <input id="b1473" type="checkbox"></input></span>
         </span>
       </div>
       <span><a target="_blank" rel="noopener noreferrer" href="guide/index.html">Guide (currently very incomplete)</a><span style="display: inline-block; width: 256px;"></span><a target="_blank" rel="noopener noreferrer" href="https://discord.gg/7JfmqF2">Discord</a></span>

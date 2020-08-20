@@ -14,7 +14,8 @@ function formatMaybeInt (x) {
 
 function getNotation() {
   if (!(player.options.notation in NOTATIONS)) {
-    NOTATIONS[player.options.notation] = new ADNotations[
+    let Source = ['Binary', 'Hexadecimal', 'Evil'].includes(player.options.notation) ? ADCommunityNotations : ADNotations;
+    NOTATIONS[player.options.notation] = new Source[
       player.options.notation.replace(/ [a-z]/g, (x) => x[1].toUpperCase()) + 'Notation']();
   }
   return NOTATIONS[player.options.notation];

@@ -1,5 +1,5 @@
 let NOTATION_LIST = ['Scientific', 'Engineering', 'Letters', 'Standard', 'Cancer',
-'Mixed scientific', 'Mixed engineering', 'Logarithm', 'Brackets', 'Infinity',
+'Mixed scientific', 'Mixed engineering', 'Logarithm', 'Binary', 'Hexadecimal', 'Evil', 'Brackets', 'Infinity',
 'Roman', 'Dots', 'Zalgo', 'Hex', 'Imperial', 'Clock', 'Prime', 'Bar', 'Shi', 'Blind'];
 
 let COMPLETION_COLOR_LIST = ['On (gradient)', 'On (uniform)', 'Off']
@@ -17,7 +17,10 @@ let Options = {
   nextCompletionColors() {
     player.options.completionColors = COMPLETION_COLOR_LIST[(COMPLETION_COLOR_LIST.indexOf(player.options.completionColors) + 1) % COMPLETION_COLOR_LIST.length];
   },
-  nextNotation() {
-    player.options.notation = NOTATION_LIST[(NOTATION_LIST.indexOf(player.options.notation) + 1) % NOTATION_LIST.length];
+  notation() {
+    return player.options.notation;
+  },
+  setNotation(x) {
+    player.options.notation = x;
   }
 }
