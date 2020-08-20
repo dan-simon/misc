@@ -4544,48 +4544,48 @@
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'statistics' ? '' : 'none'~>
       <span>You have produced ~f player.stats.totalStarsProduced ~ total stars.</span>
-      <br/>
-      <span>You have produced ~f player.stats.totalStarsProducedThisEternity ~ stars this eternity.</span>
-      <br/>
-      <span>You have produced ~f player.stats.totalStarsProducedThisComplexity ~ stars this complexity.</span>
-      <br/>
-      <span>You have produced ~f player.stats.totalStarsProducedThisFinality ~ stars this finality.</span>
-      <br/>
-      <span>You have produced ~i player.stats.totalIPProduced ~ total infinity point~s player.stats.totalIPProduced ~.</span>
-      <br/>
-      <span>You have produced ~i player.stats.totalIPProducedThisEternity ~ infinity point~s player.stats.totalIPProducedThisEternity ~ this eternity.</span>
-      <br/>
-      <span>You have produced ~i player.stats.totalEPProduced ~ total eternity point~s player.stats.totalEPProduced ~.</span>
-      <br/>
-      <span>You have produced ~i player.stats.totalEPProducedThisComplexity ~ total eternity point~s player.stats.totalEPProducedThisComplexity ~ this complexity.</span>
-      <br/>
-      <span>You have produced ~i player.stats.totalCPProduced ~ total complexity point~s player.stats.totalCPProduced ~.</span>
-      <br/>
-      <span>You have produced ~i player.stats.totalCPProducedThisFinality ~ total complexity point~s player.stats.totalCPProducedThisFinality ~ this finality.</span>
-      <br/>
-      <span>You have produced ~i player.stats.totalFPProduced ~ total finality point~s player.stats.totalFPProduced ~.</span>
-      <br/>
-      <span>Your fastest infinity took ~f player.stats.fastestInfinity ~ seconds.</span>
-      <br/>
-      <span>Your fastest eternity took ~f player.stats.fastestEternity ~ seconds.</span>
-      <br/>
-      <span>Your fastest complexity took ~f player.stats.fastestComplexity ~ seconds.</span>
-      <br/>
-      <span>Your fastest finality took ~f player.stats.fastestFinality ~ seconds.</span>
+      <br ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~/>
+      <span ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>You have produced ~f player.stats.totalStarsProducedThisEternity ~ stars this eternity.</span>
+      <br ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~/>
+      <span ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~>You have produced ~f player.stats.totalStarsProducedThisComplexity ~ stars this complexity.</span>
+      <br ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~/>
+      <span ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~>You have produced ~f player.stats.totalStarsProducedThisFinality ~ stars this finality.</span>
+      <br ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~/>
+      <span ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~>You have produced ~i player.stats.totalIPProduced ~ total infinity point~s player.stats.totalIPProduced ~.</span>
+      <br ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~/>
+      <span ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>You have produced ~i player.stats.totalIPProducedThisEternity ~ infinity point~s player.stats.totalIPProducedThisEternity ~ this eternity.</span>
+      <br ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~/>
+      <span ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>You have produced ~i player.stats.totalEPProduced ~ total eternity point~s player.stats.totalEPProduced ~.</span>
+      <br ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~/>
+      <span ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~>You have produced ~i player.stats.totalEPProducedThisComplexity ~ total eternity point~s player.stats.totalEPProducedThisComplexity ~ this complexity.</span>
+      <br ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~/>
+      <span ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~>You have produced ~i player.stats.totalCPProduced ~ total complexity point~s player.stats.totalCPProduced ~.</span>
+      <br ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~/>
+      <span ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~>You have produced ~i player.stats.totalCPProducedThisFinality ~ total complexity point~s player.stats.totalCPProducedThisFinality ~ this finality.</span>
+      <br ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~/>
+      <span ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~>You have produced ~i player.stats.totalFPProduced ~ total finality point~s player.stats.totalFPProduced ~.</span>
+      <br ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~/>
+      <span ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~>Your fastest infinity took ~f player.stats.fastestInfinity ~ seconds.</span>
+      <br ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~/>
+      <span ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>Your fastest eternity took ~f player.stats.fastestEternity ~ seconds.</span>
+      <br ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~/>
+      <span ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~>Your fastest complexity took ~f player.stats.fastestComplexity ~ seconds.</span>
+      <br ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~/>
+      <span ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~>Your fastest finality took ~f player.stats.fastestFinality ~ seconds.</span>
       <br/>
       <span>You have spent ~f player.stats.timeSincePurchase ~ seconds without purchasing anything.</span>
       <br/>
       <span>You have spent ~f player.stats.timeSinceSacrifice ~ seconds without sacrificing.</span>
       <br/>
       <span>You have spent ~f player.stats.timeSincePrestige ~ seconds in this prestige.</span>
-      <br/>
-      <span>You have spent ~f player.stats.timeSinceInfinity ~ seconds in this infinity.</span>
-      <br/>
-      <span>You have spent ~f player.stats.timeSinceEternity ~ seconds in this eternity.</span>
-      <br/>
-      <span>You have spent ~f player.stats.timeSinceComplexity ~ seconds in this complexity.</span>
-      <br/>
-      <span>You have spent ~f player.stats.timeSinceFinality ~ seconds in this finality.</span>
+      <br ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~/>
+      <span ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~>You have spent ~f player.stats.timeSinceInfinity ~ seconds in this infinity.</span>
+      <br ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~/>
+      <span ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>You have spent ~f player.stats.timeSinceEternity ~ seconds in this eternity.</span>
+      <br ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~/>
+      <span ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~>You have spent ~f player.stats.timeSinceComplexity ~ seconds in this complexity.</span>
+      <br ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~/>
+      <span ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~>You have spent ~f player.stats.timeSinceFinality ~ seconds in this finality.</span>
       <br/>
       <span>You have spent ~f player.stats.timeSinceGameStart ~ seconds playing this game (counting time offline).</span>
       <div ~style.display=player.stats.lastTenInfinities[0][0] !== -1 ? '' : 'none'~>
