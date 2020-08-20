@@ -65,13 +65,12 @@ let ComplexityChallenge = {
   showActualExtraTheorems() {
     return this.extraTheoremsRaw() < this.extraTheoremsActualAndDisplay();
   },
-  complexityStarsForNextExtraTheorem() {
+  extraComplexityStarsForNextExtraTheorem() {
     let cc6 = this.getComplexityChallengeCompletions(6);
     if (cc6 === 0 || !ComplexityStars.doComplexityStarsDoAnything()) {
       return new Decimal(Infinity);
     }
-    let rewardStars = Decimal.pow(2, Math.pow(2 * (this.extraTheoremsActualAndDisplay() + 1) / cc6, 2));
-    return ComplexityStars.complexityChallengeRewardStarsToActualStars(rewardStars, 6);
+    return Decimal.pow(2, Math.pow(2 * (this.extraTheoremsActualAndDisplay() + 1) / cc6, 2));
   },
   complexityChallengeStatusDescription(x) {
     if (!this.isComplexityChallengeUnlocked(x)) {
