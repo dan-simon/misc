@@ -283,11 +283,11 @@ let Autobuyers = {
     let triggerFastAutobuyers = player.fastAutobuyersTimer >= this.fastAutobuyersTimerLength();
     player.fastAutobuyersTimer = this.mod(player.fastAutobuyersTimer, this.fastAutobuyersTimerLength());
     if (triggerFastAutobuyers) {
-      Autobuyers.finality();
-      Autobuyers.complexity();
-      Autobuyers.gainPermanence();
-      Autobuyers.eternity();
       Autobuyers.infinity();
+      Autobuyers.eternity();
+      Autobuyers.gainPermanence();
+      Autobuyers.complexity();
+      Autobuyers.finality();
       Autobuyers.prestige();
       Autobuyers.sacrifice();
     }
