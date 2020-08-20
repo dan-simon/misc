@@ -49,7 +49,10 @@ let Stats = {
   key(layer) {
     return 'lastTen' + layer[0].toUpperCase() + layer.slice(1, -1) + 'ies';
   },
+  showAnyResets(x) {
+    return this.lastResetsToShow() >= x;
+  },
   showReset(x, layer) {
-    return this.lastResetsToShow() >= x && player.stats[this.key(layer)][x - 1][0] !== -1;
+    return this.showAnyResets(x) && player.stats[this.key(layer)][x - 1][0] !== -1;
   }
 }

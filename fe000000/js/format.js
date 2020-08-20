@@ -5,6 +5,11 @@ function format (x) {
 }
 
 function formatInt (x) {
+  // This is a patch to a bug in the notations library where these notations
+  // display 0 as the empty string.
+  if (x === 0 && ['Binary', 'Hexadecimal'].includes(player.options.notation)) {
+    return '0';
+  }
   return getNotation().format(x, 3, 0);
 }
 
