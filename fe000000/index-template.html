@@ -568,10 +568,12 @@
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'autobuyers' ? '' : 'none'~>
       <span>You have ~i Autobuyers.numberOfAutobuyers() ~ autobuyer~s Autobuyers.numberOfAutobuyers() ~.</span>
+      <br ~style.display=Autobuyers.isLockedResetAutobuyer(15) ? '' : 'none'~/>
+      <span ~style.display=Autobuyers.isLockedResetAutobuyer(15) ? '' : 'none'~>The complexity autobuyer is off when unlocked unless you explicitly pre-set it to be on.</span>
       <br/>
       <span>Turn newly unlocked autobuyers on when unlocked: <input type="checkbox" ~!checked=Autobuyers.areNewlyUnlockedAutobuyersOn()~ ~!onchange=function() {Autobuyers.setAreNewlyUnlockedAutobuyersOn(this.checked)}~></input></span>
       <div ~style.display=Autobuyers.anyLockedResetAutobuyers() ? '' : 'none'~>
-        <span>Pre-set locked reset autobuyers so they don't reset anything when you unlock them (this overrides the above setting):</span>
+        <span>Pre-set locked reset autobuyers (this overrides the above setting):</span>
         <br/>
         <span ~style.display=Autobuyers.isLockedResetAutobuyer(12) ? '' : 'none'~>Infinity: <input type="checkbox" class="autobuyer-checkbox-12" ~!checked=Autobuyer(12).isOn()~ ~!onchange=function() {Autobuyer(12).setIsOn(this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
         <span ~style.display=Autobuyers.isLockedResetAutobuyer(13) ? '' : 'none'~>Eternity: <input type="checkbox" class="autobuyer-checkbox-13" ~!checked=Autobuyer(13).isOn()~ ~!onchange=function() {Autobuyer(13).setIsOn(this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>

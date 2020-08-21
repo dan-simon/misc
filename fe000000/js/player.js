@@ -27,7 +27,7 @@ function initialAutobuyers() {
     {isOn: true, mode: 'Buy max', priority: 9}, {isOn: true, mode: 'Multiplier', priority: new Decimal(2)},
     {isOn: true, mode: 'Multiplier', priority: new Decimal(2)},
     {isOn: true, mode: 'Amount', priority: new Decimal(2)}, {isOn: true, mode: 'Amount', priority: new Decimal(2)},
-    {isOn: true, mode: 'X times last', priority: new Decimal(2)}, {isOn: true, mode: 'Amount', priority: new Decimal(2)},
+    {isOn: true, mode: 'X times last', priority: new Decimal(2)}, {isOn: false, mode: 'Amount', priority: new Decimal(2)},
     {isOn: true, mode: 'none', priority: 'none'}
   ];
 }
@@ -338,7 +338,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.953125
+  version: 1.9541015625
 }
 
 let player;
