@@ -559,6 +559,12 @@ let Saving = {
       player.stats.lastResetsToShow = 10;
       player.version = 1.953125;
     }
+    if (player.version < 1.9541015625) {
+      if (player.complexities < 12 && player.finalities === 0) {
+        player.autobuyers[14].isOn = false;
+      }
+      player.version = 1.9541015625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

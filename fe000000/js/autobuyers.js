@@ -136,8 +136,10 @@ let Autobuyers = {
   setAreNewlyUnlockedAutobuyersOn(x) {
     player.areNewlyUnlockedAutobuyersOn = x;
     // This actually changes which locked autobuyers are on, behind the scenes.
-    for (let autobuyer of this.list) {
-      if (!autobuyer.hasAutobuyer()) {
+    for (let i = 1; i <= 16; i++) {
+      let autobuyer = this.get(i);
+      // Don't touch the complexity autobuyer.
+      if (!autobuyer.hasAutobuyer() && !this.isLockedResetAutobuyer(i) && i !== 15) {
         autobuyer.setIsOn(x);
         for (let checkbox of autobuyer.checkboxes()) {
           checkbox.checked = autobuyer.isOn();
@@ -146,6 +148,7 @@ let Autobuyers = {
     }
   },
   isLockedResetAutobuyer(x) {
+    if (x < 12) return false;
     let layer = ['infinity', 'eternity', 'complexity', 'complexity', 'finality'][x - 12];
     return !Autobuyer(x).hasAutobuyer() && PrestigeLayerProgress.hasReached(layer);
   },
