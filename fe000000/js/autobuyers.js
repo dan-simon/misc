@@ -125,6 +125,11 @@ let Autobuyers = {
       }
     }
   },
+  synchronize() {
+    let newTimer = Math.min(player.slowAutobuyersTimer, player.fastAutobuyersTimer);
+    player.slowAutobuyersTimer = newTimer;
+    player.fastAutobuyersTimer = newTimer;
+  },
   areNewlyUnlockedAutobuyersOn() {
     return player.areNewlyUnlockedAutobuyersOn;
   },

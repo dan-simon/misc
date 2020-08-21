@@ -596,7 +596,7 @@
       </div>
       <span ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>Autobuyers options on this tab only apply to autobuyers on this tab.</span>
       <br ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~/>
-      <span><button onclick="Autobuyers.setAll(true)">Turn all autobuyers on</button> <button onclick="Autobuyers.setAll(false)">Turn all autobuyers off</button> <button onclick="Autobuyers.toggleAll()">Toggle all autobuyers</button></span>
+      <span><button onclick="Autobuyers.setAll(true)">Turn all autobuyers on</button> <button onclick="Autobuyers.setAll(false)">Turn all autobuyers off</button> <button onclick="Autobuyers.toggleAll()">Toggle all autobuyers</button> <button ~style.display=(Autobuyers.areAnyAutobuyersSlow() && Autobuyers.areAnyAutobuyersFast()) ? '' : 'none'~ onclick="Autobuyers.synchronize()">Synchronize slow and fast autobuyers</button></span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>
