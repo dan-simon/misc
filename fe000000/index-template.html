@@ -570,6 +570,15 @@
       <span>You have ~i Autobuyers.numberOfAutobuyers() ~ autobuyer~s Autobuyers.numberOfAutobuyers() ~.</span>
       <br/>
       <span>Turn newly unlocked autobuyers on when unlocked: <input type="checkbox" ~!checked=Autobuyers.areNewlyUnlockedAutobuyersOn()~ ~!onchange=function() {Autobuyers.setAreNewlyUnlockedAutobuyersOn(this.checked)}~></input></span>
+      <div ~style.display=Autobuyers.anyLockedResetAutobuyers() ? '' : 'none'~>
+        <span>Pre-set locked reset autobuyers so they don't reset when you unlock them (this overrides the above setting):</span>
+        <br/>
+        <span ~style.display=Autobuyers.isLockedResetAutobuyer(12) ? '' : 'none'~>Infinity: <input type="checkbox" class="autobuyer-checkbox-12" ~!checked=Autobuyer(12).isOn()~ ~!onchange=function() {Autobuyer(12).setIsOn(this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=Autobuyers.isLockedResetAutobuyer(13) ? '' : 'none'~>Eternity: <input type="checkbox" class="autobuyer-checkbox-13" ~!checked=Autobuyer(13).isOn()~ ~!onchange=function() {Autobuyer(13).setIsOn(this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=Autobuyers.isLockedResetAutobuyer(14) ? '' : 'none'~>Permanence: <input type="checkbox" class="autobuyer-checkbox-14" ~!checked=Autobuyer(14).isOn()~ ~!onchange=function() {Autobuyer(14).setIsOn(this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=Autobuyers.isLockedResetAutobuyer(15) ? '' : 'none'~>Complexity: <input type="checkbox" class="autobuyer-checkbox-15" ~!checked=Autobuyer(15).isOn()~ ~!onchange=function() {Autobuyer(15).setIsOn(this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=Autobuyers.isLockedResetAutobuyer(16) ? '' : 'none'~>Finality: <input type="checkbox" class="autobuyer-checkbox-16" ~!checked=Autobuyer(16).isOn()~ ~!onchange=function() {Autobuyer(16).setIsOn(this.checked)}~></input></span>
+      </div>
       <br/>
       <span>Autobuyers triggering at the same time trigger from lowest to highest autobuyer order.</span>
       <br/>

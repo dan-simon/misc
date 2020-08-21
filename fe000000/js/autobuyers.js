@@ -46,6 +46,9 @@ let Autobuyer = function (i) {
     },
     setIsOn(x) {
       player.autobuyers[i - 1].isOn = x;
+      for (let checkbox of this.checkboxes()) {
+        checkbox.checked = x;
+      }
     },
     setMode(x) {
       player.autobuyers[i - 1].mode = x;
@@ -53,8 +56,8 @@ let Autobuyer = function (i) {
     setPriority(x) {
       player.autobuyers[i - 1].priority = x;
     },
-    checkbox() {
-      return document.getElementsByClassName('autobuyer-checkbox-' + i)[0];
+    checkboxes() {
+      return Array.from(document.getElementsByClassName('autobuyer-checkbox-' + i));
     },
     target() {
       if (i <= 8) {
@@ -105,7 +108,9 @@ let Autobuyers = {
     for (let autobuyer of this.list) {
       if (autobuyer.hasAutobuyer()) {
         autobuyer.setIsOn(x);
-        autobuyer.checkbox().checked = x;
+        for (let checkbox of autobuyer.checkboxes()) {
+          checkbox.checked = x;
+        }
       }
     }
   },
@@ -114,7 +119,9 @@ let Autobuyers = {
       if (autobuyer.hasAutobuyer()) {
         autobuyer.setIsOn(!autobuyer.isOn());
         // Note that autobuyer.isOn() has been negated by the previous line.
-        autobuyer.checkbox().checked = autobuyer.isOn();
+        for (let checkbox of autobuyer.checkboxes()) {
+          checkbox.checked = autobuyer.isOn();
+        }
       }
     }
   },
@@ -127,9 +134,18 @@ let Autobuyers = {
     for (let autobuyer of this.list) {
       if (!autobuyer.hasAutobuyer()) {
         autobuyer.setIsOn(x);
-        autobuyer.checkbox().checked = autobuyer.isOn();
+        for (let checkbox of autobuyer.checkboxes()) {
+          checkbox.checked = autobuyer.isOn();
+        }
       }
     }
+  },
+  isLockedResetAutobuyer(x) {
+    let layer = ['infinity', 'eternity', 'complexity', 'complexity', 'finality'][x - 12];
+    return !Autobuyer(x).hasAutobuyer() && PrestigeLayerProgress.hasReached(layer);
+  },
+  anyLockedResetAutobuyers() {
+    return [12, 13, 14, 15, 16].some(x => this.isLockedResetAutobuyer(x));
   },
   priorityOrder() {
     function cmp(a, b) {
