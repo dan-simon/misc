@@ -96,6 +96,7 @@ let initialPlayer = {
     false, false, false, false, false, false,
     false, false, false, false, false, false,
   ],
+  challengeRestartOnCompletion: false,
   slowAutobuyers: [
     false, false, false, false, false, false, false, false, false,
   ],
@@ -338,7 +339,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9541015625
+  version: 1.955078125
 }
 
 let player;

@@ -39,6 +39,12 @@ let Challenge = {
   setChallenge(x) {
     player.currentChallenge = x;
   },
+  restartOnCompletion() {
+    return player.challengeRestartOnCompletion;
+  },
+  toggleRestartOnCompletion() {
+    player.challengeRestartOnCompletion = !player.challengeRestartOnCompletion;
+  },
   startChallenge(x) {
     this.setChallenge(x);
     InfinityChallenge.setInfinityChallenge(0);

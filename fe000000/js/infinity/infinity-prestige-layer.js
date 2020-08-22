@@ -102,7 +102,9 @@ let InfinityPrestigeLayer = {
     Stats.addInfinity(player.stats.timeSinceInfinity, gain);
     Challenge.checkForChallengeCompletion();
     InfinityChallenge.checkForInfinityChallengeCompletion();
-    Challenge.setChallenge(0);
+    if (!Challenge.restartOnCompletion()) {
+      Challenge.setChallenge(0);
+    }
     InfinityChallenge.setInfinityChallenge(0);
     Goals.recordPrestige('infinity');
     this.infinityReset();

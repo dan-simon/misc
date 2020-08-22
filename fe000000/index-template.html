@@ -394,7 +394,7 @@
       </table>
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'challenges' ? '' : 'none'~>
-      <span>You have completed ~i Challenge.numberOfChallengesCompleted() ~ challenge~s Challenge.numberOfChallengesCompleted() ~, multiplying all generators by ~f Challenge.multiplier() ~.</span>
+      <span>You have completed ~i Challenge.numberOfChallengesCompleted() ~ challenge~s Challenge.numberOfChallengesCompleted() ~, multiplying all generators by ~f Challenge.multiplier() ~. <button onclick="Challenge.toggleRestartOnCompletion()">Restart challenges on completion: ~r Challenge.restartOnCompletion() ? "On" : "Off" ~</button></span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>
