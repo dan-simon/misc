@@ -22,5 +22,11 @@ let Options = {
   },
   setNotation(x) {
     player.options.notation = x;
+  },
+  fitToWidth() {
+    return player.options.fitToWidth;
+  },
+  toggleFitToWidth() {
+    player.options.fitToWidth = !player.options.fitToWidth;
   }
 }

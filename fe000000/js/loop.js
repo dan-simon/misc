@@ -54,6 +54,7 @@ function gameLoop(diff, display) {
   Goals.checkForGoals();
   SpecialTabs.makeTabsVisible();
   if (display !== false) {
+    maybeFitToWidth();
     updateDisplay();
   }
 }

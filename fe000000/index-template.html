@@ -56,6 +56,7 @@
   <script src="js/chroma.js"></script>
   <script src="js/colors.js"></script>
   <script src="js/coordinate.js"></script>
+  <script src="js/fit-to-width.js"></script>
   <script src="js/format.js"></script>
   <script src="js/galaxy.js"></script>
   <script src="js/generators.js"></script>
@@ -93,7 +94,7 @@
     <br/>
     <span>Reloading might work, so probably try that first.</span>
     <br/>
-    <span>The page loads <span id="script-count"></span> scripts (should be 79).</span>
+    <span>The page loads <span id="script-count"></span> scripts (should be 80).</span>
     <br/>
     <span><button onclick="window.location.reload(true)">Reload window</button> <button class="export-button" onclick="Saving.exportGame()">Export</button> <button onclick="Saving.loadGamePrompt()">Load</button> <button onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></span>
   </div>
@@ -4731,7 +4732,11 @@
             <option value="Shi">Shi</option>
             <option value="Blind">Blind</option>
           </select></div></td>
+          <td><button class="options-button" onclick="Options.toggleFitToWidth()">Decrease page size if page is too narrow: ~r player.options.fitToWidth ? "On" : "Off" ~</button></td>
+        </tr>
+          <td></td/>
           <td><button class="options-button" onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></td>
+          <td></td/>
         </tr>
       </table>
       <span>Tabs to show:

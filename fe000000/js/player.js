@@ -287,6 +287,7 @@ let initialPlayer = {
     hotkeys: true,
     completionColors: 'On (gradient)',
     exportDisplay: false,
+    fitToWidth: true,
   },
   stats: {
     totalStarsProduced: new Decimal(0),
@@ -339,7 +340,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.955078125
+  version: 1.9560546875
 }
 
 let player;
