@@ -106,7 +106,7 @@ function updateDisplay() {
   e[92].textContent = format(11 / 16);
   e[93].textContent = formatInt(512);
   e[94].textContent = formatInt(10);
-  e[95].textContent = format(512);
+  e[95].textContent = formatInt(512);
   e[96].textContent = formatInt(2);
   e[97].textContent = formatInt(256);
   e[98].textContent = formatInt(7);
