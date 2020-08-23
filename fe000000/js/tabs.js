@@ -113,3 +113,27 @@ let SpecialTabs = {
     return player.isTabVisible[x];
   }
 }
+
+let SpecialDivs = {
+  requirements: {
+    'prestige': () => player.stats.totalStarsProduced.gte(Math.pow(2, 64)),
+    'infinity': () => player.stats.totalStarsProduced.gte(Math.pow(2, 128)),
+    'boost-power': () => Boost.bought() >= Boost.boostPowerStart() / 2,
+    'softcap': () => Generators.list.some(x => x.multiplier().gte(Generators.nerfValue().pow(0.25))),
+    'hardcap': () => player.stats.totalStarsProduced.gte(Decimal.pow(2, Math.pow(2, 46))),
+  },
+  shouldMakeDivVisible(x) {
+    return this.requirements[x]();
+  },
+  makeDivsVisible() {
+    for (let x in this.requirements) {
+      if (this.shouldMakeDivVisible(x)) {
+        player.isDivVisible[x] = true;
+      }
+    }
+  },
+  isDivVisible(x) {
+    return player.isDivVisible[x];
+  }
+}
+

@@ -573,6 +573,16 @@ let Saving = {
       player.options.fitToWidth = true;
       player.version = 1.9560546875;
     }
+    if (player.version < 1.95703125) {
+      player.isDivVisible = {
+        'prestige': false,
+        'infinity': false,
+        'boost-power': false,
+        'softcap': false,
+        'hardcap': false,
+      };
+      player.version = 1.95703125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

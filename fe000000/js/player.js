@@ -256,6 +256,13 @@ let initialPlayer = {
     'oracle': false,
     'galaxies': false,
   },
+  isDivVisible: {
+    'prestige': false,
+    'infinity': false,
+    'boost-power': false,
+    'softcap': false,
+    'hardcap': false,
+  },
   tabOptions: {
     'main': true,
     'infinity': true,
@@ -340,7 +347,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9560546875
+  version: 1.95703125
 }
 
 let player;

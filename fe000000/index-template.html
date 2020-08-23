@@ -100,7 +100,7 @@
   </div>
   <div id="main" style="display: none;">
     <div style="height: 32px;">You have ~f Stars.amount() ~ stars.<span ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~> ~r ChallengeHeaderText.getText() ~</span></div>
-    <div style="height: 56px;">
+    <div style="height: 56px;" ~style.display=SpecialDivs.isDivVisible('infinity') ? '' : 'none'~>
       <span ~style.display=InfinityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~f InfinityPrestigeLayer.starRequirementForInfinity() ~ stars to infinity.</span>
       <br ~style.display=InfinityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
       <span ~style.display=InfinityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i InfinityPrestigeLayer.infinityPoints() ~ infinity point~s InfinityPrestigeLayer.infinityPoints() ~ (~i InfinityPrestigeLayer.totalInfinityPoints() ~ total this eternity)</span>
@@ -175,15 +175,15 @@
         </div>
         <div ~style.display=Boost.isVisible() ? '' : 'none'~>
           <span/>You have ~i Boost.bought() ~ boost~s Boost.bought() ~, multiplying all generators by ~f Boost.multiplier() ~x (~f Boost.multiplierPer() ~x each). <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buy()">Cost: ~f Boost.cost() ~</button> <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buyMax()">Max</button></span>
-          <br/>
-          <div ~style.display=Boost.isBoostPowerVisible() ? '' : 'none'~>
+          <br ~style.display=SpecialDivs.isDivVisible('boost-power') ? '' : 'none'~/>
+          <div ~style.display=(SpecialDivs.isDivVisible('boost-power') && Boost.isBoostPowerVisible()) ? '' : 'none'~>
             <span>You have ~f Boost.boostPower() ~ boost power, increasing the per-boost multiplier by ~f Boost.boostPowerEffect() ~x.</span>
             <br/>
             <span>You are generating ~r formatWithPrecision(Boost.boostPowerPerSecond(), 5) ~ boost power per second (~r formatWithPrecision(Boost.boostPowerPerBoost(), 5) ~ per boost above ~i Boost.boostPowerStart() ~).</span>
             <br/>
             <span>Your ~r Boost.bestBoostPowerDescription() ~ is ~f Boost.bestBoostPower() ~ (giving ~i Boost.extraTheoremsActualAndDisplay() ~ extra theorem~s Boost.extraTheoremsActualAndDisplay() ~, next at ~f Boost.nextExtraTheorem() ~).</span>
           </div>
-          <span ~style.display=Boost.isBoostPowerVisible() ? 'none' : ''~>You will start generating boost power for each boost above ~i Boost.boostPowerStart() ~ boosts.</span>
+          <span ~style.display=(SpecialDivs.isDivVisible('boost-power') && !Boost.isBoostPowerVisible()) ? '' : 'none'~>You will start generating boost power for each boost above ~i Boost.boostPowerStart() ~ boosts.</span>
         </div>
         <br/>
         <br/>
@@ -267,14 +267,14 @@
           <span ~style.display=Prestige.canPrestige() ? '' : 'none'~><button style="height: 48px;" onclick="Prestige.prestige()">Prestige: ~f Prestige.prestigePower() ~ → ~f Prestige.newPrestigePower() ~<br/>(+~f Prestige.prestigePowerGain() ~, ~f Prestige.prestigePowerMultGain() ~x)</button></span>
           <span ~style.display=Prestige.canPrestige() ? 'none' : ''~>You need ~f Prestige.prestigeRequirement() ~ stars to prestige.</span>
         </div>
-        <br/>
-        <span>Generator multipliers are reduced above ~f Generators.nerfValue() ~ (the multiplier softcap).</span>
-        <br/>
+        <br ~style.display=SpecialDivs.isDivVisible('softcap') ? '' : 'none'~/>
+        <span ~style.display=SpecialDivs.isDivVisible('softcap') ? '' : 'none'~>Generator multipliers are reduced above ~f Generators.nerfValue() ~ (the multiplier softcap).</span>
+        <br ~style.display=Generators.areAnyMultipliersNerfed() ? '' : 'none'~/>
         <div ~style.display=Generators.areAnyMultipliersNerfed() ? '' : 'none'~>
           Given a multiplier x, let y be log(x, ~f Generators.nerfValue() ~). x is reduced to ~f Generators.nerfValue() ~^y^y^~r formatWithPrecision(Generators.nerfExponent, 5) ~.
         </div>
-        <br/>
-        <span>It is impossible to get more than ~f MultiverseCollapse.stars() ~ stars.</span>
+        <br ~style.display=SpecialDivs.isDivVisible('hardcap') ? '' : 'none'~/>
+        <span ~style.display=SpecialDivs.isDivVisible('hardcap') ? '' : 'none'~>It is impossible to get more than ~f MultiverseCollapse.stars() ~ stars.</span>
       </div>
       <div ~style.display=Stars.atLimit() ? '' : 'none'~>
         <span>The ~r Stars.collapsedText() ~ collapsed due to an excess of stars.</span>

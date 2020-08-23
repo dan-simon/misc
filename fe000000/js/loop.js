@@ -53,6 +53,7 @@ function gameLoop(diff, display) {
   Powers.checkForPowerGain();
   Goals.checkForGoals();
   SpecialTabs.makeTabsVisible();
+  SpecialDivs.makeDivsVisible();
   if (display !== false) {
     maybeFitToWidth();
     updateDisplay();
