@@ -377,9 +377,9 @@ function updateDisplaySaveLoadSetup() {
   b[1044].onchange = function() {Powers.setPresetName(32, this.value)};
   b[1045].value = Powers.presetPowerList(32);
   b[1045].onchange = function() {Powers.setPresetPowerList(32, this.value)};
-  b[1053].value = Oracle.time();
+  b[1053].value = Oracle.displayTime();
   b[1053].onchange = function() {Oracle.setTime(+this.value)};
-  b[1054].value = Oracle.ticks();
+  b[1054].value = Oracle.displayTicks();
   b[1054].onchange = function() {Oracle.setTicks(+this.value)};
   b[1115].value = Galaxy.nextDilatedRaw();
   b[1115].onchange = function() {Galaxy.setNextDilated(+this.value)};
@@ -2519,8 +2519,8 @@ function updateDisplay() {
     e[1034].textContent = format(Oracle.unlockCost());
     b[1051].style.display = SpecialTabs.isTabVisible('galaxies') ?  'none' : '';
     b[1052].style.display = Oracle.isUnlocked() ? '' : 'none';
-    e[1035].textContent = pluralize(Oracle.time(), '', 's');
-    e[1036].textContent = pluralize(Oracle.ticks(), '', 's');
+    e[1035].textContent = pluralize(Oracle.displayTime(), '', 's');
+    e[1036].textContent = pluralize(Oracle.displayTicks(), '', 's');
     e[1037].textContent = Oracle.alert() ? "On" : "Off";
     e[1038].textContent = Oracle.powerDisplay() ? "On" : "Off";
     e[1039].textContent = Oracle.powerFutureExtraMultipliers() ? "On" : "Off";

@@ -3657,11 +3657,15 @@
         <div ~style.display=SpecialTabs.isTabVisible('galaxies') ?  'none' : ''~>Unlocking the Oracle for the first time will also let you view the Galaxies tab.</div>
       </div>
       <div ~style.display=Oracle.isUnlocked() ? '' : 'none'~>
-        <span>Ask the Oracle to look <input type="text" ~!value=Oracle.time()~ ~!onchange=function() {Oracle.setTime(+this.value)}~></input> second~s Oracle.time() ~ into the future, using <input type="text" ~!value=Oracle.ticks()~ ~!onchange=function() {Oracle.setTicks(+this.value)}~></input> game tick~s Oracle.ticks() ~. <button onclick="Oracle.invoke()">Get prediction</button> <button onclick="Oracle.toggleAlert()">Alert on prediction: ~r Oracle.alert() ? "On" : "Off" ~</button></span>
+        <span>Ask the Oracle to look <input type="text" ~!value=Oracle.displayTime()~ ~!onchange=function() {Oracle.setTime(+this.value)}~></input> second~s Oracle.displayTime() ~ into the future, using <input type="text" ~!value=Oracle.displayTicks()~ ~!onchange=function() {Oracle.setTicks(+this.value)}~></input> game tick~s Oracle.displayTicks() ~.</span>
         <br/>
-        <span><button onclick="Oracle.togglePowerDisplay()">Show future powers on prediction: ~r Oracle.powerDisplay() ? "On" : "Off" ~</button> <button onclick="Oracle.togglePowerFutureExtraMultipliers()">Show future power extra multipliers (as opposed to current): ~r Oracle.powerFutureExtraMultipliers() ? "On" : "Off" ~</button></span>
+        <span><button onclick="Oracle.invoke()">Get prediction</button> <button onclick="Oracle.toggleAlert()">Alert on prediction: ~r Oracle.alert() ? "On" : "Off" ~</button> <button onclick="Oracle.togglePowerDisplay()">Show future powers on prediction: ~r Oracle.powerDisplay() ? "On" : "Off" ~</button></span>
         <br/>
-        <span>The Oracle can look between ~i 0 ~ and ~f Oracle.maxTime() ~ seconds into the future, and can use between ~i 1 ~ and ~f Oracle.maxTicks() ~ game ticks (more than ~f Oracle.defaultTicks() ~ ticks may make it slow).</span>
+        <span><button onclick="Oracle.togglePowerFutureExtraMultipliers()">Show future power extra multipliers (as opposed to current): ~r Oracle.powerFutureExtraMultipliers() ? "On" : "Off" ~</button></span>
+        <br/>
+        <span>The Oracle can look between ~i 0 ~ and ~f Oracle.maxTime() ~ seconds into the future,</span>
+        <br/>
+        <span>and can use between ~i 1 ~ and ~f Oracle.maxTicks() ~ game ticks (more than ~f Oracle.defaultTicks() ~ ticks may make it slow).</span>
         <br/>
         <span>You can press O to get a prediction from the Oracle on any tab.</span>
         <br/>

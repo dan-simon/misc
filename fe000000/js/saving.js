@@ -14,24 +14,29 @@ let Saving = {
       // We can do this after fixing Decimal.
       let now = Date.now();
       if (offlineProgress) {
-        this.simulateTime((now - player.lastUpdate) / 1000);
+        this.simulateTime((now - player.lastUpdate) / 1000, this.defaultTicks());
       }
       player.lastUpdate = now;
       this.saveGame();
       updateDisplaySaveLoadSetup();
     }
   },
-  simulateTime(totalDiff) {
+  defaultTicks() {
+    return 1024;
+  },
+  simulateTime(totalDiff, maxTicks) {
     let baseTickLength = 1 / 16;
-    let ticks = Math.ceil(Math.min(totalDiff / baseTickLength, 1024));
+    let ticks = Math.ceil(Math.min(totalDiff / baseTickLength, maxTicks));
     let tickLength = totalDiff / ticks;
     for (let i = 0; i < ticks; i++) {
       gameLoop(tickLength, false);
     }
   },
-  oracleSimulateTime(totalDiff) {
-    this.simulateTime(Math.max(0, totalDiff - 16));
-    this.simulateTime(Math.min(16, totalDiff));
+  oracleSimulateTime(totalDiff, totalTicks) {
+    let firstDiff = Math.max(0, totalDiff - 16);
+    let secondDiff = Math.min(16, totalDiff);
+    this.simulateTime(firstDiff, totalTicks);
+    this.simulateTime(secondDiff, this.defaultTicks());
   },
   fixPlayer() {
     if (player.version < 1.25) {

@@ -17,6 +17,9 @@ let Oracle = {
   maxTime() {
     return Math.pow(2, 16);
   },
+  displayTime() {
+    return player.oracle.time;
+  },
   time() {
     return Math.min(Math.max(0, player.oracle.time), this.maxTime());
   },
@@ -26,8 +29,11 @@ let Oracle = {
   defaultTicks() {
     return 1024;
   },
+  displayTicks() {
+    return player.oracle.ticks;
+  },
   ticks() {
-    return Math.min(Math.max(1, player.oracle.ticks), this.maxTicks());
+    return Math.min(Math.max(1, Math.floor(player.oracle.ticks)), this.maxTicks());
   },
   isUsed() {
     return player.oracle.used;
@@ -66,7 +72,8 @@ let Oracle = {
     if (!this.isUnlocked()) return;
     let save = btoa(JSON.stringify(player));
     let time = this.time();
-    Saving.oracleSimulateTime(time);
+    let ticks = this.ticks();
+    Saving.oracleSimulateTime(time, ticks);
     let complexityPoints = ComplexityPoints.amount();
     let complexityPointGain = ComplexityPrestigeLayer.canComplexity() ?
       ComplexityPrestigeLayer.complexityPointGain() : new Decimal(0);
@@ -78,6 +85,7 @@ let Oracle = {
     Saving.loadGame(save, null, true);
     player.oracle.used = true;
     player.oracle.timeSimulated = time;
+    player.oracle.ticksSimulated = ticks;
     player.oracle.complexityPoints = complexityPoints;
     player.oracle.complexityPointGain = complexityPointGain;
     player.oracle.originalComplexityChallengeCompletions = ComplexityChallenge.getAllComplexityChallengeCompletions();
@@ -98,7 +106,8 @@ let Oracle = {
       this.complexityChallengeCompletionsMessage(), this.finalityMessage()
     ];
     return 'After ' + formatMaybeInt(player.oracle.timeSimulated) + ' second' +
-      pluralize(player.oracle.timeSimulated, '', 's') + ', you ' + coordinate('*', '', messages) + '.';
+      pluralize(player.oracle.timeSimulated, '', 's') + ' and ' + formatMaybeInt(player.oracle.ticksSimulated) + ' tick' +
+      pluralize(player.oracle.ticksSimulated, '', 's') + ', you ' + coordinate('*', '', messages) + '.';
   },
   complexityPointMessage() {
     return 'will have ' + formatInt(player.oracle.complexityPoints) + ' ℂP';
