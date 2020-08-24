@@ -573,7 +573,17 @@ let Saving = {
       player.options.fitToWidth = true;
       player.version = 1.9560546875;
     }
-    if (player.version < ) {
+    if (player.version < 1.95703125) {
+      player.isDivVisible = {
+        'prestige': false,
+        'infinity': false,
+        'boost-power': false,
+        'softcap': false,
+        'hardcap': false,
+      };
+      player.version = 1.95703125;
+    }
+    if (player.version < 1.9580078125) {
       player.oracle.ticks = 1024;
       player.oracle.ticksSimulated = 1024;
       player.oracle.complexityPoints = new Decimal(0);
@@ -584,7 +594,7 @@ let Saving = {
       player.oracle.originalFinalities = 0;
       player.oracle.finalityShards = 0;
       player.oracle.originalFinalityShards = 0;
-      player.version = ;
+      player.version = 1.9580078125;
     }
   },
   convertSaveToDecimal() {

@@ -34,7 +34,8 @@ let Prestige = {
   isVisible() {
     // This basically used to be as follows: (this.canPrestige() || this.prestigePower().gt(1) || player.infinities > 0 || player.eternities.gt(0)) && !this.isPrestigeDisabled();
     // Seeing that things are possible probably isn't too intimidating, so I'm experimenting with making it true unless prestige is disabled.
-    return !this.isPrestigeDisabled();
+    // The above experiment has failed to some extent; it's now not visible immediately, but becomes visible long before you can do it.
+    return !this.isPrestigeDisabled() && SpecialDivs.isDivVisible('prestige');
   },
   newPrestigePower() {
     return this.canPrestige() ? Decimal.pow(2, this.prestigePowerExponent() * (player.stars.max(1).log(2) - 96) / 16) : this.prestigePower();

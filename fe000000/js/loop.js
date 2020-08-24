@@ -43,6 +43,9 @@ function gameLoop(diff, display) {
   if (Powers.isUnlocked() || FinalityMilestones.isFinalityMilestoneActive(6)) {
     EternityPoints.addAmount(EternityPrestigeLayer.eternityPointGain().times(diff));
   }
+  if (FinalityMilestones.isFinalityMilestoneActive(4)) {
+    Permanence.add(Permanence.permanenceGain().times(diff));
+  }
   if (FinalityMilestones.isFinalityMilestoneActive(10)) {
     ComplexityPoints.addAmount(ComplexityPrestigeLayer.complexityPointGain().times(diff));
   }
@@ -53,6 +56,7 @@ function gameLoop(diff, display) {
   Powers.checkForPowerGain();
   Goals.checkForGoals();
   SpecialTabs.makeTabsVisible();
+  SpecialDivs.makeDivsVisible();
   if (display !== false) {
     maybeFitToWidth();
     updateDisplay();
