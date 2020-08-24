@@ -591,10 +591,6 @@ let Saving = {
     if (player.version < 1.9580078125) {
       player.oracle.ticks = 1024;
       player.oracle.ticksSimulated = 1024;
-      player.oracle.complexityPoints = new Decimal(0);
-      player.oracle.complexityPointGain = new Decimal(0);
-      player.oracle.complexityChallengeCompletions = [0, 0, 0, 0, 0, 0];
-      player.oracle.originalComplexityChallengeCompletions = [0, 0, 0, 0, 0, 0];
       player.oracle.finalities = 0;
       player.oracle.originalFinalities = 0;
       player.oracle.finalityShards = 0;
