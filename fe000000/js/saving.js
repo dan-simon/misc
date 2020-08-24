@@ -25,6 +25,10 @@ let Saving = {
     return 1024;
   },
   simulateTime(totalDiff, maxTicks) {
+    // Add this not for any of the actual JS files, but for ease of use from console.
+    if (maxTicks === undefined) {
+      maxTicks = this.defaultTicks();
+    }
     let baseTickLength = 1 / 16;
     let ticks = Math.ceil(Math.min(totalDiff / baseTickLength, maxTicks));
     let tickLength = totalDiff / ticks;
