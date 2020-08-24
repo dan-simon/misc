@@ -20,6 +20,15 @@ let Oracle = {
   time() {
     return Math.min(Math.max(0, player.oracle.time), this.maxTime());
   },
+  maxTicks() {
+    return Math.pow(2, 16);
+  },
+  defaultTicks() {
+    return 1024;
+  },
+  ticks() {
+    return Math.min(Math.max(1, player.oracle.ticks), this.maxTicks());
+  },
   isUsed() {
     return player.oracle.used;
   },
@@ -50,6 +59,9 @@ let Oracle = {
   setTime(x) {
     player.oracle.time = x || 0;
   },
+  setTicks(x) {
+    player.oracle.ticks = x || 1;
+  },
   invoke() {
     if (!this.isUnlocked()) return;
     let save = btoa(JSON.stringify(player));
@@ -59,6 +71,8 @@ let Oracle = {
     let complexityPointGain = ComplexityPrestigeLayer.canComplexity() ?
       ComplexityPrestigeLayer.complexityPointGain() : new Decimal(0);
     let complexityChallengeCompletions = ComplexityChallenge.getAllComplexityChallengeCompletions();
+    let finalities = Finalities.amount();
+    let finalityShards = FinalityShards.total();
     let powers = player.powers.stored.map(p => Powers.makeFuture(p));
     let extraMultipliers = Powers.getAllExtraMultipliers();
     Saving.loadGame(save, null, true);
@@ -68,6 +82,10 @@ let Oracle = {
     player.oracle.complexityPointGain = complexityPointGain;
     player.oracle.originalComplexityChallengeCompletions = ComplexityChallenge.getAllComplexityChallengeCompletions();
     player.oracle.complexityChallengeCompletions = complexityChallengeCompletions;
+    player.oracle.originalFinalities = Finalities.amount();
+    player.oracle.finalities = finalities;
+    player.oracle.originalFinalityShards = FinalityShards.total();
+    player.oracle.finalityShards = finalityShards;
     player.oracle.powers = powers;
     player.oracle.extraMultipliers = extraMultipliers;
     if (this.alert()) {
@@ -75,7 +93,10 @@ let Oracle = {
     }
   },
   message() {
-    let messages = [this.complexityPointMessage(), this.complexityPointGainMessage(), this.complexityChallengeCompletionsMessage()];
+    let messages = [
+      this.complexityPointMessage(), this.complexityPointGainMessage(),
+      this.complexityChallengeCompletionsMessage(), this.finalityMessage()
+    ];
     return 'After ' + formatMaybeInt(player.oracle.timeSimulated) + ' second' +
       pluralize(player.oracle.timeSimulated, '', 's') + ', you ' + coordinate('*', '', messages) + '.';
   },
@@ -94,6 +115,15 @@ let Oracle = {
     let completionText = gainedCompletions.map(
       (x, i) => x > 0 ? formatInt(x) + ' completion' + pluralize(x, '', 's') + ' of Complexity Challenge ' + (i + 1) : null);
     return coordinate('will have gained *', null, completionText);
+  },
+  finalityMessage() {
+    if (player.oracle.finalities === player.oracle.originalFinalities) {
+      return null;
+    }
+    return 'will have gained ' + formatInt(player.oracle.finalities - player.oracle.originalFinalities) +
+      ' finalit' + pluralize(player.oracle.finalities - player.oracle.originalFinalities, 'y', 'ies') +
+      ' and ' + formatInt(player.oracle.finalityShards - player.oracle.originalFinalityShards) +
+      ' finality shard' + pluralize(player.oracle.finalityShards - player.oracle.originalFinalityShards, '', 's');
   },
   messagePrequel() {
     if (this.isUsed()) {

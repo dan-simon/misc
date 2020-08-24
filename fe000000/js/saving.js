@@ -573,6 +573,19 @@ let Saving = {
       player.options.fitToWidth = true;
       player.version = 1.9560546875;
     }
+    if (player.version < ) {
+      player.oracle.ticks = 1024;
+      player.oracle.ticksSimulated = 1024;
+      player.oracle.complexityPoints = new Decimal(0);
+      player.oracle.complexityPointGain = new Decimal(0);
+      player.oracle.complexityChallengeCompletions = [0, 0, 0, 0, 0, 0];
+      player.oracle.originalComplexityChallengeCompletions = [0, 0, 0, 0, 0, 0];
+      player.oracle.finalities = 0;
+      player.oracle.originalFinalities = 0;
+      player.oracle.finalityShards = 0;
+      player.oracle.originalFinalityShards = 0;
+      player.version = ;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
