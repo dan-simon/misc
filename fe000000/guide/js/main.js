@@ -4,6 +4,7 @@ window.onload = function () {
   } catch (ex) {
     player = {options: {notation: 'Scientific', theme: 'Dark'}};
   }
+  Options.updateCheckboxSize();
   Colors.updateColors();
   updateDisplayPageLoadSetup();
   updateDisplay();

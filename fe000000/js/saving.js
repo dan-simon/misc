@@ -18,6 +18,7 @@ let Saving = {
       }
       player.lastUpdate = now;
       this.saveGame();
+      Options.updateCheckboxSize();
       Colors.updateColors();
       updateDisplaySaveLoadSetup();
     }
@@ -611,6 +612,10 @@ let Saving = {
     if (player.version < 1.9599609375) {
       player.options.theme = 'Dark';
       player.version = 1.9599609375;
+    }
+    if (player.version < 1.9609375) {
+      player.options.largerCheckboxes = false;
+      player.version = 1.9609375;
     }
   },
   convertSaveToDecimal() {

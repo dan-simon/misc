@@ -35,5 +35,15 @@ let Options = {
   },
   toggleFitToWidth() {
     player.options.fitToWidth = !player.options.fitToWidth;
+  },
+  largerCheckboxes() {
+    return player.options.largerCheckboxes;
+  },
+  toggleLargerCheckboxes() {
+    player.options.largerCheckboxes = !player.options.largerCheckboxes;
+    this.updateCheckboxSize();
+  },
+  updateCheckboxSize() {
+    document.documentElement.style.setProperty('--checkbox-scale', player.options.largerCheckboxes ? 3 : 1);
   }
 }

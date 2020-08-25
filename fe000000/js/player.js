@@ -302,6 +302,7 @@ let initialPlayer = {
     exportDisplay: false,
     theme: 'Dark',
     fitToWidth: true,
+    largerCheckboxes: false,
   },
   stats: {
     totalStarsProduced: new Decimal(0),
@@ -354,7 +355,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9599609375
+  version: 1.9609375
 }
 
 let player;
