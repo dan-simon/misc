@@ -161,7 +161,9 @@ let Powers = {
       auto && player.complexityPoints.minus(this.unlockCost()).lt(2) && ComplexityGenerator(1).bought() === 0)) return;
     player.complexityPoints = player.complexityPoints.safeMinus(this.unlockCost());
     player.powers.unlocked = true;
-    player.powers.stored.push(RNG.initialPower());
+    // I have no idea why the player would already have powers at this point,
+    // but let's keep them if they do.
+    player.powers.stored = player.powers.stored.concat(RNG.initialPowers());
     player.stats.timeSincePowerGain = 0;
   },
   isPowerGainOn() {

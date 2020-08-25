@@ -89,8 +89,9 @@ let RNG = {
     return this.cachedAverage;
   },
   randomType(real) {
-    let type = ['normal', 'infinity', 'eternity', 'complexity'].filter(
-      i => i !== player.powers.lastData.type)[Math.floor(3 * this.uniform(real))];
+    let options = ['normal', 'infinity', 'eternity', 'complexity'].filter(
+      i => i !== player.powers.lastData.type);
+    let type = options[Math.floor(options.length * this.uniform(real))];
     if (real) {
       player.powers.lastData.type = type;
     }
@@ -112,11 +113,11 @@ let RNG = {
       'rarity': this.rarityFromRandom(r)
     };
   },
-  initialPower() {
-    return {
-      'type': 'normal',
+  initialPowers() {
+    return Powers.typeList.map(x => ({
+      'type': x,
       'strength': Powers.newStrength(),
       'rarity': 1,
-    };
+    }));
   }
 }

@@ -196,7 +196,7 @@ let initialPlayer = {
     },
     lastData: {
       lowRarity: false,
-      type: 'normal'
+      type: 'none'
     }
   },
   powerListAutoLoad: {
@@ -353,7 +353,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9580078125
+  version: 1.958984375
 }
 
 let player;

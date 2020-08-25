@@ -138,7 +138,7 @@ let FinalityPrestigeLayer = {
       craft: player.powers.craft,
       lastData: {
         lowRarity: false,
-        type: 'normal'
+        type: 'none'
       }
     };
     // Jump to another seed, so each finality gets a new seed that doesn't depend

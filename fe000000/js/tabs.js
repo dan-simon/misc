@@ -71,6 +71,14 @@ let Tabs = {
   },
   setTabOption(x, b) {
     player.tabOptions[x] = b;
+  },
+  showAllUnlockedTabs() {
+    for (let x in player.tabOptions) {
+      if (this.isTabOptionVisible(x) && x !== 'options') {
+        player.tabOptions[x] = true;
+        document.getElementsByClassName(x + '-tab-option')[0].checked = true;
+      }
+    }
   }
 }
 

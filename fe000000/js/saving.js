@@ -601,6 +601,12 @@ let Saving = {
       player.oracle.originalFinalityShards = 0;
       player.version = 1.9580078125;
     }
+    if (player.version < 1.958984375) {
+      if (!player.powers.unlocked) {
+        player.powers.lastData.next = 'none';
+      }
+      player.version = 1.958984375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
