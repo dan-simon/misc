@@ -2,8 +2,9 @@ window.onload = function () {
   try {
     player = JSON.parse(atob(localStorage.getItem('fe000000-save'), null));
   } catch (ex) {
-    player = {options: {notation: 'Scientific'}};
+    player = {options: {notation: 'Scientific', theme: 'Dark'}};
   }
+  Colors.updateColors();
   updateDisplayPageLoadSetup();
   updateDisplay();
   setInterval(updateDisplay, 16384);
