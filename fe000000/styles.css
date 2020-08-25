@@ -3,11 +3,16 @@
   src: url('MonospaceTypewriter.ttf');
 }
 
+:root {
+  --background-color: #000000;
+  --text-color: #ffffff;
+}
+
 body {
   text-align: center;
   font-family: Typewriter, serif;
-  background-color: #000000;
-  color: #ffffff;
+  background-color: var(--background-color);
+  color: var(--text-color);
   -moz-transform-origin: 0 0;
 }
 
@@ -344,51 +349,51 @@ button {
 }
 
 .chromacurrentgreydiv {
-  background: radial-gradient(#000000, #000000 75%, #aaaaaa);
+  background: radial-gradient(var(--background-color), var(--background-color) 75%, #aaaaaa);
 }
 
 .chromanextgreydiv {
-  background: radial-gradient(#000000, #000000 75%, #555555);
+  background: radial-gradient(var(--background-color), var(--background-color) 75%, #555555);
 }
 
 .chromacurrentpurplediv {
-  background: radial-gradient(#000000, #000000 75%, #6633cc);
+  background: radial-gradient(var(--background-color), var(--background-color) 75%, #6633cc);
 }
 
 .chromanextpurplediv {
-  background: radial-gradient(#000000, #000000 75%, #331166);
+  background: radial-gradient(var(--background-color), var(--background-color) 75%, #331166);
 }
 
 .chromacurrentorangediv {
-  background: radial-gradient(#000000, #000000 75%, #cc6633);
+  background: radial-gradient(var(--background-color), var(--background-color) 75%, #cc6633);
 }
 
 .chromanextorangediv {
-  background: radial-gradient(#000000, #000000 75%, #663311);
+  background: radial-gradient(var(--background-color), var(--background-color) 75%, #663311);
 }
 
 .chromacurrentcyandiv {
-  background: radial-gradient(#000000, #000000 75%, #00ffff);
+  background: radial-gradient(var(--background-color), var(--background-color) 75%, #00ffff);
 }
 
 .chromanextcyandiv {
-  background: radial-gradient(#000000, #000000 75%, #007777);
+  background: radial-gradient(var(--background-color), var(--background-color) 75%, #007777);
 }
 
 .chromacurrentgreendiv {
-  background: radial-gradient(#000000, #000000 75%, #33ff33);
+  background: radial-gradient(var(--background-color), var(--background-color) 75%, #33ff33);
 }
 
 .chromanextgreendiv {
-  background: radial-gradient(#000000, #000000 75%, #117711);
+  background: radial-gradient(var(--background-color), var(--background-color) 75%%, #117711);
 }
 
 .chromacurrentreddiv {
-  background: radial-gradient(#000000, #000000 75%, #ff0000);
+  background: radial-gradient(var(--background-color), var(--background-color) 75%, #ff0000);
 }
 
 .chromanextreddiv {
-  background: radial-gradient(#000000, #000000 75%, #770000);
+  background: radial-gradient(var(--background-color), var(--background-color) 75%, #770000);
 }
 
 .greytogrey {

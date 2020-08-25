@@ -18,6 +18,7 @@ let Saving = {
       }
       player.lastUpdate = now;
       this.saveGame();
+      Colors.updateColors();
       updateDisplaySaveLoadSetup();
     }
   },
@@ -606,6 +607,10 @@ let Saving = {
         player.powers.lastData.next = 'none';
       }
       player.version = 1.958984375;
+    }
+    if (player.version < 1.9599609375) {
+      player.options.theme = 'Dark';
+      player.version = 1.9599609375;
     }
   },
   convertSaveToDecimal() {
