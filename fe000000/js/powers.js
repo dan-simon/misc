@@ -16,7 +16,7 @@ let PowerUpgrade = function (i) {
       return [Decimal.pow(2, 16), Decimal.pow(2, 64), null][i - 1];
     },
     effectIncreasePer() {
-      return 1;
+      return [1, 1 / 4, 1][i - 1];
     },
     initialEffect() {
       return [0, 1, 0][i - 1];
@@ -463,7 +463,7 @@ let Powers = {
     return 3;
   },
   interval() {
-    return 8192 / this.speed();
+    return 2048 / this.speed();
   },
   showNextPower() {
     return this.interval() > 1;

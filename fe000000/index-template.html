@@ -3341,7 +3341,7 @@
           </tr>
           <tr>
             <td>Speed of gaining new powers:</td>
-            <td><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? 'none' : ''~>~i PowerUpgrade(2).effectDisplay() ~x → ~i PowerUpgrade(2).nextEffectDisplay() ~x</span><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? '' : 'none'~>~i PowerUpgrade(2).effectDisplay() ~x (maxed)</span></td>
+            <td><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? 'none' : ''~>~f PowerUpgrade(2).effectDisplay() ~x → ~f PowerUpgrade(2).nextEffectDisplay() ~x</span><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? '' : 'none'~>~f PowerUpgrade(2).effectDisplay() ~x (maxed)</span></td>
             <td><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(2).buy()">Cost: ~i PowerUpgrade(2).cost() ~ ℂP</button></span></td>
             <td><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(2).buyMax()">Max</button></span></td>
             <td><span ~style.display=ComplexityAutobuyer(10).hasComplexityAutobuyer() ? '' : 'none'~><button onclick="ComplexityAutobuyer(10).toggle()">Auto: ~r ComplexityAutobuyer(10).isOn() ? "On" : "Off" ~</button></span></td>

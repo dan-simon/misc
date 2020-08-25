@@ -2391,10 +2391,10 @@ function updateDisplay() {
     b[899].style.display = ComplexityAutobuyer(9).hasComplexityAutobuyer() ? '' : 'none';
     e[993].textContent = ComplexityAutobuyer(9).isOn() ? "On" : "Off";
     b[900].style.display = PowerUpgrade(2).atBoughtLimit() ? 'none' : '';
-    e[994].textContent = formatInt(PowerUpgrade(2).effectDisplay());
-    e[995].textContent = formatInt(PowerUpgrade(2).nextEffectDisplay());
+    e[994].textContent = format(PowerUpgrade(2).effectDisplay());
+    e[995].textContent = format(PowerUpgrade(2).nextEffectDisplay());
     b[901].style.display = PowerUpgrade(2).atBoughtLimit() ? '' : 'none';
-    e[996].textContent = formatInt(PowerUpgrade(2).effectDisplay());
+    e[996].textContent = format(PowerUpgrade(2).effectDisplay());
     b[902].style.display = PowerUpgrade(2).atBoughtLimit() ? 'none' : '';
     b[903].className = PowerUpgrade(2).canBuy() ? "" : "disabled";
     e[997].textContent = formatInt(PowerUpgrade(2).cost());
