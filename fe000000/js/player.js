@@ -300,6 +300,7 @@ let initialPlayer = {
     hotkeys: true,
     completionColors: 'On (gradient)',
     exportDisplay: false,
+    theme: 'Dark',
     fitToWidth: true,
   },
   stats: {
@@ -353,7 +354,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.958984375
+  version: 1.9599609375
 }
 
 let player;

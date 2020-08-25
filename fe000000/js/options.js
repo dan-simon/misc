@@ -23,6 +23,13 @@ let Options = {
   setNotation(x) {
     player.options.notation = x;
   },
+  theme() {
+    return player.options.theme;
+  },
+  nextTheme() {
+    player.options.theme = ['Dark', 'Light'][(['Dark', 'Light'].indexOf(player.options.theme) + 1) % 2];
+    Colors.updateColors();
+  },
   fitToWidth() {
     return player.options.fitToWidth;
   },
