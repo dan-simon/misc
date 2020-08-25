@@ -2531,8 +2531,7 @@
       <br/>
       <span>multiplying permanence and chroma buildup speed by ~q Complexities.permanenceAndChromaMultiplier() ~,</span>
       <br/>
-      <span ~style.display=Complexities.autoECCompletionTime() === Infinity ? 'none' : ''~>and auto-completing an EC tier every ~q Complexities.autoECCompletionTime() ~ seconds.</span>
-      <span ~style.display=Complexities.autoECCompletionTime() === Infinity ? '' : 'none'~>and never auto-completing an EC tier.</span>
+      <span>and <span ~style.display=EternityChallenge.autoECFromComplexities() ? '' : 'none'~>auto-completing an EC tier every ~q Complexities.autoECCompletionTime() ~ seconds</span><span ~style.display=EternityChallenge.autoECFromComplexities() ? 'none' : ''~>never auto-completing an EC tier</span><span ~style.display=EternityChallenge.autoECFromFinalities() ? '' : 'none'~> (actually one EC tier per ~q EternityChallenge.autoECCompletionTime() ~ seconds due to finalities)</span>.</span>
       <br/>
       <span>You have ~f ComplexityStars.amount() ~ complexity stars, making all complexity challenge rewards ~f ComplexityStars.complexityChallengeRewardMultiplier() ~x stronger.</span>
       <br/>
@@ -3895,7 +3894,7 @@
       <br/>
       <span>making the finality generator per-purchase multiplier ~q Finalities.finalityGeneratorPerPurchaseMultiplier() ~x,</span>
       <br/>
-      <span>and auto-completing an EC tier every ~q Finalities.autoECCompletionTime() ~ seconds.</span>
+      <span>and <span ~style.display=EternityChallenge.autoECFromFinalities() ? '' : 'none'~>auto-completing an EC tier every ~q Finalities.autoECCompletionTime() ~ seconds</span><span ~style.display=EternityChallenge.autoECFromFinalities() ? 'none' : ''~>never auto-completing an EC tier</span><span ~style.display=EternityChallenge.autoECFromComplexities() ? '' : 'none'~> (actually one EC tier per ~q EternityChallenge.autoECCompletionTime() ~ seconds due to complexities)</span>.</span>
       <br/>
       <span>You have ~f FinalityStars.amount() ~ finality stars, multiplying all non-finality generators by ~f FinalityStars.multiplier() ~x.</span>
       <br/>
