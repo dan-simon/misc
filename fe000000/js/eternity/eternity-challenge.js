@@ -268,8 +268,12 @@ let EternityChallenge = {
     player.unlockedEternityChallenge = 0;
   },
   startEternityChallenge(x) {
+    if (EternityPrestigeLayer.canEternity()) {
+      EternityPrestigeLayer.eternity();
+    } else {
+      EternityPrestigeLayer.eternityReset();
+    }
     this.setEternityChallenge(x);
-    EternityPrestigeLayer.eternityReset();
   },
   exitEternityChallenge() {
     this.setEternityChallenge(0);
