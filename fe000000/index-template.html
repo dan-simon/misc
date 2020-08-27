@@ -4715,7 +4715,7 @@
         <span ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~>Finality: <input type="checkbox" ~!checked=Stats.showRunType('finality')~ ~!onchange=function() {Stats.setShowRunType('finality', this.checked)}~></input></span>
       </span>
       <br/>
-      <span>Number of last run of each type to show: <input type="text" ~!value=Stats.lastRunsToShow()~ ~!onchange=function() {Stats.setLastRunsToShow(+this.value)}~></input></span>
+      <span>Number of last runs of each type to show: <input type="text" ~!value=Stats.lastRunsToShow()~ ~!onchange=function() {Stats.setLastRunsToShow(+this.value)}~></input></span>
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'options' ? '' : 'none'~>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 8px; border-collapse: separate;">
