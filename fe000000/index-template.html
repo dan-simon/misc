@@ -135,6 +135,7 @@
       <button ~style.display=Tabs.isTabVisible('infinity-challenges') ? '' : 'none'~ onclick="Tabs.setTab('infinity-challenges')">Infinity Challenges</button>
       <button ~style.display=Tabs.isTabVisible('goals') ? '' : 'none'~ onclick="Tabs.setTab('goals')">Goals</button>
       <button ~style.display=Tabs.isTabVisible('statistics') ? '' : 'none'~ onclick="Tabs.setTab('statistics')">Statistics</button>
+      <button ~style.display=Tabs.isTabVisible('last-ten-runs') ? '' : 'none'~ onclick="Tabs.setTab('last-ten-runs')">Last Ten Runs</button>
       <button ~style.display=Tabs.isTabVisible('options') ? '' : 'none'~ onclick="Tabs.setTab('options')">Options</button>
     </span>
     <br ~style.display=Tabs.displayTabBreak(1) ? '' : 'none'~/>
@@ -185,6 +186,7 @@
           </div>
           <span ~style.display=(SpecialDivs.isDivVisible('boost-power') && !Boost.isBoostPowerVisible()) ? '' : 'none'~>You will start generating boost power for each boost above ~i Boost.boostPowerStart() ~ boosts.</span>
         </div>
+        <span ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~>View all generators even if they would be otherwise invisible: <input type="checkbox" ~!checked=Generators.viewAll()~ ~!onchange=function() {Generators.setViewAll(this.checked)}~></input></span> 
         <br/>
         <br/>
         <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
@@ -4613,96 +4615,107 @@
       <span ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~>You have spent ~f player.stats.timeSinceFinality ~ seconds in this finality.</span>
       <br/>
       <span>You have spent ~f player.stats.timeSinceGameStart ~ seconds playing this game (counting time offline).</span>
-      <div ~style.display=Stats.showReset(1, 'infinity') ? '' : 'none'~>
+    </tab>
+    <tab ~style.display=Tabs.currentTab() === 'last-ten-runs' ? '' : 'none'~>
+      <div ~style.display=Stats.showRun(1, 'infinity') ? '' : 'none'~>
         <span>Last infinity took ~f player.stats.lastTenInfinities[0][0] ~ seconds and gave ~i player.stats.lastTenInfinities[0][1] ~ IP, giving ~f player.stats.lastTenInfinities[0][2] ~ IP/second.</span>
-        <br ~style.display=Stats.showAnyResets(2) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(2, 'infinity') ? '' : 'none'~>The infinity two infinities ago took ~f player.stats.lastTenInfinities[1][0] ~ seconds and gave ~i player.stats.lastTenInfinities[1][1] ~ IP, giving ~f player.stats.lastTenInfinities[1][2] ~ IP/second.</span>
-        <br ~style.display=Stats.showAnyResets(3) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(3, 'infinity') ? '' : 'none'~>The infinity three infinities ago took ~f player.stats.lastTenInfinities[2][0] ~ seconds and gave ~i player.stats.lastTenInfinities[2][1] ~ IP, giving ~f player.stats.lastTenInfinities[2][2] ~ IP/second.</span>
-        <br ~style.display=Stats.showAnyResets(4) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(4, 'infinity')  ? '' : 'none'~>The infinity four infinities ago took ~f player.stats.lastTenInfinities[3][0] ~ seconds and gave ~i player.stats.lastTenInfinities[3][1] ~ IP, giving ~f player.stats.lastTenInfinities[3][2] ~ IP/second.</span>
-        <br ~style.display=Stats.showAnyResets(5) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(5, 'infinity') ? '' : 'none'~>The infinity five infinities ago took ~f player.stats.lastTenInfinities[4][0] ~ seconds and gave ~i player.stats.lastTenInfinities[4][1] ~ IP, giving ~f player.stats.lastTenInfinities[4][2] ~ IP/second.</span>
-        <br ~style.display=Stats.showAnyResets(6) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(6, 'infinity') ? '' : 'none'~>The infinity six infinities ago took ~f player.stats.lastTenInfinities[5][0] ~ seconds and gave ~i player.stats.lastTenInfinities[5][1] ~ IP, giving ~f player.stats.lastTenInfinities[5][2] ~ IP/second.</span>
-        <br ~style.display=Stats.showAnyResets(7) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(7, 'infinity') ? '' : 'none'~>The infinity seven infinities ago took ~f player.stats.lastTenInfinities[6][0] ~ seconds and gave ~i player.stats.lastTenInfinities[6][1] ~ IP, giving ~f player.stats.lastTenInfinities[6][2] ~ IP/second.</span>
-        <br ~style.display=Stats.showAnyResets(8) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(8, 'infinity')  ? '' : 'none'~>The infinity eight infinities ago took ~f player.stats.lastTenInfinities[7][0] ~ seconds and gave ~i player.stats.lastTenInfinities[7][1] ~ IP, giving ~f player.stats.lastTenInfinities[7][2] ~ IP/second.</span>
-        <br ~style.display=Stats.showAnyResets(9) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(9, 'infinity')  ? '' : 'none'~>The infinity nine infinities ago took ~f player.stats.lastTenInfinities[8][0] ~ seconds and gave ~i player.stats.lastTenInfinities[8][1] ~ IP, giving ~f player.stats.lastTenInfinities[8][2] ~ IP/second.</span>
-        <br ~style.display=Stats.showAnyResets(10) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(10, 'infinity')  ? '' : 'none'~>The infinity ten infinities ago took ~f player.stats.lastTenInfinities[9][0] ~ seconds and gave ~i player.stats.lastTenInfinities[9][1] ~ IP, giving ~f player.stats.lastTenInfinities[9][2] ~ IP/second.</span>
+        <br ~style.display=Stats.showAnyRuns(2) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(2, 'infinity') ? '' : 'none'~>The infinity two infinities ago took ~f player.stats.lastTenInfinities[1][0] ~ seconds and gave ~i player.stats.lastTenInfinities[1][1] ~ IP, giving ~f player.stats.lastTenInfinities[1][2] ~ IP/second.</span>
+        <br ~style.display=Stats.showAnyRuns(3) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(3, 'infinity') ? '' : 'none'~>The infinity three infinities ago took ~f player.stats.lastTenInfinities[2][0] ~ seconds and gave ~i player.stats.lastTenInfinities[2][1] ~ IP, giving ~f player.stats.lastTenInfinities[2][2] ~ IP/second.</span>
+        <br ~style.display=Stats.showAnyRuns(4) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(4, 'infinity')  ? '' : 'none'~>The infinity four infinities ago took ~f player.stats.lastTenInfinities[3][0] ~ seconds and gave ~i player.stats.lastTenInfinities[3][1] ~ IP, giving ~f player.stats.lastTenInfinities[3][2] ~ IP/second.</span>
+        <br ~style.display=Stats.showAnyRuns(5) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(5, 'infinity') ? '' : 'none'~>The infinity five infinities ago took ~f player.stats.lastTenInfinities[4][0] ~ seconds and gave ~i player.stats.lastTenInfinities[4][1] ~ IP, giving ~f player.stats.lastTenInfinities[4][2] ~ IP/second.</span>
+        <br ~style.display=Stats.showAnyRuns(6) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(6, 'infinity') ? '' : 'none'~>The infinity six infinities ago took ~f player.stats.lastTenInfinities[5][0] ~ seconds and gave ~i player.stats.lastTenInfinities[5][1] ~ IP, giving ~f player.stats.lastTenInfinities[5][2] ~ IP/second.</span>
+        <br ~style.display=Stats.showAnyRuns(7) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(7, 'infinity') ? '' : 'none'~>The infinity seven infinities ago took ~f player.stats.lastTenInfinities[6][0] ~ seconds and gave ~i player.stats.lastTenInfinities[6][1] ~ IP, giving ~f player.stats.lastTenInfinities[6][2] ~ IP/second.</span>
+        <br ~style.display=Stats.showAnyRuns(8) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(8, 'infinity')  ? '' : 'none'~>The infinity eight infinities ago took ~f player.stats.lastTenInfinities[7][0] ~ seconds and gave ~i player.stats.lastTenInfinities[7][1] ~ IP, giving ~f player.stats.lastTenInfinities[7][2] ~ IP/second.</span>
+        <br ~style.display=Stats.showAnyRuns(9) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(9, 'infinity')  ? '' : 'none'~>The infinity nine infinities ago took ~f player.stats.lastTenInfinities[8][0] ~ seconds and gave ~i player.stats.lastTenInfinities[8][1] ~ IP, giving ~f player.stats.lastTenInfinities[8][2] ~ IP/second.</span>
+        <br ~style.display=Stats.showAnyRuns(10) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(10, 'infinity')  ? '' : 'none'~>The infinity ten infinities ago took ~f player.stats.lastTenInfinities[9][0] ~ seconds and gave ~i player.stats.lastTenInfinities[9][1] ~ IP, giving ~f player.stats.lastTenInfinities[9][2] ~ IP/second.</span>
         <br/>
       </div>
-      <div ~style.display=Stats.showReset(1, 'eternity') ? '' : 'none'~>
+      <div ~style.display=Stats.showRun(1, 'eternity') ? '' : 'none'~>
         <span>Last eternity took ~f player.stats.lastTenEternities[0][0] ~ seconds and gave ~i player.stats.lastTenEternities[0][1] ~ EP, giving ~f player.stats.lastTenEternities[0][2] ~ EP/second.</span>
-        <br ~style.display=Stats.showAnyResets(2) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(2, 'eternity') ? '' : 'none'~>The eternity two eternities ago took ~f player.stats.lastTenEternities[1][0] ~ seconds and gave ~i player.stats.lastTenEternities[1][1] ~ EP, giving ~f player.stats.lastTenEternities[1][2] ~ EP/second.</span>
-        <br ~style.display=Stats.showAnyResets(3) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(3, 'eternity') ? '' : 'none'~>The eternity three eternities ago took ~f player.stats.lastTenEternities[2][0] ~ seconds and gave ~i player.stats.lastTenEternities[2][1] ~ EP, giving ~f player.stats.lastTenEternities[2][2] ~ EP/second.</span>
-        <br ~style.display=Stats.showAnyResets(4) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(4, 'eternity')  ? '' : 'none'~>The eternity four eternities ago took ~f player.stats.lastTenEternities[3][0] ~ seconds and gave ~i player.stats.lastTenEternities[3][1] ~ EP, giving ~f player.stats.lastTenEternities[3][2] ~ EP/second.</span>
-        <br ~style.display=Stats.showAnyResets(5) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(5, 'eternity') ? '' : 'none'~>The eternity five eternities ago took ~f player.stats.lastTenEternities[4][0] ~ seconds and gave ~i player.stats.lastTenEternities[4][1] ~ EP, giving ~f player.stats.lastTenEternities[4][2] ~ EP/second.</span>
-        <br ~style.display=Stats.showAnyResets(6) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(6, 'eternity') ? '' : 'none'~>The eternity six eternities ago took ~f player.stats.lastTenEternities[5][0] ~ seconds and gave ~i player.stats.lastTenEternities[5][1] ~ EP, giving ~f player.stats.lastTenEternities[5][2] ~ EP/second.</span>
-        <br ~style.display=Stats.showAnyResets(7) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(7, 'eternity') ? '' : 'none'~>The eternity seven eternities ago took ~f player.stats.lastTenEternities[6][0] ~ seconds and gave ~i player.stats.lastTenEternities[6][1] ~ EP, giving ~f player.stats.lastTenEternities[6][2] ~ EP/second.</span>
-        <br ~style.display=Stats.showAnyResets(8) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(8, 'eternity')  ? '' : 'none'~>The eternity eight eternities ago took ~f player.stats.lastTenEternities[7][0] ~ seconds and gave ~i player.stats.lastTenEternities[7][1] ~ EP, giving ~f player.stats.lastTenEternities[7][2] ~ EP/second.</span>
-        <br ~style.display=Stats.showAnyResets(9) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(9, 'eternity')  ? '' : 'none'~>The eternity nine eternities ago took ~f player.stats.lastTenEternities[8][0] ~ seconds and gave ~i player.stats.lastTenEternities[8][1] ~ EP, giving ~f player.stats.lastTenEternities[8][2] ~ EP/second.</span>
-        <br ~style.display=Stats.showAnyResets(10) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(10, 'eternity')  ? '' : 'none'~>The eternity ten eternities ago took ~f player.stats.lastTenEternities[9][0] ~ seconds and gave ~i player.stats.lastTenEternities[9][1] ~ EP, giving ~f player.stats.lastTenEternities[9][2] ~ EP/second.</span>
+        <br ~style.display=Stats.showAnyRuns(2) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(2, 'eternity') ? '' : 'none'~>The eternity two eternities ago took ~f player.stats.lastTenEternities[1][0] ~ seconds and gave ~i player.stats.lastTenEternities[1][1] ~ EP, giving ~f player.stats.lastTenEternities[1][2] ~ EP/second.</span>
+        <br ~style.display=Stats.showAnyRuns(3) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(3, 'eternity') ? '' : 'none'~>The eternity three eternities ago took ~f player.stats.lastTenEternities[2][0] ~ seconds and gave ~i player.stats.lastTenEternities[2][1] ~ EP, giving ~f player.stats.lastTenEternities[2][2] ~ EP/second.</span>
+        <br ~style.display=Stats.showAnyRuns(4) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(4, 'eternity')  ? '' : 'none'~>The eternity four eternities ago took ~f player.stats.lastTenEternities[3][0] ~ seconds and gave ~i player.stats.lastTenEternities[3][1] ~ EP, giving ~f player.stats.lastTenEternities[3][2] ~ EP/second.</span>
+        <br ~style.display=Stats.showAnyRuns(5) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(5, 'eternity') ? '' : 'none'~>The eternity five eternities ago took ~f player.stats.lastTenEternities[4][0] ~ seconds and gave ~i player.stats.lastTenEternities[4][1] ~ EP, giving ~f player.stats.lastTenEternities[4][2] ~ EP/second.</span>
+        <br ~style.display=Stats.showAnyRuns(6) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(6, 'eternity') ? '' : 'none'~>The eternity six eternities ago took ~f player.stats.lastTenEternities[5][0] ~ seconds and gave ~i player.stats.lastTenEternities[5][1] ~ EP, giving ~f player.stats.lastTenEternities[5][2] ~ EP/second.</span>
+        <br ~style.display=Stats.showAnyRuns(7) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(7, 'eternity') ? '' : 'none'~>The eternity seven eternities ago took ~f player.stats.lastTenEternities[6][0] ~ seconds and gave ~i player.stats.lastTenEternities[6][1] ~ EP, giving ~f player.stats.lastTenEternities[6][2] ~ EP/second.</span>
+        <br ~style.display=Stats.showAnyRuns(8) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(8, 'eternity')  ? '' : 'none'~>The eternity eight eternities ago took ~f player.stats.lastTenEternities[7][0] ~ seconds and gave ~i player.stats.lastTenEternities[7][1] ~ EP, giving ~f player.stats.lastTenEternities[7][2] ~ EP/second.</span>
+        <br ~style.display=Stats.showAnyRuns(9) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(9, 'eternity')  ? '' : 'none'~>The eternity nine eternities ago took ~f player.stats.lastTenEternities[8][0] ~ seconds and gave ~i player.stats.lastTenEternities[8][1] ~ EP, giving ~f player.stats.lastTenEternities[8][2] ~ EP/second.</span>
+        <br ~style.display=Stats.showAnyRuns(10) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(10, 'eternity')  ? '' : 'none'~>The eternity ten eternities ago took ~f player.stats.lastTenEternities[9][0] ~ seconds and gave ~i player.stats.lastTenEternities[9][1] ~ EP, giving ~f player.stats.lastTenEternities[9][2] ~ EP/second.</span>
         <br/>
       </div>
-      <div ~style.display=Stats.showReset(1, 'complexity') ? '' : 'none'~>
+      <div ~style.display=Stats.showRun(1, 'complexity') ? '' : 'none'~>
         <span>Last complexity took ~f player.stats.lastTenComplexities[0][0] ~ seconds and gave ~i player.stats.lastTenComplexities[0][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[0][2] ~ ℂP/second.</span>
-        <br ~style.display=Stats.showAnyResets(2) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(2, 'complexity') ? '' : 'none'~>The complexity two complexities ago took ~f player.stats.lastTenComplexities[1][0] ~ seconds and gave ~i player.stats.lastTenComplexities[1][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[1][2] ~ ℂP/second.</span>
-        <br ~style.display=Stats.showAnyResets(3) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(3, 'complexity') ? '' : 'none'~>The complexity three complexities ago took ~f player.stats.lastTenComplexities[2][0] ~ seconds and gave ~i player.stats.lastTenComplexities[2][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[2][2] ~ ℂP/second.</span>
-        <br ~style.display=Stats.showAnyResets(4) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(4, 'complexity')  ? '' : 'none'~>The complexity four complexities ago took ~f player.stats.lastTenComplexities[3][0] ~ seconds and gave ~i player.stats.lastTenComplexities[3][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[3][2] ~ ℂP/second.</span>
-        <br ~style.display=Stats.showAnyResets(5) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(5, 'complexity') ? '' : 'none'~>The complexity five complexities ago took ~f player.stats.lastTenComplexities[4][0] ~ seconds and gave ~i player.stats.lastTenComplexities[4][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[4][2] ~ ℂP/second.</span>
-        <br ~style.display=Stats.showAnyResets(6) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(6, 'complexity') ? '' : 'none'~>The complexity six complexities ago took ~f player.stats.lastTenComplexities[5][0] ~ seconds and gave ~i player.stats.lastTenComplexities[5][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[5][2] ~ ℂP/second.</span>
-        <br ~style.display=Stats.showAnyResets(7) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(7, 'complexity') ? '' : 'none'~>The complexity seven complexities ago took ~f player.stats.lastTenComplexities[6][0] ~ seconds and gave ~i player.stats.lastTenComplexities[6][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[6][2] ~ ℂP/second.</span>
-        <br ~style.display=Stats.showAnyResets(8) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(8, 'complexity')  ? '' : 'none'~>The complexity eight complexities ago took ~f player.stats.lastTenComplexities[7][0] ~ seconds and gave ~i player.stats.lastTenComplexities[7][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[7][2] ~ ℂP/second.</span>
-        <br ~style.display=Stats.showAnyResets(9) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(9, 'complexity')  ? '' : 'none'~>The complexity nine complexities ago took ~f player.stats.lastTenComplexities[8][0] ~ seconds and gave ~i player.stats.lastTenComplexities[8][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[8][2] ~ ℂP/second.</span>
-        <br ~style.display=Stats.showAnyResets(10) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(10, 'complexity')  ? '' : 'none'~>The complexity ten complexities ago took ~f player.stats.lastTenComplexities[9][0] ~ seconds and gave ~i player.stats.lastTenComplexities[9][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[9][2] ~ ℂP/second.</span>
+        <br ~style.display=Stats.showAnyRuns(2) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(2, 'complexity') ? '' : 'none'~>The complexity two complexities ago took ~f player.stats.lastTenComplexities[1][0] ~ seconds and gave ~i player.stats.lastTenComplexities[1][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[1][2] ~ ℂP/second.</span>
+        <br ~style.display=Stats.showAnyRuns(3) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(3, 'complexity') ? '' : 'none'~>The complexity three complexities ago took ~f player.stats.lastTenComplexities[2][0] ~ seconds and gave ~i player.stats.lastTenComplexities[2][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[2][2] ~ ℂP/second.</span>
+        <br ~style.display=Stats.showAnyRuns(4) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(4, 'complexity')  ? '' : 'none'~>The complexity four complexities ago took ~f player.stats.lastTenComplexities[3][0] ~ seconds and gave ~i player.stats.lastTenComplexities[3][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[3][2] ~ ℂP/second.</span>
+        <br ~style.display=Stats.showAnyRuns(5) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(5, 'complexity') ? '' : 'none'~>The complexity five complexities ago took ~f player.stats.lastTenComplexities[4][0] ~ seconds and gave ~i player.stats.lastTenComplexities[4][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[4][2] ~ ℂP/second.</span>
+        <br ~style.display=Stats.showAnyRuns(6) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(6, 'complexity') ? '' : 'none'~>The complexity six complexities ago took ~f player.stats.lastTenComplexities[5][0] ~ seconds and gave ~i player.stats.lastTenComplexities[5][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[5][2] ~ ℂP/second.</span>
+        <br ~style.display=Stats.showAnyRuns(7) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(7, 'complexity') ? '' : 'none'~>The complexity seven complexities ago took ~f player.stats.lastTenComplexities[6][0] ~ seconds and gave ~i player.stats.lastTenComplexities[6][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[6][2] ~ ℂP/second.</span>
+        <br ~style.display=Stats.showAnyRuns(8) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(8, 'complexity')  ? '' : 'none'~>The complexity eight complexities ago took ~f player.stats.lastTenComplexities[7][0] ~ seconds and gave ~i player.stats.lastTenComplexities[7][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[7][2] ~ ℂP/second.</span>
+        <br ~style.display=Stats.showAnyRuns(9) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(9, 'complexity')  ? '' : 'none'~>The complexity nine complexities ago took ~f player.stats.lastTenComplexities[8][0] ~ seconds and gave ~i player.stats.lastTenComplexities[8][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[8][2] ~ ℂP/second.</span>
+        <br ~style.display=Stats.showAnyRuns(10) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(10, 'complexity')  ? '' : 'none'~>The complexity ten complexities ago took ~f player.stats.lastTenComplexities[9][0] ~ seconds and gave ~i player.stats.lastTenComplexities[9][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[9][2] ~ ℂP/second.</span>
         <br/>
       </div>
-      <div ~style.display=Stats.showReset(1, 'finality') ? '' : 'none'~>
+      <div ~style.display=Stats.showRun(1, 'finality') ? '' : 'none'~>
         <span>Last finality took ~f player.stats.lastTenFinalities[0][0] ~ seconds and gave ~i player.stats.lastTenFinalities[0][1] ~ FP and ~i player.stats.lastTenFinalities[0][2] ~ FS.</span>
-        <br ~style.display=Stats.showAnyResets(2) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(2, 'finality') ? '' : 'none'~>The finality two finalities ago took ~f player.stats.lastTenFinalities[1][0] ~ seconds and gave ~i player.stats.lastTenFinalities[1][1] ~ FP and ~i player.stats.lastTenFinalities[1][2] ~ FS.</span>
-        <br ~style.display=Stats.showAnyResets(3) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(3, 'finality') ? '' : 'none'~>The finality three finalities ago took ~f player.stats.lastTenFinalities[2][0] ~ seconds and gave ~i player.stats.lastTenFinalities[2][1] ~ FP and ~i player.stats.lastTenFinalities[2][2] ~ FS.</span>
-        <br ~style.display=Stats.showAnyResets(4) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(4, 'finality') ? '' : 'none'~>The finality four finalities ago took ~f player.stats.lastTenFinalities[3][0] ~ seconds and gave ~i player.stats.lastTenFinalities[3][1] ~ FP and ~i player.stats.lastTenFinalities[3][2] ~ FS.</span>
-        <br ~style.display=Stats.showAnyResets(5) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(5, 'finality') ? '' : 'none'~>The finality five finalities ago took ~f player.stats.lastTenFinalities[4][0] ~ seconds and gave ~i player.stats.lastTenFinalities[4][1] ~ FP and ~i player.stats.lastTenFinalities[4][2] ~ FS.</span>
-        <br ~style.display=Stats.showAnyResets(6) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(6, 'finality') ? '' : 'none'~>The finality six finalities ago took ~f player.stats.lastTenFinalities[5][0] ~ seconds and gave ~i player.stats.lastTenFinalities[5][1] ~ FP and ~i player.stats.lastTenFinalities[5][2] ~ FS.</span>
-        <br ~style.display=Stats.showAnyResets(7) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(7, 'finality') ? '' : 'none'~>The finality seven finalities ago took ~f player.stats.lastTenFinalities[6][0] ~ seconds and gave ~i player.stats.lastTenFinalities[6][1] ~ FP and ~i player.stats.lastTenFinalities[6][2] ~ FS.</span>
-        <br ~style.display=Stats.showAnyResets(8) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(8, 'finality') ? '' : 'none'~>The finality eight finalities ago took ~f player.stats.lastTenFinalities[7][0] ~ seconds and gave ~i player.stats.lastTenFinalities[7][1] ~ FP and ~i player.stats.lastTenFinalities[7][2] ~ FS.</span>
-        <br ~style.display=Stats.showAnyResets(9) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(9, 'finality') ? '' : 'none'~>The finality nine finalities ago took ~f player.stats.lastTenFinalities[8][0] ~ seconds and gave ~i player.stats.lastTenFinalities[8][1] ~ FP and ~i player.stats.lastTenFinalities[8][2] ~ FS.</span>
-        <br ~style.display=Stats.showAnyResets(10) ? '' : 'none'~/>
-        <span ~style.display=Stats.showReset(10, 'finality') ? '' : 'none'~>The finality ten finalities ago took ~f player.stats.lastTenFinalities[9][0] ~ seconds and gave ~i player.stats.lastTenFinalities[9][1] ~ FP and ~i player.stats.lastTenFinalities[9][2] ~ FS.</span>
+        <br ~style.display=Stats.showAnyRuns(2) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(2, 'finality') ? '' : 'none'~>The finality two finalities ago took ~f player.stats.lastTenFinalities[1][0] ~ seconds and gave ~i player.stats.lastTenFinalities[1][1] ~ FP and ~i player.stats.lastTenFinalities[1][2] ~ FS.</span>
+        <br ~style.display=Stats.showAnyRuns(3) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(3, 'finality') ? '' : 'none'~>The finality three finalities ago took ~f player.stats.lastTenFinalities[2][0] ~ seconds and gave ~i player.stats.lastTenFinalities[2][1] ~ FP and ~i player.stats.lastTenFinalities[2][2] ~ FS.</span>
+        <br ~style.display=Stats.showAnyRuns(4) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(4, 'finality') ? '' : 'none'~>The finality four finalities ago took ~f player.stats.lastTenFinalities[3][0] ~ seconds and gave ~i player.stats.lastTenFinalities[3][1] ~ FP and ~i player.stats.lastTenFinalities[3][2] ~ FS.</span>
+        <br ~style.display=Stats.showAnyRuns(5) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(5, 'finality') ? '' : 'none'~>The finality five finalities ago took ~f player.stats.lastTenFinalities[4][0] ~ seconds and gave ~i player.stats.lastTenFinalities[4][1] ~ FP and ~i player.stats.lastTenFinalities[4][2] ~ FS.</span>
+        <br ~style.display=Stats.showAnyRuns(6) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(6, 'finality') ? '' : 'none'~>The finality six finalities ago took ~f player.stats.lastTenFinalities[5][0] ~ seconds and gave ~i player.stats.lastTenFinalities[5][1] ~ FP and ~i player.stats.lastTenFinalities[5][2] ~ FS.</span>
+        <br ~style.display=Stats.showAnyRuns(7) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(7, 'finality') ? '' : 'none'~>The finality seven finalities ago took ~f player.stats.lastTenFinalities[6][0] ~ seconds and gave ~i player.stats.lastTenFinalities[6][1] ~ FP and ~i player.stats.lastTenFinalities[6][2] ~ FS.</span>
+        <br ~style.display=Stats.showAnyRuns(8) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(8, 'finality') ? '' : 'none'~>The finality eight finalities ago took ~f player.stats.lastTenFinalities[7][0] ~ seconds and gave ~i player.stats.lastTenFinalities[7][1] ~ FP and ~i player.stats.lastTenFinalities[7][2] ~ FS.</span>
+        <br ~style.display=Stats.showAnyRuns(9) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(9, 'finality') ? '' : 'none'~>The finality nine finalities ago took ~f player.stats.lastTenFinalities[8][0] ~ seconds and gave ~i player.stats.lastTenFinalities[8][1] ~ FP and ~i player.stats.lastTenFinalities[8][2] ~ FS.</span>
+        <br ~style.display=Stats.showAnyRuns(10) ? '' : 'none'~/>
+        <span ~style.display=Stats.showRun(10, 'finality') ? '' : 'none'~>The finality ten finalities ago took ~f player.stats.lastTenFinalities[9][0] ~ seconds and gave ~i player.stats.lastTenFinalities[9][1] ~ FP and ~i player.stats.lastTenFinalities[9][2] ~ FS.</span>
         <br/>
       </div>
       <br/>
-      <div ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~>Number of last resets of each type to show: <input type="text" ~!value=Stats.lastResetsToShow()~ ~!onchange=function() {Stats.setLastResetsToShow(+this.value)}~></input></div>
+      <br/>
+      <span>
+        Run types to show:
+        <span ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~>Infinity: <input type="checkbox" ~!checked=Stats.showRunType('infinity')~ ~!onchange=function() {Stats.setShowRunType('infinity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>Eternity: <input type="checkbox" ~!checked=Stats.showRunType('eternity')~ ~!onchange=function() {Stats.setShowRunType('eternity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~>Complexity: <input type="checkbox" ~!checked=Stats.showRunType('complexity')~ ~!onchange=function() {Stats.setShowRunType('complexity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~>Finality: <input type="checkbox" ~!checked=Stats.showRunType('finality')~ ~!onchange=function() {Stats.setShowRunType('finality', this.checked)}~></input></span>
+      </span>
+      <br/>
+      <span>Number of last run of each type to show: <input type="text" ~!value=Stats.lastRunsToShow()~ ~!onchange=function() {Stats.setLastRunsToShow(+this.value)}~></input></span>
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'options' ? '' : 'none'~>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 8px; border-collapse: separate;">
@@ -4764,6 +4777,7 @@
         <span>
           <span ~style.display=Tabs.isTabOptionVisible('goals') ? '' : 'none'~>Goals: <input class="goals-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('goals')~ ~!onchange=function() {Tabs.setTabOption('goals', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
           <span ~style.display=Tabs.isTabOptionVisible('statistics') ? '' : 'none'~>Statistics: <input class="statistics-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('statistics')~ ~!onchange=function() {Tabs.setTabOption('statistics', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span ~style.display=Tabs.isTabOptionVisible('last-ten-runs') ? '' : 'none'~>Last Ten Runs: <input class="last-ten-runs-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('statistics')~ ~!onchange=function() {Tabs.setTabOption('last-ten-runs', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
           <span ~style.display=Tabs.isTabOptionVisible('options') ? '' : 'none'~>Options: cannot be hidden</span> 
         </span>
       </div>

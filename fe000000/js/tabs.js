@@ -1,6 +1,6 @@
 let Tabs = {
   rows: [
-    ['main', 'infinity', 'challenges', 'autobuyers', 'infinity-challenges', 'goals', 'statistics', 'options'],
+    ['main', 'infinity', 'challenges', 'autobuyers', 'infinity-challenges', 'goals', 'statistics', 'last-ten-runs', 'options'],
     ['eternity', 'eternity-milestones', 'studies', 'eternity-producer', 'eternity-challenges', 'chroma'],
     ['complexity', 'complexity-challenges', 'complexity-achievements', 'powers', 'oracle', 'galaxies'],
     ['finality', 'finality-shards', 'finality-milestones']
@@ -20,6 +20,7 @@ let Tabs = {
       'infinity-challenges': () => SpecialTabs.isTabVisible('infinity-challenges'),
       'goals': () => true,
       'statistics': () => true,
+      'last-ten-runs': () => PrestigeLayerProgress.hasReached('infinity'),
       'options': () => true,
       'eternity': () => PrestigeLayerProgress.hasReached('eternity'),
       'eternity-milestones': () => PrestigeLayerProgress.hasReached('eternity'),
@@ -55,7 +56,7 @@ let Tabs = {
     let display = [[]]
     for (let rawRow of this.rows) {
       row = rawRow.filter(x => this.isTabVisible(x));
-      if (this.getSpace(display[display.length - 1].concat(row)) > 96) {
+      if (this.getSpace(display[display.length - 1].concat(row)) > 108) {
         display.push(row);
         tabBreaks.push(true);
       } else {

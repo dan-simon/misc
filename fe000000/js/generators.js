@@ -71,8 +71,14 @@ let Generator = function (i) {
     perSecond() {
       return (i < 8) ? Generator(i + 1).productionPerSecond() : new Decimal(0);
     },
+    isOutOfRange() {
+      return Challenge.isChallengeEffectActive(6) && i > 6;
+    },
+    isDirectlyVisible() {
+      return i <= player.highestGenerator + 1 && !this.isOutOfRange();
+    },
     isVisible() {
-      return i <= player.highestGenerator + 1 && ((!Challenge.isChallengeEffectActive(6)) || i <= 6);
+      return (i <= player.highestGenerator + 1 || Generators.viewAll()) && !this.isOutOfRange();
     },
     canBuy(n) {
       if (n === undefined) {
@@ -81,7 +87,7 @@ let Generator = function (i) {
       return n <= this.maxBuyable();
     },
     maxBuyable() {
-      if (!this.isVisible() || Stars.atLimit()) return 0;
+      if (!this.isDirectlyVisible() || Stars.atLimit()) return 0;
       let num = Math.floor(player.stars.div(this.cost()).times(
         Decimal.minus(this.costIncreasePer(), 1)).plus(1).log(this.costIncreasePer()));
       num = Math.min(num,
@@ -147,5 +153,11 @@ let Generators = {
   areAnyMultipliersNerfed() {
     // Note that the nerf never reduces a multiplier below the initial nerf value.
     return Generators.list.some(x => x.multiplier().gte(this.nerfValue()));
+  },
+  viewAll() {
+    return player.viewAllGenerators;
+  },
+  setViewAll(x) {
+    player.viewAllGenerators = x;
   }
 }
