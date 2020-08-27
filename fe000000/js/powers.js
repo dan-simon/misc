@@ -357,10 +357,13 @@ let Powers = {
   title(x) {
     return x[0].toUpperCase() + x.slice(1);
   },
+  lower(x) {
+    return x[0].toLowerCase() + x.slice(1);
+  },
   descriptionFull(type, i) {
     // WE have this conditional so that we return undefined when desired.
     if (this.canAccessPower(type, i)) {
-      return [this.descriptionFullEffect(type, i), this.descriptionStrengthRarity(type, i).toLowerCase(), this.descriptionMultiplier(type, i).toLowerCase()].join(', ');
+      return [this.descriptionFullEffect(type, i), this.lower(this.descriptionStrengthRarity(type, i)), this.lower(this.descriptionMultiplier(type, i))].join(', ');
     }
   },
   descriptionFullEffect(type, i) {

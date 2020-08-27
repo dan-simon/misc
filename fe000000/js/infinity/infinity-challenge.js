@@ -57,9 +57,13 @@ let InfinityChallenge = {
     player.currentInfinityChallenge = x;
   },
   startInfinityChallenge(x) {
+    if (InfinityPrestigeLayer.canInfinity()) {
+      InfinityPrestigeLayer.infinity();
+    } else {
+      InfinityPrestigeLayer.infinityReset();
+    }
     this.setInfinityChallenge(x);
     Challenge.setChallenge(0);
-    InfinityPrestigeLayer.infinityReset();
   },
   exitInfinityChallenge() {
     this.setInfinityChallenge(0);

@@ -2074,7 +2074,7 @@
           <span>You have ~f Permanence.amount() ~ permanence. <button ~class=Permanence.anythingToBuy() ? "" : "disabled"~ onclick="Permanence.maxAll()">Max permanence upgrades</button></span>
           <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
             <tr>
-              <td>Multiplier to eternity production:</td>
+              <td>Multiplier to eternity gain:</td>
               <td><span ~style.display=PermanenceUpgrade(1).atBoughtLimit() ? 'none' : ''~>~i PermanenceUpgrade(1).effect() ~ → ~i PermanenceUpgrade(1).nextEffect() ~</span><span ~style.display=PermanenceUpgrade(1).atBoughtLimit() ? '' : 'none'~>~i PermanenceUpgrade(1).effect() ~ (maxed)</span></td>
               <td><span ~style.display=PermanenceUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(1).buy()">Cost: ~i PermanenceUpgrade(1).cost() ~ permanence</button></span></td>
               <td><span ~style.display=PermanenceUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PermanenceUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PermanenceUpgrade(1).buyMax()">Max</button></span></td>
@@ -2426,7 +2426,7 @@
                 <div class="purplediv" ~style.display=Chroma.isColorUnlocked(2) ? '' : 'none'~>
                   <span>~r Chroma.colorName(2, true) ~: ~f Chroma.colorAmount(2) ~</span>
                   <br/>
-                  <span>Eternity production ~f Chroma.effectOfColor(2) ~x</span>
+                  <span>Eternity gain ~f Chroma.effectOfColor(2) ~x</span>
                   <br/>
                   <br/>
                   <button ~style.display=Chroma.producingAll() ? 'none' : ''~ onclick="Chroma.setNextColor(2)">Produce ~r Chroma.colorName(2) ~ next</button>
@@ -2689,7 +2689,7 @@
               <br/>
               <span ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(3) ? 'none' : ''~>(Disabling this doesn't put you in this challenge yet, since the challenge is locked.)</span>
               <br ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(3) ? 'none' : ''~/>
-              <span>Reward: Multiplier to eternity production.</span>
+              <span>Reward: Multiplier to eternity gain.</span>
               <br/>
               <span>Current: ~f ComplexityChallenge.getComplexityChallengeReward(3) ~x, Next: ~f ComplexityChallenge.getComplexityChallengeNextReward(3) ~x</span>
             </div>

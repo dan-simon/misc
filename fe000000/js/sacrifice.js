@@ -33,7 +33,8 @@ let Sacrifice = {
   isVisible() {
     // This basically used to be as follows: this.canSacrifice() || this.sacrificeMultiplier().gt(1) || player.infinities > 0 || player.eternities.gt(0);
     // Seeing that things are possible probably isn't too intimidating, so I'm experimenting with making it always true.
-    return true;
+    // Actually let's hide it if G8 is impossible to get (also covers IC1).
+    return !Challenge.isChallengeEffectActive(6);
   },
   newSacrificeMultiplier() {
     let mult = new Decimal(player.stars.log(2) / 16);
