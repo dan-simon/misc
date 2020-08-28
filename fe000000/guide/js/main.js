@@ -1,12 +1,29 @@
+let player;
+let temporarySettings;
+
 window.onload = function () {
   try {
     player = JSON.parse(atob(localStorage.getItem('fe000000-save'), null));
   } catch (ex) {
-    player = {options: {notation: 'Scientific', theme: 'Dark'}};
+    player = {
+      options: {notation: 'Scientific', theme: 'Dark'},
+      goals: [
+        false, false, false, false,
+        false, false, false, false,
+        false, false, false, false,
+        false, false, false, false
+      ],
+      displayAllGoals: false
+    };
   }
+  temporarySettings = {
+    viewAll: player.displayAllGoals,
+    currentTab: 1
+  };
   Options.updateCheckboxSize();
   Colors.updateColors();
   updateDisplayPageLoadSetup();
+  updateDisplaySaveLoadSetup();
   updateDisplay();
   setInterval(updateDisplay, 16384);
 }
