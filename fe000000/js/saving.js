@@ -617,6 +617,19 @@ let Saving = {
       player.options.largerCheckboxes = false;
       player.version = 1.9609375;
     }
+    if (player.version < 1.9619140625) {
+      player.tabOptions['last-ten-runs'] = true;
+      player.stats.lastRunsToShow = player.stats.lastResetsToShow;
+      delete player.stats.lastResetsToShow;
+      player.stats.lastRunTypesToShow = {
+        infinity: true,
+        eternity: true,
+        complexity: true,
+        finality: true
+      };
+      player.viewAllGenerators = false;
+      player.version = 1.9619140625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

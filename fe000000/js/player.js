@@ -248,6 +248,7 @@ let initialPlayer = {
     true, true, true, true, true, true, true, true,
     true, true, true, true, true, true, true
   ],
+  viewAllGenerators: false,
   goals: [
     false, false, false, false, false, false, false, false,
     false, false, false, false, false, false, false, false
@@ -277,6 +278,7 @@ let initialPlayer = {
     'infinity-challenges': true,
     'goals': true,
     'statistics': true,
+    'last-ten-runs': true,
     'options': true,
     'eternity': true,
     'eternity-milestones': true,
@@ -349,13 +351,19 @@ let initialPlayer = {
     lastTenComplexities: initialLastTenComplexities(),
     lastTenFinalities: initialLastTenFinalities(),
     lastPermanenceGain: new Decimal(0),
-    lastResetsToShow: 10,
+    lastRunsToShow: 10,
+    lastRunTypesToShow: {
+      infinity: true,
+      eternity: true,
+      complexity: true,
+      finality: true
+    }
   },
   cheats: {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9609375
+  version: 1.9619140625
 }
 
 let player;

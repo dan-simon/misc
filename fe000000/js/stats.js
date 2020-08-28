@@ -40,19 +40,25 @@ let Stats = {
     player.stats.lastTenFinalities.unshift([time, pointGain, shardGain]);
     player.stats.lastTenFinalities.pop();
   },
-  lastResetsToShow() {
-    return player.stats.lastResetsToShow;
+  lastRunsToShow() {
+    return player.stats.lastRunsToShow;
   },
-  setLastResetsToShow(x) {
-    player.stats.lastResetsToShow = Math.min(10, Math.max(0, x || 0));
+  setLastRunsToShow(x) {
+    player.stats.lastRunsToShow = Math.min(10, Math.max(0, x || 0));
+  },
+  setShowRunType(layer, b) {
+    player.stats.lastRunTypesToShow[layer] = b;
   },
   key(layer) {
     return 'lastTen' + layer[0].toUpperCase() + layer.slice(1, -1) + 'ies';
   },
-  showAnyResets(x) {
-    return this.lastResetsToShow() >= x;
+  showAnyRuns(x) {
+    return this.lastRunsToShow() >= x;
   },
-  showReset(x, layer) {
-    return this.showAnyResets(x) && player.stats[this.key(layer)][x - 1][0] !== -1;
+  showRunType(layer) {
+    return player.stats.lastRunTypesToShow[layer];
+  },
+  showRun(x, layer) {
+    return this.showAnyRuns(x) && this.showRunType(layer) && player.stats[this.key(layer)][x - 1][0] !== -1;
   }
 }
