@@ -273,7 +273,7 @@
         <span ~style.display=SpecialDivs.isDivVisible('softcap') ? '' : 'none'~>Generator multipliers are reduced above ~f Generators.nerfValue() ~ (the multiplier softcap).</span>
         <br ~style.display=Generators.areAnyMultipliersNerfed() ? '' : 'none'~/>
         <div ~style.display=Generators.areAnyMultipliersNerfed() ? '' : 'none'~>
-          Given a multiplier x, let y be log(x, ~f Generators.nerfValue() ~). x is reduced to ~f Generators.nerfValue() ~^y^y^~r formatWithPrecision(Generators.nerfExponent, 5) ~.
+          Given a multiplier x, let y be log(x, ~f Generators.nerfValue() ~). x is reduced to ~f Generators.nerfValue() ~^(y^(y^~r formatWithPrecision(Generators.nerfExponent, 5) ~)).
         </div>
         <br ~style.display=SpecialDivs.isDivVisible('hardcap') ? '' : 'none'~/>
         <span ~style.display=SpecialDivs.isDivVisible('hardcap') ? '' : 'none'~>It is impossible to get more than ~f MultiverseCollapse.stars() ~ stars.</span>
