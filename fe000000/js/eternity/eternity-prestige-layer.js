@@ -76,7 +76,6 @@ let EternityPrestigeLayer = {
     let gain = this.eternityPointGain();
     EternityPoints.addAmount(gain);
     Eternities.add(Eternities.commonEternityGainMultiplier());
-    ComplexityPrestigeLayer.updatePeakCPPerSec();
     // Note that this happens before starting benefits which might care
     // about additional eternities from complexity achievements.
     ComplexityAchievements.checkForComplexityAchievements('eternity');
