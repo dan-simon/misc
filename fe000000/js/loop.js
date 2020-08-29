@@ -27,9 +27,6 @@ function gameLoop(diff, display) {
   Stats.addToTimeStats(diff);
   // Why is this here? Because otherwise the eternity time will be out of sync with chroma when the UI updates.
   Chroma.updateColors();
-  InfinityPrestigeLayer.updatePeakIPPerSec();
-  EternityPrestigeLayer.updatePeakEPPerSec();
-  ComplexityPrestigeLayer.updatePeakCPPerSec();
   Autobuyers.tick(diff);
   InfinityAutobuyers.tick();
   EternityAutobuyers.tick();
@@ -53,6 +50,13 @@ function gameLoop(diff, display) {
   EternityChallenge.checkForAutoEternityChallengeCompletions();
   ComplexityChallenge.checkForComplexityChallengeCompletions();
   ComplexityAchievements.checkForComplexityAchievements();
+  // Why are these here? Because these are used mainly for display, and we want 
+  // displayed peak to be at most current. Why so late? Because theoretically
+  // a complexity achievement could give you EP, which might mess up stuff.
+  // Autobuyers also use these but they compute them at the time if needed.
+  InfinityPrestigeLayer.updatePeakIPPerSec();
+  EternityPrestigeLayer.updatePeakEPPerSec();
+  ComplexityPrestigeLayer.updatePeakCPPerSec();
   Powers.checkForPowerGain();
   Goals.checkForGoals();
   SpecialTabs.makeTabsVisible();

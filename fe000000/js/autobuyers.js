@@ -204,13 +204,14 @@ let Autobuyers = {
     } else if (mode === 'X times best of last ten') {
       shouldInfinity = InfinityPrestigeLayer.infinityPointGain().gte(player.stats.lastTenInfinities.map(x => x[1]).reduce(Decimal.max).times(priority));
     } else if (mode === 'Time past peak/sec') {
+      InfinityPrestigeLayer.updatePeakIPPerSec();
       shouldInfinity = player.stats.timeSinceLastPeakIPPerSec >= priority.toNumber();
     } else if (mode === 'Fraction of peak/sec') {
+      InfinityPrestigeLayer.updatePeakIPPerSec();
       shouldInfinity = InfinityPrestigeLayer.currentIPPerSec().lte(InfinityPrestigeLayer.peakIPPerSec().times(priority));
     }
     if (shouldInfinity) {
       InfinityPrestigeLayer.infinity();
-      EternityPrestigeLayer.updatePeakEPPerSec();
     }
   },
   eternity() {
@@ -227,13 +228,14 @@ let Autobuyers = {
     }  else if (mode === 'X times best of last ten') {
       shouldEternity = EternityPrestigeLayer.eternityPointGain().gte(player.stats.lastTenEternities.map(x => x[1]).reduce(Decimal.max).times(priority));
     } else if (mode === 'Time past peak/sec') {
+      EternityPrestigeLayer.updatePeakEPPerSec();
       shouldEternity = player.stats.timeSinceLastPeakEPPerSec >= priority.toNumber();
     } else if (mode === 'Fraction of peak/sec') {
+      EternityPrestigeLayer.updatePeakEPPerSec();
       shouldEternity = EternityPrestigeLayer.currentEPPerSec().lte(EternityPrestigeLayer.peakEPPerSec().times(priority));
     }
     if (shouldEternity) {
       EternityPrestigeLayer.eternity();
-      ComplexityPrestigeLayer.updatePeakCPPerSec();
     }
   },
   gainPermanence() {
@@ -266,8 +268,10 @@ let Autobuyers = {
     }  else if (mode === 'X times best of last ten') {
       shouldComplexity = ComplexityPrestigeLayer.complexityPointGain().gte(player.stats.lastTenComplexities.map(x => x[1]).reduce(Decimal.max).times(priority));
     } else if (mode === 'Time past peak/sec') {
+      ComplexityPrestigeLayer.updatePeakCPPerSec();
       shouldComplexity = player.stats.timeSinceLastPeakEPPerSec >= priority.toNumber();
     } else if (mode === 'Fraction of peak/sec') {
+      ComplexityPrestigeLayer.updatePeakCPPerSec();
       shouldComplexity = ComplexityPrestigeLayer.currentEPPerSec().lte(ComplexityPrestigeLayer.peakEPPerSec().times(priority));
     }
     if (shouldComplexity) {

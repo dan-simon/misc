@@ -37,13 +37,13 @@ input[type=checkbox] {
 }
 
 .options-button {
-  width: 256px;
-  height: 64px;
+  width: 320px;
+  height: 80px;
 }
 
 .options-div {
-  width: 256px;
-  height: 64px;
+  width: 320px;
+  height: 80px;
   display: table;
   text-align: center;
   border: solid;
