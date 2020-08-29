@@ -210,7 +210,6 @@ let Autobuyers = {
     }
     if (shouldInfinity) {
       InfinityPrestigeLayer.infinity();
-      EternityPrestigeLayer.updatePeakEPPerSec();
     }
   },
   eternity() {
@@ -233,7 +232,6 @@ let Autobuyers = {
     }
     if (shouldEternity) {
       EternityPrestigeLayer.eternity();
-      ComplexityPrestigeLayer.updatePeakCPPerSec();
     }
   },
   gainPermanence() {

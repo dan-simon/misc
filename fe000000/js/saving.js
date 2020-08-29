@@ -24,7 +24,7 @@ let Saving = {
     }
   },
   defaultTicks() {
-    return 1024;
+    return Options.offlineTicks();
   },
   simulateTime(totalDiff, maxTicks) {
     // Add this not for any of the actual JS files, but for ease of use from console.
@@ -42,7 +42,9 @@ let Saving = {
     let firstDiff = Math.max(0, totalDiff - 16);
     let secondDiff = Math.min(16, totalDiff);
     this.simulateTime(firstDiff, totalTicks);
-    this.simulateTime(secondDiff, this.defaultTicks());
+    // 1024 is more than enough for max ticks however long secondDiff is
+    // (since it's at most 16 seconds).
+    this.simulateTime(secondDiff, 1024);
   },
   fixPlayer() {
     if (player.version < 1.25) {
@@ -629,6 +631,10 @@ let Saving = {
       };
       player.viewAllGenerators = false;
       player.version = 1.9619140625;
+    }
+    if (player.version < 1.962890625) {
+      player.options.offlineTicks = 1024;
+      player.version = 1.962890625;
     }
   },
   convertSaveToDecimal() {

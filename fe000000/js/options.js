@@ -8,6 +8,18 @@ let Options = {
   toggleOfflineProgress() {
     player.options.offlineProgress = !player.options.offlineProgress;
   },
+  displayOfflineTicks() {
+    return player.options.offlineTicks;
+  },
+  offlineTicks() {
+    return Math.min(Math.max(1, Math.floor(player.options.offlineTicks)), this.maxTicks());
+  },
+  setOfflineTicks(x) {
+    player.options.offlineTicks = x || 1;
+  },
+  maxTicks() {
+    return Math.pow(2, 16);
+  },
   toggleHotkeys() {
     player.options.hotkeys = !player.options.hotkeys;
   },
