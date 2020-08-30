@@ -36,6 +36,7 @@ let randomMessageList = [
   'Did you know that some stars in the sky are dead, but we still see their ancient image?',
   'Don\'t hex the moon, hex the stars.',
   'What are these messages, a news ticker or something?',
+  'Better for you if you take me off.',
 ]
 
 let getRandomMessage = function () {
