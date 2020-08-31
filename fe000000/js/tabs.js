@@ -127,7 +127,7 @@ let SpecialDivs = {
   requirements: {
     'prestige': () => player.stats.totalStarsProduced.gte(Math.pow(2, 64)),
     'infinity': () => player.stats.totalStarsProduced.gte(Math.pow(2, 128)),
-    'boost-power': () => Boost.bought() >= Boost.boostPowerStart() / 2,
+    'boost-power': () => Boost.highestBoughtThisEternity() >= Boost.boostPowerStart() / 2,
     'softcap': () => Generators.list.some(x => x.multiplier().gte(Generators.nerfValue().pow(0.25))),
     'hardcap': () => player.stats.totalStarsProduced.gte(Decimal.pow(2, Math.pow(2, 46))),
   },
