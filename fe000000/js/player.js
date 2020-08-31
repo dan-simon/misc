@@ -79,6 +79,7 @@ let initialPlayer = {
   boost: {bought: 0},
   boostPower: 1,
   bestBoostPower: 1,
+  highestBoostsBoughtThisEternity: 0,
   highestBoostsBought: 0,
   generators: initialGenerators(),
   highestGenerator: 0,
@@ -365,7 +366,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9638671875
+  version: 1.96484375
 }
 
 let player;
