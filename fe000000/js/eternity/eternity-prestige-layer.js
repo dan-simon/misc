@@ -97,6 +97,7 @@ let EternityPrestigeLayer = {
     player.eternityStars = new Decimal(2);
     EternityGenerators.list.forEach(x => x.resetAmount());
     player.boostPower = 1;
+    player.highestBoostsBoughtThisEternity = 0;
     player.infinityPoints = EternityStartingBenefits.infinityPoints().plus(FinalityStartingBenefits.infinityPoints());
     player.infinities = EternityStartingBenefits.infinities();
     player.realInfinities = 0;

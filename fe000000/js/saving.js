@@ -640,6 +640,10 @@ let Saving = {
       player.options.timeDisplay = 'Seconds';
       player.version = 1.9638671875;
     }
+    if (player.version < 1.96484375) {
+      player.highestBoostsBoughtThisEternity = player.boost.bought;
+      player.version = 1.96484375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

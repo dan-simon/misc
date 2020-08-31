@@ -5,9 +5,13 @@ let Boost = {
   highestBought() {
     return player.highestBoostsBought;
   },
+  highestBoughtThisEternity() {
+    return player.highestBoostsBoughtThisEternity;
+  },
   addBought(n) {
     player.boost.bought += n;
     player.highestBoostsBought = Math.max(player.highestBoostsBought, player.boost.bought);
+    player.highestBoostsBoughtThisEternity = Math.max(player.highestBoostsBoughtThisEternity, player.boost.bought);
     ComplexityChallenge.exitComplexityChallenge(2);
   },
   costForOne(n) {
@@ -110,7 +114,7 @@ let Boost = {
     return this.isVisible() && this.boostPower() > 1;
   },
   boostPowerPerSecond() {
-    return this.boostPowerPerBoost() * Math.max(0, this.bought() - this.boostPowerStart());
+    return this.boostPowerPerBoost() * Math.max(0, this.highestBoughtThisEternity() - this.boostPowerStart());
   },
   boostPowerPerBoost() {
     return EternityChallenge.getTotalCompletionsRewardEffect(1) * ComplexityAchievements.effect(1, 1) / 16384;
