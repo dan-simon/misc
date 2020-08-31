@@ -541,7 +541,7 @@ function updateDisplaySaveLoadSetup() {
   b[1521].onchange = function() {Tabs.setTabOption('goals', this.checked)};
   b[1523].checked = Tabs.isTabOptionOn('statistics');
   b[1523].onchange = function() {Tabs.setTabOption('statistics', this.checked)};
-  b[1525].checked = Tabs.isTabOptionOn('statistics');
+  b[1525].checked = Tabs.isTabOptionOn('last-ten-runs');
   b[1525].onchange = function() {Tabs.setTabOption('last-ten-runs', this.checked)};
   b[1529].checked = Tabs.isTabOptionOn('eternity');
   b[1529].onchange = function() {Tabs.setTabOption('eternity', this.checked)};
