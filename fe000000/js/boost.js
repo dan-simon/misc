@@ -111,7 +111,7 @@ let Boost = {
     return 1 + Math.log2(this.boostPower())
   },
   isBoostPowerVisible() {
-    return this.isVisible() && this.boostPower() > 1;
+    return this.boostPower() > 1;
   },
   boostPowerPerSecond() {
     return this.boostPowerPerBoost() * Math.max(0, this.highestBoughtThisEternity() - this.boostPowerStart());
