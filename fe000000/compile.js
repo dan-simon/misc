@@ -73,8 +73,17 @@ function getUntabbed(inTabs) {
   return Object.keys(untabbed).sort((a, b) => (-cmp(a[0], b[0])) || cmp(+a.slice(1), +b.slice(1)));
 }
 
+let scriptTimePrequel = t => `let scriptTime = ${t};
+if (indexTime !== scriptTime &&
+  confirm('The loaded files appear to be from a different version than the HTML file. ' +
+  'Try to reload the page to handle this? (It is suggested that you do.)')) {
+  window.location.reload(true)
+}
+
+`
+
 function makeUpdateDisplaySetup(setupList) {
-  return 'let scriptTime = ' + time + ';\nif (indexTime !== scriptTime) {\n  window.location.reload(true)\n}\n\n' +
+  return scriptTimePrequel(time) +
   'let e;\nlet b;\n\nfunction updateDisplayPageLoadSetup() {\n  e = [' +
   [...Array(el1Number)].map((_, i) => 'document.getElementById("e' + i + '")').join(', ') + '];\n  b = [' +
   [...Array(el2Number)].map((_, i) => 'document.getElementById("b' + i + '")').join(', ') +
