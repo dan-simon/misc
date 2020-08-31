@@ -177,17 +177,18 @@
         </div>
         <div ~style.display=Boost.isVisible() ? '' : 'none'~>
           <span/>You have ~i Boost.bought() ~ boost~s Boost.bought() ~, multiplying all generators by ~f Boost.multiplier() ~x (~f Boost.multiplierPer() ~x each). <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buy()">Cost: ~f Boost.cost() ~</button> <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buyMax()">Max</button></span>
-          <br ~style.display=SpecialDivs.isDivVisible('boost-power') ? '' : 'none'~/>
-          <span ~style.display=SpecialDivs.isDivVisible('boost-power') ? '' : 'none'~>Your highest number of boosts this eternity is ~i Boost.highestBoughtThisEternity() ~.</span>
-          <br ~style.display=SpecialDivs.isDivVisible('boost-power') ? '' : 'none'~/>
-          <div ~style.display=(SpecialDivs.isDivVisible('boost-power') && Boost.isBoostPowerVisible()) ? '' : 'none'~>
+        </div>
+        <div ~style.display=SpecialDivs.isDivVisible('boost-power') ? '' : 'none'~>
+          <span>Your highest number of boosts this eternity is ~i Boost.highestBoughtThisEternity() ~.</span>
+          <br/>
+          <div ~style.display=Boost.isBoostPowerVisible() ? '' : 'none'~>
             <span>You have ~f Boost.boostPower() ~ boost power, increasing the per-boost multiplier by ~f Boost.boostPowerEffect() ~x.</span>
             <br/>
             <span>You are generating ~r formatWithPrecision(Boost.boostPowerPerSecond(), 5) ~ boost power per second (~r formatWithPrecision(Boost.boostPowerPerBoost(), 5) ~ per boost this eternity above ~i Boost.boostPowerStart() ~).</span>
             <br/>
             <span>Your ~r Boost.bestBoostPowerDescription() ~ is ~f Boost.bestBoostPower() ~ (giving ~i Boost.extraTheoremsActualAndDisplay() ~ extra theorem~s Boost.extraTheoremsActualAndDisplay() ~, next at ~f Boost.nextExtraTheorem() ~).</span>
           </div>
-          <span ~style.display=(SpecialDivs.isDivVisible('boost-power') && !Boost.isBoostPowerVisible()) ? '' : 'none'~>You will start generating boost power for each boost this eternity above ~i Boost.boostPowerStart() ~ boosts.</span>
+          <span ~style.display=Boost.isBoostPowerVisible() ? 'none' : ''~>You will start generating boost power for each boost this eternity above ~i Boost.boostPowerStart() ~ boosts.</span>
         </div>
         <span ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~>View all generators even if they would be otherwise invisible: <input type="checkbox" ~!checked=Generators.viewAll()~ ~!onchange=function() {Generators.setViewAll(this.checked)}~></input></span> 
         <br/>
