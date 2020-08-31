@@ -298,6 +298,7 @@ let initialPlayer = {
   },
   options: {
     notation: 'Scientific',
+    timeDisplay: 'Seconds',
     offlineProgress: true,
     offlineTicks: 1024,
     hotkeys: true,
@@ -364,7 +365,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.962890625
+  version: 1.9638671875
 }
 
 let player;

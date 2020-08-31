@@ -636,6 +636,10 @@ let Saving = {
       player.options.offlineTicks = 1024;
       player.version = 1.962890625;
     }
+    if (player.version < 1.9638671875) {
+      player.options.timeDisplay = 'Seconds';
+      player.version = 1.9638671875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
