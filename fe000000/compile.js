@@ -11,6 +11,14 @@ function extractCode(x) {
     return x.slice(3, -2);
   } else if (x[1] === 's') {
     return 'pluralize(' + x.slice(3, -2) + ', \'\', \'s\')';
+  } else if (x[1] === 't') {
+    if (x[2] === ' ') {
+      return 'formatTime(' + x.slice(3, -2) + ', format, false)';
+    } else if (x[2] === 'i') {
+      return 'formatTime(' + x.slice(4, -2) + ', formatInt, true)';
+    } else if (x[2] === 'q') {
+      return 'formatTime(' + x.slice(4, -2) + ', formatMaybeInt, true)';
+    }
   } else if (x[1] === 'y') {
     return 'pluralize(' + x.slice(3, -2) + ', \'y\', \'ies\')';
   }
@@ -94,8 +102,8 @@ let files = process.argv.length > 2 ? process.argv.slice(2) : ['index-template.h
 fs.readFile(files[0], 'utf8', function(err, contents) {
   let newContents = contents.replace(
     /<[-a-z]+( [-a-z]+="[^"]+"| ~[-!.a-z]+=[^~]+~)*\/?>/g, dealWithElement).replace(
-    /~[fiqrsy] [^~]+ ~/g, (x) => '<span id="e' + el1Number++ + '"></span>');
-  let el1CodeList = (contents.match(/~[fiqrsy] [^~]+ ~/g) || []).map(updateDisplayOneElement);
+    /~([fiqrsy]|t[iq]?) [^~]+ ~/g, (x) => '<span id="e' + el1Number++ + '"></span>');
+  let el1CodeList = (contents.match(/~([fiqrsy]|t[iq]?) [^~]+ ~/g) || []).map(updateDisplayOneElement);
   let el2CodeList = (contents.match(/<[-a-z]+( [-a-z]+="[^"]+"| ~[-!.a-z]+=[^~]+~)*\/?>/g) || []).filter(x => x.includes('~')).map(updateDisplayOneStyle);
   let setupList = flatten(el2CodeList.map(x => x.filter(y => y[0] === '!').map(y => y.slice(1))));
   el2CodeList = el2CodeList.map(x => x.filter(y => y[0] !== '!'));

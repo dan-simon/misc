@@ -1,8 +1,6 @@
-let NOTATION_LIST = ['Scientific', 'Engineering', 'Letters', 'Standard', 'Cancer',
-'Mixed scientific', 'Mixed engineering', 'Logarithm', 'Binary', 'Hexadecimal', 'Evil', 'Brackets', 'Infinity',
-'Roman', 'Dots', 'Zalgo', 'Hex', 'Imperial', 'Clock', 'Prime', 'Bar', 'Shi', 'Blind'];
+let COMPLETION_COLOR_LIST = ['On (gradient)', 'On (uniform)', 'Off'];
 
-let COMPLETION_COLOR_LIST = ['On (gradient)', 'On (uniform)', 'Off']
+let TIME_DISPLAY_LIST = ['Seconds', 'D:H:M:S', 'D:H:M:S with notation', 'Largest unit'];
 
 let Options = {
   toggleOfflineProgress() {
@@ -34,6 +32,9 @@ let Options = {
   },
   setNotation(x) {
     player.options.notation = x;
+  },
+  nextTimeDisplay() {
+    player.options.timeDisplay = TIME_DISPLAY_LIST[(TIME_DISPLAY_LIST.indexOf(player.options.timeDisplay) + 1) % TIME_DISPLAY_LIST.length];
   },
   theme() {
     return player.options.theme;

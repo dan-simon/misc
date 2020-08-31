@@ -417,7 +417,7 @@
             <div class="challengediv" ~style.background=Challenge.color(2)~>
               <span>Challenge 2</span>
               <br/>
-              <span>There's a multiplier on all generators increasing linearly from ~i 0 ~ to ~i 1 ~ over ~i 256 ~ seconds. Every time you buy a generator or boost, or sacrifice or prestige, this multiplier resets to ~i 0 ~.</span>
+              <span>There's a multiplier on all generators increasing linearly from ~i 0 ~ to ~i 1 ~ over ~ti 256 ~. Every time you buy a generator or boost, or sacrifice or prestige, this multiplier resets to ~i 0 ~.</span>
               <br/>
               <span>~r Challenge.challengeStatusDescription(2) ~</span>
               <br/>
@@ -432,7 +432,7 @@
             <div class="challengediv" ~style.background=Challenge.color(3)~>
               <span>Challenge 3</span>
               <br/>
-              <span>There's a multiplier on Generator 1, starting at ~r formatWithPrecision(1 / 256, 5) ~ and doubling every ~i 256 ~ seconds. Every time you prestige, this multiplier resets to ~r formatWithPrecision(1 / 256, 5) ~.</span>
+              <span>There's a multiplier on Generator 1, starting at ~r formatWithPrecision(1 / 256, 5) ~ and doubling every ~ti 256 ~. Every time you prestige, this multiplier resets to ~r formatWithPrecision(1 / 256, 5) ~.</span>
               <br/>
               <span>~r Challenge.challengeStatusDescription(3) ~</span>
               <br/>
@@ -588,11 +588,11 @@
       <span>Autobuyers triggering at the same time trigger from lowest to highest autobuyer order.</span>
       <br/>
       <div ~style.display=Autobuyers.areAnyAutobuyersSlow() ? '' : 'none'~>
-        <span>Slow autobuyers will trigger in ~f Autobuyers.timeUntilNextSlowTrigger() ~ more seconds.</span>
+        <span>Slow autobuyers will trigger in ~t Autobuyers.timeUntilNextSlowTrigger() ~.</span>
         <br/>
       </div>
       <div ~style.display=Autobuyers.areAnyAutobuyersFast() ? '' : 'none'~>
-        <span>Fast autobuyers <span ~style.display=Autobuyers.doFastAutobuyersAlwaysTrigger() ? '' : 'none'~>trigger every tick.</span><span ~style.display=Autobuyers.doFastAutobuyersAlwaysTrigger() ? 'none' : ''~>will trigger in ~f Autobuyers.timeUntilNextFastTrigger() ~ more seconds.</span></span>
+        <span>Fast autobuyers <span ~style.display=Autobuyers.doFastAutobuyersAlwaysTrigger() ? '' : 'none'~>trigger every tick.</span><span ~style.display=Autobuyers.doFastAutobuyersAlwaysTrigger() ? 'none' : ''~>will trigger in ~t Autobuyers.timeUntilNextFastTrigger() ~.</span></span>
         <br/>
       </div>
       <div ~style.display=Autobuyers.areThereAnyAutobuyers() ? '' : 'none'~>
@@ -630,7 +630,7 @@
             <button ~style.display=Autobuyer(1).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(1).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(1).unlockSlow()">
               Unlock Slow Generator 1 Autobuyer
               <br/>
-              (triggering every ~i 16 ~ seconds)
+              (triggering every ~ti 16 ~)
               <br/>
               Cost: ~i Autobuyer(1).unlockSlowCost() ~ stars
             </button>
@@ -661,7 +661,7 @@
             <button class="autobuyerunlockbutton" ~style.display=Autobuyer(2).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(2).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(2).unlockSlow()">
               Unlock Slow Generator 2 Autobuyer
               <br/>
-              (triggering every ~i 16 ~ seconds)
+              (triggering every ~ti 16 ~)
               <br/>
               Cost: ~i Autobuyer(2).unlockSlowCost() ~ stars
             </button>
@@ -692,7 +692,7 @@
             <button class="autobuyerunlockbutton" ~style.display=Autobuyer(3).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(3).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(3).unlockSlow()">
               Unlock Slow Generator 3 Autobuyer
               <br/>
-              (triggering every ~i 16 ~ seconds)
+              (triggering every ~ti 16 ~)
               <br/>
               Cost: ~i Autobuyer(3).unlockSlowCost() ~ stars
             </button>
@@ -725,7 +725,7 @@
             <button class="autobuyerunlockbutton" ~style.display=Autobuyer(4).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(4).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(4).unlockSlow()">
               Unlock Slow Generator 4 Autobuyer
               <br/>
-              (triggering every ~i 16 ~ seconds)
+              (triggering every ~ti 16 ~)
               <br/>
               Cost: ~i Autobuyer(4).unlockSlowCost() ~ stars
             </button>
@@ -756,7 +756,7 @@
             <button class="autobuyerunlockbutton" ~style.display=Autobuyer(5).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(5).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(5).unlockSlow()">
               Unlock Slow Generator 5 Autobuyer
               <br/>
-              (triggering every ~i 16 ~ seconds)
+              (triggering every ~ti 16 ~)
               <br/>
               Cost: ~i Autobuyer(5).unlockSlowCost() ~ stars
             </button>
@@ -787,7 +787,7 @@
             <button class="autobuyerunlockbutton" ~style.display=Autobuyer(6).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(6).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(6).unlockSlow()">
               Unlock Slow Generator 6 Autobuyer
               <br/>
-              (triggering every ~i 16 ~ seconds)
+              (triggering every ~ti 16 ~)
               <br/>
               Cost: ~i Autobuyer(6).unlockSlowCost() ~ stars
             </button>
@@ -820,7 +820,7 @@
             <button class="autobuyerunlockbutton" ~style.display=Autobuyer(7).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(7).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(7).unlockSlow()">
               Unlock Slow Generator 7 Autobuyer
               <br/>
-              (triggering every ~i 16 ~ seconds)
+              (triggering every ~ti 16 ~)
               <br/>
               Cost: ~i Autobuyer(7).unlockSlowCost() ~ stars
             </button>
@@ -851,7 +851,7 @@
             <button class="autobuyerunlockbutton" ~style.display=Autobuyer(8).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(8).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(8).unlockSlow()">
               Unlock Slow Generator 8 Autobuyer
               <br/>
-              (triggering every ~i 16 ~ seconds)
+              (triggering every ~ti 16 ~)
               <br/>
               Cost: ~i Autobuyer(8).unlockSlowCost() ~ stars
             </button>
@@ -882,7 +882,7 @@
             <button class="autobuyerunlockbutton" ~style.display=Autobuyer(9).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(9).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(9).unlockSlow()">
               Unlock Slow Boost Autobuyer
               <br/>
-              (triggering every ~i 16 ~ seconds)
+              (triggering every ~ti 16 ~)
               <br/>
               Cost: ~i Autobuyer(9).unlockSlowCost() ~ stars
             </button>
@@ -1077,7 +1077,7 @@
             <div class="infinitychallengediv" ~style.background=InfinityChallenge.color(4)~>
               <span>Infinity Challenge 4</span>
               <br/>
-              <span>There's an exponent on the multipliers of all generators increasing linearly from ~i 0 ~ to ~i 1 ~ over ~i 16 ~ seconds. Every time you buy a generator or boost, or sacrifice or prestige, this exponent resets to ~i 0 ~.</span>
+              <span>There's an exponent on the multipliers of all generators increasing linearly from ~i 0 ~ to ~i 1 ~ over ~ti 16 ~. Every time you buy a generator or boost, or sacrifice or prestige, this exponent resets to ~i 0 ~.</span>
               <br/>
               <span>Requirement to start: ~f InfinityChallenge.getInfinityChallengeRequirement(4) ~ stars this eternity</span>
               <br/>
@@ -2117,7 +2117,7 @@
         <button ~style.display=EternityChallenge.showRequirementDisplayToggle() ? '' : 'none'~ onclick="EternityChallenge.toggleRequirementDisplay()">Show (now unneeded) eternity challenge requirements: ~r EternityChallenge.isRequirementDisplayOn() ? "On" : "Off" ~</button>
       </span>
       <div ~style.display=EternityChallenge.showAutoECCompletion() ? '' : 'none'~>
-        <span>You auto-complete an EC tier once every ~q EternityChallenge.autoECCompletionTime() ~ seconds, <span ~style.display=EternityChallenge.areAllEternityChallengesCompleted() ? 'none' : ''~>next in ~f EternityChallenge.timeUntilAutoECCompletion() ~ seconds</span><span ~style.display=EternityChallenge.areAllEternityChallengesCompleted() ? '' : 'none'~>and they're now fully complete</span><span ~style.display=EternityChallenge.usedAutoECCompletionThisComplexity() ? 'none' : ''~>  (no auto-completions this complexity)</span>.</span>
+        <span>You auto-complete an EC tier once every ~tq EternityChallenge.autoECCompletionTime() ~, <span ~style.display=EternityChallenge.areAllEternityChallengesCompleted() ? 'none' : ''~>next in ~t EternityChallenge.timeUntilAutoECCompletion() ~</span><span ~style.display=EternityChallenge.areAllEternityChallengesCompleted() ? '' : 'none'~>and they're now fully complete</span><span ~style.display=EternityChallenge.usedAutoECCompletionThisComplexity() ? 'none' : ''~>  (no auto-completions this complexity)</span>.</span>
         <br/>
         <span ~style.display=!EternityChallenge.isAutoECCompletionOn() && EternityChallenge.imminentAutoECCompletionTiers() !== 0 ? '' : 'none'~>Turning auto-EC completion on would complete ~i EternityChallenge.imminentAutoECCompletionTiers() ~ eternity challenge tier~s EternityChallenge.imminentAutoECCompletionTiers() ~.</span>
         <br ~style.display=!EternityChallenge.isAutoECCompletionOn() && EternityChallenge.imminentAutoECCompletionTiers() !== 0 ? '' : 'none'~/>
@@ -2384,7 +2384,7 @@
         </button>
       </div>
       <div ~style.display=Chroma.isUnlocked() ? '' : 'none'~>
-        <span>You have spent ~f player.stats.timeSinceEternity ~ seconds in this eternity, giving you ~f Chroma.displayAmount() ~ chroma (capped at ~f Chroma.cap() ~, based on eternity points).</span>
+        <span>You have spent ~t player.stats.timeSinceEternity ~ in this eternity, giving you ~f Chroma.displayAmount() ~ chroma (capped at ~f Chroma.cap() ~, based on eternity points).</span>
         <br/>
         <span>Chroma gain will slow down over time, gradually approaching its cap but taking a very long time to reach it.</span>
         <br/>
@@ -2533,7 +2533,7 @@
       <br/>
       <span>multiplying permanence and chroma buildup speed by ~q Complexities.permanenceAndChromaMultiplier() ~,</span>
       <br/>
-      <span>and <span ~style.display=EternityChallenge.autoECFromComplexities() ? '' : 'none'~>auto-completing an EC tier every ~q Complexities.autoECCompletionTime() ~ seconds</span><span ~style.display=EternityChallenge.autoECFromComplexities() ? 'none' : ''~>never auto-completing an EC tier</span><span ~style.display=EternityChallenge.autoECFromFinalities() ? '' : 'none'~> (actually one EC tier per ~q EternityChallenge.autoECCompletionTime() ~ seconds due to finalities)</span>.</span>
+      <span>and <span ~style.display=EternityChallenge.autoECFromComplexities() ? '' : 'none'~>auto-completing an EC tier every ~tq Complexities.autoECCompletionTime() ~</span><span ~style.display=EternityChallenge.autoECFromComplexities() ? 'none' : ''~>never auto-completing an EC tier</span><span ~style.display=EternityChallenge.autoECFromFinalities() ? '' : 'none'~> (actually one EC tier per ~tq EternityChallenge.autoECCompletionTime() ~ due to finalities)</span>.</span>
       <br/>
       <span>You have ~f ComplexityStars.amount() ~ complexity stars, making all complexity challenge rewards ~f ComplexityStars.complexityChallengeRewardMultiplier() ~x stronger.</span>
       <br/>
@@ -3042,7 +3042,7 @@
         <span ~style.display=FinalityMilestones.isFinalityMilestoneActive(6) ? 'none' : ''~>Due to unlocking powers, you gain your eternity points on eternity every second, without needing to eternity.</span>
         <br/>
         <br/>
-        <span>You gain a new power once every ~f Powers.interval() ~ seconds, next in ~f Powers.timeUntilPowerGain() ~ seconds. <button onclick="Powers.togglePowerGain()">Power gain: ~r Powers.isPowerGainOn() ? "On" : "Off" ~</button></span>
+        <span>You gain a new power once every ~f Powers.interval() ~ seconds, next in ~t Powers.timeUntilPowerGain() ~. <button onclick="Powers.togglePowerGain()">Power gain: ~r Powers.isPowerGainOn() ? "On" : "Off" ~</button></span>
         <br ~style.display=!Powers.isPowerGainOn() && Powers.imminentPowerGain() !== 0 ? '' : 'none'~/>
         <span ~style.display=!Powers.isPowerGainOn() && Powers.imminentPowerGain() !== 0 ? '' : 'none'~>Turning power gain on would give you ~i Powers.imminentPowerGain() ~ new power~s Powers.imminentPowerGain() ~.</span>
         <br/>
@@ -3664,7 +3664,7 @@
         <br/>
         <span><button onclick="Oracle.togglePowerFutureExtraMultipliers()">Show future power extra multipliers (as opposed to current): ~r Oracle.powerFutureExtraMultipliers() ? "On" : "Off" ~</button></span>
         <br/>
-        <span>The Oracle can look between ~i 0 ~ and ~f Oracle.maxTime() ~ seconds into the future,</span>
+        <span>The Oracle can look between ~ti 0 ~ and ~ti Oracle.maxTime() ~ into the future,</span>
         <br/>
         <span>and can use between ~i 1 ~ and ~f Oracle.maxTicks() ~ game ticks (more than ~f Oracle.defaultTicks() ~ ticks may make it slow).</span>
         <br/>
@@ -3868,14 +3868,14 @@
         <span>Your galaxies are increasing the strength of new powers by ~r formatWithPrecision(Galaxy.getStrengthIncrease(), 5) ~.</span>
         <br/>
         <br/>
-        <span>You have spent ~f player.stats.timeSinceComplexity ~ seconds in this complexity, increasing chroma caps ^~r formatWithPrecision(Galaxy.effect(), 5) ~.</span>
+        <span>You have spent ~t player.stats.timeSinceComplexity ~ in this complexity, increasing chroma caps ^~r formatWithPrecision(Galaxy.effect(), 5) ~.</span>
         <br/>
         <br/>
         <span>You can make some of your galaxies dilated to make the galaxy effect increase faster, but have a lower cap.</span>
         <br/>
-        <span>Currently ~i Galaxy.dilated() ~ galax~y Galaxy.dilated() ~ ~r Galaxy.dilated() === 1 ? 'is' : 'are' ~ dilated, making the galaxy effect have speed ~i Galaxy.effectSpeed() ~x and cap ~r formatWithPrecision(Galaxy.effectCap(), 5) ~, capping in ~f Galaxy.timeToReachEffectCap() ~ seconds.</span>
+        <span>Currently ~i Galaxy.dilated() ~ galax~y Galaxy.dilated() ~ ~r Galaxy.dilated() === 1 ? 'is' : 'are' ~ dilated, making the galaxy effect have speed ~i Galaxy.effectSpeed() ~x and cap ~r formatWithPrecision(Galaxy.effectCap(), 5) ~, capping in ~t Galaxy.timeToReachEffectCap() ~.</span>
         <br/>
-        <span>Next complexity ~i Galaxy.nextDilated() ~ galax~y Galaxy.nextDilated() ~ will be dilated, making the galaxy effect have speed ~i Galaxy.nextEffectSpeed() ~x and cap ~r formatWithPrecision(Galaxy.nextEffectCap(), 5) ~, capping in ~f Galaxy.nextTimeToReachEffectCap() ~ seconds.</span>
+        <span>Next complexity ~i Galaxy.nextDilated() ~ galax~y Galaxy.nextDilated() ~ will be dilated, making the galaxy effect have speed ~i Galaxy.nextEffectSpeed() ~x and cap ~r formatWithPrecision(Galaxy.nextEffectCap(), 5) ~, capping in ~t Galaxy.nextTimeToReachEffectCap() ~.</span>
         <br/>
         <br/>
         <span>Galaxies to make dilated next complexity reset: <input class="nextdilatedinput" type="text" ~!value=Galaxy.nextDilatedRaw()~ ~!onchange=function() {Galaxy.setNextDilated(+this.value)}~></input></span>
@@ -3896,7 +3896,7 @@
       <br/>
       <span>making the finality generator per-purchase multiplier ~q Finalities.finalityGeneratorPerPurchaseMultiplier() ~x,</span>
       <br/>
-      <span>and <span ~style.display=EternityChallenge.autoECFromFinalities() ? '' : 'none'~>auto-completing an EC tier every ~q Finalities.autoECCompletionTime() ~ seconds</span><span ~style.display=EternityChallenge.autoECFromFinalities() ? 'none' : ''~>never auto-completing an EC tier</span><span ~style.display=EternityChallenge.autoECFromComplexities() ? '' : 'none'~> (actually one EC tier per ~q EternityChallenge.autoECCompletionTime() ~ seconds due to complexities)</span>.</span>
+      <span>and <span ~style.display=EternityChallenge.autoECFromFinalities() ? '' : 'none'~>auto-completing an EC tier every ~tq Finalities.autoECCompletionTime() ~</span><span ~style.display=EternityChallenge.autoECFromFinalities() ? 'none' : ''~>never auto-completing an EC tier</span><span ~style.display=EternityChallenge.autoECFromComplexities() ? '' : 'none'~> (actually one EC tier per ~tq EternityChallenge.autoECCompletionTime() ~ due to complexities)</span>.</span>
       <br/>
       <span>You have ~f FinalityStars.amount() ~ finality stars, multiplying all non-finality generators by ~f FinalityStars.multiplier() ~x.</span>
       <br/>
@@ -4416,7 +4416,7 @@
               <br/>
               ~r FinalityMilestones.milestoneStatusDescription(9) ~
               <br/>
-              For galaxy effect and eternity power extra multipliers, you start each ~r PrestigeLayerNames.layersAbove('complexity') ~ with time in complexity based on your finalities (currently ~f FinalityMilestones.rawFreeTimeInComplexity() ~ seconds)
+              For galaxy effect and eternity power extra multipliers, you start each ~r PrestigeLayerNames.layersAbove('complexity') ~ with time in complexity based on your finalities (currently ~t FinalityMilestones.rawFreeTimeInComplexity() ~)
             </div>
           </td>
           <td>
@@ -4592,117 +4592,117 @@
       <br ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~/>
       <span ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~>You have ~i player.finalities ~ finalit~y player.finalities ~.</span>
       <br ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~/>
-      <span ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~>Your fastest infinity took ~f player.stats.fastestInfinity ~ seconds.</span>
+      <span ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~>Your fastest infinity took ~t player.stats.fastestInfinity ~.</span>
       <br ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~/>
-      <span ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>Your fastest eternity took ~f player.stats.fastestEternity ~ seconds.</span>
+      <span ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>Your fastest eternity took ~t player.stats.fastestEternity ~.</span>
       <br ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~/>
-      <span ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~>Your fastest complexity took ~f player.stats.fastestComplexity ~ seconds.</span>
+      <span ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~>Your fastest complexity took ~t player.stats.fastestComplexity ~.</span>
       <br ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~/>
-      <span ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~>Your fastest finality took ~f player.stats.fastestFinality ~ seconds.</span>
+      <span ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~>Your fastest finality took ~t player.stats.fastestFinality ~.</span>
       <br/>
-      <span>You have spent ~f player.stats.timeSincePurchase ~ seconds without purchasing anything.</span>
+      <span>You have spent ~t player.stats.timeSincePurchase ~ without purchasing anything.</span>
       <br/>
-      <span>You have spent ~f player.stats.timeSinceSacrifice ~ seconds without sacrificing.</span>
+      <span>You have spent ~t player.stats.timeSinceSacrifice ~ without sacrificing.</span>
       <br/>
-      <span>You have spent ~f player.stats.timeSincePrestige ~ seconds in this prestige.</span>
+      <span>You have spent ~t player.stats.timeSincePrestige ~ in this prestige.</span>
       <br ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~/>
-      <span ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~>You have spent ~f player.stats.timeSinceInfinity ~ seconds in this infinity.</span>
+      <span ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~>You have spent ~t player.stats.timeSinceInfinity ~ in this infinity.</span>
       <br ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~/>
-      <span ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>You have spent ~f player.stats.timeSinceEternity ~ seconds in this eternity.</span>
+      <span ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>You have spent ~t player.stats.timeSinceEternity ~ in this eternity.</span>
       <br ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~/>
-      <span ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~>You have spent ~f player.stats.timeSinceComplexity ~ seconds in this complexity.</span>
+      <span ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~>You have spent ~t player.stats.timeSinceComplexity ~ in this complexity.</span>
       <br ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~/>
-      <span ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~>You have spent ~f player.stats.timeSinceFinality ~ seconds in this finality.</span>
+      <span ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~>You have spent ~t player.stats.timeSinceFinality ~ in this finality.</span>
       <br/>
-      <span>You have spent ~f player.stats.timeSinceGameStart ~ seconds playing this game (counting time offline).</span>
+      <span>You have spent ~t player.stats.timeSinceGameStart ~ playing this game (counting time offline).</span>
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'last-ten-runs' ? '' : 'none'~>
       <div ~style.display=Stats.showRun(1, 'infinity') ? '' : 'none'~>
-        <span>Last infinity took ~f player.stats.lastTenInfinities[0][0] ~ seconds and gave ~i player.stats.lastTenInfinities[0][1] ~ IP, giving ~f player.stats.lastTenInfinities[0][2] ~ IP/second.</span>
+        <span>Last infinity took ~t player.stats.lastTenInfinities[0][0] ~ and gave ~i player.stats.lastTenInfinities[0][1] ~ IP, giving ~f player.stats.lastTenInfinities[0][2] ~ IP/second.</span>
         <br ~style.display=Stats.showAnyRuns(2) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(2, 'infinity') ? '' : 'none'~>The infinity two infinities ago took ~f player.stats.lastTenInfinities[1][0] ~ seconds and gave ~i player.stats.lastTenInfinities[1][1] ~ IP, giving ~f player.stats.lastTenInfinities[1][2] ~ IP/second.</span>
+        <span ~style.display=Stats.showRun(2, 'infinity') ? '' : 'none'~>The infinity two infinities ago took ~t player.stats.lastTenInfinities[1][0] ~ and gave ~i player.stats.lastTenInfinities[1][1] ~ IP, giving ~f player.stats.lastTenInfinities[1][2] ~ IP/second.</span>
         <br ~style.display=Stats.showAnyRuns(3) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(3, 'infinity') ? '' : 'none'~>The infinity three infinities ago took ~f player.stats.lastTenInfinities[2][0] ~ seconds and gave ~i player.stats.lastTenInfinities[2][1] ~ IP, giving ~f player.stats.lastTenInfinities[2][2] ~ IP/second.</span>
+        <span ~style.display=Stats.showRun(3, 'infinity') ? '' : 'none'~>The infinity three infinities ago took ~t player.stats.lastTenInfinities[2][0] ~ and gave ~i player.stats.lastTenInfinities[2][1] ~ IP, giving ~f player.stats.lastTenInfinities[2][2] ~ IP/second.</span>
         <br ~style.display=Stats.showAnyRuns(4) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(4, 'infinity')  ? '' : 'none'~>The infinity four infinities ago took ~f player.stats.lastTenInfinities[3][0] ~ seconds and gave ~i player.stats.lastTenInfinities[3][1] ~ IP, giving ~f player.stats.lastTenInfinities[3][2] ~ IP/second.</span>
+        <span ~style.display=Stats.showRun(4, 'infinity')  ? '' : 'none'~>The infinity four infinities ago took ~t player.stats.lastTenInfinities[3][0] ~ and gave ~i player.stats.lastTenInfinities[3][1] ~ IP, giving ~f player.stats.lastTenInfinities[3][2] ~ IP/second.</span>
         <br ~style.display=Stats.showAnyRuns(5) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(5, 'infinity') ? '' : 'none'~>The infinity five infinities ago took ~f player.stats.lastTenInfinities[4][0] ~ seconds and gave ~i player.stats.lastTenInfinities[4][1] ~ IP, giving ~f player.stats.lastTenInfinities[4][2] ~ IP/second.</span>
+        <span ~style.display=Stats.showRun(5, 'infinity') ? '' : 'none'~>The infinity five infinities ago took ~t player.stats.lastTenInfinities[4][0] ~ and gave ~i player.stats.lastTenInfinities[4][1] ~ IP, giving ~f player.stats.lastTenInfinities[4][2] ~ IP/second.</span>
         <br ~style.display=Stats.showAnyRuns(6) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(6, 'infinity') ? '' : 'none'~>The infinity six infinities ago took ~f player.stats.lastTenInfinities[5][0] ~ seconds and gave ~i player.stats.lastTenInfinities[5][1] ~ IP, giving ~f player.stats.lastTenInfinities[5][2] ~ IP/second.</span>
+        <span ~style.display=Stats.showRun(6, 'infinity') ? '' : 'none'~>The infinity six infinities ago took ~t player.stats.lastTenInfinities[5][0] ~ and gave ~i player.stats.lastTenInfinities[5][1] ~ IP, giving ~f player.stats.lastTenInfinities[5][2] ~ IP/second.</span>
         <br ~style.display=Stats.showAnyRuns(7) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(7, 'infinity') ? '' : 'none'~>The infinity seven infinities ago took ~f player.stats.lastTenInfinities[6][0] ~ seconds and gave ~i player.stats.lastTenInfinities[6][1] ~ IP, giving ~f player.stats.lastTenInfinities[6][2] ~ IP/second.</span>
+        <span ~style.display=Stats.showRun(7, 'infinity') ? '' : 'none'~>The infinity seven infinities ago took ~t player.stats.lastTenInfinities[6][0] ~ and gave ~i player.stats.lastTenInfinities[6][1] ~ IP, giving ~f player.stats.lastTenInfinities[6][2] ~ IP/second.</span>
         <br ~style.display=Stats.showAnyRuns(8) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(8, 'infinity')  ? '' : 'none'~>The infinity eight infinities ago took ~f player.stats.lastTenInfinities[7][0] ~ seconds and gave ~i player.stats.lastTenInfinities[7][1] ~ IP, giving ~f player.stats.lastTenInfinities[7][2] ~ IP/second.</span>
+        <span ~style.display=Stats.showRun(8, 'infinity')  ? '' : 'none'~>The infinity eight infinities ago took ~t player.stats.lastTenInfinities[7][0] ~ and gave ~i player.stats.lastTenInfinities[7][1] ~ IP, giving ~f player.stats.lastTenInfinities[7][2] ~ IP/second.</span>
         <br ~style.display=Stats.showAnyRuns(9) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(9, 'infinity')  ? '' : 'none'~>The infinity nine infinities ago took ~f player.stats.lastTenInfinities[8][0] ~ seconds and gave ~i player.stats.lastTenInfinities[8][1] ~ IP, giving ~f player.stats.lastTenInfinities[8][2] ~ IP/second.</span>
+        <span ~style.display=Stats.showRun(9, 'infinity')  ? '' : 'none'~>The infinity nine infinities ago took ~t player.stats.lastTenInfinities[8][0] ~ and gave ~i player.stats.lastTenInfinities[8][1] ~ IP, giving ~f player.stats.lastTenInfinities[8][2] ~ IP/second.</span>
         <br ~style.display=Stats.showAnyRuns(10) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(10, 'infinity')  ? '' : 'none'~>The infinity ten infinities ago took ~f player.stats.lastTenInfinities[9][0] ~ seconds and gave ~i player.stats.lastTenInfinities[9][1] ~ IP, giving ~f player.stats.lastTenInfinities[9][2] ~ IP/second.</span>
+        <span ~style.display=Stats.showRun(10, 'infinity')  ? '' : 'none'~>The infinity ten infinities ago took ~t player.stats.lastTenInfinities[9][0] ~ and gave ~i player.stats.lastTenInfinities[9][1] ~ IP, giving ~f player.stats.lastTenInfinities[9][2] ~ IP/second.</span>
         <br/>
       </div>
       <div ~style.display=Stats.showRun(1, 'eternity') ? '' : 'none'~>
-        <span>Last eternity took ~f player.stats.lastTenEternities[0][0] ~ seconds and gave ~i player.stats.lastTenEternities[0][1] ~ EP, giving ~f player.stats.lastTenEternities[0][2] ~ EP/second.</span>
+        <span>Last eternity took ~t player.stats.lastTenEternities[0][0] ~ and gave ~i player.stats.lastTenEternities[0][1] ~ EP, giving ~f player.stats.lastTenEternities[0][2] ~ EP/second.</span>
         <br ~style.display=Stats.showAnyRuns(2) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(2, 'eternity') ? '' : 'none'~>The eternity two eternities ago took ~f player.stats.lastTenEternities[1][0] ~ seconds and gave ~i player.stats.lastTenEternities[1][1] ~ EP, giving ~f player.stats.lastTenEternities[1][2] ~ EP/second.</span>
+        <span ~style.display=Stats.showRun(2, 'eternity') ? '' : 'none'~>The eternity two eternities ago took ~t player.stats.lastTenEternities[1][0] ~ and gave ~i player.stats.lastTenEternities[1][1] ~ EP, giving ~f player.stats.lastTenEternities[1][2] ~ EP/second.</span>
         <br ~style.display=Stats.showAnyRuns(3) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(3, 'eternity') ? '' : 'none'~>The eternity three eternities ago took ~f player.stats.lastTenEternities[2][0] ~ seconds and gave ~i player.stats.lastTenEternities[2][1] ~ EP, giving ~f player.stats.lastTenEternities[2][2] ~ EP/second.</span>
+        <span ~style.display=Stats.showRun(3, 'eternity') ? '' : 'none'~>The eternity three eternities ago took ~t player.stats.lastTenEternities[2][0] ~ and gave ~i player.stats.lastTenEternities[2][1] ~ EP, giving ~f player.stats.lastTenEternities[2][2] ~ EP/second.</span>
         <br ~style.display=Stats.showAnyRuns(4) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(4, 'eternity')  ? '' : 'none'~>The eternity four eternities ago took ~f player.stats.lastTenEternities[3][0] ~ seconds and gave ~i player.stats.lastTenEternities[3][1] ~ EP, giving ~f player.stats.lastTenEternities[3][2] ~ EP/second.</span>
+        <span ~style.display=Stats.showRun(4, 'eternity')  ? '' : 'none'~>The eternity four eternities ago took ~t player.stats.lastTenEternities[3][0] ~ and gave ~i player.stats.lastTenEternities[3][1] ~ EP, giving ~f player.stats.lastTenEternities[3][2] ~ EP/second.</span>
         <br ~style.display=Stats.showAnyRuns(5) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(5, 'eternity') ? '' : 'none'~>The eternity five eternities ago took ~f player.stats.lastTenEternities[4][0] ~ seconds and gave ~i player.stats.lastTenEternities[4][1] ~ EP, giving ~f player.stats.lastTenEternities[4][2] ~ EP/second.</span>
+        <span ~style.display=Stats.showRun(5, 'eternity') ? '' : 'none'~>The eternity five eternities ago took ~t player.stats.lastTenEternities[4][0] ~ and gave ~i player.stats.lastTenEternities[4][1] ~ EP, giving ~f player.stats.lastTenEternities[4][2] ~ EP/second.</span>
         <br ~style.display=Stats.showAnyRuns(6) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(6, 'eternity') ? '' : 'none'~>The eternity six eternities ago took ~f player.stats.lastTenEternities[5][0] ~ seconds and gave ~i player.stats.lastTenEternities[5][1] ~ EP, giving ~f player.stats.lastTenEternities[5][2] ~ EP/second.</span>
+        <span ~style.display=Stats.showRun(6, 'eternity') ? '' : 'none'~>The eternity six eternities ago took ~t player.stats.lastTenEternities[5][0] ~ and gave ~i player.stats.lastTenEternities[5][1] ~ EP, giving ~f player.stats.lastTenEternities[5][2] ~ EP/second.</span>
         <br ~style.display=Stats.showAnyRuns(7) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(7, 'eternity') ? '' : 'none'~>The eternity seven eternities ago took ~f player.stats.lastTenEternities[6][0] ~ seconds and gave ~i player.stats.lastTenEternities[6][1] ~ EP, giving ~f player.stats.lastTenEternities[6][2] ~ EP/second.</span>
+        <span ~style.display=Stats.showRun(7, 'eternity') ? '' : 'none'~>The eternity seven eternities ago took ~t player.stats.lastTenEternities[6][0] ~ and gave ~i player.stats.lastTenEternities[6][1] ~ EP, giving ~f player.stats.lastTenEternities[6][2] ~ EP/second.</span>
         <br ~style.display=Stats.showAnyRuns(8) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(8, 'eternity')  ? '' : 'none'~>The eternity eight eternities ago took ~f player.stats.lastTenEternities[7][0] ~ seconds and gave ~i player.stats.lastTenEternities[7][1] ~ EP, giving ~f player.stats.lastTenEternities[7][2] ~ EP/second.</span>
+        <span ~style.display=Stats.showRun(8, 'eternity')  ? '' : 'none'~>The eternity eight eternities ago took ~t player.stats.lastTenEternities[7][0] ~ and gave ~i player.stats.lastTenEternities[7][1] ~ EP, giving ~f player.stats.lastTenEternities[7][2] ~ EP/second.</span>
         <br ~style.display=Stats.showAnyRuns(9) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(9, 'eternity')  ? '' : 'none'~>The eternity nine eternities ago took ~f player.stats.lastTenEternities[8][0] ~ seconds and gave ~i player.stats.lastTenEternities[8][1] ~ EP, giving ~f player.stats.lastTenEternities[8][2] ~ EP/second.</span>
+        <span ~style.display=Stats.showRun(9, 'eternity')  ? '' : 'none'~>The eternity nine eternities ago took ~t player.stats.lastTenEternities[8][0] ~ and gave ~i player.stats.lastTenEternities[8][1] ~ EP, giving ~f player.stats.lastTenEternities[8][2] ~ EP/second.</span>
         <br ~style.display=Stats.showAnyRuns(10) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(10, 'eternity')  ? '' : 'none'~>The eternity ten eternities ago took ~f player.stats.lastTenEternities[9][0] ~ seconds and gave ~i player.stats.lastTenEternities[9][1] ~ EP, giving ~f player.stats.lastTenEternities[9][2] ~ EP/second.</span>
+        <span ~style.display=Stats.showRun(10, 'eternity')  ? '' : 'none'~>The eternity ten eternities ago took ~t player.stats.lastTenEternities[9][0] ~ and gave ~i player.stats.lastTenEternities[9][1] ~ EP, giving ~f player.stats.lastTenEternities[9][2] ~ EP/second.</span>
         <br/>
       </div>
       <div ~style.display=Stats.showRun(1, 'complexity') ? '' : 'none'~>
-        <span>Last complexity took ~f player.stats.lastTenComplexities[0][0] ~ seconds and gave ~i player.stats.lastTenComplexities[0][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[0][2] ~ ℂP/second.</span>
+        <span>Last complexity took ~t player.stats.lastTenComplexities[0][0] ~ and gave ~i player.stats.lastTenComplexities[0][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[0][2] ~ ℂP/second.</span>
         <br ~style.display=Stats.showAnyRuns(2) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(2, 'complexity') ? '' : 'none'~>The complexity two complexities ago took ~f player.stats.lastTenComplexities[1][0] ~ seconds and gave ~i player.stats.lastTenComplexities[1][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[1][2] ~ ℂP/second.</span>
+        <span ~style.display=Stats.showRun(2, 'complexity') ? '' : 'none'~>The complexity two complexities ago took ~t player.stats.lastTenComplexities[1][0] ~ and gave ~i player.stats.lastTenComplexities[1][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[1][2] ~ ℂP/second.</span>
         <br ~style.display=Stats.showAnyRuns(3) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(3, 'complexity') ? '' : 'none'~>The complexity three complexities ago took ~f player.stats.lastTenComplexities[2][0] ~ seconds and gave ~i player.stats.lastTenComplexities[2][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[2][2] ~ ℂP/second.</span>
+        <span ~style.display=Stats.showRun(3, 'complexity') ? '' : 'none'~>The complexity three complexities ago took ~t player.stats.lastTenComplexities[2][0] ~ and gave ~i player.stats.lastTenComplexities[2][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[2][2] ~ ℂP/second.</span>
         <br ~style.display=Stats.showAnyRuns(4) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(4, 'complexity')  ? '' : 'none'~>The complexity four complexities ago took ~f player.stats.lastTenComplexities[3][0] ~ seconds and gave ~i player.stats.lastTenComplexities[3][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[3][2] ~ ℂP/second.</span>
+        <span ~style.display=Stats.showRun(4, 'complexity')  ? '' : 'none'~>The complexity four complexities ago took ~t player.stats.lastTenComplexities[3][0] ~ and gave ~i player.stats.lastTenComplexities[3][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[3][2] ~ ℂP/second.</span>
         <br ~style.display=Stats.showAnyRuns(5) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(5, 'complexity') ? '' : 'none'~>The complexity five complexities ago took ~f player.stats.lastTenComplexities[4][0] ~ seconds and gave ~i player.stats.lastTenComplexities[4][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[4][2] ~ ℂP/second.</span>
+        <span ~style.display=Stats.showRun(5, 'complexity') ? '' : 'none'~>The complexity five complexities ago took ~t player.stats.lastTenComplexities[4][0] ~ and gave ~i player.stats.lastTenComplexities[4][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[4][2] ~ ℂP/second.</span>
         <br ~style.display=Stats.showAnyRuns(6) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(6, 'complexity') ? '' : 'none'~>The complexity six complexities ago took ~f player.stats.lastTenComplexities[5][0] ~ seconds and gave ~i player.stats.lastTenComplexities[5][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[5][2] ~ ℂP/second.</span>
+        <span ~style.display=Stats.showRun(6, 'complexity') ? '' : 'none'~>The complexity six complexities ago took ~t player.stats.lastTenComplexities[5][0] ~ and gave ~i player.stats.lastTenComplexities[5][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[5][2] ~ ℂP/second.</span>
         <br ~style.display=Stats.showAnyRuns(7) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(7, 'complexity') ? '' : 'none'~>The complexity seven complexities ago took ~f player.stats.lastTenComplexities[6][0] ~ seconds and gave ~i player.stats.lastTenComplexities[6][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[6][2] ~ ℂP/second.</span>
+        <span ~style.display=Stats.showRun(7, 'complexity') ? '' : 'none'~>The complexity seven complexities ago took ~t player.stats.lastTenComplexities[6][0] ~ and gave ~i player.stats.lastTenComplexities[6][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[6][2] ~ ℂP/second.</span>
         <br ~style.display=Stats.showAnyRuns(8) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(8, 'complexity')  ? '' : 'none'~>The complexity eight complexities ago took ~f player.stats.lastTenComplexities[7][0] ~ seconds and gave ~i player.stats.lastTenComplexities[7][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[7][2] ~ ℂP/second.</span>
+        <span ~style.display=Stats.showRun(8, 'complexity')  ? '' : 'none'~>The complexity eight complexities ago took ~t player.stats.lastTenComplexities[7][0] ~ and gave ~i player.stats.lastTenComplexities[7][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[7][2] ~ ℂP/second.</span>
         <br ~style.display=Stats.showAnyRuns(9) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(9, 'complexity')  ? '' : 'none'~>The complexity nine complexities ago took ~f player.stats.lastTenComplexities[8][0] ~ seconds and gave ~i player.stats.lastTenComplexities[8][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[8][2] ~ ℂP/second.</span>
+        <span ~style.display=Stats.showRun(9, 'complexity')  ? '' : 'none'~>The complexity nine complexities ago took ~t player.stats.lastTenComplexities[8][0] ~ and gave ~i player.stats.lastTenComplexities[8][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[8][2] ~ ℂP/second.</span>
         <br ~style.display=Stats.showAnyRuns(10) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(10, 'complexity')  ? '' : 'none'~>The complexity ten complexities ago took ~f player.stats.lastTenComplexities[9][0] ~ seconds and gave ~i player.stats.lastTenComplexities[9][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[9][2] ~ ℂP/second.</span>
+        <span ~style.display=Stats.showRun(10, 'complexity')  ? '' : 'none'~>The complexity ten complexities ago took ~t player.stats.lastTenComplexities[9][0] ~ and gave ~i player.stats.lastTenComplexities[9][1] ~ ℂP, giving ~f player.stats.lastTenComplexities[9][2] ~ ℂP/second.</span>
         <br/>
       </div>
       <div ~style.display=Stats.showRun(1, 'finality') ? '' : 'none'~>
-        <span>Last finality took ~f player.stats.lastTenFinalities[0][0] ~ seconds and gave ~i player.stats.lastTenFinalities[0][1] ~ FP and ~i player.stats.lastTenFinalities[0][2] ~ FS.</span>
+        <span>Last finality took ~t player.stats.lastTenFinalities[0][0] ~ and gave ~i player.stats.lastTenFinalities[0][1] ~ FP and ~i player.stats.lastTenFinalities[0][2] ~ FS.</span>
         <br ~style.display=Stats.showAnyRuns(2) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(2, 'finality') ? '' : 'none'~>The finality two finalities ago took ~f player.stats.lastTenFinalities[1][0] ~ seconds and gave ~i player.stats.lastTenFinalities[1][1] ~ FP and ~i player.stats.lastTenFinalities[1][2] ~ FS.</span>
+        <span ~style.display=Stats.showRun(2, 'finality') ? '' : 'none'~>The finality two finalities ago took ~t player.stats.lastTenFinalities[1][0] ~ and gave ~i player.stats.lastTenFinalities[1][1] ~ FP and ~i player.stats.lastTenFinalities[1][2] ~ FS.</span>
         <br ~style.display=Stats.showAnyRuns(3) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(3, 'finality') ? '' : 'none'~>The finality three finalities ago took ~f player.stats.lastTenFinalities[2][0] ~ seconds and gave ~i player.stats.lastTenFinalities[2][1] ~ FP and ~i player.stats.lastTenFinalities[2][2] ~ FS.</span>
+        <span ~style.display=Stats.showRun(3, 'finality') ? '' : 'none'~>The finality three finalities ago took ~t player.stats.lastTenFinalities[2][0] ~ and gave ~i player.stats.lastTenFinalities[2][1] ~ FP and ~i player.stats.lastTenFinalities[2][2] ~ FS.</span>
         <br ~style.display=Stats.showAnyRuns(4) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(4, 'finality') ? '' : 'none'~>The finality four finalities ago took ~f player.stats.lastTenFinalities[3][0] ~ seconds and gave ~i player.stats.lastTenFinalities[3][1] ~ FP and ~i player.stats.lastTenFinalities[3][2] ~ FS.</span>
+        <span ~style.display=Stats.showRun(4, 'finality') ? '' : 'none'~>The finality four finalities ago took ~t player.stats.lastTenFinalities[3][0] ~ and gave ~i player.stats.lastTenFinalities[3][1] ~ FP and ~i player.stats.lastTenFinalities[3][2] ~ FS.</span>
         <br ~style.display=Stats.showAnyRuns(5) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(5, 'finality') ? '' : 'none'~>The finality five finalities ago took ~f player.stats.lastTenFinalities[4][0] ~ seconds and gave ~i player.stats.lastTenFinalities[4][1] ~ FP and ~i player.stats.lastTenFinalities[4][2] ~ FS.</span>
+        <span ~style.display=Stats.showRun(5, 'finality') ? '' : 'none'~>The finality five finalities ago took ~t player.stats.lastTenFinalities[4][0] ~ and gave ~i player.stats.lastTenFinalities[4][1] ~ FP and ~i player.stats.lastTenFinalities[4][2] ~ FS.</span>
         <br ~style.display=Stats.showAnyRuns(6) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(6, 'finality') ? '' : 'none'~>The finality six finalities ago took ~f player.stats.lastTenFinalities[5][0] ~ seconds and gave ~i player.stats.lastTenFinalities[5][1] ~ FP and ~i player.stats.lastTenFinalities[5][2] ~ FS.</span>
+        <span ~style.display=Stats.showRun(6, 'finality') ? '' : 'none'~>The finality six finalities ago took ~t player.stats.lastTenFinalities[5][0] ~ and gave ~i player.stats.lastTenFinalities[5][1] ~ FP and ~i player.stats.lastTenFinalities[5][2] ~ FS.</span>
         <br ~style.display=Stats.showAnyRuns(7) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(7, 'finality') ? '' : 'none'~>The finality seven finalities ago took ~f player.stats.lastTenFinalities[6][0] ~ seconds and gave ~i player.stats.lastTenFinalities[6][1] ~ FP and ~i player.stats.lastTenFinalities[6][2] ~ FS.</span>
+        <span ~style.display=Stats.showRun(7, 'finality') ? '' : 'none'~>The finality seven finalities ago took ~t player.stats.lastTenFinalities[6][0] ~ and gave ~i player.stats.lastTenFinalities[6][1] ~ FP and ~i player.stats.lastTenFinalities[6][2] ~ FS.</span>
         <br ~style.display=Stats.showAnyRuns(8) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(8, 'finality') ? '' : 'none'~>The finality eight finalities ago took ~f player.stats.lastTenFinalities[7][0] ~ seconds and gave ~i player.stats.lastTenFinalities[7][1] ~ FP and ~i player.stats.lastTenFinalities[7][2] ~ FS.</span>
+        <span ~style.display=Stats.showRun(8, 'finality') ? '' : 'none'~>The finality eight finalities ago took ~t player.stats.lastTenFinalities[7][0] ~ and gave ~i player.stats.lastTenFinalities[7][1] ~ FP and ~i player.stats.lastTenFinalities[7][2] ~ FS.</span>
         <br ~style.display=Stats.showAnyRuns(9) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(9, 'finality') ? '' : 'none'~>The finality nine finalities ago took ~f player.stats.lastTenFinalities[8][0] ~ seconds and gave ~i player.stats.lastTenFinalities[8][1] ~ FP and ~i player.stats.lastTenFinalities[8][2] ~ FS.</span>
+        <span ~style.display=Stats.showRun(9, 'finality') ? '' : 'none'~>The finality nine finalities ago took ~t player.stats.lastTenFinalities[8][0] ~ and gave ~i player.stats.lastTenFinalities[8][1] ~ FP and ~i player.stats.lastTenFinalities[8][2] ~ FS.</span>
         <br ~style.display=Stats.showAnyRuns(10) ? '' : 'none'~/>
-        <span ~style.display=Stats.showRun(10, 'finality') ? '' : 'none'~>The finality ten finalities ago took ~f player.stats.lastTenFinalities[9][0] ~ seconds and gave ~i player.stats.lastTenFinalities[9][1] ~ FP and ~i player.stats.lastTenFinalities[9][2] ~ FS.</span>
+        <span ~style.display=Stats.showRun(10, 'finality') ? '' : 'none'~>The finality ten finalities ago took ~t player.stats.lastTenFinalities[9][0] ~ and gave ~i player.stats.lastTenFinalities[9][1] ~ FP and ~i player.stats.lastTenFinalities[9][2] ~ FS.</span>
         <br/>
       </div>
       <br/>
@@ -4727,7 +4727,7 @@
         <tr>
           <td><button class="options-button" onclick="Options.toggleOfflineProgress()">Offline progress: ~r player.options.offlineProgress ? "On" : "Off" ~</button></td>
           <td><div class="options-div"><span style="font-size: 0.75rem;">Offline game ticks (between ~i 1 ~ and ~i Options.maxTicks() ~, slow above ~i 1024 ~):</span> <input type="text" ~!value=Options.displayOfflineTicks()~ ~!onchange=function() {Options.setOfflineTicks(+this.value)}~></input></div></td>
-          <td><button class="options-button" onclick="Options.toggleExportDisplay()"">Show export text (as opposed to just copying it): ~r player.options.exportDisplay ? "On" : "Off" ~</button></td>
+          <td><button class="options-button" onclick="Options.nextTheme()">Theme: ~r player.options.theme ~</button></td>
         </tr>
         <tr>
           <td><button class="options-button" onclick="Options.nextCompletionColors()">Completion colors: ~r player.options.completionColors ~</button></td>
@@ -4756,14 +4756,14 @@
             <option value="Shi">Shi</option>
             <option value="Blind">Blind</option>
           </select></div></td>
-          <td><button class="options-button" onclick="Options.nextTheme()">Theme: ~r player.options.theme ~</button></td>
+          <td><button class="options-button" onclick="Options.nextTimeDisplay()" style="font-size: 0.875rem;">Time display: ~r player.options.timeDisplay ~<br/>(for example, ~t 83.125 ~)</button></td>
         </tr>
           <td><button class="options-button" onclick="Options.toggleHotkeys()">Hotkeys: ~r player.options.hotkeys ? "On" : "Off" ~</button></td>
           <td><button class="options-button" onclick="Options.toggleFitToWidth()">Decrease page size if page is too narrow: ~r player.options.fitToWidth ? "On" : "Off" ~</button></td>
           <td><button class="options-button" onclick="Options.toggleLargerCheckboxes()">Larger checkboxes: ~r player.options.largerCheckboxes ? "On" : "Off" ~</button></td>
         </tr>
         <tr>
-          <td></td>
+          <td><button class="options-button" onclick="Options.toggleExportDisplay()">Show export text (as opposed to just copying it): ~r player.options.exportDisplay ? "On" : "Off" ~</button></td>
           <td><button class="options-button" onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></td>
           <td></td>
         </tr>
