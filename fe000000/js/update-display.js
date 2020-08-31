@@ -1,4 +1,4 @@
-let scriptTime = 1598882096501;
+let scriptTime = 1598882273717;
 if (indexTime !== scriptTime) {
   window.location.reload(true)
 }

@@ -38,7 +38,7 @@ function formatTime(time, options) {
     } else if (time < 86400) {
       return options.larger.f(time / 3600) + ' hour' + (options.larger.s ? pluralize(time / 3600, '', 's') : 's');
     } else {
-      return options.larger.fr(time / 86400) + ' day' + (options.larger.s ? pluralize(time / 86400, '', 's') : 's');
+      return options.larger.f(time / 86400) + ' day' + (options.larger.s ? pluralize(time / 86400, '', 's') : 's');
     }
   }
 }
