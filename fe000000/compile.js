@@ -74,7 +74,8 @@ function getUntabbed(inTabs) {
 }
 
 function makeUpdateDisplaySetup(setupList) {
-  return 'let e;\nlet b;\n\nfunction updateDisplayPageLoadSetup() {\n  e = [' +
+  return 'let scriptTime = ' + time + ';\nif (indexTime !== scriptTime) {\n  window.location.reload(true)\n}\n\n' +
+  'let e;\nlet b;\n\nfunction updateDisplayPageLoadSetup() {\n  e = [' +
   [...Array(el1Number)].map((_, i) => 'document.getElementById("e' + i + '")').join(', ') + '];\n  b = [' +
   [...Array(el2Number)].map((_, i) => 'document.getElementById("b' + i + '")').join(', ') +
   '];\n}\n\nfunction updateDisplaySaveLoadSetup() {\n' + g(setupList, '  ') + '\n}';
@@ -101,8 +102,11 @@ function dealWithElement(x) {
 
 let files = process.argv.length > 2 ? process.argv.slice(2) : ['index-template.html', 'index.html', 'js/update-display.js']
 
+let time = Date.now();
+
 fs.readFile(files[0], 'utf8', function(err, contents) {
-  let newContents = contents.replace(
+  let contentsWithTime = contents.replace(/<time\/>/g, '<script>let indexTime = ' + time + ';</script>');
+  let newContents = contentsWithTime.replace(
     /<[-a-z]+( [-a-z]+="[^"]+"| ~[-!.a-z]+=[^~]+~)*\/?>/g, dealWithElement).replace(
     /~([fiqrsy]|t[iqs]?) [^~]+ ~/g, (x) => '<span id="e' + el1Number++ + '"></span>');
   let el1CodeList = (contents.match(/~([fiqrsy]|t[iqs]?) [^~]+ ~/g) || []).map(updateDisplayOneElement);
