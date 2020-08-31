@@ -6,7 +6,7 @@ window.onload = function () {
     player = JSON.parse(atob(localStorage.getItem('fe000000-save'), null));
   } catch (ex) {
     player = {
-      options: {notation: 'Scientific', theme: 'Dark'},
+      options: {notation: 'Scientific', timeDisplay: 'Seconds', theme: 'Dark'},
       goals: [
         false, false, false, false,
         false, false, false, false,

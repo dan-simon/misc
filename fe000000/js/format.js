@@ -20,10 +20,10 @@ function maybeAddInitialZero(x, expected, maybeDo) {
   }
 }
 
-function formatTime(time, formatSeconds, maybeSingular) {
+function formatTime(time, options) {
   let timeDisplay = player.options.timeDisplay;
   if (timeDisplay === 'Seconds' || time < 60) {
-    return formatSeconds(time) + ' second' + (maybeSingular ? pluralize(time, '', 's') : 's');
+    return options.seconds.f(time) + ' second' + (options.seconds.s ? pluralize(time, '', 's') : 's');
   } else if (timeDisplay === 'D:H:M:S' || timeDisplay === 'D:H:M:S with notation') {
     let applyNotation = (timeDisplay === 'D:H:M:S with notation');
     let parts = [Math.floor(time / 86400), Math.floor(time / 3600) % 24, Math.floor(time / 60) % 60, Math.floor(time) % 60];
@@ -34,11 +34,11 @@ function formatTime(time, formatSeconds, maybeSingular) {
     return parts.map(f).join(':');
   } else if (timeDisplay === 'Largest unit') {
     if (time < 3600) {
-      return format(time / 60) + ' minutes';
+      return options.larger.f(time / 60) + ' minute' + (options.larger.s ? pluralize(time / 60, '', 's') : 's');
     } else if (time < 86400) {
-      return format(time / 3600) + ' hours';
+      return options.larger.f(time / 3600) + ' hour' + (options.larger.s ? pluralize(time / 3600, '', 's') : 's');
     } else {
-      return format(time / 86400) + ' days';
+      return options.larger.fr(time / 86400) + ' day' + (options.larger.s ? pluralize(time / 86400, '', 's') : 's');
     }
   }
 }

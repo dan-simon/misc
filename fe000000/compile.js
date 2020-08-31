@@ -13,11 +13,13 @@ function extractCode(x) {
     return 'pluralize(' + x.slice(3, -2) + ', \'\', \'s\')';
   } else if (x[1] === 't') {
     if (x[2] === ' ') {
-      return 'formatTime(' + x.slice(3, -2) + ', format, false)';
+      return 'formatTime(' + x.slice(3, -2) + ', {seconds: {f: format, s: false}, larger: {f: format, s: false}})';
     } else if (x[2] === 'i') {
-      return 'formatTime(' + x.slice(4, -2) + ', formatInt, true)';
+      return 'formatTime(' + x.slice(4, -2) + ', {seconds: {f: formatInt, s: true}, larger: {f: format, s: false}})';
     } else if (x[2] === 'q') {
-      return 'formatTime(' + x.slice(4, -2) + ', formatMaybeInt, true)';
+      return 'formatTime(' + x.slice(4, -2) + ', {seconds: {f: formatMaybeInt, s: true}, larger: {f: format, s: false}})';
+    } else if (x[2] === 's') {
+      return 'formatTime(' + x.slice(4, -2) + ', {seconds: {f: formatMaybeInt, s: true}, larger: {f: formatMaybeInt, s: true}})';
     }
   } else if (x[1] === 'y') {
     return 'pluralize(' + x.slice(3, -2) + ', \'y\', \'ies\')';
@@ -102,8 +104,8 @@ let files = process.argv.length > 2 ? process.argv.slice(2) : ['index-template.h
 fs.readFile(files[0], 'utf8', function(err, contents) {
   let newContents = contents.replace(
     /<[-a-z]+( [-a-z]+="[^"]+"| ~[-!.a-z]+=[^~]+~)*\/?>/g, dealWithElement).replace(
-    /~([fiqrsy]|t[iq]?) [^~]+ ~/g, (x) => '<span id="e' + el1Number++ + '"></span>');
-  let el1CodeList = (contents.match(/~([fiqrsy]|t[iq]?) [^~]+ ~/g) || []).map(updateDisplayOneElement);
+    /~([fiqrsy]|t[iqs]?) [^~]+ ~/g, (x) => '<span id="e' + el1Number++ + '"></span>');
+  let el1CodeList = (contents.match(/~([fiqrsy]|t[iqs]?) [^~]+ ~/g) || []).map(updateDisplayOneElement);
   let el2CodeList = (contents.match(/<[-a-z]+( [-a-z]+="[^"]+"| ~[-!.a-z]+=[^~]+~)*\/?>/g) || []).filter(x => x.includes('~')).map(updateDisplayOneStyle);
   let setupList = flatten(el2CodeList.map(x => x.filter(y => y[0] === '!').map(y => y.slice(1))));
   el2CodeList = el2CodeList.map(x => x.filter(y => y[0] !== '!'));
