@@ -180,7 +180,7 @@ let Chroma = {
     } else if (this.isProducing()) {
       return 'are currently producing ' + this.currentColorName();
     } else {
-      return 'will start to produce ' + this.currentColorName() + ' in ' + format(Chroma.timeUntilProduction()) + ' seconds';
+      return 'will start to produce ' + this.currentColorName() + ' in ' + formatTime(Chroma.timeUntilProduction(), {seconds: {f: format, s: false}, larger: {f: format, s: false}});
     }
   },
   currentProductionTextPrefix() {
