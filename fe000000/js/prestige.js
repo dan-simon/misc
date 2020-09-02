@@ -46,8 +46,13 @@ let Prestige = {
   prestigePowerMultGain() {
     return this.newPrestigePower().div(this.prestigePower());
   },
-  prestige() {
+  prestigeConfirmationMessage() {
+    return 'Are you sure you want to prestige to increase your prestige power from ' +
+      format(this.prestigePower()) + ' to ' + format(this.newPrestigePower()) + '?';
+  },
+  prestige(manual) {
     if (!this.canPrestige()) return;
+    if (manual && Options.confirmation('prestige') && !confirm(this.prestigeConfirmationMessage())) return;
     this.setPrestigePower(this.newPrestigePower());
     player.stats.prestigesThisInfinity++;
     Goals.recordPrestige('prestige');

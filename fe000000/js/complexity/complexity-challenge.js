@@ -112,10 +112,10 @@ let ComplexityChallenge = {
     }
     player.complexityChallengeCompletions[x - 1] = Math.max(player.complexityChallengeCompletions[x - 1], completions);
   },
-  complexityReset() {
+  complexityReset(manual) {
     // It's easy to imagine wanting something else here (for example, because certain things
     // disqualify you from complexity challenges), which is why this is its own method.
-    ComplexityPrestigeLayer.complexityReset();
+    ComplexityPrestigeLayer.complexityReset(manual);
   },
   isSafeguardOn(x) {
     return player.complexityChallengeSafeguards[x - 2];

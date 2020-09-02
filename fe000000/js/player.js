@@ -309,6 +309,14 @@ let initialPlayer = {
     fitToWidth: true,
     largerCheckboxes: false,
   },
+  confirmations: {
+    sacrifice: true,
+    prestige: true,
+    infinity: true,
+    eternity: true,
+    complexity: true,
+    finality: true,
+  },
   stats: {
     totalStarsProduced: new Decimal(0),
     totalStarsProducedThisEternity: new Decimal(0),
@@ -366,7 +374,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.96484375
+  version: 1.9658203125
 }
 
 let player;

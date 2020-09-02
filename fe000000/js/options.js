@@ -58,5 +58,11 @@ let Options = {
   },
   updateCheckboxSize() {
     document.documentElement.style.setProperty('--checkbox-scale', player.options.largerCheckboxes ? 3 : 1);
+  },
+  confirmation(x) {
+    return player.confirmations[x];
+  },
+  setConfirmation(x, y) {
+    player.confirmations[x] = y;
   }
 }

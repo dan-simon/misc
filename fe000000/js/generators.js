@@ -159,5 +159,8 @@ let Generators = {
   },
   setViewAll(x) {
     player.viewAllGenerators = x;
+  },
+  term(singular) {
+    return (PrestigeLayerProgress.hasReached('infinity') ? 'normal generator' : 'generator') + (singular ? '' : 's');
   }
 }

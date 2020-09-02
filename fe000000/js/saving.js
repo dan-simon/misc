@@ -644,6 +644,17 @@ let Saving = {
       player.highestBoostsBoughtThisEternity = player.boost.bought;
       player.version = 1.96484375;
     }
+    if (player.version < 1.965820312) {
+      player.confirmations = {
+        sacrifice: true,
+        prestige: true,
+        infinity: true,
+        eternity: true,
+        complexity: true,
+        finality: true,
+      };
+      player.version = 1.965820312;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

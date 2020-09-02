@@ -52,8 +52,13 @@ let Sacrifice = {
   sacrificeMultiplierMultGain() {
     return this.newSacrificeMultiplier().div(this.sacrificeMultiplier());
   },
-  sacrifice() {
+  sacrificeConfirmationMessage() {
+    return 'Are you sure you want to sacrifice to increase your sacrifice multiplier from ' +
+      format(this.sacrificeMultiplier()) + ' to ' + format(this.newSacrificeMultiplier()) + '?';
+  },
+  sacrifice(manual) {
     if (!this.canSacrifice()) return;
+    if (manual && Options.confirmation('sacrifice') && !confirm(this.sacrificeConfirmationMessage())) return;
     this.setSacrificeMultiplier(this.newSacrificeMultiplier());
     Goals.recordPrestige('sacrifice');
     this.sacrificeReset();

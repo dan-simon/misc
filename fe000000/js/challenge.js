@@ -47,16 +47,16 @@ let Challenge = {
   },
   startChallenge(x) {
     if (InfinityPrestigeLayer.canInfinity()) {
-      InfinityPrestigeLayer.infinity();
+      InfinityPrestigeLayer.infinity(false);
     } else {
-      InfinityPrestigeLayer.infinityReset();
+      InfinityPrestigeLayer.infinityReset(false);
     }
     this.setChallenge(x);
     InfinityChallenge.setInfinityChallenge(0);
   },
   exitChallenge() {
     this.setChallenge(0);
-    InfinityPrestigeLayer.infinityReset();
+    InfinityPrestigeLayer.infinityReset(false);
   },
   checkForChallengeCompletion() {
     let cc = this.currentChallenge();

@@ -82,20 +82,30 @@ let ComplexityPrestigeLayer = {
       player.stats.timeSinceLastPeakCPPerSec = 0;
     }
   },
-  complexity() {
+  complexityConfirmationMessage() {
+    let gain = this.complexityPointGain();
+    return 'Are you sure you want to complexity for ' +
+    formatInt(gain) + ' complexity point' + pluralize(gain, '', 's') + '?';
+  },
+  complexityResetConfirmationMessage() {
+    return 'Are you sure you want to do a complexity reset? This will not give you any complexity points.';
+  },
+  complexity(manual) {
     if (!this.canComplexity()) return;
+    if (manual && Options.confirmation('complexity') && !confirm(this.complexityConfirmationMessage())) return;
     let gain = this.complexityPointGain();
     ComplexityPoints.addAmount(gain);
     Complexities.increment();
     Stats.addComplexity(player.stats.timeSinceComplexity, gain);
     Powers.maybeRespec();
     Goals.recordPrestige('complexity');
-    this.complexityReset();
+    this.complexityReset(false);
   },
-  complexityReset() {
+  complexityReset(manual) {
+    if (manual && Options.confirmation('complexity') && !confirm(this.complexityResetConfirmationMessage())) return;
     // We need to do this here to avoid eternity milestones being applied in the eternity reset.
     player.eternities = ComplexityAchievements.effect(1, 2);
-    EternityPrestigeLayer.eternityReset();
+    EternityPrestigeLayer.eternityReset(false);
     // Not handled by Eternity.eternityReset().
     EternityChallenge.setEternityChallenge(0);
     player.complexityStars = new Decimal(2);

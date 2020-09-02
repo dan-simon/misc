@@ -88,8 +88,17 @@ let InfinityPrestigeLayer = {
       player.stats.timeSinceLastPeakIPPerSec = 0;
     }
   },
-  infinity() {
+  infinityConfirmationMessage() {
+    let gain = this.infinityPointGain();
+    return 'Are you sure you want to infinity for ' +
+    formatInt(gain) + ' infinity point' + pluralize(gain, '', 's') + '?';
+  },
+  infinityResetConfirmationMessage() {
+    return 'Are you sure you want to do an infinity reset? This will not give you any infinity points.';
+  },
+  infinity(manual) {
     if (!this.canInfinity()) return;
+    if (manual && Options.confirmation('infinity') && !confirm(this.infinityConfirmationMessage())) return;
     if (EternityChallenge.isEternityChallengeRunning(4) &&
       EternityChallenge.eternityChallenge4RemainingInfinities() === 0) {
       EternityChallenge.exitEternityChallenge();
@@ -107,9 +116,10 @@ let InfinityPrestigeLayer = {
     }
     InfinityChallenge.setInfinityChallenge(0);
     Goals.recordPrestige('infinity');
-    this.infinityReset();
+    this.infinityReset(false);
   },
-  infinityReset() {
+  infinityReset(manual) {
+    if (manual && Options.confirmation('infinity') && !confirm(this.infinityResetConfirmationMessage())) return;
     Prestige.prestigeReset(true);
     player.prestigePower = new Decimal(1);
     player.infinityStars = new Decimal(1);

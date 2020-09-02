@@ -29,19 +29,19 @@ window.addEventListener('keydown', function(event) {
     break;
 
     case 67: // C
-      ComplexityPrestigeLayer.complexity();
+      ComplexityPrestigeLayer.complexity(true);
     break;
 
     case 69: // E, also, nice
-      EternityPrestigeLayer.eternity();
+      EternityPrestigeLayer.eternity(true);
     break;
 
     case 70: // F
-      FinalityPrestigeLayer.finality();
+      FinalityPrestigeLayer.finality(true);
     break;
 
     case 73: // I
-      InfinityPrestigeLayer.infinity();
+      InfinityPrestigeLayer.infinity(true);
     break;
 
     case 77: // M
@@ -53,11 +53,11 @@ window.addEventListener('keydown', function(event) {
     break;
 
     case 80: // P
-      Prestige.prestige();
+      Prestige.prestige(true);
     break;
 
     case 83: // S
-      Sacrifice.sacrifice();
+      Sacrifice.sacrifice(true);
     break;
   }
 }, false);

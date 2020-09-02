@@ -71,8 +71,17 @@ let EternityPrestigeLayer = {
       player.stats.timeSinceLastPeakEPPerSec = 0;
     }
   },
-  eternity() {
+  eternityConfirmationMessage() {
+    let gain = this.eternityPointGain();
+    return 'Are you sure you want to eternity for ' +
+    formatInt(gain) + ' eternity point' + pluralize(gain, '', 's') + '?';
+  },
+  eternityResetConfirmationMessage() {
+    return 'Are you sure you want to do an eternity reset? This will not give you any eternity points.';
+  },
+  eternity(manual) {
     if (!this.canEternity()) return;
+    if (manual && Options.confirmation('eternity') && !confirm(this.eternityConfirmationMessage())) return;
     let gain = this.eternityPointGain();
     EternityPoints.addAmount(gain);
     Eternities.add(Eternities.commonEternityGainMultiplier());
@@ -86,10 +95,11 @@ let EternityPrestigeLayer = {
     Studies.maybeRespec();
     EternityChallenge.maybeRespec();
     Goals.recordPrestige('eternity');
-    this.eternityReset();
+    this.eternityReset(false);
   },
-  eternityReset() {
-    InfinityPrestigeLayer.infinityReset();
+  eternityReset(manual) {
+    if (manual && Options.confirmation('eternity') && !confirm(this.eternityResetConfirmationMessage())) return;
+    InfinityPrestigeLayer.infinityReset(false);
     // Not handled by Infinity.infinityReset() since that's also called
     // when you start a challenge.
     Challenge.setChallenge(0);

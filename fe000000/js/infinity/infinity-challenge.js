@@ -58,16 +58,16 @@ let InfinityChallenge = {
   },
   startInfinityChallenge(x) {
     if (InfinityPrestigeLayer.canInfinity()) {
-      InfinityPrestigeLayer.infinity();
+      InfinityPrestigeLayer.infinity(false);
     } else {
-      InfinityPrestigeLayer.infinityReset();
+      InfinityPrestigeLayer.infinityReset(false);
     }
     this.setInfinityChallenge(x);
     Challenge.setChallenge(0);
   },
   exitInfinityChallenge() {
     this.setInfinityChallenge(0);
-    InfinityPrestigeLayer.infinityReset();
+    InfinityPrestigeLayer.infinityReset(false);
   },
   checkForInfinityChallengeCompletion() {
     let cc = this.currentInfinityChallenge();

@@ -173,7 +173,7 @@ let Autobuyers = {
       shouldSacrifice = player.stats.timeSinceSacrifice >= priority.toNumber();
     }
     if (shouldSacrifice) {
-      Sacrifice.sacrifice();
+      Sacrifice.sacrifice(false);
     }
   },
   prestige() {
@@ -187,7 +187,7 @@ let Autobuyers = {
       shouldPrestige = player.stats.timeSincePrestige >= priority.toNumber();
     }
     if (shouldPrestige) {
-      Prestige.prestige();
+      Prestige.prestige(false);
     }
   },
   infinity() {
@@ -211,7 +211,7 @@ let Autobuyers = {
       shouldInfinity = InfinityPrestigeLayer.currentIPPerSec().lte(InfinityPrestigeLayer.peakIPPerSec().times(priority));
     }
     if (shouldInfinity) {
-      InfinityPrestigeLayer.infinity();
+      InfinityPrestigeLayer.infinity(false);
     }
   },
   eternity() {
@@ -235,7 +235,7 @@ let Autobuyers = {
       shouldEternity = EternityPrestigeLayer.currentEPPerSec().lte(EternityPrestigeLayer.peakEPPerSec().times(priority));
     }
     if (shouldEternity) {
-      EternityPrestigeLayer.eternity();
+      EternityPrestigeLayer.eternity(false);
     }
   },
   gainPermanence() {
@@ -275,12 +275,12 @@ let Autobuyers = {
       shouldComplexity = ComplexityPrestigeLayer.currentEPPerSec().lte(ComplexityPrestigeLayer.peakEPPerSec().times(priority));
     }
     if (shouldComplexity) {
-      ComplexityPrestigeLayer.complexity();
+      ComplexityPrestigeLayer.complexity(false);
     }
   },
   finality() {
     if (!Autobuyer(16).isActive() || !FinalityPrestigeLayer.canFinality()) return;
-    FinalityPrestigeLayer.finality();
+    FinalityPrestigeLayer.finality(false);
   },
   slowAutobuyersTimerLength() {
     return Math.max(16, player.autobuyersTimerLength);

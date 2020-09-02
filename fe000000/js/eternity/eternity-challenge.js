@@ -257,9 +257,9 @@ let EternityChallenge = {
   respecAndReset() {
     this.respec();
     if (EternityPrestigeLayer.canEternity()) {
-      EternityPrestigeLayer.eternity();
+      EternityPrestigeLayer.eternity(false);
     } else {
-      EternityPrestigeLayer.eternityReset();
+      EternityPrestigeLayer.eternityReset(false);
     }
   },
   lockUnlockedEternityChallenge() {
@@ -269,15 +269,15 @@ let EternityChallenge = {
   },
   startEternityChallenge(x) {
     if (EternityPrestigeLayer.canEternity()) {
-      EternityPrestigeLayer.eternity();
+      EternityPrestigeLayer.eternity(false);
     } else {
-      EternityPrestigeLayer.eternityReset();
+      EternityPrestigeLayer.eternityReset(false);
     }
     this.setEternityChallenge(x);
   },
   exitEternityChallenge() {
     this.setEternityChallenge(0);
-    EternityPrestigeLayer.eternityReset();
+    EternityPrestigeLayer.eternityReset(false);
   },
   checkForEternityChallengeCompletion() {
     let cc = this.currentEternityChallenge();

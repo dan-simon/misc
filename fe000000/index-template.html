@@ -104,25 +104,25 @@
       <span ~style.display=InfinityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~f InfinityPrestigeLayer.starRequirementForInfinity() ~ stars to infinity.</span>
       <br ~style.display=InfinityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
       <span ~style.display=InfinityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i InfinityPrestigeLayer.infinityPoints() ~ infinity point~s InfinityPrestigeLayer.infinityPoints() ~ (~i InfinityPrestigeLayer.totalInfinityPoints() ~ total this eternity)</span>
-      <button ~style.display=InfinityPrestigeLayer.canInfinity() ? '' : 'none'~ style="height: 48px;" onclick="InfinityPrestigeLayer.infinity()">Infinity: Gain ~i InfinityPrestigeLayer.infinityPointGain() ~ infinity point~s InfinityPrestigeLayer.infinityPointGain() ~ (~r InfinityPrestigeLayer.infinityPointGainRatioText() ~~i InfinityPrestigeLayer.infinityPoints() ~ → ~i InfinityPrestigeLayer.newInfinityPoints() ~~r InfinityPrestigeLayer.infinityPointNextText() ~)<br/>~f InfinityPrestigeLayer.currentIPPerSec() ~ IP/sec, ~f InfinityPrestigeLayer.peakIPPerSec() ~ peak IP/sec</button>
+      <button ~style.display=InfinityPrestigeLayer.canInfinity() ? '' : 'none'~ style="height: 48px;" onclick="InfinityPrestigeLayer.infinity(true)">Infinity: Gain ~i InfinityPrestigeLayer.infinityPointGain() ~ infinity point~s InfinityPrestigeLayer.infinityPointGain() ~ (~r InfinityPrestigeLayer.infinityPointGainRatioText() ~~i InfinityPrestigeLayer.infinityPoints() ~ → ~i InfinityPrestigeLayer.newInfinityPoints() ~~r InfinityPrestigeLayer.infinityPointNextText() ~)<br/>~f InfinityPrestigeLayer.currentIPPerSec() ~ IP/sec, ~f InfinityPrestigeLayer.peakIPPerSec() ~ peak IP/sec</button>
     </div>
     <div style="height: 56px;" ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~>
       <span ~style.display=EternityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~f EternityPrestigeLayer.infinityPointRequirementForEternity() ~ total infinity points this eternity to eternity.</span>
       <br ~style.display=EternityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
       <span ~style.display=EternityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i EternityPrestigeLayer.eternityPoints() ~ eternity point~s EternityPrestigeLayer.eternityPoints() ~ (~i EternityPrestigeLayer.totalEternityPoints() ~ total this complexity)</span>
-      <button ~style.display=EternityPrestigeLayer.canEternity() ? '' : 'none'~ style="height: 48px;" onclick="EternityPrestigeLayer.eternity()">Eternity: Gain ~i EternityPrestigeLayer.eternityPointGain() ~ eternity point~s EternityPrestigeLayer.eternityPointGain() ~ (~r EternityPrestigeLayer.eternityPointGainRatioText() ~~i EternityPrestigeLayer.eternityPoints() ~ → ~i EternityPrestigeLayer.newEternityPoints() ~~r EternityPrestigeLayer.eternityPointNextText() ~)<br/>~f EternityPrestigeLayer.currentEPPerSec() ~ EP/sec, ~f EternityPrestigeLayer.peakEPPerSec() ~ peak EP/sec<span ~style.display=EternityChallenge.displayTiersCompletedOnEternity() ? '' : 'none'~>, +~i EternityChallenge.tiersCompletedOnEternity() ~ EC tier~s EternityChallenge.tiersCompletedOnEternity() ~ (~i EternityChallenge.getEternityChallengeCompletions() ~ → ~i EternityChallenge.getNextEternityChallengeCompletions() ~~r EternityChallenge.eternityChallengeCompletionsNextText() ~)</span></button>
+      <button ~style.display=EternityPrestigeLayer.canEternity() ? '' : 'none'~ style="height: 48px;" onclick="EternityPrestigeLayer.eternity(true)">Eternity: Gain ~i EternityPrestigeLayer.eternityPointGain() ~ eternity point~s EternityPrestigeLayer.eternityPointGain() ~ (~r EternityPrestigeLayer.eternityPointGainRatioText() ~~i EternityPrestigeLayer.eternityPoints() ~ → ~i EternityPrestigeLayer.newEternityPoints() ~~r EternityPrestigeLayer.eternityPointNextText() ~)<br/>~f EternityPrestigeLayer.currentEPPerSec() ~ EP/sec, ~f EternityPrestigeLayer.peakEPPerSec() ~ peak EP/sec<span ~style.display=EternityChallenge.displayTiersCompletedOnEternity() ? '' : 'none'~>, +~i EternityChallenge.tiersCompletedOnEternity() ~ EC tier~s EternityChallenge.tiersCompletedOnEternity() ~ (~i EternityChallenge.getEternityChallengeCompletions() ~ → ~i EternityChallenge.getNextEternityChallengeCompletions() ~~r EternityChallenge.eternityChallengeCompletionsNextText() ~)</span></button>
     </div>
     <div style="height: 56px;" ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>
       <span ~style.display=ComplexityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~r ComplexityPrestigeLayer.requirementForComplexity() ~ to complexity.</span>
       <br ~style.display=ComplexityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
       <span ~style.display=ComplexityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i ComplexityPrestigeLayer.complexityPoints() ~ complexity point~s ComplexityPrestigeLayer.complexityPoints() ~ (~i ComplexityPrestigeLayer.totalComplexityPoints() ~ total this finality)</span>
-      <button ~style.display=ComplexityPrestigeLayer.canComplexity() ? '' : 'none'~ style="height: 48px;" onclick="ComplexityPrestigeLayer.complexity()">Complexity: Gain ~i ComplexityPrestigeLayer.complexityPointGain() ~ complexity point~s ComplexityPrestigeLayer.complexityPointGain() ~ (~r ComplexityPrestigeLayer.complexityPointGainRatioText() ~~i ComplexityPrestigeLayer.complexityPoints() ~ → ~i ComplexityPrestigeLayer.newComplexityPoints() ~~r ComplexityPrestigeLayer.complexityPointNextText() ~)<br/>~f ComplexityPrestigeLayer.currentCPPerSec() ~ ℂP/sec, ~f ComplexityPrestigeLayer.peakCPPerSec() ~ peak ℂP/sec</button>
+      <button ~style.display=ComplexityPrestigeLayer.canComplexity() ? '' : 'none'~ style="height: 48px;" onclick="ComplexityPrestigeLayer.complexity(true)">Complexity: Gain ~i ComplexityPrestigeLayer.complexityPointGain() ~ complexity point~s ComplexityPrestigeLayer.complexityPointGain() ~ (~r ComplexityPrestigeLayer.complexityPointGainRatioText() ~~i ComplexityPrestigeLayer.complexityPoints() ~ → ~i ComplexityPrestigeLayer.newComplexityPoints() ~~r ComplexityPrestigeLayer.complexityPointNextText() ~)<br/>~f ComplexityPrestigeLayer.currentCPPerSec() ~ ℂP/sec, ~f ComplexityPrestigeLayer.peakCPPerSec() ~ peak ℂP/sec</button>
     </div>
     <div style="height: 56px;" ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~>
       <span ~style.display=FinalityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~f FinalityPrestigeLayer.complexityPointRequirementForFinality() ~ total complexity points this finality to finality.</span>
       <br ~style.display=FinalityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
       <span ~style.display=FinalityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i FinalityPrestigeLayer.finalityPoints() ~ finality point~s FinalityPrestigeLayer.finalityPoints() ~ (~i FinalityPrestigeLayer.totalFinalityPoints() ~ total)</span>
-      <button ~style.display=FinalityPrestigeLayer.canFinality() ? '' : 'none'~ style="height: 48px;" onclick="FinalityPrestigeLayer.finality()">Finality: Gain ~i FinalityPrestigeLayer.finalityPointGain() ~ finality point~s FinalityPrestigeLayer.finalityPointGain() ~ (~r FinalityPrestigeLayer.finalityPointGainRatioText() ~~i FinalityPrestigeLayer.finalityPoints() ~ → ~i FinalityPrestigeLayer.newFinalityPoints() ~)<br/>and ~i FinalityPrestigeLayer.finalityShardGain() ~ finality shard~s FinalityPrestigeLayer.finalityShardGain() ~ (~r FinalityPrestigeLayer.finalityShardGainRatioText() ~~i FinalityPrestigeLayer.finalityShards() ~ → ~i FinalityPrestigeLayer.newFinalityShards() ~)</button>
+      <button ~style.display=FinalityPrestigeLayer.canFinality() ? '' : 'none'~ style="height: 48px;" onclick="FinalityPrestigeLayer.finality(true)">Finality: Gain ~i FinalityPrestigeLayer.finalityPointGain() ~ finality point~s FinalityPrestigeLayer.finalityPointGain() ~ (~r FinalityPrestigeLayer.finalityPointGainRatioText() ~~i FinalityPrestigeLayer.finalityPoints() ~ → ~i FinalityPrestigeLayer.newFinalityPoints() ~)<br/>and ~i FinalityPrestigeLayer.finalityShardGain() ~ finality shard~s FinalityPrestigeLayer.finalityShardGain() ~ (~r FinalityPrestigeLayer.finalityShardGainRatioText() ~~i FinalityPrestigeLayer.finalityShards() ~ → ~i FinalityPrestigeLayer.newFinalityShards() ~)</button>
     </div>
     <div style="height: 32px;" ~style.display=Goals.areAllGoalsCompleted() ? '' : 'none'~>You have won the game! Congratulations!</div>
     <br/>
@@ -175,7 +175,7 @@
           <span>~r EternityChallenge.eternityChallengeText() ~</span>
         </div>
         <div ~style.display=Boost.isVisible() ? '' : 'none'~>
-          <span/>You have ~i Boost.bought() ~ boost~s Boost.bought() ~, multiplying all generators by ~f Boost.multiplier() ~x (~f Boost.multiplierPer() ~x each). <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buy()">Cost: ~f Boost.cost() ~</button> <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buyMax()">Max</button></span>
+          <span/>You have ~i Boost.bought() ~ boost~s Boost.bought() ~, multiplying all ~r Generators.term() ~ by ~f Boost.multiplier() ~x (~f Boost.multiplierPer() ~x each). <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buy()">Cost: ~f Boost.cost() ~</button> <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buyMax()">Max</button></span>
         </div>
         <div ~style.display=SpecialDivs.isDivVisible('boost-power') ? '' : 'none'~>
           <span>Your highest number of boosts this eternity is ~i Boost.highestBoughtThisEternity() ~.</span>
@@ -189,7 +189,7 @@
           </div>
           <span ~style.display=Boost.isBoostPowerVisible() ? 'none' : ''~>You will start generating boost power for each boost this eternity above ~i Boost.boostPowerStart() ~ boosts.</span>
         </div>
-        <span ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~>View all generators even if they would be otherwise invisible: <input type="checkbox" ~!checked=Generators.viewAll()~ ~!onchange=function() {Generators.setViewAll(this.checked)}~></input></span> 
+        <span ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~>View all ~r Generators.term() ~ even if they would be otherwise invisible: <input type="checkbox" ~!checked=Generators.viewAll()~ ~!onchange=function() {Generators.setViewAll(this.checked)}~></input></span> 
         <br/>
         <br/>
         <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
@@ -262,14 +262,14 @@
           <br/>
           <span>You have a ~f Sacrifice.sacrificeMultiplier() ~ sacrifice multiplier multiplying Generator 8 by its amount.</span>
           <br/>
-          <span ~style.display=Sacrifice.canSacrifice() ? '' : 'none'~><button style="height: 48px;" onclick="Sacrifice.sacrifice()">Sacrifice: ~f Sacrifice.sacrificeMultiplier() ~ → ~f Sacrifice.newSacrificeMultiplier() ~<br/>(+~f Sacrifice.sacrificeMultiplierGain() ~, ~f Sacrifice.sacrificeMultiplierMultGain() ~x)</button></span>
+          <span ~style.display=Sacrifice.canSacrifice() ? '' : 'none'~><button style="height: 48px;" onclick="Sacrifice.sacrifice(true)">Sacrifice: ~f Sacrifice.sacrificeMultiplier() ~ → ~f Sacrifice.newSacrificeMultiplier() ~<br/>(+~f Sacrifice.sacrificeMultiplierGain() ~, ~f Sacrifice.sacrificeMultiplierMultGain() ~x)</button></span>
           <span ~style.display=Sacrifice.canSacrifice() ? 'none' : ''~>You need ~f Sacrifice.sacrificeRequirement() ~ stars and at least one of Generator 8 to sacrifice.</span>
         </div>
         <div ~style.display=Prestige.isVisible() ? '' : 'none'~>
           <br/>
-          <span>You have ~f Prestige.prestigePower() ~ prestige power multiplying all generators by its amount.</span>
+          <span>You have ~f Prestige.prestigePower() ~ prestige power multiplying all ~r Generators.term() ~ by its amount.</span>
           <br/>
-          <span ~style.display=Prestige.canPrestige() ? '' : 'none'~><button style="height: 48px;" onclick="Prestige.prestige()">Prestige: ~f Prestige.prestigePower() ~ → ~f Prestige.newPrestigePower() ~<br/>(+~f Prestige.prestigePowerGain() ~, ~f Prestige.prestigePowerMultGain() ~x)</button></span>
+          <span ~style.display=Prestige.canPrestige() ? '' : 'none'~><button style="height: 48px;" onclick="Prestige.prestige(true)">Prestige: ~f Prestige.prestigePower() ~ → ~f Prestige.newPrestigePower() ~<br/>(+~f Prestige.prestigePowerGain() ~, ~f Prestige.prestigePowerMultGain() ~x)</button></span>
           <span ~style.display=Prestige.canPrestige() ? 'none' : ''~>You need ~f Prestige.prestigeRequirement() ~ stars to prestige.</span>
         </div>
         <br ~style.display=SpecialDivs.isDivVisible('softcap') ? '' : 'none'~/>
@@ -292,7 +292,7 @@
         <button ~class=InfinityMaxAll.anyGeneratorsToBuy() ? "" : "disabled"~ onclick="InfinityMaxAll.maxGenerators()">Max generators</button>
       </span>
       <br/>
-      <span>You have produced ~i InfinityPoints.totalIPProducedThisEternity() ~ infinity point~s InfinityPoints.totalIPProducedThisEternity() ~ this eternity, multiplying all generators by ~f InfinityPoints.multiplier() ~.</span>
+      <span>You have produced ~i InfinityPoints.totalIPProducedThisEternity() ~ infinity point~s InfinityPoints.totalIPProducedThisEternity() ~ this eternity, multiplying all ~r Generators.term() ~ by ~f InfinityPoints.multiplier() ~.</span>
       <br/>
       <span>You have ~i Infinities.amount() ~ infinit~y Infinities.amount() ~, multiplying all infinity generators (IGs) by ~q Infinities.infinityGeneratorMultiplier() ~.</span>
       <br/>
@@ -301,7 +301,7 @@
       <br ~style.display=(InfinityPrestigeLayer.canInfinityBeBroken() && !SpecialTabs.isTabVisible('infinity-challenges')) ? '' : 'none'~/>
       <span ~style.display=(InfinityPrestigeLayer.canInfinityBeBroken() && !SpecialTabs.isTabVisible('infinity-challenges')) ? '' : 'none'~>Breaking infinity for the first time will also let you view the Infinity Challenges tab.</span>
       <br/>
-      <span>You have ~f InfinityStars.amount() ~ infinity stars, multiplying all generators by their amount^~f InfinityStars.exponent() ~ = ~f InfinityStars.multiplier() ~.</span>
+      <span>You have ~f InfinityStars.amount() ~ infinity stars, multiplying all ~r Generators.term() ~ by their amount^~f InfinityStars.exponent() ~ = ~f InfinityStars.multiplier() ~.</span>
       <br/>
       <span>You are getting ~f InfinityStars.perSecond() ~ infinity stars per second.</span>
       <br/>
@@ -400,14 +400,14 @@
       </table>
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'challenges' ? '' : 'none'~>
-      <span>You have completed ~i Challenge.numberOfChallengesCompleted() ~ challenge~s Challenge.numberOfChallengesCompleted() ~, multiplying all generators by ~f Challenge.multiplier() ~. <button onclick="Challenge.toggleRestartOnCompletion()">Restart challenges on completion: ~r Challenge.restartOnCompletion() ? "On" : "Off" ~</button></span>
+      <span>You have completed ~i Challenge.numberOfChallengesCompleted() ~ challenge~s Challenge.numberOfChallengesCompleted() ~, multiplying all ~r Generators.term() ~ by ~f Challenge.multiplier() ~. <button onclick="Challenge.toggleRestartOnCompletion()">Restart challenges on completion: ~r Challenge.restartOnCompletion() ? "On" : "Off" ~</button></span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>
             <div class="challengediv" ~style.background=Challenge.color(1)~>
               <span>Challenge 1</span>
               <br/>
-              <span>Generator 1 multiplier is raised ^~i 4 ~. All other generator multipliers are always ~i 1 ~x.</span>
+              <span>Generator 1 multiplier is raised ^~i 4 ~. All other ~r Generators.term(true) ~ multipliers are always ~i 1 ~x.</span>
               <br/>
               <span>~r Challenge.challengeStatusDescription(1) ~</span>
               <br/>
@@ -420,7 +420,7 @@
             <div class="challengediv" ~style.background=Challenge.color(2)~>
               <span>Challenge 2</span>
               <br/>
-              <span>There's a multiplier on all generators increasing linearly from ~i 0 ~ to ~i 1 ~ over ~ti 256 ~. Every time you buy a generator or boost, or sacrifice or prestige, this multiplier resets to ~i 0 ~.</span>
+              <span>There's a multiplier on all ~r Generators.term() ~ increasing linearly from ~i 0 ~ to ~i 1 ~ over ~ti 256 ~. Every time you buy a generator or boost, or sacrifice or prestige, this multiplier resets to ~i 0 ~.</span>
               <br/>
               <span>~r Challenge.challengeStatusDescription(2) ~</span>
               <br/>
@@ -448,7 +448,7 @@
             <div class="challengediv" ~style.background=Challenge.color(4)~>
               <span>Challenge 4</span>
               <br/>
-              <span>Every time you buy a generator, the amounts of all lower generators are reset, like a sacrifice without the benefit.</span>
+              <span>Every time you buy a ~r Generators.term(true) ~, the amounts of all lower ~r Generators.term() ~ are reset, like a sacrifice without the benefit.</span>
               <br/>
               <span>~r Challenge.challengeStatusDescription(4) ~</span>
               <br/>
@@ -463,7 +463,7 @@
             <div class="challengediv" ~style.background=Challenge.color(5)~>
               <span>Challenge 5</span>
               <br/>
-              <span>All generator cost increases are raised ^~i 2 ~.</span>
+              <span>All ~r Generators.term(true) ~ cost increases are raised ^~i 2 ~.</span>
               <br/>
               <span>~r Challenge.challengeStatusDescription(5) ~</span>
               <br/>
@@ -476,7 +476,7 @@
             <div class="challengediv" ~style.background=Challenge.color(6)~>
               <span>Challenge 6</span>
               <br/>
-              <span>There are only 6 generators. (Generator 7 and Generator 8 don't exist.)</span>
+              <span>There are only 6 ~r Generators.term() ~. (Generator 7 and Generator 8 don't exist.)</span>
               <br/>
               <span>~r Challenge.challengeStatusDescription(6) ~</span>
               <br/>
@@ -491,7 +491,7 @@
             <div class="challengediv" ~style.background=Challenge.color(7)~>
               <span>Challenge 7</span>
               <br/>
-              <span>You can only buy ~i 343 ~ total generators and boosts throughout the challenge. This count does not reset on prestige.</span>
+              <span>You can only buy ~i 343 ~ total ~r Generators.term() ~ and boosts throughout the challenge. This count does not reset on prestige.</span>
               <br/>
               <span>~r Challenge.challengeStatusDescription(7) ~</span>
               <br/>
@@ -504,7 +504,7 @@
             <div class="challengediv" ~style.background=Challenge.color(8)~>
               <span>Challenge 8</span>
               <br/>
-              <span>You can't buy boosts, the boost multiplier is ~i 1 ~x, and prestige power is raised ^~f 0.5 ~, but all generators (including Generator 8) are multiplied by your amount of Generator 8.</span>
+              <span>You can't buy boosts, the boost multiplier is ~i 1 ~x, and prestige power is raised ^~f 0.5 ~, but all ~r Generators.term() ~ (including Generator 8) are multiplied by your amount of Generator 8.</span>
               <br/>
               <span>~r Challenge.challengeStatusDescription(8) ~</span>
               <br/>
@@ -532,7 +532,7 @@
             <div class="challengediv" ~style.background=Challenge.color(10)~>
               <span>Challenge 10</span>
               <br/>
-              <span>You can't buy boosts or more than one of each generator, and you can't prestige. You can sacrifice multiple times at the same point and the sacrifice bonuses multiply, but sacrifice resets everything like prestige.</span>
+              <span>You can't buy boosts or more than one of each ~r Generators.term(true) ~, and you can't prestige. You can sacrifice multiple times at the same point and the sacrifice bonuses multiply, but sacrifice resets everything like prestige.</span>
               <br/>
               <span>~r Challenge.challengeStatusDescription(10) ~</span>
               <br/>
@@ -1080,7 +1080,7 @@
             <div class="infinitychallengediv" ~style.background=InfinityChallenge.color(4)~>
               <span>Infinity Challenge 4</span>
               <br/>
-              <span>There's an exponent on the multipliers of all generators increasing linearly from ~i 0 ~ to ~i 1 ~ over ~ti 16 ~. Every time you buy a generator or boost, or sacrifice or prestige, this exponent resets to ~i 0 ~.</span>
+              <span>There's an exponent on the multipliers of all ~r Generators.term() ~ increasing linearly from ~i 0 ~ to ~i 1 ~ over ~ti 16 ~. Every time you buy a generator or boost, or sacrifice or prestige, this exponent resets to ~i 0 ~.</span>
               <br/>
               <span>Requirement to start: ~f InfinityChallenge.getInfinityChallengeRequirement(4) ~ stars this eternity</span>
               <br/>
@@ -1099,7 +1099,7 @@
             <div class="infinitychallengediv" ~style.background=InfinityChallenge.color(5)~>
               <span>Infinity Challenge 5</span>
               <br/>
-              <span>There's an exponent on the multipliers of all generators based on stars, capping at ~i 1 ~.</span>
+              <span>There's an exponent on the multipliers of all ~r Generators.term() ~ based on stars, capping at ~i 1 ~.</span>
               <br/>
               <span>Requirement to start: ~f InfinityChallenge.getInfinityChallengeRequirement(5) ~ stars this eternity</span>
               <br/>
@@ -1152,7 +1152,7 @@
             <div class="infinitychallengediv" ~style.background=InfinityChallenge.color(8)~>
               <span>Infinity Challenge 8</span>
               <br/>
-              <span>You can only buy ~i 7 ~ total generators (apart from Generator 8) and boosts throughout the challenge. Each Generator 8 you buy gives you ~i 8 ~ extra purchases.</span>
+              <span>You can only buy ~i 7 ~ total ~r Generators.term() ~ (apart from Generator 8) and boosts throughout the challenge. Each Generator 8 you buy gives you ~i 8 ~ extra purchases.</span>
               <br/>
               <span>Requirement to start: ~f InfinityChallenge.getInfinityChallengeRequirement(8) ~ stars this eternity</span>
               <br/>
@@ -2626,7 +2626,7 @@
     <tab ~style.display=Tabs.currentTab() === 'complexity-challenges' ? '' : 'none'~>
       <span>
         You have completed ~i ComplexityChallenge.getTotalComplexityChallengeCompletions() ~ complexity challenge tier~s ComplexityChallenge.getTotalComplexityChallengeCompletions() ~.
-        <button onclick="ComplexityChallenge.complexityReset()">Restart complexity and re-enter all complexity challenges</button>
+        <button onclick="ComplexityChallenge.complexityReset(true)">Restart complexity and re-enter all complexity challenges</button>
       </span>
       <br/>
       <span>You have ~i Complexities.amount() ~ complexit~y Complexities.amount() ~ (allowing you to enter ~i ComplexityChallenge.numberUnlocked() ~ complexity challenge~s ComplexityChallenge.numberUnlocked() ~).</span>
@@ -4771,6 +4771,17 @@
           <td></td>
         </tr>
       </table>
+      <span>
+        Confirmations for manual resets:
+        <span>Sacrifice: <input type="checkbox" ~!checked=Options.confirmation('sacrifice')~ ~!onchange=function() {Options.setConfirmation('sacrifice', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=SpecialDivs.isDivVisible('prestige') ? '' : 'none'~>Prestige: <input type="checkbox" ~!checked=Options.confirmation('prestige')~ ~!onchange=function() {Options.setConfirmation('prestige', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=(PrestigeLayerProgress.hasReached('infinity') || InfinityPrestigeLayer.canInfinity()) ? '' : 'none'~>Infinity: <input type="checkbox" ~!checked=Options.confirmation('infinity')~ ~!onchange=function() {Options.setConfirmation('infinity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=(PrestigeLayerProgress.hasReached('eternity') || EternityPrestigeLayer.canEternity()) ? '' : 'none'~>Eternity: <input type="checkbox" ~!checked=Options.confirmation('eternity')~ ~!onchange=function() {Options.setConfirmation('eternity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=(PrestigeLayerProgress.hasReached('complexity') || ComplexityPrestigeLayer.canComplexity()) ? '' : 'none'~>Complexity: <input type="checkbox" ~!checked=Options.confirmation('complexity')~ ~!onchange=function() {Options.setConfirmation('complexity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=(PrestigeLayerProgress.hasReached('finality') || FinalityPrestigeLayer.canFinality()) ? '' : 'none'~>Finality: <input type="checkbox" ~!checked=Options.confirmation('finality')~ ~!onchange=function() {Options.setConfirmation('finality', this.checked)}~></input></span>
+      </span>
+      <br/>
+      <br/>
       <span>Tabs to show:</span>
       <div>
         <span>

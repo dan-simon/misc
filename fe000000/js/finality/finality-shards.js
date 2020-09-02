@@ -152,9 +152,9 @@ let FinalityShardPresets = {
   respecAndReset() {
     this.respec();
     if (FinalityPrestigeLayer.canFinality()) {
-      FinalityPrestigeLayer.finality();
+      FinalityPrestigeLayer.finality(false);
     } else {
-      FinalityPrestigeLayer.finalityReset();
+      FinalityPrestigeLayer.finalityReset(false);
     }
   },
   exportString() {

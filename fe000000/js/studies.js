@@ -203,17 +203,17 @@ let Studies = {
   respecAndReset() {
     this.respec();
     if (EternityPrestigeLayer.canEternity()) {
-      EternityPrestigeLayer.eternity();
+      EternityPrestigeLayer.eternity(false);
     } else {
-      EternityPrestigeLayer.eternityReset();
+      EternityPrestigeLayer.eternityReset(false);
     }
   },
   respecFourthRowAndReset() {
     this.respecFourthRow();
     if (EternityPrestigeLayer.canEternity()) {
-      EternityPrestigeLayer.eternity();
+      EternityPrestigeLayer.eternity(false);
     } else {
-      EternityPrestigeLayer.eternityReset();
+      EternityPrestigeLayer.eternityReset(false);
     }
   },
   boughtThatAreNotOnRow(x) {

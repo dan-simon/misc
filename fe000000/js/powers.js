@@ -445,9 +445,9 @@ let Powers = {
   respecAndReset() {
     this.respec();
     if (ComplexityPrestigeLayer.canComplexity()) {
-      ComplexityPrestigeLayer.complexity();
+      ComplexityPrestigeLayer.complexity(false);
     } else {
-      ComplexityPrestigeLayer.complexityReset();
+      ComplexityPrestigeLayer.complexityReset(false);
     }
   },
   newStrength() {

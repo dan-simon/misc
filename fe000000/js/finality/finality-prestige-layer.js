@@ -74,8 +74,19 @@ let FinalityPrestigeLayer = {
       return '';
     }
   },
-  finality() {
+  finalityConfirmationMessage() {
+    let pointGain = this.finalityPointGain();
+    let shardGain = this.finalityShardGain();
+    return 'Are you sure you want to finality for ' +
+    formatInt(pointGain) + ' finality point' + pluralize(pointGain, '', 's') + ' and ' +
+    formatInt(shardGain) + ' finality shard' + pluralize(shardGain, '', 's') + '?';
+  },
+  finalityResetConfirmationMessage() {
+    return 'Are you sure you want to do a finality reset? This will not give you any finality points or finality shards.';
+  },
+  finality(manual) {
     if (!this.canFinality()) return;
+    if (manual && Options.confirmation('finality') && !confirm(this.finalityConfirmationMessage())) return;
     let pointGain = this.finalityPointGain();
     let shardGain = this.finalityShardGain();
     FinalityPoints.addAmount(pointGain);
@@ -84,9 +95,10 @@ let FinalityPrestigeLayer = {
     Stats.addFinality(player.stats.timeSinceFinality, pointGain, shardGain);
     FinalityShardPresets.maybeRespec();
     Goals.recordPrestige('finality');
-    this.finalityReset();
+    this.finalityReset(false);
   },
-  finalityReset() {
+  finalityReset(manual) {
+    if (manual && Options.confirmation('finality') && !confirm(this.finalityResetConfirmationMessage())) return;
     // We need to do this here to avoid complexity achievements being applied in the eternity reset.
     // As said below, this method shouldn't apply rewards.
     FinalityShards.initializeStartingComplexityAchievements();
@@ -110,7 +122,7 @@ let FinalityPrestigeLayer = {
     player.complexities = FinalityStartingBenefits.complexities();
     // This function takes care of applying the rewards for certain numbers of achievements,
     // so don't do it in initializeStartingComplexityAchievements().
-    ComplexityPrestigeLayer.complexityReset();
+    ComplexityPrestigeLayer.complexityReset(false);
     player.finalityStars = new Decimal(1);
     FinalityGenerators.list.forEach(x => x.resetAmount());
     player.complexityPoints = FinalityStartingBenefits.complexityPoints().plus(FinalityMilestones.startingComplexityPoints());
