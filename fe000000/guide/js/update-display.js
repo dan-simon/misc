@@ -1,8 +1,3 @@
-let scriptTime = 1598882098013;
-if (indexTime !== scriptTime) {
-  window.location.reload(true)
-}
-
 let e;
 let b;
 
