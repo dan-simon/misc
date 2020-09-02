@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 let scriptTime = 1599002656134;
 if (indexTime !== scriptTime &&
   confirm('The loaded files appear to be from a different version than the HTML file. ' +
@@ -5,6 +6,8 @@ if (indexTime !== scriptTime &&
   window.location.reload(true)
 }
 
+=======
+>>>>>>> master
 let e;
 let b;
 
