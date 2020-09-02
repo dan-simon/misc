@@ -39,7 +39,7 @@ let Chroma = {
       Studies.chromaCapMultiplier(), ComplexityChallenge.getComplexityChallengeReward(4),
       ComplexityAchievements.effect(4, 3), FinalityShardUpgrade(5).effect()
     ];
-    return Math.pow(factors.reduce((a, b) => a * b), Galaxy.effect());
+    return Math.safePow(factors.reduce((a, b) => a * b), Galaxy.effect());
   },
   chromaSpeedMultiplier() {
     let factors = [

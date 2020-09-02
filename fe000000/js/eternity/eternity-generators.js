@@ -52,7 +52,7 @@ let EternityGenerator = function (i) {
       // so the code works.
       let multiplier = factors.reduce((a, b) => a.times(b));
       let powFactors = [Powers.getTotalEffect('eternity'), FinalityShardUpgrade(1).effect()];
-      return multiplier.pow(powFactors.reduce((a, b) => a * b));
+      return multiplier.safePow(powFactors.reduce((a, b) => a * b));
     },
     productionPerSecond() {
       return this.amount().times(this.multiplier());
