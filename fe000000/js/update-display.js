@@ -1,4 +1,4 @@
-let scriptTime = 1599002554180;
+let scriptTime = 1599004712877;
 if (indexTime !== scriptTime &&
   confirm('The loaded files appear to be from a different version than the HTML file. ' +
   'Try to reload the page to handle this? (It is suggested that you do.)')) {

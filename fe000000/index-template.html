@@ -97,7 +97,7 @@
     <br/>
     <span>The page loads <span id="script-count"></span> scripts (should be 80).</span>
     <br/>
-    <span><button onclick="window.location.reload(true)">Reload window</button> <button class="export-button" onclick="Saving.exportGame()">Export</button> <button onclick="Saving.loadGamePrompt()">Load</button> <button onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></span>
+    <span><button onclick="window.location.reload(true)">Reload window</button> <button class="export-button" onclick="Saving.exportGame(0)">Export</button> <button onclick="Saving.loadGamePrompt()">Load</button> <button onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></span>
   </div>
   <div id="main" style="display: none;">
     <div style="height: 32px;">You have ~f Stars.amount() ~ stars.<span ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~> ~r ChallengeHeaderText.getText() ~</span></div>
@@ -4725,7 +4725,7 @@
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 8px; border-collapse: separate;">
         <tr>
           <td><button class="options-button" onclick="Saving.saveGame()">Save</button></td>
-          <td><button class="options-button export-button" onclick="Saving.exportGame()">Export</button></td>
+          <td><button class="options-button export-button" onclick="Saving.exportGame(1)">Export</button></td>
           <td><button class="options-button" onclick="Saving.loadGamePrompt()">Load</button></td>
         </tr>
         <tr>

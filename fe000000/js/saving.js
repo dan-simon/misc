@@ -741,7 +741,7 @@ let Saving = {
       alert('The save you entered does not seem to be valid. The error was ' + ex);
     }
   },
-  exportGame () {
+  exportGame(buttonIndex) {
     // How can this happen? Well, it can happen if something went wrong.
     let loading = document.getElementById('loading').style.display === '';
     if (loading) {
@@ -758,13 +758,13 @@ let Saving = {
     } catch(ex) {
       alert('Copying to clipboard failed.');
     }
-    if (!player.options.exportDisplay) {
-      parent.style.display = 'none';
-      document.getElementsByClassName('export-button')[0].focus();
-    }
     if (loading) {
       document.getElementById('loading').style.display = '';
       document.getElementById('main').style.display = 'none';
+    }
+    if (!player.options.exportDisplay) {
+      parent.style.display = 'none';
+      document.getElementsByClassName('export-button')[buttonIndex].focus();
     }
   },
   reseedInitialPlayer() {
