@@ -612,7 +612,7 @@ function updateDisplay() {
     e[544].textContent = formatInt(256);
     e[545].textContent = formatTime(180, {seconds: {f: formatMaybeInt, s: true}, larger: {f: formatMaybeInt, s: true}});
     e[546].textContent = formatInt(90);
-    e[547].textContent = formatInt(Decimal.pow(2, 1054));
+    e[547].textContent = formatInt(Decimal.pow(2, 1152));
     e[548].textContent = formatInt(512);
     e[549].textContent = formatTime(900, {seconds: {f: formatMaybeInt, s: true}, larger: {f: formatMaybeInt, s: true}});
     e[550].textContent = formatInt(92);
