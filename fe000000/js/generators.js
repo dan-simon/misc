@@ -160,7 +160,12 @@ let Generators = {
   setViewAll(x) {
     player.viewAllGenerators = x;
   },
-  term(singular) {
-    return (PrestigeLayerProgress.hasReached('infinity') ? 'normal generator' : 'generator') + (singular ? '' : 's');
+  term(singular, title) {
+    let x = (PrestigeLayerProgress.hasReached('infinity') ? 'normal generator' : 'generator') + (singular ? '' : 's');
+    if (title) {
+      return x[0].toUpperCase() + x.slice(1);
+    } else {
+      return x;
+    }
   }
 }
