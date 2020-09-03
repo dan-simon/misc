@@ -129,6 +129,9 @@ let Boost = {
   bestBoostPower() {
     return player.bestBoostPower;
   },
+  isBestBoostPowerVisible() {
+    return this.bestBoostPower() > 1;
+  },
   bestBoostPowerDescription() {
     if (ComplexityAchievements.hasComplexityAchievement(4, 4)) {
       return 'best boost power this finality';
