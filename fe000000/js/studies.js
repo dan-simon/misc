@@ -264,8 +264,8 @@ let Studies = {
         let costs = counts.map((x, j) => Study(13 + j).costUpTo(x));
         let studies = [0, 1, 2, 3].map(j => ({'study': Study(13 + j), 'cost': costs[j]}));
         let f = x => x.cost / x.study.costSoFar() || 0;
-        while (studies.some(x => x.study.isBuyable())) {
-          [...studies.filter(x => x.study.isBuyable())].sort((a, b) => f(b) - f(a))[0].study.buy();
+        while (studies.some(x => x.study.isBuyable() && x.cost > 0)) {
+          [...studies.filter(x => x.study.isBuyable() && x.cost > 0)].sort((a, b) => f(b) - f(a))[0].study.buy();
         }
       } else {
         for (let j = 0; j < 4; j++) {
