@@ -275,7 +275,7 @@
           <span ~style.display=Prestige.canPrestige() ? 'none' : ''~>You need ~f Prestige.prestigeRequirement() ~ stars to prestige.</span>
         </div>
         <br ~style.display=SpecialDivs.isDivVisible('softcap') ? '' : 'none'~/>
-        <span ~style.display=SpecialDivs.isDivVisible('softcap') ? '' : 'none'~>~r Generators.term(true, true) ~ multipliers are reduced above ~f Generators.nerfValue() ~ (the multiplier softcap).</span>
+        <span ~style.display=SpecialDivs.isDivVisible('softcap') ? '' : 'none'~>~r Generators.term(true, true) ~ multipliers are reduced above ~f Generators.nerfValue() ~x (the multiplier softcap).</span>
         <br ~style.display=Generators.areAnyMultipliersNerfed() ? '' : 'none'~/>
         <div ~style.display=Generators.areAnyMultipliersNerfed() ? '' : 'none'~>
           Given a multiplier x, let y be log(x, ~f Generators.nerfValue() ~). x is reduced to ~f Generators.nerfValue() ~^(y^(y^~r formatWithPrecision(Generators.nerfExponent, 5) ~)).
