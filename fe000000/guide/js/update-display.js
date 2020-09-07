@@ -910,7 +910,7 @@ function updateDisplay() {
     e[840].textContent = formatInt(Decimal.pow(2, 8704));
     e[841].textContent = formatInt(120);
     e[842].textContent = formatInt(Decimal.pow(2, 16384));
-    e[843].textContent = formatInt(129);
+    e[843].textContent = formatInt(128);
     e[844].textContent = formatInt(8);
   }
   if (b[33].style.display !== "none") {
