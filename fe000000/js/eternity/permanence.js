@@ -15,7 +15,7 @@ let Permanence = {
     return EternityProducer.isUnlocked() && Eternities.amount().gte(this.getRequiredEternities());
   },
   permanenceGain() {
-    if (!this.canGainPermanence) {
+    if (!this.canGainPermanence()) {
       return new Decimal(0);
     }
     return Eternities.amount().minus(this.getLeftoverEternities()).div(this.getEternitiesPerPermanence());
