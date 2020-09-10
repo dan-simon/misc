@@ -921,7 +921,7 @@ function updateDisplay() {
     e[849].textContent = formatInt(2);
     e[850].textContent = format(0.5);
     e[851].textContent = formatInt(2);
-    e[852].textContent = formatWithPrecision(1 / 256, 5);
+    e[852].textContent = formatWithPrecision(Math.pow(2, -16), 7);
     e[853].textContent = formatInt(8192);
     e[854].textContent = formatInt(256);
     e[855].textContent = formatInt(4);
