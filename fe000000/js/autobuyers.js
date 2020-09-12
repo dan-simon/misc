@@ -269,10 +269,10 @@ let Autobuyers = {
       shouldComplexity = ComplexityPrestigeLayer.complexityPointGain().gte(player.stats.lastTenComplexities.map(x => x[1]).reduce(Decimal.max).times(priority));
     } else if (mode === 'Time past peak/sec') {
       ComplexityPrestigeLayer.updatePeakCPPerSec();
-      shouldComplexity = player.stats.timeSinceLastPeakEPPerSec >= priority.toNumber();
+      shouldComplexity = player.stats.timeSinceLastPeakCPPerSec >= priority.toNumber();
     } else if (mode === 'Fraction of peak/sec') {
       ComplexityPrestigeLayer.updatePeakCPPerSec();
-      shouldComplexity = ComplexityPrestigeLayer.currentEPPerSec().lte(ComplexityPrestigeLayer.peakEPPerSec().times(priority));
+      shouldComplexity = ComplexityPrestigeLayer.currentCPPerSec().lte(ComplexityPrestigeLayer.peakCPPerSec().times(priority));
     }
     if (shouldComplexity) {
       ComplexityPrestigeLayer.complexity(false);
