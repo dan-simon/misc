@@ -1115,7 +1115,7 @@ function updateDisplay() {
     e[1043].textContent = formatInt(Math.pow(2, 181));
     e[1044].textContent = formatInt(Math.pow(2, 206));
     e[1045].textContent = formatInt(Math.pow(2, 258));
-    e[1046].textContent = formatInt(Math.pow(2, 1216));
+    e[1046].textContent = formatInt(Decimal.pow(2, 1216));
     e[1047].textContent = formatTime(9600, {seconds: {f: formatMaybeInt, s: true}, larger: {f: formatMaybeInt, s: true}});
     e[1048].textContent = formatTime(18000, {seconds: {f: formatMaybeInt, s: true}, larger: {f: formatMaybeInt, s: true}});
     e[1049].textContent = formatTime(9000, {seconds: {f: formatMaybeInt, s: true}, larger: {f: formatMaybeInt, s: true}});
