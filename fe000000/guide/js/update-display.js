@@ -1234,12 +1234,12 @@ function updateDisplay() {
     e[1162].textContent = formatInt(4);
     e[1163].textContent = formatInt(4);
     e[1164].textContent = formatTime(7200, {seconds: {f: formatMaybeInt, s: true}, larger: {f: formatMaybeInt, s: true}});
-    e[1165].textContent = formatInt(12);
+    e[1165].textContent = formatInt(13);
     e[1166].textContent = formatInt(6);
     e[1167].textContent = formatTime(300, {seconds: {f: formatMaybeInt, s: true}, larger: {f: formatMaybeInt, s: true}});
     e[1168].textContent = formatInt(4);
     e[1169].textContent = formatTime(600, {seconds: {f: formatMaybeInt, s: true}, larger: {f: formatMaybeInt, s: true}});
-    e[1170].textContent = formatInt(13);
+    e[1170].textContent = formatInt(14);
     e[1171].textContent = formatInt(10);
     e[1172].textContent = formatInt(Decimal.pow(2, 4096));
     e[1173].textContent = formatInt(Decimal.pow(2, Math.pow(2, 14)));
@@ -1256,7 +1256,7 @@ function updateDisplay() {
     e[1184].textContent = formatInt(8);
     e[1185].textContent = formatInt(10);
     e[1186].textContent = formatTime(2400, {seconds: {f: formatMaybeInt, s: true}, larger: {f: formatMaybeInt, s: true}});
-    e[1187].textContent = formatInt(14);
+    e[1187].textContent = formatInt(15);
     e[1188].textContent = formatInt(20);
     e[1189].textContent = formatTime(20, {seconds: {f: formatInt, s: true}, larger: {f: format, s: false}});
     e[1190].textContent = formatTime(120, {seconds: {f: formatMaybeInt, s: true}, larger: {f: formatMaybeInt, s: true}});
@@ -1275,7 +1275,7 @@ function updateDisplay() {
     e[1203].textContent = formatInt(51);
     e[1204].textContent = formatInt(50);
     e[1205].textContent = formatTime(4500, {seconds: {f: formatMaybeInt, s: true}, larger: {f: formatMaybeInt, s: true}});
-    e[1206].textContent = formatInt(15);
+    e[1206].textContent = formatInt(16);
     e[1207].textContent = formatInt(54);
     e[1208].textContent = formatTime(20, {seconds: {f: formatInt, s: true}, larger: {f: format, s: false}});
     e[1209].textContent = formatInt(Decimal.pow(2, 3072));
@@ -1287,11 +1287,11 @@ function updateDisplay() {
     e[1215].textContent = formatTime(20, {seconds: {f: formatMaybeInt, s: true}, larger: {f: formatMaybeInt, s: true}});
     e[1216].textContent = formatInt(16);
     e[1217].textContent = formatTime(1800, {seconds: {f: formatMaybeInt, s: true}, larger: {f: formatMaybeInt, s: true}});
-    e[1218].textContent = formatInt(16);
+    e[1218].textContent = formatInt(17);
     e[1219].textContent = formatInt(38);
     e[1220].textContent = formatInt(10);
     e[1221].textContent = formatTime(480, {seconds: {f: formatMaybeInt, s: true}, larger: {f: formatMaybeInt, s: true}});
-    e[1222].textContent = formatInt(17);
+    e[1222].textContent = formatInt(18);
     e[1223].textContent = formatInt(48);
     e[1224].textContent = formatTime(20, {seconds: {f: formatInt, s: true}, larger: {f: format, s: false}});
     e[1225].textContent = formatInt(8192);
