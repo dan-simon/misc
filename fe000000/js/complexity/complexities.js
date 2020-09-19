@@ -30,6 +30,16 @@ let Complexities = {
     return Math.pow(4, Math.pow(Math.min(this.amount(), 256), 0.25));
   },
   autoECCompletionTime() {
-    return 8192 / Math.min(this.amount(), 256);
+    let interval = 8192 / Math.min(this.amount(), 256);
+    if (this.hasAutoECCompletionSpeedupFromFinalities()) {
+      interval /= this.autoECCompletionSpeedupFromFinalities();
+    }
+    return interval;
+  },
+  hasAutoECCompletionSpeedupFromFinalities() {
+    return Finalities.amount() > 0;
+  },
+  autoECCompletionSpeedupFromFinalities() {
+    return 4;
   }
 }

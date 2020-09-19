@@ -23,7 +23,8 @@ let ComplexityChallenge = {
   },
   isComplexityChallengeUnlocked(x) {
     // Yes, you can complete Complexity Challenge 1 before knowing that it exists.
-    return player.complexities >= this.requirements[x];
+    // Finality Milestone 1 also removes complexity requirements for unlocking complexity challenges.
+    return player.complexities >= this.requirements[x] || FinalityMilestones.isFinalityMilestoneActive(1);
   },
   numberUnlocked() {
     return [1, 2, 3, 4, 5, 6].filter(i => this.isComplexityChallengeUnlocked(i)).length;

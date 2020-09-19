@@ -2540,6 +2540,8 @@
       <br/>
       <span>and <span ~style.display=EternityChallenge.autoECFromComplexities() ? '' : 'none'~>auto-completing an EC tier every ~tq Complexities.autoECCompletionTime() ~</span><span ~style.display=EternityChallenge.autoECFromComplexities() ? 'none' : ''~>never auto-completing an EC tier</span><span ~style.display=EternityChallenge.autoECFromFinalities() ? '' : 'none'~> (actually one EC tier per ~tq EternityChallenge.autoECCompletionTime() ~ due to finalities)</span>.</span>
       <br/>
+      <span ~style.display=Complexities.hasAutoECCompletionSpeedupFromFinalities() ? '' : 'none'~>After finality, EC tier auto-completion from complexities is ~i Complexities.autoECCompletionSpeedupFromFinalities() ~x faster.</span>
+      <br/>
       <span>You have ~f ComplexityStars.amount() ~ complexity stars, making all complexity challenge rewards ~f ComplexityStars.complexityChallengeRewardMultiplier() ~x stronger.</span>
       <br/>
       <span>You are getting ~f ComplexityStars.perSecond() ~ complexity stars per second.</span>
@@ -4346,7 +4348,7 @@
               <br/>
               ~r FinalityMilestones.milestoneStatusDescription(1) ~
               <br/>
-              Always have autobuyers for complexity generator and power upgrades.
+              Remove the complexity unlock requirements for complexity challenges, and always have autobuyers for complexity generator and power upgrades.
             </div>
           </td>
           <td>
