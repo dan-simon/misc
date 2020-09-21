@@ -315,6 +315,7 @@ let initialPlayer = {
     infinity: true,
     eternity: true,
     complexity: true,
+    complexityReset: true,
     finality: true,
   },
   stats: {
@@ -374,7 +375,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9658203125
+  version: 1.966796875
 }
 
 let player;
