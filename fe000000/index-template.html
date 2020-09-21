@@ -163,6 +163,11 @@
       <button ~style.display=Tabs.isTabVisible('finality-shards') ? '' : 'none'~ onclick="Tabs.setTab('finality-shards')">Finality Shards</button>
       <button ~style.display=Tabs.isTabVisible('finality-milestones') ? '' : 'none'~ onclick="Tabs.setTab('finality-milestones')">Finality Milestones</button>
     </span>
+    <div ~style.display=ComplexityChallenge.anyLongTime() ? '' : 'none'~>
+      <span>You have been in ~r ComplexityChallenge.longTimeText() ~ for a long time.</span>
+      <br/>
+      <span>This message is here in case you accidentally disabled something and forgot to enable it again. <button onclick="ComplexityChallenge.removeLongTimeMessage()">Remove this message</button></span>
+    </div>
     <br/>
     <br/>
     <tab ~style.display=Tabs.currentTab() === 'main' ? '' : 'none'~>

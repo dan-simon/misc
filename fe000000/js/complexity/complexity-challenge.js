@@ -124,6 +124,35 @@ let ComplexityChallenge = {
   toggleSafeguard(x) {
     player.complexityChallengeSafeguards[x - 2] = !player.complexityChallengeSafeguards[x - 2];
   },
+  addToTimeStats(diff) {
+    for (let i = 1; i <= 6; i++) {
+      if (this.isComplexityChallengeRunning(i)) {
+        player.complexityChallengeTimeSpent[i - 1] += diff;
+      } else {
+        player.complexityChallengeTimeSpent[i - 1] = 0;
+      }
+    }
+  },
+  longTimeThreshold() {
+    return Math.pow(2, 16);
+  },
+  longTimeOn(x) {
+    return player.complexityChallengeTimeSpent[x - 1] >= this.longTimeThreshold();
+  },
+  anyLongTime() {
+    return [2, 3, 4, 5, 6].some(x => this.longTimeOn(x));
+  },
+  longTimeText() {
+    let complexityChallenges = [2, 3, 4, 5, 6].filter(x => this.longTimeOn(x));
+    return 'Complexity Challenge' + pluralize(complexityChallenges.length, '', 's') + ' ' + coordinate('*', '', complexityChallenges);
+  },
+  removeLongTimeMessage() {
+    for (let i = 2; i <= 6; i++) {
+      if (this.longTimeOn(i)) {
+        player.complexityChallengeTimeSpent[i - 1] = 0
+      }
+    }
+  },
   color(x) {
     return Colors.makeStyle(1 - 2 / (2 + Math.log2(1 + this.getComplexityChallengeCompletions(x) / 2)), true);
   }

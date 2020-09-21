@@ -659,6 +659,10 @@ let Saving = {
       player.confirmations.complexityReset = true;
       player.version = 1.966796875
     }
+    if (player.version < 1.9677734375) {
+      player.complexityChallengeTimeSpent = [0, 0, 0, 0, 0, 0];
+      player.version = 1.9677734375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
