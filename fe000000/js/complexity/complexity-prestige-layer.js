@@ -18,7 +18,7 @@ let ComplexityPrestigeLayer = {
       // Formulate the requirement in terms the player can understand without knowing about complexity challenges.
       return format(Decimal.pow(2, Math.pow(2, 32))) + ' stars';
     }
-    return format(this.eternityPointRequirementForComplexity()) + ' total eternity points this complexity';
+    return format(this.eternityPointRequirementForComplexity()) + ' total eternity points';
   },
   isRequirementVisible() {
     return !this.canComplexity() && PrestigeLayerProgress.hasReached('eternity');
