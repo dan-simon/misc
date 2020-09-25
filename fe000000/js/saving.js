@@ -1,8 +1,16 @@
 let Saving = {
-  saveGame () {
-    localStorage.setItem('fe000000-save', btoa(JSON.stringify(player)))
+  saveGame(isAutoLoop) {
+    // Stop the player from saving the game while time is being simulated.
+    if (blocked) {
+      if (!isAutoLoop) {
+        alert('This is an evanescent simulation. Saving it is forbidden.');
+      }
+      return;
+    }
+    // Stop the player from saving the game while time is being simulated.
+    localStorage.setItem('fe000000-save', btoa(JSON.stringify(player)));
   },
-  loadGame(s, offlineProgress, isOracle) {
+  loadGame(s, offlineProgress, isOracle, callback) {
     // offlineProgress = null means leave it up to the save.
     player = JSON.parse(atob(s));
     if (offlineProgress === null) {
@@ -10,23 +18,45 @@ let Saving = {
     }
     this.fixPlayer();
     this.convertSaveToDecimal();
-    if (!isOracle) {
-      // We can do this after fixing Decimal.
-      let now = Date.now();
-      if (offlineProgress) {
-        this.simulateTime((now - player.lastUpdate) / 1000, this.defaultTicks());
-      }
+    let setupPageLoad = function (now) {
       player.lastUpdate = now;
-      this.saveGame();
+      Saving.saveGame(false);
       Options.updateCheckboxSize();
       Colors.updateColors();
       updateDisplaySaveLoadSetup();
+    }
+    if (isOracle) {
+      callback();
+    } else {
+      // We can do this after fixing Decimal.
+      let now = Date.now();
+      if (offlineProgress) {
+        this.simulateTime((now - player.lastUpdate) / 1000, this.defaultTicks(), true, function () {
+          setupPageLoad(now);
+          callback();
+        });
+      } else {
+        setupPageLoad(now);
+        callback();
+      }
     }
   },
   defaultTicks() {
     return Options.offlineTicks();
   },
-  simulateTime(totalDiff, maxTicks) {
+  simulateTimeUpdate(time, ticks, totalTicks) {
+    document.getElementById('timesimulated').innerHTML =
+      formatTime(time, {seconds: {f: format, s: false}, larger: {f: format, s: false}});
+    document.getElementById('tickssimulated').innerHTML = format(ticks);
+    document.getElementById('totaltickssimulated').innerHTML = format(totalTicks);
+    let expectedTotalTime = time * totalTicks / ticks;
+    document.getElementById('expectedtotaltimesimulated').innerHTML = ticks === 0 ? 'unknown' :
+      formatTime(expectedTotalTime, {seconds: {f: format, s: false}, larger: {f: format, s: false}});
+    document.getElementById('expectedremainingtimesimulated').innerHTML = ticks === 0 ? 'unknown' :
+      formatTime(expectedTotalTime - time, {seconds: {f: format, s: false}, larger: {f: format, s: false}});
+    document.getElementById('bar').style.width = Math.floor(ticks / totalTicks * 512) + 'px';
+  },
+  simulateTime(totalDiff, maxTicks, showSimulation, callback) {
     // Add this not for any of the actual JS files, but for ease of use from console.
     if (maxTicks === undefined) {
       maxTicks = this.defaultTicks();
@@ -34,17 +64,45 @@ let Saving = {
     let baseTickLength = 1 / 16;
     let ticks = Math.ceil(Math.min(totalDiff / baseTickLength, maxTicks));
     let tickLength = totalDiff / ticks;
-    for (let i = 0; i < ticks; i++) {
-      gameLoop(tickLength, false);
+    let startTime = Date.now();
+    let lastUpdateTime = Date.now();
+    if (showSimulation) {
+      document.getElementById('simulatetime').style.display = '';
+      this.simulateTimeUpdate((lastUpdateTime - startTime) / 1000, 0, ticks);
     }
+    let tick = 0;
+    blocked = true;
+    let interval = setInterval(function() {
+      let initialTick = tick;
+      while (tick < Math.min(ticks, initialTick + 256)) {
+        gameLoop(tickLength, false);
+        let d = Date.now();
+        tick++;
+        if (d - startTime > 1 / 16) {
+          lastUpdateTime = d;
+          if (showSimulation) {
+            Saving.simulateTimeUpdate((lastUpdateTime - startTime) / 1000, tick, ticks);
+          }
+        }
+      }
+      if (tick === ticks) {
+        blocked = false;
+        clearInterval(interval);
+        if (showSimulation) {
+          document.getElementById('simulatetime').style.display = 'none';
+        }
+        callback();
+      }
+    }, 1);
   },
-  oracleSimulateTime(totalDiff, totalTicks) {
+  oracleSimulateTime(totalDiff, totalTicks, callback) {
     let firstDiff = Math.max(0, totalDiff - 16);
     let secondDiff = Math.min(16, totalDiff);
-    this.simulateTime(firstDiff, totalTicks);
-    // 1024 is more than enough for max ticks however long secondDiff is
-    // (since it's at most 16 seconds).
-    this.simulateTime(secondDiff, 1024);
+    Saving.simulateTime(firstDiff, totalTicks, true, function () {
+      // 1024 is more than enough for max ticks however long secondDiff is
+      // (since it's at most 16 seconds).
+      Saving.simulateTime(secondDiff, 1024, false, callback);
+    });
   },
   fixPlayer() {
     if (player.version < 1.25) {
@@ -728,23 +786,22 @@ let Saving = {
     player.oracle.complexityPoints = new Decimal(player.oracle.complexityPoints);
     player.oracle.complexityPointGain = new Decimal(player.oracle.complexityPointGain);
   },
-  loadGameStorage () {
+  loadGameStorage (callback) {
     if (!localStorage.getItem('fe000000-save')) {
       // The save doesn't exist.
       this.resetGame();
       // It worked, I guess?
-      return true;
+      callback(true);
     } else {
       try {
         // We're loading from storage, player.options.offlineProgress isn't set yet.
-        this.loadGame(localStorage.getItem('fe000000-save'), null);
-        return true;
+        this.loadGame(localStorage.getItem('fe000000-save'), null, false, () => callback(true));
       } catch (ex) {
         console.log('Error while loading game, please report this.', ex);
         alert('There was an error while loading the game, please report this. ' +
         'If the game seems broken, export your save (and reset if you want). ' +
         'More detail on error: ' + ex.toString() + ', stack: ' + ex.stack.toString());
-        return false;
+        callback(false);
       }
     }
   },
@@ -752,7 +809,8 @@ let Saving = {
     try {
       let save = prompt('Enter your save:');
       if (save && !(/^\s+$/.test(save))) {
-        this.loadGame(save, player.options.offlineProgress);
+        // This isn't the oracle and needs no callback
+        this.loadGame(save, player.options.offlineProgress, false, () => true);
       } else if (save !== null) {
         alert('The save you entered appears to be empty.');
       }
@@ -761,6 +819,12 @@ let Saving = {
     }
   },
   exportGame(buttonIndex) {
+    if (blocked && !confirm('Time is currently being simulated. Exploits are possible by ' +
+      'exporting while time is being simulated and then loading the resulting save. ' +
+      'If you want to use those exploits, it\'s your choice, but those exploits ' +
+      'are not intended in normal play. Are you sure you want to export?')) {
+      return;
+    }
     // How can this happen? Well, it can happen if something went wrong.
     let loading = document.getElementById('loading').style.display === '';
     if (loading) {
@@ -794,10 +858,10 @@ let Saving = {
     initialPlayer.powers.initialSeed = initialSeed;
   },
   resetGame() {
-    // The false here sets Date.now() to when the game was reset
+    // The first false here sets Date.now() to when the game was reset
     // rather than when the window was loaded.
-    this.loadGame(btoa(JSON.stringify(initialPlayer)), false);
-    this.reseedInitialPlayer();
+    // The second confirms that this isn't the oracle.
+    this.loadGame(btoa(JSON.stringify(initialPlayer)), false, false, () => this.reseedInitialPlayer());
   },
   resetGameWithConfirmation() {
     if (confirm('Do you really want to reset the game? You will lose all your progress, and get no benefit.')) {

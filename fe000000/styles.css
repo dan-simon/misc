@@ -9,6 +9,19 @@
   --checkbox-scale: 1;
 }
 
+#progress {
+  width: 512px;
+  height: 32px;
+  margin: auto;
+  background-color: #aaaaaa;
+}
+
+#bar {
+  width: 0px;
+  height: 32px;
+  background-color: #33ff33;
+}
+
 body {
   text-align: center;
   font-family: Typewriter, serif;

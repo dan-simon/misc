@@ -73,32 +73,34 @@ let Oracle = {
     let save = btoa(JSON.stringify(player));
     let time = this.time();
     let ticks = this.ticks();
-    Saving.oracleSimulateTime(time, ticks);
-    let complexityPoints = ComplexityPoints.amount();
-    let complexityPointGain = ComplexityPrestigeLayer.canComplexity() ?
-      ComplexityPrestigeLayer.complexityPointGain() : new Decimal(0);
-    let complexityChallengeCompletions = ComplexityChallenge.getAllComplexityChallengeCompletions();
-    let finalities = Finalities.amount();
-    let finalityShards = FinalityShards.total();
-    let powers = player.powers.stored.map(p => Powers.makeFuture(p));
-    let extraMultipliers = Powers.getAllExtraMultipliers();
-    Saving.loadGame(save, null, true);
-    player.oracle.used = true;
-    player.oracle.timeSimulated = time;
-    player.oracle.ticksSimulated = ticks;
-    player.oracle.complexityPoints = complexityPoints;
-    player.oracle.complexityPointGain = complexityPointGain;
-    player.oracle.originalComplexityChallengeCompletions = ComplexityChallenge.getAllComplexityChallengeCompletions();
-    player.oracle.complexityChallengeCompletions = complexityChallengeCompletions;
-    player.oracle.originalFinalities = Finalities.amount();
-    player.oracle.finalities = finalities;
-    player.oracle.originalFinalityShards = FinalityShards.total();
-    player.oracle.finalityShards = finalityShards;
-    player.oracle.powers = powers;
-    player.oracle.extraMultipliers = extraMultipliers;
-    if (this.alert()) {
-      alert(this.message());
-    }
+    Saving.oracleSimulateTime(time, ticks, function () {
+      let complexityPoints = ComplexityPoints.amount();
+      let complexityPointGain = ComplexityPrestigeLayer.canComplexity() ?
+        ComplexityPrestigeLayer.complexityPointGain() : new Decimal(0);
+      let complexityChallengeCompletions = ComplexityChallenge.getAllComplexityChallengeCompletions();
+      let finalities = Finalities.amount();
+      let finalityShards = FinalityShards.total();
+      let powers = player.powers.stored.map(p => Powers.makeFuture(p));
+      let extraMultipliers = Powers.getAllExtraMultipliers();
+      Saving.loadGame(save, null, true, function () {
+        player.oracle.used = true;
+        player.oracle.timeSimulated = time;
+        player.oracle.ticksSimulated = ticks;
+        player.oracle.complexityPoints = complexityPoints;
+        player.oracle.complexityPointGain = complexityPointGain;
+        player.oracle.originalComplexityChallengeCompletions = ComplexityChallenge.getAllComplexityChallengeCompletions();
+        player.oracle.complexityChallengeCompletions = complexityChallengeCompletions;
+        player.oracle.originalFinalities = Finalities.amount();
+        player.oracle.finalities = finalities;
+        player.oracle.originalFinalityShards = FinalityShards.total();
+        player.oracle.finalityShards = finalityShards;
+        player.oracle.powers = powers;
+        player.oracle.extraMultipliers = extraMultipliers;
+        if (Oracle.alert()) {
+          alert(Oracle.message());
+        }
+      });
+    });
   },
   message() {
     let messages = [
