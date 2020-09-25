@@ -2199,7 +2199,7 @@ function updateDisplay() {
     e[899].textContent = formatInt(Powers.activatedLimit());
     b[772].style.display = FinalityMilestones.isFinalityMilestoneActive(6) ? 'none' : '';
     b[773].style.display = FinalityMilestones.isFinalityMilestoneActive(6) ? 'none' : '';
-    e[900].textContent = format(Powers.interval());
+    e[900].textContent = formatTime(Powers.interval(), {seconds: {f: format, s: false}, larger: {f: format, s: false}});
     e[901].textContent = formatTime(Powers.timeUntilPowerGain(), {seconds: {f: format, s: false}, larger: {f: format, s: false}});
     e[902].textContent = Powers.isPowerGainOn() ? "On" : "Off";
     b[774].style.display = !Powers.isPowerGainOn() && Powers.imminentPowerGain() !== 0 ? '' : 'none';
