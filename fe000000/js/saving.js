@@ -11,6 +11,12 @@ let Saving = {
     localStorage.setItem('fe000000-save', btoa(JSON.stringify(player)));
   },
   loadGame(s, offlineProgress, isOracle, callback) {
+    if (blocked && !confirm('Time is currently being simulated. Loading a save while time ' +
+      'is being simulated can cause weird behavior. Are you sure you want to load? ' +
+      '(This message may appear if you did something that uses loading in its implementation, ' +
+      'such as resetting.)')) {
+      return;
+    }
     // offlineProgress = null means leave it up to the save.
     player = JSON.parse(atob(s));
     if (offlineProgress === null) {
