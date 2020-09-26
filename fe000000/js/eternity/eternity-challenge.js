@@ -255,6 +255,9 @@ let EternityChallenge = {
     player.respecEternityChallenge = false;
   },
   respecAndReset() {
+    if (Options.confirmation('eternityChallengeRespec') && !confirm(
+      'Are you sure you want to respec your unlocked eternity challenge and ' +
+      EternityPrestigeLayer.resetText() + '?')) return;
     this.respec();
     if (EternityPrestigeLayer.canEternity()) {
       EternityPrestigeLayer.eternity(false);
@@ -458,6 +461,9 @@ let EternityChallenge = {
     } else {
       return ', too many infinities for more'
     }
+  },
+  areEternityChallengesVisible() {
+    return SpecialTabs.isTabVisible('eternity-challenges');
   },
   color(x) {
     return Colors.makeStyle(this.getEternityChallengeCompletions(x) / 4, true);

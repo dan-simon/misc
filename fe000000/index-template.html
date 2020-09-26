@@ -4792,8 +4792,8 @@
           <td></td>
         </tr>
       </table>
-      <span>
-        Manual reset confirmations:
+      <div>
+        Confirmations:
         <span>Sacrifice: <input type="checkbox" ~!checked=Options.confirmation('sacrifice')~ ~!onchange=function() {Options.setConfirmation('sacrifice', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
         <span ~style.display=SpecialDivs.isDivVisible('prestige') ? '' : 'none'~>Prestige: <input type="checkbox" ~!checked=Options.confirmation('prestige')~ ~!onchange=function() {Options.setConfirmation('prestige', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
         <span ~style.display=(PrestigeLayerProgress.hasReached('infinity') || InfinityPrestigeLayer.canInfinity()) ? '' : 'none'~>Infinity: <input type="checkbox" ~!checked=Options.confirmation('infinity')~ ~!onchange=function() {Options.setConfirmation('infinity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
@@ -4801,8 +4801,13 @@
         <span ~style.display=(PrestigeLayerProgress.hasReached('complexity') || ComplexityPrestigeLayer.canComplexity()) ? '' : 'none'~>Complexity: <input type="checkbox" ~!checked=Options.confirmation('complexity')~ ~!onchange=function() {Options.setConfirmation('complexity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
         <span ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~>Complexity reset: <input type="checkbox" ~!checked=Options.confirmation('complexityReset')~ ~!onchange=function() {Options.setConfirmation('complexityReset', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
         <span ~style.display=(PrestigeLayerProgress.hasReached('finality') || FinalityPrestigeLayer.canFinality()) ? '' : 'none'~>Finality: <input type="checkbox" ~!checked=Options.confirmation('finality')~ ~!onchange=function() {Options.setConfirmation('finality', this.checked)}~></input></span>
-      </span>
-      <br/>
+      </div>
+      <div ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>
+        <span ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>Studies respec: <input type="checkbox" ~!checked=Options.confirmation('studiesRespec')~ ~!onchange=function() {Options.setConfirmation('studiesRespec', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=EternityChallenge.areEternityChallengesVisible() ? '' : 'none'~>Eternity challenge respec: <input type="checkbox" ~!checked=Options.confirmation('eternityChallengeRespec')~ ~!onchange=function() {Options.setConfirmation('eternityChallengeRespec', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Powers respec: <input type="checkbox" ~!checked=Options.confirmation('powersRespec')~ ~!onchange=function() {Options.setConfirmation('powersRespec', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~>Finality shard upgrades respec: <input type="checkbox" ~!checked=Options.confirmation('finalityShardUpgradesRespec')~ ~!onchange=function() {Options.setConfirmation('finalityShardUpgradesRespec', this.checked)}~></input></span>
+      </div>
       <br/>
       <span>Tabs to show:</span>
       <div>

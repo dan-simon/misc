@@ -727,6 +727,13 @@ let Saving = {
       player.complexityChallengeTimeSpent = [0, 0, 0, 0, 0, 0];
       player.version = 1.9677734375;
     }
+    if (player.version < 1.96875) {
+      player.confirmations.studiesRespec = true;
+      player.confirmations.eternityChallengeRespec = true;
+      player.confirmations.powersRespec = true;
+      player.confirmations.finalityShardUpgradesRespec = true;
+      player.version = 1.96875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

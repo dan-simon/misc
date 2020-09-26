@@ -200,6 +200,9 @@ let Studies = {
     player.respecStudies = false;
   },
   respecAndReset() {
+    if (Options.confirmation('studiesRespec') && !confirm(
+      'Are you sure you want to respec your studies and ' +
+      EternityPrestigeLayer.resetText() + '?')) return;
     this.respec();
     if (EternityPrestigeLayer.canEternity()) {
       EternityPrestigeLayer.eternity(false);
@@ -208,6 +211,9 @@ let Studies = {
     }
   },
   respecFourthRowAndReset() {
+    if (Options.confirmation('studiesRespec') && !confirm(
+      'Are you sure you want to respec your fourth-row studies and ' +
+      EternityPrestigeLayer.resetText() + '?')) return;
     this.respecFourthRow();
     if (EternityPrestigeLayer.canEternity()) {
       EternityPrestigeLayer.eternity(false);

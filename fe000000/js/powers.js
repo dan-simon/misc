@@ -443,6 +443,9 @@ let Powers = {
     player.powers.respec = false;
   },
   respecAndReset() {
+    if (Options.confirmation('powersRespec') && !confirm(
+      'Are you sure you want to deactivate your active powers and ' +
+      ComplexityPrestigeLayer.resetText() + '?')) return;
     this.respec();
     if (ComplexityPrestigeLayer.canComplexity()) {
       ComplexityPrestigeLayer.complexity(false);
