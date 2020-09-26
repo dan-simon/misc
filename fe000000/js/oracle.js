@@ -70,6 +70,11 @@ let Oracle = {
   },
   invoke() {
     if (!this.isUnlocked()) return;
+    if (blocked) {
+      alert('This is an evanescent simulation. Recursing within it is forbidden due to ' + 
+        'the damage it may cause to the space-time continuum.');
+      return;
+    }
     let save = btoa(JSON.stringify(player));
     let time = this.time();
     let ticks = this.ticks();
