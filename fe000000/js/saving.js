@@ -67,6 +67,10 @@ let Saving = {
     if (maxTicks === undefined) {
       maxTicks = this.defaultTicks();
     }
+    // And similarly
+    if (callback === undefined) {
+      callback = () => true;
+    }
     let baseTickLength = 1 / 16;
     let ticks = Math.ceil(Math.min(totalDiff / baseTickLength, maxTicks));
     let tickLength = totalDiff / ticks;
@@ -733,6 +737,11 @@ let Saving = {
       player.confirmations.powersRespec = true;
       player.confirmations.finalityShardUpgradesRespec = true;
       player.version = 1.96875;
+    }
+    if (player.version < 1.9697265625) {
+      player.oracle.originalGalaxies = 0;
+      player.oracle.galaxies = 0;
+      player.version = 1.9697265625;
     }
   },
   convertSaveToDecimal() {

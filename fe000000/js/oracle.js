@@ -83,6 +83,7 @@ let Oracle = {
       let complexityPointGain = ComplexityPrestigeLayer.canComplexity() ?
         ComplexityPrestigeLayer.complexityPointGain() : new Decimal(0);
       let complexityChallengeCompletions = ComplexityChallenge.getAllComplexityChallengeCompletions();
+      let galaxies = Galaxy.amount();
       let finalities = Finalities.amount();
       let finalityShards = FinalityShards.total();
       let powers = player.powers.stored.map(p => Powers.makeFuture(p));
@@ -95,6 +96,8 @@ let Oracle = {
         player.oracle.complexityPointGain = complexityPointGain;
         player.oracle.originalComplexityChallengeCompletions = ComplexityChallenge.getAllComplexityChallengeCompletions();
         player.oracle.complexityChallengeCompletions = complexityChallengeCompletions;
+        player.oracle.originalGalaxies = Galaxy.amount();
+        player.oracle.galaxies = galaxies;
         player.oracle.originalFinalities = Finalities.amount();
         player.oracle.finalities = finalities;
         player.oracle.originalFinalityShards = FinalityShards.total();
@@ -109,8 +112,7 @@ let Oracle = {
   },
   message() {
     let messages = [
-      this.complexityPointMessage(), this.complexityPointGainMessage(),
-      this.complexityChallengeCompletionsMessage(), this.finalityMessage()
+      this.complexityPointMessage(), this.complexityPointGainMessage(), this.otherThingsMessage(),
     ];
     return 'After ' + formatMaybeInt(player.oracle.timeSimulated) + ' second' +
       pluralize(player.oracle.timeSimulated, '', 's') + ' and ' + formatMaybeInt(player.oracle.ticksSimulated) + ' tick' +
@@ -123,23 +125,41 @@ let Oracle = {
     return player.oracle.complexityPointGain.gt(0) ?
       ('will be able to gain ' + formatInt(player.oracle.complexityPointGain) + ' ℂP') : 'will not yet be able to complexity';
   },
-  complexityChallengeCompletionsMessage() {
+  complexityChallengeCompletionsGainText() {
     // Note that we might, in theory, lose complexity challenge completions, if we finality.
     // I'm not sure if this can happen in practice but it seems worth mentioning.
     let gainedCompletions = [1, 2, 3, 4, 5, 6].map(
       i => player.oracle.complexityChallengeCompletions[i - 1] - player.oracle.originalComplexityChallengeCompletions[i - 1]);
     let completionText = gainedCompletions.map(
       (x, i) => x > 0 ? formatInt(x) + ' completion' + pluralize(x, '', 's') + ' of Complexity Challenge ' + (i + 1) : null);
-    return coordinate('will have gained *', null, completionText);
+    return coordinate('*', null, completionText);
   },
-  finalityMessage() {
+  galaxyGainText() {
+    if (player.oracle.galaxies === player.oracle.originalGalaxies) {
+      return null;
+    }
+    return formatInt(player.oracle.galaxies - player.oracle.originalGalaxies) +
+      ' galax' + pluralize(player.oracle.galaxies - player.oracle.originalGalaxies, 'y', 'ies');
+  },
+  finalityGainText() {
     if (player.oracle.finalities === player.oracle.originalFinalities) {
       return null;
     }
-    return 'will have gained ' + formatInt(player.oracle.finalities - player.oracle.originalFinalities) +
-      ' finalit' + pluralize(player.oracle.finalities - player.oracle.originalFinalities, 'y', 'ies') +
-      ' and ' + formatInt(player.oracle.finalityShards - player.oracle.originalFinalityShards) +
-      ' finality shard' + pluralize(player.oracle.finalityShards - player.oracle.originalFinalityShards, '', 's');
+    return formatInt(player.oracle.finalities - player.oracle.originalFinalities) +
+      ' finalit' + pluralize(player.oracle.finalities - player.oracle.originalFinalities, 'y', 'ies');
+  },
+  finalityShardGainText() {
+    if (player.oracle.finalityShards === player.oracle.originalFinalityShards) {
+      return null;
+    }
+    formatInt(player.oracle.finalityShards - player.oracle.originalFinalityShards) +
+    ' finality shard' + pluralize(player.oracle.finalityShards - player.oracle.originalFinalityShards, '', 's');
+  },
+  otherThingsMessage() {
+    return coordinate('and will have gained *', null, [
+      this.complexityChallengeCompletionsGainText(), this.galaxyGainText(),
+      this.finalityGainText(), this.finalityShardGainText(),
+    ]);
   },
   messagePrequel() {
     if (this.isUsed()) {
