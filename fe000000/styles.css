@@ -405,7 +405,7 @@ input[type=checkbox] {
 }
 
 .chromanextgreendiv {
-  background: radial-gradient(var(--background-color), var(--background-color) 75%%, #117711);
+  background: radial-gradient(var(--background-color), var(--background-color) 75%, #117711);
 }
 
 .chromacurrentreddiv {
