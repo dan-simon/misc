@@ -745,7 +745,7 @@ let Saving = {
     }
     if (player.version < 1.970703125) {
       player.studyMode = 'Buy';
-      player.confirmation.singleStudyRefund = true;
+      player.confirmations.singleStudyRefund = true;
       player.powers.powerDeactivationMode = 'Confirmation';
       player.version = 1.970703125;
     }
