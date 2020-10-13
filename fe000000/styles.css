@@ -179,6 +179,19 @@ input[type=checkbox] {
   font-size: 0.875rem;
 }
 
+.mediumpowertd  {
+  text-align: center;
+  font-size: 0.875rem;
+  width: 320px;
+  height: 96px;
+  border: solid;
+  border-width: 1px 1px;
+}
+
+.mediumpowertd button {
+  font-size: 0.875rem;
+}
+
 .largepowertd {
   text-align: center;
   font-size: 0.875rem;

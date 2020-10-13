@@ -419,6 +419,24 @@ let Powers = {
       this.onPowerChange(false, false);
     }
   },
+  canDeactivate(i) {
+    return this.canAccessActive(i) && this.powerDeactivationMode() !== 'Disabled';
+  },
+  deactivate(i) {
+    if (this.canDeactivate(i) && (this.powerDeactivationMode() === 'No confirmation' ||
+        confirm('Are you sure you want to deactivate this active power and ' +
+        ComplexityPrestigeLayer.resetText() + '?'))) {
+      player.powers.stored.push(this.accessPower('active', i));
+      player.powers.active = [...Array(this.active().length)].map((_, j) => j + 1).map(
+        j => i === j ? null : this.accessPower('active', j)).filter(x => x !== null);
+      this.onPowerChange(true, false);
+      if (ComplexityPrestigeLayer.canComplexity()) {
+        ComplexityPrestigeLayer.complexity(false);
+      } else {
+        ComplexityPrestigeLayer.complexityReset(false);
+      }
+    }
+  },
   canAccessActive(i) {
     return this.active().length >= i;
   },
@@ -570,6 +588,13 @@ let Powers = {
   changePowerDeletionMode() {
     let modes = ['Confirmation', 'No confirmation', 'Disabled'];
     player.powers.powerDeletionMode = modes[(modes.indexOf(player.powers.powerDeletionMode) + 1) % 3];
+  },
+  powerDeactivationMode() {
+    return player.powers.powerDeactivationMode;
+  },
+  changePowerDeactivationMode() {
+    let modes = ['Confirmation', 'No confirmation', 'Disabled'];
+    player.powers.powerDeactivationMode = modes[(modes.indexOf(player.powers.powerDeactivationMode) + 1) % 3];
   },
   isAutoLoadUnlocked() {
     return FinalityMilestones.isFinalityMilestoneActive(7);

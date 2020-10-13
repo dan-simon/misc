@@ -743,6 +743,12 @@ let Saving = {
       player.oracle.galaxies = 0;
       player.version = 1.9697265625;
     }
+    if (player.version < 1.970703125) {
+      player.studyMode = 'Buy';
+      player.confirmation.singleStudyRefund = true;
+      player.powers.powerDeactivationMode = 'Confirmation';
+      player.version = 1.970703125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

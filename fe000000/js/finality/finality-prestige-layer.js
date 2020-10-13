@@ -145,6 +145,7 @@ let FinalityPrestigeLayer = {
       hasGainedShards: player.powers.hasGainedShards,
       shards: 0,
       shardUpgrades: [0, 0, 0, 0],
+      powerDeactivationMode: player.powers.powerDeactivationMode,
       powerDeletionMode: player.powers.powerDeletionMode,
       presets: player.powers.presets,
       craft: player.powers.craft,

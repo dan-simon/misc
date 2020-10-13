@@ -1469,7 +1469,7 @@
       <span>You have ~i Studies.totalTheorems() ~ total theorem~s Studies.totalTheorems() ~ and ~i Studies.unspentTheorems() ~ unspent theorem~s Studies.unspentTheorems() ~.</span>
       <br/>
       <button class="studies-export-button" onclick="Studies.export()">Export studies</button> <button onclick="Studies.import()">Import studies</button>
-      <button onclick="Studies.toggleRespec()">Respec studies on next eternity: ~r Studies.isRespecOn() ? "On" : "Off" ~</button>
+      <button onclick="Studies.changeMode()">Mode: ~r Studies.mode() ~</button> <button onclick="Studies.toggleRespec()">Respec studies on next eternity: ~r Studies.isRespecOn() ? "On" : "Off" ~</button>
       <button ~style.display=Studies.canAccessFourthRow() ? '' : 'none'~ ~class=Studies.canMaxFourthRowStudies() ? '' : 'disabled' ~ onclick="Studies.maxFourthRowStudies()">Max fourth-row studies</button>
       <br/>
       <button onclick="Studies.respecAndReset()">Respec studies and ~r EternityPrestigeLayer.resetText() ~</button>
@@ -1522,7 +1522,7 @@
       <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 8px; border-collapse: separate;">
         <tr>
           <td>
-            <button ~class=Study(1).className()~ onclick="Study(1).buy()">
+            <button ~class=Study(1).className()~ onclick="Study(1).click()">
               Study 1
               <br/>
               Double per-boost multiplier
@@ -1533,7 +1533,7 @@
             </button>
           </td>
           <td>
-            <button ~class=Study(2).className()~ onclick="Study(2).buy()">
+            <button ~class=Study(2).className()~ onclick="Study(2).click()">
               Study 2
               <br/>
               Multiplier to normal generators based on prestige power
@@ -1544,7 +1544,7 @@
             </button>
           </td>
           <td>
-            <button ~class=Study(3).className()~ onclick="Study(3).buy()">
+            <button ~class=Study(3).className()~ onclick="Study(3).click()">
               Study 3
               <br/>
               Multiplier to normal generators based on total stars this complexity
@@ -1555,7 +1555,7 @@
             </button>
           </td>
           <td>
-            <button ~class=Study(4).className()~ onclick="Study(4).buy()">
+            <button ~class=Study(4).className()~ onclick="Study(4).click()">
               Study 4
               <br/>
               Multiplier to normal generators based on total theorems
@@ -1568,7 +1568,7 @@
         </tr>
         <tr>
           <td>
-            <button ~class=Study(5).className()~ onclick="Study(5).buy()">
+            <button ~class=Study(5).className()~ onclick="Study(5).click()">
               Study 5
               <br/>
               Multiplier to infinity generators based on number of boosts
@@ -1579,7 +1579,7 @@
             </button>
           </td>
           <td>
-            <button ~class=Study(6).className()~ onclick="Study(6).buy()">
+            <button ~class=Study(6).className()~ onclick="Study(6).click()">
               Study 6
               <br/>
               Multiplier to infinity generators based on prestige power
@@ -1590,7 +1590,7 @@
             </button>
           </td>
           <td>
-            <button ~class=Study(7).className()~ onclick="Study(7).buy()">
+            <button ~class=Study(7).className()~ onclick="Study(7).click()">
               Study 7
               <br/>
               Multiplier to infinity generators based on eternities
@@ -1601,7 +1601,7 @@
             </button>
           </td>
           <td>
-            <button ~class=Study(8).className()~ onclick="Study(8).buy()">
+            <button ~class=Study(8).className()~ onclick="Study(8).click()">
               Study 8
               <br/>
               Multiplier to infinity generators based on total theorems
@@ -1614,7 +1614,7 @@
         </tr>
         <tr>
           <td>
-            <button ~class=Study(9).className()~ onclick="Study(9).buy()">
+            <button ~class=Study(9).className()~ onclick="Study(9).click()">
               Study 9
               <br/>
               Eternity generators are multiplied by <span ~style.display=InfinityChallenge.isInfinityChallengeRunning(7) ? '' : 'none'~>square root of</span> per-boost multiplier
@@ -1625,7 +1625,7 @@
             </button>
           </td>
           <td>
-            <button ~class=Study(10).className()~ onclick="Study(10).buy()">
+            <button ~class=Study(10).className()~ onclick="Study(10).click()">
               Study 10
               <br/>
               Multiplier to eternity generators based on prestige power
@@ -1636,7 +1636,7 @@
             </button>
           </td>
           <td>
-            <button ~class=Study(11).className()~ onclick="Study(11).buy()">
+            <button ~class=Study(11).className()~ onclick="Study(11).click()">
               Study 11
               <br/>
               Multiplier to eternity generators based on eternity stars and time in eternity
@@ -1647,7 +1647,7 @@
             </button>
           </td>
           <td>
-            <button ~class=Study(12).className()~ onclick="Study(12).buy()">
+            <button ~class=Study(12).className()~ onclick="Study(12).click()">
               Study 12
               <br/>
               Multiplier to eternity generators based on total theorems
@@ -3135,31 +3135,37 @@
         <span>Active powers:</span>
         <table style="margin-left: auto; margin-right: auto; border-collapse: collapse;">
           <tr>
-            <td class="smallpowertd">
+            <td class="mediumpowertd">
               <div ~style.display=Powers.canAccessPower('active', 1) ? '' : 'none'~>
                 <span ~class=Powers.color('active', 1)~>~r Powers.descriptionFullEffect('active', 1) ~</span>
                 <br/>
                 <span ~class=Powers.color('active', 1)~>~r Powers.descriptionStrengthRarity('active', 1) ~</span>
                 <br/>
                 <span ~class=Powers.color('active', 1)~>~r Powers.descriptionMultiplier('active', 1) ~</span>
+                <br/>
+                <button onclick="Powers.deactivate(1)" ~class=Powers.canDeactivate(1) ? '' : 'disabled'~>Deactivate</button>
               </div>
             </td>
-            <td class="smallpowertd">
+            <td class="mediumpowertd">
               <div ~style.display=Powers.canAccessPower('active', 2) ? '' : 'none'~>
                 <span ~class=Powers.color('active', 2)~>~r Powers.descriptionFullEffect('active', 2) ~</span>
                 <br/>
                 <span ~class=Powers.color('active', 2)~>~r Powers.descriptionStrengthRarity('active', 2) ~</span>
                 <br/>
                 <span ~class=Powers.color('active', 2)~>~r Powers.descriptionMultiplier('active', 2) ~</span>
+                <br/>
+                <button onclick="Powers.deactivate(2)" ~class=Powers.canDeactivate(2) ? '' : 'disabled'~>Deactivate</button>
               </div>
             </td>
-            <td class="smallpowertd">
+            <td class="mediumpowertd">
               <div ~style.display=Powers.canAccessPower('active', 3) ? '' : 'none'~>
                 <span ~class=Powers.color('active', 3)~>~r Powers.descriptionFullEffect('active', 3) ~</span>
                 <br/>
                 <span ~class=Powers.color('active', 3)~>~r Powers.descriptionStrengthRarity('active', 3) ~</span>
                 <br/>
                 <span ~class=Powers.color('active', 3)~>~r Powers.descriptionMultiplier('active', 3) ~</span>
+                <br/>
+                <button onclick="Powers.deactivate(3)" ~class=Powers.canDeactivate(3) ? '' : 'disabled'~>Deactivate</button>
               </div>
             </td>
           </tr>
@@ -3352,7 +3358,7 @@
         <br/>
         <span>Thus, all but the best ~i Powers.maximumActivatedLimit() ~ power~s Powers.maximumActivatedLimit() ~ of each type are useless and are thus automatically deleted for power shards.</span>
         <br/>
-        <button onclick="Powers.changePowerDeletionMode()">Manual power deletion mode: ~r Powers.powerDeletionMode() ~</button>
+        <button onclick="Powers.changePowerDeletionMode()">Manual power deletion mode: ~r Powers.powerDeletionMode() ~</button> <button onclick="Powers.changePowerDeactivationMode()">Single power deactivation mode: ~r Powers.powerDeactivationMode() ~</button>
         <br/>
         <br/>
         <span>You have ~i ComplexityPoints.amount() ~ complexity point~s ComplexityPoints.amount() ~. <button ~class=Powers.anythingToBuy() ? "" : "disabled"~ onclick="Powers.maxAll()">Max power upgrades</button></span>
@@ -4803,6 +4809,7 @@
         <span ~style.display=(PrestigeLayerProgress.hasReached('finality') || FinalityPrestigeLayer.canFinality()) ? '' : 'none'~>Finality: <input type="checkbox" ~!checked=Options.confirmation('finality')~ ~!onchange=function() {Options.setConfirmation('finality', this.checked)}~></input></span>
       </div>
       <div ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>
+        <span ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>Single study refund: <input type="checkbox" ~!checked=Options.confirmation('singleStudyRefund')~ ~!onchange=function() {Options.setConfirmation('singleStudyRefund', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
         <span ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>Studies respec: <input type="checkbox" ~!checked=Options.confirmation('studiesRespec')~ ~!onchange=function() {Options.setConfirmation('studiesRespec', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
         <span ~style.display=EternityChallenge.areEternityChallengesVisible() ? '' : 'none'~>Eternity challenge respec: <input type="checkbox" ~!checked=Options.confirmation('eternityChallengeRespec')~ ~!onchange=function() {Options.setConfirmation('eternityChallengeRespec', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
         <span ~style.display=(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Powers respec: <input type="checkbox" ~!checked=Options.confirmation('powersRespec')~ ~!onchange=function() {Options.setConfirmation('powersRespec', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>

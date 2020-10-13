@@ -130,6 +130,7 @@ let initialPlayer = {
   ],
   firstTwelveStudyPurchaseOrder: [],
   respecStudies: false,
+  studyMode: 'Buy',
   boughtTheoremsThisComplexity: false,
   presets: [],
   eternityProducer: {
@@ -190,6 +191,7 @@ let initialPlayer = {
     hasGainedShards: false,
     shards: 0,
     shardUpgrades: [0, 0, 0, 0],
+    powerDeactivationMode: 'Confirmation',
     powerDeletionMode: 'Confirmation',
     presets: [],
     craft: {
@@ -320,6 +322,7 @@ let initialPlayer = {
     complexity: true,
     complexityReset: true,
     finality: true,
+    singleStudyRefund: true,
     studiesRespec: true,
     eternityChallengeRespec: true,
     powersRespec: true,
@@ -382,7 +385,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9697265625
+  version: 1.970703125
 }
 
 let player;

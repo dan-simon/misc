@@ -1,7 +1,7 @@
 let STUDY_EFFECTS = [
   () => 2,
   () => Decimal.pow(4, Math.pow(Prestige.prestigePower().log2(), 0.5)),
-  () => Decimal.pow(2, Math.pow(player.stats.totalStarsProducedThisComplexity.log2(), 0.5) / 2),
+  () => Decimal.pow(2, Math.pow(player.stats.totalStarsProducedThisComplexity.max(1).log2(), 0.5) / 2),
   () => Decimal.pow(2, 16 * Studies.totalTheorems()),
   () => Decimal.pow(2, Math.pow(Boost.bought(), 1.75) / 1024),
   () => Decimal.pow(2, Math.pow(4 * Prestige.prestigePower().log2(), 0.875) / 1024),
@@ -126,6 +126,29 @@ let Study = function (i) {
           player.firstTwelveStudyPurchaseOrder.push(i);
         }
         ComplexityChallenge.exitComplexityChallenge(6);
+      }
+    },
+    refund() {
+      if (player.studies[i - 1] && Options.confirmation('singleStudyRefund') && !confirm(
+        'Are you sure you want to refund ' + (this.row() === 4 ? 'one purchase of ' : '') +
+        'this study and ' + EternityPrestigeLayer.resetText() + '?')) return;
+      if (this.row() === 4) {
+        player.studies[i - 1]--;
+      } else {
+        player.studies[i - 1] = false;
+        player.firstTwelveStudyPurchaseOrder = player.firstTwelveStudyPurchaseOrder.filter(j => j !== i);
+      }
+      if (EternityPrestigeLayer.canEternity()) {
+        EternityPrestigeLayer.eternity(false);
+      } else {
+        EternityPrestigeLayer.eternityReset(false);
+      }
+    },
+    click() {
+      if (Studies.mode() === 'Buy') {
+        this.buy();
+      } else if (Studies.mode() === 'Refund') {
+        this.refund();
       }
     },
     className() {
@@ -340,6 +363,13 @@ let Studies = {
   maxFourthRowStudies() {
     // Yes, we are calling import.
     this.importString('&s1,1,1,1');
+  },
+  mode() {
+    return player.studyMode;
+  },
+  changeMode() {
+    player.studyMode = ['Buy', 'Refund'][
+      (['Buy', 'Refund'].indexOf(player.studyMode) + 1) % 2];
   },
   boughtTheoremsThisComplexity() {
     return player.boughtTheoremsThisComplexity;
