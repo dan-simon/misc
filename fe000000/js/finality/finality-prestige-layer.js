@@ -24,7 +24,7 @@ let FinalityPrestigeLayer = {
     if (this.canFinality()) {
       return 'finality';
     } else {
-      return 'do a finality reset (no finality point gain or complexity gain)';
+      return 'do a finality reset (no finality point gain or finality gain)';
     }
   },
   finalityPointGain() {
