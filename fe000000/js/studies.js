@@ -128,10 +128,21 @@ let Study = function (i) {
         ComplexityChallenge.exitComplexityChallenge(6);
       }
     },
+    refundText() {
+      return 'Are you sure you want to refund ' + (this.row() === 4 ? 'one purchase of ' : '') +
+        'Study ' + i + ' and ' + EternityPrestigeLayer.resetText() + '?';
+    },
+    refundImpossibleText() {
+      return 'Only fourth-row studies, not Study ' + i + ', can be refunded ' +
+        'if any fourth-row study is bought.';
+    },
     refund() {
-      if (player.studies[i - 1] && Options.confirmation('singleStudyRefund') && !confirm(
-        'Are you sure you want to refund ' + (this.row() === 4 ? 'one purchase of ' : '') +
-        'this study and ' + EternityPrestigeLayer.resetText() + '?')) return;
+      if (!this.isBought()) return;
+      if (this.row() !== 4 && Studies.anyFourthRowStudiesBought()) {
+        alert(this.refundImpossibleText());
+        return;
+      }
+      if (Options.confirmation('singleStudyRefund') && !confirm(this.refundText())) return;
       if (this.row() === 4) {
         player.studies[i - 1]--;
       } else {
@@ -314,6 +325,9 @@ let Studies = {
   },
   canAccessFourthRow() {
     return this.totalTheorems() >= this.totalStudyCost();
+  },
+  anyFourthRowStudiesBought() {
+    return [13, 14, 15, 16].some(i => Study(i).isBought());
   },
   chromaCapMultiplier() {
     return 1 + [13, 14, 15, 16].map(i => Study(i).timesBought()).reduce((a, b) => a + b) / 1024;
