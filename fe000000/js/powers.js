@@ -618,6 +618,9 @@ let Powers = {
   toggleAutoLoad() {
     player.powerListAutoLoad.on = !player.powerListAutoLoad.on;
   },
+  tabColors() {
+    return ['normal', 'infinity', 'eternity', 'complexity'];
+  },
   exportString() {
     if (this.active().length === 0) {
       return 'none';

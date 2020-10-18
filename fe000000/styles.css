@@ -50,13 +50,19 @@ input[type=checkbox] {
 }
 
 .options-button {
-  width: 320px;
-  height: 80px;
+  width: 352px;
+  height: 96px;
+}
+
+.mini-options-button {
+  width: 288px;
+  height: 20px;
+  font-size: 0.875rem;
 }
 
 .options-div {
-  width: 320px;
-  height: 80px;
+  width: 352px;
+  height: 96px;
   display: table;
   text-align: center;
   border: solid;
@@ -379,6 +385,10 @@ input[type=checkbox] {
 
 .brownspan, .browndiv > span {
   color: #aa7777;
+}
+
+.goldspan, .golddiv > span {
+  color: #cc9933;
 }
 
 .chromacurrentgreydiv {

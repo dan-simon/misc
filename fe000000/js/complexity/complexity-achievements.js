@@ -151,6 +151,9 @@ let ComplexityAchievements = {
   color(row, column) {
     return Colors.makeStyle(this.hasComplexityAchievement(row, column), false);
   },
+  tabColors() {
+    return ['grey', 'purple', 'orange', 'green'];
+  },
   complexityAchievementRow1Column2EffectFormula(x) {
     return Decimal.pow(Math.min(16, x), 2).round();
   }

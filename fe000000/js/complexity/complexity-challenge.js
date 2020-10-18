@@ -155,5 +155,8 @@ let ComplexityChallenge = {
   },
   color(x) {
     return Colors.makeStyle(1 - 2 / (2 + Math.log2(1 + this.getComplexityChallengeCompletions(x) / 2)), true);
+  },
+  tabColors() {
+    return ['yellow', 'grey', 'purple', 'orange', 'cyan', 'green'];
   }
 }

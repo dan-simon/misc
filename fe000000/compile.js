@@ -86,7 +86,7 @@ function makeUpdateDisplay(el1CodeList, el2CodeList, setupList, inTabs) {
   let f = x => [el1CodeList, el2CodeList]['eb'.indexOf(x[0])][+x.slice(1)];
   let untabbed = getUntabbed(inTabs);
   let setupCode = makeUpdateDisplaySetup(setupList);
-  let updateDisplayCode = 'function updateDisplay() {\n' + g(untabbed.map(f), '  ') + '\n' +
+  let updateDisplayCode = 'function updateDisplay() {\n' + g(flatten(untabbed.map(f)), '  ') + '\n' +
   inTabs.map(x => '  if (' + x[0][0] + '[' + x[0].slice(1) + '].style.display !== "none") {\n' +
   g(flatten(x[1].map(f)), '    ') + '\n  }').join('\n') + '\n}';
   return setupCode + '\n\n' + updateDisplayCode;

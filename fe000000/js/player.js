@@ -309,6 +309,8 @@ let initialPlayer = {
     offlineTicks: 1024,
     hotkeys: true,
     completionColors: 'On (gradient)',
+    resetColors: true,
+    tabColors: true,
     exportDisplay: false,
     theme: 'Dark',
     fitToWidth: true,
@@ -385,7 +387,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.970703125
+  version: 1.9716796875
 }
 
 let player;

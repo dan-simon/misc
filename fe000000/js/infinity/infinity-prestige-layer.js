@@ -12,8 +12,8 @@ let InfinityPrestigeLayer = {
   },
   breakInfinityButtonText() {
     return player.breakInfinity ?
-      `Fix infinity: force infinity at ${format(Decimal.pow(2, 256))} stars` :
-      `Break infinity: allow stars to go beyond ${format(Decimal.pow(2, 256))}, with greater IP gain`;
+      ('Fix infinity: force infinity at ' + format(Decimal.pow(2, 256)) + ' stars') :
+      ('Break infinity: allow stars to go beyond ' + format(Decimal.pow(2, 256)) + ', with greater IP gain');
   },
   toggleBreakInfinity() {
     if (this.canInfinityBeBroken()) {

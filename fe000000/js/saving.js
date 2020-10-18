@@ -749,6 +749,11 @@ let Saving = {
       player.powers.powerDeactivationMode = 'Confirmation';
       player.version = 1.970703125;
     }
+    if (player.version < 1.9716796875) {
+      player.options.resetColors = true;
+      player.options.tabColors = true;
+      player.version = 1.9716796875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

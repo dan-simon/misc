@@ -27,6 +27,18 @@ let Options = {
   nextCompletionColors() {
     player.options.completionColors = COMPLETION_COLOR_LIST[(COMPLETION_COLOR_LIST.indexOf(player.options.completionColors) + 1) % COMPLETION_COLOR_LIST.length];
   },
+  resetColors() {
+    return player.options.resetColors;
+  },
+  toggleResetColors() {
+    player.options.resetColors = !player.options.resetColors;
+  },
+  tabColors() {
+    return player.options.tabColors;
+  },
+  toggleTabColors() {
+    player.options.tabColors = !player.options.tabColors;
+  },
   notation() {
     return player.options.notation;
   },

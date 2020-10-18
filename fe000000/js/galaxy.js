@@ -132,5 +132,8 @@ let Galaxy = {
   },
   updateNextDilatedInputDisplay() {
     document.getElementsByClassName('nextdilatedinput')[0].value = this.nextDilatedRaw();
+  },
+  tabColors() {
+    return ['normal', 'infinity', 'eternity', 'complexity'];
   }
 }

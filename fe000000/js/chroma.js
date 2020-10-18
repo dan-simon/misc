@@ -211,5 +211,8 @@ let Chroma = {
     } else {
       return 'chromadiv';
     }
-  }
+  },
+  tabColors() {
+    return [1, 2, 3, 4, 5, 6].filter(x => x === 1 || this.isColorUnlocked(x)).map(x => this.colorName(x));
+  },
 }

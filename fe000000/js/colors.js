@@ -9,6 +9,25 @@ let Colors = {
       '--text-color': '#000000',
     }
   },
+  stringToColorCode: {
+    'normal': '#cccc33',
+    'yellow': '#cccc33',
+    'infinity': '#cc33cc',
+    'magenta': '#cc33cc',
+    'eternity': '#33cccc',
+    'cyan': '#33cccc',
+    'complexity': '#aa7777',
+    'brown': '#aa7777',
+    'finality': '#cc9933',
+    'gold': '#cc9933',
+    'grey': '#aaaaaa',
+    'eternity-producer': '#6633cc',
+    'purple': '#6633cc',
+    'orange': '#cc6633',
+    'fourth-row': '#33cc33',
+    'green': '#33cc33',
+    'red': '#cc3333',
+  },
   updateColors() {
     let table = this.themeColors[Options.theme()];
     for (let i in table) {
@@ -40,6 +59,16 @@ let Colors = {
       let a = isChallenge ? 'var(--background-color)' : this.makeColor(x, 1);
       let b = isChallenge ? this.makeColor(x, 1) : 'var(--background-color)';
       return 'radial-gradient(' + a + ', ' + b + ')';
+    }
+  },
+  getButtonColor(x, colorType) {
+    if (!x) {
+      return '#aaaaaa';
+    }
+    if (typeof colorType === 'string') {
+      return this.stringToColorCode[colorType];
+    } else {
+      return 'linear-gradient(90deg, ' + colorType.map(x => this.stringToColorCode[x]).join(', ') + ')';
     }
   }
 }
