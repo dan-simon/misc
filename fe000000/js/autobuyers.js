@@ -147,6 +147,18 @@ let Autobuyers = {
       }
     }
   },
+  disableWhenStartingChallenge() {
+    return player.disableAutobuyersWhenStarting.challenge;
+  },
+  setDisableWhenStartingChallenge() {
+    player.disableAutobuyersWhenStarting.challenge = !player.disableAutobuyersWhenStarting.challenge;
+  },
+  disableWhenStartingInfinityChallenge() {
+    return player.disableAutobuyersWhenStarting.infinityChallenge;
+  },
+  setDisableWhenStartingInfinityChallenge() {
+    player.disableAutobuyersWhenStarting.infinityChallenge = !player.disableAutobuyersWhenStarting.infinityChallenge;
+  },
   isLockedResetAutobuyer(x) {
     if (x < 12) return false;
     let layer = ['infinity', 'eternity', 'complexity', 'complexity', 'finality'][x - 12];

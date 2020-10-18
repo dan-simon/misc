@@ -62,6 +62,9 @@ let InfinityChallenge = {
     } else {
       InfinityPrestigeLayer.infinityReset(false);
     }
+    if (Autobuyers.disableWhenStartingInfinityChallenge()) {
+      Autobuyers.setAll(false);
+    }
     this.setInfinityChallenge(x);
     Challenge.setChallenge(0);
   },

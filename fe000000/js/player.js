@@ -111,6 +111,10 @@ let initialPlayer = {
   breakInfinity: false,
   autobuyers: initialAutobuyers(),
   areNewlyUnlockedAutobuyersOn: true,
+  disableAutobuyersWhenStarting: {
+    challenge: false,
+    infinityChallenge: false,
+  },
   eternityPoints: new Decimal(0),
   eternities: new Decimal(0),
   eternityStars: new Decimal(2),
@@ -387,7 +391,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9716796875
+  version: 1.97265625
 }
 
 let player;

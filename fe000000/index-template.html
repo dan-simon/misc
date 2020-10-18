@@ -619,6 +619,10 @@
         <span>Make autobuyers trigger at most every X seconds (~i 0 ~ to always trigger): <input type="text" ~!value=Autobuyers.autobuyersTimerLength()~ ~!onchange=function() {Autobuyers.setAutobuyersTimerLength(+this.value)}~></input></span>
         <br/>
       </div>
+      <div ~style.display=Autobuyers.areThereAnyAutobuyers() ? '' : 'none'~>
+        <span>Automatically turn all autobuyers off when entering challenges: <input type="checkbox" ~!checked=Autobuyers.disableWhenStartingChallenge()~ ~!onchange=function() {Autobuyers.setDisableWhenStartingChallenge(this.checked)}~></input><span ~style.display=SpecialTabs.isTabVisible('infinity-challenges') ? '' : 'none'~> when entering infinity challenges: <input type="checkbox" ~!checked=Autobuyers.disableWhenStartingInfinityChallenge()~ ~!onchange=function() {Autobuyers.setDisableWhenStartingInfinityChallenge(this.checked)}~></input></span></span>
+        <br/>
+      </div>
       <span ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>Autobuyers options on this tab only apply to autobuyers on this tab.</span>
       <br ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~/>
       <span><button onclick="Autobuyers.setAll(true)">Turn all autobuyers on</button> <button onclick="Autobuyers.setAll(false)">Turn all autobuyers off</button> <button onclick="Autobuyers.toggleAll()">Toggle all autobuyers</button> <button ~style.display=(Autobuyers.areAnyAutobuyersSlow() && Autobuyers.areAnyAutobuyersFast()) ? '' : 'none'~ onclick="Autobuyers.synchronize()">Synchronize slow and fast autobuyers</button></span>

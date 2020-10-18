@@ -754,6 +754,13 @@ let Saving = {
       player.options.tabColors = true;
       player.version = 1.9716796875;
     }
+    if (player.version < 1.97265625) {
+      player.disableAutobuyersWhenStarting = {
+        challenge: false,
+        infinityChallenge: false,
+      };
+      player.version = 1.97265625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
