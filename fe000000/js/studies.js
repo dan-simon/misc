@@ -315,12 +315,6 @@ let Studies = {
   canAccessFourthRow() {
     return this.totalTheorems() >= this.totalStudyCost();
   },
-  rows() {
-    return this.canAccessFourthRow() ? 4 : 3;
-  },
-  tabColors() {
-    return ['normal', 'infinity', 'eternity', 'fourth-row'].slice(0, this.rows());
-  },
   chromaCapMultiplier() {
     return 1 + [13, 14, 15, 16].map(i => Study(i).timesBought()).reduce((a, b) => a + b) / 1024;
   },
