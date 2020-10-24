@@ -101,7 +101,7 @@ let EternityChallenge = {
     return this.rewards[x](this.getNextRewardCalculationEternityChallengeCompletions(x));
   },
   getEternityChallengeCost(x) {
-    if (ComplexityAchievements.hasComplexityAchievement(3, 2)) {
+    if (this.isEternityChallengeUnlockingMeaningless()) {
       return 0;
     }
     return this.costs[x];
@@ -185,7 +185,7 @@ let EternityChallenge = {
     return this.resourceNames[x];
   },
   canEternityChallengeBeStarted(x) {
-    return ComplexityAchievements.hasComplexityAchievement(3, 2) || this.getUnlockedEternityChallenge() === x;
+    return this.isEternityChallengeUnlockingMeaningless() || this.getUnlockedEternityChallenge() === x;
   },
   isEternityChallengeRunning(x) {
     return this.currentEternityChallenge() === x;
@@ -218,8 +218,14 @@ let EternityChallenge = {
   setEternityChallenge(x) {
     player.currentEternityChallenge = x;
   },
+  hasBrokeEveryStone() {
+    return ComplexityAchievements.hasComplexityAchievement(3, 2);
+  },
+  isEternityChallengeUnlockingMeaningless() {
+    return this.hasBrokeEveryStone();
+  },
   canEternityChallengeBeUnlocked(x) {
-    if (ComplexityAchievements.hasComplexityAchievement(3, 2)) {
+    if (this.isEternityChallengeUnlockingMeaningless()) {
       return true;
     }
     return this.getUnlockedEternityChallenge() === 0 &&
@@ -232,7 +238,7 @@ let EternityChallenge = {
     player.unlockedEternityChallenge = x;
   },
   canRespec() {
-    return !ComplexityAchievements.hasComplexityAchievement(3, 2);
+    return !this.isEternityChallengeUnlockingMeaningless();
   },
   isRespecOn() {
     return player.respecEternityChallenge;
@@ -341,16 +347,17 @@ let EternityChallenge = {
   },
   // Technically this is a bit redundant.
   isRequirementDisplayOn() {
-    return player.isEternityChallengeRequirementDisplayOn || !ComplexityAchievements.hasComplexityAchievement(3, 2);
+    return player.isEternityChallengeRequirementDisplayOn || !this.isEternityChallengeUnlockingMeaningless();
   },
   toggleRequirementDisplay() {
-    if (ComplexityAchievements.hasComplexityAchievement(3, 2)) {
+    if (this.isEternityChallengeUnlockingMeaningless()) {
       player.isEternityChallengeRequirementDisplayOn = !player.isEternityChallengeRequirementDisplayOn;
     }
   },
   showRequirementDisplayToggle() {
     // This option still does something, so we leave it even after all ECs.
-    return ComplexityAchievements.hasComplexityAchievement(3, 2);
+    // We don't show it, however, when you still need to unlock ECs.
+    return this.isEternityChallengeUnlockingMeaningless();
   },
   hasAutoECCompletion() {
     return Complexities.amount() > 0 || Finalities.amount() > 0;
@@ -412,7 +419,7 @@ let EternityChallenge = {
     return player.usedAutoECCompletionThisComplexity;
   },
   canCompleteMultipleTiersAtOnce() {
-    return ComplexityAchievements.hasComplexityAchievement(3, 2);
+    return this.hasBrokeEveryStone();
   },
   displayTiersCompletedOnEternity() {
     return this.canCompleteMultipleTiersAtOnce() && this.isSomeEternityChallengeRunning();

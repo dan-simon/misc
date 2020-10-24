@@ -2196,7 +2196,7 @@
                 <br/>
                 <span>~r EternityChallenge.eternityChallengeRequirementDescription(1) ~</span>
               </div>
-              <div ~style.display=ComplexityAchievements.hasComplexityAchievement(3, 2) ? 'none' : ''~>
+              <div ~style.display=EternityChallenge.isEternityChallengeUnlockingMeaningless() ? 'none' : ''~>
                 <span>Cost: ~i EternityChallenge.getEternityChallengeCost(1) ~ theorem~s EternityChallenge.getEternityChallengeCost(1) ~</span>
               </div>
               <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(1) ~ IP</span>
@@ -2221,7 +2221,7 @@
                 <br/>
                 <span>~r EternityChallenge.eternityChallengeRequirementDescription(2) ~</span>
               </div>
-              <div ~style.display=ComplexityAchievements.hasComplexityAchievement(3, 2) ? 'none' : ''~>
+              <div ~style.display=EternityChallenge.isEternityChallengeUnlockingMeaningless() ? 'none' : ''~>
                 <span>Cost: ~i EternityChallenge.getEternityChallengeCost(2) ~ theorem~s EternityChallenge.getEternityChallengeCost(2) ~</span>
               </div>
               <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(2) ~ IP</span>
@@ -2248,7 +2248,7 @@
                 <br/>
                 <span>~r EternityChallenge.eternityChallengeRequirementDescription(3) ~</span>
               </div>
-              <div ~style.display=ComplexityAchievements.hasComplexityAchievement(3, 2) ? 'none' : ''~>
+              <div ~style.display=EternityChallenge.isEternityChallengeUnlockingMeaningless() ? 'none' : ''~>
                 <span>Cost: ~i EternityChallenge.getEternityChallengeCost(3) ~ theorem~s EternityChallenge.getEternityChallengeCost(3) ~</span>
               </div>
               <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(3) ~ IP</span>
@@ -2273,7 +2273,7 @@
                 <br/>
                 <span>~r EternityChallenge.eternityChallengeRequirementDescription(4) ~</span>
               </div>
-              <div ~style.display=ComplexityAchievements.hasComplexityAchievement(3, 2) ? 'none' : ''~>
+              <div ~style.display=EternityChallenge.isEternityChallengeUnlockingMeaningless() ? 'none' : ''~>
                 <span>Cost: ~i EternityChallenge.getEternityChallengeCost(4) ~ theorem~s EternityChallenge.getEternityChallengeCost(4) ~</span>
               </div>
               <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(4) ~ IP</span>
@@ -2300,7 +2300,7 @@
                 <br/>
                 <span>~r EternityChallenge.eternityChallengeRequirementDescription(5) ~</span>
               </div>
-              <div ~style.display=ComplexityAchievements.hasComplexityAchievement(3, 2) ? 'none' : ''~>
+              <div ~style.display=EternityChallenge.isEternityChallengeUnlockingMeaningless() ? 'none' : ''~>
                 <span>Cost: ~i EternityChallenge.getEternityChallengeCost(5) ~ theorem~s EternityChallenge.getEternityChallengeCost(5) ~</span>
               </div>
               <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(5) ~ IP</span>
@@ -2325,7 +2325,7 @@
                 <br/>
                 <span>~r EternityChallenge.eternityChallengeRequirementDescription(6) ~</span>
               </div>
-              <div ~style.display=ComplexityAchievements.hasComplexityAchievement(3, 2) ? 'none' : ''~>
+              <div ~style.display=EternityChallenge.isEternityChallengeUnlockingMeaningless() ? 'none' : ''~>
                 <span>Cost: ~i EternityChallenge.getEternityChallengeCost(6) ~ theorem~s EternityChallenge.getEternityChallengeCost(6) ~</span>
               </div>
               <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(6) ~ IP</span>
@@ -2352,7 +2352,7 @@
                 <br/>
                 <span>~r EternityChallenge.eternityChallengeRequirementDescription(7) ~</span>
               </div>
-              <div ~style.display=ComplexityAchievements.hasComplexityAchievement(3, 2) ? 'none' : ''~>
+              <div ~style.display=EternityChallenge.isEternityChallengeUnlockingMeaningless() ? 'none' : ''~>
                 <span>Cost: ~i EternityChallenge.getEternityChallengeCost(7) ~ theorem~s EternityChallenge.getEternityChallengeCost(7) ~</span>
               </div>
               <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(7) ~ IP</span>
@@ -2377,7 +2377,7 @@
                 <br/>
                 <span>~r EternityChallenge.eternityChallengeRequirementDescription(8) ~</span>
               </div>
-              <div ~style.display=ComplexityAchievements.hasComplexityAchievement(3, 2) ? 'none' : ''~>
+              <div ~style.display=EternityChallenge.isEternityChallengeUnlockingMeaningless() ? 'none' : ''~>
                 <span>Cost: ~i EternityChallenge.getEternityChallengeCost(8) ~ theorem~s EternityChallenge.getEternityChallengeCost(8) ~</span>
               </div>
               <span>Goal: ~f EternityChallenge.getEternityChallengeGoal(8) ~ IP</span>
@@ -2393,13 +2393,15 @@
           </td>
         </tr>
       </table>
-      <span>
-        You can only have a single eternity challenge unlocked at a given time.
-      </span>
-      <br/>
-      <span>
-        Eternity challenges lock again once completed.
-      </span>
+      <div ~style.display=EternityChallenge.isEternityChallengeUnlockingMeaningless() ? 'none' : ''~>
+        <span>
+          You can only have a single eternity challenge unlocked at a given time.
+        </span>
+        <br/>
+        <span>
+          Eternity challenges lock again once completed.
+        </span>
+      </div>
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'chroma' ? '' : 'none'~>
       <div ~style.display=Chroma.isUnlocked() ? 'none' : ''~>
