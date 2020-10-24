@@ -348,8 +348,12 @@ let Studies = {
   cost(x) {
     return Decimal.pow(2, Math.pow(256, 2 - x) * this.costPow(player.boughtTheorems[x], x)).floor();
   },
+  canSeeTab() {
+    return PrestigeLayerProgress.hasReached('eternity');
+  },
   canBuy(x) {
-    return player[['stars', 'infinityPoints', 'eternityPoints'][x]].gte(this.cost(x)) && (x !== 2 || EternityGenerator(1).bought() > 0);
+    return player[['stars', 'infinityPoints', 'eternityPoints'][x]].gte(this.cost(x)) &&
+      this.canSeeTab() && (x !== 2 || EternityGenerator(1).bought() > 0);
   },
   getStat(x) {
     return player[['stars', 'infinityPoints', 'eternityPoints'][x]];
