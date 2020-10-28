@@ -4762,7 +4762,7 @@
         </tr>
         <tr>
           <td><button class="options-button" onclick="Options.toggleOfflineProgress()">Offline progress: ~r player.options.offlineProgress ? "On" : "Off" ~</button></td>
-          <td><div class="options-div"><span style="font-size: 0.75rem;">Offline game ticks (between ~i 1 ~ and ~i Options.maxTicks() ~, slow above ~i 1024 ~):</span> <input type="text" ~!value=Options.displayOfflineTicks()~ ~!onchange=function() {Options.setOfflineTicks(+this.value)}~></input></div></td>
+          <td><div class="options-div"><span style="font-size: 0.75rem;">Offline game ticks (between ~i 1 ~ and ~i Options.maxTicks() ~, slow above ~i 1024 ~):</span><br/><input type="text" ~!value=Options.displayOfflineTicks()~ ~!onchange=function() {Options.setOfflineTicks(+this.value)}~></input></div></td>
           <td><button class="options-button" onclick="Options.nextTheme()">Theme: ~r player.options.theme ~</button></td>
         </tr>
         <tr>
