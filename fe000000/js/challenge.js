@@ -2,7 +2,7 @@ let Challenge = {
   startOrExitChallenge(x) {
     if (this.isChallengeRunning(x)) {
       this.exitChallenge();
-    } else {
+    } else if (PrestigeLayerProgress.hasReached('infinity')) {
       this.startChallenge(x);
     }
   },
@@ -46,7 +46,6 @@ let Challenge = {
     player.challengeRestartOnCompletion = !player.challengeRestartOnCompletion;
   },
   startChallenge(x) {
-    if (!PrestigeLayerProgress.hasReached('infinity')) return;
     if (InfinityPrestigeLayer.canInfinity()) {
       InfinityPrestigeLayer.infinity(false);
     } else {
@@ -59,7 +58,6 @@ let Challenge = {
     InfinityChallenge.setInfinityChallenge(0);
   },
   exitChallenge() {
-    if (!PrestigeLayerProgress.hasReached('infinity')) return;
     this.setChallenge(0);
     InfinityPrestigeLayer.infinityReset(false);
   },
