@@ -152,11 +152,11 @@ let Oracle = {
     if (player.oracle.finalityShards === player.oracle.originalFinalityShards) {
       return null;
     }
-    formatInt(player.oracle.finalityShards - player.oracle.originalFinalityShards) +
+    return formatInt(player.oracle.finalityShards - player.oracle.originalFinalityShards) +
     ' finality shard' + pluralize(player.oracle.finalityShards - player.oracle.originalFinalityShards, '', 's');
   },
   otherThingsMessage() {
-    return coordinate('and will have gained *', null, [
+    return coordinate('will have gained *', null, [
       this.complexityChallengeCompletionsGainText(), this.galaxyGainText(),
       this.finalityGainText(), this.finalityShardGainText(),
     ]);
