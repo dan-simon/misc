@@ -3060,7 +3060,7 @@
           Unlock Powers<br/>Cost: ~f Powers.unlockCost() ~ complexity points
         </button>
         <div ~style.display=SpecialTabs.isTabVisible('oracle') ? 'none' : ''~>Unlocking powers for the first time will also let you view the Oracle tab.</div>
-        <div ~style.display=FinalityMilestones.isFinalityMilestoneActive(6) ? 'none' : ''~>Unlocking powers will also let you gain your eternity points on eternity every second, without needing to eternity.</div>
+        <div ~style.display=FinalityMilestones.isFinalityMilestoneActive(6) ? 'none' : ''~>Unlocking powers will also let you gain your eternity points on eternity every second, without needing to eternity (EP generation).</div>
       </div>
       <div ~style.display=Powers.isUnlocked() ? '' : 'none'~>
         <span>You have ~i Powers.active().length ~/~i Powers.activatedLimit() ~ active power~s Powers.activatedLimit() ~.</span>
@@ -3069,7 +3069,7 @@
         <br/>
         <span>You can have multiple powers of the same type active; the only rule about active powers is that you can have at most ~i Powers.activatedLimit() ~ at once.</span>
         <br ~style.display=FinalityMilestones.isFinalityMilestoneActive(6) ? 'none' : ''~/>
-        <span ~style.display=FinalityMilestones.isFinalityMilestoneActive(6) ? 'none' : ''~>Due to unlocking powers, you gain your eternity points on eternity every second, without needing to eternity.</span>
+        <span ~style.display=FinalityMilestones.isFinalityMilestoneActive(6) ? 'none' : ''~>Due to unlocking powers, you gain your eternity points on eternity every second, without needing to eternity (EP generation).</span>
         <br/>
         <br/>
         <span>You gain a new power once every ~t Powers.interval() ~, next in ~t Powers.timeUntilPowerGain() ~. <button onclick="Powers.togglePowerGain()">Power gain: ~r Powers.isPowerGainOn() ? "On" : "Off" ~</button></span>
