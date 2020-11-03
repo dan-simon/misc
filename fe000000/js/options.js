@@ -1,3 +1,5 @@
+let COMPLETION_GRADIENT_LIST = ['Default', 'Center', 'Edge', 'Reversed']
+
 let COMPLETION_COLOR_LIST = ['On (gradient)', 'On (uniform)', 'Off'];
 
 let TIME_DISPLAY_LIST = ['Seconds', 'D:H:M:S', 'D:H:M:S with notation', 'Largest unit'];
@@ -48,12 +50,28 @@ let Options = {
   nextTimeDisplay() {
     player.options.timeDisplay = TIME_DISPLAY_LIST[(TIME_DISPLAY_LIST.indexOf(player.options.timeDisplay) + 1) % TIME_DISPLAY_LIST.length];
   },
-  theme() {
-    return player.options.theme;
+  background() {
+    return player.options.theme.background;
   },
-  nextTheme() {
-    player.options.theme = ['Dark', 'Light'][(['Dark', 'Light'].indexOf(player.options.theme) + 1) % 2];
+  nextBackground() {
+    player.options.theme.background = ['Dark', 'Light'][
+      (['Dark', 'Light'].indexOf(player.options.theme.background) + 1) % 2];
     Colors.updateColors();
+  },
+  buttonColor() {
+    return player.options.theme.buttonColor;
+  },
+  nextButtonColor() {
+    player.options.theme.buttonColor = ['Dull', 'Vibrant'][
+      (['Dull', 'Vibrant'].indexOf(player.options.theme.buttonColor) + 1) % 2];
+    Colors.updateColors();
+  },
+  completionGradients() {
+    return player.options.theme.completionGradients;
+  },
+  nextCompletionGradients() {
+    let list = PrestigeLayerProgress.hasReached('infinity') ? COMPLETION_GRADIENT_LIST : ['Default', 'Reversed'];
+    player.options.theme.completionGradients = list[(list.indexOf(player.options.theme.completionGradients) + 1) % list.length];
   },
   fitToWidth() {
     return player.options.fitToWidth;

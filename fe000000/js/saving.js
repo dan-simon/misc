@@ -761,6 +761,14 @@ let Saving = {
       };
       player.version = 1.97265625;
     }
+    if (player.version < 1.9736328125) {
+      player.options.theme = {
+        background: player.options.theme,
+        buttonColor: 'Vibrant',
+        completionGradients: 'Default'
+      }
+      player.version = 1.9736328125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

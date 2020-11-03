@@ -316,7 +316,11 @@ let initialPlayer = {
     resetColors: true,
     tabColors: true,
     exportDisplay: false,
-    theme: 'Dark',
+    theme: {
+      background: 'Dark',
+      buttonColor: 'Vibrant',
+      completionGradients: 'Default'
+    },
     fitToWidth: true,
     largerCheckboxes: false,
   },
@@ -391,7 +395,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.97265625
+  version: 1.9736328125
 }
 
 let player;

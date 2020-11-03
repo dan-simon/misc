@@ -163,7 +163,7 @@ let Study = function (i) {
       }
     },
     className() {
-      let infix = ['normal', 'infinity', 'time', 'chroma'][this.row() - 1];
+      let infix = ['normal', 'infinity', 'eternity', 'chroma'][this.row() - 1];
       // For the rebuyable studies this order is very important.
       let suffix =  this.isBuyable() ? 'buyable' : (this.isBought() ? 'bought' : 'unbuyable');
       return 'study' + infix + suffix;

@@ -255,7 +255,7 @@ input[type=checkbox] {
 .studynormalbuyable {
   display: table;
   text-align: center;
-  background: radial-gradient(#cccc33, #aaaaaa);
+  background: radial-gradient(var(--study-normal-color), #aaaaaa);
   font-size: 0.875rem;
   width: 256px;
   height: 160px;
@@ -264,7 +264,7 @@ input[type=checkbox] {
 .studynormalbought {
   display: table;
   text-align: center;
-  background: #cccc33;
+  background: var(--study-normal-color);
   font-size: 0.875rem;
   width: 256px;
   height: 160px;
@@ -282,7 +282,7 @@ input[type=checkbox] {
 .studyinfinitybuyable {
   display: table;
   text-align: center;
-  background: radial-gradient(#cc33cc, #aaaaaa);
+  background: radial-gradient(var(--study-infinity-color), #aaaaaa);
   font-size: 0.875rem;
   width: 256px;
   height: 160px;
@@ -291,13 +291,13 @@ input[type=checkbox] {
 .studyinfinitybought {
   display: table;
   text-align: center;
-  background: #cc33cc;
+  background: var(--study-infinity-color);
   font-size: 0.875rem;
   width: 256px;
   height: 160px;
 }
 
-.studytimeunbuyable {
+.studyeternityunbuyable {
   display: table;
   text-align: center;
   background: #555555;
@@ -306,19 +306,19 @@ input[type=checkbox] {
   height: 160px;
 }
 
-.studytimebuyable {
+.studyeternitybuyable {
   display: table;
   text-align: center;
-  background: radial-gradient(#33cccc, #aaaaaa);
+  background: radial-gradient(var(--study-eternity-color), #aaaaaa);
   font-size: 0.875rem;
   width: 256px;
   height: 160px;
 }
 
-.studytimebought {
+.studyeternitybought {
   display: table;
   text-align: center;
-  background: #33cccc;
+  background: var(--study-eternity-color);
   font-size: 0.875rem;
   width: 256px;
   height: 160px;
@@ -336,7 +336,7 @@ input[type=checkbox] {
 .studychromabuyable {
   display: table;
   text-align: center;
-  background: radial-gradient(#33cc33, #aaaaaa);
+  background: radial-gradient(var(--study-chroma-color), #aaaaaa);
   font-size: 0.875rem;
   width: 256px;
   height: 160px;
@@ -345,7 +345,7 @@ input[type=checkbox] {
 .studychromabought {
   display: table;
   text-align: center;
-  background: #33cc33;
+  background: var(--study-chroma-color);
   font-size: 0.875rem;
   width: 256px;
   height: 160px;
@@ -364,7 +364,7 @@ input[type=checkbox] {
 }
 
 .orangespan, .orangediv > span {
-  color: #cc6633;
+  color: #ff9933;
 }
 
 .cyanspan, .cyandiv > span {
@@ -388,7 +388,7 @@ input[type=checkbox] {
 }
 
 .goldspan, .golddiv > span {
-  color: #cc9933;
+  color: #ccaa33;
 }
 
 .chromacurrentgreydiv {
@@ -396,7 +396,7 @@ input[type=checkbox] {
 }
 
 .chromanextgreydiv {
-  background: radial-gradient(var(--background-color), var(--background-color) 75%, #555555);
+  background: radial-gradient(var(--background-color), var(--background-color) 75%, var(--next-grey-color));
 }
 
 .chromacurrentpurplediv {
@@ -404,15 +404,15 @@ input[type=checkbox] {
 }
 
 .chromanextpurplediv {
-  background: radial-gradient(var(--background-color), var(--background-color) 75%, #331166);
+  background: radial-gradient(var(--background-color), var(--background-color) 75%, var(--next-purple-color));
 }
 
 .chromacurrentorangediv {
-  background: radial-gradient(var(--background-color), var(--background-color) 75%, #cc6633);
+  background: radial-gradient(var(--background-color), var(--background-color) 75%, #ff9933);
 }
 
 .chromanextorangediv {
-  background: radial-gradient(var(--background-color), var(--background-color) 75%, #663311);
+  background: radial-gradient(var(--background-color), var(--background-color) 75%, var(--next-orange-color));
 }
 
 .chromacurrentcyandiv {
@@ -420,7 +420,7 @@ input[type=checkbox] {
 }
 
 .chromanextcyandiv {
-  background: radial-gradient(var(--background-color), var(--background-color) 75%, #007777);
+  background: radial-gradient(var(--background-color), var(--background-color) 75%, var(--next-cyan-color));
 }
 
 .chromacurrentgreendiv {
@@ -428,7 +428,7 @@ input[type=checkbox] {
 }
 
 .chromanextgreendiv {
-  background: radial-gradient(var(--background-color), var(--background-color) 75%, #117711);
+  background: radial-gradient(var(--background-color), var(--background-color) 75%, var(--next-green-color));
 }
 
 .chromacurrentreddiv {
@@ -436,7 +436,7 @@ input[type=checkbox] {
 }
 
 .chromanextreddiv {
-  background: radial-gradient(var(--background-color), var(--background-color) 75%, #770000);
+  background: radial-gradient(var(--background-color), var(--background-color) 75%, var(--next-red-color));
 }
 
 .greytogrey {
@@ -454,7 +454,7 @@ input[type=checkbox] {
 }
 
 .greytoorange {
-   background-image: linear-gradient(to right, #aaaaaa, #cc6633);
+   background-image: linear-gradient(to right, #aaaaaa, #ff9933);
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;
@@ -482,7 +482,7 @@ input[type=checkbox] {
 }
 
 .purpletoorange {
-   background-image: linear-gradient(to right, #6633cc, #cc6633);
+   background-image: linear-gradient(to right, #6633cc, #ff9933);
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;
@@ -496,28 +496,28 @@ input[type=checkbox] {
 }
 
 .orangetogrey {
-   background-image: linear-gradient(to right, #cc6633, #aaaaaa);
+   background-image: linear-gradient(to right, #ff9933, #aaaaaa);
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;
 }
 
 .orangetopurple {
-   background-image: linear-gradient(to right, #cc6633, #6633cc);
+   background-image: linear-gradient(to right, #ff9933, #6633cc);
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;
 }
 
 .orangetoorange {
-   background-image: linear-gradient(to right, #cc6633, #cc6633);
+   background-image: linear-gradient(to right, #ff9933, #ff9933);
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;
 }
 
 .orangetogreen {
-   background-image: linear-gradient(to right, #cc6633, #33ff33);
+   background-image: linear-gradient(to right, #ff9933, #33ff33);
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;
@@ -538,7 +538,7 @@ input[type=checkbox] {
 }
 
 .greentoorange {
-   background-image: linear-gradient(to right, #33ff33, #cc6633);
+   background-image: linear-gradient(to right, #33ff33, #ff9933);
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;
