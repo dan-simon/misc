@@ -137,7 +137,7 @@ let ComplexityChallenge = {
     return Math.pow(2, 16);
   },
   longTimeOn(x) {
-    return player.complexityChallengeTimeSpent[x - 1] >= this.longTimeThreshold();
+    return this.isSafeguardOn(x) && player.complexityChallengeTimeSpent[x - 1] >= this.longTimeThreshold();
   },
   anyLongTime() {
     return [2, 3, 4, 5, 6].some(x => this.longTimeOn(x));
