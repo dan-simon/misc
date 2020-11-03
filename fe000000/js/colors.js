@@ -60,11 +60,9 @@ let Colors = {
       let buttonColor = this.getButtonColor(true, i === 'chroma' ? 'studies' : i);
       document.documentElement.style.setProperty('--study-' + i + '-color', buttonColor);
     }
-    for (let i of Chroma.colors) {
-      if (i !== null) {
-        let nextColor = this.interpolate(this.backgroundColor(), this.colorToRgb(this.stringToColorCode['Vibrant'][i]), 0.5);
-        document.documentElement.style.setProperty('--next-' + i + '-color', 'rgb(' + nextColor.map(Math.floor).join(', ') + ')');
-      }
+    for (let i of ['grey', 'purple', 'orange', 'cyan', 'green', 'red']) {
+      let nextColor = this.interpolate(this.backgroundColor(), this.colorToRgb(this.stringToColorCode['Vibrant'][i]), 0.5);
+      document.documentElement.style.setProperty('--next-' + i + '-color', 'rgb(' + nextColor.map(Math.floor).join(', ') + ')');
     }
   },
   colorToRgb(x) {
