@@ -135,6 +135,7 @@ let initialPlayer = {
   firstTwelveStudyPurchaseOrder: [],
   respecStudies: false,
   studyMode: 'Buy',
+  studyDisplayCostWhenBought: false,
   boughtTheoremsThisComplexity: false,
   presets: [],
   eternityProducer: {
@@ -395,7 +396,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9736328125
+  version: 1.974609375
 }
 
 let player;

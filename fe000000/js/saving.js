@@ -769,6 +769,10 @@ let Saving = {
       }
       player.version = 1.9736328125;
     }
+    if (player.version < 1.974609375) {
+      player.studyDisplayCostWhenBought = false;
+      player.version = 1.974609375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

@@ -46,7 +46,7 @@ let Study = function (i) {
       }
     },
     displayCost() {
-      if (this.row() === 4 || !this.isBought()) {
+      if (!player.studyDisplayCostWhenBought || this.row() === 4 || !this.isBought()) {
         return this.cost();
       } else {
         return 2 * (1 + this.row() + Studies.boughtPreviouslyThatAreNotOnRow(this.row(), i));
@@ -399,6 +399,12 @@ let Studies = {
   changeMode() {
     player.studyMode = ['Buy', 'Refund'][
       (['Buy', 'Refund'].indexOf(player.studyMode) + 1) % 2];
+  },
+  costDisplayMode() {
+    return player.studyDisplayCostWhenBought ? 'Cost when study was bought' : 'Cost if study were most recent bought';
+  },
+  changeCostDisplayMode() {
+    player.studyDisplayCostWhenBought = !player.studyDisplayCostWhenBought
   },
   boughtTheoremsThisComplexity() {
     return player.boughtTheoremsThisComplexity;
