@@ -40,9 +40,16 @@ let Study = function (i) {
     },
     cost() {
       if (this.row() === 4) {
-        return this.costAtBought(this.timesBought())
+        return this.costAtBought(this.timesBought());
       } else {
         return 2 * (1 + this.row() + Studies.boughtThatAreNotOnRow(this.row()));
+      }
+    },
+    displayCost() {
+      if (this.row() === 4 || !this.isBought()) {
+        return this.cost();
+      } else {
+        return 2 * (1 + this.row() + Studies.boughtPreviouslyThatAreNotOnRow(this.row(), i));
       }
     },
     costAtBought(x) {
@@ -257,6 +264,10 @@ let Studies = {
   },
   boughtThatAreNotOnRow(x) {
     return this.list.slice(0, 12).filter(y => y.isBought() && y.row() !== x).length;
+  },
+  boughtPreviouslyThatAreNotOnRow(x, z) {
+    let order = player.firstTwelveStudyPurchaseOrder;
+    return order.slice(0, order.indexOf(z)).filter(y => Study(y).row() !== x).length;
   },
   exportString() {
     let extraList = [13, 14, 15, 16].map(x => Study(x).timesBought());
