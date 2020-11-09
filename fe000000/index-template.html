@@ -2100,7 +2100,7 @@
         </table>
         <br/>
         <div ~style.display=Permanence.hasGainedPermanence() ? '' : 'none'~>
-          <span>You have ~f Permanence.amount() ~ permanence. <button ~class=Permanence.anythingToBuy() ? "" : "disabled"~ onclick="Permanence.maxAll()">Max permanence upgrades</button></span>
+          <span>You have ~f Permanence.amount() ~ permanence. You get ~r Permanence.conversionText() ~. <button ~class=Permanence.anythingToBuy() ? "" : "disabled"~ onclick="Permanence.maxAll()">Max permanence upgrades</button></span>
           <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
             <tr>
               <td>Multiplier to eternity gain:</td>
@@ -2134,6 +2134,8 @@
         </div>
         <span ~style.display=Permanence.canGainPermanence() ? '' : 'none'~><button style="height: 48px;" onclick="Permanence.gainPermanence()">Lose all but ~i Permanence.getLeftoverEternities() ~ eternities,<br/>but gain ~f Permanence.permanenceGain() ~ permanence.</button></span>
         <span ~style.display=Permanence.canGainPermanence() ? 'none' : ''~>You need ~f Permanence.getRequiredEternities() ~ eternities to gain permanence.<span ~style.display=Permanence.hasGainedPermanence() ? 'none' : ''~> Permanence can be spent on a variety of upgrades.</span></span>
+        <br ~style.display=Permanence.hasGainedPermanence() ? 'none' : ''~/>
+        <span ~style.display=Permanence.hasGainedPermanence() ? 'none' : ''~>You get ~r Permanence.conversionText() ~.</span>
       </div>
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'eternity-challenges' ? '' : 'none'~>

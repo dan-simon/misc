@@ -1,15 +1,23 @@
 let Permanence = {
   getRequiredEternities() {
-    return this.getEternitiesPerPermanence() + this.getLeftoverEternities();
+    return this.getEternitiesPerPermanence().plus(this.getLeftoverEternities());
   },
   getLeftoverEternities() {
     return 16;
   },
   getTotalPermanenceMultiplier() {
-    return PermanenceUpgrade(4).effect() * Complexities.permanenceMultiplier() * FinalityShardUpgrade(3).effect();
+    return PermanenceUpgrade(4).effect().times(Complexities.permanenceMultiplier()).times(FinalityShardUpgrade(3).effect());
   },
   getEternitiesPerPermanence() {
-    return Math.pow(2, 24) / this.getTotalPermanenceMultiplier();
+    return Decimal.pow(2, 24).div(this.getTotalPermanenceMultiplier());
+  },
+  conversionText() {
+    let eternitiesPer = this.getEternitiesPerPermanence();
+    if (eternitiesPer.gt(1)) {
+      return formatInt(1) + ' permanence per ' + format(eternitiesPer) + ' eternities';
+    } else {
+      return format(Decimal.div(1, eternitiesPer)) + ' permanence per eternity';
+    }
   },
   canGainPermanence() {
     return EternityProducer.isUnlocked() && Eternities.amount().gte(this.getRequiredEternities());
