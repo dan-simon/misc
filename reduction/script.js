@@ -84,37 +84,44 @@ let move = function (board, space) {
   }
 }
 
+let press = function (key) {
+  if (key.length === 1) {
+    key = 'Key' + key.toUpperCase();
+  }
+  if (key === 'KeyR') {
+    globalState.board = {};
+    globalState.offsets = [0, 0];
+    drawBoard(globalState.board, globalState.offsets);
+    return;
+  }
+  if (key === 'KeyG') {
+    globalState.board = generateReducibleBoard();
+    globalState.offsets = [0, 0];
+    drawBoard(globalState.board, globalState.offsets);
+    return;
+  }
+  let d = {
+    'KeyD': [-1, 0],
+    'ArrowLeft': [-1, 0],
+    'KeyA': [1, 0],
+    'ArrowRight': [1, 0],
+    'KeyS': [0, 1],
+    'ArrowDown': [0, 1],
+    'KeyW': [0, -1],
+    'ArrowUp': [0, -1],
+  };
+  if (!(key in d)) return;
+  let x = d[key];
+  globalState.offsets[0] += x[0];
+  globalState.offsets[1] += x[1];
+  drawBoard(globalState.board, globalState.offsets);
+}
+
 window.onload = function() {
   drawBoard(globalState.board, globalState.offsets);
   window.addEventListener("keydown", function(event) {
     if (event.defaultPrevented) return;
-    if (event.code === 'KeyR') {
-      globalState.board = {};
-      globalState.offsets = [0, 0];
-      drawBoard(globalState.board, globalState.offsets);
-      return;
-    }
-    if (event.code === 'KeyG') {
-      globalState.board = generateReducibleBoard();
-      globalState.offsets = [0, 0];
-      drawBoard(globalState.board, globalState.offsets);
-      return;
-    }
-    let d = {
-      'KeyD': [-1, 0],
-      'ArrowLeft': [-1, 0],
-      'KeyA': [1, 0],
-      'ArrowRight': [1, 0],
-      'KeyS': [0, 1],
-      'ArrowDown': [0, 1],
-      'KeyW': [0, -1],
-      'ArrowUp': [0, -1],
-    };
-    if (!(event.code in d)) return;
-    let x = d[event.code]
-    globalState.offsets[0] += x[0];
-    globalState.offsets[1] += x[1];
-    drawBoard(globalState.board, globalState.offsets);
+    press(event.code);
     event.preventDefault();
   }, true);
   document.getElementById('board').onclick = function (event) {
