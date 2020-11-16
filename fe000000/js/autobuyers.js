@@ -245,6 +245,15 @@ let Autobuyers = {
     } else if (mode === 'Fraction of peak/sec') {
       EternityPrestigeLayer.updatePeakEPPerSec();
       shouldEternity = EternityPrestigeLayer.currentEPPerSec().lte(EternityPrestigeLayer.peakEPPerSec().times(priority));
+    } else if (mode === 'Chroma amount') {
+      // We use display amount here because colors were just updated,
+      // potentially increasing the chroma amount (through orange, for example)
+      // but not increasing the color amounts (or the display amount).
+      // And if the player asked for x chroma, they probably wanted x of
+      // whatever color they were producing, too.
+      shouldEternity = Chroma.displayAmount() >= priority;
+    } else if (mode === 'Chroma as fraction of cap') {
+      shouldEternity = Chroma.displayAmount() >= Chroma.cap() * priority;
     }
     if (shouldEternity) {
       EternityPrestigeLayer.eternity(false);

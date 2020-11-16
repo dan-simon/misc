@@ -980,6 +980,8 @@
                 <option value="X times best of last ten">X times best of last ten</option>
                 <option value="Time past peak/sec">Time past peak/sec</option>
                 <option value="Fraction of peak/sec">Fraction of peak/sec</option>
+                <option value="Chroma amount" ~style.display=(Chroma.isUnlocked() || PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~>Chroma amount</option>
+                <option value="Chroma as fraction of cap" ~style.display=(Chroma.isUnlocked() || PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~>Chroma as fraction of cap</option>
               </select></span>
               <br/>
               <span>~r Autobuyer(13).mode() ~:</span>
