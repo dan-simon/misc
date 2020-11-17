@@ -865,7 +865,7 @@ function updateDisplay() {
     e[116].textContent = format(Sacrifice.sacrificeMultiplierGain());
     e[117].textContent = format(Sacrifice.sacrificeMultiplierMultGain());
     b[95].style.display = Sacrifice.canSacrifice() ? 'none' : '';
-    e[118].textContent = format(Sacrifice.sacrificeRequirement());
+    e[118].textContent = Sacrifice.sacrificeRequirementText();
     b[96].style.display = Prestige.isVisible() ? '' : 'none';
     e[119].textContent = format(Prestige.prestigePower());
     e[120].textContent = Generators.term();

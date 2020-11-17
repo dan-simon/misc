@@ -280,7 +280,7 @@
           <span>You have a ~f Sacrifice.sacrificeMultiplier() ~ sacrifice multiplier multiplying Generator 8 by its amount.</span>
           <br/>
           <span ~style.display=Sacrifice.canSacrifice() ? '' : 'none'~><button style="height: 48px;" onclick="Sacrifice.sacrifice(true)">Sacrifice: ~f Sacrifice.sacrificeMultiplier() ~ → ~f Sacrifice.newSacrificeMultiplier() ~<br/>(+~f Sacrifice.sacrificeMultiplierGain() ~, ~f Sacrifice.sacrificeMultiplierMultGain() ~x)</button></span>
-          <span ~style.display=Sacrifice.canSacrifice() ? 'none' : ''~>You need ~f Sacrifice.sacrificeRequirement() ~ stars and at least one of Generator 8 to sacrifice.</span>
+          <span ~style.display=Sacrifice.canSacrifice() ? 'none' : ''~>You need ~r Sacrifice.sacrificeRequirementText() ~ to sacrifice.</span>
         </div>
         <div ~style.display=Prestige.isVisible() ? '' : 'none'~>
           <br/>
