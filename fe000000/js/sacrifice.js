@@ -27,8 +27,11 @@ let Sacrifice = {
     }
     return req;
   },
+  bestStarsThisSacrifice() {
+    return player.stats.bestStarsThisSacrifice;
+  },
   canSacrifice() {
-    return Generator(8).amount().gt(0) && player.stars.gte(this.sacrificeRequirement()) && !InfinityPrestigeLayer.mustInfinity();
+    return Generator(8).amount().gt(0) && this.bestStarsThisSacrifice().gte(this.sacrificeRequirement()) && !InfinityPrestigeLayer.mustInfinity();
   },
   isVisible() {
     // This basically used to be as follows: this.canSacrifice() || this.sacrificeMultiplier().gt(1) || player.infinities > 0 || player.eternities.gt(0);
@@ -37,9 +40,10 @@ let Sacrifice = {
     return !Challenge.isChallengeEffectActive(6);
   },
   newSacrificeMultiplier() {
-    let mult = new Decimal(player.stars.log(2) / 16);
+    let stars = this.bestStarsThisSacrifice();
+    let mult = new Decimal(stars.log(2) / 16);
     if (this.hasStrongerSacrifice()) {
-      mult = mult.max(player.stars.pow(this.sacrificeExponent()));
+      mult = mult.max(stars.pow(this.sacrificeExponent()));
     }
     if (Challenge.isChallengeRunning(10)) {
       mult = mult.times(this.sacrificeMultiplier());
@@ -74,7 +78,8 @@ let Sacrifice = {
       Generators.resetAmounts(7);
     }
     // Sacrificing still resets times (this matters in a few challenges
-    // and in stats tab).
+    // and in stats tab). It also still resets best stars.
+    player.stats.bestStarsThisSacrifice = Stars.amount();
     player.stats.timeSincePurchase = 0;
     player.stats.timeSinceSacrifice = 0;
   }

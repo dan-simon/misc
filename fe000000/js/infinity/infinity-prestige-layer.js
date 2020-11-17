@@ -28,7 +28,7 @@ let InfinityPrestigeLayer = {
     }
   },
   canInfinity() {
-    return Stars.amount().gte(this.starRequirementForInfinity());
+    return this.bestStarsThisInfinity().gte(this.starRequirementForInfinity());
   },
   mustInfinity() {
     return this.canInfinity() && !this.isInfinityBroken();
@@ -39,11 +39,14 @@ let InfinityPrestigeLayer = {
   isAmountSpanVisible() {
     return this.isRequirementVisible() && PrestigeLayerProgress.hasReached('infinity');
   },
+  bestStarsThisInfinity() {
+    return player.stats.bestStarsThisInfinity;
+  },
   infinityPointGain() {
     if (!this.canInfinity()) {
       return new Decimal(0);
     }
-    let oom = (this.isInfinityBroken() ? Stars.amount() : this.starRequirementForInfinity()).max(1).log(2) / 256;
+    let oom = (this.isInfinityBroken() ? this.bestStarsThisInfinity() : this.starRequirementForInfinity()).max(1).log(2) / 256;
     return Decimal.pow(2, oom).floor();
   },
   infinityPoints() {
@@ -124,6 +127,7 @@ let InfinityPrestigeLayer = {
     player.prestigePower = new Decimal(1);
     player.infinityStars = new Decimal(1);
     InfinityGenerators.list.forEach(x => x.resetAmount());
+    player.stats.bestStarsThisInfinity = Stars.amount();
     player.stats.timeSinceInfinity = 0;
     player.stats.timeSinceLastPeakIPPerSec = Math.pow(2, 256);
     player.stats.peakIPPerSec = new Decimal(0);

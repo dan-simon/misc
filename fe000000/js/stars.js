@@ -32,6 +32,10 @@ let Stars = {
     let oldStars = player.stars;
     player.stars = player.stars.plus(x).min(this.limit());
     let change = player.stars.minus(oldStars).max(0);
+    // Update stats with stars (and change).
+    player.stats.bestStarsThisSacrifice = player.stats.bestStarsThisSacrifice.max(player.stars);
+    player.stats.bestStarsThisPrestige = player.stats.bestStarsThisPrestige.max(player.stars);
+    player.stats.bestStarsThisInfinity = player.stats.bestStarsThisInfinity.max(player.stars);
     player.stats.totalStarsProduced = player.stats.totalStarsProduced.plus(change);
     player.stats.totalStarsProducedThisEternity = player.stats.totalStarsProducedThisEternity.plus(change);
     player.stats.totalStarsProducedThisComplexity = player.stats.totalStarsProducedThisComplexity.plus(change);

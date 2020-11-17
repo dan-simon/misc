@@ -28,8 +28,11 @@ let Prestige = {
   prestigeRequirement() {
     return Decimal.pow(2, Math.max(128, 96 + 16 * Decimal.log2(this.prestigePower()) / this.prestigePowerExponent()));
   },
+  bestStarsThisPrestige() {
+    return player.stats.bestStarsThisPrestige;
+  },
   canPrestige() {
-    return player.stars.gte(this.prestigeRequirement()) && !InfinityPrestigeLayer.mustInfinity() && !this.isPrestigeDisabled();
+    return this.bestStarsThisPrestige().gte(this.prestigeRequirement()) && !InfinityPrestigeLayer.mustInfinity() && !this.isPrestigeDisabled();
   },
   isVisible() {
     // This basically used to be as follows: (this.canPrestige() || this.prestigePower().gt(1) || player.infinities > 0 || player.eternities.gt(0)) && !this.isPrestigeDisabled();
@@ -38,7 +41,7 @@ let Prestige = {
     return !this.isPrestigeDisabled() && SpecialDivs.isDivVisible('prestige');
   },
   newPrestigePower() {
-    return this.canPrestige() ? Decimal.pow(2, this.prestigePowerExponent() * (player.stars.max(1).log(2) - 96) / 16) : this.prestigePower();
+    return this.canPrestige() ? Decimal.pow(2, this.prestigePowerExponent() * (this.bestStarsThisPrestige().max(1).log(2) - 96) / 16) : this.prestigePower();
   },
   prestigePowerGain() {
     return this.newPrestigePower().minus(this.prestigePower());
@@ -67,7 +70,9 @@ let Prestige = {
       player.sacrificeMultiplier = new Decimal(1);
     }
     // Prestiging still resets times (this matters in a few challenges
-    // and in stats tab).
+    // and in stats tab). It also still resets best stars.
+    player.stats.bestStarsThisSacrifice = Stars.amount();
+    player.stats.bestStarsThisPrestige = Stars.amount();
     player.stats.timeSincePurchase = 0;
     player.stats.timeSinceSacrifice = 0;
     player.stats.timeSincePrestige = 0;

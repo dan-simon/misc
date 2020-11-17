@@ -773,6 +773,12 @@ let Saving = {
       player.studyDisplayCostWhenBought = false;
       player.version = 1.974609375;
     }
+    if (player.version < 1.9755859375) {
+      player.stats.bestStarsThisSacrifice = player.stars;
+      player.stats.bestStarsThisPrestige = player.stars;
+      player.stats.bestStarsThisInfinity = player.stars;
+      player.version = 1.9755859375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
@@ -796,6 +802,9 @@ let Saving = {
     player.eternities = new Decimal(player.eternities);
     player.permanence = new Decimal(player.permanence);
     player.stats.lastPermanenceGain = new Decimal(player.stats.lastPermanenceGain);
+    player.stats.bestStarsThisSacrifice = new Decimal(player.stats.bestStarsThisSacrifice);
+    player.stats.bestStarsThisPrestige = new Decimal(player.stats.bestStarsThisPrestige);
+    player.stats.bestStarsThisInfinity = new Decimal(player.stats.bestStarsThisInfinity);
     player.stats.totalStarsProduced = new Decimal(player.stats.totalStarsProduced);
     player.stats.totalStarsProducedThisEternity = new Decimal(player.stats.totalStarsProducedThisEternity);
     player.stats.totalStarsProducedThisComplexity = new Decimal(player.stats.totalStarsProducedThisComplexity);

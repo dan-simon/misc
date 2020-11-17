@@ -341,6 +341,9 @@ let initialPlayer = {
   },
   stats: {
     totalStarsProduced: new Decimal(0),
+    bestStarsThisSacrifice: new Decimal(2),
+    bestStarsThisPrestige: new Decimal(2),
+    bestStarsThisInfinity: new Decimal(2),
     totalStarsProducedThisEternity: new Decimal(0),
     totalStarsProducedThisComplexity: new Decimal(0),
     totalStarsProducedThisFinality: new Decimal(0),
@@ -396,7 +399,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.974609375
+  version: 1.9755859375
 }
 
 let player;
