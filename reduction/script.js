@@ -101,9 +101,9 @@ let press = function (key) {
     return;
   }
   let d = {
-    'KeyD': [-1, 0],
+    'KeyA': [-1, 0],
     'ArrowLeft': [-1, 0],
-    'KeyA': [1, 0],
+    'KeyD': [1, 0],
     'ArrowRight': [1, 0],
     'KeyS': [0, 1],
     'ArrowDown': [0, 1],
