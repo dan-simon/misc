@@ -251,9 +251,9 @@ let Autobuyers = {
       // but not increasing the color amounts (or the display amount).
       // And if the player asked for x chroma, they probably wanted x of
       // whatever color they were producing, too.
-      shouldEternity = Chroma.displayAmount() >= priority;
+      shouldEternity = Chroma.displayAmount() >= priority.toNumber();
     } else if (mode === 'Chroma as fraction of cap') {
-      shouldEternity = Chroma.displayAmount() >= Chroma.cap() * priority;
+      shouldEternity = Chroma.displayAmount() >= Chroma.cap() * priority.toNumber();
     }
     if (shouldEternity) {
       EternityPrestigeLayer.eternity(false);
@@ -294,6 +294,11 @@ let Autobuyers = {
     } else if (mode === 'Fraction of peak/sec') {
       ComplexityPrestigeLayer.updatePeakCPPerSec();
       shouldComplexity = ComplexityPrestigeLayer.currentCPPerSec().lte(ComplexityPrestigeLayer.peakCPPerSec().times(priority));
+    } else if (mode === 'Eternity power extra multiplier') {
+      shouldComplexity = Powers.getExtraMultiplier('eternity') >= priority.toNumber();
+    } else if (mode === 'Galaxy effect (0 means cap)') {
+      // If priority is 0, this uses Galaxy.effectCap() instead.
+      shouldComplexity = Galaxy.effect() >= (priority.toNumber() || Galaxy.effectCap());
     }
     if (shouldComplexity) {
       ComplexityPrestigeLayer.complexity(false);

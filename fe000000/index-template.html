@@ -1019,6 +1019,8 @@
                 <option value="X times best of last ten">X times best of last ten</option>
                 <option value="Time past peak/sec">Time past peak/sec</option>
                 <option value="Fraction of peak/sec">Fraction of peak/sec</option>
+                <option value="Eternity power extra multiplier" ~style.display=(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Eternity power extra multiplier</option>
+                <option value="Galaxy effect (0 means cap)" ~style.display=(Galaxy.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Galaxy effect (0 means cap)</option>
               </select></span>
               <br/>
               <span>~r Autobuyer(15).mode() ~:</span>
