@@ -223,7 +223,7 @@ let Studies = {
     player.studySettings.respecStudies = !player.studySettings.respecStudies;
   },
   respec() {
-    if (ComplexityAchievements.hasComplexityAchievement(4, 4)) {
+    if (ComplexityAchievements.hasComplexityAchievement(4, 4) && !Studies.areStudiesInitialStudies()) {
       Studies.setStudiesBeforeLastRespec();
     }
     for (let i = 0; i < 12; i++) {
@@ -419,7 +419,7 @@ let Studies = {
     player.studySettings.rebuyAfterComplexityChallenge6 = !player.studySettings.rebuyAfterComplexityChallenge6;
   },
   areStudiesInitialStudies() {
-    return player.studies.join(',') !== initialStudies().join(',');
+    return player.studies.join(',') === initialStudies().join(',');
   },
   boughtTheoremsThisComplexity() {
     return player.studySettings.boughtTheoremsThisComplexity;
