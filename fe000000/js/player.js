@@ -32,6 +32,14 @@ function initialAutobuyers() {
   ];
 }
 
+function initialStudies() {
+  return [
+    false, false, false, false, false, false,
+    false, false, false, false, false, false,
+    0, 0, 0, 0
+  ];
+}
+
 function initialLastTenInfinities() {
   return [
     [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
@@ -127,16 +135,16 @@ let initialPlayer = {
   ],
   boughtTheorems: [0, 0, 0],
   extraTheorems: [0, 0, 0, 0],
-  studies: [
-    false, false, false, false, false, false,
-    false, false, false, false, false, false,
-    0, 0, 0, 0
-  ],
-  firstTwelveStudyPurchaseOrder: [],
-  respecStudies: false,
-  studyMode: 'Buy',
-  studyDisplayCostWhenBought: false,
-  boughtTheoremsThisComplexity: false,
+  studies: initialStudies(),
+  studySettings: {
+    firstTwelveStudyPurchaseOrder: [],
+    respecStudies: false,
+    studyMode: 'Buy',
+    studyDisplayCostWhenBought: false,
+    boughtTheoremsThisComplexity: false,
+    rebuyAfterComplexityChallenge6: true,
+    studiesBeforeLastRespec: initialStudies(),
+  },
   presets: [],
   eternityProducer: {
     unlocked: false,
@@ -259,7 +267,6 @@ let initialPlayer = {
     true, true, true, true, true, true, true, true,
     true, true, true, true, true, true, true
   ],
-  viewAllGenerators: false,
   goals: [
     false, false, false, false, false, false, false, false,
     false, false, false, false, false, false, false, false
@@ -324,6 +331,8 @@ let initialPlayer = {
     },
     fitToWidth: true,
     largerCheckboxes: false,
+    viewAllGenerators: false,
+    viewGeneratorsWhenStarsAtLimit: false,
   },
   confirmations: {
     sacrifice: true,
@@ -399,7 +408,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9755859375
+  version: 1.9765625
 }
 
 let player;

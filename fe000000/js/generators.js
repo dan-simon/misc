@@ -155,10 +155,16 @@ let Generators = {
     return Generators.list.some(x => x.multiplier().gte(this.nerfValue()));
   },
   viewAll() {
-    return player.viewAllGenerators;
+    return player.options.viewAllGenerators;
   },
   setViewAll(x) {
-    player.viewAllGenerators = x;
+    player.options.viewAllGenerators = x;
+  },
+  viewWhenStarsAtLimit() {
+    return player.options.viewGeneratorsWhenStarsAtLimit;
+  },
+  setViewWhenStarsAtLimit(x) {
+    player.options.viewGeneratorsWhenStarsAtLimit = x;
   },
   term(singular, title) {
     let x = (PrestigeLayerProgress.hasReached('infinity') ? 'normal generator' : 'generator') + (singular ? '' : 's');

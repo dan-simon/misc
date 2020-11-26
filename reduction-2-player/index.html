@@ -7,8 +7,8 @@
   <span>Click on an intersection to change the 2x2 area around it (green = legal, red = not legal).</span>
   <br/>
   <span>
-    Game settings: Board size: <input id="size" type="number" min="10" max="20" value="16"/> Max allowed changes at once: <input id="changes" type="number" min="1" max="20" value="5"/>
-    Confirm moves: <input id="confirm" type="checkbox"/> Challenge: <input id="allow-challenge" type="checkbox"/> <button id="start" onclick="startGame()">Start game!</button>
+    Game settings: Board size: <input id="size" type="number" min="10" max="20" value="16"/> Max changes per turn: <input id="changes" type="number" min="1" max="20" value="5"/> Max undos per turn: <input id="max-undos" type="number" min="0" max="10" value="0"/>
+    Confirm turn completion: <input id="confirm" type="checkbox"/> Challenge: <input id="allow-challenge" type="checkbox"/> <button id="start" onclick="startGame()">Start game!</button>
   </span>
   <br/>
   <span>Note: these game settings cannot be changed during the game.</span>
@@ -17,8 +17,8 @@
     <span id="game-text">Game has not started yet.</span>
     <button id="undo" style="display: none;" onclick="undo()">Undo change (U)</button>
     <button id="reset" style="display: none;" onclick="reset()">Reset changes (R)</button>
-    <button id="challenge" style="display: none;" onclick="challenge()">Challenge your opponent's last move</button>
-    <button id="complete" style="display: none;" onclick="completeMove()">Complete move</button>
+    <button id="challenge" style="display: none;" onclick="challenge()">Challenge your opponent's last turn</button>
+    <button id="complete" style="display: none;" onclick="completeTurn()">Complete turn</button>
     <button id="concede" style="display: none;" onclick="concedeGame()">Concede (other player wins)</button>
   </span>
   <br/>

@@ -125,19 +125,18 @@ let ComplexityPrestigeLayer = {
     if (!ComplexityAchievements.hasComplexityAchievement(4, 4)) {
       player.boughtTheorems = [0, 0, 0];
     }
-    if (!ComplexityAchievements.hasComplexityAchievement(4, 4) || player.respecStudies || ComplexityChallenge.isSafeguardOn(6)) {
-      player.studies = [
-        false, false, false, false, false, false,
-        false, false, false, false, false, false,
-        0, 0, 0, 0
-      ];
-      player.firstTwelveStudyPurchaseOrder = [];
+    if (!ComplexityAchievements.hasComplexityAchievement(4, 4) || player.studySettings.respecStudies || ComplexityChallenge.isSafeguardOn(6)) {
+      if (ComplexityAchievements.hasComplexityAchievement(4, 4) && Studies.areStudiesInitialStudies()) {
+        Studies.setStudiesBeforeLastRespec();
+      }
+      player.studies = initialStudies();
+      player.studySettings.firstTwelveStudyPurchaseOrder = [];
     }
     if (Studies.list.some(x => x.isBought())) {
       ComplexityChallenge.exitComplexityChallenge(6);
     }
-    player.respecStudies = false;
-    player.boughtTheoremsThisComplexity = false;
+    player.studySettings.respecStudies = false;
+    player.studySettings.boughtTheoremsThisComplexity = false;
     player.eternityProducer = {
       unlocked: false,
       upgrades: [0, 0]

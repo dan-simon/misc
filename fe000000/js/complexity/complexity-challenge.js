@@ -123,6 +123,10 @@ let ComplexityChallenge = {
   },
   toggleSafeguard(x) {
     player.complexityChallengeSafeguards[x - 2] = !player.complexityChallengeSafeguards[x - 2];
+    if (x === 6 && !player.complexityChallengeSafeguards[x - 2] &&
+      ComplexityAchievements.hasComplexityAchievement(4, 4) && Studies.rebuyAfterComplexityChallenge6()) {
+      player.studies = [...player.studySettings.studiesBeforeLastRespec];
+    }
   },
   addToTimeStats(diff) {
     for (let i = 1; i <= 6; i++) {

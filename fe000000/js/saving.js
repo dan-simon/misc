@@ -779,6 +779,26 @@ let Saving = {
       player.stats.bestStarsThisInfinity = player.stars;
       player.version = 1.9755859375;
     }
+    if (player.version < 1.9765625) {
+      player.options.viewAllGenerators = player.viewAllGenerators;
+      delete player.viewAllGenerators;
+      player.options.viewGeneratorsWhenStarsAtLimit = false;
+      player.studySettings = {
+        firstTwelveStudyPurchaseOrder: player.firstTwelveStudyPurchaseOrder,
+        respecStudies: player.respecStudies,
+        studyMode: player.studyMode,
+        studyDisplayCostWhenBought: player.studyDisplayCostWhenBought,
+        boughtTheoremsThisComplexity: player.boughtTheoremsThisComplexity,
+        rebuyAfterComplexityChallenge6: true,
+        studiesBeforeLastRespec: initialStudies(),
+      },
+      delete player.firstTwelveStudyPurchaseOrder;
+      delete player.respecStudies
+      delete player.studyMode;
+      delete player.studyDisplayCostWhenBought;
+      delete player.boughtTheoremsThisComplexity;
+      player.version = 1.9765625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

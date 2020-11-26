@@ -46,7 +46,7 @@ let Study = function (i) {
       }
     },
     displayCost() {
-      if (!player.studyDisplayCostWhenBought || this.row() === 4 || !this.isBought()) {
+      if (!player.studySettings.studyDisplayCostWhenBought || this.row() === 4 || !this.isBought()) {
         return this.cost();
       } else {
         return 2 * (1 + this.row() + Studies.boughtPreviouslyThatAreNotOnRow(this.row(), i));
@@ -130,7 +130,7 @@ let Study = function (i) {
           player.studies[i - 1]++;
         } else {
           player.studies[i - 1] = true;
-          player.firstTwelveStudyPurchaseOrder.push(i);
+          player.studySettings.firstTwelveStudyPurchaseOrder.push(i);
         }
         ComplexityChallenge.exitComplexityChallenge(6);
       }
@@ -154,7 +154,7 @@ let Study = function (i) {
         player.studies[i - 1]--;
       } else {
         player.studies[i - 1] = false;
-        player.firstTwelveStudyPurchaseOrder = player.firstTwelveStudyPurchaseOrder.filter(j => j !== i);
+        player.studySettings.firstTwelveStudyPurchaseOrder = player.studySettings.firstTwelveStudyPurchaseOrder.filter(j => j !== i);
       }
       if (EternityPrestigeLayer.canEternity()) {
         EternityPrestigeLayer.eternity(false);
@@ -217,17 +217,23 @@ let Studies = {
     return firstThreeRowsInitial + firstThreeRowsExtra + fourthRow + eternityChallenge;
   },
   isRespecOn() {
-    return player.respecStudies;
+    return player.studySettings.respecStudies;
   },
   toggleRespec() {
-    player.respecStudies = !player.respecStudies;
+    player.studySettings.respecStudies = !player.studySettings.respecStudies;
   },
   respec() {
+    if (ComplexityAchievements.hasComplexityAchievement(4, 4)) {
+      Studies.setStudiesBeforeLastRespec();
+    }
     for (let i = 0; i < 12; i++) {
       player.studies[i] = false;
     }
-    player.firstTwelveStudyPurchaseOrder = [];
+    player.studySettings.firstTwelveStudyPurchaseOrder = [];
     this.respecFourthRow();
+  },
+  setStudiesBeforeLastRespec() {
+    player.studySettings.studiesBeforeLastRespec = [...player.studies];
   },
   respecFourthRow() {
     for (let i = 12; i < 16; i++) {
@@ -238,7 +244,7 @@ let Studies = {
     if (this.isRespecOn()) {
       this.respec();
     }
-    player.respecStudies = false;
+    player.studySettings.respecStudies = false;
   },
   respecAndReset() {
     if (Options.confirmation('studiesRespec') && !confirm(
@@ -266,13 +272,13 @@ let Studies = {
     return this.list.slice(0, 12).filter(y => y.isBought() && y.row() !== x).length;
   },
   boughtPreviouslyThatAreNotOnRow(x, z) {
-    let order = player.firstTwelveStudyPurchaseOrder;
+    let order = player.studySettings.firstTwelveStudyPurchaseOrder;
     return order.slice(0, order.indexOf(z)).filter(y => Study(y).row() !== x).length;
   },
   exportString() {
     let extraList = [13, 14, 15, 16].map(x => Study(x).timesBought());
     let extraString = extraList.some(x => x !== 0) ? '&s' + extraList.join(',') : '';
-    return (player.firstTwelveStudyPurchaseOrder.join(',') || 'none') + extraString;
+    return (player.studySettings.firstTwelveStudyPurchaseOrder.join(',') || 'none') + extraString;
   },
   export() {
     let output = document.getElementById('study-export-output');
@@ -376,14 +382,14 @@ let Studies = {
     if (this.canBuy(x)) {
       this.setStat(x, this.getStat(x).safeMinus(this.cost(x)));
       player.boughtTheorems[x] += 1;
-      player.boughtTheoremsThisComplexity = true;
+      player.studySettings.boughtTheoremsThisComplexity = true;
     }
   },
   buyMax(x) {
     while (this.canBuy(x)) {
       this.setStat(x, this.getStat(x).safeMinus(this.cost(x)));
       player.boughtTheorems[x] += 1;
-      player.boughtTheoremsThisComplexity = true;
+      player.studySettings.boughtTheoremsThisComplexity = true;
     }
   },
   canMaxFourthRowStudies() {
@@ -394,20 +400,29 @@ let Studies = {
     this.importString('&s1,1,1,1');
   },
   mode() {
-    return player.studyMode;
+    return player.studySettings.studyMode;
   },
   changeMode() {
-    player.studyMode = ['Buy', 'Refund'][
-      (['Buy', 'Refund'].indexOf(player.studyMode) + 1) % 2];
+    player.studySettings.studyMode = ['Buy', 'Refund'][
+      (['Buy', 'Refund'].indexOf(player.studySettings.studyMode) + 1) % 2];
   },
   costDisplayMode() {
-    return player.studyDisplayCostWhenBought ? 'Cost when study was bought' : 'Cost if study were most recent bought';
+    return player.studySettings.studyDisplayCostWhenBought ? 'Cost when study was bought' : 'Cost if study were most recent bought';
   },
   changeCostDisplayMode() {
-    player.studyDisplayCostWhenBought = !player.studyDisplayCostWhenBought
+    player.studySettings.studyDisplayCostWhenBought = !player.studySettings.studyDisplayCostWhenBought
+  },
+  rebuyAfterComplexityChallenge6() {
+    return player.studySettings.rebuyAfterComplexityChallenge6;
+  },
+  toggleRebuyAfterComplexityChallenge6() {
+    player.studySettings.rebuyAfterComplexityChallenge6 = !player.studySettings.rebuyAfterComplexityChallenge6;
+  },
+  areStudiesInitialStudies() {
+    return player.studies.join(',') !== initialStudies().join(',');
   },
   boughtTheoremsThisComplexity() {
-    return player.boughtTheoremsThisComplexity;
+    return player.studySettings.boughtTheoremsThisComplexity;
   },
   isAutoLoadUnlocked() {
     return FinalityMilestones.isFinalityMilestoneActive(3);

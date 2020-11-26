@@ -152,13 +152,43 @@ let PowerShards = {
       'rarity': this.craftedRarity(),
     }
   },
-  craftedPowerCost() {
+  craftedPowerCost(rarity) {
+    if (rarity === undefined) {
+      rarity = this.craftedRarity();
+    }
     return Math.max(
       2 * this.shardGain(this.craftedPower()),
-      4 * Math.pow(2, Math.pow(this.craftedRarity(), 2) - Math.pow(Powers.minimumRarity(), 2)));
+      4 * Math.pow(2, Math.pow(rarity, 2) - Math.pow(Powers.minimumRarity(), 2)));
+  },
+  craftSafetyMargin() {
+    return 1e-10;
   },
   canCraft() {
-    return player.powers.shards >= this.craftedPowerCost();
+    return player.powers.shards >= this.craftedPowerCost() - this.craftSafetyMargin();
+  },
+  craft() {
+    if (!this.canCraft()) return;
+    player.powers.shards -= Math.max(player.powers.shards, this.craftedPowerCost());
+    player.powers.stored.push(this.craftedPower());
+    Powers.cleanStored();
+    Powers.autoSort();
+  },
+  canCraftAny() {
+    return player.powers.shards >= this.craftedPowerCost(0) - this.craftSafetyMargin();
+  },
+  maxCraftRarity() {
+    return Math.min(
+      (this.amount() / 2 - 1) / this.craftedRarity(),
+      Math.sqrt(Math.log2(this.amount() / 4) + Math.pow(Powers.minimumRarity(), 2)));
+  },
+  maxCraftRarityText() {
+    return this.canCraftAny() ? formatWithPrecision(this.maxCraftRarity(), 5) : 'cannot craft any rarity';
+  },
+  setCraftRarityToMax() {
+    if (!this.canCraftAny()) return;
+    let max = this.maxCraftRarity();
+    PowerShards.setCraftedRarity(max);
+    [...document.getElementsByClassName('craft-rarity')].forEach(i => i.value = max);
   },
   craft() {
     if (!this.canCraft()) return;

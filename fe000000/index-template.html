@@ -181,7 +181,13 @@
     <br/>
     <br/>
     <tab ~style.display=Tabs.currentTab() === 'main' ? '' : 'none'~>
-      <div ~style.display=Stars.atLimit() ? 'none' : ''~>
+      <div ~style.display=Stars.atLimit() ? '' : 'none'~>
+        <span>The ~r Stars.collapsedText() ~ collapsed due to an excess of stars.</span>
+        <br/>
+        <span>View stars and generators anyway: <input type="checkbox" ~!checked=Generators.viewWhenStarsAtLimit()~ ~!onchange=function() {Generators.setViewWhenStarsAtLimit(this.checked)}~></input></span>
+      </div>
+      <br ~style.display=(Stars.atLimit() && Generators.viewWhenStarsAtLimit()) ? '' : 'none'~/>
+      <div ~style.display=(Stars.atLimit() && !Generators.viewWhenStarsAtLimit()) ? 'none' : ''~>
         <span>You have ~f Stars.amount() ~ stars. You are getting ~f Stars.perSecond() ~ stars per second. <button ~class=MaxAll.anythingToBuy() ? "" : "disabled"~ onclick="MaxAll.maxAll()">Max all</button></span>
         <br/>
         <div ~style.display=Challenge.isThereChallengeText() ? '' : 'none'~>
@@ -297,9 +303,6 @@
         </div>
         <br ~style.display=SpecialDivs.isDivVisible('hardcap') ? '' : 'none'~/>
         <span ~style.display=SpecialDivs.isDivVisible('hardcap') ? '' : 'none'~>It is impossible to get more than ~f MultiverseCollapse.stars() ~ stars.</span>
-      </div>
-      <div ~style.display=Stars.atLimit() ? '' : 'none'~>
-        <span>The ~r Stars.collapsedText() ~ collapsed due to an excess of stars.</span>
       </div>
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'infinity' ? '' : 'none'~>
@@ -1485,7 +1488,9 @@
       <button onclick="Studies.respecFourthRowAndReset()" ~style.display=Studies.canAccessFourthRow() ? '' : 'none'~>Respec fourth-row studies and ~r EternityPrestigeLayer.resetText() ~</button>
       <br/>
       <br/>
-      <span>Study options: <button onclick="Studies.changeMode()">Study click mode: ~r Studies.mode() ~</button> <button onclick="Studies.changeCostDisplayMode()">Cost display: ~r Studies.costDisplayMode() ~</button></span>
+      <span>Study options: <button onclick="Studies.changeMode()">Study click mode: ~r Studies.mode() ~</button> <button onclick="Studies.changeCostDisplayMode()">Cost display: ~r Studies.costDisplayMode() ~</button>
+      <br ~style.display=(ComplexityAchievements.hasComplexityAchievement(4, 4) || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~/>
+      <button ~style.display=(ComplexityAchievements.hasComplexityAchievement(4, 4) || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~ onclick="Studies.toggleRebuyAfterComplexityChallenge6()">Rebuy studies when finishing ℂC6: ~r Studies.rebuyAfterComplexityChallenge6() ? "On" : "Off" ~</button></span>
       <br/>
       <span>Click on the name of a study preset on the line below to load that study list:</span>
       <div style="width: 1024px; margin-left: auto; margin-right: auto;">
@@ -3447,7 +3452,9 @@
             <option value="eternity">eternity</option>
             <option value="complexity">complexity</option>
           </select>,
-          strength ~r formatWithPrecision(PowerShards.craftedStrength(), 5) ~, and rarity <input type="text" ~!value=PowerShards.craftedRarityDisplay()~ ~!onchange=function() {PowerShards.setCraftedRarity(this.value)}~></input>:
+          strength ~r formatWithPrecision(PowerShards.craftedStrength(), 5) ~, and rarity <input type="text" class="craft-rarity" ~!value=PowerShards.craftedRarityDisplay()~ ~!onchange=function() {PowerShards.setCraftedRarity(this.value)}~></input>:
+          <br/>
+          <button ~class=PowerShards.canCraftAny() ? '' : 'disabled'~ onclick="PowerShards.setCraftRarityToMax()">Set craft rarity to maximum possible (~r PowerShards.maxCraftRarityText() ~)</button></span>
           <button ~class=PowerShards.canCraft() ? '' : 'disabled'~ onclick="PowerShards.craft()">Cost: ~f PowerShards.craftedPowerCost() ~ power shards</button></span>
           <br/>
           <span>You cannot craft powers with negative rarity or powers with rarity greater than ~f Powers.maximumRarity() ~ (the maximum rarity of generated powers).</span>
