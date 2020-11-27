@@ -99,7 +99,7 @@ let InfinityPrestigeLayer = {
   infinityResetConfirmationMessage() {
     return 'Are you sure you want to do an infinity reset? This will not give you any infinity points.';
   },
-  infinity(manual) {
+  infinity(manual, newLimit) {
     if (!this.canInfinity()) return;
     if (manual && Options.confirmation('infinity') && !confirm(this.infinityConfirmationMessage())) return;
     if (EternityChallenge.isEternityChallengeRunning(4) &&
@@ -119,11 +119,11 @@ let InfinityPrestigeLayer = {
     }
     InfinityChallenge.setInfinityChallenge(0);
     Goals.recordPrestige('infinity');
-    this.infinityReset(false);
+    this.infinityReset(false, newLimit);
   },
-  infinityReset(manual) {
+  infinityReset(manual, newLimit) {
     if (manual && Options.confirmation('infinity') && !confirm(this.infinityResetConfirmationMessage())) return;
-    Prestige.prestigeReset(true);
+    Prestige.prestigeReset(true, newLimit);
     player.prestigePower = new Decimal(1);
     player.infinityStars = new Decimal(1);
     InfinityGenerators.list.forEach(x => x.resetAmount());

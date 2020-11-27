@@ -223,7 +223,7 @@ let Autobuyers = {
       shouldInfinity = InfinityPrestigeLayer.currentIPPerSec().lte(InfinityPrestigeLayer.peakIPPerSec().times(priority));
     }
     if (shouldInfinity) {
-      InfinityPrestigeLayer.infinity(false);
+      InfinityPrestigeLayer.infinity(false, null);
     }
   },
   eternity() {

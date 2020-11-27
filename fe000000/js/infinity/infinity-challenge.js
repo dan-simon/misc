@@ -57,10 +57,11 @@ let InfinityChallenge = {
     player.currentInfinityChallenge = x;
   },
   startInfinityChallenge(x) {
+    let newLimit = InfinityChallenge.getInfinityChallengeGoal(x);
     if (InfinityPrestigeLayer.canInfinity()) {
-      InfinityPrestigeLayer.infinity(false);
+      InfinityPrestigeLayer.infinity(false, newLimit);
     } else {
-      InfinityPrestigeLayer.infinityReset(false);
+      InfinityPrestigeLayer.infinityReset(false, newLimit);
     }
     if (Autobuyers.disableWhenStartingInfinityChallenge()) {
       Autobuyers.setAll(false);
@@ -70,7 +71,7 @@ let InfinityChallenge = {
   },
   exitInfinityChallenge() {
     this.setInfinityChallenge(0);
-    InfinityPrestigeLayer.infinityReset(false);
+    InfinityPrestigeLayer.infinityReset(false, null);
   },
   checkForInfinityChallengeCompletion() {
     let cc = this.currentInfinityChallenge();

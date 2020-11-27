@@ -59,11 +59,12 @@ let Prestige = {
     this.setPrestigePower(this.newPrestigePower());
     player.stats.prestigesThisInfinity++;
     Goals.recordPrestige('prestige');
-    this.prestigeReset(false);
+    this.prestigeReset(false, null);
   },
-  prestigeReset(fromHigher) {
+  prestigeReset(fromHigher, newLimit) {
     if (fromHigher || !EternityMilestones.isEternityMilestoneActive(8)) {
-      Stars.setAmount(Stars.startingAmount());
+      let startingAmount = (newLimit === null) ? Stars.startingAmount() : Decimal.min(Stars.startingAmount(), newLimit);
+      Stars.setAmount(startingAmount);
       player.boost = {bought: 0};
       player.generators = initialGenerators();
       player.highestGenerator = 0;

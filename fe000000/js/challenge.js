@@ -46,10 +46,11 @@ let Challenge = {
     player.challengeRestartOnCompletion = !player.challengeRestartOnCompletion;
   },
   startChallenge(x) {
+    let newLimit = Decimal.pow(2, 256);
     if (InfinityPrestigeLayer.canInfinity()) {
-      InfinityPrestigeLayer.infinity(false);
+      InfinityPrestigeLayer.infinity(false, newLimit);
     } else {
-      InfinityPrestigeLayer.infinityReset(false);
+      InfinityPrestigeLayer.infinityReset(false, newLimit);
     }
     if (Autobuyers.disableWhenStartingChallenge()) {
       Autobuyers.setAll(false);
@@ -59,7 +60,7 @@ let Challenge = {
   },
   exitChallenge() {
     this.setChallenge(0);
-    InfinityPrestigeLayer.infinityReset(false);
+    InfinityPrestigeLayer.infinityReset(false, null);
   },
   checkForChallengeCompletion() {
     let cc = this.currentChallenge();

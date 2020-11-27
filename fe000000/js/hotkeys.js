@@ -38,7 +38,7 @@ window.addEventListener('keydown', function(event) {
     break;
 
     case 73: // I
-      InfinityPrestigeLayer.infinity(true);
+      InfinityPrestigeLayer.infinity(true, null);
     break;
 
     case 77: // M
