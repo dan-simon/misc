@@ -799,6 +799,10 @@ let Saving = {
       delete player.boughtTheoremsThisComplexity;
       player.version = 1.9765625;
     }
+    if (player.version < 1.9775390625) {
+      player.oracle.powerGainInPredictions = 'Same';
+      player.version = 1.9775390625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

@@ -185,7 +185,7 @@ let Powers = {
   imminentPowerGain() {
     return Math.floor(player.stats.timeSincePowerGain / this.interval());
   },
-  checkForPowerGain() {
+  checkForPowerGain(diff) {
     if (this.isPowerGainActive()) {
       let timePer = this.interval();
       let newPowers = this.imminentPowerGain();
@@ -194,7 +194,7 @@ let Powers = {
       let maxedPowers = ['normal', 'infinity', 'eternity', 'complexity'].map(
         x => this.active().concat(this.stored()).filter(y => y.type === x && this.isMaxed(y)).length);
       while (newPowers > 0 && maxedPowers.some(x => x < this.maximumActivatedLimit())) {
-        let newPower = this.gainNewPower(true, player.stats.timeSincePowerGain + timePer * (newPowers - 1));
+        let newPower = this.gainNewPower(true, Math.min(diff, player.stats.timeSincePowerGain + timePer * (newPowers - 1)));
         if (this.isMaxed(newPower)) {
           maxedPowers[this.index(newPower.type) - 1]++;
         }
@@ -395,6 +395,8 @@ let Powers = {
       let power = this.accessPower(type, i);
       if (power.wait > 0) {
         return 'Produced after ' + formatTime(power.wait, {seconds: {f: format, s: false}, larger: {f: format, s: false}});
+      } else if (power.wait === 0) {
+        return 'Produced immediately';
       } else {
         return 'Already produced';
       }

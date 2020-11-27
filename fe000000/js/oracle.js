@@ -44,6 +44,9 @@ let Oracle = {
   powerDisplay() {
     return player.oracle.powerDisplay;
   },
+  powerGainInPredictions() {
+    return player.oracle.powerGainInPredictions;
+  },
   powerFutureExtraMultipliers() {
     return player.oracle.powerFutureExtraMultipliers;
   },
@@ -58,6 +61,10 @@ let Oracle = {
   },
   togglePowerDisplay() {
     player.oracle.powerDisplay = !player.oracle.powerDisplay;
+  },
+  nextPowerGainInPredictions() {
+    let settings = ['Same', 'On', 'Off'];
+    player.oracle.powerGainInPredictions = settings[(settings.indexOf(player.oracle.powerGainInPredictions) + 1) % 3]
   },
   togglePowerFutureExtraMultipliers() {
     player.oracle.powerFutureExtraMultipliers= !player.oracle.powerFutureExtraMultipliers;
@@ -77,6 +84,9 @@ let Oracle = {
     }
     let originalTime = player.stats.timeSinceGameStart;
     let save = btoa(JSON.stringify(player));
+    if (this.powerGainInPredictions() !== 'Same') {
+      player.powers.gain = {'Off': false, 'On': true}[this.powerGainInPredictions()];
+    }
     let time = this.time();
     let ticks = this.ticks();
     Saving.oracleSimulateTime(time, ticks, function () {

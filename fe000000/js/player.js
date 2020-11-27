@@ -238,6 +238,7 @@ let initialPlayer = {
     originalFinalityShards: 0,
     used: false,
     alert: false,
+    powerGainInPredictions: 'Same',
     powerDisplay: true,
     powerFutureExtraMultipliers: true,
     powers: [],
@@ -408,7 +409,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9765625
+  version: 1.9775390625
 }
 
 let player;

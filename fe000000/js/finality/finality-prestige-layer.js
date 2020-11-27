@@ -174,6 +174,7 @@ let FinalityPrestigeLayer = {
       originalFinalityShards: 0,
       used: false,
       alert: player.oracle.alert,
+      powerGainInPredictions: player.oracle.powerGainInPredictions,
       powerDisplay: player.oracle.powerDisplay,
       powers: [],
       extraMultipliers: {
