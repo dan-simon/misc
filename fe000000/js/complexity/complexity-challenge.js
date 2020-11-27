@@ -126,6 +126,9 @@ let ComplexityChallenge = {
     if (x === 6 && !player.complexityChallengeSafeguards[x - 2] &&
       ComplexityAchievements.hasComplexityAchievement(4, 4) && Studies.rebuyAfterComplexityChallenge6()) {
       player.studies = [...player.studySettings.studiesBeforeLastRespec];
+      if (!Studies.areStudiesInitialStudies()) {
+        ComplexityChallenge.exitComplexityChallenge(6);
+      }
     }
   },
   addToTimeStats(diff) {
