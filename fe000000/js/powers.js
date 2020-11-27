@@ -194,7 +194,7 @@ let Powers = {
       let maxedPowers = ['normal', 'infinity', 'eternity', 'complexity'].map(
         x => this.active().concat(this.stored()).filter(y => y.type === x && this.isMaxed(y)).length);
       while (newPowers > 0 && maxedPowers.some(x => x < this.maximumActivatedLimit())) {
-        let newPower = this.gainNewPower(true);
+        let newPower = this.gainNewPower(true, player.stats.timeSincePowerGain + timePer * (newPowers - 1));
         if (this.isMaxed(newPower)) {
           maxedPowers[this.index(newPower.type) - 1]++;
         }
@@ -205,8 +205,8 @@ let Powers = {
       this.onPowerChange(true, true);
     }
   },
-  gainNewPower(returnPower) {
-    let newPower = RNG.randomPower(true);
+  gainNewPower(returnPower, howLongAgo) {
+    let newPower = RNG.randomPower(true, howLongAgo);
     player.powers.stored.push(newPower);
     if (returnPower) {
       return newPower;
@@ -390,6 +390,16 @@ let Powers = {
       return 'Multiplier ' + format(this.preExtraMultiplier(power)) + 'x (total ' + format(this.getOverallMultiplier(power)) + ')';
     }
   },
+  descriptionWait(type, i) {
+    if (this.canAccessPower(type, i)) {
+      let power = this.accessPower(type, i);
+      if (power.wait > 0) {
+        return 'Produced after ' + formatTime(power.wait, {seconds: {f: format, s: false}, larger: {f: format, s: false}});
+      } else {
+        return 'Already produced';
+      }
+    }
+  },
   totalEffectDescription(type) {
     return this.shortDescriptionData[type] + ': ^' + formatWithPrecision(this.getTotalEffect(type), 5);
   },
@@ -557,12 +567,14 @@ let Powers = {
   getTotalEffectFrom(x, active) {
     return x.map(p => this.getEffect(p, active)).reduce((a, b) => a + b - 1, 1);
   },
-  makeFuture(p) {
+  makeFuture(p, originalTime) {
     return {
       'type': p.type,
       'strength': p.strength,
       'rarity': p.rarity,
-      'future': true
+      'time': p.time,
+      'future': true,
+      'wait': p.time - originalTime
     }
   },
   anythingToBuy() {

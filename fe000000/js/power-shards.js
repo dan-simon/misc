@@ -145,11 +145,14 @@ let PowerShards = {
   craftedRarityDisplay() {
     return player.powers.craft.rarity;
   },
-  craftedPower() {
+  craftedPower(rarity) {
+    if (rarity === undefined) {
+      rarity = this.craftedRarity();
+    }
     return {
       'type': this.craftedType(),
       'strength': this.craftedStrength(),
-      'rarity': this.craftedRarity(),
+      'rarity': rarity,
     }
   },
   craftedPowerCost(rarity) {
@@ -157,7 +160,7 @@ let PowerShards = {
       rarity = this.craftedRarity();
     }
     return Math.max(
-      2 * this.shardGain(this.craftedPower()),
+      2 * this.shardGain(this.craftedPower(rarity)),
       4 * Math.pow(2, Math.pow(rarity, 2) - Math.pow(Powers.minimumRarity(), 2)));
   },
   craftSafetyMargin() {
@@ -178,7 +181,7 @@ let PowerShards = {
   },
   maxCraftRarity() {
     return Math.min(
-      (this.amount() / 2 - 1) / this.craftedRarity(),
+      (this.amount() / 2 - 1) / this.craftedStrength(),
       Math.sqrt(Math.log2(this.amount() / 4) + Math.pow(Powers.minimumRarity(), 2)));
   },
   maxCraftRarityText() {

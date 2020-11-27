@@ -75,6 +75,7 @@ let Oracle = {
         'the damage it may cause to the space-time continuum.');
       return;
     }
+    let originalTime = player.stats.timeSinceGameStart;
     let save = btoa(JSON.stringify(player));
     let time = this.time();
     let ticks = this.ticks();
@@ -86,7 +87,7 @@ let Oracle = {
       let galaxies = Galaxy.amount();
       let finalities = Finalities.amount();
       let finalityShards = FinalityShards.total();
-      let powers = player.powers.stored.map(p => Powers.makeFuture(p));
+      let powers = player.powers.stored.map(p => Powers.makeFuture(p, originalTime));
       let extraMultipliers = Powers.getAllExtraMultipliers();
       Saving.loadGame(save, null, true, function () {
         player.oracle.used = true;
