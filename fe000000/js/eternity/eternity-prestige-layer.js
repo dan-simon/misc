@@ -99,7 +99,7 @@ let EternityPrestigeLayer = {
   },
   eternityReset(manual) {
     if (manual && Options.confirmation('eternity') && !confirm(this.eternityResetConfirmationMessage())) return;
-    InfinityPrestigeLayer.infinityReset(false);
+    InfinityPrestigeLayer.infinityReset(false, null);
     // Not handled by Infinity.infinityReset() since that's also called
     // when you start a challenge.
     Challenge.setChallenge(0);
