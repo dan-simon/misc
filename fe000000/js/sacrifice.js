@@ -30,7 +30,7 @@ let Sacrifice = {
   sacrificeRequirementText() {
     // Note that without an intervening sacrifice (or prestige, etc.)
     // only one of these requirement conditions should be visible.
-    // If initally the player has no Generator 8, when they can buy a Generator 8
+    // If initially the player has no Generator 8, when they can buy a Generator 8
     // their best stars will increase to enough that they can sacrifice,
     // so the star requirement will disappear at that point.
     if (Generator(8).amount().gt(0)) {
