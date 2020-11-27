@@ -82,7 +82,7 @@ let Sacrifice = {
   sacrificeReset() {
     if (Challenge.isChallengeRunning(10)) {
       // Challenge 10 overrides Eternity Milestone 4.
-      Stars.setAmount(Stars.startingAmount());
+      Stars.setAmount(Stars.startingAmount(), null);
       player.boost = {bought: 0};
       player.generators = initialGenerators();
       player.highestGenerator = 0;

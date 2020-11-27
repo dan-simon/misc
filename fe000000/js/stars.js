@@ -25,8 +25,8 @@ let Stars = {
       return 'universe has';
     }
   },
-  setAmount(x) {
-    player.stars = x.min(this.limit());
+  setAmount(x, newLimit) {
+    player.stars = x.min((newLimit === null) ? this.limit() : newLimit);
   },
   addAmount(x) {
     let oldStars = player.stars;

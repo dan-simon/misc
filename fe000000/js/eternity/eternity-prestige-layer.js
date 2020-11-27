@@ -99,7 +99,8 @@ let EternityPrestigeLayer = {
   },
   eternityReset(manual) {
     if (manual && Options.confirmation('eternity') && !confirm(this.eternityResetConfirmationMessage())) return;
-    InfinityPrestigeLayer.infinityReset(false, null);
+    let newLimit = (EternityMilestones.isEternityMilestoneActive(2) && player.breakInfinity) ? MultiverseCollapse.stars() : Decimal.pow(2, 256);
+    InfinityPrestigeLayer.infinityReset(false, newLimit);
     // Not handled by Infinity.infinityReset() since that's also called
     // when you start a challenge.
     Challenge.setChallenge(0);
