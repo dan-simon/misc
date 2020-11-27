@@ -110,7 +110,7 @@ let FinalityPrestigeLayer = {
     player.boughtTheorems = [0, 0, 0];
     player.studies = initialStudies();
     player.studySettings.firstTwelveStudyPurchaseOrder = [];
-    player.studySettings.studiesBeforeLastRespec = initalStudies();
+    player.studySettings.studiesBeforeLastRespec = initialStudies();
     // Extra theorems seem to fit in best here, because they're theorem-related, even though
     // nothing resets them other than finality.
     player.extraTheorems = [0, 0, 0, 0];
