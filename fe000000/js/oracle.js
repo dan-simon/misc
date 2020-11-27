@@ -21,7 +21,7 @@ let Oracle = {
     return player.oracle.time;
   },
   time() {
-    return Math.min(Math.max(0, player.oracle.time), this.maxTime());
+    return Math.min(Math.max(1, player.oracle.time), this.maxTime());
   },
   maxTicks() {
     return Math.pow(2, 16);
