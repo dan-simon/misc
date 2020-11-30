@@ -5,28 +5,20 @@ let OFFSET = 20;
 let globalState = {
   boardSize: null,
   maxChangeCount: null,
-  maxUndos: null,
-  confirmMoves: null,
-  challengesAllowed: null,
+  playerNames: null,
   board: null,
   player: null,
-  challenging: null,
-  changeLists: null,
-  undos: null,
+  changeList: null,
   winner: -1
 };
 
 let startGame = function() {
   globalState.boardSize = +document.getElementById('size').value;
   globalState.maxChangeCount = +document.getElementById('changes').value;
-  globalState.maxUndos = +document.getElementById('max-undos').value;
-  globalState.confirmMoves = document.getElementById('confirm').checked;
-  globalState.challengesAllowed = document.getElementById('allow-challenge').checked;
+  globalState.playerNames = [document.getElementById('player-1-name').value, document.getElementById('player-2-name').value];
   globalState.board = [...Array(globalState.boardSize)].map(() => [...Array(globalState.boardSize)].map(coin));
   globalState.player = 1;
-  globalState.challenging = false;
-  globalState.changeLists = [null, []];
-  globalState.undos = 0;
+  globalState.changeList = []
   globalState.winner = 0;
   updateGameState();
 }
@@ -75,12 +67,6 @@ let updateGameText = function () {
 
 let updateButtonVisibility = function () {
   document.getElementById('start').innerHTML = globalState.winner ? (globalState.winner > 0 ? 'Start new game!' : 'Start game!') : 'Restart game!';
-  document.getElementById('challenge').innerHTML = globalState.challenging ? 'Undo challenge' : 'Challenge your opponent\'s last turn' ;
-  document.getElementById('undo').style.display = (canNothingBeDone() || currentChangeList().length === 0 || remainingUndos() === 0) ? 'none' : '';
-  document.getElementById('reset').style.display = (canNothingBeDone() || currentChangeList().length === 0 || remainingUndos() < currentChangeList().length) ? 'none' : '';
-  document.getElementById('challenge').style.display = (canNothingBeDone() || !globalState.challengesAllowed || globalState.changeLists[0] === null || (globalState.challenging && remainingUndos() === 0)) ? 'none' : '';
-  document.getElementById('complete').style.display = (canNothingBeDone() || !canMoveBeCompleted()) ? 'none' : '';
-  document.getElementById('concede').style.display = canNothingBeDone() ? 'none' : '';
 }
 
 let updateGameState = function () {
@@ -89,24 +75,50 @@ let updateGameState = function () {
   updateButtonVisibility();
 }
 
+let updateIssueText = function () {
+  let issueText = getSetupIssueText();
+  document.getElementById('start').style.display = issueText ? 'none' : '';
+  document.getElementById('issue').innerHTML = issueText;
+}
+
+let getPlayerName = function (playerNumber) {
+  return globalState.playerNames[playerNumber - 1];
+}
+
+let getSetupIssueText = function () {
+  let boardSize = +document.getElementById('size').value;
+  let maxChangeCount = +document.getElementById('changes').value;
+  let issues = [];
+  if (boardSize < 10) {
+    issues.push('board size too small (must be at least 10)');
+  }
+  if (boardSize > 20) {
+    issues.push('board size too large (must be at most 20)');
+  }
+  if (maxChangeCount < 5) {
+    issues.push('max changes per turn too small (must be at least 5)');
+  }
+  if (issues.length > 0) {
+    return 'Issue' + (issues.length > 1 ? 's' : '') + ': ' + issues.join(', ');
+  } else {
+    return '';
+  }
+}
+
 let getGameText = function () {
   let text;
   if (globalState.winner === -1) {
     text = 'Game not started';
   } else if (globalState.winner > 0) {
-    text = 'Player ' + globalState.winner + ' won';
+    text = getPlayerName(globalState.winner) + ' won';
   } else {
-    text = 'Player ' + globalState.player + '\'s turn';
-  }
-  if (globalState.challenging === true) {
-    text += ', challenging previous turn'
+    text = getPlayerName(globalState.player) + '\'s turn';
   }
   if (globalState.winner) {
     return text + '!';
   }
   text += ', ' + filledSquares(boardAtStartOfMove()) + ' to ' + filledSquares(globalState.board) + ' filled square' + (filledSquares(globalState.board) === 1 ? '' : 's') +
-    ', ' + currentChangeList().length + ' of ' + lengthLimit() + ' change' + (lengthLimit() === 1 ? '' : 's') +
-    (globalState.maxUndos > 0 ? ', ' + remainingUndos() + ' of ' + globalState.maxUndos + ' undo' + (globalState.maxUndos === 1 ? '' : 's') + ' left': '');
+    ', ' + currentChangeList().length + ' of ' + lengthLimit() + ' change' + (lengthLimit() === 1 ? '' : 's');
   return text;
 }
 
@@ -132,7 +144,7 @@ let move = function (board, space) {
 }
 
 let currentChangeList = function () {
-  return globalState.changeLists[1];
+  return globalState.changeList;
 }
 
 let boardAtStartOfMove = function () {
@@ -153,11 +165,7 @@ let hasMoveReducedFilledSquares = function () {
 }
 
 let lengthLimit = function () {
-  if (globalState.challenging) {
-    return globalState.changeLists[0].length - 1;
-  } else {
-    return globalState.maxChangeCount;
-  }
+  return globalState.maxChangeCount;
 }
 
 let canMoveBeCompleted = function () {
@@ -176,109 +184,29 @@ let win = function (player) {
   globalState.winner = player;
 }
 
-let concedeGame = function() {
-  if (canNothingBeDone()) return;
-  if (confirm('Are you sure you want to concede? The other player will win!')) {
-    win(3 - globalState.player);
-    updateGameState();
-  }
-}
-
 let completeTurn = function() {
   if (canNothingBeDone() || !canMoveBeCompleted()) return;
-  if (globalState.challenging || filledSquares(globalState.board) === 0) {
+  if (filledSquares(globalState.board) === 0) {
     win(globalState.player);
   } else {
     globalState.player = 3 - globalState.player;
-    globalState.changeLists = [currentChangeList(), []];
-    globalState.undos = 0;
+    globalState.changeList = [];
   }
-  updateGameState();
-}
-
-let challenge = function() {
-  if (canNothingBeDone() || !globalState.challengesAllowed || globalState.changeLists[0] === null || (globalState.challenging && remainingUndos() === 0)) return;
-  if (globalState.challenging) {
-    player.undos++;
-  }
-  reset(true);
-  let a = globalState.changeLists[0].map(x => x);
-  // When challenging, do the moves in reverse order
-  // (to undo them and get back to the previous game state).
-  if (!globalState.challenging) {
-    a.reverse();
-  }
-  for (let i of a) {
-    move(globalState.board, i);
-  }
-  globalState.challenging = !globalState.challenging;
   updateGameState();
 }
 
 let checkForMoveCompletion = function () {
   if (canMoveBeCompleted()) {
-    // Yes, in the case of a challenge, if the player says yes then they just win.
-    // Also, technically, you could make a move after using all your undos with confirm on and challenges on
-    // (but not currently be making a challenge) and then be unable to challenge, because the game assumed
-    // you were done with your move. But if you were going to challenge, why not at the start of your move?
-    // There's a similar thing below, where once you make all the changes for your move, if you didn't
-    // reduce full squares you just lose.
-    // This seems like a rare enough case to be ignored (though it should be domcumented).
-    if (!globalState.confirmMoves || remainingUndos() === 0 || confirm('This change will complete your ' + (globalState.challenging ? 'challenge' : 'turn') + '. Do you want to do that?')) {
-      completeTurn();
-    } else {
-      undo();
-    }
-  } else if (currentChangeList().length >= lengthLimit() && remainingUndos() === 0) {
+    completeTurn();
+  } else if (currentChangeList().length >= lengthLimit()) {
     win(3 - globalState.player);
-  }
-}
-
-let remainingUndos = function () {
-  return globalState.allowedUndos = globalState.undos;
-}
-
-let undo = function () {
-  if (canNothingBeDone() || remainingUndos() === 0) return;
-  globalState.undos++;
-  let ccl = currentChangeList();
-  if (ccl.length > 0) {
-    move(globalState.board, ccl.pop());
-  }
-  updateGameState();
-}
-
-let reset = function (free) {
-  let ccl = currentChangeList();
-  if (canNothingBeDone() || (!free && remainingUndos() < ccl.length)) return;
-  if (!free) {
-    globalState.undos += ccl.length;
-  }
-  while (ccl.length > 0) {
-    move(globalState.board, ccl.pop());
-  }
-  updateGameState();
-}
-
-let press = function (key) {
-  if (key.length === 1) {
-    key = 'Key' + key.toUpperCase();
-  }
-  if (key === 'KeyU') {
-    undo();
-  }
-  if (key === 'KeyR') {
-    reset();
   }
 }
 
 window.onload = function() {
   updateGameState();
-  window.addEventListener("keydown", function(event) {
-    if (event.defaultPrevented) return;
-    press(event.code);
-    event.preventDefault();
-  }, true);
+  document.getElementById('size').onchange = updateIssueText;
+  document.getElementById('changes').onchange = updateIssueText;
   document.getElementById('board').onclick = function (event) {
     let rect = document.getElementById('board').getBoundingClientRect();
     let coords = [event.clientX - rect.left, event.clientY - rect.top];
