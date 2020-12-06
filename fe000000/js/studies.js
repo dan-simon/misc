@@ -301,6 +301,14 @@ let Studies = {
     return Number.isFinite(result) ? result : 0;
   },
   importString(importString) {
+    let presetsWithName = player.presets.filter(x => x.name === importString);
+    if (presetsWithName.length > 0) {
+      this.importStringFromPreset(presetsWithName[0].studies);
+    } else {
+      this.importStringFromPreset(importString);
+    }
+  },
+  importStringFromPreset(importString) {
     if (!importString) return;
     let parts = importString.split('&');
     // You can put any study id between 1 and 16 in the initial part of the import list; this is intended.
@@ -468,7 +476,7 @@ let Studies = {
     this.redisplayPresetStudyList(x);
   },
   presetLoad(x) {
-    this.importString(this.presetStudyList(x));
+    this.importStringFromPreset(this.presetStudyList(x));
   },
   presetDelete(x) {
     player.presets = player.presets.slice(0, x - 1).concat(player.presets.slice(x));

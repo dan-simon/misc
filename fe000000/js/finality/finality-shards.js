@@ -189,6 +189,14 @@ let FinalityShardPresets = {
     return result.concat([0, 0, 0, 0, 0, 0, 0, 0].slice(result.length));
   },
   importString(importString) {
+    let presetsWithName = player.finalityShardUpgradePresets.filter(x => x.name === importString);
+    if (presetsWithName.length > 0) {
+      this.importStringFromPreset(presetsWithName[0].upgrades);
+    } else {
+      this.importStringFromPreset(importString);
+    }
+  },
+  importStringFromPreset(importString) {
     if (!importString) return;
     let importStringCounts = this.importStringCounts(importString);
     let old = FinalityShards.totalUpgradeBonuses();
@@ -226,7 +234,7 @@ let FinalityShardPresets = {
     this.redisplayPresetFinalityShardUpgradeList(x);
   },
   presetLoad(x) {
-    this.importString(this.presetFinalityShardUpgradeList(x));
+    this.importStringFromPreset(this.presetFinalityShardUpgradeList(x));
   },
   presetDelete(x) {
     player.finalityShardUpgradePresets = player.finalityShardUpgradePresets.slice(0, x - 1).concat(

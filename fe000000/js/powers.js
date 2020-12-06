@@ -673,6 +673,14 @@ let Powers = {
     return [0, 1, 2, 3].map(i => (importString.match(new RegExp('NIEC'[i], 'g')) || []).length + (initialCounts[i] || 0));
   },
   importString(importString) {
+    let presetsWithName = player.powers.presets.filter(x => x.name === importString);
+    if (presetsWithName.length > 0) {
+      this.importStringFromPreset(presetsWithName[0].powers);
+    } else {
+      this.importStringFromPreset(importString);
+    }
+  },
+  importStringFromPreset(importString) {
     if (!importString) return;
     let counts = this.importStringCounts(importString);
     let realCounts = [0, 1, 2, 3].map(i => Math.max(0, counts[i] - this.active().filter(
@@ -710,7 +718,7 @@ let Powers = {
     this.redisplayPresetPowerList(x);
   },
   presetLoad(x) {
-    this.importString(this.presetPowerList(x));
+    this.importStringFromPreset(this.presetPowerList(x));
   },
   presetDelete(x) {
     player.powers.presets = player.powers.presets.slice(0, x - 1).concat(player.powers.presets.slice(x));
