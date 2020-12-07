@@ -184,14 +184,23 @@ let Studies = {
     return this.list[x - 1];
   },
   totalTheorems() {
-    return player.boughtTheorems.reduce((a, b) => a + b) + this.extraTheorems();
+    return this.boughtTheorems() + this.extraTheorems();
+  },
+  boughtTheoremsList() {
+    return player.boughtTheorems;
+  },
+  boughtTheorems() {
+    return this.boughtTheoremsList().reduce((a, b) => a + b);
+  },
+  extraTheoremsList() {
+    if (ComplexityAchievements.hasComplexityAchievement(4, 4)) {
+      return player.extraTheorems;
+    } else {
+      return this.extraTheoremsByType();
+    }
   },
   extraTheorems() {
-    if (ComplexityAchievements.hasComplexityAchievement(4, 4)) {
-      return player.extraTheorems.reduce((a, b) => a + b);
-    } else {
-      return this.extraTheoremsByType().reduce((a, b) => a + b);
-    }
+    return this.extraTheoremsList().reduce((a, b) => a + b);
   },
   extraTheoremsByType() {
     return [Boost.extraTheoremsRaw(), EternityChallenge.extraTheoremsRaw(), Chroma.extraTheoremsRaw(), ComplexityChallenge.extraTheoremsRaw()];
@@ -202,6 +211,27 @@ let Studies = {
       for (let i = 0; i < 4; i++) {
         player.extraTheorems[i] = Math.max(player.extraTheorems[i], extraTheoremsByType[i]);
       }
+    }
+  },
+  extraTheoremsBreakdownText() {
+    let extraTheoremsList = this.extraTheoremsList();
+    let extraTheorems = this.extraTheorems();
+    let conditions = [
+      Boost.isBestBoostPowerVisible() || PrestigeLayerProgress.hasReached('complexity'), EternityChallenge.areEternityChallengesVisible(),
+      Chroma.isColorUnlocked(5) || PrestigeLayerProgress.hasReached('complexity'), PrestigeLayerProgress.hasReached('complexity')
+    ];
+    let sources = [
+      'boost power (see Main tab)', 'EC completions', 'green chroma', 'ℂC6'
+    ];
+    let conditionsCount = conditions.filter(x => x).length;
+    if (conditionsCount === 0) {
+      return formatInt(extraTheorems) + ' (progress further to unlock ways to get extra theorems)';
+    } else if (conditionsCount === 1) {
+      return formatInt(extraTheorems) + ' (from ' + sources[conditions.indexOf(true)] + ')';
+    } else {
+      return [0, 1, 2, 3].filter(i => conditions[i]).map(
+        i => formatInt(extraTheoremsList[i]) + ' (from ' + sources[i] + ')'
+      ).join(' + ') + ' = ' + formatInt(extraTheorems);
     }
   },
   unspentTheorems() {

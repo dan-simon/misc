@@ -281,14 +281,14 @@
             <td><button ~class=Generator(8).canBuy() ? "" : "disabled"~ onclick="Generator(8).buyMax()">Max</button></td>
           </tr>
         </table>
-        <div ~style.display=Sacrifice.isVisible() ? '' : 'none'~>
+        <div style="min-height: 104px;" ~style.display=Sacrifice.isVisible() ? '' : 'none'~>
           <br/>
           <span>You have a ~f Sacrifice.sacrificeMultiplier() ~ sacrifice multiplier multiplying Generator 8 by its amount.</span>
           <br/>
           <span ~style.display=Sacrifice.canSacrifice() ? '' : 'none'~><button style="height: 48px;" onclick="Sacrifice.sacrifice(true)">Sacrifice: ~f Sacrifice.sacrificeMultiplier() ~ → ~f Sacrifice.newSacrificeMultiplier() ~<br/>(+~f Sacrifice.sacrificeMultiplierGain() ~, ~f Sacrifice.sacrificeMultiplierMultGain() ~x)</button></span>
           <span ~style.display=Sacrifice.canSacrifice() ? 'none' : ''~>You need ~r Sacrifice.sacrificeRequirementText() ~ to sacrifice.</span>
         </div>
-        <div ~style.display=Prestige.isVisible() ? '' : 'none'~>
+        <div style="min-height: 104px;" ~style.display=Prestige.isVisible() ? '' : 'none'~>
           <br/>
           <span>You have ~f Prestige.prestigePower() ~ prestige power multiplying all ~r Generators.term() ~ by its amount.</span>
           <br/>
@@ -1477,7 +1477,7 @@
       <span ~style.display=SpecialTabs.isTabVisible('eternity-producer') ? 'none' : ''~>Completing all eternity milestones for the first time will also let you view the Eternity Producer tab.</span>
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'studies' ? '' : 'none'~>
-      <span>You have ~i Studies.totalTheorems() ~ total theorem~s Studies.totalTheorems() ~ and ~i Studies.unspentTheorems() ~ unspent theorem~s Studies.unspentTheorems() ~.</span>
+      <span>You have ~i Studies.totalTheorems() ~ total theorem~s Studies.totalTheorems() ~ (a breakdown is below the theorem purchase buttons) and ~i Studies.unspentTheorems() ~ unspent theorem~s Studies.unspentTheorems() ~.</span>
       <br/>
       <button class="studies-export-button" onclick="Studies.export()">Export studies</button> <button onclick="Studies.import()">Import studies</button>
       <button onclick="Studies.toggleRespec()">Respec studies on next eternity: ~r Studies.isRespecOn() ? "On" : "Off" ~</button>
@@ -1803,6 +1803,19 @@
         </tr>
       </table>
       <span>
+        Bought theorems: ~i Studies.boughtTheoremsList()[0] ~ (from stars) + ~i Studies.boughtTheoremsList()[1] ~ (from IP) + ~i Studies.boughtTheoremsList()[2] ~ (from EP) = ~i Studies.boughtTheorems() ~.
+      </span>
+      <br/>
+      <span>
+        Extra theorems: ~r Studies.extraTheoremsBreakdownText() ~.
+      </span>
+      <br/>
+      <span>
+        Total theorems: ~i Studies.boughtTheorems() ~ (bought theorems) + ~i Studies.extraTheorems() ~ (extra theorems) = ~i Studies.totalTheorems() ~.
+      </span>
+      <br/>
+      <br/>
+      <span>
         Buying a study will increase the costs of all studies on other rows by ~i 2 ~ theorems.
       </span>
       <br/>
@@ -1829,7 +1842,11 @@
       </div>
       <div ~style.display=Studies.canAccessFourthRow() ? '' : 'none'~>
         <span>
-          Studies on the fourth row are rebuyable, with increasing costs. Their costs are unaffected by buying other studies. Their shown costs are always the cost of the next purchase.
+          Studies on the fourth row are rebuyable, with increasing costs.
+        </span>
+        <br/>
+        <span>
+          Their costs are unaffected by buying other studies. Their shown costs are always the cost of the next purchase.
         </span>
         <br/>
         <span>
