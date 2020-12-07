@@ -1620,7 +1620,7 @@ function updateDisplay() {
     b[441].style.display = Trivia.show('EG requirement for theorems') ? '' : 'none';
     e[563].textContent = formatInt(4);
     b[442].style.display = Studies.canAccessFourthRow() ? 'none' : '';
-    e[564].textContent = format(Studies.totalStudyCost());
+    e[564].textContent = formatInt(Studies.totalStudyCost());
     b[443].style.display = Studies.canAccessFourthRow() ? '' : 'none';
     b[444].style.display = Studies.hasPreset(1) ? '' : 'none';
     b[447].style.display = Studies.hasPreset(2) ? '' : 'none';
