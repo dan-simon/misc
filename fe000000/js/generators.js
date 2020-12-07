@@ -78,7 +78,7 @@ let Generator = function (i) {
       return i <= player.highestGenerator + 1 && !this.isOutOfRange();
     },
     isVisible() {
-      return (i <= player.highestGenerator + 1 || Generators.viewAll()) && !this.isOutOfRange();
+      return (i <= player.highestGenerator + 1 || Generators.actualViewAll()) && !this.isOutOfRange();
     },
     canBuy(n) {
       if (n === undefined) {
@@ -154,10 +154,13 @@ let Generators = {
     // Note that the nerf never reduces a multiplier below the initial nerf value.
     return Generators.list.some(x => x.multiplier().gte(this.nerfValue()));
   },
-  viewAll() {
+  actualViewAll() {
+    return PrestigeLayerProgress.hasReached('infinity') && this.rawViewAll();
+  },
+  rawViewAll() {
     return player.options.viewAllGenerators;
   },
-  setViewAll(x) {
+  setRawViewAll(x) {
     player.options.viewAllGenerators = x;
   },
   viewWhenStarsAtLimit() {

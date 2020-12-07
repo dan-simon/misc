@@ -9,8 +9,8 @@ function updateDisplayPageLoadSetup() {
 function updateDisplaySaveLoadSetup() {
   b[57].checked = Generators.viewWhenStarsAtLimit();
   b[57].onchange = function() {Generators.setViewWhenStarsAtLimit(this.checked)};
-  b[71].checked = Generators.viewAll();
-  b[71].onchange = function() {Generators.setViewAll(this.checked)};
+  b[71].checked = Generators.rawViewAll();
+  b[71].onchange = function() {Generators.setRawViewAll(this.checked)};
   b[178].checked = Autobuyers.areNewlyUnlockedAutobuyersOn();
   b[178].onchange = function() {Autobuyers.setAreNewlyUnlockedAutobuyersOn(this.checked)};
   b[181].checked = Autobuyer(12).isOn();

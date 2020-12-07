@@ -332,7 +332,7 @@ let initialPlayer = {
     },
     fitToWidth: true,
     largerCheckboxes: false,
-    viewAllGenerators: false,
+    viewAllGenerators: true,
     viewGeneratorsWhenStarsAtLimit: false,
   },
   confirmations: {
@@ -409,7 +409,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9775390625
+  version: 1.978515625
 }
 
 let player;

@@ -803,6 +803,10 @@ let Saving = {
       player.oracle.powerGainInPredictions = 'Same';
       player.version = 1.9775390625;
     }
+    if (player.version < 1.978515625) {
+      player.options.viewAllGenerators = true;
+      player.version = 1.978515625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
