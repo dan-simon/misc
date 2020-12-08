@@ -59,3 +59,35 @@ window.addEventListener('keydown', function(event) {
   }
 }, false);
 
+let Hotkeys = {
+  criteria: function() {
+    // There's some inconsistency here, in that the prestige hotkey is visible as soon as prestige is visible
+    // (even if not reached), but later hotkeys are only visible when reached. I think it's justifiable,
+    // because in the early game it's good to show future content (unless there's so much it will scare people,
+    // which isn't the case here) and to show that there are hotkeys for it.
+    return [
+      true, SpecialDivs.isDivVisible('prestige'),
+      PrestigeLayerProgress.hasReached('infinity') || InfinityPrestigeLayer.canInfinity(),
+      PrestigeLayerProgress.hasReached('eternity') || EternityPrestigeLayer.canEternity(),
+      PrestigeLayerProgress.hasReached('complexity') || ComplexityPrestigeLayer.canComplexity(),
+      PrestigeLayerProgress.hasReached('finality') || Oracle.isUnlocked(),
+      PrestigeLayerProgress.hasReached('finality') || FinalityPrestigeLayer.canFinality()
+    ];
+  },
+  eachText: [
+    '1-8 to buy max of Generator 1-8 respectively, shift+1-8 to buy one of ' +
+    'Generator 1-8 respectively, B to buy max boosts, shift+B to buy a boost, ' +
+    'M to max all generators and boosts, A to toggle all autobuyers, S to sacrifice',
+    'P to prestige', 'I to infinity', 'E to eternity', 'C to complexity',
+    'O to get a prediction from the oracle', 'F to finality'
+  ],
+  listText: function () {
+    let criteria = this.criteria();
+    // This join-then-split thing is very important if the first item of the list,
+    // which has commas in it, is the only item (that is, before you can prestige).
+    let parts = this.eachText.filter((_, i) => criteria[i]).join(', ').split(', ');
+    parts[parts.length - 1] = 'and ' + parts[parts.length - 1];
+    return parts.join(', ');
+  }
+}
+
