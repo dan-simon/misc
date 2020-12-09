@@ -67,6 +67,7 @@ let Saving = {
       alert('It appears that your save is somehow from ' +
         formatTime(-totalDiff, {seconds: {f: format, s: false}, larger: {f: format, s: false}}) +
         ' in the future. You may want to figure out what might be causing this.');
+      player.lastUpdate = Date.now();
       callback();
       return;
     }
