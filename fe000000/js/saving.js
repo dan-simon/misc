@@ -10,6 +10,16 @@ let Saving = {
     // Stop the player from saving the game while time is being simulated.
     localStorage.setItem('fe000000-save', btoa(JSON.stringify(player)));
   },
+  quickLoadIssueCheck(s) {
+    let p = JSON.parse(atob(s));
+    for (let i of ['boost', 'currentTab', 'generators', 'lastUpdate', 'prestigePower', 'stars']) {
+      if (!(i in p)) {
+        // This message has additional context when shown. 
+        return 'It has no "' + i + '" property.';
+      }
+    }
+    return null;
+  },
   loadGame(s, offlineProgress, isOracle, callback) {
     if (blocked && !confirm('Time is currently being simulated. Loading a save while time ' +
       'is being simulated can cause weird behavior. Are you sure you want to load? ' +
@@ -136,8 +146,11 @@ let Saving = {
     }
     if (player.version < 1.3125) {
       player.sacrificeMultiplier = new Decimal(1);
+      // This is done so old saves that have reached infinity won't be stuck.
+      // It works because 2^256 - 2 is still 2^256 in the number library used.
+      // Also, we use Decimal.minus because player.stars is usually a string here.
       player.stats = {
-        totalStarsProduced: new Decimal(0),
+        totalStarsProduced: Decimal.minus(player.stars, 2).max(0),
         timeSincePurchase: 0,
         timeSinceSacrifice: 0,
         timeSincePrestige: 0,
@@ -906,8 +919,13 @@ let Saving = {
     try {
       let save = prompt('Enter your save:');
       if (save && !(/^\s+$/.test(save))) {
-        // This isn't the oracle and needs no callback
-        this.loadGame(save, player.options.offlineProgress, false, () => true);
+        let issue = this.quickLoadIssueCheck(save);
+        if (issue) {
+          alert('The save you entered does not seem to be valid. ' + issue);
+        } else {
+          // This isn't the oracle and needs no callback
+          this.loadGame(save, player.options.offlineProgress, false, () => true);
+        }
       } else if (save !== null) {
         alert('The save you entered appears to be empty.');
       }
