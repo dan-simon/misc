@@ -422,6 +422,7 @@
     <tab ~style.display=Tabs.currentTab() === 'challenges' ? '' : 'none'~>
       <span>You have completed ~i Challenge.numberOfChallengesCompleted() ~ challenge~s Challenge.numberOfChallengesCompleted() ~, multiplying all ~r Generators.term() ~ by ~f Challenge.multiplier() ~. <button onclick="Challenge.toggleRestartOnCompletion()">Restart challenges on completion: ~r Challenge.restartOnCompletion() ? "On" : "Off" ~</button></span>
       <br/>
+      <br/>
       <span>To complete a challenge, infinity while in the challenge.</span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
@@ -1051,6 +1052,7 @@
       <span>You have completed ~i InfinityChallenge.numberOfInfinityChallengesCompleted() ~ infinity challenge~s InfinityChallenge.numberOfInfinityChallengesCompleted() ~, multiplying all infinity generators by ~f InfinityChallenge.multiplier() ~.</span>
       <br/>
       <span>You have produced ~f InfinityChallenge.totalStarsProducedThisEternity() ~ stars this eternity.</span>
+      <br/>
       <br/>
       <span>To complete an infinity challenge, infinity while in the infinity challenge.</span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
@@ -2214,12 +2216,13 @@
       <span>
         ~r EternityChallenge.eternityChallengeTotalCompletionsReward4Text() ~
       </span>
-      <br/>
-      <span>To complete an eternity challenge, eternity while in the eternity challenge.</span>
-      <br/>
+      <br ~style.display=EternityChallenge.canRespec() ? '' : 'none'~/>
       <span ~style.display=EternityChallenge.canRespec() ? '' : 'none'~>
         <button onclick="EternityChallenge.respecAndReset()">Respec eternity challenge and ~r EternityPrestigeLayer.resetText() ~</button>
       </span>
+      <br/>
+      <br/>
+      <span>To complete an eternity challenge, eternity while in the eternity challenge.</span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>
@@ -2697,8 +2700,8 @@
       <br ~style.display=FinalityMilestones.isFinalityMilestoneActive(5) ? '' : 'none'~/>
       <span ~style.display=FinalityMilestones.isFinalityMilestoneActive(5) ? '' : 'none'~>The Complexity Challenge 6 reward is instead currently ~f ComplexityStars.complexityChallengeRewardMultiplier(6) ~x stronger (from ~f ComplexityStars.extraAmount() ~ hypercomplexity stars).</span>
       <br/>
-      <span>You do not need to complexity to complete complexity challenges. How to complete them is explained at the bottom of this tab.</span>
       <br/>
+      <span>You do not need to complexity to complete complexity challenges. How to complete them is explained at the bottom of this tab.</span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>
