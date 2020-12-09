@@ -63,6 +63,13 @@ let Saving = {
     document.getElementById('bar').style.width = Math.floor(ticks / totalTicks * 512) + 'px';
   },
   simulateTime(totalDiff, maxTicks, showSimulation, callback) {
+    if (totalDiff < 0) {
+      alert('It appears that your save is somehow from ' +
+        formatTime(-totalDiff, {seconds: {f: format, s: false}, larger: {f: format, s: false}}) +
+        ' in the future. You may want to figure out what might be causing this.');
+      callback();
+      return;
+    }
     // Add this not for any of the actual JS files, but for ease of use from console.
     if (maxTicks === undefined) {
       maxTicks = this.defaultTicks();
