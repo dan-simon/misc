@@ -315,6 +315,7 @@ let initialPlayer = {
     'finality-shards': true,
     'finality-milestones': true,
   },
+  tabPresets: [],
   options: {
     notation: 'Scientific',
     timeDisplay: 'Seconds',
@@ -325,6 +326,7 @@ let initialPlayer = {
     resetColors: true,
     tabColors: true,
     exportDisplay: false,
+    exportNotificationFrequency: Math.pow(2, 16),
     theme: {
       background: 'Dark',
       buttonColor: 'Vibrant',
@@ -379,6 +381,7 @@ let initialPlayer = {
     timeSinceComplexity: 0,
     timeSincePowerGain: 0,
     timeSinceGameStart: 0,
+    timeSinceExport: 0,
     timeSinceLastPeakIPPerSec: Math.pow(2, 256),
     timeSinceLastPeakEPPerSec: Math.pow(2, 256),
     timeSinceLastPeakCPPerSec: Math.pow(2, 256),
@@ -409,7 +412,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.978515625
+  version: 1.9794921875
 }
 
 let player;

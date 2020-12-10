@@ -26,6 +26,19 @@ let Options = {
   toggleExportDisplay() {
     player.options.exportDisplay = !player.options.exportDisplay;
   },
+  exportNotificationFrequency() {
+    return player.options.exportNotificationFrequency;
+  },
+  setExportNotificationFrequency(x) {
+    player.options.exportNotificationFrequency = x;
+  },
+  showExportNotification() {
+    let frequency = this.exportNotificationFrequency();
+    return 0 < frequency && frequency <= player.stats.timeSinceExport;
+  },
+  resetExportTime() {
+    player.stats.timeSinceExport = 0;
+  },
   nextCompletionColors() {
     player.options.completionColors = COMPLETION_COLOR_LIST[(COMPLETION_COLOR_LIST.indexOf(player.options.completionColors) + 1) % COMPLETION_COLOR_LIST.length];
   },

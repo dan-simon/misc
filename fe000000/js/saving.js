@@ -828,6 +828,12 @@ let Saving = {
       player.options.viewAllGenerators = true;
       player.version = 1.978515625;
     }
+    if (player.version < 1.9794921875) {
+      player.stats.timeSinceExport = 0;
+      player.options.exportNotificationFrequency = Math.pow(2, 16);
+      player.tabPresets = [];
+      player.version = 1.9794921875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
@@ -940,6 +946,7 @@ let Saving = {
       'are not intended in normal play. Are you sure you want to export?')) {
       return;
     }
+    player.stats.timeSinceExport = 0;
     // How can this happen? Well, it can happen if something went wrong.
     let loading = document.getElementById('loading').style.display === '';
     if (loading) {

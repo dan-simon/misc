@@ -14,6 +14,7 @@ let Stats = {
     player.stats.timeSinceLastPeakEPPerSec += diff;
     player.stats.timeSinceLastPeakCPPerSec += diff;
     player.stats.timeSincePowerGain += diff;
+    player.stats.timeSinceExport += diff;
     ComplexityChallenge.addToTimeStats(diff);
   },
   recordPurchase(i, n) {

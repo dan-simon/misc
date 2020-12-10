@@ -75,11 +75,116 @@ let Tabs = {
   },
   showAllUnlockedTabs() {
     for (let x in player.tabOptions) {
-      if (this.isTabOptionVisible(x) && x !== 'options') {
+      if (x !== 'options') {
         player.tabOptions[x] = true;
         document.getElementsByClassName(x + '-tab-option')[0].checked = true;
       }
     }
+  },
+  hash(x) {
+    let d = {
+      'challenges': 'cha',
+      'chroma': 'chr',
+      'complexity': 'co',
+      'galaxies': 'ga',
+      'goals': 'go',
+      'options': 'op',
+      'oracle': 'or',
+      'statistics': 'sta',
+      'studies': 'stu'
+    };
+    return x.split('-').map(w => w in d ? d[w] : w[0]).join('');
+  },
+  exportString() {
+    return Object.keys(player.tabOptions).filter(x => player.tabOptions[x]).map(x => this.hash(x)).sort().join(',') || 'none';
+  },
+  export() {
+    let output = document.getElementById('tabs-export-output');
+    let parent = output.parentElement;
+    let tabPresetBr = document.getElementsByClassName('tabpresetbr')[0];
+    parent.style.display = '';
+    tabPresetBr.style.display = '';
+    output.value = this.exportString();
+    output.select();
+    try {
+      document.execCommand('copy');
+    } catch(ex) {
+      alert('Copying to clipboard failed.');
+    }
+    if (!player.options.exportDisplay) {
+      parent.style.display = 'none';
+      tabPresetBr.style.display = 'none';
+      document.getElementsByClassName('tabs-export-button')[0].focus();
+    }
+  },
+  importString(importString) {
+    let presetsWithName = player.tabPresets.filter(x => x.name === importString);
+    if (presetsWithName.length > 0) {
+      this.importStringFromPreset(presetsWithName[0].tabs);
+    } else {
+      this.importStringFromPreset(importString);
+    }
+  },
+  importStringFromPreset(importString) {
+    if (!importString) return;
+    importString = importString.toLowerCase();
+    let tabHashes = (importString === 'none') ? [] : importString.split(',');
+    for (let x in player.tabOptions) {
+      if (x !== 'options') {
+        let value = tabHashes.includes(this.hash(x));
+        player.tabOptions[x] = value;
+        document.getElementsByClassName(x + '-tab-option')[0].checked = value;
+      }
+    }
+  },
+  import() {
+    this.importString(prompt('Enter tabs to show (as previously exported):'));
+  },
+  hasPreset(x) {
+    return player.tabPresets.length >= x;
+  },
+  presetName(x) {
+    if (!this.hasPreset(x)) return 'Untitled';
+    return player.tabPresets[x - 1].name;
+  },
+  presetTabs(x) {
+    if (!this.hasPreset(x)) return '';
+    return player.tabPresets[x - 1].tabs;
+  },
+  setPresetName(x, name) {
+    player.tabPresets[x - 1].name = name;
+  },
+  setPresetTabs(x, shownTabs) {
+    player.tabPresets[x - 1].tabs = shownTabs;
+  },
+  presetSetToCurrentTabs(x) {
+    this.setPresetTabs(x, this.exportString());
+    this.redisplayPresetTabs(x);
+  },
+  presetLoad(x) {
+    this.importStringFromPreset(this.presetTabs(x));
+  },
+  presetDelete(x) {
+    player.tabPresets = player.tabPresets.slice(0, x - 1).concat(player.tabPresets.slice(x));
+    for (let i = x; i <= player.tabPresets.length; i++) {
+      this.redisplayPreset(i);
+    }
+  },
+  presetCreate() {
+    if (!this.hasPreset(32)) {
+      player.tabPresets.push({'name': 'Untitled', 'tabs': this.exportString()});
+      this.redisplayPreset(player.tabPresets.length);
+    }
+  },
+  redisplayPreset(x) {
+    this.redisplayPresetName(x);
+    this.redisplayPresetTabs(x);
+  },
+  redisplayPresetName(x) {
+    document.getElementsByClassName('presettabname' + x)[0].value = this.presetName(x);
+  },
+  redisplayPresetTabs(x) {
+    document.getElementsByClassName('presettablist' + x)[0].value = this.presetTabs(x);
   }
 }
 
