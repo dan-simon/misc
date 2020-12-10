@@ -930,7 +930,11 @@ let Saving = {
           alert('The save you entered does not seem to be valid. ' + issue);
         } else {
           // This isn't the oracle and needs no callback
-          this.loadGame(save, player.options.offlineProgress, false, () => true);
+          this.loadGame(save, player.options.offlineProgress, false, function () {
+            // If the player is loading a save from a prompt, we assume that the loaded save
+            // is itself an export, and thus reset the export timer.
+            Options.resetExportTime();
+          });
         }
       } else if (save !== null) {
         alert('The save you entered appears to be empty.');
