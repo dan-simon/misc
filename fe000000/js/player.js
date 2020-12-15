@@ -139,6 +139,7 @@ let initialPlayer = {
   studySettings: {
     firstTwelveStudyPurchaseOrder: [],
     respecStudies: false,
+    presetRespecStudies: false,
     studyMode: 'Buy',
     studyDisplayCostWhenBought: false,
     boughtTheoremsThisComplexity: false,
@@ -202,6 +203,7 @@ let initialPlayer = {
     stored: [],
     gain: true,
     respec: false,
+    presetRespec: false,
     hasGainedShards: false,
     shards: 0,
     shardUpgrades: [0, 0, 0, 0],
@@ -259,6 +261,7 @@ let initialPlayer = {
   finalityPoints: new Decimal(0),
   totalFinalityShards: 0,
   respecFinalityShards: false,
+  presetRespecFinalityShards: false,
   finalities: 0,
   finalityStars: new Decimal(1),
   finalityGenerators: initialFinalityGenerators(),
@@ -419,7 +422,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9814453125
+  version: 1.982421875
 }
 
 let player;

@@ -847,6 +847,12 @@ let Saving = {
       player.stats.timeSinceCPGainWasTotal = 0;
       player.version = 1.9814453125;
     }
+    if (player.version < 1.982421875) {
+      player.studySettings.presetRespecStudies = false;
+      player.powers.presetRespec = false;
+      player.presetRespecFinalityShards = false;
+      player.version = 1.982421875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

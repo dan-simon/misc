@@ -263,13 +263,14 @@ let EternityChallenge = {
   respecAndReset() {
     if (Options.confirmation('eternityChallengeRespec') && !confirm(
       'Are you sure you want to respec your unlocked eternity challenge and ' +
-      EternityPrestigeLayer.resetText() + '?')) return;
+      EternityPrestigeLayer.resetText() + '?')) return false;
     this.respec();
     if (EternityPrestigeLayer.canEternity()) {
       EternityPrestigeLayer.eternity(false);
     } else {
       EternityPrestigeLayer.eternityReset(false);
     }
+    return true;
   },
   lockUnlockedEternityChallenge() {
     // This can happen if we're respeccing and doing an eternity reset.

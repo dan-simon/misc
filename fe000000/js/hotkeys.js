@@ -113,7 +113,7 @@ window.addEventListener('keyup', function(event) {
   // This is slightly over-engineered, but it's for symmetry.
   let controlDown = event.ctrlKey || event.metaKey;
   let shiftDown = event.shiftKey;
-  if (!player.options.hotkeys || controlDown || document.activeElement.type === "text") return false
+  if ((player && !player.options.hotkeys) || controlDown || document.activeElement.type === "text") return false
   const tmp = event.keyCode;
   switch (tmp) {
     case 84: // T

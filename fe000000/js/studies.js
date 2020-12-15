@@ -237,13 +237,16 @@ let Studies = {
   unspentTheorems(extraSpentOnEC) {
     return this.totalTheorems() - this.spentTheorems(extraSpentOnEC);
   },
-  spentOnStudiesTheorems() {
+  studiesCost(studies) {
     // This function is a mess that hopefully both works and is decently quick.
-    let rowCounts = [0, 1, 2].map(x => this.list.slice(4 * x, 4 * (x + 1)).filter(y => y.isBought()).length);
+    let rowCounts = [0, 1, 2].map(x => [4 * x + 1, 4 * x + 2, 4 * x + 3, 4 * x + 4].filter(y => studies[y - 1]).length);
     let firstThreeRowsInitial = rowCounts.map((x, i) => x * (2 * i + 4)).reduce((a, b) => a + b);
     let firstThreeRowsExtra = 2 * (rowCounts[0] * rowCounts[1] + rowCounts[0] * rowCounts[2] + rowCounts[1] * rowCounts[2]);
-    let fourthRow = this.list.slice(12).map(x => [...Array(x.timesBought())].map((_, y) => Math.floor(Math.pow(2, y / 2))).reduce((a, b) => a + b, 0)).reduce((a, b) => a + b);
+    let fourthRow = studies.slice(12).map(x => [...Array(x)].map((_, y) => Math.floor(Math.pow(2, y / 2))).reduce((a, b) => a + b, 0)).reduce((a, b) => a + b);
     return firstThreeRowsInitial + firstThreeRowsExtra + fourthRow;
+  },
+  spentOnStudiesTheorems() {
+    return this.studiesCost(player.studies);
   },
   spentTheorems(extraSpentOnEC) {
     let eternityChallengeCost = EternityChallenge.getUnlockedEternityChallengeCost();
@@ -257,6 +260,12 @@ let Studies = {
   },
   toggleRespec() {
     player.studySettings.respecStudies = !player.studySettings.respecStudies;
+  },
+  presetRespec() {
+    return player.studySettings.presetRespecStudies;
+  },
+  togglePresetRespec() {
+    player.studySettings.presetRespecStudies = !player.studySettings.presetRespecStudies;
   },
   respec() {
     if (ComplexityAchievements.hasComplexityAchievement(4, 4) && !Studies.areStudiesInitialStudies()) {
@@ -285,24 +294,26 @@ let Studies = {
   respecAndReset() {
     if (Options.confirmation('studiesRespec') && !confirm(
       'Are you sure you want to respec your studies and ' +
-      EternityPrestigeLayer.resetText() + '?')) return;
+      EternityPrestigeLayer.resetText() + '?')) return false;
     this.respec();
     if (EternityPrestigeLayer.canEternity()) {
       EternityPrestigeLayer.eternity(false);
     } else {
       EternityPrestigeLayer.eternityReset(false);
     }
+    return true;
   },
   respecFourthRowAndReset() {
     if (Options.confirmation('studiesRespec') && !confirm(
       'Are you sure you want to respec your fourth-row studies and ' +
-      EternityPrestigeLayer.resetText() + '?')) return;
+      EternityPrestigeLayer.resetText() + '?')) return false;
     this.respecFourthRow();
     if (EternityPrestigeLayer.canEternity()) {
       EternityPrestigeLayer.eternity(false);
     } else {
       EternityPrestigeLayer.eternityReset(false);
     }
+    return true;
   },
   boughtThatAreNotOnRow(x) {
     return this.list.slice(0, 12).filter(y => y.isBought() && y.row() !== x).length;
@@ -346,6 +357,17 @@ let Studies = {
       this.importStringFromPreset(importString);
     }
   },
+  getUnspentEternityChallenge(x) {
+    // Note: x can be null.
+    if (x === null || x[0] !== 'c') {
+      return 0;
+    }
+    let ec = this.toNumber(x.slice(1));
+    if (ec < 1 || ec > 8) {
+      return 0;
+    }
+    return ec;
+  },
   getUnspent(x) {
     // Note: x can be null.
     if (x === null) {
@@ -354,11 +376,7 @@ let Studies = {
     if (x[0] === 'u') {
       return this.toNumber(x.slice(1));
     } else if (x[0] === 'c') {
-      let ec = this.toNumber(x.slice(1));
-      if (ec < 1 || ec > 8) {
-        return 0;
-      }
-      return EternityChallenge.getEternityChallengeCost(ec);
+      return EternityChallenge.getEternityChallengeCost(this.getUnspentEternityChallenge(x));
     } else {
       return 0;
     }
@@ -409,6 +427,42 @@ let Studies = {
         }
       }
     }
+  },
+  studyListCostText(importString) {
+    if (!importString) return formatInt(0);
+    let split = this.splitImportString(importString);
+    let mainPart = split[0];
+    let fourthRowPart = split[1];
+    let eternityChallengePart = split[2];
+    let unspent = this.getUnspent(eternityChallengePart);
+    let eternityChallenge = this.getUnspentEternityChallenge(eternityChallengePart)
+    let eternityChallengeText = (eternityChallenge !== 0) ? ' for EC' + eternityChallenge : '';
+    let atLeast = fourthRowPart !== null && fourthRowPart[0] === 's';
+    let studies = initialStudies();
+    for (let i of mainPart.split(',').map(x => this.toNumber(x)).filter(x => 1 <= x && x <= 16)) {
+      if (i <= 12) {
+        studies[i - 1] = true;
+      } else {
+        studies[i - 1]++;
+      }
+    }
+    if (fourthRowPart !== null && !atLeast) {
+      let counts = fourthRowPart.split(',').map(x => this.toNumber(x));
+      for (let j = 0; j < 4; j++) {
+        studies[12 + i] += counts[j];
+      }
+    }
+    let cost = this.studiesCost(studies);
+    let atLeastText = atLeast ? 'at least ' : '';
+    if (unspent > 0) {
+      return atLeastText + formatInt(cost) + ' (studies) + ' + formatInt(unspent) +
+      ' (required unspent' + eternityChallengeText + ') = ' + formatInt(cost + unspent) + '.';
+    } else {
+      return atLeastText + formatInt(cost);
+    }
+  },
+  presetCostText(x) {
+    return this.studyListCostText(this.presetStudyList(x));
   },
   import() {
     this.importString(prompt('Enter your studies (as previously exported):'));
@@ -555,6 +609,7 @@ let Studies = {
     this.redisplayPresetStudyList(x);
   },
   presetLoad(x) {
+    if (this.presetRespec() && !this.respecAndReset()) return;
     this.importStringFromPreset(this.presetStudyList(x));
   },
   presetDelete(x) {
@@ -564,7 +619,7 @@ let Studies = {
     }
   },
   presetCreate() {
-    if (!this.hasPreset(32)) {
+    if (!this.hasPreset(64)) {
       player.presets.push({'name': 'Untitled', 'studies': this.exportString()});
       this.redisplayPreset(player.presets.length);
     }

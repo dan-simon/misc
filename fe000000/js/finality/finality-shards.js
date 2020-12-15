@@ -140,6 +140,12 @@ let FinalityShardPresets = {
   toggleRespec() {
     player.respecFinalityShards = !player.respecFinalityShards;
   },
+  presetRespec() {
+    return player.presetRespecFinalityShards;
+  },
+  togglePresetRespec() {
+    player.presetRespecFinalityShards = !player.presetRespecFinalityShards;
+  },
   respec() {
     player.finalityShardUpgrades = [0, 0, 0, 0, 0, 0, 0, 0];
   },
@@ -152,13 +158,14 @@ let FinalityShardPresets = {
   respecAndReset() {
     if (Options.confirmation('finalityShardUpgradesRespec') && !confirm(
       'Are you sure you want to respec your bought finality shard upgrades and ' +
-      FinalityPrestigeLayer.resetText() + '?')) return;
+      FinalityPrestigeLayer.resetText() + '?')) return false;
     this.respec();
     if (FinalityPrestigeLayer.canFinality()) {
       FinalityPrestigeLayer.finality(false);
     } else {
       FinalityPrestigeLayer.finalityReset(false);
     }
+    return true;
   },
   exportString() {
     if (FinalityShards.totalUpgrades() === 0) return 'none';
@@ -234,6 +241,7 @@ let FinalityShardPresets = {
     this.redisplayPresetFinalityShardUpgradeList(x);
   },
   presetLoad(x) {
+    if (this.presetRespec() && !this.respecAndReset()) return;
     this.importStringFromPreset(this.presetFinalityShardUpgradeList(x));
   },
   presetDelete(x) {

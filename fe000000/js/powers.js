@@ -461,6 +461,12 @@ let Powers = {
   toggleRespec() {
     player.powers.respec = !player.powers.respec;
   },
+  presetRespec() {
+    return player.powers.presetRespec;
+  },
+  togglePresetRespec() {
+    player.powers.presetRespec = !player.powers.presetRespec;
+  },
   respec() {
     player.powers.stored = this.stored().concat(this.active());
     player.powers.active = [];
@@ -475,13 +481,14 @@ let Powers = {
   respecAndReset() {
     if (Options.confirmation('powersRespec') && !confirm(
       'Are you sure you want to deactivate your active powers and ' +
-      ComplexityPrestigeLayer.resetText() + '?')) return;
+      ComplexityPrestigeLayer.resetText() + '?')) return false;
     this.respec();
     if (ComplexityPrestigeLayer.canComplexity()) {
       ComplexityPrestigeLayer.complexity(false);
     } else {
       ComplexityPrestigeLayer.complexityReset(false);
-    }
+    };
+    return true;
   },
   newStrength() {
     return PowerUpgrade(1).effect();
@@ -718,6 +725,7 @@ let Powers = {
     this.redisplayPresetPowerList(x);
   },
   presetLoad(x) {
+    if (this.presetRespec() && !this.respecAndReset()) return;
     this.importStringFromPreset(this.presetPowerList(x));
   },
   presetDelete(x) {
