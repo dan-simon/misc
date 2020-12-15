@@ -365,7 +365,7 @@ let Studies = {
   },
   splitImportString(importString) {
     let parts = importString.split(/[&|]/g);
-    let conj = importString.match(/[&|]/g);
+    let conj = importString.match(/[&|]/g) || [];
     return [
       parts[0],
       (conj.includes('&') ? parts[conj.indexOf('&') + 1] : null),
