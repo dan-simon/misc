@@ -838,6 +838,15 @@ let Saving = {
       player.studySettings.showPresetExplanation = false;
       player.version = 1.98046875;
     }
+    if (player.version < 1.9814453125) {
+      player.stats.timeSinceIPGainWasAmount = 0;
+      player.stats.timeSinceEPGainWasAmount = 0;
+      player.stats.timeSinceCPGainWasAmount = 0;
+      player.stats.timeSinceIPGainWasTotal = 0;
+      player.stats.timeSinceEPGainWasTotal = 0;
+      player.stats.timeSinceCPGainWasTotal = 0;
+      player.version = 1.9814453125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
@@ -955,6 +964,7 @@ let Saving = {
       return;
     }
     player.stats.timeSinceExport = 0;
+    this.saveGame(false);
     // How can this happen? Well, it can happen if something went wrong.
     let loading = document.getElementById('loading').style.display === '';
     if (loading) {

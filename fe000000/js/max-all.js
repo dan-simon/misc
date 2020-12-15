@@ -8,5 +8,11 @@ let MaxAll = {
     }
     Boost.buyMax();
     Generators.list.forEach(x => x.buyMax());
+  },
+  maxAllGenerators() {
+    while (Generators.highest() && Generators.highest().canBuy()) {
+      Generators.highest().buy();
+    }
+    Generators.list.forEach(x => x.buyMax());
   }
 }

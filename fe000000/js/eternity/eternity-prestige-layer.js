@@ -71,6 +71,14 @@ let EternityPrestigeLayer = {
       player.stats.timeSinceLastPeakEPPerSec = 0;
     }
   },
+  compareEPGain() {
+    if (this.eternityPointGain().lt(this.eternityPoints())) {
+      player.stats.timeSinceEPGainWasAmount = 0;
+    }
+    if (this.eternityPointGain().lt(this.totalEternityPoints())) {
+      player.stats.timeSinceEPGainWasTotal = 0;
+    }
+  },
   eternityConfirmationMessage() {
     let gain = this.eternityPointGain();
     return 'Are you sure you want to eternity for ' +
@@ -135,6 +143,8 @@ let EternityPrestigeLayer = {
     player.stats.totalIPProducedThisEternity = EternityStartingBenefits.infinityPoints().plus(FinalityStartingBenefits.infinityPoints());
     player.stats.timeSinceEternity = 0;
     player.stats.timeSinceLastPeakEPPerSec = Math.pow(2, 256);
+    player.stats.timeSinceEPGainWasAmount = 0;
+    player.stats.timeSinceEPGainWasTotal = 0;
     player.stats.peakEPPerSec = new Decimal(0);
     player.stats.lastTenInfinities = initialLastTenInfinities();
   }

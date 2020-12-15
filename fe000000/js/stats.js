@@ -13,6 +13,12 @@ let Stats = {
     player.stats.timeSinceLastPeakIPPerSec += diff;
     player.stats.timeSinceLastPeakEPPerSec += diff;
     player.stats.timeSinceLastPeakCPPerSec += diff;
+    player.stats.timeSinceIPGainWasAmount += diff;
+    player.stats.timeSinceEPGainWasAmount += diff;
+    player.stats.timeSinceCPGainWasAmount += diff;
+    player.stats.timeSinceIPGainWasTotal += diff;
+    player.stats.timeSinceEPGainWasTotal += diff;
+    player.stats.timeSinceCPGainWasTotal += diff;
     player.stats.timeSincePowerGain += diff;
     player.stats.timeSinceExport += diff;
     ComplexityChallenge.addToTimeStats(diff);

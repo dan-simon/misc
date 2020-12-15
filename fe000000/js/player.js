@@ -386,6 +386,12 @@ let initialPlayer = {
     timeSinceLastPeakIPPerSec: Math.pow(2, 256),
     timeSinceLastPeakEPPerSec: Math.pow(2, 256),
     timeSinceLastPeakCPPerSec: Math.pow(2, 256),
+    timeSinceIPGainWasAmount: -1,
+    timeSinceEPGainWasAmount: -1,
+    timeSinceCPGainWasAmount: -1,
+    timeSinceIPGainWasTotal: -1,
+    timeSinceEPGainWasTotal: -1,
+    timeSinceCPGainWasTotal: -1,
     fastestInfinity: Math.pow(2, 256),
     fastestEternity: Math.pow(2, 256),
     fastestComplexity: Math.pow(2, 256),
@@ -413,7 +419,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.98046875
+  version: 1.9814453125
 }
 
 let player;

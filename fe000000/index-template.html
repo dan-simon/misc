@@ -634,6 +634,8 @@
         <span>Automatically turn all autobuyers off when entering challenges: <input type="checkbox" ~!checked=Autobuyers.disableWhenStartingChallenge()~ ~!onchange=function() {Autobuyers.setDisableWhenStartingChallenge(this.checked)}~></input><span ~style.display=SpecialTabs.isTabVisible('infinity-challenges') ? '' : 'none'~> when entering infinity challenges: <input type="checkbox" ~!checked=Autobuyers.disableWhenStartingInfinityChallenge()~ ~!onchange=function() {Autobuyers.setDisableWhenStartingInfinityChallenge(this.checked)}~></input></span></span>
         <br/>
       </div>
+      <span>You can toggle an autobuyer by pressing T + the corresponding hotkey.</span>
+      <br/>
       <span ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>Autobuyers options on this tab only apply to autobuyers on this tab.</span>
       <br ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~/>
       <span><button onclick="Autobuyers.setAll(true)">Turn all autobuyers on</button> <button onclick="Autobuyers.setAll(false)">Turn all autobuyers off</button> <button onclick="Autobuyers.toggleAll()">Toggle all autobuyers</button> <button ~style.display=(Autobuyers.areAnyAutobuyersSlow() && Autobuyers.areAnyAutobuyersFast()) ? '' : 'none'~ onclick="Autobuyers.synchronize()">Synchronize slow and fast autobuyers</button></span>
@@ -969,6 +971,8 @@
                 <option value="X times best of last ten">X times best of last ten</option>
                 <option value="Time past peak/sec">Time past peak/sec</option>
                 <option value="Fraction of peak/sec">Fraction of peak/sec</option>
+                <option value="Time since gain was amount">Time since gain was amount</option>
+                <option value="Time since gain was total">Time since gain was total</option>
               </select></span>
               <br/>
               <span>~r Autobuyer(12).mode() ~:</span>
@@ -991,6 +995,8 @@
                 <option value="X times best of last ten">X times best of last ten</option>
                 <option value="Time past peak/sec">Time past peak/sec</option>
                 <option value="Fraction of peak/sec">Fraction of peak/sec</option>
+                <option value="Time since gain was amount">Time since gain was amount</option>
+                <option value="Time since gain was total">Time since gain was total</option>
                 <option value="Chroma amount" ~style.display=(Chroma.isUnlocked() || PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~>Chroma amount</option>
                 <option value="Chroma as fraction of cap" ~style.display=(Chroma.isUnlocked() || PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~>Chroma as fraction of cap</option>
               </select></span>
@@ -1030,6 +1036,8 @@
                 <option value="X times best of last ten">X times best of last ten</option>
                 <option value="Time past peak/sec">Time past peak/sec</option>
                 <option value="Fraction of peak/sec">Fraction of peak/sec</option>
+                <option value="Time since gain was amount">Time since gain was amount</option>
+                <option value="Time since gain was total">Time since gain was total</option>
                 <option value="Eternity power extra multiplier" ~style.display=(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Eternity power extra multiplier</option>
                 <option value="Galaxy effect (0 means cap)" ~style.display=(Galaxy.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Galaxy effect (0 means cap)</option>
               </select></span>

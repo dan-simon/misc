@@ -82,6 +82,14 @@ let ComplexityPrestigeLayer = {
       player.stats.timeSinceLastPeakCPPerSec = 0;
     }
   },
+  compareCPGain() {
+    if (this.complexityPointGain().lt(this.complexityPoints())) {
+      player.stats.timeSinceCPGainWasAmount = 0;
+    }
+    if (this.complexityPointGain().lt(this.totalComplexityPoints())) {
+      player.stats.timeSinceCPGainWasTotal = 0;
+    }
+  },
   complexityConfirmationMessage() {
     let gain = this.complexityPointGain();
     return 'Are you sure you want to complexity for ' +
@@ -168,6 +176,8 @@ let ComplexityPrestigeLayer = {
     player.stats.timeSincePermanenceGain = 0;
     player.stats.timeSinceComplexity = 0;
     player.stats.timeSinceLastPeakCPPerSec = Math.pow(2, 256);
+    player.stats.timeSinceCPGainWasAmount = 0;
+    player.stats.timeSinceCPGainWasTotal = 0;
     player.stats.peakCPPerSec = new Decimal(0);
     player.stats.lastTenEternities = initialLastTenEternities();
     // Not sure where to do this, might as well be here.

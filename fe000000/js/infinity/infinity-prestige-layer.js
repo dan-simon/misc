@@ -91,6 +91,14 @@ let InfinityPrestigeLayer = {
       player.stats.timeSinceLastPeakIPPerSec = 0;
     }
   },
+  compareIPGain() {
+    if (this.infinityPointGain().lt(this.infinityPoints())) {
+      player.stats.timeSinceIPGainWasAmount = 0;
+    }
+    if (this.infinityPointGain().lt(this.totalInfinityPoints())) {
+      player.stats.timeSinceIPGainWasTotal = 0;
+    }
+  },
   infinityConfirmationMessage() {
     let gain = this.infinityPointGain();
     return 'Are you sure you want to infinity for ' +
@@ -130,6 +138,8 @@ let InfinityPrestigeLayer = {
     player.stats.bestStarsThisInfinity = Stars.amount();
     player.stats.timeSinceInfinity = 0;
     player.stats.timeSinceLastPeakIPPerSec = Math.pow(2, 256);
+    player.stats.timeSinceIPGainWasAmount = 0;
+    player.stats.timeSinceIPGainWasTotal = 0;
     player.stats.peakIPPerSec = new Decimal(0);
     player.stats.purchasesThisInfinity = 0;
     player.stats.purchasesThisInfinityByType = [0, 0, 0, 0, 0, 0, 0, 0, 0];

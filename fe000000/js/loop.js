@@ -57,6 +57,9 @@ function gameLoop(diff, display) {
   InfinityPrestigeLayer.updatePeakIPPerSec();
   EternityPrestigeLayer.updatePeakEPPerSec();
   ComplexityPrestigeLayer.updatePeakCPPerSec();
+  InfinityPrestigeLayer.compareIPGain();
+  EternityPrestigeLayer.compareEPGain();
+  ComplexityPrestigeLayer.compareCPGain();
   // Why does checkForPowerGain need diff? Because it wants to know if a bunch of new powers
   // are due to a long tick or power production suddenly becoming possibile.
   Powers.checkForPowerGain(diff);

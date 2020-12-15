@@ -125,6 +125,21 @@ let Autobuyers = {
       }
     }
   },
+  toggleSome(x) {
+    if (typeof x === 'number') {
+      x = [x];
+    }
+    for (let i of x) {
+      let autobuyer = this.list[i - 1];
+      if (autobuyer.hasAutobuyer()) {
+        autobuyer.setIsOn(!autobuyer.isOn());
+        // Note that autobuyer.isOn() has been negated by the previous line.
+        for (let checkbox of autobuyer.checkboxes()) {
+          checkbox.checked = autobuyer.isOn();
+        }
+      }
+    }
+  },
   synchronize() {
     let newTimer = Math.min(player.slowAutobuyersTimer, player.fastAutobuyersTimer);
     player.slowAutobuyersTimer = newTimer;
@@ -221,6 +236,12 @@ let Autobuyers = {
     } else if (mode === 'Fraction of peak/sec') {
       InfinityPrestigeLayer.updatePeakIPPerSec();
       shouldInfinity = InfinityPrestigeLayer.currentIPPerSec().lte(InfinityPrestigeLayer.peakIPPerSec().times(priority));
+    } else if (mode === 'Time since gain was amount') {
+      InfinityPrestigeLayer.compareIPGain();
+      shouldInfinity = InfinityPrestigeLayer.infinityPointGain().gte(InfinityPrestigeLayer.infinityPoints()) && player.stats.timeSinceIPGainWasAmount >= priority.toNumber();
+    } else if (mode === 'Time since gain was total') {
+      InfinityPrestigeLayer.compareIPGain();
+      shouldInfinity = InfinityPrestigeLayer.infinityPointGain().gte(InfinityPrestigeLayer.totalInfinityPoints()) && player.stats.timeSinceIPGainWasTotal >= priority.toNumber();
     }
     if (shouldInfinity) {
       InfinityPrestigeLayer.infinity(false, null);
@@ -245,6 +266,12 @@ let Autobuyers = {
     } else if (mode === 'Fraction of peak/sec') {
       EternityPrestigeLayer.updatePeakEPPerSec();
       shouldEternity = EternityPrestigeLayer.currentEPPerSec().lte(EternityPrestigeLayer.peakEPPerSec().times(priority));
+    } else if (mode === 'Time since gain was amount') {
+      EternityPrestigeLayer.compareEPGain();
+      shouldEternity = EternityPrestigeLayer.eternityPointGain().gte(EternityPrestigeLayer.eternityPoints()) && player.stats.timeSinceEPGainWasAmount >= priority.toNumber();
+    } else if (mode === 'Time since gain was total') {
+      EternityPrestigeLayer.compareEPGain();
+      shouldEternity = EternityPrestigeLayer.eternityPointGain().gte(EternityPrestigeLayer.totalEternityPoints()) && player.stats.timeSinceEPGainWasTotal >= priority.toNumber();
     } else if (mode === 'Chroma amount') {
       // We use display amount here because colors were just updated,
       // potentially increasing the chroma amount (through orange, for example)
@@ -290,10 +317,16 @@ let Autobuyers = {
       shouldComplexity = ComplexityPrestigeLayer.complexityPointGain().gte(player.stats.lastTenComplexities.map(x => x[1]).reduce(Decimal.max).times(priority));
     } else if (mode === 'Time past peak/sec') {
       ComplexityPrestigeLayer.updatePeakCPPerSec();
-      shouldComplexity = player.stats.timeSinceLastPeakCPPerSec >= priority.toNumber();
+      shouldComplexity = ComplexityPrestigeLayer.eternityPointGain().gte(ComplexityPrestigeLayer.complexityPoints()) && player.stats.timeSinceLastPeakCPPerSec >= priority.toNumber();
     } else if (mode === 'Fraction of peak/sec') {
       ComplexityPrestigeLayer.updatePeakCPPerSec();
-      shouldComplexity = ComplexityPrestigeLayer.currentCPPerSec().lte(ComplexityPrestigeLayer.peakCPPerSec().times(priority));
+      shouldComplexity = ComplexityPrestigeLayer.eternityPointGain().gte(ComplexityPrestigeLayer.totalComplexityPoints()) && ComplexityPrestigeLayer.currentCPPerSec().lte(ComplexityPrestigeLayer.peakCPPerSec().times(priority));
+    } else if (mode === 'Time since gain was amount') {
+      ComplexityPrestigeLayer.compareCPGain();
+      shouldComplexity = player.stats.timeSinceCPGainWasAmount >= priority.toNumber();
+    } else if (mode === 'Time since gain was total') {
+      ComplexityPrestigeLayer.compareCPGain();
+      shouldComplexity = player.stats.timeSinceCPGainWasTotal >= priority.toNumber();
     } else if (mode === 'Eternity power extra multiplier') {
       shouldComplexity = Powers.getExtraMultiplier('eternity') >= priority.toNumber();
     } else if (mode === 'Galaxy effect (0 means cap)') {
