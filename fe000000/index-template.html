@@ -1499,9 +1499,11 @@
       <button onclick="Studies.respecFourthRowAndReset()" ~style.display=Studies.canAccessFourthRow() ? '' : 'none'~>Respec fourth-row studies and ~r EternityPrestigeLayer.resetText() ~</button>
       <br/>
       <br/>
-      <span>Study options: <button onclick="Studies.changeMode()">Study click mode: ~r Studies.mode() ~</button> <button onclick="Studies.changeCostDisplayMode()">Cost display: ~r Studies.costDisplayMode() ~</button>
-      <br ~style.display=(ComplexityAchievements.hasComplexityAchievement(4, 4) || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~/>
-      <button ~style.display=(ComplexityAchievements.hasComplexityAchievement(4, 4) || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~ onclick="Studies.toggleRebuyAfterComplexityChallenge6()">Rebuy studies when finishing ℂC6: ~r Studies.rebuyAfterComplexityChallenge6() ? "On" : "Off" ~</button></span>
+      <div style="width: 1024px; margin-left: auto; margin-right: auto;">
+        Study options: <button onclick="Studies.changeMode()">Study click mode: ~r Studies.mode() ~</button> <button onclick="Studies.changeCostDisplayMode()">Cost display: ~r Studies.costDisplayMode() ~</button>
+        <button ~style.display=(ComplexityAchievements.hasComplexityAchievement(4, 4) || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~ onclick="Studies.toggleRebuyAfterComplexityChallenge6()">Rebuy studies when finishing ℂC6: ~r Studies.rebuyAfterComplexityChallenge6() ? "On" : "Off" ~</button>
+        <button onclick="Studies.toggleShowPresetExplanation()">Show explanation of presets and exported studies: ~r Studies.showPresetExplanation() ? "On" : "Off" ~</button>
+      </div>
       <br/>
       <span>Click on the name of a study preset on the line below to load that study list:</span>
       <div style="width: 1024px; margin-left: auto; margin-right: auto;">
@@ -1542,6 +1544,32 @@
         <button ~style.display=Studies.hasPreset(30) ? '' : 'none'~ onclick="Studies.presetLoad(30)">~r Studies.presetName(30) ~</button>
         <button ~style.display=Studies.hasPreset(31) ? '' : 'none'~ onclick="Studies.presetLoad(31)">~r Studies.presetName(31) ~</button>
         <button ~style.display=Studies.hasPreset(32) ? '' : 'none'~ onclick="Studies.presetLoad(32)">~r Studies.presetName(32) ~</button>
+      </div>
+      <div ~style.display=Studies.showPresetExplanation() ? '' : 'none'~>
+        <div style="width: 1024px; margin-left: auto; margin-right: auto;">
+          Exporting studies and preset study lists use the same syntax, which is explained below.
+          More of the syntax will be explained as it becomes useful.<span ~style.display=Studies.couldEverAccessFourthRow() ? '' : 'none'~> Currently all the syntax is visible.</span>
+        </div>
+        <br/>
+        <div style="width: 1024px; margin-left: auto; margin-right: auto;">
+          Loading the study list a,b,c,...,z tries to buy Study a, then Study b, then Study c, and so on, until it has bought Study z.
+          If the game cannot buy a study in the list with the available theorems, it will continue to the next study in the list rather than stopping.
+          <span ~style.display=Studies.couldEverAccessFourthRow() ? '' : 'none'~>Note that you can put fourth-row studies (that is, numbers from 13 to 16) in this list, but there is a more convenient syntax for fourth-row studies explained below.</span>
+        </div>
+        <br ~style.display=EternityChallenge.areEternityChallengesVisible() ? '' : 'none'~/>
+        <div ~style.display=EternityChallenge.areEternityChallengesVisible() ? '' : 'none'~ style="width: 1024px; margin-left: auto; margin-right: auto;">
+          Adding |ux to the end of a study list (where the u is a literal u) will keep at least x theorems unspent by studies no matter what. It's fine if those theorems are spent on an eternity challenge.
+          |cx is like |ux, except it uses the cost of Eternity Challenge x rather than the value of x. This is useful for eternity challenges.
+          When you have an eternity challenge unlocked and export a study list, that study list will have |ux, where x is the eternity challenge theorem cost.
+          <span ~style.display=(EternityChallenge.isEternityChallengeUnlockingMeaningless() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>("Broke every stone" disables this.)</span>
+        </div>
+        <br ~style.display=Studies.couldEverAccessFourthRow() ? '' : 'none'~/>
+        <div ~style.display=Studies.couldEverAccessFourthRow() ? '' : 'none'~ style="width: 1024px; margin-left: auto; margin-right: auto;">
+          Adding &amp;a,b,c,d to the end of a study list will try to buy Study 13 up to a total times, then Study 14 b total times, and so on.
+          If the game cannot buy a study in the list as many times as asked for, it will move to the next study.
+          Adding &amp;sa,b,c,d, where the s is a literal s, will instead try to spend theorems on fourth-row studies in proportion to their costs when bought a, b, c, and d times.
+          This &amp;sa,b,c,d syntax allows for a preset to keep the same relative values between fourth-row studies (that is, which is more important and which is less) without the preset changing for every fourth-row study purchase.
+        </div>
       </div>
       <div ~style.display=Studies.isAutoLoadUnlocked() ? '' : 'none'~>
         Study list to constantly load: <input style="width: 256px;" type="text" ~!value=Studies.studyListToAutoLoad()~ ~!onchange=function() {Studies.setStudyListToAutoLoad(this.value)}~></input> <button onclick="Studies.toggleAutoLoad()">Auto-load: ~r Studies.isAutoLoadOn() ? "On" : "Off" ~</button>

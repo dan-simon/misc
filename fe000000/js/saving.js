@@ -834,6 +834,10 @@ let Saving = {
       player.tabPresets = [];
       player.version = 1.9794921875;
     }
+    if (player.version < 1.98046875) {
+      player.studySettings.showPresetExplanation = false;
+      player.version = 1.98046875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

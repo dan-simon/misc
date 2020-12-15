@@ -30,12 +30,12 @@ let Study = function (i) {
     timesBought() {
       return player.studies[i - 1];
     },
-    isBuyable() {
+    isBuyable(requiredExtra) {
       if (ComplexityChallenge.isSafeguardOn(6)) return false;
       if (i <= 12) {
-        return !this.isBought() && Studies.unspentTheorems() >= this.cost();
+        return !this.isBought() && Studies.unspentTheorems(requiredExtra) >= this.cost();
       } else {
-        return Studies.list.slice(0, 12).every(i => i.isBought()) && Studies.unspentTheorems() >= this.cost();
+        return Studies.list.slice(0, 12).every(i => i.isBought()) && Studies.unspentTheorems(requiredExtra) >= this.cost();
       }
     },
     cost() {
@@ -124,8 +124,8 @@ let Study = function (i) {
     cappedText() {
       return this.isCapped() ? 'Capped' : 'Currently';
     },
-    buy() {
-      if (this.isBuyable()) {
+    buy(requiredExtra) {
+      if (this.isBuyable(requiredExtra)) {
         if (this.row() === 4) {
           player.studies[i - 1]++;
         } else {
@@ -234,17 +234,23 @@ let Studies = {
       ).join(' + ') + ' = ' + formatInt(extraTheorems);
     }
   },
-  unspentTheorems() {
-    return this.totalTheorems() - this.spentTheorems();
+  unspentTheorems(extraSpentOnEC) {
+    return this.totalTheorems() - this.spentTheorems(extraSpentOnEC);
   },
-  spentTheorems() {
-    /// This function is a mess that hopefully both works and is decently quick.
+  spentOnStudiesTheorems() {
+    // This function is a mess that hopefully both works and is decently quick.
     let rowCounts = [0, 1, 2].map(x => this.list.slice(4 * x, 4 * (x + 1)).filter(y => y.isBought()).length);
     let firstThreeRowsInitial = rowCounts.map((x, i) => x * (2 * i + 4)).reduce((a, b) => a + b);
     let firstThreeRowsExtra = 2 * (rowCounts[0] * rowCounts[1] + rowCounts[0] * rowCounts[2] + rowCounts[1] * rowCounts[2]);
     let fourthRow = this.list.slice(12).map(x => [...Array(x.timesBought())].map((_, y) => Math.floor(Math.pow(2, y / 2))).reduce((a, b) => a + b, 0)).reduce((a, b) => a + b);
-    let eternityChallenge = EternityChallenge.getUnlockedEternityChallengeCost();
-    return firstThreeRowsInitial + firstThreeRowsExtra + fourthRow + eternityChallenge;
+    return firstThreeRowsInitial + firstThreeRowsExtra + fourthRow;
+  },
+  spentTheorems(extraSpentOnEC) {
+    let eternityChallengeCost = EternityChallenge.getUnlockedEternityChallengeCost();
+    if (extraSpentOnEC !== undefined) {
+      eternityChallengeCost = Math.max(extraSpentOnEC, eternityChallengeCost);
+    }
+    return this.spentOnStudiesTheorems() + eternityChallengeCost;
   },
   isRespecOn() {
     return player.studySettings.respecStudies;
@@ -308,7 +314,9 @@ let Studies = {
   exportString() {
     let extraList = [13, 14, 15, 16].map(x => Study(x).timesBought());
     let extraString = extraList.some(x => x !== 0) ? '&s' + extraList.join(',') : '';
-    return (player.studySettings.firstTwelveStudyPurchaseOrder.join(',') || 'none') + extraString;
+    let cost = EternityChallenge.getUnlockedEternityChallengeCost();
+    let eternityChallengeString = (cost > 0) ? '|u' + cost : '';
+    return (player.studySettings.firstTwelveStudyPurchaseOrder.join(',') || 'none') + extraString + eternityChallengeString;
   },
   export() {
     let output = document.getElementById('study-export-output');
@@ -338,35 +346,65 @@ let Studies = {
       this.importStringFromPreset(importString);
     }
   },
+  getUnspent(x) {
+    // Note: x can be null.
+    if (x === null) {
+      return 0;
+    }
+    if (x[0] === 'u') {
+      return this.toNumber(x.slice(1));
+    } else if (x[0] === 'c') {
+      let ec = this.toNumber(x.slice(1));
+      if (ec < 1 || ec > 8) {
+        return 0;
+      }
+      return EternityChallenge.getEternityChallengeCost(ec);
+    } else {
+      return 0;
+    }
+  },
+  splitImportString(importString) {
+    let parts = importString.split(/[&|]/g);
+    let conj = importString.match(/[&|]/g);
+    return [
+      parts[0],
+      (conj.includes('&') ? parts[conj.indexOf('&') + 1] : null),
+      (conj.includes('|') ? parts[conj.indexOf('|') + 1] : null)
+    ];
+  },
   importStringFromPreset(importString) {
     if (!importString) return;
-    let parts = importString.split('&');
+    let split = this.splitImportString(importString);
+    let mainPart = split[0];
+    let fourthRowPart = split[1];
+    let eternityChallengePart = split[2];
+    let unspent = this.getUnspent(eternityChallengePart);
     // You can put any study id between 1 and 16 in the initial part of the import list; this is intended.
     // Also, none should be handled as buying no studies based on current code even without a special case,
     // but best to not rely on that.
-    if (parts[0] !== 'none') {
-      for (let i of parts[0].split(',').map(x => this.toNumber(x)).filter(x => 1 <= x && x <= 16)) {
-        Study(i).buy();
+    if (mainPart !== null && mainPart !== 'none') {
+      for (let i of mainPart.split(',').map(x => this.toNumber(x)).filter(x => 1 <= x && x <= 16)) {
+        Study(i).buy(unspent);
       }
     }
-    if (parts.length > 1) {
-      let startsWithS = parts[1][0] === 's';
+    if (fourthRowPart !== null) {
+      let startsWithS = fourthRowPart[0] === 's';
       if (startsWithS) {
-        parts[1] = parts[1].slice(1);
+        fourthRowPart = fourthRowPart.slice(1);
       }
-      let counts = parts[1].split(',').map(x => this.toNumber(x));
+      let counts = fourthRowPart.split(',').map(x => this.toNumber(x));
       if (startsWithS) {
         let costs = counts.map((x, j) => Study(13 + j).costUpTo(x));
         let studies = [0, 1, 2, 3].map(j => ({'study': Study(13 + j), 'cost': costs[j]}));
         let f = x => x.cost / x.study.costSoFar() || 0;
-        while (studies.some(x => x.study.isBuyable() && x.cost > 0)) {
-          [...studies.filter(x => x.study.isBuyable() && x.cost > 0)].sort((a, b) => f(b) - f(a))[0].study.buy();
+        while (studies.some(x => x.study.isBuyable(unspent) && x.cost > 0)) {
+          [...studies.filter(x => x.study.isBuyable(unspent) && x.cost > 0)].sort((a, b) => f(b) - f(a))[0].study.buy(unspent);
         }
       } else {
         for (let j = 0; j < 4; j++) {
           let times = counts[j] - Study(13 + j).timesBought();
           for (let k = 0; k < times; k++) {
-            Study(13 + j).buy();
+            Study(13 + j).buy(unspent);
           }
         }
       }
@@ -380,6 +418,11 @@ let Studies = {
   },
   canAccessFourthRow() {
     return this.totalTheorems() >= this.totalStudyCost();
+  },
+  couldEverAccessFourthRow() {
+    // Technically, you could reach complexity without adding a fourth row,
+    // but then you deserve to hear about it.
+    return this.canAccessFourthRow() || PrestigeLayerProgress.hasReached('complexity');
   },
   anyFourthRowStudiesBought() {
     return [13, 14, 15, 16].some(i => Study(i).isBought());
@@ -455,6 +498,12 @@ let Studies = {
   },
   toggleRebuyAfterComplexityChallenge6() {
     player.studySettings.rebuyAfterComplexityChallenge6 = !player.studySettings.rebuyAfterComplexityChallenge6;
+  },
+  showPresetExplanation() {
+    return player.studySettings.showPresetExplanation;
+  },
+  toggleShowPresetExplanation() {
+    player.studySettings.showPresetExplanation = !player.studySettings.showPresetExplanation;
   },
   areStudiesInitialStudies() {
     return player.studies.join(',') === initialStudies().join(',');

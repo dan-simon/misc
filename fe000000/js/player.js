@@ -143,6 +143,7 @@ let initialPlayer = {
     studyDisplayCostWhenBought: false,
     boughtTheoremsThisComplexity: false,
     rebuyAfterComplexityChallenge6: true,
+    showPresetExplanation: false,
     studiesBeforeLastRespec: initialStudies(),
   },
   presets: [],
@@ -412,7 +413,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9794921875
+  version: 1.98046875
 }
 
 let player;
