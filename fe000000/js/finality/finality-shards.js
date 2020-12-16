@@ -148,6 +148,7 @@ let FinalityShardPresets = {
   },
   respec() {
     player.finalityShardUpgrades = [0, 0, 0, 0, 0, 0, 0, 0];
+    this.setLastPresetIndex(0);
   },
   maybeRespec() {
     if (this.isRespecOn()) {

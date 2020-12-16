@@ -139,6 +139,7 @@ let ComplexityPrestigeLayer = {
       }
       player.studies = initialStudies();
       player.studySettings.firstTwelveStudyPurchaseOrder = [];
+      player.lastPresetIndices[1] = 0;
     }
     if (Studies.list.some(x => x.isBought())) {
       ComplexityChallenge.exitComplexityChallenge(6);

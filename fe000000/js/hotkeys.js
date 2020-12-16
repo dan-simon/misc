@@ -57,7 +57,11 @@ window.addEventListener('keydown', function(event) {
     break;
     
     case 65: // A
-      Autobuyers.toggleAll();
+      if (shiftDown) {
+        Autobuyers.toggleAll();
+      } else {
+        Autobuyers.turnAllOnOrOff();
+      }
     break;
 
     case 66: // B
@@ -150,7 +154,8 @@ let Hotkeys = {
   eachText: [
     '1-8 to buy max of Generator 1-8 respectively, shift+1-8 to buy one of ' +
     'Generator 1-8 respectively, B to buy max boosts, shift+B to buy a boost, ' +
-    'G to max all ~g~, M to max all ~g~ and boosts, A to toggle all autobuyers, S to sacrifice',
+    'G to max all ~g~, M to max all ~g~ and boosts, A to turn all autobuyers on/off, ' +
+    'shift+A to toggle all autobuyers, S to sacrifice',
     'P to prestige', 'I to infinity', 'E to eternity', 'R to gain permanence', 'C to complexity',
     'O to get a prediction from the oracle', 'F to finality'
   ],

@@ -114,6 +114,11 @@ let Autobuyers = {
       }
     }
   },
+  turnAllOnOrOff() {
+    let values = this.list.filter(x => x.hasAutobuyer()).map(x => x.isOn());
+    // If at most half are on, turn all on. Otherwise, turn all off.
+    this.setAll(values.filter(x => x).length <= values.length / 2);
+  },
   toggleAll() {
     for (let autobuyer of this.list) {
       if (autobuyer.hasAutobuyer()) {

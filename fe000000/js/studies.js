@@ -275,6 +275,7 @@ let Studies = {
       player.studies[i] = false;
     }
     player.studySettings.firstTwelveStudyPurchaseOrder = [];
+    this.setLastPresetIndex(0);
     this.respecFourthRow();
   },
   setStudiesBeforeLastRespec() {

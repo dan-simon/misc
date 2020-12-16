@@ -470,6 +470,7 @@ let Powers = {
   respec() {
     player.powers.stored = this.stored().concat(this.active());
     player.powers.active = [];
+    this.setLastPresetIndex(0);
     this.onPowerChange(true, false);
   },
   maybeRespec() {
