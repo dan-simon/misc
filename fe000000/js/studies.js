@@ -262,7 +262,7 @@ let Studies = {
     player.studySettings.respecStudies = !player.studySettings.respecStudies;
   },
   presetRespec() {
-    return player.studySettings.presetRespecStudies;
+    return globalShiftDown !== player.studySettings.presetRespecStudies;
   },
   togglePresetRespec() {
     player.studySettings.presetRespecStudies = !player.studySettings.presetRespecStudies;
@@ -325,8 +325,14 @@ let Studies = {
   exportString() {
     let extraList = [13, 14, 15, 16].map(x => Study(x).timesBought());
     let extraString = extraList.some(x => x !== 0) ? '&s' + extraList.join(',') : '';
-    let cost = EternityChallenge.getUnlockedEternityChallengeCost();
-    let eternityChallengeString = (cost > 0) ? '|u' + cost : '';
+    let unlockedEternityChallenge = EternityChallenge.getUnlockedEternityChallenge();
+    let currentEternityChallenge = EternityChallenge.currentEternityChallenge();
+    let eternityChallengeString = '';
+    if (currentEternityChallenge !== 0) {
+      eternityChallengeString = '|c' + currentEternityChallenge + '!!';
+    } else if (unlockedEternityChallenge !== 0) {
+      eternityChallengeString = '|c' + unlockedEternityChallenge + '!';
+    }
     return (player.studySettings.firstTwelveStudyPurchaseOrder.join(',') || 'none') + extraString + eternityChallengeString;
   },
   export() {
@@ -382,12 +388,15 @@ let Studies = {
     }
   },
   splitImportString(importString) {
+    let exclamations = [...importString].filter(i => i === '!').length;
+    importString = importString.replace(/!/g, '');
     let parts = importString.split(/[&|]/g);
     let conj = importString.match(/[&|]/g) || [];
     return [
       parts[0],
       (conj.includes('&') ? parts[conj.indexOf('&') + 1] : null),
-      (conj.includes('|') ? parts[conj.indexOf('|') + 1] : null)
+      (conj.includes('|') ? parts[conj.indexOf('|') + 1] : null),
+      exclamations
     ];
   },
   importStringFromPreset(importString) {
@@ -396,7 +405,17 @@ let Studies = {
     let mainPart = split[0];
     let fourthRowPart = split[1];
     let eternityChallengePart = split[2];
+    let exclamations = split[3];
     let unspent = this.getUnspent(eternityChallengePart);
+    let presetEternityChallenge = this.getUnspentEternityChallenge(eternityChallengePart);
+    if (presetEternityChallenge !== 0) {
+      if (exclamations >= 1 && EternityChallenge.canEternityChallengeBeUnlocked(presetEternityChallenge)) {
+        EternityChallenge.unlockEternityChallenge(presetEternityChallenge);
+      }
+      if (exclamations >= 2 && EternityChallenge.canEternityChallengeBeStarted(presetEternityChallenge)) {
+        EternityChallenge.startEternityChallenge(presetEternityChallenge);
+      }
+    }
     // You can put any study id between 1 and 16 in the initial part of the import list; this is intended.
     // Also, none should be handled as buying no studies based on current code even without a special case,
     // but best to not rely on that.
@@ -535,11 +554,13 @@ let Studies = {
     this.importString('&s1,1,1,1');
   },
   mode() {
-    return player.studySettings.studyMode;
+    return globalShiftDown ? this.otherMode(player.studySettings.studyMode) : player.studySettings.studyMode;
+  },
+  otherMode(x) {
+    return ['Buy', 'Refund'][(['Buy', 'Refund'].indexOf(x) + 1) % 2]
   },
   changeMode() {
-    player.studySettings.studyMode = ['Buy', 'Refund'][
-      (['Buy', 'Refund'].indexOf(player.studySettings.studyMode) + 1) % 2];
+    player.studySettings.studyMode = this.otherMode(player.studySettings.studyMode);
   },
   costDisplayMode() {
     return player.studySettings.studyDisplayCostWhenBought ? 'Cost when study was bought' : 'Cost if study were most recent bought';
@@ -608,12 +629,31 @@ let Studies = {
     this.setPresetStudyList(x, this.exportString());
     this.redisplayPresetStudyList(x);
   },
+  isLastPresetIndex(x) {
+    return player.lastPresetIndices[1] === x;
+  },
+  setLastPresetIndex(x) {
+    player.lastPresetIndices[1] = x;
+  },
+  updateLastPresetIndexFromDeletion(x) {
+    if (player.lastPresetIndices[1] === x) {
+      player.lastPresetIndices[1] = 0;
+    }
+    if (player.lastPresetIndices[1] > x) {
+      player.lastPresetIndices[1]--;
+    }
+  },
+  presetClass(x) {
+    return (Options.presetHighlightColors() && this.isLastPresetIndex(x)) ? 'softlyhighlighted' : '';
+  },
   presetLoad(x) {
     if (this.presetRespec() && !this.respecAndReset()) return;
     this.importStringFromPreset(this.presetStudyList(x));
+    this.setLastPresetIndex(x);
   },
   presetDelete(x) {
     player.presets = player.presets.slice(0, x - 1).concat(player.presets.slice(x));
+    this.updateLastPresetIndexFromDeletion(x);
     for (let i = x; i <= player.presets.length; i++) {
       this.redisplayPreset(i);
     }

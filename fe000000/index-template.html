@@ -1508,13 +1508,13 @@
       <br/>
       <br/>
       <div style="width: 1024px; margin-left: auto; margin-right: auto;">
-        Study options: <button onclick="Studies.changeMode()">Study click mode: ~r Studies.mode() ~</button> <button onclick="Studies.changeCostDisplayMode()">Cost display: ~r Studies.costDisplayMode() ~</button>
+        Study options: <button onclick="Studies.changeMode()">Study click mode: ~r Studies.mode() ~ (reversed when holding shift)</button> <button onclick="Studies.changeCostDisplayMode()">Cost display: ~r Studies.costDisplayMode() ~</button>
         <button ~style.display=(ComplexityAchievements.hasComplexityAchievement(4, 4) || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~ onclick="Studies.toggleRebuyAfterComplexityChallenge6()">Rebuy studies when finishing ℂC6: ~r Studies.rebuyAfterComplexityChallenge6() ? "On" : "Off" ~</button>
         <button onclick="Studies.toggleShowPresetExplanation()">Show explanation of presets and exported studies: ~r Studies.showPresetExplanation() ? "On" : "Off" ~</button>
       </div>
       <br/>
       <div style="width: 1024px; margin-left: auto; margin-right: auto;">
-        <span><button onclick="Studies.togglePresetRespec()">Respec studies when loading a preset: ~r Studies.presetRespec() ? "On" : "Off" ~</button></span>
+        <span><button onclick="Studies.togglePresetRespec()">Respec studies when loading a preset: ~r Studies.presetRespec() ? "On" : "Off" ~ (reversed when holding shift)</button></span>
         <br/>
         <span>Click on the name of a study preset on the line below to load that study list:</span>
         <br/>
@@ -1523,70 +1523,70 @@
           <br/>
           Presets can be used to load study lists more easily.
         </div>
-        <button ~style.display=Studies.hasPreset(1) ? '' : 'none'~ onclick="Studies.presetLoad(1)">~r Studies.presetName(1) ~</button>
-        <button ~style.display=Studies.hasPreset(2) ? '' : 'none'~ onclick="Studies.presetLoad(2)">~r Studies.presetName(2) ~</button>
-        <button ~style.display=Studies.hasPreset(3) ? '' : 'none'~ onclick="Studies.presetLoad(3)">~r Studies.presetName(3) ~</button>
-        <button ~style.display=Studies.hasPreset(4) ? '' : 'none'~ onclick="Studies.presetLoad(4)">~r Studies.presetName(4) ~</button>
-        <button ~style.display=Studies.hasPreset(5) ? '' : 'none'~ onclick="Studies.presetLoad(5)">~r Studies.presetName(5) ~</button>
-        <button ~style.display=Studies.hasPreset(6) ? '' : 'none'~ onclick="Studies.presetLoad(6)">~r Studies.presetName(6) ~</button>
-        <button ~style.display=Studies.hasPreset(7) ? '' : 'none'~ onclick="Studies.presetLoad(7)">~r Studies.presetName(7) ~</button>
-        <button ~style.display=Studies.hasPreset(8) ? '' : 'none'~ onclick="Studies.presetLoad(8)">~r Studies.presetName(8) ~</button>
-        <button ~style.display=Studies.hasPreset(9) ? '' : 'none'~ onclick="Studies.presetLoad(9)">~r Studies.presetName(9) ~</button>
-        <button ~style.display=Studies.hasPreset(10) ? '' : 'none'~ onclick="Studies.presetLoad(10)">~r Studies.presetName(10) ~</button>
-        <button ~style.display=Studies.hasPreset(11) ? '' : 'none'~ onclick="Studies.presetLoad(11)">~r Studies.presetName(11) ~</button>
-        <button ~style.display=Studies.hasPreset(12) ? '' : 'none'~ onclick="Studies.presetLoad(12)">~r Studies.presetName(12) ~</button>
-        <button ~style.display=Studies.hasPreset(13) ? '' : 'none'~ onclick="Studies.presetLoad(13)">~r Studies.presetName(13) ~</button>
-        <button ~style.display=Studies.hasPreset(14) ? '' : 'none'~ onclick="Studies.presetLoad(14)">~r Studies.presetName(14) ~</button>
-        <button ~style.display=Studies.hasPreset(15) ? '' : 'none'~ onclick="Studies.presetLoad(15)">~r Studies.presetName(15) ~</button>
-        <button ~style.display=Studies.hasPreset(16) ? '' : 'none'~ onclick="Studies.presetLoad(16)">~r Studies.presetName(16) ~</button>
-        <button ~style.display=Studies.hasPreset(17) ? '' : 'none'~ onclick="Studies.presetLoad(17)">~r Studies.presetName(17) ~</button>
-        <button ~style.display=Studies.hasPreset(18) ? '' : 'none'~ onclick="Studies.presetLoad(18)">~r Studies.presetName(18) ~</button>
-        <button ~style.display=Studies.hasPreset(19) ? '' : 'none'~ onclick="Studies.presetLoad(19)">~r Studies.presetName(19) ~</button>
-        <button ~style.display=Studies.hasPreset(20) ? '' : 'none'~ onclick="Studies.presetLoad(20)">~r Studies.presetName(20) ~</button>
-        <button ~style.display=Studies.hasPreset(21) ? '' : 'none'~ onclick="Studies.presetLoad(21)">~r Studies.presetName(21) ~</button>
-        <button ~style.display=Studies.hasPreset(22) ? '' : 'none'~ onclick="Studies.presetLoad(22)">~r Studies.presetName(22) ~</button>
-        <button ~style.display=Studies.hasPreset(23) ? '' : 'none'~ onclick="Studies.presetLoad(23)">~r Studies.presetName(23) ~</button>
-        <button ~style.display=Studies.hasPreset(24) ? '' : 'none'~ onclick="Studies.presetLoad(24)">~r Studies.presetName(24) ~</button>
-        <button ~style.display=Studies.hasPreset(25) ? '' : 'none'~ onclick="Studies.presetLoad(25)">~r Studies.presetName(25) ~</button>
-        <button ~style.display=Studies.hasPreset(26) ? '' : 'none'~ onclick="Studies.presetLoad(26)">~r Studies.presetName(26) ~</button>
-        <button ~style.display=Studies.hasPreset(27) ? '' : 'none'~ onclick="Studies.presetLoad(27)">~r Studies.presetName(27) ~</button>
-        <button ~style.display=Studies.hasPreset(28) ? '' : 'none'~ onclick="Studies.presetLoad(28)">~r Studies.presetName(28) ~</button>
-        <button ~style.display=Studies.hasPreset(29) ? '' : 'none'~ onclick="Studies.presetLoad(29)">~r Studies.presetName(29) ~</button>
-        <button ~style.display=Studies.hasPreset(30) ? '' : 'none'~ onclick="Studies.presetLoad(30)">~r Studies.presetName(30) ~</button>
-        <button ~style.display=Studies.hasPreset(31) ? '' : 'none'~ onclick="Studies.presetLoad(31)">~r Studies.presetName(31) ~</button>
-        <button ~style.display=Studies.hasPreset(32) ? '' : 'none'~ onclick="Studies.presetLoad(32)">~r Studies.presetName(32) ~</button>
-        <button ~style.display=Studies.hasPreset(33) ? '' : 'none'~ onclick="Studies.presetLoad(33)">~r Studies.presetName(33) ~</button>
-        <button ~style.display=Studies.hasPreset(34) ? '' : 'none'~ onclick="Studies.presetLoad(34)">~r Studies.presetName(34) ~</button>
-        <button ~style.display=Studies.hasPreset(35) ? '' : 'none'~ onclick="Studies.presetLoad(35)">~r Studies.presetName(35) ~</button>
-        <button ~style.display=Studies.hasPreset(36) ? '' : 'none'~ onclick="Studies.presetLoad(36)">~r Studies.presetName(36) ~</button>
-        <button ~style.display=Studies.hasPreset(37) ? '' : 'none'~ onclick="Studies.presetLoad(37)">~r Studies.presetName(37) ~</button>
-        <button ~style.display=Studies.hasPreset(38) ? '' : 'none'~ onclick="Studies.presetLoad(38)">~r Studies.presetName(38) ~</button>
-        <button ~style.display=Studies.hasPreset(39) ? '' : 'none'~ onclick="Studies.presetLoad(39)">~r Studies.presetName(39) ~</button>
-        <button ~style.display=Studies.hasPreset(40) ? '' : 'none'~ onclick="Studies.presetLoad(40)">~r Studies.presetName(40) ~</button>
-        <button ~style.display=Studies.hasPreset(41) ? '' : 'none'~ onclick="Studies.presetLoad(41)">~r Studies.presetName(41) ~</button>
-        <button ~style.display=Studies.hasPreset(42) ? '' : 'none'~ onclick="Studies.presetLoad(42)">~r Studies.presetName(42) ~</button>
-        <button ~style.display=Studies.hasPreset(43) ? '' : 'none'~ onclick="Studies.presetLoad(43)">~r Studies.presetName(43) ~</button>
-        <button ~style.display=Studies.hasPreset(44) ? '' : 'none'~ onclick="Studies.presetLoad(44)">~r Studies.presetName(44) ~</button>
-        <button ~style.display=Studies.hasPreset(45) ? '' : 'none'~ onclick="Studies.presetLoad(45)">~r Studies.presetName(45) ~</button>
-        <button ~style.display=Studies.hasPreset(46) ? '' : 'none'~ onclick="Studies.presetLoad(46)">~r Studies.presetName(46) ~</button>
-        <button ~style.display=Studies.hasPreset(47) ? '' : 'none'~ onclick="Studies.presetLoad(47)">~r Studies.presetName(47) ~</button>
-        <button ~style.display=Studies.hasPreset(48) ? '' : 'none'~ onclick="Studies.presetLoad(48)">~r Studies.presetName(48) ~</button>
-        <button ~style.display=Studies.hasPreset(49) ? '' : 'none'~ onclick="Studies.presetLoad(49)">~r Studies.presetName(49) ~</button>
-        <button ~style.display=Studies.hasPreset(50) ? '' : 'none'~ onclick="Studies.presetLoad(50)">~r Studies.presetName(50) ~</button>
-        <button ~style.display=Studies.hasPreset(51) ? '' : 'none'~ onclick="Studies.presetLoad(51)">~r Studies.presetName(51) ~</button>
-        <button ~style.display=Studies.hasPreset(52) ? '' : 'none'~ onclick="Studies.presetLoad(52)">~r Studies.presetName(52) ~</button>
-        <button ~style.display=Studies.hasPreset(53) ? '' : 'none'~ onclick="Studies.presetLoad(53)">~r Studies.presetName(53) ~</button>
-        <button ~style.display=Studies.hasPreset(54) ? '' : 'none'~ onclick="Studies.presetLoad(54)">~r Studies.presetName(54) ~</button>
-        <button ~style.display=Studies.hasPreset(55) ? '' : 'none'~ onclick="Studies.presetLoad(55)">~r Studies.presetName(55) ~</button>
-        <button ~style.display=Studies.hasPreset(56) ? '' : 'none'~ onclick="Studies.presetLoad(56)">~r Studies.presetName(56) ~</button>
-        <button ~style.display=Studies.hasPreset(57) ? '' : 'none'~ onclick="Studies.presetLoad(57)">~r Studies.presetName(57) ~</button>
-        <button ~style.display=Studies.hasPreset(58) ? '' : 'none'~ onclick="Studies.presetLoad(58)">~r Studies.presetName(58) ~</button>
-        <button ~style.display=Studies.hasPreset(59) ? '' : 'none'~ onclick="Studies.presetLoad(59)">~r Studies.presetName(59) ~</button>
-        <button ~style.display=Studies.hasPreset(60) ? '' : 'none'~ onclick="Studies.presetLoad(60)">~r Studies.presetName(60) ~</button>
-        <button ~style.display=Studies.hasPreset(61) ? '' : 'none'~ onclick="Studies.presetLoad(61)">~r Studies.presetName(61) ~</button>
-        <button ~style.display=Studies.hasPreset(62) ? '' : 'none'~ onclick="Studies.presetLoad(62)">~r Studies.presetName(62) ~</button>
-        <button ~style.display=Studies.hasPreset(63) ? '' : 'none'~ onclick="Studies.presetLoad(63)">~r Studies.presetName(63) ~</button>
-        <button ~style.display=Studies.hasPreset(64) ? '' : 'none'~ onclick="Studies.presetLoad(64)">~r Studies.presetName(64) ~</button>
+        <button ~class=Studies.presetClass(1)~ ~style.display=Studies.hasPreset(1) ? '' : 'none'~ onclick="Studies.presetLoad(1)">~r Studies.presetName(1) ~</button>
+        <button ~class=Studies.presetClass(2)~ ~style.display=Studies.hasPreset(2) ? '' : 'none'~ onclick="Studies.presetLoad(2)">~r Studies.presetName(2) ~</button>
+        <button ~class=Studies.presetClass(3)~ ~style.display=Studies.hasPreset(3) ? '' : 'none'~ onclick="Studies.presetLoad(3)">~r Studies.presetName(3) ~</button>
+        <button ~class=Studies.presetClass(4)~ ~style.display=Studies.hasPreset(4) ? '' : 'none'~ onclick="Studies.presetLoad(4)">~r Studies.presetName(4) ~</button>
+        <button ~class=Studies.presetClass(5)~ ~style.display=Studies.hasPreset(5) ? '' : 'none'~ onclick="Studies.presetLoad(5)">~r Studies.presetName(5) ~</button>
+        <button ~class=Studies.presetClass(6)~ ~style.display=Studies.hasPreset(6) ? '' : 'none'~ onclick="Studies.presetLoad(6)">~r Studies.presetName(6) ~</button>
+        <button ~class=Studies.presetClass(7)~ ~style.display=Studies.hasPreset(7) ? '' : 'none'~ onclick="Studies.presetLoad(7)">~r Studies.presetName(7) ~</button>
+        <button ~class=Studies.presetClass(8)~ ~style.display=Studies.hasPreset(8) ? '' : 'none'~ onclick="Studies.presetLoad(8)">~r Studies.presetName(8) ~</button>
+        <button ~class=Studies.presetClass(9)~ ~style.display=Studies.hasPreset(9) ? '' : 'none'~ onclick="Studies.presetLoad(9)">~r Studies.presetName(9) ~</button>
+        <button ~class=Studies.presetClass(10)~ ~style.display=Studies.hasPreset(10) ? '' : 'none'~ onclick="Studies.presetLoad(10)">~r Studies.presetName(10) ~</button>
+        <button ~class=Studies.presetClass(11)~ ~style.display=Studies.hasPreset(11) ? '' : 'none'~ onclick="Studies.presetLoad(11)">~r Studies.presetName(11) ~</button>
+        <button ~class=Studies.presetClass(12)~ ~style.display=Studies.hasPreset(12) ? '' : 'none'~ onclick="Studies.presetLoad(12)">~r Studies.presetName(12) ~</button>
+        <button ~class=Studies.presetClass(13)~ ~style.display=Studies.hasPreset(13) ? '' : 'none'~ onclick="Studies.presetLoad(13)">~r Studies.presetName(13) ~</button>
+        <button ~class=Studies.presetClass(14)~ ~style.display=Studies.hasPreset(14) ? '' : 'none'~ onclick="Studies.presetLoad(14)">~r Studies.presetName(14) ~</button>
+        <button ~class=Studies.presetClass(15)~ ~style.display=Studies.hasPreset(15) ? '' : 'none'~ onclick="Studies.presetLoad(15)">~r Studies.presetName(15) ~</button>
+        <button ~class=Studies.presetClass(16)~ ~style.display=Studies.hasPreset(16) ? '' : 'none'~ onclick="Studies.presetLoad(16)">~r Studies.presetName(16) ~</button>
+        <button ~class=Studies.presetClass(17)~ ~style.display=Studies.hasPreset(17) ? '' : 'none'~ onclick="Studies.presetLoad(17)">~r Studies.presetName(17) ~</button>
+        <button ~class=Studies.presetClass(18)~ ~style.display=Studies.hasPreset(18) ? '' : 'none'~ onclick="Studies.presetLoad(18)">~r Studies.presetName(18) ~</button>
+        <button ~class=Studies.presetClass(19)~ ~style.display=Studies.hasPreset(19) ? '' : 'none'~ onclick="Studies.presetLoad(19)">~r Studies.presetName(19) ~</button>
+        <button ~class=Studies.presetClass(20)~ ~style.display=Studies.hasPreset(20) ? '' : 'none'~ onclick="Studies.presetLoad(20)">~r Studies.presetName(20) ~</button>
+        <button ~class=Studies.presetClass(21)~ ~style.display=Studies.hasPreset(21) ? '' : 'none'~ onclick="Studies.presetLoad(21)">~r Studies.presetName(21) ~</button>
+        <button ~class=Studies.presetClass(22)~ ~style.display=Studies.hasPreset(22) ? '' : 'none'~ onclick="Studies.presetLoad(22)">~r Studies.presetName(22) ~</button>
+        <button ~class=Studies.presetClass(23)~ ~style.display=Studies.hasPreset(23) ? '' : 'none'~ onclick="Studies.presetLoad(23)">~r Studies.presetName(23) ~</button>
+        <button ~class=Studies.presetClass(24)~ ~style.display=Studies.hasPreset(24) ? '' : 'none'~ onclick="Studies.presetLoad(24)">~r Studies.presetName(24) ~</button>
+        <button ~class=Studies.presetClass(25)~ ~style.display=Studies.hasPreset(25) ? '' : 'none'~ onclick="Studies.presetLoad(25)">~r Studies.presetName(25) ~</button>
+        <button ~class=Studies.presetClass(26)~ ~style.display=Studies.hasPreset(26) ? '' : 'none'~ onclick="Studies.presetLoad(26)">~r Studies.presetName(26) ~</button>
+        <button ~class=Studies.presetClass(27)~ ~style.display=Studies.hasPreset(27) ? '' : 'none'~ onclick="Studies.presetLoad(27)">~r Studies.presetName(27) ~</button>
+        <button ~class=Studies.presetClass(28)~ ~style.display=Studies.hasPreset(28) ? '' : 'none'~ onclick="Studies.presetLoad(28)">~r Studies.presetName(28) ~</button>
+        <button ~class=Studies.presetClass(29)~ ~style.display=Studies.hasPreset(29) ? '' : 'none'~ onclick="Studies.presetLoad(29)">~r Studies.presetName(29) ~</button>
+        <button ~class=Studies.presetClass(30)~ ~style.display=Studies.hasPreset(30) ? '' : 'none'~ onclick="Studies.presetLoad(30)">~r Studies.presetName(30) ~</button>
+        <button ~class=Studies.presetClass(31)~ ~style.display=Studies.hasPreset(31) ? '' : 'none'~ onclick="Studies.presetLoad(31)">~r Studies.presetName(31) ~</button>
+        <button ~class=Studies.presetClass(32)~ ~style.display=Studies.hasPreset(32) ? '' : 'none'~ onclick="Studies.presetLoad(32)">~r Studies.presetName(32) ~</button>
+        <button ~class=Studies.presetClass(33)~ ~style.display=Studies.hasPreset(33) ? '' : 'none'~ onclick="Studies.presetLoad(33)">~r Studies.presetName(33) ~</button>
+        <button ~class=Studies.presetClass(34)~ ~style.display=Studies.hasPreset(34) ? '' : 'none'~ onclick="Studies.presetLoad(34)">~r Studies.presetName(34) ~</button>
+        <button ~class=Studies.presetClass(35)~ ~style.display=Studies.hasPreset(35) ? '' : 'none'~ onclick="Studies.presetLoad(35)">~r Studies.presetName(35) ~</button>
+        <button ~class=Studies.presetClass(36)~ ~style.display=Studies.hasPreset(36) ? '' : 'none'~ onclick="Studies.presetLoad(36)">~r Studies.presetName(36) ~</button>
+        <button ~class=Studies.presetClass(37)~ ~style.display=Studies.hasPreset(37) ? '' : 'none'~ onclick="Studies.presetLoad(37)">~r Studies.presetName(37) ~</button>
+        <button ~class=Studies.presetClass(38)~ ~style.display=Studies.hasPreset(38) ? '' : 'none'~ onclick="Studies.presetLoad(38)">~r Studies.presetName(38) ~</button>
+        <button ~class=Studies.presetClass(39)~ ~style.display=Studies.hasPreset(39) ? '' : 'none'~ onclick="Studies.presetLoad(39)">~r Studies.presetName(39) ~</button>
+        <button ~class=Studies.presetClass(40)~ ~style.display=Studies.hasPreset(40) ? '' : 'none'~ onclick="Studies.presetLoad(40)">~r Studies.presetName(40) ~</button>
+        <button ~class=Studies.presetClass(41)~ ~style.display=Studies.hasPreset(41) ? '' : 'none'~ onclick="Studies.presetLoad(41)">~r Studies.presetName(41) ~</button>
+        <button ~class=Studies.presetClass(42)~ ~style.display=Studies.hasPreset(42) ? '' : 'none'~ onclick="Studies.presetLoad(42)">~r Studies.presetName(42) ~</button>
+        <button ~class=Studies.presetClass(43)~ ~style.display=Studies.hasPreset(43) ? '' : 'none'~ onclick="Studies.presetLoad(43)">~r Studies.presetName(43) ~</button>
+        <button ~class=Studies.presetClass(44)~ ~style.display=Studies.hasPreset(44) ? '' : 'none'~ onclick="Studies.presetLoad(44)">~r Studies.presetName(44) ~</button>
+        <button ~class=Studies.presetClass(45)~ ~style.display=Studies.hasPreset(45) ? '' : 'none'~ onclick="Studies.presetLoad(45)">~r Studies.presetName(45) ~</button>
+        <button ~class=Studies.presetClass(46)~ ~style.display=Studies.hasPreset(46) ? '' : 'none'~ onclick="Studies.presetLoad(46)">~r Studies.presetName(46) ~</button>
+        <button ~class=Studies.presetClass(47)~ ~style.display=Studies.hasPreset(47) ? '' : 'none'~ onclick="Studies.presetLoad(47)">~r Studies.presetName(47) ~</button>
+        <button ~class=Studies.presetClass(48)~ ~style.display=Studies.hasPreset(48) ? '' : 'none'~ onclick="Studies.presetLoad(48)">~r Studies.presetName(48) ~</button>
+        <button ~class=Studies.presetClass(49)~ ~style.display=Studies.hasPreset(49) ? '' : 'none'~ onclick="Studies.presetLoad(49)">~r Studies.presetName(49) ~</button>
+        <button ~class=Studies.presetClass(50)~ ~style.display=Studies.hasPreset(50) ? '' : 'none'~ onclick="Studies.presetLoad(50)">~r Studies.presetName(50) ~</button>
+        <button ~class=Studies.presetClass(51)~ ~style.display=Studies.hasPreset(51) ? '' : 'none'~ onclick="Studies.presetLoad(51)">~r Studies.presetName(51) ~</button>
+        <button ~class=Studies.presetClass(52)~ ~style.display=Studies.hasPreset(52) ? '' : 'none'~ onclick="Studies.presetLoad(52)">~r Studies.presetName(52) ~</button>
+        <button ~class=Studies.presetClass(53)~ ~style.display=Studies.hasPreset(53) ? '' : 'none'~ onclick="Studies.presetLoad(53)">~r Studies.presetName(53) ~</button>
+        <button ~class=Studies.presetClass(54)~ ~style.display=Studies.hasPreset(54) ? '' : 'none'~ onclick="Studies.presetLoad(54)">~r Studies.presetName(54) ~</button>
+        <button ~class=Studies.presetClass(55)~ ~style.display=Studies.hasPreset(55) ? '' : 'none'~ onclick="Studies.presetLoad(55)">~r Studies.presetName(55) ~</button>
+        <button ~class=Studies.presetClass(56)~ ~style.display=Studies.hasPreset(56) ? '' : 'none'~ onclick="Studies.presetLoad(56)">~r Studies.presetName(56) ~</button>
+        <button ~class=Studies.presetClass(57)~ ~style.display=Studies.hasPreset(57) ? '' : 'none'~ onclick="Studies.presetLoad(57)">~r Studies.presetName(57) ~</button>
+        <button ~class=Studies.presetClass(58)~ ~style.display=Studies.hasPreset(58) ? '' : 'none'~ onclick="Studies.presetLoad(58)">~r Studies.presetName(58) ~</button>
+        <button ~class=Studies.presetClass(59)~ ~style.display=Studies.hasPreset(59) ? '' : 'none'~ onclick="Studies.presetLoad(59)">~r Studies.presetName(59) ~</button>
+        <button ~class=Studies.presetClass(60)~ ~style.display=Studies.hasPreset(60) ? '' : 'none'~ onclick="Studies.presetLoad(60)">~r Studies.presetName(60) ~</button>
+        <button ~class=Studies.presetClass(61)~ ~style.display=Studies.hasPreset(61) ? '' : 'none'~ onclick="Studies.presetLoad(61)">~r Studies.presetName(61) ~</button>
+        <button ~class=Studies.presetClass(62)~ ~style.display=Studies.hasPreset(62) ? '' : 'none'~ onclick="Studies.presetLoad(62)">~r Studies.presetName(62) ~</button>
+        <button ~class=Studies.presetClass(63)~ ~style.display=Studies.hasPreset(63) ? '' : 'none'~ onclick="Studies.presetLoad(63)">~r Studies.presetName(63) ~</button>
+        <button ~class=Studies.presetClass(64)~ ~style.display=Studies.hasPreset(64) ? '' : 'none'~ onclick="Studies.presetLoad(64)">~r Studies.presetName(64) ~</button>
       </div>
       <div ~style.display=Studies.showPresetExplanation() ? '' : 'none'~>
         <div style="width: 1024px; margin-left: auto; margin-right: auto;">
@@ -1603,7 +1603,8 @@
         <div ~style.display=EternityChallenge.areEternityChallengesVisible() ? '' : 'none'~ style="width: 1024px; margin-left: auto; margin-right: auto;">
           Adding |ux to the end of a study list (where the u is a literal u) will keep at least x theorems unspent by studies no matter what. It's fine if those theorems are spent on an eternity challenge.
           |cx is like |ux, except it uses the cost of Eternity Challenge x rather than the value of x. This is useful for eternity challenges.
-          When you have an eternity challenge unlocked and export a study list, that study list will have |ux, where x is the eternity challenge theorem cost.
+          Adding ! to a preset with |x will try to unlock the eternity challenge, and adding !! will try to start it. Additional exclamation marks have no additional effect.
+          When you have an eternity challenge unlocked and export a study list, that study list will have |cx!, where x is the eternity challenge, and it will have |cx!! if you are in the challenge.
           <span ~style.display=(EternityChallenge.isEternityChallengeUnlockingMeaningless() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>("Broke every stone" disables this.)</span>
         </div>
         <br ~style.display=Studies.couldEverAccessFourthRow() ? '' : 'none'~/>
@@ -3567,42 +3568,42 @@
         <br/>
         <br/>
         <div style="width: 1024px; margin-left: auto; margin-right: auto;">
-          <span><button onclick="Powers.togglePresetRespec()">Deactivate active powers when loading a preset: ~r Powers.presetRespec() ? "On" : "Off" ~</button></span>
+          <span><button onclick="Powers.togglePresetRespec()">Deactivate active powers when loading a preset: ~r Powers.presetRespec() ? "On" : "Off" ~  (reversed when holding shift)</button></span>
           <br/>
           <span>Click on the name of a power preset on the line below to activate those powers:</span>
           <br/>
-          <button ~style.display=Powers.hasPreset(1) ? '' : 'none'~ onclick="Powers.presetLoad(1)">~r Powers.presetName(1) ~</button>
-          <button ~style.display=Powers.hasPreset(2) ? '' : 'none'~ onclick="Powers.presetLoad(2)">~r Powers.presetName(2) ~</button>
-          <button ~style.display=Powers.hasPreset(3) ? '' : 'none'~ onclick="Powers.presetLoad(3)">~r Powers.presetName(3) ~</button>
-          <button ~style.display=Powers.hasPreset(4) ? '' : 'none'~ onclick="Powers.presetLoad(4)">~r Powers.presetName(4) ~</button>
-          <button ~style.display=Powers.hasPreset(5) ? '' : 'none'~ onclick="Powers.presetLoad(5)">~r Powers.presetName(5) ~</button>
-          <button ~style.display=Powers.hasPreset(6) ? '' : 'none'~ onclick="Powers.presetLoad(6)">~r Powers.presetName(6) ~</button>
-          <button ~style.display=Powers.hasPreset(7) ? '' : 'none'~ onclick="Powers.presetLoad(7)">~r Powers.presetName(7) ~</button>
-          <button ~style.display=Powers.hasPreset(8) ? '' : 'none'~ onclick="Powers.presetLoad(8)">~r Powers.presetName(8) ~</button>
-          <button ~style.display=Powers.hasPreset(9) ? '' : 'none'~ onclick="Powers.presetLoad(9)">~r Powers.presetName(9) ~</button>
-          <button ~style.display=Powers.hasPreset(10) ? '' : 'none'~ onclick="Powers.presetLoad(10)">~r Powers.presetName(10) ~</button>
-          <button ~style.display=Powers.hasPreset(11) ? '' : 'none'~ onclick="Powers.presetLoad(11)">~r Powers.presetName(11) ~</button>
-          <button ~style.display=Powers.hasPreset(12) ? '' : 'none'~ onclick="Powers.presetLoad(12)">~r Powers.presetName(12) ~</button>
-          <button ~style.display=Powers.hasPreset(13) ? '' : 'none'~ onclick="Powers.presetLoad(13)">~r Powers.presetName(13) ~</button>
-          <button ~style.display=Powers.hasPreset(14) ? '' : 'none'~ onclick="Powers.presetLoad(14)">~r Powers.presetName(14) ~</button>
-          <button ~style.display=Powers.hasPreset(15) ? '' : 'none'~ onclick="Powers.presetLoad(15)">~r Powers.presetName(15) ~</button>
-          <button ~style.display=Powers.hasPreset(16) ? '' : 'none'~ onclick="Powers.presetLoad(16)">~r Powers.presetName(16) ~</button>
-          <button ~style.display=Powers.hasPreset(17) ? '' : 'none'~ onclick="Powers.presetLoad(17)">~r Powers.presetName(17) ~</button>
-          <button ~style.display=Powers.hasPreset(18) ? '' : 'none'~ onclick="Powers.presetLoad(18)">~r Powers.presetName(18) ~</button>
-          <button ~style.display=Powers.hasPreset(19) ? '' : 'none'~ onclick="Powers.presetLoad(19)">~r Powers.presetName(19) ~</button>
-          <button ~style.display=Powers.hasPreset(20) ? '' : 'none'~ onclick="Powers.presetLoad(20)">~r Powers.presetName(20) ~</button>
-          <button ~style.display=Powers.hasPreset(21) ? '' : 'none'~ onclick="Powers.presetLoad(21)">~r Powers.presetName(21) ~</button>
-          <button ~style.display=Powers.hasPreset(22) ? '' : 'none'~ onclick="Powers.presetLoad(22)">~r Powers.presetName(22) ~</button>
-          <button ~style.display=Powers.hasPreset(23) ? '' : 'none'~ onclick="Powers.presetLoad(23)">~r Powers.presetName(23) ~</button>
-          <button ~style.display=Powers.hasPreset(24) ? '' : 'none'~ onclick="Powers.presetLoad(24)">~r Powers.presetName(24) ~</button>
-          <button ~style.display=Powers.hasPreset(25) ? '' : 'none'~ onclick="Powers.presetLoad(25)">~r Powers.presetName(25) ~</button>
-          <button ~style.display=Powers.hasPreset(26) ? '' : 'none'~ onclick="Powers.presetLoad(26)">~r Powers.presetName(26) ~</button>
-          <button ~style.display=Powers.hasPreset(27) ? '' : 'none'~ onclick="Powers.presetLoad(27)">~r Powers.presetName(27) ~</button>
-          <button ~style.display=Powers.hasPreset(28) ? '' : 'none'~ onclick="Powers.presetLoad(28)">~r Powers.presetName(28) ~</button>
-          <button ~style.display=Powers.hasPreset(29) ? '' : 'none'~ onclick="Powers.presetLoad(29)">~r Powers.presetName(29) ~</button>
-          <button ~style.display=Powers.hasPreset(30) ? '' : 'none'~ onclick="Powers.presetLoad(30)">~r Powers.presetName(30) ~</button>
-          <button ~style.display=Powers.hasPreset(31) ? '' : 'none'~ onclick="Powers.presetLoad(31)">~r Powers.presetName(31) ~</button>
-          <button ~style.display=Powers.hasPreset(32) ? '' : 'none'~ onclick="Powers.presetLoad(32)">~r Powers.presetName(32) ~</button>
+          <button ~class=Powers.presetClass(1) ~ ~style.display=Powers.hasPreset(1) ? '' : 'none'~ onclick="Powers.presetLoad(1)">~r Powers.presetName(1) ~</button>
+          <button ~class=Powers.presetClass(2) ~ ~style.display=Powers.hasPreset(2) ? '' : 'none'~ onclick="Powers.presetLoad(2)">~r Powers.presetName(2) ~</button>
+          <button ~class=Powers.presetClass(3) ~ ~style.display=Powers.hasPreset(3) ? '' : 'none'~ onclick="Powers.presetLoad(3)">~r Powers.presetName(3) ~</button>
+          <button ~class=Powers.presetClass(4) ~ ~style.display=Powers.hasPreset(4) ? '' : 'none'~ onclick="Powers.presetLoad(4)">~r Powers.presetName(4) ~</button>
+          <button ~class=Powers.presetClass(5) ~ ~style.display=Powers.hasPreset(5) ? '' : 'none'~ onclick="Powers.presetLoad(5)">~r Powers.presetName(5) ~</button>
+          <button ~class=Powers.presetClass(6) ~ ~style.display=Powers.hasPreset(6) ? '' : 'none'~ onclick="Powers.presetLoad(6)">~r Powers.presetName(6) ~</button>
+          <button ~class=Powers.presetClass(7) ~ ~style.display=Powers.hasPreset(7) ? '' : 'none'~ onclick="Powers.presetLoad(7)">~r Powers.presetName(7) ~</button>
+          <button ~class=Powers.presetClass(8) ~ ~style.display=Powers.hasPreset(8) ? '' : 'none'~ onclick="Powers.presetLoad(8)">~r Powers.presetName(8) ~</button>
+          <button ~class=Powers.presetClass(9) ~ ~style.display=Powers.hasPreset(9) ? '' : 'none'~ onclick="Powers.presetLoad(9)">~r Powers.presetName(9) ~</button>
+          <button ~class=Powers.presetClass(10) ~ ~style.display=Powers.hasPreset(10) ? '' : 'none'~ onclick="Powers.presetLoad(10)">~r Powers.presetName(10) ~</button>
+          <button ~class=Powers.presetClass(11) ~ ~style.display=Powers.hasPreset(11) ? '' : 'none'~ onclick="Powers.presetLoad(11)">~r Powers.presetName(11) ~</button>
+          <button ~class=Powers.presetClass(12) ~ ~style.display=Powers.hasPreset(12) ? '' : 'none'~ onclick="Powers.presetLoad(12)">~r Powers.presetName(12) ~</button>
+          <button ~class=Powers.presetClass(13) ~ ~style.display=Powers.hasPreset(13) ? '' : 'none'~ onclick="Powers.presetLoad(13)">~r Powers.presetName(13) ~</button>
+          <button ~class=Powers.presetClass(14) ~ ~style.display=Powers.hasPreset(14) ? '' : 'none'~ onclick="Powers.presetLoad(14)">~r Powers.presetName(14) ~</button>
+          <button ~class=Powers.presetClass(15) ~ ~style.display=Powers.hasPreset(15) ? '' : 'none'~ onclick="Powers.presetLoad(15)">~r Powers.presetName(15) ~</button>
+          <button ~class=Powers.presetClass(16) ~ ~style.display=Powers.hasPreset(16) ? '' : 'none'~ onclick="Powers.presetLoad(16)">~r Powers.presetName(16) ~</button>
+          <button ~class=Powers.presetClass(17) ~ ~style.display=Powers.hasPreset(17) ? '' : 'none'~ onclick="Powers.presetLoad(17)">~r Powers.presetName(17) ~</button>
+          <button ~class=Powers.presetClass(18) ~ ~style.display=Powers.hasPreset(18) ? '' : 'none'~ onclick="Powers.presetLoad(18)">~r Powers.presetName(18) ~</button>
+          <button ~class=Powers.presetClass(19) ~ ~style.display=Powers.hasPreset(19) ? '' : 'none'~ onclick="Powers.presetLoad(19)">~r Powers.presetName(19) ~</button>
+          <button ~class=Powers.presetClass(20) ~ ~style.display=Powers.hasPreset(20) ? '' : 'none'~ onclick="Powers.presetLoad(20)">~r Powers.presetName(20) ~</button>
+          <button ~class=Powers.presetClass(21) ~ ~style.display=Powers.hasPreset(21) ? '' : 'none'~ onclick="Powers.presetLoad(21)">~r Powers.presetName(21) ~</button>
+          <button ~class=Powers.presetClass(22) ~ ~style.display=Powers.hasPreset(22) ? '' : 'none'~ onclick="Powers.presetLoad(22)">~r Powers.presetName(22) ~</button>
+          <button ~class=Powers.presetClass(23) ~ ~style.display=Powers.hasPreset(23) ? '' : 'none'~ onclick="Powers.presetLoad(23)">~r Powers.presetName(23) ~</button>
+          <button ~class=Powers.presetClass(24) ~ ~style.display=Powers.hasPreset(24) ? '' : 'none'~ onclick="Powers.presetLoad(24)">~r Powers.presetName(24) ~</button>
+          <button ~class=Powers.presetClass(25) ~ ~style.display=Powers.hasPreset(25) ? '' : 'none'~ onclick="Powers.presetLoad(25)">~r Powers.presetName(25) ~</button>
+          <button ~class=Powers.presetClass(26) ~ ~style.display=Powers.hasPreset(26) ? '' : 'none'~ onclick="Powers.presetLoad(26)">~r Powers.presetName(26) ~</button>
+          <button ~class=Powers.presetClass(27) ~ ~style.display=Powers.hasPreset(27) ? '' : 'none'~ onclick="Powers.presetLoad(27)">~r Powers.presetName(27) ~</button>
+          <button ~class=Powers.presetClass(28) ~ ~style.display=Powers.hasPreset(28) ? '' : 'none'~ onclick="Powers.presetLoad(28)">~r Powers.presetName(28) ~</button>
+          <button ~class=Powers.presetClass(29) ~ ~style.display=Powers.hasPreset(29) ? '' : 'none'~ onclick="Powers.presetLoad(29)">~r Powers.presetName(29) ~</button>
+          <button ~class=Powers.presetClass(30) ~ ~style.display=Powers.hasPreset(30) ? '' : 'none'~ onclick="Powers.presetLoad(30)">~r Powers.presetName(30) ~</button>
+          <button ~class=Powers.presetClass(31) ~ ~style.display=Powers.hasPreset(31) ? '' : 'none'~ onclick="Powers.presetLoad(31)">~r Powers.presetName(31) ~</button>
+          <button ~class=Powers.presetClass(32) ~ ~style.display=Powers.hasPreset(32) ? '' : 'none'~ onclick="Powers.presetLoad(32)">~r Powers.presetName(32) ~</button>
           <div ~style.display=Powers.hasPreset(1) ? 'none' : ''~>
             You don't currently have any power presets. You can create presets at the bottom of this tab.
           </div>
@@ -4513,42 +4514,42 @@
       <br/>
       <br/>
       <div style="width: 1024px; margin-left: auto; margin-right: auto;">
-        <span><button onclick="FinalityShardPresets.togglePresetRespec()">Respec finality shard upgrades when loading a preset: ~r FinalityShardPresets.presetRespec() ? "On" : "Off" ~</button></span>
+        <span><button onclick="FinalityShardPresets.togglePresetRespec()">Respec finality shard upgrades when loading a preset: ~r FinalityShardPresets.presetRespec() ? "On" : "Off" ~  (reversed when holding shift)</button></span>
         <br/>
         <span>Click on the name of a finality preset on the line below to buy those finality upgrades:</span>
         <br/>
-        <button ~style.display=FinalityShardPresets.hasPreset(1) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(1)">~r FinalityShardPresets.presetName(1) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(2) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(2)">~r FinalityShardPresets.presetName(2) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(3) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(3)">~r FinalityShardPresets.presetName(3) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(4) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(4)">~r FinalityShardPresets.presetName(4) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(5) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(5)">~r FinalityShardPresets.presetName(5) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(6) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(6)">~r FinalityShardPresets.presetName(6) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(7) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(7)">~r FinalityShardPresets.presetName(7) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(8) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(8)">~r FinalityShardPresets.presetName(8) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(9) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(9)">~r FinalityShardPresets.presetName(9) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(10) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(10)">~r FinalityShardPresets.presetName(10) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(11) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(11)">~r FinalityShardPresets.presetName(11) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(12) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(12)">~r FinalityShardPresets.presetName(12) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(13) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(13)">~r FinalityShardPresets.presetName(13) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(14) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(14)">~r FinalityShardPresets.presetName(14) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(15) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(15)">~r FinalityShardPresets.presetName(15) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(16) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(16)">~r FinalityShardPresets.presetName(16) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(17) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(17)">~r FinalityShardPresets.presetName(17) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(18) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(18)">~r FinalityShardPresets.presetName(18) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(19) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(19)">~r FinalityShardPresets.presetName(19) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(20) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(20)">~r FinalityShardPresets.presetName(20) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(21) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(21)">~r FinalityShardPresets.presetName(21) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(22) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(22)">~r FinalityShardPresets.presetName(22) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(23) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(23)">~r FinalityShardPresets.presetName(23) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(24) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(24)">~r FinalityShardPresets.presetName(24) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(25) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(25)">~r FinalityShardPresets.presetName(25) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(26) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(26)">~r FinalityShardPresets.presetName(26) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(27) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(27)">~r FinalityShardPresets.presetName(27) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(28) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(28)">~r FinalityShardPresets.presetName(28) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(29) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(29)">~r FinalityShardPresets.presetName(29) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(30) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(30)">~r FinalityShardPresets.presetName(30) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(31) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(31)">~r FinalityShardPresets.presetName(31) ~</button>
-        <button ~style.display=FinalityShardPresets.hasPreset(32) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(32)">~r FinalityShardPresets.presetName(32) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(1)~ ~style.display=FinalityShardPresets.hasPreset(1) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(1)">~r FinalityShardPresets.presetName(1) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(2)~ ~style.display=FinalityShardPresets.hasPreset(2) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(2)">~r FinalityShardPresets.presetName(2) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(3)~ ~style.display=FinalityShardPresets.hasPreset(3) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(3)">~r FinalityShardPresets.presetName(3) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(4)~ ~style.display=FinalityShardPresets.hasPreset(4) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(4)">~r FinalityShardPresets.presetName(4) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(5)~ ~style.display=FinalityShardPresets.hasPreset(5) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(5)">~r FinalityShardPresets.presetName(5) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(6)~ ~style.display=FinalityShardPresets.hasPreset(6) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(6)">~r FinalityShardPresets.presetName(6) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(7)~ ~style.display=FinalityShardPresets.hasPreset(7) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(7)">~r FinalityShardPresets.presetName(7) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(8)~ ~style.display=FinalityShardPresets.hasPreset(8) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(8)">~r FinalityShardPresets.presetName(8) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(9)~ ~style.display=FinalityShardPresets.hasPreset(9) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(9)">~r FinalityShardPresets.presetName(9) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(10)~ ~style.display=FinalityShardPresets.hasPreset(10) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(10)">~r FinalityShardPresets.presetName(10) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(11)~ ~style.display=FinalityShardPresets.hasPreset(11) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(11)">~r FinalityShardPresets.presetName(11) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(12)~ ~style.display=FinalityShardPresets.hasPreset(12) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(12)">~r FinalityShardPresets.presetName(12) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(13)~ ~style.display=FinalityShardPresets.hasPreset(13) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(13)">~r FinalityShardPresets.presetName(13) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(14)~ ~style.display=FinalityShardPresets.hasPreset(14) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(14)">~r FinalityShardPresets.presetName(14) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(15)~ ~style.display=FinalityShardPresets.hasPreset(15) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(15)">~r FinalityShardPresets.presetName(15) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(16)~ ~style.display=FinalityShardPresets.hasPreset(16) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(16)">~r FinalityShardPresets.presetName(16) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(17)~ ~style.display=FinalityShardPresets.hasPreset(17) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(17)">~r FinalityShardPresets.presetName(17) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(18)~ ~style.display=FinalityShardPresets.hasPreset(18) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(18)">~r FinalityShardPresets.presetName(18) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(19)~ ~style.display=FinalityShardPresets.hasPreset(19) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(19)">~r FinalityShardPresets.presetName(19) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(20)~ ~style.display=FinalityShardPresets.hasPreset(20) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(20)">~r FinalityShardPresets.presetName(20) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(21)~ ~style.display=FinalityShardPresets.hasPreset(21) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(21)">~r FinalityShardPresets.presetName(21) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(22)~ ~style.display=FinalityShardPresets.hasPreset(22) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(22)">~r FinalityShardPresets.presetName(22) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(23)~ ~style.display=FinalityShardPresets.hasPreset(23) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(23)">~r FinalityShardPresets.presetName(23) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(24)~ ~style.display=FinalityShardPresets.hasPreset(24) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(24)">~r FinalityShardPresets.presetName(24) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(25)~ ~style.display=FinalityShardPresets.hasPreset(25) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(25)">~r FinalityShardPresets.presetName(25) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(26)~ ~style.display=FinalityShardPresets.hasPreset(26) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(26)">~r FinalityShardPresets.presetName(26) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(27)~ ~style.display=FinalityShardPresets.hasPreset(27) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(27)">~r FinalityShardPresets.presetName(27) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(28)~ ~style.display=FinalityShardPresets.hasPreset(28) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(28)">~r FinalityShardPresets.presetName(28) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(29)~ ~style.display=FinalityShardPresets.hasPreset(29) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(29)">~r FinalityShardPresets.presetName(29) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(30)~ ~style.display=FinalityShardPresets.hasPreset(30) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(30)">~r FinalityShardPresets.presetName(30) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(31)~ ~style.display=FinalityShardPresets.hasPreset(31) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(31)">~r FinalityShardPresets.presetName(31) ~</button>
+        <button ~class=FinalityShardPresets.presetClass(32)~ ~style.display=FinalityShardPresets.hasPreset(32) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(32)">~r FinalityShardPresets.presetName(32) ~</button>
         <div ~style.display=FinalityShardPresets.hasPreset(1) ? 'none' : ''~>
           You don't currently have any finality presets. You can create presets at the bottom of this tab.
         </div>
@@ -5260,13 +5261,14 @@
             <button class="mini-options-button" onclick="Options.nextCompletionGradients()">Completion gradients: ~r player.options.theme.completionGradients ~</button>
           </div></td>
           <td><button class="options-button" onclick="Options.toggleOfflineProgress()">Offline progress: ~r player.options.offlineProgress ? "On" : "Off" ~</button></td>
-          <td><div class="options-div"><span style="font-size: 0.75rem;">Offline game ticks (between ~i 1 ~ and ~i Options.maxTicks() ~, slow above ~i 1024 ~):</span><br/><input type="text" ~!value=Options.displayOfflineTicks()~ ~!onchange=function() {Options.setOfflineTicks(+this.value)}~></input></div></td>
+          <td><div class="options-div">Offline game ticks (between ~i 1 ~ and ~i Options.maxTicks() ~, slow above ~i 1024 ~):<br/><input type="text" ~!value=Options.displayOfflineTicks()~ ~!onchange=function() {Options.setOfflineTicks(+this.value)}~></input></div></td>
         </tr>
         <tr>
           <td><div class="options-div">
             <button class="mini-options-button" onclick="Options.nextCompletionColors()">Completion colors: ~r player.options.completionColors ~</button>
             <button class="mini-options-button" onclick="Options.toggleResetColors()">Reset colors: ~r Options.resetColors() ? 'On' : 'Off' ~</button>
             <button class="mini-options-button" onclick="Options.toggleTabColors()">Tab colors: ~r Options.tabColors() ? 'On' : 'Off' ~</button>
+            <button class="mini-options-button" onclick="Options.togglePresetHighlightColors()">Preset highlight colors: ~r Options.presetHighlightColors() ? 'On' : 'Off' ~</button>
           </div></td>
           <td><div class="options-div">Notation: <select ~!value=Options.notation()~ ~!onchange=function() {Options.setNotation(this.value)}~>
             <option value="Scientific">Scientific</option>
@@ -5301,7 +5303,7 @@
         </tr>
         <tr>
           <td><button class="options-button" onclick="Options.toggleExportDisplay()">Show export text (as opposed to just copying it): ~r player.options.exportDisplay ? "On" : "Off" ~</button></td>
-          <td><div class="options-div"><span style="font-size: 0.75rem;">Show export reminder after X seconds (~i 0 ~ for never):</span><br/><input type="text" ~!value=Options.exportNotificationFrequency()~ ~!onchange=function() {Options.setExportNotificationFrequency(+this.value)}~></input></div></td>
+          <td><div class="options-div">Show export reminder after X seconds (~i 0 ~ for never):<br/><input type="text" ~!value=Options.exportNotificationFrequency()~ ~!onchange=function() {Options.setExportNotificationFrequency(+this.value)}~></input></div></td>
           <td><button class="options-button" onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></td>
         </tr>
       </table>
@@ -5372,38 +5374,38 @@
       <div style="width: 1024px; margin-left: auto; margin-right: auto;">
         <span>Click on the name of a tab preset on the line below to show those tabs:</span>
         <br/>
-        <button ~style.display=Tabs.hasPreset(1) ? '' : 'none'~ onclick="Tabs.presetLoad(1)">~r Tabs.presetName(1) ~</button>
-        <button ~style.display=Tabs.hasPreset(2) ? '' : 'none'~ onclick="Tabs.presetLoad(2)">~r Tabs.presetName(2) ~</button>
-        <button ~style.display=Tabs.hasPreset(3) ? '' : 'none'~ onclick="Tabs.presetLoad(3)">~r Tabs.presetName(3) ~</button>
-        <button ~style.display=Tabs.hasPreset(4) ? '' : 'none'~ onclick="Tabs.presetLoad(4)">~r Tabs.presetName(4) ~</button>
-        <button ~style.display=Tabs.hasPreset(5) ? '' : 'none'~ onclick="Tabs.presetLoad(5)">~r Tabs.presetName(5) ~</button>
-        <button ~style.display=Tabs.hasPreset(6) ? '' : 'none'~ onclick="Tabs.presetLoad(6)">~r Tabs.presetName(6) ~</button>
-        <button ~style.display=Tabs.hasPreset(7) ? '' : 'none'~ onclick="Tabs.presetLoad(7)">~r Tabs.presetName(7) ~</button>
-        <button ~style.display=Tabs.hasPreset(8) ? '' : 'none'~ onclick="Tabs.presetLoad(8)">~r Tabs.presetName(8) ~</button>
-        <button ~style.display=Tabs.hasPreset(9) ? '' : 'none'~ onclick="Tabs.presetLoad(9)">~r Tabs.presetName(9) ~</button>
-        <button ~style.display=Tabs.hasPreset(10) ? '' : 'none'~ onclick="Tabs.presetLoad(10)">~r Tabs.presetName(10) ~</button>
-        <button ~style.display=Tabs.hasPreset(11) ? '' : 'none'~ onclick="Tabs.presetLoad(11)">~r Tabs.presetName(11) ~</button>
-        <button ~style.display=Tabs.hasPreset(12) ? '' : 'none'~ onclick="Tabs.presetLoad(12)">~r Tabs.presetName(12) ~</button>
-        <button ~style.display=Tabs.hasPreset(13) ? '' : 'none'~ onclick="Tabs.presetLoad(13)">~r Tabs.presetName(13) ~</button>
-        <button ~style.display=Tabs.hasPreset(14) ? '' : 'none'~ onclick="Tabs.presetLoad(14)">~r Tabs.presetName(14) ~</button>
-        <button ~style.display=Tabs.hasPreset(15) ? '' : 'none'~ onclick="Tabs.presetLoad(15)">~r Tabs.presetName(15) ~</button>
-        <button ~style.display=Tabs.hasPreset(16) ? '' : 'none'~ onclick="Tabs.presetLoad(16)">~r Tabs.presetName(16) ~</button>
-        <button ~style.display=Tabs.hasPreset(17) ? '' : 'none'~ onclick="Tabs.presetLoad(17)">~r Tabs.presetName(17) ~</button>
-        <button ~style.display=Tabs.hasPreset(18) ? '' : 'none'~ onclick="Tabs.presetLoad(18)">~r Tabs.presetName(18) ~</button>
-        <button ~style.display=Tabs.hasPreset(19) ? '' : 'none'~ onclick="Tabs.presetLoad(19)">~r Tabs.presetName(19) ~</button>
-        <button ~style.display=Tabs.hasPreset(20) ? '' : 'none'~ onclick="Tabs.presetLoad(20)">~r Tabs.presetName(20) ~</button>
-        <button ~style.display=Tabs.hasPreset(21) ? '' : 'none'~ onclick="Tabs.presetLoad(21)">~r Tabs.presetName(21) ~</button>
-        <button ~style.display=Tabs.hasPreset(22) ? '' : 'none'~ onclick="Tabs.presetLoad(22)">~r Tabs.presetName(22) ~</button>
-        <button ~style.display=Tabs.hasPreset(23) ? '' : 'none'~ onclick="Tabs.presetLoad(23)">~r Tabs.presetName(23) ~</button>
-        <button ~style.display=Tabs.hasPreset(24) ? '' : 'none'~ onclick="Tabs.presetLoad(24)">~r Tabs.presetName(24) ~</button>
-        <button ~style.display=Tabs.hasPreset(25) ? '' : 'none'~ onclick="Tabs.presetLoad(25)">~r Tabs.presetName(25) ~</button>
-        <button ~style.display=Tabs.hasPreset(26) ? '' : 'none'~ onclick="Tabs.presetLoad(26)">~r Tabs.presetName(26) ~</button>
-        <button ~style.display=Tabs.hasPreset(27) ? '' : 'none'~ onclick="Tabs.presetLoad(27)">~r Tabs.presetName(27) ~</button>
-        <button ~style.display=Tabs.hasPreset(28) ? '' : 'none'~ onclick="Tabs.presetLoad(28)">~r Tabs.presetName(28) ~</button>
-        <button ~style.display=Tabs.hasPreset(29) ? '' : 'none'~ onclick="Tabs.presetLoad(29)">~r Tabs.presetName(29) ~</button>
-        <button ~style.display=Tabs.hasPreset(30) ? '' : 'none'~ onclick="Tabs.presetLoad(30)">~r Tabs.presetName(30) ~</button>
-        <button ~style.display=Tabs.hasPreset(31) ? '' : 'none'~ onclick="Tabs.presetLoad(31)">~r Tabs.presetName(31) ~</button>
-        <button ~style.display=Tabs.hasPreset(32) ? '' : 'none'~ onclick="Tabs.presetLoad(32)">~r Tabs.presetName(32) ~</button>
+        <button ~class=Tabs.presetClass(1)~ ~style.display=Tabs.hasPreset(1) ? '' : 'none'~ onclick="Tabs.presetLoad(1)">~r Tabs.presetName(1) ~</button>
+        <button ~class=Tabs.presetClass(2)~ ~style.display=Tabs.hasPreset(2) ? '' : 'none'~ onclick="Tabs.presetLoad(2)">~r Tabs.presetName(2) ~</button>
+        <button ~class=Tabs.presetClass(3)~ ~style.display=Tabs.hasPreset(3) ? '' : 'none'~ onclick="Tabs.presetLoad(3)">~r Tabs.presetName(3) ~</button>
+        <button ~class=Tabs.presetClass(4)~ ~style.display=Tabs.hasPreset(4) ? '' : 'none'~ onclick="Tabs.presetLoad(4)">~r Tabs.presetName(4) ~</button>
+        <button ~class=Tabs.presetClass(5)~ ~style.display=Tabs.hasPreset(5) ? '' : 'none'~ onclick="Tabs.presetLoad(5)">~r Tabs.presetName(5) ~</button>
+        <button ~class=Tabs.presetClass(6)~ ~style.display=Tabs.hasPreset(6) ? '' : 'none'~ onclick="Tabs.presetLoad(6)">~r Tabs.presetName(6) ~</button>
+        <button ~class=Tabs.presetClass(7)~ ~style.display=Tabs.hasPreset(7) ? '' : 'none'~ onclick="Tabs.presetLoad(7)">~r Tabs.presetName(7) ~</button>
+        <button ~class=Tabs.presetClass(8)~ ~style.display=Tabs.hasPreset(8) ? '' : 'none'~ onclick="Tabs.presetLoad(8)">~r Tabs.presetName(8) ~</button>
+        <button ~class=Tabs.presetClass(9)~ ~style.display=Tabs.hasPreset(9) ? '' : 'none'~ onclick="Tabs.presetLoad(9)">~r Tabs.presetName(9) ~</button>
+        <button ~class=Tabs.presetClass(10)~ ~style.display=Tabs.hasPreset(10) ? '' : 'none'~ onclick="Tabs.presetLoad(10)">~r Tabs.presetName(10) ~</button>
+        <button ~class=Tabs.presetClass(11)~ ~style.display=Tabs.hasPreset(11) ? '' : 'none'~ onclick="Tabs.presetLoad(11)">~r Tabs.presetName(11) ~</button>
+        <button ~class=Tabs.presetClass(12)~ ~style.display=Tabs.hasPreset(12) ? '' : 'none'~ onclick="Tabs.presetLoad(12)">~r Tabs.presetName(12) ~</button>
+        <button ~class=Tabs.presetClass(13)~ ~style.display=Tabs.hasPreset(13) ? '' : 'none'~ onclick="Tabs.presetLoad(13)">~r Tabs.presetName(13) ~</button>
+        <button ~class=Tabs.presetClass(14)~ ~style.display=Tabs.hasPreset(14) ? '' : 'none'~ onclick="Tabs.presetLoad(14)">~r Tabs.presetName(14) ~</button>
+        <button ~class=Tabs.presetClass(15)~ ~style.display=Tabs.hasPreset(15) ? '' : 'none'~ onclick="Tabs.presetLoad(15)">~r Tabs.presetName(15) ~</button>
+        <button ~class=Tabs.presetClass(16)~ ~style.display=Tabs.hasPreset(16) ? '' : 'none'~ onclick="Tabs.presetLoad(16)">~r Tabs.presetName(16) ~</button>
+        <button ~class=Tabs.presetClass(17)~ ~style.display=Tabs.hasPreset(17) ? '' : 'none'~ onclick="Tabs.presetLoad(17)">~r Tabs.presetName(17) ~</button>
+        <button ~class=Tabs.presetClass(18)~ ~style.display=Tabs.hasPreset(18) ? '' : 'none'~ onclick="Tabs.presetLoad(18)">~r Tabs.presetName(18) ~</button>
+        <button ~class=Tabs.presetClass(19)~ ~style.display=Tabs.hasPreset(19) ? '' : 'none'~ onclick="Tabs.presetLoad(19)">~r Tabs.presetName(19) ~</button>
+        <button ~class=Tabs.presetClass(20)~ ~style.display=Tabs.hasPreset(20) ? '' : 'none'~ onclick="Tabs.presetLoad(20)">~r Tabs.presetName(20) ~</button>
+        <button ~class=Tabs.presetClass(21)~ ~style.display=Tabs.hasPreset(21) ? '' : 'none'~ onclick="Tabs.presetLoad(21)">~r Tabs.presetName(21) ~</button>
+        <button ~class=Tabs.presetClass(22)~ ~style.display=Tabs.hasPreset(22) ? '' : 'none'~ onclick="Tabs.presetLoad(22)">~r Tabs.presetName(22) ~</button>
+        <button ~class=Tabs.presetClass(23)~ ~style.display=Tabs.hasPreset(23) ? '' : 'none'~ onclick="Tabs.presetLoad(23)">~r Tabs.presetName(23) ~</button>
+        <button ~class=Tabs.presetClass(24)~ ~style.display=Tabs.hasPreset(24) ? '' : 'none'~ onclick="Tabs.presetLoad(24)">~r Tabs.presetName(24) ~</button>
+        <button ~class=Tabs.presetClass(25)~ ~style.display=Tabs.hasPreset(25) ? '' : 'none'~ onclick="Tabs.presetLoad(25)">~r Tabs.presetName(25) ~</button>
+        <button ~class=Tabs.presetClass(26)~ ~style.display=Tabs.hasPreset(26) ? '' : 'none'~ onclick="Tabs.presetLoad(26)">~r Tabs.presetName(26) ~</button>
+        <button ~class=Tabs.presetClass(27)~ ~style.display=Tabs.hasPreset(27) ? '' : 'none'~ onclick="Tabs.presetLoad(27)">~r Tabs.presetName(27) ~</button>
+        <button ~class=Tabs.presetClass(28)~ ~style.display=Tabs.hasPreset(28) ? '' : 'none'~ onclick="Tabs.presetLoad(28)">~r Tabs.presetName(28) ~</button>
+        <button ~class=Tabs.presetClass(29)~ ~style.display=Tabs.hasPreset(29) ? '' : 'none'~ onclick="Tabs.presetLoad(29)">~r Tabs.presetName(29) ~</button>
+        <button ~class=Tabs.presetClass(30)~ ~style.display=Tabs.hasPreset(30) ? '' : 'none'~ onclick="Tabs.presetLoad(30)">~r Tabs.presetName(30) ~</button>
+        <button ~class=Tabs.presetClass(31)~ ~style.display=Tabs.hasPreset(31) ? '' : 'none'~ onclick="Tabs.presetLoad(31)">~r Tabs.presetName(31) ~</button>
+        <button ~class=Tabs.presetClass(32)~ ~style.display=Tabs.hasPreset(32) ? '' : 'none'~ onclick="Tabs.presetLoad(32)">~r Tabs.presetName(32) ~</button>
         <div ~style.display=Tabs.hasPreset(1) ? 'none' : ''~>
           You don't currently have any tab presets.
         </div>

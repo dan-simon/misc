@@ -54,6 +54,12 @@ let Options = {
   toggleTabColors() {
     player.options.tabColors = !player.options.tabColors;
   },
+  presetHighlightColors() {
+    return player.options.presetHighlightColors;
+  },
+  togglePresetHighlightColors() {
+    player.options.presetHighlightColors = !player.options.presetHighlightColors;
+  },
   notation() {
     return player.options.notation;
   },

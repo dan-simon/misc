@@ -148,6 +148,7 @@ let initialPlayer = {
     studiesBeforeLastRespec: initialStudies(),
   },
   presets: [],
+  lastPresetIndices: [0, 0, 0, 0],
   eternityProducer: {
     unlocked: false,
     upgrades: [0, 0]
@@ -329,6 +330,7 @@ let initialPlayer = {
     completionColors: 'On (gradient)',
     resetColors: true,
     tabColors: true,
+    presetHighlightColors: false,
     exportDisplay: false,
     exportNotificationFrequency: Math.pow(2, 16),
     theme: {
@@ -389,12 +391,12 @@ let initialPlayer = {
     timeSinceLastPeakIPPerSec: Math.pow(2, 256),
     timeSinceLastPeakEPPerSec: Math.pow(2, 256),
     timeSinceLastPeakCPPerSec: Math.pow(2, 256),
-    timeSinceIPGainWasAmount: -1,
-    timeSinceEPGainWasAmount: -1,
-    timeSinceCPGainWasAmount: -1,
-    timeSinceIPGainWasTotal: -1,
-    timeSinceEPGainWasTotal: -1,
-    timeSinceCPGainWasTotal: -1,
+    timeSinceIPGainWasAmount: 0,
+    timeSinceEPGainWasAmount: 0,
+    timeSinceCPGainWasAmount: 0,
+    timeSinceIPGainWasTotal: 0,
+    timeSinceEPGainWasTotal: 0,
+    timeSinceCPGainWasTotal: 0,
     fastestInfinity: Math.pow(2, 256),
     fastestEternity: Math.pow(2, 256),
     fastestComplexity: Math.pow(2, 256),
@@ -422,7 +424,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.982421875
+  version: 1.9833984375
 }
 
 let player;

@@ -853,6 +853,11 @@ let Saving = {
       player.presetRespecFinalityShards = false;
       player.version = 1.982421875;
     }
+    if (player.version < 1.9833984375) {
+      player.lastPresetIndices = [0, 0, 0, 0];
+      player.options.presetHighlightColors = false;
+      player.version = 1.9833984375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

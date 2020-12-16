@@ -141,7 +141,7 @@ let FinalityShardPresets = {
     player.respecFinalityShards = !player.respecFinalityShards;
   },
   presetRespec() {
-    return player.presetRespecFinalityShards;
+    return globalShiftDown !== player.presetRespecFinalityShards;
   },
   togglePresetRespec() {
     player.presetRespecFinalityShards = !player.presetRespecFinalityShards;
@@ -240,13 +240,32 @@ let FinalityShardPresets = {
     this.setPresetFinalityShardUpgradeList(x, this.exportString());
     this.redisplayPresetFinalityShardUpgradeList(x);
   },
+  isLastPresetIndex(x) {
+    return player.lastPresetIndices[3] === x;
+  },
+  setLastPresetIndex(x) {
+    player.lastPresetIndices[3] = x;
+  },
+  updateLastPresetIndexFromDeletion(x) {
+    if (player.lastPresetIndices[3] === x) {
+      player.lastPresetIndices[3] = 0;
+    }
+    if (player.lastPresetIndices[3] > x) {
+      player.lastPresetIndices[3]--;
+    }
+  },
+  presetClass(x) {
+    return (Options.presetHighlightColors() && this.isLastPresetIndex(x)) ? 'softlyhighlighted' : '';
+  },
   presetLoad(x) {
     if (this.presetRespec() && !this.respecAndReset()) return;
     this.importStringFromPreset(this.presetFinalityShardUpgradeList(x));
+    this.setLastPresetIndex(x);
   },
   presetDelete(x) {
     player.finalityShardUpgradePresets = player.finalityShardUpgradePresets.slice(0, x - 1).concat(
       player.finalityShardUpgradePresets.slice(x));
+    this.updateLastPresetIndexFromDeletion(x);
     for (let i = x; i <= player.finalityShardUpgradePresets.length; i++) {
       this.redisplayPreset(i);
     }

@@ -161,11 +161,30 @@ let Tabs = {
     this.setPresetTabs(x, this.exportString());
     this.redisplayPresetTabs(x);
   },
+  isLastPresetIndex(x) {
+    return player.lastPresetIndices[0] === x;
+  },
+  setLastPresetIndex(x) {
+    player.lastPresetIndices[0] = x;
+  },
+  updateLastPresetIndexFromDeletion(x) {
+    if (player.lastPresetIndices[1] === x) {
+      player.lastPresetIndices[0] = 0;
+    }
+    if (player.lastPresetIndices[1] > x) {
+      player.lastPresetIndices[0]--;
+    }
+  },
+  presetClass(x) {
+    return (Options.presetHighlightColors() && this.isLastPresetIndex(x)) ? 'softlyhighlighted' : '';
+  },
   presetLoad(x) {
     this.importStringFromPreset(this.presetTabs(x));
+    this.setLastPresetIndex(x);
   },
   presetDelete(x) {
     player.tabPresets = player.tabPresets.slice(0, x - 1).concat(player.tabPresets.slice(x));
+    this.updateLastPresetIndexFromDeletion(x);
     for (let i = x; i <= player.tabPresets.length; i++) {
       this.redisplayPreset(i);
     }

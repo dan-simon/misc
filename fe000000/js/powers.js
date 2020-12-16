@@ -462,7 +462,7 @@ let Powers = {
     player.powers.respec = !player.powers.respec;
   },
   presetRespec() {
-    return player.powers.presetRespec;
+    return globalShiftDown !== player.powers.presetRespec;
   },
   togglePresetRespec() {
     player.powers.presetRespec = !player.powers.presetRespec;
@@ -724,12 +724,31 @@ let Powers = {
     this.setPresetPowerList(x, this.exportString());
     this.redisplayPresetPowerList(x);
   },
+  isLastPresetIndex(x) {
+    return player.lastPresetIndices[2] === x;
+  },
+  setLastPresetIndex(x) {
+    player.lastPresetIndices[2] = x;
+  },
+  updateLastPresetIndexFromDeletion(x) {
+    if (player.lastPresetIndices[2] === x) {
+      player.lastPresetIndices[2] = 0;
+    }
+    if (player.lastPresetIndices[2] > x) {
+      player.lastPresetIndices[2]--;
+    }
+  },
+  presetClass(x) {
+    return (Options.presetHighlightColors() && this.isLastPresetIndex(x)) ? 'softlyhighlighted' : '';
+  },
   presetLoad(x) {
     if (this.presetRespec() && !this.respecAndReset()) return;
     this.importStringFromPreset(this.presetPowerList(x));
+    this.setLastPresetIndex(x);
   },
   presetDelete(x) {
     player.powers.presets = player.powers.presets.slice(0, x - 1).concat(player.powers.presets.slice(x));
+    this.updateLastPresetIndexFromDeletion(x);
     for (let i = x; i <= player.powers.presets.length; i++) {
       this.redisplayPreset(i);
     }

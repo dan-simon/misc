@@ -1,4 +1,5 @@
 let toggleDown = false;
+let globalShiftDown = false;
 
 let codeToAutobuyers = {
   49: 1,
@@ -33,7 +34,7 @@ let codeToAutobuyers = {
 window.addEventListener('keydown', function(event) {
   let controlDown = event.ctrlKey || event.metaKey;
   let shiftDown = event.shiftKey;
-  if ((player && !player.options.hotkeys) || controlDown || document.activeElement.type === "text") return false
+  if ((player && !player.options.hotkeys) || controlDown || (document.activeElement && document.activeElement.type === 'text')) return false;
   const tmp = event.keyCode;
   if (toggleDown) {
     if (tmp in codeToAutobuyers) {
@@ -51,6 +52,10 @@ window.addEventListener('keydown', function(event) {
     return false;
   }
   switch (tmp) {
+    case 16: // shift
+      globalShiftDown = true;
+    break;
+    
     case 65: // A
       Autobuyers.toggleAll();
     break;
@@ -113,9 +118,13 @@ window.addEventListener('keyup', function(event) {
   // This is slightly over-engineered, but it's for symmetry.
   let controlDown = event.ctrlKey || event.metaKey;
   let shiftDown = event.shiftKey;
-  if ((player && !player.options.hotkeys) || controlDown || document.activeElement.type === "text") return false
+  if ((player && !player.options.hotkeys) || controlDown || (document.activeElement && document.activeElement.type === 'text')) return false;
   const tmp = event.keyCode;
   switch (tmp) {
+    case 16: // shift
+      globalShiftDown = false;
+    break;
+    
     case 84: // T
       toggleDown = false;
     break;

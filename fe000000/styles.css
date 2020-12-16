@@ -51,7 +51,7 @@ input[type=checkbox] {
 
 .options-button {
   width: 352px;
-  height: 96px;
+  height: 112px;
 }
 
 .mini-options-button {
@@ -62,7 +62,7 @@ input[type=checkbox] {
 
 .options-div {
   width: 352px;
-  height: 96px;
+  height: 112px;
   display: table;
   text-align: center;
   border: solid;
@@ -241,6 +241,10 @@ input[type=checkbox] {
   margin: 4px;
   border: solid;
   border-width: 1px 1px;
+}
+
+.softlyhighlighted {
+  background: var(--study-chroma-color);
 }
 
 .studynormalunbuyable {
