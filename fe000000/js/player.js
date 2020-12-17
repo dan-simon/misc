@@ -342,6 +342,7 @@ let initialPlayer = {
     largerCheckboxes: false,
     viewAllGenerators: true,
     viewGeneratorsWhenStarsAtLimit: false,
+    showGeneratorAndBoostAutobuyers: true,
   },
   confirmations: {
     sacrifice: true,
@@ -424,7 +425,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9833984375
+  version: 1.984375
 }
 
 let player;

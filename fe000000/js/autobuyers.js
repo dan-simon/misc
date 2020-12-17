@@ -150,6 +150,12 @@ let Autobuyers = {
     player.slowAutobuyersTimer = newTimer;
     player.fastAutobuyersTimer = newTimer;
   },
+  showGeneratorAndBoost() {
+    return player.options.showGeneratorAndBoostAutobuyers;
+  },
+  toggleShowGeneratorAndBoost() {
+    player.options.showGeneratorAndBoostAutobuyers = !player.options.showGeneratorAndBoostAutobuyers;
+  },
   areNewlyUnlockedAutobuyersOn() {
     return player.areNewlyUnlockedAutobuyersOn;
   },

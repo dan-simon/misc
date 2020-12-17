@@ -858,6 +858,10 @@ let Saving = {
       player.options.presetHighlightColors = false;
       player.version = 1.9833984375;
     }
+    if (player.version < 1.984375) {
+      player.options.showGeneratorAndBoostAutobuyers = true;
+      player.version = 1.984375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

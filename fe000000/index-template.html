@@ -639,10 +639,10 @@
       <span ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>Autobuyers options on this tab only apply to autobuyers on this tab.</span>
       <br ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~/>
       <span><button onclick="Autobuyers.setAll(true)">Turn all autobuyers on</button> <button onclick="Autobuyers.setAll(false)">Turn all autobuyers off</button> <button onclick="Autobuyers.turnAllOnOrOff()">Turn all autobuyers on/off</button> <button onclick="Autobuyers.toggleAll()">Toggle all autobuyers</button>
-      <br ~style.display=(Autobuyers.areAnyAutobuyersSlow() && Autobuyers.areAnyAutobuyersFast()) ? '' : 'none'~/>
-      <span ~style.display=(Autobuyers.areAnyAutobuyersSlow() && Autobuyers.areAnyAutobuyersFast()) ? '' : 'none'~><button onclick="Autobuyers.synchronize()">Synchronize slow and fast autobuyers</button></span>
+      <br/>
+      <span><button onclick="Autobuyers.toggleShowGeneratorAndBoost()">Show generator and boost autobuyers: ~r Autobuyers.showGeneratorAndBoost() ? 'On' : 'Off' ~</button> <button onclick="Autobuyers.synchronize()" ~style.display=(Autobuyers.areAnyAutobuyersSlow() && Autobuyers.areAnyAutobuyersFast()) ? '' : 'none'~>Synchronize slow and fast autobuyers</button></span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
-        <tr>
+        <tr ~style.display=Autobuyers.showGeneratorAndBoost() ? '' : 'none'~>
           <td>
             <div class="autobuyerdiv" ~style.display=Autobuyer(1).hasAutobuyer() ? '' : 'none'~>
               <span><span ~style.display=Autobuyer(1).isSlow() ? '' : 'none'~>Slow </span>Generator 1 Autobuyer</span>
@@ -737,7 +737,7 @@
             </button>
           </td>
         </tr>
-        <tr>
+        <tr ~style.display=Autobuyers.showGeneratorAndBoost() ? '' : 'none'~>
           <td>
             <div class="autobuyerdiv" ~style.display=Autobuyer(4).hasAutobuyer() ? '' : 'none'~>
               <span><span ~style.display=Autobuyer(4).isSlow() ? '' : 'none'~>Slow </span>Generator 4 Autobuyer</span>
@@ -832,7 +832,7 @@
             </button>
           </td>
         </tr>
-        <tr>
+        <tr ~style.display=Autobuyers.showGeneratorAndBoost() ? '' : 'none'~>
           <td>
             <div class="autobuyerdiv" ~style.display=Autobuyer(7).hasAutobuyer() ? '' : 'none'~>
               <span><span ~style.display=Autobuyer(7).isSlow() ? '' : 'none'~>Slow </span>Generator 7 Autobuyer</span>
