@@ -398,6 +398,8 @@ let initialPlayer = {
     timeSinceLastPeakIPPerSec: Math.pow(2, 256),
     timeSinceLastPeakEPPerSec: Math.pow(2, 256),
     timeSinceLastPeakCPPerSec: Math.pow(2, 256),
+    timeSinceSacrificePossible: 0,
+    timeSincePrestigePossible: 0,
     timeSinceIPGainWasAmount: 0,
     timeSinceEPGainWasAmount: 0,
     timeSinceCPGainWasAmount: 0,
@@ -431,7 +433,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9853515625
+  version: 1.986328125
 }
 
 let player;

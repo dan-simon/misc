@@ -57,6 +57,8 @@ function gameLoop(diff, display) {
   InfinityPrestigeLayer.updatePeakIPPerSec();
   EternityPrestigeLayer.updatePeakEPPerSec();
   ComplexityPrestigeLayer.updatePeakCPPerSec();
+  Sacrifice.updateSacrificePossible();
+  Prestige.updatePrestigePossible();
   InfinityPrestigeLayer.compareIPGain();
   EternityPrestigeLayer.compareEPGain();
   ComplexityPrestigeLayer.compareCPGain();

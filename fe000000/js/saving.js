@@ -871,6 +871,11 @@ let Saving = {
       player.options.optionTypeShown = 'saving';
       player.version = 1.9853515625;
     }
+    if (player.version < 1.986328125) {
+      player.stats.timeSinceSacrificePossible = 0;
+      player.stats.timeSincePrestigePossible = 0;
+      player.version = 1.986328125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

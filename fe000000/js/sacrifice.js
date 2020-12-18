@@ -45,6 +45,11 @@ let Sacrifice = {
   canSacrifice() {
     return Generator(8).amount().gt(0) && this.bestStarsThisSacrifice().gte(this.sacrificeRequirement()) && !InfinityPrestigeLayer.mustInfinity();
   },
+  updateSacrificePossible() {
+    if (!this.canSacrifice()) {
+      player.stats.timeSinceSacrificePossible = 0;
+    }
+  },
   isVisible() {
     // This basically used to be as follows: this.canSacrifice() || this.sacrificeMultiplier().gt(1) || player.infinities > 0 || player.eternities.gt(0);
     // Seeing that things are possible probably isn't too intimidating, so I'm experimenting with making it always true.
@@ -94,5 +99,6 @@ let Sacrifice = {
     player.stats.bestStarsThisSacrifice = Stars.amount();
     player.stats.timeSincePurchase = 0;
     player.stats.timeSinceSacrifice = 0;
+    player.stats.timeSinceSacrificePossible = 0;
   }
 }

@@ -209,6 +209,9 @@ let Autobuyers = {
       shouldSacrifice = Sacrifice.sacrificeMultiplierMultGain().gte(priority);
     } else if (mode === 'Time') {
       shouldSacrifice = player.stats.timeSinceSacrifice >= priority.toNumber();
+    } else if (mode === 'Time since possible') {
+      Sacrifice.updateSacrificePossible();
+      shouldSacrifice = Sacrifice.canSacrifice() && player.stats.timeSinceSacrificePossible >= priority.toNumber();
     }
     if (shouldSacrifice) {
       Sacrifice.sacrifice(false);
@@ -223,6 +226,9 @@ let Autobuyers = {
       shouldPrestige = Prestige.prestigePowerMultGain().gte(priority);
     } else if (mode === 'Time') {
       shouldPrestige = player.stats.timeSincePrestige >= priority.toNumber();
+    } else if (mode === 'Time since possible') {
+      Prestige.updatePrestigePossible();
+      shouldPrestige = Prestige.canPrestige() && player.stats.timeSincePrestigePossible >= priority.toNumber();
     }
     if (shouldPrestige) {
       Prestige.prestige(false);

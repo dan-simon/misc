@@ -34,6 +34,11 @@ let Prestige = {
   canPrestige() {
     return this.bestStarsThisPrestige().gte(this.prestigeRequirement()) && !InfinityPrestigeLayer.mustInfinity() && !this.isPrestigeDisabled();
   },
+  updatePrestigePossible() {
+    if (!this.canPrestige()) {
+      player.stats.timeSincePrestigePossible = 0;
+    }
+  },
   isVisible() {
     // This basically used to be as follows: (this.canPrestige() || this.prestigePower().gt(1) || player.infinities > 0 || player.eternities.gt(0)) && !this.isPrestigeDisabled();
     // Seeing that things are possible probably isn't too intimidating, so I'm experimenting with making it true unless prestige is disabled.
@@ -76,5 +81,7 @@ let Prestige = {
     player.stats.timeSincePurchase = 0;
     player.stats.timeSinceSacrifice = 0;
     player.stats.timeSincePrestige = 0;
+    player.stats.timeSinceSacrificePossible = 0;
+    player.stats.timeSincePrestigePossible = 0;
   }
 }
