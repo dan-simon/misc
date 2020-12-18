@@ -125,8 +125,8 @@ let Oracle = {
     let messages = [
       this.complexityPointMessage(), this.complexityPointGainMessage(), this.otherThingsMessage(),
     ];
-    return 'After ' + formatMaybeInt(player.oracle.timeSimulated) + ' second' +
-      pluralize(player.oracle.timeSimulated, '', 's') + ' and ' + formatMaybeInt(player.oracle.ticksSimulated) + ' tick' +
+    return 'After ' + formatTime(player.oracle.timeSimulated, {seconds: {f: formatMaybeInt, s: true}, larger: {f: formatMaybeInt, s: true}}) +
+      ' and ' + formatMaybeInt(player.oracle.ticksSimulated) + ' tick' +
       pluralize(player.oracle.ticksSimulated, '', 's') + ', you ' + coordinate('*', '', messages) + '.';
   },
   complexityPointMessage() {
