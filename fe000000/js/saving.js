@@ -862,6 +862,15 @@ let Saving = {
       player.options.showGeneratorAndBoostAutobuyers = true;
       player.version = 1.984375;
     }
+    if (player.version < 1.9853515625) {
+      player.options.headerSettings = {
+        showCurrentChallenges: true,
+        showNextCCCompletion: true,
+        showResetButtonsForHiddenTabs: true,
+      };
+      player.options.optionTypeShown = 'saving';
+      player.version = 1.9853515625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

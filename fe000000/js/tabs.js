@@ -270,3 +270,11 @@ let SpecialDivs = {
   }
 }
 
+let ResetButtons = {
+  list: ['infinity', 'eternity', 'complexity', 'finality'],
+  isResetButtonVisible(x) {
+    let isReached = (x === 'infinity') ? SpecialDivs.isDivVisible('infinity') : PrestigeLayerProgress.hasReached(this.list[this.list.indexOf(x) - 1]);
+    return isReached && (Options.showResetButtonsForHiddenTabs() || Tabs.isTabVisible(x) || !PrestigeLayerProgress.hasReached(x));
+  }
+}
+

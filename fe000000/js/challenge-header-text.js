@@ -1,5 +1,5 @@
 let ChallengeHeaderText = {
-  getText() {
+  getCurrentChallengesText() {
     // Don't include 1.
     let runningComplexityChallenges = [2, 3, 4, 5, 6].filter(x => ComplexityChallenge.isComplexityChallengeRunning(x));
     let challenges = [
@@ -10,5 +10,22 @@ let ChallengeHeaderText = {
       'Complexity Challenge' + pluralize(runningComplexityChallenges.length, '', 's') + ' ' + coordinate('*', '', runningComplexityChallenges) : null
     ];
     return coordinate('You are currently in *.', 'You are currently not in any challenge.', challenges);
+  },
+  getNextCCCompletionText() {
+    let minRunningComplexityChallengeGoal = [1, 2, 3, 4, 5, 6].filter(
+      x => ComplexityChallenge.isComplexityChallengeRunning(x)).map(
+      x => ComplexityChallenge.getComplexityChallengeGoal(x)).reduce(
+      (x, y) => Decimal.min(x, y));
+    return 'Next ℂC completion at ' + format(minRunningComplexityChallengeGoal) + ' stars.';
+  },
+  getText() {
+    let texts = [];
+    if (PrestigeLayerProgress.hasReached('infinity') && Options.showCurrentChallenges()) {
+      texts.push(this.getCurrentChallengesText());
+    }
+    if (PrestigeLayerProgress.hasReached('complexity') && Options.showNextCCCompletion()) {
+      texts.push(this.getNextCCCompletionText());
+    }
+    return texts.map(i => ' ' + i).join('');
   }
 }

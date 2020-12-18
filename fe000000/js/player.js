@@ -343,6 +343,12 @@ let initialPlayer = {
     viewAllGenerators: true,
     viewGeneratorsWhenStarsAtLimit: false,
     showGeneratorAndBoostAutobuyers: true,
+    headerSettings: {
+      showCurrentChallenges: true,
+      showNextCCCompletion: true,
+      showResetButtonsForHiddenTabs: true,
+    },
+    optionTypeShown: 'saving'
   },
   confirmations: {
     sacrifice: true,
@@ -425,7 +431,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.984375
+  version: 1.9853515625
 }
 
 let player;

@@ -113,5 +113,29 @@ let Options = {
   },
   setConfirmation(x, y) {
     player.confirmations[x] = y;
+  },
+  showCurrentChallenges() {
+    return player.options.headerSettings.showCurrentChallenges;
+  },
+  toggleShowCurrentChallenges() {
+    player.options.headerSettings.showCurrentChallenges = !player.options.headerSettings.showCurrentChallenges;
+  },
+  showNextCCCompletion() {
+    return player.options.headerSettings.showNextCCCompletion;
+  },
+  toggleShowNextCCCompletion() {
+    player.options.headerSettings.showNextCCCompletion = !player.options.headerSettings.showNextCCCompletion;
+  },
+  showResetButtonsForHiddenTabs() {
+    return player.options.headerSettings.showResetButtonsForHiddenTabs;
+  },
+  toggleShowResetButtonsForHiddenTabs() {
+    player.options.headerSettings.showResetButtonsForHiddenTabs = !player.options.headerSettings.showResetButtonsForHiddenTabs;
+  },
+  setOptionTypeShown(x) {
+    player.options.optionTypeShown = x;
+  },
+  isOptionTypeShown(x) {
+    return player.options.optionTypeShown === x;
   }
 }
