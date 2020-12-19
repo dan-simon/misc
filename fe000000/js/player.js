@@ -234,6 +234,8 @@ let initialPlayer = {
     complexityPointGain: new Decimal(0),
     complexityChallengeCompletions: [0, 0, 0, 0, 0, 0],
     originalComplexityChallengeCompletions: [0, 0, 0, 0, 0, 0],
+    powerShards: 0,
+    originalPowerShards: 0,
     galaxies: 0,
     originalGalaxies: 0,
     finalities: 0,
@@ -433,7 +435,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.986328125
+  version: 1.9873046875
 }
 
 let player;

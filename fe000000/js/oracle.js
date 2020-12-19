@@ -94,6 +94,7 @@ let Oracle = {
       let complexityPointGain = ComplexityPrestigeLayer.canComplexity() ?
         ComplexityPrestigeLayer.complexityPointGain() : new Decimal(0);
       let complexityChallengeCompletions = ComplexityChallenge.getAllComplexityChallengeCompletions();
+      let powerShards = PowerShards.amount();
       let galaxies = Galaxy.amount();
       let finalities = Finalities.amount();
       let finalityShards = FinalityShards.total();
@@ -107,6 +108,8 @@ let Oracle = {
         player.oracle.complexityPointGain = complexityPointGain;
         player.oracle.originalComplexityChallengeCompletions = ComplexityChallenge.getAllComplexityChallengeCompletions();
         player.oracle.complexityChallengeCompletions = complexityChallengeCompletions;
+        player.oracle.originalPowerShards = PowerShards.amount();
+        player.oracle.powerShards = powerShards;
         player.oracle.originalGalaxies = Galaxy.amount();
         player.oracle.galaxies = galaxies;
         player.oracle.originalFinalities = Finalities.amount();
@@ -145,6 +148,13 @@ let Oracle = {
       (x, i) => x > 0 ? formatInt(x) + ' completion' + pluralize(x, '', 's') + ' of Complexity Challenge ' + (i + 1) : null);
     return coordinate('*', null, completionText);
   },
+  powerShardGainText() {
+    if (player.oracle.PowerShards === player.oracle.originalPowerShards) {
+      return null;
+    }
+    return format(player.oracle.powerShards - player.oracle.originalPowerShards) +
+      ' power shard' + pluralize(player.oracle.powerShards - player.oracle.originalPowerShards, '', 's');
+  },
   galaxyGainText() {
     if (player.oracle.galaxies === player.oracle.originalGalaxies) {
       return null;
@@ -168,8 +178,8 @@ let Oracle = {
   },
   otherThingsMessage() {
     return coordinate('will have gained *', null, [
-      this.complexityChallengeCompletionsGainText(), this.galaxyGainText(),
-      this.finalityGainText(), this.finalityShardGainText(),
+      this.complexityChallengeCompletionsGainText(), this.powerShardGainText(),
+      this.galaxyGainText(), this.finalityGainText(), this.finalityShardGainText(),
     ]);
   },
   messagePrequel() {

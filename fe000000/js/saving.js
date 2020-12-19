@@ -876,6 +876,11 @@ let Saving = {
       player.stats.timeSincePrestigePossible = 0;
       player.version = 1.986328125;
     }
+    if (player.version < 1.9873046875) {
+      player.oracle.powerShards = 0;
+      player.oracle.originalPowerShards = 0;
+      player.version = 1.9873046875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
