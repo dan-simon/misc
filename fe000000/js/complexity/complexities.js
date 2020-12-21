@@ -15,6 +15,13 @@ let Complexities = {
       let current = ComplexityAchievements.complexityAchievementRow1Column2EffectFormula(this.amount());
       Eternities.addSudden(current.minus(old));
     }
+    // This is messy, but we sometimes need to update our complexity challenge completion
+    // records so that they don't appear to be from tons of complexities ago.
+    for (let entry of player.complexityChallengeLastCompletion) {
+      if (entry[1] === Finalities.amount()) {
+        entry[0] += x;
+      }
+    }
   },
   complexityGeneratorMultiplier() {
     // This is intentionally always at most 1, and often less.

@@ -4204,6 +4204,39 @@
         <br/>
         <br/>
         <div ~style.display=(Oracle.isUsed() && Oracle.powerDisplay()) ? '' : 'none'~>
+          <span>Active powers from the future:</span>
+          <table style="margin-left: auto; margin-right: auto; border-collapse: collapse;">
+            <tr>
+              <td class="smallpowertd">
+                <div ~style.display=Powers.canAccessPower('oracle-active', 1) ? '' : 'none'~>
+                  <span ~class=Powers.color('oracle-active', 1)~>~r Powers.descriptionFullEffect('oracle-active', 1) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle-active', 1)~>~r Powers.descriptionStrengthRarity('oracle-active', 1) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle-active', 1)~>~r Powers.descriptionMultiplier('oracle-active', 1) ~</span>
+                </div>
+              </td>
+              <td class="smallpowertd">
+                <div ~style.display=Powers.canAccessPower('oracle-active', 2) ? '' : 'none'~>
+                  <span ~class=Powers.color('oracle-active', 2)~>~r Powers.descriptionFullEffect('oracle-active', 2) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle-active', 2)~>~r Powers.descriptionStrengthRarity('oracle-active', 2) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle-active', 2)~>~r Powers.descriptionMultiplier('oracle-active', 2) ~</span>
+                </div>
+              </td>
+              <td class="smallpowertd">
+                <div ~style.display=Powers.canAccessPower('oracle-active', 3) ? '' : 'none'~>
+                  <span ~class=Powers.color('oracle-active', 3)~>~r Powers.descriptionFullEffect('oracle-active', 3) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle-active', 3)~>~r Powers.descriptionStrengthRarity('oracle-active', 3) ~</span>
+                  <br/>
+                  <span ~class=Powers.color('oracle-active', 3)~>~r Powers.descriptionMultiplier('oracle-active', 3) ~</span>
+                </div>
+              </td>
+            </tr>
+          </table>
+          <br/>
           <span>Stored powers from the future:</span>
           <table style="margin-left: auto; margin-right: auto; border-collapse: collapse;">
             <tr>

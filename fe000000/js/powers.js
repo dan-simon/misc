@@ -321,6 +321,8 @@ let Powers = {
       return this.stored().length > 0;
     } else if (type === 'oracle') {
       return Oracle.isUnlocked() && Oracle.powers().length > 0;
+    } else if (type === 'oracle-active') {
+      return Oracle.isUnlocked() && Oracle.activePowers().length > 0;
     } else if (type === 'next' || type === 'crafted') {
       return this.isUnlocked();
     }
@@ -332,6 +334,8 @@ let Powers = {
       return this.canAccessStored(i);
     } else if (type === 'oracle') {
       return Oracle.isUnlocked() && Oracle.powers().filter(p => p.type === this.typeList[(i - 1) % 4]).length > Math.floor((i - 1) / 4);
+    } else if (type === 'oracle-active') {
+      return Oracle.isUnlocked() && Oracle.activePowers().length >= i;
     } else if (type === 'next' || type === 'crafted') {
       return this.isUnlocked();
     }
@@ -345,6 +349,8 @@ let Powers = {
       return this.next();
     } else if (type === 'oracle') {
       return Oracle.powers().filter(p => p.type === this.typeList[(i - 1) % 4])[Math.floor((i - 1) / 4)];
+    } else if (type === 'oracle-active') {
+      return Oracle.activePowers()[i - 1];
     } else if (type === 'crafted') {
       return PowerShards.craftedPower();
     }

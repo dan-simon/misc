@@ -180,6 +180,7 @@ let FinalityPrestigeLayer = {
       alert: player.oracle.alert,
       powerGainInPredictions: player.oracle.powerGainInPredictions,
       powerDisplay: player.oracle.powerDisplay,
+      activePowers: [],
       powers: [],
       extraMultipliers: {
         normal: 1,

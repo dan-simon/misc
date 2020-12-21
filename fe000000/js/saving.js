@@ -881,6 +881,12 @@ let Saving = {
       player.oracle.originalPowerShards = 0;
       player.version = 1.9873046875;
     }
+    if (player.version < 1.98828125) {
+      // New saves get -1 for this. 0 is slightly less likely to lead to bug reports, I think.
+      player.complexityChallengeLastCompletion = player.complexityChallengeLastCompletion.map(i => i.concat([0]));
+      player.oracle.activePowers = [];
+      player.version = 1.98828125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
