@@ -334,10 +334,10 @@ let Autobuyers = {
       shouldComplexity = ComplexityPrestigeLayer.complexityPointGain().gte(player.stats.lastTenComplexities.map(x => x[1]).reduce(Decimal.max).times(priority));
     } else if (mode === 'Time past peak/sec') {
       ComplexityPrestigeLayer.updatePeakCPPerSec();
-      shouldComplexity = ComplexityPrestigeLayer.eternityPointGain().gte(ComplexityPrestigeLayer.complexityPoints()) && player.stats.timeSinceLastPeakCPPerSec >= priority.toNumber();
+      shouldComplexity = ComplexityPrestigeLayer.complexityPointGain().gte(ComplexityPrestigeLayer.complexityPoints()) && player.stats.timeSinceLastPeakCPPerSec >= priority.toNumber();
     } else if (mode === 'Fraction of peak/sec') {
       ComplexityPrestigeLayer.updatePeakCPPerSec();
-      shouldComplexity = ComplexityPrestigeLayer.eternityPointGain().gte(ComplexityPrestigeLayer.totalComplexityPoints()) && ComplexityPrestigeLayer.currentCPPerSec().lte(ComplexityPrestigeLayer.peakCPPerSec().times(priority));
+      shouldComplexity = ComplexityPrestigeLayer.complexityPointGain().gte(ComplexityPrestigeLayer.totalComplexityPoints()) && ComplexityPrestigeLayer.currentCPPerSec().lte(ComplexityPrestigeLayer.peakCPPerSec().times(priority));
     } else if (mode === 'Time since gain was amount') {
       ComplexityPrestigeLayer.compareCPGain();
       shouldComplexity = player.stats.timeSinceCPGainWasAmount >= priority.toNumber();
