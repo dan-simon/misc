@@ -1,4 +1,13 @@
 let Saving = {
+  encode(s) {
+    return btoa(JSON.stringify(s).replace(/[\u007F-\uFFFF]/g, function (chr) {
+      let code = chr.charCodeAt(0).toString(16);
+      return '\\u' + '0000'.slice(0, 4 - code.length) + code;
+    }));
+  },
+  decode(s) {
+    return JSON.parse(atob(s));
+  },
   saveGame(isAutoLoop) {
     // Stop the player from saving the game while time is being simulated.
     if (blocked) {
@@ -8,10 +17,10 @@ let Saving = {
       return;
     }
     // Stop the player from saving the game while time is being simulated.
-    localStorage.setItem('fe000000-save', btoa(JSON.stringify(player)));
+    localStorage.setItem('fe000000-save', this.encode(player));
   },
   quickLoadIssueCheck(s) {
-    let p = JSON.parse(atob(s));
+    let p = this.decode(s);
     for (let i of ['boost', 'currentTab', 'generators', 'lastUpdate', 'prestigePower', 'stars']) {
       if (!(i in p)) {
         // This message has additional context when shown. 
@@ -28,7 +37,7 @@ let Saving = {
       return;
     }
     // offlineProgress = null means leave it up to the save.
-    player = JSON.parse(atob(s));
+    player = this.decode(s);
     if (offlineProgress === null) {
       offlineProgress = player.options.offlineProgress;
     }
@@ -1034,7 +1043,7 @@ let Saving = {
     let output = document.getElementById('export-output');
     let parent = output.parentElement;
     parent.style.display = '';
-    output.value = btoa(JSON.stringify(player));
+    output.value = this.encode(player);
     output.select();
     try {
       document.execCommand('copy');
@@ -1061,7 +1070,7 @@ let Saving = {
     // The first false here sets Date.now() to when the game was reset
     // rather than when the window was loaded.
     // The second confirms that this isn't the oracle.
-    this.loadGame(btoa(JSON.stringify(initialPlayer)), false, false, () => this.reseedInitialPlayer());
+    this.loadGame(this.encode(initialPlayer), false, false, () => this.reseedInitialPlayer());
   },
   resetGameWithConfirmation() {
     if (confirm('Do you really want to reset the game? You will lose all your progress, and get no benefit.')) {

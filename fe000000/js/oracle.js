@@ -92,7 +92,7 @@ let Oracle = {
       return;
     }
     let originalTime = player.stats.timeSinceGameStart;
-    let save = btoa(JSON.stringify(player));
+    let save = Saving.encode(player);
     if (this.powerGainInPredictions() !== 'Same') {
       player.powers.gain = {'Off': false, 'On': true}[this.powerGainInPredictions()];
     }

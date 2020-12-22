@@ -3,7 +3,7 @@ let temporarySettings;
 
 window.onload = function () {
   try {
-    player = JSON.parse(atob(localStorage.getItem('fe000000-save'), null));
+    player = Saving.decode(localStorage.getItem('fe000000-save'));
   } catch (ex) {
     player = {
       options: {

@@ -7,14 +7,15 @@
   <script src="../js/break_infinity.min.js"></script>
   <script src="../js/ad-notations.min.js"></script>
   <script src="../js/ad-notations.community.min.js"></script>
-  <script src="../js/colors.js?time=1608666243011"></script>
-  <script src="../js/format.js?time=1608666243011"></script>
-  <script src="../js/options.js?time=1608666243011"></script>
-  <script src="js/main.js?time=1608666243011"></script>
-  <script src="js/tabs.js?time=1608666243011"></script>
-  <script src="js/update-display.js?time=1608666243011"></script>
+  <script src="../js/colors.js?time=1608672571448"></script>
+  <script src="../js/format.js?time=1608672571448"></script>
+  <script src="../js/options.js?time=1608672571448"></script>
+  <script src="../js/saving.js?time=1608672571448"></script>
+  <script src="js/main.js?time=1608672571448"></script>
+  <script src="js/tabs.js?time=1608672571448"></script>
+  <script src="js/update-display.js?time=1608672571448"></script>
   <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
-  <link rel="stylesheet" href="../styles.css?time=1608666243011"></link>
+  <link rel="stylesheet" href="../styles.css?time=1608672571448"></link>
 </head>
 <body>
   <h2>FE000000 Guide</h2>
@@ -22,42 +23,25 @@
   <p>This guide divides the game into part based (more or less) on which of the <span id="e1"></span> goals in the "Goals" tab have been accomplished so far.</p>
   <p>Note that this guide was written based on a playthrough which was very active and did not use offline progress. The times given are thus fairly close to minimum possible times.</p>
   <p>Show all guide parts: <input id="b0" type="checkbox"></input></p>
-  <span id="b1">
-    <button id="b2" onclick="Tabs.setTab(1)">Before sacrifice</button>
-    <button id="b3" onclick="Tabs.setTab(2)">Sacrifice to prestige</button>
-    <button id="b4" onclick="Tabs.setTab(3)">Prestige to infinity</button>
-    <button id="b5" onclick="Tabs.setTab(4)">Infinity to breaking infinity</button>
-  </span>
-  <br id="b6"/>
-  <span id="b7">
-    <button id="b8" onclick="Tabs.setTab(5)">Breaking infinity to starting Infinity Challenge 1</button>
-    <button id="b9" onclick="Tabs.setTab(6)">Starting Infinity Challenge 1 to eternity</button>
-  </span>
-  <br id="b10"/>
-  <span id="b11">
-    <button id="b12" onclick="Tabs.setTab(7)">Eternity to completing all eternity milestones</button>
-    <button id="b13" onclick="Tabs.setTab(8)">Completing all eternity milestones to unlocking the Eternity Producer</button>
-  </span>
-  <br id="b14"/>
-  <span id="b15">
-    <button id="b16" onclick="Tabs.setTab(9)">Unlocking the Eternity Producer to starting Eternity Challenge 1</button>
-    <button id="b17" onclick="Tabs.setTab(10)">Starting Eternity Challenge 1 to unlocking chroma</button>
-  </span>
-  <br id="b18"/>
-  <span id="b19">
-    <button id="b20" onclick="Tabs.setTab(11)">Unlocking chroma to complexity</button>
-    <button id="b21" onclick="Tabs.setTab(12)">Complexity to completing all complexity achievements</button>
-  </span>
-  <br id="b22"/>
-  <span id="b23">
-    <button id="b24" onclick="Tabs.setTab(13)">Completing all complexity achievements to unlocking powers</button>
-    <button id="b25" onclick="Tabs.setTab(14)">Unlocking powers to unlocking galaxies</button>
-  </span>
-  <br id="b26"/>
-  <span id="b27">
-    <button id="b28" onclick="Tabs.setTab(15)">Unlocking galaxies to finality</button>
-  </span>
-  <div id="b29">
+  <div style="width: 1024px; margin-left: auto; margin-right: auto;">
+    <button id="b1" onclick="Tabs.setTab(1)">Before sacrifice</button>
+    <button id="b2" onclick="Tabs.setTab(2)">Sacrifice to prestige</button>
+    <button id="b3" onclick="Tabs.setTab(3)">Prestige to infinity</button>
+    <button id="b4" onclick="Tabs.setTab(4)">Infinity to breaking infinity</button>
+    <button id="b5" onclick="Tabs.setTab(5)">Breaking infinity to starting Infinity Challenge 1</button>
+    <button id="b6" onclick="Tabs.setTab(6)">Starting Infinity Challenge 1 to eternity</button>
+    <button id="b7" onclick="Tabs.setTab(7)">Eternity to completing all eternity milestones</button>
+    <button id="b8" onclick="Tabs.setTab(8)">Completing all eternity milestones to unlocking the Eternity Producer</button>
+    <button id="b9" onclick="Tabs.setTab(9)">Unlocking the Eternity Producer to starting Eternity Challenge 1</button>
+    <button id="b10" onclick="Tabs.setTab(10)">Starting Eternity Challenge 1 to unlocking chroma</button>
+    <button id="b11" onclick="Tabs.setTab(11)">Unlocking chroma to complexity</button>
+    <button id="b12" onclick="Tabs.setTab(12)">Complexity to completing all complexity achievements</button>
+    <button id="b13" onclick="Tabs.setTab(13)">Completing all complexity achievements to unlocking powers</button>
+    <button id="b14" onclick="Tabs.setTab(14)">Unlocking powers to unlocking galaxies</button>
+    <button id="b15" onclick="Tabs.setTab(15)">Unlocking galaxies to finality</button>
+    <button id="b16" onclick="Tabs.setTab(16)">After finality</button>
+  </div>
+  <div id="b17">
     <h3>Before sacrifice</h3>
     <p>This part of the game is fairly simple. Start by clicking the "Main" button to go to the main tab, if you haven't already. Then buy a Generator 1 for the cost of <span id="e2"></span> stars. Other generators will become affordable over time. You can hold down M to buy max of all generators. The way generators work is very simple. Each generator produces the one before it, except the first which produces stars. Buying more of a generator increases a multiplier to its production, by <span id="e3"></span>x per purchase.</p>
     <p>Generator initial costs: <span id="e4"></span>^(generator number^<span id="e5"></span>) stars</p>
@@ -67,13 +51,13 @@
     <p>Once you get <span id="e10"></span> stars, several things will happen more or less at once. Firstly, you can buy the last generator, your first Generator 8. There is no Generator 9, so this is somewhat significant. Secondly, you can buy a boost. This will multiply all your generator multipliers by <span id="e11"></span> when bought. Thirdly, after buying Generator 8, you will be able to sacrifice. It doesn't matter very much for what multiplier you do this the first time, but I would recommend at least <span id="e12"></span>x, and getting the boost with cost <span id="e13"></span> stars.</p>
     <p>When you sacrifice, you'll be asked if you're sure you want to. You should say yes. This is a measure to stop accidental sacrifices at bad times for it. Turn it off in the options tab (in the confirmations row) when you feel that the safety of not accidentally sacrificing stops being worthwhile. This applies to other confirmations too.</p>
   </div>
-  <div id="b30">
+  <div id="b18">
     <h3>Sacrifice to prestige</h3>
     <p>So, you've sacrificed. This resets all Generator 1-7 amounts, but they keep their multipliers, and Generator 8 actually has a slightly increased (<span id="e14"></span>x) multiplier. Thus, it should only take roughly <span id="e15"></span> for you to get back to the same star production you had before. After this, keep playing as before. There'll be another boost at <span id="e16"></span> stars. Note that in general boosts are the most worthwhile things to buy, since they give a multiplier to all generators.</p>
     <p>Sacrifice formula: (log(stars when sacrificing, <span id="e17"></span>) / <span id="e18"></span>) sacrifice multiplier</p>
     <p>At <span id="e19"></span> stars, you will be able to prestige. The slow Generator 8 autobuyer also costs <span id="e20"></span> stars, so unless you're very active you probably want to buy that autobuyer first. However, after buying that, prestige as soon as you can.</p>
   </div>
-  <div id="b31">
+  <div id="b19">
     <h3>Prestige to infinity</h3>
     <p>So, you've prestiged. This resets all Generator 1-8 amounts and multipliers, and your stars. However, you now have a roughly <span id="e21"></span>x multiplier to all generators, which will let you get far more quickly to where you were before. You also keep your slow autobuyers. Keep playing as before, perhaps sacrificing slightly later, at perhaps <span id="e22"></span>x (though it barely matters). Eventually you'll be able to prestige again. In theory, the optimal prestige powers amounts to prestige at are roughly <span id="e23"></span>, <span id="e24"></span>, <span id="e25"></span>, <span id="e26"></span>, and <span id="e27"></span>, but you may want to prestige slightly less often so that you have to buy generators and boosts less, especially if you are idle. Consistently prestiging for <span id="e28"></span>x or <span id="e29"></span>x is not that bad.<p>
     <p>If you are idle, it might be worth pushing on your second prestige to <span id="e30"></span> stars to unlock the slow boost autobuyer, the last slow autobuyer. This will give you roughly <span id="e31"></span> prestige power, or a <span id="e32"></span>x prestige multiplier if you first prestiged for <span id="e33"></span> prestige power.</p>
@@ -81,7 +65,7 @@
     <p>Note that prestige power gain (and sacrifice multiplier gain, for that matter) is based on stars, so buying something right before prestiging or sacrificing can cause less of a benefit than you might hope. If you care about this, you might want to turn autobuyers off directly before each sacrifice or prestige, just to be safe.</p>
     <p>Keep prestiging as described above (for the above amounts, or <span id="e36"></span>x or <span id="e37"></span>x). Sacrifice once in each prestige, <span id="e38"></span> to <span id="e39"></span> after prestiging (or when progress feels like it's starting to slow). If you're close to <span id="e40"></span> stars (if you have more than <span id="e41"></span>, perhaps) it's probably best not to prestige, because stuff happens at <span id="e42"></span> stars. Specifically, stars will stop increasing. Also, the main tab will vanish, and be replaced with a message saying "The universe has collapsed due to an excess of stars." (I guess that's why stars stopped increasing.) Also, a new button will appear, saying "Infinity: Gain 2 infinity points", with additional statistics on it. Press this button, and infinity, as soon as it appears; unlike with sacrifice and prestige, there's nothing to be gained from waiting at this point.</p>
   </div>
-  <div id="b32">
+  <div id="b20">
     <h3>Infinity to breaking infinity</h3>
     <p>So, you've infinitied. This resets everything prestige resets, and also resets prestige power. However, you keep your slow autobuyers. New tabs called "Infinity" and "Challenges" also unlock. On the Infinity tab, you can see that you have <span id="e43"></span> infinity points and <span id="e44"></span> infinity (infinities are basically a count of how many times you've infinitied). Buy an Infinity Generator 1 for the <span id="e45"></span> infinity points you just got. Note that infinity generators (IGs) have the same initial costs, cost increases, and multiplier per purchase as the generators you already know from pre-infinity (for clarity, in this guide the pre-infinity generators are sometimes called normal generators, though sometimes they are called generators when it is (hopefully) clear); they just cost IP instead of stars. Infinity will reset infinity stars to <span id="e46"></span> infinity generator amounts to however many you've bought, but will not reset their multipliers.</p>
     <p>There will be something on the autobuyer tab that appears to let you turn the infinity autobuyer on (checked) or off (unchecked). It indeed does, but since the infinity autobuyer is locked it doesn't do anything whether it's on or off yet. It doesn't really matter whether you turn it on or off right now; by the time you unlock it you'll be changing its other settings a lot too. In general, if an autobuyer does something that resets things in the way that (as you just saw) infinity does, it will be possible to turn it off before unlocking it, so it doesn't reset things right after it's unlocked and before it can be turned off. This is also why the above "Turn newly unlocked autobuyers on when unlocked" setting exists.</p>
@@ -104,7 +88,7 @@
     <p>In this paragraph, challenge orders within each sentence are suggestions and not following them probably won't make anything much harder. Do Challenge 1 (if you didn't do it already as your second infinity), Challenge 3, and Challenge 4 in <span id="e84"></span> separate infinities. Then do <span id="e85"></span> normal infinities (each of which is roughly <span id="e86"></span> long if you are active). Spend your <span id="e87"></span> IP on an Infinity Generator 2. Then do Challenges 5, 8, 9, and 11. Spend <span id="e88"></span> IP on the first infinity upgrade, increasing the multiplier per boost from <span id="e89"></span>x to <span id="e90"></span>x. Optionally do some more normal infinities now if you want. Do Challenges 2, 6, 7, 10, and 12, and then, having completed all challenges, break infinity in the Infinity tab.</p>
     <p>For autobuyers, you probably want to sacrifice for multiplier <span id="e91"></span>x, prestige for multiplier <span id="e92"></span>x, and, if you do Challenge 12 earlier than suggested here, infinity whenever possible, at least before breaking infinity (multiple settings lead to this).</p>
   </div>
-  <div id="b33">
+  <div id="b21">
     <h3>Breaking infinity to starting Infinity Challenge 1</h3>
     <p>So, you've broken infinity. You can now get more infinity points from each infinity, if you get more stars. At the very start, you want to do slightly long infinities just to find out how many IP to infinity for so that you get the most IP/sec (infinity points per second), then do shorter infinities in each of which you get that many IP. (Of course, with this guide, finding out yourself how many IP to infinity for is mostly unnecessary.) Once IP/sec starts going down, it generally won't go back up in that infinity, except sometimes if you are about to be able to buy another boost (so that might be worth checking).</p>
     <p>Note that you cannot go beyond <span id="e93"></span> stars in challenges even if infinity is broken, so don't try to, for example, spend months in Challenge 3 to get exponential infinity point gain. Also note that although you can now view the Infinity Challenges tab, it is not useful for a while.</p>
@@ -117,7 +101,7 @@
     <p>Infinity challenges (or ICs) are much like challenges, except they require more stars to infinity than a normal infinity (you cannot go beyond their star requirement in them whether or not infinity is broken), and after completing them you get some new bonus to something rather than getting an autobuyer and get a multiplier to infinity generators of <span id="e130"></span>^(completed infinity challenges / <span id="e131"></span>) rather than a multiplier to normal generators. Infinity challenges can generally be grouped into the easy ones with no special strategy and the hard ones with special strategy. Unlike previous challenges, they unlock in a particular order, which is also the order you should complete them in.</p>
     <p>Infinity Challenge 1: Hard. This is a bunch of challenges combined (Challenges 2, 3, 4, 5, 6, and 7), and its strategy is mostly taken from Challenge 7, so follow the strategy given above for that challenge. The differences are that you want to spend at least <span id="e132"></span> before prestiging (to build up infinity stars and thus do fewer prestiges, letting you save more purchases for the last prestige), you want to spend at least <span id="e133"></span> in each prestige (again, to do fewer prestiges), your last prestige should instead be when you reach over <span id="e134"></span> stars (because of the goal of <span id="e135"></span> being far higher than the goal for Challenge 3), and that at the end you should buy Generator 6 rather than Generator 8, because Generator 8 does not exist due to Challenge 6. Despite Challenge 2 making boosts reset multipliers, boosts are worth buying as soon as you can afford them. You don't have to worry about sacrifice because, due to Challenge 6, you can't do it. Infinity Challenge 1 should take <span id="e136"></span> to <span id="e137"></span>. It's perhaps worth noting that you can complete this challenge eventually just by buying a Generator 1 and waiting, since it includes Challenge 3, but this will take a day at least.</p>
   </div>
-  <div id="b34">
+  <div id="b22">
     <h3>Starting Infinity Challenge 1 to eternity</h3>
     <p>Infinity challenges (or ICs) are much like challenges, except they require more stars to infinity than a normal infinity (you cannot go beyond their star requirement in them whether or not infinity is broken), and after completing them you get some new bonus to something rather than getting an autobuyer and get a multiplier to infinity generators of <span id="e138"></span>^(completed infinity challenges / <span id="e139"></span>) rather than a multiplier to normal generators. Infinity challenges can generally be grouped into the easy ones with no special strategy and the hard ones with special strategy. Unlike previous challenges, they unlock in a particular order, which is also the order you should complete them in.</p>
     <p>Infinity Challenge 1: Hard. This is a bunch of challenges combined (Challenges 2, 3, 4, 5, 6, and 7), and its strategy is mostly taken from Challenge 7, so follow the strategy given above for that challenge. The differences are that you want to spend at least <span id="e140"></span> before prestiging (to build up infinity stars and thus do fewer prestiges, letting you save more purchases for the last prestige), you want to spend at least <span id="e141"></span> in each prestige (again, to do fewer prestiges), your last prestige should instead be when you reach over <span id="e142"></span> stars (because of the goal of <span id="e143"></span> being far higher than the goal for Challenge 3), and that at the end you should buy Generator 6 rather than Generator 8, because Generator 8 does not exist due to Challenge 6. Despite Challenge 2 making boosts reset multipliers, boosts are worth buying as soon as you can afford them. You don't have to worry about sacrifice because, due to Challenge 6, you can't do it. Infinity Challenge 1 should take <span id="e144"></span> to <span id="e145"></span>. It's perhaps worth noting that you can complete this challenge eventually just by buying a Generator 1 and waiting, since it includes Challenge 3, but this will take a day at least.</p>
@@ -138,7 +122,7 @@
     <p>The IC8 reward is roughly as strong as the IC7 reward. Infinities should only be roughly <span id="e220"></span> to <span id="e221"></span> long until you can eternity, in <span id="e222"></span> or <span id="e223"></span> more infinities.</p>
     <p>Unlike stars when you could infinity, IP don't cap at <span id="e224"></span>. However, getting enough more to get more than <span id="e225"></span> eternity points isn't worth it yet, so eternity for <span id="e226"></span> eternity points as soon as you can. You can get to this point from the start of infinity challenges in roughly <span id="e227"></span>.</p>
   </div>
-  <div id="b35">
+  <div id="b23">
     <h3>Eternity to completing all eternity milestones</h3>
     <p>So, you've eternitied. This resets basically everything. You keep your slow autobuyers, and that's basically it. However, with your <span id="e228"></span> eternity points (EP) you can, and should, buy an Eternity Generator 1. Eternity generators (EGs) are like normal generators and infinity generators except that they cost eternity points. Eternity stars have two effects: a multiplier and a power. Note that you start with <span id="e229"></span> eternity stars at the start of each eternity. Eternity stars and eternity generators reset on eternity to the same extent infinity stars and infinity generators reset on infinity.</p>
     <p>Multiplier from eternity stars: (eternity stars)x.</p>
@@ -159,7 +143,7 @@
     <p>Now you can finally buy another theorem for <span id="e281"></span> EP and buy Study 3. This will make eternities a lot quicker. Getting <span id="e282"></span> infinities is now unnecessary. The <span id="e283"></span>-eternity eternity milestone lets you set the sacrifice autobuyer to <span id="e284"></span>x. You can prestige and infinity manually (prestiges should be roughly <span id="e285"></span> long and infinities should be roughly <span id="e286"></span> long), or you can set your prestige autobuyer to <span id="e287"></span> and your infinity autobuyer to <span id="e288"></span>x best of last ten. You should still eternity for <span id="e289"></span> EP. This eternity should take roughly <span id="e290"></span> (maybe slightly quicker), mostly limited by autobuyers and (if you prestige and infinity manually) manual speed.</p>
     <p>Now keep doing eternities much like the last. The <span id="e291"></span>-eternity eternity milestone gives you some infinities (initially <span id="e292"></span>), which helps a bit but not that much. When you have <span id="e293"></span> eternities, you can (and should) get another EG1. The <span id="e294"></span>-eternity eternity milestone automatically completes ICs, which means you don't need to do them yourself and is thus very helpful. At this point, eternities are roughly <span id="e295"></span> long and you can just stay on the infinity tab. The <span id="e296"></span>-eternity eternity milestone is just autobuyers (on by default) and thus is not much of a speedup. The <span id="e297"></span>-eternity eternity milestone lets you set the prestige autobuyer to prestige for a <span id="e298"></span>x multiplier, which is a very big speedup. You can also set the infinity autobuyer to infinity <span id="e299"></span> since total (this is a helpful autobuyer setting that infinities some amount of time after gained IP reaches total IP). You'll still need to buy infinity generators until you get autobuyers for them, though. Eternities should now be roughly <span id="e300"></span> to <span id="e301"></span> long. When you have <span id="e302"></span> eternities, you can, and should, buy EG2. After roughly <span id="e303"></span> to <span id="e304"></span> from <span id="e305"></span> eternity, you'll have <span id="e306"></span> eternities and thus will have completed all eternity milestones.</p>
   </div>
-  <div id="b36">
+  <div id="b24">
     <h3>Completing all eternity milestones to unlocking the Eternity Producer</h3>
     <p>In this section of the game, you'll start to have several studies at once and to need to determine which studies are best. Generally, a multiplier to infinity generators is <span id="e307"></span> times better than the same multiplier to normal generators, and a multiplier to eternity generators is slightly better than (however many eternity generators you have any of) times better than the same multiplier to infinity generators. Of course, the studies that multiply normal generators generally have the biggest multipliers, and those that multiply eternity generators generally have the smallest multipliers, so determining which is best requires some mental arithemetic (and of course, multipliers should be compared logarithmically; a <span id="e308"></span>x multiplier is only <span id="e309"></span>x as good as a <span id="e310"></span>x multiplier to the same thing, since <span id="e311"></span> is <span id="e312"></span>^<span id="e313"></span>).</p>
     <p>First, turn off your eternity autobuyer. It's good in general, but there are advantages to doing a somewhat long eternity now. It gives less EP/second, but it makes Study 3 stronger and lets you get more theorems. Getting to <span id="e314"></span> IP should be enough to get another theorem with stars, get another theorem with IP, and noticeably increase Study 3's multiplier without taking too long (<span id="e315"></span> to <span id="e316"></span>), so do that. Note that you should buy the theorems with stars and IP as soon as you can afford them, as stated above. Then start doing quick eternities for <span id="e317"></span> EP again. In addition to this being efficient for IP/second, it makes EGs slightly stronger via more eternities, and gives you more starting benefits (in particular starting IP), which makes eternities even quicker.</p>
@@ -245,7 +229,7 @@
       </tr>
     </table>
   </div>
-  <div id="b37">
+  <div id="b25">
     <h3>Unlocking the Eternity Producer to starting Eternity Challenge 1</h3>
     <p>The Eternity Producer produces eternities, and gives a multiplier to eternity generators based on their amount. Upgrades for it (to produce more eternities and increase the multiplier) are generally fairly minor: worse than an eternity upgrade with the same cost, but better than an eternity generator. Note that with more eternities (from, for example, waiting overnight), progress will be significantly faster and the time it takes to do things after getting a large number of additional eternities will likely be less than the time given below.</p>
     <p>Do another long eternity (roughly <span id="e401"></span>) to get another theorem with stars and another extra theorem from boost power, increasing your total theorems to <span id="e402"></span>. As before, set the infinity autobuyer to <span id="e403"></span> since total. Now do an eternity (roughly <span id="e404"></span> long) for <span id="e405"></span> EP with Studies 5, 6, 8, and 10. Buy the second eternity upgrade (rather than the first). At this point, you should replace Study 10 with Study 9 instead. Do another eternity for <span id="e406"></span> EP, which should take roughly <span id="e407"></span>, and buy the first eternity upgrade. Do another eternity for <span id="e408"></span> EP, which should take roughly <span id="e409"></span>, and buy EG5.</p>
@@ -323,7 +307,7 @@
       </tr>
     </table>
   </div>
-  <div id="b38">
+  <div id="b26">
     <h3>Starting Eternity Challenge 1 to unlocking chroma</h3>
     <p>Eternity challenges (or ECs) are somewhat like challenges and infinity challenges. There are several important differences, however. Eternity challenges require a certain amount of IP to eternity and complete the challenge, rather than a certain amount of stars to infinity and complete the challenge. They have infinity-challenge-like rewards that make various things stronger, but they can each be completed up to <span id="e452"></span> times, having a higher goal amount of IP each time and getting a stronger reward for each time completed. Finally, they have a requirement (depending on times completed) and a cost in theorems (fixed for each challenge) to unlock, and must be explicitly unlocked to be entered. Note that you can respec studies in an eternity challenge if you want. You will get the theorems you paid to unlock an eternity challenge back when you complete it or respec your eternity challenge (which will lock it again).</p>
     <p>To recap, you can do EC1 the first time (EC1x1) at <span id="e453"></span> EP, unlocking it with Studies 5, 6, 8, and 9. Once you unlock it, respec your studies and buy Studies 3, 8, 10, and 12. Within EC1x1, you should infinity for <span id="e454"></span>x best of last ten rather than, for example, every <span id="e455"></span>. This challenge should take roughly <span id="e456"></span> to <span id="e457"></span> to complete.</p>
@@ -724,7 +708,7 @@
       </tr>
     </table>
   </div>
-  <div id="b39">
+  <div id="b27">
     <h3>Unlocking chroma to complexity</h3>
     <p>Chroma works as follows. Chroma builds up over time in an eternity and resets on eternity, getting <span id="e738"></span> times closer to the cap every (cap / buildup speed) seconds. Alternatively, as a formula, chroma is given below.</p>
     <p>chroma = cap * (1 - <span id="e739"></span>^(-time in eternity * buildup speed / cap)).</p>
@@ -810,7 +794,7 @@
       </tr>
     </table>
   </div>
-  <div id="b40">
+  <div id="b28">
     <h3>Complexity to completing all complexity achievements</h3>
     <p>So, you've complexitied. As with eternity, this resets basically everything. You keep your slow autobuyers, and that's basically it. However, you do have <span id="e833"></span> complexity points (ℂP) and <span id="e834"></span> Complexity Challenge 1 (ℂC1) completion. Complexity challenges will become more relevant and thus more discussed later. For now you can ignore them.</p>
     <p>With your two ℂP, you can, and should, buy a Complexity Generator 1. Complexity generators (ℂGs) are like previous generators except that they cost complexity points. Complexity stars have a single effect, which makes complexity challenge rewards stronger. Note that you start with <span id="e835"></span> complexity stars at the start of each complexity. Note also that before you eternity you have <span id="e836"></span> eternity stars, but they don't do anything until you eternity. Complexity generators reset on complexity as eternity generators do on eternity.</p>
@@ -875,7 +859,7 @@
     <p>In case you get "On the other side" earlier than suggested here, it makes "Forgot something" and "3 * 7 * 11" very easy, since both "Forgot something" and "3 * 7 * 11" can then be gotten with the theorems you have from the previous complexity. Also, only buying theorems in your current complexity stops you from getting "Thousand-theorem twilight", so "Thousand-theorem twilight" is also easier.</p>
     <p>This section of the game (from complexity to completing all complexity achievements) should take roughly <span id="e1218"></span>.</p>
   </div>
-  <div id="b41">
+  <div id="b29">
     <h3>Completing all complexity achievements to unlocking powers</h3>
     <p>After getting "On the other side", exit ℂC2 with roughly ℂC6x22 (but the exact number of completions is not important). Change "Push" to 1,2,3,4,5,6,7,8,9,10,11,12&amp;s9,10,9,3. This allows buying Study 16 when it is very cheap, which will increase total fourth-row study purchases and thus increase the chroma cap slightly.</p>
     <p>Complexity for 16 ℂP again, and then enter ℂC2. Do ℂC2x76, ℂC3x38, and ℂC4x17, each in its own complexity and each roughly between <span id="e1219"></span> and <span id="e1220"></span>. You aren't doing ℂC5 because it's weak, and you aren't doing ℂC6 because you just did it.</p>
@@ -890,7 +874,7 @@
     <p>After getting <span id="e1248"></span> complexities, go back to doing complexities for ℂP, with eternities <span id="e1249"></span> long. Each complexity should be for <span id="e1250"></span>x to <span id="e1251"></span>x total ℂP. Each new complexity generator will increase ℂP gain a lot. Complexities will increase in length from <span id="e1252"></span> to <span id="e1253"></span>. At <span id="e1254"></span> ℂP, you should again do a longer eternity to get boost power, getting <span id="e1255"></span> boost power in <span id="e1256"></span> to <span id="e1257"></span> at the end of a complexity. Unlock powers as soon as you have <span id="e1258"></span> ℂP.</p>
     <p>This section of the game (from completing all complexity achievements to unlocking powers) should take roughly <span id="e1259"></span>.</p>
   </div>
-  <div id="b42">
+  <div id="b30">
     <h3>Unlocking powers to unlocking galaxies</h3>
     <p>Powers have randomness. Thus, this section and the next section of the guide cannot reasonably give exact strategy. It will instead bring up all the considerations for you to take into account, and say what you want to do no matter what.</p>
     <p>Some general explanation of things you'll probably want to know about powers follows. You can activate up to <span id="e1260"></span> powers at once, and if you want to change your choices for some reason you can deactivate your active powers (and can later reactivate them if you want). To deactivate powers, you need to do a complexity reset or to complexity. You can have multiple powers of the same type active, and if you do, their multipliers combine as 1 + (a - 1) + (b - 1) where a and b are their individual multipliers (if there are <span id="e1261"></span>), or 1 + (a - 1) + (b - 1) + (c - 1) where a, b, and c are their individual multipliers (if there are <span id="e1262"></span>).</p>
@@ -918,16 +902,27 @@
     <p>The most important power shard upgrades to buy are those for powers you use the most of. However, you should generally keep all power shard upgrade costs for power types you use at all within a factor of <span id="e1303"></span> of each other (in this phase, those power types are likely at least everything but eternity, and also eternity if you're idle).</p>
     <p>Crafting powers is sometimes useful, especially if you feel like fewer than expected of the random powers you're getting are good. Crafting lets you create powers of a given type and rarity, for a cost in power shards. In this phase of the game, crafting is on average slightly less efficient than waiting for random powers, but of course this depends on which random powers you're going to get. Generally, crafting normal powers is best in this part of the game, but right before unlocking galaxies crafting an infinity power becomes perhaps slightly better (especially if you're not using any infinity powers), and if you're very idle crafting an eternity power might be worth it.</p>
     <p>As suggested by the suggestions above for what types of power to craft, when you're trying to get more ℂP, NNN (all normal) is generally best (unless you're using an E (eternity power) as described above), with NNI becoming good near galaxy unlock or if you get a great infinity power, and NII or III being good if your infinity powers are extremely good compared to your normal powers. IEC and NEC are good powers to use if you're using an eternity power, since the C gives you more complexity stars and makes the E build up faster.</p>
-    <p>In ℂC4 specifically, NNC or (if you have no good C) NNN is good. Note that ℂC4 completions are very important.</p>
+    <p>In ℂC4 specifically, NNC or (if you have no good C) NNN is good. Note that ℂC4 completions are very important. It may be worth creating a preset.</p>
     <p>The Oracle is a very useful feature, even though it only gives you information. It lets you know roughly what your game state will be in the future. It has two main usages. One usage is comparing sets of powers without actually doing long complexities with then (this is especially important for eternity powers since they take time to become good and you don't want to waste that time if in fact they're not good). The other usage is seeing what powers you're going to get and when, so you can plan accordingly and can avoid getting a great new power just after starting a long run, or randomly getting a power similar to one that you just spent a lot of power shards crafting.</p>
     <p>You should have the alert option on so that you can press O on another tab (like the powers tab) and get a brief description of the consequences of your powers. Note that with enough ticks, the oracle might take a few seconds to work (it will show a progress bar on the top of the screen during this time), but the more ticks you're using the more accurate the predictions will be (<span id="e1304"></span> ticks is usually enough, though).</p>
     <p>After <span id="e1305"></span> ℂP, Study 14 is by far more useful than the other fourth-row studies; the main benefit from other fourth-row studies is their small increase to the chroma cap. Change your Push study preset to 1,2,3,4,5,6,7,8,9,10,11,12&s3,10,3,3 to further prioritize Study 14.</p>
     <p>After <span id="e1306"></span> ℂP, the game largely consists of waiting for good enough powers (either via random generation or via crafting) to unlock galaxies. You'll probably need powers with rarities <span id="e1307"></span> to <span id="e1308"></span> to unlock galaxies. Even a <span id="e1309"></span> increase in rarity in <span id="e1310"></span> power is noticeable.</p>
     <p>How long unlocking powers to unlocking powers takes is variable, but <span id="e1311"></span> is a typical amount of time.</p>
   </div>
-  <div id="b43">
+  <div id="b31">
     <h3>Unlocking galaxies to finality</h3>
-    <p>This section is not written yet.</p>
+    <p>Unlocking galaxies give you autobuyers for complexity generators and power upgrades, so you don't need to buy those manually anymore. Due to needing to use CCC for theorems, however, auto-complexity is still not good.</p>
+    <p>More importantly, galaxies increase the chroma cap over time by raising it to a power, which starts at <span id="e1312"></span> and increases over each complexity to some cap based on how many galaxies you have. There are three main impacts this has on play. The first effect is to make long complexities better. This may make IEC better than whatever powers you're using. On the other hand, it might not. Use the Oracle to find out (using an amount of time roughly equal to the time galaxies take to cap). The second effect is to encourage getting more galaxies, which is almost but not exactly the same as making more general progress. CCC is good for getting galaxies because it gives you more total complexity stars, and IEC gains the additional advantage that your additional total eternity stars may give you another galaxy. Using more than <span id="e1313"></span> E is not worth it, however, because you then can't get as much EP which generally more than cancels out the additional power to EGs.</p>
+    <p>The third effect of galaxies on gameplay is the decision of how many galaxies to dilate. The galaxy power on chroma increases quicker the more dilated galaxies you have; the speed multiplier is (<span id="e1314"></span> + dilated galaxies)^<span id="e1315"></span>. However, dilated galaxies don't count towards increasing the cap, so if you dilate all your galaxies, then galaxies don't increase the chroma cap at all. (Thus dilating all your galaxies is a bad idea.) Generally dilating all but <span id="e1316"></span> (or, later, when you're near finality, all but <span id="e1317"></span>) of your galaxies is good if you're active. If you're idle or doing an overnight run, dilate fewer galaxies. (But once you have <span id="e1318"></span> galaxies or so, you should basically always dilate at least <span id="e1319"></span> galaxy no matter what.)</p>
+    <p>It's worth noting that after the first few galaxies, each galaxy increases the time for the galaxy effect power to reach its cap by more than the last (which is why dilating galaxies becomes basically necessary).</p>
+    <p>Galaxies also increase the strength of new powers somewhat, but this doesn't affect gameplay much qualitatively.</p>
+    <p>As for how long complexities should be, once you unlock galaxies you generally want to get the galaxy effect to its cap in each complexity. After roughly <span id="e1320"></span> ℂP, if you're using an eternity power (as you probably are), you probably want the eternity power extra multiplier to cap at <span id="e1321"></span>x also. (Ideally the galaxy effect and your eternity power cap at about the same time, but this is not very important.) This does not apply in challenges, which you should generally only be in for <span id="e1322"></span> to <span id="e1323"></span>, even if galaxies don't cap that quickly (as they almost surely won't). Since complexities with challenges are shorter, it might be better to use NNI or NII for challenges.</p>
+    <p>Note that after <span id="e1324"></span> ℂP, the eternity power extra multiplier will cap before the galaxy effect caps. If the galaxy effect caps first, you are probably dilating too many galaxies and should probably try dilating fewer.</p>
+    <p>Powers to use for getting ℂP are IEC initially, switching to IIE (or IEE if you have no good I or only one good I) at roughly <span id="e1325"></span> ℂP. For ℂC4, it's best to use NCC after roughly <span id="e1326"></span> ℂP (when you unlock galaxies) and to use CCC after roughly <span id="e1327"></span> ℂP.</p>
+  </div>
+  <div id="b32">
+    <h3>After finality</h3>
+    <p>This section of the guide is not written yet.</p>
   </div>
 </body>
 </html>

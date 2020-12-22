@@ -10,6 +10,7 @@
   <script src="../js/colors.js?time=%time%"></script>
   <script src="../js/format.js?time=%time%"></script>
   <script src="../js/options.js?time=%time%"></script>
+  <script src="../js/saving.js?time=%time%"></script>
   <script src="js/main.js?time=%time%"></script>
   <script src="js/tabs.js?time=%time%"></script>
   <script src="js/update-display.js?time=%time%"></script>
@@ -22,41 +23,24 @@
   <p>This guide divides the game into part based (more or less) on which of the ~i 16 ~ goals in the "Goals" tab have been accomplished so far.</p>
   <p>Note that this guide was written based on a playthrough which was very active and did not use offline progress. The times given are thus fairly close to minimum possible times.</p>
   <p>Show all guide parts: <input type="checkbox" ~!checked=temporarySettings.viewAll~ ~!onchange=function() {Tabs.setViewAll(this.checked)}~></input></p>
-  <span ~style.display=Tabs.displayTabRow(1) ? '' : 'none'~>
+  <div style="width: 1024px; margin-left: auto; margin-right: auto;">
     <button ~style.display=Tabs.isTabVisible(1) ? '' : 'none'~ onclick="Tabs.setTab(1)">Before sacrifice</button>
     <button ~style.display=Tabs.isTabVisible(2) ? '' : 'none'~ onclick="Tabs.setTab(2)">Sacrifice to prestige</button>
     <button ~style.display=Tabs.isTabVisible(3) ? '' : 'none'~ onclick="Tabs.setTab(3)">Prestige to infinity</button>
     <button ~style.display=Tabs.isTabVisible(4) ? '' : 'none'~ onclick="Tabs.setTab(4)">Infinity to breaking infinity</button>
-  </span>
-  <br ~style.display=Tabs.displayTabRow(2) ? '' : 'none'~/>
-  <span ~style.display=Tabs.displayTabRow(2) ? '' : 'none'~>
     <button ~style.display=Tabs.isTabVisible(5) ? '' : 'none'~ onclick="Tabs.setTab(5)">Breaking infinity to starting Infinity Challenge 1</button>
     <button ~style.display=Tabs.isTabVisible(6) ? '' : 'none'~ onclick="Tabs.setTab(6)">Starting Infinity Challenge 1 to eternity</button>
-  </span>
-  <br ~style.display=Tabs.displayTabRow(3) ? '' : 'none'~/>
-  <span ~style.display=Tabs.displayTabRow(3) ? '' : 'none'~>
     <button ~style.display=Tabs.isTabVisible(7) ? '' : 'none'~ onclick="Tabs.setTab(7)">Eternity to completing all eternity milestones</button>
     <button ~style.display=Tabs.isTabVisible(8) ? '' : 'none'~ onclick="Tabs.setTab(8)">Completing all eternity milestones to unlocking the Eternity Producer</button>
-  </span>
-  <br ~style.display=Tabs.displayTabRow(4) ? '' : 'none'~/>
-  <span ~style.display=Tabs.displayTabRow(4) ? '' : 'none'~>
     <button ~style.display=Tabs.isTabVisible(9) ? '' : 'none'~ onclick="Tabs.setTab(9)">Unlocking the Eternity Producer to starting Eternity Challenge 1</button>
     <button ~style.display=Tabs.isTabVisible(10) ? '' : 'none'~ onclick="Tabs.setTab(10)">Starting Eternity Challenge 1 to unlocking chroma</button>
-  </span>
-  <br ~style.display=Tabs.displayTabRow(5) ? '' : 'none'~/>
-  <span ~style.display=Tabs.displayTabRow(5) ? '' : 'none'~>
     <button ~style.display=Tabs.isTabVisible(11) ? '' : 'none'~ onclick="Tabs.setTab(11)">Unlocking chroma to complexity</button>
     <button ~style.display=Tabs.isTabVisible(12) ? '' : 'none'~ onclick="Tabs.setTab(12)">Complexity to completing all complexity achievements</button>
-  </span>
-  <br ~style.display=Tabs.displayTabRow(6) ? '' : 'none'~/>
-  <span ~style.display=Tabs.displayTabRow(6) ? '' : 'none'~>
     <button ~style.display=Tabs.isTabVisible(13) ? '' : 'none'~ onclick="Tabs.setTab(13)">Completing all complexity achievements to unlocking powers</button>
     <button ~style.display=Tabs.isTabVisible(14) ? '' : 'none'~ onclick="Tabs.setTab(14)">Unlocking powers to unlocking galaxies</button>
-  </span>
-  <br ~style.display=Tabs.displayTabRow(7) ? '' : 'none'~/>
-  <span ~style.display=Tabs.displayTabRow(7) ? '' : 'none'~>
     <button ~style.display=Tabs.isTabVisible(15) ? '' : 'none'~ onclick="Tabs.setTab(15)">Unlocking galaxies to finality</button>
-  </span>
+    <button ~style.display=Tabs.isTabVisible(16) ? '' : 'none'~ onclick="Tabs.setTab(16)">After finality</button>
+  </div>
   <tab ~style.display=Tabs.currentTab() === 1 ? '' : 'none'~>
     <h3>Before sacrifice</h3>
     <p>This part of the game is fairly simple. Start by clicking the "Main" button to go to the main tab, if you haven't already. Then buy a Generator 1 for the cost of ~i 2 ~ stars. Other generators will become affordable over time. You can hold down M to buy max of all generators. The way generators work is very simple. Each generator produces the one before it, except the first which produces stars. Buying more of a generator increases a multiplier to its production, by ~f Math.pow(2, 1 / 8) ~x per purchase.</p>
@@ -918,7 +902,7 @@
     <p>The most important power shard upgrades to buy are those for powers you use the most of. However, you should generally keep all power shard upgrade costs for power types you use at all within a factor of ~i 2 ~ of each other (in this phase, those power types are likely at least everything but eternity, and also eternity if you're idle).</p>
     <p>Crafting powers is sometimes useful, especially if you feel like fewer than expected of the random powers you're getting are good. Crafting lets you create powers of a given type and rarity, for a cost in power shards. In this phase of the game, crafting is on average slightly less efficient than waiting for random powers, but of course this depends on which random powers you're going to get. Generally, crafting normal powers is best in this part of the game, but right before unlocking galaxies crafting an infinity power becomes perhaps slightly better (especially if you're not using any infinity powers), and if you're very idle crafting an eternity power might be worth it.</p>
     <p>As suggested by the suggestions above for what types of power to craft, when you're trying to get more ℂP, NNN (all normal) is generally best (unless you're using an E (eternity power) as described above), with NNI becoming good near galaxy unlock or if you get a great infinity power, and NII or III being good if your infinity powers are extremely good compared to your normal powers. IEC and NEC are good powers to use if you're using an eternity power, since the C gives you more complexity stars and makes the E build up faster.</p>
-    <p>In ℂC4 specifically, NNC or (if you have no good C) NNN is good. Note that ℂC4 completions are very important.</p>
+    <p>In ℂC4 specifically, NNC or (if you have no good C) NNN is good. Note that ℂC4 completions are very important. It may be worth creating a preset.</p>
     <p>The Oracle is a very useful feature, even though it only gives you information. It lets you know roughly what your game state will be in the future. It has two main usages. One usage is comparing sets of powers without actually doing long complexities with then (this is especially important for eternity powers since they take time to become good and you don't want to waste that time if in fact they're not good). The other usage is seeing what powers you're going to get and when, so you can plan accordingly and can avoid getting a great new power just after starting a long run, or randomly getting a power similar to one that you just spent a lot of power shards crafting.</p>
     <p>You should have the alert option on so that you can press O on another tab (like the powers tab) and get a brief description of the consequences of your powers. Note that with enough ticks, the oracle might take a few seconds to work (it will show a progress bar on the top of the screen during this time), but the more ticks you're using the more accurate the predictions will be (~i 1024 ~ ticks is usually enough, though).</p>
     <p>After ~i Math.pow(2, 256) ~ ℂP, Study 14 is by far more useful than the other fourth-row studies; the main benefit from other fourth-row studies is their small increase to the chroma cap. Change your Push study preset to 1,2,3,4,5,6,7,8,9,10,11,12&s3,10,3,3 to further prioritize Study 14.</p>
@@ -927,7 +911,18 @@
   </tab>
   <tab ~style.display=Tabs.currentTab() === 15 ? '' : 'none'~>
     <h3>Unlocking galaxies to finality</h3>
-    <p>This section is not written yet.</p>
+    <p>Unlocking galaxies give you autobuyers for complexity generators and power upgrades, so you don't need to buy those manually anymore. Due to needing to use CCC for theorems, however, auto-complexity is still not good.</p>
+    <p>More importantly, galaxies increase the chroma cap over time by raising it to a power, which starts at ~i 1 ~ and increases over each complexity to some cap based on how many galaxies you have. There are three main impacts this has on play. The first effect is to make long complexities better. This may make IEC better than whatever powers you're using. On the other hand, it might not. Use the Oracle to find out (using an amount of time roughly equal to the time galaxies take to cap). The second effect is to encourage getting more galaxies, which is almost but not exactly the same as making more general progress. CCC is good for getting galaxies because it gives you more total complexity stars, and IEC gains the additional advantage that your additional total eternity stars may give you another galaxy. Using more than ~i 1 ~ E is not worth it, however, because you then can't get as much EP which generally more than cancels out the additional power to EGs.</p>
+    <p>The third effect of galaxies on gameplay is the decision of how many galaxies to dilate. The galaxy power on chroma increases quicker the more dilated galaxies you have; the speed multiplier is (~i 1 ~ + dilated galaxies)^~i 2 ~. However, dilated galaxies don't count towards increasing the cap, so if you dilate all your galaxies, then galaxies don't increase the chroma cap at all. (Thus dilating all your galaxies is a bad idea.) Generally dilating all but ~i 1 ~ (or, later, when you're near finality, all but ~i 2 ~) of your galaxies is good if you're active. If you're idle or doing an overnight run, dilate fewer galaxies. (But once you have ~i 4 ~ galaxies or so, you should basically always dilate at least ~i 1 ~ galaxy no matter what.)</p>
+    <p>It's worth noting that after the first few galaxies, each galaxy increases the time for the galaxy effect power to reach its cap by more than the last (which is why dilating galaxies becomes basically necessary).</p>
+    <p>Galaxies also increase the strength of new powers somewhat, but this doesn't affect gameplay much qualitatively.</p>
+    <p>As for how long complexities should be, once you unlock galaxies you generally want to get the galaxy effect to its cap in each complexity. After roughly ~i Decimal.pow(2, 2048) ~ ℂP, if you're using an eternity power (as you probably are), you probably want the eternity power extra multiplier to cap at ~i 3 ~x also. (Ideally the galaxy effect and your eternity power cap at about the same time, but this is not very important.) This does not apply in challenges, which you should generally only be in for ~ts 120 ~ to ~ts 180 ~, even if galaxies don't cap that quickly (as they almost surely won't). Since complexities with challenges are shorter, it might be better to use NNI or NII for challenges.</p>
+    <p>Note that after ~i Decimal.pow(2, 1.5 * Math.pow(2, 14)) ~ ℂP, the eternity power extra multiplier will cap before the galaxy effect caps. If the galaxy effect caps first, you are probably dilating too many galaxies and should probably try dilating fewer.</p>
+    <p>Powers to use for getting ℂP are IEC initially, switching to IIE (or IEE if you have no good I or only one good I) at roughly ~i Decimal.pow(2, 4096) ~ ℂP. For ℂC4, it's best to use NCC after roughly ~i Decimal.pow(2, 1024) ~ ℂP (when you unlock galaxies) and to use CCC after roughly ~i Decimal.pow(2, 8192) ~ ℂP.</p>
+  </tab>
+  <tab ~style.display=Tabs.currentTab() === 16 ? '' : 'none'~>
+    <h3>After finality</h3>
+    <p>This section of the guide is not written yet.</p>
   </tab>
 </body>
 </html>
