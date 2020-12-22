@@ -101,6 +101,17 @@ let Options = {
   largerCheckboxes() {
     return player.options.largerCheckboxes;
   },
+  rawViewAllGenerators(type) {
+    return player.options.viewAllGenerators[type];
+  },
+  setRawViewAllGenerators(type, x) {
+    player.options.viewAllGenerators[type] = x;
+  },
+  actualViewAllGenerators(type) {
+    // This is trivally true for every type other than normal. Still worth having
+    // in case the condition changes.
+    return PrestigeLayerProgress.hasReached('infinity') && this.rawViewAllGenerators(type);
+  },
   toggleLargerCheckboxes() {
     player.options.largerCheckboxes = !player.options.largerCheckboxes;
     this.updateCheckboxSize();

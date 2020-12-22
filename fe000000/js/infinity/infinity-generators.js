@@ -70,7 +70,7 @@ let InfinityGenerator = function (i) {
       return (i < 8) ? InfinityGenerator(i + 1).productionPerSecond() : new Decimal(0);
     },
     isVisible() {
-      return i <= player.highestInfinityGenerator + 1;
+      return i <= player.highestInfinityGenerator + 1 || Options.actualViewAllGenerators('infinity');
     },
     canBuy(n) {
       if (n === undefined) {

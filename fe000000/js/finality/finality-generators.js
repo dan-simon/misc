@@ -54,7 +54,7 @@ let FinalityGenerator = function (i) {
       return (i < 8) ? FinalityGenerator(i + 1).productionPerSecond() : new Decimal(0);
     },
     isVisible() {
-      return i <= player.highestFinalityGenerator + 1;
+      return i <= player.highestFinalityGenerator + 1 || Options.actualViewAllGenerators('finality');
     },
     canBuy(n) {
       if (n === undefined) {

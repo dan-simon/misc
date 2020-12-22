@@ -891,6 +891,18 @@ let Saving = {
       player.oracle.showWaitsFromPastTime = true;
       player.version = 1.9892578125;
     }
+    if (player.version < 1.990234375) {
+      // Note that player.options.viewAllGenerators.normal is true by default,
+      // and is intended to be true by default.
+      player.options.viewAllGenerators = {
+        normal: player.options.viewAllGenerators,
+        infinity: false,
+        eternity: false,
+        complexity: false,
+        finality: false,
+      };
+      player.version = 1.990234375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

@@ -69,7 +69,7 @@ let EternityGenerator = function (i) {
       return (i < 8) ? EternityGenerator(i + 1).productionPerSecond() : new Decimal(0);
     },
     isVisible() {
-      return i <= player.highestEternityGenerator + 1;
+      return i <= player.highestEternityGenerator + 1 || Options.actualViewAllGenerators('eternity');
     },
     canBuy(n) {
       if (n === undefined) {

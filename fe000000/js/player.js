@@ -344,7 +344,13 @@ let initialPlayer = {
     },
     fitToWidth: true,
     largerCheckboxes: false,
-    viewAllGenerators: true,
+    viewAllGenerators: {
+      normal: true,
+      infinity: false,
+      eternity: false,
+      complexity: false,
+      finality: false,
+    },
     viewGeneratorsWhenStarsAtLimit: false,
     showGeneratorAndBoostAutobuyers: true,
     headerSettings: {
@@ -437,7 +443,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9892578125
+  version: 1.990234375
 }
 
 let player;

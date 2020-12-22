@@ -58,7 +58,7 @@ let ComplexityGenerator = function (i) {
       return (i < 8) ? ComplexityGenerator(i + 1).productionPerSecond() : new Decimal(0);
     },
     isVisible() {
-      return i <= player.highestComplexityGenerator + 1;
+      return i <= player.highestComplexityGenerator + 1 || Options.actualViewAllGenerators('complexity');
     },
     canBuy(n) {
       if (n === undefined) {

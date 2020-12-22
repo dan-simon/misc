@@ -217,7 +217,7 @@
         <div ~style.display=Boost.isBestBoostPowerVisible() ? '' : 'none'~>
           <span>Your ~r Boost.bestBoostPowerDescription() ~ is ~f Boost.bestBoostPower() ~ (giving ~i Boost.extraTheoremsActualAndDisplay() ~ extra theorem~s Boost.extraTheoremsActualAndDisplay() ~, next at ~f Boost.nextExtraTheorem() ~).</span>
         </div>
-        <span ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~>View all ~r Generators.term() ~ even if they would be otherwise invisible: <input type="checkbox" ~!checked=Generators.rawViewAll()~ ~!onchange=function() {Generators.setRawViewAll(this.checked)}~></input></span> 
+        <span ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~>View all ~r Generators.term() ~ even if they would be otherwise invisible: <input type="checkbox" ~!checked=Options.rawViewAllGenerators('normal')~ ~!onchange=function() {Options.setRawViewAllGenerators('normal', this.checked)}~></input></span>
         <br/>
         <br/>
         <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
@@ -337,6 +337,8 @@
       <span>You have ~f InfinityStars.amount() ~ infinity stars, multiplying all ~r Generators.term() ~ by their amount^~f InfinityStars.exponent() ~ = ~f InfinityStars.multiplier() ~.</span>
       <br/>
       <span>You are getting ~f InfinityStars.perSecond() ~ infinity stars per second.</span>
+      <br/>
+      <span>View all infinity generators even if they would be otherwise invisible: <input type="checkbox" ~!checked=Options.rawViewAllGenerators('infinity')~ ~!onchange=function() {Options.setRawViewAllGenerators('infinity', this.checked)}~></input></span>
       <br/>
       <br/>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
@@ -1243,6 +1245,8 @@
       <span>and raising all normal and infinity generator multipliers ^~r formatWithPrecision(EternityStars.power(), 5) ~.</span>
       <br/>
       <span>You are getting ~f EternityStars.perSecond() ~ eternity stars per second.</span>
+      <br/>
+      <span>View all eternity generators even if they would be otherwise invisible: <input type="checkbox" ~!checked=Options.rawViewAllGenerators('eternity')~ ~!onchange=function() {Options.setRawViewAllGenerators('eternity', this.checked)}~></input></span>
       <br/>
       <br/>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
@@ -3055,6 +3059,8 @@
         <span>used for Complexity Challenge 6 reward strength and complexity star factor.</span>
       </div>
       <br ~style.display=FinalityMilestones.isFinalityMilestoneActive(5) ? 'none' : ''~/>
+      <span>View all complexity generators even if they would be otherwise invisible: <input type="checkbox" ~!checked=Options.rawViewAllGenerators('complexity')~ ~!onchange=function() {Options.setRawViewAllGenerators('complexity', this.checked)}~></input></span>
+      <br/>
       <br/>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr ~style.display=ComplexityGenerator(1).isVisible() ? '' : 'none'~>
@@ -4476,6 +4482,8 @@
       <br/>
       <span>You are getting ~f FinalityStars.perSecond() ~ finality stars per second.</span>
       <br/>
+      <span>View all finality generators even if they would be otherwise invisible: <input type="checkbox" ~!checked=Options.rawViewAllGenerators('finality')~ ~!onchange=function() {Options.setRawViewAllGenerators('finality', this.checked)}~></input></span>
+      <br/>
       <br/>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr ~style.display=FinalityGenerator(1).isVisible() ? '' : 'none'~>
@@ -5399,7 +5407,7 @@
           <span ~style.display=Tabs.isTabOptionVisible('goals') ? '' : 'none'~>Goals: <input class="goals-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('goals')~ ~!onchange=function() {Tabs.setTabOption('goals', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
           <span ~style.display=Tabs.isTabOptionVisible('statistics') ? '' : 'none'~>Statistics: <input class="statistics-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('statistics')~ ~!onchange=function() {Tabs.setTabOption('statistics', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
           <span ~style.display=Tabs.isTabOptionVisible('last-ten-runs') ? '' : 'none'~>Last Ten Runs: <input class="last-ten-runs-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('last-ten-runs')~ ~!onchange=function() {Tabs.setTabOption('last-ten-runs', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span ~style.display=Tabs.isTabOptionVisible('options') ? '' : 'none'~>Options: cannot be hidden</span> 
+          <span ~style.display=Tabs.isTabOptionVisible('options') ? '' : 'none'~>Options: cannot be hidden</span>
         </span>
       </div>
       <div ~style.display=Tabs.isTabOptionVisible('eternity') ? '' : 'none'~>
