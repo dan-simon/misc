@@ -79,12 +79,14 @@ let Boost = {
   isNotBuyableAtAll() {
     // This function is a bit misleadingly named. It checks if there's some condition making boosts completely unbuyable
     // independent of how many stars you have.
-    return !this.isVisible() || Stars.atLimit() || !Generators.anyGenerators() || ComplexityChallenge.isSafeguardOn(2);
+    return !this.isVisible() || Stars.atLimit() || ComplexityChallenge.isSafeguardOn(2);
   },
   maxBuyable() {
-    if (this.isNotBuyableAtAll()) return 0;
+    if (this.isNotBuyableAtAll() || player.stars.minus(this.cost()).lt(Stars.requiredUnspent())) return 0;
     let num = Math.floor(Math.pow(player.stars.max(1).log(2) / this.costSlowdown(), 1 / this.costPower()) / this.costSkip() - this.costStart() + 1) - this.bought();
-    if (player.stars.lt(this.costFor(num))) {
+    // We could use safeMinus here in theory, but the cost calculation should be as accurate as possible.
+    // Cost increases quickly enough that we don't even get close to needing to decrease cost by more than 1.
+    if (player.stars.minus(this.costFor(num)).lt(Stars.requiredUnspent())) {
       num -= 1;
     }
     num = Math.min(num, Challenge.isChallengeEffectActive(7) ? Challenge.challenge7PurchasesLeft() : Infinity,

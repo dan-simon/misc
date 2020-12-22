@@ -22,7 +22,8 @@ let Autobuyer = function (i) {
       return i <= 9 && this.hasAutobuyer() && !Challenge.isChallengeCompleted(i);
     },
     canUnlockSlow() {
-      return i <= 9 && Generators.anyGenerators() && !this.hasAutobuyer() && player.stars.gte(this.unlockSlowCost());
+      // As with boosts, we could use safeMinus here in theory, but the cost calculation should be as accurate as possible.
+      return i <= 9 && !this.hasAutobuyer() && player.stars.minus(this.unlockSlowCost()).gte(Stars.requiredUnspent());
     },
     unlockSlow() {
       if (!this.canUnlockSlow()) return;

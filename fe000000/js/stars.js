@@ -25,6 +25,9 @@ let Stars = {
       return 'universe has';
     }
   },
+  requiredUnspent() {
+    return Generators.anyGenerators() ? new Decimal(0) : new Decimal(2);
+  },
   setAmount(x, newLimit) {
     player.stars = x.min((newLimit === null) ? this.limit() : newLimit);
   },
