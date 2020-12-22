@@ -903,6 +903,10 @@ let Saving = {
       };
       player.version = 1.990234375;
     }
+    if (player.version < 1.9912109375) {
+      player.complexityChallengeLastCompletion = player.complexityChallengeLastCompletion.map(i => [i[0], i[2]]);
+      player.version = 1.9912109375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

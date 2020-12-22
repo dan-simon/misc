@@ -88,11 +88,11 @@ let ComplexityChallenge = {
     return this.getComplexityChallengeCompletions(x) > 0;
   },
   complexityChallengeLastCompletionDescription(x) {
-    if (player.complexityChallengeLastCompletion[x - 1][1] < Finalities.amount()) {
+    if (player.complexityChallengeLastCompletion[x - 1][0] < 0) {
       return 'Not completed this finality';
     } else {
       let complexities = Complexities.amount() - player.complexityChallengeLastCompletion[x - 1][0];
-      let times = player.complexityChallengeLastCompletion[x - 1][2];
+      let times = player.complexityChallengeLastCompletion[x - 1][1];
       if (complexities === 0) {
         return 'Completed ' + formatInt(times) + ' time' + pluralize(times, '', 's') + ' this complexity'
       } else {
@@ -112,9 +112,8 @@ let ComplexityChallenge = {
     if (player.complexityChallengeCompletions[x - 1] < completions) {
       let lastData = player.complexityChallengeLastCompletion[x - 1];
       let extra = completions - player.complexityChallengeCompletions[x - 1];
-      let current = (lastData[0] === Complexities.amount() &&
-        lastData[1] === Finalities.amount()) ? lastData[2] : 0;
-      player.complexityChallengeLastCompletion[x - 1] = [Complexities.amount(), Finalities.amount(), current + extra];
+      let current = lastData[0] === Complexities.amount() ? lastData[1] : 0;
+      player.complexityChallengeLastCompletion[x - 1] = [Complexities.amount(), current + extra];
     }
     player.complexityChallengeCompletions[x - 1] = Math.max(player.complexityChallengeCompletions[x - 1], completions);
   },

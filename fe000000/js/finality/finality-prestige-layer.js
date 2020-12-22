@@ -128,6 +128,7 @@ let FinalityPrestigeLayer = {
     player.highestComplexityGenerator = 0;
     player.complexityChallengeCompletions = player.complexityChallengeCompletions.map(
       x => Math.min(x, FinalityMilestones.keptComplexityChallenges()));
+    player.complexityChallengeLastCompletion = [[-1, -1], [-1, -1], [-1, -1], [-1, -1], [-1, -1], [-1, -1]];
     // Reset the power preset index before going further.
     player.lastPresetIndices[2] = 0;
     // We keep hasGainedShards for the same reason we keep hasGainedPermanence in complexity;
