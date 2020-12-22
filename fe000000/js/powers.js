@@ -396,12 +396,20 @@ let Powers = {
       return 'Multiplier ' + format(this.preExtraMultiplier(power)) + 'x (total ' + format(this.getOverallMultiplier(power)) + ')';
     }
   },
+  getWait(power) {
+    if (Oracle.showWaitsFromPastTime()) {
+      return power.time - player.stats.timeSinceGameStart;
+    } else {
+      return power.wait;
+    }
+  },
   descriptionWait(type, i) {
     if (this.canAccessPower(type, i)) {
       let power = this.accessPower(type, i);
-      if (power.wait > 0) {
-        return 'Produced after ' + formatTime(power.wait, {seconds: {f: format, s: false}, larger: {f: format, s: false}});
-      } else if (power.wait === 0) {
+      let wait = this.getWait(power);
+      if (wait > 0) {
+        return 'Produced after ' + formatTime(wait, {seconds: {f: format, s: false}, larger: {f: format, s: false}});
+      } else if (wait === 0) {
         return 'Produced immediately';
       } else {
         return 'Already produced';

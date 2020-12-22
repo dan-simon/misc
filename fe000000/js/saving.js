@@ -887,6 +887,10 @@ let Saving = {
       player.oracle.activePowers = [];
       player.version = 1.98828125;
     }
+    if (player.version < 1.9892578125) {
+      player.oracle.showWaitsFromPastTime = true;
+      player.version = 1.9892578125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

@@ -247,6 +247,7 @@ let initialPlayer = {
     powerGainInPredictions: 'Same',
     powerDisplay: true,
     powerFutureExtraMultipliers: true,
+    showWaitsFromPastTime: true,
     activePowers: [],
     powers: [],
     extraMultipliers: {
@@ -436,7 +437,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.98828125
+  version: 1.9892578125
 }
 
 let player;

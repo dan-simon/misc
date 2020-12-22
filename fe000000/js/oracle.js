@@ -50,6 +50,9 @@ let Oracle = {
   powerFutureExtraMultipliers() {
     return player.oracle.powerFutureExtraMultipliers;
   },
+  showWaitsFromPastTime() {
+    return player.oracle.showWaitsFromPastTime;
+  },
   powers() {
     return player.oracle.powers;
   },
@@ -70,7 +73,10 @@ let Oracle = {
     player.oracle.powerGainInPredictions = settings[(settings.indexOf(player.oracle.powerGainInPredictions) + 1) % 3]
   },
   togglePowerFutureExtraMultipliers() {
-    player.oracle.powerFutureExtraMultipliers= !player.oracle.powerFutureExtraMultipliers;
+    player.oracle.powerFutureExtraMultipliers = !player.oracle.powerFutureExtraMultipliers;
+  },
+  toggleShowWaitsFromPastTime() {
+    player.oracle.showWaitsFromPastTime = !player.oracle.showWaitsFromPastTime;
   },
   setTime(x) {
     player.oracle.time = x || 0;
