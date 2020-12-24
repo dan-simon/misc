@@ -370,7 +370,7 @@ input[type=checkbox] {
 }
 
 .purplespan, .purplediv > span {
-  color: #6633cc;
+  color: #aa99ff;
 }
 
 .orangespan, .orangediv > span {
@@ -410,7 +410,7 @@ input[type=checkbox] {
 }
 
 .chromacurrentpurplediv {
-  background: radial-gradient(var(--background-color), var(--background-color) 75%, #6633cc);
+  background: radial-gradient(var(--background-color), var(--background-color) 75%, #aa99ff);
 }
 
 .chromanextpurplediv {
@@ -457,7 +457,7 @@ input[type=checkbox] {
 }
 
 .greytopurple {
-   background-image: linear-gradient(to right, #aaaaaa, #6633cc);
+   background-image: linear-gradient(to right, #aaaaaa, #aa99ff);
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;
@@ -478,28 +478,28 @@ input[type=checkbox] {
 }
 
 .purpletogrey {
-   background-image: linear-gradient(to right, #6633cc, #aaaaaa);
+   background-image: linear-gradient(to right, #aa99ff, #aaaaaa);
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;
 }
 
 .purpletopurple {
-   background-image: linear-gradient(to right, #6633cc, #6633cc);
+   background-image: linear-gradient(to right, #aa99ff, #aa99ff);
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;
 }
 
 .purpletoorange {
-   background-image: linear-gradient(to right, #6633cc, #ff9933);
+   background-image: linear-gradient(to right, #aa99ff, #ff9933);
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;
 }
 
 .purpletogreen {
-   background-image: linear-gradient(to right, #6633cc, #33ff33);
+   background-image: linear-gradient(to right, #aa99ff, #33ff33);
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;
@@ -513,7 +513,7 @@ input[type=checkbox] {
 }
 
 .orangetopurple {
-   background-image: linear-gradient(to right, #ff9933, #6633cc);
+   background-image: linear-gradient(to right, #ff9933, #aa99ff);
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;
@@ -541,7 +541,7 @@ input[type=checkbox] {
 }
 
 .greentopurple {
-   background-image: linear-gradient(to right, #33ff33, #6633cc);
+   background-image: linear-gradient(to right, #33ff33, #aa99ff);
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;
