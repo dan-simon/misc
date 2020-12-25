@@ -165,6 +165,9 @@ let EternityChallenge = {
     }
     return 1;
   },
+  getTotalCompletionsRewardClass(x) {
+    return Colors.rewardClass(this.isTotalCompletionsRewardActive(x));
+  },
   extraTheoremsRaw() {
     return this.getTotalEternityChallengeCompletions();
   },

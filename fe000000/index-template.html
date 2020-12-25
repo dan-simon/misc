@@ -2632,35 +2632,35 @@
         <button onclick="EternityChallenge.toggleAutoECCompletion()">Auto-EC completion: ~r EternityChallenge.isAutoECCompletionOn() ? "On" : "Off" ~</button>
       </div>
       <br ~style.display=EternityChallenge.showAutoECCompletion() ? 'none' : ''~/>
-      <span>
+      <span ~class=EternityChallenge.getTotalCompletionsRewardClass(1)~>
         At ~i EternityChallenge.getTotalCompletionsRewardThreshold(1) ~ total eternity challenge tiers completed:
       </span>
       <br/>
-      <span>
+      <span ~class=EternityChallenge.getTotalCompletionsRewardClass(1)~>
         Multiplier to boost power gain based on eternity challenge tiers completed (~q EternityChallenge.getTotalCompletionsRewardRawEffect(1) ~)
       </span>
       <br/>
-      <span>
+      <span ~class=EternityChallenge.getTotalCompletionsRewardClass(2)~>
         At ~i EternityChallenge.getTotalCompletionsRewardThreshold(2) ~ total eternity challenge tiers completed:
       </span>
       <br/>
-      <span>
+      <span ~class=EternityChallenge.getTotalCompletionsRewardClass(2)~>
         Multiplier to eternity gain based on eternity challenge tiers completed (~q EternityChallenge.getTotalCompletionsRewardRawEffect(2) ~)
       </span>
       <br/>
-      <span>
+      <span ~class=EternityChallenge.getTotalCompletionsRewardClass(3)~>
         At ~i EternityChallenge.getTotalCompletionsRewardThreshold(3) ~ total eternity challenge tiers completed:
       </span>
       <br/>
-      <span>
+      <span ~class=EternityChallenge.getTotalCompletionsRewardClass(3)~>
         You gain your infinity points on infinity every second, without needing to infinity (IP generation)<span ~style.display=PrestigeLayerProgress.hasReached('complexity') ? 'none' : ''~>, and you can view the Chroma tab</span>.
       </span>
       <br/>
-      <span>
+      <span ~class=EternityChallenge.getTotalCompletionsRewardClass(4)~>
         At ~i EternityChallenge.getTotalCompletionsRewardThreshold(4) ~ total eternity challenge tiers completed:
       </span>
       <br/>
-      <span>
+      <span ~class=EternityChallenge.getTotalCompletionsRewardClass(4)~>
         ~r EternityChallenge.eternityChallengeTotalCompletionsReward4Text() ~
       </span>
       <br ~style.display=EternityChallenge.canRespec() ? '' : 'none'~/>
@@ -3325,35 +3325,35 @@
         You have unlocked ~i ComplexityAchievements.getTotalAchievementsUnlocked() ~ complexity achievement~s ComplexityAchievements.getTotalAchievementsUnlocked() ~.
       </span>
       <br/>
-      <span>
+      <span ~class=ComplexityAchievements.getAchievementsUnlockedRewardClass(1)~>
         At ~i ComplexityAchievements.getAchievementsUnlockedRewardThreshold(1) ~ complexity achievements unlocked:
       </span>
       <br/>
-      <span>
+      <span ~class=ComplexityAchievements.getAchievementsUnlockedRewardClass(1)~>
          You start each ~r PrestigeLayerNames.layersAbove('complexity') ~ with EP equal to your highest-ever number of boosts (~i ComplexityAchievements.getAchievementsUnlockedRewardRawEffect(1) ~)
       </span>
       <br/>
-      <span>
+      <span ~class=ComplexityAchievements.getAchievementsUnlockedRewardClass(2)~>
         At ~i ComplexityAchievements.getAchievementsUnlockedRewardThreshold(2) ~ complexity achievements unlocked:
       </span>
       <br/>
-      <span>
+      <span ~class=ComplexityAchievements.getAchievementsUnlockedRewardClass(2)~>
         Multiplier to eternity gain based on complexity achievements unlocked (~q ComplexityAchievements.getAchievementsUnlockedRewardRawEffect(2) ~)
       </span>
       <br/>
-      <span>
+      <span ~class=ComplexityAchievements.getAchievementsUnlockedRewardClass(3)~>
         At ~i ComplexityAchievements.getAchievementsUnlockedRewardThreshold(3) ~ complexity achievements unlocked:
       </span>
       <br/>
-      <span>
+      <span ~class=ComplexityAchievements.getAchievementsUnlockedRewardClass(3)~>
         Unlock a new color of chroma.
       </span>
       <br/>
-      <span>
+      <span ~class=ComplexityAchievements.getAchievementsUnlockedRewardClass(4)~>
         At ~i ComplexityAchievements.getAchievementsUnlockedRewardThreshold(4) ~ complexity achievements unlocked:
       </span>
       <br/>
-      <span>
+      <span ~class=ComplexityAchievements.getAchievementsUnlockedRewardClass(4)~>
         You start each ~r PrestigeLayerNames.layersAbove('complexity') ~ with ~f ComplexityAchievements.getAchievementsUnlockedRewardRawEffect(4) ~ EP, and you get a complexity autobuyer.
       </span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">

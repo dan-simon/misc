@@ -104,5 +104,9 @@ let Colors = {
     } else {
       return 'linear-gradient(90deg, ' + colorType.map(x => this.stringToColorCode[Options.buttonColor()][x]).join(', ') + ')';
     }
+  },
+  rewardClass(hasReward) {
+    if (player.options.completionColors === 'Off') return '';
+    return hasReward ? 'greenspan' : 'redspan';
   }
 }

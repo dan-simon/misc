@@ -145,6 +145,9 @@ let ComplexityAchievements = {
     }
     return [new Decimal(0), 1, null, new Decimal(0)][x - 1];
   },
+  getAchievementsUnlockedRewardClass(x) {
+    return Colors.rewardClass(this.isAchievementsUnlockedRewardActive(x));
+  },
   startingEternityPoints() {
     return this.getAchievementsUnlockedRewardEffect(1).add(this.getAchievementsUnlockedRewardEffect(4));
   },
