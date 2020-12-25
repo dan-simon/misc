@@ -158,6 +158,9 @@ let Tabs = {
     player.tabPresets[x - 1].tabs = shownTabs;
   },
   presetSetToCurrentTabs(x) {
+    if (Options.confirmation('presetChange') && !confirm('Are you sure you want to change this tab preset?')) {
+      return;
+    }
     this.setPresetTabs(x, this.exportString());
     this.redisplayPresetTabs(x);
   },
@@ -183,6 +186,9 @@ let Tabs = {
     this.setLastPresetIndex(x);
   },
   presetDelete(x) {
+    if (Options.confirmation('presetDeletion') && !confirm('Are you sure you want to delete this tab preset?')) {
+      return;
+    }
     player.tabPresets = player.tabPresets.slice(0, x - 1).concat(player.tabPresets.slice(x));
     this.updateLastPresetIndexFromDeletion(x);
     for (let i = x; i <= player.tabPresets.length; i++) {

@@ -627,6 +627,9 @@ let Studies = {
     player.presets[x - 1].studies = studyList;
   },
   presetSetToCurrentStudies(x) {
+    if (Options.confirmation('presetChange') && !confirm('Are you sure you want to change this study preset?')) {
+      return;
+    }
     this.setPresetStudyList(x, this.exportString());
     this.redisplayPresetStudyList(x);
   },
@@ -653,6 +656,9 @@ let Studies = {
     this.setLastPresetIndex(x);
   },
   presetDelete(x) {
+    if (Options.confirmation('presetDeletion') && !confirm('Are you sure you want to delete this study preset?')) {
+      return;
+    }
     player.presets = player.presets.slice(0, x - 1).concat(player.presets.slice(x));
     this.updateLastPresetIndexFromDeletion(x);
     for (let i = x; i <= player.presets.length; i++) {

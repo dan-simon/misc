@@ -736,6 +736,9 @@ let Powers = {
     player.powers.presets[x - 1].powers = activePowers;
   },
   presetSetToCurrentPowers(x) {
+    if (Options.confirmation('presetChange') && !confirm('Are you sure you want to change this power preset?')) {
+      return;
+    }
     this.setPresetPowerList(x, this.exportString());
     this.redisplayPresetPowerList(x);
   },
@@ -762,6 +765,9 @@ let Powers = {
     this.setLastPresetIndex(x);
   },
   presetDelete(x) {
+    if (Options.confirmation('presetDeletion') && !confirm('Are you sure you want to delete this power preset?')) {
+      return;
+    }
     player.powers.presets = player.powers.presets.slice(0, x - 1).concat(player.powers.presets.slice(x));
     this.updateLastPresetIndexFromDeletion(x);
     for (let i = x; i <= player.powers.presets.length; i++) {

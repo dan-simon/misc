@@ -378,6 +378,8 @@ let initialPlayer = {
     eternityChallengeRespec: true,
     powersRespec: true,
     finalityShardUpgradesRespec: true,
+    presetChange: true,
+    presetDeletion: true,
   },
   stats: {
     totalStarsProduced: new Decimal(0),
@@ -448,7 +450,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9931640625
+  version: 1.994140625
 }
 
 let player;

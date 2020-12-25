@@ -238,6 +238,9 @@ let FinalityShardPresets = {
     player.finalityShardUpgradePresets[x - 1].upgrades = finalityShardUpgrades;
   },
   presetSetToCurrentFinalityShardUpgrades(x) {
+    if (Options.confirmation('presetChange') && !confirm('Are you sure you want to change this finality preset?')) {
+      return;
+    }
     this.setPresetFinalityShardUpgradeList(x, this.exportString());
     this.redisplayPresetFinalityShardUpgradeList(x);
   },
@@ -264,6 +267,9 @@ let FinalityShardPresets = {
     this.setLastPresetIndex(x);
   },
   presetDelete(x) {
+    if (Options.confirmation('presetDeletion') && !confirm('Are you sure you want to delete this finality preset?')) {
+      return;
+    }
     player.finalityShardUpgradePresets = player.finalityShardUpgradePresets.slice(0, x - 1).concat(
       player.finalityShardUpgradePresets.slice(x));
     this.updateLastPresetIndexFromDeletion(x);

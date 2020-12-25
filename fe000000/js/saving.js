@@ -924,6 +924,11 @@ let Saving = {
       };
       player.version = 1.9931640625;
     }
+    if (player.version < 1.994140625) {
+      player.confirmations.presetChange = true;
+      player.confirmations.presetDeletion = true;
+      player.version = 1.994140625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
