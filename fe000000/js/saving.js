@@ -929,6 +929,10 @@ let Saving = {
       player.confirmations.presetDeletion = true;
       player.version = 1.994140625;
     }
+    if (player.version < 1.9951171875) {
+      player.stats.timeSinceOraclePrediction = 0;
+      player.version = 1.9951171875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

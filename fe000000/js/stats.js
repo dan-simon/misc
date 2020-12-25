@@ -5,10 +5,12 @@ let Stats = {
     player.stats.timeSincePrestige += diff;
     player.stats.timeSinceInfinity += diff;
     player.stats.timeSinceEternity += diff;
+    player.stats.timeSinceComplexity += diff;
     player.stats.timeSinceFinality += diff;
     player.stats.timeSinceAutoECCompletion += diff;
     player.stats.timeSincePermanenceGain += diff;
-    player.stats.timeSinceComplexity += diff;
+    player.stats.timeSincePowerGain += diff;
+    player.stats.timeSinceOraclePrediction += diff;
     player.stats.timeSinceGameStart += diff;
     player.stats.timeSinceLastPeakIPPerSec += diff;
     player.stats.timeSinceLastPeakEPPerSec += diff;
@@ -21,7 +23,6 @@ let Stats = {
     player.stats.timeSinceIPGainWasTotal += diff;
     player.stats.timeSinceEPGainWasTotal += diff;
     player.stats.timeSinceCPGainWasTotal += diff;
-    player.stats.timeSincePowerGain += diff;
     player.stats.timeSinceExport += diff;
     ComplexityChallenge.addToTimeStats(diff);
   },

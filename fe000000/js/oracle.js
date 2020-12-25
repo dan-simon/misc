@@ -129,6 +129,7 @@ let Oracle = {
         player.oracle.activePowers = activePowers;
         player.oracle.powers = powers;
         player.oracle.extraMultipliers = extraMultipliers;
+        player.stats.timeSinceOraclePrediction = 0;
         if (Oracle.alert()) {
           alert(Oracle.message());
         }
@@ -195,7 +196,8 @@ let Oracle = {
   },
   messagePrequel() {
     if (this.isUsed()) {
-      return 'The Oracle most recently said:';
+      let timeString = formatTime(player.stats.timeSinceOraclePrediction, {seconds: {f: format, s: false}, larger: {f: format, s: false}});
+      return 'The Oracle most recently said (' + timeString + ' ago):';
     } else {
       return 'The Oracle has not said anything yet in this finality.';
     }

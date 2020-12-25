@@ -405,11 +405,12 @@ let initialPlayer = {
     timeSincePrestige: 0,
     timeSinceInfinity: 0,
     timeSinceEternity: 0,
+    timeSinceComplexity: 0,
     timeSinceFinality: 0,
     timeSinceAutoECCompletion: 0,
     timeSincePermanenceGain: 0,
-    timeSinceComplexity: 0,
     timeSincePowerGain: 0,
+    timeSinceOraclePrediction: 0,
     timeSinceGameStart: 0,
     timeSinceExport: 0,
     timeSinceLastPeakIPPerSec: Math.pow(2, 256),
@@ -450,7 +451,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.994140625
+  version: 1.9951171875
 }
 
 let player;

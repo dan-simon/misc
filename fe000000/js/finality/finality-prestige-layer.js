@@ -203,6 +203,8 @@ let FinalityPrestigeLayer = {
     player.stats.totalEternityStarsProducedThisFinality = new Decimal(0);
     player.stats.totalComplexityStarsProducedThisFinality = new Decimal(0);
     player.stats.totalCPProducedThisFinality = FinalityStartingBenefits.complexityPoints().plus(FinalityMilestones.startingComplexityPoints());
+    player.stats.timeSincePowerGain = 0;
+    player.stats.timeSinceOraclePrediction = 0;
     player.stats.timeSinceFinality = 0;
     player.stats.lastTenComplexities = initialLastTenComplexities();
   }
