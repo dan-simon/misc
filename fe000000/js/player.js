@@ -343,6 +343,11 @@ let initialPlayer = {
       completionGradients: 'Default'
     },
     fitToWidth: true,
+    showFullOptions: {
+      studies: false,
+      powers: false,
+      finality: false,
+    },
     largerCheckboxes: false,
     viewAllGenerators: {
       normal: true,
@@ -443,7 +448,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9912109375
+  version: 1.9931640625
 }
 
 let player;

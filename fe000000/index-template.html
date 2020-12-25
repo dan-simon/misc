@@ -1514,24 +1514,35 @@
     <tab ~style.display=Tabs.currentTab() === 'studies' ? '' : 'none'~>
       <span>You have ~i Studies.totalTheorems() ~ total theorem~s Studies.totalTheorems() ~ (a breakdown is below the theorem purchase buttons) and ~i Studies.unspentTheorems() ~ unspent theorem~s Studies.unspentTheorems() ~.</span>
       <br/>
-      <button class="studies-export-button" onclick="Studies.export()">Export studies</button> <button onclick="Studies.import()">Import studies</button>
-      <button onclick="Studies.toggleRespec()">Respec studies on next eternity: ~r Studies.isRespecOn() ? "On" : "Off" ~</button>
-      <button ~style.display=Studies.canAccessFourthRow() ? '' : 'none'~ ~class=Studies.canMaxFourthRowStudies() ? '' : 'disabled' ~ onclick="Studies.maxFourthRowStudies()">Max fourth-row studies</button>
-      <br/>
-      <button onclick="Studies.respecAndReset()">Respec studies and ~r EternityPrestigeLayer.resetText() ~</button>
-      <br ~style.display=!EternityPrestigeLayer.canEternity() && Studies.canAccessFourthRow() ? '' : 'none'~/>
-      <button onclick="Studies.respecFourthRowAndReset()" ~style.display=Studies.canAccessFourthRow() ? '' : 'none'~>Respec fourth-row studies and ~r EternityPrestigeLayer.resetText() ~</button>
-      <br/>
-      <br/>
-      <div style="width: 1024px; margin-left: auto; margin-right: auto;">
-        Study options: <button onclick="Studies.changeMode()">Study click mode: ~r Studies.mode() ~ (reversed when holding shift)</button> <button onclick="Studies.changeCostDisplayMode()">Cost display: ~r Studies.costDisplayMode() ~</button>
-        <button ~style.display=(ComplexityAchievements.hasComplexityAchievement(4, 4) || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~ onclick="Studies.toggleRebuyAfterComplexityChallenge6()">Rebuy studies when finishing ℂC6: ~r Studies.rebuyAfterComplexityChallenge6() ? "On" : "Off" ~</button>
-        <button onclick="Studies.toggleShowPresetExplanation()">Show explanation of presets and exported studies: ~r Studies.showPresetExplanation() ? "On" : "Off" ~</button>
+      <div ~style.display=Options.showFullOptions('studies') ? 'none' : ''~>
+        <button onclick="Studies.respecAndReset()">Respec studies and ~r EternityPrestigeLayer.resetText() ~</button>
+        <div style="width: 1024px; margin-left: auto; margin-right: auto;">
+          <span>There are a lot of study options. To see the others, go to the options tab and toggle (turn on) "Full study options" in the "other options" part.</span>
+        </div>
+      </div>
+      <div ~style.display=Options.showFullOptions('studies') ? '' : 'none'~>
+        <div style="width: 1024px; margin-left: auto; margin-right: auto;">
+          <button class="studies-export-button" onclick="Studies.export()">Export studies</button> <button onclick="Studies.import()">Import studies</button>
+          <button onclick="Studies.toggleRespec()">Respec studies on next eternity: ~r Studies.isRespecOn() ? "On" : "Off" ~</button>
+          <button ~style.display=Studies.canAccessFourthRow() ? '' : 'none'~ ~class=Studies.canMaxFourthRowStudies() ? '' : 'disabled' ~ onclick="Studies.maxFourthRowStudies()">Max fourth-row studies</button>
+          <button onclick="Studies.respecAndReset()">Respec studies and ~r EternityPrestigeLayer.resetText() ~</button>
+          <button onclick="Studies.respecFourthRowAndReset()" ~style.display=Studies.canAccessFourthRow() ? '' : 'none'~>Respec fourth-row studies and ~r EternityPrestigeLayer.resetText() ~</button>
+        </div>
+        <br/>
+        <div style="width: 1024px; margin-left: auto; margin-right: auto;">
+          <button onclick="Studies.changeMode()">Study click mode: ~r Studies.mode() ~ (reversed when holding shift)</button> <button onclick="Studies.changeCostDisplayMode()">Cost display: ~r Studies.costDisplayMode() ~</button>
+          <button ~style.display=(ComplexityAchievements.hasComplexityAchievement(4, 4) || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~ onclick="Studies.toggleRebuyAfterComplexityChallenge6()">Rebuy studies when finishing ℂC6: ~r Studies.rebuyAfterComplexityChallenge6() ? "On" : "Off" ~</button>
+          <button onclick="Studies.toggleShowPresetExplanation()">Show explanation of presets and exported studies: ~r Studies.showPresetExplanation() ? "On" : "Off" ~</button>
+        </div>
+        <div style="width: 1024px; margin-left: auto; margin-right: auto;">
+          <span>There are a lot of study options. To hide most of them, go to the options tab and toggle (turn off) "Full study options" in the "other options" part.</span>
+        </div>
       </div>
       <br/>
       <div style="width: 1024px; margin-left: auto; margin-right: auto;">
-        <span><button onclick="Studies.togglePresetRespec()">Respec studies when loading a preset: ~r Studies.presetRespec() ? "On" : "Off" ~ (reversed when holding shift)</button></span>
-        <br/>
+        <div ~style.display=Options.showFullOptions('studies') ? '' : 'none'~>
+          <button onclick="Studies.togglePresetRespec()">Respec studies when loading a preset: ~r Studies.presetRespec() ? "On" : "Off" ~ (reversed when holding shift)</button></span>
+        </div>
         <span>Click on the name of a study preset on the line below to load that study list:</span>
         <br/>
         <div ~style.display=Studies.hasPreset(1) ? 'none' : ''~>
@@ -3579,15 +3590,26 @@
         <br/>
         <span>The powers activated by importing powers will be the strongest stored powers of the chosen types.</span>
         <br/>
-        <button class="powers-export-button" onclick="Powers.export()">Export active powers</button> <button onclick="Powers.import()">Import active powers</button>
-        <button onclick="Powers.toggleRespec()">Deactivate active powers on next complexity: ~r Powers.isRespecOn() ? "On" : "Off" ~</button>
-        <br/>
-        <button onclick="Powers.respecAndReset()">Deactivate active powers and ~r ComplexityPrestigeLayer.resetText() ~</button></button>
-        <br/>
+        <div ~style.display=Options.showFullOptions('powers') ? 'none' : ''~>
+          <button onclick="Powers.respecAndReset()">Deactivate active powers and ~r ComplexityPrestigeLayer.resetText() ~</button></button>
+          <div style="width: 1024px; margin-left: auto; margin-right: auto;">
+            <span>There are a lot of power options. To see the others, go to the options tab and toggle (turn on) "Full power options" in the "other options" part.</span>
+          </div>
+        </div>
+        <div ~style.display=Options.showFullOptions('powers') ? '' : 'none'~>
+          <button class="powers-export-button" onclick="Powers.export()">Export active powers</button> <button onclick="Powers.import()">Import active powers</button>
+          <button onclick="Powers.toggleRespec()">Deactivate active powers on next complexity: ~r Powers.isRespecOn() ? "On" : "Off" ~</button>
+          <br/>
+          <button onclick="Powers.respecAndReset()">Deactivate active powers and ~r ComplexityPrestigeLayer.resetText() ~</button></button>
+          <div style="width: 1024px; margin-left: auto; margin-right: auto;">
+            <span>There are a lot of power options. To hide most of them, go to the options tab and toggle (turn off) "Full power options" in the "other options" part.</span>
+          </div>
+        </div>
         <br/>
         <div style="width: 1024px; margin-left: auto; margin-right: auto;">
-          <span><button onclick="Powers.togglePresetRespec()">Deactivate active powers when loading a preset: ~r Powers.presetRespec() ? "On" : "Off" ~  (reversed when holding shift)</button></span>
-          <br/>
+          <div ~style.display=Options.showFullOptions('powers') ? '' : 'none'~>
+            <button onclick="Powers.togglePresetRespec()">Deactivate active powers when loading a preset: ~r Powers.presetRespec() ? "On" : "Off" ~  (reversed when holding shift)</button>
+          </div>
           <span>Click on the name of a power preset on the line below to activate those powers:</span>
           <br/>
           <button ~class=Powers.presetClass(1) ~ ~style.display=Powers.hasPreset(1) ? '' : 'none'~ onclick="Powers.presetLoad(1)">~r Powers.presetName(1) ~</button>
@@ -4561,15 +4583,26 @@
       <br/>
       <span>(This gain of finality shards is ~i 16 ~ times (~i 1 ~ + finalities), doubled if (~i 1 ~ + finalities) is a multiple of ~i 64 ~.)</span>
       <br/>
-      <button class="finality-shard-upgrades-export-button" onclick="FinalityShardPresets.export()">Export finality shard upgrades</button> <button onclick="FinalityShardPresets.import()">Import finality shard upgrades</button>
-      <button onclick="FinalityShardPresets.toggleRespec()">Respec finality shard upgrades on next finality: ~r FinalityShardPresets.isRespecOn() ? "On" : "Off" ~</button>
-      <br/>
-      <button onclick="FinalityShardPresets.respecAndReset()">Respec finality shard upgrades and ~r FinalityPrestigeLayer.resetText() ~</button></button>
-      <br/>
+      <div ~style.display=Options.showFullOptions('finality') ? 'none' : ''~>
+        <button onclick="FinalityShardPresets.respecAndReset()">Respec finality shard upgrades and ~r FinalityPrestigeLayer.resetText() ~</button></button>
+        <div style="width: 1024px; margin-left: auto; margin-right: auto;">
+          <span>There are a lot of finality shard options. To see the others, go to the options tab and toggle (turn on) "Full finality shard options" in the "other options" part.</span>
+        </div>
+      </div>
+      <div ~style.display=Options.showFullOptions('finality') ? '' : 'none'~>
+        <button class="finality-shard-upgrades-export-button" onclick="FinalityShardPresets.export()">Export finality shard upgrades</button> <button onclick="FinalityShardPresets.import()">Import finality shard upgrades</button>
+        <button onclick="FinalityShardPresets.toggleRespec()">Respec finality shard upgrades on next finality: ~r FinalityShardPresets.isRespecOn() ? "On" : "Off" ~</button>
+        <br/>
+        <button onclick="FinalityShardPresets.respecAndReset()">Respec finality shard upgrades and ~r FinalityPrestigeLayer.resetText() ~</button>
+        <div style="width: 1024px; margin-left: auto; margin-right: auto;">
+          <span>There are a lot of finality shard options. To hide most of them, go to the options tab and toggle (turn off) "Full finality shard options" in the "other options" part.</span>
+        </div>
+      </div>
       <br/>
       <div style="width: 1024px; margin-left: auto; margin-right: auto;">
-        <span><button onclick="FinalityShardPresets.togglePresetRespec()">Respec finality shard upgrades when loading a preset: ~r FinalityShardPresets.presetRespec() ? "On" : "Off" ~  (reversed when holding shift)</button></span>
-        <br/>
+        <div ~style.display=Options.showFullOptions('finality') ? '' : 'none'~>
+          <button onclick="FinalityShardPresets.togglePresetRespec()">Respec finality shard upgrades when loading a preset: ~r FinalityShardPresets.presetRespec() ? "On" : "Off" ~  (reversed when holding shift)</button>
+        </div>
         <span>Click on the name of a finality preset on the line below to buy those finality upgrades:</span>
         <br/>
         <button ~class=FinalityShardPresets.presetClass(1)~ ~style.display=FinalityShardPresets.hasPreset(1) ? '' : 'none'~ onclick="FinalityShardPresets.presetLoad(1)">~r FinalityShardPresets.presetName(1) ~</button>
@@ -5371,7 +5404,11 @@
             <button class="mini-options-button" onclick="Options.nextButtonColor()">Button colors: ~r player.options.theme.buttonColor ~</button>
             <button class="mini-options-button" onclick="Options.nextCompletionGradients()">Completion gradients: ~r player.options.theme.completionGradients ~</button>
           </div></td>
-          <td/>
+          <td><div ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~ class="options-div">
+            <button ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('studies')">Full study options: ~r Options.showFullOptions('studies') ? 'On' : 'Off' ~</button>
+            <button ~style.display=(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('powers')">Full power options: ~r Options.showFullOptions('powers') ? 'On' : 'Off' ~</button>
+            <button ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('finality')">Full finality shard options: ~r Options.showFullOptions('finality') ? 'On' : 'Off' ~</button>
+          </div></td>
         <tr/>
       </table>
       <div>

@@ -112,6 +112,12 @@ let Options = {
     // in case the condition changes.
     return PrestigeLayerProgress.hasReached('infinity') && this.rawViewAllGenerators(type);
   },
+  showFullOptions(x) {
+    return player.options.showFullOptions[x];
+  },
+  toggleShowFullOptions(x) {
+    player.options.showFullOptions[x] = !player.options.showFullOptions[x];
+  },
   toggleLargerCheckboxes() {
     player.options.largerCheckboxes = !player.options.largerCheckboxes;
     this.updateCheckboxSize();

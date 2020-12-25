@@ -916,6 +916,14 @@ let Saving = {
       player.complexityChallengeLastCompletion = player.complexityChallengeLastCompletion.map(i => [i[0], i[2]]);
       player.version = 1.9912109375;
     }
+    if (player.version < 1.9931640625) {
+      player.options.showFullOptions = {
+        studies: false,
+        powers: false,
+        finality: false,
+      };
+      player.version = 1.9931640625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
