@@ -56,6 +56,12 @@ let InfinityChallenge = {
   setInfinityChallenge(x) {
     player.currentInfinityChallenge = x;
   },
+  restartOnCompletion() {
+    return player.infinityChallengeRestartOnCompletion;
+  },
+  toggleRestartOnCompletion() {
+    player.infinityChallengeRestartOnCompletion = !player.infinityChallengeRestartOnCompletion;
+  },
   startInfinityChallenge(x) {
     let newLimit = InfinityChallenge.getInfinityChallengeGoal(x);
     if (InfinityPrestigeLayer.canInfinity()) {

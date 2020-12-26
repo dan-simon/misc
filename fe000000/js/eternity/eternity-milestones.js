@@ -7,7 +7,7 @@ let EternityMilestones = {
   },
   isEternityMilestoneDisabled(x) {
     if (x === 4 || x === 8) {
-      return !player.eternityMilestonesOn[[4, 8].indexOf(x)];
+      return !player.eternityMilestonesEnabled[[4, 8].indexOf(x)];
     } else {
       return false;
     }
@@ -17,7 +17,7 @@ let EternityMilestones = {
   },
   toggleMilestone(x) {
     if (x === 4 || x === 8) {
-      player.eternityMilestonesOn[[4, 8].indexOf(x)] = !player.eternityMilestonesOn[[4, 8].indexOf(x)];
+      player.eternityMilestonesEnabled[[4, 8].indexOf(x)] = !player.eternityMilestonesEnabled[[4, 8].indexOf(x)];
     }
   },
   milestoneStatusDescription(x) {

@@ -78,7 +78,7 @@ let Study = function (i) {
         effect = STUDY_EFFECTS[i - 1]();
       }
       if (i === 7 || i === 11) {
-        if (ComplexityAchievements.hasComplexityAchievement(2, 4)) {
+        if (ComplexityAchievements.isComplexityAchievementActive(2, 4)) {
           effect = effect.pow(ComplexityAchievements.effect(2, 4));
         } else {
           effect = effect.min(Math.pow(2, {7: 64, 11: 16}[i]));
@@ -118,7 +118,7 @@ let Study = function (i) {
       // Note that if a third study gets capped this won't handle it.
       // Note also that we use STUDY_EFFECTS[i - 1]() directly since the raw effect of study 11
       // is modified by an upgrade that boosts third-row studies.
-      return (i === 7 || i === 11) && !ComplexityAchievements.hasComplexityAchievement(2, 4) &&
+      return (i === 7 || i === 11) && !ComplexityAchievements.isComplexityAchievementActive(2, 4) &&
         STUDY_EFFECTS[i - 1]().gte(Math.pow(2, {7: 64, 11: 16}[i]));
     },
     cappedText() {
@@ -193,7 +193,7 @@ let Studies = {
     return this.boughtTheoremsList().reduce((a, b) => a + b);
   },
   extraTheoremsList() {
-    if (ComplexityAchievements.hasComplexityAchievement(4, 4)) {
+    if (ComplexityAchievements.isComplexityAchievementActive(4, 4)) {
       return player.extraTheorems;
     } else {
       return this.extraTheoremsByType();
@@ -206,7 +206,7 @@ let Studies = {
     return [Boost.extraTheoremsRaw(), EternityChallenge.extraTheoremsRaw(), Chroma.extraTheoremsRaw(), ComplexityChallenge.extraTheoremsRaw()];
   },
   updateExtraTheorems() {
-    if (ComplexityAchievements.hasComplexityAchievement(4, 4)) {
+    if (ComplexityAchievements.isComplexityAchievementActive(4, 4)) {
       let extraTheoremsByType = this.extraTheoremsByType();
       for (let i = 0; i < 4; i++) {
         player.extraTheorems[i] = Math.max(player.extraTheorems[i], extraTheoremsByType[i]);
@@ -268,7 +268,7 @@ let Studies = {
     player.studySettings.presetRespecStudies = !player.studySettings.presetRespecStudies;
   },
   respec() {
-    if (ComplexityAchievements.hasComplexityAchievement(4, 4) && !Studies.areStudiesInitialStudies()) {
+    if (ComplexityAchievements.isComplexityAchievementActive(4, 4) && !Studies.areStudiesInitialStudies()) {
       Studies.setStudiesBeforeLastRespec();
     }
     for (let i = 0; i < 12; i++) {

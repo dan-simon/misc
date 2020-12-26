@@ -57,7 +57,7 @@ let ComplexityChallenge = {
     return 3;
   },
   extraTheoremsActualAndDisplay() {
-    if (ComplexityAchievements.hasComplexityAchievement(4, 4)) {
+    if (ComplexityAchievements.isComplexityAchievementActive(4, 4)) {
       return player.extraTheorems[this.extraTheoremsIndex()];
     } else {
       return this.extraTheoremsRaw();
@@ -128,7 +128,7 @@ let ComplexityChallenge = {
   toggleSafeguard(x) {
     player.complexityChallengeSafeguards[x - 2] = !player.complexityChallengeSafeguards[x - 2];
     if (x === 6 && !player.complexityChallengeSafeguards[x - 2] &&
-      ComplexityAchievements.hasComplexityAchievement(4, 4) && Studies.rebuyAfterComplexityChallenge6()) {
+      ComplexityAchievements.isComplexityAchievementActive(4, 4) && Studies.rebuyAfterComplexityChallenge6()) {
       player.studies = [...player.studySettings.studiesBeforeLastRespec];
       if (!Studies.areStudiesInitialStudies()) {
         ComplexityChallenge.exitComplexityChallenge(6);

@@ -5,7 +5,7 @@ let EternityAutobuyer = function (i) {
   return {
     hasEternityAutobuyer() {
       return (i <= 13 && EternityChallenge.isTotalCompletionsRewardActive(4)) ||
-        ComplexityAchievements.hasComplexityAchievement(2, 2);
+        ComplexityAchievements.isComplexityAchievementActive(2, 2);
     },
     isOn() {
       return player.eternityAutobuyers[i - 1];
@@ -68,7 +68,7 @@ let EternityAutobuyers = {
       EternityAutobuyer([9, 10, 11, 1, 2, 3, 4, 5, 6, 7, 8, 12, 13, 14, 15, 16][i]).tick();
     }
     Permanence.buyMaxOf([1, 2, 3, 4].filter(i => EternityAutobuyer(i + 16).isActive()));
-    if (ComplexityAchievements.hasComplexityAchievement(1, 3)) {
+    if (ComplexityAchievements.isComplexityAchievementActive(1, 3)) {
       EternityProducer.unlock(true);
       for (let i = 1; i <= 6; i++) {
         Chroma.unlockColor(i, true);

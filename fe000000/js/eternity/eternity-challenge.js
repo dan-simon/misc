@@ -175,7 +175,7 @@ let EternityChallenge = {
     return 1;
   },
   extraTheoremsActualAndDisplay() {
-    if (ComplexityAchievements.hasComplexityAchievement(4, 4)) {
+    if (ComplexityAchievements.isComplexityAchievementActive(4, 4)) {
       return player.extraTheorems[this.extraTheoremsIndex()];
     } else {
       return this.extraTheoremsRaw();
@@ -222,7 +222,7 @@ let EternityChallenge = {
     player.currentEternityChallenge = x;
   },
   hasBrokeEveryStone() {
-    return ComplexityAchievements.hasComplexityAchievement(3, 2);
+    return ComplexityAchievements.isComplexityAchievementActive(3, 2);
   },
   isEternityChallengeUnlockingMeaningless() {
     return this.hasBrokeEveryStone();
@@ -338,7 +338,7 @@ let EternityChallenge = {
     }
   },
   eternityChallengeTotalCompletionsReward4Text() {
-    if (ComplexityAchievements.hasComplexityAchievement(2, 2)) {
+    if (ComplexityAchievements.isComplexityAchievementActive(2, 2)) {
       return 'Chroma buildup speed ' + formatInt(this.getTotalCompletionsRewardRawEffect(4)) + 'x.';
     } else {
       return 'Autobuyers for eternity upgrades, eternity generators, and Eternity Producer upgrades, and chroma buildup speed ' + formatInt(this.getTotalCompletionsRewardRawEffect(4)) + 'x.';

@@ -116,6 +116,7 @@ let initialPlayer = {
   infinityChallengesCompleted: [
     false, false, false, false, false, false, false, false,
   ],
+  infinityChallengeRestartOnCompletion: false,
   breakInfinity: false,
   autobuyers: initialAutobuyers(),
   areNewlyUnlockedAutobuyersOn: true,
@@ -129,7 +130,7 @@ let initialPlayer = {
   eternityGenerators: initialEternityGenerators(),
   highestEternityGenerator: 0,
   eternityUpgrades: [0, 0, 0],
-  eternityMilestonesOn: [true, true],
+  eternityMilestonesEnabled: [true, true],
   infinityAutobuyers: [
     true, true, true, true, true, true, true, true, true, true,
   ],
@@ -190,6 +191,7 @@ let initialPlayer = {
     [false, false, false, false],
     [false, false, false, false]
   ],
+  complexityAchievementsEnabled: [true, true],
   eternityAutobuyers: [
     true, true, true, true, true, true, true, true,
     true, true, true, true, true, true, true, true,
@@ -451,7 +453,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.9951171875
+  version: 1.99609375
 }
 
 let player;

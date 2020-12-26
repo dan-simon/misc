@@ -7,7 +7,7 @@ let FinalityMilestones = {
     return player.finalities >= this.getFinalityMilestoneRequirement(x);
   },
   hasAllFinalityMilestones() {
-    return this.hasEternityMilestone(8);
+    return this.hasFinalityMilestone(10);
   },
   isFinalityMilestoneActive(x) {
     return this.hasFinalityMilestone(x);

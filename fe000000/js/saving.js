@@ -933,6 +933,13 @@ let Saving = {
       player.stats.timeSinceOraclePrediction = 0;
       player.version = 1.9951171875;
     }
+    if (player.version < 1.99609375) {
+      player.infinityChallengeRestartOnCompletion = false;
+      player.eternityMilestonesEnabled = player.eternityMilestonesOn;
+      delete player.eternityMilestonesOn;
+      player.complexityAchievementsEnabled = [true, true];
+      player.version = 1.99609375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

@@ -10,7 +10,7 @@ let Complexities = {
   },
   addSudden(x) {
     this.add(x);
-    if (ComplexityAchievements.hasComplexityAchievement(1, 2)) {
+    if (ComplexityAchievements.isComplexityAchievementActive(1, 2)) {
       let old = ComplexityAchievements.complexityAchievementRow1Column2EffectFormula(this.amount() - x);
       let current = ComplexityAchievements.complexityAchievementRow1Column2EffectFormula(this.amount());
       Eternities.addSudden(current.minus(old));

@@ -135,7 +135,7 @@ let Boost = {
     return this.bestBoostPower() > 1;
   },
   bestBoostPowerDescription() {
-    if (ComplexityAchievements.hasComplexityAchievement(4, 4)) {
+    if (ComplexityAchievements.isComplexityAchievementActive(4, 4)) {
       return 'best boost power this finality';
     } else {
       return 'best boost power this complexity';
@@ -148,7 +148,7 @@ let Boost = {
     return 0;
   },
   extraTheoremsActualAndDisplay() {
-    if (ComplexityAchievements.hasComplexityAchievement(4, 4)) {
+    if (ComplexityAchievements.isComplexityAchievementActive(4, 4)) {
       return player.extraTheorems[this.extraTheoremsIndex()];
     } else {
       return this.extraTheoremsRaw();

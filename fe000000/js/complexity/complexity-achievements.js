@@ -59,9 +59,12 @@ let ComplexityAchievements = {
     [Math.pow(2, 1 / 8), null, 1, new Decimal(0)]
   ],
   achievementsUnlockedRewardThresholds: [4, 8, 12, 16],
+  complexityChallengeFor(row) {
+    return [2, 3, 4, 6][row - 1];
+  },
   checkForComplexityAchievements(situation) {
     for (let row = 1; row <= 4; row++) {
-      if (ComplexityChallenge.isComplexityChallengeRunning([2, 3, 4, 6][row - 1])) {
+      if (ComplexityChallenge.isComplexityChallengeRunning(this.complexityChallengeFor(row))) {
         for (let column = 1; column <= 4; column++) {
           if (!this.hasComplexityAchievement(row, column) &&
             this.canUnlockComplexityAchievement(row, column, situation)) {
@@ -76,11 +79,13 @@ let ComplexityAchievements = {
     // It also doesn't check whether the player already has the complexity achievement.
     return this.complexityAchievementRequirements[row - 1][column - 1](situation);
   },
-  unlockComplexityAchievement(row, column, fromFinalityShardUpgrades) {
-    player.complexityAchievements[row - 1][column - 1] = true;
+  giveComplexityAchievementSingleResult(row, column, fromUnusualSource) {
+    // We also call this function when we enable a complexity achievement.
+    // The check for being active catches the case where we enable an inactive achievement.
+    if (!this.isComplexityAchievementActive(row, column)) return;
     if (row === 1 && column === 2) {
       // Give the starting eternities, belatedly, as if the player had started with them.
-      if (fromFinalityShardUpgrades) {
+      if (fromUnusualSource) {
         Eternities.addSudden(this.effect(1, 2));
       } else {
         // If we're getting this naturally, we're doing an eternity reset immediately, so
@@ -94,6 +99,9 @@ let ComplexityAchievements = {
     if (row == 4 && column === 4) {
       Studies.updateExtraTheorems();
     }
+  },
+  giveComplexityAchievementGlobalResult() {
+    // This function only gets called when a complexity achievement is unlocked (not when one is enabled).
     if (this.getTotalAchievementsUnlocked() === this.getAchievementsUnlockedRewardThreshold(1)) {
       EternityPoints.addAmount(this.getAchievementsUnlockedRewardEffect(1));
     }
@@ -101,21 +109,49 @@ let ComplexityAchievements = {
       EternityPoints.addAmount(this.getAchievementsUnlockedRewardEffect(4));
     }
   },
+  unlockComplexityAchievement(row, column, fromUnusualSource) {
+    player.complexityAchievements[row - 1][column - 1] = true;
+    this.giveComplexityAchievementSingleResult(row, column, fromUnusualSource);
+    this.giveComplexityAchievementGlobalResult();
+  },
   hasComplexityAchievement(row, column) {
     return player.complexityAchievements[row - 1][column - 1];
   },
-  complexityAchievementStatusDescription(row, column) {
-    if (this.hasComplexityAchievement(row, column)) {
-      return 'Active';
+  isComplexityAchievementDisabled(row, column) {
+    if ((row === 1 && column === 3) || (row === 4 && column === 2)) {
+      return !player.complexityAchievementsEnabled[[1, 4].indexOf(row)];
     } else {
+      return false;
+    }
+  },
+  isComplexityAchievementActive(row, column) {
+    return this.hasComplexityAchievement(row, column) && !this.isComplexityAchievementDisabled(row, column);
+  },
+  isComplexityAchievementClose(row, column) {
+    return ComplexityChallenge.isComplexityChallengeUnlocked(this.complexityChallengeFor(row));
+  },
+  toggleAchievement(row, column) {
+    if ((row === 1 && column === 3) || (row === 4 && column === 2)) {
+      player.complexityAchievementsEnabled[[1, 4].indexOf(row)] = !player.complexityAchievementsEnabled[[1, 4].indexOf(row)];
+      if (player.complexityAchievementsEnabled[[1, 4].indexOf(row)]) {
+        this.giveComplexityAchievementSingleResult(row, column, true);
+      }
+    }
+  },
+  complexityAchievementStatusDescription(row, column) {
+    if (this.isComplexityAchievementActive(row, column)) {
+      return 'Active';
+    } else if (!this.hasComplexityAchievement(row, column)) {
       return 'Locked';
+    } else if (this.isComplexityAchievementDisabled(row, column)) {
+      return 'Disabled';
     }
   },
   rawEffect(row, column) {
     return this.complexityAchievementEffects[row - 1][column - 1]();
   },
   effect(row, column) {
-    if (this.hasComplexityAchievement(row, column)) {
+    if (this.isComplexityAchievementActive(row, column)) {
       return this.rawEffect(row, column);
     }
     return this.complexityAchievementDefaults[row - 1][column - 1];
@@ -151,8 +187,17 @@ let ComplexityAchievements = {
   startingEternityPoints() {
     return this.getAchievementsUnlockedRewardEffect(1).add(this.getAchievementsUnlockedRewardEffect(4));
   },
+  achievementStatusNumber(row, column) {
+    if (this.isComplexityAchievementActive(row, column)) {
+      return 1;
+    } else if (!this.hasComplexityAchievement(row, column)) {
+      return 0;
+    } else if (this.isComplexityAchievementDisabled(row, column)) {
+      return 0.5;
+    }
+  },
   color(row, column) {
-    return Colors.makeStyle(this.hasComplexityAchievement(row, column), false);
+    return Colors.makeStyle(this.achievementStatusNumber(row, column), false);
   },
   complexityAchievementRow1Column2EffectFormula(x) {
     return Decimal.pow(Math.min(16, x), 2).round();

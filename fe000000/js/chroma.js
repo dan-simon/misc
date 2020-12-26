@@ -56,7 +56,7 @@ let Chroma = {
     return 2;
   },
   extraTheoremsActualAndDisplay() {
-    if (ComplexityAchievements.hasComplexityAchievement(4, 4)) {
+    if (ComplexityAchievements.isComplexityAchievementActive(4, 4)) {
       return player.extraTheorems[this.extraTheoremsIndex()];
     } else {
       return this.extraTheoremsRaw();
@@ -201,7 +201,7 @@ let Chroma = {
     }
   },
   producingAll() {
-    return ComplexityAchievements.hasComplexityAchievement(3, 3);
+    return ComplexityAchievements.isComplexityAchievementActive(3, 3);
   },
   chromaDivClass(color) {
     if ((this.producingAll() && this.isColorUnlocked(color)) || color === player.chroma.current) {

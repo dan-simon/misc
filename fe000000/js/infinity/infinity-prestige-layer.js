@@ -125,7 +125,9 @@ let InfinityPrestigeLayer = {
     if (!Challenge.restartOnCompletion()) {
       Challenge.setChallenge(0);
     }
-    InfinityChallenge.setInfinityChallenge(0);
+    if (!InfinityChallenge.restartOnCompletion()) {
+      InfinityChallenge.setInfinityChallenge(0);
+    }
     Goals.recordPrestige('infinity');
     this.infinityReset(false, newLimit);
   },
