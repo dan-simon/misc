@@ -95,7 +95,7 @@ let ComplexityAchievements = {
     if (row === 4 && column === 2) {
       player.eternityChallengeCompletions = [4, 4, 4, 4, 4, 4, 4, 4];
     }
-    if (row == 4 && column === 4) {
+    if (row === 4 && column === 4) {
       Studies.updateExtraTheorems();
     }
   },
@@ -117,8 +117,10 @@ let ComplexityAchievements = {
     return player.complexityAchievements[row - 1][column - 1];
   },
   isComplexityAchievementDisabled(row, column) {
-    if ((row === 1 && column === 3) || (row === 4 && column === 2)) {
-      return !player.complexityAchievementsEnabled[[1, 4].indexOf(row)];
+    if (row === 1 && column === 3) {
+      // Yeah, this is a bit dumb, but if we do want to disable another complexity achievement
+      // it'll help a lot.
+      return !player.complexityAchievementsEnabled[[1].indexOf(row)];
     } else {
       return false;
     }
@@ -130,9 +132,9 @@ let ComplexityAchievements = {
     return ComplexityChallenge.isComplexityChallengeUnlocked(this.complexityChallengeFor(row));
   },
   toggleAchievement(row, column) {
-    if ((row === 1 && column === 3) || (row === 4 && column === 2)) {
-      player.complexityAchievementsEnabled[[1, 4].indexOf(row)] = !player.complexityAchievementsEnabled[[1, 4].indexOf(row)];
-      if (player.complexityAchievementsEnabled[[1, 4].indexOf(row)]) {
+    if (row === 1 && column === 3) {
+      player.complexityAchievementsEnabled[[1].indexOf(row)] = !player.complexityAchievementsEnabled[[1].indexOf(row)];
+      if (player.complexityAchievementsEnabled[[1].indexOf(row)]) {
         this.giveComplexityAchievementSingleResult(row, column, true);
       }
     }

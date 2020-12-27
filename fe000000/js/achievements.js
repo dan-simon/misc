@@ -35,8 +35,8 @@ let Achievements = {
       'Tri-vial',
       'You can skip IC8 and get this later',
       'That took forever',
-      'Not edutainment',
       'Hold infinity in the palm of your hand',
+      'Not edutainment',
       'Longer than forever',
       'More nerf removal',
     ],
@@ -55,8 +55,8 @@ let Achievements = {
       'This achievement doesn\'t exist',
       'Fourth row hype',
       'That doesn\'t sound right',
-      'Lightspeed',
       'It\'s not simple',
+      'Faster than a snail',
       'More achievements?',
       'Still two more rows here'
     ],
@@ -73,10 +73,10 @@ let Achievements = {
     [
       'It is luck',
       'Forever capped',
-      'The answer',
+      'Update before cap',
       'Nearing the end',
+      'Faster than another snail with the same speed',
       'Permanently greener grass',
-      'Desrever',
       'Last-mile delivery',
       'The end'
     ]
@@ -133,8 +133,8 @@ let Achievements = {
       () => InfinityChallenge.isInfinityChallengeRunning(3) && player.stats.timeSinceInfinity <= 3,
       () => InfinityChallenge.numberOfInfinityChallengesCompleted() >= 8,
       () => true,
-      () => range(1, 16).some(i => Study(i).isBought()),
       () => player.stats.timeSinceEternity <= 3600,
+      () => range(1, 16).some(i => Study(i).isBought()),
       () => EternityMilestones.hasAllEternityMilestones(),
       () => Eternities.amount().gte(256)
     ],
@@ -154,8 +154,8 @@ let Achievements = {
       () => Stars.amount().gte(Decimal.pow(9, Math.pow(9, 9))),
       () => range(1, 12).every(i => Study(i).isBought()),
       () => Permanence.getEternitiesPerPermanence().lte(1),
-      () => Chroma.amount() >= Math.pow(2, 14) && player.stats.timeSinceEternity <= 16,
       () => true,
+      () => player.stats.timeSinceComplexity <= Math.pow(2, 16),
       () => ComplexityAchievements.getTotalAchievementsUnlocked() > 0,
       () => ComplexityAchievements.getTotalAchievementsUnlocked() >= 16
     ],
@@ -172,11 +172,10 @@ let Achievements = {
     [
       () => Powers.active().concat(Powers.stored()).some(x => x.rarity >= 3),
       () => Powers.isUnlocked() && Powers.getExtraMultiplier('eternity') === 3,
-      () => Math.abs(42 - Powers.activeMultiplierSum()) <= 1 / 256,
+      () => Galaxy.timeToReachEffectCap() >= 18000,
       () => true,
+      () => player.stats.timeSinceFinality <= Math.pow(2, 16),
       () => FinalityShards.totalUpgradeBonuses() >= 16,
-      () => [Generator, InfinityGenerator, EternityGenerator, ComplexityGenerator].every(
-        f => Achievements.hasReversed(range(1, 8).map(i => f(i).multiplier()))),
       () => FinalityMilestones.hasAllFinalityMilestones(),
       () => FinalityShards.areAllUpgradesCapped()
     ]
@@ -217,8 +216,8 @@ let Achievements = {
       'infinity',
       'loop',
       'eternity',
-      'loop',
       'eternity',
+      'loop',
       'loop',
       'loop'
     ],
@@ -237,7 +236,7 @@ let Achievements = {
       'loop',
       'loop',
       'loop',
-      'loop',
+      'complexity',
       'complexity',
       'loop',
       'loop'
@@ -257,7 +256,7 @@ let Achievements = {
       'loop',
       'loop',
       'finality',
-      'loop',
+      'finality',
       'loop',
       'loop',
       'loop'

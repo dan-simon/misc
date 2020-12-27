@@ -190,7 +190,9 @@ let Chroma = {
     return this.currentProductionText().split(this.currentColorName())[1];
   },
   colorProductionStatus(color) {
-    if ((this.producingAll() && this.isColorUnlocked(color)) || (color === player.chroma.current && color === player.chroma.next)) {
+    if (this.producingAll() && this.isColorUnlocked(color)) {
+      return 'Will always be produced';
+    } if (color === player.chroma.current && color === player.chroma.next) {
       return 'Being produced, will be produced next';
     } else if (color === player.chroma.current) {
       return 'Being produced';

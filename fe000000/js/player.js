@@ -191,7 +191,7 @@ let initialPlayer = {
     [false, false, false, false],
     [false, false, false, false]
   ],
-  complexityAchievementsEnabled: [true, true],
+  complexityAchievementsEnabled: [true],
   eternityAutobuyers: [
     true, true, true, true, true, true, true, true,
     true, true, true, true, true, true, true, true,

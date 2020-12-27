@@ -941,6 +941,7 @@ let Saving = {
       player.version = 1.99609375;
     }
     if (player.version < 2) {
+      player.complexityAchievementsEnabled.pop();
       player.oracle.isPredicting = false;
       player.tabOptions.achievements = true;
       for (let x of player.tabPresets) {
@@ -963,6 +964,36 @@ let Saving = {
         active: true,
         notifications: true
       };
+      if (player.sacrificeMultiplier !== '1') {
+        player.achievements.table[1][0] = true;
+      }
+      if (player.prestigePower !== '1') {
+        player.achievements.table[1][4] = true;
+      }
+      if (player.infinities > 0 || player.eternities !== '0' || player.complexities > 0 || player.finalities > 0) {
+        // We don't technically know that the player has done all these things but it's a fair guess.
+        player.achievements.table[1][0] = true;
+        player.achievements.table[1][4] = true;
+        player.achievements.table[1][7] = true;
+      }
+      if (player.eternities !== '0' || player.complexities > 0 || player.finalities > 0) {
+        player.achievements.table[3][3] = true;
+      }
+      if (player.complexities > 0 || player.finalities > 0) {
+        player.achievements.table[5][4] = true;
+      }
+      if (player.finalities > 0) {
+        player.achievements.table[7][3] = true;
+      }
+      if (player.stats.fastestEternity <= 3600) {
+        player.achievements.table[3][4] = true;
+      }
+      if (player.stats.fastestComplexity <= Math.pow(2, 16)) {
+        player.achievements.table[5][5] = true;
+      }
+      if (player.stats.fastestFinality <= Math.pow(2, 16)) {
+        player.achievements.table[7][4] = true;
+      }
       player.stats.sacrificesThisInfinity = 0;
       player.version = 2;
     }

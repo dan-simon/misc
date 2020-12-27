@@ -601,20 +601,6 @@ let Powers = {
       'wait': p.time - originalTime
     }
   },
-  activeMultiplierSum() {
-    return this.active().map(p => this.preExtraMultiplier(p)).reduce((a, b) => a + b, 0);
-  },
-  activeMultiplierSumText(precision) {
-    let active = this.active().map(p => this.preExtraMultiplier(p));
-    if (active.length === 0) {
-      return formatWithPrecision(0, precision) + ' (no active powers)';
-    } else if (active.length === 1) {
-      return formatWithPrecision(active[0], precision);
-    } else {
-      return active.map(x => formatWithPrecision(x, precision)).join(' + ') + ' = ' +
-        formatWithPrecision(active.reduce((a, b) => a + b), precision);
-    }
-  },
   anythingToBuy() {
     return this.upgradeList.some(x => x.canBuy());
   },
