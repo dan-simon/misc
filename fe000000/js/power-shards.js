@@ -195,6 +195,7 @@ let PowerShards = {
   },
   craft() {
     if (!this.canCraft()) return;
+    Achievements.checkForAchievements('craft');
     player.powers.shards -= this.craftedPowerCost();
     player.powers.stored.push(this.craftedPower());
     Powers.cleanStored();

@@ -101,6 +101,7 @@ let ComplexityPrestigeLayer = {
   complexity(manual) {
     if (!this.canComplexity()) return;
     if (manual && Options.confirmation('complexity') && !confirm(this.complexityConfirmationMessage())) return;
+    Achievements.checkForAchievements('complexity');
     let gain = this.complexityPointGain();
     ComplexityPoints.addAmount(gain);
     Complexities.increment();

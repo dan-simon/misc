@@ -74,7 +74,7 @@ let Galaxy = {
     return Math.pow(1 + this.dilated(), 2);
   },
   actualSpeed() {
-    return this.effectSpeed() * FinalityShardUpgrade(8).effect();
+    return this.effectSpeed() * Achievements.otherMultiplier() * FinalityShardUpgrade(8).effect();
   },
   timeToReachEffectCap() {
     return Math.max(0, 1024 * (Math.pow(2, 64 * (this.effectCap() - 1)) - 1) / this.actualSpeed() - FinalityMilestones.freeTimeInComplexity());

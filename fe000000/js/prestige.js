@@ -9,7 +9,7 @@ let Prestige = {
     return this.prestigePower();
   },
   isPrestigeDisabled() {
-    return Challenge.isChallengeRunning(10) || EternityChallenge.isEternityChallengeRunning(3);
+    return Challenge.isChallengeEffectActive(10) || EternityChallenge.isEternityChallengeRunning(3);
   },
   prestigePowerExponent() {
     if (this.isPrestigeDisabled()) {
@@ -61,6 +61,7 @@ let Prestige = {
   prestige(manual) {
     if (!this.canPrestige()) return;
     if (manual && Options.confirmation('prestige') && !confirm(this.prestigeConfirmationMessage())) return;
+    Achievements.checkForAchievements('prestige');
     this.setPrestigePower(this.newPrestigePower());
     player.stats.prestigesThisInfinity++;
     Goals.recordPrestige('prestige');

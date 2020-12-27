@@ -19,6 +19,7 @@ let Tabs = {
       'autobuyers': () => true,
       'infinity-challenges': () => SpecialTabs.isTabVisible('infinity-challenges'),
       'goals': () => true,
+      'achievements': () => true,
       'statistics': () => true,
       'last-ten-runs': () => PrestigeLayerProgress.hasReached('infinity'),
       'options': () => true,
@@ -83,6 +84,8 @@ let Tabs = {
   },
   hash(x) {
     let d = {
+      'achievements': 'ac',
+      'autobuyers': 'au',
       'challenges': 'cha',
       'chroma': 'chr',
       'complexity': 'co',

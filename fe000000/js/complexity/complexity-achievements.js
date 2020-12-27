@@ -25,7 +25,6 @@ let ComplexityAchievements = {
       () => Studies.totalTheorems() >= 168
     ]
   ],
-  // The round is here because Decimal.pow(16, 2) isn't exactly new Decimal(256).
   complexityAchievementEffects: [
     [
       () => Complexities.permanenceAndChromaMultiplier(),
@@ -200,6 +199,7 @@ let ComplexityAchievements = {
     return Colors.makeStyle(this.achievementStatusNumber(row, column), false);
   },
   complexityAchievementRow1Column2EffectFormula(x) {
+    // The round is here because Decimal.pow(16, 2) isn't exactly new Decimal(256).
     return Decimal.pow(Math.min(16, x), 2).round();
   }
 }

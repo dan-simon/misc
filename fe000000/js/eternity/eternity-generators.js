@@ -43,7 +43,8 @@ let EternityGenerator = function (i) {
       let perPurchaseMultiplier = Math.pow(2, EternityUpgrade(1).effect() / 8) *
         (i === 8 ? ComplexityChallenge.getComplexityChallengeReward(5) : 1);
       let factors = [
-        Decimal.pow(perPurchaseMultiplier, this.bought()), Eternities.eternityGeneratorMultiplier(),
+        Decimal.pow(perPurchaseMultiplier, this.bought()),
+        Achievements.generatorMultiplier(), Eternities.eternityGeneratorMultiplier(),
         Study(9).effect(), Study(10).effect(), Study(11).effect(), Study(12).effect(),  Study(15).effect(),
         EternityUpgrade(3).effect(), EternityProducer.multiplier(), EternityChallenge.getEternityChallengeReward(8),
         (i === 8) ? Chroma.effectOfColor(4) : 1, FinalityStars.multiplier(),

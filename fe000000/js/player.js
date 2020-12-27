@@ -228,6 +228,7 @@ let initialPlayer = {
   },
   oracle: {
     unlocked: false,
+    isPredicting: false,
     time: 256,
     timeSimulated: 256,
     ticks: 1024,
@@ -283,6 +284,21 @@ let initialPlayer = {
     false, false, false, false, false, false, false, false,
     false, false, false, false, false, false, false, false
   ],
+  achievements: {
+    table: [
+      [false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false],
+    ],
+    beyondHighest: 2,
+    active: true,
+    notifications: true
+  },
   displayAllGoals: false,
   isTabVisible: {
     'infinity-challenges': false,
@@ -307,6 +323,7 @@ let initialPlayer = {
     'autobuyers': true,
     'infinity-challenges': true,
     'goals': true,
+    'achievements': true,
     'statistics': true,
     'last-ten-runs': true,
     'options': true,
@@ -435,6 +452,7 @@ let initialPlayer = {
     peakCPPerSec: new Decimal(0),
     purchasesThisInfinity: 0,
     purchasesThisInfinityByType: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    sacrificesThisInfinity: 0,
     prestigesThisInfinity: 0,
     lastTenInfinities: initialLastTenInfinities(),
     lastTenEternities: initialLastTenEternities(),
@@ -453,7 +471,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 1.99609375
+  version: 2
 }
 
 let player;

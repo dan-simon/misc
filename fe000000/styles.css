@@ -49,6 +49,57 @@ input[type=checkbox] {
   top: calc(-6px * (var(--checkbox-scale) - 1));
 }
 
+.achievementtd {
+  vertical-align: top;
+  text-align: center;
+  font-size: 0.875rem;
+  width: 128px;
+  height: 128px;
+  padding: 4px;
+  border: solid;
+  border-width: 1px 1px;
+  position: relative;
+}
+
+.tooltiptext {
+  width: 256px;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -128px;
+  padding: 2px;
+  background-color: var(--text-color);
+  color: var(--background-color);
+  text-align: center;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 2;
+  visibility: hidden;
+}
+
+.achievementtd:hover .tooltiptext {
+  visibility: visible;
+}
+
+#notificationarea {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  z-index: 1;
+}
+
+.notification {
+  position: relative;
+  top: 0px;
+  right: 0px;
+  margin: 6px;
+  padding: 2px;
+  background-color: var(--text-color);
+  color: var(--background-color);
+  text-align: center;
+  border-radius: 6px;
+  z-index: 1;
+}
+
 .options-button {
   width: 352px;
   height: 112px;

@@ -36,7 +36,8 @@ let ComplexityGenerator = function (i) {
     multiplier() {
       let perPurchaseMultiplier = ComplexityAchievements.effect(4, 1);
       let factors = [
-        Decimal.pow(perPurchaseMultiplier, this.bought()), Complexities.complexityGeneratorMultiplier(),
+        Decimal.pow(perPurchaseMultiplier, this.bought()),
+        Achievements.generatorMultiplier(), Complexities.complexityGeneratorMultiplier(),
         FinalityStars.multiplier(),
       ];
       let multiplier = factors.reduce((a, b) => a.times(b));

@@ -43,7 +43,7 @@ let Chroma = {
   },
   chromaSpeedMultiplier() {
     let factors = [
-      this.effectOfColor(3), EternityChallenge.getTotalCompletionsRewardEffect(4),
+      this.effectOfColor(3), Achievements.otherMultiplier(), EternityChallenge.getTotalCompletionsRewardEffect(4),
       Study(16).effect(), Complexities.chromaMultiplier(), ComplexityAchievements.effect(2, 3),
       FinalityShardUpgrade(4).effect()
     ];

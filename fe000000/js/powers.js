@@ -509,7 +509,7 @@ let Powers = {
     return PowerUpgrade(1).effect();
   },
   speed() {
-    return PowerUpgrade(2).effect() * FinalityShardUpgrade(6).effect();
+    return PowerUpgrade(2).effect() * Achievements.otherMultiplier() * FinalityShardUpgrade(6).effect();
   },
   minimumRarity() {
     return PowerUpgrade(3).effect();
@@ -599,6 +599,20 @@ let Powers = {
       'time': p.time,
       'future': true,
       'wait': p.time - originalTime
+    }
+  },
+  activeMultiplierSum() {
+    return this.active().map(p => this.preExtraMultiplier(p)).reduce((a, b) => a + b, 0);
+  },
+  activeMultiplierSumText(precision) {
+    let active = this.active().map(p => this.preExtraMultiplier(p));
+    if (active.length === 0) {
+      return formatWithPrecision(0, precision) + ' (no active powers)';
+    } else if (active.length === 1) {
+      return formatWithPrecision(active[0], precision);
+    } else {
+      return active.map(x => formatWithPrecision(x, precision)).join(' + ') + ' = ' +
+        formatWithPrecision(active.reduce((a, b) => a + b), precision);
     }
   },
   anythingToBuy() {

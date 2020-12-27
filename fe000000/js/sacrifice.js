@@ -21,7 +21,7 @@ let Sacrifice = {
     // Decimal.pow(2, Infinity) is 0, but Decimal.pow(2, 1e20) isn't,
     // so we take the min with 1e20 in case this.sacrificeMultiplier()
     // is too big to be converted to number.
-    let req = Decimal.pow(2, 16 * (Challenge.isChallengeRunning(10) ? 1 : this.sacrificeMultiplier().min(1e20).toNumber()));
+    let req = Decimal.pow(2, 16 * (Challenge.isChallengeEffectActive(10) ? 1 : this.sacrificeMultiplier().min(1e20).toNumber()));
     if (this.hasStrongerSacrifice()) {
       req = req.min(this.sacrificeMultiplier().pow(1 / this.sacrificeExponent()));
     }
@@ -62,7 +62,7 @@ let Sacrifice = {
     if (this.hasStrongerSacrifice()) {
       mult = mult.max(stars.pow(this.sacrificeExponent()));
     }
-    if (Challenge.isChallengeRunning(10)) {
+    if (Challenge.isChallengeEffectActive(10)) {
       mult = mult.times(this.sacrificeMultiplier());
     }
     return this.canSacrifice() ? mult : this.sacrificeMultiplier();
@@ -80,12 +80,14 @@ let Sacrifice = {
   sacrifice(manual) {
     if (!this.canSacrifice()) return;
     if (manual && Options.confirmation('sacrifice') && !confirm(this.sacrificeConfirmationMessage())) return;
+    Achievements.checkForAchievements('sacrifice');
     this.setSacrificeMultiplier(this.newSacrificeMultiplier());
+    player.stats.sacrificesThisInfinity++;
     Goals.recordPrestige('sacrifice');
     this.sacrificeReset();
   },
   sacrificeReset() {
-    if (Challenge.isChallengeRunning(10)) {
+    if (Challenge.isChallengeEffectActive(10)) {
       // Challenge 10 overrides Eternity Milestone 4.
       Stars.setAmount(Stars.startingAmount(), null);
       player.boost = {bought: 0};

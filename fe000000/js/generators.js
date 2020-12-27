@@ -36,20 +36,21 @@ let Generator = function (i) {
     },
     multiplier() {
       let factors = [
-        Decimal.pow(2, this.bought() / 8), Boost.multiplier(), Prestige.multiplier(),
+        Decimal.pow(2, this.bought() / 8), Achievements.generatorMultiplier(),
+        Boost.multiplier(), Prestige.multiplier(),
         InfinityPoints.multiplier(), Challenge.multiplier(),
         InfinityStars.multiplier(), EternityStars.multiplier(),
         (i === 8) ? Sacrifice.sacrificeMultiplier() : 1,
         Challenge.isChallengeEffectActive(2) ? Challenge.challenge2Mult() : 1,
         (i === 1 && Challenge.isChallengeEffectActive(3)) ? Challenge.challenge3Mult() : 1,
-        Challenge.isChallengeRunning(8) ? Generator(8).amount().max(1) : 1,
+        Challenge.isChallengeEffectActive(8) ? Generator(8).amount().max(1) : 1,
         Study(2).effect(), Study(3).effect(), Study(4).effect(), Study(13).effect(),
         EternityChallenge.getEternityChallengeReward(1), ComplexityChallenge.getComplexityChallengeReward(1),
         FinalityStars.multiplier(),
       ];
       let multiplier = factors.reduce((a, b) => a.times(b));
       let powFactors = [
-        Challenge.isChallengeRunning(1) ? ((i === 1) ? 4 : 0) : 1,
+        Challenge.isChallengeEffectActive(1) ? ((i === 1) ? 4 : 0) : 1,
         InfinityChallenge.isInfinityChallengeRunning(4) ? InfinityChallenge.infinityChallenge4Pow() : 1,
         InfinityChallenge.isInfinityChallengeRunning(5) ? InfinityChallenge.infinityChallenge5Pow() : 1,
         EternityChallenge.isEternityChallengeRunning(1) ? EternityChallenge.eternityChallenge1InfinityStarsEffect() : 1,
@@ -91,7 +92,7 @@ let Generator = function (i) {
       let num = Math.floor(player.stars.div(this.cost()).times(
         Decimal.minus(this.costIncreasePer(), 1)).plus(1).log(this.costIncreasePer()));
       num = Math.min(num,
-        Challenge.isChallengeRunning(10) ? 1 - this.bought() : Infinity,
+        Challenge.isChallengeEffectActive(10) ? 1 - this.bought() : Infinity,
         Challenge.isChallengeEffectActive(7) ? Challenge.challenge7PurchasesLeft() : Infinity,
         (i !== 8 && InfinityChallenge.isInfinityChallengeRunning(8)) ?
           InfinityChallenge.infinityChallenge8PurchasesLeft() : Infinity);

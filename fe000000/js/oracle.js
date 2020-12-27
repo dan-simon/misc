@@ -96,6 +96,7 @@ let Oracle = {
     if (this.powerGainInPredictions() !== 'Same') {
       player.powers.gain = {'Off': false, 'On': true}[this.powerGainInPredictions()];
     }
+    player.oracle.isPredicting = true;
     let time = this.time();
     let ticks = this.ticks();
     Saving.oracleSimulateTime(time, ticks, function () {

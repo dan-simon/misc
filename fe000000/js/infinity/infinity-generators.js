@@ -34,12 +34,12 @@ let InfinityGenerator = function (i) {
       return this.cost().times(Decimal.pow(this.costIncreasePer(), n).minus(1)).div(Decimal.minus(this.costIncreasePer(), 1));
     },
     multiplier() {
-      if (Challenge.isChallengeRunning(12)) {
+      if (Challenge.isChallengeEffectActive(12)) {
         return new Decimal(0);
       }
       let factors = [
         EternityChallenge.isEternityChallengeRunning(7) ? new Decimal(1) : Decimal.pow(2, this.bought() / 8),
-        Infinities.infinityGeneratorMultiplier(), InfinityChallenge.multiplier(),
+        Achievements.generatorMultiplier(), Infinities.infinityGeneratorMultiplier(), InfinityChallenge.multiplier(),
         (i === 1 && InfinityChallenge.isInfinityChallengeCompleted(3)) ? InfinityChallenge.infinityChallenge3Reward() : 1,
         InfinityChallenge.isInfinityChallengeCompleted(4) ? InfinityChallenge.infinityChallenge4Reward() : 1,
         (i === 8 && InfinityChallenge.isInfinityChallengeCompleted(8)) ? Math.max(1, Generator(8).amount().toNumber()) : 1,

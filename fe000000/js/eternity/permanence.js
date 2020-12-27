@@ -33,6 +33,7 @@ let Permanence = {
   },
   gainPermanence() {
     if (!this.canGainPermanence()) return;
+    Achievements.checkForAchievements('permanence');
     player.hasGainedPermanence = true;
     let gain = this.permanenceGain();
     player.stats.lastPermanenceGain = gain;

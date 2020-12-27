@@ -940,6 +940,32 @@ let Saving = {
       player.complexityAchievementsEnabled = [true, true];
       player.version = 1.99609375;
     }
+    if (player.version < 2) {
+      player.oracle.isPredicting = false;
+      player.tabOptions.achievements = true;
+      for (let x of player.tabPresets) {
+        x.tabs = 'ac,' + ((x.tabs[0] === 'a') ? ('au' + x.tabs.slice(1)) : i);
+      }
+      // Assume that the player has done some EC out of order
+      // if they've done an EC apart from the first EC at all.
+      player.achievements = {
+        table: [
+          [false, false, false, false, false, false, false, false],
+          [false, false, false, false, false, false, false, false],
+          [false, false, false, false, false, false, false, false],
+          [false, false, false, false, false, false, false, false],
+          [false, false, false, false, false, false, false, false],
+          [false, false, false, false, false, false, false, false],
+          [false, false, false, false, false, false, false, false],
+          [false, false, false, false, false, false, false, false],
+        ],
+        beyondHighest: 2,
+        active: true,
+        notifications: true
+      };
+      player.stats.sacrificesThisInfinity = 0;
+      player.version = 2;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

@@ -49,6 +49,7 @@
   <script src="js/infinity/infinity-stars.js?time=%time%"></script>
   <script src="js/infinity/infinity-upgrades.js?time=%time%"></script>
   <script src="js/rng.js?time=%time%"></script>
+  <script src="js/achievements.js?time=%time%"></script>
   <script src="js/autobuyers.js?time=%time%"></script>
   <script src="js/boost.js?time=%time%"></script>
   <script src="js/challenge-header-text.js?time=%time%"></script>
@@ -74,6 +75,7 @@
   <script src="js/prestige-layer-names.js?time=%time%"></script>
   <script src="js/prestige-layer-progress.js?time=%time%"></script>
   <script src="js/prestige.js?time=%time%"></script>
+  <script src="js/range.js?time=%time%"></script>
   <script src="js/sacrifice.js?time=%time%"></script>
   <script src="js/safe-minus.js?time=%time%"></script>
   <script src="js/safe-pow.js?time=%time%"></script>
@@ -95,7 +97,7 @@
     <br/>
     <span>Reloading might work, so probably try that first.</span>
     <br/>
-    <span>The page loads <span id="script-count"></span> scripts (should be 81).</span>
+    <span>The page loads <span id="script-count"></span> scripts (should be 83).</span>
     <br/>
     <span><button onclick="window.location.reload(true)">Reload window</button> <button class="export-button" onclick="Saving.exportGame(0)">Export</button> <button onclick="Saving.loadGamePrompt()">Load</button> <button onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></span>
   </div>
@@ -108,6 +110,8 @@
     <div id="progress">
       <div id="bar"></div>
     </div>
+  </div>
+  <div id="notificationarea">
   </div>
   <div id="main" style="display: none;">
     <div style="height: 32px;">You have ~f Stars.amount() ~ stars.~r ChallengeHeaderText.getText() ~</div>
@@ -145,6 +149,7 @@
       <button ~style.display=Tabs.isTabVisible('autobuyers') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'normal')~ onclick="Tabs.setTab('autobuyers')">Autobuyers</button>
       <button ~style.display=Tabs.isTabVisible('infinity-challenges') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'infinity')~ onclick="Tabs.setTab('infinity-challenges')">Infinity Challenges</button>
       <button ~style.display=Tabs.isTabVisible('goals') ? '' : 'none'~ onclick="Tabs.setTab('goals')">Goals</button>
+      <button ~style.display=Tabs.isTabVisible('achievements') ? '' : 'none'~ onclick="Tabs.setTab('achievements')">Achievements</button>
       <button ~style.display=Tabs.isTabVisible('statistics') ? '' : 'none'~ onclick="Tabs.setTab('statistics')">Statistics</button>
       <button ~style.display=Tabs.isTabVisible('last-ten-runs') ? '' : 'none'~ onclick="Tabs.setTab('last-ten-runs')">Last Ten Runs</button>
       <button ~style.display=Tabs.isTabVisible('options') ? '' : 'none'~ ~class-name=Options.showExportNotification() ? 'redspan' : ''~ onclick="Tabs.setTab('options')">Options</button>
@@ -5187,6 +5192,298 @@
         </tr>
       </table>
     </tab>
+    <tab ~style.display=Tabs.currentTab() === 'achievements' ? '' : 'none'~>
+      <span>You have completed ~i Achievements.getTotalAchievementsUnlocked() ~ achievements.</span>
+      <br/>
+      <span>Only achievements up to ~i Achievements.beyondHighestRounded() ~ beyond the last achievement you have are shown.</span>
+      <br/>
+      <span>Number of achievements beyond last reached achievement to show: <input type="text" ~!value=Achievements.beyondHighest()~ ~!onchange=function() {Achievements.setBeyondHighest(+this.value)}~></input></span>
+      <br/>
+      <span>There are by default small rewards for completing achievements.</span>
+      <br/>
+      <span>If you think this ruins the game somehow, you can turn rewards off.</span>
+      <br/>
+      <span>Your achievements ~r Achievements.active() ? 'are' : 'would be' ~ multiplying all generators <span ~style.display=PrestigeLayerProgress.hasReached('infinity')~>(of any type) </span>by ~f Achievements.generatorMultiplier() ~x~r Achievements.hasNonGeneratorEffects() ? ',' : '.' ~</span>
+      <br ~style.display=Achievements.hasNonGeneratorEffects() ? '' : 'none'~/>
+      <span ~style.display=Achievements.hasNonGeneratorEffects() ? '' : 'none'~>and multiplying ~r Achievements.nonGeneratorEffectsText() ~ by ~r formatWithPrecision(Achievements.otherMultiplier(), 5) ~x.</span>
+      <br/>
+      <span><button onclick="Achievements.toggleActive()">Achievement rewards: ~r Achievements.active() ? 'On' : 'Off' ~</button> <button onclick="Achievements.toggleNotifications()">Achievement notifications: ~r Achievements.notifications() ? 'On' : 'Off' ~</button></span>
+      <br/>
+      <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: collapse;">
+        <tr>
+          <td class="achievementtd" ~style.background=Achievements.color(1, 1)~>
+            <span>~r Achievements.getAchievementName(1, 1) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 1) ? '' : 'none'~>Buy Generator 1.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(1, 2)~>
+            <span>~r Achievements.getAchievementName(1, 2) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 2) ? '' : 'none'~>Buy Generator 2.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(1, 3)~>
+            <span>~r Achievements.getAchievementName(1, 3) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 3) ? '' : 'none'~>Buy Generator 3.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(1, 4)~>
+            <span>~r Achievements.getAchievementName(1, 4) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 4) ? '' : 'none'~>Buy Generator 4.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(1, 5)~>
+            <span>~r Achievements.getAchievementName(1, 5) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 5) ? '' : 'none'~>Buy Generator 5.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(1, 6)~>
+            <span>~r Achievements.getAchievementName(1, 6) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 6) ? '' : 'none'~>Buy Generator 6.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(1, 7)~>
+            <span>~r Achievements.getAchievementName(1, 7) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 7) ? '' : 'none'~>Buy Generator 7.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(1, 8)~>
+            <span>~r Achievements.getAchievementName(1, 8) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 8) ? '' : 'none'~>Buy Generator 8.</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="achievementtd" ~style.background=Achievements.color(2, 1)~>
+            <span>~r Achievements.getAchievementName(2, 1) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(2, 1) ? '' : 'none'~>Sacrifice.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(2, 2)~>
+            <span>~r Achievements.getAchievementName(2, 2) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(2, 2) ? '' : 'none'~>Have ~i 2 ~ boosts.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(2, 3)~>
+            <span>~r Achievements.getAchievementName(2, 3) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(2, 3) ? '' : 'none'~>Have at least ~i Math.pow(2, 16) ~ of every ~r Generators.term(true) ~ other than Generator 8.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(2, 4)~>
+            <span>~r Achievements.getAchievementName(2, 4) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(2, 4) ? '' : 'none'~>Have some generator multiplier over ~i Math.pow(2, 16) ~.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(2, 5)~>
+            <span>~r Achievements.getAchievementName(2, 5) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(2, 5) ? '' : 'none'~>Prestige.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(2, 6)~>
+            <span>~r Achievements.getAchievementName(2, 6) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(2, 6) ? '' : 'none'~>Have autobuyers for all ~r Generators.term() ~ and boosts.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(2, 7)~>
+            <span>~r Achievements.getAchievementName(2, 7) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(2, 7) ? '' : 'none'~>Have all ~r Generators.term(true) ~ multipliers in reverse order (G8 multiplier larger than G7 multiplier ... larger than G1 multiplier).</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(2, 8)~>
+            <span>~r Achievements.getAchievementName(2, 8) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(2, 8) ? '' : 'none'~>Infinity.</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="achievementtd" ~style.background=Achievements.color(3, 1)~>
+            <span>~r Achievements.getAchievementName(3, 1) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 1) ? '' : 'none'~>Complete a challenge.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(3, 2)~>
+            <span>~r Achievements.getAchievementName(3, 2) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 2) ? '' : 'none'~>Complete ~i 6 ~ challenges.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(3, 3)~>
+            <span>~r Achievements.getAchievementName(3, 3) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 3) ? '' : 'none'~>Break infinity.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(3, 4)~>
+            <span>~r Achievements.getAchievementName(3, 4) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 4) ? '' : 'none'~>Get ~i Decimal.pow(2, 1024) ~ stars.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(3, 5)~>
+            <span>~r Achievements.getAchievementName(3, 5) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 5) ? '' : 'none'~>Get ~i 256 ~ infinities.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(3, 6)~>
+            <span>~r Achievements.getAchievementName(3, 6) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 6) ? '' : 'none'~>Infinity in Challenge 10 without sacrificing.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(3, 7)~>
+            <span>~r Achievements.getAchievementName(3, 7) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 7) ? '' : 'none'~>Infinity in Challenge 2 in ~ti 16 ~.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(3, 8)~>
+            <span>~r Achievements.getAchievementName(3, 8) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 8) ? '' : 'none'~>Complete an infinity challenge.</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="achievementtd" ~style.background=Achievements.color(4, 1)~>
+            <span>~r Achievements.getAchievementName(4, 1) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(4, 1) ? '' : 'none'~>Infinity in Infinity Challenge 1 in ~ti 1 ~.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(4, 2)~>
+            <span>~r Achievements.getAchievementName(4, 2) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(4, 2) ? '' : 'none'~>Infinity in Infinity Challenge 3 in ~ti 3 ~.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(4, 3)~>
+            <span>~r Achievements.getAchievementName(4, 3) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(4, 3) ? '' : 'none'~>Complete all infinity challenges.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(4, 4)~>
+            <span>~r Achievements.getAchievementName(4, 4) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(4, 4) ? '' : 'none'~>Eternity.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(4, 5)~>
+            <span>~r Achievements.getAchievementName(4, 5) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(4, 5) ? '' : 'none'~>Buy a study.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(4, 6)~>
+            <span>~r Achievements.getAchievementName(4, 6) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(4, 6) ? '' : 'none'~>Eternity in ~ts 3600 ~.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(4, 7)~>
+            <span>~r Achievements.getAchievementName(4, 7) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(4, 7) ? '' : 'none'~>Complete all eternity milestones.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(4, 8)~>
+            <span>~r Achievements.getAchievementName(4, 8) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(4, 8) ? '' : 'none'~>Get ~i 256 ~ eternities.</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="achievementtd" ~style.background=Achievements.color(5, 1)~>
+            <span>~r Achievements.getAchievementName(5, 1) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(5, 1) ? '' : 'none'~>Have all the first-row studies at once.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(5, 2)~>
+            <span>~r Achievements.getAchievementName(5, 2) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(5, 2) ? '' : 'none'~>Infinity in Infinity Challenge 4 in ~ti 16 ~.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(5, 3)~>
+            <span>~r Achievements.getAchievementName(5, 3) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(5, 3) ? '' : 'none'~>Unlock the Eternity Producer.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(5, 4)~>
+            <span>~r Achievements.getAchievementName(5, 4) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(5, 4) ? '' : 'none'~>Complete an eternity challenge.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(5, 5)~>
+            <span>~r Achievements.getAchievementName(5, 5) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(5, 5) ? '' : 'none'~>Get ~i Math.pow(2, 256) ~ total EP.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(5, 6)~>
+            <span>~r Achievements.getAchievementName(5, 6) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(5, 6) ? '' : 'none'~>Gain permanence.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(5, 7)~>
+            <span>~r Achievements.getAchievementName(5, 7) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(5, 7) ? '' : 'none'~>Eternity for ~i Math.pow(2, 256) ~ EP while in Eternity Challenge 1.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(5, 8)~>
+            <span>~r Achievements.getAchievementName(5, 8) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(5, 8) ? '' : 'none'~>Unlock chroma.</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="achievementtd" ~style.background=Achievements.color(6, 1)~>
+            <span>~r Achievements.getAchievementName(6, 1) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(6, 1) ? '' : 'none'~>Complete all eternity challenges (~i 4 ~ times each).</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(6, 2)~>
+            <span>~r Achievements.getAchievementName(6, 2) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(6, 2) ? '' : 'none'~>Get ~i Decimal.pow(9, Math.pow(9, 9)) ~ stars.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(6, 3)~>
+            <span>~r Achievements.getAchievementName(6, 3) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(6, 3) ? '' : 'none'~>Have all the studies in the first three rows at once.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(6, 4)~>
+            <span>~r Achievements.getAchievementName(6, 4) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(6, 4) ? '' : 'none'~>Get at least ~i 1 ~ permanence per eternity.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(6, 5)~>
+            <span>~r Achievements.getAchievementName(6, 5) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(6, 5) ? '' : 'none'~>Get ~i Math.pow(2, 14) ~ chroma in ~ti 16 ~.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(6, 6)~>
+            <span>~r Achievements.getAchievementName(6, 6) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(6, 6) ? '' : 'none'~>Complexity.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(6, 7)~>
+            <span>~r Achievements.getAchievementName(6, 7) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(6, 7) ? '' : 'none'~>Complete a complexity achievement.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(6, 8)~>
+            <span>~r Achievements.getAchievementName(6, 8) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(6, 8) ? '' : 'none'~>Complete all the complexity achievements.</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="achievementtd" ~style.background=Achievements.color(7, 1)~>
+            <span>~r Achievements.getAchievementName(7, 1) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(7, 1) ? '' : 'none'~>Get ~i 256 ~ complexities.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(7, 2)~>
+            <span>~r Achievements.getAchievementName(7, 2) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(7, 2) ? '' : 'none'~>Complexity for ~i 16 ~ ℂP without unlocking red.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(7, 3)~>
+            <span>~r Achievements.getAchievementName(7, 3) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(7, 3) ? '' : 'none'~>Complexity while in all ~i 6 ~ complexity challenges.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(7, 4)~>
+            <span>~r Achievements.getAchievementName(7, 4) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(7, 4) ? '' : 'none'~>Unlock powers.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(7, 5)~>
+            <span>~r Achievements.getAchievementName(7, 5) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(7, 5) ? '' : 'none'~>Have ~i 12 ~ stored powers.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(7, 6)~>
+            <span>~r Achievements.getAchievementName(7, 6) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(7, 6) ? '' : 'none'~>Unlock the Oracle.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(7, 7)~>
+            <span>~r Achievements.getAchievementName(7, 7) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(7, 7) ? '' : 'none'~>Craft a power.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(7, 8)~>
+            <span>~r Achievements.getAchievementName(7, 8) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(7, 8) ? '' : 'none'~>Unlock galaxies.</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="achievementtd" ~style.background=Achievements.color(8, 1)~>
+            <span>~r Achievements.getAchievementName(8, 1) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(8, 1) ? '' : 'none'~>Get a power with rarity at least ~i 3 ~.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(8, 2)~>
+            <span>~r Achievements.getAchievementName(8, 2) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(8, 2) ? '' : 'none'~>Have the eternity power extra multiplier reach its cap (which is ~i 3 ~).</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(8, 3)~>
+            <span>~r Achievements.getAchievementName(8, 3) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(8, 3) ? '' : 'none'~>Have the sum of multipliers of active powers (ignoring extra multipliers) be ~i 42 ~ (with a margin of error of ~r formatWithPrecision(1 / 256, 5) ~). Current sum: ~r Powers.activeMultiplierSumText(5) ~.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(8, 4)~>
+            <span>~r Achievements.getAchievementName(8, 4) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(8, 4) ? '' : 'none'~>Finality.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(8, 5)~>
+            <span>~r Achievements.getAchievementName(8, 5) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(8, 5) ? '' : 'none'~>Get finality shard upgrade starting bonuses to a strength of ~i 16 ~.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(8, 6)~>
+            <span>~r Achievements.getAchievementName(8, 6) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(8, 6) ? '' : 'none'~>Have all ~i 4 ~ types of non-finality generator multipliers in reversed order (as in "Reversed", but for IGs, EGs, and ℂGs also).</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(8, 7)~>
+            <span>~r Achievements.getAchievementName(8, 7) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(8, 7) ? '' : 'none'~>Complete all finality milestones.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(8, 8)~>
+            <span>~r Achievements.getAchievementName(8, 8) ~</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(8, 8) ? '' : 'none'~>Buy the maximum possible of all finality upgrades.</span>
+          </td>
+        </tr>
+      </table>
+    </tab>
     <tab ~style.display=Tabs.currentTab() === 'statistics' ? '' : 'none'~>
       <span>You have produced ~f player.stats.totalStarsProduced ~ total stars.</span>
       <br ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~/>
@@ -5455,6 +5752,7 @@
       <div>
         <span>
           <span ~style.display=Tabs.isTabOptionVisible('goals') ? '' : 'none'~>Goals: <input class="goals-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('goals')~ ~!onchange=function() {Tabs.setTabOption('goals', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span ~style.display=Tabs.isTabOptionVisible('achievements') ? '' : 'none'~>Achievements: <input class="achievements-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('achievements')~ ~!onchange=function() {Tabs.setTabOption('achievements', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
           <span ~style.display=Tabs.isTabOptionVisible('statistics') ? '' : 'none'~>Statistics: <input class="statistics-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('statistics')~ ~!onchange=function() {Tabs.setTabOption('statistics', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
           <span ~style.display=Tabs.isTabOptionVisible('last-ten-runs') ? '' : 'none'~>Last Ten Runs: <input class="last-ten-runs-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('last-ten-runs')~ ~!onchange=function() {Tabs.setTabOption('last-ten-runs', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
           <span ~style.display=Tabs.isTabOptionVisible('options') ? '' : 'none'~>Options: cannot be hidden</span>

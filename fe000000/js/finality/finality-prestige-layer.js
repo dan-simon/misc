@@ -87,6 +87,7 @@ let FinalityPrestigeLayer = {
   finality(manual) {
     if (!this.canFinality()) return;
     if (manual && Options.confirmation('finality') && !confirm(this.finalityConfirmationMessage())) return;
+    Achievements.checkForAchievements('finality');
     let pointGain = this.finalityPointGain();
     let shardGain = this.finalityShardGain();
     FinalityPoints.addAmount(pointGain);
@@ -159,8 +160,10 @@ let FinalityPrestigeLayer = {
     RNG.jump(Finalities.amount() * Math.pow(2, 20));
     // Note that player.oracle.timeSimulated doesn't matter here at all.
     // We let the player keep their settings since they probably want to.
+    // Also, doing a finality doesn't change whether we're predicting or not.
     player.oracle = {
       unlocked: false,
+      isPredicting: player.oracle.isPredicting,
       time: player.oracle.time,
       timeSimulated: 256,
       ticks: player.oracle.ticks,

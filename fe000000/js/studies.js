@@ -35,7 +35,7 @@ let Study = function (i) {
       if (i <= 12) {
         return !this.isBought() && Studies.unspentTheorems(requiredExtra) >= this.cost();
       } else {
-        return Studies.list.slice(0, 12).every(i => i.isBought()) && Studies.unspentTheorems(requiredExtra) >= this.cost();
+        return range(1, 12).every(i => Study(i).isBought()) && Studies.unspentTheorems(requiredExtra) >= this.cost();
       }
     },
     cost() {

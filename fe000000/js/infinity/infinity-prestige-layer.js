@@ -115,6 +115,7 @@ let InfinityPrestigeLayer = {
       EternityChallenge.exitEternityChallenge();
       return;
     }
+    Achievements.checkForAchievements('infinity');
     let gain = this.infinityPointGain();
     InfinityPoints.addAmount(gain);
     Infinities.increment();
@@ -145,6 +146,7 @@ let InfinityPrestigeLayer = {
     player.stats.peakIPPerSec = new Decimal(0);
     player.stats.purchasesThisInfinity = 0;
     player.stats.purchasesThisInfinityByType = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+    player.stats.sacrificesThisInfinity = 0;
     player.stats.prestigesThisInfinity = 0;
   }
 }

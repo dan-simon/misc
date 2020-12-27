@@ -66,6 +66,7 @@ function gameLoop(diff, display) {
   // are due to a long tick or power production suddenly becoming possibile.
   Powers.checkForPowerGain(diff);
   Goals.checkForGoals();
+  Achievements.checkForAchievements('loop');
   SpecialTabs.makeTabsVisible();
   SpecialDivs.makeDivsVisible();
   if (display !== false) {

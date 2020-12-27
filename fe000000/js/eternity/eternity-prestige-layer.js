@@ -90,6 +90,7 @@ let EternityPrestigeLayer = {
   eternity(manual) {
     if (!this.canEternity()) return;
     if (manual && Options.confirmation('eternity') && !confirm(this.eternityConfirmationMessage())) return;
+    Achievements.checkForAchievements('eternity');
     let gain = this.eternityPointGain();
     EternityPoints.addAmount(gain);
     Eternities.add(Eternities.commonEternityGainMultiplier());
