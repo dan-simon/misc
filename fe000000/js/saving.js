@@ -964,6 +964,7 @@ let Saving = {
         active: true,
         notifications: true
       };
+      // Add some achievement migrations. (This isn't complete but hopefully it's good enough.)
       if (player.sacrificeMultiplier !== '1') {
         player.achievements.table[1][0] = true;
       }
@@ -993,6 +994,12 @@ let Saving = {
       }
       if (player.stats.fastestFinality <= Math.pow(2, 16)) {
         player.achievements.table[7][4] = true;
+      }
+      if (new Decimal(player.stats.totalStarsProduced).gt(Decimal.pow(2, 1024).times(Decimal.pow(2, 64)))) {
+        player.achievements.table[2][3] = true;
+      }
+      if (new Decimal(player.stats.totalStarsProduced).gt(Decimal.pow(9, Math.pow(9, 9)).times(Decimal.pow(2, 64)))) {
+        player.achievements.table[5][1] = true;
       }
       player.stats.sacrificesThisInfinity = 0;
       player.version = 2;
