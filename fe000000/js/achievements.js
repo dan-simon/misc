@@ -85,9 +85,9 @@ let Achievements = {
   // Yes, it is important that Challenge 10 be running (not just have its effect active)
   // for the Challenge 10 achievement. If some other challenge incorperated Challenge 10,
   // you still wouldn't be in Challenge 10 while in it. This is even more true for Challenge 2.
-  // Yes, the total EP achievement is intended to be in current complexity. No, saying it
-  // would just confuse people. No, it has no gameplay consequences at all, because you necessarily
-  // get this achievement in first complexity.
+  // Whether the total EP achievement is current complexity or full total has no
+  // consequences at all, because you necessarily get this achievement in first complexity.
+  // Exception: Importing a save, where full total gives the achievement, as it should be.
   // Yes, there is some confusion between chroma and display chroma. But chroma is IMO the right one
   // to use because it's the thing we're actually basing stuff on.
   // Yes, "Have a power with rarity at least 3" actually requires you to have such a power,
@@ -143,7 +143,7 @@ let Achievements = {
       () => InfinityChallenge.isInfinityChallengeRunning(4) && player.stats.timeSinceInfinity <= 16,
       () => EternityProducer.isUnlocked(),
       () => EternityChallenge.getTotalEternityChallengeCompletions() > 0,
-      () => EternityPrestigeLayer.totalEternityPoints().gte(Decimal.pow(2, 256)),
+      () => EternityPoints.totalEPProduced().gte(Decimal.pow(2, 256)),
       () => true,
       () => EternityChallenge.isEternityChallengeRunning(1) &&
         EternityPrestigeLayer.eternityPointGain().gte(Decimal.pow(2, 256)),
