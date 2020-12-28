@@ -62,10 +62,10 @@ input[type=checkbox] {
 }
 
 .tooltiptext {
-  width: 256px;
+  width: 288px;
   bottom: 100%;
   left: 50%;
-  margin-left: -128px;
+  margin-left: -144px;
   padding: 2px;
   background-color: var(--text-color);
   color: var(--background-color);
