@@ -164,7 +164,7 @@ let Achievements = {
       () => ComplexityPrestigeLayer.complexityPointGain().gte(16) && !Chroma.isColorUnlocked(6),
       () => range(1, 6).every(i => ComplexityChallenge.isComplexityChallengeRunning(i)),
       () => Powers.isUnlocked(),
-      () => Powers.stored().length >= 12,
+      () => Powers.active().concat(Powers.stored()).length >= 12,
       () => Oracle.isUnlocked(),
       () => true,
       () => Galaxy.isUnlocked()
