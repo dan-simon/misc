@@ -945,7 +945,7 @@ let Saving = {
       player.oracle.isPredicting = false;
       player.tabOptions.achievements = true;
       for (let x of player.tabPresets) {
-        x.tabs = 'ac,' + ((x.tabs[0] === 'a') ? ('au' + x.tabs.slice(1)) : i);
+        x.tabs = 'ac,' + ((x.tabs[0] === 'a') ? ('au' + x.tabs.slice(1)) : x.tabs);
       }
       // Assume that the player has done some EC out of order
       // if they've done an EC apart from the first EC at all.
