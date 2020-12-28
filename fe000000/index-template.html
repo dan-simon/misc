@@ -207,7 +207,10 @@
           <span>~r EternityChallenge.eternityChallengeText() ~</span>
         </div>
         <div ~style.display=Boost.isVisible() ? '' : 'none'~>
-          <span>You have ~i Boost.bought() ~ boost~s Boost.bought() ~, multiplying all ~r Generators.term() ~ by ~f Boost.multiplier() ~x (~f Boost.multiplierPer() ~x each). <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buy()">Cost: ~f Boost.cost() ~</button> <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buyMax()">Max</button> <button ~style.display=Autobuyer(9).hasAutobuyer() ? '' : 'none'~ onclick="Autobuyers.toggleSome(9)">Auto: ~r Autobuyer(9).isOn() ? "On" : "Off" ~</button></span>
+          <span>
+            You have ~i Boost.bought() ~ boost~s Boost.bought() ~, multiplying all ~r Generators.term() ~ by ~f Boost.multiplier() ~x (~f Boost.multiplierPer() ~x each).
+            <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buy()">Cost: ~f Boost.cost() ~</button> <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buyMax()">Max</button> <button ~style.display=Autobuyer(9).hasAutobuyer() ? '' : 'none'~ onclick="Autobuyers.toggleSome(9)">Auto: ~r Autobuyer(9).isOn() ? "On" : "Off" ~ <span ~style.display=Autobuyer(9).isSlow() ? '' : 'none'~> (slow)</span></button>
+          </span>
         </div>
         <div ~style.display=SpecialDivs.isDivVisible('boost-power') ? '' : 'none'~>
           <span>Your highest number of boosts this eternity is ~i Boost.highestBoughtThisEternity() ~.</span>
@@ -233,7 +236,7 @@
             <td>~f Generator(1).multiplier() ~x</td>
             <td><button ~class=Generator(1).canBuy() ? "" : "disabled"~ onclick="Generator(1).buy()">Cost: ~i Generator(1).cost() ~</button></td>
             <td><button ~class=Generator(1).canBuy() ? "" : "disabled"~ onclick="Generator(1).buyMax()">Max</button></td>
-            <td><button ~style.display=Autobuyer(1).hasAutobuyer() ? '' : 'none'~ onclick="Autobuyers.toggleSome(1)">Auto: ~r Autobuyer(1).isOn() ? "On" : "Off" ~</button></td>
+            <td><button ~style.display=Autobuyer(1).hasAutobuyer() ? '' : 'none'~ onclick="Autobuyers.toggleSome(1)">Auto: ~r Autobuyer(1).isOn() ? "On" : "Off" ~<span ~style.display=Autobuyer(1).isSlow() ? '' : 'none'~> (slow)</span></button></td>
           </tr>
           <tr ~style.display=Generator(2).isVisible() ? '' : 'none'~>
             <td>Generator 2</td>
@@ -242,7 +245,7 @@
             <td>~f Generator(2).multiplier() ~x</td>
             <td><button ~class=Generator(2).canBuy() ? "" : "disabled"~ onclick="Generator(2).buy()">Cost: ~i Generator(2).cost() ~</button></td>
             <td><button ~class=Generator(2).canBuy() ? "" : "disabled"~ onclick="Generator(2).buyMax()">Max</button></td>
-            <td><button ~style.display=Autobuyer(2).hasAutobuyer() ? '' : 'none'~ onclick="Autobuyers.toggleSome(2)">Auto: ~r Autobuyer(2).isOn() ? "On" : "Off" ~</button></td>
+            <td><button ~style.display=Autobuyer(2).hasAutobuyer() ? '' : 'none'~ onclick="Autobuyers.toggleSome(2)">Auto: ~r Autobuyer(2).isOn() ? "On" : "Off" ~<span ~style.display=Autobuyer(2).isSlow() ? '' : 'none'~> (slow)</span></button></td>
           </tr>
           <tr ~style.display=Generator(3).isVisible() ? '' : 'none'~>
             <td>Generator 3</td>
@@ -251,7 +254,7 @@
             <td>~f Generator(3).multiplier() ~x</td>
             <td><button ~class=Generator(3).canBuy() ? "" : "disabled"~ onclick="Generator(3).buy()">Cost: ~i Generator(3).cost() ~</button></td>
             <td><button ~class=Generator(3).canBuy() ? "" : "disabled"~ onclick="Generator(3).buyMax()">Max</button></td>
-            <td><button ~style.display=Autobuyer(3).hasAutobuyer() ? '' : 'none'~ onclick="Autobuyers.toggleSome(3)">Auto: ~r Autobuyer(3).isOn() ? "On" : "Off" ~</button></td>
+            <td><button ~style.display=Autobuyer(3).hasAutobuyer() ? '' : 'none'~ onclick="Autobuyers.toggleSome(3)">Auto: ~r Autobuyer(3).isOn() ? "On" : "Off" ~<span ~style.display=Autobuyer(3).isSlow() ? '' : 'none'~> (slow)</span></button></td>
           </tr>
           <tr ~style.display=Generator(4).isVisible() ? '' : 'none'~>
             <td>Generator 4</td>
@@ -260,7 +263,7 @@
             <td>~f Generator(4).multiplier() ~x</td>
             <td><button ~class=Generator(4).canBuy() ? "" : "disabled"~ onclick="Generator(4).buy()">Cost: ~i Generator(4).cost() ~</button></td>
             <td><button ~class=Generator(4).canBuy() ? "" : "disabled"~ onclick="Generator(4).buyMax()">Max</button></td>
-            <td><button ~style.display=Autobuyer(4).hasAutobuyer() ? '' : 'none'~ onclick="Autobuyers.toggleSome(4)">Auto: ~r Autobuyer(4).isOn() ? "On" : "Off" ~</button></td>
+            <td><button ~style.display=Autobuyer(4).hasAutobuyer() ? '' : 'none'~ onclick="Autobuyers.toggleSome(4)">Auto: ~r Autobuyer(4).isOn() ? "On" : "Off" ~<span ~style.display=Autobuyer(4).isSlow() ? '' : 'none'~> (slow)</span></button></td>
           </tr>
           <tr ~style.display=Generator(5).isVisible() ? '' : 'none'~>
             <td>Generator 5</td>
@@ -269,7 +272,7 @@
             <td>~f Generator(5).multiplier() ~x</td>
             <td><button ~class=Generator(5).canBuy() ? "" : "disabled"~ onclick="Generator(5).buy()">Cost: ~i Generator(5).cost() ~</button></td>
             <td><button ~class=Generator(5).canBuy() ? "" : "disabled"~ onclick="Generator(5).buyMax()">Max</button></td>
-            <td><button ~style.display=Autobuyer(5).hasAutobuyer() ? '' : 'none'~ onclick="Autobuyers.toggleSome(5)">Auto: ~r Autobuyer(5).isOn() ? "On" : "Off" ~</button></td>
+            <td><button ~style.display=Autobuyer(5).hasAutobuyer() ? '' : 'none'~ onclick="Autobuyers.toggleSome(5)">Auto: ~r Autobuyer(5).isOn() ? "On" : "Off" ~<span ~style.display=Autobuyer(5).isSlow() ? '' : 'none'~> (slow)</span></button></td>
           </tr>
           <tr ~style.display=Generator(6).isVisible() ? '' : 'none'~>
             <td>Generator 6</td>
@@ -278,7 +281,7 @@
             <td>~f Generator(6).multiplier() ~x</td>
             <td><button ~class=Generator(6).canBuy() ? "" : "disabled"~ onclick="Generator(6).buy()">Cost: ~i Generator(6).cost() ~</button></td>
             <td><button ~class=Generator(6).canBuy() ? "" : "disabled"~ onclick="Generator(6).buyMax()">Max</button></td>
-            <td><button ~style.display=Autobuyer(6).hasAutobuyer() ? '' : 'none'~ onclick="Autobuyers.toggleSome(6)">Auto: ~r Autobuyer(6).isOn() ? "On" : "Off" ~</button></td>
+            <td><button ~style.display=Autobuyer(6).hasAutobuyer() ? '' : 'none'~ onclick="Autobuyers.toggleSome(6)">Auto: ~r Autobuyer(6).isOn() ? "On" : "Off" ~<span ~style.display=Autobuyer(6).isSlow() ? '' : 'none'~> (slow)</span></button></td>
           </tr>
           <tr ~style.display=Generator(7).isVisible() ? '' : 'none'~>
             <td>Generator 7</td>
@@ -287,7 +290,7 @@
             <td>~f Generator(7).multiplier() ~x</td>
             <td><button ~class=Generator(7).canBuy() ? "" : "disabled"~ onclick="Generator(7).buy()">Cost: ~i Generator(7).cost() ~</button></td>
             <td><button ~class=Generator(7).canBuy() ? "" : "disabled"~ onclick="Generator(7).buyMax()">Max</button></td>
-            <td><button ~style.display=Autobuyer(7).hasAutobuyer() ? '' : 'none'~ onclick="Autobuyers.toggleSome(7)">Auto: ~r Autobuyer(7).isOn() ? "On" : "Off" ~</button></td>
+            <td><button ~style.display=Autobuyer(7).hasAutobuyer() ? '' : 'none'~ onclick="Autobuyers.toggleSome(7)">Auto: ~r Autobuyer(7).isOn() ? "On" : "Off" ~<span ~style.display=Autobuyer(7).isSlow() ? '' : 'none'~> (slow)</span></button></td>
           </tr>
           <tr ~style.display=Generator(8).isVisible() ? '' : 'none'~>
             <td>Generator 8</td>
@@ -296,7 +299,7 @@
             <td>~f Generator(8).multiplier() ~x</td>
             <td><button ~class=Generator(8).canBuy() ? "" : "disabled"~ onclick="Generator(8).buy()">Cost: ~i Generator(8).cost() ~</button></td>
             <td><button ~class=Generator(8).canBuy() ? "" : "disabled"~ onclick="Generator(8).buyMax()">Max</button></td>
-            <td><button ~style.display=Autobuyer(8).hasAutobuyer() ? '' : 'none'~ onclick="Autobuyers.toggleSome(8)">Auto: ~r Autobuyer(8).isOn() ? "On" : "Off" ~</button></td>
+            <td><button ~style.display=Autobuyer(8).hasAutobuyer() ? '' : 'none'~ onclick="Autobuyers.toggleSome(8)">Auto: ~r Autobuyer(8).isOn() ? "On" : "Off" ~<span ~style.display=Autobuyer(8).isSlow() ? '' : 'none'~> (slow)</span></button></td>
           </tr>
         </table>
         <div style="min-height: 104px;" ~style.display=Sacrifice.isVisible() ? '' : 'none'~>
