@@ -1010,6 +1010,13 @@ let Saving = {
       player.achievements.showCompletedRows = true;
       player.version = 2.015625;
     }
+    if (player.version < 2.01953125) {
+      if (Decimal.lte(4, player.eternities) && Decimal.lte(player.eternities, 6)) {
+        alert('Eternity milestones 4 and 6 have been swapped (view the eternity milestones tab for more information). ' +
+          'You may want to change your sacrifice autobuyer to not constantly sacrifice.');
+      }
+      player.version = 2.01953125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

@@ -89,9 +89,9 @@ let InfinityChallenge = {
     player.infinityChallengesCompleted[x - 1] = true;
   },
   checkForAllAutoInfinityChallengeCompletions() {
-    // Don't call this unless the player actually has
-    // the relevant eternity milestone.
-    for (let i = 1; i <= 8; i++) {
+    // This will do nothing if the player doesn't have the auto-EC milestone.
+    let autoInfinityChallenges = EternityStartingBenefits.infinityChallenges();
+    for (let i = 1; i <= autoInfinityChallenges; i++) {
       this.checkForAutoInfinityChallengeCompletion(i);
     }
   },

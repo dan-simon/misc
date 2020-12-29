@@ -29,5 +29,25 @@ let EternityStartingBenefits = {
   },
   rawInfinities() {
     return Math.pow(Math.min(16, player.eternities.toNumber()), 2);
+  },
+  infinityChallenges() {
+    if (EternityMilestones.isEternityMilestoneActive(4)) {
+      return this.rawInfinityChallenges();
+    } else {
+      return 0;
+    }
+  },
+  rawInfinityChallenges() {
+    return Math.min(8, Math.floor(player.eternities.toNumber()));
+  },
+  rawInfinityChallengesText() {
+    let x = this.rawInfinityChallenges();
+    if (x === 1) {
+      return 'the first infinity challenge';
+    } else if (x === 8) {
+      return 'all ' + formatInt(8) + ' infinity challenges';
+    } else {
+      return 'the first ' + formatInt(x) + ' infinity challenges';
+    }
   }
 }

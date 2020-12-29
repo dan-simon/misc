@@ -474,7 +474,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2.015625
+  version: 2.01953125
 }
 
 let player;

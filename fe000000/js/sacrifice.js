@@ -93,7 +93,7 @@ let Sacrifice = {
       player.boost = {bought: 0};
       player.generators = initialGenerators();
       player.highestGenerator = 0;
-    } else if (!EternityMilestones.isEternityMilestoneActive(4)) {
+    } else if (!EternityMilestones.isEternityMilestoneActive(6)) {
       Generators.resetAmounts(7);
     }
     // Sacrificing still resets times (this matters in a few challenges

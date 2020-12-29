@@ -31,9 +31,7 @@ function gameLoop(diff, display) {
   InfinityAutobuyers.tick();
   EternityAutobuyers.tick();
   ComplexityAutobuyers.tick();
-  if (EternityMilestones.isEternityMilestoneActive(6)) {
-    InfinityChallenge.checkForAllAutoInfinityChallengeCompletions();
-  }
+  InfinityChallenge.checkForAllAutoInfinityChallengeCompletions();
   if (EternityChallenge.isTotalCompletionsRewardActive(3)) {
     InfinityPoints.addAmount(InfinityPrestigeLayer.infinityPointGain().times(diff));
   }

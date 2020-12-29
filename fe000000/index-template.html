@@ -1364,7 +1364,7 @@
     <tab ~style.display=Tabs.currentTab() === 'eternity-milestones' ? '' : 'none'~>
       <span>
         You have ~q Eternities.amount() ~ eternit~y Eternities.amount() ~.
-        <button ~style.display=(EternityMilestones.hasEternityMilestone(4) || PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~ onclick="EternityMilestones.toggleMilestone(4)">Eternity Milestone ~i 4 ~: ~r (EternityMilestones.isEternityMilestoneDisabled(4) ? "Disabled" : "Enabled") + (EternityMilestones.hasEternityMilestone(4) ? '' : ' (once unlocked)') ~</button>
+        <button ~style.display=(EternityMilestones.hasEternityMilestone(6) || PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~ onclick="EternityMilestones.toggleMilestone(6)">Eternity Milestone ~i 6 ~: ~r (EternityMilestones.isEternityMilestoneDisabled(6) ? "Disabled" : "Enabled") + (EternityMilestones.hasEternityMilestone(6) ? '' : ' (once unlocked)') ~</button>
         <button ~style.display=(EternityMilestones.hasEternityMilestone(8) || PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~ onclick="EternityMilestones.toggleMilestone(8)">Eternity Milestone ~i 8 ~: ~r (EternityMilestones.isEternityMilestoneDisabled(8) ? "Disabled" : "Enabled") + (EternityMilestones.hasEternityMilestone(8) ? '' : ' (once unlocked)') ~</button>
       </span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
@@ -1402,7 +1402,7 @@
               <br/>
               ~r EternityMilestones.milestoneStatusDescription(4) ~
               <br/>
-              Sacrifice no longer resets anything.
+              Automatically complete ~r EternityStartingBenefits.rawInfinityChallengesText() ~ as soon as you unlock ~r pluralize(EternityStartingBenefits.rawInfinityChallenges(), 'it', 'them') ~ (based on eternities)
             </div>
           </td>
         </tr>
@@ -1422,7 +1422,7 @@
               <br/>
               ~r EternityMilestones.milestoneStatusDescription(6) ~
               <br/>
-              Automatically complete each infinity challenge as soon as you unlock it.
+              Sacrifice no longer resets anything.
             </div>
           </td>
           <td>
