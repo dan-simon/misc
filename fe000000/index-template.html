@@ -2634,7 +2634,7 @@
             </tr>
           </table>
         </div>
-        <span ~style.display=Permanence.canGainPermanence() ? '' : 'none'~><button style="height: 48px;" onclick="Permanence.gainPermanence()">Lose all but ~i Permanence.getLeftoverEternities() ~ eternities,<br/>but gain ~f Permanence.permanenceGain() ~ permanence.</button></span>
+        <span ~style.display=Permanence.canGainPermanence() ? '' : 'none'~><button style="height: 48px;" onclick="Permanence.gainPermanence(true)">Lose all but ~i Permanence.getLeftoverEternities() ~ eternities,<br/>but gain ~f Permanence.permanenceGain() ~ permanence.</button></span>
         <span ~style.display=Permanence.canGainPermanence() ? 'none' : ''~>You need ~f Permanence.getRequiredEternities() ~ eternities to gain permanence.<span ~style.display=Permanence.hasGainedPermanence() ? 'none' : ''~> Permanence can be spent on a variety of upgrades.</span></span>
         <br ~style.display=Permanence.hasGainedPermanence() ? 'none' : ''~/>
         <span ~style.display=Permanence.hasGainedPermanence() ? 'none' : ''~>You get ~r Permanence.conversionText() ~.</span>
@@ -5197,7 +5197,7 @@
     <tab ~style.display=Tabs.currentTab() === 'achievements' ? '' : 'none'~>
       <span>You have completed ~i Achievements.getTotalAchievementsUnlocked() ~ achievements.</span>
       <br/>
-      <span>Only achievements up to ~i Achievements.beyondHighestRounded() ~ beyond the last achievement you have are shown.</span>
+      <span>Only achievements up to ~i Achievements.beyondHighestRounded() ~ beyond the last achievement you have are shown. The others are replaced with question marks.</span>
       <br/>
       <span>Number of achievements beyond last reached achievement to show: <input type="text" ~!value=Achievements.beyondHighest()~ ~!onchange=function() {Achievements.setBeyondHighest(+this.value)}~></input></span>
       <br/>
@@ -5209,10 +5209,18 @@
       <br ~style.display=Achievements.hasNonGeneratorEffects() ? '' : 'none'~/>
       <span ~style.display=Achievements.hasNonGeneratorEffects() ? '' : 'none'~>and multiplying ~r Achievements.nonGeneratorEffectsText() ~ by ~r formatWithPrecision(Achievements.otherMultiplier(), 5) ~x.</span>
       <br/>
-      <span><button onclick="Achievements.toggleActive()">Achievement rewards: ~r Achievements.active() ? 'On' : 'Off' ~</button> <button onclick="Achievements.toggleNotifications()">Achievement notifications: ~r Achievements.notifications() ? 'On' : 'Off' ~</button></span>
+      <span>
+        <button onclick="Achievements.toggleActive()">Achievement rewards: ~r Achievements.active() ? 'On' : 'Off' ~</button>
+        <button onclick="Achievements.toggleNotifications()">Achievement notifications: ~r Achievements.notifications() ? 'On' : 'Off' ~</button>
+      </span>
+      <br/>
+      <span>
+        <button onclick="Achievements.toggleShowFullyFarRows()">Show fully-question-mark achievement rows: ~r Achievements.showFullyFarRows() ? 'On' : 'Off' ~</button>
+        <button onclick="Achievements.toggleShowCompletedRows()">Show completed achievement rows: ~r Achievements.showCompletedRows() ? 'On' : 'Off' ~</button>
+      </span>
       <br/>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: collapse;">
-        <tr>
+        <tr ~style.display=Achievements.showRow(1) ? '' : 'none'~>
           <td class="achievementtd" ~style.background=Achievements.color(1, 1)~>
             <span>~r Achievements.getAchievementName(1, 1) ~</span>
             <br/>
@@ -5262,7 +5270,7 @@
             <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 8) ? '' : 'none'~>Buy Generator 8.</span>
           </td>
         </tr>
-        <tr>
+        <tr ~style.display=Achievements.showRow(2) ? '' : 'none'~>
           <td class="achievementtd" ~style.background=Achievements.color(2, 1)~>
             <span>~r Achievements.getAchievementName(2, 1) ~</span>
             <br/>
@@ -5312,7 +5320,7 @@
             <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(2, 8) ? '' : 'none'~>Infinity.</span>
           </td>
         </tr>
-        <tr>
+        <tr ~style.display=Achievements.showRow(3) ? '' : 'none'~>
           <td class="achievementtd" ~style.background=Achievements.color(3, 1)~>
             <span>~r Achievements.getAchievementName(3, 1) ~</span>
             <br/>
@@ -5362,7 +5370,7 @@
             <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 8) ? '' : 'none'~>Complete an infinity challenge.</span>
           </td>
         </tr>
-        <tr>
+        <tr ~style.display=Achievements.showRow(4) ? '' : 'none'~>
           <td class="achievementtd" ~style.background=Achievements.color(4, 1)~>
             <span>~r Achievements.getAchievementName(4, 1) ~</span>
             <br/>
@@ -5412,7 +5420,7 @@
             <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(4, 8) ? '' : 'none'~>Get ~i 256 ~ eternities.</span>
           </td>
         </tr>
-        <tr>
+        <tr ~style.display=Achievements.showRow(5) ? '' : 'none'~>
           <td class="achievementtd" ~style.background=Achievements.color(5, 1)~>
             <span>~r Achievements.getAchievementName(5, 1) ~</span>
             <br/>
@@ -5462,7 +5470,7 @@
             <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(5, 8) ? '' : 'none'~>Unlock chroma.</span>
           </td>
         </tr>
-        <tr>
+        <tr ~style.display=Achievements.showRow(6) ? '' : 'none'~>
           <td class="achievementtd" ~style.background=Achievements.color(6, 1)~>
             <span>~r Achievements.getAchievementName(6, 1) ~</span>
             <br/>
@@ -5512,7 +5520,7 @@
             <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(6, 8) ? '' : 'none'~>Complete all the complexity achievements.</span>
           </td>
         </tr>
-        <tr>
+        <tr ~style.display=Achievements.showRow(7) ? '' : 'none'~>
           <td class="achievementtd" ~style.background=Achievements.color(7, 1)~>
             <span>~r Achievements.getAchievementName(7, 1) ~</span>
             <br/>
@@ -5562,7 +5570,7 @@
             <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(7, 8) ? '' : 'none'~>Unlock galaxies.</span>
           </td>
         </tr>
-        <tr>
+        <tr ~style.display=Achievements.showRow(8) ? '' : 'none'~>
           <td class="achievementtd" ~style.background=Achievements.color(8, 1)~>
             <span>~r Achievements.getAchievementName(8, 1) ~</span>
             <br/>
@@ -5853,6 +5861,9 @@
         <span ~style.display=SpecialDivs.isDivVisible('prestige') ? '' : 'none'~>Prestige: <input type="checkbox" ~!checked=Options.confirmation('prestige')~ ~!onchange=function() {Options.setConfirmation('prestige', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
         <span ~style.display=(PrestigeLayerProgress.hasReached('infinity') || InfinityPrestigeLayer.canInfinity()) ? '' : 'none'~>Infinity: <input type="checkbox" ~!checked=Options.confirmation('infinity')~ ~!onchange=function() {Options.setConfirmation('infinity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
         <span ~style.display=(PrestigeLayerProgress.hasReached('eternity') || EternityPrestigeLayer.canEternity()) ? '' : 'none'~>Eternity: <input type="checkbox" ~!checked=Options.confirmation('eternity')~ ~!onchange=function() {Options.setConfirmation('eternity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=(Permanence.hasGainedPermanence() || Permanence.canGainPermanence()) ? '' : 'none'~>Gaining permanence: <input type="checkbox" ~!checked=Options.confirmation('permanence')~ ~!onchange=function() {Options.setConfirmation('permanence', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+      </div>
+      <div ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~>
         <span ~style.display=(PrestigeLayerProgress.hasReached('complexity') || ComplexityPrestigeLayer.canComplexity()) ? '' : 'none'~>Complexity: <input type="checkbox" ~!checked=Options.confirmation('complexity')~ ~!onchange=function() {Options.setConfirmation('complexity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
         <span ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~>Complexity reset: <input type="checkbox" ~!checked=Options.confirmation('complexityReset')~ ~!onchange=function() {Options.setConfirmation('complexityReset', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
         <span ~style.display=(PrestigeLayerProgress.hasReached('finality') || FinalityPrestigeLayer.canFinality()) ? '' : 'none'~>Finality: <input type="checkbox" ~!checked=Options.confirmation('finality')~ ~!onchange=function() {Options.setConfirmation('finality', this.checked)}~></input></span>

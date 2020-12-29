@@ -297,7 +297,9 @@ let initialPlayer = {
     ],
     beyondHighest: 2,
     active: true,
-    notifications: true
+    notifications: true,
+    showFullyFarRows: true,
+    showCompletedRows: true
   },
   displayAllGoals: false,
   isTabVisible: {
@@ -389,6 +391,7 @@ let initialPlayer = {
     prestige: true,
     infinity: true,
     eternity: true,
+    permanence: true,
     complexity: true,
     complexityReset: true,
     finality: true,
@@ -471,7 +474,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2
+  version: 2.015625
 }
 
 let player;

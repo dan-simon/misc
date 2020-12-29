@@ -1004,6 +1004,12 @@ let Saving = {
       player.stats.sacrificesThisInfinity = 0;
       player.version = 2;
     }
+    if (player.version < 2.015625) {
+      player.confirmations.permanence = true;
+      player.achievements.showFullyFarRows = true;
+      player.achievements.showCompletedRows = true;
+      player.version = 2.015625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

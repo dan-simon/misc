@@ -318,6 +318,23 @@ let Achievements = {
   toggleNotifications(x) {
     player.achievements.notifications = !player.achievements.notifications;
   },
+  showFullyFarRows() {
+    return player.achievements.showFullyFarRows;
+  },
+  toggleShowFullyFarRows(x) {
+    player.achievements.showFullyFarRows = !player.achievements.showFullyFarRows;
+  },
+  showCompletedRows() {
+    return player.achievements.showCompletedRows;
+  },
+  toggleShowCompletedRows(x) {
+    player.achievements.showCompletedRows = !player.achievements.showCompletedRows;
+  },
+  showRow(x) {
+    let highestCloseRow = Math.min(8, Math.floor(this.getHighest()  + this.beyondHighest() - 1) / 8);
+    return (this.showFullyFarRows() || x <= highestCloseRow) &&
+      (this.showCompletedRows() || range(1, 8).some(y => !this.hasAchievement(x, y)));
+  },
   beyondHighest() {
     return player.achievements.beyondHighest;
   },
@@ -327,9 +344,12 @@ let Achievements = {
   setBeyondHighest(x) {
     player.achievements.beyondHighest = x;
   },
-  isAchievementClose(row, column) {
-    let highest = Math.max(8, ...range(1, 8).map(
+  getHighest() {
+    return Math.max(8, ...range(1, 8).map(
       x => 8 * x + Math.max(...range(1, 8).filter(y => this.hasAchievement(x, y)))));
+  },
+  isAchievementClose(row, column) {
+    let highest = this.getHighest();
     return 8 * row + column <= highest + this.beyondHighest();
   },
   achievementStatusDescription(row, column) {

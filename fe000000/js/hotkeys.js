@@ -105,7 +105,7 @@ window.addEventListener('keydown', function(event) {
     break;
     
     case 82: // R
-      Permanence.gainPermanence();
+      Permanence.gainPermanence(true);
     break;
 
     case 83: // S

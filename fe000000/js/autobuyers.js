@@ -317,7 +317,7 @@ let Autobuyers = {
       shouldGainPermanence = Permanence.permanenceGain().gte(player.stats.lastPermanenceGain.times(priority));
     }
     if (shouldGainPermanence) {
-      Permanence.gainPermanence();
+      Permanence.gainPermanence(false);
     }
   },
   complexity() {

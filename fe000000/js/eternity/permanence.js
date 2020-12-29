@@ -20,7 +20,9 @@ let Permanence = {
     }
   },
   canGainPermanence() {
-    return EternityProducer.isUnlocked() && Eternities.amount().gte(this.getRequiredEternities());
+    // We don't use Permanence.getRequiredEternities() since that's often rounded to
+    // the leftover eternities with good enough conversion.
+    return EternityProducer.isUnlocked() && Eternities.amount().minus(this.getLeftoverEternities()).gte(this.getEternitiesPerPermanence());
   },
   permanenceGain() {
     if (!this.canGainPermanence()) {
@@ -31,8 +33,14 @@ let Permanence = {
   hasGainedPermanence() {
     return player.hasGainedPermanence;
   },
-  gainPermanence() {
+  gainPermanenceConfirmationMessage() {
+    return 'Are you sure you want to gain ' + format(Permanence.permanenceGain()) +
+    ' permanence? You will lose all but ' + formatInt(Permanence.getLeftoverEternities()) +
+    ' eternities, but you will not lose anything else.';
+  },
+  gainPermanence(manual) {
     if (!this.canGainPermanence()) return;
+    if (manual && Options.confirmation('permanence') && !confirm(this.gainPermanenceConfirmationMessage())) return;
     Achievements.checkForAchievements('permanence');
     player.hasGainedPermanence = true;
     let gain = this.permanenceGain();
