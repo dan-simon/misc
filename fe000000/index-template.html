@@ -2926,6 +2926,11 @@
         <br/>
         <span ~style.display=Chroma.producingAll() ? 'none' : ''~>You ~r Chroma.currentProductionTextPrefix() ~<span ~class=Chroma.currentColorClass()~>~r Chroma.currentColorName() ~</span>~r Chroma.currentProductionTextSuffix() ~, and will produce <span ~class=Chroma.nextColorClass()~>~r Chroma.nextColorName() ~</span> after next eternity reset.</span>
         <br ~style.display=Chroma.producingAll() ? 'none' : ''~/>
+        <span>You ~r Chroma.timeForChromaTextPrefix() ~ <input type="text" ~!value=Chroma.timeForChromaValue()~ ~!onchange=function() {Chroma.setTimeForChromaValue(+this.value)}~></input> <select ~!value=Chroma.timeForChromaMode()~ ~!onchange=function() {Chroma.setTimeForChromaMode(this.value)}~>
+          <option value="chroma">chroma</option>
+          <option value="fraction of chroma cap">fraction of chroma cap</option>
+        </select>~r Chroma.timeForChromaTextSuffix() ~.</span>
+        <br/>
         <span>
           <span ~style.display=Chroma.producingAll() ? 'none' : ''~>The value of whatever color you are producing is</span>
           <span ~style.display=Chroma.producingAll() ? '' : 'none'~>The values of all colors are</span>

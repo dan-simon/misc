@@ -1017,6 +1017,11 @@ let Saving = {
       }
       player.version = 2.01953125;
     }
+    if (player.version < 2.03125) {
+      player.chroma.timeForChromaValue = 0.875;
+      player.chroma.timeForChromaMode = 'fraction of chroma cap';
+      player.version = 2.03125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

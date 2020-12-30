@@ -173,7 +173,9 @@ let initialPlayer = {
     unlocked: [false, false, false, false, false, false],
     current: 0,
     next: 0,
-    displayAmount: 0
+    displayAmount: 0,
+    timeForChromaValue: 0.875,
+    timeForChromaMode: 'fraction of chroma cap'
   },
   complexityPoints: new Decimal(0),
   complexities: 0,
@@ -474,7 +476,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2.01953125
+  version: 2.03125
 }
 
 let player;
