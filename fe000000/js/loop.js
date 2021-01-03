@@ -1,4 +1,5 @@
-function gameLoop(diff, display) {
+function gameLoop(diff, display, isOnline) {
+  // Right now display and isOnline are always the same, but who knows if that'll continue to be true?
   if (typeof diff !== 'number') {
     let now = Date.now();
     diff = Math.max(0, (now - player.lastUpdate) / 1000 * player.cheats.gameSpeed);
@@ -24,7 +25,7 @@ function gameLoop(diff, display) {
       Generator(i).produce(diff);
     }
   }
-  Stats.addToTimeStats(diff);
+  Stats.addToTimeStats(diff, isOnline);
   // Why is this here? Because otherwise the eternity time will be out of sync with chroma when the UI updates.
   Chroma.updateColors();
   Autobuyers.tick(diff);

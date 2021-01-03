@@ -3210,7 +3210,7 @@
               <br/>
               <span ~style.display=ComplexityChallenge.showComplexityChallengeLastCompletionDescription(2) ? '' : 'none'~>~r ComplexityChallenge.complexityChallengeLastCompletionDescription(2) ~</span>
               <br ~style.display=ComplexityChallenge.showComplexityChallengeLastCompletionDescription(2) ? '' : 'none'~/>
-              <span><button onclick="ComplexityChallenge.toggleSafeguard(2)">Buying boosts: ~r ComplexityChallenge.isSafeguardOn(2) ? "Disabled" : "Enabled" ~</button></span>
+              <span><button onclick="ComplexityChallenge.toggleSafeguard(2)">Buying boosts: ~r ComplexityChallenge.safeguardStatusText(2) ~</button></span>
               <br/>
               <span ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(2) ? 'none' : ''~>(Disabling this doesn't put you in this challenge yet, since the challenge is locked.)</span>
               <br ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(2) ? 'none' : ''~/>
@@ -3233,7 +3233,7 @@
               <br/>
               <span ~style.display=ComplexityChallenge.showComplexityChallengeLastCompletionDescription(3) ? '' : 'none'~>~r ComplexityChallenge.complexityChallengeLastCompletionDescription(3) ~</span>
               <br ~style.display=ComplexityChallenge.showComplexityChallengeLastCompletionDescription(3) ? '' : 'none'~/>
-              <span><button onclick="ComplexityChallenge.toggleSafeguard(3)">Unlocking the Eternity Producer: ~r ComplexityChallenge.isSafeguardOn(3) ? "Disabled" : "Enabled" ~</button></span>
+              <span><button onclick="ComplexityChallenge.toggleSafeguard(3)">Unlocking the Eternity Producer: ~r ComplexityChallenge.safeguardStatusText(3) ~</button></span>
               <br/>
               <span ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(3) ? 'none' : ''~>(Disabling this doesn't put you in this challenge yet, since the challenge is locked.)</span>
               <br ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(3) ? 'none' : ''~/>
@@ -3254,7 +3254,7 @@
               <br/>
               <span ~style.display=ComplexityChallenge.showComplexityChallengeLastCompletionDescription(4) ? '' : 'none'~>~r ComplexityChallenge.complexityChallengeLastCompletionDescription(4) ~</span>
               <br ~style.display=ComplexityChallenge.showComplexityChallengeLastCompletionDescription(4) ? '' : 'none'~/>
-              <span><button onclick="ComplexityChallenge.toggleSafeguard(4)">Unlocking chroma and colors: ~r ComplexityChallenge.isSafeguardOn(4) ? "Disabled" : "Enabled" ~</button></span>
+              <span><button onclick="ComplexityChallenge.toggleSafeguard(4)">Unlocking chroma and colors: ~r ComplexityChallenge.safeguardStatusText(4) ~</button></span>
               <br/>
               <span ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(4) ? 'none' : ''~>(Disabling this doesn't put you in this challenge yet, since the challenge is locked.)</span>
               <br ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(4) ? 'none' : ''~/>
@@ -3277,7 +3277,7 @@
               <br/>
               <span ~style.display=ComplexityChallenge.showComplexityChallengeLastCompletionDescription(5) ? '' : 'none'~>~r ComplexityChallenge.complexityChallengeLastCompletionDescription(5) ~</span>
               <br ~style.display=ComplexityChallenge.showComplexityChallengeLastCompletionDescription(5) ? '' : 'none'~/>
-              <span><button onclick="ComplexityChallenge.toggleSafeguard(5)">Buying Eternity Generator 8: ~r ComplexityChallenge.isSafeguardOn(5) ? "Disabled" : "Enabled" ~</button></span>
+              <span><button onclick="ComplexityChallenge.toggleSafeguard(5)">Buying Eternity Generator 8: ~r ComplexityChallenge.safeguardStatusText(5) ~</button></span>
               <br/>
               <span ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(5) ? 'none' : ''~>(Disabling this doesn't put you in this challenge yet, since the challenge is locked.)</span>
               <br ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(5) ? 'none' : ''~/>
@@ -3298,11 +3298,11 @@
               <br/>
               <span ~style.display=ComplexityChallenge.showComplexityChallengeLastCompletionDescription(6) ? '' : 'none'~>~r ComplexityChallenge.complexityChallengeLastCompletionDescription(6) ~</span>
               <br ~style.display=ComplexityChallenge.showComplexityChallengeLastCompletionDescription(6) ? '' : 'none'~/>
-              <span><button onclick="ComplexityChallenge.toggleSafeguard(6)">Buying studies: ~r ComplexityChallenge.isSafeguardOn(6) ? "Disabled" : "Enabled" ~</button></span>
+              <span><button onclick="ComplexityChallenge.toggleSafeguard(6)">Buying studies: ~r ComplexityChallenge.safeguardStatusText(6) ~</button></span>
               <br/>
               <span ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(6) ? 'none' : ''~>(Disabling this doesn't put you in this challenge yet, since the challenge is locked.)</span>
               <br ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(6) ? 'none' : ''~/>
-              <span style="font-size: 0.875rem" ~style.display=(ComplexityAchievements.hasComplexityAchievement(4, 4) && ComplexityChallenge.isComplexityChallengeUnlocked(6)) ? '' : 'none'~>(Due to "On the other side", you also need to respec studies to enter this challenge. Disabling buying studies will respec studies on complexity.)</span>
+              <span ~style.display=(ComplexityAchievements.hasComplexityAchievement(4, 4) && ComplexityChallenge.isComplexityChallengeUnlocked(6)) ? '' : 'none'~>(Due to "On the other side", you also need to respec studies to enter this challenge. Disabling buying studies will respec studies on complexity.)</span>
               <br ~style.display=(ComplexityAchievements.hasComplexityAchievement(4, 4) && ComplexityChallenge.isComplexityChallengeUnlocked(6)) ? '' : 'none'~/>
               <span>Reward: Extra theorems.</span>
               <br/>
@@ -5679,6 +5679,8 @@
       <span ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~>You have spent ~t player.stats.timeSinceComplexity ~ in this complexity.</span>
       <br ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~/>
       <span ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~>You have spent ~t player.stats.timeSinceFinality ~ in this finality.</span>
+      <br/>
+      <span>You have spent ~t player.stats.onlineTimeSinceGameStart ~ playing this game (not counting time offline).</span>
       <br/>
       <span>You have spent ~t player.stats.timeSinceGameStart ~ playing this game (counting time offline).</span>
     </tab>

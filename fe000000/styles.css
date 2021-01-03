@@ -189,10 +189,15 @@ input[type=checkbox] {
   text-align: center;
   width: 576px;
   height: 288px;
+  font-size: 0.875rem;
   padding: 4px;
   margin: 4px;
   border: solid;
   border-width: 1px 1px;
+}
+
+.complexitychallengediv button {
+  font-size: 0.875rem;
 }
 
 .eternitymilestonediv {

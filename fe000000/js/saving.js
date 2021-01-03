@@ -112,7 +112,7 @@ let Saving = {
     let interval = setInterval(function() {
       let initialTick = tick;
       while (tick < Math.min(ticks, initialTick + 256)) {
-        gameLoop(tickLength, false);
+        gameLoop(tickLength, false, false);
         let d = Date.now();
         tick++;
         if (d - startTime > 1 / 16) {
@@ -1021,6 +1021,11 @@ let Saving = {
       player.chroma.timeForChromaValue = 0.875;
       player.chroma.timeForChromaMode = 'fraction of chroma cap';
       player.version = 2.03125;
+    }
+    if (player.version < 2.046875) {
+      // We don't have any better guess.
+      player.stats.onlineTimeSinceGameStart = player.stats.timeSinceGameStart;
+      player.version = 2.046875;
     }
   },
   convertSaveToDecimal() {

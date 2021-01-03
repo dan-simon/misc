@@ -448,6 +448,7 @@ let initialPlayer = {
     timeSinceIPGainWasTotal: 0,
     timeSinceEPGainWasTotal: 0,
     timeSinceCPGainWasTotal: 0,
+    onlineTimeSinceGameStart: 0,
     fastestInfinity: Math.pow(2, 256),
     fastestEternity: Math.pow(2, 256),
     fastestComplexity: Math.pow(2, 256),
@@ -476,7 +477,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2.03125
+  version: 2.046875
 }
 
 let player;

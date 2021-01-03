@@ -1,5 +1,5 @@
 let Stats = {
-  addToTimeStats(diff) {
+  addToTimeStats(diff, isOnline) {
     player.stats.timeSincePurchase += diff;
     player.stats.timeSinceSacrifice += diff;
     player.stats.timeSincePrestige += diff;
@@ -25,6 +25,12 @@ let Stats = {
     player.stats.timeSinceCPGainWasTotal += diff;
     player.stats.timeSinceExport += diff;
     ComplexityChallenge.addToTimeStats(diff);
+    if (isOnline !== false) {
+      // Note that this happens in the default case where isOnline is undefined.
+      // Note also that if the game is being throttled, this makes sure each tick
+      // is at most 1/8th of a second.
+      player.stats.onlineTimeSinceGameStart += Math.min(diff, 1 / 8);
+    }
   },
   recordPurchase(i, n) {
     player.stats.timeSincePurchase = 0;

@@ -135,6 +135,11 @@ let ComplexityChallenge = {
       }
     }
   },
+  safeguardStatusText(x) {
+    let mainText = ComplexityChallenge.isSafeguardOn(x) ? 'Disabled' : 'Enabled';
+    let extraText = (ComplexityChallenge.isSafeguardOn(x) && !ComplexityChallenge.isComplexityChallengeRunning(x)) ? ' (not in challenge)' : '';
+    return mainText + extraText;
+  },
   addToTimeStats(diff) {
     for (let i = 1; i <= 6; i++) {
       if (this.isComplexityChallengeRunning(i)) {
