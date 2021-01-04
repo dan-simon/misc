@@ -187,6 +187,7 @@ let initialPlayer = {
   complexityChallengeSafeguards: [false, false, false, false, false],
   complexityChallengeLastCompletion: [[-1, -1], [-1, -1], [-1, -1], [-1, -1], [-1, -1], [-1, -1]],
   complexityChallengeTimeSpent: [0, 0, 0, 0, 0, 0],
+  isComplexityChallengeExplanationMovedDown: false,
   complexityAchievements: [
     [false, false, false, false],
     [false, false, false, false],
@@ -477,7 +478,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2.046875
+  version: 2.05078125
 }
 
 let player;

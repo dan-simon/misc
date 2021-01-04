@@ -169,6 +169,12 @@ let ComplexityChallenge = {
       }
     }
   },
+  isExplanationMovedDown() {
+    return player.isComplexityChallengeExplanationMovedDown;
+  },
+  moveExplanation() {
+    player.isComplexityChallengeExplanationMovedDown = !player.isComplexityChallengeExplanationMovedDown;
+  },
   color(x) {
     return Colors.makeStyle(1 - 2 / (2 + Math.log2(1 + this.getComplexityChallengeCompletions(x) / 2)), true);
   }

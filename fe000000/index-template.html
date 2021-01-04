@@ -3178,7 +3178,49 @@
       <span ~style.display=FinalityMilestones.isFinalityMilestoneActive(5) ? '' : 'none'~>The Complexity Challenge 6 reward is instead currently ~f ComplexityStars.complexityChallengeRewardMultiplier(6) ~x stronger (from ~f ComplexityStars.extraAmount() ~ hypercomplexity stars).</span>
       <br/>
       <br/>
-      <span>You do not need to complexity to complete complexity challenges. How to complete them is explained at the bottom of this tab.</span>
+      <span>You do not need to complexity to complete complexity challenges.<span ~style.display=ComplexityChallenge.isExplanationMovedDown() ? '' : 'none'~> How to complete them is explained at the bottom of this tab.</span></span>
+      <div ~style.display=ComplexityChallenge.isExplanationMovedDown() ? 'none' : ''~>
+        <span>
+          Being in a complexity challenge doesn't prevent you from violating its condition.
+        </span>
+        <br/>
+        <span>
+          Instead, violating the condition makes you exit the challenge.
+        </span>
+        <br/>
+        <span>
+          Thus, you are automatically in whichever complexity challenges you have not yet violated the condition of this complexity.
+        </span>
+        <br/>
+        <span>
+          In particular, when starting a new complexity, you will be in all complexity challenges that you've unlocked at once.
+        </span>
+        <br ~style.display=Trivia.show('CC1 pre-complexity completion') ? 'none' : ''~/>
+        <div ~style.display=Trivia.show('CC1 pre-complexity completion') ? '' : 'none'~/>
+          <span>
+            You can complete Complexity Challenge 1 even pre-complexity.
+          </span>
+          <br/>
+          <span>
+            This allows you to start with a Complexity Challenge 1 completion.
+          </span>
+        </div>
+        <span>
+          The header does not mention that you are in Complexity Challenge 1 to avoid clutter, since you are always in it.
+        </span>
+        <br/>
+        <span>
+          The ability to disable certain things is there to prevent accidental violation of complexity challenge requirements.
+        </span>
+        <br/>
+        <span>
+          Once you understand this explanation, you can move it to the bottom of this tab so that it doesn't take up so much space.
+        </span>
+        <br/>
+        <span>
+          <button onclick="ComplexityChallenge.moveExplanation()">Move explanation to the bottom of this tab</button>
+        </span>
+      </div>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>
@@ -3315,38 +3357,44 @@
           </td>
         </tr>
       </table>
-      <span>
-        Being in a complexity challenge doesn't prevent you from violating its condition.
-      <span>
-      <br/>
-      <span>
-        Instead, violating the condition makes you exit the challenge.
-      </span>
-      <br/>
-      <span>
-        Thus, you are automatically in whichever complexity challenges you have not yet violated the condition of this complexity.
-      </span>
-      <br/>
-      <span>
-        In particular, when starting a new complexity, you will be in all complexity challenges that you've unlocked at once.
-      </span>
-      <br ~style.display=Trivia.show('CC1 pre-complexity completion') ? 'none' : ''~/>
-      <div ~style.display=Trivia.show('CC1 pre-complexity completion') ? '' : 'none'~/>
+      <div ~style.display=ComplexityChallenge.isExplanationMovedDown() ? '' : 'none'~>
         <span>
-          You can complete Complexity Challenge 1 even pre-complexity.
+          Being in a complexity challenge doesn't prevent you from violating its condition.
         </span>
         <br/>
         <span>
-          This allows you to start with a Complexity Challenge 1 completion.
+          Instead, violating the condition makes you exit the challenge.
+        </span>
+        <br/>
+        <span>
+          Thus, you are automatically in whichever complexity challenges you have not yet violated the condition of this complexity.
+        </span>
+        <br/>
+        <span>
+          In particular, when starting a new complexity, you will be in all complexity challenges that you've unlocked at once.
+        </span>
+        <br ~style.display=Trivia.show('CC1 pre-complexity completion') ? 'none' : ''~/>
+        <div ~style.display=Trivia.show('CC1 pre-complexity completion') ? '' : 'none'~/>
+          <span>
+            You can complete Complexity Challenge 1 even pre-complexity.
+          </span>
+          <br/>
+          <span>
+            This allows you to start with a Complexity Challenge 1 completion.
+          </span>
+        </div>
+        <span>
+          The header does not mention that you are in Complexity Challenge 1 to avoid clutter, since you are always in it.
+        </span>
+        <br/>
+        <span>
+          The ability to disable certain things is there to prevent accidental violation of complexity challenge requirements.
+        </span>
+        <br/>
+        <span>
+          <button onclick="ComplexityChallenge.moveExplanation()">Move explanation back to the top of this tab</button>
         </span>
       </div>
-      <span>
-        The header does not mention that you are in Complexity Challenge 1 to avoid clutter, since you are always in it.
-      </span>
-      <br/>
-      <span>
-        The ability to disable certain things is there to prevent accidental violation of complexity challenge requirements.
-      </span>
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'complexity-achievements' ? '' : 'none'~>
       <span>

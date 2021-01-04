@@ -1027,6 +1027,10 @@ let Saving = {
       player.stats.onlineTimeSinceGameStart = player.stats.timeSinceGameStart;
       player.version = 2.046875;
     }
+    if (player.version < 2.05078125) {
+      player.isComplexityChallengeExplanationMovedDown = false;
+      player.version = 2.05078125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
