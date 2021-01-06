@@ -205,7 +205,7 @@ let initialPlayer = {
     initialSeed: initialSeed,
     unlocked: false,
     upgrades: [0, 0, 0],
-    active: [],
+    equipped: [],
     stored: [],
     gain: true,
     respec: false,
@@ -213,7 +213,7 @@ let initialPlayer = {
     hasGainedShards: false,
     shards: 0,
     shardUpgrades: [0, 0, 0, 0],
-    powerDeactivationMode: 'Confirmation',
+    powerUnequipMode: 'Confirmation',
     powerDeletionMode: 'Confirmation',
     presets: [],
     craft: {
@@ -254,7 +254,7 @@ let initialPlayer = {
     powerDisplay: true,
     powerFutureExtraMultipliers: true,
     showWaitsFromPastTime: true,
-    activePowers: [],
+    equippedPowers: [],
     powers: [],
     extraMultipliers: {
       normal: 1,
@@ -478,7 +478,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2.05078125
+  version: 2.0625
 }
 
 let player;

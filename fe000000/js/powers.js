@@ -117,7 +117,7 @@ let Powers = {
     'normal': () => 1,
     'infinity': () => Math.log2(1 + InfinityStars.amount().max(1).log2() / Math.pow(2, 16)) / 16,
     'eternity': () => Math.min(3, Math.pow(Math.log2(1 + (player.stats.timeSinceComplexity + FinalityMilestones.freeTimeInComplexity()) * (1 + ComplexityStars.amount().max(1).log2() / 1024) / 64) / 4, 1.25)),
-    'complexity': (active) => Math.sqrt((active || Powers.active()).map(p => Powers.strength(p) * Powers.rarity(p)).reduce((a, b) => a + b, 0))
+    'complexity': (equipped) => Math.sqrt((equipped || Powers.equipped()).map(p => Powers.strength(p) * Powers.rarity(p)).reduce((a, b) => a + b, 0))
   },
   baseEffects: {
     'normal': 1 / 512,
@@ -135,7 +135,7 @@ let Powers = {
     'normal': 'Normal generator multiplier power',
     'infinity': 'Infinity generator multiplier power based on infinity stars',
     'eternity': 'Eternity generator multiplier power based on complexity stars and time in complexity',
-    'complexity': 'Complexity generator multiplier power based on total strength and rarity of active powers',
+    'complexity': 'Complexity generator multiplier power based on total strength and rarity of equipped powers',
   },
   shortDescriptionData: {
     'normal': 'Normal generator multiplier power',
@@ -192,8 +192,8 @@ let Powers = {
       if (newPowers === 0) return;
       player.stats.timeSincePowerGain -= newPowers * timePer;
       let maxedPowers = ['normal', 'infinity', 'eternity', 'complexity'].map(
-        x => this.active().concat(this.stored()).filter(y => y.type === x && this.isMaxed(y)).length);
-      while (newPowers > 0 && maxedPowers.some(x => x < this.maximumActivatedLimit())) {
+        x => this.equipped().concat(this.stored()).filter(y => y.type === x && this.isMaxed(y)).length);
+      while (newPowers > 0 && maxedPowers.some(x => x < this.maximumEquippedLimit())) {
         let newPower = this.gainNewPower(true, Math.min(diff, player.stats.timeSincePowerGain + timePer * (newPowers - 1)));
         if (this.isMaxed(newPower)) {
           maxedPowers[this.index(newPower.type) - 1]++;
@@ -215,34 +215,34 @@ let Powers = {
   isMaxed(p) {
     return p.strength === this.newStrength() && p.rarity === this.maximumRarity()
   },
-  getUnsortedPowerList(x, includeActive, noIndex) {
-    let startingList = includeActive ? this.active().concat(this.stored()) : this.stored();
+  getUnsortedPowerList(x, includeEquipped, noIndex) {
+    let startingList = includeEquipped ? this.equipped().concat(this.stored()) : this.stored();
     if (!noIndex) {
       startingList = startingList.map((p, i) => ({'index': 1 + i, ...p}));
     }
     return startingList.filter(p => p.type === x);
   },
-  getSortedPowerList(x, includeActive, noIndex) {
-    let startingList = this.getUnsortedPowerList(x, includeActive, noIndex);
+  getSortedPowerList(x, includeEquipped, noIndex) {
+    let startingList = this.getUnsortedPowerList(x, includeEquipped, noIndex);
     let f = p => this.strength(p) * this.rarity(p);
     let result = startingList.sort((a, b) => f(b) - f(a));
     return result;
   },
   cutoff(x) {
-    return this.getSortedPowerList(x, true, true).map(p => this.strength(p) * this.rarity(p))[this.maximumActivatedLimit() - 1] || 0;
+    return this.getSortedPowerList(x, true, true).map(p => this.strength(p) * this.rarity(p))[this.maximumEquippedLimit() - 1] || 0;
   },
   cutoffIndex(x, cutoff) {
-    let over = this.active().concat(this.stored()).filter(p => p.type === x && this.strength(p) * this.rarity(p) > cutoff);
+    let over = this.equipped().concat(this.stored()).filter(p => p.type === x && this.strength(p) * this.rarity(p) > cutoff);
     let equal = this.getUnsortedPowerList(x, true, false).filter(p => p.type === x && this.strength(p) * this.rarity(p) === cutoff);
-    // Indices start at 1 and include active powers.
-    let equalIndex = this.maximumActivatedLimit() - over.length - 1;
+    // Indices start at 1 and include equipped powers.
+    let equalIndex = this.maximumEquippedLimit() - over.length - 1;
     if (equalIndex < 0) {
       return -1;
     }
     if (equalIndex >= equal.length) {
       return this.stored().length;
     }
-    return equal[this.maximumActivatedLimit() - over.length - 1].index - this.active().length - 1;
+    return equal[this.maximumEquippedLimit() - over.length - 1].index - this.equipped().length - 1;
   },
   cleanStored() {
     let cutoffs = {};
@@ -270,87 +270,87 @@ let Powers = {
     let cutoff = this.cutoff(p.type);
     return this.strength(p) * this.rarity(p) > cutoff;
   },
-  maybeActiveSwap() {
+  maybeEquippedSwap() {
     if (FinalityMilestones.isFinalityMilestoneActive(6)) {
-      this.activeSwap();
+      this.equippedSwap();
     }
   },
-  activeSwap() {
-    let numberActive = this.active().length;
+  equippedSwap() {
+    let numberEquipped = this.equipped().length;
     for (let x of ['normal', 'infinity', 'eternity', 'complexity']) {
       let sortedOfType = this.getSortedPowerList(x, true, false);
-      let numberActiveOfType = sortedOfType.filter(i => i.index <= numberActive).length;
-      let activeToReplace = sortedOfType.slice(numberActiveOfType).filter(i => i.index <= numberActive);
-      let storedToReplace = sortedOfType.slice(0, numberActiveOfType).filter(i => i.index > numberActive);
-      for (let i = 0; i < activeToReplace.length; i++) {
-        this.swap(activeToReplace[i].index - 1, storedToReplace[i].index - numberActive - 1);
+      let numberEquippedOfType = sortedOfType.filter(i => i.index <= numberEquipped).length;
+      let equippedToReplace = sortedOfType.slice(numberEquippedOfType).filter(i => i.index <= numberEquipped);
+      let storedToReplace = sortedOfType.slice(0, numberEquippedOfType).filter(i => i.index > numberEquipped);
+      for (let i = 0; i < equippedToReplace.length; i++) {
+        this.swap(equippedToReplace[i].index - 1, storedToReplace[i].index - numberEquipped - 1);
       }
     }
   },
-  swap(activeIndex, storedIndex) {
-    let temp = this.active()[activeIndex];
-    this.active()[activeIndex] = this.stored()[storedIndex];
+  swap(equippedIndex, storedIndex) {
+    let temp = this.equipped()[equippedIndex];
+    this.equipped()[equippedIndex] = this.stored()[storedIndex];
     this.stored()[storedIndex] = temp;
   },
-  sortActive() {
+  sortEquipped() {
     // Put higher strength and rarity on the top.
     let f = p => 1000 * ['normal', 'infinity', 'eternity', 'complexity'].indexOf(p.type) - this.strength(p) * this.rarity(p);
-    player.powers.active.sort((a, b) => f(a) - f(b));
+    player.powers.equipped.sort((a, b) => f(a) - f(b));
   },
   sortStored() {
     let f = p => 1000 * ['normal', 'infinity', 'eternity', 'complexity'].indexOf(p.type) - this.strength(p) * this.rarity(p);
     player.powers.stored.sort((a, b) => f(a) - f(b));
   },
   autoSort() {
-    this.sortActive();
+    this.sortEquipped();
     this.sortStored();
   },
-  onPowerChange(cleaning, potentialNewActiveReplacements) {
+  onPowerChange(cleaning, potentialNewEquippedReplacements) {
     if (cleaning) {
       this.cleanStored();
     }
-    if (potentialNewActiveReplacements) {
-      this.maybeActiveSwap();
+    if (potentialNewEquippedReplacements) {
+      this.maybeEquippedSwap();
     }
     this.autoSort();
   },
   hasAnyPowers(type) {
-    if (type === 'active') {
-      return this.active().length > 0;
+    if (type === 'equipped') {
+      return this.equipped().length > 0;
     } else if (type === 'stored') {
       return this.stored().length > 0;
     } else if (type === 'oracle') {
       return Oracle.isUnlocked() && Oracle.powers().length > 0;
-    } else if (type === 'oracle-active') {
-      return Oracle.isUnlocked() && Oracle.activePowers().length > 0;
+    } else if (type === 'oracle-equipped') {
+      return Oracle.isUnlocked() && Oracle.equippedPowers().length > 0;
     } else if (type === 'next' || type === 'crafted') {
       return this.isUnlocked();
     }
   },
   canAccessPower(type, i) {
-    if (type === 'active') {
-      return this.canAccessActive(i);
+    if (type === 'equipped') {
+      return this.canAccessEquipped(i);
     } else if (type === 'stored') {
       return this.canAccessStored(i);
     } else if (type === 'oracle') {
       return Oracle.isUnlocked() && Oracle.powers().filter(p => p.type === this.typeList[(i - 1) % 4]).length > Math.floor((i - 1) / 4);
-    } else if (type === 'oracle-active') {
-      return Oracle.isUnlocked() && Oracle.activePowers().length >= i;
+    } else if (type === 'oracle-equipped') {
+      return Oracle.isUnlocked() && Oracle.equippedPowers().length >= i;
     } else if (type === 'next' || type === 'crafted') {
       return this.isUnlocked();
     }
   },
   accessPower(type, i) {
-    if (type === 'active') {
-      return this.active()[i - 1];
+    if (type === 'equipped') {
+      return this.equipped()[i - 1];
     } else if (type === 'stored') {
       return this.getUnsortedPowerList(this.typeList[(i - 1) % 4], false, true)[Math.floor((i - 1) / 4)];
     } else if (type === 'next') {
       return this.next();
     } else if (type === 'oracle') {
       return Oracle.powers().filter(p => p.type === this.typeList[(i - 1) % 4])[Math.floor((i - 1) / 4)];
-    } else if (type === 'oracle-active') {
-      return Oracle.activePowers()[i - 1];
+    } else if (type === 'oracle-equipped') {
+      return Oracle.equippedPowers()[i - 1];
     } else if (type === 'crafted') {
       return PowerShards.craftedPower();
     }
@@ -422,13 +422,13 @@ let Powers = {
   displayIndexToRealIndex(i) {
     return this.getUnsortedPowerList(this.typeList[(i - 1) % 4], false, false)[Math.floor((i - 1) / 4)].index - 1;
   },
-  canActivate(i) {
-    return this.canAccessStored(i) && this.active().length < this.activatedLimit();
+  canEquip(i) {
+    return this.canAccessStored(i) && this.equipped().length < this.equippedLimit();
   },
-  activate(i) {
-    if (this.canActivate(i)) {
+  equip(i) {
+    if (this.canEquip(i)) {
       let j = this.displayIndexToRealIndex(i);
-      player.powers.active.push(player.powers.stored[j]);
+      player.powers.equipped.push(player.powers.stored[j]);
       player.powers.stored = player.powers.stored.slice(0, j).concat(player.powers.stored.slice(j + 1));
       this.onPowerChange(false, true);
     }
@@ -445,16 +445,16 @@ let Powers = {
       this.onPowerChange(false, false);
     }
   },
-  canDeactivate(i) {
-    return this.canAccessActive(i) && this.powerDeactivationMode() !== 'Disabled';
+  canUnequip(i) {
+    return this.canAccessEquipped(i) && this.powerUnequipMode() !== 'Disabled';
   },
-  deactivate(i) {
-    if (this.canDeactivate(i) && (this.powerDeactivationMode() === 'No confirmation' ||
-        confirm('Are you sure you want to deactivate this active power and ' +
+  unequip(i) {
+    if (this.canUnequip(i) && (this.powerUnequipMode() === 'No confirmation' ||
+        confirm('Are you sure you want to unequip this equipped power and ' +
         ComplexityPrestigeLayer.resetText() + '?'))) {
-      player.powers.stored.push(this.accessPower('active', i));
-      player.powers.active = [...Array(this.active().length)].map((_, j) => j + 1).map(
-        j => i === j ? null : this.accessPower('active', j)).filter(x => x !== null);
+      player.powers.stored.push(this.accessPower('equipped', i));
+      player.powers.equipped = [...Array(this.equipped().length)].map((_, j) => j + 1).map(
+        j => i === j ? null : this.accessPower('equipped', j)).filter(x => x !== null);
       this.onPowerChange(true, false);
       if (ComplexityPrestigeLayer.canComplexity()) {
         ComplexityPrestigeLayer.complexity(false);
@@ -463,8 +463,8 @@ let Powers = {
       }
     }
   },
-  canAccessActive(i) {
-    return this.active().length >= i;
+  canAccessEquipped(i) {
+    return this.equipped().length >= i;
   },
   canAccessStored(i) {
     return this.getUnsortedPowerList(this.typeList[(i - 1) % 4], false, true).length > Math.floor((i - 1) / 4);
@@ -482,8 +482,8 @@ let Powers = {
     player.powers.presetRespec = !player.powers.presetRespec;
   },
   respec() {
-    player.powers.stored = this.stored().concat(this.active());
-    player.powers.active = [];
+    player.powers.stored = this.stored().concat(this.equipped());
+    player.powers.equipped = [];
     this.setLastPresetIndex(0);
     this.onPowerChange(true, false);
   },
@@ -495,7 +495,7 @@ let Powers = {
   },
   respecAndReset() {
     if (Options.confirmation('powersRespec') && !confirm(
-      'Are you sure you want to deactivate your active powers and ' +
+      'Are you sure you want to unequip your equipped powers and ' +
       ComplexityPrestigeLayer.resetText() + '?')) return false;
     this.respec();
     if (ComplexityPrestigeLayer.canComplexity()) {
@@ -517,7 +517,7 @@ let Powers = {
   maximumRarity() {
     return 4;
   },
-  activatedLimit() {
+  equippedLimit() {
     return 3;
   },
   interval() {
@@ -526,11 +526,11 @@ let Powers = {
   showNextPower() {
     return this.interval() > 1;
   },
-  maximumActivatedLimit() {
+  maximumEquippedLimit() {
     return 3;
   },
-  active() {
-    return player.powers.active;
+  equipped() {
+    return player.powers.equipped;
   },
   stored() {
     return player.powers.stored;
@@ -547,11 +547,11 @@ let Powers = {
   index(x) {
     return this.indexData[x];
   },
-  getExtraMultiplier(x, future, active) {
+  getExtraMultiplier(x, future, equipped) {
     if (future && Oracle.powerFutureExtraMultipliers()) {
       return Oracle.extraMultipliers()[x];
     } else {
-      return this.extraMultipliers[x](active);
+      return this.extraMultipliers[x](equipped);
     }
   },
   getAllExtraMultipliers() {
@@ -573,23 +573,23 @@ let Powers = {
   preExtraMultiplier(p) {
     return this.rarity(p) * this.strength(p) + this.powerShardBonus(p);
   },
-  extraMultiplier(p, active) {
-    return this.getExtraMultiplier(p.type, p.future, active);
+  extraMultiplier(p, equipped) {
+    return this.getExtraMultiplier(p.type, p.future, equipped);
   },
-  getOverallMultiplier(p, active) {
-    return this.preExtraMultiplier(p) * this.extraMultiplier(p, active);
+  getOverallMultiplier(p, equipped) {
+    return this.preExtraMultiplier(p) * this.extraMultiplier(p, equipped);
   },
-  getEffect(p, active) {
-    return 1 + this.baseEffects[p.type] * this.getOverallMultiplier(p, active);
+  getEffect(p, equipped) {
+    return 1 + this.baseEffects[p.type] * this.getOverallMultiplier(p, equipped);
   },
-  getTotalEffect(x, active) {
-    if (active === undefined) {
-      active = Powers.active();
+  getTotalEffect(x, equipped) {
+    if (equipped === undefined) {
+      equipped = Powers.equipped();
     }
-    return this.getTotalEffectFrom(active.filter(p => p.type === x), active);
+    return this.getTotalEffectFrom(equipped.filter(p => p.type === x), equipped);
   },
-  getTotalEffectFrom(x, active) {
-    return x.map(p => this.getEffect(p, active)).reduce((a, b) => a + b - 1, 1);
+  getTotalEffectFrom(x, equipped) {
+    return x.map(p => this.getEffect(p, equipped)).reduce((a, b) => a + b - 1, 1);
   },
   makeFuture(p, originalTime) {
     return {
@@ -608,12 +608,12 @@ let Powers = {
     this.upgradeList.forEach(x => x.buyMax());
   },
   bestComplexityPowers() {
-    let bestComplexityPowers = this.getSortedPowerList('complexity', true, true).slice(0, this.activatedLimit());
+    let bestComplexityPowers = this.getSortedPowerList('complexity', true, true).slice(0, this.equippedLimit());
     // Fill up leftover space with the best other powers we have equipped.
     let f = p => this.strength(p) * this.rarity(p);
     return bestComplexityPowers.concat(
-      this.active().filter(x => x.type !== 'complexity').sort(
-        (a, b) => f(b) - f(a)).slice(0, this.activatedLimit() - bestComplexityPowers.length));
+      this.equipped().filter(x => x.type !== 'complexity').sort(
+        (a, b) => f(b) - f(a)).slice(0, this.equippedLimit() - bestComplexityPowers.length));
   },
   effectOfBestComplexityPowers() {
     return Math.max(this.getTotalEffect('complexity'), this.getTotalEffect('complexity', this.bestComplexityPowers()))
@@ -625,12 +625,12 @@ let Powers = {
     let modes = ['Confirmation', 'No confirmation', 'Disabled'];
     player.powers.powerDeletionMode = modes[(modes.indexOf(player.powers.powerDeletionMode) + 1) % 3];
   },
-  powerDeactivationMode() {
-    return player.powers.powerDeactivationMode;
+  powerUnequipMode() {
+    return player.powers.powerUnequipMode;
   },
-  changePowerDeactivationMode() {
+  changePowerUnequipMode() {
     let modes = ['Confirmation', 'No confirmation', 'Disabled'];
-    player.powers.powerDeactivationMode = modes[(modes.indexOf(player.powers.powerDeactivationMode) + 1) % 3];
+    player.powers.powerUnequipMode = modes[(modes.indexOf(player.powers.powerUnequipMode) + 1) % 3];
   },
   isAutoLoadUnlocked() {
     return FinalityMilestones.isFinalityMilestoneActive(7);
@@ -658,11 +658,11 @@ let Powers = {
     return ['normal', 'infinity', 'eternity', 'complexity'];
   },
   exportString() {
-    if (this.active().length === 0) {
+    if (this.equipped().length === 0) {
       return 'none';
     }
     let typeCount = [0, 0, 0, 0];
-    for (let p of this.active()) {
+    for (let p of this.equipped()) {
       typeCount[this.index(p.type) - 1]++;
     }
     return typeCount.map((n, i) => 'NIEC'[i].repeat(n)).join('');
@@ -705,18 +705,18 @@ let Powers = {
   importStringFromPreset(importString) {
     if (!importString) return;
     let counts = this.importStringCounts(importString);
-    let realCounts = [0, 1, 2, 3].map(i => Math.max(0, counts[i] - this.active().filter(
+    let realCounts = [0, 1, 2, 3].map(i => Math.max(0, counts[i] - this.equipped().filter(
       x => x.type === ['normal', 'infinity', 'eternity', 'complexity'][i]).length));
-    let toActivateByType = [0, 1, 2, 3].map(i => this.getSortedPowerList(['normal', 'infinity', 'eternity', 'complexity'][i], false, false).slice(0, realCounts[i]));
-    let indicesToActivate = [].concat.apply([], toActivateByType).slice(0, this.activatedLimit() - this.active().length).map(x => x.index);
-    player.powers.active = this.active().concat(indicesToActivate.map(i => this.stored()[i - 1]));
-    player.powers.stored = this.stored().filter((_, i) => !indicesToActivate.includes(1 + i));
+    let toEquipByType = [0, 1, 2, 3].map(i => this.getSortedPowerList(['normal', 'infinity', 'eternity', 'complexity'][i], false, false).slice(0, realCounts[i]));
+    let indicesToEquip = [].concat.apply([], toEquipByType).slice(0, this.equippedLimit() - this.equipped().length).map(x => x.index);
+    player.powers.equipped = this.equipped().concat(indicesToEquip.map(i => this.stored()[i - 1]));
+    player.powers.stored = this.stored().filter((_, i) => !indicesToEquip.includes(1 + i));
     // The second parameter is false here because import already selects the best powers of each type,
     // so there's no need to do any swapping.
     this.onPowerChange(false, false);
   },
   import() {
-    this.importString(prompt('Enter your active powers (as previously exported):'));
+    this.importString(prompt('Enter your equipped powers (as previously exported):'));
   },
   hasPreset(x) {
     return player.powers.presets.length >= x;
@@ -732,8 +732,8 @@ let Powers = {
   setPresetName(x, name) {
     player.powers.presets[x - 1].name = name;
   },
-  setPresetPowerList(x, activePowers) {
-    player.powers.presets[x - 1].powers = activePowers;
+  setPresetPowerList(x, equippedPowers) {
+    player.powers.presets[x - 1].powers = equippedPowers;
   },
   presetSetToCurrentPowers(x) {
     if (Options.confirmation('presetChange') && !confirm('Are you sure you want to change this power preset?')) {

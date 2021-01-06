@@ -1031,6 +1031,15 @@ let Saving = {
       player.isComplexityChallengeExplanationMovedDown = false;
       player.version = 2.05078125;
     }
+    if (player.version < 2.0625) {
+      player.powers.equipped = player.powers.active;
+      player.powers.powerUnequipMode = player.powers.powerDeactivationMode;
+      player.oracle.equippedPowers = player.oracle.activePowers;
+      delete player.powers.active;
+      delete player.powers.powerDeactivationMode;
+      delete player.oracle.activePowers;
+      player.version = 2.0625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

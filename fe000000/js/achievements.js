@@ -164,13 +164,13 @@ let Achievements = {
       () => ComplexityPrestigeLayer.complexityPointGain().gte(16) && !Chroma.isColorUnlocked(6),
       () => range(1, 6).every(i => ComplexityChallenge.isComplexityChallengeRunning(i)),
       () => Powers.isUnlocked(),
-      () => Powers.active().concat(Powers.stored()).length >= 12,
+      () => Powers.equipped().concat(Powers.stored()).length >= 12,
       () => Oracle.isUnlocked(),
       () => true,
       () => Galaxy.isUnlocked()
     ],
     [
-      () => Powers.active().concat(Powers.stored()).some(x => x.rarity >= 3),
+      () => Powers.equipped().concat(Powers.stored()).some(x => x.rarity >= 3),
       () => Powers.isUnlocked() && Powers.getExtraMultiplier('eternity') === 3,
       () => Galaxy.timeToReachEffectCap() >= 18000,
       () => true,
