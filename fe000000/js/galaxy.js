@@ -64,6 +64,9 @@ let Galaxy = {
     player.complexityPoints = player.complexityPoints.safeMinus(this.unlockCost());
     player.galaxies.unlocked = true;
   },
+  otherSpeedMultiplier() {
+    return Achievements.otherMultiplier() * FinalityShardUpgrade(8).effect();
+  },
   effect() {
     return Math.min(1 + Math.log2(1 + this.actualSpeed() * (player.stats.timeSinceComplexity + FinalityMilestones.freeTimeInComplexity()) / 1024) / 64, this.effectCap());
   },
@@ -74,7 +77,7 @@ let Galaxy = {
     return Math.pow(1 + this.dilated(), 2);
   },
   actualSpeed() {
-    return this.effectSpeed() * Achievements.otherMultiplier() * FinalityShardUpgrade(8).effect();
+    return this.effectSpeed() * this.otherSpeedMultiplier();
   },
   timeToReachEffectCap() {
     return Math.max(0, 1024 * (Math.pow(2, 64 * (this.effectCap() - 1)) - 1) / this.actualSpeed() - FinalityMilestones.freeTimeInComplexity());
@@ -86,7 +89,7 @@ let Galaxy = {
     return Math.pow(1 + this.nextDilated(), 2);
   },
   nextActualSpeed() {
-    return this.nextEffectSpeed() * FinalityShardUpgrade(8).effect();
+    return this.nextEffectSpeed() * this.otherSpeedMultiplier();
   },
   nextTimeToReachEffectCap() {
     return Math.max(0, 1024 * (Math.pow(2, 64 * (this.nextEffectCap() - 1)) - 1) / this.nextActualSpeed() - FinalityMilestones.freeTimeInComplexity());
