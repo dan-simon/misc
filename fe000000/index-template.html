@@ -3635,9 +3635,13 @@
       <div ~style.display=Powers.isUnlocked() ? '' : 'none'~>
         <span>You have ~i Powers.active().length ~/~i Powers.activatedLimit() ~ active power~s Powers.activatedLimit() ~.</span>
         <br/>
-        <span>Active powers raise various generator multipliers to powers. Stored powers do not, but can be activated.</span>
+        <span>Each power raises all of a generator type's multipliers to a power. Up to ~i Powers.activatedLimit() ~ power~s Powers.activatedLimit() ~ can be active at the same time.</span>
         <br/>
-        <span>You can have multiple powers of the same type active; the only rule about active powers is that you can have at most ~i Powers.activatedLimit() ~ at once.</span>
+        <span>Powers are never destroyed unless you delete them, and can be activated at any time as long as there is a free slot.</span>
+        <br/>
+        <span>To deactivate a power and create a free slot you need to complexity.</span>
+        <br/>
+        <span>You start with ~i 1 ~ power of each type but get more over time. You can have multiple powers of the same type active.</span>
         <br ~style.display=FinalityMilestones.isFinalityMilestoneActive(6) ? 'none' : ''~/>
         <span ~style.display=FinalityMilestones.isFinalityMilestoneActive(6) ? 'none' : ''~>Due to unlocking powers, you gain your eternity points on eternity every second, without needing to eternity (EP generation).</span>
         <br/>
