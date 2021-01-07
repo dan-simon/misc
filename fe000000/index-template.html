@@ -4553,11 +4553,19 @@
         <span>Next complexity ~i Galaxy.nextDilated() ~ galax~y Galaxy.nextDilated() ~ will be dilated, making the galaxy effect have speed ~i Galaxy.nextEffectSpeed() ~x and cap ~r formatWithPrecision(Galaxy.nextEffectCap(), 5) ~, capping in ~t Galaxy.nextTimeToReachEffectCap() ~.</span>
         <br/>
         <br/>
-        <span>Galaxies to make dilated next complexity reset: <input class="nextdilatedinput" type="text" ~!value=Galaxy.nextDilatedRaw()~ ~!onchange=function() {Galaxy.setNextDilated(+this.value)}~></input></span>
-        <br/>
-        <span>(Set this to ~i 0 ~ to un-dilate all galaxies, or -x to dilate all but x galaxies.)</span>
+        <span>
+          Galaxies to make dilated next complexity reset:
+          <span style="display: inline-block; width: 16px;"></span>
+          Mode: <select class="nextdilatedmode" ~!value=Galaxy.nextDilatedMode()~ ~!onchange=function() {Galaxy.setNextDilatedMode(this.value)}~>
+            <option value="Amount">Amount</option>
+            <option value="All but amount">All but amount</option>
+            <option value="Seconds to reach cap">Seconds to reach cap</option>
+          </select>
+          <span style="display: inline-block; width: 16px;"></span>
+          ~r Galaxy.nextDilatedMode() ~: <input class="nextdilatedamount" type="text" ~!value=Galaxy.nextDilatedAmount()~ ~!onchange=function() {Galaxy.setNextDilatedAmount(+this.value)}~></input>
+        </span>
         <br ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~/>
-        <span><button ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~ onclick="Galaxy.toggleResetDilatedOnFinality()">Reset dilated galaxies to ~i 0 ~ on finality: ~r Galaxy.isResetDilatedOnFinalityOn() ? "On" : "Off" ~</button></span>
+        <span><button ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~ onclick="Galaxy.toggleResetNextDilatedOnFinality()">Reset dilated galaxies to ~i 0 ~ amount on finality: ~r Galaxy.isResetNextDilatedOnFinalityOn() ? "On" : "Off" ~</button></span>
       </div>
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'finality' ? '' : 'none'~>

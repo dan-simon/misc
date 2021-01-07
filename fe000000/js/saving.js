@@ -41,8 +41,10 @@ let Saving = {
     if (offlineProgress === null) {
       offlineProgress = player.options.offlineProgress;
     }
+    let originalVersion = player.version;
     this.fixPlayer();
     this.convertSaveToDecimal();
+    this.doLastFixes(originalVersion);
     let setupPageLoad = function (now) {
       player.lastUpdate = now;
       Saving.saveGame(false);
@@ -1040,6 +1042,14 @@ let Saving = {
       delete player.oracle.activePowers;
       player.version = 2.0625;
     }
+    if (player.version < 2.078125) {
+      player.galaxies.resetNextDilatedOnFinality = player.galaxies.resetDilatedOnFinality;
+      player.galaxies.nextDilatedMode = (player.galaxies.nextDilated >= 0) ? 'Amount' : 'All but amount';
+      player.galaxies.nextDilatedAmount = Math.abs(player.galaxies.nextDilated);
+      delete player.galaxies.nextDilated;
+      delete player.galaxies.resetDilatedOnFinality;
+      player.version = 2.078125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
@@ -1107,6 +1117,11 @@ let Saving = {
     }
     player.oracle.complexityPoints = new Decimal(player.oracle.complexityPoints);
     player.oracle.complexityPointGain = new Decimal(player.oracle.complexityPointGain);
+  },
+  doLastFixes(originalVersion) {
+    if (originalVersion < 2.078125) {
+      player.galaxies.dilated = Math.floor(Math.min(Galaxy.amount(), Math.max(0, player.galaxies.dilated)));
+    }
   },
   loadGameStorage (callback) {
     if (!localStorage.getItem('fe000000-save')) {

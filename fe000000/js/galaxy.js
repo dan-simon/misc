@@ -70,71 +70,88 @@ let Galaxy = {
   effect() {
     return Math.min(1 + Math.log2(1 + this.actualSpeed() * (player.stats.timeSinceComplexity + FinalityMilestones.freeTimeInComplexity()) / 1024) / 64, this.effectCap());
   },
-  effectCap() {
-    return 1 + Math.sqrt(this.amount() - this.dilated()) / 64;
+  effectCap(d) {
+    // The max with 0 is there to minimize the effect of something going very wrong and dilating more galaxies than the player has.
+    return 1 + Math.sqrt(Math.max(0, this.amount() - (d === undefined ? this.dilated() : d))) / 64;
   },
-  effectSpeed() {
-    return Math.pow(1 + this.dilated(), 2);
+  effectSpeed(d) {
+    return Math.pow(1 + (d === undefined ? this.dilated() : d), 2);
   },
-  actualSpeed() {
-    return this.effectSpeed() * this.otherSpeedMultiplier();
+  actualSpeed(d) {
+    return this.effectSpeed(d) * this.otherSpeedMultiplier();
   },
-  timeToReachEffectCap() {
-    return Math.max(0, 1024 * (Math.pow(2, 64 * (this.effectCap() - 1)) - 1) / this.actualSpeed() - FinalityMilestones.freeTimeInComplexity());
+  timeToReachEffectCap(d) {
+    return Math.max(0, 1024 * (Math.pow(2, 64 * (this.effectCap(d) - 1)) - 1) / this.actualSpeed(d) - FinalityMilestones.freeTimeInComplexity());
   },
   nextEffectCap() {
-    return 1 + Math.sqrt(this.amount() - this.nextDilated()) / 64;
+    return this.effectCap(this.nextDilated());
   },
   nextEffectSpeed() {
-    return Math.pow(1 + this.nextDilated(), 2);
+    return this.effectSpeed(this.nextDilated())
   },
   nextActualSpeed() {
-    return this.nextEffectSpeed() * this.otherSpeedMultiplier();
+    return this.actualSpeed(this.nextDilated())
   },
   nextTimeToReachEffectCap() {
-    return Math.max(0, 1024 * (Math.pow(2, 64 * (this.nextEffectCap() - 1)) - 1) / this.nextActualSpeed() - FinalityMilestones.freeTimeInComplexity());
+    return this.timeToReachEffectCap(this.nextDilated());
   },
   dilated() {
-    return this.dilatedRawToActual(this.dilatedRaw());
-  },
-  dilatedRaw() {
     return player.galaxies.dilated;
   },
   nextDilated() {
-    return this.dilatedRawToActual(this.nextDilatedRaw());
-  },
-  nextDilatedRaw() {
-    return player.galaxies.nextDilated;
-  },
-  dilatedRawToActual(x) {
-    if (x < 0) {
-      return Math.max(0, x + this.amount());
-    } else {
-      return Math.min(x, this.amount());
+    let mode = this.nextDilatedMode();
+    let amount = this.nextDilatedAmount();
+    let total = this.amount();
+    if (mode === 'Amount') {
+      return Math.floor(Math.min(total, Math.max(0, amount)));
+    } else if (mode === 'All but amount') {
+      return Math.floor(total - Math.min(total, Math.max(0, amount)));
+    } else if (mode === 'Seconds to reach cap') {
+      // This loop is as things go pretty cheap.
+      // If there were more than 128 dilated galaxies, I'd start to be worried,
+      // but we're nowhere near that.
+      let safe = total;
+      while (safe >= 16 && this.timeToReachEffectCap(safe - 16) <= amount) {
+        safe -= 16;
+      }
+      while (safe >= 1 && this.timeToReachEffectCap(safe - 1) <= amount) {
+        safe -= 1;
+      }
+      return safe;
     }
   },
-  updateDilated() {
-    player.galaxies.dilated = player.galaxies.nextDilated;
+  nextDilatedMode(x) {
+    return player.galaxies.nextDilatedMode;
   },
-  setNextDilated(x) {
-    player.galaxies.nextDilated = Math.floor(x || 0);
+  setNextDilatedMode(x) {
+    player.galaxies.nextDilatedMode = x;
+  },
+  nextDilatedAmount(x) {
+    return player.galaxies.nextDilatedAmount;
+  },
+  setNextDilatedAmount(x) {
+    player.galaxies.nextDilatedAmount = x || 0;
   },
   getStrengthIncrease() {
     return Math.pow(this.amount() / 128, 0.5);
   },
-  toggleResetDilatedOnFinality() {
-    player.galaxies.resetDilatedOnFinality = !player.galaxies.resetDilatedOnFinality;
+  toggleResetNextDilatedOnFinality() {
+    player.galaxies.resetNextDilatedOnFinality = !player.galaxies.resetNextDilatedOnFinality;
   },
-  isResetDilatedOnFinalityOn() {
-    return player.galaxies.resetDilatedOnFinality;
+  isResetNextDilatedOnFinalityOn() {
+    return player.galaxies.resetNextDilatedOnFinality;
   },
-  resetDilated() {
-    player.galaxies.dilated = 0;
-    player.galaxies.nextDilated = 0;
+  updateDilated() {
+    player.galaxies.dilated = this.nextDilated();
+  },
+  resetNextDilated() {
+    player.galaxies.nextDilatedMode = 'Amount';
+    player.galaxies.nextDilatedAmount = 0;
     this.updateNextDilatedInputDisplay();
   },
   updateNextDilatedInputDisplay() {
-    document.getElementsByClassName('nextdilatedinput')[0].value = this.nextDilatedRaw();
+    document.getElementsByClassName('nextdilatedmode')[0].value = this.nextDilatedMode();
+    document.getElementsByClassName('nextdilatedamount')[0].value = this.nextDilatedAmount();
   },
   tabColors() {
     return ['normal', 'infinity', 'eternity', 'complexity'];

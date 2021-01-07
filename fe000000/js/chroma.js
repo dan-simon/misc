@@ -223,7 +223,7 @@ let Chroma = {
     return player.chroma.timeForChromaValue;
   },
   setTimeForChromaValue(x) {
-    player.chroma.timeForChromaValue = x;
+    player.chroma.timeForChromaValue = x || 0;
   },
   timeForChromaMode() {
     return player.chroma.timeForChromaMode;

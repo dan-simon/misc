@@ -55,7 +55,7 @@ let Autobuyer = function (i) {
       player.autobuyers[i - 1].mode = x;
     },
     setPriority(x) {
-      player.autobuyers[i - 1].priority = x;
+      player.autobuyers[i - 1].priority = x || 0;
     },
     checkboxes() {
       return Array.from(document.getElementsByClassName('autobuyer-checkbox-' + i));

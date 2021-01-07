@@ -266,8 +266,9 @@ let initialPlayer = {
   galaxies: {
     unlocked: false,
     dilated: 0,
-    nextDilated: 0,
-    resetDilatedOnFinality: true
+    nextDilatedMode: 'Amount',
+    nextDilatedAmount: 0,
+    resetNextDilatedOnFinality: true
   },
   finalityPoints: new Decimal(0),
   totalFinalityShards: 0,
@@ -478,7 +479,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2.0625
+  version: 2.078125
 }
 
 let player;

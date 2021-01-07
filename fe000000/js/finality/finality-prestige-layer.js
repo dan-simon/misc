@@ -196,11 +196,10 @@ let FinalityPrestigeLayer = {
       }
     };
     player.galaxies.unlocked = false;
-    if (Galaxy.isResetDilatedOnFinalityOn()) {
-      Galaxy.resetDilated();
-    } else {
-      Galaxy.updateDilated();
+    if (Galaxy.isResetNextDilatedOnFinalityOn()) {
+      Galaxy.resetNextDilated();
     }
+    Galaxy.updateDilated();
     player.stats.totalStarsProducedThisFinality = Stars.startingAmount();
     player.stats.totalInfinityStarsProducedThisFinality = new Decimal(0);
     player.stats.totalEternityStarsProducedThisFinality = new Decimal(0);
