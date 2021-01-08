@@ -1050,6 +1050,10 @@ let Saving = {
       delete player.galaxies.resetDilatedOnFinality;
       player.version = 2.078125;
     }
+    if (player.version < 2.08203125) {
+      player.options.complexityChallengeRunningColors = false;
+      player.version = 2.08203125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

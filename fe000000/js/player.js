@@ -388,6 +388,7 @@ let initialPlayer = {
       showNextCCCompletion: true,
       showResetButtonsForHiddenTabs: true,
     },
+    complexityChallengeRunningColors: false,
     optionTypeShown: 'saving'
   },
   confirmations: {
@@ -479,7 +480,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2.078125
+  version: 2.08203125
 }
 
 let player;

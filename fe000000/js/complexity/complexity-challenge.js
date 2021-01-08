@@ -136,8 +136,10 @@ let ComplexityChallenge = {
     }
   },
   safeguardStatusText(x) {
-    let mainText = ComplexityChallenge.isSafeguardOn(x) ? 'Disabled' : 'Enabled';
-    let extraText = (ComplexityChallenge.isSafeguardOn(x) && !ComplexityChallenge.isComplexityChallengeRunning(x)) ? ' (not in challenge)' : '';
+    let running = ComplexityChallenge.isComplexityChallengeRunning(x)
+    let safeguard = (x === 1) ? running : ComplexityChallenge.isSafeguardOn(x);
+    let mainText = safeguard ? 'Disabled' : 'Enabled';
+    let extraText = (safeguard !== running) ? [' (not in challenge)', ' (in challenge)'][+running] : '';
     return mainText + extraText;
   },
   addToTimeStats(diff) {
@@ -176,6 +178,12 @@ let ComplexityChallenge = {
     player.isComplexityChallengeExplanationMovedDown = !player.isComplexityChallengeExplanationMovedDown;
   },
   color(x) {
-    return Colors.makeStyle(1 - 2 / (2 + Math.log2(1 + this.getComplexityChallengeCompletions(x) / 2)), true);
+    if (Options.complexityChallengeRunningColors()) {
+      let running = this.isComplexityChallengeRunning(x);
+      let safeguard = (x === 1) ? running : this.isSafeguardOn(x);
+      return Colors.makeStyle('challenge' + ['red', 'orange', 'yellow', 'green'][+safeguard + 2 * +running], true);
+    } else {
+      return Colors.makeStyle(1 - 2 / (2 + Math.log2(1 + this.getComplexityChallengeCompletions(x) / 2)), true);
+    }
   }
 }

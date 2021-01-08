@@ -149,6 +149,12 @@ let Options = {
   toggleShowResetButtonsForHiddenTabs() {
     player.options.headerSettings.showResetButtonsForHiddenTabs = !player.options.headerSettings.showResetButtonsForHiddenTabs;
   },
+  complexityChallengeRunningColors() {
+    return player.options.complexityChallengeRunningColors;
+  },
+  toggleComplexityChallengeRunningColors() {
+    player.options.complexityChallengeRunningColors = !player.options.complexityChallengeRunningColors;
+  },
   setOptionTypeShown(x) {
     player.options.optionTypeShown = x;
   },

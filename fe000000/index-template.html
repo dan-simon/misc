@@ -5921,6 +5921,13 @@
             <button ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('finality')">Full finality shard options: ~r Options.showFullOptions('finality') ? 'On' : 'Off' ~</button>
           </div></td>
         <tr/>
+        <tr ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~>
+          <td/>
+          <td><button ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~ class="options-button" onclick="Options.toggleComplexityChallengeRunningColors()" style="font-size: 0.875rem;">
+            Complexity challenge colors: ~r Options.complexityChallengeRunningColors() ? "Running" : "Completions" ~
+          </button></td>
+          <td/>
+        <tr/>
       </table>
       <div>
         Confirmations:

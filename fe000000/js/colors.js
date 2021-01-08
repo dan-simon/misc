@@ -31,6 +31,10 @@ let Colors = {
       'red': '#cc3333',
     },
     'Vibrant': {
+      'challengered': '#ff0000',
+      'challengeorange': '#ff9933',
+      'challengeyellow': '#ffff00',
+      'challengegreen': '#00cc00',
       'normal': '#ffff00',
       'yellow': '#ffff00',
       'infinity': '#ff00ff',
@@ -75,6 +79,10 @@ let Colors = {
     return [0, 1, 2].map(i => a[i] * (1 - dimmed) + b[i] * dimmed);
   },
   makeColor(x, dimmed) {
+    if (typeof x === 'string') {
+      let colorCode = this.stringToColorCode.Vibrant[x];
+      return 'rgb(' + this.interpolate(this.backgroundColor(), this.colorToRgb(colorCode), dimmed).map(Math.floor).join(', ') + ')';
+    }
     // Handle true and false properly.
     x = +x;
     let r = x <= 1 / 4 ? 1 - x * 8 / 5 : (1 - x) * 4 / 5;
