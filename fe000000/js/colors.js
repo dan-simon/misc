@@ -89,14 +89,17 @@ let Colors = {
     let g = x * 4 / 5;
     return 'rgb(' + this.interpolate(this.backgroundColor(), [255 * r, 255 * g, 0], dimmed).map(Math.floor).join(', ') + ')';
   },
+  interpolationFactor(isChallenge) {
+    return {'Dull': 0.5, 'Dull on challenges': isChallenge ? 0.5 : 1, 'Vibrant': 1}[Options.buttonColor()];
+  },
   makeStyle(x, isChallenge) {
     if (player.options.completionColors === 'Off') {
       return 'var(--background-color)';
     } else if (player.options.completionColors === 'On (uniform)') {
-      let interpolationFactor = {'Dull': 0.5, 'Vibrant': 1}[Options.buttonColor()];
+      let interpolationFactor = this.interpolationFactor(isChallenge);
       return this.makeColor(x, interpolationFactor);
     } else if (player.options.completionColors === 'On (gradient)') {
-      let interpolationFactor = {'Dull': 0.5, 'Vibrant': 1}[Options.buttonColor()];
+      let interpolationFactor = this.interpolationFactor(isChallenge);
       let gradientOnEdge = {'Edge': true, 'Center': false, 'Default': isChallenge, 'Reversed': !isChallenge}[
         Options.completionGradients()];
       let a = gradientOnEdge ? 'var(--background-color)' : this.makeColor(x, interpolationFactor);
@@ -109,9 +112,9 @@ let Colors = {
       return '#aaaaaa';
     }
     if (typeof colorType === 'string') {
-      return this.stringToColorCode[Options.buttonColor()][colorType];
+      return this.stringToColorCode[Options.usualButtonColor()][colorType];
     } else {
-      return 'linear-gradient(90deg, ' + colorType.map(x => this.stringToColorCode[Options.buttonColor()][x]).join(', ') + ')';
+      return 'linear-gradient(90deg, ' + colorType.map(x => this.stringToColorCode[Options.usualButtonColor()][x]).join(', ') + ')';
     }
   },
   rewardClass(hasReward) {

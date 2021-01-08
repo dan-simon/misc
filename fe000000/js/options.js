@@ -80,9 +80,15 @@ let Options = {
   buttonColor() {
     return player.options.theme.buttonColor;
   },
+  usualButtonColor() {
+    return this.buttonColor() === 'Dull' ? 'Dull' : 'Vibrant';
+  },
   nextButtonColor() {
-    player.options.theme.buttonColor = ['Dull', 'Vibrant'][
-      (['Dull', 'Vibrant'].indexOf(player.options.theme.buttonColor) + 1) % 2];
+    let options = ['Vibrant', 'Dull'];
+    if (PrestigeLayerProgress.hasReached('infinity')) {
+      options.push('Dull on challenges');
+    }
+    player.options.theme.buttonColor = options[(options.indexOf(player.options.theme.buttonColor) + 1) % options.length];
     Colors.updateColors();
   },
   completionGradients() {
