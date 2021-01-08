@@ -96,10 +96,11 @@ let Colors = {
       let interpolationFactor = {'Dull': 0.5, 'Vibrant': 1}[Options.buttonColor()];
       return this.makeColor(x, interpolationFactor);
     } else if (player.options.completionColors === 'On (gradient)') {
+      let interpolationFactor = {'Dull': 0.5, 'Vibrant': 1}[Options.buttonColor()];
       let gradientOnEdge = {'Edge': true, 'Center': false, 'Default': isChallenge, 'Reversed': !isChallenge}[
         Options.completionGradients()];
-      let a = gradientOnEdge ? 'var(--background-color)' : this.makeColor(x, 1);
-      let b = gradientOnEdge ? this.makeColor(x, 1) : 'var(--background-color)';
+      let a = gradientOnEdge ? 'var(--background-color)' : this.makeColor(x, interpolationFactor);
+      let b = gradientOnEdge ? this.makeColor(x, interpolationFactor) : 'var(--background-color)';
       return 'radial-gradient(' + a + ', ' + b + ')';
     }
   },
