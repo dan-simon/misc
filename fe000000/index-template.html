@@ -5950,7 +5950,7 @@
         <span ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~>Finality shard upgrades respec: <input type="checkbox" ~!checked=Options.confirmation('finalityShardUpgradesRespec')~ ~!onchange=function() {Options.setConfirmation('finalityShardUpgradesRespec', this.checked)}~></input></span>
       </div>
       <div>
-        <span>Present change: <input type="checkbox" ~!checked=Options.confirmation('presetChange')~ ~!onchange=function() {Options.setConfirmation('presetChange', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        <span>Preset change: <input type="checkbox" ~!checked=Options.confirmation('presetChange')~ ~!onchange=function() {Options.setConfirmation('presetChange', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
         <span>Preset deletion: <input type="checkbox" ~!checked=Options.confirmation('presetDeletion')~ ~!onchange=function() {Options.setConfirmation('presetDeletion', this.checked)}~></input></span>
       </div>
       <br/>
