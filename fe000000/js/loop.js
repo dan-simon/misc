@@ -5,6 +5,9 @@ function gameLoop(diff, display, isOnline) {
     diff = Math.max(0, (now - player.lastUpdate) / 1000 * player.cheats.gameSpeed);
     player.lastUpdate = now;
   }
+  // We cache stuff in achievements for efficiency. This deletes the cache.
+  // The issue is mostly recomputation in a single tick.
+  Achievements.invalidateCache();
   // This order is (I think) the one giving the most stuff.
   EternityProducer.produce(diff);
   Boost.produceBoostPower(diff);

@@ -1054,6 +1054,10 @@ let Saving = {
       player.options.complexityChallengeRunningColors = false;
       player.version = 2.08203125;
     }
+    if (player.version < 2.0859375) {
+      player.achievements.requirementDescriptions = true;
+      player.version = 2.0859375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

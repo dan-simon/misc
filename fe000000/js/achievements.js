@@ -1,4 +1,5 @@
 let Achievements = {
+  cache: {},
   names: [
     [
       'Easy',
@@ -262,6 +263,9 @@ let Achievements = {
       'loop'
     ]
   ],
+  invalidateCache() {
+    this.cache = {};
+  },
   checkForAchievements(situation) {
     for (let row = 1; row <= 8; row++) {
       for (let column = 1; column <= 8; column++) {
@@ -318,6 +322,12 @@ let Achievements = {
   toggleNotifications(x) {
     player.achievements.notifications = !player.achievements.notifications;
   },
+  requirementDescriptions() {
+    return player.achievements.requirementDescriptions;
+  },
+  toggleRequirementDescriptions(x) {
+    player.achievements.requirementDescriptions = !player.achievements.requirementDescriptions;
+  },
   showFullyFarRows() {
     return player.achievements.showFullyFarRows;
   },
@@ -331,9 +341,15 @@ let Achievements = {
     player.achievements.showCompletedRows = !player.achievements.showCompletedRows;
   },
   showRow(x) {
-    let highestCloseRow = Math.min(8, Math.floor(this.getHighest()  + this.beyondHighest() - 1) / 8);
-    return (this.showFullyFarRows() || x <= highestCloseRow) &&
-      (this.showCompletedRows() || range(1, 8).some(y => !this.hasAchievement(x, y)));
+    if (!('row' + x in this.cache)) {
+      let highestCloseRow = Math.min(8, Math.floor(this.getHighest()  + this.beyondHighest() - 1) / 8);
+      this.cache['row' + x] = (this.showFullyFarRows() || x <= highestCloseRow) &&
+        (this.showCompletedRows() || range(1, 8).some(y => !this.hasAchievement(x, y)));
+    }
+    return this.cache['row' + x];
+  },
+  showAchievementDescriptionBelow(row, column) {
+    return this.isAchievementClose(row, column) && this.showRow(row);
   },
   beyondHighest() {
     return player.achievements.beyondHighest;
@@ -345,12 +361,18 @@ let Achievements = {
     player.achievements.beyondHighest = x;
   },
   getHighest() {
-    return Math.max(8, ...range(1, 8).map(
-      x => 8 * x + Math.max(...range(1, 8).filter(y => this.hasAchievement(x, y)))));
+    if (!('highest' in this.cache)) {
+      this.cache['highest'] = Math.max(8, ...range(1, 8).map(
+        x => 8 * x + Math.max(...range(1, 8).filter(y => this.hasAchievement(x, y)))));
+    }
+    return this.cache['highest'];
   },
   isAchievementClose(row, column) {
-    let highest = this.getHighest();
-    return 8 * row + column <= highest + this.beyondHighest();
+    if (!('close' + row + '&' + column in this.cache)) {
+      let highest = this.getHighest();
+      this.cache['close' + row + '&' + column] = 8 * row + column <= highest + this.beyondHighest();
+    }
+    return this.cache['close' + row + '&' + column];
   },
   achievementStatusDescription(row, column) {
     if (this.hasAchievement(row, column)) {

@@ -302,6 +302,7 @@ let initialPlayer = {
     beyondHighest: 2,
     active: true,
     notifications: true,
+    requirementDescriptions: true,
     showFullyFarRows: true,
     showCompletedRows: true
   },
@@ -480,7 +481,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2.08203125
+  version: 2.0859375
 }
 
 let player;
