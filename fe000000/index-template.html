@@ -5691,7 +5691,7 @@
           </td>
         </tr>
       </table>
-      <div style="width: 1024px; margin-left: auto; margin-right: auto;">
+      <div style="width: 1024px; margin-left: auto; margin-right: auto;" ~style.display=Achievements.requirementDescriptions() ? '' : 'none'~>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(1, 1) ? '' : 'none'~/>
         <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 1) ? '' : 'none'~>~r Achievements.getAchievementName(1, 1) ~ (~r Achievements.achievementStatusDescription(1, 1) ~): Buy Generator 1.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(1, 2) ? '' : 'none'~/>
