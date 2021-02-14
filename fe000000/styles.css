@@ -49,6 +49,22 @@ input[type=checkbox] {
   top: calc(-6px * (var(--checkbox-scale) - 1));
 }
 
+.unobtrusive:link {
+  color: var(--background-color);
+}
+
+.unobtrusive:visited {
+  color: var(--background-color);
+}
+
+.unobtrusive:hover {
+  color: var(--background-color);
+}
+
+.unobtrusive:active {
+  color: var(--background-color);
+}
+
 .achievementtd {
   vertical-align: top;
   text-align: center;

@@ -27,7 +27,7 @@ function extractCode(x) {
 }
 
 function updateDisplayOneElement(x, i) {
-  return 'e[' + i + '].textContent = ' + extractCode(x) + ';'
+  return 'if (shouldUpdate("e' + i + '")) {e[' + i + '].textContent = ' + extractCode(x) + '};'
 }
 
 function styleNameToJsName(x) {
@@ -45,7 +45,7 @@ function updateDisplayOneStyle(x, i) {
       property = property.slice(1);
       head = '!';
     }
-    return head + 'b[' + i + '].' + property + ' = ' + y.split('=').slice(1).join('=').slice(0, -1) + ';';
+    return head + 'if (shouldUpdate("b' + i + '")) {b[' + i + '].' + property + ' = ' + y.split('=').slice(1).join('=').slice(0, -1) + '};';
   });
 }
 
@@ -74,10 +74,14 @@ function getUntabbed(inTabs) {
 }
 
 function makeUpdateDisplaySetup(setupList) {
-  return 'let e;\nlet b;\n\nfunction updateDisplayPageLoadSetup() {\n  e = [' +
+  return 'let e;\nlet b;\nlet majorDivs;\nlet majorDivTable;\nlet tickMap;\n\nlet shouldUpdate = x => majorDivTable[x].every(' +
+  'y => {if (!(y in tickMap)) {tickMap[y] = document.getElementById(y).style.display !== "none"}; ' +
+  'return tickMap[y]});\n\nfunction updateDisplayPageLoadSetup() {\n  e = [' +
   [...Array(el1Number)].map((_, i) => 'document.getElementById("e' + i + '")').join(', ') + '];\n  b = [' +
-  [...Array(el2Number)].map((_, i) => 'document.getElementById("b' + i + '")').join(', ') +
-  '];\n}\n\nfunction updateDisplaySaveLoadSetup() {\n' + g(setupList, '  ') + '\n}';
+  [...Array(el2Number)].map((_, i) => 'document.getElementById("b' + i + '")').join(', ') + '];\n  let majorDivsOrig = ' +
+  '[...document.getElementsByClassName("major-div")];\n  majorDivs = majorDivsOrig.map(x => x.id);\n  majorDivTable = {};\n  for (let i of e.concat(b)) {' +
+  'majorDivTable[i.id] = majorDivsOrig.filter(j => j.contains(i)).map(j => j.id)}' +
+  ';\n}\n\nfunction updateDisplaySaveLoadSetup() {\n' + g(setupList, '  ') + '\n}';
 }
 
 let g = (l, s) => l.map(i => s + i).join('\n');
@@ -86,7 +90,7 @@ function makeUpdateDisplay(el1CodeList, el2CodeList, setupList, inTabs) {
   let f = x => [el1CodeList, el2CodeList]['eb'.indexOf(x[0])][+x.slice(1)];
   let untabbed = getUntabbed(inTabs);
   let setupCode = makeUpdateDisplaySetup(setupList);
-  let updateDisplayCode = 'function updateDisplay() {\n' + g(flatten(untabbed.map(f)), '  ') + '\n' +
+  let updateDisplayCode = 'function updateDisplay() {\n  tickMap = {};\n' + g(flatten(untabbed.map(f)), '  ') + '\n' +
   inTabs.map(x => '  if (' + x[0][0] + '[' + x[0].slice(1) + '].style.display !== "none") {\n' +
   g(flatten(x[1].map(f)), '    ') + '\n  }').join('\n') + '\n}';
   return setupCode + '\n\n' + updateDisplayCode;
