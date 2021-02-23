@@ -189,11 +189,21 @@ let Powers = {
     if (this.isPowerGainActive()) {
       let timePer = this.interval();
       let newPowers = this.imminentPowerGain();
+      let overproductionEfficiencyLimit = newPowers - 1024;
       if (newPowers === 0) return;
       player.stats.timeSincePowerGain -= newPowers * timePer;
       let maxedPowers = ['normal', 'infinity', 'eternity', 'complexity'].map(
         x => this.equipped().concat(this.stored()).filter(y => y.type === x && this.isMaxed(y)).length);
       while (newPowers > 0 && maxedPowers.some(x => x < this.maximumEquippedLimit())) {
+        if (newPowers <= overproductionEfficiencyLimit) {
+          if (!player.stats.hasSeenPowerWarningMessage) {
+            alert('To avoid offline progress taking too long to process, you can get at most ' +
+              formatInt(1024) + ' powers in a single tick. The rest will be converted to power shards. ' +
+              'This message will not show up again.');
+            player.stats.hasSeenPowerWarningMessage = true;
+          }
+          break;
+        }
         let newPower = this.gainNewPower(true, Math.min(diff, player.stats.timeSincePowerGain + timePer * (newPowers - 1)));
         if (this.isMaxed(newPower)) {
           maxedPowers[this.index(newPower.type) - 1]++;

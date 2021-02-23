@@ -63,6 +63,7 @@ let Galaxy = {
       auto && player.complexityPoints.minus(this.unlockCost()).lt(2) && ComplexityGenerator(1).bought() === 0)) return;
     player.complexityPoints = player.complexityPoints.safeMinus(this.unlockCost());
     player.galaxies.unlocked = true;
+    this.updateDilatedMinor();
   },
   otherSpeedMultiplier() {
     return Achievements.otherMultiplier() * FinalityShardUpgrade(8).effect();
@@ -98,23 +99,29 @@ let Galaxy = {
   dilated() {
     return player.galaxies.dilated;
   },
+  undilated() {
+    return player.galaxies.undilated;
+  },
   nextDilated() {
+    return this.nextDilatedClamped(0, this.amount());
+  },
+  nextDilatedClamped(min, max) {
     let mode = this.nextDilatedMode();
     let amount = this.nextDilatedAmount();
     let total = this.amount();
     if (mode === 'Amount') {
-      return Math.floor(Math.min(total, Math.max(0, amount)));
+      return Math.floor(Math.min(max, Math.max(min, amount)));
     } else if (mode === 'All but amount') {
-      return Math.floor(total - Math.min(total, Math.max(0, amount)));
+      return Math.floor(Math.min(max, Math.max(min, total - amount)));
     } else if (mode === 'Seconds to reach cap') {
       // This loop is as things go pretty cheap.
       // If there were more than 128 dilated galaxies, I'd start to be worried,
       // but we're nowhere near that.
-      let safe = total;
-      while (safe >= 16 && this.timeToReachEffectCap(safe - 16) <= amount) {
+      let safe = max;
+      while (safe >= min + 16 && this.timeToReachEffectCap(safe - 16) <= amount) {
         safe -= 16;
       }
-      while (safe >= 1 && this.timeToReachEffectCap(safe - 1) <= amount) {
+      while (safe >= min + 1 && this.timeToReachEffectCap(safe - 1) <= amount) {
         safe -= 1;
       }
       return safe;
@@ -142,7 +149,18 @@ let Galaxy = {
     return player.galaxies.resetNextDilatedOnFinality;
   },
   updateDilated() {
-    player.galaxies.dilated = this.nextDilated();
+    let d = this.nextDilated();
+    let total = this.amount();
+    player.galaxies.dilated = d;
+    player.galaxies.undilated = total - d;
+  },
+  updateDilatedMinor() {
+    let total = this.amount();
+    if (this.dilated() + this.undilated() < total) {
+      let d = this.nextDilatedClamped(this.dilated(), total - this.undilated());
+      player.galaxies.dilated = d;
+      player.galaxies.undilated = total - d;
+    }
   },
   resetNextDilated() {
     player.galaxies.nextDilatedMode = 'Amount';

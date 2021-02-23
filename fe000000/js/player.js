@@ -266,6 +266,7 @@ let initialPlayer = {
   galaxies: {
     unlocked: false,
     dilated: 0,
+    undilated: 0,
     nextDilatedMode: 'Amount',
     nextDilatedAmount: 0,
     resetNextDilatedOnFinality: true
@@ -475,13 +476,14 @@ let initialPlayer = {
       eternity: true,
       complexity: true,
       finality: true
-    }
+    },
+    hasSeenPowerWarningMessage: false,
   },
   cheats: {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2.0859375
+  version: 2.08984375
 }
 
 let player;

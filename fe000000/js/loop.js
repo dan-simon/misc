@@ -52,6 +52,9 @@ function gameLoop(diff, display, isOnline) {
   EternityChallenge.checkForAutoEternityChallengeCompletions();
   ComplexityChallenge.checkForComplexityChallengeCompletions();
   ComplexityAchievements.checkForComplexityAchievements();
+  // We need to check every tick for new galaxies so we can possibly dilate
+  // them if there are any.
+  Galaxy.updateDilatedMinor();
   // Why are these here? Because these are used mainly for display, and we want 
   // displayed peak to be at most current. Why so late? Because theoretically
   // a complexity achievement could give you EP, which might mess up stuff.

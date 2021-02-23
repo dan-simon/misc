@@ -1058,6 +1058,13 @@ let Saving = {
       player.achievements.requirementDescriptions = true;
       player.version = 2.0859375;
     }
+    if (player.version < 2.08984375) {
+      player.stats.hasSeenPowerWarningMessage = false;
+      // This might be confusing for one tick but since dilated galaxies
+      // can't go down, it's not that bad, if indeed it's bad at all.
+      player.galaxies.undilated = 0;
+      player.version = 2.08984375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
