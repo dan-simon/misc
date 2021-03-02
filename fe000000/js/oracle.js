@@ -139,7 +139,7 @@ let Oracle = {
   },
   message() {
     let messages = [
-      this.complexityPointMessage(), this.complexityPointGainMessage(), this.otherThingsMessage(),
+      this.complexityPointMessage(), this.complexityPointGainMessage(), this.otherThingsGainMessage(), this.otherThingsLossMessage()
     ];
     return 'After ' + formatTime(player.oracle.timeSimulated, {seconds: {f: formatMaybeInt, s: true}, larger: {f: formatMaybeInt, s: true}}) +
       ' and ' + formatMaybeInt(player.oracle.ticksSimulated) + ' tick' +
@@ -152,47 +152,55 @@ let Oracle = {
     return player.oracle.complexityPointGain.gt(0) ?
       ('will be able to gain ' + formatInt(player.oracle.complexityPointGain) + ' ℂP') : 'will not yet be able to complexity';
   },
-  complexityChallengeCompletionsGainText() {
-    // Note that we might, in theory, lose complexity challenge completions, if we finality.
-    // I'm not sure if this can happen in practice but it seems worth mentioning.
+  complexityChallengeCompletionsChangeText(gain) {
+    // Note that we can lose complexity challenge completions, if we finality.
     let gainedCompletions = [1, 2, 3, 4, 5, 6].map(
       i => player.oracle.complexityChallengeCompletions[i - 1] - player.oracle.originalComplexityChallengeCompletions[i - 1]);
-    let completionText = gainedCompletions.map(
+    let completionText = gainedCompletions.map(x => x * (gain ? 1 : -1)).map(
       (x, i) => x > 0 ? formatInt(x) + ' completion' + pluralize(x, '', 's') + ' of Complexity Challenge ' + (i + 1) : null);
     return coordinate('*', null, completionText);
   },
-  powerShardGainText() {
-    if (player.oracle.PowerShards === player.oracle.originalPowerShards) {
+  powerShardChangeText(gain) {
+    let diff = (player.oracle.powerShards - player.oracle.originalPowerShards) * (gain ? 1 : -1);
+    if (diff <= 0) {
       return null;
     }
-    return format(player.oracle.powerShards - player.oracle.originalPowerShards) +
-      ' power shard' + pluralize(player.oracle.powerShards - player.oracle.originalPowerShards, '', 's');
+    return format(diff) + ' power shard' + pluralize(diff, '', 's');
   },
-  galaxyGainText() {
-    if (player.oracle.galaxies === player.oracle.originalGalaxies) {
+  galaxyChangeText(gain) {
+    let diff = (player.oracle.galaxies - player.oracle.originalGalaxies) * (gain ? 1 : -1);
+    if (diff <= 0) {
       return null;
     }
-    return formatInt(player.oracle.galaxies - player.oracle.originalGalaxies) +
-      ' galax' + pluralize(player.oracle.galaxies - player.oracle.originalGalaxies, 'y', 'ies');
+    return formatInt(diff) + ' galax' + pluralize(diff, 'y', 'ies');
   },
-  finalityGainText() {
-    if (player.oracle.finalities === player.oracle.originalFinalities) {
+  finalityChangeText(gain) {
+    let diff = (player.oracle.finalities - player.oracle.originalFinalities) * (gain ? 1 : -1);
+    if (diff <= 0) {
       return null;
     }
-    return formatInt(player.oracle.finalities - player.oracle.originalFinalities) +
-      ' finalit' + pluralize(player.oracle.finalities - player.oracle.originalFinalities, 'y', 'ies');
+    return formatInt(diff) + ' finalit' + pluralize(diff, 'y', 'ies');
   },
-  finalityShardGainText() {
-    if (player.oracle.finalityShards === player.oracle.originalFinalityShards) {
+  finalityShardChangeText(gain) {
+    let diff = (player.oracle.finalityShards - player.oracle.originalFinalityShards) * (gain ? 1 : -1);
+    if (diff <= 0) {
       return null;
     }
-    return formatInt(player.oracle.finalityShards - player.oracle.originalFinalityShards) +
-    ' finality shard' + pluralize(player.oracle.finalityShards - player.oracle.originalFinalityShards, '', 's');
+    return formatInt(diff) + ' finality shard' + pluralize(diff, '', 's');
   },
-  otherThingsMessage() {
+  otherThingsGainMessage() {
     return coordinate('will have gained *', null, [
-      this.complexityChallengeCompletionsGainText(), this.powerShardGainText(),
-      this.galaxyGainText(), this.finalityGainText(), this.finalityShardGainText(),
+      this.complexityChallengeCompletionsChangeText(true), this.powerShardChangeText(true),
+      this.galaxyChangeText(true), this.finalityChangeText(true), this.finalityShardChangeText(true),
+    ]);
+  },
+  otherThingsLossMessage() {
+    let hasGainedFinalities = player.oracle.finalities > player.oracle.originalFinalities;
+    // Nothing but power shard autobuyers should be able to decrease anything during a finality.
+    let cause = hasGainedFinalities ? 'finality' : 'power shard autobuyers';
+    return coordinate('will have lost * (due to ' + cause + ')', null, [
+      this.complexityChallengeCompletionsChangeText(false), this.powerShardChangeText(false),
+      this.galaxyChangeText(false), this.finalityChangeText(false), this.finalityShardChangeText(false),
     ]);
   },
   messagePrequel() {
