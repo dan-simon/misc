@@ -1,6 +1,6 @@
 let Tabs = {
   rows: [
-    ['main', 'infinity', 'challenges', 'autobuyers', 'infinity-challenges', 'goals', 'statistics', 'last-ten-runs', 'options'],
+    ['main', 'infinity', 'normal-challenges', 'autobuyers', 'infinity-challenges', 'goals', 'statistics', 'last-ten-runs', 'options'],
     ['eternity', 'eternity-milestones', 'studies', 'eternity-producer', 'eternity-challenges', 'chroma'],
     ['complexity', 'complexity-challenges', 'complexity-achievements', 'powers', 'oracle', 'galaxies'],
     ['finality', 'finality-shards', 'finality-milestones']
@@ -15,7 +15,7 @@ let Tabs = {
     return {
       'main': () => true,
       'infinity': () => PrestigeLayerProgress.hasReached('infinity'),
-      'challenges': () => PrestigeLayerProgress.hasReached('infinity'),
+      'normal-challenges': () => PrestigeLayerProgress.hasReached('infinity'),
       'autobuyers': () => true,
       'infinity-challenges': () => SpecialTabs.isTabVisible('infinity-challenges'),
       'goals': () => true,

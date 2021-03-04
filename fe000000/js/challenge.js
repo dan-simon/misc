@@ -100,15 +100,15 @@ let Challenge = {
     let cc = this.currentChallenge();
     let ic = InfinityChallenge.currentInfinityChallenge();
     if (cc === 2) {
-      return 'Challenge 2 multiplier: ' + formatMaybeInt(this.challenge2Mult());
+      return 'Normal Challenge 2 multiplier: ' + formatMaybeInt(this.challenge2Mult());
     } else if (cc === 3) {
-      return 'Challenge 3 multiplier: ' + formatWithPrecision(this.challenge3Mult(), 5);
+      return 'Normal Challenge 3 multiplier: ' + formatWithPrecision(this.challenge3Mult(), 5);
     } else if (cc === 7) {
-      return 'Challenge 7 purchases left: ' + formatInt(this.challenge7PurchasesLeft());
+      return 'Normal Challenge 7 purchases left: ' + formatInt(this.challenge7PurchasesLeft());
     } else if (ic === 1) {
-      return 'Challenge 2 multiplier: ' + formatMaybeInt(this.challenge2Mult()) + ', ' +
-      'Challenge 3 multiplier: ' + formatWithPrecision(this.challenge3Mult(), 5) + ', ' +
-      'Challenge 7 purchases left: ' + formatInt(this.challenge7PurchasesLeft());
+      return 'Normal Challenge 2 multiplier: ' + formatMaybeInt(this.challenge2Mult()) + ', ' +
+      'Normal Challenge 3 multiplier: ' + formatWithPrecision(this.challenge3Mult(), 5) + ', ' +
+      'Normal Challenge 7 purchases left: ' + formatInt(this.challenge7PurchasesLeft());
     } else if (ic === 3) {
       return 'Infinity Challenge 3 prestige power exponent: ' +
       formatMaybeInt(InfinityChallenge.infinityChallenge3PrestigePowerExponent());

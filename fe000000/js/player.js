@@ -327,7 +327,7 @@ let initialPlayer = {
   tabOptions: {
     'main': true,
     'infinity': true,
-    'challenges': true,
+    'normal-challenges': true,
     'autobuyers': true,
     'infinity-challenges': true,
     'goals': true,
@@ -483,7 +483,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2.08984375
+  version: 2.09375
 }
 
 let player;

@@ -722,8 +722,8 @@ function updateDisplaySaveLoadSetup() {
   if (shouldUpdate("b2064")) {b[2064].onchange = function() {Tabs.setTabOption('main', this.checked)}};
   if (shouldUpdate("b2066")) {b[2066].checked = Tabs.isTabOptionOn('infinity')};
   if (shouldUpdate("b2066")) {b[2066].onchange = function() {Tabs.setTabOption('infinity', this.checked)}};
-  if (shouldUpdate("b2068")) {b[2068].checked = Tabs.isTabOptionOn('challenges')};
-  if (shouldUpdate("b2068")) {b[2068].onchange = function() {Tabs.setTabOption('challenges', this.checked)}};
+  if (shouldUpdate("b2068")) {b[2068].checked = Tabs.isTabOptionOn('normal-challenges')};
+  if (shouldUpdate("b2068")) {b[2068].onchange = function() {Tabs.setTabOption('normal-challenges', this.checked)}};
   if (shouldUpdate("b2070")) {b[2070].checked = Tabs.isTabOptionOn('autobuyers')};
   if (shouldUpdate("b2070")) {b[2070].onchange = function() {Tabs.setTabOption('autobuyers', this.checked)}};
   if (shouldUpdate("b2072")) {b[2072].checked = Tabs.isTabOptionOn('infinity-challenges')};
@@ -995,7 +995,7 @@ function updateDisplay() {
   if (shouldUpdate("b23")) {b[23].style.background = Colors.getButtonColor(Options.tabColors(), 'normal')};
   if (shouldUpdate("b24")) {b[24].style.display = Tabs.isTabVisible('infinity') ? '' : 'none'};
   if (shouldUpdate("b24")) {b[24].style.background = Colors.getButtonColor(Options.tabColors(), 'infinity')};
-  if (shouldUpdate("b25")) {b[25].style.display = Tabs.isTabVisible('challenges') ? '' : 'none'};
+  if (shouldUpdate("b25")) {b[25].style.display = Tabs.isTabVisible('normal-challenges') ? '' : 'none'};
   if (shouldUpdate("b25")) {b[25].style.background = Colors.getButtonColor(Options.tabColors(), 'infinity')};
   if (shouldUpdate("b26")) {b[26].style.display = Tabs.isTabVisible('autobuyers') ? '' : 'none'};
   if (shouldUpdate("b26")) {b[26].style.background = Colors.getButtonColor(Options.tabColors(), 'normal')};
@@ -1047,7 +1047,7 @@ function updateDisplay() {
   if (shouldUpdate("b55")) {b[55].style.display = ComplexityChallenge.anyLongTime() ? '' : 'none'};
   if (shouldUpdate("b56")) {b[56].style.display = Tabs.currentTab() === 'main' ? '' : 'none'};
   if (shouldUpdate("b127")) {b[127].style.display = Tabs.currentTab() === 'infinity' ? '' : 'none'};
-  if (shouldUpdate("b182")) {b[182].style.display = Tabs.currentTab() === 'challenges' ? '' : 'none'};
+  if (shouldUpdate("b182")) {b[182].style.display = Tabs.currentTab() === 'normal-challenges' ? '' : 'none'};
   if (shouldUpdate("b195")) {b[195].style.display = Tabs.currentTab() === 'autobuyers' ? '' : 'none'};
   if (shouldUpdate("b310")) {b[310].style.display = Tabs.currentTab() === 'infinity-challenges' ? '' : 'none'};
   if (shouldUpdate("b319")) {b[319].style.display = Tabs.currentTab() === 'eternity' ? '' : 'none'};
@@ -4951,7 +4951,7 @@ function updateDisplay() {
     if (shouldUpdate("b2059")) {b[2059].style.display = PrestigeLayerProgress.hasReached('finality') ? '' : 'none'};
     if (shouldUpdate("b2063")) {b[2063].style.display = Tabs.isTabOptionVisible('main') ? '' : 'none'};
     if (shouldUpdate("b2065")) {b[2065].style.display = Tabs.isTabOptionVisible('infinity') ? '' : 'none'};
-    if (shouldUpdate("b2067")) {b[2067].style.display = Tabs.isTabOptionVisible('challenges') ? '' : 'none'};
+    if (shouldUpdate("b2067")) {b[2067].style.display = Tabs.isTabOptionVisible('normal-challenges') ? '' : 'none'};
     if (shouldUpdate("b2069")) {b[2069].style.display = Tabs.isTabOptionVisible('autobuyers') ? '' : 'none'};
     if (shouldUpdate("b2071")) {b[2071].style.display = Tabs.isTabOptionVisible('infinity-challenges') ? '' : 'none'};
     if (shouldUpdate("b2073")) {b[2073].style.display = Tabs.isTabOptionVisible('goals') ? '' : 'none'};

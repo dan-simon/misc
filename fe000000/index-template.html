@@ -145,7 +145,7 @@
     <span ~style.display=Tabs.displayTabRow(1) ? '' : 'none'~>
       <button ~style.display=Tabs.isTabVisible('main') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'normal')~ onclick="Tabs.setTab('main')">Main</button>
       <button ~style.display=Tabs.isTabVisible('infinity') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'infinity')~ onclick="Tabs.setTab('infinity')">Infinity</button>
-      <button ~style.display=Tabs.isTabVisible('challenges') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'infinity')~ onclick="Tabs.setTab('challenges')">Challenges</button>
+      <button ~style.display=Tabs.isTabVisible('normal-challenges') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'infinity')~ onclick="Tabs.setTab('normal-challenges')">Normal Challenges</button>
       <button ~style.display=Tabs.isTabVisible('autobuyers') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'normal')~ onclick="Tabs.setTab('autobuyers')">Autobuyers</button>
       <button ~style.display=Tabs.isTabVisible('infinity-challenges') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'infinity')~ onclick="Tabs.setTab('infinity-challenges')">Infinity Challenges</button>
       <button ~style.display=Tabs.isTabVisible('goals') ? '' : 'none'~ onclick="Tabs.setTab('goals')">Goals</button>
@@ -338,7 +338,7 @@
       <span>You have ~i Infinities.amount() ~ infinit~y Infinities.amount() ~, multiplying all infinity generators (IGs) by ~q Infinities.infinityGeneratorMultiplier() ~.</span>
       <br/>
       <span ~style.display=InfinityPrestigeLayer.canInfinityBeBroken() ? '' : 'none'~><button style="height: 48px;" onclick="InfinityPrestigeLayer.toggleBreakInfinity()">~r InfinityPrestigeLayer.breakInfinityButtonText() ~</button></span>
-      <span ~style.display=InfinityPrestigeLayer.canInfinityBeBroken() ? 'none' : ''~>You need to complete all the challenges to be able to break infinity.</span>
+      <span ~style.display=InfinityPrestigeLayer.canInfinityBeBroken() ? 'none' : ''~>You need to complete all the normal challenges to be able to break infinity.</span>
       <br ~style.display=(InfinityPrestigeLayer.canInfinityBeBroken() && !SpecialTabs.isTabVisible('infinity-challenges')) ? '' : 'none'~/>
       <span ~style.display=(InfinityPrestigeLayer.canInfinityBeBroken() && !SpecialTabs.isTabVisible('infinity-challenges')) ? '' : 'none'~>Breaking infinity for the first time will also let you view the Infinity Challenges tab.</span>
       <br/>
@@ -442,18 +442,18 @@
         </tr>
       </table>
     </tab>
-    <tab ~style.display=Tabs.currentTab() === 'challenges' ? '' : 'none'~>
-      <span>You have completed ~i Challenge.numberOfChallengesCompleted() ~ challenge~s Challenge.numberOfChallengesCompleted() ~, multiplying all ~r Generators.term() ~ by ~f Challenge.multiplier() ~.</span>
+    <tab ~style.display=Tabs.currentTab() === 'normal-challenges' ? '' : 'none'~>
+      <span>You have completed ~i Challenge.numberOfChallengesCompleted() ~ normal challenge~s Challenge.numberOfChallengesCompleted() ~, multiplying all ~r Generators.term() ~ by ~f Challenge.multiplier() ~.</span>
       <br/>
-      <span><button onclick="Challenge.toggleRestartOnCompletion()">Restart challenges on completion: ~r Challenge.restartOnCompletion() ? "On" : "Off" ~</button></span>
+      <span><button onclick="Challenge.toggleRestartOnCompletion()">Restart normal challenges on completion: ~r Challenge.restartOnCompletion() ? "On" : "Off" ~</button></span>
       <br/>
       <br/>
-      <span>To complete a challenge, infinity while in the challenge.</span>
+      <span>To complete a normal challenge, infinity while in the normal challenge.</span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>
             <div class="challengediv" ~style.background=Challenge.color(1)~>
-              <span>Challenge 1</span>
+              <span>Normal Challenge 1</span>
               <br/>
               <span>Generator 1 multiplier is raised ^~i 4 ~. All other ~r Generators.term(true) ~ multipliers are always ~i 1 ~x.</span>
               <br/>
@@ -466,7 +466,7 @@
           </td>
           <td>
             <div class="challengediv" ~style.background=Challenge.color(2)~>
-              <span>Challenge 2</span>
+              <span>Normal Challenge 2</span>
               <br/>
               <span>There's a multiplier on all ~r Generators.term() ~ increasing linearly from ~i 0 ~ to ~i 1 ~ over ~ti 256 ~. Every time you buy a generator or boost, or sacrifice or prestige, this multiplier resets to ~i 0 ~.</span>
               <br/>
@@ -481,7 +481,7 @@
         <tr>
           <td>
             <div class="challengediv" ~style.background=Challenge.color(3)~>
-              <span>Challenge 3</span>
+              <span>Normal Challenge 3</span>
               <br/>
               <span>There's a multiplier on Generator 1, starting at ~r formatWithPrecision(1 / 256, 5) ~ and doubling every ~ti 256 ~. Every time you prestige, this multiplier resets to ~r formatWithPrecision(1 / 256, 5) ~.</span>
               <br/>
@@ -494,7 +494,7 @@
           </td>
           <td>
             <div class="challengediv" ~style.background=Challenge.color(4)~>
-              <span>Challenge 4</span>
+              <span>Normal Challenge 4</span>
               <br/>
               <span>Every time you buy a ~r Generators.term(true) ~, the amounts of all lower ~r Generators.term() ~ are reset, like a sacrifice without the benefit.</span>
               <br/>
@@ -509,7 +509,7 @@
         <tr>
           <td>
             <div class="challengediv" ~style.background=Challenge.color(5)~>
-              <span>Challenge 5</span>
+              <span>Normal Challenge 5</span>
               <br/>
               <span>All ~r Generators.term(true) ~ cost increases are raised ^~i 2 ~.</span>
               <br/>
@@ -522,7 +522,7 @@
           </td>
           <td>
             <div class="challengediv" ~style.background=Challenge.color(6)~>
-              <span>Challenge 6</span>
+              <span>Normal Challenge 6</span>
               <br/>
               <span>There are only 6 ~r Generators.term() ~. (Generator 7 and Generator 8 don't exist.)</span>
               <br/>
@@ -537,9 +537,9 @@
         <tr>
           <td>
             <div class="challengediv" ~style.background=Challenge.color(7)~>
-              <span>Challenge 7</span>
+              <span>Normal Challenge 7</span>
               <br/>
-              <span>You can only buy ~i 343 ~ total ~r Generators.term() ~ and boosts throughout the challenge. This count does not reset on prestige.</span>
+              <span>You can only buy ~i 343 ~ total ~r Generators.term() ~ and boosts throughout this challenge. This count does not reset on prestige.</span>
               <br/>
               <span>~r Challenge.challengeStatusDescription(7) ~</span>
               <br/>
@@ -550,7 +550,7 @@
           </td>
           <td>
             <div class="challengediv" ~style.background=Challenge.color(8)~>
-              <span>Challenge 8</span>
+              <span>Normal Challenge 8</span>
               <br/>
               <span>You can't buy boosts, the boost multiplier is ~i 1 ~x, and prestige power is raised ^~f 0.5 ~, but all ~r Generators.term() ~ (including Generator 8) are multiplied by your amount of Generator 8.</span>
               <br/>
@@ -565,7 +565,7 @@
         <tr>
           <td>
             <div class="challengediv" ~style.background=Challenge.color(9)~>
-              <span>Challenge 9</span>
+              <span>Normal Challenge 9</span>
               <br/>
               <span>You can't buy boosts and the boost multiplier is ~i 1 ~x.</span>
               <br/>
@@ -578,7 +578,7 @@
           </td>
           <td>
             <div class="challengediv" ~style.background=Challenge.color(10)~>
-              <span>Challenge 10</span>
+              <span>Normal Challenge 10</span>
               <br/>
               <span>You can't buy boosts or more than one of each ~r Generators.term(true) ~, and you can't prestige. You can sacrifice multiple times at the same point and the sacrifice bonuses multiply, but sacrifice resets everything that prestige resets.</span>
               <br/>
@@ -593,7 +593,7 @@
         <tr>
           <td>
             <div class="challengediv" ~style.background=Challenge.color(11)~>
-              <span>Challenge 11</span>
+              <span>Normal Challenge 11</span>
               <br/>
               <span>Prestige power is raised ^~f 0.5 ~.</span>
               <br/>
@@ -606,7 +606,7 @@
           </td>
           <td>
             <div class="challengediv" ~style.background=Challenge.color(12)~>
-              <span>Challenge 12</span>
+              <span>Normal Challenge 12</span>
               <br/>
               <span>Infinity generators are disabled.</span>
               <br/>
@@ -1100,7 +1100,7 @@
             <div class="infinitychallengediv" ~style.background=InfinityChallenge.color(1)~>
               <span>Infinity Challenge 1</span>
               <br/>
-              <span>Challenges 2, 3, 4, 5, 6, and 7 all apply.</span>
+              <span>Normal Challenges 2, 3, 4, 5, 6, and 7 all apply.</span>
               <br/>
               <span>Requirement to start: ~f InfinityChallenge.getInfinityChallengeRequirement(1) ~ stars this eternity</span>
               <br/>
@@ -1225,7 +1225,7 @@
             <div class="infinitychallengediv" ~style.background=InfinityChallenge.color(8)~>
               <span>Infinity Challenge 8</span>
               <br/>
-              <span>You can only buy ~i 7 ~ total ~r Generators.term() ~ (apart from Generator 8) and boosts throughout the challenge. Each Generator 8 you buy gives you ~i 8 ~ extra purchases.</span>
+              <span>You can only buy ~i 7 ~ total ~r Generators.term() ~ (apart from Generator 8) and boosts throughout this challenge. Each Generator 8 you buy gives you ~i 8 ~ extra purchases.</span>
               <br/>
               <span>Requirement to start: ~f InfinityChallenge.getInfinityChallengeRequirement(8) ~ stars this eternity</span>
               <br/>
@@ -1384,7 +1384,7 @@
               <br/>
               ~r EternityMilestones.milestoneStatusDescription(2) ~
               <br/>
-              Start each ~r PrestigeLayerNames.layersAbove('eternity') ~ with all challenges completed. (You also keep autobuyers and infinity remains broken.)
+              Start each ~r PrestigeLayerNames.layersAbove('eternity') ~ with all normal challenges completed. (You also keep autobuyers and infinity remains broken.)
             </div>
           </td>
           <td>
@@ -1643,7 +1643,7 @@
           Adding |ux to the end of a study list (where the u is a literal u) will keep at least x theorems unspent by studies no matter what. It's fine if those theorems are spent on an eternity challenge.
           |cx is like |ux, except it uses the cost of Eternity Challenge x rather than the value of x. This is useful for eternity challenges.
           Adding ! to a preset with |x will try to unlock the eternity challenge, and adding !! will try to start it. Additional exclamation marks have no additional effect.
-          When you have an eternity challenge unlocked and export a study list, that study list will have |cx!, where x is the eternity challenge, and it will have |cx!! if you are in the challenge.
+          When you have an eternity challenge unlocked and export a study list, that study list will have |cx!, where x is the eternity challenge, and it will have |cx!! if you are in the eternity challenge.
           <span ~style.display=(EternityChallenge.isEternityChallengeUnlockingMeaningless() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>("Broke every stone" disables this.)</span>
         </div>
         <br ~style.display=Studies.couldEverAccessFourthRow() ? '' : 'none'~/>
@@ -2776,7 +2776,7 @@
             <div class="eternitychallengediv" ~style.background=EternityChallenge.color(4)~>
               <span>Eternity Challenge 4</span>
               <br/>
-              <span>You can infinity at most ~i EternityChallenge.eternityChallenge4AllowedInfinities() ~ time~s EternityChallenge.eternityChallenge4AllowedInfinities() ~. If you infinity more, you will automatically exit the challenge.</span>
+              <span>You can infinity at most ~i EternityChallenge.eternityChallenge4AllowedInfinities() ~ time~s EternityChallenge.eternityChallenge4AllowedInfinities() ~. If you infinity more, you will automatically exit this challenge.</span>
               <br/>
               <div ~style.display=EternityChallenge.isRequirementDisplayOn() ? '' : 'none'~>
                 <span>Requirement to unlock:</span>
@@ -3185,7 +3185,7 @@
         </span>
         <br/>
         <span>
-          Instead, violating the condition makes you exit the challenge.
+          Instead, violating the condition makes you exit the complexity challenge.
         </span>
         <br/>
         <span>
@@ -3254,7 +3254,7 @@
               <br ~style.display=ComplexityChallenge.showComplexityChallengeLastCompletionDescription(2) ? '' : 'none'~/>
               <span><button onclick="ComplexityChallenge.toggleSafeguard(2)">Buying boosts: ~r ComplexityChallenge.safeguardStatusText(2) ~</button></span>
               <br/>
-              <span ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(2) ? 'none' : ''~>(Disabling this doesn't put you in this challenge yet, since the challenge is locked.)</span>
+              <span ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(2) ? 'none' : ''~>(Disabling this doesn't put you in this challenge yet, since this challenge is locked.)</span>
               <br ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(2) ? 'none' : ''~/>
               <span>Reward: Boosts are cheaper.</span>
               <br/>
@@ -3277,7 +3277,7 @@
               <br ~style.display=ComplexityChallenge.showComplexityChallengeLastCompletionDescription(3) ? '' : 'none'~/>
               <span><button onclick="ComplexityChallenge.toggleSafeguard(3)">Unlocking the Eternity Producer: ~r ComplexityChallenge.safeguardStatusText(3) ~</button></span>
               <br/>
-              <span ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(3) ? 'none' : ''~>(Disabling this doesn't put you in this challenge yet, since the challenge is locked.)</span>
+              <span ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(3) ? 'none' : ''~>(Disabling this doesn't put you in this challenge yet, since this challenge is locked.)</span>
               <br ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(3) ? 'none' : ''~/>
               <span>Reward: Multiplier to eternity gain.</span>
               <br/>
@@ -3298,7 +3298,7 @@
               <br ~style.display=ComplexityChallenge.showComplexityChallengeLastCompletionDescription(4) ? '' : 'none'~/>
               <span><button onclick="ComplexityChallenge.toggleSafeguard(4)">Unlocking chroma and colors: ~r ComplexityChallenge.safeguardStatusText(4) ~</button></span>
               <br/>
-              <span ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(4) ? 'none' : ''~>(Disabling this doesn't put you in this challenge yet, since the challenge is locked.)</span>
+              <span ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(4) ? 'none' : ''~>(Disabling this doesn't put you in this challenge yet, since this challenge is locked.)</span>
               <br ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(4) ? 'none' : ''~/>
               <span>Reward: Multiplier to chroma cap.</span>
               <br/>
@@ -3321,7 +3321,7 @@
               <br ~style.display=ComplexityChallenge.showComplexityChallengeLastCompletionDescription(5) ? '' : 'none'~/>
               <span><button onclick="ComplexityChallenge.toggleSafeguard(5)">Buying Eternity Generator 8: ~r ComplexityChallenge.safeguardStatusText(5) ~</button></span>
               <br/>
-              <span ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(5) ? 'none' : ''~>(Disabling this doesn't put you in this challenge yet, since the challenge is locked.)</span>
+              <span ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(5) ? 'none' : ''~>(Disabling this doesn't put you in this challenge yet, since this challenge is locked.)</span>
               <br ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(5) ? 'none' : ''~/>
               <span>Reward: Multiplier to per-purchase Eternity Generator 8 multiplier.</span>
               <br/>
@@ -3342,7 +3342,7 @@
               <br ~style.display=ComplexityChallenge.showComplexityChallengeLastCompletionDescription(6) ? '' : 'none'~/>
               <span><button onclick="ComplexityChallenge.toggleSafeguard(6)">Buying studies: ~r ComplexityChallenge.safeguardStatusText(6) ~</button></span>
               <br/>
-              <span ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(6) ? 'none' : ''~>(Disabling this doesn't put you in this challenge yet, since the challenge is locked.)</span>
+              <span ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(6) ? 'none' : ''~>(Disabling this doesn't put you in this challenge yet, since this challenge is locked.)</span>
               <br ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(6) ? 'none' : ''~/>
               <span ~style.display=(ComplexityAchievements.hasComplexityAchievement(4, 4) && ComplexityChallenge.isComplexityChallengeUnlocked(6)) ? '' : 'none'~>(Due to "On the other side", you also need to respec studies to enter this challenge. Disabling buying studies will respec studies on complexity.)</span>
               <br ~style.display=(ComplexityAchievements.hasComplexityAchievement(4, 4) && ComplexityChallenge.isComplexityChallengeUnlocked(6)) ? '' : 'none'~/>
@@ -5395,13 +5395,13 @@
             <span>~r Achievements.getAchievementName(3, 1) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(3, 1) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 1) ? '' : 'none'~>Complete a challenge.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 1) ? '' : 'none'~>Complete a normal challenge.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(3, 2)~>
             <span>~r Achievements.getAchievementName(3, 2) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(3, 2) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 2) ? '' : 'none'~>Complete ~i 6 ~ challenges.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 2) ? '' : 'none'~>Complete ~i 6 ~ normal challenges.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(3, 3)~>
             <span>~r Achievements.getAchievementName(3, 3) ~</span>
@@ -5425,13 +5425,13 @@
             <span>~r Achievements.getAchievementName(3, 6) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(3, 6) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 6) ? '' : 'none'~>Infinity in Challenge 10 without sacrificing.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 6) ? '' : 'none'~>Infinity in Normal Challenge 10 without sacrificing.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(3, 7)~>
             <span>~r Achievements.getAchievementName(3, 7) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(3, 7) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 7) ? '' : 'none'~>Infinity in Challenge 2 in ~ti 16 ~.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 7) ? '' : 'none'~>Infinity in Normal Challenge 2 in ~ti 16 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(3, 8)~>
             <span>~r Achievements.getAchievementName(3, 8) ~</span>
@@ -5725,9 +5725,9 @@
         <br ~style.display=Achievements.showAchievementDescriptionBelow(2, 8) ? '' : 'none'~/>
         <span ~style.display=Achievements.showAchievementDescriptionBelow(2, 8) ? '' : 'none'~>~r Achievements.getAchievementName(2, 8) ~ (~r Achievements.achievementStatusDescription(2, 8) ~): Infinity.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(3, 1) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 1) ? '' : 'none'~>~r Achievements.getAchievementName(3, 1) ~ (~r Achievements.achievementStatusDescription(3, 1) ~): Complete a challenge.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 1) ? '' : 'none'~>~r Achievements.getAchievementName(3, 1) ~ (~r Achievements.achievementStatusDescription(3, 1) ~): Complete a normal challenge.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(3, 2) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 2) ? '' : 'none'~>~r Achievements.getAchievementName(3, 2) ~ (~r Achievements.achievementStatusDescription(3, 2) ~): Complete ~i 6 ~ challenges.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 2) ? '' : 'none'~>~r Achievements.getAchievementName(3, 2) ~ (~r Achievements.achievementStatusDescription(3, 2) ~): Complete ~i 6 ~ normal challenges.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(3, 3) ? '' : 'none'~/>
         <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 3) ? '' : 'none'~>~r Achievements.getAchievementName(3, 3) ~ (~r Achievements.achievementStatusDescription(3, 3) ~): Break infinity.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(3, 4) ? '' : 'none'~/>
@@ -5735,9 +5735,9 @@
         <br ~style.display=Achievements.showAchievementDescriptionBelow(3, 5) ? '' : 'none'~/>
         <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 5) ? '' : 'none'~>~r Achievements.getAchievementName(3, 5) ~ (~r Achievements.achievementStatusDescription(3, 5) ~): Get ~i 256 ~ infinities.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(3, 6) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 6) ? '' : 'none'~>~r Achievements.getAchievementName(3, 6) ~ (~r Achievements.achievementStatusDescription(3, 6) ~): Infinity in Challenge 10 without sacrificing.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 6) ? '' : 'none'~>~r Achievements.getAchievementName(3, 6) ~ (~r Achievements.achievementStatusDescription(3, 6) ~): Infinity in Normal Challenge 10 without sacrificing.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(3, 7) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 7) ? '' : 'none'~>~r Achievements.getAchievementName(3, 7) ~ (~r Achievements.achievementStatusDescription(3, 7) ~): Infinity in Challenge 2 in ~ti 16 ~.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 7) ? '' : 'none'~>~r Achievements.getAchievementName(3, 7) ~ (~r Achievements.achievementStatusDescription(3, 7) ~): Infinity in Normal Challenge 2 in ~ti 16 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(3, 8) ? '' : 'none'~/>
         <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 8) ? '' : 'none'~>~r Achievements.getAchievementName(3, 8) ~ (~r Achievements.achievementStatusDescription(3, 8) ~): Complete an infinity challenge.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(4, 1) ? '' : 'none'~/>
@@ -6094,7 +6094,7 @@
         <span>
           <span ~style.display=Tabs.isTabOptionVisible('main') ? '' : 'none'~>Main: <input class="main-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('main')~ ~!onchange=function() {Tabs.setTabOption('main', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
           <span ~style.display=Tabs.isTabOptionVisible('infinity') ? '' : 'none'~>Infinity: <input class="infinity-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('infinity')~ ~!onchange=function() {Tabs.setTabOption('infinity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span ~style.display=Tabs.isTabOptionVisible('challenges') ? '' : 'none'~>Challenges: <input class="challenges-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('challenges')~ ~!onchange=function() {Tabs.setTabOption('challenges', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+          <span ~style.display=Tabs.isTabOptionVisible('normal-challenges') ? '' : 'none'~>Normal Challenges: <input class="normal-challenges-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('normal-challenges')~ ~!onchange=function() {Tabs.setTabOption('normal-challenges', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
           <span ~style.display=Tabs.isTabOptionVisible('autobuyers') ? '' : 'none'~>Autobuyers: <input class="autobuyers-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('autobuyers')~ ~!onchange=function() {Tabs.setTabOption('autobuyers', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
           <span ~style.display=Tabs.isTabOptionVisible('infinity-challenges') ? '' : 'none'~>Infinity Challenges: <input class="infinity-challenges-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('infinity-challenges')~ ~!onchange=function() {Tabs.setTabOption('infinity-challenges', this.checked)}~></input></span>
         </span>

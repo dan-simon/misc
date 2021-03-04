@@ -1065,6 +1065,17 @@ let Saving = {
       player.galaxies.undilated = 0;
       player.version = 2.08984375;
     }
+    if (player.version < 2.09375) {
+      if (player.currentTab === 'challenges') {
+        player.currentTab = 'normal-challenges';
+      }
+      player.tabOptions['normal-challenges'] = player.tabOptions.challenges;
+      delete player.tabOptions.challenges;
+      for (let i of player.tabPresets) {
+        i.tabs = i.tabs.split(',').map(j => j === 'cha' ? 'ncha' : j).join(',');
+      }
+      player.version = 2.09375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
