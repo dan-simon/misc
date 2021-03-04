@@ -1,7 +1,6 @@
 let Tabs = {
   rows: [
-    ['main', 'infinity', 'normal-challenges', 'autobuyers', 'infinity-challenges'],
-    ['goals', 'statistics', 'last-ten-runs', 'options'],
+    ['main', 'infinity', 'normal-challenges', 'autobuyers', 'infinity-challenges', 'goals', 'achievements', 'statistics', 'last-ten-runs', 'options'],
     ['eternity', 'eternity-milestones', 'studies', 'eternity-producer', 'eternity-challenges', 'chroma'],
     ['complexity', 'complexity-challenges', 'complexity-achievements', 'powers', 'oracle', 'galaxies'],
     ['finality', 'finality-shards', 'finality-milestones']
