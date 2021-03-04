@@ -148,14 +148,17 @@
       <button ~style.display=Tabs.isTabVisible('normal-challenges') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'infinity')~ onclick="Tabs.setTab('normal-challenges')">Normal Challenges</button>
       <button ~style.display=Tabs.isTabVisible('autobuyers') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'normal')~ onclick="Tabs.setTab('autobuyers')">Autobuyers</button>
       <button ~style.display=Tabs.isTabVisible('infinity-challenges') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'infinity')~ onclick="Tabs.setTab('infinity-challenges')">Infinity Challenges</button>
+    </span>
+    <br ~style.display=Tabs.displayTabBreak(1) ? '' : 'none'~/>
+    <span ~style.display=Tabs.displayTabRow(2) ? '' : 'none'~>
       <button ~style.display=Tabs.isTabVisible('goals') ? '' : 'none'~ onclick="Tabs.setTab('goals')">Goals</button>
       <button ~style.display=Tabs.isTabVisible('achievements') ? '' : 'none'~ onclick="Tabs.setTab('achievements')">Achievements</button>
       <button ~style.display=Tabs.isTabVisible('statistics') ? '' : 'none'~ onclick="Tabs.setTab('statistics')">Statistics</button>
       <button ~style.display=Tabs.isTabVisible('last-ten-runs') ? '' : 'none'~ onclick="Tabs.setTab('last-ten-runs')">Last Ten Runs</button>
       <button ~style.display=Tabs.isTabVisible('options') ? '' : 'none'~ ~class-name=Options.showExportNotification() ? 'redspan' : ''~ onclick="Tabs.setTab('options')">Options</button>
     </span>
-    <br ~style.display=Tabs.displayTabBreak(1) ? '' : 'none'~/>
-    <span ~style.display=Tabs.displayTabRow(2) ? '' : 'none'~>
+    <br ~style.display=Tabs.displayTabBreak(2) ? '' : 'none'~/>
+    <span ~style.display=Tabs.displayTabRow(3) ? '' : 'none'~>
       <button ~style.display=Tabs.isTabVisible('eternity') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'eternity')~ onclick="Tabs.setTab('eternity')">Eternity</button>
       <button ~style.display=Tabs.isTabVisible('eternity-milestones') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'eternity')~ onclick="Tabs.setTab('eternity-milestones')">Eternity Milestones</button>
       <button ~style.display=Tabs.isTabVisible('studies') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'studies')~ onclick="Tabs.setTab('studies')">Studies</button>
@@ -163,8 +166,8 @@
       <button ~style.display=Tabs.isTabVisible('eternity-challenges') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'eternity')~ onclick="Tabs.setTab('eternity-challenges')">Eternity Challenges</button>
       <button ~style.display=Tabs.isTabVisible('chroma') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'chroma')~ onclick="Tabs.setTab('chroma')">Chroma</button>
     </span>
-    <br ~style.display=Tabs.displayTabBreak(2) ? '' : 'none'~/>
-    <span ~style.display=Tabs.displayTabRow(3) ? '' : 'none'~>
+    <br ~style.display=Tabs.displayTabBreak(3) ? '' : 'none'~/>
+    <span ~style.display=Tabs.displayTabRow(4) ? '' : 'none'~>
       <button ~style.display=Tabs.isTabVisible('complexity') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'complexity')~ onclick="Tabs.setTab('complexity')">Complexity</button>
       <button ~style.display=Tabs.isTabVisible('complexity-challenges') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'complexity')~ onclick="Tabs.setTab('complexity-challenges')">Complexity Challenges</button>
       <button ~style.display=Tabs.isTabVisible('complexity-achievements') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'complexity')~ onclick="Tabs.setTab('complexity-achievements')">Complexity Achievements</button>
@@ -172,8 +175,8 @@
       <button ~style.display=Tabs.isTabVisible('oracle') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'complexity')~ onclick="Tabs.setTab('oracle')">Oracle</button>
       <button ~style.display=Tabs.isTabVisible('galaxies') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), Galaxy.tabColors())~ onclick="Tabs.setTab('galaxies')">Galaxies</button>
     </span>
-    <br ~style.display=Tabs.displayTabBreak(3) ? '' : 'none'~/>
-    <span ~style.display=Tabs.displayTabRow(4) ? '' : 'none'~>
+    <br ~style.display=Tabs.displayTabBreak(4) ? '' : 'none'~/>
+    <span ~style.display=Tabs.displayTabRow(5) ? '' : 'none'~>
       <button ~style.display=Tabs.isTabVisible('finality') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'finality')~ onclick="Tabs.setTab('finality')">Finality</button>
       <button ~style.display=Tabs.isTabVisible('finality-shards') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'finality')~ onclick="Tabs.setTab('finality-shards')">Finality Shards</button>
       <button ~style.display=Tabs.isTabVisible('finality-milestones') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'finality')~ onclick="Tabs.setTab('finality-milestones')">Finality Milestones</button>
