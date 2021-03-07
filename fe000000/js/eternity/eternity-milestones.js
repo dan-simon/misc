@@ -38,6 +38,12 @@ let EternityMilestones = {
       return 0.5;
     }
   },
+  isExplanationMovedDown() {
+    return player.isEternityMilestoneExplanationMovedDown;
+  },
+  moveExplanation() {
+    player.isEternityMilestoneExplanationMovedDown = !player.isEternityMilestoneExplanationMovedDown;
+  },
   color(x) {
     return Colors.makeStyle(this.milestoneStatusNumber(x), false);
   }

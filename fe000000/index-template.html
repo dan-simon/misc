@@ -1370,6 +1370,12 @@
         <button ~style.display=(EternityMilestones.hasEternityMilestone(6) || PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~ onclick="EternityMilestones.toggleMilestone(6)">Eternity Milestone ~i 6 ~: ~r (EternityMilestones.isEternityMilestoneDisabled(6) ? "Disabled" : "Enabled") + (EternityMilestones.hasEternityMilestone(6) ? '' : ' (once unlocked)') ~</button>
         <button ~style.display=(EternityMilestones.hasEternityMilestone(8) || PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~ onclick="EternityMilestones.toggleMilestone(8)">Eternity Milestone ~i 8 ~: ~r (EternityMilestones.isEternityMilestoneDisabled(8) ? "Disabled" : "Enabled") + (EternityMilestones.hasEternityMilestone(8) ? '' : ' (once unlocked)') ~</button>
       </span>
+      <div style="width: 1024px; margin-left: auto; margin-right: auto;" ~style.display=(PrestigeLayerProgress.hasReached('complexity') && !EternityMilestones.isExplanationMovedDown()) ? '' : 'none'~>
+        <span>Complexity and resets beyond complexity will reset eternity milestones, and will lock those milestones (including the ones saying "Start each ... complexity"), removing their effects until you unlock the milestones again. Once you start with enough eternities after complexity to start with eternity milestones unlocked, however, those milestones will have an effect even at the start of a complexity. This situation will also arise later in the game with other similar mechanics.</span>
+      </div>
+      <span ~style.display=(PrestigeLayerProgress.hasReached('complexity') && !EternityMilestones.isExplanationMovedDown()) ? '' : 'none'~>
+        <button onclick="EternityMilestones.moveExplanation()">Move the above explanation to the bottom of this tab</button>
+      </span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>
@@ -1525,6 +1531,12 @@
         </tr>
       </table>
       <span ~style.display=SpecialTabs.isTabVisible('eternity-producer') ? 'none' : ''~>Completing all eternity milestones for the first time will also let you view the Eternity Producer tab.</span>
+      <div style="width: 1024px; margin-left: auto; margin-right: auto;" ~style.display=(PrestigeLayerProgress.hasReached('complexity') && EternityMilestones.isExplanationMovedDown()) ? '' : 'none'~>
+        <span>Complexity and resets beyond complexity will reset eternity milestones, and will remove their effects until you get them again. Once you keep enough eternities after complexity to start with eternity milestones, however, they will have an effect at the start of a complexity. This situation will also arise later in the game with other similar mechanics.</span>
+      </div>
+      <span ~style.display=(PrestigeLayerProgress.hasReached('complexity') && EternityMilestones.isExplanationMovedDown()) ? '' : 'none'~>
+        <button onclick="EternityMilestones.moveExplanation()">Move the above explanation back to the top of this tab</button>
+      </span>
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'studies' ? '' : 'none'~>
       <span>You have ~i Studies.totalTheorems() ~ total theorem~s Studies.totalTheorems() ~ (a breakdown is below the theorem purchase buttons) and ~i Studies.unspentTheorems() ~ unspent theorem~s Studies.unspentTheorems() ~.</span>

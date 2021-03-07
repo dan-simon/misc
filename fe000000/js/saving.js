@@ -1076,6 +1076,10 @@ let Saving = {
       }
       player.version = 2.09375;
     }
+    if (player.version < 2.09765625) {
+      player.isEternityMilestoneExplanationMovedDown = false;
+      player.version = 2.09765625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

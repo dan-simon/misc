@@ -131,6 +131,7 @@ let initialPlayer = {
   highestEternityGenerator: 0,
   eternityUpgrades: [0, 0, 0],
   eternityMilestonesEnabled: [true, true],
+  isEternityMilestoneExplanationMovedDown: false,
   infinityAutobuyers: [
     true, true, true, true, true, true, true, true, true, true,
   ],
@@ -483,7 +484,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2.09375
+  version: 2.09765625
 }
 
 let player;
