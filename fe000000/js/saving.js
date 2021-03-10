@@ -1080,6 +1080,18 @@ let Saving = {
       player.isEternityMilestoneExplanationMovedDown = false;
       player.version = 2.09765625;
     }
+    if (player.version < 2.0986328125) {
+      // These two probably shouldn't be the same but coming up
+      // with a good value requires computing the chroma cap.
+      // If the player switches, they won't be surprised to see
+      // the same value, but when they switch back they'll
+      // happily see the old value.
+      player.chroma.timeForChromaValue = {
+        amount: player.chroma.timeForChromaValue,
+        capFraction: player.chroma.timeForChromaValue,
+      }
+      player.version = 2.0986328125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

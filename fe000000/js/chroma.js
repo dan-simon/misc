@@ -220,16 +220,26 @@ let Chroma = {
     }
   },
   timeForChromaValue() {
-    return player.chroma.timeForChromaValue;
+    return player.chroma.timeForChromaValue[this.timeForChromaValueKey()];
   },
   setTimeForChromaValue(x) {
-    player.chroma.timeForChromaValue = x || 0;
+    player.chroma.timeForChromaValue[this.timeForChromaValueKey()] = x || 0;
+  },
+  timeForChromaValueKey() {
+    return {
+      'chroma': 'amount',
+      'fraction of chroma cap': 'capFraction',
+    }[this.timeForChromaMode()];
   },
   timeForChromaMode() {
     return player.chroma.timeForChromaMode;
   },
   setTimeForChromaMode(x) {
+    let old = player.chroma.timeForChromaMode;
     player.chroma.timeForChromaMode = x;
+    if (old !== x) {
+      document.getElementsByClassName('chroma-value')[0].value = Chroma.timeForChromaValue();
+    }
   },
   timeForChromaTextMargin() {
     return this.cap() * (1 - Math.pow(2, -16));

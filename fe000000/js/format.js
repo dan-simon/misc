@@ -43,13 +43,15 @@ function formatTime(time, options) {
   }
 }
 
-function getNotation() {
-  if (!(player.options.notation in NOTATIONS)) {
-    let Source = ['Binary', 'Hexadecimal', 'Evil'].includes(player.options.notation) ? ADCommunityNotations : ADNotations;
-    NOTATIONS[player.options.notation] = new Source[
-      player.options.notation.replace(/ [a-z]/g, (x) => x[1].toUpperCase()) + 'Notation']();
+function getNotation(x) {
+  if (x === undefined) {
+    x = player.options.notation;
   }
-  return NOTATIONS[player.options.notation];
+  if (!(x in NOTATIONS)) {
+    let Source = ['Binary', 'Hexadecimal', 'Evil'].includes(x) ? ADCommunityNotations : ADNotations;
+    NOTATIONS[x] = new Source[x.replace(/ [a-z]/g, (x) => x[1].toUpperCase()) + 'Notation']();
+  }
+  return NOTATIONS[x];
 }
 
 function formatWithPrecision(x, n) {

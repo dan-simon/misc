@@ -175,7 +175,10 @@ let initialPlayer = {
     current: 0,
     next: 0,
     displayAmount: 0,
-    timeForChromaValue: 0.875,
+    timeForChromaValue: {
+      amount: 3584,
+      capFraction: 0.875, 
+    },
     timeForChromaMode: 'fraction of chroma cap'
   },
   complexityPoints: new Decimal(0),
@@ -484,7 +487,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2.09765625
+  version: 2.0986328125
 }
 
 let player;
