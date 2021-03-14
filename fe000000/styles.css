@@ -434,7 +434,7 @@ input[type=checkbox] {
 }
 
 .yellowspan, .yellowdiv > span {
-  color: #ffff00;
+  color: var(--yellow-text-color);
 }
 
 .greyspan, .greydiv > span {

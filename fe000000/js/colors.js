@@ -37,6 +37,10 @@ let Colors = {
       'challengegreen': '#00cc00',
       'normal': '#ffff00',
       'yellow': '#ffff00',
+      'yellowtext': {
+        'Dark': '#ffff00',
+        'Light': '#cccc33'
+      },
       'infinity': '#ff00ff',
       'magenta': '#ff00ff',
       'eternity': '#00ffff',
@@ -65,9 +69,10 @@ let Colors = {
       document.documentElement.style.setProperty('--study-' + i + '-color', buttonColor);
     }
     for (let i of ['grey', 'purple', 'orange', 'cyan', 'green', 'red']) {
-      let nextColor = this.interpolate(this.backgroundColor(), this.colorToRgb(this.stringToColorCode['Vibrant'][i]), 0.5);
+      let nextColor = this.interpolate(this.backgroundColor(), this.colorToRgb(this.getStringToColorCode(i, 'Vibrant')), 0.5);
       document.documentElement.style.setProperty('--next-' + i + '-color', 'rgb(' + nextColor.map(Math.floor).join(', ') + ')');
     }
+    document.documentElement.style.setProperty('--yellow-text-color', this.getStringToColorCode('yellowtext', 'Vibrant'));
   },
   colorToRgb(x) {
     return [parseInt(x.slice(1, 3), 16), parseInt(x.slice(3, 5), 16), parseInt(x.slice(5, 7), 16)];
@@ -80,7 +85,7 @@ let Colors = {
   },
   makeColor(x, dimmed) {
     if (typeof x === 'string') {
-      let colorCode = this.stringToColorCode.Vibrant[x];
+      let colorCode = this.getStringToColorCode(x, 'Vibrant');
       return 'rgb(' + this.interpolate(this.backgroundColor(), this.colorToRgb(colorCode), dimmed).map(Math.floor).join(', ') + ')';
     }
     // Handle true and false properly.
@@ -107,14 +112,18 @@ let Colors = {
       return 'radial-gradient(' + a + ', ' + b + ')';
     }
   },
+  getStringToColorCode(color, buttonColor) {
+    let res = this.stringToColorCode[buttonColor || Options.usualButtonColor()][color];
+    return (typeof res === 'string') ? res : res[Options.background()];
+  },
   getButtonColor(hasColor, colorType) {
     if (!hasColor) {
       return '#aaaaaa';
     }
     if (typeof colorType === 'string') {
-      return this.stringToColorCode[Options.usualButtonColor()][colorType];
+      return this.getStringToColorCode(colorType);
     } else {
-      return 'linear-gradient(90deg, ' + colorType.map(x => this.stringToColorCode[Options.usualButtonColor()][x]).join(', ') + ')';
+      return 'linear-gradient(90deg, ' + colorType.map(x => this.getStringToColorCode(x)).join(', ') + ')';
     }
   },
   rewardClass(hasReward) {
