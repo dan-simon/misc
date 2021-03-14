@@ -1092,6 +1092,10 @@ let Saving = {
       }
       player.version = 2.0986328125;
     }
+    if (player.version < 2.099609375) {
+      player.options.theme.edgeGradients = 'Default';
+      player.version = 2.099609375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

@@ -109,6 +109,9 @@ let Colors = {
         Options.completionGradients()];
       let a = gradientOnEdge ? 'var(--background-color)' : this.makeColor(x, interpolationFactor);
       let b = gradientOnEdge ? this.makeColor(x, interpolationFactor) : 'var(--background-color)';
+      if (gradientOnEdge && player.options.theme.edgeGradients === 'Small') {
+        return 'radial-gradient(' + a + ', ' + a + ' 75%,' + b + ')';
+      }
       return 'radial-gradient(' + a + ', ' + b + ')';
     }
   },

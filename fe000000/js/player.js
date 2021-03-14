@@ -371,7 +371,8 @@ let initialPlayer = {
     theme: {
       background: 'Dark',
       buttonColor: 'Vibrant',
-      completionGradients: 'Default'
+      completionGradients: 'Default',
+      edgeGradients: 'Default',
     },
     fitToWidth: true,
     showFullOptions: {

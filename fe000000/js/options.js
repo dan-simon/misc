@@ -98,6 +98,10 @@ let Options = {
     let list = PrestigeLayerProgress.hasReached('infinity') ? COMPLETION_GRADIENT_LIST : ['Default', 'Reversed'];
     player.options.theme.completionGradients = list[(list.indexOf(player.options.theme.completionGradients) + 1) % list.length];
   },
+  nextEdgeGradients() {
+    let options = ['Default', 'Small'];
+    player.options.theme.edgeGradients = options[(options.indexOf(player.options.theme.edgeGradients) + 1) % options.length];
+  },
   fitToWidth() {
     return player.options.fitToWidth;
   },
