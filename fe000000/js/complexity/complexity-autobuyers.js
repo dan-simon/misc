@@ -43,7 +43,7 @@ let ComplexityAutobuyers = {
     return this.list[x - 1];
   },
   tick() {
-    ComplexityMaxAll.maxAll([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].filter(i => ComplexityAutobuyer(i).isActive));
+    ComplexityMaxAll.maxAll([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].filter(i => ComplexityAutobuyer(i).isActive()));
     if (FinalityMilestones.isFinalityMilestoneActive(8)) {
       Powers.unlock(true);
       Oracle.unlock(true);

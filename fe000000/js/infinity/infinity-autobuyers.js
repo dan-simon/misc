@@ -31,6 +31,6 @@ let InfinityAutobuyers = {
     return this.list[x - 1];
   },
   tick() {
-    InfinityMaxAll.maxAll([1, 2, 3, 4, 5, 6, 7, 8, 9, 10].filter(i => InfinityAutobuyer(i).isActive));
+    InfinityMaxAll.maxAll([1, 2, 3, 4, 5, 6, 7, 8, 9, 10].filter(i => InfinityAutobuyer(i).isActive()));
   }
 }

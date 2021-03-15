@@ -31,7 +31,7 @@ let EternityAutobuyers = {
     return EternityAutobuyer(14).hasEternityAutobuyer();
   },
   tick() {
-    EternityMaxAll.maxAll([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].filter(i => EternityAutobuyer(i).isActive));
+    EternityMaxAll.maxAll([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].filter(i => EternityAutobuyer(i).isActive()));
     if (ComplexityAchievements.isComplexityAchievementActive(1, 3)) {
       EternityProducer.unlock(true);
       for (let i = 1; i <= 6; i++) {
