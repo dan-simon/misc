@@ -1096,6 +1096,12 @@ let Saving = {
       player.options.theme.edgeGradients = 'Default';
       player.version = 2.099609375;
     }
+    if (player.version < 2.1015625) {
+      for (let i = 0; i < 9; i++) {
+        delete player.autobuyers[i].priority;
+      }
+      player.version = 2.1015625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

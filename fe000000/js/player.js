@@ -20,11 +20,11 @@ function initialFinalityGenerators() {
 
 function initialAutobuyers() {
   return [
-    {isOn: true, mode: 'Buy max', priority: 1}, {isOn: true, mode: 'Buy max', priority: 2},
-    {isOn: true, mode: 'Buy max', priority: 3}, {isOn: true, mode: 'Buy max', priority: 4},
-    {isOn: true, mode: 'Buy max', priority: 5}, {isOn: true, mode: 'Buy max', priority: 6},
-    {isOn: true, mode: 'Buy max', priority: 7}, {isOn: true, mode: 'Buy max', priority: 8},
-    {isOn: true, mode: 'Buy max', priority: 9}, {isOn: true, mode: 'Multiplier', priority: new Decimal(2)},
+    {isOn: true, mode: 'Buy max'}, {isOn: true, mode: 'Buy max'},
+    {isOn: true, mode: 'Buy max'}, {isOn: true, mode: 'Buy max'},
+    {isOn: true, mode: 'Buy max'}, {isOn: true, mode: 'Buy max'},
+    {isOn: true, mode: 'Buy max'}, {isOn: true, mode: 'Buy max'},
+    {isOn: true, mode: 'Buy max'}, {isOn: true, mode: 'Multiplier', priority: new Decimal(2)},
     {isOn: true, mode: 'Multiplier', priority: new Decimal(2)},
     {isOn: true, mode: 'Amount', priority: new Decimal(2)}, {isOn: true, mode: 'Amount', priority: new Decimal(2)},
     {isOn: true, mode: 'X times last', priority: new Decimal(2)}, {isOn: false, mode: 'Amount', priority: new Decimal(2)},
@@ -488,7 +488,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2.0986328125
+  version: 2.1015625
 }
 
 let player;
