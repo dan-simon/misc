@@ -63,9 +63,12 @@ let FinalityGenerator = function (i) {
       }
       return n <= this.maxBuyable();
     },
-    maxBuyable() {
+    maxBuyable(fraction) {
       if (!this.isVisible()) return 0;
-      let num = Math.floor(player.finalityPoints.div(this.cost()).times(
+      if (fraction === undefined) {
+        fraction = 1;
+      }
+      let num = Math.floor(player.finalityPoints.times(fraction).div(this.cost()).times(
         Decimal.minus(this.costIncreasePer(), 1)).plus(1).log(this.costIncreasePer()));
       num = Math.max(num, 0);
       return num;
@@ -82,8 +85,8 @@ let FinalityGenerator = function (i) {
         player.highestFinalityGenerator = i;
       }
     },
-    buyMax() {
-      this.buy(this.maxBuyable(), true);
+    buyMax(fraction) {
+      this.buy(this.maxBuyable(fraction), true);
     }
   }
 }

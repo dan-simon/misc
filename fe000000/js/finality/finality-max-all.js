@@ -2,10 +2,11 @@ let FinalityMaxAll = {
   anythingToBuy() {
     return FinalityGenerators.list.some(x => x.canBuy());
   },
-  maxAll() {
-    while (FinalityGenerators.highest() && FinalityGenerators.highest().canBuy()) {
-      FinalityGenerators.highest().buy();
+  maxAll(types) {
+    if (types === undefined) {
+      types = [1, 2, 3, 4, 5, 6, 7, 8];
     }
-    FinalityGenerators.list.forEach(x => x.buyMax());
+    generalHighestSweep(() => FinalityGenerators.highest(), types);
+    generalMaxAll(types.map(x => FinalityGenerator(x)));
   }
 }

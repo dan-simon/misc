@@ -21,21 +21,6 @@ let InfinityAutobuyer = function (i) {
     },
     toggle() {
       this.setIsOn(!this.isOn());
-    },
-    target() {
-      if (i <= 8) {
-        return InfinityGenerator(i);
-      } else {
-        return InfinityUpgrade(i - 8);
-      }
-    },
-    tick() {
-      if (!this.isActive()) return;
-      this.target().buyMax();
-    },
-    tickBuyOne() {
-      if (!this.isActive()) return;
-      this.target().buy();
     }
   }
 }
@@ -46,16 +31,6 @@ let InfinityAutobuyers = {
     return this.list[x - 1];
   },
   tick() {
-    while (InfinityGenerators.highest() && InfinityGenerators.highest().canBuy()) {
-      let highest = InfinityGenerators.highest();
-      if (highest && highest.canBuy() && InfinityAutobuyer(highest.tier()).isActive()) {
-        InfinityAutobuyer(highest.tier()).tickBuyOne();
-      } else {
-        break;
-      }
-    }
-    for (let i = 0; i < 10; i++) {
-      InfinityAutobuyer([9, 10, 1, 2, 3, 4, 5, 6, 7, 8][i]).tick();
-    }
+    InfinityMaxAll.maxAll([1, 2, 3, 4, 5, 6, 7, 8, 9, 10].filter(i => InfinityAutobuyer(i).isActive));
   }
 }

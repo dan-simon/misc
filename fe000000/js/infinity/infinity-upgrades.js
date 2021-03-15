@@ -45,8 +45,11 @@ let InfinityUpgrade = function (i) {
       }
       return n <= this.maxBuyable();
     },
-    maxBuyable(n) {
-      let num = Math.floor(player.infinityPoints.div(this.cost()).times(
+    maxBuyable(fraction) {
+      if (fraction === undefined) {
+        fraction = 1;
+      }
+      let num = Math.floor(player.infinityPoints.times(fraction).div(this.cost()).times(
         Decimal.minus(this.costIncreasePer(), 1)).plus(1).log(this.costIncreasePer()));
       num = Math.min(num, this.boughtLimit() - this.bought());
       num = Math.max(num, 0);
@@ -60,8 +63,8 @@ let InfinityUpgrade = function (i) {
       player.infinityPoints = player.infinityPoints.safeMinus(this.costFor(n));
       this.addBought(n);
     },
-    buyMax() {
-      this.buy(this.maxBuyable(), true);
+    buyMax(fraction) {
+      this.buy(this.maxBuyable(fraction), true);
     }
   }
 }

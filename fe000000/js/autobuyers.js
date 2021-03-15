@@ -74,13 +74,8 @@ let Autobuyer = function (i) {
         return 'buyMax';
       }
     },
-    tick(triggerSlowAutobuyers, triggerFastAutobuyers) {
-      if (!this.isActive()) return;
-      if (this.isSlow() && !triggerSlowAutobuyers) return;
-      if (!this.isSlow() && !triggerFastAutobuyers) return;
-      if (i <= 9) {
-        this.target()[this.targetMethod()]();
-      }
+    canTick(triggerSlowAutobuyers, triggerFastAutobuyers) {
+      return this.isActive() && (this.isSlow() ? triggerSlowAutobuyers : triggerFastAutobuyers);
     }
   }
 }
@@ -193,13 +188,6 @@ let Autobuyers = {
   },
   anyLockedResetAutobuyers() {
     return [12, 13, 14, 15, 16].some(x => this.isLockedResetAutobuyer(x));
-  },
-  priorityOrder() {
-    function cmp(a, b) {
-      return (a < b) ? -1 : ((a > b) ? 1 : 0);
-    }
-    return [1, 2, 3, 4, 5, 6, 7, 8, 9].sort(
-      (a, b) => cmp(Autobuyer(a).priority(), Autobuyer(b).priority()) || cmp(a, b)).map(x => Autobuyer(x));
   },
   sacrifice() {
     if (!Autobuyer(10).isActive() || !Sacrifice.canSacrifice()) return;
@@ -398,8 +386,7 @@ let Autobuyers = {
       Autobuyers.prestige();
       Autobuyers.sacrifice();
     }
-    for (let autobuyer of this.priorityOrder()) {
-      autobuyer.tick(triggerSlowAutobuyers, triggerFastAutobuyers);
-    }
+    let autobuyers = [1, 2, 3, 4, 5, 6, 7, 8, 9].filter(x => Autobuyer(x).canTick(triggerSlowAutobuyers, triggerFastAutobuyers));
+    MaxAll.maxAll(autobuyers);
   }
 }

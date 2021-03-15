@@ -18,31 +18,6 @@ let EternityAutobuyer = function (i) {
     },
     toggle() {
       this.setIsOn(!this.isOn());
-    },
-    target() {
-      if (i <= 8) {
-        return EternityGenerator(i);
-      } else if (i <= 11) {
-        return EternityUpgrade(i - 8);
-      } else if (i <= 13) {
-        return EternityProducerUpgrade(i - 11);
-      }
-    },
-    tick() {
-      if (!this.isActive()) return;
-      if (14 <= i && i <= 16) {
-        Studies.buyMax(i - 14);
-      } else {
-        this.target().buyMax();
-      }
-    },
-    tickBuyOne() {
-      if (!this.isActive()) return;
-      if (14 <= i && i <= 16) {
-        Studies.buy(i - 14);
-      } else {
-        this.target().buy();
-      }
     }
   }
 }
@@ -56,18 +31,7 @@ let EternityAutobuyers = {
     return EternityAutobuyer(14).hasEternityAutobuyer();
   },
   tick() {
-    while (EternityGenerators.highest() && EternityGenerators.highest().canBuy()) {
-      let highest = EternityGenerators.highest();
-      if (highest && highest.canBuy() && EternityAutobuyer(highest.tier()).isActive()) {
-        EternityAutobuyer(highest.tier()).tickBuyOne();
-      } else {
-        break;
-      }
-    }
-    for (let i = 0; i < 17; i++) {
-      EternityAutobuyer([9, 10, 11, 1, 2, 3, 4, 5, 6, 7, 8, 12, 13, 14, 15, 16][i]).tick();
-    }
-    Permanence.buyMaxOf([1, 2, 3, 4].filter(i => EternityAutobuyer(i + 16).isActive()));
+    EternityMaxAll.maxAll([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].filter(i => EternityAutobuyer(i).isActive));
     if (ComplexityAchievements.isComplexityAchievementActive(1, 3)) {
       EternityProducer.unlock(true);
       for (let i = 1; i <= 6; i++) {

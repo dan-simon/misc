@@ -639,8 +639,6 @@
         <span ~style.display=Autobuyers.isLockedResetAutobuyer(16) ? '' : 'none'~>Finality: <input type="checkbox" class="autobuyer-checkbox-16" ~!checked=Autobuyer(16).isOn()~ ~!onchange=function() {Autobuyer(16).setIsOn(this.checked)}~></input></span>
       </div>
       <br/>
-      <span>Autobuyers triggering at the same time trigger from lowest to highest autobuyer order.</span>
-      <br/>
       <div ~style.display=Autobuyers.areAnyAutobuyersSlow() ? '' : 'none'~>
         <span>Slow autobuyers will trigger in ~t Autobuyers.timeUntilNextSlowTrigger() ~.</span>
         <br/>
@@ -676,18 +674,6 @@
                 <option value="Buy singles">Buy singles</option>
                 <option value="Buy max">Buy max</option>
               </select></span>
-              <br/>
-              <span>Autobuyer order: <select ~!value=Autobuyer(1).priority().toString()~ ~!onchange=function() {Autobuyer(1).setPriority(+this.value)}~>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-              </select></span>
             </div>
             <button ~style.display=Autobuyer(1).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(1).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(1).unlockSlow()">
               Unlock Slow Generator 1 Autobuyer
@@ -707,18 +693,6 @@
                 <option value="Buy singles">Buy singles</option>
                 <option value="Buy max">Buy max</option>
               </select></span>
-              <br/>
-              <span>Autobuyer order: <select ~!value=Autobuyer(2).priority().toString()~ ~!onchange=function() {Autobuyer(2).setPriority(+this.value)}~>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-              </select></span>
             </div>
             <button class="autobuyerunlockbutton" ~style.display=Autobuyer(2).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(2).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(2).unlockSlow()">
               Unlock Slow Generator 2 Autobuyer
@@ -737,18 +711,6 @@
               <span>Mode: <select ~!value=Autobuyer(3).mode()~ ~!onchange=function() {Autobuyer(3).setMode(this.value)}~>
                 <option value="Buy singles">Buy singles</option>
                 <option value="Buy max">Buy max</option>
-              </select></span>
-              <br/>
-              <span>Autobuyer order: <select ~!value=Autobuyer(3).priority().toString()~ ~!onchange=function() {Autobuyer(3).setPriority(+this.value)}~>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
               </select></span>
             </div>
             <button class="autobuyerunlockbutton" ~style.display=Autobuyer(3).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(3).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(3).unlockSlow()">
@@ -771,18 +733,6 @@
                 <option value="Buy singles">Buy singles</option>
                 <option value="Buy max">Buy max</option>
               </select></span>
-              <br/>
-              <span>Autobuyer order: <select ~!value=Autobuyer(4).priority().toString()~ ~!onchange=function() {Autobuyer(4).setPriority(+this.value)}~>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-              </select></span>
             </div>
             <button class="autobuyerunlockbutton" ~style.display=Autobuyer(4).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(4).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(4).unlockSlow()">
               Unlock Slow Generator 4 Autobuyer
@@ -802,18 +752,6 @@
                 <option value="Buy singles">Buy singles</option>
                 <option value="Buy max">Buy max</option>
               </select></span>
-              <br/>
-              <span>Autobuyer order: <select ~!value=Autobuyer(5).priority().toString()~ ~!onchange=function() {Autobuyer(5).setPriority(+this.value)}~>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-              </select></span>
             </div>
             <button class="autobuyerunlockbutton" ~style.display=Autobuyer(5).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(5).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(5).unlockSlow()">
               Unlock Slow Generator 5 Autobuyer
@@ -832,18 +770,6 @@
               <span>Mode: <select ~!value=Autobuyer(6).mode()~ ~!onchange=function() {Autobuyer(6).setMode(this.value)}~>
                 <option value="Buy singles">Buy singles</option>
                 <option value="Buy max">Buy max</option>
-              </select></span>
-              <br/>
-              <span>Autobuyer order: <select ~!value=Autobuyer(6).priority().toString()~ ~!onchange=function() {Autobuyer(6).setPriority(+this.value)}~>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
               </select></span>
             </div>
             <button class="autobuyerunlockbutton" ~style.display=Autobuyer(6).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(6).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(6).unlockSlow()">
@@ -866,18 +792,6 @@
                 <option value="Buy singles">Buy singles</option>
                 <option value="Buy max">Buy max</option>
               </select></span>
-              <br/>
-              <span>Autobuyer order: <select ~!value=Autobuyer(7).priority().toString()~ ~!onchange=function() {Autobuyer(7).setPriority(+this.value)}~>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-              </select></span>
             </div>
             <button class="autobuyerunlockbutton" ~style.display=Autobuyer(7).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(7).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(7).unlockSlow()">
               Unlock Slow Generator 7 Autobuyer
@@ -897,18 +811,6 @@
                 <option value="Buy singles">Buy singles</option>
                 <option value="Buy max">Buy max</option>
               </select></span>
-              <br/>
-              <span>Autobuyer order: <select ~!value=Autobuyer(8).priority().toString()~ ~!onchange=function() {Autobuyer(8).setPriority(+this.value)}~>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-              </select></span>
             </div>
             <button class="autobuyerunlockbutton" ~style.display=Autobuyer(8).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(8).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(8).unlockSlow()">
               Unlock Slow Generator 8 Autobuyer
@@ -927,18 +829,6 @@
               <span>Mode: <select ~!value=Autobuyer(9).mode()~ ~!onchange=function() {Autobuyer(9).setMode(this.value)}~>
                 <option value="Buy singles">Buy singles</option>
                 <option value="Buy max">Buy max</option>
-              </select></span>
-              <br/>
-              <span>Autobuyer order: <select ~!value=Autobuyer(9).priority().toString()~ ~!onchange=function() {Autobuyer(9).setPriority(+this.value)}~>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
               </select></span>
             </div>
             <button class="autobuyerunlockbutton" ~style.display=Autobuyer(9).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(9).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(9).unlockSlow()">

@@ -43,19 +43,7 @@ let ComplexityAutobuyers = {
     return this.list[x - 1];
   },
   tick() {
-    while (ComplexityGenerators.highest() && ComplexityGenerators.highest().canBuy()) {
-      let highest = ComplexityGenerators.highest();
-      if (highest && highest.canBuy() && ComplexityAutobuyer(highest.tier()).isActive()) {
-        ComplexityAutobuyer(highest.tier()).tickBuyOne();
-      } else {
-        break;
-      }
-    }
-    for (let i = 0; i < 11; i++) {
-      // This could be simpler, but the order might change later.
-      ComplexityAutobuyer([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11][i]).tick();
-    }
-    PowerShards.buyMaxOf([1, 2, 3, 4].filter(i => ComplexityAutobuyer(i + 11).isActive()));
+    ComplexityMaxAll.maxAll([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].filter(i => ComplexityAutobuyer(i).isActive));
     if (FinalityMilestones.isFinalityMilestoneActive(8)) {
       Powers.unlock(true);
       Oracle.unlock(true);

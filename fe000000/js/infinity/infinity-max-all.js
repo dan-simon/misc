@@ -8,20 +8,15 @@ let InfinityMaxAll = {
   anyGeneratorsToBuy() {
     return InfinityGenerators.list.some(x => x.canBuy());
   },
-  maxAll() {
-    while (InfinityGenerators.highest() && InfinityGenerators.highest().canBuy()) {
-      InfinityGenerators.highest().buy();
-    }
-    InfinityUpgrades.list.forEach(x => x.buyMax());
-    InfinityGenerators.list.forEach(x => x.buyMax());
+  maxAll(types) {
+    generalHighestSweep(() => InfinityGenerators.highest(), types);
+    generalMaxAll(types.filter(x => x > 8).map(x => InfinityUpgrade(x - 8)));
+    generalMaxAll(types.filter(x => x <= 8).map(x => InfinityGenerator(x)));
   },
   maxUpgrades() {
-    InfinityUpgrades.list.forEach(x => x.buyMax());
+    this.maxAll([9, 10]);
   },
   maxGenerators() {
-    while (InfinityGenerators.highest() && InfinityGenerators.highest().canBuy()) {
-      InfinityGenerators.highest().buy();
-    }
-    InfinityGenerators.list.forEach(x => x.buyMax());
+    this.maxAll([1, 2, 3, 4, 5, 6, 7, 8]);
   }
 }

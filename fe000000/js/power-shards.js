@@ -46,8 +46,11 @@ let PowerShardUpgrade = function (i) {
       }
       return n <= this.maxBuyable();
     },
-    maxBuyable() {
-      let num = Math.floor(Math.log(player.powers.shards / this.cost() * (this.costIncreasePer() - 1) + 1) / Math.log(this.costIncreasePer()));
+    maxBuyable(fraction) {
+      if (fraction === undefined) {
+        fraction = 1;
+      }
+      let num = Math.floor(Math.log(player.powers.shards * fraction / this.cost() * (this.costIncreasePer() - 1) + 1) / Math.log(this.costIncreasePer()));
       num = Math.min(num, this.boughtLimit() - this.bought());
       num = Math.max(num, 0);
       return num;
@@ -60,11 +63,8 @@ let PowerShardUpgrade = function (i) {
       player.powers.shards = player.powers.shards - this.costFor(n);
       this.addBought(n);
     },
-    buyMax() {
-      this.buy(this.maxBuyable(), true);
-    },
-    buyShortOfMax(n) {
-      this.buy(Math.max(0, this.maxBuyable() - n), true);
+    buyMax(fraction) {
+      this.buy(this.maxBuyable(fraction), true);
     }
   }
 }
@@ -112,14 +112,7 @@ let PowerShards = {
   },
   buyMaxOf(ids) {
     let list = ids.map(x => PowerShardUpgrades.list[x - 1]);
-    // Buying short of max
-    list.forEach(x => x.buyShortOfMax(3));
-    while (list.some(x => x.canBuy())) {
-      // We copy it so that sorting doesn't rearrange the list, which would be a subtle source of bugs
-      // (letting current costs influence future buy order even after costs change).
-      // Note: This nonly buys in the expected order if sort is stable.
-      [...list].sort((x, y) => x.bought() - y.bought())[0].buy();
-    }
+    generalMaxAll(list);
   },
   setCraftedType(x) {
     player.powers.craft.type = x;

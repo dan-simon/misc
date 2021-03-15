@@ -67,9 +67,12 @@ let ComplexityGenerator = function (i) {
       }
       return n <= this.maxBuyable();
     },
-    maxBuyable() {
+    maxBuyable(fraction) {
+      if (fraction === undefined) {
+        fraction = 1;
+      }
       if (!this.isVisible()) return 0;
-      let num = Math.floor(player.complexityPoints.div(this.cost()).times(
+      let num = Math.floor(player.complexityPoints.times(fraction).div(this.cost()).times(
         Decimal.minus(this.costIncreasePer(), 1)).plus(1).log(this.costIncreasePer()));
       num = Math.max(num, 0);
       return num;
@@ -86,8 +89,8 @@ let ComplexityGenerator = function (i) {
         player.highestComplexityGenerator = i;
       }
     },
-    buyMax() {
-      this.buy(this.maxBuyable(), true);
+    buyMax(fraction) {
+      this.buy(this.maxBuyable(fraction), true);
     }
   }
 }

@@ -78,9 +78,12 @@ let EternityGenerator = function (i) {
       }
       return n <= this.maxBuyable();
     },
-    maxBuyable() {
+    maxBuyable(fraction) {
       if (!this.isVisible() || (i == 8 && ComplexityChallenge.isSafeguardOn(5))) return 0;
-      let num = Math.floor(player.eternityPoints.div(this.cost()).times(
+      if (fraction === undefined) {
+        fraction = 1;
+      }
+      let num = Math.floor(player.eternityPoints.times(fraction).div(this.cost()).times(
         Decimal.minus(this.costIncreasePer(), 1)).plus(1).log(this.costIncreasePer()));
       num = Math.max(num, 0);
       return num;
@@ -97,8 +100,8 @@ let EternityGenerator = function (i) {
         player.highestEternityGenerator = i;
       }
     },
-    buyMax() {
-      this.buy(this.maxBuyable(), true);
+    buyMax(fraction) {
+      this.buy(this.maxBuyable(fraction), true);
     }
   }
 }

@@ -87,9 +87,12 @@ let Generator = function (i) {
       }
       return n <= this.maxBuyable();
     },
-    maxBuyable() {
+    maxBuyable(fraction) {
       if (!this.isDirectlyVisible() || Stars.atLimit()) return 0;
-      let num = Math.floor(player.stars.div(this.cost()).times(
+      if (fraction === undefined) {
+        fraction = 1;
+      }
+      let num = Math.floor(player.stars.times(fraction).div(this.cost()).times(
         Decimal.minus(this.costIncreasePer(), 1)).plus(1).log(this.costIncreasePer()));
       num = Math.min(num,
         Challenge.isChallengeEffectActive(10) ? 1 - this.bought() : Infinity,
@@ -118,8 +121,8 @@ let Generator = function (i) {
       }
       Stats.recordPurchase(i, n);
     },
-    buyMax() {
-      this.buy(this.maxBuyable(), true);
+    buyMax(fraction) {
+      this.buy(this.maxBuyable(fraction), true);
     }
   }
 }
