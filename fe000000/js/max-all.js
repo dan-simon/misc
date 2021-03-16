@@ -34,7 +34,7 @@ let generalMaxAll = function (things) {
   while (things.some(x => x.canBuy()) && bought < 256) {
     let legalThings = things.filter(x => x.canBuy())
     let minCost = legalThings.map(x => x.cost()).reduce((a, b) => Decimal.min(a, b));
-    let toBuy = legalThings.filter(x => x.cost().eq(minCost))[0];
+    let toBuy = legalThings.filter(x => Decimal.eq(x.cost(), minCost))[0];
     toBuy.buy();
     bought += 1;
   }

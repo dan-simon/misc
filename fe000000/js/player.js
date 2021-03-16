@@ -217,8 +217,6 @@ let initialPlayer = {
     hasGainedShards: false,
     shards: 0,
     shardUpgrades: [0, 0, 0, 0],
-    powerUnequipMode: 'Confirmation',
-    powerDeletionMode: 'Confirmation',
     presets: [],
     craft: {
       type: 'normal',
@@ -410,7 +408,9 @@ let initialPlayer = {
     singleStudyRefund: true,
     studiesRespec: true,
     eternityChallengeRespec: true,
-    powersRespec: true,
+    powerDeletionMode: 'Confirmation',
+    powerUnequipMode: 'Confirmation',
+    powersUnequip: true,
     finalityShardUpgradesRespec: true,
     presetChange: true,
     presetDeletion: true,
@@ -488,7 +488,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2.1015625
+  version: 2.1025390625
 }
 
 let player;

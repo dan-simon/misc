@@ -504,7 +504,7 @@ let Powers = {
     player.powers.respec = false;
   },
   respecAndReset() {
-    if (Options.confirmation('powersRespec') && !confirm(
+    if (Options.confirmation('powersUnequip') && !confirm(
       'Are you sure you want to unequip your equipped powers and ' +
       ComplexityPrestigeLayer.resetText() + '?')) return false;
     this.respec();
@@ -629,18 +629,16 @@ let Powers = {
     return Math.max(this.getTotalEffect('complexity'), this.getTotalEffect('complexity', this.bestComplexityPowers()))
   },
   powerDeletionMode() {
-    return player.powers.powerDeletionMode;
+    return player.confirmations.powerDeletionMode;
   },
-  changePowerDeletionMode() {
-    let modes = ['Confirmation', 'No confirmation', 'Disabled'];
-    player.powers.powerDeletionMode = modes[(modes.indexOf(player.powers.powerDeletionMode) + 1) % 3];
+  setPowerDeletionMode(x) {
+    player.confirmations.powerDeletionMode = x;
   },
   powerUnequipMode() {
-    return player.powers.powerUnequipMode;
+    return player.confirmations.powerUnequipMode;
   },
-  changePowerUnequipMode() {
-    let modes = ['Confirmation', 'No confirmation', 'Disabled'];
-    player.powers.powerUnequipMode = modes[(modes.indexOf(player.powers.powerUnequipMode) + 1) % 3];
+  setPowerUnequipMode(x) {
+    player.confirmations.powerUnequipMode = x;
   },
   isAutoLoadUnlocked() {
     return FinalityMilestones.isFinalityMilestoneActive(7);

@@ -146,8 +146,6 @@ let FinalityPrestigeLayer = {
       hasGainedShards: player.powers.hasGainedShards,
       shards: 0,
       shardUpgrades: [0, 0, 0, 0],
-      powerUnequipMode: player.powers.powerUnequipMode,
-      powerDeletionMode: player.powers.powerDeletionMode,
       presets: player.powers.presets,
       craft: player.powers.craft,
       lastData: {

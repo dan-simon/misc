@@ -3867,8 +3867,6 @@
         <br/>
         <span>Thus, all but the best ~i Powers.maximumEquippedLimit() ~ power~s Powers.maximumEquippedLimit() ~ of each type are useless and are thus automatically deleted for power shards.</span>
         <br/>
-        <button onclick="Powers.changePowerDeletionMode()">Manual power deletion mode: ~r Powers.powerDeletionMode() ~</button> <button onclick="Powers.changePowerUnequipMode()">Single power unequip mode: ~r Powers.powerUnequipMode() ~</button>
-        <br/>
         <br/>
         <span>You have ~i ComplexityPoints.amount() ~ complexity point~s ComplexityPoints.amount() ~. <button ~class=Powers.anythingToBuy() ? "" : "disabled"~ onclick="Powers.maxAll()">Max power upgrades</button></span>
         <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
@@ -5998,7 +5996,18 @@
         <span ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>Single study refund: <input type="checkbox" ~!checked=Options.confirmation('singleStudyRefund')~ ~!onchange=function() {Options.setConfirmation('singleStudyRefund', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
         <span ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>Studies respec: <input type="checkbox" ~!checked=Options.confirmation('studiesRespec')~ ~!onchange=function() {Options.setConfirmation('studiesRespec', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
         <span ~style.display=EternityChallenge.areEternityChallengesVisible() ? '' : 'none'~>Eternity challenge respec: <input type="checkbox" ~!checked=Options.confirmation('eternityChallengeRespec')~ ~!onchange=function() {Options.setConfirmation('eternityChallengeRespec', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-        <span ~style.display=(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Powers respec: <input type="checkbox" ~!checked=Options.confirmation('powersRespec')~ ~!onchange=function() {Options.setConfirmation('powersRespec', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+      <div ~style.display=(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>
+        <span ~style.display=(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Power deletion: <select ~!value=Powers.powerDeletionMode()~ ~!onchange=function() {Powers.setPowerDeletionMode(this.value)}~>
+          <option value="Confirmation">Confirmation</option>
+          <option value="No confirmation">No confirmation</option>
+          <option value="Disabled">Disabled</option>
+        </select><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Single power unequip: <select ~!value=Powers.powerUnequipMode()~ ~!onchange=function() {Powers.setPowerUnequipMode(this.value)}~>
+          <option value="Confirmation">Confirmation</option>
+          <option value="No confirmation">No confirmation</option>
+          <option value="Disabled">Disabled</option>
+        </select><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Powers unequip: <input type="checkbox" ~!checked=Options.confirmation('powersUnequip')~ ~!onchange=function() {Options.setConfirmation('powersUnequip', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
         <span ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~>Finality shard upgrades respec: <input type="checkbox" ~!checked=Options.confirmation('finalityShardUpgradesRespec')~ ~!onchange=function() {Options.setConfirmation('finalityShardUpgradesRespec', this.checked)}~></input></span>
       </div>
       <div>

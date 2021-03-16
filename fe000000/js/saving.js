@@ -1102,6 +1102,15 @@ let Saving = {
       }
       player.version = 2.1015625;
     }
+    if (player.version < 2.1025390625) {
+      player.confirmations.powerDeletionMode = player.powers.powerDeletionMode;
+      player.confirmations.powerUnequipMode = player.powers.powerUnequipMode;
+      player.confirmations.powersUnequip = player.confirmations.powersRespec;
+      delete player.powers.powerDeletionMode;
+      delete player.powers.powerUnequipMode;
+      delete player.confirmations.powersRespec;
+      player.version = 2.1025390625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
