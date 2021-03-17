@@ -2,15 +2,27 @@ let MaxAll = {
   anythingToBuy() {
     return Boost.canBuy() || Generators.list.some(x => x.canBuy());
   },
-  maxAll(types) {
+  maxAll(types, singles) {
     if (types === undefined) {
       types = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     }
-    generalHighestSweep(() => Generators.highest(), types);
-    if (types.includes(9)) {
-      Boost.buyMax();
+    if (singles === undefined) {
+      singles = [];
     }
-    generalMaxAll(types.filter(x => x <= 8).map(x => Generator(x)));
+    let bought = generalHighestSweep(() => Generators.highest(), types);
+    if (types.includes(9)) {
+      if (singles.includes(9)) {
+        Boost.buy();
+      } else {
+        Boost.buyMax();
+      }
+    }
+    let typesMultiple = types.filter(x => x <= 8 && !singles.includes(x));
+    let typesSingle = types.filter(x => x <= 8 && singles.includes(x) && !bought.includes(x));
+    for (let i of typesSingle) {
+      Generator(i).buy();
+    }
+    generalMaxAll(typesMultiple.map(x => Generator(x)));
   },
   maxAllGenerators() {
     this.maxAll([1, 2, 3, 4, 5, 6, 7, 8]);
@@ -18,12 +30,14 @@ let MaxAll = {
 }
 
 let generalHighestSweep = function (highestGetter, allowed) {
+  let bought = [];
   while (true) {
     let h = highestGetter();
     if (h && allowed.includes(h.tier()) && h.canBuy()) {
       h.buy();
+      bought.push(h.tier());
     } else {
-      break;
+      return bought;
     }
   }
 }

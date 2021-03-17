@@ -67,13 +67,6 @@ let Autobuyer = function (i) {
         return Boost;
       }
     },
-    targetMethod() {
-      if (this.mode() === 'Buy singles') {
-        return 'buy';
-      } else if (this.mode() === 'Buy max') {
-        return 'buyMax';
-      }
-    },
     canTick(triggerSlowAutobuyers, triggerFastAutobuyers) {
       return this.isActive() && (this.isSlow() ? triggerSlowAutobuyers : triggerFastAutobuyers);
     }
@@ -387,6 +380,7 @@ let Autobuyers = {
       Autobuyers.sacrifice();
     }
     let autobuyers = [1, 2, 3, 4, 5, 6, 7, 8, 9].filter(x => Autobuyer(x).canTick(triggerSlowAutobuyers, triggerFastAutobuyers));
-    MaxAll.maxAll(autobuyers);
+    let singles = autobuyers.filter(x => Autobuyer(x).mode() === 'Buy singles');
+    MaxAll.maxAll(autobuyers, singles);
   }
 }
