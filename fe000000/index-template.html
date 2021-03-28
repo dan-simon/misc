@@ -1894,7 +1894,7 @@
         </span>
       </div>
       <br/>
-      <span>Presets:</span>
+      <span>Presets (<button onclick="Studies.presetSort()">sort by name</button>):</span>
       <br/>
       <div ~style.display=Studies.hasPreset(1) ? '' : 'none'~>
         Name: <input class="presetname1" type="text" ~!value=Studies.presetName(1)~ ~!onchange=function() {Studies.setPresetName(1, this.value)}~></input>
@@ -3954,7 +3954,7 @@
           <span ~class=Powers.color('crafted', 1)~>~r Powers.descriptionFull('crafted', 1) ~</span>
         </div>
         <br/>
-        <span>Power presets:</span>
+        <span>Power presets (<button onclick="Powers.presetSort()">sort by name</button>):</span>
         <br/>
         <div ~style.display=Powers.hasPreset(1) ? '' : 'none'~>
           Name: <input class="presetpowername1" type="text" ~!value=Powers.presetName(1)~ ~!onchange=function() {Powers.setPresetName(1, this.value)}~></input>
@@ -4710,7 +4710,7 @@
       <span ~style.display=Trivia.show('complexity achievement order') ? '' : 'none'~>(Starting complexity achievements are given top-to-bottom, and left-to-right within each row.)</span>
       <br/>
       <br/>
-      <span>Finality presets:</span>
+      <span>Finality presets (<button onclick="FinalityShardPresets.presetSort()">sort by name</button>):</span>
       <br/>
       <div ~style.display=FinalityShardPresets.hasPreset(1) ? '' : 'none'~>
         Name: <input class="presetfinalityshardupgradename1" type="text" ~!value=FinalityShardPresets.presetName(1)~ ~!onchange=function() {FinalityShardPresets.setPresetName(1, this.value)}~></input>
@@ -5996,6 +5996,7 @@
         <span ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>Single study refund: <input type="checkbox" ~!checked=Options.confirmation('singleStudyRefund')~ ~!onchange=function() {Options.setConfirmation('singleStudyRefund', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
         <span ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>Studies respec: <input type="checkbox" ~!checked=Options.confirmation('studiesRespec')~ ~!onchange=function() {Options.setConfirmation('studiesRespec', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
         <span ~style.display=EternityChallenge.areEternityChallengesVisible() ? '' : 'none'~>Eternity challenge respec: <input type="checkbox" ~!checked=Options.confirmation('eternityChallengeRespec')~ ~!onchange=function() {Options.setConfirmation('eternityChallengeRespec', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+      </div>
       <div ~style.display=(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>
         <span ~style.display=(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Power deletion: <select ~!value=Powers.powerDeletionMode()~ ~!onchange=function() {Powers.setPowerDeletionMode(this.value)}~>
           <option value="Confirmation">Confirmation</option>
@@ -6101,6 +6102,7 @@
           You don't currently have any tab presets.
         </div>
       </div>
+      <span>Tab presets (<button onclick="Tabs.presetSort()">sort by name</button>):</span>
       <div ~style.display=Tabs.hasPreset(1) ? '' : 'none'~>
         Name: <input class="presettabname1" type="text" ~!value=Tabs.presetName(1)~ ~!onchange=function() {Tabs.setPresetName(1, this.value)}~></input>
         Tabs to show: <input class="presettablist1" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(1)~ ~!onchange=function() {Tabs.setPresetTabs(1, this.value)}~></input>

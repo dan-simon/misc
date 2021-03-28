@@ -788,6 +788,12 @@ let Powers = {
       this.redisplayPreset(player.powers.presets.length);
     }
   },
+  presetSort() {
+    player.powers.presets.sort((a, b) => (a.name > b.name) ? 1 : (a.name < b.name ? -1 : 0));
+    for (let i = 1; i <= player.powers.presets.length; i++) {
+      this.redisplayPreset(i);
+    }
+  },
   redisplayPreset(x) {
     this.redisplayPresetName(x);
     this.redisplayPresetPowerList(x);

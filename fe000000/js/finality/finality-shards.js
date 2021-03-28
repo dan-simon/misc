@@ -283,6 +283,12 @@ let FinalityShardPresets = {
       this.redisplayPreset(player.finalityShardUpgradePresets.length);
     }
   },
+  presetSort() {
+    player.finalityShardUpgradePresets.sort((a, b) => (a.name > b.name) ? 1 : (a.name < b.name ? -1 : 0));
+    for (let i = 1; i <= player.finalityShardUpgradePresets.length; i++) {
+      this.redisplayPreset(i);
+    }
+  },
   redisplayPreset(x) {
     this.redisplayPresetName(x);
     this.redisplayPresetFinalityShardUpgradeList(x);
