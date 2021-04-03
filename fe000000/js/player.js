@@ -377,7 +377,7 @@ let initialPlayer = {
       powers: false,
       finality: false,
     },
-    showNotifications: {
+    notifications: {
       achievements: true,
       complexityAchievements: true
     },
