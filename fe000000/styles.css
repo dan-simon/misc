@@ -127,6 +127,12 @@ input[type=checkbox] {
   font-size: 0.875rem;
 }
 
+.mid-options-button {
+  width: 288px;
+  height: 40px;
+  font-size: 0.875rem;
+}
+
 .minier-options-button {
   width: 288px;
   height: 20px;

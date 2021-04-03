@@ -304,7 +304,6 @@ let initialPlayer = {
     ],
     beyondHighest: 2,
     active: true,
-    notifications: true,
     requirementDescriptions: true,
     showFullyFarRows: true,
     showCompletedRows: true
@@ -377,6 +376,10 @@ let initialPlayer = {
       studies: false,
       powers: false,
       finality: false,
+    },
+    showNotifications: {
+      achievements: true,
+      complexityAchievements: true
     },
     largerCheckboxes: false,
     viewAllGenerators: {
@@ -488,7 +491,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2.1025390625
+  version: 2.103515625
 }
 
 let player;

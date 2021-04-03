@@ -108,6 +108,12 @@ let Options = {
   toggleFitToWidth() {
     player.options.fitToWidth = !player.options.fitToWidth;
   },
+  showNotifications(x) {
+    return player.options.notifications[x];
+  },
+  toggleNotifications(x) {
+    player.options.notifications[x] = !player.options.notifications[x];
+  },
   largerCheckboxes() {
     return player.options.largerCheckboxes;
   },

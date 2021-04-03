@@ -1111,6 +1111,14 @@ let Saving = {
       delete player.confirmations.powersRespec;
       player.version = 2.1025390625;
     }
+    if (player.version < 2.103515625) {
+      player.options.notifications = {
+        achievements: player.achievements.notifications,
+        complexityAchievements: true
+      };
+      delete player.achievements.notifications;
+      player.version = 2.103515625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

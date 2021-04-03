@@ -1,4 +1,10 @@
 let ComplexityAchievements = {
+  complexityAchievementNames: [
+    ['One per generator', 'Forever isn\'t too long', 'More colorful than a potato', 'Forgot something'],
+    ['Actually a boost', 'Time after time', 'After a hurricane', '3 * 7 * 11'],
+    ['No rest', 'Broke every stone', 'Shadeless', 'Thousand-theorem twilight'],
+    ['Power beats knowledge', 'Calm EC', 'Nonzero-color theorem', 'On the other side']
+  ],
   complexityAchievementRequirements: [
     [
       () => ComplexityChallenge.getComplexityChallengeCompletions(2) >= 8,
@@ -112,6 +118,13 @@ let ComplexityAchievements = {
     player.complexityAchievements[row - 1][column - 1] = true;
     this.giveComplexityAchievementSingleResult(row, column, fromUnusualSource);
     this.giveComplexityAchievementGlobalResult();
+    // When we finality, the complexity achievements we keep are just kept.
+    // They don't get re-unlocked. So it's fine to notify whenever we get a complexity achievement,
+    // even if we get it from buying finality upgrades.
+    Notifications.notify(this.getComplexityAchievementName(row, column), 'complexityAchievements');
+  },
+  getComplexityAchievementName(row, column) {
+    return this.complexityAchievementNames[row - 1][column - 1];
   },
   hasComplexityAchievement(row, column) {
     return player.complexityAchievements[row - 1][column - 1];

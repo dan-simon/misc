@@ -294,33 +294,13 @@ let Achievements = {
   },
   unlockAchievement(row, column) {
     player.achievements.table[row - 1][column - 1] = true;
-    this.notify(this.getAchievementRawName(row, column));
-  },
-  notify(name) {
-    if (player.oracle.isPredicting || !this.notifications()) return;
-    let e = document.createElement('div');
-    e.className = 'notification';
-    e.innerText = 'Achievement unlocked: ' + name;
-    document.getElementById('notificationarea').appendChild(e);
-    let remove = function() {
-      if (document.body.contains(e)) {
-        document.getElementById('notificationarea').removeChild(e);
-      }
-    };
-    e.onclick = remove;
-    setTimeout(remove, 16000);
+    Notifications.notify(this.getAchievementRawName(row, column), 'achievements');
   },
   active() {
     return player.achievements.active;
   },
   toggleActive(x) {
     player.achievements.active = !player.achievements.active;
-  },
-  notifications() {
-    return player.achievements.notifications;
-  },
-  toggleNotifications(x) {
-    player.achievements.notifications = !player.achievements.notifications;
   },
   requirementDescriptions() {
     return player.achievements.requirementDescriptions;

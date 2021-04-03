@@ -67,6 +67,7 @@
   <script src="js/main.js?time=%time%"></script>
   <script src="js/max-all.js?time=%time%"></script>
   <script src="js/multiverse-collapse.js?time=%time%"></script>
+  <script src="js/notifications.js?time=%time%"></script>
   <script src="js/options.js?time=%time%"></script>
   <script src="js/oracle.js?time=%time%"></script>
   <script src="js/player.js?time=%time%"></script>
@@ -97,7 +98,7 @@
     <br/>
     <span>Reloading might work, so probably try that first.</span>
     <br/>
-    <span>The page loads <span id="script-count"></span> scripts (should be 83).</span>
+    <span>The page loads <span id="script-count"></span> scripts (should be 84).</span>
     <br/>
     <span><button onclick="window.location.reload(true)">Reload window</button> <button class="export-button" onclick="Saving.exportGame(0)">Export</button> <button onclick="Saving.loadGamePrompt()">Load</button> <button onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></span>
   </div>
@@ -3356,7 +3357,7 @@
         <tr>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(1, 1)~>
-              <span class="greytogrey">One per generator</span>
+              <span class="greytogrey">~r ComplexityAchievements.getComplexityAchievementName(1, 1) ~</span>
               <br/>
               Complete Complexity Challenge 2 ~i 8 ~ times.
               <br/>
@@ -3367,7 +3368,7 @@
           </td>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(1, 2)~>
-              <span class="greytopurple">Forever isn't too long</span>
+              <span class="greytopurple">~r ComplexityAchievements.getComplexityAchievementName(1, 2) ~</span>
               <br/>
               Eternity in Complexity Challenge 2.
               <br/>
@@ -3378,7 +3379,7 @@
           </td>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(1, 3)~>
-              <span class="greytoorange">More colorful than a potato</span>
+              <span class="greytoorange">~r ComplexityAchievements.getComplexityAchievementName(1, 3) ~</span>
               <br/>
               Unlock chroma in Complexity Challenge 2.
               <br/>
@@ -3389,7 +3390,7 @@
           </td>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(1, 4)~>
-              <span class="greytogreen">Forgot something</span>
+              <span class="greytogreen">~r ComplexityAchievements.getComplexityAchievementName(1, 4) ~</span>
               <br/>
               Get ~i 11 ~ studies in Complexity Challenge 2.
               <br/>
@@ -3402,7 +3403,7 @@
         <tr>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(2, 1)~>
-              <span class="purpletogrey">Actually a boost</span>
+              <span class="purpletogrey">~r ComplexityAchievements.getComplexityAchievementName(2, 1) ~</span>
               <br/>
               Get a per-boost multiplier of ~f Math.pow(2, 24) ~ outside of Infinity Challenge 7 in Complexity Challenge 3.
               <br/>
@@ -3413,7 +3414,7 @@
           </td>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(2, 2)~>
-              <span class="purpletopurple">Time after time</span>
+              <span class="purpletopurple">~r ComplexityAchievements.getComplexityAchievementName(2, 2) ~</span>
               <br/>
               Get ~f Math.pow(2, 24) ~ eternities in Complexity Challenge 3.
               <br/>
@@ -3424,7 +3425,7 @@
           </td>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(2, 3)~>
-              <span class="purpletoorange">After a hurricane</span>
+              <span class="purpletoorange">~r ComplexityAchievements.getComplexityAchievementName(2, 3) ~</span>
               <br/>
               Unlock chroma in Complexity Challenge 3.
               <br/>
@@ -3435,7 +3436,7 @@
           </td>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(2, 4)~>
-              <span class="purpletogreen">3 * 7 * 11</span>
+              <span class="purpletogreen">~r ComplexityAchievements.getComplexityAchievementName(2, 4) ~</span>
               <br/>
               Get ~i 231 ~ theorems in Complexity Challenge 3.
               <br/>
@@ -3448,7 +3449,7 @@
         <tr>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(3, 1)~>
-              <span class="orangetogrey">No rest</span>
+              <span class="orangetogrey">~r ComplexityAchievements.getComplexityAchievementName(3, 1) ~</span>
               <br/>
               Get ~f 1024 ~ boosts in Eternity Challenge 2 in Complexity Challenge 4.
               <br/>
@@ -3459,7 +3460,7 @@
           </td>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(3, 2)~>
-              <span class="orangetopurple">Broke every stone</span>
+              <span class="orangetopurple">~r ComplexityAchievements.getComplexityAchievementName(3, 2) ~</span>
               <br/>
               Complete all eternity challenges, without using automatic eternity challenge completion, in Complexity Challenge 4.
               <br/>
@@ -3470,7 +3471,7 @@
           </td>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(3, 3)~>
-              <span class="orangetoorange">Shadeless</span>
+              <span class="orangetoorange">~r ComplexityAchievements.getComplexityAchievementName(3, 3) ~</span>
               <br/>
               Complete Complexity Challenge 4 ~i 13 ~ times.
               <br/>
@@ -3481,7 +3482,7 @@
           </td>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(3, 4)~>
-              <span class="orangetogreen">Thousand-theorem twilight</span>
+              <span class="orangetogreen">~r ComplexityAchievements.getComplexityAchievementName(3, 4) ~</span>
               <br/>
               Get ~f Decimal.pow(2, 1.75 * Math.pow(2, 16)) ~ eternity points, without buying theorems, in Complexity Challenge 4.
               <br/>
@@ -3494,7 +3495,7 @@
         <tr>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(4, 1)~>
-              <span class="greentogrey">Power beats knowledge</span>
+              <span class="greentogrey">~r ComplexityAchievements.getComplexityAchievementName(4, 1) ~</span>
               <br/>
               Get ~f Math.pow(2, 16) ~ boost power in Complexity Challenge 6.
               <br/>
@@ -3505,7 +3506,7 @@
           </td>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(4, 2)~>
-              <span class="greentopurple">Calm EC</span>
+              <span class="greentopurple">~r ComplexityAchievements.getComplexityAchievementName(4, 2) ~</span>
               <br/>
               Complete ~i 20 ~ eternity challenge tiers, without using automatic eternity challenge completion, in Complexity Challenge 6.
               <br/>
@@ -3516,7 +3517,7 @@
           </td>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(4, 3)~>
-              <span class="greentoorange">Nonzero-color theorem</span>
+              <span class="greentoorange">~r ComplexityAchievements.getComplexityAchievementName(4, 3) ~</span>
               <br/>
               Unlock chroma in Complexity Challenge 6.
               <br/>
@@ -3527,7 +3528,7 @@
           </td>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(4, 4)~>
-              <span class="greentogreen">On the other side</span>
+              <span class="greentogreen">~r ComplexityAchievements.getComplexityAchievementName(4, 4) ~</span>
               <br/>
               Get ~i 168 ~ theorems in Complexity Challenge 6.
               <br/>
@@ -5194,7 +5195,6 @@
       <br/>
       <span>
         <button onclick="Achievements.toggleActive()">Achievement rewards: ~r Achievements.active() ? 'On' : 'Off' ~</button>
-        <button onclick="Achievements.toggleNotifications()">Achievement notifications: ~r Achievements.notifications() ? 'On' : 'Off' ~</button>
         <button onclick="Achievements.toggleRequirementDescriptions()">Achievement descriptions at bottom of tab: ~r Achievements.requirementDescriptions() ? 'On' : 'Off' ~</button>
       </span>
       <br/>
@@ -5954,10 +5954,9 @@
           <td><button class="options-button" onclick="Options.toggleLargerCheckboxes()">Larger checkboxes: ~r player.options.largerCheckboxes ? "On" : "Off" ~</button></td>
         </tr>
         <tr>
-          <td><div ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~ class="options-div">
-            <button ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleShowCurrentChallenges()">Current challenges in header: ~r Options.showCurrentChallenges() ? 'Shown' : 'Hidden' ~</button>
-            <button ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleShowNextCCCompletion()">Next ℂC completion in header: ~r Options.showNextCCCompletion() ? 'Shown' : 'Hidden' ~</button>
-            <button ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleShowResetButtonsForHiddenTabs()">Reset buttons for hidden tabs: ~r Options.showResetButtonsForHiddenTabs() ? 'Shown' : 'Hidden' ~</button>
+          <td><div class="options-div">
+            <button class="mini-options-button" onclick="Options.toggleNotifications('achievements')">Achievement notifications: ~r Options.showNotifications('achievements') ? 'On' : 'Off' ~</button>
+            <button ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~ class="mid-options-button" onclick="Options.toggleNotifications('complexityAchievements')">Complexity achievement notifications: ~r Options.showNotifications('complexityAchievements') ? 'On' : 'Off' ~</button>
           </div></td>
           <td><div class="options-div">
             <button class="mini-options-button" onclick="Options.nextBackground()">Background: ~r player.options.theme.background ~</button>
@@ -5965,15 +5964,19 @@
             <button class="mini-options-button" onclick="Options.nextCompletionGradients()">Completion gradients: ~r player.options.theme.completionGradients ~</button>
             <button class="mini-options-button" onclick="Options.nextEdgeGradients()">Edge gradients: ~r player.options.theme.edgeGradients ~</button>
           </div></td>
+          <td><div ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~ class="options-div">
+            <button ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleShowCurrentChallenges()">Current challenges in header: ~r Options.showCurrentChallenges() ? 'Shown' : 'Hidden' ~</button>
+            <button ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleShowNextCCCompletion()">Next ℂC completion in header: ~r Options.showNextCCCompletion() ? 'Shown' : 'Hidden' ~</button>
+            <button ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleShowResetButtonsForHiddenTabs()">Reset buttons for hidden tabs: ~r Options.showResetButtonsForHiddenTabs() ? 'Shown' : 'Hidden' ~</button>
+          </div></td>
+        <tr/>
+        <tr ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>
           <td><div ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~ class="options-div">
             <button ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('studies')">Full study options: ~r Options.showFullOptions('studies') ? 'On' : 'Off' ~</button>
             <button ~style.display=(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('powers')">Full power options: ~r Options.showFullOptions('powers') ? 'On' : 'Off' ~</button>
             <button ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('finality')">Full finality shard options: ~r Options.showFullOptions('finality') ? 'On' : 'Off' ~</button>
           </div></td>
-        <tr/>
-        <tr ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~>
-          <td/>
-          <td><button ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~ class="options-button" onclick="Options.toggleComplexityChallengeRunningColors()" style="font-size: 0.875rem;">
+          <td><button ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~ class="options-button" onclick="Options.toggleComplexityChallengeRunningColors()" style="font-size: 0.875rem;">
             Complexity challenge colors: ~r Options.complexityChallengeRunningColors() ? "Running" : "Completions" ~
           </button></td>
           <td/>
