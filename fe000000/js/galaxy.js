@@ -79,14 +79,20 @@ let Galaxy = {
     return Math.min(1 + Math.log2(1 + this.actualSpeed() * (player.stats.timeSinceComplexity + FinalityMilestones.freeTimeInComplexity()) / 1024) / 64, this.effectCap());
   },
   effectCap(d, amount) {
+    if (d === undefined) {
+      d = this.dilated();
+    }
     if (amount === undefined) {
       amount = this.amount();
     }
     // The max with 0 is there to minimize the effect of something going very wrong and dilating more galaxies than the player has.
-    return 1 + Math.sqrt(Math.max(0, amount) - (d === undefined ? this.dilated() : d))) / 64;
+    return 1 + Math.sqrt(Math.max(0, amount - d)) / 64;
   },
   effectSpeed(d) {
-    return Math.pow(1 + (d === undefined ? this.dilated() : d), 2);
+    if (d === undefined) {
+      d = this.dilated();
+    }
+    return Math.pow(1 + d, 2);
   },
   actualSpeed(d) {
     return this.effectSpeed(d) * this.otherSpeedMultiplier();
