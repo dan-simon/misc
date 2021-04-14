@@ -34,11 +34,18 @@ let Galaxy = {
     if (!this.isUnlocked()) return 0;
     return this.stellarProductAmount() + this.complexityPointAmount() + this.finalityShardUpgradeAmount();
   },
+  nextAmount() {
+    if (!this.isUnlocked()) return 0;
+    return this.stellarProductAmount() + this.nextComplexityPointAmount() + this.finalityShardUpgradeAmount();
+  },
   stellarProductAmount() {
     return Math.floor(Math.max(Math.log2(this.stellarProduct() / this.baseGalaxyRequirement()) + 1, 0));
   },
   complexityPointAmount() {
     return Math.floor(Math.max(Math.log2(ComplexityPoints.totalCPProducedThisFinality().max(1).log2() / this.unlockCost().log2()) + 1, 0));
+  },
+  nextComplexityPointAmount() {
+    return Math.floor(Math.max(Math.log2(ComplexityPoints.totalCPProducedThisFinality().plus(ComplexityPrestigeLayer.complexityPointGain()).max(1).log2() / this.unlockCost().log2()) + 1, 0));
   },
   finalityShardUpgradeAmount() {
     return FinalityStartingBenefits.galaxies();
@@ -71,9 +78,12 @@ let Galaxy = {
   effect() {
     return Math.min(1 + Math.log2(1 + this.actualSpeed() * (player.stats.timeSinceComplexity + FinalityMilestones.freeTimeInComplexity()) / 1024) / 64, this.effectCap());
   },
-  effectCap(d) {
+  effectCap(d, amount) {
+    if (amount === undefined) {
+      amount = this.amount();
+    }
     // The max with 0 is there to minimize the effect of something going very wrong and dilating more galaxies than the player has.
-    return 1 + Math.sqrt(Math.max(0, this.amount() - (d === undefined ? this.dilated() : d))) / 64;
+    return 1 + Math.sqrt(Math.max(0, amount) - (d === undefined ? this.dilated() : d))) / 64;
   },
   effectSpeed(d) {
     return Math.pow(1 + (d === undefined ? this.dilated() : d), 2);
@@ -81,20 +91,20 @@ let Galaxy = {
   actualSpeed(d) {
     return this.effectSpeed(d) * this.otherSpeedMultiplier();
   },
-  timeToReachEffectCap(d) {
-    return Math.max(0, 1024 * (Math.pow(2, 64 * (this.effectCap(d) - 1)) - 1) / this.actualSpeed(d) - FinalityMilestones.freeTimeInComplexity());
+  timeToReachEffectCap(d, amount) {
+    return Math.max(0, 1024 * (Math.pow(2, 64 * (this.effectCap(d, amount) - 1)) - 1) / this.actualSpeed(d) - FinalityMilestones.freeTimeInComplexity());
   },
   nextEffectCap() {
-    return this.effectCap(this.nextDilated());
+    return this.effectCap(this.nextDilated(), this.nextAmount());
   },
   nextEffectSpeed() {
-    return this.effectSpeed(this.nextDilated())
+    return this.effectSpeed(this.nextDilated(), this.nextAmount())
   },
   nextActualSpeed() {
-    return this.actualSpeed(this.nextDilated())
+    return this.actualSpeed(this.nextDilated(), this.nextAmount())
   },
   nextTimeToReachEffectCap() {
-    return this.timeToReachEffectCap(this.nextDilated());
+    return this.timeToReachEffectCap(this.nextDilated(), this.nextAmount());
   },
   dilated() {
     return player.galaxies.dilated;
@@ -103,12 +113,11 @@ let Galaxy = {
     return player.galaxies.undilated;
   },
   nextDilated() {
-    return this.nextDilatedClamped(0, this.amount());
+    return this.nextDilatedClamped(0, this.nextAmount(), this.nextAmount());
   },
-  nextDilatedClamped(min, max) {
+  nextDilatedClamped(min, max, total) {
     let mode = this.nextDilatedMode();
     let amount = this.nextDilatedAmount();
-    let total = this.amount();
     if (mode === 'Amount') {
       return Math.floor(Math.min(max, Math.max(min, amount)));
     } else if (mode === 'All but amount') {
@@ -118,10 +127,10 @@ let Galaxy = {
       // If there were more than 128 dilated galaxies, I'd start to be worried,
       // but we're nowhere near that.
       let safe = max;
-      while (safe >= min + 16 && this.timeToReachEffectCap(safe - 16) <= amount) {
+      while (safe >= min + 16 && this.timeToReachEffectCap(safe - 16, total) <= amount) {
         safe -= 16;
       }
-      while (safe >= min + 1 && this.timeToReachEffectCap(safe - 1) <= amount) {
+      while (safe >= min + 1 && this.timeToReachEffectCap(safe - 1, total) <= amount) {
         safe -= 1;
       }
       return safe;
@@ -157,7 +166,7 @@ let Galaxy = {
   updateDilatedMinor() {
     let total = this.amount();
     if (this.dilated() + this.undilated() < total) {
-      let d = this.nextDilatedClamped(this.dilated(), total - this.undilated());
+      let d = this.nextDilatedClamped(this.dilated(), total - this.undilated(), this.amount());
       player.galaxies.dilated = d;
       player.galaxies.undilated = total - d;
     }
