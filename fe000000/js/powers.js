@@ -503,7 +503,13 @@ let Powers = {
     }
     player.powers.respec = false;
   },
+  canRespec() {
+    return this.equipped().length !== 0;
+  },
   respecAndReset() {
+    if (!this.canRespec()) {
+      return true;
+    }
     if (Options.confirmation('powersUnequip') && !confirm(
       'Are you sure you want to unequip your equipped powers and ' +
       ComplexityPrestigeLayer.resetText() + '?')) return false;

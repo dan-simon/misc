@@ -240,9 +240,6 @@ let EternityChallenge = {
     // has previously been confirmed to be unlockable.
     player.unlockedEternityChallenge = x;
   },
-  canRespec() {
-    return !this.isEternityChallengeUnlockingMeaningless();
-  },
   isRespecOn() {
     return player.respecEternityChallenge;
   },
@@ -250,12 +247,7 @@ let EternityChallenge = {
     player.respecEternityChallenge = !player.respecEternityChallenge;
   },
   respec() {
-    // This fails in situations where ECs being locked is no longer a thing,
-    // which is why we then can't respec and so don't do anything when
-    // this function is called.
-    if (this.canRespec()) {
-      this.lockUnlockedEternityChallenge();
-    }
+    this.lockUnlockedEternityChallenge();
   },
   maybeRespec() {
     if (this.isRespecOn()) {
@@ -263,7 +255,16 @@ let EternityChallenge = {
     }
     player.respecEternityChallenge = false;
   },
+  canRespec() {
+    return this.getUnlockedEternityChallenge() !== 0 && !this.isEternityChallengeUnlockingMeaningless();
+  },
   respecAndReset() {
+    // This fails in situations where ECs being locked is no longer a thing,
+    // which is why we then can't respec and so don't do anything when
+    // this function is called (but we succeed, because respec means doing nothing).
+    if (!this.canRespec()) {
+      return true;
+    }
     if (Options.confirmation('eternityChallengeRespec') && !confirm(
       'Are you sure you want to respec your unlocked eternity challenge and ' +
       EternityPrestigeLayer.resetText() + '?')) return false;

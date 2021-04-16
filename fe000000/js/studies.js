@@ -292,7 +292,15 @@ let Studies = {
     }
     player.studySettings.respecStudies = false;
   },
+  canRespec() {
+    // This checks if the player has any studies (pre-fourth-row or fourth-row).
+    return player.studies.some(x => x);
+  },
   respecAndReset() {
+    // We return true because if we can't respec, it's because respec does nothing.
+    if (!this.canRespec()) {
+      return true;
+    }
     if (Options.confirmation('studiesRespec') && !confirm(
       'Are you sure you want to respec your studies and ' +
       EternityPrestigeLayer.resetText() + '?')) return false;
@@ -304,7 +312,15 @@ let Studies = {
     }
     return true;
   },
+  canRespecFourthRow() {
+    // This checks if the player has any fourth-row studies.
+    return player.studies.slice(12).some(x => x);
+  },
   respecFourthRowAndReset() {
+    // We return true because if we can't respec, it's because respec does nothing.
+    if (!this.canRespecFourthRow()) {
+      return true;
+    }
     if (Options.confirmation('studiesRespec') && !confirm(
       'Are you sure you want to respec your fourth-row studies and ' +
       EternityPrestigeLayer.resetText() + '?')) return false;

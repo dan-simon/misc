@@ -1119,6 +1119,12 @@ let Saving = {
       delete player.achievements.notifications;
       player.version = 2.103515625;
     }
+    // player.powers.presetRespec previously wasn't kept properly on finality,
+    // so we fix it with a new version.
+    if (player.version < 2.1044921875) {
+      player.powers.presetRespec = !!player.powers.presetRespec;
+      player.version = 2.1044921875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

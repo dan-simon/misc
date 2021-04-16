@@ -156,7 +156,13 @@ let FinalityShardPresets = {
     }
     player.respecFinalityShards = false;
   },
+  canRespec() {
+    return FinalityShards.totalUpgrades() !== 0;
+  },
   respecAndReset() {
+    if (!this.canRespec()) {
+      return true;
+    }
     if (Options.confirmation('finalityShardUpgradesRespec') && !confirm(
       'Are you sure you want to respec your bought finality shard upgrades and ' +
       FinalityPrestigeLayer.resetText() + '?')) return false;

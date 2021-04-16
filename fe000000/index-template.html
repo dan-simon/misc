@@ -1444,7 +1444,7 @@
       <span>You have ~i Studies.totalTheorems() ~ total theorem~s Studies.totalTheorems() ~ (a breakdown is below the theorem purchase buttons) and ~i Studies.unspentTheorems() ~ unspent theorem~s Studies.unspentTheorems() ~.</span>
       <br/>
       <div ~style.display=Options.showFullOptions('studies') ? 'none' : ''~>
-        <button onclick="Studies.respecAndReset()">Respec studies and ~r EternityPrestigeLayer.resetText() ~</button>
+        <button onclick="Studies.respecAndReset()" ~class=Studies.canRespec() ? "" : "disabled"~>Respec studies and ~r EternityPrestigeLayer.resetText() ~</button>
         <div style="width: 1024px; margin-left: auto; margin-right: auto;">
           <span>There are a lot of study options. To see the others, go to the options tab and toggle (turn on) "Full study options" in the "other options" part.</span>
         </div>
@@ -1454,8 +1454,8 @@
           <button class="studies-export-button" onclick="Studies.export()">Export studies</button> <button onclick="Studies.import()">Import studies</button>
           <button onclick="Studies.toggleRespec()">Respec studies on next eternity: ~r Studies.isRespecOn() ? "On" : "Off" ~</button>
           <button ~style.display=Studies.canAccessFourthRow() ? '' : 'none'~ ~class=Studies.canMaxFourthRowStudies() ? '' : 'disabled' ~ onclick="Studies.maxFourthRowStudies()">Max fourth-row studies</button>
-          <button onclick="Studies.respecAndReset()">Respec studies and ~r EternityPrestigeLayer.resetText() ~</button>
-          <button onclick="Studies.respecFourthRowAndReset()" ~style.display=Studies.canAccessFourthRow() ? '' : 'none'~>Respec fourth-row studies and ~r EternityPrestigeLayer.resetText() ~</button>
+          <button onclick="Studies.respecAndReset()" ~class=Studies.canRespec() ? "" : "disabled"~>Respec studies and ~r EternityPrestigeLayer.resetText() ~</button>
+          <button onclick="Studies.respecFourthRowAndReset()" ~class=Studies.canRespecFourthRow() ? "" : "disabled"~ ~style.display=Studies.canAccessFourthRow() ? '' : 'none'~>Respec fourth-row studies and ~r EternityPrestigeLayer.resetText() ~</button>
         </div>
         <br/>
         <div style="width: 1024px; margin-left: auto; margin-right: auto;">
@@ -2561,7 +2561,7 @@
       <span>You have completed ~i EternityChallenge.getTotalEternityChallengeCompletions() ~ eternity challenge (EC) tier~s EternityChallenge.getTotalEternityChallengeCompletions() ~, giving you ~i EternityChallenge.extraTheoremsActualAndDisplay() ~ extra theorem~s EternityChallenge.extraTheoremsActualAndDisplay() ~ (~i 1 ~ per tier).</span>
       <br/>
       <span>
-        <button ~style.display=EternityChallenge.canRespec() ? '' : 'none'~ onclick="EternityChallenge.toggleRespec()">Respec eternity challenge on next eternity: ~r EternityChallenge.isRespecOn() ? "On" : "Off" ~</button>
+        <button ~style.display=EternityChallenge.isEternityChallengeUnlockingMeaningless() ? 'none' : ''~ onclick="EternityChallenge.toggleRespec()">Respec eternity challenge on next eternity: ~r EternityChallenge.isRespecOn() ? "On" : "Off" ~</button>
         <button ~style.display=EternityChallenge.showRequirementDisplayToggle() ? '' : 'none'~ onclick="EternityChallenge.toggleRequirementDisplay()">Show (now unneeded) eternity challenge requirements: ~r EternityChallenge.isRequirementDisplayOn() ? "On" : "Off" ~</button>
       </span>
       <div ~style.display=EternityChallenge.showAutoECCompletion() ? '' : 'none'~>
@@ -2603,9 +2603,9 @@
       <span ~class=EternityChallenge.getTotalCompletionsRewardClass(4)~>
         ~r EternityChallenge.eternityChallengeTotalCompletionsReward4Text() ~
       </span>
-      <br ~style.display=EternityChallenge.canRespec() ? '' : 'none'~/>
-      <span ~style.display=EternityChallenge.canRespec() ? '' : 'none'~>
-        <button onclick="EternityChallenge.respecAndReset()">Respec eternity challenge and ~r EternityPrestigeLayer.resetText() ~</button>
+      <br ~style.display=EternityChallenge.isEternityChallengeUnlockingMeaningless() ? 'none' : ''~/>
+      <span ~style.display=EternityChallenge.isEternityChallengeUnlockingMeaningless() ? 'none' : ''~>
+        <button onclick="EternityChallenge.respecAndReset()" ~class=EternityChallenge.canRespec() ? "" : "disabled"~>Respec eternity challenge and ~r EternityPrestigeLayer.resetText() ~</button>
       </span>
       <br/>
       <br/>
@@ -3581,7 +3581,7 @@
         <span>The powers equipped by importing powers will be the strongest stored powers of the chosen types.</span>
         <br/>
         <div ~style.display=Options.showFullOptions('powers') ? 'none' : ''~>
-          <button onclick="Powers.respecAndReset()">Unequip equipped powers and ~r ComplexityPrestigeLayer.resetText() ~</button></button>
+          <button onclick="Powers.respecAndReset()" ~class=Powers.canRespec() ? "" : "disabled"~>Unequip equipped powers and ~r ComplexityPrestigeLayer.resetText() ~</button></button>
           <div style="width: 1024px; margin-left: auto; margin-right: auto;">
             <span>There are a lot of power options. To see the others, go to the options tab and toggle (turn on) "Full power options" in the "other options" part.</span>
           </div>
@@ -3590,7 +3590,7 @@
           <button class="powers-export-button" onclick="Powers.export()">Export equipped powers</button> <button onclick="Powers.import()">Import equipped powers</button>
           <button onclick="Powers.toggleRespec()">Unequip equipped powers on next complexity: ~r Powers.isRespecOn() ? "On" : "Off" ~</button>
           <br/>
-          <button onclick="Powers.respecAndReset()">Unequip equipped powers and ~r ComplexityPrestigeLayer.resetText() ~</button></button>
+          <button onclick="Powers.respecAndReset()" ~class=Powers.canRespec() ? "" : "disabled"~>Unequip equipped powers and ~r ComplexityPrestigeLayer.resetText() ~</button></button>
           <div style="width: 1024px; margin-left: auto; margin-right: auto;">
             <span>There are a lot of power options. To hide most of them, go to the options tab and toggle (turn off) "Full power options" in the "other options" part.</span>
           </div>
@@ -4584,7 +4584,7 @@
       <span>(This gain of finality shards is ~i 16 ~ times (~i 1 ~ + finalities), doubled if (~i 1 ~ + finalities) is a multiple of ~i 64 ~.)</span>
       <br/>
       <div ~style.display=Options.showFullOptions('finality') ? 'none' : ''~>
-        <button onclick="FinalityShardPresets.respecAndReset()">Respec finality shard upgrades and ~r FinalityPrestigeLayer.resetText() ~</button></button>
+        <button onclick="FinalityShardPresets.respecAndReset()" ~class=FinalityShardPresets.canRespec() ? "" : "disabled"~>Respec finality shard upgrades and ~r FinalityPrestigeLayer.resetText() ~</button></button>
         <div style="width: 1024px; margin-left: auto; margin-right: auto;">
           <span>There are a lot of finality shard options. To see the others, go to the options tab and toggle (turn on) "Full finality shard options" in the "other options" part.</span>
         </div>
@@ -4593,7 +4593,7 @@
         <button class="finality-shard-upgrades-export-button" onclick="FinalityShardPresets.export()">Export finality shard upgrades</button> <button onclick="FinalityShardPresets.import()">Import finality shard upgrades</button>
         <button onclick="FinalityShardPresets.toggleRespec()">Respec finality shard upgrades on next finality: ~r FinalityShardPresets.isRespecOn() ? "On" : "Off" ~</button>
         <br/>
-        <button onclick="FinalityShardPresets.respecAndReset()">Respec finality shard upgrades and ~r FinalityPrestigeLayer.resetText() ~</button>
+        <button onclick="FinalityShardPresets.respecAndReset()" ~class=FinalityShardPresets.canRespec() ? "" : "disabled"~>Respec finality shard upgrades and ~r FinalityPrestigeLayer.resetText() ~</button>
         <div style="width: 1024px; margin-left: auto; margin-right: auto;">
           <span>There are a lot of finality shard options. To hide most of them, go to the options tab and toggle (turn off) "Full finality shard options" in the "other options" part.</span>
         </div>

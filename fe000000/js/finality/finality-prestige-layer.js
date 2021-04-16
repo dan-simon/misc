@@ -143,6 +143,7 @@ let FinalityPrestigeLayer = {
       stored: [],
       gain: player.powers.gain,
       respec: false,
+      presetRespec: player.powers.presetRespec,
       hasGainedShards: player.powers.hasGainedShards,
       shards: 0,
       shardUpgrades: [0, 0, 0, 0],
