@@ -18,9 +18,7 @@ let Complexities = {
     // This is messy, but we sometimes need to update our complexity challenge completion
     // records so that they don't appear to be from tons of complexities ago.
     for (let entry of player.complexityChallengeLastCompletion) {
-      if (entry[1] === Finalities.amount()) {
-        entry[0] += x;
-      }
+      entry[0] += x;
     }
   },
   complexityGeneratorMultiplier() {
