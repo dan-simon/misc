@@ -382,6 +382,7 @@ let initialPlayer = {
       complexityAchievements: true
     },
     largerCheckboxes: false,
+    buttonOutlines: false,
     viewAllGenerators: {
       normal: true,
       infinity: false,
@@ -491,7 +492,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2.1044921875
+  version: 2.10546875
 }
 
 let player;

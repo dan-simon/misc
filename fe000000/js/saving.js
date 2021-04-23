@@ -49,6 +49,7 @@ let Saving = {
       player.lastUpdate = now;
       Saving.saveGame(false);
       Options.updateCheckboxSize();
+      Options.updateButtonOutlines();
       Colors.updateColors();
       updateDisplaySaveLoadSetup();
     }
@@ -1124,6 +1125,10 @@ let Saving = {
     if (player.version < 2.1044921875) {
       player.powers.presetRespec = !!player.powers.presetRespec;
       player.version = 2.1044921875;
+    }
+    if (player.version < 2.10546875) {
+      player.options.buttonOutlines = false;
+      player.version = 2.10546875;
     }
   },
   convertSaveToDecimal() {

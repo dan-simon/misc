@@ -7,6 +7,7 @@
   --background-color: #000000;
   --text-color: #ffffff;
   --checkbox-scale: 1;
+  --outline-style: solid
 }
 
 #progress {
@@ -41,6 +42,11 @@ button {
   margin: 2px;
   background-color: #aaaaaa;
   color: #000000;
+}
+
+button:focus {
+  outline-style: var(--outline-style);
+  outline-color: #00ffff;
 }
 
 input[type=checkbox] {

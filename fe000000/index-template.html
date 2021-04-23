@@ -5951,7 +5951,10 @@
         </tr>
           <td><button class="options-button" onclick="Options.toggleHotkeys()">Hotkeys: ~r player.options.hotkeys ? "On" : "Off" ~</button></td>
           <td><button class="options-button" onclick="Options.toggleFitToWidth()">Decrease page size if page is too narrow: ~r player.options.fitToWidth ? "On" : "Off" ~</button></td>
-          <td><button class="options-button" onclick="Options.toggleLargerCheckboxes()">Larger checkboxes: ~r player.options.largerCheckboxes ? "On" : "Off" ~</button></td>
+          <td><div class="options-div">
+            <button class="mini-options-button" onclick="Options.toggleLargerCheckboxes()">Larger checkboxes: ~r player.options.largerCheckboxes ? "On" : "Off" ~</button>
+            <button class="mini-options-button" onclick="Options.toggleButtonOutlines()">Clicked button outlines: ~r player.options.buttonOutlines ? "On" : "Off" ~</button>
+          </td>
         </tr>
         <tr>
           <td><div class="options-div">

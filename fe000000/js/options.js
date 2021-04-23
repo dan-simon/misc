@@ -141,6 +141,13 @@ let Options = {
   updateCheckboxSize() {
     document.documentElement.style.setProperty('--checkbox-scale', player.options.largerCheckboxes ? 3 : 1);
   },
+  toggleButtonOutlines() {
+    player.options.buttonOutlines = !player.options.buttonOutlines;
+    this.updateButtonOutlines();
+  },
+  updateButtonOutlines() {
+    document.documentElement.style.setProperty('--outline-style', player.options.buttonOutlines ? 'solid' : 'none');
+  },
   confirmation(x) {
     return player.confirmations[x];
   },
