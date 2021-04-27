@@ -146,7 +146,7 @@ let Options = {
     this.updateButtonOutlines();
   },
   updateButtonOutlines() {
-    document.documentElement.style.setProperty('--outline-style', player.options.buttonOutlines ? 'solid' : 'none');
+    document.documentElement.style.setProperty('--outline-style', player.options.buttonOutlines ? '1' : '0');
   },
   confirmation(x) {
     return player.confirmations[x];
