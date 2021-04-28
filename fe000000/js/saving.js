@@ -1130,6 +1130,10 @@ let Saving = {
       player.options.buttonOutlines = false;
       player.version = 2.10546875;
     }
+    if (player.version < 2.1064453125) {
+      player.options.buttonOutlines = player.options.buttonOutlines ? 'Cyan' : 'None';
+      player.version = 2.1064453125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

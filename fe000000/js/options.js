@@ -141,12 +141,22 @@ let Options = {
   updateCheckboxSize() {
     document.documentElement.style.setProperty('--checkbox-scale', player.options.largerCheckboxes ? 3 : 1);
   },
-  toggleButtonOutlines() {
-    player.options.buttonOutlines = !player.options.buttonOutlines;
+  buttonOutlines() {
+    return player.options.buttonOutlines;
+  },
+  setButtonOutlines(x) {
+    player.options.buttonOutlines = x;
     this.updateButtonOutlines();
   },
   updateButtonOutlines() {
-    document.documentElement.style.setProperty('--outline-style', player.options.buttonOutlines ? '1' : '0');
+    let table = {
+      'None': '#000000',
+      'Black': '#000000',
+      'White': '#ffffff',
+      'Cyan': '#00ffff'
+    }
+    document.documentElement.style.setProperty('--outline-size', (player.options.buttonOutlines !== 'None') ? '1px' : '0px');
+    document.documentElement.style.setProperty('--outline-color', table[player.options.buttonOutlines]);
   },
   confirmation(x) {
     return player.confirmations[x];
