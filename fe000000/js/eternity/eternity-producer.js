@@ -1,5 +1,5 @@
 let EternityProducerUpgrade = function (i) {
-  if ('EternityProducer' in window) {
+  if (defined.eternityProducer) {
     return EternityProducer.getUpgrade(i);
   }
   return {
@@ -132,3 +132,5 @@ let EternityProducer = {
     this.upgradeList.forEach(x => x.buyMax());
   }
 }
+
+defined.eternityProducer = true;

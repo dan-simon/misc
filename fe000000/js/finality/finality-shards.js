@@ -1,5 +1,5 @@
 let FinalityShardUpgrade = function (i) {
-  if ('FinalityShards' in window) {
+  if (defined.finalityShards) {
     return FinalityShards.getUpgrade(i);
   }
   return {
@@ -306,3 +306,5 @@ let FinalityShardPresets = {
     document.getElementsByClassName('presetfinalityshardupgradelist' + x)[0].value = this.presetFinalityShardUpgradeList(x);
   }
 }
+
+defined.finalityShards = true;

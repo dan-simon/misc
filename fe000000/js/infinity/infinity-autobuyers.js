@@ -1,5 +1,5 @@
 let InfinityAutobuyer = function (i) {
-  if ('InfinityAutobuyers' in window) {
+  if (defined.infinityAutobuyers) {
     return InfinityAutobuyers.get(i);
   }
   return {
@@ -34,3 +34,5 @@ let InfinityAutobuyers = {
     InfinityMaxAll.maxAll([1, 2, 3, 4, 5, 6, 7, 8, 9, 10].filter(i => InfinityAutobuyer(i).isActive()));
   }
 }
+
+defined.infinityAutobuyers = true;

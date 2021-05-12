@@ -1,5 +1,5 @@
 let PowerShardUpgrade = function (i) {
-  if ('PowerShardUpgrades' in window) {
+  if (defined.powerShardUpgrades) {
     return PowerShardUpgrades.get(i);
   }
   return {
@@ -195,3 +195,5 @@ let PowerShards = {
     Powers.autoSort();
   }
 }
+
+defined.powerShardUpgrades = true;

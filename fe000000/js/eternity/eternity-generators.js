@@ -1,5 +1,5 @@
 let EternityGenerator = function (i) {
-  if ('EternityGenerators' in window) {
+  if (defined.eternityGenerators) {
     return EternityGenerators.get(i);
   }
   return {
@@ -115,3 +115,5 @@ let EternityGenerators = {
     return EternityGenerators.list[player.highestEternityGenerator] || null;
   }
 }
+
+defined.eternityGenerators = true;

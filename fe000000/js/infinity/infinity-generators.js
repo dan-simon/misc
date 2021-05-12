@@ -1,5 +1,5 @@
 let InfinityGenerator = function (i) {
-  if ('InfinityGenerators' in window) {
+  if (defined.infinityGenerators) {
     return InfinityGenerators.get(i);
   }
   return {
@@ -115,3 +115,5 @@ let InfinityGenerators = {
     return InfinityGenerators.list[player.highestInfinityGenerator] || null;
   }
 }
+
+defined.infinityGenerators = true;

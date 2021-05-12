@@ -1,5 +1,5 @@
 let EternityUpgrade = function (i) {
-  if ('EternityUpgrades' in window) {
+  if (defined.eternityUpgrades) {
     return EternityUpgrades.get(i);
   }
   return {
@@ -85,3 +85,5 @@ let EternityUpgrades = {
     return this.list[x - 1];
   },
 }
+
+defined.eternityUpgrades = true;

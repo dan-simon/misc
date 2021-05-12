@@ -1,5 +1,5 @@
 let FinalityGenerator = function (i) {
-  if ('FinalityGenerators' in window) {
+  if (defined.finalityGenerators) {
     return FinalityGenerators.get(i);
   }
   return {
@@ -100,3 +100,5 @@ let FinalityGenerators = {
     return FinalityGenerators.list[player.highestFinalityGenerator] || null;
   }
 }
+
+defined.finalityGenerators = true;

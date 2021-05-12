@@ -1,5 +1,5 @@
 let Generator = function (i) {
-  if ('Generators' in window) {
+  if (defined.generators) {
     return Generators.get(i);
   }
   return {
@@ -173,3 +173,5 @@ let Generators = {
     }
   }
 }
+
+defined.generators = true;

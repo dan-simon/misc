@@ -1,5 +1,5 @@
 let PowerUpgrade = function (i) {
-  if ('Powers' in window) {
+  if (defined.powers) {
     return Powers.getUpgrade(i);
   }
   return {
@@ -811,3 +811,5 @@ let Powers = {
     document.getElementsByClassName('presetpowerlist' + x)[0].value = this.presetPowerList(x);
   }
 }
+
+defined.powers = true;

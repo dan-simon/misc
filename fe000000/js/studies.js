@@ -19,7 +19,7 @@ let STUDY_EFFECTS = [
 ]
 
 let Study = function (i) {
-  if ('Studies' in window) {
+  if (defined.studies) {
     return Studies.get(i);
   }
   return {
@@ -704,3 +704,5 @@ let Studies = {
     document.getElementsByClassName('presetstudylist' + x)[0].value = this.presetStudyList(x);
   }
 }
+
+defined.studies = true;

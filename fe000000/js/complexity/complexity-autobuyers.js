@@ -1,5 +1,5 @@
 let ComplexityAutobuyer = function (i) {
-  if ('ComplexityAutobuyers' in window) {
+  if (defined.complexityAutobuyers) {
     return ComplexityAutobuyers.get(i);
   }
   return {
@@ -40,7 +40,7 @@ let ComplexityAutobuyer = function (i) {
 let ComplexityAutobuyers = {
   complexityList: [...Array(15)].map((_, i) => ComplexityAutobuyer(i + 1)),
   get: function (x) {
-    return this.list[x - 1];
+    return this.complexityList[x - 1];
   },
   tick() {
     ComplexityMaxAll.maxAll([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].filter(i => ComplexityAutobuyer(i).isActive()));
@@ -52,3 +52,5 @@ let ComplexityAutobuyers = {
     Powers.autoLoadPowerList();
   }
 }
+
+defined.complexityAutobuyers = true;

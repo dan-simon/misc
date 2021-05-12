@@ -1,5 +1,5 @@
 let PermanenceUpgrade = function (i) {
-  if ('PermanenceUpgrades' in window) {
+  if (defined.permanenceUpgrades) {
     return PermanenceUpgrades.get(i);
   }
   return {
@@ -83,3 +83,5 @@ let PermanenceUpgrades = {
     return this.list[x - 1];
   },
 }
+
+defined.permanenceUpgrades = true;

@@ -1,5 +1,5 @@
 let Autobuyer = function (i) {
-  if ('Autobuyers' in window) {
+  if (defined.autobuyers) {
     return Autobuyers.get(i);
   }
   return {
@@ -384,3 +384,5 @@ let Autobuyers = {
     MaxAll.maxAll(autobuyers, singles);
   }
 }
+
+defined.autobuyers = true;

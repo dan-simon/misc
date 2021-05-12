@@ -1,5 +1,5 @@
 let EternityAutobuyer = function (i) {
-  if ('EternityAutobuyers' in window) {
+  if (defined.eternityAutobuyers) {
     return EternityAutobuyers.get(i);
   }
   return {
@@ -25,7 +25,7 @@ let EternityAutobuyer = function (i) {
 let EternityAutobuyers = {
   eternityList: [...Array(20)].map((_, i) => EternityAutobuyer(i + 1)),
   get: function (x) {
-    return this.list[x - 1];
+    return this.eternityList[x - 1];
   },
   hasTheoremAutobuyers() {
     return EternityAutobuyer(14).hasEternityAutobuyer();
@@ -41,3 +41,5 @@ let EternityAutobuyers = {
     Studies.autoLoadStudyList();
   }
 }
+
+defined.eternityAutobuyers = true;

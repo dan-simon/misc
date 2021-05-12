@@ -1,6 +1,6 @@
 let InfinityUpgrade = function (i) {
-  if ('InfinityUpgrade' in window) {
-    return InfinityUpgrade.get(i);
+  if (defined.infinityUpgrades) {
+    return InfinityUpgrades.get(i);
   }
   return {
     bought() {
@@ -75,3 +75,5 @@ let InfinityUpgrades = {
     return this.list[x - 1];
   },
 }
+
+defined.infinityUpgrades = true;

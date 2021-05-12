@@ -1,5 +1,5 @@
 let ComplexityGenerator = function (i) {
-  if ('ComplexityGenerators' in window) {
+  if (defined.complexityGenerators) {
     return ComplexityGenerators.get(i);
   }
   return {
@@ -104,3 +104,5 @@ let ComplexityGenerators = {
     return ComplexityGenerators.list[player.highestComplexityGenerator] || null;
   }
 }
+
+defined.complexityGenerators = true;
