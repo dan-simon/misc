@@ -4034,12 +4034,12 @@ function updateDisplay() {
     if (shouldUpdate("e1625")) {e[1625].textContent = formatInt(Achievements.beyondHighestRounded())};
     if (shouldUpdate("e1626")) {e[1626].textContent = Achievements.active() ? 'are' : 'would be'};
     if (shouldUpdate("b1623")) {b[1623].style.display = PrestigeLayerProgress.hasReached('infinity')};
-    if (shouldUpdate("e1627")) {e[1627].textContent = format(Achievements.generatorMultiplier())};
+    if (shouldUpdate("e1627")) {e[1627].textContent = format(Achievements.rawGeneratorMultiplier())};
     if (shouldUpdate("e1628")) {e[1628].textContent = Achievements.hasNonGeneratorEffects() ? ',' : '.'};
     if (shouldUpdate("b1624")) {b[1624].style.display = Achievements.hasNonGeneratorEffects() ? '' : 'none'};
     if (shouldUpdate("b1625")) {b[1625].style.display = Achievements.hasNonGeneratorEffects() ? '' : 'none'};
     if (shouldUpdate("e1629")) {e[1629].textContent = Achievements.nonGeneratorEffectsText()};
-    if (shouldUpdate("e1630")) {e[1630].textContent = formatWithPrecision(Achievements.otherMultiplier(), 5)};
+    if (shouldUpdate("e1630")) {e[1630].textContent = formatWithPrecision(Achievements.rawOtherMultiplier(), 5)};
     if (shouldUpdate("e1631")) {e[1631].textContent = Achievements.active() ? 'On' : 'Off'};
     if (shouldUpdate("e1632")) {e[1632].textContent = Achievements.requirementDescriptions() ? 'On' : 'Off'};
     if (shouldUpdate("e1633")) {e[1633].textContent = Achievements.showFullyFarRows() ? 'On' : 'Off'};

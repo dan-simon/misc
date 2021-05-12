@@ -362,9 +362,15 @@ let Achievements = {
     }
   },
   generatorMultiplier() {
-    return Math.pow(2, this.getTotalAchievementsUnlocked() / 64);
+    return this.active() ? this.rawGeneratorMultiplier() : 1;
   },
   otherMultiplier() {
+    return this.active() ? this.rawOtherMultiplier() : 1;
+  },
+  rawGeneratorMultiplier() {
+    return Math.pow(2, this.getTotalAchievementsUnlocked() / 64);
+  },
+  rawOtherMultiplier() {
     return 1 + this.getTotalAchievementsUnlocked() / 256;
   },
   getTotalAchievementsUnlocked() {

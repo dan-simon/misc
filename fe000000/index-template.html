@@ -5190,9 +5190,9 @@
       <br/>
       <span>If you think this ruins the game somehow, you can turn rewards off.</span>
       <br/>
-      <span>Your achievements ~r Achievements.active() ? 'are' : 'would be' ~ multiplying all generators <span ~style.display=PrestigeLayerProgress.hasReached('infinity')~>(of any type) </span>by ~f Achievements.generatorMultiplier() ~x~r Achievements.hasNonGeneratorEffects() ? ',' : '.' ~</span>
+      <span>Your achievements ~r Achievements.active() ? 'are' : 'would be' ~ multiplying all generators <span ~style.display=PrestigeLayerProgress.hasReached('infinity')~>(of any type) </span>by ~f Achievements.rawGeneratorMultiplier() ~x~r Achievements.hasNonGeneratorEffects() ? ',' : '.' ~</span>
       <br ~style.display=Achievements.hasNonGeneratorEffects() ? '' : 'none'~/>
-      <span ~style.display=Achievements.hasNonGeneratorEffects() ? '' : 'none'~>and multiplying ~r Achievements.nonGeneratorEffectsText() ~ by ~r formatWithPrecision(Achievements.otherMultiplier(), 5) ~x.</span>
+      <span ~style.display=Achievements.hasNonGeneratorEffects() ? '' : 'none'~>and multiplying ~r Achievements.nonGeneratorEffectsText() ~ by ~r formatWithPrecision(Achievements.rawOtherMultiplier(), 5) ~x.</span>
       <br/>
       <span>
         <button onclick="Achievements.toggleActive()">Achievement rewards: ~r Achievements.active() ? 'On' : 'Off' ~</button>
