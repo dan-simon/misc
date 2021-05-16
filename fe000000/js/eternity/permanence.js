@@ -39,7 +39,8 @@ let Permanence = {
       // Note that perSecond can't ever be small enough for this to convert a Decimal
       // to Infinity without being actually 0 (it's not even close;
       // perSecond's minimum is something like 1e-7).
-      perSecondText = formatInt(1) + ' permanence per ' + formatTime(Decimal.div(1, perSecond).toNumber());
+      perSecondText = formatInt(1) + ' permanence per ' + formatTime(Decimal.div(1, perSecond).toNumber(),
+        {seconds: {f: format, s: false}, larger: {f: format, s: false}});
     }
     return template.replace('*', perSecondText);
   },
