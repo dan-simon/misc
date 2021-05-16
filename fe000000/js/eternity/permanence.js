@@ -19,6 +19,30 @@ let Permanence = {
       return format(Decimal.div(1, eternitiesPer)) + ' permanence per eternity';
     }
   },
+  hasPassiveProduction() {
+    return FinalityMilestones.isFinalityMilestoneActive(4);
+  },
+  productionPerSecondText() {
+    let template;
+    let perSecond;
+    if (this.hasPassiveProduction()) {
+      template = 'You get * from Finality Milestone ' + formatInt(4) + '.';
+      perSecond = this.permanenceGain();
+    } else {
+      template = 'Your eternity generation rate translates to *.';
+      perSecond = EternityProducer.productionPerSecond().div(this.getEternitiesPerPermanence());
+    }
+    let perSecondText;
+    if (perSecond.gte(1) || perSecond.eq(0)) {
+      perSecondText = format(perSecond) + ' permanence per second';
+    } else {
+      // Note that perSecond can't ever be small enough for this to convert a Decimal
+      // to Infinity without being actually 0 (it's not even close;
+      // perSecond's minimum is something like 1e-7).
+      perSecondText = formatInt(1) + ' permanence per ' + formatTime(Decimal.div(1, perSecond).toNumber());
+    }
+    return template.replace('*', perSecondText);
+  },
   canGainPermanence() {
     // We don't use Permanence.getRequiredEternities() since that's often rounded to
     // the leftover eternities with good enough conversion.

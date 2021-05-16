@@ -2520,7 +2520,9 @@
         </table>
         <br/>
         <div ~style.display=Permanence.hasGainedPermanence() ? '' : 'none'~>
-          <span>You have ~f Permanence.amount() ~ permanence. You get ~r Permanence.conversionText() ~. <button ~class=Permanence.anythingToBuy() ? "" : "disabled"~ onclick="Permanence.maxAll()">Max permanence upgrades</button></span>
+          <span>You have ~f Permanence.amount() ~ permanence. You get ~r Permanence.conversionText() ~.</span>
+          <br/>
+          <span>~r Permanence.productionPerSecondText() ~ <button ~class=Permanence.anythingToBuy() ? "" : "disabled"~ onclick="Permanence.maxAll()">Max permanence upgrades</button></span>
           <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
             <tr>
               <td>Multiplier to eternity gain:</td>

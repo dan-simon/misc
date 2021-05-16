@@ -42,7 +42,7 @@ function gameLoop(diff, display, isOnline) {
   if (Powers.isUnlocked() || FinalityMilestones.isFinalityMilestoneActive(6)) {
     EternityPoints.addAmount(EternityPrestigeLayer.eternityPointGain().times(diff));
   }
-  if (FinalityMilestones.isFinalityMilestoneActive(4)) {
+  if (Permanence.hasPassiveProduction()) {
     Permanence.add(Permanence.permanenceGain().times(diff));
   }
   if (FinalityMilestones.isFinalityMilestoneActive(10)) {
