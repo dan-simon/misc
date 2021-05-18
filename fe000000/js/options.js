@@ -18,7 +18,7 @@ let Options = {
     player.options.offlineTicks = x || 1;
   },
   maxTicks() {
-    return Math.pow(2, 16);
+    return Math.pow(2, 20);
   },
   toggleHotkeys() {
     player.options.hotkeys = !player.options.hotkeys;

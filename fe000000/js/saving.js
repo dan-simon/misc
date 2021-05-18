@@ -29,7 +29,7 @@ let Saving = {
     }
     return null;
   },
-  loadGame(s, offlineProgress, isOracle, callback) {
+  loadGame(s, offlineProgress, minTicks, isOracle, callback) {
     if (blocked && !confirm('Time is currently being simulated. Loading a save while time ' +
       'is being simulated can cause weird behavior. Are you sure you want to load? ' +
       '(This message may appear if you did something that uses loading in its implementation, ' +
@@ -59,7 +59,9 @@ let Saving = {
       // We can do this after fixing Decimal.
       let now = Date.now();
       if (offlineProgress) {
-        this.simulateTime((now - player.lastUpdate) / 1000, this.defaultTicks(), true, function () {
+        let realTicks = (minTicks === null) ? this.defaultTicks() :
+          Math.max(minTicks, this.defaultTicks());
+        this.simulateTime((now - player.lastUpdate) / 1000, minTicks, true, function () {
           setupPageLoad(now);
           callback();
         });
@@ -75,8 +77,8 @@ let Saving = {
   simulateTimeUpdate(time, ticks, totalTicks) {
     document.getElementById('timesimulated').innerHTML =
       formatTime(time, {seconds: {f: format, s: false}, larger: {f: format, s: false}});
-    document.getElementById('tickssimulated').innerHTML = format(ticks);
-    document.getElementById('totaltickssimulated').innerHTML = format(totalTicks);
+    document.getElementById('tickssimulated').innerHTML = formatInt(ticks);
+    document.getElementById('totaltickssimulated').innerHTML = formatInt(totalTicks);
     let expectedTotalTime = time * totalTicks / ticks;
     document.getElementById('expectedtotaltimesimulated').innerHTML = ticks === 0 ? 'unknown' :
       formatTime(expectedTotalTime, {seconds: {f: format, s: false}, larger: {f: format, s: false}});
@@ -1216,7 +1218,7 @@ let Saving = {
     } else {
       try {
         // We're loading from storage, player.options.offlineProgress isn't set yet.
-        this.loadGame(localStorage.getItem('fe000000-save'), null, false, () => callback(true));
+        this.loadGame(localStorage.getItem('fe000000-save'), null, null, false, () => callback(true));
       } catch (ex) {
         console.log('Error while loading game, please report this.', ex);
         alert('There was an error while loading the game, please report this. ' +
@@ -1235,7 +1237,7 @@ let Saving = {
           alert('The save you entered does not seem to be valid. ' + issue);
         } else {
           // This isn't the oracle and needs no callback
-          this.loadGame(save, player.options.offlineProgress, false, function () {
+          this.loadGame(save, player.options.offlineProgress, player.options.offlineTicks, false, function () {
             // If the player is loading a save from a prompt, we assume that the loaded save
             // is itself an export, and thus reset the export timer.
             Options.resetExportTime();
@@ -1292,8 +1294,9 @@ let Saving = {
   resetGame() {
     // The first false here sets Date.now() to when the game was reset
     // rather than when the window was loaded.
-    // The second confirms that this isn't the oracle.
-    this.loadGame(this.encode(initialPlayer), false, false, () => this.reseedInitialPlayer());
+    // The null says we have no special setting for offline ticks.
+    // The second false confirms that this isn't the oracle.
+    this.loadGame(this.encode(initialPlayer), false, null, false, () => this.reseedInitialPlayer());
   },
   resetGameWithConfirmation() {
     if (confirm('Do you really want to reset the game? You will lose all your progress, and get no benefit.')) {

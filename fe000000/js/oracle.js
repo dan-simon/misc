@@ -24,7 +24,7 @@ let Oracle = {
     return Math.min(Math.max(1, player.oracle.time), this.maxTime());
   },
   maxTicks() {
-    return Math.pow(2, 16);
+    return Math.pow(2, 20);
   },
   defaultTicks() {
     return 1024;
@@ -111,7 +111,7 @@ let Oracle = {
       let equippedPowers = player.powers.equipped.map(p => Powers.makeFuture(p, originalTime));
       let powers = player.powers.stored.map(p => Powers.makeFuture(p, originalTime));
       let extraMultipliers = Powers.getAllExtraMultipliers();
-      Saving.loadGame(save, null, true, function () {
+      Saving.loadGame(save, null, null, true, function () {
         player.oracle.used = true;
         player.oracle.timeSimulated = time;
         player.oracle.ticksSimulated = ticks;
