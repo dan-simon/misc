@@ -61,7 +61,7 @@ let Saving = {
       if (offlineProgress) {
         let realTicks = (minTicks === null) ? this.defaultTicks() :
           Math.max(minTicks, this.defaultTicks());
-        this.simulateTime((now - player.lastUpdate) / 1000, minTicks, true, function () {
+        this.simulateTime((now - player.lastUpdate) / 1000, realTicks, true, function () {
           setupPageLoad(now);
           callback();
         });
