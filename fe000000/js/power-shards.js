@@ -174,6 +174,7 @@ let PowerShards = {
   },
   maxCraftRarity() {
     return Math.min(
+      Powers.maximumRarity(),
       (this.amount() / 2 - 1) / this.craftedStrength(),
       Math.sqrt(Math.log2(this.amount() / 4) + Math.pow(Powers.minimumRarity(), 2)));
   },
