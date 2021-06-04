@@ -1,0 +1,322 @@
+<html>
+<head>
+  <title>Smirt</title>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/break_infinity.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@antimatter-dimensions/notations"></script>
+  <script src="js/challenge.js"></script>
+  <script src="js/format.js"></script>
+  <script src="js/gold.js"></script>
+  <script src="js/loop.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/options.js"></script>
+  <script src="js/perks.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/saving.js"></script>
+  <script src="js/stuff.js"></script>
+  <script src="js/upgrades.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/zone.js"></script>
+  <script src="js/update-display.js"></script>
+  <link rel="stylesheet" href="styles.css"></link>
+</head>
+<body>
+  <button class="options-button" onclick="Saving.saveGame()">Save</button>
+  <button class="options-button export-button" onclick="Saving.exportGame()">Export</button>
+  <button class="options-button" onclick="Saving.loadGamePrompt()">Load</button>
+  <button class="options-button" onclick="Options.toggleOfflineProgress()">Offline progress: <span id="e0"></span></button>
+  Notation: <select id="b0">
+    <option value="Scientific">Scientific</option>
+    <option value="Engineering">Engineering</option>
+    <option value="Letters">Letter</option>
+    <option value="Standard">Standard</option>
+    <option value="Cancer">Cancer</option>
+    <option value="Logarithm">Logarithm</option>
+    <option value="Hex">Hex</option>
+    <option value="Blind">Blind</option>
+  </select></span>
+  <span style="display:inline-block; width: 150px;"></span>
+  <button class="options-button" onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button>
+  <span style="display: none;">Exported save (also copied to clipboard): <input id="export-output"></input></span>
+  <br/>
+  <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 0px; border-collapse: separate;"><tr>
+    <td><div class="buildingdiv">
+      <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 0px; border-collapse: separate;">
+        <tbody>
+          <tr>
+            <td>
+              Metal: <span id="e1"></span>, <span id="e2"></span>/sec
+            </td>
+            <td style="width: 100px;"/>
+            <td>
+              Stone: <span id="e3"></span>, <span id="e4"></span>/sec
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Metal: <input id="b1" type="range" min="0" max="64"></input>
+            </td>
+            <td style="width: 100px;"/>
+            <td>
+              Stone: <input id="b2" type="range" min="0" max="64"></input>
+            </td>
+          </tr>
+          <tr id="b3">
+            <td id="b4">
+              Wood: <span id="e5"></span>, <span id="e6"></span>/sec
+            </td>
+            <td style="width: 100px;"/>
+            <td id="b5">
+              Aether: <span id="e7"></span>, <span id="e8"></span>/sec
+            </td>
+          </tr>
+          <tr id="b6">
+            <td id="b7">
+              Wood: <input id="b8" type="range" min="0" max="64"></input>
+            </td>
+            <td style="width: 100px;"/>
+            <td id="b9">
+              Aether: <input id="b10" type="range" min="0" max="64"></input>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 0px; border-collapse: separate;">
+        <tbody>
+          <tr id="b11">
+            <td>
+              <button id="b12" onclick="Upgrades.buy(0, 0)">Knife Prestige<br/>Amount: <span id="e9"></span><br/>Cost: <span id="e10"></span> <span id="e11"></span></button>
+              <br/>
+              <button id="b13" onclick="Upgrades.unprestige(0)">Unprestige</button>
+            </td>
+            <td>
+              <button id="b14" onclick="Upgrades.buy(0, 1)">Knife Upgrade<br/>Amount: <span id="e12"></span><br/>Cost: <span id="e13"></span> <span id="e14"></span></button>
+              <br/>
+              <button id="b15" onclick="Upgrades.buyMax(0, 1)">Buy max</button>
+            </td>
+            <td>
+              <button id="b16" onclick="Upgrades.buy(0, 2)">Knife Research<br/>Amount: <span id="e15"></span><br/>Cost: <span id="e16"></span> <span id="e17"></span></button>
+              <br/>
+              <button id="b17" onclick="Upgrades.buyMax(0, 2)">Buy max</button>
+            </td>
+            <td>
+              Knife attack: <span id="e18"></span>
+            </td>
+          </tr>
+          <tr id="b18">
+            <td>
+              <button id="b19" onclick="Upgrades.buy(1, 0)">Sword Prestige<br/>Amount: <span id="e19"></span><br/>Cost: <span id="e20"></span> <span id="e21"></span></button>
+              <br/>
+              <button id="b20" onclick="Upgrades.unprestige(1)">Unprestige</button>
+            </td>
+            <td>
+              <button id="b21" onclick="Upgrades.buy(1, 1)">Sword Upgrade<br/>Amount: <span id="e22"></span><br/>Cost: <span id="e23"></span> <span id="e24"></span></button>
+              <br/>
+              <button id="b22" onclick="Upgrades.buyMax(1, 1)">Buy max</button>
+            </td>
+            <td>
+              <button id="b23" onclick="Upgrades.buy(1, 2)">Sword Research<br/>Amount: <span id="e25"></span><br/>Cost: <span id="e26"></span> <span id="e27"></span></button>
+              <br/>
+              <button id="b24" onclick="Upgrades.buyMax(1, 2)">Buy max</button>
+            </td>
+            <td>
+              Sword attack: <span id="e28"></span>
+            </td>
+          </tr>
+          <tr id="b25">
+            <td>
+              <button id="b26" onclick="Upgrades.buy(2, 0)">Lance Prestige<br/>Amount: <span id="e29"></span><br/>Cost: <span id="e30"></span> <span id="e31"></span></button>
+              <br/>
+              <button id="b27" onclick="Upgrades.unprestige(2)">Unprestige</button>
+            </td>
+            <td>
+              <button id="b28" onclick="Upgrades.buy(2, 1)">Lance Upgrade<br/>Amount: <span id="e32"></span><br/>Cost: <span id="e33"></span> <span id="e34"></span></button>
+              <br/>
+              <button id="b29" onclick="Upgrades.buyMax(2, 1)">Buy max</button>
+            </td>
+            <td>
+              <button id="b30" onclick="Upgrades.buy(2, 2)">Lance Research<br/>Amount: <span id="e35"></span><br/>Cost: <span id="e36"></span> <span id="e37"></span></button>
+              <br/>
+              <button id="b31" onclick="Upgrades.buyMax(2, 2)">Buy max</button>
+            </td>
+            <td>
+              Lance attack: <span id="e38"></span>
+            </td>
+          </tr>
+          <tr id="b32">
+            <td>
+              <button id="b33" onclick="Upgrades.buy(3, 0)">Horn Prestige<br/>Amount: <span id="e39"></span><br/>Cost: <span id="e40"></span> <span id="e41"></span></button>
+              <br/>
+              <button id="b34" onclick="Upgrades.unprestige(3)">Unprestige</button>
+            </td>
+            <td>
+              <button id="b35" onclick="Upgrades.buy(3, 1)">Horn Upgrade<br/>Amount: <span id="e42"></span><br/>Cost: <span id="e43"></span> <span id="e44"></span></button>
+              <br/>
+              <button id="b36" onclick="Upgrades.buyMax(3, 1)">Buy max</button>
+            </td>
+            <td>
+              <button id="b37" onclick="Upgrades.buy(3, 2)">Horn Research<br/>Amount: <span id="e45"></span><br/>Cost: <span id="e46"></span> <span id="e47"></span></button>
+              <br/>
+              <button id="b38" onclick="Upgrades.buyMax(3, 2)">Buy max</button>
+            </td>
+            <td>
+              Horn attack: <span id="e48"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div id="b39">
+        <span>
+          Map Zone: <input id="b40" type="number"></input>
+          <button id="b41" onclick="Map.run()">Run map<br/>Cost: <span id="e49"></span> <span id="e50"></span></button>
+          <button id="b42" onclick="Map.run('void')">Run void map (<span id="e51"></span>)</button>
+          <button id="b43" onclick="Map.exit()">Exit map</button>
+        </span>
+        <br/>
+        <span>Exploration attack: <span id="e52"></span></span>
+        <br id="b44"/>
+        <span id="b45"><button id="b46" onclick="AetherUpgrade.buy()">Aether Attack<br/>Amount: <span id="e53"></span><br/>Cost: <span id="e54"></span> <span id="e55"></span></button> Aether attack: <span id="e56"></span></span>
+      </div>
+      <div id="b47">
+        Gold: <span id="e57"></span>/<span id="e58"></span> <button onclick="Perks.respec()">Respec and <span id="e59"></span></button>
+        <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 0px; border-collapse: separate;">
+          <tbody>
+            <tr>
+              <td>
+                <button id="b48" onclick="Perks.buy(0)">Headstart<br/>Amount: <span id="e60"></span><br/>Cost: <span id="e61"></span> <span id="e62"></span></button>
+              </td>
+              <td>
+                <button id="b49" onclick="Perks.buy(1)">Gathermore<br/>Amount: <span id="e63"></span><br/>Cost: <span id="e64"></span> <span id="e65"></span></button>
+              </td>
+              <td>
+                <button id="b50" onclick="Perks.buy(2)">Speed<br/>Amount: <span id="e66"></span><br/>Cost: <span id="e67"></span> <span id="e68"></span></button>
+              </td>
+              <td>
+                <button id="b51" onclick="Perks.buy(3)">Looting<br/>Amount: <span id="e69"></span><br/>Cost: <span id="e70"></span> <span id="e71"></span></button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button id="b52" onclick="Perks.buy(4)">Organization<br/>Amount: <span id="e72"></span><br/>Cost: <span id="e73"></span> <span id="e74"></span></button>
+              </td>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="b53">
+        <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 0px; border-collapse: separate;">
+          <tbody>
+            <tr>
+              <td>
+                <button onclick="Challenge.doSomething(0)"><span id="e75"></span> <span id="e76"></span><div id="b54">(completed)</div></button>
+              </td>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    </td>
+    <td><div class="zonediv">
+      <span id="b55"><span id="e77"></span> (<span id="e78"></span>/<span id="e79"></span>)<span style="display:inline-block; width: 30px;"></span></span>
+      <span id="e80"></span><span style="display:inline-block; width: 30px;"></span>Cell <span id="e81"></span>
+      <br/>
+      <span id="e82"></span> attack<span style="display:inline-block; width: 30px;"></span><button onclick="Zone.toggleFighting()">Fighting: <span id="e83"></span></button>
+      <br/>
+      <span id="e84"></span>: <span id="e85"></span>/<span id="e86"></span> health, <span id="e87"></span> defense
+      <br/>
+      <meter id="b56" min="0" max="1" low="0.25" high="0.75" optimum="0.875"></meter>
+      <br/>
+      <span id="b57"><button id="b58" onclick="Gold.portal(true)">Portal</button> +<span id="e88"></span> gold, </span><span id="e89"></span>
+      <br/>
+      <table class="zonetable">
+        <tr>
+          <td id="b59"></td>
+          <td id="b60"></td>
+          <td id="b61"></td>
+          <td id="b62"></td>
+          <td id="b63"></td>
+          <td id="b64"></td>
+          <td id="b65"></td>
+          <td id="b66"></td>
+        </tr>
+        <tr>
+          <td id="b67"></td>
+          <td id="b68"></td>
+          <td id="b69"></td>
+          <td id="b70"></td>
+          <td id="b71"></td>
+          <td id="b72"></td>
+          <td id="b73"></td>
+          <td id="b74"></td>
+        </tr>
+        <tr>
+          <td id="b75"></td>
+          <td id="b76"></td>
+          <td id="b77"></td>
+          <td id="b78"></td>
+          <td id="b79"></td>
+          <td id="b80"></td>
+          <td id="b81"></td>
+          <td id="b82"></td>
+        </tr>
+        <tr>
+          <td id="b83"></td>
+          <td id="b84"></td>
+          <td id="b85"></td>
+          <td id="b86"></td>
+          <td id="b87"></td>
+          <td id="b88"></td>
+          <td id="b89"></td>
+          <td id="b90"></td>
+        </tr>
+        <tr>
+          <td id="b91"></td>
+          <td id="b92"></td>
+          <td id="b93"></td>
+          <td id="b94"></td>
+          <td id="b95"></td>
+          <td id="b96"></td>
+          <td id="b97"></td>
+          <td id="b98"></td>
+        </tr>
+        <tr>
+          <td id="b99"></td>
+          <td id="b100"></td>
+          <td id="b101"></td>
+          <td id="b102"></td>
+          <td id="b103"></td>
+          <td id="b104"></td>
+          <td id="b105"></td>
+          <td id="b106"></td>
+        </tr>
+        <tr>
+          <td id="b107"></td>
+          <td id="b108"></td>
+          <td id="b109"></td>
+          <td id="b110"></td>
+          <td id="b111"></td>
+          <td id="b112"></td>
+          <td id="b113"></td>
+          <td id="b114"></td>
+        </tr>
+        <tr>
+          <td id="b115"></td>
+          <td id="b116"></td>
+          <td id="b117"></td>
+          <td id="b118"></td>
+          <td id="b119"></td>
+          <td id="b120"></td>
+          <td id="b121"></td>
+          <td id="b122"></td>
+        </tr>
+      </table>
+    </div></td>
+  </tr></table>
+</body>
