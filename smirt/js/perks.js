@@ -3,7 +3,7 @@ let Perks = {
     return player.perks[x];
   },
   count() {
-    return 5;
+    return 6;
   },
   totalCost() {
     return [...Array(this.count())].map((_, i) => this.costToCurrent(i)).reduce((a, b) => a + b, 0);
@@ -22,10 +22,10 @@ let Perks = {
     return scale(x, 4).toNumber();
   },
   baseCost(x) {
-    return [1, 1, 1, 1, 64][x];
+    return [1, 1, 1, 1, 64, 1024][x];
   },
   isUnlocked(x) {
-    return x < 4 || (x === 4 && Challenge.isCompleted(0));
+    return x < 4 || ([4, 5].includes(x) && Challenge.isCompleted(x - 4));
   },
   canBuy(x) {
     return Gold.amount() >= this.cost(x) && this.isUnlocked(x);

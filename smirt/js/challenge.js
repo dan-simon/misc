@@ -30,8 +30,14 @@ let Challenge = {
       player.currentChallenge = -1;
     }
   },
+  unlockRequirement(x) {
+    return [64, 160][x];
+  },
+  nextUnlockRequirement() {
+    return [64, 160].filter(x => player.stats.highestZone <= x)[0] || Infinity;
+  },
   isUnlocked(x) {
-    return player.stats.highestZone >= [64][x];
+    return player.stats.highestZone > this.unlockRequirement(x);
   },
   text(x) {
     if (this.isRunning(x)) {
@@ -48,13 +54,18 @@ let Challenge = {
     }
   },
   nameOf(x) {
-    return ['Crowded'][x];
+    return ['Crowded', 'Prestigeless'][x];
   },
   goal() {
     if (this.isSomeChallengeRunning()) {
-      return [32][player.currentChallenge];
+      return [32, 40][player.currentChallenge];
     } else {
       return 0;
     }
+  },
+  nextChallengeText() {
+    let req = this.nextUnlockRequirement();
+    return (req === Infinity) ? 'You have unlocked all challenges!' :
+      'Complete Zone ' + formatInt(req) + ' to unlock a challenge.';
   }
 }

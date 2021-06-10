@@ -72,8 +72,14 @@ let ComplexityPrestigeLayer = {
   currentCPPerSec() {
     return this.complexityPointGain().div(player.stats.timeSinceComplexity);
   },
+  currentLogCPPerSec() {
+    return Math.max(this.newComplexityPoints().log2() - Math.max(this.totalComplexityPoints().log2(), 0), 0) / player.stats.timeSinceComplexity;
+  },
   peakCPPerSec() {
     return player.stats.peakCPPerSec;
+  },
+  peakLogCPPerSec() {
+    return player.stats.peakLogCPPerSec;
   },
   updatePeakCPPerSec() {
     let cps = this.currentCPPerSec();
@@ -81,6 +87,16 @@ let ComplexityPrestigeLayer = {
       player.stats.peakCPPerSec = cps;
       player.stats.timeSinceLastPeakCPPerSec = 0;
     }
+  },
+  updatePeakLogCPPerSec() {
+    let cps = this.currentLogCPPerSec();
+    if (this.canComplexity() && cps >= player.stats.peakLogCPPerSec) {
+      player.stats.peakLogCPPerSec = cps;
+      player.stats.timeSinceLastPeakLogCPPerSec = 0;
+    }
+  },
+  showLog() {
+    return Autobuyer(15).hasAutobuyer() && ['Time past peak log/sec', 'Fraction of peak log/sec'].includes(Autobuyer(15).mode());
   },
   compareCPGain() {
     if (this.complexityPointGain().lt(this.complexityPoints())) {
@@ -181,9 +197,11 @@ let ComplexityPrestigeLayer = {
     player.stats.timeSincePermanenceGain = 0;
     player.stats.timeSinceComplexity = 0;
     player.stats.timeSinceLastPeakCPPerSec = Math.pow(2, 256);
+    player.stats.timeSinceLastPeakLogCPPerSec = Math.pow(2, 256);
     player.stats.timeSinceCPGainWasAmount = 0;
     player.stats.timeSinceCPGainWasTotal = 0;
     player.stats.peakCPPerSec = new Decimal(0);
+    player.stats.peakLogCPPerSec = 0;
     player.stats.lastTenEternities = initialLastTenEternities();
     // Not sure where to do this, might as well be here.
     Galaxy.updateDilated();

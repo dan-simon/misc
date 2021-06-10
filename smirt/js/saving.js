@@ -54,6 +54,10 @@ let Saving = {
       delete player.highestZone;
       player.version = 0.03;
     }
+    if (player.version < 0.04) {
+      player.perks.push(0);
+      player.challengesCompleted.push(false);
+    }
   },
   convertSaveToDecimal() {
     player.metal = new Decimal(player.metal);

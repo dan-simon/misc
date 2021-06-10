@@ -6,7 +6,7 @@ let Map = {
     return player.map.createdZone;
   },
   setCreatedZone(x) {
-    player.map.createdZone = x | 0;
+    player.map.createdZone = Math.max(1, x | 0);
   },
   resourceName() {
     return 'wood';

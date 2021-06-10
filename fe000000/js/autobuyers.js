@@ -235,6 +235,13 @@ let Autobuyers = {
     } else if (mode === 'Fraction of peak/sec') {
       InfinityPrestigeLayer.updatePeakIPPerSec();
       shouldInfinity = InfinityPrestigeLayer.currentIPPerSec().lte(InfinityPrestigeLayer.peakIPPerSec().times(priority));
+    } else if (mode === 'Time past peak log/sec') {
+      InfinityPrestigeLayer.updatePeakLogIPPerSec();
+      shouldInfinity = player.stats.timeSinceLastPeakLogIPPerSec >= priority.toNumber();
+    } else if (mode === 'Fraction of peak log/sec') {
+      InfinityPrestigeLayer.updatePeakLogIPPerSec();
+      let current = InfinityPrestigeLayer.currentLogIPPerSec();
+      shouldInfinity = 0 < current && current <= InfinityPrestigeLayer.peakLogIPPerSec() * priority;
     } else if (mode === 'Time since gain was amount') {
       InfinityPrestigeLayer.compareIPGain();
       shouldInfinity = InfinityPrestigeLayer.infinityPointGain().gte(InfinityPrestigeLayer.infinityPoints()) && player.stats.timeSinceIPGainWasAmount >= priority.toNumber();
@@ -265,6 +272,13 @@ let Autobuyers = {
     } else if (mode === 'Fraction of peak/sec') {
       EternityPrestigeLayer.updatePeakEPPerSec();
       shouldEternity = EternityPrestigeLayer.currentEPPerSec().lte(EternityPrestigeLayer.peakEPPerSec().times(priority));
+    } else if (mode === 'Time past peak log/sec') {
+      EternityPrestigeLayer.updatePeakLogEPPerSec();
+      shouldEternity = player.stats.timeSinceLastPeakLogEPPerSec >= priority.toNumber();
+    } else if (mode === 'Fraction of peak log/sec') {
+      EternityPrestigeLayer.updatePeakLogEPPerSec();
+      let current = EternityPrestigeLayer.currentLogEPPerSec();
+      shouldEternity = 0 < current && current <= EternityPrestigeLayer.peakLogEPPerSec() * priority;
     } else if (mode === 'Time since gain was amount') {
       EternityPrestigeLayer.compareEPGain();
       shouldEternity = EternityPrestigeLayer.eternityPointGain().gte(EternityPrestigeLayer.eternityPoints()) && player.stats.timeSinceEPGainWasAmount >= priority.toNumber();
@@ -320,6 +334,13 @@ let Autobuyers = {
     } else if (mode === 'Fraction of peak/sec') {
       ComplexityPrestigeLayer.updatePeakCPPerSec();
       shouldComplexity = ComplexityPrestigeLayer.complexityPointGain().gte(ComplexityPrestigeLayer.totalComplexityPoints()) && ComplexityPrestigeLayer.currentCPPerSec().lte(ComplexityPrestigeLayer.peakCPPerSec().times(priority));
+    } else if (mode === 'Time past peak log/sec') {
+      ComplexityPrestigeLayer.updatePeakLogCPPerSec();
+      shouldComplexity = player.stats.timeSinceLastPeakLogCPPerSec >= priority.toNumber();
+    } else if (mode === 'Fraction of peak log/sec') {
+      ComplexityPrestigeLayer.updatePeakLogCPPerSec();
+      let current = ComplexityPrestigeLayer.currentLogCPPerSec();
+      shouldComplexity = 0 < current && current <= ComplexityPrestigeLayer.peakLogCPPerSec() * priority;
     } else if (mode === 'Time since gain was amount') {
       ComplexityPrestigeLayer.compareCPGain();
       shouldComplexity = player.stats.timeSinceCPGainWasAmount >= priority.toNumber();

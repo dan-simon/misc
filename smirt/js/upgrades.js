@@ -3,7 +3,8 @@ let Upgrades = {
     return player.upgrades[level][type];
   },
   baseCost(level, adj) {
-    return zoneToCost(4 * (this.amount(level, 0) - (adj ? 1 : 0)) + level + 1);
+    let adjZone = 4 * (this.amount(level, 0) - (adj ? 1 : 0)) + level + 1;
+    return zoneToCost(adjZone);
   },
   cost(level, type) {
     if (type === 0) {
@@ -27,7 +28,7 @@ let Upgrades = {
     return this.resource(type).amount().gte(this.cost(level, type));
   },
   isUnlocked(level, type) {
-    return (type === 0) ? (Zone.worldZone() > 4 * this.amount(level, 0) + level) : (this.amount(level, 0) > 0)
+    return (type === 0) ? (Zone.worldZone() > 4 * this.amount(level, 0) + level && (!Challenge.isRunning(1) || this.amount(level, 0) === 0)) : (this.amount(level, 0) > 0)
   },
   canBuy(level, type) {
     return this.isAffordable(level, type) && this.isUnlocked(level, type);

@@ -202,6 +202,7 @@
                 <button onclick="Perks.buy(4)" ~style.display=Perks.isUnlocked(4) ? "" : "none"~ ~class=Perks.canBuy(4) ? "" : "disabled"~>Organization<br/>Amount: ~i Perks.amount(4) ~<br/>Cost: ~i Perks.cost(4) ~ ~r Perks.resourceName() ~</button>
               </td>
               <td>
+                <button onclick="Perks.buy(5)" ~style.display=Perks.isUnlocked(5) ? "" : "none"~ ~class=Perks.canBuy(5) ? "" : "disabled"~>Craftmore<br/>Amount: ~i Perks.amount(5) ~<br/>Cost: ~i Perks.cost(5) ~ ~r Perks.resourceName() ~</button>
               </td>
               <td>
               </td>
@@ -211,15 +212,19 @@
           </tbody>
         </table>
       </div>
-      <div ~style.display=Challenge.isUnlocked(0) ? "" : "none"~>
+      <div ~style.display=Gold.hasPortaled() ? "" : "none"~>
         <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 0px; border-collapse: separate;">
           <tbody>
             <tr>
               <td>
-                <button onclick="Challenge.doSomething(0)">~r Challenge.text(0) ~ ~r Challenge.nameOf(0) ~<div ~style.display=Challenge.isCompleted(0) ? "" : "none"~>(completed)</div></button>
+                <button onclick="Challenge.doSomething(0)" ~style.display=Challenge.isUnlocked(0) ? "" : "none"~>~r Challenge.text(0) ~ ~r Challenge.nameOf(0) ~<div ~style.display=Challenge.isCompleted(0) ? "" : "none"~>(completed)</div></button>
+              </td>
+              <td>
+                <button onclick="Challenge.doSomething(1)" ~style.display=Challenge.isUnlocked(1) ? "" : "none"~>~r Challenge.text(1) ~ ~r Challenge.nameOf(1) ~<div ~style.display=Challenge.isCompleted(1) ? "" : "none"~>(completed)</div></button>
               </td>
           </tbody>
         </table>
+        ~r Challenge.nextChallengeText() ~
       </div>
     </div>
     </td>

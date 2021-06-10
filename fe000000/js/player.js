@@ -454,6 +454,9 @@ let initialPlayer = {
     timeSinceLastPeakIPPerSec: Math.pow(2, 256),
     timeSinceLastPeakEPPerSec: Math.pow(2, 256),
     timeSinceLastPeakCPPerSec: Math.pow(2, 256),
+    timeSinceLastPeakLogIPPerSec: Math.pow(2, 256),
+    timeSinceLastPeakLogEPPerSec: Math.pow(2, 256),
+    timeSinceLastPeakLogCPPerSec: Math.pow(2, 256),
     timeSinceSacrificePossible: 0,
     timeSincePrestigePossible: 0,
     timeSinceIPGainWasAmount: 0,
@@ -470,6 +473,9 @@ let initialPlayer = {
     peakIPPerSec: new Decimal(0),
     peakEPPerSec: new Decimal(0),
     peakCPPerSec: new Decimal(0),
+    peakLogIPPerSec: 0,
+    peakLogEPPerSec: 0,
+    peakLogCPPerSec: 0,
     purchasesThisInfinity: 0,
     purchasesThisInfinityByType: [0, 0, 0, 0, 0, 0, 0, 0, 0],
     sacrificesThisInfinity: 0,
@@ -492,7 +498,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2.1064453125
+  version: 2.107421875
 }
 
 let player;

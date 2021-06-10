@@ -12,7 +12,7 @@ let Gold = {
     if (!this.canPortal()) {
       return false;
     }
-    if (manual && !confirm('Are you sure you want to portal')) {
+    if (manual && !confirm('Are you sure you want to portal?')) {
       return false;
     }
     player.gold.total += player.gold.gain;

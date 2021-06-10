@@ -1136,6 +1136,15 @@ let Saving = {
       player.options.buttonOutlines = player.options.buttonOutlines ? 'Cyan' : 'None';
       player.version = 2.1064453125;
     }
+    if (player.version < 2.107421875) {
+      player.stats.timeSinceLastPeakLogIPPerSec = Math.pow(2, 256);
+      player.stats.timeSinceLastPeakLogEPPerSec = Math.pow(2, 256);
+      player.stats.timeSinceLastPeakLogCPPerSec = Math.pow(2, 256);
+      player.stats.peakLogIPPerSec = 0;
+      player.stats.peakLogEPPerSec = 0;
+      player.stats.peakLogCPPerSec = 0;
+      player.version = 2.107421875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

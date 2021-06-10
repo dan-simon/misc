@@ -61,8 +61,14 @@ let EternityPrestigeLayer = {
   currentEPPerSec() {
     return this.eternityPointGain().div(player.stats.timeSinceEternity);
   },
+  currentLogEPPerSec() {
+    return Math.max(this.newEternityPoints().log2() - Math.max(this.totalEternityPoints().log2(), 0), 0) / player.stats.timeSinceEternity;
+  },
   peakEPPerSec() {
     return player.stats.peakEPPerSec;
+  },
+  peakLogEPPerSec() {
+    return player.stats.peakLogEPPerSec;
   },
   updatePeakEPPerSec() {
     let cps = this.currentEPPerSec();
@@ -70,6 +76,16 @@ let EternityPrestigeLayer = {
       player.stats.peakEPPerSec = cps;
       player.stats.timeSinceLastPeakEPPerSec = 0;
     }
+  },
+  updatePeakLogEPPerSec() {
+    let cps = this.currentLogEPPerSec();
+    if (this.canEternity() && cps >= player.stats.peakLogEPPerSec) {
+      player.stats.peakLogEPPerSec = cps;
+      player.stats.timeSinceLastPeakLogEPPerSec = 0;
+    }
+  },
+  showLog() {
+    return Autobuyer(13).hasAutobuyer() && ['Time past peak log/sec', 'Fraction of peak log/sec'].includes(Autobuyer(13).mode());
   },
   compareEPGain() {
     if (this.eternityPointGain().lt(this.eternityPoints())) {
@@ -144,9 +160,11 @@ let EternityPrestigeLayer = {
     player.stats.totalIPProducedThisEternity = EternityStartingBenefits.infinityPoints().plus(FinalityStartingBenefits.infinityPoints());
     player.stats.timeSinceEternity = 0;
     player.stats.timeSinceLastPeakEPPerSec = Math.pow(2, 256);
+    player.stats.timeSinceLastPeakLogEPPerSec = Math.pow(2, 256);
     player.stats.timeSinceEPGainWasAmount = 0;
     player.stats.timeSinceEPGainWasTotal = 0;
     player.stats.peakEPPerSec = new Decimal(0);
+    player.stats.peakLogEPPerSec = 0;
     player.stats.lastTenInfinities = initialLastTenInfinities();
   }
 }

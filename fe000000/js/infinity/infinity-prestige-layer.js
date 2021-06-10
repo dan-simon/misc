@@ -81,8 +81,14 @@ let InfinityPrestigeLayer = {
   currentIPPerSec() {
     return this.infinityPointGain().div(player.stats.timeSinceInfinity);
   },
+  currentLogIPPerSec() {
+    return Math.max(this.newInfinityPoints().log2() - Math.max(this.totalInfinityPoints().log2(), 0), 0) / player.stats.timeSinceInfinity;
+  },
   peakIPPerSec() {
     return player.stats.peakIPPerSec;
+  },
+  peakLogIPPerSec() {
+    return player.stats.peakLogIPPerSec;
   },
   updatePeakIPPerSec() {
     let cps = this.currentIPPerSec();
@@ -90,6 +96,16 @@ let InfinityPrestigeLayer = {
       player.stats.peakIPPerSec = cps;
       player.stats.timeSinceLastPeakIPPerSec = 0;
     }
+  },
+  updatePeakLogIPPerSec() {
+    let cps = this.currentLogIPPerSec();
+    if (this.canInfinity() && cps >= player.stats.peakLogIPPerSec) {
+      player.stats.peakLogIPPerSec = cps;
+      player.stats.timeSinceLastPeakLogIPPerSec = 0;
+    }
+  },
+  showLog() {
+    return Autobuyer(12).hasAutobuyer() && ['Time past peak log/sec', 'Fraction of peak log/sec'].includes(Autobuyer(12).mode());
   },
   compareIPGain() {
     if (this.infinityPointGain().lt(this.infinityPoints())) {
@@ -141,9 +157,11 @@ let InfinityPrestigeLayer = {
     player.stats.bestStarsThisInfinity = Stars.amount();
     player.stats.timeSinceInfinity = 0;
     player.stats.timeSinceLastPeakIPPerSec = Math.pow(2, 256);
+    player.stats.timeSinceLastPeakLogIPPerSec = Math.pow(2, 256);
     player.stats.timeSinceIPGainWasAmount = 0;
     player.stats.timeSinceIPGainWasTotal = 0;
     player.stats.peakIPPerSec = new Decimal(0);
+    player.stats.peakLogIPPerSec = 0;
     player.stats.purchasesThisInfinity = 0;
     player.stats.purchasesThisInfinityByType = [0, 0, 0, 0, 0, 0, 0, 0, 0];
     player.stats.sacrificesThisInfinity = 0;

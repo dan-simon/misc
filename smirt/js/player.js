@@ -28,7 +28,7 @@ let initialPlayer = {
     total: 0,
     portals: 0
   },
-  perks: [0, 0, 0, 0, 0],
+  perks: [0, 0, 0, 0, 0, 0],
   upgrades: [
     [0, 0, 0],
     [0, 0, 0],
@@ -36,7 +36,7 @@ let initialPlayer = {
     [0, 0, 0]
   ],
   currentChallenge: -1,
-  challengesCompleted: [false],
+  challengesCompleted: [false, false],
   zone: 1,
   cell: 1,
   fighting: true,
@@ -56,7 +56,7 @@ let initialPlayer = {
     timeSincePortal: 0,
     timeSinceGameStart: 0,
   },
-  version: 0.03
+  version: 0.04
 }
 
 let player;

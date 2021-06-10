@@ -24,5 +24,6 @@ let logBin = function (a) {
 }
 
 let zoneToCost = function (zone) {
-  return logMult(new Decimal(16), scale(zone - 1, 2));
+  let adjZone = Math.ceil(zone * logInv(new Decimal(1 + Perks.amount(5) / 16)).toNumber());
+  return logMult(new Decimal(16), scale(adjZone - 1, 2));
 }
