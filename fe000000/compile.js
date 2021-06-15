@@ -80,7 +80,7 @@ function makeUpdateDisplaySetup(setupList) {
   [...Array(el1Number)].map((_, i) => 'document.getElementById("e' + i + '")').join(', ') + '];\n  b = [' +
   [...Array(el2Number)].map((_, i) => 'document.getElementById("b' + i + '")').join(', ') + '];\n  let majorDivsOrig = ' +
   '[...document.getElementsByClassName("major-div")];\n  majorDivs = majorDivsOrig.map(x => x.id);\n  majorDivTable = {};\n  for (let i of e.concat(b)) {' +
-  'majorDivTable[i.id] = majorDivsOrig.filter(j => j.contains(i)).map(j => j.id)}' +
+  'majorDivTable[i.id] = majorDivsOrig.filter(j => j.contains(i) && !i.contains(j)).map(j => j.id)}' +
   ';\n}\n\nfunction updateDisplaySaveLoadSetup() {\n' + g(setupList, '  ') + '\n}';
 }
 

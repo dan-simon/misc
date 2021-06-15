@@ -12,7 +12,7 @@ function updateDisplayPageLoadSetup() {
   let majorDivsOrig = [...document.getElementsByClassName("major-div")];
   majorDivs = majorDivsOrig.map(x => x.id);
   majorDivTable = {};
-  for (let i of e.concat(b)) {majorDivTable[i.id] = majorDivsOrig.filter(j => j.contains(i)).map(j => j.id)};
+  for (let i of e.concat(b)) {majorDivTable[i.id] = majorDivsOrig.filter(j => j.contains(i) && !i.contains(j)).map(j => j.id)};
 }
 
 function updateDisplaySaveLoadSetup() {
