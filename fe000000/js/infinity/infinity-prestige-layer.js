@@ -58,6 +58,9 @@ let InfinityPrestigeLayer = {
   totalInfinityPoints() {
     return InfinityPoints.totalIPProducedThisEternity();
   },
+  newTotalInfinityPoints() {
+    return this.totalInfinityPoints().plus(this.infinityPointGain());
+  },
   infinityPointGainRatio() {
     return this.infinityPointGain().div(this.totalInfinityPoints());
   },
@@ -82,7 +85,7 @@ let InfinityPrestigeLayer = {
     return this.infinityPointGain().div(player.stats.timeSinceInfinity);
   },
   currentLogIPPerSec() {
-    return Math.max(this.newInfinityPoints().log2() - Math.max(this.totalInfinityPoints().log2(), 0), 0) / player.stats.timeSinceInfinity;
+    return Math.max(this.newTotalInfinityPoints().log2() - Math.max(this.totalInfinityPoints().log2(), 0), 0) / player.stats.timeSinceInfinity;
   },
   peakIPPerSec() {
     return player.stats.peakIPPerSec;

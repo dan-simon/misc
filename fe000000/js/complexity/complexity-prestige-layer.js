@@ -49,6 +49,9 @@ let ComplexityPrestigeLayer = {
   totalComplexityPoints() {
     return ComplexityPoints.totalCPProducedThisFinality();
   },
+  newTotalComplexityPoints() {
+    return this.totalComplexityPoints().plus(this.complexityPointGain());
+  },
   complexityPointGainRatio() {
     return this.complexityPointGain().div(this.totalComplexityPoints());
   },
@@ -73,7 +76,7 @@ let ComplexityPrestigeLayer = {
     return this.complexityPointGain().div(player.stats.timeSinceComplexity);
   },
   currentLogCPPerSec() {
-    return Math.max(this.newComplexityPoints().log2() - Math.max(this.totalComplexityPoints().log2(), 0), 0) / player.stats.timeSinceComplexity;
+    return Math.max(this.newTotalComplexityPoints().log2() - Math.max(this.totalComplexityPoints().log2(), 0), 0) / player.stats.timeSinceComplexity;
   },
   peakCPPerSec() {
     return player.stats.peakCPPerSec;

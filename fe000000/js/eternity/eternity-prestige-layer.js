@@ -38,6 +38,9 @@ let EternityPrestigeLayer = {
   totalEternityPoints() {
     return EternityPoints.totalEPProducedThisComplexity();
   },
+  newTotalEternityPoints() {
+    return this.totalEternityPoints().plus(this.eternityPointGain());
+  },
   eternityPointGainRatio() {
     return this.eternityPointGain().div(this.totalEternityPoints());
   },
@@ -62,7 +65,7 @@ let EternityPrestigeLayer = {
     return this.eternityPointGain().div(player.stats.timeSinceEternity);
   },
   currentLogEPPerSec() {
-    return Math.max(this.newEternityPoints().log2() - Math.max(this.totalEternityPoints().log2(), 0), 0) / player.stats.timeSinceEternity;
+    return Math.max(this.newTotalEternityPoints().log2() - Math.max(this.totalEternityPoints().log2(), 0), 0) / player.stats.timeSinceEternity;
   },
   peakEPPerSec() {
     return player.stats.peakEPPerSec;
