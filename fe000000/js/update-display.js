@@ -1112,7 +1112,7 @@ function updateDisplay() {
     if (shouldUpdate("e93")) {e[93].textContent = formatInt(Boost.extraTheoremsActualAndDisplay())};
     if (shouldUpdate("e94")) {e[94].textContent = pluralize(Boost.extraTheoremsActualAndDisplay(), '', 's')};
     if (shouldUpdate("e95")) {e[95].textContent = format(Boost.nextExtraTheorem())};
-    if (shouldUpdate("b81")) {b[81].style.display = PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'};
+    if (shouldUpdate("b81")) {b[81].style.display = PrestigeLayerProgress.hasReached('prestige') ? '' : 'none'};
     if (shouldUpdate("e96")) {e[96].textContent = Generators.term()};
     if (shouldUpdate("b83")) {b[83].style.display = Generator(1).isVisible() ? '' : 'none'};
     if (shouldUpdate("e97")) {e[97].textContent = format(Generator(1).amount())};

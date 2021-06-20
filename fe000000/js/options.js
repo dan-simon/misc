@@ -126,7 +126,7 @@ let Options = {
   actualViewAllGenerators(type) {
     // This is trivally true for every type other than normal. Still worth having
     // in case the condition changes.
-    return PrestigeLayerProgress.hasReached('infinity') && this.rawViewAllGenerators(type);
+    return PrestigeLayerProgress.hasReached('prestige') && this.rawViewAllGenerators(type);
   },
   showFullOptions(x) {
     return player.options.showFullOptions[x];
