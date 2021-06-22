@@ -76,7 +76,12 @@ let ComplexityPrestigeLayer = {
     return this.complexityPointGain().div(player.stats.timeSinceComplexity);
   },
   currentLogCPPerSec() {
-    return Math.max(this.newTotalComplexityPoints().log2() - Math.max(this.totalComplexityPoints().log2(), 0), 0) / player.stats.timeSinceComplexity;
+    let c = this.newTotalComplexityPoints().log2() - Math.max(this.totalComplexityPoints().log2(), 0);
+    // Ignore very small gains.
+    if (c < Math.pow(2, -16)) {
+      c = 0;
+    }
+    return c / player.stats.timeSinceComplexity;
   },
   peakCPPerSec() {
     return player.stats.peakCPPerSec;

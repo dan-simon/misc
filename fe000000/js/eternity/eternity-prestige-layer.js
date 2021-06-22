@@ -65,7 +65,12 @@ let EternityPrestigeLayer = {
     return this.eternityPointGain().div(player.stats.timeSinceEternity);
   },
   currentLogEPPerSec() {
-    return Math.max(this.newTotalEternityPoints().log2() - Math.max(this.totalEternityPoints().log2(), 0), 0) / player.stats.timeSinceEternity;
+    let c = this.newTotalEternityPoints().log2() - Math.max(this.totalEternityPoints().log2(), 0);
+    // Ignore very small gains.
+    if (c < Math.pow(2, -16)) {
+      c = 0;
+    }
+    return c / player.stats.timeSinceEternity;
   },
   peakEPPerSec() {
     return player.stats.peakEPPerSec;

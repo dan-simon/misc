@@ -85,7 +85,12 @@ let InfinityPrestigeLayer = {
     return this.infinityPointGain().div(player.stats.timeSinceInfinity);
   },
   currentLogIPPerSec() {
-    return Math.max(this.newTotalInfinityPoints().log2() - Math.max(this.totalInfinityPoints().log2(), 0), 0) / player.stats.timeSinceInfinity;
+    let c = this.newTotalInfinityPoints().log2() - Math.max(this.totalInfinityPoints().log2(), 0);
+    // Ignore very small gains.
+    if (c < Math.pow(2, -16)) {
+      c = 0;
+    }
+    return c / player.stats.timeSinceInfinity;
   },
   peakIPPerSec() {
     return player.stats.peakIPPerSec;
