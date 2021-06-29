@@ -5908,7 +5908,7 @@
       <br/>
       <table ~style.display=Options.isOptionTypeShown('saving') ? '' : 'none'~ style="margin-left: auto; margin-right: auto; border-spacing: 24px 8px; border-collapse: separate;">
         <tr>
-          <td><button class="options-button" onclick="Saving.saveGame(false)">Save</button></td>
+          <td><button class="options-button" onclick="Saving.saveGame(false, true)">Save</button></td>
           <td><button class="options-button" onclick="Saving.loadGamePrompt()">Load</button></td>
           <td><button ~class-name=Options.showExportNotification() ? 'options-button export-button redspan' : 'options-button export-button'~ onclick="Saving.exportGame(1)">Export</button></td>
         </tr>
@@ -5972,6 +5972,7 @@
         </tr>
         <tr>
           <td><div class="options-div">
+            <button class="mini-options-button" onclick="Options.toggleNotifications('saveLoad')">Save/load notifications: ~r Options.showNotifications('saveLoad') ? 'On' : 'Off' ~</button>
             <button class="mini-options-button" onclick="Options.toggleNotifications('achievements')">Achievement notifications: ~r Options.showNotifications('achievements') ? 'On' : 'Off' ~</button>
             <button ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~ class="mid-options-button" onclick="Options.toggleNotifications('complexityAchievements')">Complexity achievement notifications: ~r Options.showNotifications('complexityAchievements') ? 'On' : 'Off' ~</button>
           </div></td>

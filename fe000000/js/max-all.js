@@ -43,12 +43,16 @@ let generalHighestSweep = function (highestGetter, allowed) {
 }
 
 let generalMaxAll = function (things) {
+  let safetyMargin = 1e-10;
   things.forEach(x => x.buyMax(1 / (2 * things.length)));
   let bought = 0;
   while (things.some(x => x.canBuy()) && bought < 256) {
     let legalThings = things.filter(x => x.canBuy())
     let minCost = legalThings.map(x => x.cost()).reduce((a, b) => Decimal.min(a, b));
-    let toBuy = legalThings.filter(x => Decimal.eq(x.cost(), minCost))[0];
+    // Do this multiplication to avoid rounding errors
+    // making costs that should be equal unequal.
+    let safeMinCost = minCost.times(1 + safetyMargin);
+    let toBuy = legalThings.filter(x => Decimal.lte(x.cost(), safeMinCost))[0];
     toBuy.buy();
     bought += 1;
   }

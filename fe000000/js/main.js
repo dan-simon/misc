@@ -18,5 +18,5 @@ window.onload = function () {
     }
   });
   setInterval(blockableGameLoop, 64);
-  setInterval(() => Saving.saveGame(true), Math.pow(2, 14));
+  setInterval(() => Saving.saveGame(true, false), Math.pow(2, 14));
 }

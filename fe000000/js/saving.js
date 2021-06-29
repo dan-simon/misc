@@ -8,7 +8,7 @@ let Saving = {
   decode(s) {
     return JSON.parse(atob(s));
   },
-  saveGame(isAutoLoop) {
+  saveGame(isAutoLoop, isDirectlyManual) {
     // Stop the player from saving the game while time is being simulated.
     if (blocked) {
       if (!isAutoLoop) {
@@ -18,6 +18,9 @@ let Saving = {
     }
     // Stop the player from saving the game while time is being simulated.
     localStorage.setItem('fe000000-save', this.encode(player));
+    if (isDirectlyManual) {
+      Notifications.notify('Manually saved!', 'saveLoad');
+    }
   },
   quickLoadIssueCheck(s) {
     let p = this.decode(s);
@@ -47,7 +50,7 @@ let Saving = {
     this.doLastFixes(originalVersion);
     let setupPageLoad = function (now) {
       player.lastUpdate = now;
-      Saving.saveGame(false);
+      Saving.saveGame(false, false);
       Options.updateCheckboxSize();
       Options.updateButtonOutlines();
       Colors.updateColors();
@@ -1145,6 +1148,10 @@ let Saving = {
       player.stats.peakLogCPPerSec = 0;
       player.version = 2.107421875;
     }
+    if (player.version < 2.1083984375) {
+      player.options.notifications.saveLoad = true;
+      player.version = 2.1083984375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
@@ -1249,7 +1256,7 @@ let Saving = {
           this.loadGame(save, player.options.offlineProgress, player.options.offlineTicks, false, function () {
             // If the player is loading a save from a prompt, we assume that the loaded save
             // is itself an export, and thus reset the export timer.
-            Options.resetExportTime();
+            Notifications.notify('Loaded save!', 'saveLoad');
           });
         }
       } else if (save !== null) {
@@ -1267,7 +1274,7 @@ let Saving = {
       return;
     }
     player.stats.timeSinceExport = 0;
-    this.saveGame(false);
+    this.saveGame(false, false);
     // How can this happen? Well, it can happen if something went wrong.
     let loading = document.getElementById('loading').style.display === '';
     if (loading) {
@@ -1279,10 +1286,15 @@ let Saving = {
     parent.style.display = '';
     output.value = this.encode(player);
     output.select();
+    let copyWorked;
     try {
       document.execCommand('copy');
+      copyWorked = true;
     } catch(ex) {
       alert('Copying to clipboard failed.');
+      // I guess we don't need this explicitly but it seems nice
+      // for showing intent.
+      copyWorked = false;
     }
     if (loading) {
       document.getElementById('loading').style.display = '';
@@ -1291,6 +1303,9 @@ let Saving = {
     if (!player.options.exportDisplay) {
       parent.style.display = 'none';
       document.getElementsByClassName('export-button')[buttonIndex].focus();
+    }
+    if (copyWorked) {
+      Notifications.notify('Exported save!', 'saveLoad');
     }
   },
   reseedInitialPlayer() {
@@ -1310,6 +1325,7 @@ let Saving = {
   resetGameWithConfirmation() {
     if (confirm('Do you really want to reset the game? You will lose all your progress, and get no benefit.')) {
       this.resetGame();
+      Notifications.notify('Game has been reset!', 'saveLoad');
     }
   }
 }

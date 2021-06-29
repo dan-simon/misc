@@ -378,6 +378,7 @@ let initialPlayer = {
       finality: false,
     },
     notifications: {
+      saveLoad: true,
       achievements: true,
       complexityAchievements: true
     },
@@ -498,7 +499,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2.107421875
+  version: 2.1083984375
 }
 
 let player;

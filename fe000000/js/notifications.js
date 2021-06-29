@@ -1,7 +1,8 @@
 let Notifications = {
   wrapper: {
     'achievements': name => 'Achievement unlocked: ' + name,
-    'complexityAchievements': name => 'Complexity achievement unlocked: ' + name
+    'complexityAchievements': name => 'Complexity achievement unlocked: ' + name,
+    'saveLoad': name => name
   },
   canNotify(type) {
     return Options.showNotifications(type);
