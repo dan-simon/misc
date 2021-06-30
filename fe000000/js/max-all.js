@@ -51,7 +51,7 @@ let generalMaxAll = function (things) {
     let minCost = legalThings.map(x => x.cost()).reduce((a, b) => Decimal.min(a, b));
     // Do this multiplication to avoid rounding errors
     // making costs that should be equal unequal.
-    let safeMinCost = minCost.times(1 + safetyMargin);
+    let safeMinCost = Decimal.times(minCost, 1 + safetyMargin);
     let toBuy = legalThings.filter(x => Decimal.lte(x.cost(), safeMinCost))[0];
     toBuy.buy();
     bought += 1;
