@@ -170,7 +170,18 @@ let Powers = {
     return player.powers.gain;
   },
   togglePowerGain() {
-    player.powers.gain = !player.powers.gain;
+    this.setPowerGain(!player.powers.gain);
+  },
+  setPowerGain(x) {
+    player.powers.gain = x;
+    if (x === true) {
+      // This limit is high enough that in practice you'll usually get
+      // enough capped powers quickly enough to not get 2^20 powers,
+      // and thus not reach the limit. However, without any rarity
+      // improvements, it's pretty close, so it's possible someone
+      // will actually see this message.
+      this.checkForPowerGain(0, 'turning power gain on', Math.pow(2, 20));
+    }
   },
   isPowerGainActive() {
     return this.isUnlocked() && this.isPowerGainOn();
@@ -185,22 +196,28 @@ let Powers = {
   imminentPowerGain() {
     return Math.floor(player.stats.timeSincePowerGain / this.interval());
   },
-  checkForPowerGain(diff) {
+  checkForPowerGain(diff, cause, limit) {
+    if (cause === undefined) {
+      cause = 'offline progress';
+    }
+    if (limit === undefined) {
+      limit = 1024;
+    }
     if (this.isPowerGainActive()) {
       let timePer = this.interval();
       let newPowers = this.imminentPowerGain();
-      let overproductionEfficiencyLimit = newPowers - 1024;
+      let overproductionEfficiencyLimit = newPowers - limit;
       if (newPowers === 0) return;
       player.stats.timeSincePowerGain -= newPowers * timePer;
       let maxedPowers = ['normal', 'infinity', 'eternity', 'complexity'].map(
         x => this.equipped().concat(this.stored()).filter(y => y.type === x && this.isMaxed(y)).length);
       while (newPowers > 0 && maxedPowers.some(x => x < this.maximumEquippedLimit())) {
         if (newPowers <= overproductionEfficiencyLimit) {
-          if (!player.stats.hasSeenPowerWarningMessage) {
-            alert('To avoid offline progress taking too long to process, you can get at most ' +
-              formatInt(1024) + ' powers in a single tick. The rest will be converted to power shards. ' +
+          if (!(cause in player.stats.hasSeenPowerWarningMessage)) {
+            alert('To avoid ' + cause + ' taking too long to process, you can get at most ' +
+              formatInt(limit) + ' powers in a single tick. The rest will be converted to power shards. ' +
               'This message will not show up again.');
-            player.stats.hasSeenPowerWarningMessage = true;
+            player.stats.hasSeenPowerWarningMessage[cause] = true;
           }
           break;
         }

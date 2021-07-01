@@ -493,13 +493,13 @@ let initialPlayer = {
       complexity: true,
       finality: true
     },
-    hasSeenPowerWarningMessage: false,
+    hasSeenPowerWarningMessage: {},
   },
   cheats: {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2.1083984375
+  version: 2.109375
 }
 
 let player;

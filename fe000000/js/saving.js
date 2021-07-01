@@ -1152,6 +1152,10 @@ let Saving = {
       player.options.notifications.saveLoad = true;
       player.version = 2.1083984375;
     }
+    if (player.version < 2.109375) {
+      player.stats.hasSeenPowerWarningMessage = player.stats.hasSeenPowerWarningMessage ? {'offline progress': true} : {};
+      player.version = 2.109375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

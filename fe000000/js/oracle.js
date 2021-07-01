@@ -94,7 +94,7 @@ let Oracle = {
     let originalTime = player.stats.timeSinceGameStart;
     let save = Saving.encode(player);
     if (this.powerGainInPredictions() !== 'Same') {
-      player.powers.gain = {'Off': false, 'On': true}[this.powerGainInPredictions()];
+      Powers.setPowerGain({'Off': false, 'On': true}[this.powerGainInPredictions()]);
     }
     player.oracle.isPredicting = true;
     let time = this.time();
