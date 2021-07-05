@@ -198,6 +198,15 @@ let Powers = {
   },
   checkForPowerGain(diff, cause, limit) {
     if (cause === undefined) {
+      // Of course this is not the cause of most calls to this function
+      // (generally it's called for a regular tick). However, this parameter
+      // is only used (and, even then, mostly for display) when a tick
+      // generates, usually, at least 1024 powers, which should only happen
+      // in a few scenarios, primarily usual offline progress but perhaps
+      // also a computer waking up from sleep (or a vaguely similar state)
+      // and doing one super-long tick (which is close enough to usual
+      // offline progress for me). In the case of turning power gain
+      // back on after having it off, this parameter is not its default value.
       cause = 'offline progress';
     }
     if (limit === undefined) {

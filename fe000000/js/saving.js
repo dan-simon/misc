@@ -16,7 +16,6 @@ let Saving = {
       }
       return;
     }
-    // Stop the player from saving the game while time is being simulated.
     localStorage.setItem('fe000000-save', this.encode(player));
     if (isDirectlyManual) {
       Notifications.notify('Manually saved!', 'saveLoad');
