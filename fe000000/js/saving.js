@@ -1260,6 +1260,8 @@ let Saving = {
           this.loadGame(save, player.options.offlineProgress, player.options.offlineTicks, false, function () {
             // If the player is loading a save from a prompt, we assume that the loaded save
             // is itself an export, and thus reset the export timer.
+            player.stats.timeSinceExport = 0;
+            // Also notify that the save was loaded successfully.
             Notifications.notify('Loaded save!', 'saveLoad');
           });
         }
