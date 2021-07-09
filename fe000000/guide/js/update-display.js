@@ -1069,7 +1069,7 @@ function updateDisplay() {
     if (shouldUpdate("e989")) {e[989].textContent = formatInt(2)};
     if (shouldUpdate("e990")) {e[990].textContent = formatInt(4)};
     if (shouldUpdate("e991")) {e[991].textContent = formatInt(2)};
-    if (shouldUpdate("e992")) {e[992].textContent = formatInt(5)};
+    if (shouldUpdate("e992")) {e[992].textContent = formatTime(18000, {seconds: {f: formatMaybeInt, s: true}, larger: {f: formatMaybeInt, s: true}})};
     if (shouldUpdate("e993")) {e[993].textContent = formatInt(4)};
     if (shouldUpdate("e994")) {e[994].textContent = formatInt(4)};
     if (shouldUpdate("e995")) {e[995].textContent = formatInt(1)};
