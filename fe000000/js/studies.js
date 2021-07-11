@@ -485,7 +485,7 @@ let Studies = {
     if (fourthRowPart !== null && !atLeast) {
       let counts = fourthRowPart.split(',').map(x => this.toNumber(x));
       for (let j = 0; j < 4; j++) {
-        studies[12 + i] += counts[j];
+        studies[12 + j] += counts[j];
       }
     }
     let cost = this.studiesCost(studies);

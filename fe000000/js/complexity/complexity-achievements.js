@@ -98,6 +98,13 @@ let ComplexityAchievements = {
         Eternities.add(this.effect(1, 2));
       }
     }
+    if (row === 3 && column === 4) {
+      // This usually doesn't matter, but we don't really want the player to
+      // have an unlocked EC with "Broke every stone" (it leads to a potential
+      // hidden unlocked EC which shows up in presets, but isn't visible anywhere else).
+      // So we lock the currently unlocked EC if any.
+      player.unlockedEternityChallenge = 0;
+    }
     if (row === 4 && column === 2) {
       player.eternityChallengeCompletions = [4, 4, 4, 4, 4, 4, 4, 4];
     }

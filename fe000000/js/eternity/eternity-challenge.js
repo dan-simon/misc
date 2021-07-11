@@ -238,7 +238,10 @@ let EternityChallenge = {
   unlockEternityChallenge(x) {
     // This function should only be called if the eternity challenge
     // has previously been confirmed to be unlockable.
-    player.unlockedEternityChallenge = x;
+    // We never want the player to have an unlocked EC with "Broke every stone".
+    if (!this.isEternityChallengeUnlockingMeaningless()) {
+      player.unlockedEternityChallenge = x;
+    }
   },
   isRespecOn() {
     return player.respecEternityChallenge;
