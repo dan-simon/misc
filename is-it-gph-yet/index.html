@@ -26,6 +26,9 @@
         document.getElementsByTagName('div')[0].innerHTML = 'NO';
         document.getElementsByTagName('div')[1].innerHTML = days + ' days, ' + hours + ' hours, ' + minutes + ' minutes, ' + seconds + ' seconds until start';
       }
+      for (let i = 0; i < document.getElementsByTagName('div').length; i++) {
+        document.getElementsByTagName('div')[i].style.filter = 'blur(' + ((i % 3 === 0) ? 15 : 3) * Math.min(Math.abs(timeUntilHunt) / 7200, 1) + 'px)';
+      }
     }
     f(); setInterval(f, 100);
   </script>
