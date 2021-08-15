@@ -206,7 +206,7 @@ let Tabs = {
     }
   },
   presetSort() {
-    player.tabPresets.sort((a, b) => (a.name > b.name) ? 1 : (a.name < b.name ? -1 : 0));
+    player.tabPresets.sort((a, b) => presetSortFunction(a.name, b.name));
     for (let i = 1; i <= player.tabPresets.length; i++) {
       this.redisplayPreset(i);
     }

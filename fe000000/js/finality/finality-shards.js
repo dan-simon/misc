@@ -290,7 +290,7 @@ let FinalityShardPresets = {
     }
   },
   presetSort() {
-    player.finalityShardUpgradePresets.sort((a, b) => (a.name > b.name) ? 1 : (a.name < b.name ? -1 : 0));
+    player.finalityShardUpgradePresets.sort((a, b) => presetSortFunction(a.name, b.name));
     for (let i = 1; i <= player.finalityShardUpgradePresets.length; i++) {
       this.redisplayPreset(i);
     }

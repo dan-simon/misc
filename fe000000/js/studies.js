@@ -688,7 +688,7 @@ let Studies = {
     }
   },
   presetSort() {
-    player.presets.sort((a, b) => (a.name > b.name) ? 1 : (a.name < b.name ? -1 : 0));
+    player.presets.sort((a, b) => presetSortFunction(a.name, b.name));
     for (let i = 1; i <= player.presets.length; i++) {
       this.redisplayPreset(i);
     }
