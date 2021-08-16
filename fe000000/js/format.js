@@ -48,8 +48,10 @@ function getNotation(x) {
     x = player.options.notation;
   }
   if (!(x in NOTATIONS)) {
-    let Source = ['Binary', 'Hexadecimal', 'Evil'].includes(x) ? ADCommunityNotations : ADNotations;
-    NOTATIONS[x] = new Source[x.replace(/ [a-z]/g, (x) => x[1].toUpperCase()) + 'Notation']();
+    // Mixed Logarithm (Sci) has logarithm capitalized in the official notation name,
+    // unlike Mixed scientific and Mixed engineering.
+    let Source = ['Binary', 'Hexadecimal', 'Evil', 'Mixed Logarithm (Sci)'].includes(x) ? ADCommunityNotations : ADNotations;
+    NOTATIONS[x] = new Source[x.replace(/[()]/g, '').replace(/ [A-Za-z]/g, (x) => x[1].toUpperCase()) + 'Notation']();
   }
   return NOTATIONS[x];
 }
