@@ -1,3 +1,5 @@
+let offlineSimulationData = {active: false};
+
 let Saving = {
   encode(s) {
     return btoa(JSON.stringify(s).replace(/[\u007F-\uFFFF]/g, function (chr) {
@@ -106,38 +108,53 @@ let Saving = {
       callback = () => true;
     }
     let baseTickLength = 1 / 16;
-    let ticks = Math.ceil(Math.min(totalDiff / baseTickLength, maxTicks));
-    let tickLength = totalDiff / ticks;
+    offlineSimulationData.active = true;
+    offlineSimulationData.ticks = Math.ceil(Math.min(totalDiff / baseTickLength, maxTicks));
+    offlineSimulationData.tickLength = totalDiff / offlineSimulationData.ticks;
     let startTime = Date.now();
     let lastUpdateTime = Date.now();
     if (showSimulation) {
       document.getElementById('simulatetime').style.display = '';
-      this.simulateTimeUpdate((lastUpdateTime - startTime) / 1000, 0, ticks);
+      this.simulateTimeUpdate((lastUpdateTime - startTime) / 1000, 0, offlineSimulationData.ticks);
     }
-    let tick = 0;
+    offlineSimulationData.tick = 0;
     blocked = true;
     let interval = setInterval(function() {
-      let initialTick = tick;
-      while (tick < Math.min(ticks, initialTick + 256)) {
-        gameLoop(tickLength, false, false);
+      let initialTick = offlineSimulationData.tick;
+      while (offlineSimulationData.tick < Math.min(offlineSimulationData.ticks, initialTick + 256)) {
+        gameLoop(offlineSimulationData.tickLength, false, false);
         let d = Date.now();
-        tick++;
+        offlineSimulationData.tick++;
         if (d - startTime > 1 / 16) {
           lastUpdateTime = d;
           if (showSimulation) {
-            Saving.simulateTimeUpdate((lastUpdateTime - startTime) / 1000, tick, ticks);
+            Saving.simulateTimeUpdate((lastUpdateTime - startTime) / 1000, offlineSimulationData.tick, offlineSimulationData.ticks);
           }
         }
       }
-      if (tick === ticks) {
+      if (offlineSimulationData.tick === offlineSimulationData.ticks) {
         blocked = false;
         clearInterval(interval);
+        offlineSimulationData.active = false;
         if (showSimulation) {
           document.getElementById('simulatetime').style.display = 'none';
         }
         callback();
       }
     }, 1);
+  },
+  speedUpOffline() {
+    if (!offlineSimulationData.active) {
+      return;
+    }
+    let oldTicks = offlineSimulationData.ticks - offlineSimulationData.tick;
+    let newTicks = 1024;
+    if (oldTicks <= newTicks) {
+      return;
+    }
+    offlineSimulationData.tickLength *= oldTicks / newTicks;
+    offlineSimulationData.ticks = newTicks;
+    offlineSimulationData.tick = 0;
   },
   oracleSimulateTime(totalDiff, totalTicks, callback) {
     let firstDiff = Math.max(0, totalDiff - 16);

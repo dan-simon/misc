@@ -14,6 +14,8 @@ window.onload = function () {
       document.getElementById('main').style.display = '';
     } else {
       // No, don't format in this case. For all we know our formatting is down too.
+      document.getElementById('script-count-br').style.display = '';
+      document.getElementById('script-count-span').style.display = '';
       document.getElementById('script-count').innerHTML = document.getElementsByTagName('script').length;
     }
   });

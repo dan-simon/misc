@@ -99,10 +99,10 @@
     <span>If it shows up for a longer time, that's probably a bug and you should use the buttons below.</span>
     <br/>
     <span>Reloading might work, so probably try that first.</span>
+    <br id="script-count-br" style="display: none;"/>
+    <span id="script-count-span" style="display: none;">The page loads <span id="script-count"></span> scripts (should be 86).</span>
     <br/>
-    <span>The page loads <span id="script-count"></span> scripts (should be 86).</span>
-    <br/>
-    <span><button onclick="window.location.reload(true)">Reload window</button> <button class="export-button" onclick="Saving.exportGame(0)">Export</button> <button onclick="Saving.loadGamePrompt()">Import/Load</button> <button onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></span>
+    <span><button onclick="window.location.reload(true)">Reload window</button> <button class="export-button" onclick="Saving.exportGame(0)">Export</button> <button onclick="Saving.loadGamePrompt()">Import/Load</button>  <button onclick="Saving.speedUpOffline()">Speed up offline progress (doing fewer ticks)</button> <button onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></span>
   </div>
   <div id="simulatetime" style="display: none;">
     <span>Time spent simulating ticks: <span id="timesimulated"></span></span>
