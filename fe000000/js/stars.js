@@ -15,14 +15,27 @@ let Stars = {
   atLimit() {
     return this.amount().gte(this.limit());
   },
+  canBuyThings() {
+    return !this.atLimit() && !InfinityPrestigeLayer.mustInfinity();
+  },
   collapsedText() {
-    if (!this.atLimit()) return;
+    if (this.canBuyThings()) return;
     if (InfinityPrestigeLayer.isInfinityBroken()) {
       return 'multiverse has';
     } else if (this.amount().gte(MultiverseCollapse.stars())) {
       return 'multiverse and universe have';
     } else {
       return 'universe has';
+    }
+  },
+  cannotBuyThingsReason() {
+    if (this.canBuyThings()) return;
+    if (InfinityPrestigeLayer.isInfinityBroken()) {
+      return 'the multiverse to not have collapsed';
+    } else if (this.amount().gte(MultiverseCollapse.stars())) {
+      return 'the multiverse and universe to not have collapsed';
+    } else {
+      return 'the universe to not have collapsed';
     }
   },
   requiredUnspent() {

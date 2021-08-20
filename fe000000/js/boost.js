@@ -79,7 +79,7 @@ let Boost = {
   isNotBuyableAtAll() {
     // This function is a bit misleadingly named. It checks if there's some condition making boosts completely unbuyable
     // independent of how many stars you have.
-    return !this.isVisible() || Stars.atLimit() || ComplexityChallenge.isSafeguardOn(2);
+    return !this.isVisible() || !Stars.canBuyThings() || ComplexityChallenge.isSafeguardOn(2);
   },
   maxBuyable() {
     if (this.isNotBuyableAtAll() || player.stars.minus(this.cost()).lt(Stars.requiredUnspent())) return 0;

@@ -197,13 +197,13 @@
     <br/>
     <br/>
     <tab ~style.display=Tabs.currentTab() === 'main' ? '' : 'none'~>
-      <div ~style.display=Stars.atLimit() ? '' : 'none'~>
+      <div ~style.display=Stars.canBuyThings() ? 'none' : ''~>
         <span>The ~r Stars.collapsedText() ~ collapsed due to an excess of stars.</span>
         <br/>
         <span>View stars and generators anyway: <input type="checkbox" ~!checked=Generators.viewWhenStarsAtLimit()~ ~!onchange=function() {Generators.setViewWhenStarsAtLimit(this.checked)}~></input></span>
       </div>
-      <br ~style.display=(Stars.atLimit() && Generators.viewWhenStarsAtLimit()) ? '' : 'none'~/>
-      <div ~style.display=(Stars.atLimit() && !Generators.viewWhenStarsAtLimit()) ? 'none' : ''~>
+      <br ~style.display=(Stars.canBuyThings() || !Generators.viewWhenStarsAtLimit()) ? 'none' : ''~/>
+      <div ~style.display=(Stars.canBuyThings() || Generators.viewWhenStarsAtLimit()) ? '' : 'none'~>
         <span>You have ~f Stars.amount() ~ stars. You are getting ~f Stars.perSecond() ~ stars per second. <button ~class=MaxAll.anythingToBuy() ? "" : "disabled"~ onclick="MaxAll.maxAll()">Max all</button></span>
         <br/>
         <div ~style.display=Challenge.isThereChallengeText() ? '' : 'none'~>
@@ -320,7 +320,7 @@
           <span>You have ~f Prestige.prestigePower() ~ prestige power multiplying all ~r Generators.term() ~ by its amount.</span>
           <br/>
           <span ~style.display=Prestige.canPrestige() ? '' : 'none'~><button style="height: 48px;" onclick="Prestige.prestige(true)">Prestige: ~f Prestige.prestigePower() ~ → ~f Prestige.newPrestigePower() ~<br/>(+~f Prestige.prestigePowerGain() ~, ~f Prestige.prestigePowerMultGain() ~x)</button></span>
-          <span ~style.display=Prestige.canPrestige() ? 'none' : ''~>You need ~f Prestige.prestigeRequirement() ~ stars to prestige.</span>
+          <span ~style.display=Prestige.canPrestige() ? 'none' : ''~>You need ~r Prestige.prestigeRequirementText() ~ to prestige.</span>
         </div>
         <br ~style.display=SpecialDivs.isDivVisible('softcap') ? '' : 'none'~/>
         <span ~style.display=SpecialDivs.isDivVisible('softcap') ? '' : 'none'~>~r Generators.term(true, true) ~ multipliers are reduced above ~f Generators.nerfValue() ~x (the multiplier softcap).</span>

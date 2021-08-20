@@ -32,7 +32,22 @@ let Prestige = {
     return player.stats.bestStarsThisPrestige;
   },
   canPrestige() {
-    return this.bestStarsThisPrestige().gte(this.prestigeRequirement()) && !InfinityPrestigeLayer.mustInfinity() && !this.isPrestigeDisabled();
+    return this.bestStarsThisPrestige().gte(this.prestigeRequirement()) && Stars.canBuyThings() && !this.isPrestigeDisabled();
+  },
+  prestigeRequirementText() {
+    if (this.isPrestigeDisabled()) {
+      let challenges = [];
+      if (Challenge.isChallengeEffectActive(10)) {
+        challenges.push('Challenge 10');
+      } else if (EternityChallenge.isEternityChallengeRunning(3)) {
+        challenges.push('Eternity Challenge 3');
+      }
+      return 'to not be in ' + challenges.join(' or ');
+    }
+    if (!Stars.canBuyThings()) {
+      return Stars.cannotBuyThingsReason();
+    }
+    return format(Prestige.prestigeRequirement()) + ' stars';
   },
   updatePrestigePossible() {
     if (!this.canPrestige()) {

@@ -23,7 +23,7 @@ function gameLoop(diff, display, isOnline) {
   for (let i = 8; i >= 1; i--) {
     InfinityGenerator(i).produce(diff);
   }
-  if (!Stars.atLimit()) {
+  if (Stars.canBuyThings()) {
     for (let i = 8; i >= 1; i--) {
       Generator(i).produce(diff);
     }

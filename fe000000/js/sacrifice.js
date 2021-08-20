@@ -27,23 +27,26 @@ let Sacrifice = {
     }
     return req;
   },
-  sacrificeRequirementText() {
-    // Note that without an intervening sacrifice (or prestige, etc.)
-    // only one of these requirement conditions should be visible.
-    // If initially the player has no Generator 8, when they can buy a Generator 8
-    // their best stars will increase to enough that they can sacrifice,
-    // so the star requirement will disappear at that point.
-    if (Generator(8).amount().gt(0)) {
-      return format(this.sacrificeRequirement()) + ' stars';
-    } else {
-      return 'at least one of Generator 8';
-    }
-  },
   bestStarsThisSacrifice() {
     return player.stats.bestStarsThisSacrifice;
   },
   canSacrifice() {
-    return Generator(8).amount().gt(0) && this.bestStarsThisSacrifice().gte(this.sacrificeRequirement()) && !InfinityPrestigeLayer.mustInfinity();
+    return Generator(8).amount().gt(0) && this.bestStarsThisSacrifice().gte(this.sacrificeRequirement()) && Stars.canBuyThings();
+  },
+  sacrificeRequirementText() {
+    // Note that without an intervening sacrifice (or prestige, etc.)
+    // only one of the last two requirement conditions (stars and
+    // at least one Generator 8) should be visible.
+    // If initially the player has no Generator 8, when they can buy a Generator 8
+    // their best stars will increase to enough that they can sacrifice,
+    // so the star requirement will disappear at that point.
+    if (!Stars.canBuyThings()) {
+      return Stars.cannotBuyThingsReason();
+    } else if (Generator(8).amount().gt(0)) {
+      return format(this.sacrificeRequirement()) + ' stars';
+    } else {
+      return 'at least one of Generator 8';
+    }
   },
   updateSacrificePossible() {
     if (!this.canSacrifice()) {

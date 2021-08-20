@@ -1073,10 +1073,10 @@ function updateDisplay() {
   if (shouldUpdate("b1944")) {b[1944].style.display = Tabs.currentTab() === 'last-ten-runs' ? '' : 'none'};
   if (shouldUpdate("b2030")) {b[2030].style.display = Tabs.currentTab() === 'options' ? '' : 'none'};
   if (b[64].style.display !== "none") {
-    if (shouldUpdate("b65")) {b[65].style.display = Stars.atLimit() ? '' : 'none'};
+    if (shouldUpdate("b65")) {b[65].style.display = Stars.canBuyThings() ? 'none' : ''};
     if (shouldUpdate("e72")) {e[72].textContent = Stars.collapsedText()};
-    if (shouldUpdate("b67")) {b[67].style.display = (Stars.atLimit() && Generators.viewWhenStarsAtLimit()) ? '' : 'none'};
-    if (shouldUpdate("b68")) {b[68].style.display = (Stars.atLimit() && !Generators.viewWhenStarsAtLimit()) ? 'none' : ''};
+    if (shouldUpdate("b67")) {b[67].style.display = (Stars.canBuyThings() || !Generators.viewWhenStarsAtLimit()) ? 'none' : ''};
+    if (shouldUpdate("b68")) {b[68].style.display = (Stars.canBuyThings() || Generators.viewWhenStarsAtLimit()) ? '' : 'none'};
     if (shouldUpdate("e73")) {e[73].textContent = format(Stars.amount())};
     if (shouldUpdate("e74")) {e[74].textContent = format(Stars.perSecond())};
     if (shouldUpdate("b69")) {b[69].className = MaxAll.anythingToBuy() ? "" : "disabled"};
@@ -1212,7 +1212,7 @@ function updateDisplay() {
     if (shouldUpdate("e147")) {e[147].textContent = format(Prestige.prestigePowerGain())};
     if (shouldUpdate("e148")) {e[148].textContent = format(Prestige.prestigePowerMultGain())};
     if (shouldUpdate("b128")) {b[128].style.display = Prestige.canPrestige() ? 'none' : ''};
-    if (shouldUpdate("e149")) {e[149].textContent = format(Prestige.prestigeRequirement())};
+    if (shouldUpdate("e149")) {e[149].textContent = Prestige.prestigeRequirementText()};
     if (shouldUpdate("b129")) {b[129].style.display = SpecialDivs.isDivVisible('softcap') ? '' : 'none'};
     if (shouldUpdate("b130")) {b[130].style.display = SpecialDivs.isDivVisible('softcap') ? '' : 'none'};
     if (shouldUpdate("e150")) {e[150].textContent = Generators.term(true, true)};

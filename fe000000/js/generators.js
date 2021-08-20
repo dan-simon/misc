@@ -88,7 +88,7 @@ let Generator = function (i) {
       return n <= this.maxBuyable();
     },
     maxBuyable(fraction) {
-      if (!this.isDirectlyVisible() || Stars.atLimit()) return 0;
+      if (!this.isDirectlyVisible() || !Stars.canBuyThings()) return 0;
       if (fraction === undefined) {
         fraction = 1;
       }
