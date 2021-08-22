@@ -62,7 +62,8 @@ let EternityPrestigeLayer = {
     }
   },
   currentEPPerSec() {
-    return this.eternityPointGain().div(player.stats.timeSinceEternity);
+    // This Math.max is here to prevent issues with gain after 0 seconds from starting benefits.
+    return this.eternityPointGain().div(Math.max(player.stats.timeSinceEternity, 1 / 16));
   },
   currentLogEPPerSec() {
     let c = this.newTotalEternityPoints().log2() - Math.max(this.totalEternityPoints().log2(), 0);
@@ -70,7 +71,7 @@ let EternityPrestigeLayer = {
     if (c < Math.pow(2, -16)) {
       c = 0;
     }
-    return c / player.stats.timeSinceEternity;
+    return c / Math.max(player.stats.timeSinceEternity, 1 / 16);
   },
   peakEPPerSec() {
     return player.stats.peakEPPerSec;

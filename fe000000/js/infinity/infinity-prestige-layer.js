@@ -82,7 +82,8 @@ let InfinityPrestigeLayer = {
     }
   },
   currentIPPerSec() {
-    return this.infinityPointGain().div(player.stats.timeSinceInfinity);
+    // This Math.max is here to prevent issues with gain after 0 seconds from starting benefits.
+    return this.infinityPointGain().div(Math.max(player.stats.timeSinceInfinity, 1 / 16));
   },
   currentLogIPPerSec() {
     let c = this.newTotalInfinityPoints().log2() - Math.max(this.totalInfinityPoints().log2(), 0);
@@ -90,7 +91,7 @@ let InfinityPrestigeLayer = {
     if (c < Math.pow(2, -16)) {
       c = 0;
     }
-    return c / player.stats.timeSinceInfinity;
+    return c / Math.max(player.stats.timeSinceInfinity, 1 / 16);
   },
   peakIPPerSec() {
     return player.stats.peakIPPerSec;

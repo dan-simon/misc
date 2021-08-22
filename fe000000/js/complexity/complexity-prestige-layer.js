@@ -73,7 +73,8 @@ let ComplexityPrestigeLayer = {
     }
   },
   currentCPPerSec() {
-    return this.complexityPointGain().div(player.stats.timeSinceComplexity);
+    // This Math.max is here to prevent issues with gain after 0 seconds from starting benefits.
+    return this.complexityPointGain().div(Math.max(player.stats.timeSinceComplexity, 1 / 16));
   },
   currentLogCPPerSec() {
     let c = this.newTotalComplexityPoints().log2() - Math.max(this.totalComplexityPoints().log2(), 0);
@@ -81,7 +82,7 @@ let ComplexityPrestigeLayer = {
     if (c < Math.pow(2, -16)) {
       c = 0;
     }
-    return c / player.stats.timeSinceComplexity;
+    return c / Math.max(player.stats.timeSinceComplexity, 1 / 16);
   },
   peakCPPerSec() {
     return player.stats.peakCPPerSec;
