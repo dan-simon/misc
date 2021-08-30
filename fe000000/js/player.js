@@ -355,6 +355,8 @@ let initialPlayer = {
   tabPresets: [],
   options: {
     notation: 'Scientific',
+    lowerPrecision: 3,
+    higherPrecision: 5,
     timeDisplay: 'Seconds',
     offlineProgress: true,
     offlineTicks: 1024,
@@ -499,7 +501,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2.109375
+  version: 2.1103515625
 }
 
 let player;

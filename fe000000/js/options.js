@@ -66,6 +66,21 @@ let Options = {
   setNotation(x) {
     player.options.notation = x;
   },
+  lowerPrecision() {
+    return Math.min(Math.max(0, Math.floor(player.options.lowerPrecision)), 10);
+  },
+  higherPrecision() {
+    return Math.min(Math.max(0, Math.floor(player.options.higherPrecision)), 10);
+  },
+  highestPrecision(x) {
+    return 2 + Math.max(this.lowerPrecision(), this.higherPrecision())
+  },
+  setLowerPrecision(x) {
+    player.options.lowerPrecision = (x === 0) ? 0 : (x || 3);
+  },
+  setHigherPrecision(x) {
+    player.options.higherPrecision = (x === 0) ? 0 : (x || 5);
+  },
   nextTimeDisplay() {
     player.options.timeDisplay = TIME_DISPLAY_LIST[(TIME_DISPLAY_LIST.indexOf(player.options.timeDisplay) + 1) % TIME_DISPLAY_LIST.length];
   },

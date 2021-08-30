@@ -102,12 +102,12 @@ let Challenge = {
     if (cc === 2) {
       return 'Normal Challenge 2 multiplier: ' + formatMaybeInt(this.challenge2Mult());
     } else if (cc === 3) {
-      return 'Normal Challenge 3 multiplier: ' + formatWithPrecision(this.challenge3Mult(), 5);
+      return 'Normal Challenge 3 multiplier: ' + formatPrecisely(this.challenge3Mult());
     } else if (cc === 7) {
       return 'Normal Challenge 7 purchases left: ' + formatInt(this.challenge7PurchasesLeft());
     } else if (ic === 1) {
       return 'Normal Challenge 2 multiplier: ' + formatMaybeInt(this.challenge2Mult()) + ', ' +
-      'Normal Challenge 3 multiplier: ' + formatWithPrecision(this.challenge3Mult(), 5) + ', ' +
+      'Normal Challenge 3 multiplier: ' + formatPrecisely(this.challenge3Mult()) + ', ' +
       'Normal Challenge 7 purchases left: ' + formatInt(this.challenge7PurchasesLeft());
     } else if (ic === 3) {
       return 'Infinity Challenge 3 prestige power exponent: ' +

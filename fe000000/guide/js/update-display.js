@@ -130,7 +130,7 @@ function updateDisplay() {
     if (shouldUpdate("e66")) {e[66].textContent = formatInt(1)};
     if (shouldUpdate("e67")) {e[67].textContent = formatTime(16, {seconds: {f: formatInt, s: true}, larger: {f: format, s: false}})};
     if (shouldUpdate("e68")) {e[68].textContent = formatTime(16, {seconds: {f: formatInt, s: true}, larger: {f: format, s: false}})};
-    if (shouldUpdate("e69")) {e[69].textContent = formatWithPrecision(1 / 256, 5)};
+    if (shouldUpdate("e69")) {e[69].textContent = formatPrecisely(1 / 256)};
     if (shouldUpdate("e70")) {e[70].textContent = formatInt(4)};
     if (shouldUpdate("e71")) {e[71].textContent = formatInt(8)};
     if (shouldUpdate("e72")) {e[72].textContent = formatInt(16)};
@@ -157,7 +157,7 @@ function updateDisplay() {
   }
   if (b[21].style.display !== "none") {
     if (shouldUpdate("e93")) {e[93].textContent = formatInt(Math.pow(2, 256))};
-    if (shouldUpdate("e94")) {e[94].textContent = formatWithPrecision(1 / 256, 5)};
+    if (shouldUpdate("e94")) {e[94].textContent = formatPrecisely(1 / 256)};
     if (shouldUpdate("e95")) {e[95].textContent = format(0.5)};
     if (shouldUpdate("e96")) {e[96].textContent = formatInt(7)};
     if (shouldUpdate("e97")) {e[97].textContent = format(1 / 16)};
@@ -300,7 +300,7 @@ function updateDisplay() {
     if (shouldUpdate("e230")) {e[230].textContent = formatInt(1)};
     if (shouldUpdate("e231")) {e[231].textContent = formatInt(512)};
     if (shouldUpdate("e232")) {e[232].textContent = formatInt(2)};
-    if (shouldUpdate("e233")) {e[233].textContent = formatWithPrecision(1 / 256, 5)};
+    if (shouldUpdate("e233")) {e[233].textContent = formatPrecisely(1 / 256)};
     if (shouldUpdate("e234")) {e[234].textContent = formatInt(4)};
     if (shouldUpdate("e235")) {e[235].textContent = formatInt(64)};
     if (shouldUpdate("e236")) {e[236].textContent = formatInt(2)};
@@ -432,9 +432,9 @@ function updateDisplay() {
     if (shouldUpdate("e360")) {e[360].textContent = formatInt(320)};
     if (shouldUpdate("e361")) {e[361].textContent = formatInt(320)};
     if (shouldUpdate("e362")) {e[362].textContent = formatInt(320)};
-    if (shouldUpdate("e363")) {e[363].textContent = formatWithPrecision(Math.pow(2, -14), 5)};
+    if (shouldUpdate("e363")) {e[363].textContent = formatPrecisely(Math.pow(2, -14))};
     if (shouldUpdate("e364")) {e[364].textContent = formatInt(320)};
-    if (shouldUpdate("e365")) {e[365].textContent = formatWithPrecision(Math.pow(2, -14), 5)};
+    if (shouldUpdate("e365")) {e[365].textContent = formatPrecisely(Math.pow(2, -14))};
     if (shouldUpdate("e366")) {e[366].textContent = formatInt(1)};
     if (shouldUpdate("e367")) {e[367].textContent = formatInt(2)};
     if (shouldUpdate("e368")) {e[368].textContent = formatInt(24)};
@@ -914,7 +914,7 @@ function updateDisplay() {
     if (shouldUpdate("e834")) {e[834].textContent = formatInt(2)};
     if (shouldUpdate("e835")) {e[835].textContent = format(0.5)};
     if (shouldUpdate("e836")) {e[836].textContent = formatInt(2)};
-    if (shouldUpdate("e837")) {e[837].textContent = formatWithPrecision(Math.pow(2, -16), 7)};
+    if (shouldUpdate("e837")) {e[837].textContent = formatVeryPrecisely(Math.pow(2, -16))};
     if (shouldUpdate("e838")) {e[838].textContent = formatInt(8192)};
     if (shouldUpdate("e839")) {e[839].textContent = formatInt(256)};
     if (shouldUpdate("e840")) {e[840].textContent = formatInt(4)};

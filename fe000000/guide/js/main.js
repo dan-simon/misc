@@ -1,24 +1,34 @@
 let player;
 let temporarySettings;
 
+let startingPlayer = {
+  options: {
+    notation: 'Scientific',
+    lowerPrecision: 3,
+    higherPrecision: 5,
+    timeDisplay: 'Seconds',
+    theme: {background: 'Dark', buttonColor: 'Vibrant'}
+  },
+  goals: [
+    false, false, false, false,
+    false, false, false, false,
+    false, false, false, false,
+    false, false, false, false
+  ],
+  displayAllGoals: false
+};
+
 window.onload = function () {
   try {
     player = Saving.decode(localStorage.getItem('fe000000-save'));
   } catch (ex) {
-    player = {
-      options: {
-        notation: 'Scientific',
-        timeDisplay: 'Seconds',
-        theme: {background: 'Dark', buttonColor: 'Vibrant'}
-      },
-      goals: [
-        false, false, false, false,
-        false, false, false, false,
-        false, false, false, false,
-        false, false, false, false
-      ],
-      displayAllGoals: false
-    };
+    player = startingPlayer;
+  }
+  // Add new options (e.g. notation precision)
+  for (let i in startingPlayer.options) {
+    if (!(i in player.options)) {
+      player.options[i] = startingPlayer.options[i];
+    }
   }
   temporarySettings = {
     viewAll: player.displayAllGoals,

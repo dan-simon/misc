@@ -224,7 +224,7 @@
           <div ~style.display=Boost.isBoostPowerVisible() ? '' : 'none'~>
             <span>You have ~f Boost.boostPower() ~ boost power, increasing the per-boost multiplier by ~f Boost.boostPowerEffect() ~x.</span>
             <br/>
-            <span>You are generating ~r formatWithPrecision(Boost.boostPowerPerSecond(), 5) ~ boost power per second (~r formatWithPrecision(Boost.boostPowerPerBoost(), 5) ~ per boost this eternity above ~i Boost.boostPowerStart() ~).</span>
+            <span>You are generating ~r formatPrecisely(Boost.boostPowerPerSecond()) ~ boost power per second (~r formatPrecisely(Boost.boostPowerPerBoost()) ~ per boost this eternity above ~i Boost.boostPowerStart() ~).</span>
           </div>
           <span ~style.display=Boost.isBoostPowerVisible() ? 'none' : ''~>You will start generating boost power for each boost this eternity above ~i Boost.boostPowerStart() ~ boosts.</span>
         </div>
@@ -326,7 +326,7 @@
         <span ~style.display=SpecialDivs.isDivVisible('softcap') ? '' : 'none'~>~r Generators.term(true, true) ~ multipliers are reduced above ~f Generators.nerfValue() ~x (the multiplier softcap).</span>
         <br ~style.display=Generators.areAnyMultipliersNerfed() ? '' : 'none'~/>
         <div ~style.display=Generators.areAnyMultipliersNerfed() ? '' : 'none'~>
-          Given a multiplier x, let y be log(x, ~f Generators.nerfValue() ~). x is reduced to ~f Generators.nerfValue() ~^(y^(y^~r formatWithPrecision(Generators.nerfExponent, 5) ~)).
+          Given a multiplier x, let y be log(x, ~f Generators.nerfValue() ~). x is reduced to ~f Generators.nerfValue() ~^(y^(y^~r formatPrecisely(Generators.nerfExponent) ~)).
         </div>
         <br ~style.display=SpecialDivs.isDivVisible('hardcap') ? '' : 'none'~/>
         <span ~style.display=SpecialDivs.isDivVisible('hardcap') ? '' : 'none'~>It is impossible to get more than ~f MultiverseCollapse.stars() ~ stars.</span>
@@ -489,7 +489,7 @@
             <div class="challengediv" ~style.background=Challenge.color(3)~>
               <span>Normal Challenge 3</span>
               <br/>
-              <span>There's a multiplier on Generator 1, starting at ~r formatWithPrecision(1 / 256, 5) ~ and doubling every ~ti 256 ~. Every time you prestige, this multiplier resets to ~r formatWithPrecision(1 / 256, 5) ~.</span>
+              <span>There's a multiplier on Generator 1, starting at ~r formatPrecisely(1 / 256) ~ and doubling every ~ti 256 ~. Every time you prestige, this multiplier resets to ~r formatPrecisely(1 / 256) ~.</span>
               <br/>
               <span>~r Challenge.challengeStatusDescription(3) ~</span>
               <br/>
@@ -1167,7 +1167,7 @@
       <br/>
       <span>You have ~f EternityStars.amount() ~ eternity stars, multiplying all normal and infinity generators by ~f EternityStars.multiplier() ~</span>
       <br/>
-      <span>and raising all normal and infinity generator multipliers ^~r formatWithPrecision(EternityStars.power(), 5) ~.</span>
+      <span>and raising all normal and infinity generator multipliers ^~r formatPrecisely(EternityStars.power()) ~.</span>
       <br/>
       <span>You are getting ~f EternityStars.perSecond() ~ eternity stars per second.</span>
       <br/>
@@ -1779,7 +1779,7 @@
         </tr>
       </table>
       <span ~style.display=Studies.canAccessFourthRow() ? '' : 'none'~ class="greenspan">
-        There is also a small multiplier to the chroma cap based on total fourth-row study purchases (currently ~r formatWithPrecision(Studies.chromaCapMultiplier(), 5) ~x).
+        There is also a small multiplier to the chroma cap based on total fourth-row study purchases (currently ~r formatPrecisely(Studies.chromaCapMultiplier()) ~x).
       </span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 0px; border-collapse: separate;">
         <tr>
@@ -2696,7 +2696,7 @@
               <br/>
               <span>Reward: Exponent to prestige power.</span>
               <br/>
-              <span>Current: ^~r formatWithPrecision(EternityChallenge.getEternityChallengeReward(3), 5) ~<span ~style.display=EternityChallenge.isEternityChallengeCompleted(3) ? 'none' : ''~>, Next: ^~r formatWithPrecision(EternityChallenge.getEternityChallengeNextReward(3), 5) ~</span></span>
+              <span>Current: ^~r formatPrecisely(EternityChallenge.getEternityChallengeReward(3)) ~<span ~style.display=EternityChallenge.isEternityChallengeCompleted(3) ? 'none' : ''~>, Next: ^~r formatPrecisely(EternityChallenge.getEternityChallengeNextReward(3)) ~</span></span>
             </div>
           </td>
           <td>
@@ -3185,7 +3185,7 @@
               <br ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(2) ? 'none' : ''~/>
               <span>Reward: Boosts are cheaper.</span>
               <br/>
-              <span>Current: Cost ^~r formatWithPrecision(ComplexityChallenge.getComplexityChallengeReward(2), 5) ~, Next: Cost ^~r formatWithPrecision(ComplexityChallenge.getComplexityChallengeNextReward(2), 5) ~</span>
+              <span>Current: Cost ^~r formatPrecisely(ComplexityChallenge.getComplexityChallengeReward(2)) ~, Next: Cost ^~r formatPrecisely(ComplexityChallenge.getComplexityChallengeNextReward(2)) ~</span>
             </div>
           </td>
         </tr>
@@ -3885,7 +3885,7 @@
         <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
           <tr>
             <td>Strength of new powers:</td>
-            <td><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? 'none' : ''~>~r formatWithPrecision(PowerUpgrade(1).effectDisplay(), 5) ~ → ~r formatWithPrecision(PowerUpgrade(1).nextEffectDisplay(), 5) ~</span><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? '' : 'none'~>~r formatWithPrecision(PowerUpgrade(1).effectDisplay(), 5) ~ (maxed)</span></td>
+            <td><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? 'none' : ''~>~r formatPrecisely(PowerUpgrade(1).effectDisplay()) ~ → ~r formatPrecisely(PowerUpgrade(1).nextEffectDisplay()) ~</span><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? '' : 'none'~>~r formatPrecisely(PowerUpgrade(1).effectDisplay()) ~ (maxed)</span></td>
             <td><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(1).buy()">Cost: ~i PowerUpgrade(1).cost() ~ ℂP</button></span></td>
             <td><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(1).buyMax()">Max</button></span></td>
             <td><span ~style.display=ComplexityAutobuyer(9).hasComplexityAutobuyer() ? '' : 'none'~><button onclick="ComplexityAutobuyer(9).toggle()">Auto: ~r ComplexityAutobuyer(9).isOn() ? "On" : "Off" ~</button></span></td>
@@ -3952,7 +3952,7 @@
             <option value="eternity">eternity</option>
             <option value="complexity">complexity</option>
           </select>,
-          strength ~r formatWithPrecision(PowerShards.craftedStrength(), 5) ~, and rarity <input type="text" class="craft-rarity" ~!value=PowerShards.craftedRarityDisplay()~ ~!onchange=function() {PowerShards.setCraftedRarity(this.value)}~></input>:
+          strength ~r formatPrecisely(PowerShards.craftedStrength()) ~, and rarity <input type="text" class="craft-rarity" ~!value=PowerShards.craftedRarityDisplay()~ ~!onchange=function() {PowerShards.setCraftedRarity(this.value)}~></input>:
           <br/>
           <button ~class=PowerShards.canCraftAny() ? '' : 'disabled'~ onclick="PowerShards.setCraftRarityToMax()">Set craft rarity to maximum possible (~r PowerShards.maxCraftRarityText() ~)</button></span>
           <button ~class=PowerShards.canCraft() ? '' : 'disabled'~ onclick="PowerShards.craft()">Cost: ~f PowerShards.craftedPowerCost() ~ power shards</button></span>
@@ -4467,17 +4467,17 @@
         <br/>
         <span>Next galaxies are at ~f Galaxy.nextStellarProductGalaxy() ~ stellar product and ~f Galaxy.nextComplexityPointGalaxy() ~ total ℂP this finality.</span>
         <br/>
-        <span>Your galaxies are increasing the strength of new powers by ~r formatWithPrecision(Galaxy.getStrengthIncrease(), 5) ~.</span>
+        <span>Your galaxies are increasing the strength of new powers by ~r formatPrecisely(Galaxy.getStrengthIncrease()) ~.</span>
         <br/>
         <br/>
-        <span>You have spent ~t player.stats.timeSinceComplexity ~ in this complexity, increasing chroma caps ^~r formatWithPrecision(Galaxy.effect(), 5) ~.</span>
+        <span>You have spent ~t player.stats.timeSinceComplexity ~ in this complexity, increasing chroma caps ^~r formatPrecisely(Galaxy.effect()) ~.</span>
         <br/>
         <br/>
         <span>You can make some of your galaxies dilated to make the galaxy effect increase faster, but have a lower cap.</span>
         <br/>
-        <span>Currently ~i Galaxy.dilated() ~ galax~y Galaxy.dilated() ~ ~r Galaxy.dilated() === 1 ? 'is' : 'are' ~ dilated, making the galaxy effect have speed ~i Galaxy.effectSpeed() ~x and cap ~r formatWithPrecision(Galaxy.effectCap(), 5) ~, capping in ~t Galaxy.timeToReachEffectCap() ~.</span>
+        <span>Currently ~i Galaxy.dilated() ~ galax~y Galaxy.dilated() ~ ~r Galaxy.dilated() === 1 ? 'is' : 'are' ~ dilated, making the galaxy effect have speed ~i Galaxy.effectSpeed() ~x and cap ~r formatPrecisely(Galaxy.effectCap()) ~, capping in ~t Galaxy.timeToReachEffectCap() ~.</span>
         <br/>
-        <span>Next complexity ~i Galaxy.nextDilated() ~ galax~y Galaxy.nextDilated() ~ will be dilated, making the galaxy effect have speed ~i Galaxy.nextEffectSpeed() ~x and cap ~r formatWithPrecision(Galaxy.nextEffectCap(), 5) ~, capping in ~t Galaxy.nextTimeToReachEffectCap() ~.</span>
+        <span>Next complexity ~i Galaxy.nextDilated() ~ galax~y Galaxy.nextDilated() ~ will be dilated, making the galaxy effect have speed ~i Galaxy.nextEffectSpeed() ~x and cap ~r formatPrecisely(Galaxy.nextEffectCap()) ~, capping in ~t Galaxy.nextTimeToReachEffectCap() ~.</span>
         <br/>
         <br/>
         <span>
@@ -4657,7 +4657,7 @@
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>Power to non-finality generator multipliers (~i FinalityShardUpgrade(1).bought() ~):</td>
-          <td><span ~style.display=FinalityShardUpgrade(1).atBoughtLimit() ? 'none' : ''~>^~r formatWithPrecision(FinalityShardUpgrade(1).effect(), 5) ~ → ^~r formatWithPrecision(FinalityShardUpgrade(1).nextEffect(), 5) ~</span><span ~style.display=FinalityShardUpgrade(1).atBoughtLimit() ? '' : 'none'~>^~r formatWithPrecision(FinalityShardUpgrade(1).effect(), 5) ~ (maxed)</span></td>
+          <td><span ~style.display=FinalityShardUpgrade(1).atBoughtLimit() ? 'none' : ''~>^~r formatPrecisely(FinalityShardUpgrade(1).effect()) ~ → ^~r formatPrecisely(FinalityShardUpgrade(1).nextEffect()) ~</span><span ~style.display=FinalityShardUpgrade(1).atBoughtLimit() ? '' : 'none'~>^~r formatPrecisely(FinalityShardUpgrade(1).effect()) ~ (maxed)</span></td>
           <td><span ~style.display=FinalityShardUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(1).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(1).buy()">Cost: ~i FinalityShardUpgrade(1).cost() ~ finality shard~s FinalityShardUpgrade(1).cost() ~</button></span></td>
           <td><span ~style.display=FinalityShardUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=FinalityShardUpgrade(1).canBuy() ? "" : "disabled"~ onclick="FinalityShardUpgrade(1).buyMax()">Max</button></span></td>
         </tr>
@@ -5203,7 +5203,7 @@
       <br/>
       <span>Your achievements ~r Achievements.active() ? 'are' : 'would be' ~ multiplying all generators <span ~style.display=PrestigeLayerProgress.hasReached('infinity')~>(of any type) </span>by ~f Achievements.rawGeneratorMultiplier() ~x~r Achievements.hasNonGeneratorEffects() ? ',' : '.' ~</span>
       <br ~style.display=Achievements.hasNonGeneratorEffects() ? '' : 'none'~/>
-      <span ~style.display=Achievements.hasNonGeneratorEffects() ? '' : 'none'~>and multiplying ~r Achievements.nonGeneratorEffectsText() ~ by ~r formatWithPrecision(Achievements.rawOtherMultiplier(), 5) ~x.</span>
+      <span ~style.display=Achievements.hasNonGeneratorEffects() ? '' : 'none'~>and multiplying ~r Achievements.nonGeneratorEffectsText() ~ by ~r formatPrecisely(Achievements.rawOtherMultiplier()) ~x.</span>
       <br/>
       <span>
         <button onclick="Achievements.toggleActive()">Achievement rewards: ~r Achievements.active() ? 'On' : 'Off' ~</button>
@@ -5928,12 +5928,6 @@
       </table>
       <table ~style.display=Options.isOptionTypeShown('other') ? '' : 'none'~ style="margin-left: auto; margin-right: auto; border-spacing: 24px 8px; border-collapse: separate;">
         <tr>
-          <td><div class="options-div">
-            <button class="mini-options-button" onclick="Options.nextCompletionColors()">Completion colors: ~r player.options.completionColors ~</button>
-            <button class="mini-options-button" onclick="Options.toggleResetColors()">Reset colors: ~r Options.resetColors() ? 'On' : 'Off' ~</button>
-            <button class="mini-options-button" onclick="Options.toggleTabColors()">Tab colors: ~r Options.tabColors() ? 'On' : 'Off' ~</button>
-            <button class="mini-options-button" onclick="Options.togglePresetHighlightColors()">Preset highlight colors: ~r Options.presetHighlightColors() ? 'On' : 'Off' ~</button>
-          </div></td>
           <td><div class="options-div">Notation: <select ~!value=Options.notation()~ ~!onchange=function() {Options.setNotation(this.value)}~>
             <option value="Scientific">Scientific</option>
             <option value="Engineering">Engineering</option>
@@ -5960,6 +5954,7 @@
             <option value="Shi">Shi</option>
             <option value="Blind">Blind</option>
           </select></div></td>
+          <td><div class="options-div">Usual digits of precision:<br/><input type="text" ~!value=Options.lowerPrecision()~ ~!onchange=function() {Options.setLowerPrecision(+this.value)}~></input><br/>Higher digits of precision:<br/><input type="text" ~!value=Options.higherPrecision()~ ~!onchange=function() {Options.setHigherPrecision(+this.value)}~></input></div></td>
           <td><button class="options-button" onclick="Options.nextTimeDisplay()" style="font-size: 0.875rem;">Time display: ~r player.options.timeDisplay ~<br/>(for example, ~t 83.125 ~)</button></td>
         </tr>
           <td><button class="options-button" onclick="Options.toggleHotkeys()">Hotkeys: ~r player.options.hotkeys ? "On" : "Off" ~</button></td>
@@ -5998,10 +5993,15 @@
             <button ~style.display=(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('powers')">Full power options: ~r Options.showFullOptions('powers') ? 'On' : 'Off' ~</button>
             <button ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('finality')">Full finality shard options: ~r Options.showFullOptions('finality') ? 'On' : 'Off' ~</button>
           </div></td>
+          <td><div class="options-div">
+            <button class="mini-options-button" onclick="Options.nextCompletionColors()">Completion colors: ~r player.options.completionColors ~</button>
+            <button class="mini-options-button" onclick="Options.toggleResetColors()">Reset colors: ~r Options.resetColors() ? 'On' : 'Off' ~</button>
+            <button class="mini-options-button" onclick="Options.toggleTabColors()">Tab colors: ~r Options.tabColors() ? 'On' : 'Off' ~</button>
+            <button class="mini-options-button" onclick="Options.togglePresetHighlightColors()">Preset highlight colors: ~r Options.presetHighlightColors() ? 'On' : 'Off' ~</button>
+          </div></td>
           <td><button ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~ class="options-button" onclick="Options.toggleComplexityChallengeRunningColors()" style="font-size: 0.875rem;">
             Complexity challenge colors: ~r Options.complexityChallengeRunningColors() ? "Running" : "Completions" ~
           </button></td>
-          <td/>
         <tr/>
       </table>
       <div>

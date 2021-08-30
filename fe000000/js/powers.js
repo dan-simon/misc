@@ -411,13 +411,13 @@ let Powers = {
   descriptionFullEffect(type, i) {
     if (this.canAccessPower(type, i)) {
       let power = this.accessPower(type, i);
-      return this.title(power.type) + ' ^' + formatWithPrecision(this.getEffect(power), 5);
+      return this.title(power.type) + ' ^' + formatPrecisely(this.getEffect(power));
     }
   },
   descriptionEffect(type, i) {
     if (this.canAccessPower(type, i)) {
       let power = this.accessPower(type, i);
-      return '^' + formatWithPrecision(this.getEffect(power), 5);
+      return '^' + formatPrecisely(this.getEffect(power));
     }
   },
   descriptionStrengthRarity(type, i) {
@@ -453,7 +453,7 @@ let Powers = {
     }
   },
   totalEffectDescription(type) {
-    return this.shortDescriptionData[type] + ': ^' + formatWithPrecision(this.getTotalEffect(type), 5);
+    return this.shortDescriptionData[type] + ': ^' + formatPrecisely(this.getTotalEffect(type));
   },
   displayIndexToRealIndex(i) {
     return this.getUnsortedPowerList(this.typeList[(i - 1) % 4], false, false)[Math.floor((i - 1) / 4)].index - 1;

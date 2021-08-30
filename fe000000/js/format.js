@@ -1,11 +1,19 @@
 let NOTATIONS = {};
 
 function format (x) {
-  return formatWithPrecision(x, 3);
+  return formatWithPrecision(x, Options.lowerPrecision());
+}
+
+function formatPrecisely (x) {
+  return formatWithPrecision(x, Options.higherPrecision());
+}
+
+function formatVeryPrecisely (x) {
+  return formatWithPrecision(x, Options.highestPrecision());
 }
 
 function formatInt (x) {
-  return getNotation().format(x, 3, 0);
+  return getNotation().format(x, Options.lowerPrecision(), 0);
 }
 
 function formatMaybeInt (x) {

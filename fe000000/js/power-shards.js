@@ -179,7 +179,7 @@ let PowerShards = {
       Math.sqrt(Math.log2(this.amount() / 4) + Math.pow(Powers.minimumRarity(), 2)));
   },
   maxCraftRarityText() {
-    return this.canCraftAny() ? formatWithPrecision(this.maxCraftRarity(), 5) : 'cannot craft any rarity';
+    return this.canCraftAny() ? formatPrecisely(this.maxCraftRarity()) : 'cannot craft any rarity';
   },
   setCraftRarityToMax() {
     if (!this.canCraftAny()) return;

@@ -332,8 +332,8 @@ let EternityChallenge = {
     let cc = this.currentEternityChallenge();
     if (cc === 1) {
       return 'Eternity Challenge 1 exponents: ' +
-        formatWithPrecision(this.eternityChallenge1InfinityStarsEffect(), 5) + ' to normal generators, ' +
-        formatWithPrecision(this.eternityChallenge1EternityStarsEffect(), 5) + ' to infinity generators';
+        formatPrecisely(this.eternityChallenge1InfinityStarsEffect()) + ' to normal generators, ' +
+        formatPrecisely(this.eternityChallenge1EternityStarsEffect()) + ' to infinity generators';
     } else if (cc === 4) {
       return 'Eternity Challenge 4: ' + formatInt(this.eternityChallenge4DoneInfinities()) + '/' +
         formatInt(this.eternityChallenge4AllowedInfinities()) + ' infinities done';
