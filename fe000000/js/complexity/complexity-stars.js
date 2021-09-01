@@ -15,7 +15,7 @@ let ComplexityStars = {
     return player.complexities > 0 || ComplexityGenerator(1).bought() > 0;
   },
   extraComplexityStarPower() {
-    if (FinalityMilestones.isFinalityMilestoneActive(5)) {
+    if (FinalityMilestones.isFinalityMilestoneActive(9)) {
       return Powers.effectOfBestComplexityPowers() / Powers.getTotalEffect('complexity');
     } else {
       return 1;

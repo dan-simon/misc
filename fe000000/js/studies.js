@@ -604,7 +604,7 @@ let Studies = {
     return player.studySettings.boughtTheoremsThisComplexity;
   },
   isAutoLoadUnlocked() {
-    return FinalityMilestones.isFinalityMilestoneActive(3);
+    return FinalityMilestones.isFinalityMilestoneActive(6);
   },
   isAutoLoadActive() {
     return this.isAutoLoadUnlocked() && this.isAutoLoadOn();

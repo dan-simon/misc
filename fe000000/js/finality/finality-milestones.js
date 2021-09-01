@@ -1,5 +1,5 @@
 let FinalityMilestones = {
-  finalityMilestoneRequirements: [2, 4, 6, 8, 10, 12, 14, 16, 32, 64],
+  finalityMilestoneRequirements: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 16, 32, 64],
   getFinalityMilestoneRequirement(x) {
     return this.finalityMilestoneRequirements[x - 1];
   },
@@ -7,7 +7,7 @@ let FinalityMilestones = {
     return player.finalities >= this.getFinalityMilestoneRequirement(x);
   },
   hasAllFinalityMilestones() {
-    return this.hasFinalityMilestone(10);
+    return this.hasFinalityMilestone(16);
   },
   isFinalityMilestoneActive(x) {
     return this.hasFinalityMilestone(x);
@@ -31,19 +31,19 @@ let FinalityMilestones = {
     }
   },
   startingComplexityPoints() {
-    return this.isFinalityMilestoneActive(2) ? this.rawStartingComplexityPoints() : new Decimal(0);
+    return this.isFinalityMilestoneActive(3) ? this.rawStartingComplexityPoints() : new Decimal(0);
   },
   rawStartingComplexityPoints() {
     return new Decimal(2);
   },
   keptComplexityChallenges() {
-    return this.isFinalityMilestoneActive(2) ? this.rawKeptComplexityChallenges() : 0;
+    return this.isFinalityMilestoneActive(4) ? this.rawKeptComplexityChallenges() : 0;
   },
   rawKeptComplexityChallenges() {
     return Math.floor(Math.pow(2, Math.min(16, player.finalities) / 2));
   },
   freeTimeInComplexity() {
-    return FinalityMilestones.isFinalityMilestoneActive(9) ? this.rawFreeTimeInComplexity() : 0;
+    return FinalityMilestones.isFinalityMilestoneActive(15) ? this.rawFreeTimeInComplexity() : 0;
   },
   rawFreeTimeInComplexity() {
     return Math.min(16, Math.max(1, Math.sqrt(player.finalities)));

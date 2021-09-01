@@ -39,13 +39,13 @@ function gameLoop(diff, display, isOnline) {
   if (EternityChallenge.isTotalCompletionsRewardActive(3)) {
     InfinityPoints.addAmount(InfinityPrestigeLayer.infinityPointGain().times(diff));
   }
-  if (Powers.isUnlocked() || FinalityMilestones.isFinalityMilestoneActive(6)) {
+  if (Powers.isUnlocked() || FinalityMilestones.isFinalityMilestoneActive(8)) {
     EternityPoints.addAmount(EternityPrestigeLayer.eternityPointGain().times(diff));
   }
   if (Permanence.hasPassiveProduction()) {
     Permanence.add(Permanence.permanenceGain().times(diff));
   }
-  if (FinalityMilestones.isFinalityMilestoneActive(10)) {
+  if (FinalityMilestones.isFinalityMilestoneActive(16)) {
     ComplexityPoints.addAmount(ComplexityPrestigeLayer.complexityPointGain().times(diff));
   }
   Studies.updateExtraTheorems();

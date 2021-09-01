@@ -11,7 +11,7 @@ let Autobuyer = function (i) {
       } else if (i === 15) {
         return ComplexityAchievements.isAchievementsUnlockedRewardActive(4);
       } else if (i === 16) {
-        return FinalityMilestones.isFinalityMilestoneActive(8);
+        return FinalityMilestones.isFinalityMilestoneActive(14);
       } else if (i > 9) {
         return Challenge.isChallengeCompleted(i);
       } else {

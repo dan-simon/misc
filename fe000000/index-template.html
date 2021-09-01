@@ -3008,12 +3008,12 @@
       <span>You have ~f ComplexityStars.amount() ~ complexity stars, making all complexity challenge rewards ~f ComplexityStars.complexityChallengeRewardMultiplier() ~x stronger.</span>
       <br/>
       <span>You are getting ~f ComplexityStars.perSecond() ~ complexity stars per second.</span>
-      <div ~style.display=FinalityMilestones.isFinalityMilestoneActive(5) ? '' : 'none'~>
+      <div ~style.display=FinalityMilestones.isFinalityMilestoneActive(9) ? '' : 'none'~>
         <span>You have ~f ComplexityStars.amount() ~^~f ComplexityStars.extraComplexityStarPower() ~ = ~f ComplexityStars.extraAmount() ~ hypercomplexity stars,</span>
         <br/>
         <span>used for Complexity Challenge 6 reward strength and complexity star factor.</span>
       </div>
-      <br ~style.display=FinalityMilestones.isFinalityMilestoneActive(5) ? 'none' : ''~/>
+      <br ~style.display=FinalityMilestones.isFinalityMilestoneActive(9) ? 'none' : ''~/>
       <span>View all complexity generators even if they would be otherwise invisible: <input type="checkbox" ~!checked=Options.rawViewAllGenerators('complexity')~ ~!onchange=function() {Options.setRawViewAllGenerators('complexity', this.checked)}~></input></span>
       <br/>
       <br/>
@@ -3101,8 +3101,8 @@
       <span>You have ~i Complexities.amount() ~ complexit~y Complexities.amount() ~ (allowing you to enter ~i ComplexityChallenge.numberUnlocked() ~ complexity challenge~s ComplexityChallenge.numberUnlocked() ~).</span>
       <br/>
       <span>Complexity challenge rewards are currently ~f ComplexityStars.complexityChallengeRewardMultiplier() ~x stronger (from ~f ComplexityStars.amount() ~ complexity stars).</span>
-      <br ~style.display=FinalityMilestones.isFinalityMilestoneActive(5) ? '' : 'none'~/>
-      <span ~style.display=FinalityMilestones.isFinalityMilestoneActive(5) ? '' : 'none'~>The Complexity Challenge 6 reward is instead currently ~f ComplexityStars.complexityChallengeRewardMultiplier(6) ~x stronger (from ~f ComplexityStars.extraAmount() ~ hypercomplexity stars).</span>
+      <br ~style.display=FinalityMilestones.isFinalityMilestoneActive(9) ? '' : 'none'~/>
+      <span ~style.display=FinalityMilestones.isFinalityMilestoneActive(9) ? '' : 'none'~>The Complexity Challenge 6 reward is instead currently ~f ComplexityStars.complexityChallengeRewardMultiplier(6) ~x stronger (from ~f ComplexityStars.extraAmount() ~ hypercomplexity stars).</span>
       <br/>
       <br/>
       <span>You do not need to complexity to complete complexity challenges.<span ~style.display=ComplexityChallenge.isExplanationMovedDown() ? '' : 'none'~> How to complete them is explained at the bottom of this tab.</span></span>
@@ -3279,7 +3279,7 @@
               <br ~style.display=ComplexityChallenge.showActualExtraTheorems() ? '' : 'none'~/>
               <span ~style.display=ComplexityChallenge.showActualExtraTheorems() ? '' : 'none'~>(increased to +~i ComplexityChallenge.extraTheoremsActualAndDisplay() ~, from "On the other side")</span>
               <br ~style.display=ComplexityChallenge.extraComplexityStarsForNextExtraTheorem().neq(Infinity) ? '' : 'none'~/>
-              <span ~style.display=ComplexityChallenge.extraComplexityStarsForNextExtraTheorem().neq(Infinity) ? '' : 'none'~>Next theorem at ~f ComplexityChallenge.extraComplexityStarsForNextExtraTheorem() ~ <span ~style.display=FinalityMilestones.isFinalityMilestoneActive(5) ? '' : 'none'~>hyper</span>complexity stars.</span>
+              <span ~style.display=ComplexityChallenge.extraComplexityStarsForNextExtraTheorem().neq(Infinity) ? '' : 'none'~>Next theorem at ~f ComplexityChallenge.extraComplexityStarsForNextExtraTheorem() ~ <span ~style.display=FinalityMilestones.isFinalityMilestoneActive(9) ? '' : 'none'~>hyper</span>complexity stars.</span>
             </div>
           </td>
         </tr>
@@ -3361,7 +3361,7 @@
       </span>
       <br/>
       <span ~class=ComplexityAchievements.getAchievementsUnlockedRewardClass(4)~>
-        You start each ~r PrestigeLayerNames.layersAbove('complexity') ~ with ~f ComplexityAchievements.getAchievementsUnlockedRewardRawEffect(4) ~ EP, and you get a complexity autobuyer.
+        You start each ~r PrestigeLayerNames.layersAbove('complexity') ~ with ~f ComplexityAchievements.getAchievementsUnlockedRewardRawEffect(4) ~ EP, and you unlock a complexity autobuyer.
       </span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
@@ -3559,7 +3559,7 @@
           Unlock Powers<br/>Cost: ~f Powers.unlockCost() ~ complexity points
         </button>
         <div ~style.display=SpecialTabs.isTabVisible('oracle') ? 'none' : ''~>Unlocking powers for the first time will also let you view the Oracle tab.</div>
-        <div ~style.display=FinalityMilestones.isFinalityMilestoneActive(6) ? 'none' : ''~>Unlocking powers will also let you gain your eternity points on eternity every second, without needing to eternity (EP generation).</div>
+        <div ~style.display=FinalityMilestones.isFinalityMilestoneActive(8) ? 'none' : ''~>Unlocking powers will also let you gain your eternity points on eternity every second, without needing to eternity (EP generation).</div>
       </div>
       <div ~style.display=Powers.isUnlocked() ? '' : 'none'~>
         <span>You have ~i Powers.equipped().length ~/~i Powers.equippedLimit() ~ equipped power~s Powers.equippedLimit() ~.</span>
@@ -3571,8 +3571,8 @@
         <span>If all power slots are full, to unequip a power and create a free slot you need to complexity.</span>
         <br/>
         <span>You start with ~i 1 ~ power of each type but get more over time. You can have multiple powers of the same type equipped.</span>
-        <br ~style.display=FinalityMilestones.isFinalityMilestoneActive(6) ? 'none' : ''~/>
-        <span ~style.display=FinalityMilestones.isFinalityMilestoneActive(6) ? 'none' : ''~>Due to unlocking powers, you gain your eternity points on eternity every second, without needing to eternity (EP generation).</span>
+        <br ~style.display=FinalityMilestones.isFinalityMilestoneActive(8) ? 'none' : ''~/>
+        <span ~style.display=FinalityMilestones.isFinalityMilestoneActive(8) ? 'none' : ''~>Due to unlocking powers, you gain your eternity points on eternity every second, without needing to eternity (EP generation).</span>
         <br/>
         <br/>
         <span>You gain a new power once every ~t Powers.interval() ~, next in ~t Powers.timeUntilPowerGain() ~. <button onclick="Powers.togglePowerGain()">Power gain: ~r Powers.isPowerGainOn() ? "On" : "Off" ~</button></span>
@@ -4447,18 +4447,18 @@
         <button style="height: 48px;" onclick="Galaxy.unlock()" ~class=Galaxy.canUnlock() ? '' : 'disabled'~>
           Unlock Galaxies<br/>Cost: ~f Galaxy.unlockCost() ~ complexity points
         </button>
-        <div ~style.display=FinalityMilestones.isFinalityMilestoneActive(1) ? 'none' : ''~>Unlocking galaxies will also give you autobuyers for complexity generators and power upgrades.</div>
+        <div ~style.display=FinalityMilestones.isFinalityMilestoneActive(2) ? 'none' : ''~>Unlocking galaxies will also give you autobuyers for complexity generators and power upgrades.</div>
       </div>
       <div ~style.display=Galaxy.isUnlocked() ? '' : 'none'~>
-        <div ~style.display=FinalityMilestones.isFinalityMilestoneActive(1) ? 'none' : ''~>Due to unlocking galaxies, you have autobuyers for complexity generators and power upgrades.</div>
-        <br ~style.display=FinalityMilestones.isFinalityMilestoneActive(1) ? 'none' : ''~/>
+        <div ~style.display=FinalityMilestones.isFinalityMilestoneActive(2) ? 'none' : ''~>Due to unlocking galaxies, you have autobuyers for complexity generators and power upgrades.</div>
+        <br ~style.display=FinalityMilestones.isFinalityMilestoneActive(2) ? 'none' : ''~/>
         <span>You have produced ~f Galaxy.totalStarsProducedThisFinality() ~ total stars this finality, making your star factor ~f Galaxy.starFactor() ~.</span>
         <br/>
         <span>You have produced ~f Galaxy.totalInfinityStarsProducedThisFinality() ~ total infinity stars this finality, making your infinity star factor ~f Galaxy.infinityStarFactor() ~.</span>
         <br/>
         <span>You have produced ~f Galaxy.totalEternityStarsProducedThisFinality() ~ total eternity stars this finality, making your eternity star factor ~f Galaxy.eternityStarFactor() ~.</span>
         <br/>
-        <span>You have produced ~f Galaxy.totalComplexityStarsProducedThisFinality() ~ total <span ~style.display=FinalityMilestones.isFinalityMilestoneActive(5) ? '' : 'none'~>hyper</span>complexity stars this finality, making your complexity star factor ~f Galaxy.complexityStarFactor() ~.</span>
+        <span>You have produced ~f Galaxy.totalComplexityStarsProducedThisFinality() ~ total <span ~style.display=FinalityMilestones.isFinalityMilestoneActive(9) ? '' : 'none'~>hyper</span>complexity stars this finality, making your complexity star factor ~f Galaxy.complexityStarFactor() ~.</span>
         <br/>
         <span>Your stellar product is ~f Galaxy.starFactor() ~ x ~f Galaxy.infinityStarFactor() ~ x ~f Galaxy.eternityStarFactor() ~ x ~f Galaxy.complexityStarFactor() ~ = ~f Galaxy.stellarProduct() ~.</span>
         <br/>
@@ -4964,11 +4964,11 @@
         <tr>
           <td>
             <div class="finalitymilestonediv" ~style.background=FinalityMilestones.color(1)~>
-              ~i FinalityMilestones.getFinalityMilestoneRequirement(1) ~ finalities
+              ~i FinalityMilestones.getFinalityMilestoneRequirement(1) ~ finality
               <br/>
               ~r FinalityMilestones.milestoneStatusDescription(1) ~
               <br/>
-              Remove the complexity unlock requirements for complexity challenges, and always have autobuyers for complexity generator and power upgrades.
+              Divide the complexity unlock requirements for complexity challenges by ~i 2 ~.
             </div>
           </td>
           <td>
@@ -4977,7 +4977,7 @@
               <br/>
               ~r FinalityMilestones.milestoneStatusDescription(2) ~
               <br/>
-              Start each ~r PrestigeLayerNames.layersAbove('finality') ~ with ~i FinalityMilestones.rawStartingComplexityPoints() ~ ℂP, and keep completions of each complexity challenge on ~r PrestigeLayerNames.layersAbove('finality') ~ based on your finalities (currently ~i FinalityMilestones.rawKeptComplexityChallenges() ~)
+              Remove the complexity unlock requirements for complexity challenges, and always have autobuyers for complexity generator and power upgrades.
             </div>
           </td>
           <td>
@@ -4986,7 +4986,7 @@
               <br/>
               ~r FinalityMilestones.milestoneStatusDescription(3) ~
               <br/>
-              Unlock study list auto-load.
+              Start each ~r PrestigeLayerNames.layersAbove('finality') ~ with ~i FinalityMilestones.rawStartingComplexityPoints() ~ ℂP.
             </div>
           </td>
           <td>
@@ -4995,18 +4995,18 @@
               <br/>
               ~r FinalityMilestones.milestoneStatusDescription(4) ~
               <br/>
-              Unlock autobuyers for power shard upgrades, and automatically gain permanence every second without needing to reset eternities.
+              Keep completions of each complexity challenge on ~r PrestigeLayerNames.layersAbove('finality') ~ based on your finalities (currently ~i FinalityMilestones.rawKeptComplexityChallenges() ~)
             </div>
           </td>
         </tr>
         <tr>
           <td>
-            <div class="finalitymilestonediv" ~style.background=FinalityMilestones.color(5)~ style="font-size: 0.875rem;">
+            <div class="finalitymilestonediv" ~style.background=FinalityMilestones.color(5)~>
               ~i FinalityMilestones.getFinalityMilestoneRequirement(5) ~ finalities
               <br/>
               ~r FinalityMilestones.milestoneStatusDescription(5) ~
               <br/>
-              Complexity Challenge 6 reward strength and total complexity stars are based on hypercomplexity stars, which are what your complexity stars would be if your complexity power~s Powers.equippedLimit() ~ were equipped.
+              Automatically gain permanence every second without needing to reset eternities.
             </div>
           </td>
           <td>
@@ -5015,7 +5015,7 @@
               <br/>
               ~r FinalityMilestones.milestoneStatusDescription(6) ~
               <br/>
-              Always have EP generation, and automatically swap equipped powers with better stored powers of the same type.
+              Unlock study list auto-load.
             </div>
           </td>
           <td>
@@ -5024,7 +5024,7 @@
               <br/>
               ~r FinalityMilestones.milestoneStatusDescription(7) ~
               <br/>
-              Unlock equipped powers auto-load.
+              Unlock autobuyers for power shard upgrades.
             </div>
           </td>
           <td>
@@ -5033,19 +5033,18 @@
               <br/>
               ~r FinalityMilestones.milestoneStatusDescription(8) ~
               <br/>
-              Automatically unlock powers, the Oracle, and galaxies when possible, and get a finality autobuyer.
+              Always have EP generation.
             </div>
           </td>
         </tr>
         <tr>
-          <td></td>
           <td>
-            <div class="finalitymilestonediv" ~style.background=FinalityMilestones.color(9)~>
+            <div class="finalitymilestonediv" ~style.background=FinalityMilestones.color(9)~ style="font-size: 0.875rem;">
               ~i FinalityMilestones.getFinalityMilestoneRequirement(9) ~ finalities
               <br/>
               ~r FinalityMilestones.milestoneStatusDescription(9) ~
               <br/>
-              For galaxy effect and eternity power extra multipliers, you start each ~r PrestigeLayerNames.layersAbove('complexity') ~ with time in complexity based on your finalities (currently ~t FinalityMilestones.rawFreeTimeInComplexity() ~)
+              Complexity Challenge 6 reward strength and total complexity stars are based on hypercomplexity stars, which are what your complexity stars would be if your complexity power~s Powers.equippedLimit() ~ were equipped.
             </div>
           </td>
           <td>
@@ -5054,10 +5053,65 @@
               <br/>
               ~r FinalityMilestones.milestoneStatusDescription(10) ~
               <br/>
+              Automatically unlock powers when possible.
+            </div>
+          </td>
+          <td>
+            <div class="finalitymilestonediv" ~style.background=FinalityMilestones.color(11)~>
+              ~i FinalityMilestones.getFinalityMilestoneRequirement(11) ~ finalities
+              <br/>
+              ~r FinalityMilestones.milestoneStatusDescription(11) ~
+              <br/>
+              Automatically swap equipped powers with better stored powers of the same type.
+            </div>
+          </td>
+          <td>
+            <div class="finalitymilestonediv" ~style.background=FinalityMilestones.color(12)~>
+              ~i FinalityMilestones.getFinalityMilestoneRequirement(12) ~ finalities
+              <br/>
+              ~r FinalityMilestones.milestoneStatusDescription(12) ~
+              <br/>
+              Automatically unlock the Oracle and galaxies when possible.
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="finalitymilestonediv" ~style.background=FinalityMilestones.color(13)~>
+              ~i FinalityMilestones.getFinalityMilestoneRequirement(13) ~ finalities
+              <br/>
+              ~r FinalityMilestones.milestoneStatusDescription(13) ~
+              <br/>
+              Unlock equipped powers auto-load.
+            </div>
+          </td>
+          <td>
+            <div class="finalitymilestonediv" ~style.background=FinalityMilestones.color(14)~>
+              ~i FinalityMilestones.getFinalityMilestoneRequirement(14) ~ finalities
+              <br/>
+              ~r FinalityMilestones.milestoneStatusDescription(14) ~
+              <br/>
+              Unlock a finality autobuyer.
+            </div>
+          </td>
+          <td>
+            <div class="finalitymilestonediv" ~style.background=FinalityMilestones.color(15)~>
+              ~i FinalityMilestones.getFinalityMilestoneRequirement(15) ~ finalities
+              <br/>
+              ~r FinalityMilestones.milestoneStatusDescription(15) ~
+              <br/>
+              For galaxy effect and eternity power extra multipliers, you start each ~r PrestigeLayerNames.layersAbove('complexity') ~ with time in complexity based on your finalities (currently ~t FinalityMilestones.rawFreeTimeInComplexity() ~)
+            </div>
+          </td>
+          <td>
+            <div class="finalitymilestonediv" ~style.background=FinalityMilestones.color(16)~>
+              ~i FinalityMilestones.getFinalityMilestoneRequirement(16) ~ finalities
+              <br/>
+              ~r FinalityMilestones.milestoneStatusDescription(16) ~
+              <br/>
               You gain your complexity points on complexity every second, without needing to complexity (ℂP generation).
             </div>
           </td>
-          <td></td>
         </tr>
       </table>
     </tab>

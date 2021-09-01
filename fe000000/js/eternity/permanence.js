@@ -20,7 +20,7 @@ let Permanence = {
     }
   },
   hasPassiveProduction() {
-    return FinalityMilestones.isFinalityMilestoneActive(4);
+    return FinalityMilestones.isFinalityMilestoneActive(5);
   },
   productionPerSecondText() {
     let template;

@@ -4,7 +4,7 @@ let ComplexityChallenge = {
     Decimal.pow(2, Math.pow(2, 24)), Decimal.pow(2, Math.pow(2, 29)),
     Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 24)),
   ],
-  requirements: [Infinity, 0, 2, 4, 6, 8, 12],
+  baseRequirements: [Infinity, 0, 2, 4, 6, 8, 12],
   rewards: [
     null,
     x => Decimal.pow(2, x * Math.pow(Stars.amount().max(1).log2(), 0.5) / 2),
@@ -21,10 +21,20 @@ let ComplexityChallenge = {
   exitComplexityChallenge(x) {
     player.isComplexityChallengeRunning[x - 1] = false;
   },
+  getComplexityChallengeRequirement(x) {
+    if (FinalityMilestones.isFinalityMilestoneActive(2)) {
+      return 0;
+    } else if (FinalityMilestones.isFinalityMilestoneActive(1)) {
+      // All the base requirements should be even but I'm putting this in for safety.
+      return Math.floor(this.baseRequirements[x] / 2);
+    } else {
+      return this.baseRequirements[x];
+    }
+  },
   isComplexityChallengeUnlocked(x) {
     // Yes, you can complete Complexity Challenge 1 before knowing that it exists.
-    // Finality Milestone 1 also removes complexity requirements for unlocking complexity challenges.
-    return player.complexities >= this.requirements[x] || FinalityMilestones.isFinalityMilestoneActive(1);
+    // Finality Milestone 2 also removes complexity requirements for unlocking complexity challenges.
+    return player.complexities >= this.getComplexityChallengeRequirement(x) || FinalityMilestones.isFinalityMilestoneActive(2);
   },
   numberUnlocked() {
     return [1, 2, 3, 4, 5, 6].filter(i => this.isComplexityChallengeUnlocked(i)).length;
@@ -75,7 +85,8 @@ let ComplexityChallenge = {
   },
   complexityChallengeStatusDescription(x) {
     if (!this.isComplexityChallengeUnlocked(x)) {
-      return 'Locked (requires ' + formatInt(this.requirements[x]) + ' complexities)';
+      let requirement = this.getComplexityChallengeRequirement(x);
+      return 'Locked (requires ' + formatInt(requirement) + ' complexit' + pluralize(requirement, 'y', 'ies') + ')';
     }
     let description = formatInt(this.getComplexityChallengeCompletions(x)) + ' completion' +
       pluralize(this.getComplexityChallengeCompletions(x), '', 's');

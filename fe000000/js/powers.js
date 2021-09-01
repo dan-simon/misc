@@ -307,7 +307,7 @@ let Powers = {
     return this.strength(p) * this.rarity(p) > cutoff;
   },
   maybeEquippedSwap() {
-    if (FinalityMilestones.isFinalityMilestoneActive(6)) {
+    if (FinalityMilestones.isFinalityMilestoneActive(11)) {
       this.equippedSwap();
     }
   },
@@ -673,7 +673,7 @@ let Powers = {
     player.confirmations.powerUnequipMode = x;
   },
   isAutoLoadUnlocked() {
-    return FinalityMilestones.isFinalityMilestoneActive(7);
+    return FinalityMilestones.isFinalityMilestoneActive(13);
   },
   isAutoLoadActive() {
     return this.isAutoLoadUnlocked() && this.isAutoLoadOn();
