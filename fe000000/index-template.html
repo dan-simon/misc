@@ -5247,7 +5247,7 @@
     <tab ~style.display=Tabs.currentTab() === 'achievements' ? '' : 'none'~>
       <span>You have completed ~i Achievements.getTotalAchievementsUnlocked() ~ achievements.</span>
       <br/>
-      <span>Only achievements up to ~i Achievements.beyondHighestRounded() ~ beyond the last achievement you have are shown. The others are replaced with question marks.</span>
+      <span>Only achievements up to ~i Achievements.beyondHighest() ~ beyond the last achievement you have are shown. The others are replaced with question marks.</span>
       <br/>
       <span>Number of achievements beyond last reached achievement to show: <input type="text" ~!value=Achievements.beyondHighest()~ ~!onchange=function() {Achievements.setBeyondHighest(+this.value)}~></input></span>
       <br/>

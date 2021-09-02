@@ -322,7 +322,7 @@ let Achievements = {
   },
   showRow(x) {
     if (!('row' + x in this.cache)) {
-      let highestCloseRow = Math.min(8, Math.floor(this.getHighest()  + this.beyondHighest() - 1) / 8);
+      let highestCloseRow = Math.min(8, Math.floor(this.getHighest() + this.beyondHighest() - 1) / 8);
       this.cache['row' + x] = (this.showFullyFarRows() || x <= highestCloseRow) &&
         (this.showCompletedRows() || range(1, 8).some(y => !this.hasAchievement(x, y)));
     }
@@ -332,13 +332,10 @@ let Achievements = {
     return this.isAchievementClose(row, column) && this.showRow(row);
   },
   beyondHighest() {
-    return player.achievements.beyondHighest;
-  },
-  beyondHighestRounded() {
     return Math.max(0, Math.floor(player.achievements.beyondHighest));
   },
   setBeyondHighest(x) {
-    player.achievements.beyondHighest = x;
+    player.achievements.beyondHighest = (x === 0) ? 0 : (x || 2);
   },
   getHighest() {
     if (!('highest' in this.cache)) {

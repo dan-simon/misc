@@ -4069,7 +4069,7 @@ function updateDisplay() {
   }
   if (b[1635].style.display !== "none") {
     if (shouldUpdate("e1644")) {e[1644].textContent = formatInt(Achievements.getTotalAchievementsUnlocked())};
-    if (shouldUpdate("e1645")) {e[1645].textContent = formatInt(Achievements.beyondHighestRounded())};
+    if (shouldUpdate("e1645")) {e[1645].textContent = formatInt(Achievements.beyondHighest())};
     if (shouldUpdate("e1646")) {e[1646].textContent = Achievements.active() ? 'are' : 'would be'};
     if (shouldUpdate("b1637")) {b[1637].style.display = PrestigeLayerProgress.hasReached('infinity')};
     if (shouldUpdate("e1647")) {e[1647].textContent = format(Achievements.rawGeneratorMultiplier())};
