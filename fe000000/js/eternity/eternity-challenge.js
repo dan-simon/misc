@@ -74,6 +74,23 @@ let EternityChallenge = {
       return 'Requires more unspent theorems';
     }
   },
+  pressUnlockedEternityChallengeHeaderButton() {
+    let unlocked = this.getUnlockedEternityChallenge();
+    if (unlocked !== 0) {
+      this.pressEternityChallengeButton(unlocked);
+    }
+  },
+  unlockedEternityChallengeHeaderButtonText() {
+    let unlocked = this.getUnlockedEternityChallenge();
+    if (unlocked !== 0) {
+      // Note the implicit conversion of unlocked directly to string (unformatted) in the below.
+      if (this.isEternityChallengeRunning(unlocked)) {
+        return 'Exit Eternity Challenge ' + unlocked + ' (this will not complete it)';
+      } else if (this.canEternityChallengeBeStarted(unlocked)) {
+        return 'Start Eternity Challenge ' + unlocked;
+      }
+    }
+  },
   currentEternityChallenge() {
     return player.currentEternityChallenge;
   },
