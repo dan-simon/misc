@@ -82,3 +82,26 @@ let Stats = {
     return this.showAnyRuns(x) && this.showRunType(layer) && player.stats[this.key(layer)][x - 1][0] !== -1;
   }
 }
+
+// This is here since it's vaguely stats-related and adding a new file just for this didn't seem wise.
+let FastResetText = {
+  layers: ['infinity', 'eternity', 'complexity', 'finality'],
+  autobuyerIndices: [12, 13, 15, 16],
+  getTextForLayer(x) {
+    // We need the leading space to separate from previous text.
+    return ' You are currently doing fast ' + x.slice(0, -1) + 'ies due to your ' + x + ' autobuyer.'
+  },
+  isDoingFast(x) {
+    let info = player.stats[Stats.key(x)];
+    let times = info.map(x => x[0]);
+    return times.every(x => x !== -1 && x <= 1) && Autobuyer(this.autobuyerIndices[this.layers.indexOf(x)]).isActive();
+  },
+  getText(x) {
+    for (let i of this.layers) {
+      if (this.isDoingFast(i)) {
+        return this.getTextForLayer(i);
+      }
+    }
+    return '';
+  }
+}
