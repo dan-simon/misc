@@ -44,7 +44,7 @@ window.onload = function () {
 
 let randomMessageList = [
   'Do you really need a guide for this?',
-  'This guide does not yet cover the entire game.',
+  'This guide now covers the entire game, at least if you define "cover" loosely.',
   'Nothing in here is necessarily optimal, but it\'s probably fairly close.',
   'Feel free to make suggestions to improve this guide.',
   'Did you know that some stars in the sky are dead, but we still see their ancient image?',
