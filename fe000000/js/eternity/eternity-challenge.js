@@ -74,14 +74,14 @@ let EternityChallenge = {
       return 'Requires more unspent theorems';
     }
   },
-  pressUnlockedEternityChallengeHeaderButton() {
-    let unlocked = this.getUnlockedEternityChallenge();
+  pressUnlockedOrRunningEternityChallengeHeaderButton() {
+    let unlocked = this.currentEternityChallenge() || this.getUnlockedEternityChallenge();
     if (unlocked !== 0) {
       this.pressEternityChallengeButton(unlocked);
     }
   },
-  unlockedEternityChallengeHeaderButtonText() {
-    let unlocked = this.getUnlockedEternityChallenge();
+  unlockedOrRunningEternityChallengeHeaderButtonText() {
+    let unlocked = this.currentEternityChallenge() || this.getUnlockedEternityChallenge();
     if (unlocked !== 0) {
       // Note the implicit conversion of unlocked directly to string (unformatted) in the below.
       if (this.isEternityChallengeRunning(unlocked)) {
@@ -89,6 +89,13 @@ let EternityChallenge = {
       } else if (this.canEternityChallengeBeStarted(unlocked)) {
         return 'Start Eternity Challenge ' + unlocked;
       }
+    }
+  },
+  restartEternityChallenge() {
+    let running = this.currentEternityChallenge();
+    if (running !== 0) {
+      this.exitEternityChallenge();
+      this.startEternityChallenge(running);
     }
   },
   currentEternityChallenge() {

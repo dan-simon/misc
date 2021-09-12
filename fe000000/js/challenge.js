@@ -6,6 +6,13 @@ let Challenge = {
       this.startChallenge(x);
     }
   },
+  restartChallenge() {
+    let running = this.currentChallenge();
+    if (running !== 0) {
+      this.exitChallenge();
+      this.startChallenge(running);
+    }
+  },
   currentChallenge() {
     return player.currentChallenge;
   },

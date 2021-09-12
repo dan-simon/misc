@@ -54,6 +54,7 @@
   <script src="js/achievements.js?time=%time%"></script>
   <script src="js/autobuyers.js?time=%time%"></script>
   <script src="js/boost.js?time=%time%"></script>
+  <script src="js/challenge-exit-or-restart.js?time=%time%"></script>
   <script src="js/challenge-header-text.js?time=%time%"></script>
   <script src="js/challenge.js?time=%time%"></script>
   <script src="js/chroma.js?time=%time%"></script>
@@ -101,7 +102,7 @@
     <br/>
     <span>Reloading might work, so probably try that first.</span>
     <br id="script-count-br" style="display: none;"/>
-    <span id="script-count-span" style="display: none;">The page loads <span id="script-count"></span> scripts (should be 86).</span>
+    <span id="script-count-span" style="display: none;">The page loads <span id="script-count"></span> scripts (should be 87).</span>
     <br/>
     <span><button onclick="window.location.reload(true)">Reload window</button> <button class="export-button" onclick="Saving.exportGame(0)">Export</button> <button onclick="Saving.loadGamePrompt()">Import/Load</button>  <button onclick="Saving.speedUpOffline()">Speed up offline progress (doing fewer ticks)</button> <button onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></span>
   </div>
@@ -457,7 +458,7 @@
       <br/>
       <span>To complete a normal challenge, infinity while in the normal challenge.</span>
       <br ~style.display=Challenge.isSomeChallengeRunning() ? '' : 'none' ~/>
-      <span ~style.display=Challenge.isSomeChallengeRunning() ? '' : 'none' ~><button onclick="Challenge.exitChallenge()">Exit Normal Challenge ~r Challenge.currentChallenge() ~ (this will not complete it)</button></span>
+      <span ~style.display=Challenge.isSomeChallengeRunning() ? '' : 'none' ~><button onclick="Challenge.exitChallenge()">Exit Normal Challenge ~r Challenge.currentChallenge() ~ (this will not complete it)</button> <button onclick="Challenge.restartChallenge()">Reset it (exit and start again)</button></span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>
@@ -1000,7 +1001,7 @@
       <br/>
       <span>To complete an infinity challenge, infinity while in the infinity challenge.</span>
       <br ~style.display=InfinityChallenge.isSomeInfinityChallengeRunning() ? '' : 'none' ~/>
-      <span ~style.display=InfinityChallenge.isSomeInfinityChallengeRunning() ? '' : 'none' ~><button onclick="InfinityChallenge.exitInfinityChallenge()">Exit Infinity Challenge ~r InfinityChallenge.currentInfinityChallenge() ~ (this will not complete it)</button></span>
+      <span ~style.display=InfinityChallenge.isSomeInfinityChallengeRunning() ? '' : 'none' ~><button onclick="InfinityChallenge.exitInfinityChallenge()">Exit Infinity Challenge ~r InfinityChallenge.currentInfinityChallenge() ~ (this will not complete it)</button>  <button onclick="InfinityChallenge.restartInfinityChallenge()">Reset it (exit and start again)</button></span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>
@@ -2625,8 +2626,10 @@
       <br/>
       <br/>
       <span>To complete an eternity challenge, eternity while in the eternity challenge.</span>
-      <br ~style.display=(EternityChallenge.getUnlockedEternityChallenge() !== 0) ? '' : 'none' ~/>
-      <span ~style.display=(EternityChallenge.getUnlockedEternityChallenge() !== 0) ? '' : 'none' ~><button onclick="EternityChallenge.pressUnlockedEternityChallengeHeaderButton()">~r EternityChallenge.unlockedEternityChallengeHeaderButtonText() ~</button></span>
+      <br ~style.display=(EternityChallenge.currentEternityChallenge() || EternityChallenge.getUnlockedEternityChallenge() !== 0) ? '' : 'none' ~/>
+      <span ~style.display=(EternityChallenge.currentEternityChallenge() || EternityChallenge.getUnlockedEternityChallenge() !== 0) ? '' : 'none' ~>
+        <button onclick="EternityChallenge.pressUnlockedOrRunningEternityChallengeHeaderButton()">~r EternityChallenge.unlockedOrRunningEternityChallengeHeaderButtonText() ~</button>
+        <button ~style.display=EternityChallenge.isSomeEternityChallengeRunning() ? '' : 'none'~ onclick="EternityChallenge.restartEternityChallenge()">Reset it (exit and start again)</button></span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>

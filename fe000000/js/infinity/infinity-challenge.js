@@ -14,6 +14,13 @@ let InfinityChallenge = {
       this.startInfinityChallenge(x);
     }
   },
+  restartInfinityChallenge() {
+    let running = this.currentInfinityChallenge();
+    if (running !== 0) {
+      this.exitInfinityChallenge();
+      this.startInfinityChallenge(running);
+    }
+  },
   currentInfinityChallenge() {
     return player.currentInfinityChallenge;
   },

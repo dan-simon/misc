@@ -131,6 +131,14 @@ window.addEventListener('keydown', function(event) {
     case 84: // T
       toggleDown = true;
     break;
+    
+    case 8 * 11: // X
+      ChallengeExitOrRestart.exitChallenge();
+    break;
+    
+    case 89: // Y
+      ChallengeExitOrRestart.restartChallenge();
+    break;
   }
 }, false);
 
@@ -176,7 +184,8 @@ let Hotkeys = {
     'Generator 1-8 respectively, B to buy max boosts, shift+B to buy a boost, ' +
     'G to max all ~g~, M to max all ~g~ and boosts, A to turn all autobuyers on/off, ' +
     'shift+A to toggle all autobuyers, S to sacrifice',
-    'P to prestige', 'I to infinity', 'E to eternity', 'shift+S to respec studies and eternity',
+    'P to prestige', 'I to infinity, X to exit challenge, Y to restart challenge (exit and start again)',
+    'E to eternity', 'shift+S to respec studies and eternity',
     'R to gain permanence', 'shift+E to respec eternity challenge and eternity', 'C to complexity',
     'shift+P to unequip equipped powers and complexity', 'O to get a prediction from the oracle',
     'F to finality', 'shift+F to respec finality shard upgrades and finality'
