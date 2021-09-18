@@ -25,6 +25,7 @@
 }
 
 body {
+  touch-action: manipulation;
   text-align: center;
   font-family: Typewriter, serif;
   background-color: var(--background-color);
