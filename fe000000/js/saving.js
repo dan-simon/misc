@@ -574,16 +574,31 @@ let Saving = {
       if (player.prestigePower !== '1') {
         player.goals[1] = true;
       }
-      if (player.infinities > 0 || player.eternities !== '0' || player.complexities > 0) {
+      // This works for numbers, strings (that can be converted to Decimal), and Decimals.
+      // It also works for undefined, but it should never need to.
+      // Why each of these things is relevant: infinities and complexities will both be numbers,
+      // and eternities will be a Decimal if they weren't in the save before (default value)
+      // and a string if they were (we haven't converted the save yet).
+      let isPositive = function (x) {
+        return Decimal.gt(x, 0);
+      }
+      // Is this remotely worth the optimization of not recalculating stuff? Probably not.
+      // Note that finalities were added right at this time so there was no need to check for them.
+      let posData = {
+        'infinities': isPositive(player.infinities),
+        'eternities': isPositive(player.eternities),
+        'complexities': isPositive(player.complexities)
+      };
+      if (posData.infinities || posData.eternities || posData.complexities) {
         // We don't technically know that the player has done all these things but it's a fair guess.
         player.goals[0] = true;
         player.goals[1] = true;
         player.goals[2] = true;
       }
-      if (player.eternities !== '0' || player.complexities > 0) {
+      if (posData.eternities || posData.complexities) {
         player.goals[5] = true;
       }
-      if (player.complexities > 0) {
+      if (posData.complexities) {
         player.goals[10] = true;
       }
       player.displayAllGoals = false;
@@ -995,19 +1010,30 @@ let Saving = {
       if (player.prestigePower !== '1') {
         player.achievements.table[1][4] = true;
       }
-      if (player.infinities > 0 || player.eternities !== '0' || player.complexities > 0 || player.finalities > 0) {
+      // Search for either isPositive or posData above to see more information about them.
+      let isPositive = function (x) {
+        return Decimal.gt(x, 0);
+      }
+      // At this point, the player may have finalities.
+      let posData = {
+        'infinities': isPositive(player.infinities),
+        'eternities': isPositive(player.eternities),
+        'complexities': isPositive(player.complexities),
+        'finalities': isPositive(player.finalities)
+      };
+      if (posData.infinities || posData.eternities || posData.complexities || posData.finalities) {
         // We don't technically know that the player has done all these things but it's a fair guess.
         player.achievements.table[1][0] = true;
         player.achievements.table[1][4] = true;
         player.achievements.table[1][7] = true;
       }
-      if (player.eternities !== '0' || player.complexities > 0 || player.finalities > 0) {
+      if (posData.eternities || posData.complexities || posData.finalities) {
         player.achievements.table[3][3] = true;
       }
-      if (player.complexities > 0 || player.finalities > 0) {
+      if (posData.complexities || posData.finalities) {
         player.achievements.table[5][4] = true;
       }
-      if (player.finalities > 0) {
+      if (posData.finalities) {
         player.achievements.table[7][3] = true;
       }
       if (player.stats.fastestEternity <= 3600) {
