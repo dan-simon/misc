@@ -1177,6 +1177,12 @@ let Saving = {
       player.options.higherPrecision = 5;
       player.version = 2.1103515625;
     }
+    if (player.version < 2.111328125) {
+      if (player.options.notation === 'Cancer') {
+        player.options.notation = 'Emoji';
+      }
+      player.version = 2.111328125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
