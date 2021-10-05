@@ -1309,8 +1309,14 @@ let Saving = {
         if (issue) {
           alert('The save you entered does not seem to be valid. ' + issue);
         } else {
-          // This isn't the oracle and needs no callback
-          this.loadGame(save, player.options.offlineProgress, player.options.offlineTicks, false, function () {
+          // This needs a callback to reset time since export and notify that the save was loaded'
+          // (we only want to notify after loading in case something goes wrong).
+          // The Options.offlineTicks() here means we'll always use at least the pre-load
+          // number of offline ticks (we don't need this parameter when, for example,
+          // opening the game in a new window, because then we don't have any potentially different
+          // number of offline progress ticks, but when loading from prompt we have a number
+          // from the pre-load save and a number from the save being loaded).
+          this.loadGame(save, player.options.offlineProgress, Options.offlineTicks(), false, function () {
             // If the player is loading a save from a prompt, we assume that the loaded save
             // is itself an export, and thus reset the export timer.
             player.stats.timeSinceExport = 0;

@@ -2,7 +2,8 @@ function gameLoop(diff, display, isOnline) {
   // Right now display and isOnline are always the same, but who knows if that'll continue to be true?
   if (typeof diff !== 'number') {
     let now = Date.now();
-    diff = Math.max(0, (now - player.lastUpdate) / 1000 * player.cheats.gameSpeed);
+    let rawDiff = (now - player.lastUpdate) / 1000;
+    diff = Math.max(0, rawDiff * player.cheats.gameSpeed);
     player.lastUpdate = now;
   }
   // We cache stuff in achievements for efficiency. This deletes the cache.
