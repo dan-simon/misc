@@ -166,7 +166,7 @@ let Hotkeys = {
     // because in the early game it's good to show future content (unless there's so much it will scare people,
     // which isn't the case here) and to show that there are hotkeys for it.
     return [
-      true, SpecialDivs.isDivVisible('prestige'),
+      true, SpecialDivs.isDivVisible('boosts'), SpecialDivs.isDivVisible('sacrifice'), SpecialDivs.isDivVisible('prestige'),
       PrestigeLayerProgress.hasReached('infinity') || InfinityPrestigeLayer.canInfinity(),
       PrestigeLayerProgress.hasReached('eternity') || EternityPrestigeLayer.canEternity(),
       PrestigeLayerProgress.hasReached('eternity'),
@@ -181,10 +181,10 @@ let Hotkeys = {
   },
   eachText: [
     '1-8 to buy max of Generator 1-8 respectively, shift+1-8 to buy one of ' +
-    'Generator 1-8 respectively, B to buy max boosts, shift+B to buy a boost, ' +
-    'G to max all ~g~, M to max all ~g~ and boosts, A to turn all autobuyers on/off, ' +
-    'shift+A to toggle all autobuyers, S to sacrifice',
-    'P to prestige', 'I to infinity, X to exit challenge, Y to restart challenge (exit and start again)',
+    'Generator 1-8 respectively, G to max all ~g~, M to max all ~g~ and boosts, ' +
+    'A to turn all autobuyers on/off, shift+A to toggle all autobuyers',
+    'B to buy max boosts, shift+B to buy a boost', 'S to sacrifice', 'P to prestige',
+    'I to infinity, X to exit challenge, Y to restart challenge (exit and start again)',
     'E to eternity', 'shift+S to respec studies and eternity',
     'R to gain permanence', 'shift+E to respec eternity challenge and eternity', 'C to complexity',
     'shift+P to unequip equipped powers and complexity', 'O to get a prediction from the oracle',

@@ -6057,7 +6057,7 @@
       </table>
       <div>
         Confirmations:
-        <span>Sacrifice: <input type="checkbox" ~!checked=Options.confirmation('sacrifice')~ ~!onchange=function() {Options.setConfirmation('sacrifice', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=SpecialDivs.isDivVisible('sacrifice') ? '' : 'none'~>Sacrifice: <input type="checkbox" ~!checked=Options.confirmation('sacrifice')~ ~!onchange=function() {Options.setConfirmation('sacrifice', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
         <span ~style.display=SpecialDivs.isDivVisible('prestige') ? '' : 'none'~>Prestige: <input type="checkbox" ~!checked=Options.confirmation('prestige')~ ~!onchange=function() {Options.setConfirmation('prestige', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
         <span ~style.display=(PrestigeLayerProgress.hasReached('infinity') || InfinityPrestigeLayer.canInfinity()) ? '' : 'none'~>Infinity: <input type="checkbox" ~!checked=Options.confirmation('infinity')~ ~!onchange=function() {Options.setConfirmation('infinity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
         <span ~style.display=(PrestigeLayerProgress.hasReached('eternity') || EternityPrestigeLayer.canEternity()) ? '' : 'none'~>Eternity: <input type="checkbox" ~!checked=Options.confirmation('eternity')~ ~!onchange=function() {Options.setConfirmation('eternity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
