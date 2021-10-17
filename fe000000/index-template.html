@@ -5839,12 +5839,10 @@
       <span ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~>Your fastest complexity took ~t player.stats.fastestComplexity ~.</span>
       <br ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~/>
       <span ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~>Your fastest finality took ~t player.stats.fastestFinality ~.</span>
-      <br/>
-      <span>You have spent ~t player.stats.timeSincePurchase ~ without purchasing anything.</span>
-      <br/>
-      <span>You have spent ~t player.stats.timeSinceSacrifice ~ without sacrificing.</span>
-      <br/>
-      <span>You have spent ~t player.stats.timeSincePrestige ~ in this prestige.</span>
+      <br ~style.display=PrestigeLayerProgress.hasReached('sacrifice') ? '' : 'none'~/>
+      <span ~style.display=PrestigeLayerProgress.hasReached('sacrifice') ? '' : 'none'~>You have spent ~t player.stats.timeSinceSacrifice ~ without sacrificing.</span>
+      <br ~style.display=PrestigeLayerProgress.hasReached('prestige') ? '' : 'none'~/>
+      <span ~style.display=PrestigeLayerProgress.hasReached('prestige') ? '' : 'none'~>You have spent ~t player.stats.timeSincePrestige ~ in this prestige.</span>
       <br ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~/>
       <span ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~>You have spent ~t player.stats.timeSinceInfinity ~ in this infinity.</span>
       <br ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~/>
