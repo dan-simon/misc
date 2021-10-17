@@ -56,7 +56,7 @@ let Boost = {
     return Decimal.pow(this.multiplierPer(), this.bought());
   },
   isVisible() {
-    return !this.areBoostsDisabled();
+    return !this.areBoostsDisabled() && SpecialDivs.isDivVisible('boosts');
   },
   canBuy(n) {
     if (n === undefined) {

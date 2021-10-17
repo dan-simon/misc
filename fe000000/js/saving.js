@@ -1209,6 +1209,12 @@ let Saving = {
       }
       player.version = 2.111328125;
     }
+    if (player.version < 2.1123046875) {
+      // These will be set to true after one tick if they should be true.
+      player.isDivVisible.boosts = false;
+      player.isDivVisible.sacrifice = false;
+      player.version = 2.1123046875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

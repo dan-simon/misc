@@ -263,11 +263,17 @@ let SpecialTabs = {
   }
 }
 
+// Note that after prestige or infinity, you'll necessarily have enough total stars
+// for all of boost, sacrifice, and prestige to show up.
+// Also: Goal 7 is all eternity milestones, and boost power starts at 320 boosts
+// (so display requires 240 boosts).
 let SpecialDivs = {
   requirements: {
-    'prestige': () => player.stats.totalStarsProduced.gte(Math.pow(2, 64)),
-    'infinity': () => player.stats.totalStarsProduced.gte(Math.pow(2, 128)),
-    'boost-power': () => Boost.highestBoughtThisEternity() >= Boost.boostPowerStart() / 2,
+    'boosts': () => Generator(7).amount().gt(0) || player.stats.totalStarsProduced.gte(Math.pow(2, 56)),
+    'sacrifice': () => Generator(8).amount().gt(0) || player.stats.totalStarsProduced.gte(Math.pow(2, 96)),
+    'prestige': () => player.stats.sacrificesThisInfinity > 0 || player.stats.totalStarsProduced.gte(Math.pow(2, 112)),
+    'infinity': () => player.stats.prestigesThisInfinity > 0 || player.stats.totalStarsProduced.gte(Math.pow(2, 224)),
+    'boost-power': () => Goals.hasGoal(7) || Boost.highestBoughtThisEternity() >= 3 * Boost.boostPowerStart() / 4,
     'softcap': () => Generators.list.some(x => x.multiplier().gte(Generators.nerfValue().pow(0.25))),
     'hardcap': () => player.stats.totalStarsProduced.gte(Decimal.pow(2, Math.pow(2, 46))),
   },
