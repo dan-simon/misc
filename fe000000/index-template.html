@@ -669,10 +669,10 @@
       <span><button onclick="Autobuyers.setAll(true)">Turn all autobuyers on</button> <button onclick="Autobuyers.setAll(false)">Turn all autobuyers off</button> <button onclick="Autobuyers.turnAllOnOrOff()">Turn all autobuyers on/off</button> <button onclick="Autobuyers.toggleAll()">Toggle all autobuyers</button>
       <br/>
       <span><button onclick="Autobuyers.toggleShowGeneratorAndBoost()">Show generator and boost autobuyers: ~r Autobuyers.showGeneratorAndBoost() ? 'On' : 'Off' ~</button> <button onclick="Autobuyers.synchronize()" ~style.display=(Autobuyers.areAnyAutobuyersSlow() && Autobuyers.areAnyAutobuyersFast()) ? '' : 'none'~>Synchronize slow and fast autobuyers</button></span>
-      <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
+      <table style="margin-left: auto; margin-right: auto; border-collapse: collapse;">
         <tr ~style.display=Autobuyers.showGeneratorAndBoost() ? '' : 'none'~>
           <td>
-            <div class="autobuyerdiv" ~style.display=Autobuyer(1).hasAutobuyer() ? '' : 'none'~>
+            <div class="autobuyerdiv" ~style.display=(Autobuyer(1).hasAutobuyer() || !Autobuyer(1).hasReachedDisplayThreshold()) ? '' : 'none'~>
               <span><span ~style.display=Autobuyer(1).isSlow() ? '' : 'none'~>Slow </span>Generator 1 Autobuyer</span>
               <br/>
               <span>On: <input type="checkbox" class="autobuyer-checkbox-1" ~!checked=Autobuyer(1).isOn()~ ~!onchange=function() {Autobuyer(1).setIsOn(this.checked)}~></input></span>
@@ -701,7 +701,7 @@
                 <option value="Buy max">Buy max</option>
               </select></span>
             </div>
-            <button class="autobuyerunlockbutton" ~style.display=Autobuyer(2).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(2).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(2).unlockSlow()">
+            <button class="autobuyerunlockbutton" ~style.display=(Autobuyer(2).hasAutobuyer() || !Autobuyer(2).hasReachedDisplayThreshold()) ? 'none' : ''~ ~class=Autobuyer(2).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(2).unlockSlow()">
               Unlock Slow Generator 2 Autobuyer
               <br/>
               (triggering every ~ti 16 ~)
@@ -720,7 +720,7 @@
                 <option value="Buy max">Buy max</option>
               </select></span>
             </div>
-            <button class="autobuyerunlockbutton" ~style.display=Autobuyer(3).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(3).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(3).unlockSlow()">
+            <button class="autobuyerunlockbutton" ~style.display=(Autobuyer(3).hasAutobuyer() || !Autobuyer(3).hasReachedDisplayThreshold()) ? 'none' : ''~ ~class=Autobuyer(3).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(3).unlockSlow()">
               Unlock Slow Generator 3 Autobuyer
               <br/>
               (triggering every ~ti 16 ~)
@@ -741,7 +741,7 @@
                 <option value="Buy max">Buy max</option>
               </select></span>
             </div>
-            <button class="autobuyerunlockbutton" ~style.display=Autobuyer(4).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(4).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(4).unlockSlow()">
+            <button class="autobuyerunlockbutton" ~style.display=(Autobuyer(4).hasAutobuyer() || !Autobuyer(4).hasReachedDisplayThreshold()) ? 'none' : ''~ ~class=Autobuyer(4).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(4).unlockSlow()">
               Unlock Slow Generator 4 Autobuyer
               <br/>
               (triggering every ~ti 16 ~)
@@ -760,7 +760,7 @@
                 <option value="Buy max">Buy max</option>
               </select></span>
             </div>
-            <button class="autobuyerunlockbutton" ~style.display=Autobuyer(5).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(5).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(5).unlockSlow()">
+            <button class="autobuyerunlockbutton" ~style.display=(Autobuyer(5).hasAutobuyer() || !Autobuyer(5).hasReachedDisplayThreshold()) ? 'none' : ''~ ~class=Autobuyer(5).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(5).unlockSlow()">
               Unlock Slow Generator 5 Autobuyer
               <br/>
               (triggering every ~ti 16 ~)
@@ -779,7 +779,7 @@
                 <option value="Buy max">Buy max</option>
               </select></span>
             </div>
-            <button class="autobuyerunlockbutton" ~style.display=Autobuyer(6).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(6).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(6).unlockSlow()">
+            <button class="autobuyerunlockbutton" ~style.display=(Autobuyer(6).hasAutobuyer() || !Autobuyer(6).hasReachedDisplayThreshold()) ? 'none' : ''~ ~class=Autobuyer(6).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(6).unlockSlow()">
               Unlock Slow Generator 6 Autobuyer
               <br/>
               (triggering every ~ti 16 ~)
@@ -800,7 +800,7 @@
                 <option value="Buy max">Buy max</option>
               </select></span>
             </div>
-            <button class="autobuyerunlockbutton" ~style.display=Autobuyer(7).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(7).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(7).unlockSlow()">
+            <button class="autobuyerunlockbutton" ~style.display=(Autobuyer(7).hasAutobuyer() || !Autobuyer(7).hasReachedDisplayThreshold()) ? 'none' : ''~ ~class=Autobuyer(7).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(7).unlockSlow()">
               Unlock Slow Generator 7 Autobuyer
               <br/>
               (triggering every ~ti 16 ~)
@@ -819,7 +819,7 @@
                 <option value="Buy max">Buy max</option>
               </select></span>
             </div>
-            <button class="autobuyerunlockbutton" ~style.display=Autobuyer(8).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(8).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(8).unlockSlow()">
+            <button class="autobuyerunlockbutton" ~style.display=(Autobuyer(8).hasAutobuyer() || !Autobuyer(8).hasReachedDisplayThreshold()) ? 'none' : ''~ ~class=Autobuyer(8).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(8).unlockSlow()">
               Unlock Slow Generator 8 Autobuyer
               <br/>
               (triggering every ~ti 16 ~)
@@ -838,7 +838,7 @@
                 <option value="Buy max">Buy max</option>
               </select></span>
             </div>
-            <button class="autobuyerunlockbutton" ~style.display=Autobuyer(9).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(9).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(9).unlockSlow()">
+            <button class="autobuyerunlockbutton" ~style.display=(Autobuyer(9).hasAutobuyer() || !Autobuyer(9).hasReachedDisplayThreshold()) ? 'none' : ''~ ~class=Autobuyer(9).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(9).unlockSlow()">
               Unlock Slow Boost Autobuyer
               <br/>
               (triggering every ~ti 16 ~)

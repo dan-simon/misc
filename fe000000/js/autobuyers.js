@@ -33,6 +33,10 @@ let Autobuyer = function (i) {
     unlockSlowCost() {
       return Decimal.pow(2, 2 * Math.pow(i, 2));
     },
+    hasReachedDisplayThreshold() {
+      return player.stats.totalStarsProduced.gte(this.unlockSlowCost().pow(0.875)) || i === 1 ||
+        (i === 9 ? SpecialDivs.isDivVisible('boosts') : (Generator(i).isVisible() || PrestigeLayerProgress.hasReached('sacrifice')));
+    },
     isOn() {
       return player.autobuyers[i - 1].isOn;
     },
