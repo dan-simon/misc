@@ -23,9 +23,6 @@ let MaxAll = {
       Generator(i).buy();
     }
     generalMaxAll(typesMultiple.map(x => Generator(x)));
-  },
-  maxAllGenerators() {
-    this.maxAll([1, 2, 3, 4, 5, 6, 7, 8]);
   }
 }
 

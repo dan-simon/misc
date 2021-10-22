@@ -566,7 +566,8 @@ let Powers = {
     return 2048 / this.speed();
   },
   showNextPower() {
-    return this.interval() > 1;
+    // Don't show next power if we're doing fast finalities, to avoid it flashing.
+    return this.interval() > 1 && !player.stats.lastTenFinalities.map(x => x[0]).every(x => x !== -1 && x <= 1);
   },
   maximumEquippedLimit() {
     return 3;

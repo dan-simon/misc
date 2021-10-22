@@ -206,7 +206,10 @@
       </div>
       <br ~style.display=(Stars.canBuyThings() || !Generators.viewWhenStarsAtLimit()) ? 'none' : ''~/>
       <div ~style.display=(Stars.canBuyThings() || Generators.viewWhenStarsAtLimit()) ? '' : 'none'~>
-        <span>You have ~f Stars.amount() ~ stars. You are getting ~f Stars.perSecond() ~ stars per second. <button ~class=MaxAll.anythingToBuy() ? "" : "disabled"~ onclick="MaxAll.maxAll()">Max all</button></span>
+        <span>
+          You have ~f Stars.amount() ~ stars. You are getting ~f Stars.perSecond() ~ stars per second.
+          <br ~style.display=Options.isMaxAllModeBroad() ? '' : 'none'~/>
+          <button ~class=(Options.isMaxAllModeBroad() ? true : MaxAll.anythingToBuy()) ? "" : "disabled"~ onclick="HotkeyMaxAll.trigger(true)">~r Options.isMaxAllModeBroad() ? 'Max all ' + Options.truncatedMaxAllMode() + ' (always displays as clickable)' : 'Max all' ~</button> <button ~style.display=Options.isMaxAllModeBroad() ? '' : 'none'~ ~class=MaxAll.anythingToBuy() ? "" : "disabled"~ onclick="MaxAll.maxAll()">Max all normal generators and boosts</button></span>
         <br/>
         <div ~style.display=Challenge.isThereChallengeText() ? '' : 'none'~>
           <span>~r Challenge.challengeText() ~</span>
@@ -6039,27 +6042,38 @@
             <button class="mini-options-button" onclick="Options.nextCompletionGradients()">Completion gradients: ~r player.options.theme.completionGradients ~</button>
             <button class="mini-options-button" onclick="Options.nextEdgeGradients()">Edge gradients: ~r player.options.theme.edgeGradients ~</button>
           </div></td>
+          <td><div class="options-div">
+            <button class="mini-options-button" onclick="Options.toggleTabColors()">Tab colors: ~r Options.tabColors() ? 'On' : 'Off' ~</button>
+            <button class="mini-options-button" ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~ onclick="Options.nextCompletionColors()">Completion colors: ~r player.options.completionColors ~</button>
+            <button class="mini-options-button" ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~ onclick="Options.toggleResetColors()">Reset colors: ~r Options.resetColors() ? 'On' : 'Off' ~</button>
+            <button class="mini-options-button" ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~ onclick="Options.togglePresetHighlightColors()">Preset highlight colors: ~r Options.presetHighlightColors() ? 'On' : 'Off' ~</button>
+          </div></td>
+        <tr/>
+        <tr ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~>
+          <td><div ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~ class="options-div">Max all mode: <select ~!value=Options.maxAllMode()~ ~!onchange=function() {Options.setMaxAllMode(this.value)}~>
+            <option value="Normal generators and boosts">Normal generators and boosts</option>
+            <option value="Generators and upgrades in current tab">Generators and upgrades in current tab</option>
+            <option value="Both">Both</option>
+            <option value="All generators and upgrades">All generators and upgrades</option>
+            <option value="All generators, upgrades, and unlocks">All generators, upgrades, and unlocks</option>
+          </select></div></td>
           <td><div ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~ class="options-div">
             <button ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleShowCurrentChallenges()">Current challenges in header: ~r Options.showCurrentChallenges() ? 'Shown' : 'Hidden' ~</button>
             <button ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleShowNextCCCompletion()">Next ℂC completion in header: ~r Options.showNextCCCompletion() ? 'Shown' : 'Hidden' ~</button>
             <button ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleShowResetButtonsForHiddenTabs()">Reset buttons for hidden tabs: ~r Options.showResetButtonsForHiddenTabs() ? 'Shown' : 'Hidden' ~</button>
           </div></td>
-        <tr/>
-        <tr ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>
           <td><div ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~ class="options-div">
             <button ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('studies')">Full study options: ~r Options.showFullOptions('studies') ? 'On' : 'Off' ~</button>
             <button ~style.display=(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('powers')">Full power options: ~r Options.showFullOptions('powers') ? 'On' : 'Off' ~</button>
             <button ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('finality')">Full finality shard options: ~r Options.showFullOptions('finality') ? 'On' : 'Off' ~</button>
           </div></td>
-          <td><div class="options-div">
-            <button class="mini-options-button" onclick="Options.nextCompletionColors()">Completion colors: ~r player.options.completionColors ~</button>
-            <button class="mini-options-button" onclick="Options.toggleResetColors()">Reset colors: ~r Options.resetColors() ? 'On' : 'Off' ~</button>
-            <button class="mini-options-button" onclick="Options.toggleTabColors()">Tab colors: ~r Options.tabColors() ? 'On' : 'Off' ~</button>
-            <button class="mini-options-button" onclick="Options.togglePresetHighlightColors()">Preset highlight colors: ~r Options.presetHighlightColors() ? 'On' : 'Off' ~</button>
-          </div></td>
+        <tr/>
+        <tr ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~>
+          <td/>
           <td><button ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~ class="options-button" onclick="Options.toggleComplexityChallengeRunningColors()" style="font-size: 0.875rem;">
             Complexity challenge colors: ~r Options.complexityChallengeRunningColors() ? "Running" : "Completions" ~
           </button></td>
+          <td/>
         <tr/>
       </table>
       <div>

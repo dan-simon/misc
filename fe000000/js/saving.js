@@ -1227,6 +1227,11 @@ let Saving = {
       delete player.options.showGeneratorAndBoostAutobuyers;
       player.version = 2.11328125;
     }
+    if (player.version < 2.1171875) {
+      // Adding a whole 1 / 256 because as player experience goes this is a fairly big change.
+      player.options.maxAllMode = 'Normal generators and boosts';
+      player.version = 2.1171875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

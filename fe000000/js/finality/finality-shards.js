@@ -124,11 +124,17 @@ let FinalityShards = {
   anythingToBuy() {
     return this.upgradeList.some(x => x.canBuy());
   },
-  maxAll() {
+  maxAll(types) {
+    if (types === undefined) {
+      types = [1, 2, 3, 4, 5, 6, 7, 8];
+    }
     // Buy the one bought least as long as it's possible to buy one. This isn't too expensive computationally
-    // and only happens on user input.
-    while (this.anythingToBuy()) {
-      [...this.upgradeList].filter(x => x.canBuy()).sort((x, y) => x.bought() - y.bought())[0].buy();
+    // and only happens on user input. This input is sometimes just holding m, but in that case usually
+    // none of the upgrades will be buyable and this loop will terminate quite quickly.
+    // Generally (always, for now) this'll be a list of all upgrade types.
+    let f = this.upgradeList.filter((_, i) => types.includes(i + 1));
+    while (f.some(x => x.canBuy())) {
+      f.filter(x => x.canBuy()).sort((x, y) => x.bought() - y.bought())[0].buy();
     }
   }
 }

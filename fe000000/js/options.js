@@ -143,6 +143,18 @@ let Options = {
     // in case the condition changes.
     return PrestigeLayerProgress.hasReached('prestige') && this.rawViewAllGenerators(type);
   },
+  maxAllMode() {
+    return player.options.maxAllMode;
+  },
+  setMaxAllMode(x) {
+    player.options.maxAllMode = x;
+  },
+  isMaxAllModeBroad() {
+    return ['All generators and upgrades', 'All generators, upgrades, and unlocks'].includes(this.maxAllMode())
+  },
+  truncatedMaxAllMode() {
+    return this.maxAllMode().split(' ').slice(1).join(' ');
+  },
   showFullOptions(x) {
     return player.options.showFullOptions[x];
   },

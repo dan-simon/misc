@@ -31,6 +31,143 @@ let codeToAutobuyers = {
   83: 10,
 };
 
+// We need to avoid referencing things that might not exist yet due to not all scripts having run.
+let HotkeyMaxAll = {
+  things: [
+    {
+      purchase: list => MaxAll.maxAll(list),
+      generators: [1, 2, 3, 4, 5, 6, 7, 8],
+      upgrades: [9],
+      tab: 'main'
+    },
+    {
+      purchase: list => InfinityMaxAll.maxAll(list),
+      generators: [1, 2, 3, 4, 5, 6, 7, 8],
+      upgrades: [9, 10],
+      tab: 'infinity'
+    },
+    // This is mostly irrelevant since we only show the player this once they reach infinity,
+    // and they can easily buy all slow generators by then (and never lose them),
+    // but we include it for completeness.
+    {
+      purchase: function (list) {
+        for (let i of list) {
+          Autobuyers.unlockSlow(i);
+        }
+      },
+      unlocks: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      tab: 'autobuyers'
+    },
+    {
+      purchase: list => EternityMaxAll.maxAll(list),
+      generators: [1, 2, 3, 4, 5, 6, 7, 8],
+      upgrades: [9, 10, 11],
+      tab: 'eternity'
+    },
+    // We deviate slightly from tab order to do things in the same order
+    // as the autobuyer code.
+    {
+      purchase: list => EternityMaxAll.maxAll(list),
+      upgrades: [12, 13],
+      tab: 'eternity-producer'
+    },
+    {
+      purchase: list => EternityMaxAll.maxAll(list),
+      upgrades: [14, 15, 16],
+      tab: 'studies'
+    },
+    {
+      purchase: list => EternityMaxAll.maxAll(list),
+      upgrades: [17, 18, 19, 20],
+      tab: 'eternity-producer'
+    },
+    // This "true" means "via autobuyer". It's likely that,
+    // if a player is using this, they're just mindlessly holding M,
+    // so we should treat this similarly to an automatic unlock.
+    {
+      purchase: () => EternityProducer.unlock(true),
+      type: 'unlock',
+      tab: 'eternity-producer'
+    },
+    {
+      purchase: function (list) {
+        for (let i of list) {
+          Chroma.unlockColor(i, true);
+        }
+      },
+      unlocks: [1, 2, 3, 4, 5, 6],
+      tab: 'chroma'
+    },
+    {
+      purchase: list => ComplexityMaxAll.maxAll(list),
+      generators: [1, 2, 3, 4, 5, 6, 7, 8],
+      tab: 'complexity'
+    },
+    {
+      purchase: list => ComplexityMaxAll.maxAll(list),
+      upgrades: [9, 10, 11, 12, 13, 14, 15],
+      tab: 'powers'
+    },
+    {
+      purchase: () => Powers.unlock(true),
+      type: 'unlock',
+      tab: 'powers'
+    },
+    {
+      purchase: () => Oracle.unlock(true),
+      type: 'unlock',
+      tab: 'oracle'
+    },
+    {
+      purchase: () => Galaxy.unlock(true),
+      type: 'unlock',
+      tab: 'galaxies'
+    },
+    {
+      purchase: list => FinalityMaxAll.maxAll(list),
+      generators: [1, 2, 3, 4, 5, 6, 7, 8],
+      tab: 'finality'
+    },
+    {
+      purchase: list => FinalityShards.maxAll(list),
+      upgrades: [1, 2, 3, 4, 5, 6, 7, 8],
+      tab: 'finality-shards'
+    },
+  ],
+  trigger(fullMaxAll) {
+    let types = fullMaxAll ?
+      (Options.maxAllMode() === 'All generators, upgrades, and unlocks' ?
+      ['generators', 'upgrades', 'unlocks'] : ['generators', 'upgrades']) :
+      ['generators'];
+    let tabs = {
+      'Normal generators and boosts': ['main'],
+      'Generators and upgrades in current tab': [Tabs.currentTab()],
+      'Both': ['main', Tabs.currentTab()],
+      'All generators and upgrades': 'all',
+      'All generators, upgrades, and unlocks': 'all'
+    }[Options.maxAllMode()];
+    for (let i of this.things) {
+      if (tabs === 'all' || tabs.includes(i.tab)) {
+        if ('type' in i) {
+          if (types.includes(i.type + 's')) {
+            i.purchase();
+          }
+        } else {
+          let l = [];
+          for (let t of types) {
+            if (t in i) {
+              l = l.concat(i[t]);
+            }
+            // I'm not sure if not having this would lead to buying things in the wrong order, but better safe than sorry.
+            l.sort();
+            i.purchase(l);
+          }
+        }
+      }
+    }
+  }
+}
+
 window.addEventListener('keydown', function(event) {
   let controlDown = event.ctrlKey || event.metaKey;
   let shiftDown = event.shiftKey;
@@ -93,7 +230,7 @@ window.addEventListener('keydown', function(event) {
     break;
     
     case 71: // G
-      MaxAll.maxAllGenerators();
+      HotkeyMaxAll.trigger(false);
     break;
 
     case 73: // I
@@ -101,7 +238,7 @@ window.addEventListener('keydown', function(event) {
     break;
 
     case 77: // M
-      MaxAll.maxAll();
+      HotkeyMaxAll.trigger(true);
     break;
 
     case 79: // O
