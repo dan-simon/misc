@@ -1215,6 +1215,18 @@ let Saving = {
       player.isDivVisible.sacrifice = false;
       player.version = 2.1123046875;
     }
+    if (player.version < 2.11328125) {
+      player.options.autobuyers = {
+        areNewlyUnlockedAutobuyersOn: player.areNewlyUnlockedAutobuyersOn,
+        disableAutobuyersWhenStarting: player.disableAutobuyersWhenStarting,
+        showGeneratorAndBoostAutobuyers: player.options.showGeneratorAndBoostAutobuyers,
+        suspendAutobuyers: true
+      };
+      delete player.areNewlyUnlockedAutobuyersOn;
+      delete player.disableAutobuyersWhenStarting;
+      delete player.options.showGeneratorAndBoostAutobuyers;
+      player.version = 2.11328125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

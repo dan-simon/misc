@@ -662,13 +662,20 @@
         <span>Automatically turn all autobuyers off when entering challenges: <input type="checkbox" ~!checked=Autobuyers.disableWhenStartingChallenge()~ ~!onchange=function() {Autobuyers.setDisableWhenStartingChallenge(this.checked)}~></input><span ~style.display=SpecialTabs.isTabVisible('infinity-challenges') ? '' : 'none'~> when entering infinity challenges: <input type="checkbox" ~!checked=Autobuyers.disableWhenStartingInfinityChallenge()~ ~!onchange=function() {Autobuyers.setDisableWhenStartingInfinityChallenge(this.checked)}~></input></span></span>
         <br/>
       </div>
+      <div ~style.display=(Autobuyer(12).hasGeneration() || PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~>
+        <span>Automatically disable autobuyers while the corresponding resource has generation</span>
+        <br/>
+        <span>(e.g., turn infinity autobuyer off at ~i 24 ~ EC completions): <input type="checkbox" ~!checked=Autobuyers.suspendAutobuyers()~ ~!onchange=function() {Autobuyers.setSuspendAutobuyers(this.checked)}~></input></span>
+        <br/>
+      </div>
       <span>You can toggle an autobuyer by pressing T + the corresponding hotkey.</span>
       <br/>
       <span ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>Autobuyers options on this tab only apply to autobuyers on this tab.</span>
       <br ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~/>
       <span><button onclick="Autobuyers.setAll(true)">Turn all autobuyers on</button> <button onclick="Autobuyers.setAll(false)">Turn all autobuyers off</button> <button onclick="Autobuyers.turnAllOnOrOff()">Turn all autobuyers on/off</button> <button onclick="Autobuyers.toggleAll()">Toggle all autobuyers</button>
-      <br/>
-      <span><button onclick="Autobuyers.toggleShowGeneratorAndBoost()">Show generator and boost autobuyers: ~r Autobuyers.showGeneratorAndBoost() ? 'On' : 'Off' ~</button> <button onclick="Autobuyers.synchronize()" ~style.display=(Autobuyers.areAnyAutobuyersSlow() && Autobuyers.areAnyAutobuyersFast()) ? '' : 'none'~>Synchronize slow and fast autobuyers</button></span>
+      <div ~style.display=(Autobuyers.anyNonGeneratorAndBoostDisplay() || (Autobuyers.areAnyAutobuyersSlow() && Autobuyers.areAnyAutobuyersFast())) ? '' : 'none'~>
+        <span><button onclick="Autobuyers.toggleShowGeneratorAndBoost()" ~style.display=Autobuyers.anyNonGeneratorAndBoostDisplay() ? '' : 'none'~>Show generator and boost autobuyers: ~r Autobuyers.showGeneratorAndBoost() ? 'On' : 'Off' ~</button> <button onclick="Autobuyers.synchronize()" ~style.display=(Autobuyers.areAnyAutobuyersSlow() && Autobuyers.areAnyAutobuyersFast()) ? '' : 'none'~>Synchronize slow and fast autobuyers</button></span>
+      </div>
       <table style="margin-left: auto; margin-right: auto; border-collapse: collapse;">
         <tr ~style.display=Autobuyers.showGeneratorAndBoost() ? '' : 'none'~>
           <td>

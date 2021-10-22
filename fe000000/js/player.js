@@ -119,11 +119,6 @@ let initialPlayer = {
   infinityChallengeRestartOnCompletion: false,
   breakInfinity: false,
   autobuyers: initialAutobuyers(),
-  areNewlyUnlockedAutobuyersOn: true,
-  disableAutobuyersWhenStarting: {
-    challenge: false,
-    infinityChallenge: false,
-  },
   eternityPoints: new Decimal(0),
   eternities: new Decimal(0),
   eternityStars: new Decimal(2),
@@ -394,14 +389,22 @@ let initialPlayer = {
       finality: false,
     },
     viewGeneratorsWhenStarsAtLimit: false,
-    showGeneratorAndBoostAutobuyers: true,
     headerSettings: {
       showCurrentChallenges: true,
       showNextCCCompletion: true,
       showResetButtonsForHiddenTabs: true,
     },
     complexityChallengeRunningColors: false,
-    optionTypeShown: 'saving'
+    optionTypeShown: 'saving',
+    autobuyers: {
+      areNewlyUnlockedAutobuyersOn: true,
+      disableAutobuyersWhenStarting: {
+        challenge: false,
+        infinityChallenge: false,
+      },
+      showGeneratorAndBoostAutobuyers: true,
+      suspendAutobuyers: true
+    }
   },
   confirmations: {
     sacrifice: true,
@@ -501,7 +504,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2.1123046875
+  version: 2.11328125
 }
 
 let player;

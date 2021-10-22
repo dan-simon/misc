@@ -40,8 +40,20 @@ let Autobuyer = function (i) {
     isOn() {
       return player.autobuyers[i - 1].isOn;
     },
+    hasGeneration() {
+      if (i < 12) {
+        return false;
+      }
+      return [
+        EternityChallenge.isTotalCompletionsRewardActive(3),
+        Powers.isUnlocked() || FinalityMilestones.isFinalityMilestoneActive(8),
+        Permanence.hasPassiveProduction(),
+        FinalityMilestones.isFinalityMilestoneActive(16),
+        false
+      ][i - 12];
+    },
     isActive() {
-      return this.isOn() && this.hasAutobuyer();
+      return this.isOn() && this.hasAutobuyer() && (!this.hasGeneration() || !Autobuyers.suspendAutobuyers());
     },
     mode() {
       return player.autobuyers[i - 1].mode;
@@ -143,17 +155,21 @@ let Autobuyers = {
     player.slowAutobuyersTimer = newTimer;
     player.fastAutobuyersTimer = newTimer;
   },
+  anyNonGeneratorAndBoostDisplay() {
+    // This is only used for showing the option to hide generator and boost autobuyers.
+    return this.list.slice(9).some(i => i.hasAutobuyer()) || PrestigeLayerProgress.hasReached('eternity');
+  },
   showGeneratorAndBoost() {
-    return player.options.showGeneratorAndBoostAutobuyers;
+    return player.options.autobuyers.showGeneratorAndBoostAutobuyers;
   },
   toggleShowGeneratorAndBoost() {
-    player.options.showGeneratorAndBoostAutobuyers = !player.options.showGeneratorAndBoostAutobuyers;
+    player.options.autobuyers.showGeneratorAndBoostAutobuyers = !player.options.autobuyers.showGeneratorAndBoostAutobuyers;
   },
   areNewlyUnlockedAutobuyersOn() {
-    return player.areNewlyUnlockedAutobuyersOn;
+    return player.options.autobuyers.areNewlyUnlockedAutobuyersOn;
   },
   setAreNewlyUnlockedAutobuyersOn(x) {
-    player.areNewlyUnlockedAutobuyersOn = x;
+    player.options.autobuyers.areNewlyUnlockedAutobuyersOn = x;
     // This actually changes which locked autobuyers are on, behind the scenes.
     for (let i = 1; i <= 16; i++) {
       let autobuyer = this.get(i);
@@ -167,16 +183,22 @@ let Autobuyers = {
     }
   },
   disableWhenStartingChallenge() {
-    return player.disableAutobuyersWhenStarting.challenge;
+    return player.options.autobuyers.disableAutobuyersWhenStarting.challenge;
   },
   setDisableWhenStartingChallenge() {
-    player.disableAutobuyersWhenStarting.challenge = !player.disableAutobuyersWhenStarting.challenge;
+    player.options.autobuyers.disableAutobuyersWhenStarting.challenge = !player.options.autobuyers.disableAutobuyersWhenStarting.challenge;
   },
   disableWhenStartingInfinityChallenge() {
-    return player.disableAutobuyersWhenStarting.infinityChallenge;
+    return player.options.autobuyers.disableAutobuyersWhenStarting.infinityChallenge;
   },
   setDisableWhenStartingInfinityChallenge() {
-    player.disableAutobuyersWhenStarting.infinityChallenge = !player.disableAutobuyersWhenStarting.infinityChallenge;
+    player.options.autobuyers.disableAutobuyersWhenStarting.infinityChallenge = !player.options.autobuyers.disableAutobuyersWhenStarting.infinityChallenge;
+  },
+  suspendAutobuyers() {
+    return player.options.autobuyers.suspendAutobuyers;
+  },
+  setSuspendAutobuyers() {
+    player.options.autobuyers.suspendAutobuyers = !player.options.autobuyers.suspendAutobuyers;
   },
   isLockedResetAutobuyer(x) {
     if (x < 12) return false;
