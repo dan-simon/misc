@@ -390,6 +390,7 @@ let initialPlayer = {
     },
     viewGeneratorsWhenStarsAtLimit: false,
     maxAllMode: 'Normal generators and boosts',
+    showAllTabs: false,
     headerSettings: {
       showCurrentChallenges: true,
       showNextCCCompletion: true,
@@ -505,7 +506,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2.1171875
+  version: 2.1181640625
 }
 
 let player;

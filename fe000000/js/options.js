@@ -5,6 +5,9 @@ let COMPLETION_COLOR_LIST = ['On (gradient)', 'On (uniform)', 'Off'];
 let TIME_DISPLAY_LIST = ['Seconds', 'D:H:M:S', 'D:H:M:S with notation', 'Largest unit'];
 
 let Options = {
+  offlineProgress() {
+    return player.options.offlineProgress;
+  },
   toggleOfflineProgress() {
     player.options.offlineProgress = !player.options.offlineProgress;
   },
@@ -142,6 +145,16 @@ let Options = {
     // This is trivally true for every type other than normal. Still worth having
     // in case the condition changes.
     return PrestigeLayerProgress.hasReached('prestige') && this.rawViewAllGenerators(type);
+  },
+  showAllTabs() {
+    return player.options.showAllTabs;
+  },
+  toggleShowAllTabs() {
+    if (!player.options.showAllTabs && !confirm('Are you sure you want all tabs to be visible, ' +
+    'even those you haven\'t unlocked yet? This will reveal spoilers.')) {
+      return;
+    }
+    player.options.showAllTabs = !player.options.showAllTabs;
   },
   maxAllMode() {
     return player.options.maxAllMode;

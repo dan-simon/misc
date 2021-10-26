@@ -43,7 +43,7 @@ let Saving = {
     // offlineProgress = null means leave it up to the save.
     player = this.decode(s);
     if (offlineProgress === null) {
-      offlineProgress = player.options.offlineProgress;
+      offlineProgress = Options.offlineProgress();
     }
     let originalVersion = player.version;
     this.fixPlayer();
@@ -1232,6 +1232,10 @@ let Saving = {
       player.options.maxAllMode = 'Normal generators and boosts';
       player.version = 2.1171875;
     }
+    if (player.version < 2.1181640625) {
+      player.options.showAllTabs = false;
+      player.version = 2.1181640625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
@@ -1339,7 +1343,7 @@ let Saving = {
           // opening the game in a new window, because then we don't have any potentially different
           // number of offline progress ticks, but when loading from prompt we have a number
           // from the pre-load save and a number from the save being loaded).
-          this.loadGame(save, player.options.offlineProgress, Options.offlineTicks(), false, function () {
+          this.loadGame(save, Options.offlineProgress(), Options.offlineTicks(), false, function () {
             // If the player is loading a save from a prompt, we assume that the loaded save
             // is itself an export, and thus reset the export timer.
             player.stats.timeSinceExport = 0;

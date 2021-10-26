@@ -85,7 +85,12 @@ let Oracle = {
     player.oracle.ticks = x || 1;
   },
   invoke() {
-    if (!this.isUnlocked()) return;
+    if (!this.isUnlocked()) {
+      // This is a reference to the unlock price, written to sound a bit more worrisome.
+      alert('The Oracle babbles in an incomprehensible manner that seems, however, ' +
+        'to vaguely point toward you not having paid the price in some way.');
+      return;
+    }
     if (blocked) {
       alert('This is an evanescent simulation. Recursing within it is forbidden due to ' + 
         'the damage it may cause to the space-time continuum.');

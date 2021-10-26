@@ -1,4 +1,15 @@
 let Challenge = {
+  challengeButtonText(x) {
+    if (this.isChallengeRunning(x)) {
+      return "Exit challenge"
+    } else if (PrestigeLayerProgress.hasReached('infinity')) {
+      return "Start challenge";
+    } else {
+      // Not sure what the best wording is on this
+      // (it'll appear when all tabs are revealed).
+      return "Requires infinity";
+    }
+  },
   startOrExitChallenge(x) {
     if (this.isChallengeRunning(x)) {
       this.exitChallenge();

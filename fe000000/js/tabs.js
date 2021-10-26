@@ -13,6 +13,9 @@ let Tabs = {
     player.currentTab = x;
   },
   isTabOptionVisible(x) {
+    if (Options.showAllTabs()) {
+      return true;
+    }
     return {
       'main': () => true,
       'infinity': () => PrestigeLayerProgress.hasReached('infinity'),
