@@ -85,7 +85,11 @@ let Oracle = {
     player.oracle.ticks = x || 1;
   },
   invoke() {
-    if (!this.isUnlocked()) return;
+    if (!this.isUnlocked()) {
+      // This button is grey when the oracle isn't unlocked, even if it's visible,
+      // so it's reasonable to just return.
+      return;
+    }
     if (blocked) {
       alert('This is an evanescent simulation. Recursing within it is forbidden due to ' + 
         'the damage it may cause to the space-time continuum.');

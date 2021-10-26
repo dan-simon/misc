@@ -13,8 +13,12 @@ let PrestigeLayerNames = {
       return 'prestige';
     }
   },
-  layersAbove(x) {
-    let layers = this.layers.slice(this.layers.indexOf(x), this.layers.indexOf(this.highestLayer()) + 1);
+  layersAboveDisplay(x) {
+    let hl = this.highestLayer();
+    if (Options.showAllTabs()) {
+      hl = 'finality';
+    }
+    let layers = this.layers.slice(this.layers.indexOf(x), this.layers.indexOf(hl) + 1);
     return coordinate('*', '', layers);
   }
 }

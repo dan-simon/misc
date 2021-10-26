@@ -142,7 +142,16 @@ let Boost = {
     }
   },
   extraTheoremsRaw() {
-    return Studies.theoremsFrom(Math.log2(this.bestBoostPower()), 3);
+    // This makes it impossible to get extra theorems from boost power before eternity.
+    // Note that it only checks for eternity ever, so, for example, in first complexity
+    // first eternity, you can get theorems from boost power.
+    // This almost doesn't matter because reaching boost power in first eternity
+    // is practically impossible.
+    if (PrestigeLayerProgress.hasReached('eternity')) {
+      return Studies.theoremsFrom(Math.log2(this.bestBoostPower()), 3);
+    } else {
+      return 0;
+    }
   },
   extraTheoremsIndex() {
     return 0;
@@ -155,6 +164,10 @@ let Boost = {
     }
   },
   nextExtraTheorem() {
-    return Math.pow(2, Studies.costPow(this.extraTheoremsActualAndDisplay(), 3));
+    if (PrestigeLayerProgress.hasReached('eternity')) {
+      return Math.pow(2, Studies.costPow(this.extraTheoremsActualAndDisplay(), 3));
+    } else {
+      return Infinity;
+    }
   }
 };

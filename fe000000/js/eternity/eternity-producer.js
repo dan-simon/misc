@@ -12,6 +12,9 @@ let EternityProducerUpgrade = function (i) {
     boughtLimit() {
       return EternityProducer.isUnlocked() ? Infinity : 0;
     },
+    displayBoughtLimit() {
+      return Infinity;
+    },
     costIncreasePer() {
       return 16;
     },
@@ -58,6 +61,9 @@ let EternityProducerUpgrade = function (i) {
     },
     atBoughtLimit() {
       return this.bought() >= this.boughtLimit();
+    },
+    atDisplayBoughtLimit() {
+      return this.bought() >= this.displayBoughtLimit();
     },
     canBuy(n) {
       if (n === undefined) {

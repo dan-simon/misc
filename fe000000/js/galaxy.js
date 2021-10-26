@@ -34,6 +34,9 @@ let Galaxy = {
     if (!this.isUnlocked()) return 0;
     return this.stellarProductAmount() + this.complexityPointAmount() + this.finalityShardUpgradeAmount();
   },
+  showSpecialZeroText() {
+    return !this.isUnlocked() && this.stellarProductAmount() + this.complexityPointAmount() + this.finalityShardUpgradeAmount() > 0;
+  },
   nextAmount() {
     if (!this.isUnlocked()) return 0;
     return this.stellarProductAmount() + this.nextComplexityPointAmount() + this.finalityShardUpgradeAmount();

@@ -12,6 +12,9 @@ let PowerUpgrade = function (i) {
     boughtLimit() {
       return Powers.isUnlocked() ? Infinity : 0;
     },
+    displayBoughtLimit() {
+      return Infinity;
+    },
     costIncreasePer() {
       return [Decimal.pow(2, 16), Decimal.pow(2, 64), null][i - 1];
     },
@@ -64,6 +67,9 @@ let PowerUpgrade = function (i) {
     },
     atBoughtLimit() {
       return this.bought() >= this.boughtLimit();
+    },
+    atDisplayBoughtLimit() {
+      return this.bought() >= this.displayBoughtLimit();
     },
     canBuy(n) {
       if (n === undefined) {
@@ -567,7 +573,8 @@ let Powers = {
   },
   showNextPower() {
     // Don't show next power if we're doing fast finalities, to avoid it flashing.
-    return this.interval() > 1 && !player.stats.lastTenFinalities.map(x => x[0]).every(x => x !== -1 && x <= 1);
+    // Also don't show it without powers unlocked.
+    return this.interval() > 1 && this.isUnlocked() && !player.stats.lastTenFinalities.map(x => x[0]).every(x => x !== -1 && x <= 1);
   },
   maximumEquippedLimit() {
     return 3;
