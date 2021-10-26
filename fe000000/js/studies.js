@@ -223,6 +223,11 @@ let Studies = {
     let sources = [
       'boost power (see Main tab)', 'EC completions', 'green chroma', 'ℂC6'
     ];
+    // If the player hasn't reached eternity yet but has boost power and has all tabs shown,
+    // seeing Main tab won't help. So we say something else.
+    if (!PrestigeLayerProgress.hasReached('eternity')) {
+      sources[0] = 'boost power (after eternity, you\'ll get theorems from boost power)';
+    }
     let conditionsCount = conditions.filter(x => x).length;
     if (conditionsCount === 0) {
       return formatInt(extraTheorems) + ' (progress further to unlock ways to get extra theorems)';

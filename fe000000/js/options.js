@@ -156,6 +156,9 @@ let Options = {
     }
     player.options.showAllTabs = !player.options.showAllTabs;
   },
+  optionDisplay(x) {
+    return x || this.showAllTabs();
+  },
   maxAllMode() {
     return player.options.maxAllMode;
   },

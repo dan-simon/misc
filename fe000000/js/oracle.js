@@ -86,9 +86,8 @@ let Oracle = {
   },
   invoke() {
     if (!this.isUnlocked()) {
-      // This is a reference to the unlock price, written to sound a bit more worrisome.
-      alert('The Oracle babbles in an incomprehensible manner that seems, however, ' +
-        'to vaguely point toward you not having paid the price in some way.');
+      // This button is grey when the oracle isn't unlocked, even if it's visible,
+      // so it's reasonable to just return.
       return;
     }
     if (blocked) {

@@ -233,7 +233,7 @@
           </div>
           <span ~style.display=Boost.isBoostPowerVisible() ? 'none' : ''~>You will start generating boost power for each boost this eternity above ~i Boost.boostPowerStart() ~ boosts.</span>
         </div>
-        <div ~style.display=Boost.isBestBoostPowerVisible() ? '' : 'none'~>
+        <div ~style.display=(Boost.isBestBoostPowerVisible() && PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~>
           <span>Your ~r Boost.bestBoostPowerDescription() ~ is ~f Boost.bestBoostPower() ~ (giving ~i Boost.extraTheoremsActualAndDisplay() ~ extra theorem~s Boost.extraTheoremsActualAndDisplay() ~, next at ~f Boost.nextExtraTheorem() ~).</span>
         </div>
         <span ~style.display=PrestigeLayerProgress.hasReached('prestige') ? '' : 'none'~>View all ~r Generators.term() ~ even if they would be otherwise invisible: <input type="checkbox" ~!checked=Options.rawViewAllGenerators('normal')~ ~!onchange=function() {Options.setRawViewAllGenerators('normal', this.checked)}~></input></span>
@@ -2514,7 +2514,9 @@
       <div ~style.display=(EternityProducer.isUnlocked() || Options.showAllTabs()) ? '' : 'none'~>
         <div ~style.display=EternityProducer.isUnlocked() ? 'none' : ''~>
           <br/>
-          <span>Note that you cannot benefit from the Eternity Producer or buy Eternity Producer upgrades before unlocking the eternity producer.</span>
+          <span>Note that you cannot benefit from the Eternity Producer or buy Eternity Producer upgrades before you unlock the Eternity Producer.</span>
+          <br/>
+          <br/>
         </div>
         <span>You have ~q Eternities.amount() ~ eternit~y Eternities.amount() ~. Due to the Eternity Producer, they multiply all eternity generators by ~f EternityProducer.multiplier() ~.</span>
         <br/>
@@ -2525,16 +2527,16 @@
         <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
           <tr>
             <td>Eternity Producer base production per second:</td>
-            <td><span ~style.display=EternityProducerUpgrade(1).atBoughtLimit() ? 'none' : ''~>~i EternityProducerUpgrade(1).effect() ~ → ~i EternityProducerUpgrade(1).nextEffect() ~</span><span ~style.display=EternityProducerUpgrade(1).atBoughtLimit() ? '' : 'none'~>~i EternityProducerUpgrade(1).effect() ~ (maxed)</span></td>
-            <td><span ~style.display=EternityProducerUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=EternityProducerUpgrade(1).canBuy() ? "" : "disabled"~ onclick="EternityProducerUpgrade(1).buy()">Cost: ~i EternityProducerUpgrade(1).cost() ~ EP</button></span></td>
-            <td><span ~style.display=EternityProducerUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=EternityProducerUpgrade(1).canBuy() ? "" : "disabled"~ onclick="EternityProducerUpgrade(1).buyMax()">Max</button></span></td>
+            <td><span ~style.display=EternityProducerUpgrade(1).atDisplayBoughtLimit() ? 'none' : ''~>~i EternityProducerUpgrade(1).effect() ~ → ~i EternityProducerUpgrade(1).nextEffect() ~</span><span ~style.display=EternityProducerUpgrade(1).atDisplayBoughtLimit() ? '' : 'none'~>~i EternityProducerUpgrade(1).effect() ~ (maxed)</span></td>
+            <td><span ~style.display=EternityProducerUpgrade(1).atDisplayBoughtLimit() ? 'none' : ''~><button ~class=EternityProducerUpgrade(1).canBuy() ? "" : "disabled"~ onclick="EternityProducerUpgrade(1).buy()">Cost: ~i EternityProducerUpgrade(1).cost() ~ EP</button></span></td>
+            <td><span ~style.display=EternityProducerUpgrade(1).atDisplayBoughtLimit() ? 'none' : ''~><button ~class=EternityProducerUpgrade(1).canBuy() ? "" : "disabled"~ onclick="EternityProducerUpgrade(1).buyMax()">Max</button></span></td>
             <td><span ~style.display=EternityAutobuyer(12).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(12).toggle()">Auto: ~r EternityAutobuyer(12).isOn() ? "On" : "Off" ~</button></span></td>
           </tr>
           <tr>
             <td>Eternity Producer multiplier to EGs:</td>
-            <td><span ~style.display=EternityProducerUpgrade(2).atBoughtLimit() ? 'none' : ''~>~f EternityProducerUpgrade(2).effect() ~ → ~f EternityProducerUpgrade(2).nextEffect() ~</span><span ~style.display=EternityProducerUpgrade(2).atBoughtLimit() ? '' : 'none'~>~f EternityProducerUpgrade(2).effect() ~ (maxed)</span></td>
-            <td><span ~style.display=EternityProducerUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=EternityProducerUpgrade(2).canBuy() ? "" : "disabled"~ onclick="EternityProducerUpgrade(2).buy()">Cost: ~i EternityProducerUpgrade(2).cost() ~ EP</button></span></td>
-            <td><span ~style.display=EternityProducerUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=EternityProducerUpgrade(2).canBuy() ? "" : "disabled"~ onclick="EternityProducerUpgrade(2).buyMax()">Max</button></span></td>
+            <td><span ~style.display=EternityProducerUpgrade(2).atDisplayBoughtLimit() ? 'none' : ''~>~f EternityProducerUpgrade(2).effect() ~ → ~f EternityProducerUpgrade(2).nextEffect() ~</span><span ~style.display=EternityProducerUpgrade(2).atDisplayBoughtLimit() ? '' : 'none'~>~f EternityProducerUpgrade(2).effect() ~ (maxed)</span></td>
+            <td><span ~style.display=EternityProducerUpgrade(2).atDisplayBoughtLimit() ? 'none' : ''~><button ~class=EternityProducerUpgrade(2).canBuy() ? "" : "disabled"~ onclick="EternityProducerUpgrade(2).buy()">Cost: ~i EternityProducerUpgrade(2).cost() ~ EP</button></span></td>
+            <td><span ~style.display=EternityProducerUpgrade(2).atDisplayBoughtLimit() ? 'none' : ''~><button ~class=EternityProducerUpgrade(2).canBuy() ? "" : "disabled"~ onclick="EternityProducerUpgrade(2).buyMax()">Max</button></span></td>
             <td><span ~style.display=EternityAutobuyer(13).hasEternityAutobuyer() ? '' : 'none'~><button onclick="EternityAutobuyer(13).toggle()">Auto: ~r EternityAutobuyer(13).isOn() ? "On" : "Off" ~</button></span></td>
           </tr>
         </table>
@@ -2863,13 +2865,19 @@
           Unlock Chroma<br/>Cost: ~f Chroma.getUnlockColorCost(1) ~ eternity points
         </button>
       </div>
-      <div ~style.display=Chroma.isUnlocked() ? '' : 'none'~>
+      <div ~style.display=(Chroma.isUnlocked() || Options.showAllTabs()) ? '' : 'none'~>
+        <div ~style.display=Chroma.isUnlocked() ? 'none' : ''~>
+          <br/>
+          <span>Note that you cannot gain chroma before you unlock any color of it, and ~r Chroma.colorName(1) ~ must be the first color you unlock.</span>
+          <br/>
+          <br/>
+        </div>
         <span>You have spent ~t player.stats.timeSinceEternity ~ in this eternity, giving you ~f Chroma.displayAmount() ~ chroma (capped at ~f Chroma.cap() ~, based on eternity points).</span>
         <br/>
         <span>Chroma gain will slow down over time, gradually approaching its cap but taking a very long time to reach it.</span>
         <br/>
-        <span ~style.display=Chroma.producingAll() ? 'none' : ''~>You ~r Chroma.currentProductionTextPrefix() ~<span ~class=Chroma.currentColorClass()~>~r Chroma.currentColorName() ~</span>~r Chroma.currentProductionTextSuffix() ~, and will produce <span ~class=Chroma.nextColorClass()~>~r Chroma.nextColorName() ~</span> after next eternity reset.</span>
-        <br ~style.display=Chroma.producingAll() ? 'none' : ''~/>
+        <span ~style.display=(Chroma.isUnlocked() && !Chroma.producingAll()) ? '' : 'none'~>You ~r Chroma.currentProductionTextPrefix() ~<span ~class=Chroma.currentColorClass()~>~r Chroma.currentColorName() ~</span>~r Chroma.currentProductionTextSuffix() ~, and will produce <span ~class=Chroma.nextColorClass()~>~r Chroma.nextColorName() ~</span> after next eternity reset.</span>
+        <br ~style.display=(Chroma.isUnlocked() && !Chroma.producingAll()) ? '' : 'none'~/>
         <span>You ~r Chroma.timeForChromaTextPrefix() ~ <input type="text" class="chroma-value" ~!value=Chroma.timeForChromaValue()~ ~!onchange=function() {Chroma.setTimeForChromaValue(+this.value)}~></input> <select ~!value=Chroma.timeForChromaMode()~ ~!onchange=function() {Chroma.setTimeForChromaMode(this.value)}~>
           <option value="chroma">chroma</option>
           <option value="fraction of chroma cap">fraction of chroma cap</option>
@@ -3578,7 +3586,13 @@
         <div ~style.display=SpecialTabs.isTabVisible('oracle') ? 'none' : ''~>Unlocking powers for the first time will also let you view the Oracle tab.</div>
         <div ~style.display=FinalityMilestones.isFinalityMilestoneActive(8) ? 'none' : ''~>Unlocking powers will also let you gain your eternity points on eternity every second, without needing to eternity (EP generation).</div>
       </div>
-      <div ~style.display=Powers.isUnlocked() ? '' : 'none'~>
+      <div ~style.display=(Powers.isUnlocked() || Options.showAllTabs()) ? '' : 'none'~>
+        <div ~style.display=Powers.isUnlocked() ? 'none' : ''~>
+          <br/>
+          <span>Note that you cannot gain powers or buy power upgrades before you unlock powers.</span>
+          <br/>
+          <br/>
+        </div>
         <span>You have ~i Powers.equipped().length ~/~i Powers.equippedLimit() ~ equipped power~s Powers.equippedLimit() ~.</span>
         <br/>
         <span>Each power raises all of a generator type's multipliers to a power. Up to ~i Powers.equippedLimit() ~ power~s Powers.equippedLimit() ~ can be equipped at the same time.</span>
@@ -3592,7 +3606,8 @@
         <span ~style.display=FinalityMilestones.isFinalityMilestoneActive(8) ? 'none' : ''~>Due to unlocking powers, you gain your eternity points on eternity every second, without needing to eternity (EP generation).</span>
         <br/>
         <br/>
-        <span>You gain a new power once every ~t Powers.interval() ~, next in ~t Powers.timeUntilPowerGain() ~. <button onclick="Powers.togglePowerGain()">Power gain: ~r Powers.isPowerGainOn() ? "On" : "Off" ~</button></span>
+        <span ~style.display=Powers.isUnlocked() ? '' : 'none'~>You gain a new power once every ~t Powers.interval() ~, next in ~t Powers.timeUntilPowerGain() ~. <button onclick="Powers.togglePowerGain()">Power gain: ~r Powers.isPowerGainOn() ? "On" : "Off" ~</button></span>
+        <span ~style.display=Powers.isUnlocked() ? 'none' : ''~>You would gain a new power once every ~t Powers.interval() ~, but you haven't unlocked them yet.</span>
         <br ~style.display=!Powers.isPowerGainOn() && Powers.imminentPowerGain() !== 0 ? '' : 'none'~/>
         <span ~style.display=!Powers.isPowerGainOn() && Powers.imminentPowerGain() !== 0 ? '' : 'none'~>Turning power gain on would give you ~i Powers.imminentPowerGain() ~ new power~s Powers.imminentPowerGain() ~.</span>
         <br/>
@@ -3902,23 +3917,23 @@
         <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
           <tr>
             <td>Strength of new powers:</td>
-            <td><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? 'none' : ''~>~r formatPrecisely(PowerUpgrade(1).effectDisplay()) ~ → ~r formatPrecisely(PowerUpgrade(1).nextEffectDisplay()) ~</span><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? '' : 'none'~>~r formatPrecisely(PowerUpgrade(1).effectDisplay()) ~ (maxed)</span></td>
-            <td><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(1).buy()">Cost: ~i PowerUpgrade(1).cost() ~ ℂP</button></span></td>
-            <td><span ~style.display=PowerUpgrade(1).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(1).buyMax()">Max</button></span></td>
+            <td><span ~style.display=PowerUpgrade(1).atDisplayBoughtLimit() ? 'none' : ''~>~r formatPrecisely(PowerUpgrade(1).effectDisplay()) ~ → ~r formatPrecisely(PowerUpgrade(1).nextEffectDisplay()) ~</span><span ~style.display=PowerUpgrade(1).atDisplayBoughtLimit() ? '' : 'none'~>~r formatPrecisely(PowerUpgrade(1).effectDisplay()) ~ (maxed)</span></td>
+            <td><span ~style.display=PowerUpgrade(1).atDisplayBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(1).buy()">Cost: ~i PowerUpgrade(1).cost() ~ ℂP</button></span></td>
+            <td><span ~style.display=PowerUpgrade(1).atDisplayBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(1).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(1).buyMax()">Max</button></span></td>
             <td><span ~style.display=ComplexityAutobuyer(9).hasComplexityAutobuyer() ? '' : 'none'~><button onclick="ComplexityAutobuyer(9).toggle()">Auto: ~r ComplexityAutobuyer(9).isOn() ? "On" : "Off" ~</button></span></td>
           </tr>
           <tr>
             <td>Speed of gaining new powers:</td>
-            <td><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? 'none' : ''~>~f PowerUpgrade(2).effectDisplay() ~x → ~f PowerUpgrade(2).nextEffectDisplay() ~x</span><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? '' : 'none'~>~f PowerUpgrade(2).effectDisplay() ~x (maxed)</span></td>
-            <td><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(2).buy()">Cost: ~i PowerUpgrade(2).cost() ~ ℂP</button></span></td>
-            <td><span ~style.display=PowerUpgrade(2).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(2).buyMax()">Max</button></span></td>
+            <td><span ~style.display=PowerUpgrade(2).atDisplayBoughtLimit() ? 'none' : ''~>~f PowerUpgrade(2).effectDisplay() ~x → ~f PowerUpgrade(2).nextEffectDisplay() ~x</span><span ~style.display=PowerUpgrade(2).atDisplayBoughtLimit() ? '' : 'none'~>~f PowerUpgrade(2).effectDisplay() ~x (maxed)</span></td>
+            <td><span ~style.display=PowerUpgrade(2).atDisplayBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(2).buy()">Cost: ~i PowerUpgrade(2).cost() ~ ℂP</button></span></td>
+            <td><span ~style.display=PowerUpgrade(2).atDisplayBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(2).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(2).buyMax()">Max</button></span></td>
             <td><span ~style.display=ComplexityAutobuyer(10).hasComplexityAutobuyer() ? '' : 'none'~><button onclick="ComplexityAutobuyer(10).toggle()">Auto: ~r ComplexityAutobuyer(10).isOn() ? "On" : "Off" ~</button></span></td>
           </tr>
           <tr>
             <td>Minimum rarity of new powers:</td>
-            <td><span ~style.display=PowerUpgrade(3).atBoughtLimit() ? 'none' : ''~>~f PowerUpgrade(3).effectDisplay() ~ → ~f PowerUpgrade(3).nextEffectDisplay() ~</span><span ~style.display=PowerUpgrade(3).atBoughtLimit() ? '' : 'none'~>~f PowerUpgrade(3).effectDisplay() ~ (maxed)</span></td>
-            <td><span ~style.display=PowerUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(3).buy()">Cost: ~i PowerUpgrade(3).cost() ~ ℂP</button></span></td>
-            <td><span ~style.display=PowerUpgrade(3).atBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(3).buyMax()">Max</button></span></td>
+            <td><span ~style.display=PowerUpgrade(3).atDisplayBoughtLimit() ? 'none' : ''~>~f PowerUpgrade(3).effectDisplay() ~ → ~f PowerUpgrade(3).nextEffectDisplay() ~</span><span ~style.display=PowerUpgrade(3).atDisplayBoughtLimit() ? '' : 'none'~>~f PowerUpgrade(3).effectDisplay() ~ (maxed)</span></td>
+            <td><span ~style.display=PowerUpgrade(3).atDisplayBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(3).buy()">Cost: ~i PowerUpgrade(3).cost() ~ ℂP</button></span></td>
+            <td><span ~style.display=PowerUpgrade(3).atDisplayBoughtLimit() ? 'none' : ''~><button ~class=PowerUpgrade(3).canBuy() ? "" : "disabled"~ onclick="PowerUpgrade(3).buyMax()">Max</button></span></td>
             <td><span ~style.display=ComplexityAutobuyer(11).hasComplexityAutobuyer() ? '' : 'none'~><button onclick="ComplexityAutobuyer(11).toggle()">Auto: ~r ComplexityAutobuyer(11).isOn() ? "On" : "Off" ~</button></span></td>
           </tr>
         </table>
@@ -4226,14 +4241,20 @@
         <div>The Oracle is a quality-of-life feature that will let you see the future.</div>
         <div ~style.display=SpecialTabs.isTabVisible('galaxies') ?  'none' : ''~>Unlocking the Oracle for the first time will also let you view the Galaxies tab.</div>
       </div>
-      <div ~style.display=Oracle.isUnlocked() ? '' : 'none'~>
+      <div ~style.display=(Oracle.isUnlocked() || Options.showAllTabs()) ? '' : 'none'~>
+        <div ~style.display=Oracle.isUnlocked() ? 'none' : ''~>
+          <br/>
+          <span>Note that you cannot get a prediction from the Oracle before you unlock the Oracle.</span>
+          <br/>
+          <br/>
+        </div>
         <span>The Oracle lets you see what certain stats will be and what powers you will gain in the future.</span>
         <br/>
         <span>It can also be used to see what powers you would gain with power gain on.</span>
         <br/>
         <span>Ask the Oracle to look <input type="text" ~!value=Oracle.displayTime()~ ~!onchange=function() {Oracle.setTime(+this.value)}~></input> second~s Oracle.displayTime() ~ into the future, using <input type="text" ~!value=Oracle.displayTicks()~ ~!onchange=function() {Oracle.setTicks(+this.value)}~></input> game tick~s Oracle.displayTicks() ~.</span>
         <div style="width: 1024px; margin-left: auto; margin-right: auto;">
-          <button onclick="Oracle.invoke()">Get prediction</button> <button onclick="Oracle.toggleAlert()">Alert on prediction: ~r Oracle.alert() ? "On" : "Off" ~</button> <button onclick="Oracle.togglePowerDisplay()">Show future powers on prediction: ~r Oracle.powerDisplay() ? "On" : "Off" ~</button>
+          <button ~class=Oracle.isUnlocked() ? '' : 'disabled'~ onclick="Oracle.invoke()">Get prediction</button> <button onclick="Oracle.toggleAlert()">Alert on prediction: ~r Oracle.alert() ? "On" : "Off" ~</button> <button onclick="Oracle.togglePowerDisplay()">Show future powers on prediction: ~r Oracle.powerDisplay() ? "On" : "Off" ~</button>
           <button onclick="Oracle.nextPowerGainInPredictions()">Power gain in predictions: ~r Oracle.powerGainInPredictions() ~</button>
           <button onclick="Oracle.togglePowerFutureExtraMultipliers()">Show future power extra multipliers (as opposed to current): ~r Oracle.powerFutureExtraMultipliers() ? "On" : "Off" ~</button>
           <button onclick="Oracle.toggleShowWaitsFromPastTime()">Show waiting time from when prediction was made (as opposed to current): ~r Oracle.showWaitsFromPastTime() ? "On" : "Off" ~</button>
@@ -4466,7 +4487,13 @@
         </button>
         <div ~style.display=FinalityMilestones.isFinalityMilestoneActive(2) ? 'none' : ''~>Unlocking galaxies will also give you autobuyers for complexity generators and power upgrades.</div>
       </div>
-      <div ~style.display=Galaxy.isUnlocked() ? '' : 'none'~>
+      <div ~style.display=(Galaxy.isUnlocked() || Options.showAllTabs()) ? '' : 'none'~>
+        <div ~style.display=Galaxy.isUnlocked() ? 'none' : ''~>
+          <br/>
+          <span>Note that you cannot get any galaxies before galaxies are unlocked.</span>
+          <br/>
+          <br/>
+        </div>
         <div ~style.display=FinalityMilestones.isFinalityMilestoneActive(2) ? 'none' : ''~>Due to unlocking galaxies, you have autobuyers for complexity generators and power upgrades.</div>
         <br ~style.display=FinalityMilestones.isFinalityMilestoneActive(2) ? 'none' : ''~/>
         <span>You have produced ~f Galaxy.totalStarsProducedThisFinality() ~ total stars this finality, making your star factor ~f Galaxy.starFactor() ~.</span>
@@ -4480,7 +4507,7 @@
         <span>Your stellar product is ~f Galaxy.starFactor() ~ x ~f Galaxy.infinityStarFactor() ~ x ~f Galaxy.eternityStarFactor() ~ x ~f Galaxy.complexityStarFactor() ~ = ~f Galaxy.stellarProduct() ~.</span>
         <br/>
         <br/>
-        <span>You have ~i Galaxy.stellarProductAmount() ~ (from stellar product) + ~i Galaxy.complexityPointAmount() ~ (from total ℂP this finality) <span ~style.display=Galaxy.finalityShardUpgradeAmount() === 0 ? 'none' : ''~>+ ~i Galaxy.finalityShardUpgradeAmount() ~ (from finality shard upgrade bonuses)</span> = ~i Galaxy.amount() ~ galax~y Galaxy.amount() ~.</span>
+        <span>You have ~i Galaxy.stellarProductAmount() ~ (from stellar product) + ~i Galaxy.complexityPointAmount() ~ (from total ℂP this finality) <span ~style.display=Galaxy.finalityShardUpgradeAmount() === 0 ? 'none' : ''~>+ ~i Galaxy.finalityShardUpgradeAmount() ~ (from finality shard upgrade bonuses)</span> = ~i Galaxy.amount() ~<span ~style.display=Galaxy.showSpecialZeroText() ? '' : 'none'~> (since you haven't unlocked galaxies yet)</span> galax~y Galaxy.amount() ~.</span>
         <br/>
         <span>Next galaxies are at ~f Galaxy.nextStellarProductGalaxy() ~ stellar product and ~f Galaxy.nextComplexityPointGalaxy() ~ total ℂP this finality.</span>
         <br/>
@@ -6042,7 +6069,7 @@
           <td><div class="options-div">
             <button class="mini-options-button" onclick="Options.toggleNotifications('saveLoad')">Save/load notifications: ~r Options.showNotifications('saveLoad') ? 'On' : 'Off' ~</button>
             <button class="mini-options-button" onclick="Options.toggleNotifications('achievements')">Achievement notifications: ~r Options.showNotifications('achievements') ? 'On' : 'Off' ~</button>
-            <button ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~ class="mid-options-button" onclick="Options.toggleNotifications('complexityAchievements')">Complexity achievement notifications: ~r Options.showNotifications('complexityAchievements') ? 'On' : 'Off' ~</button>
+            <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~ class="mid-options-button" onclick="Options.toggleNotifications('complexityAchievements')">Complexity achievement notifications: ~r Options.showNotifications('complexityAchievements') ? 'On' : 'Off' ~</button>
           </div></td>
           <td><div class="options-div">
             <button class="mini-options-button" onclick="Options.nextBackground()">Background: ~r player.options.theme.background ~</button>
@@ -6052,33 +6079,33 @@
           </div></td>
           <td><div class="options-div">
             <button class="mini-options-button" onclick="Options.toggleTabColors()">Tab colors: ~r Options.tabColors() ? 'On' : 'Off' ~</button>
-            <button class="mini-options-button" ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~ onclick="Options.nextCompletionColors()">Completion colors: ~r player.options.completionColors ~</button>
-            <button class="mini-options-button" ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~ onclick="Options.toggleResetColors()">Reset colors: ~r Options.resetColors() ? 'On' : 'Off' ~</button>
-            <button class="mini-options-button" ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~ onclick="Options.togglePresetHighlightColors()">Preset highlight colors: ~r Options.presetHighlightColors() ? 'On' : 'Off' ~</button>
+            <button class="mini-options-button" ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ onclick="Options.nextCompletionColors()">Completion colors: ~r player.options.completionColors ~</button>
+            <button class="mini-options-button" ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ onclick="Options.toggleResetColors()">Reset colors: ~r Options.resetColors() ? 'On' : 'Off' ~</button>
+            <button class="mini-options-button" ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~ onclick="Options.togglePresetHighlightColors()">Preset highlight colors: ~r Options.presetHighlightColors() ? 'On' : 'Off' ~</button>
           </div></td>
         <tr/>
         <tr>
           <td><button class="options-button" onclick="Options.toggleShowAllTabs()">Show all tabs: ~r player.options.showAllTabs ? "On" : "Off" ~</button></td>
-          <td><div ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~ class="options-div">Max all mode: <select ~!value=Options.maxAllMode()~ ~!onchange=function() {Options.setMaxAllMode(this.value)}~>
+          <td><div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="options-div">Max all mode: <select ~!value=Options.maxAllMode()~ ~!onchange=function() {Options.setMaxAllMode(this.value)}~>
             <option value="Normal generators and boosts">Normal generators and boosts</option>
             <option value="Generators and upgrades in current tab">Generators and upgrades in current tab</option>
             <option value="Both">Both</option>
             <option value="All generators and upgrades">All generators and upgrades</option>
             <option value="All generators, upgrades, and unlocks">All generators, upgrades, and unlocks</option>
           </select></div></td>
-          <td><div ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~ class="options-div">
-            <button ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleShowCurrentChallenges()">Current challenges in header: ~r Options.showCurrentChallenges() ? 'Shown' : 'Hidden' ~</button>
-            <button ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleShowNextCCCompletion()">Next ℂC completion in header: ~r Options.showNextCCCompletion() ? 'Shown' : 'Hidden' ~</button>
-            <button ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleShowResetButtonsForHiddenTabs()">Reset buttons for hidden tabs: ~r Options.showResetButtonsForHiddenTabs() ? 'Shown' : 'Hidden' ~</button>
+          <td><div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="options-div">
+            <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleShowCurrentChallenges()">Current challenges in header: ~r Options.showCurrentChallenges() ? 'Shown' : 'Hidden' ~</button>
+            <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleShowNextCCCompletion()">Next ℂC completion in header: ~r Options.showNextCCCompletion() ? 'Shown' : 'Hidden' ~</button>
+            <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleShowResetButtonsForHiddenTabs()">Reset buttons for hidden tabs: ~r Options.showResetButtonsForHiddenTabs() ? 'Shown' : 'Hidden' ~</button>
           </div></td>
         <tr/>
-        <tr ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>
-          <td><div ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~ class="options-div">
-            <button ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('studies')">Full study options: ~r Options.showFullOptions('studies') ? 'On' : 'Off' ~</button>
-            <button ~style.display=(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('powers')">Full power options: ~r Options.showFullOptions('powers') ? 'On' : 'Off' ~</button>
-            <button ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('finality')">Full finality shard options: ~r Options.showFullOptions('finality') ? 'On' : 'Off' ~</button>
+        <tr ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~>
+          <td><div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~ class="options-div">
+            <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('studies')">Full study options: ~r Options.showFullOptions('studies') ? 'On' : 'Off' ~</button>
+            <button ~style.display=Options.optionDisplay(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('powers')">Full power options: ~r Options.showFullOptions('powers') ? 'On' : 'Off' ~</button>
+            <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('finality')">Full finality shard options: ~r Options.showFullOptions('finality') ? 'On' : 'Off' ~</button>
           </div></td>
-          <td><button ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~ class="options-button" onclick="Options.toggleComplexityChallengeRunningColors()" style="font-size: 0.875rem;">
+          <td><button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~ class="options-button" onclick="Options.toggleComplexityChallengeRunningColors()" style="font-size: 0.875rem;">
             Complexity challenge colors: ~r Options.complexityChallengeRunningColors() ? "Running" : "Completions" ~
           </button></td>
           <td/>
@@ -6086,35 +6113,35 @@
       </table>
       <div>
         Confirmations:
-        <span ~style.display=SpecialDivs.isDivVisible('sacrifice') ? '' : 'none'~>Sacrifice: <input type="checkbox" ~!checked=Options.confirmation('sacrifice')~ ~!onchange=function() {Options.setConfirmation('sacrifice', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-        <span ~style.display=SpecialDivs.isDivVisible('prestige') ? '' : 'none'~>Prestige: <input type="checkbox" ~!checked=Options.confirmation('prestige')~ ~!onchange=function() {Options.setConfirmation('prestige', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-        <span ~style.display=(PrestigeLayerProgress.hasReached('infinity') || InfinityPrestigeLayer.canInfinity()) ? '' : 'none'~>Infinity: <input type="checkbox" ~!checked=Options.confirmation('infinity')~ ~!onchange=function() {Options.setConfirmation('infinity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-        <span ~style.display=(PrestigeLayerProgress.hasReached('eternity') || EternityPrestigeLayer.canEternity()) ? '' : 'none'~>Eternity: <input type="checkbox" ~!checked=Options.confirmation('eternity')~ ~!onchange=function() {Options.setConfirmation('eternity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-        <span ~style.display=(Permanence.hasGainedPermanence() || Permanence.canGainPermanence()) ? '' : 'none'~>Gaining permanence: <input type="checkbox" ~!checked=Options.confirmation('permanence')~ ~!onchange=function() {Options.setConfirmation('permanence', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=Options.optionDisplay(SpecialDivs.isDivVisible('sacrifice')) ? '' : 'none'~>Sacrifice: <input type="checkbox" ~!checked=Options.confirmation('sacrifice')~ ~!onchange=function() {Options.setConfirmation('sacrifice', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=Options.optionDisplay(SpecialDivs.isDivVisible('prestige')) ? '' : 'none'~>Prestige: <input type="checkbox" ~!checked=Options.confirmation('prestige')~ ~!onchange=function() {Options.setConfirmation('prestige', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity') || InfinityPrestigeLayer.canInfinity()) ? '' : 'none'~>Infinity: <input type="checkbox" ~!checked=Options.confirmation('infinity')~ ~!onchange=function() {Options.setConfirmation('infinity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('eternity') || EternityPrestigeLayer.canEternity()) ? '' : 'none'~>Eternity: <input type="checkbox" ~!checked=Options.confirmation('eternity')~ ~!onchange=function() {Options.setConfirmation('eternity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=Options.optionDisplay(Permanence.hasGainedPermanence() || Permanence.canGainPermanence()) ? '' : 'none'~>Gaining permanence: <input type="checkbox" ~!checked=Options.confirmation('permanence')~ ~!onchange=function() {Options.setConfirmation('permanence', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
       </div>
-      <div ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~>
-        <span ~style.display=(PrestigeLayerProgress.hasReached('complexity') || ComplexityPrestigeLayer.canComplexity()) ? '' : 'none'~>Complexity: <input type="checkbox" ~!checked=Options.confirmation('complexity')~ ~!onchange=function() {Options.setConfirmation('complexity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-        <span ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~>Complexity reset: <input type="checkbox" ~!checked=Options.confirmation('complexityReset')~ ~!onchange=function() {Options.setConfirmation('complexityReset', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-        <span ~style.display=(PrestigeLayerProgress.hasReached('finality') || FinalityPrestigeLayer.canFinality()) ? '' : 'none'~>Finality: <input type="checkbox" ~!checked=Options.confirmation('finality')~ ~!onchange=function() {Options.setConfirmation('finality', this.checked)}~></input></span>
+      <div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity') || ComplexityPrestigeLayer.canComplexity()) ? '' : 'none'~>
+        <span ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity') || ComplexityPrestigeLayer.canComplexity()) ? '' : 'none'~>Complexity: <input type="checkbox" ~!checked=Options.confirmation('complexity')~ ~!onchange=function() {Options.setConfirmation('complexity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~>Complexity reset: <input type="checkbox" ~!checked=Options.confirmation('complexityReset')~ ~!onchange=function() {Options.setConfirmation('complexityReset', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('finality') || FinalityPrestigeLayer.canFinality()) ? '' : 'none'~>Finality: <input type="checkbox" ~!checked=Options.confirmation('finality')~ ~!onchange=function() {Options.setConfirmation('finality', this.checked)}~></input></span>
       </div>
-      <div ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>
-        <span ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>Single study refund: <input type="checkbox" ~!checked=Options.confirmation('singleStudyRefund')~ ~!onchange=function() {Options.setConfirmation('singleStudyRefund', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-        <span ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>Studies respec: <input type="checkbox" ~!checked=Options.confirmation('studiesRespec')~ ~!onchange=function() {Options.setConfirmation('studiesRespec', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-        <span ~style.display=EternityChallenge.areEternityChallengesVisible() ? '' : 'none'~>Eternity challenge respec: <input type="checkbox" ~!checked=Options.confirmation('eternityChallengeRespec')~ ~!onchange=function() {Options.setConfirmation('eternityChallengeRespec', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+      <div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~>
+        <span ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~>Single study refund: <input type="checkbox" ~!checked=Options.confirmation('singleStudyRefund')~ ~!onchange=function() {Options.setConfirmation('singleStudyRefund', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~>Studies respec: <input type="checkbox" ~!checked=Options.confirmation('studiesRespec')~ ~!onchange=function() {Options.setConfirmation('studiesRespec', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=Options.optionDisplay(EternityChallenge.areEternityChallengesVisible()) ? '' : 'none'~>Eternity challenge respec: <input type="checkbox" ~!checked=Options.confirmation('eternityChallengeRespec')~ ~!onchange=function() {Options.setConfirmation('eternityChallengeRespec', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
       </div>
-      <div ~style.display=(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>
-        <span ~style.display=(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Power deletion: <select ~!value=Powers.powerDeletionMode()~ ~!onchange=function() {Powers.setPowerDeletionMode(this.value)}~>
+      <div ~style.display=Options.optionDisplay(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>
+        <span ~style.display=Options.optionDisplay(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Power deletion: <select ~!value=Powers.powerDeletionMode()~ ~!onchange=function() {Powers.setPowerDeletionMode(this.value)}~>
           <option value="Confirmation">Confirmation</option>
           <option value="No confirmation">No confirmation</option>
           <option value="Disabled">Disabled</option>
         </select><span style="display: inline-block; width: 16px;"></span></span>
-        <span ~style.display=(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Single power unequip: <select ~!value=Powers.powerUnequipMode()~ ~!onchange=function() {Powers.setPowerUnequipMode(this.value)}~>
+        <span ~style.display=Options.optionDisplay(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Single power unequip: <select ~!value=Powers.powerUnequipMode()~ ~!onchange=function() {Powers.setPowerUnequipMode(this.value)}~>
           <option value="Confirmation">Confirmation</option>
           <option value="No confirmation">No confirmation</option>
           <option value="Disabled">Disabled</option>
         </select><span style="display: inline-block; width: 16px;"></span></span>
-        <span ~style.display=(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Powers unequip: <input type="checkbox" ~!checked=Options.confirmation('powersUnequip')~ ~!onchange=function() {Options.setConfirmation('powersUnequip', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-        <span ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~>Finality shard upgrades respec: <input type="checkbox" ~!checked=Options.confirmation('finalityShardUpgradesRespec')~ ~!onchange=function() {Options.setConfirmation('finalityShardUpgradesRespec', this.checked)}~></input></span>
+        <span ~style.display=Options.optionDisplay(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Powers unequip: <input type="checkbox" ~!checked=Options.confirmation('powersUnequip')~ ~!onchange=function() {Options.setConfirmation('powersUnequip', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Finality shard upgrades respec: <input type="checkbox" ~!checked=Options.confirmation('finalityShardUpgradesRespec')~ ~!onchange=function() {Options.setConfirmation('finalityShardUpgradesRespec', this.checked)}~></input></span>
       </div>
       <div>
         <span>Preset change: <input type="checkbox" ~!checked=Options.confirmation('presetChange')~ ~!onchange=function() {Options.setConfirmation('presetChange', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>

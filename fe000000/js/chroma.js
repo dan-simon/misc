@@ -108,6 +108,8 @@ let Chroma = {
     return this.colorCosts[x];
   },
   canSeeThatColorExists(x) {
+    // This might be a slight misnomer if we allow red to be seen in the view-everything mode,
+    // but that's fine. Red can probably be set up to show up ui-wise but not be unlockable.
     return x !== 6 || ComplexityAchievements.isAchievementsUnlockedRewardActive(3);
   },
   canUnlockColor(x) {
@@ -208,6 +210,7 @@ let Chroma = {
     }
   },
   producingAll() {
+    // Note that this can be true even if chroma isn't unlocked yet.
     return ComplexityAchievements.isComplexityAchievementActive(3, 3);
   },
   chromaDivClass(color) {
@@ -252,6 +255,9 @@ let Chroma = {
     }
   },
   timeForChromaTextPrefix() {
+    if (!this.isUnlocked()) {
+      return ' will never get';
+    }
     let c = this.timeForChromaTextChromaValue();
     let cap = this.cap();
     if (c > cap) {
@@ -265,6 +271,9 @@ let Chroma = {
     return 'will get';
   },
   timeForChromaTextSuffix() {
+    if (!this.isUnlocked()) {
+      return ' (due to chroma not being unlocked yet)';
+    }
     let c = this.timeForChromaTextChromaValue();
     let cap = this.cap();
     if (c > cap) {
