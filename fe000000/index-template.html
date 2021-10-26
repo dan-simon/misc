@@ -2511,7 +2511,11 @@
         <br ~style.display=SpecialTabs.isTabVisible('eternity-challenges') ? 'none' : ''~/>
         <span ~style.display=SpecialTabs.isTabVisible('eternity-challenges') ? 'none' : ''~>Unlocking the Eternity Producer for the first time will also let you view the Eternity Challenges tab.</span>
       </div>
-      <div ~style.display=EternityProducer.isUnlocked() ? '' : 'none'~>
+      <div ~style.display=(EternityProducer.isUnlocked() || Options.showAllTabs()) ? '' : 'none'~>
+        <div ~style.display=EternityProducer.isUnlocked() ? 'none' : ''~>
+          <br/>
+          <span>Note that you cannot benefit from the Eternity Producer or buy Eternity Producer upgrades before unlocking the eternity producer.</span>
+        </div>
         <span>You have ~q Eternities.amount() ~ eternit~y Eternities.amount() ~. Due to the Eternity Producer, they multiply all eternity generators by ~f EternityProducer.multiplier() ~.</span>
         <br/>
         <span>The Eternity Producer is producing ~q EternityProducer.productionPerSecond() ~ eternit~y EternityProducer.productionPerSecond() ~ per second.</span>
