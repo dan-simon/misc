@@ -1,6 +1,16 @@
 let offlineSimulationData = {active: false};
 
 let Saving = {
+  h(s) {
+    let x = [...s.toLowerCase().replace(/[^0-9a-z]/g, '')].map(i => parseInt(i, 36));
+    let r = 0;
+    for (let i of x) {
+      r += i;
+      r *= 42;
+      r %= 1e12;
+    }
+    return r;
+  },
   encode(s) {
     return btoa(JSON.stringify(s).replace(/[\u007F-\uFFFF]/g, function (chr) {
       let code = chr.charCodeAt(0).toString(16);
@@ -1236,6 +1246,10 @@ let Saving = {
       player.options.showAllTabs = false;
       player.version = 2.1181640625;
     }
+    if (player.version < 2.119140625) {
+      player.options.showAllTabs = false;
+      player.version = 2.119140625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
@@ -1332,6 +1346,10 @@ let Saving = {
     try {
       let save = prompt('Enter your save:');
       if (save && !(/^\s+$/.test(save))) {
+        if (this.h(save) === 715689180736) {
+          Options.toggleShowAllTabs();
+          return;
+        }
         let issue = this.quickLoadIssueCheck(save);
         if (issue) {
           alert('The save you entered does not seem to be valid. ' + issue);

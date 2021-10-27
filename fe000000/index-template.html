@@ -6084,8 +6084,7 @@
             <button class="mini-options-button" ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~ onclick="Options.togglePresetHighlightColors()">Preset highlight colors: ~r Options.presetHighlightColors() ? 'On' : 'Off' ~</button>
           </div></td>
         <tr/>
-        <tr>
-          <td><button class="options-button" onclick="Options.toggleShowAllTabs()">Show all tabs: ~r player.options.showAllTabs ? "On" : "Off" ~</button></td>
+        <tr ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~>
           <td><div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="options-div">Max all mode: <select ~!value=Options.maxAllMode()~ ~!onchange=function() {Options.setMaxAllMode(this.value)}~>
             <option value="Normal generators and boosts">Normal generators and boosts</option>
             <option value="Generators and upgrades in current tab">Generators and upgrades in current tab</option>
@@ -6098,13 +6097,14 @@
             <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleShowNextCCCompletion()">Next ℂC completion in header: ~r Options.showNextCCCompletion() ? 'Shown' : 'Hidden' ~</button>
             <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleShowResetButtonsForHiddenTabs()">Reset buttons for hidden tabs: ~r Options.showResetButtonsForHiddenTabs() ? 'Shown' : 'Hidden' ~</button>
           </div></td>
-        <tr/>
-        <tr ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~>
           <td><div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~ class="options-div">
             <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('studies')">Full study options: ~r Options.showFullOptions('studies') ? 'On' : 'Off' ~</button>
             <button ~style.display=Options.optionDisplay(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('powers')">Full power options: ~r Options.showFullOptions('powers') ? 'On' : 'Off' ~</button>
             <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('finality')">Full finality shard options: ~r Options.showFullOptions('finality') ? 'On' : 'Off' ~</button>
           </div></td>
+        <tr/>
+        <tr ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~>  
+          <td/>
           <td><button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~ class="options-button" onclick="Options.toggleComplexityChallengeRunningColors()" style="font-size: 0.875rem;">
             Complexity challenge colors: ~r Options.complexityChallengeRunningColors() ? "Running" : "Completions" ~
           </button></td>

@@ -151,7 +151,8 @@ let Options = {
   },
   toggleShowAllTabs() {
     if (!player.options.showAllTabs && !confirm('Are you sure you want all tabs to be visible, ' +
-    'even those you haven\'t unlocked yet? This will reveal spoilers.')) {
+    'even those you haven\'t unlocked yet? This will reveal spoilers and is primarily meant ' +
+    'for replaying the game.')) {
       return;
     }
     player.options.showAllTabs = !player.options.showAllTabs;
