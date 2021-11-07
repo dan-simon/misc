@@ -57,7 +57,7 @@ let RNG = {
     steps %= Math.pow(2, 32) - 1;
     let bitSeed = this.toBits(player.powers.seed);
     let bitSteps = this.toBits(steps);
-    let newBitSeed = bitSteps.reduce((x, b, i) => b ? this.multiply(
+    let newBitSeed = bitSteps.reduce((x, b, i) => b ? this.times(
       this.getAdvancementMatrixSquare(i), x) : x, bitSeed);
     player.powers.seed = this.fromBits(newBitSeed);
   },

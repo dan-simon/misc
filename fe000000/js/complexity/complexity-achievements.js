@@ -206,7 +206,7 @@ let ComplexityAchievements = {
     return Colors.rewardClass(this.isAchievementsUnlockedRewardActive(x));
   },
   startingEternityPoints() {
-    return this.getAchievementsUnlockedRewardEffect(1).add(this.getAchievementsUnlockedRewardEffect(4));
+    return this.getAchievementsUnlockedRewardEffect(1).plus(this.getAchievementsUnlockedRewardEffect(4));
   },
   achievementStatusNumber(row, column) {
     if (this.isComplexityAchievementActive(row, column)) {
