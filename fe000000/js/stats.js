@@ -69,7 +69,10 @@ let Stats = {
   setShowRunType(layer, b) {
     player.stats.lastRunTypesToShow[layer] = b;
   },
-  key(layer) {
+  timeSinceKey(layer) {
+    return 'timeSince' + layer[0].toUpperCase() + layer.slice(1);
+  },
+  lastTenKey(layer) {
     return 'lastTen' + layer[0].toUpperCase() + layer.slice(1, -1) + 'ies';
   },
   showAnyRuns(x) {
@@ -79,7 +82,8 @@ let Stats = {
     return player.stats.lastRunTypesToShow[layer];
   },
   showRun(x, layer) {
-    return this.showAnyRuns(x) && this.showRunType(layer) && player.stats[this.key(layer)][x - 1][0] !== -1;
+    return this.showAnyRuns(x) && this.showRunType(layer) &&
+      player.stats[this.lasTenKey(layer)][x - 1][0] !== -1;
   }
 }
 
@@ -92,9 +96,11 @@ let FastResetText = {
     return ' You are currently doing fast ' + x.slice(0, -1) + 'ies due to your ' + x + ' autobuyer.'
   },
   isDoingFast(x) {
-    let info = player.stats[Stats.key(x)];
+    let info = player.stats[Stats.lastTenKey(x)];
     let times = info.map(x => x[0]);
-    return times.every(x => x !== -1 && x <= 1) && Autobuyer(this.autobuyerIndices[this.layers.indexOf(x)]).isActive();
+    return player.stats[Stats.timeSinceKey(x)] <= 1 &&
+      Autobuyer(this.autobuyerIndices[this.layers.indexOf(x)]).isActive() &&
+      times.every(x => x !== -1 && x <= 1);
   },
   getText(x) {
     for (let i of this.layers) {
