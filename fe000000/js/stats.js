@@ -83,7 +83,7 @@ let Stats = {
   },
   showRun(x, layer) {
     return this.showAnyRuns(x) && this.showRunType(layer) &&
-      player.stats[this.lasTenKey(layer)][x - 1][0] !== -1;
+      player.stats[this.lastTenKey(layer)][x - 1][0] !== -1;
   }
 }
 
