@@ -158,10 +158,14 @@ let HotkeyMaxAll = {
             if (t in i) {
               l = l.concat(i[t]);
             }
-            // I'm not sure if not having this would lead to buying things in the wrong order, but better safe than sorry.
-            l.sort();
-            i.purchase(l);
           }
+          // This needs to go outside the above for loop to stop intermediate buying of things
+          // (e.g. buying generators before boosts, when generators are generally less valuable than boosts).
+          // You might think this would go without saying, but apparently it was originally in the for loop, which
+          // unsurprisingly caused bugs.
+          // I'm not sure if not sorting would lead to buying things in the wrong order, but better safe than sorry.
+          l.sort();
+          i.purchase(l);
         }
       }
     }
