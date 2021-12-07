@@ -106,6 +106,14 @@ input[type=checkbox] {
   visibility: visible;
 }
 
+.helpspan {
+  position: relative;
+}
+
+.helpspan:hover .tooltiptext {
+  visibility: visible;
+}
+
 #notificationarea {
   position: fixed;
   top: 0px;

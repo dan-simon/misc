@@ -6050,7 +6050,7 @@
             <option value="Shi">Shi</option>
             <option value="Blind">Blind</option>
           </select></div></td>
-          <td><div class="options-div">Usual digits of precision:<br/><input type="text" ~!value=Options.lowerPrecision()~ ~!onchange=function() {Options.setLowerPrecision(+this.value)}~></input><br/>Higher digits of precision:<br/><input type="text" ~!value=Options.higherPrecision()~ ~!onchange=function() {Options.setHigherPrecision(+this.value)}~></input></div></td>
+          <td><div class="options-div">Usual digits of precision:<br/><input type="text" ~!value=Options.lowerPrecision()~ ~!onchange=function() {Options.setLowerPrecision(+this.value)}~></input><br/>Higher digits of precision <span class="helpspan">(?)<span class="tooltiptext">This is used for some small values that are best shown precisely<span ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~> (such as Normal Challenge 3 multiplier)</span>.</span></span>:<br/><input type="text" ~!value=Options.higherPrecision()~ ~!onchange=function() {Options.setHigherPrecision(+this.value)}~></input></div></td>
           <td><button class="options-button" onclick="Options.nextTimeDisplay()" style="font-size: 0.875rem;">Time display: ~r player.options.timeDisplay ~<br/>(for example, ~t 83.125 ~)</button></td>
         </tr>
           <td><button class="options-button" onclick="Options.toggleHotkeys()">Hotkeys: ~r player.options.hotkeys ? "On" : "Off" ~</button></td>
@@ -6085,7 +6085,7 @@
           </div></td>
         <tr/>
         <tr ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~>
-          <td><div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="options-div">Max all mode: <select ~!value=Options.maxAllMode()~ ~!onchange=function() {Options.setMaxAllMode(this.value)}~>
+          <td><div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="options-div">Max all mode <span class="helpspan">(?)<span class="tooltiptext">This setting controls what the M hotkey buys, and also what the Main tab "Max all" button buys.</span></span>: <select ~!value=Options.maxAllMode()~ ~!onchange=function() {Options.setMaxAllMode(this.value)}~>
             <option value="Normal generators and boosts">Normal generators and boosts</option>
             <option value="Generators and upgrades in current tab">Generators and upgrades in current tab</option>
             <option value="Both">Both</option>
