@@ -20,8 +20,13 @@ function formatMaybeInt (x) {
   return Decimal.eq(x, Decimal.round(x)) ? formatInt(x) : format(x);
 }
 
+function notationIsLikeScientific(x) {
+  return ['Scientific', 'Logarithm', 'Engineering', 'Letters',
+  'Mixed Scientific', 'Mixed Engineering', 'Mixed Logarithm (Sci)'].includes(x.name);
+}
+
 function maybeAddInitialZero(x, expected, maybeDo) {
-  if (x.length === 1 && x === expected && maybeDo) {
+  if (x.length === 1 && (x === expected || notationIsLikeScientific(getTimeNotation())) && maybeDo) {
     return '0' + x;
   } else {
     return x;

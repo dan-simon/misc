@@ -18,13 +18,13 @@ class TimeScientificNotation extends ADNotations.Notation {
   }
   
   formatUnder1000(value, places) {
-    return baseFormat()(value, places);
+    return ADNotations.formatMantissaBaseTen(value, places);
   }
 
   formatDecimal(value, places) {
     return ADNotations.formatMantissaWithExponent(ADNotations.formatMantissaBaseTen,
       (n, p) => this.formatExponent(n, p, (n, _) => ADNotations.formatMantissaBaseTen(n, 0)),
-      NotationOptions.exponentBase(), 1, true)(value, places);
+      10, 1, true)(value, places);
   }
 }
 
