@@ -2656,7 +2656,9 @@
       </span>
       <br/>
       <br/>
-      <span>To complete an eternity challenge, eternity while in the eternity challenge.</span>
+      <div style="width: 1024px; margin-left: auto; margin-right: auto;">
+        <span>To complete an eternity challenge, eternity while in the eternity challenge. Completing or respeccing an eternity challenge will give all theorems spent on it back.</span>
+      </div>
       <br ~style.display=(EternityChallenge.currentEternityChallenge() || EternityChallenge.getUnlockedEternityChallenge() !== 0) ? '' : 'none' ~/>
       <span ~style.display=(EternityChallenge.currentEternityChallenge() || EternityChallenge.getUnlockedEternityChallenge() !== 0) ? '' : 'none' ~>
         <button onclick="EternityChallenge.pressUnlockedOrRunningEternityChallengeHeaderButton()">~r EternityChallenge.unlockedOrRunningEternityChallengeHeaderButtonText() ~</button>
