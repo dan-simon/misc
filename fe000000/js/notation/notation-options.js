@@ -40,7 +40,7 @@ let NotationOptions = {
   },
   displayDigits() {
     return (typeof player.options.notation.displayDigits === 'number') ? '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'.slice(0, player.options.notation.displayDigits) :
-    player.options.notation.displayDigits.length;
+    player.options.notation.displayDigits;
   },
   exponentBase() {
     return player.options.notation.exponentBase;
