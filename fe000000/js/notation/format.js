@@ -1,19 +1,19 @@
 let NOTATIONS = {};
 
 function format (x) {
-  return formatWithPrecision(x, Options.lowerPrecision());
+  return formatWithPrecision(x, NotationOptions.lowerPrecision());
 }
 
 function formatPrecisely (x) {
-  return formatWithPrecision(x, Options.higherPrecision());
+  return formatWithPrecision(x, NotationOptions.higherPrecision());
 }
 
 function formatVeryPrecisely (x) {
-  return formatWithPrecision(x, Options.highestPrecision());
+  return formatWithPrecision(x, NotationOptions.highestPrecision());
 }
 
 function formatInt (x) {
-  return getNotation().format(x, Options.lowerPrecision(), 0);
+  return getNotation().format(x, NotationOptions.lowerPrecision(), 0);
 }
 
 function formatMaybeInt (x) {
@@ -28,6 +28,22 @@ function maybeAddInitialZero(x, expected, maybeDo) {
   }
 }
 
+function getTimeNotation() {
+  return Options.notationOnTimes() ? getNotation() : getNotation('TimeScientific');
+}
+
+function formatTimeNum(x) {
+  return getTimeNotation().format(x, NotationOptions.lowerPrecision(), NotationOptions.lowerPrecision());
+}
+
+function formatTimeInt(x) {
+  return getTimeNotation().format(x, NotationOptions.lowerPrecision(), 0);
+}
+
+function formatTimeMaybeInt(x) {
+  return Decimal.eq(x, Decimal.round(x)) ? formatTimeInt(x) : formatTimeNum(x);
+}
+
 function formatTime(time, options) {
   let timeDisplay = player.options.timeDisplay;
   if (timeDisplay === 'Seconds' || time < 60) {
@@ -38,7 +54,7 @@ function formatTime(time, options) {
     while (parts[0] === 0) {
       parts.shift();
     }
-    let f = (x, i) => maybeAddInitialZero((applyNotation ? formatInt(x) : x.toString()), x.toString(), i !== 0);
+    let f = (x, i) => maybeAddInitialZero(formatTimeInt(x), x.toString(), i !== 0);
     return parts.map(f).join(':');
   } else if (timeDisplay === 'Largest unit') {
     if (time < 3600) {
@@ -53,13 +69,16 @@ function formatTime(time, options) {
 
 function getNotation(x) {
   if (x === undefined) {
-    x = player.options.notation;
+    x = NotationOptions.notation();
   }
   if (!(x in NOTATIONS)) {
-    // Mixed Logarithm (Sci) has logarithm capitalized in the official notation name,
-    // unlike Mixed scientific and Mixed engineering.
-    let Source = ['Binary', 'Hexadecimal', 'Evil', 'Mixed Logarithm (Sci)'].includes(x) ? ADCommunityNotations : ADNotations;
-    NOTATIONS[x] = new Source[x.replace(/[()]/g, '').replace(/ [A-Za-z]/g, (x) => x[1].toUpperCase()) + 'Notation']();
+    // It used to be that Mixed Logarithm (Sci) had logarithm capitalized in the official notation name,
+    // unlike Mixed scientific and Mixed engineering. However, then notation names were standardized,
+    // the new names having capitalization on every word.
+    let key = x.replace(/[()]/g, '').replace(/ [A-Za-z]/g, (x) => x[1].toUpperCase()) + 'Notation';
+    let Source = (key in ModifiedNotations) ? ModifiedNotations :
+    ((key === 'EvilNotation') ? ADCommunityNotations : ADNotations);
+    NOTATIONS[x] = new Source[key]();
   }
   return NOTATIONS[x];
 }

@@ -1250,6 +1250,39 @@ let Saving = {
       player.options.showAllTabs = false;
       player.version = 2.119140625;
     }
+    if (player.version < 2.12109375) {
+      player.options.notation = {
+        notation: player.options.notation,
+        lowerPrecision: player.options.lowerPrecision,
+        higherPrecision: player.options.higherPrecision,
+        displayDigits: 10,
+        exponentBase: 10,
+        alphabet: 'abcdefghijklmnopqrstuvwxyz'
+      };
+      if (player.options.notation.notation === 'Mixed scientific') {
+        player.options.notation.notation = 'Mixed Scientific';
+      }
+      if (player.options.notation.notation === 'Mixed engineering') {
+        player.options.notation.notation = 'Mixed Engineering';
+      }
+      if (player.options.notation.notation === 'Binary') {
+        player.options.notation.notation = 'Scientific';
+        player.options.notation.displayDigits = 2;
+        player.options.notation.exponentBase = 2;
+      }
+      if (player.options.notation.notation === 'Hexadecimal') {
+        player.options.notation.notation = 'Scientific';
+        player.options.notation.displayDigits = 16;
+        player.options.notation.exponentBase = 16;
+      }
+      player.options.notationOnTimes = false;
+      if (player.options.timeDisplay === 'D:H:M:S with notation') {
+        player.options.timeDisplay === 'D:H:M:S';
+        player.options.notationOnTimes = true;
+      }
+      player.options.headerSettings.smallerHeader = false;
+      player.version = 2.12109375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

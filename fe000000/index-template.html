@@ -50,6 +50,9 @@
   <script src="js/infinity/infinity-prestige-layer.js?time=%time%"></script>
   <script src="js/infinity/infinity-stars.js?time=%time%"></script>
   <script src="js/infinity/infinity-upgrades.js?time=%time%"></script>
+  <script src="js/notation/format.js?time=%time%"></script>
+  <script src="js/notation/notation-options.js?time=%time%"></script>
+  <script src="js/notation/notations.js?time=%time%"></script>
   <script src="js/rng.js?time=%time%"></script>
   <script src="js/achievements.js?time=%time%"></script>
   <script src="js/autobuyers.js?time=%time%"></script>
@@ -61,7 +64,6 @@
   <script src="js/colors.js?time=%time%"></script>
   <script src="js/coordinate.js?time=%time%"></script>
   <script src="js/fit-to-width.js?time=%time%"></script>
-  <script src="js/format.js?time=%time%"></script>
   <script src="js/galaxy.js?time=%time%"></script>
   <script src="js/generators.js?time=%time%"></script>
   <script src="js/goals.js?time=%time%"></script>
@@ -102,7 +104,7 @@
     <br/>
     <span>Reloading might work, so probably try that first.</span>
     <br id="script-count-br" style="display: none;"/>
-    <span id="script-count-span" style="display: none;">The page loads <span id="script-count"></span> scripts (should be 87).</span>
+    <span id="script-count-span" style="display: none;">The page loads <span id="script-count"></span> scripts (should be 89).</span>
     <br/>
     <span><button onclick="window.location.reload(true)">Reload window</button> <button class="export-button" onclick="Saving.exportGame(0)">Export</button> <button onclick="Saving.loadGamePrompt()">Import/Load</button>  <button onclick="Saving.speedUpOffline()">Speed up offline progress (doing fewer ticks)</button> <button onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></span>
   </div>
@@ -120,29 +122,49 @@
   </div>
   <div id="main" style="display: none;">
     <div style="height: 32px;">You have ~f Stars.amount() ~ stars.~r ChallengeHeaderText.getText() ~~r FastResetText.getText() ~</div>
-    <div style="height: 56px;" ~style.display=ResetButtons.isResetButtonVisible('infinity') ? '' : 'none'~>
-      <span ~style.display=InfinityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~f InfinityPrestigeLayer.starRequirementForInfinity() ~ stars to infinity.</span>
-      <br ~style.display=InfinityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
-      <span ~style.display=InfinityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i InfinityPrestigeLayer.infinityPoints() ~ infinity point~s InfinityPrestigeLayer.infinityPoints() ~ (~i InfinityPrestigeLayer.totalInfinityPoints() ~ total this eternity, ~t player.stats.timeSinceInfinity ~ in this infinity)</span>
-      <button ~style.display=InfinityPrestigeLayer.canInfinity() ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.resetColors(), 'infinity')~ style="height: 48px;" onclick="InfinityPrestigeLayer.infinity(true, null)">Infinity: Gain ~i InfinityPrestigeLayer.infinityPointGain() ~ infinity point~s InfinityPrestigeLayer.infinityPointGain() ~ (~r InfinityPrestigeLayer.infinityPointGainRatioText() ~~i InfinityPrestigeLayer.infinityPoints() ~ → ~i InfinityPrestigeLayer.newInfinityPoints() ~~r InfinityPrestigeLayer.infinityPointNextText() ~)<br/>~t player.stats.timeSinceInfinity ~, <span ~style.display=InfinityPrestigeLayer.showLog() ? 'none' : ''~>~f InfinityPrestigeLayer.currentIPPerSec() ~ IP/sec, ~f InfinityPrestigeLayer.peakIPPerSec() ~ peak IP/sec</span><span ~style.display=InfinityPrestigeLayer.showLog() ? '' : 'none'~>~f InfinityPrestigeLayer.currentLogIPPerSec() ~ log IP/sec, ~f InfinityPrestigeLayer.peakLogIPPerSec() ~ peak log IP/sec</span></button>
+    <div ~style.display=Options.smallerHeader() ? 'none' : ''~>
+      <div style="height: 56px;" ~style.display=ResetButtons.isResetButtonVisible('infinity') ? '' : 'none'~>
+        <span ~style.display=InfinityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~f InfinityPrestigeLayer.starRequirementForInfinity() ~ stars to infinity.</span>
+        <br ~style.display=InfinityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
+        <span ~style.display=InfinityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i InfinityPrestigeLayer.infinityPoints() ~ infinity point~s InfinityPrestigeLayer.infinityPoints() ~ (~i InfinityPrestigeLayer.totalInfinityPoints() ~ total this eternity, ~t player.stats.timeSinceInfinity ~ in this infinity)</span>
+        <button ~style.display=InfinityPrestigeLayer.canInfinity() ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.resetColors(), 'infinity')~ style="height: 48px;" onclick="InfinityPrestigeLayer.infinity(true, null)">Infinity: Gain ~i InfinityPrestigeLayer.infinityPointGain() ~ infinity point~s InfinityPrestigeLayer.infinityPointGain() ~ (~r InfinityPrestigeLayer.infinityPointGainRatioText() ~~i InfinityPrestigeLayer.infinityPoints() ~ → ~i InfinityPrestigeLayer.newInfinityPoints() ~~r InfinityPrestigeLayer.infinityPointNextText() ~)<br/>~t player.stats.timeSinceInfinity ~, <span ~style.display=InfinityPrestigeLayer.showLog() ? 'none' : ''~>~f InfinityPrestigeLayer.currentIPPerSec() ~ IP/sec, ~f InfinityPrestigeLayer.peakIPPerSec() ~ peak IP/sec</span><span ~style.display=InfinityPrestigeLayer.showLog() ? '' : 'none'~>~f InfinityPrestigeLayer.currentLogIPPerSec() ~ log IP/sec, ~f InfinityPrestigeLayer.peakLogIPPerSec() ~ peak log IP/sec</span></button>
+      </div>
+      <div style="height: 56px;" ~style.display=ResetButtons.isResetButtonVisible('eternity') ? '' : 'none'~>
+        <span ~style.display=EternityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~f EternityPrestigeLayer.infinityPointRequirementForEternity() ~ total infinity points to eternity.</span>
+        <br ~style.display=EternityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
+        <span ~style.display=EternityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i EternityPrestigeLayer.eternityPoints() ~ eternity point~s EternityPrestigeLayer.eternityPoints() ~ (~i EternityPrestigeLayer.totalEternityPoints() ~ total this complexity, ~t player.stats.timeSinceEternity ~ in this eternity)</span>
+        <button ~style.display=EternityPrestigeLayer.canEternity() ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.resetColors(), 'eternity')~ style="height: 48px;" onclick="EternityPrestigeLayer.eternity(true)">Eternity: Gain ~i EternityPrestigeLayer.eternityPointGain() ~ eternity point~s EternityPrestigeLayer.eternityPointGain() ~ (~r EternityPrestigeLayer.eternityPointGainRatioText() ~~i EternityPrestigeLayer.eternityPoints() ~ → ~i EternityPrestigeLayer.newEternityPoints() ~~r EternityPrestigeLayer.eternityPointNextText() ~)<br/>~t player.stats.timeSinceEternity ~, <span ~style.display=EternityPrestigeLayer.showLog() ? 'none' : ''~>~f EternityPrestigeLayer.currentEPPerSec() ~ EP/sec, ~f EternityPrestigeLayer.peakEPPerSec() ~ peak EP/sec</span><span ~style.display=EternityPrestigeLayer.showLog() ? '' : 'none'~>~f EternityPrestigeLayer.currentLogEPPerSec() ~ log EP/sec, ~f EternityPrestigeLayer.peakLogEPPerSec() ~ peak log EP/sec</span><span ~style.display=EternityChallenge.displayTiersCompletedOnEternity() ? '' : 'none'~>, +~i EternityChallenge.tiersCompletedOnEternity() ~ EC tier~s EternityChallenge.tiersCompletedOnEternity() ~ (~i EternityChallenge.getEternityChallengeCompletions() ~ → ~i EternityChallenge.getNextEternityChallengeCompletions() ~~r EternityChallenge.eternityChallengeCompletionsNextText() ~)</span></button>
+      </div>
+      <div style="height: 56px;" ~style.display=ResetButtons.isResetButtonVisible('complexity') ? '' : 'none'~>
+        <span ~style.display=ComplexityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~r ComplexityPrestigeLayer.requirementForComplexity() ~ to complexity.</span>
+        <br ~style.display=ComplexityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
+        <span ~style.display=ComplexityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i ComplexityPrestigeLayer.complexityPoints() ~ complexity point~s ComplexityPrestigeLayer.complexityPoints() ~ (~i ComplexityPrestigeLayer.totalComplexityPoints() ~ total this finality, ~t player.stats.timeSinceComplexity ~ in this complexity)</span>
+        <button ~style.display=ComplexityPrestigeLayer.canComplexity() ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.resetColors(), 'complexity')~ style="height: 48px;" onclick="ComplexityPrestigeLayer.complexity(true)">Complexity: Gain ~i ComplexityPrestigeLayer.complexityPointGain() ~ complexity point~s ComplexityPrestigeLayer.complexityPointGain() ~ (~r ComplexityPrestigeLayer.complexityPointGainRatioText() ~~i ComplexityPrestigeLayer.complexityPoints() ~ → ~i ComplexityPrestigeLayer.newComplexityPoints() ~~r ComplexityPrestigeLayer.complexityPointNextText() ~)<br/>~t player.stats.timeSinceComplexity ~, <span ~style.display=ComplexityPrestigeLayer.showLog() ? 'none' : ''~>~f ComplexityPrestigeLayer.currentCPPerSec() ~ ℂP/sec, ~f ComplexityPrestigeLayer.peakCPPerSec() ~ peak ℂP/sec</span><span ~style.display=ComplexityPrestigeLayer.showLog() ? '' : 'none'~>~f ComplexityPrestigeLayer.currentLogCPPerSec() ~ log ℂP/sec, ~f ComplexityPrestigeLayer.peakLogCPPerSec() ~ peak log ℂP/sec</span></button>
+      </div>
+      <div style="height: 56px;" ~style.display=ResetButtons.isResetButtonVisible('finality') ? '' : 'none'~>
+        <span ~style.display=FinalityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~f FinalityPrestigeLayer.complexityPointRequirementForFinality() ~ total complexity points to finality.</span>
+        <br ~style.display=FinalityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
+        <span ~style.display=FinalityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i FinalityPrestigeLayer.finalityPoints() ~ finality point~s FinalityPrestigeLayer.finalityPoints() ~ (~i FinalityPrestigeLayer.totalFinalityPoints() ~ total, ~t player.stats.timeSinceFinality ~ in this finality)</span>
+        <button ~style.display=FinalityPrestigeLayer.canFinality() ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.resetColors(), 'finality')~ style="height: 48px;" onclick="FinalityPrestigeLayer.finality(true)">Finality: Gain ~i FinalityPrestigeLayer.finalityPointGain() ~ finality point~s FinalityPrestigeLayer.finalityPointGain() ~ (~r FinalityPrestigeLayer.finalityPointGainRatioText() ~~i FinalityPrestigeLayer.finalityPoints() ~ → ~i FinalityPrestigeLayer.newFinalityPoints() ~)<br/>~t player.stats.timeSinceFinality ~, +~i FinalityPrestigeLayer.finalityShardGain() ~ finality shard~s FinalityPrestigeLayer.finalityShardGain() ~ (~r FinalityPrestigeLayer.finalityShardGainRatioText() ~~i FinalityPrestigeLayer.finalityShards() ~ → ~i FinalityPrestigeLayer.newFinalityShards() ~)</button>
+      </div>
     </div>
-    <div style="height: 56px;" ~style.display=ResetButtons.isResetButtonVisible('eternity') ? '' : 'none'~>
-      <span ~style.display=EternityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~f EternityPrestigeLayer.infinityPointRequirementForEternity() ~ total infinity points to eternity.</span>
-      <br ~style.display=EternityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
-      <span ~style.display=EternityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i EternityPrestigeLayer.eternityPoints() ~ eternity point~s EternityPrestigeLayer.eternityPoints() ~ (~i EternityPrestigeLayer.totalEternityPoints() ~ total this complexity, ~t player.stats.timeSinceEternity ~ in this eternity)</span>
-      <button ~style.display=EternityPrestigeLayer.canEternity() ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.resetColors(), 'eternity')~ style="height: 48px;" onclick="EternityPrestigeLayer.eternity(true)">Eternity: Gain ~i EternityPrestigeLayer.eternityPointGain() ~ eternity point~s EternityPrestigeLayer.eternityPointGain() ~ (~r EternityPrestigeLayer.eternityPointGainRatioText() ~~i EternityPrestigeLayer.eternityPoints() ~ → ~i EternityPrestigeLayer.newEternityPoints() ~~r EternityPrestigeLayer.eternityPointNextText() ~)<br/>~t player.stats.timeSinceEternity ~, <span ~style.display=EternityPrestigeLayer.showLog() ? 'none' : ''~>~f EternityPrestigeLayer.currentEPPerSec() ~ EP/sec, ~f EternityPrestigeLayer.peakEPPerSec() ~ peak EP/sec</span><span ~style.display=EternityPrestigeLayer.showLog() ? '' : 'none'~>~f EternityPrestigeLayer.currentLogEPPerSec() ~ log EP/sec, ~f EternityPrestigeLayer.peakLogEPPerSec() ~ peak log EP/sec</span><span ~style.display=EternityChallenge.displayTiersCompletedOnEternity() ? '' : 'none'~>, +~i EternityChallenge.tiersCompletedOnEternity() ~ EC tier~s EternityChallenge.tiersCompletedOnEternity() ~ (~i EternityChallenge.getEternityChallengeCompletions() ~ → ~i EternityChallenge.getNextEternityChallengeCompletions() ~~r EternityChallenge.eternityChallengeCompletionsNextText() ~)</span></button>
-    </div>
-    <div style="height: 56px;" ~style.display=ResetButtons.isResetButtonVisible('complexity') ? '' : 'none'~>
-      <span ~style.display=ComplexityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~r ComplexityPrestigeLayer.requirementForComplexity() ~ to complexity.</span>
-      <br ~style.display=ComplexityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
-      <span ~style.display=ComplexityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i ComplexityPrestigeLayer.complexityPoints() ~ complexity point~s ComplexityPrestigeLayer.complexityPoints() ~ (~i ComplexityPrestigeLayer.totalComplexityPoints() ~ total this finality, ~t player.stats.timeSinceComplexity ~ in this complexity)</span>
-      <button ~style.display=ComplexityPrestigeLayer.canComplexity() ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.resetColors(), 'complexity')~ style="height: 48px;" onclick="ComplexityPrestigeLayer.complexity(true)">Complexity: Gain ~i ComplexityPrestigeLayer.complexityPointGain() ~ complexity point~s ComplexityPrestigeLayer.complexityPointGain() ~ (~r ComplexityPrestigeLayer.complexityPointGainRatioText() ~~i ComplexityPrestigeLayer.complexityPoints() ~ → ~i ComplexityPrestigeLayer.newComplexityPoints() ~~r ComplexityPrestigeLayer.complexityPointNextText() ~)<br/>~t player.stats.timeSinceComplexity ~, <span ~style.display=ComplexityPrestigeLayer.showLog() ? 'none' : ''~>~f ComplexityPrestigeLayer.currentCPPerSec() ~ ℂP/sec, ~f ComplexityPrestigeLayer.peakCPPerSec() ~ peak ℂP/sec</span><span ~style.display=ComplexityPrestigeLayer.showLog() ? '' : 'none'~>~f ComplexityPrestigeLayer.currentLogCPPerSec() ~ log ℂP/sec, ~f ComplexityPrestigeLayer.peakLogCPPerSec() ~ peak log ℂP/sec</span></button>
-    </div>
-    <div style="height: 56px;" ~style.display=ResetButtons.isResetButtonVisible('finality') ? '' : 'none'~>
-      <span ~style.display=FinalityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~f FinalityPrestigeLayer.complexityPointRequirementForFinality() ~ total complexity points to finality.</span>
-      <br ~style.display=FinalityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
-      <span ~style.display=FinalityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i FinalityPrestigeLayer.finalityPoints() ~ finality point~s FinalityPrestigeLayer.finalityPoints() ~ (~i FinalityPrestigeLayer.totalFinalityPoints() ~ total, ~t player.stats.timeSinceFinality ~ in this finality)</span>
-      <button ~style.display=FinalityPrestigeLayer.canFinality() ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.resetColors(), 'finality')~ style="height: 48px;" onclick="FinalityPrestigeLayer.finality(true)">Finality: Gain ~i FinalityPrestigeLayer.finalityPointGain() ~ finality point~s FinalityPrestigeLayer.finalityPointGain() ~ (~r FinalityPrestigeLayer.finalityPointGainRatioText() ~~i FinalityPrestigeLayer.finalityPoints() ~ → ~i FinalityPrestigeLayer.newFinalityPoints() ~)<br/>~t player.stats.timeSinceFinality ~, +~i FinalityPrestigeLayer.finalityShardGain() ~ finality shard~s FinalityPrestigeLayer.finalityShardGain() ~ (~r FinalityPrestigeLayer.finalityShardGainRatioText() ~~i FinalityPrestigeLayer.finalityShards() ~ → ~i FinalityPrestigeLayer.newFinalityShards() ~)</button>
+    <div ~style.display=Options.smallerHeader() ? '' : 'none'~>
+      <button ~style.display=ResetButtons.isResetButtonVisible('infinity') ? '' : 'none'~ ~style.background=InfinityPrestigeLayer.canInfinity() ? Colors.getButtonColor(Options.resetColors(), 'infinity') : '#555555'~ onclick="InfinityPrestigeLayer.infinity(true, null)">
+        <span ~style.display=InfinityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>Infinity: requires ~f InfinityPrestigeLayer.starRequirementForInfinity() ~ stars</span>
+        <span ~style.display=InfinityPrestigeLayer.canInfinity() ? '' : 'none'~>Infinity: +~i InfinityPrestigeLayer.infinityPointGain() ~ IP</span>
+      </button>
+      <button ~style.display=ResetButtons.isResetButtonVisible('eternity') ? '' : 'none'~ ~style.background=EternityPrestigeLayer.canEternity() ? Colors.getButtonColor(Options.resetColors(), 'eternity') : '#555555'~ onclick="EternityPrestigeLayer.eternity(true)">
+        <span ~style.display=EternityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>Eternity: requires ~f EternityPrestigeLayer.infinityPointRequirementForEternity() ~ IP</span>
+        <span ~style.display=EternityPrestigeLayer.canEternity() ? '' : 'none'~>Eternity: +~i EternityPrestigeLayer.eternityPointGain() ~ EP</span>
+      </button>
+      <button ~style.display=ResetButtons.isResetButtonVisible('complexity') ? '' : 'none'~ ~style.background=ComplexityPrestigeLayer.canComplexity() ? Colors.getButtonColor(Options.resetColors(), 'complexity') : '#555555'~ onclick="ComplexityPrestigeLayer.complexity(true)">
+        <span ~style.display=ComplexityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>Complexity: requires ~f ComplexityPrestigeLayer.eternityPointRequirementForComplexity() ~ EP</span>
+        <span ~style.display=ComplexityPrestigeLayer.canComplexity() ? '' : 'none'~>Complexity: +~i ComplexityPrestigeLayer.complexityPointGain() ~ ℂP</span>
+      </button>
+      <button ~style.display=ResetButtons.isResetButtonVisible('finality') ? '' : 'none'~ ~style.background=FinalityPrestigeLayer.canFinality() ? Colors.getButtonColor(Options.resetColors(), 'finality') : '#555555'~ onclick="FinalityPrestigeLayer.finality(true)">
+        <span ~style.display=FinalityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>Finality: requires ~f FinalityPrestigeLayer.complexityPointRequirementForFinality() ~ ℂP</span>
+        <span ~style.display=FinalityPrestigeLayer.canFinality() ? '' : 'none'~>Finality: +~i FinalityPrestigeLayer.finalityPointGain() ~ FP, +~i FinalityPrestigeLayer.finalityShardGain() ~ FS</span>
+      </button>
     </div>
     <div style="height: 32px;" ~style.display=Goals.areAllGoalsCompleted() ? '' : 'none'~>You have won the game! Congratulations!</div>
     <br/>
@@ -6024,34 +6046,45 @@
       </table>
       <table ~style.display=Options.isOptionTypeShown('other') ? '' : 'none'~ style="margin-left: auto; margin-right: auto; border-spacing: 24px 8px; border-collapse: separate;">
         <tr>
-          <td><div class="options-div">Notation: <select ~!value=Options.notation()~ ~!onchange=function() {Options.setNotation(this.value)}~>
-            <option value="Scientific">Scientific</option>
-            <option value="Engineering">Engineering</option>
-            <option value="Logarithm">Logarithm</option>
-            <option value="Letters">Letters</option>
-            <option value="Standard">Standard</option>
-            <option value="Emoji">Emoji</option>
-            <option value="Mixed scientific">Mixed scientific</option>
-            <option value="Mixed engineering">Mixed engineering</option>
-            <option value="Mixed Logarithm (Sci)">Mixed logarithm (Sci)</option>
-            <option value="Binary">Binary</option>
-            <option value="Hexadecimal">Hexadecimal</option>
-            <option value="Evil">Evil</option>
-            <option value="Brackets">Brackets</option>
-            <option value="Infinity">Infinity</option>
-            <option value="Roman">Roman</option>
-            <option value="Dots">Dots</option>
-            <option value="Zalgo">Zalgo</option>
-            <option value="Hex">Hex</option>
-            <option value="Imperial">Imperial</option>
-            <option value="Clock">Clock</option>
-            <option value="Prime">Prime</option>
-            <option value="Bar">Bar</option>
-            <option value="Shi">Shi</option>
-            <option value="Blind">Blind</option>
-          </select></div></td>
-          <td><div class="options-div">Usual digits of precision:<br/><input type="text" ~!value=Options.lowerPrecision()~ ~!onchange=function() {Options.setLowerPrecision(+this.value)}~></input><br/>Higher digits of precision <span class="helpspan">(?)<span class="tooltiptext">This is used for some small values that are best shown precisely<span ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~> (such as Normal Challenge 3 multiplier)</span>.</span></span>:<br/><input type="text" ~!value=Options.higherPrecision()~ ~!onchange=function() {Options.setHigherPrecision(+this.value)}~></input></div></td>
-          <td><button class="options-button" onclick="Options.nextTimeDisplay()" style="font-size: 0.875rem;">Time display: ~r player.options.timeDisplay ~<br/>(for example, ~t 83.125 ~)</button></td>
+          <td>
+            <div class="options-div">
+              <span>Notation: <select ~!value=NotationOptions.notation()~ ~!onchange=function() {NotationOptions.setNotation(this.value)}~>
+              <option value="Scientific">Scientific</option>
+              <option value="Engineering">Engineering</option>
+              <option value="Logarithm">Logarithm</option>
+              <option value="Letters">Letters</option>
+              <option value="Standard">Standard</option>
+              <option value="Emoji">Emoji</option>
+              <option value="Mixed Scientific">Mixed Scientific</option>
+              <option value="Mixed Engineering">Mixed Engineering</option>
+              <option value="Mixed Logarithm (Sci)">Mixed Logarithm (Sci)</option>
+              <option value="Evil">Evil</option>
+              <option value="Brackets">Brackets</option>
+              <option value="Infinity">Infinity</option>
+              <option value="Roman">Roman</option>
+              <option value="Dots">Dots</option>
+              <option value="Zalgo">Zalgo</option>
+              <option value="Hex">Hex</option>
+              <option value="Imperial">Imperial</option>
+              <option value="Clock">Clock</option>
+              <option value="Prime">Prime</option>
+              <option value="Bar">Bar</option>
+              <option value="Shi">Shi</option>
+              <option value="Blind">Blind</option>
+            </select></span>
+            <br/>
+            <span style="font-size: 0.75rem;">Display base <span class="helpspan">(?)<span class="tooltiptext">This base is used for displaying the values of the mantissa and exponent, so if it's 2 and the exponent base is 10, 1e10 is 100. It must be between 2 and 36. If you surround it in quotes or dashes, it'll be used as a list of digits rather than a base.</span></span>: <input type="text" ~!value=NotationOptions.rawDisplayBase()~ ~!onchange=function() {NotationOptions.setDisplayBase(this.value)}~/></span>
+            <br/>
+            <span style="font-size: 0.75rem;">Exponent base <span class="helpspan">(?)<span class="tooltiptext">This base is used for calculating the value of the exponent, so if it's 16 and the display base is 10, 1e2 is 256.</span></span>: <input type="text" ~!value=NotationOptions.exponentBase()~ ~!onchange=function() {NotationOptions.setExponentBase(+this.value)}~/></span>
+            <br/>
+            <span style="font-size: 0.75rem;">Alphabet <span class="helpspan">(?)<span class="tooltiptext">This is used for Letters notation as the list of letters to use.</span></span>: <input type="text" ~!value=NotationOptions.alphabet()~ ~!onchange=function() {NotationOptions.setAlphabet(this.value)}~/></span>
+          </div></td>
+          <td><div class="options-div">Usual digits of precision:<br/><input type="text" ~!value=NotationOptions.lowerPrecision()~ ~!onchange=function() {NotationOptions.setLowerPrecision(+this.value)}~></input><br/>Higher digits of precision <span class="helpspan">(?)<span class="tooltiptext">This is used for some small values that are best shown precisely<span ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~> (such as Normal Challenge 3 multiplier)</span>.</span></span>:<br/><input type="text" ~!value=NotationOptions.higherPrecision()~ ~!onchange=function() {NotationOptions.setHigherPrecision(+this.value)}~></input></div></td>
+          <td><div class="options-div">
+            <button class="semi-options-button" onclick="Options.nextTimeDisplay()" style="font-size: 0.875rem;">Time display: ~r player.options.timeDisplay ~<br/>(for example, ~t 83.125 ~)</button>
+            <br/>
+            <button class="wide-mini-options-button" onclick="Options.toggleNotationOnTimes()">Notation on times: ~r player.options.notationOnTimes ? "On" : "Off" ~</button></td>
+          </div></td>
         </tr>
           <td><button class="options-button" onclick="Options.toggleHotkeys()">Hotkeys: ~r player.options.hotkeys ? "On" : "Off" ~</button></td>
           <td><button class="options-button" onclick="Options.toggleFitToWidth()">Decrease page size if page is too narrow: ~r player.options.fitToWidth ? "On" : "Off" ~</button></td>
@@ -6096,6 +6129,7 @@
             <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleShowCurrentChallenges()">Current challenges in header: ~r Options.showCurrentChallenges() ? 'Shown' : 'Hidden' ~</button>
             <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleShowNextCCCompletion()">Next ℂC completion in header: ~r Options.showNextCCCompletion() ? 'Shown' : 'Hidden' ~</button>
             <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleShowResetButtonsForHiddenTabs()">Reset buttons for hidden tabs: ~r Options.showResetButtonsForHiddenTabs() ? 'Shown' : 'Hidden' ~</button>
+            <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleSmallerHeader()">Smaller header: ~r Options.smallerHeader() ? 'On' : 'Off' ~</button>
           </div></td>
           <td><div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~ class="options-div">
             <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('studies')">Full study options: ~r Options.showFullOptions('studies') ? 'On' : 'Off' ~</button>

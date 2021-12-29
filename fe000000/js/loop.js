@@ -3,6 +3,22 @@ function gameLoop(diff, display, isOnline) {
   if (typeof diff !== 'number') {
     let now = Date.now();
     let rawDiff = (now - player.lastUpdate) / 1000;
+    // Run the game loop multiple times
+    if (rawDiff >= 10) {
+      player.lastUpdate = now;
+      if (Options.offlineProgress()) {
+        Saving.simulateTime(rawDiff, Saving.defaultTicks(), true, function () {});
+        // This tick isn't going to happen at all. We're going to simulate time instead.
+      }
+      return;
+    } else if (rawDiff >= 1 / 8) {
+      player.lastUpdate = now;
+      let ticks = Math.floor(rawDiff * 16);
+      for (let i = 0; i < ticks; i++) {
+        gameLoop(rawDiff / ticks, display, isOnline);
+      }
+      return;
+    }
     diff = Math.max(0, rawDiff * player.cheats.gameSpeed);
     player.lastUpdate = now;
   }
