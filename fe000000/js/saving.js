@@ -135,7 +135,8 @@ let Saving = {
         gameLoop(offlineSimulationData.tickLength, false, false);
         let d = Date.now();
         offlineSimulationData.tick++;
-        if (d - startTime > 0.064) {
+        // This is measured in milliseconds.
+        if (d - lastUpdateTime > 64) {
           lastUpdateTime = d;
           if (showSimulation) {
             Saving.simulateTimeUpdate((lastUpdateTime - startTime) / 1000, offlineSimulationData.tick, offlineSimulationData.ticks);
