@@ -31,8 +31,9 @@ let Stats = {
     if (isOnline !== false) {
       // Note that this happens in the default case where isOnline is undefined.
       // Note also that if the game is being throttled, this makes sure each tick
-      // is at most 1/8th of a second.
-      player.stats.onlineTimeSinceGameStart += Math.min(diff, 1 / 8);
+      // is at most 0.128 seconds (recall that a tick generally happens
+      // every 64 milliseconds).
+      player.stats.onlineTimeSinceGameStart += Math.min(diff, 0.128);
     }
   },
   recordPurchase(i, n) {

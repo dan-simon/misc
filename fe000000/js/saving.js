@@ -117,7 +117,7 @@ let Saving = {
     if (callback === undefined) {
       callback = () => true;
     }
-    let baseTickLength = 1 / 16;
+    let baseTickLength = 0.064;
     offlineSimulationData.active = true;
     offlineSimulationData.ticks = Math.ceil(Math.min(totalDiff / baseTickLength, maxTicks));
     offlineSimulationData.tickLength = totalDiff / offlineSimulationData.ticks;
@@ -135,7 +135,7 @@ let Saving = {
         gameLoop(offlineSimulationData.tickLength, false, false);
         let d = Date.now();
         offlineSimulationData.tick++;
-        if (d - startTime > 1 / 16) {
+        if (d - startTime > 0.064) {
           lastUpdateTime = d;
           if (showSimulation) {
             Saving.simulateTimeUpdate((lastUpdateTime - startTime) / 1000, offlineSimulationData.tick, offlineSimulationData.ticks);

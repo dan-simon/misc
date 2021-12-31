@@ -5,15 +5,16 @@ function gameLoop(diff, display, isOnline) {
     let rawDiff = (now - player.lastUpdate) / 1000;
     // Run the game loop multiple times
     if (rawDiff >= 10) {
+      // This tick isn't going to happen at all. We're going to simulate time instead.
       player.lastUpdate = now;
       if (Options.offlineProgress()) {
         Saving.simulateTime(rawDiff, Saving.defaultTicks(), true, function () {});
-        // This tick isn't going to happen at all. We're going to simulate time instead.
       }
       return;
-    } else if (rawDiff >= 1 / 8) {
+    } else if (rawDiff >= 0.128) {
+      // 64 millseconds is the usual tick length.
       player.lastUpdate = now;
-      let ticks = Math.floor(rawDiff * 16);
+      let ticks = Math.floor(rawDiff / 0.064);
       for (let i = 0; i < ticks; i++) {
         gameLoop(rawDiff / ticks, display, isOnline);
       }
