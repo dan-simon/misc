@@ -13,13 +13,13 @@ function extractCode(x) {
     return 'pluralize(' + x.slice(3, -2) + ', \'\', \'s\')';
   } else if (x[1] === 't') {
     if (x[2] === ' ') {
-      return 'formatTime(' + x.slice(3, -2) + ', {seconds: {f: format, s: false}, larger: {f: format, s: false}})';
+      return 'formatTime(' + x.slice(3, -2) + ', {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}})';
     } else if (x[2] === 'i') {
-      return 'formatTime(' + x.slice(4, -2) + ', {seconds: {f: formatInt, s: true}, larger: {f: format, s: false}})';
+      return 'formatTime(' + x.slice(4, -2) + ', {seconds: {f: formatTimeInt, s: true}, larger: {f: formatTimeNum, s: false}})';
     } else if (x[2] === 'q') {
-      return 'formatTime(' + x.slice(4, -2) + ', {seconds: {f: formatMaybeInt, s: true}, larger: {f: format, s: false}})';
+      return 'formatTime(' + x.slice(4, -2) + ', {seconds: {f: formatTimeMaybeInt, s: true}, larger: {f: formatTimeNum, s: false}})';
     } else if (x[2] === 's') {
-      return 'formatTime(' + x.slice(4, -2) + ', {seconds: {f: formatMaybeInt, s: true}, larger: {f: formatMaybeInt, s: true}})';
+      return 'formatTime(' + x.slice(4, -2) + ', {seconds: {f: formatTimeMaybeInt, s: true}, larger: {f: formatTimeMaybeInt, s: true}})';
     }
   } else if (x[1] === 'y') {
     return 'pluralize(' + x.slice(3, -2) + ', \'y\', \'ies\')';

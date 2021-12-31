@@ -349,10 +349,16 @@ let initialPlayer = {
   },
   tabPresets: [],
   options: {
-    notation: 'Scientific',
-    lowerPrecision: 3,
-    higherPrecision: 5,
+    notation: {
+      notation: 'Scientific',
+      lowerPrecision: 3,
+      higherPrecision: 5,
+      displayDigits: 10,
+      exponentBase: 10,
+      alphabet: 'abcdefghijklmnopqrstuvwxyz'
+    },
     timeDisplay: 'Seconds',
+    notationOnTimes: false,
     offlineProgress: true,
     offlineTicks: 1024,
     hotkeys: true,
@@ -395,6 +401,7 @@ let initialPlayer = {
       showCurrentChallenges: true,
       showNextCCCompletion: true,
       showResetButtonsForHiddenTabs: true,
+      smallerHeader: false,
     },
     complexityChallengeRunningColors: false,
     optionTypeShown: 'saving',
@@ -506,7 +513,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2.119140625
+  version: 2.12109375
 }
 
 let player;

@@ -151,10 +151,22 @@ input[type=checkbox] {
   font-size: 0.875rem;
 }
 
+.semi-options-button {
+  width: 300px;
+  height: 60px;
+  font-size: 0.875rem;
+}
+
 .minier-options-button {
   width: 288px;
-  height: 20px;
+  height: 18px;
   font-size: 0.75rem;
+}
+
+.wide-mini-options-button {
+  width: 300px;
+  height: 20px;
+  font-size: 0.875rem;
 }
 
 .options-div {
