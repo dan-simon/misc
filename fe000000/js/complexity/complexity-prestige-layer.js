@@ -84,11 +84,17 @@ let ComplexityPrestigeLayer = {
     }
     return c / Math.max(player.stats.timeSinceComplexity, 1 / 16);
   },
+  currentLogCPPerSecDisplay() {
+    return this.currentLogCPPerSec() / Math.log2(NotationOptions.exponentBase());
+  },
   peakCPPerSec() {
     return player.stats.peakCPPerSec;
   },
   peakLogCPPerSec() {
     return player.stats.peakLogCPPerSec;
+  },
+  peakLogCPPerSecDisplay() {
+    return this.peakLogCPPerSec() / Math.log2(NotationOptions.exponentBase());
   },
   updatePeakCPPerSec() {
     let cps = this.currentCPPerSec();

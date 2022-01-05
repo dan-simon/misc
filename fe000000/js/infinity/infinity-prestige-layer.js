@@ -93,11 +93,17 @@ let InfinityPrestigeLayer = {
     }
     return c / Math.max(player.stats.timeSinceInfinity, 1 / 16);
   },
+  currentLogIPPerSecDisplay() {
+    return this.currentLogIPPerSec() / Math.log2(NotationOptions.exponentBase());
+  },
   peakIPPerSec() {
     return player.stats.peakIPPerSec;
   },
   peakLogIPPerSec() {
     return player.stats.peakLogIPPerSec;
+  },
+  peakLogIPPerSecDisplay() {
+    return this.peakLogIPPerSec() / Math.log2(NotationOptions.exponentBase());
   },
   updatePeakIPPerSec() {
     let cps = this.currentIPPerSec();

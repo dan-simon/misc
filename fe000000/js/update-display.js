@@ -917,8 +917,8 @@ function updateDisplay() {
   if (shouldUpdate("e14")) {e[14].textContent = formatTime(player.stats.timeSinceInfinity, {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}})};
   if (shouldUpdate("e15")) {e[15].textContent = format(InfinityPrestigeLayer.currentIPPerSec())};
   if (shouldUpdate("e16")) {e[16].textContent = format(InfinityPrestigeLayer.peakIPPerSec())};
-  if (shouldUpdate("e17")) {e[17].textContent = format(InfinityPrestigeLayer.currentLogIPPerSec())};
-  if (shouldUpdate("e18")) {e[18].textContent = format(InfinityPrestigeLayer.peakLogIPPerSec())};
+  if (shouldUpdate("e17")) {e[17].textContent = format(InfinityPrestigeLayer.currentLogIPPerSecDisplay())};
+  if (shouldUpdate("e18")) {e[18].textContent = format(InfinityPrestigeLayer.peakLogIPPerSecDisplay())};
   if (shouldUpdate("e19")) {e[19].textContent = format(EternityPrestigeLayer.infinityPointRequirementForEternity())};
   if (shouldUpdate("e20")) {e[20].textContent = formatInt(EternityPrestigeLayer.eternityPoints())};
   if (shouldUpdate("e21")) {e[21].textContent = pluralize(EternityPrestigeLayer.eternityPoints(), '', 's')};
@@ -933,8 +933,8 @@ function updateDisplay() {
   if (shouldUpdate("e30")) {e[30].textContent = formatTime(player.stats.timeSinceEternity, {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}})};
   if (shouldUpdate("e31")) {e[31].textContent = format(EternityPrestigeLayer.currentEPPerSec())};
   if (shouldUpdate("e32")) {e[32].textContent = format(EternityPrestigeLayer.peakEPPerSec())};
-  if (shouldUpdate("e33")) {e[33].textContent = format(EternityPrestigeLayer.currentLogEPPerSec())};
-  if (shouldUpdate("e34")) {e[34].textContent = format(EternityPrestigeLayer.peakLogEPPerSec())};
+  if (shouldUpdate("e33")) {e[33].textContent = format(EternityPrestigeLayer.currentLogEPPerSecDisplay())};
+  if (shouldUpdate("e34")) {e[34].textContent = format(EternityPrestigeLayer.peakLogEPPerSecDisplay())};
   if (shouldUpdate("e35")) {e[35].textContent = formatInt(EternityChallenge.tiersCompletedOnEternity())};
   if (shouldUpdate("e36")) {e[36].textContent = pluralize(EternityChallenge.tiersCompletedOnEternity(), '', 's')};
   if (shouldUpdate("e37")) {e[37].textContent = formatInt(EternityChallenge.getEternityChallengeCompletions())};
@@ -954,8 +954,8 @@ function updateDisplay() {
   if (shouldUpdate("e51")) {e[51].textContent = formatTime(player.stats.timeSinceComplexity, {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}})};
   if (shouldUpdate("e52")) {e[52].textContent = format(ComplexityPrestigeLayer.currentCPPerSec())};
   if (shouldUpdate("e53")) {e[53].textContent = format(ComplexityPrestigeLayer.peakCPPerSec())};
-  if (shouldUpdate("e54")) {e[54].textContent = format(ComplexityPrestigeLayer.currentLogCPPerSec())};
-  if (shouldUpdate("e55")) {e[55].textContent = format(ComplexityPrestigeLayer.peakLogCPPerSec())};
+  if (shouldUpdate("e54")) {e[54].textContent = format(ComplexityPrestigeLayer.currentLogCPPerSecDisplay())};
+  if (shouldUpdate("e55")) {e[55].textContent = format(ComplexityPrestigeLayer.peakLogCPPerSecDisplay())};
   if (shouldUpdate("e56")) {e[56].textContent = format(FinalityPrestigeLayer.complexityPointRequirementForFinality())};
   if (shouldUpdate("e57")) {e[57].textContent = formatInt(FinalityPrestigeLayer.finalityPoints())};
   if (shouldUpdate("e58")) {e[58].textContent = pluralize(FinalityPrestigeLayer.finalityPoints(), '', 's')};

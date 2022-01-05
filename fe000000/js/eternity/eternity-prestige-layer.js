@@ -73,11 +73,17 @@ let EternityPrestigeLayer = {
     }
     return c / Math.max(player.stats.timeSinceEternity, 1 / 16);
   },
+  currentLogEPPerSecDisplay() {
+    return this.currentLogEPPerSec() / Math.log2(NotationOptions.exponentBase());
+  },
   peakEPPerSec() {
     return player.stats.peakEPPerSec;
   },
   peakLogEPPerSec() {
     return player.stats.peakLogEPPerSec;
+  },
+  peakLogEPPerSecDisplay() {
+    return this.peakLogEPPerSec() / Math.log2(NotationOptions.exponentBase());
   },
   updatePeakEPPerSec() {
     let cps = this.currentEPPerSec();
