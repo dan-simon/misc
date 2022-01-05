@@ -688,9 +688,9 @@
         <br/>
       </div>
       <div ~style.display=(Autobuyer(12).hasGeneration() || PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~>
-        <span>Automatically disable autobuyers while the corresponding resource has generation</span>
+        <span>Automatically stop autobuyers from triggering while the corresponding resource has generation</span>
         <br/>
-        <span>(e.g., disable infinity autobuyer at ~i 24 ~ EC completions): <input type="checkbox" ~!checked=Autobuyers.suspendAutobuyers()~ ~!onchange=function() {Autobuyers.setSuspendAutobuyers(this.checked)}~></input></span>
+        <span>(e.g., stop infinity autobuyer from triggering at ~i 24 ~ EC completions): <input type="checkbox" ~!checked=Autobuyers.suspendAutobuyers()~ ~!onchange=function() {Autobuyers.setSuspendAutobuyers(this.checked)}~></input></span>
         <br/>
       </div>
       <span>You can toggle an autobuyer by pressing T + the corresponding hotkey.</span>
