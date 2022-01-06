@@ -114,6 +114,19 @@ input[type=checkbox] {
   visibility: visible;
 }
 
+.box {
+  position: absolute;
+  top: 200px;
+  left: 50%;
+  margin-left: -350px;
+  width: 600px;
+  padding: 50px;
+  background-color: var(--text-color);
+  color: var(--background-color);
+  text-align: center;
+  z-index: 1;
+}
+
 #notificationarea {
   position: fixed;
   top: 0px;

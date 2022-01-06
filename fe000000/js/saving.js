@@ -1284,6 +1284,12 @@ let Saving = {
       player.options.headerSettings.smallerHeader = false;
       player.version = 2.12109375;
     }
+    if (player.version < 2.1220703125) {
+      player.hasSeenTextBox = {
+        'boost-power': player.bestBoostPower > 1 || player.complexities > 0 || player.finalities > 0
+      }
+      player.version = 2.1220703125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

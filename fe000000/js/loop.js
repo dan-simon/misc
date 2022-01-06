@@ -93,6 +93,7 @@ function gameLoop(diff, display, isOnline) {
   Powers.checkForPowerGain(diff);
   Goals.checkForGoals();
   Achievements.checkForAchievements('loop');
+  TextBoxes.checkDisplay();
   SpecialTabs.makeTabsVisible();
   SpecialDivs.makeDivsVisible();
   if (display !== false) {

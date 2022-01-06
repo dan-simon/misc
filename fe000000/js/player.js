@@ -304,6 +304,9 @@ let initialPlayer = {
     showCompletedRows: true
   },
   displayAllGoals: false,
+  hasSeenTextBox: {
+    'boost-power': false
+  },
   isTabVisible: {
     'infinity-challenges': false,
     'eternity-producer': false,
@@ -513,7 +516,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2.12109375
+  version: 2.1220703125
 }
 
 let player;
