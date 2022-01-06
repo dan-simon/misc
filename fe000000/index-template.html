@@ -882,7 +882,7 @@
         </tr>
         <tr>
           <td>
-            <div class="autobuyerdiv" ~style.display=Autobuyer(10).hasAutobuyer() ? '' : 'none'~>
+            <div class="tallautobuyerdiv" ~style.display=Autobuyer(10).hasAutobuyer() ? '' : 'none'~>
               <span>Sacrifice Autobuyer</span>
               <br/>
               <span>On: <input type="checkbox" class="autobuyer-checkbox-10" ~!checked=Autobuyer(10).isOn()~ ~!onchange=function() {Autobuyer(10).setIsOn(this.checked)}~></input></span>
@@ -899,7 +899,7 @@
             </div>
           </td>
           <td>
-            <div class="autobuyerdiv" ~style.display=Autobuyer(11).hasAutobuyer() ? '' : 'none'~>
+            <div class="tallautobuyerdiv" ~style.display=Autobuyer(11).hasAutobuyer() ? '' : 'none'~>
               <span>Prestige Autobuyer</span>
               <br/>
               <span>On: <input type="checkbox" class="autobuyer-checkbox-11" ~!checked=Autobuyer(11).isOn()~ ~!onchange=function() {Autobuyer(11).setIsOn(this.checked)}~></input></span>
@@ -916,7 +916,7 @@
             </div>
           </td>
           <td>
-            <div class="autobuyerdiv" ~style.display=Autobuyer(12).hasAutobuyer() ? '' : 'none'~>
+            <div class="tallautobuyerdiv" ~style.display=Autobuyer(12).hasAutobuyer() ? '' : 'none'~>
               <span>Infinity Autobuyer</span>
               <br/>
               <span>On: <input type="checkbox" class="autobuyer-checkbox-12" ~!checked=Autobuyer(12).isOn()~ ~!onchange=function() {Autobuyer(12).setIsOn(this.checked)}~></input></span>
@@ -937,12 +937,14 @@
               <span>~r Autobuyer(12).mode() ~:</span>
               <br/>
               <span><input type="text" ~!value=Autobuyer(12).priority().toString()~ ~!onchange=function() {Autobuyer(12).setPriority(new Decimal(this.value))}~></input></span>
+              <br ~style.display=Autobuyer(12).isSuspendedDueToGeneration() ? '' : 'none'~/>
+              <span ~style.display=Autobuyer(12).isSuspendedDueToGeneration() ? '' : 'none'~ style="font-size: 0.875rem;">(not triggering due to IP generation)</span>
             </div>
           </td>
         </tr>
         <tr>
           <td>
-            <div class="autobuyerdiv" ~style.display=Autobuyer(13).hasAutobuyer() ? '' : 'none'~>
+            <div class="tallautobuyerdiv" ~style.display=Autobuyer(13).hasAutobuyer() ? '' : 'none'~>
               <span>Eternity Autobuyer</span>
               <br/>
               <span>On: <input type="checkbox" class="autobuyer-checkbox-13" ~!checked=Autobuyer(13).isOn()~ ~!onchange=function() {Autobuyer(13).setIsOn(this.checked)}~></input></span>
@@ -965,10 +967,12 @@
               <span>~r Autobuyer(13).mode() ~:</span>
               <br/>
               <span><input type="text" ~!value=Autobuyer(13).priority().toString()~ ~!onchange=function() {Autobuyer(13).setPriority(new Decimal(this.value))}~></input></span>
+              <br ~style.display=Autobuyer(13).isSuspendedDueToGeneration() ? '' : 'none'~/>
+              <span ~style.display=Autobuyer(13).isSuspendedDueToGeneration() ? '' : 'none'~ style="font-size: 0.875rem;">(not triggering due to EP generation)</span>
             </div>
           </td>
           <td>
-            <div class="autobuyerdiv" ~style.display=Autobuyer(14).hasAutobuyer() ? '' : 'none'~>
+            <div class="tallautobuyerdiv" ~style.display=Autobuyer(14).hasAutobuyer() ? '' : 'none'~>
               <span>Permanence Autobuyer</span>
               <br/>
               <span>On: <input type="checkbox" class="autobuyer-checkbox-14" ~!checked=Autobuyer(14).isOn()~ ~!onchange=function() {Autobuyer(14).setIsOn(this.checked)}~></input></span>
@@ -982,10 +986,12 @@
               <span>~r Autobuyer(14).mode() ~:</span>
               <br/>
               <span><input type="text" ~!value=Autobuyer(14).priority().toString()~ ~!onchange=function() {Autobuyer(14).setPriority(new Decimal(this.value))}~></input></span>
+              <br ~style.display=Autobuyer(14).isSuspendedDueToGeneration() ? '' : 'none'~/>
+              <span ~style.display=Autobuyer(14).isSuspendedDueToGeneration() ? '' : 'none'~ style="font-size: 0.875rem;">(not triggering due to permanence generation)</span>
             </div>
           </td>
           <td>
-            <div class="autobuyerdiv" ~style.display=Autobuyer(15).hasAutobuyer() ? '' : 'none'~>
+            <div class="tallautobuyerdiv" ~style.display=Autobuyer(15).hasAutobuyer() ? '' : 'none'~>
               <span>Complexity Autobuyer</span>
               <br/>
               <span>On: <input type="checkbox" class="autobuyer-checkbox-15" ~!checked=Autobuyer(15).isOn()~ ~!onchange=function() {Autobuyer(15).setIsOn(this.checked)}~></input></span>
@@ -1008,13 +1014,15 @@
               <span>~r Autobuyer(15).mode() ~:</span>
               <br/>
               <span><input type="text" ~!value=Autobuyer(15).priority().toString()~ ~!onchange=function() {Autobuyer(15).setPriority(new Decimal(this.value))}~></input></span>
+              <br ~style.display=Autobuyer(15).isSuspendedDueToGeneration() ? '' : 'none'~/>
+              <span ~style.display=Autobuyer(15).isSuspendedDueToGeneration() ? '' : 'none'~ style="font-size: 0.875rem;">(not triggering due to ℂP generation)</span>
             </div>
           </td>
         </tr>
         <tr>
           <td/>
           <td>
-          <div class="autobuyerdiv" ~style.display=Autobuyer(16).hasAutobuyer() ? '' : 'none'~>
+          <div class="tallautobuyerdiv" ~style.display=Autobuyer(16).hasAutobuyer() ? '' : 'none'~>
             <span>Finality Autobuyer</span>
             <br/>
             <span>On: <input type="checkbox" class="autobuyer-checkbox-16" ~!checked=Autobuyer(16).isOn()~ ~!onchange=function() {Autobuyer(16).setIsOn(this.checked)}~></input></span>

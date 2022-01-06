@@ -53,7 +53,10 @@ let Autobuyer = function (i) {
       ][i - 12];
     },
     isActive() {
-      return this.isOn() && this.hasAutobuyer() && (!this.hasGeneration() || !Autobuyers.suspendAutobuyers());
+      return this.isOn() && this.hasAutobuyer() && !this.isSuspendedDueToGeneration();
+    },
+    isSuspendedDueToGeneration() {
+      return this.hasGeneration() && Autobuyers.suspendAutobuyers();
     },
     mode() {
       return player.autobuyers[i - 1].mode;
