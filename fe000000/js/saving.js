@@ -1,4 +1,9 @@
-let offlineSimulationData = {active: false};
+let offlineSimulationData = {active: false, globalId: 0};
+
+let getOfflineSimulationID = function () {
+  offlineSimulationData.globalId++;
+  return offlineSimulationData.globalId;
+}
 
 let Saving = {
   h(s) {
@@ -44,11 +49,21 @@ let Saving = {
     return null;
   },
   loadGame(s, offlineProgress, minTicks, isOracle, callback) {
-    if (blocked && !confirm('Time is currently being simulated. Loading a save while time ' +
-      'is being simulated can cause weird behavior. Are you sure you want to load? ' +
-      '(This message may appear if you did something that uses loading in its implementation, ' +
-      'such as resetting.)')) {
-      return;
+    if (blocked) {
+      let c = confirm('Time is currently being simulated. Loading a save while time ' +
+        'is being simulated may cause weird behavior, and it\'s recommended to finish the ' +
+        'existing simulation first, just in case. Are you sure you want to load? ' +
+        '(This message may appear if you did something that uses loading in its implementation, ' +
+        'such as resetting.)');
+      if (c) {
+        blocked = false;
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('simulatetime').style.display = 'none';
+        document.getElementById('main').style.display = '';
+        offlineSimulationData.id = getOfflineSimulationID();
+      } else {
+        return;
+      }
     }
     // offlineProgress = null means leave it up to the save.
     player = this.decode(s);
@@ -118,7 +133,9 @@ let Saving = {
       callback = () => true;
     }
     let baseTickLength = 0.064;
+    let id = getOfflineSimulationID();
     offlineSimulationData.active = true;
+    offlineSimulationData.id = id;
     offlineSimulationData.ticks = Math.ceil(Math.min(totalDiff / baseTickLength, maxTicks));
     offlineSimulationData.tickLength = totalDiff / offlineSimulationData.ticks;
     let startTime = Date.now();
@@ -130,6 +147,11 @@ let Saving = {
     offlineSimulationData.tick = 0;
     blocked = true;
     let interval = setInterval(function() {
+      // This should only happen when having loaded a save, starting a new simulation
+      // and completely negating the old one.
+      if (offlineSimulationData.id !== id) {
+        clearInterval(interval);
+      }
       let initialTick = offlineSimulationData.tick;
       while (offlineSimulationData.tick < Math.min(offlineSimulationData.ticks, initialTick + 256)) {
         gameLoop(offlineSimulationData.tickLength, false, false);
