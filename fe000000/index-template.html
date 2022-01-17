@@ -3153,10 +3153,9 @@
       </table>
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'complexity-challenges' ? '' : 'none'~>
-      <span>
-        You have completed ~i ComplexityChallenge.getTotalComplexityChallengeCompletions() ~ complexity challenge tier~s ComplexityChallenge.getTotalComplexityChallengeCompletions() ~.
-        <button onclick="ComplexityChallenge.complexityReset(true)">Restart complexity and re-enter all complexity challenges</button>
-      </span>
+      <span>You have completed ~i ComplexityChallenge.getTotalComplexityChallengeCompletions() ~ complexity challenge tier~s ComplexityChallenge.getTotalComplexityChallengeCompletions() ~.</span>
+      <br/>
+      <span><button onclick="ComplexityChallenge.complexityReset(true)" ~class=ComplexityPrestigeLayer.canComplexity() ? "disabled" : ""~>Restart complexity and re-enter all complexity challenges<span ~style.display=ComplexityPrestigeLayer.canComplexity() ? '' : 'none'~> (disabled because you can complexity)</span></button></span>
       <br/>
       <span>You have ~i Complexities.amount() ~ complexit~y Complexities.amount() ~ (allowing you to enter ~i ComplexityChallenge.numberUnlocked() ~ complexity challenge~s ComplexityChallenge.numberUnlocked() ~).</span>
       <br/>
