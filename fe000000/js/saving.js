@@ -1312,6 +1312,10 @@ let Saving = {
       }
       player.version = 2.1220703125;
     }
+    if (player.version < 2.123046875) {
+      player.studySettings.firstTwelveStudyPurchaseOrderBeforeLastRespec = [];
+      player.version = 2.123046875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

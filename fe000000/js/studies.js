@@ -285,6 +285,7 @@ let Studies = {
   },
   setStudiesBeforeLastRespec() {
     player.studySettings.studiesBeforeLastRespec = [...player.studies];
+    player.studySettings.firstTwelveStudyPurchaseOrderBeforeLastRespec = [...player.studySettings.firstTwelveStudyPurchaseOrder];
   },
   respecFourthRow() {
     for (let i = 12; i < 16; i++) {

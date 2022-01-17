@@ -141,6 +141,7 @@ let ComplexityChallenge = {
     if (x === 6 && !player.complexityChallengeSafeguards[x - 2] &&
       ComplexityAchievements.isComplexityAchievementActive(4, 4) && Studies.rebuyAfterComplexityChallenge6()) {
       player.studies = [...player.studySettings.studiesBeforeLastRespec];
+      player.studySettings.firstTwelveStudyPurchaseOrder = [...player.studySettings.firstTwelveStudyPurchaseOrderBeforeLastRespec];
       if (!Studies.areStudiesInitialStudies()) {
         ComplexityChallenge.exitComplexityChallenge(6);
       }

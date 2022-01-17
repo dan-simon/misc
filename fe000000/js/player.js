@@ -143,6 +143,7 @@ let initialPlayer = {
     rebuyAfterComplexityChallenge6: true,
     showPresetExplanation: false,
     studiesBeforeLastRespec: initialStudies(),
+    firstTwelveStudyPurchaseOrderBeforeLastRespec: []
   },
   presets: [],
   lastPresetIndices: [0, 0, 0, 0],
@@ -516,7 +517,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2.1220703125
+  version: 2.123046875
 }
 
 let player;
