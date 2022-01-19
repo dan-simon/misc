@@ -92,8 +92,13 @@ let InfinityChallenge = {
     Challenge.setChallenge(0);
   },
   exitInfinityChallenge() {
-    this.setInfinityChallenge(0);
-    InfinityPrestigeLayer.infinityReset(false, null);
+    if (InfinityPrestigeLayer.canInfinity()) {
+      // Finish the infinity challenge.
+      InfinityPrestigeLayer.infinity(false, null);
+    } else {
+      this.setInfinityChallenge(0);
+      InfinityPrestigeLayer.infinityReset(false, null);
+    }
   },
   checkForInfinityChallengeCompletion() {
     let cc = this.currentInfinityChallenge();

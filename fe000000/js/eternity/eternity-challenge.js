@@ -85,7 +85,7 @@ let EternityChallenge = {
     if (unlocked !== 0) {
       // Note the implicit conversion of unlocked directly to string (unformatted) in the below.
       if (this.isEternityChallengeRunning(unlocked)) {
-        return 'Exit Eternity Challenge ' + unlocked + ' (this will not complete it)';
+        return 'Exit Eternity Challenge ' + unlocked + ' (this will ' + (EternityPrestigeLayer.canEternity() ? '' : 'not ') + 'complete it)';
       } else if (this.canEternityChallengeBeStarted(unlocked)) {
         return 'Start Eternity Challenge ' + unlocked;
       }
@@ -317,8 +317,13 @@ let EternityChallenge = {
     this.setEternityChallenge(x);
   },
   exitEternityChallenge() {
-    this.setEternityChallenge(0);
-    EternityPrestigeLayer.eternityReset(false);
+    if (EternityPrestigeLayer.canEternity()) {
+      // Finish the eternity challenge.
+      EternityPrestigeLayer.eternity(false);
+    } else {
+      this.setEternityChallenge(0);
+      EternityPrestigeLayer.eternityReset(false);
+    }
   },
   checkForEternityChallengeCompletion() {
     let cc = this.currentEternityChallenge();

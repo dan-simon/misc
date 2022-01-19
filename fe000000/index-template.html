@@ -486,7 +486,7 @@
       <br/>
       <span>To complete a normal challenge, infinity while in the normal challenge.</span>
       <br ~style.display=Challenge.isSomeChallengeRunning() ? '' : 'none' ~/>
-      <span ~style.display=Challenge.isSomeChallengeRunning() ? '' : 'none' ~><button onclick="Challenge.exitChallenge()">Exit Normal Challenge ~r Challenge.currentChallenge() ~ (this will not complete it)</button> <button onclick="Challenge.restartChallenge()">Reset it (exit and start again)</button></span>
+      <span ~style.display=Challenge.isSomeChallengeRunning() ? '' : 'none' ~><button onclick="Challenge.exitChallenge()">Exit Normal Challenge ~r Challenge.currentChallenge() ~ (this will ~r InfinityPrestigeLayer.canInfinity() ? '' : 'not ' ~complete it)</button> <button onclick="Challenge.restartChallenge()">Reset it (exit and start again)</button></span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>
@@ -1044,7 +1044,7 @@
       <br/>
       <span>To complete an infinity challenge, infinity while in the infinity challenge.</span>
       <br ~style.display=InfinityChallenge.isSomeInfinityChallengeRunning() ? '' : 'none' ~/>
-      <span ~style.display=InfinityChallenge.isSomeInfinityChallengeRunning() ? '' : 'none' ~><button onclick="InfinityChallenge.exitInfinityChallenge()">Exit Infinity Challenge ~r InfinityChallenge.currentInfinityChallenge() ~ (this will not complete it)</button>  <button onclick="InfinityChallenge.restartInfinityChallenge()">Reset it (exit and start again)</button></span>
+      <span ~style.display=InfinityChallenge.isSomeInfinityChallengeRunning() ? '' : 'none' ~><button onclick="InfinityChallenge.exitInfinityChallenge()">Exit Infinity Challenge ~r InfinityChallenge.currentInfinityChallenge() ~ (this will ~r InfinityPrestigeLayer.canInfinity() ? '' : 'not ' ~complete it)</button>  <button onclick="InfinityChallenge.restartInfinityChallenge()">Reset it (exit and start again)</button></span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>

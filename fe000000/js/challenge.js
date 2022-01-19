@@ -77,8 +77,13 @@ let Challenge = {
     InfinityChallenge.setInfinityChallenge(0);
   },
   exitChallenge() {
-    this.setChallenge(0);
-    InfinityPrestigeLayer.infinityReset(false, null);
+    if (InfinityPrestigeLayer.canInfinity()) {
+      // Finish the challenge.
+      InfinityPrestigeLayer.infinity(false, null);
+    } else {
+      this.setChallenge(0);
+      InfinityPrestigeLayer.infinityReset(false, null);
+    }
   },
   checkForChallengeCompletion() {
     let cc = this.currentChallenge();
