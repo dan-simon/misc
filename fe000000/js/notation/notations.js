@@ -44,6 +44,22 @@ class ScientificNotation extends ADNotations.Notation {
   }
 }
 
+class StandardNotation extends ADNotations.Notation {
+  get name() {
+    return "Scientific";
+  }
+  
+  formatUnder1000(value, places) {
+    return baseFormat()(value, places);
+  }
+
+  formatDecimal(value, places) {
+    return ADNotations.formatMantissaWithExponent(baseFormat(),
+      (n, _) => ADNotations.abbreviateStandard(n),
+      Math.pow(NotationOptions.exponentBase(), 3), 1, true, ' ', false)(value, places);
+  }
+}
+
 class LogarithmNotation extends ADNotations.Notation {
   get name() {
     return "Logarithm";
@@ -92,7 +108,7 @@ class LettersNotation extends ADNotations.Notation {
 }
 
 // Below are mixed notations.
-let standard = new ADNotations.StandardNotation();
+let standard = new StandardNotation();
 let scientific = new ScientificNotation();
 
 class MixedScientificNotation extends ADNotations.Notation {
@@ -154,6 +170,7 @@ class MixedLogarithmSciNotation extends ADNotations.Notation {
 let ModifiedNotations = {
   'TimeScientificNotation': TimeScientificNotation,
   'ScientificNotation': ScientificNotation,
+  'StandardNotation': StandardNotation,
   'LogarithmNotation': LogarithmNotation,
   'LettersNotation': LettersNotation,
   'EngineeringNotation': EngineeringNotation,

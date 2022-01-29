@@ -1,5 +1,11 @@
 let toggleDown = false;
 let globalShiftDown = false;
+let lastHotkeyUse = {
+  'infinity': -Infinity,
+  'eternity': -Infinity,
+  'complexity': -Infinity,
+  'finality': -Infinity
+}
 
 let codeToAutobuyers = {
   49: 1,
@@ -215,6 +221,7 @@ window.addEventListener('keydown', function(event) {
 
     case 67: // C
       ComplexityPrestigeLayer.complexity(true);
+      lastHotkeyUse.complexity = Date.now() / 1000;
     break;
 
     case 69: // E, also, nice
@@ -223,6 +230,7 @@ window.addEventListener('keydown', function(event) {
       } else {
         EternityPrestigeLayer.eternity(true);
       }
+      lastHotkeyUse.eternity = Date.now() / 1000;
     break;
 
     case 70: // F
@@ -231,6 +239,7 @@ window.addEventListener('keydown', function(event) {
       } else {
         FinalityPrestigeLayer.finality(true);
       }
+      lastHotkeyUse.finality = Date.now() / 1000;
     break;
     
     case 71: // G
@@ -239,6 +248,7 @@ window.addEventListener('keydown', function(event) {
 
     case 73: // I
       InfinityPrestigeLayer.infinity(true, null);
+      lastHotkeyUse.infinity = Date.now() / 1000;
     break;
 
     case 77: // M

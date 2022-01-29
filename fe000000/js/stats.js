@@ -94,13 +94,21 @@ let FastResetText = {
   autobuyerIndices: [12, 13, 15, 16],
   getTextForLayer(x) {
     // We need the leading space to separate from previous text.
-    return ' You are currently doing fast ' + x.slice(0, -1) + 'ies due to your ' + x + ' autobuyer.'
+    return ' You are currently doing fast ' + x.slice(0, -1) + 'ies due to ' + this.getCauseForLayer(x);
+  },
+  getCauseForLayer(x) {
+    if (lastHotkeyUse[x] >= Date.now() / 1000 - 1) {
+      return 'holding the ' + x[0].toUpperCase() + ' hotkey.';
+    } else if (Autobuyer(this.autobuyerIndices[this.layers.indexOf(x)]).isActive()) {
+      return 'your ' + x + ' autobuyer.';
+    } else {
+      return 'an unknown cause (perhaps clicking the button quickly).';
+    }
   },
   isDoingFast(x) {
     let info = player.stats[Stats.lastTenKey(x)];
     let times = info.map(x => x[0]);
     return player.stats[Stats.timeSinceKey(x)] <= 1 &&
-      Autobuyer(this.autobuyerIndices[this.layers.indexOf(x)]).isActive() &&
       times.every(x => x !== -1 && x <= 1);
   },
   getText(x) {
