@@ -3007,7 +3007,7 @@ function updateDisplay() {
     if (shouldUpdate("e1124")) {e[1124].textContent = ComplexityAchievements.getComplexityAchievementName(4, 1)};
     if (shouldUpdate("e1125")) {e[1125].textContent = format(Math.pow(2, 16))};
     if (shouldUpdate("e1126")) {e[1126].textContent = ComplexityAchievements.complexityAchievementStatusDescription(4, 1)};
-    if (shouldUpdate("e1127")) {e[1127].textContent = format(ComplexityAchievements.rawEffect(4, 1))};
+    if (shouldUpdate("e1127")) {e[1127].textContent = formatPrecisely(ComplexityAchievements.rawEffect(4, 1))};
     if (shouldUpdate("b1014")) {b[1014].style.background = ComplexityAchievements.color(4, 2)};
     if (shouldUpdate("e1128")) {e[1128].textContent = ComplexityAchievements.getComplexityAchievementName(4, 2)};
     if (shouldUpdate("e1129")) {e[1129].textContent = formatInt(20)};
