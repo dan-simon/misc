@@ -1,0 +1,18 @@
+<html>
+<head>
+  <title>Dynastyword</title>
+  <script src="script.js"></script>
+</head>
+<body>
+  <span>This is a quick-and-dirty implementation of orthographic &#20313;&#35336;&#25991;&#23383;&#12463;&#12525;&#12473;, but with letters and numbers rather than japanese characters. A converter from penpa is <a href="converter/index.html" target="_blank">here.</a> The rules are:</span>
+  <ol>
+    <li>Blacken some squares. Do not blacken any two adjacent squares, and the unblackened squares must form a connected region. (These are dynasty rules.)</li>
+    <li>"Words" (contiguous sequences of more than one unblackened square, across or down) cannot start with a digit, and if a word has two adjacent digits the first must always be strictly less than the second.</li>
+    <li>No word can appear more than once in the grid.</li>
+  </ol>
+  <div id="d">
+  </div>
+  <br/>
+  <button onclick="checkGrid()">Check!</button> <button onclick="clearGrid()">Clear grid</button>
+</body>
+</html>
