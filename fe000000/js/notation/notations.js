@@ -12,6 +12,14 @@ function representExponentWithAlphabet(x, a) {
   return r.join('');
 }
 
+// General notes about the below notations:
+// None of them define canHandleNegativePlaces. This is because
+// FE000000 always makes sure to define places when calling format,
+// because the format method is only called via the functions in format.js,
+// all of which define places in their call to the method. So the issue of
+// "what if places is undefined" that canHandleNegativePlaces was meant
+// to handle never comes up.
+
 class TimeScientificNotation extends ADNotations.Notation {
   get name() {
     return "Scientific";
@@ -46,7 +54,7 @@ class ScientificNotation extends ADNotations.Notation {
 
 class StandardNotation extends ADNotations.Notation {
   get name() {
-    return "Scientific";
+    return "Standard";
   }
   
   formatUnder1000(value, places) {
