@@ -188,6 +188,7 @@ let initialPlayer = {
   complexityChallengeLastCompletion: [[-1, -1], [-1, -1], [-1, -1], [-1, -1], [-1, -1], [-1, -1]],
   complexityChallengeTimeSpent: [0, 0, 0, 0, 0, 0],
   isComplexityChallengeExplanationMovedDown: false,
+  isPowersExplanationMovedDown: false,
   complexityAchievements: [
     [false, false, false, false],
     [false, false, false, false],
@@ -370,7 +371,9 @@ let initialPlayer = {
     resetColors: true,
     tabColors: true,
     presetHighlightColors: false,
-    exportDisplay: false,
+    exportCopy: true,
+    exportDownload: false,
+    exportShow: false,
     exportNotificationFrequency: Math.pow(2, 16),
     theme: {
       background: 'Dark',
@@ -408,6 +411,7 @@ let initialPlayer = {
       smallerHeader: false,
     },
     complexityChallengeRunningColors: false,
+    news: false,
     optionTypeShown: 'saving',
     autobuyers: {
       areNewlyUnlockedAutobuyersOn: true,
@@ -517,7 +521,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2.123046875
+  version: 2.125
 }
 
 let player;

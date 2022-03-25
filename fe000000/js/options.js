@@ -32,8 +32,17 @@ let Options = {
   toggleHotkeys() {
     player.options.hotkeys = !player.options.hotkeys;
   },
-  toggleExportDisplay() {
-    player.options.exportDisplay = !player.options.exportDisplay;
+  toggleNews() {
+    player.options.news = !player.options.news;
+  },
+  toggleExportCopy() {
+    player.options.exportCopy = !player.options.exportCopy;
+  },
+  toggleExportDownload() {
+    player.options.exportDownload = !player.options.exportDownload;
+  },
+  toggleExportShow() {
+    player.options.exportShow = !player.options.exportShow;
   },
   exportNotificationFrequency() {
     return player.options.exportNotificationFrequency;

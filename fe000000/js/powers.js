@@ -702,6 +702,12 @@ let Powers = {
   toggleAutoLoad() {
     player.powerListAutoLoad.on = !player.powerListAutoLoad.on;
   },
+  isExplanationMovedDown() {
+    return player.isPowersExplanationMovedDown;
+  },
+  moveExplanation() {
+    player.isPowersExplanationMovedDown = !player.isPowersExplanationMovedDown;
+  },
   tabColors() {
     return ['normal', 'infinity', 'eternity', 'complexity'];
   },
@@ -721,12 +727,15 @@ let Powers = {
     parent.style.display = '';
     output.value = this.exportString();
     output.select();
-    try {
-      document.execCommand('copy');
-    } catch(ex) {
-      alert('Copying to clipboard failed.');
+    if (player.options.exportCopy) {
+      output.select();
+      try {
+        document.execCommand('copy');
+      } catch(ex) {
+        alert('Copying to clipboard failed.');
+      }
     }
-    if (!player.options.exportDisplay) {
+    if (!player.options.exportShow) {
       parent.style.display = 'none';
       document.getElementsByClassName('powers-export-button')[0].focus();
     }
@@ -843,7 +852,7 @@ let Powers = {
   },
   redisplayPresetPowerList(x) {
     document.getElementsByClassName('presetpowerlist' + x)[0].value = this.presetPowerList(x);
-  }
+  },
 }
 
 defined.powers = true;

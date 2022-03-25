@@ -364,12 +364,15 @@ let Studies = {
     parent.style.display = '';
     output.value = this.exportString();
     output.select();
-    try {
-      document.execCommand('copy');
-    } catch(ex) {
-      alert('Copying to clipboard failed.');
+    if (player.options.exportCopy) {
+      output.select();
+      try {
+        document.execCommand('copy');
+      } catch(ex) {
+        alert('Copying to clipboard failed.');
+      }
     }
-    if (!player.options.exportDisplay) {
+    if (!player.options.exportShow) {
       parent.style.display = 'none';
       document.getElementsByClassName('studies-export-button')[0].focus();
     }

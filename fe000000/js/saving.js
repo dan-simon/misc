@@ -1316,6 +1316,15 @@ let Saving = {
       player.studySettings.firstTwelveStudyPurchaseOrderBeforeLastRespec = [];
       player.version = 2.123046875;
     }
+    if (player.version < 2.125) {
+      player.isPowersExplanationMovedDown = false;
+      player.options.exportCopy = true;
+      player.options.exportDownload = false;
+      player.options.exportShow = player.options.exportDisplay;
+      delete player.options.exportDisplay;
+      player.options.news = false;
+      player.version = 2.125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
@@ -1442,6 +1451,15 @@ let Saving = {
       alert('The save you entered does not seem to be valid. The error was ' + ex);
     }
   },
+  exportFileName() {
+    let d = new Date();
+    let methods = ['getFullYear', 'getMonth', 'getDate', 'getHours', 'getMinutes', 'getSeconds'];
+    let parts = methods.map(i => d[i]());
+    // Months start at 0.
+    parts[1] += 1;
+    parts = parts.map(i => (i < 10 ? '0' : '') + i);
+    return ['FE000000'].concat(parts).join('_');
+  },
   exportGame(buttonIndex) {
     if (blocked && !confirm('Time is currently being simulated. Exploits are possible by ' +
       'exporting while time is being simulated and then loading the resulting save. ' +
@@ -1460,27 +1478,42 @@ let Saving = {
     let output = document.getElementById('export-output');
     let parent = output.parentElement;
     parent.style.display = '';
-    output.value = this.encode(player);
-    output.select();
-    let copyWorked;
-    try {
-      document.execCommand('copy');
-      copyWorked = true;
-    } catch(ex) {
-      alert('Copying to clipboard failed.');
-      // I guess we don't need this explicitly but it seems nice
-      // for showing intent.
-      copyWorked = false;
+    let encoded = this.encode(player);
+    output.value = encoded;
+    let fullyWorked = true;
+    if (!player.options.exportCopy) {
+      output.select();
+      let copyWorked = false;
+      try {
+        document.execCommand('copy');
+        copyWorked = true;
+      } catch(ex) {
+        alert('Copying to clipboard failed.');
+        // I guess we don't need this explicitly but it seems nice
+        // for showing intent.
+        copyWorked = false;
+      }
+      fullyWorked = fullyWorked && copyWorked;
+    }
+    if (player.options.exportDownload) {
+      // We have no way to check if this works since it's async, sadly.
+      let a = document.createElement('a');
+      a.href = 'data:text/plain;charset=utf-8,' + encoded;
+      a.download = this.exportFileName();
+      a.id = 'export-download';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
     }
     if (loading) {
       document.getElementById('loading').style.display = '';
       document.getElementById('main').style.display = 'none';
     }
-    if (!player.options.exportDisplay) {
+    if (!player.options.exportShow) {
       parent.style.display = 'none';
       document.getElementsByClassName('export-button')[buttonIndex].focus();
     }
-    if (copyWorked) {
+    if (fullyWorked) {
       Notifications.notify('Exported save!', 'saveLoad');
     }
   },

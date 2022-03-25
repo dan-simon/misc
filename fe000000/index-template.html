@@ -72,6 +72,7 @@
   <script src="js/main.js?time=%time%"></script>
   <script src="js/max-all.js?time=%time%"></script>
   <script src="js/multiverse-collapse.js?time=%time%"></script>
+  <script src="js/news.js?time=%time%"></script>
   <script src="js/notifications.js?time=%time%"></script>
   <script src="js/options.js?time=%time%"></script>
   <script src="js/oracle.js?time=%time%"></script>
@@ -105,7 +106,7 @@
     <br/>
     <span>Reloading might work, so probably try that first.</span>
     <br id="script-count-br" style="display: none;"/>
-    <span id="script-count-span" style="display: none;">The page loads <span id="script-count"></span> scripts (should be 90).</span>
+    <span id="script-count-span" style="display: none;">The page loads <span id="script-count"></span> scripts (should be 91).</span>
     <br/>
     <span><button onclick="window.location.reload(true)">Reload window</button> <button class="export-button" onclick="Saving.exportGame(0)">Export</button> <button onclick="Saving.loadGamePrompt()">Import/Load</button> <button onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></span>
   </div>
@@ -170,6 +171,7 @@
       </button>
     </div>
     <div style="height: 32px;" ~style.display=Goals.areAllGoalsCompleted() ? '' : 'none'~>You have won the game! Congratulations!</div>
+    <div style="height: 32px;" ~style.display=player.options.news ? '' : 'none'~>~r News.getMessage() ~</div>
     <br/>
     <br/>
     <span ~style.display=Tabs.displayTabRow(1) ? '' : 'none'~>
@@ -2625,8 +2627,11 @@
       <div ~style.display=EternityChallenge.showAutoECCompletion() ? '' : 'none'~>
         <span>You auto-complete an EC tier once every ~tq EternityChallenge.autoECCompletionTime() ~, <span ~style.display=EternityChallenge.areAllEternityChallengesCompleted() ? 'none' : ''~>next in ~t EternityChallenge.timeUntilAutoECCompletion() ~</span><span ~style.display=EternityChallenge.areAllEternityChallengesCompleted() ? '' : 'none'~>and they're now fully complete</span><span ~style.display=EternityChallenge.usedAutoECCompletionThisComplexity() ? 'none' : ''~>  (no auto-completions this complexity)</span>.</span>
         <br/>
+        <span ~style.display=EternityChallenge.isAutoECCompletionOn() || EternityChallenge.imminentAutoECCompletionTiers() === 0 ? '' : 'none'~>Auto-completed EC tiers can be stored up by turning auto-EC completion off.</span>
+        <br ~style.display=EternityChallenge.isAutoECCompletionOn() || EternityChallenge.imminentAutoECCompletionTiers() === 0 ? '' : 'none'~/>
+        <span ~style.display=EternityChallenge.isAutoECCompletionOn() || EternityChallenge.imminentAutoECCompletionTiers() === 0 ? '' : 'none'~>When it's turned on again you'll get all the new auto-completed EC tiers at once.</span>
         <span ~style.display=!EternityChallenge.isAutoECCompletionOn() && EternityChallenge.imminentAutoECCompletionTiers() !== 0 ? '' : 'none'~>Turning auto-EC completion on would complete ~i EternityChallenge.imminentAutoECCompletionTiers() ~ eternity challenge tier~s EternityChallenge.imminentAutoECCompletionTiers() ~.</span>
-        <br ~style.display=!EternityChallenge.isAutoECCompletionOn() && EternityChallenge.imminentAutoECCompletionTiers() !== 0 ? '' : 'none'~/>
+        <br/>
         <button onclick="EternityChallenge.toggleAutoECCompletion()">Auto-EC completion: ~r EternityChallenge.isAutoECCompletionOn() ? "On" : "Off" ~</button>
       </div>
       <br ~style.display=EternityChallenge.showAutoECCompletion() ? 'none' : ''~/>
@@ -3629,20 +3634,28 @@
         </div>
         <span>You have ~i Powers.equipped().length ~/~i Powers.equippedLimit() ~ equipped power~s Powers.equippedLimit() ~.</span>
         <br/>
-        <span>Each power raises all of a generator type's multipliers to a power. Up to ~i Powers.equippedLimit() ~ power~s Powers.equippedLimit() ~ can be equipped at the same time.</span>
-        <br/>
-        <span>Powers are never destroyed unless you delete them, and can be equipped at any time as long as there is a free slot.</span>
-        <br/>
-        <span>If all power slots are full, to unequip a power and create a free slot you need to complexity.</span>
-        <br/>
-        <span>You start with ~i 1 ~ power of each type but get more over time. You can have multiple powers of the same type equipped.</span>
-        <br ~style.display=FinalityMilestones.isFinalityMilestoneActive(8) ? 'none' : ''~/>
-        <span ~style.display=FinalityMilestones.isFinalityMilestoneActive(8) ? 'none' : ''~>Due to unlocking powers, you gain your eternity points on eternity every second, without needing to eternity (EP generation).</span>
-        <br/>
-        <br/>
+        <div ~style.display=Powers.isExplanationMovedDown() ? 'none' : ''~>
+          <span>Each power raises all of a generator type's multipliers to a power. Up to ~i Powers.equippedLimit() ~ power~s Powers.equippedLimit() ~ can be equipped at the same time.</span>
+          <br/>
+          <span>Powers are never destroyed unless you delete them, or unless they're automatically deleted as explained on this tab below stored powers.</span>
+          <br/>
+          <span>Powers can be equipped at any time as long as there is a free slot.</span>
+          <br/>
+          <span>If all power slots are full, to unequip a power and create a free slot you need to complexity.</span>
+          <br/>
+          <span>You start with ~i 1 ~ power of each type but get more over time. You can have multiple powers of the same type equipped.</span>
+          <br ~style.display=FinalityMilestones.isFinalityMilestoneActive(8) ? 'none' : ''~/>
+          <span ~style.display=FinalityMilestones.isFinalityMilestoneActive(8) ? 'none' : ''~>Due to unlocking powers, you gain your eternity points on eternity every second, without needing to eternity (EP generation).</span>
+          <br/>
+          <span>Once you understand this explanation, you can move it to the bottom of this tab so that it doesn't take up so much space.</span>
+          <br/>
+          <span><button onclick="Powers.moveExplanation()">Move explanation to the bottom of this tab</button></span>
+        </div>
+        <br ~style.display=Powers.isExplanationMovedDown() ? 'none' : ''~>
         <span ~style.display=Powers.isUnlocked() ? '' : 'none'~>You gain a new power once every ~t Powers.interval() ~, next in ~t Powers.timeUntilPowerGain() ~. <button onclick="Powers.togglePowerGain()">Power gain: ~r Powers.isPowerGainOn() ? "On" : "Off" ~</button></span>
         <span ~style.display=Powers.isUnlocked() ? 'none' : ''~>You would gain a new power once every ~t Powers.interval() ~, but you haven't unlocked them yet.</span>
-        <br ~style.display=!Powers.isPowerGainOn() && Powers.imminentPowerGain() !== 0 ? '' : 'none'~/>
+        <br/>
+        <span ~style.display=Powers.isPowerGainOn() || Powers.imminentPowerGain() === 0 ? '' : 'none'~>New powers can be stored up by turning power gain off. When it's turned on again you'll get all the new powers at once.</span>
         <span ~style.display=!Powers.isPowerGainOn() && Powers.imminentPowerGain() !== 0 ? '' : 'none'~>Turning power gain on would give you ~i Powers.imminentPowerGain() ~ new power~s Powers.imminentPowerGain() ~.</span>
         <br/>
         <span>New powers generally have a random type and random rarity.</span>
@@ -3946,6 +3959,8 @@
         <br/>
         <span>Thus, all but the best ~i Powers.maximumEquippedLimit() ~ power~s Powers.maximumEquippedLimit() ~ of each type are useless and are thus automatically deleted for power shards.</span>
         <br/>
+        <span>The calculation of which powers are the best ~i Powers.maximumEquippedLimit() ~ counts both those equipped and stored, but powers are never deleted while equipped.</span>
+        <br/>
         <br/>
         <span>You have ~i ComplexityPoints.amount() ~ complexity point~s ComplexityPoints.amount() ~. <button ~class=Powers.anythingToBuy() ? "" : "disabled"~ onclick="Powers.maxAll()">Max power upgrades</button></span>
         <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
@@ -4033,6 +4048,22 @@
           <span ~class=Powers.color('crafted', 1)~>~r Powers.descriptionFull('crafted', 1) ~</span>
         </div>
         <br/>
+        <div ~style.display=Powers.isExplanationMovedDown() ? '' : 'none'~>
+          <span>Each power raises all of a generator type's multipliers to a power. Up to ~i Powers.equippedLimit() ~ power~s Powers.equippedLimit() ~ can be equipped at the same time.</span>
+          <br/>
+          <span>Powers are never destroyed unless you delete them, or unless they're automatically deleted as explained on this tab below stored powers.</span>
+          <br/>
+          <span>Powers can be equipped at any time as long as there is a free slot.</span>
+          <br/>
+          <span>If all power slots are full, to unequip a power and create a free slot you need to complexity.</span>
+          <br/>
+          <span>You start with ~i 1 ~ power of each type but get more over time. You can have multiple powers of the same type equipped.</span>
+          <br ~style.display=FinalityMilestones.isFinalityMilestoneActive(8) ? 'none' : ''~/>
+          <span ~style.display=FinalityMilestones.isFinalityMilestoneActive(8) ? 'none' : ''~>Due to unlocking powers, you gain your eternity points on eternity every second, without needing to eternity (EP generation).</span>
+          <br/>
+          <span><button onclick="Powers.moveExplanation()">Move explanation back to the top of this tab</button></span>
+        </div>
+        <br ~style.display=Powers.isExplanationMovedDown() ? '' : 'none'~>
         <span>Power presets (<button onclick="Powers.presetSort()">sort by name</button>):</span>
         <br/>
         <div ~style.display=Powers.hasPreset(1) ? '' : 'none'~>
@@ -6047,7 +6078,11 @@
         </tr>
         <tr>
           <td><button class="options-button" onclick="Options.toggleOfflineProgress()">Offline progress: ~r Options.offlineProgress() ? "On" : "Off" ~</button></td>
-          <td><button class="options-button" onclick="Options.toggleExportDisplay()">Show export text (as opposed to just copying it): ~r player.options.exportDisplay ? "On" : "Off" ~</button></td>
+          <td><div class="options-div">
+            <button class="mini-options-button" onclick="Options.toggleExportCopy()">Copy export text: ~r player.options.exportCopy ? "On" : "Off" ~</button>
+            <button class="mini-options-button" onclick="Options.toggleExportDownload()">Download export text: ~r player.options.exportDownload ? "On" : "Off" ~</button>
+            <button class="mini-options-button" onclick="Options.toggleExportShow()">Show export text: ~r player.options.exportShow ? "On" : "Off" ~</button>
+          </div></td>
           <td><div class="options-div">Show export reminder after X seconds (~i 0 ~ for never):<br/><input type="text" ~!value=Options.exportNotificationFrequency()~ ~!onchange=function() {Options.setExportNotificationFrequency(+this.value)}~></input></div></td>
         </tr>
         <tr>
@@ -6100,6 +6135,9 @@
         </tr>
           <td><button class="options-button" onclick="Options.toggleHotkeys()">Hotkeys: ~r player.options.hotkeys ? "On" : "Off" ~</button></td>
           <td><button class="options-button" onclick="Options.toggleFitToWidth()">Decrease page size if page is too narrow: ~r player.options.fitToWidth ? "On" : "Off" ~</button></td>
+          <td><button class="options-button" onclick="Options.toggleNews()">News (non-game-relevant messages at top of screen): ~r player.options.news ? "On" : "Off" ~</button></td>
+        </tr>
+        <tr>
           <td><div class="options-div">
             <button class="mini-options-button" onclick="Options.toggleLargerCheckboxes()">Larger checkboxes: ~r player.options.largerCheckboxes ? "On" : "Off" ~</button>
             <span>Clicked button outlines: <select ~!value=Options.buttonOutlines()~ ~!onchange=function() {Options.setButtonOutlines(this.value)}~>
@@ -6109,8 +6147,6 @@
               <option value="White">White</option>
             </select></span>
           </td>
-        </tr>
-        <tr>
           <td><div class="options-div">
             <button class="mini-options-button" onclick="Options.toggleNotifications('saveLoad')">Save/load notifications: ~r Options.showNotifications('saveLoad') ? 'On' : 'Off' ~</button>
             <button class="mini-options-button" onclick="Options.toggleNotifications('achievements')">Achievement notifications: ~r Options.showNotifications('achievements') ? 'On' : 'Off' ~</button>
@@ -6122,14 +6158,15 @@
             <button class="mini-options-button" onclick="Options.nextCompletionGradients()">Completion gradients: ~r player.options.theme.completionGradients ~</button>
             <button class="mini-options-button" onclick="Options.nextEdgeGradients()">Edge gradients: ~r player.options.theme.edgeGradients ~</button>
           </div></td>
-          <td><div class="options-div">
+        <tr/>
+        <tr>
+          <td><button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? 'none' : ''~ class="options-button" onclick="Options.toggleTabColors()">Tab colors: ~r Options.tabColors() ? 'On' : 'Off' ~</button>
+          <div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="options-div">
             <button class="mini-options-button" onclick="Options.toggleTabColors()">Tab colors: ~r Options.tabColors() ? 'On' : 'Off' ~</button>
             <button class="mini-options-button" ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ onclick="Options.nextCompletionColors()">Completion colors: ~r player.options.completionColors ~</button>
             <button class="mini-options-button" ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ onclick="Options.toggleResetColors()">Reset colors: ~r Options.resetColors() ? 'On' : 'Off' ~</button>
             <button class="mini-options-button" ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~ onclick="Options.togglePresetHighlightColors()">Preset highlight colors: ~r Options.presetHighlightColors() ? 'On' : 'Off' ~</button>
           </div></td>
-        <tr/>
-        <tr ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~>
           <td><div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="options-div">Max all mode <span class="helpspan">(?)<span class="tooltiptext">This setting controls what the M hotkey buys, and also what the Main tab "Max all" button buys.</span></span>: <select ~!value=Options.maxAllMode()~ ~!onchange=function() {Options.setMaxAllMode(this.value)}~>
             <option value="Normal generators and boosts">Normal generators and boosts</option>
             <option value="Generators and upgrades in current tab">Generators and upgrades in current tab</option>
@@ -6143,13 +6180,13 @@
             <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleShowResetButtonsForHiddenTabs()">Reset buttons for hidden tabs: ~r Options.showResetButtonsForHiddenTabs() ? 'Shown' : 'Hidden' ~</button>
             <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleSmallerHeader()">Smaller header: ~r Options.smallerHeader() ? 'On' : 'Off' ~</button>
           </div></td>
+        <tr/>
+        <tr ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~>
           <td><div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~ class="options-div">
             <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('studies')">Full study options: ~r Options.showFullOptions('studies') ? 'On' : 'Off' ~</button>
             <button ~style.display=Options.optionDisplay(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('powers')">Full power options: ~r Options.showFullOptions('powers') ? 'On' : 'Off' ~</button>
             <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('finality')">Full finality shard options: ~r Options.showFullOptions('finality') ? 'On' : 'Off' ~</button>
           </div></td>
-        <tr/>
-        <tr ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~>  
           <td/>
           <td><button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~ class="options-button" onclick="Options.toggleComplexityChallengeRunningColors()" style="font-size: 0.875rem;">
             Complexity challenge colors: ~r Options.complexityChallengeRunningColors() ? "Running" : "Completions" ~
@@ -6515,7 +6552,7 @@
       <br/>
       <div style="width: 1024px; margin-left: auto; margin-right: auto;">List of hotkeys: ~r Hotkeys.listText() ~.</div>
       <br/>
-      <span><a target="_blank" rel="noopener noreferrer" href="guide/index.html">Guide</a><span style="display: inline-block; width: 256px;"></span><a target="_blank" rel="noopener noreferrer" href="https://discord.gg/7JfmqF2">Discord</a></span>
+      <span><a target="_blank" rel="noopener noreferrer" href="guide/index.html">Guide</a><span style="display: inline-block; width: 256px;"></span><a target="_blank" rel="noopener noreferrer" href="https://discord.gg/7JfmqF2">Discord</a><span style="display: inline-block; width: 256px;"></span><a target="_blank" rel="noopener noreferrer" href="https://github.com/dan-simon/misc">Github repository (also has other stuff)</a></span>
       <br/>
       <br/>
       <div style="width: 1024px; margin-left: auto; margin-right: auto;">

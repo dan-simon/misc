@@ -113,12 +113,15 @@ let Tabs = {
     tabPresetBr.style.display = '';
     output.value = this.exportString();
     output.select();
-    try {
-      document.execCommand('copy');
-    } catch(ex) {
-      alert('Copying to clipboard failed.');
+    if (player.options.exportCopy) {
+      output.select();
+      try {
+        document.execCommand('copy');
+      } catch(ex) {
+        alert('Copying to clipboard failed.');
+      }
     }
-    if (!player.options.exportDisplay) {
+    if (!player.options.exportShow) {
       parent.style.display = 'none';
       tabPresetBr.style.display = 'none';
       document.getElementsByClassName('tabs-export-button')[0].focus();
