@@ -1481,7 +1481,7 @@ let Saving = {
     let encoded = this.encode(player);
     output.value = encoded;
     let fullyWorked = true;
-    if (!player.options.exportCopy) {
+    if (player.options.exportCopy) {
       output.select();
       let copyWorked = false;
       try {
