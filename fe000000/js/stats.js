@@ -41,24 +41,24 @@ let Stats = {
     player.stats.purchasesThisInfinity += n;
     player.stats.purchasesThisInfinityByType[i] += n;
   },
-  addInfinity(time, gain) {
+  addInfinity(time, gain, total) {
     player.stats.fastestInfinity = Math.min(time, player.stats.fastestInfinity);
-    player.stats.lastTenInfinities.unshift([time, gain, gain.div(time)]);
+    player.stats.lastTenInfinities.unshift([time, gain, gain.div(time), total]);
     player.stats.lastTenInfinities.pop();
   },
-  addEternity(time, gain) {
+  addEternity(time, gain, total) {
     player.stats.fastestEternity = Math.min(time, player.stats.fastestEternity);
-    player.stats.lastTenEternities.unshift([time, gain, gain.div(time)]);
+    player.stats.lastTenEternities.unshift([time, gain, gain.div(time), total]);
     player.stats.lastTenEternities.pop();
   },
-  addComplexity(time, gain) {
+  addComplexity(time, gain, total) {
     player.stats.fastestComplexity = Math.min(time, player.stats.fastestComplexity);
-    player.stats.lastTenComplexities.unshift([time, gain, gain.div(time)]);
+    player.stats.lastTenComplexities.unshift([time, gain, gain.div(time), total]);
     player.stats.lastTenComplexities.pop();
   },
-  addFinality(time, pointGain, shardGain) {
+  addFinality(time, pointGain, shardGain, total) {
     player.stats.fastestFinality = Math.min(time, player.stats.fastestFinality);
-    player.stats.lastTenFinalities.unshift([time, pointGain, shardGain]);
+    player.stats.lastTenFinalities.unshift([time, pointGain, shardGain, total]);
     player.stats.lastTenFinalities.pop();
   },
   lastRunsToShow() {
@@ -82,9 +82,25 @@ let Stats = {
   showRunType(layer) {
     return player.stats.lastRunTypesToShow[layer];
   },
+  showRunBreak(layer) {
+    let layers = ['infinity', 'eternity', 'complexity', 'finality'];
+    return this.showRun(1, layer) && layers.slice(0, layers.indexOf(layer)).some(x => this.showRunType(x));
+  },
   showRun(x, layer) {
     return this.showAnyRuns(x) && this.showRunType(layer) &&
       player.stats[this.lastTenKey(layer)][x - 1][0] !== -1;
+  },
+  getLogPerSec(t, a, b, useBase) {
+    // Default value for last ten, should never appear elsewhere.
+    if (b.eq(-1)) {
+      return 0;
+    }
+    let c = a.plus(b).log2() - Math.max(b.log2(), 0);
+    if (c < Math.pow(2, -16)) {
+      c = 0;
+    }
+    let r = c / Math.max(t, 1 / 16);
+    return useBase ? r / Math.log2(NotationOptions.exponentBase()) : r;
   }
 }
 

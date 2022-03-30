@@ -1325,6 +1325,18 @@ let Saving = {
       player.options.news = false;
       player.version = 2.125;
     }
+    if (player.version < 2.12890625) {
+      for (let i of ['lastTenInfinities', 'lastTenEternities', 'lastTenComplexities', 'lastTenFinalities']) {
+        for (let j of player.stats[i]) {
+          j.push(new Decimal(-1));
+        }
+      }
+      player.options.showLog = {
+        resetButtons: 'Default',
+        lastTen: 'Default'
+      };
+      player.version = 2.12890625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
@@ -1373,18 +1385,23 @@ let Saving = {
       if (player.stats.lastTenInfinities[i] !== -1) {
         player.stats.lastTenInfinities[i][1] = new Decimal(player.stats.lastTenInfinities[i][1]);
         player.stats.lastTenInfinities[i][2] = new Decimal(player.stats.lastTenInfinities[i][2]);
+        player.stats.lastTenInfinities[i][3] = new Decimal(player.stats.lastTenInfinities[i][3]);
       }
       if (player.stats.lastTenEternities[i] !== -1) {
         player.stats.lastTenEternities[i][1] = new Decimal(player.stats.lastTenEternities[i][1]);
         player.stats.lastTenEternities[i][2] = new Decimal(player.stats.lastTenEternities[i][2]);
+        player.stats.lastTenEternities[i][3] = new Decimal(player.stats.lastTenEternities[i][3]);
       }
       if (player.stats.lastTenComplexities[i] !== -1) {
         player.stats.lastTenComplexities[i][1] = new Decimal(player.stats.lastTenComplexities[i][1]);
         player.stats.lastTenComplexities[i][2] = new Decimal(player.stats.lastTenComplexities[i][2]);
+        player.stats.lastTenComplexities[i][3] = new Decimal(player.stats.lastTenComplexities[i][3]);
       }
       if (player.stats.lastTenFinalities[i] !== -1) {
         // There's no missing line here. Finalities are just stored slightly differently.
         player.stats.lastTenFinalities[i][1] = new Decimal(player.stats.lastTenFinalities[i][1]);
+        // This part (total finality points) isn't actually used, but it could be.
+        player.stats.lastTenFinalities[i][3] = new Decimal(player.stats.lastTenFinalities[i][3]);
       }
     }
     for (let i = 9; i < 15; i++) {

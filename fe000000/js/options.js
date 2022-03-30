@@ -166,6 +166,14 @@ let Options = {
   truncatedMaxAllMode() {
     return this.maxAllMode().split(' ').slice(1).join(' ');
   },
+  showLogSetting(x) {
+    let d = {'reset-buttons': 'resetButtons', 'last-ten': 'lastTen'};
+    return player.options.showLog[d[x]];
+  },
+  setShowLogSetting(x, v) {
+    let d = {'reset-buttons': 'resetButtons', 'last-ten': 'lastTen'};
+    player.options.showLog[d[x]] = v;
+  },
   showFullOptions(x) {
     return player.options.showFullOptions[x];
   },
@@ -187,13 +195,17 @@ let Options = {
     this.updateButtonOutlines();
   },
   updateButtonOutlines() {
+    // Blue and gold taken from -webkit-focus-ring-color
     let table = {
       'None': '#000000',
       'Black': '#000000',
       'White': '#ffffff',
-      'Cyan': '#00ffff'
+      'Cyan': '#00ffff',
+      'Blue': '#5e9ed6',
+      'Gold': '#e59700',
     }
-    document.documentElement.style.setProperty('--outline-size', (player.options.buttonOutlines !== 'None') ? '1px' : '0px');
+    document.documentElement.style.setProperty('--outline-offset', (player.options.buttonOutlines !== 'None') ? '-2px' : '0px');
+    document.documentElement.style.setProperty('--outline-size', (player.options.buttonOutlines !== 'None') ? '5px' : '0px');
     document.documentElement.style.setProperty('--outline-color', table[player.options.buttonOutlines]);
   },
   confirmation(x) {

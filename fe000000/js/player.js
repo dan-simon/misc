@@ -42,41 +42,41 @@ function initialStudies() {
 
 function initialLastTenInfinities() {
   return [
-    [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
-    [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
-    [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
-    [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
-    [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
+    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
+    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
+    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
+    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
+    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
   ];
 }
 
 function initialLastTenEternities() {
   return [
-    [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
-    [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
-    [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
-    [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
-    [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
+    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
+    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
+    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
+    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
+    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
   ];
 }
 
 function initialLastTenComplexities() {
   return [
-    [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
-    [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
-    [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
-    [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
-    [-1, new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1)],
+    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
+    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
+    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
+    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
+    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
   ];
 }
 
 function initialLastTenFinalities() {
   return [
-    [-1, new Decimal(-1), -1], [-1, new Decimal(-1), -1],
-    [-1, new Decimal(-1), -1], [-1, new Decimal(-1), -1],
-    [-1, new Decimal(-1), -1], [-1, new Decimal(-1), -1],
-    [-1, new Decimal(-1), -1], [-1, new Decimal(-1), -1],
-    [-1, new Decimal(-1), -1], [-1, new Decimal(-1), -1],
+    [-1, new Decimal(-1), -1, new Decimal(-1)], [-1, new Decimal(-1), -1, new Decimal(-1)],
+    [-1, new Decimal(-1), -1, new Decimal(-1)], [-1, new Decimal(-1), -1, new Decimal(-1)],
+    [-1, new Decimal(-1), -1, new Decimal(-1)], [-1, new Decimal(-1), -1, new Decimal(-1)],
+    [-1, new Decimal(-1), -1, new Decimal(-1)], [-1, new Decimal(-1), -1, new Decimal(-1)],
+    [-1, new Decimal(-1), -1, new Decimal(-1)], [-1, new Decimal(-1), -1, new Decimal(-1)],
   ];
 }
 
@@ -382,6 +382,10 @@ let initialPlayer = {
       edgeGradients: 'Default',
     },
     fitToWidth: true,
+    showLog: {
+      resetButtons: 'Default',
+      lastTen: 'Default'
+    },
     showFullOptions: {
       studies: false,
       powers: false,
@@ -521,7 +525,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2.125
+  version: 2.12890625
 }
 
 let player;

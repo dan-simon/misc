@@ -86,15 +86,10 @@ let InfinityPrestigeLayer = {
     return this.infinityPointGain().div(Math.max(player.stats.timeSinceInfinity, 1 / 16));
   },
   currentLogIPPerSec() {
-    let c = this.newTotalInfinityPoints().log2() - Math.max(this.totalInfinityPoints().log2(), 0);
-    // Ignore very small gains.
-    if (c < Math.pow(2, -16)) {
-      c = 0;
-    }
-    return c / Math.max(player.stats.timeSinceInfinity, 1 / 16);
+    return Stats.getLogPerSec(player.stats.timeSinceInfinity, this.infinityPointGain(), this.totalInfinityPoints(), false);
   },
   currentLogIPPerSecDisplay() {
-    return this.currentLogIPPerSec() / Math.log2(NotationOptions.exponentBase());
+    return Stats.getLogPerSec(player.stats.timeSinceInfinity, this.infinityPointGain(), this.totalInfinityPoints(), true);
   },
   peakIPPerSec() {
     return player.stats.peakIPPerSec;
@@ -119,8 +114,15 @@ let InfinityPrestigeLayer = {
       player.stats.timeSinceLastPeakLogIPPerSec = 0;
     }
   },
-  showLog() {
-    return Autobuyer(12).hasAutobuyer() && ['Time past peak log/sec', 'Fraction of peak log/sec'].includes(Autobuyer(12).mode());
+  showLog(x) {
+    let setting = Options.showLogSetting(x);
+    if (setting === 'Default') {
+      return Autobuyer(12).hasAutobuyer() && ['Time past peak log/sec', 'Fraction of peak log/sec'].includes(Autobuyer(12).mode());
+    } else if (setting === 'Off') {
+      return false;
+    } else if (setting === 'On') {
+      return true;
+    }
   },
   compareIPGain() {
     if (this.infinityPointGain().lt(this.infinityPoints())) {
@@ -148,10 +150,11 @@ let InfinityPrestigeLayer = {
     }
     Achievements.checkForAchievements('infinity');
     let gain = this.infinityPointGain();
+    let amount = this.infinityPoints();
     InfinityPoints.addAmount(gain);
     Infinities.increment();
     ComplexityAchievements.checkForComplexityAchievements('infinity');
-    Stats.addInfinity(player.stats.timeSinceInfinity, gain);
+    Stats.addInfinity(player.stats.timeSinceInfinity, gain, amount);
     Challenge.checkForChallengeCompletion();
     InfinityChallenge.checkForInfinityChallengeCompletion();
     if (!Challenge.restartOnCompletion()) {

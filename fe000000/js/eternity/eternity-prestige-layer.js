@@ -66,15 +66,10 @@ let EternityPrestigeLayer = {
     return this.eternityPointGain().div(Math.max(player.stats.timeSinceEternity, 1 / 16));
   },
   currentLogEPPerSec() {
-    let c = this.newTotalEternityPoints().log2() - Math.max(this.totalEternityPoints().log2(), 0);
-    // Ignore very small gains.
-    if (c < Math.pow(2, -16)) {
-      c = 0;
-    }
-    return c / Math.max(player.stats.timeSinceEternity, 1 / 16);
+    return Stats.getLogPerSec(player.stats.timeSinceEternity, this.eternityPointGain(), this.totalEternityPoints(), false);
   },
   currentLogEPPerSecDisplay() {
-    return this.currentLogEPPerSec() / Math.log2(NotationOptions.exponentBase());
+    return Stats.getLogPerSec(player.stats.timeSinceEternity, this.eternityPointGain(), this.totalEternityPoints(), true);
   },
   peakEPPerSec() {
     return player.stats.peakEPPerSec;
@@ -99,8 +94,15 @@ let EternityPrestigeLayer = {
       player.stats.timeSinceLastPeakLogEPPerSec = 0;
     }
   },
-  showLog() {
-    return Autobuyer(13).hasAutobuyer() && ['Time past peak log/sec', 'Fraction of peak log/sec'].includes(Autobuyer(13).mode());
+  showLog(x) {
+    let setting = Options.showLogSetting(x);
+    if (setting === 'Default') {
+      return Autobuyer(13).hasAutobuyer() && ['Time past peak log/sec', 'Fraction of peak log/sec'].includes(Autobuyer(13).mode());
+    } else if (setting === 'Off') {
+      return false;
+    } else if (setting === 'On') {
+      return true;
+    }
   },
   compareEPGain() {
     if (this.eternityPointGain().lt(this.eternityPoints())) {
@@ -123,12 +125,13 @@ let EternityPrestigeLayer = {
     if (manual && Options.confirmation('eternity') && !confirm(this.eternityConfirmationMessage())) return;
     Achievements.checkForAchievements('eternity');
     let gain = this.eternityPointGain();
+    let amount = this.eternityPoints();
     EternityPoints.addAmount(gain);
     Eternities.add(Eternities.commonEternityGainMultiplier());
     // Note that this happens before starting benefits which might care
     // about additional eternities from complexity achievements.
     ComplexityAchievements.checkForComplexityAchievements('eternity');
-    Stats.addEternity(player.stats.timeSinceEternity, gain);
+    Stats.addEternity(player.stats.timeSinceEternity, gain, amount);
     // Eternity challenge handling
     EternityChallenge.checkForEternityChallengeCompletion();
     // I'm not sure whether or not this should go in the reset function.

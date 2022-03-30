@@ -77,15 +77,10 @@ let ComplexityPrestigeLayer = {
     return this.complexityPointGain().div(Math.max(player.stats.timeSinceComplexity, 1 / 16));
   },
   currentLogCPPerSec() {
-    let c = this.newTotalComplexityPoints().log2() - Math.max(this.totalComplexityPoints().log2(), 0);
-    // Ignore very small gains.
-    if (c < Math.pow(2, -16)) {
-      c = 0;
-    }
-    return c / Math.max(player.stats.timeSinceComplexity, 1 / 16);
+    return Stats.getLogPerSec(player.stats.timeSinceComplexity, this.complexityPointGain(), this.totalComplexityPoints(), false);
   },
   currentLogCPPerSecDisplay() {
-    return this.currentLogCPPerSec() / Math.log2(NotationOptions.exponentBase());
+    return Stats.getLogPerSec(player.stats.timeSinceComplexity, this.complexityPointGain(), this.totalComplexityPoints(), true);
   },
   peakCPPerSec() {
     return player.stats.peakCPPerSec;
@@ -110,8 +105,15 @@ let ComplexityPrestigeLayer = {
       player.stats.timeSinceLastPeakLogCPPerSec = 0;
     }
   },
-  showLog() {
-    return Autobuyer(15).hasAutobuyer() && ['Time past peak log/sec', 'Fraction of peak log/sec'].includes(Autobuyer(15).mode());
+  showLog(x) {
+    let setting = Options.showLogSetting(x);
+    if (setting === 'Default') {
+      return Autobuyer(15).hasAutobuyer() && ['Time past peak log/sec', 'Fraction of peak log/sec'].includes(Autobuyer(15).mode());
+    } else if (setting === 'Off') {
+      return false;
+    } else if (setting === 'On') {
+      return true;
+    }
   },
   compareCPGain() {
     if (this.complexityPointGain().lt(this.complexityPoints())) {
@@ -134,9 +136,10 @@ let ComplexityPrestigeLayer = {
     if (manual && Options.confirmation('complexity') && !confirm(this.complexityConfirmationMessage())) return;
     Achievements.checkForAchievements('complexity');
     let gain = this.complexityPointGain();
+    let amount = this.complexityPoints();
     ComplexityPoints.addAmount(gain);
     Complexities.increment();
-    Stats.addComplexity(player.stats.timeSinceComplexity, gain);
+    Stats.addComplexity(player.stats.timeSinceComplexity, gain, amount);
     Powers.maybeRespec();
     Goals.recordPrestige('complexity');
     this.complexityReset(false);
