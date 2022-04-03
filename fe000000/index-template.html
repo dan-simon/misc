@@ -487,8 +487,8 @@
       <br/>
       <br/>
       <span>To complete a normal challenge, infinity while in the normal challenge.</span>
-      <br ~style.display=Challenge.isSomeChallengeRunning() ? '' : 'none' ~/>
-      <span ~style.display=Challenge.isSomeChallengeRunning() ? '' : 'none' ~><button onclick="Challenge.exitChallenge()">Exit Normal Challenge ~r Challenge.currentChallenge() ~ (this will ~r InfinityPrestigeLayer.canInfinity() ? '' : 'not ' ~complete it)</button> <button onclick="Challenge.restartChallenge()">Reset it (exit and start again)</button></span>
+      <br/>
+      <span style="display: inline-block; height: 25px;">~r Challenge.isSomeChallengeRunning() ? '' : '\u200b' ~<button ~style.display=Challenge.isSomeChallengeRunning() ? '' : 'none'~ onclick="Challenge.exitChallenge()">Exit Normal Challenge ~r Challenge.currentChallenge() ~ (this will ~r InfinityPrestigeLayer.canInfinity() ? '' : 'not ' ~complete it)</button> <button ~style.display=Challenge.isSomeChallengeRunning() ? '' : 'none'~ onclick="Challenge.restartChallenge()">Reset it (exit and start again)</button></span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>
@@ -1045,8 +1045,8 @@
       <br/>
       <br/>
       <span>To complete an infinity challenge, infinity while in the infinity challenge.</span>
-      <br ~style.display=InfinityChallenge.isSomeInfinityChallengeRunning() ? '' : 'none' ~/>
-      <span ~style.display=InfinityChallenge.isSomeInfinityChallengeRunning() ? '' : 'none' ~><button onclick="InfinityChallenge.exitInfinityChallenge()">Exit Infinity Challenge ~r InfinityChallenge.currentInfinityChallenge() ~ (this will ~r InfinityPrestigeLayer.canInfinity() ? '' : 'not ' ~complete it)</button>  <button onclick="InfinityChallenge.restartInfinityChallenge()">Reset it (exit and start again)</button></span>
+      <br/>
+      <span style="display: inline-block; height: 25px;">~r InfinityChallenge.isSomeInfinityChallengeRunning() ? '' : '\u200b' ~<button ~style.display=InfinityChallenge.isSomeInfinityChallengeRunning() ? '' : 'none'~ onclick="InfinityChallenge.exitInfinityChallenge()">Exit Infinity Challenge ~r InfinityChallenge.currentInfinityChallenge() ~ (this will ~r InfinityPrestigeLayer.canInfinity() ? '' : 'not ' ~complete it)</button>  <button ~style.display=InfinityChallenge.isSomeInfinityChallengeRunning() ? '' : 'none'~ onclick="InfinityChallenge.restartInfinityChallenge()">Reset it (exit and start again)</button></span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>
@@ -2675,9 +2675,10 @@
       <div style="width: 1024px; margin-left: auto; margin-right: auto;">
         <span>To complete an eternity challenge, eternity while in the eternity challenge. Completing or respeccing an eternity challenge will give all theorems spent on it back.</span>
       </div>
-      <br ~style.display=(EternityChallenge.currentEternityChallenge() || EternityChallenge.getUnlockedEternityChallenge() !== 0) ? '' : 'none' ~/>
-      <span ~style.display=(EternityChallenge.currentEternityChallenge() || EternityChallenge.getUnlockedEternityChallenge() !== 0) ? '' : 'none' ~>
-        <button onclick="EternityChallenge.pressUnlockedOrRunningEternityChallengeHeaderButton()">~r EternityChallenge.unlockedOrRunningEternityChallengeHeaderButtonText() ~</button>
+      <br/>
+      <span style="display: inline-block; height: 25px;">
+        ~r (EternityChallenge.currentEternityChallenge() || EternityChallenge.getUnlockedEternityChallenge() !== 0) ? '' : '\u200b' ~
+        <button ~style.display=(EternityChallenge.currentEternityChallenge() || EternityChallenge.getUnlockedEternityChallenge() !== 0) ? '' : 'none' ~ onclick="EternityChallenge.pressUnlockedOrRunningEternityChallengeHeaderButton()">~r EternityChallenge.unlockedOrRunningEternityChallengeHeaderButtonText() ~</button>
         <button ~style.display=EternityChallenge.isSomeEternityChallengeRunning() ? '' : 'none'~ onclick="EternityChallenge.restartEternityChallenge()">Reset it (exit and start again)</button></span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
