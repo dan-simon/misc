@@ -107,6 +107,10 @@ let files = process.argv.length > 2 ? process.argv.slice(2) : ['index-template.h
 
 let time = Date.now();
 
+if (!(files[0].endsWith('.html') && files[1].endsWith('.html') && files[2].endsWith('.js'))) {
+  throw new Error('Wrong file types. Files should be (1) input html file you\'re editing directly, (2) output html file, (3) output JS file.');
+}
+
 fs.readFile(files[0], 'utf8', function(err, contents) {
   let contentsWithTime = contents.replace(/%time%/g, time);
   let newContents = contentsWithTime.replace(
