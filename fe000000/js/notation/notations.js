@@ -31,7 +31,7 @@ class TimeScientificNotation extends ADNotations.Notation {
 
   formatDecimal(value, places) {
     return ADNotations.formatMantissaWithExponent(ADNotations.formatMantissaBaseTen,
-      (n, p) => this.formatExponent(n, p, (n, _) => ADNotations.formatMantissaBaseTen(n, 0)),
+      (n, p) => this.formatExponent(n, p, (n, _) => ADNotations.formatMantissaBaseTen(n, 0), 0),
       10, 1, true)(value, places);
   }
 }
@@ -47,7 +47,7 @@ class ScientificNotation extends ADNotations.Notation {
 
   formatDecimal(value, places) {
     return ADNotations.formatMantissaWithExponent(baseFormat(),
-      (n, p) => this.formatExponent(n, p, (n, _) => baseFormat()(n, 0)),
+      (n, p) => this.formatExponent(n, p, (n, _) => baseFormat()(n, 0), 0),
       NotationOptions.exponentBase(), 1, true)(value, places);
   }
 }
@@ -79,7 +79,7 @@ class LogarithmNotation extends ADNotations.Notation {
 
   formatDecimal(value, places) {
     const logBase = value.log(NotationOptions.exponentBase());
-    return `e${this.formatExponent(logBase, places, baseFormat())}`;
+    return `e${this.formatExponent(logBase, places, baseFormat(), 0)}`;
   }
 }
 
@@ -94,7 +94,7 @@ class EngineeringNotation extends ADNotations.Notation {
 
   formatDecimal(value, places) {
     return ADNotations.formatMantissaWithExponent(baseFormat(),
-      (n, p) => this.formatExponent(n, p, (n, _) => baseFormat()(n, 0)),
+      (n, p) => this.formatExponent(n, p, (n, _) => baseFormat()(n, 0), 0),
       NotationOptions.exponentBase(), 3, true)(value, places);
   }
 }
@@ -133,7 +133,7 @@ class MixedScientificNotation extends ADNotations.Notation {
       return standard.formatDecimal(value, places);
     }
     return ADNotations.formatMantissaWithExponent(baseFormat(),
-      (n, p) => this.formatExponent(n, p, (n, _) => baseFormat()(n, 0)),
+      (n, p) => this.formatExponent(n, p, (n, _) => baseFormat()(n, 0), 0),
       NotationOptions.exponentBase(), 1, true)(value, places);
   }
 }
@@ -152,7 +152,7 @@ class MixedEngineeringNotation extends ADNotations.Notation {
       return standard.formatDecimal(value, places);
     }
     return ADNotations.formatMantissaWithExponent(baseFormat(),
-      (n, p) => this.formatExponent(n, p, (n, _) => baseFormat()(n, 0)),
+      (n, p) => this.formatExponent(n, p, (n, _) => baseFormat()(n, 0), 0),
       NotationOptions.exponentBase(), 3, true)(value, places);
   }
 }
@@ -171,7 +171,7 @@ class MixedLogarithmSciNotation extends ADNotations.Notation {
       return scientific.formatDecimal(value, places);
     }
     const logBase = value.log(NotationOptions.exponentBase());
-    return `e${this.formatExponent(logBase, places, baseFormat())}`;
+    return `e${this.formatExponent(logBase, places, baseFormat(), 0)}`;
   }
 }
 
