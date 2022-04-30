@@ -50,11 +50,9 @@ let generalMaxAll = function (things) {
     // making costs that should be equal unequal.
     let safeMinCost = Decimal.times(minCost, 1 + safetyMargin);
     let toBuy = legalThings.filter(x => Decimal.lte(x.cost(), safeMinCost))[0];
+    // This should always buy at least one, and increase number bought
+    // (which are the same thing if you can't buy huge amounts, but diverge if you can).
     toBuy.buy();
     bought += 1;
   }
-  if (!window.a) {
-    window.a = {};
-  }
-  window.a[things.length + ',' + bought] = (window.a[things.length + ',' + bought] || 0) + 1;
 }
