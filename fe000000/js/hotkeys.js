@@ -58,7 +58,7 @@ let HotkeyMaxAll = {
     {
       purchase: function (list) {
         for (let i of list) {
-          Autobuyers.unlockSlow(i);
+          Autobuyer(i).unlockSlow();
         }
       },
       unlocks: [1, 2, 3, 4, 5, 6, 7, 8, 9],
