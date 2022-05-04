@@ -1489,7 +1489,7 @@ function updateDisplay() {
     if (shouldUpdate("e292")) {e[292].textContent = formatTime(Autobuyers.timeUntilNextFastTrigger(), {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}})};
     if (shouldUpdate("b241")) {b[241].style.display = Autobuyers.areThereAnyAutobuyers() ? '' : 'none'};
     if (shouldUpdate("e293")) {e[293].textContent = formatInt(0)};
-    if (shouldUpdate("b243")) {b[243].style.display = Autobuyers.areThereAnyAutobuyers() ? '' : 'none'};
+    if (shouldUpdate("b243")) {b[243].style.display = (Autobuyers.areThereAnyAutobuyers() && PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'};
     if (shouldUpdate("b245")) {b[245].style.display = SpecialTabs.isTabVisible('infinity-challenges') ? '' : 'none'};
     if (shouldUpdate("b247")) {b[247].style.display = (Autobuyer(12).hasGeneration() || PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'};
     if (shouldUpdate("e294")) {e[294].textContent = formatInt(24)};

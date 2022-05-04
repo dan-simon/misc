@@ -688,8 +688,8 @@
         <span>Make autobuyers trigger at most every X seconds (~i 0 ~ to always trigger): <input type="text" ~!value=Autobuyers.autobuyersTimerLength()~ ~!onchange=function() {Autobuyers.setAutobuyersTimerLength(+this.value)}~></input></span>
         <br/>
       </div>
-      <div ~style.display=Autobuyers.areThereAnyAutobuyers() ? '' : 'none'~>
-        <span>Automatically turn all autobuyers off when entering challenges: <input type="checkbox" ~!checked=Autobuyers.disableWhenStartingChallenge()~ ~!onchange=function() {Autobuyers.setDisableWhenStartingChallenge(this.checked)}~></input><span ~style.display=SpecialTabs.isTabVisible('infinity-challenges') ? '' : 'none'~> when entering infinity challenges: <input type="checkbox" ~!checked=Autobuyers.disableWhenStartingInfinityChallenge()~ ~!onchange=function() {Autobuyers.setDisableWhenStartingInfinityChallenge(this.checked)}~></input></span></span>
+      <div ~style.display=(Autobuyers.areThereAnyAutobuyers() && PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~>
+        <span>Automatically turn all autobuyers off when entering normal challenges: <input type="checkbox" ~!checked=Autobuyers.disableWhenStartingChallenge()~ ~!onchange=function() {Autobuyers.setDisableWhenStartingChallenge(this.checked)}~></input><span ~style.display=SpecialTabs.isTabVisible('infinity-challenges') ? '' : 'none'~> when entering infinity challenges: <input type="checkbox" ~!checked=Autobuyers.disableWhenStartingInfinityChallenge()~ ~!onchange=function() {Autobuyers.setDisableWhenStartingInfinityChallenge(this.checked)}~></input></span></span>
         <br/>
       </div>
       <div ~style.display=(Autobuyer(12).hasGeneration() || PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~>
