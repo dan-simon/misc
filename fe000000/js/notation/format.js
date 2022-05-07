@@ -13,7 +13,8 @@ function formatVeryPrecisely (x) {
 }
 
 function formatInt (x) {
-  return getNotation().format(x, NotationOptions.lowerPrecision(), 0);
+  let lp = NotationOptions.lowerPrecision();
+  return getNotation().format(x, lp, 0, lp);
 }
 
 function formatMaybeInt (x) {
@@ -38,11 +39,13 @@ function getTimeNotation() {
 }
 
 function formatTimeNum(x) {
-  return getTimeNotation().format(x, NotationOptions.lowerPrecision(), NotationOptions.lowerPrecision());
+  let lp = NotationOptions.lowerPrecision();
+  return getTimeNotation().format(x, lp, lp, lp);
 }
 
 function formatTimeInt(x) {
-  return getTimeNotation().format(x, NotationOptions.lowerPrecision(), 0);
+  let lp = NotationOptions.lowerPrecision();
+  return getTimeNotation().format(x, lp, 0, lp);
 }
 
 function formatTimeMaybeInt(x) {
@@ -89,7 +92,7 @@ function getNotation(x) {
 }
 
 function formatWithPrecision(x, n) {
-  return getNotation().format(x, n, n);
+  return getNotation().format(x, n, n, n);
 }
 
 function pluralize(x, singular, plural) {
