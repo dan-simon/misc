@@ -2679,7 +2679,7 @@
       <span style="display: inline-block; height: 25px;">
         ~r (EternityChallenge.currentEternityChallenge() || EternityChallenge.getUnlockedEternityChallenge() !== 0) ? '' : '\u200b' ~
         <button ~style.display=(EternityChallenge.currentEternityChallenge() || EternityChallenge.getUnlockedEternityChallenge() !== 0) ? '' : 'none' ~ onclick="EternityChallenge.pressUnlockedOrRunningEternityChallengeHeaderButton()">~r EternityChallenge.unlockedOrRunningEternityChallengeHeaderButtonText() ~</button>
-        <button ~style.display=EternityChallenge.isSomeEternityChallengeRunning() ? '' : 'none'~ onclick="EternityChallenge.restartEternityChallenge()">Reset it (exit and start again)</button></span>
+        <button ~style.display=EternityChallenge.isSomeEternityChallengeRunning() ? '' : 'none'~ ~class=EternityChallenge.canRestartEternityChallenge() ? '' : 'disabled'~ onclick="EternityChallenge.restartEternityChallenge()">Reset it (~r EternityChallenge.restartEternityChallengeParentheticalText() ~)</button></span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>

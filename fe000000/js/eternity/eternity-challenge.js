@@ -91,11 +91,28 @@ let EternityChallenge = {
       }
     }
   },
+  canRestartEternityChallenge() {
+    // I don't see the harm in resetting if completing doesn't even complete a tier (though it can give an achievement or complexity achievement).
+    // Sure you'd need to re-unlock it, but the unlock requirement didn't go up. It's a bit beneficial to the player due to not needing to re-unlock it,
+    // but not that much.
+    return this.isSomeEternityChallengeRunning() && (!EternityPrestigeLayer.canEternity() || this.isCurrentEternityChallengeCompleted() ||
+      this.isEternityChallengeUnlockingMeaningless());
+  },
   restartEternityChallenge() {
-    let running = this.currentEternityChallenge();
-    if (running !== 0) {
-      this.exitEternityChallenge();
-      this.startEternityChallenge(running);
+    if (!this.canRestartEternityChallenge()) {
+      return;
+    }
+    this.exitEternityChallenge();
+    this.startEternityChallenge(running);
+  },
+  restartEternityChallengeParentheticalText() {
+    // Note that the button with this text doesn't even show up
+    // if the player isn't in an EC.
+    if (this.canRestartEternityChallenge()) {
+      return 'exit and start again';
+    } else {
+      // Explain to the player why they can't restart.
+      return 'this would complete the current EC tier';
     }
   },
   currentEternityChallenge() {
@@ -222,6 +239,9 @@ let EternityChallenge = {
   },
   isNoEternityChallengeRunning() {
     return this.currentEternityChallenge() === 0;
+  },
+  isCurrentEternityChallengeCompleted() {
+    return this.isSomeEternityChallengeRunning() && this.isEternityChallengeCompleted(this.currentEternityChallenge());
   },
   eternityChallengeRequirementDescription(x) {
     // This could be done as easily in the HTML but it seems nice to have a method.
