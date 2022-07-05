@@ -367,6 +367,7 @@ let initialPlayer = {
     offlineProgress: true,
     offlineTicks: 1024,
     hotkeys: true,
+    colorChange: 'None',
     completionColors: 'On (gradient)',
     resetColors: true,
     tabColors: true,
@@ -525,7 +526,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2.12890625
+  version: 2.1328125
 }
 
 let player;

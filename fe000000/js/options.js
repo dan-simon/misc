@@ -1,3 +1,5 @@
+let COLOR_CHANGE_LIST = ['None', 'Redshift', 'Blueshift'];
+
 let COMPLETION_GRADIENT_LIST = ['Default', 'Center', 'Edge', 'Reversed']
 
 let COMPLETION_COLOR_LIST = ['On (gradient)', 'On (uniform)', 'Off'];
@@ -59,6 +61,16 @@ let Options = {
   },
   nextCompletionColors() {
     player.options.completionColors = COMPLETION_COLOR_LIST[(COMPLETION_COLOR_LIST.indexOf(player.options.completionColors) + 1) % COMPLETION_COLOR_LIST.length];
+  },
+  colorChangeNumber() {
+    return COLOR_CHANGE_LIST.indexOf(player.options.colorChange);
+  },
+  colorChange() {
+    return player.options.colorChange;
+  },
+  nextColorChange() {
+    player.options.colorChange = COLOR_CHANGE_LIST[(COLOR_CHANGE_LIST.indexOf(player.options.colorChange) + 1) % COLOR_CHANGE_LIST.length];
+    Colors.updateColors();
   },
   resetColors() {
     return player.options.resetColors;

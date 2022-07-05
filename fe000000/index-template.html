@@ -131,41 +131,41 @@
         <span ~style.display=InfinityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~f InfinityPrestigeLayer.starRequirementForInfinity() ~ stars to infinity.</span>
         <br ~style.display=InfinityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
         <span ~style.display=InfinityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i InfinityPrestigeLayer.infinityPoints() ~ infinity point~s InfinityPrestigeLayer.infinityPoints() ~ (~i InfinityPrestigeLayer.totalInfinityPoints() ~ total this eternity, ~t player.stats.timeSinceInfinity ~ in this infinity)</span>
-        <button ~style.display=InfinityPrestigeLayer.canInfinity() ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.resetColors(), 'infinity')~ style="height: 48px;" onclick="InfinityPrestigeLayer.infinity(true, null)">Infinity: Gain ~i InfinityPrestigeLayer.infinityPointGain() ~ infinity point~s InfinityPrestigeLayer.infinityPointGain() ~ (~r InfinityPrestigeLayer.infinityPointGainRatioText() ~~i InfinityPrestigeLayer.infinityPoints() ~ → ~i InfinityPrestigeLayer.newInfinityPoints() ~~r InfinityPrestigeLayer.infinityPointNextText() ~)<br/>~t player.stats.timeSinceInfinity ~, <span ~style.display=InfinityPrestigeLayer.showLog('reset-buttons') ? 'none' : ''~>~f InfinityPrestigeLayer.currentIPPerSec() ~ IP/sec, ~f InfinityPrestigeLayer.peakIPPerSec() ~ peak IP/sec</span><span ~style.display=InfinityPrestigeLayer.showLog('reset-buttons') ? '' : 'none'~>~f InfinityPrestigeLayer.currentLogIPPerSecDisplay() ~ log IP/sec, ~f InfinityPrestigeLayer.peakLogIPPerSecDisplay() ~ peak log IP/sec</span></button>
+        <button ~style.display=InfinityPrestigeLayer.canInfinity() ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.resetColors(), 'infinity')~ style="height: 48px;" onclick="InfinityPrestigeLayer.infinity(true, null)">Infinity: Gain ~i InfinityPrestigeLayer.infinityPointGain() ~ infinity point~s InfinityPrestigeLayer.infinityPointGain() ~ (~r InfinityPrestigeLayer.infinityPointGainRatioText() ~~i InfinityPrestigeLayer.infinityPoints() ~ → ~i InfinityPrestigeLayer.newInfinityPoints() ~~r InfinityPrestigeLayer.infinityPointNextText() ~)<br/>~t player.stats.timeSinceInfinity ~, <span ~style.display=InfinityPrestigeLayer.showLog('reset-buttons') ? 'none' : ''~>~f InfinityPrestigeLayer.currentIPPerSec() ~ IP/sec, ~f InfinityPrestigeLayer.peakIPPerSec() ~ peak IP/sec</span><span ~style.display=InfinityPrestigeLayer.showLog('reset-buttons') ? '' : 'none'~>~f InfinityPrestigeLayer.currentLogIPPerSecDisplay() ~ log IP/sec, ~f InfinityPrestigeLayer.peakLogIPPerSecDisplay() ~ peak log IP/sec</span></button>
       </div>
       <div style="height: 56px;" ~style.display=ResetButtons.isResetButtonVisible('eternity') ? '' : 'none'~>
         <span ~style.display=EternityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~f EternityPrestigeLayer.infinityPointRequirementForEternity() ~ total infinity points to eternity.</span>
         <br ~style.display=EternityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
         <span ~style.display=EternityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i EternityPrestigeLayer.eternityPoints() ~ eternity point~s EternityPrestigeLayer.eternityPoints() ~ (~i EternityPrestigeLayer.totalEternityPoints() ~ total this complexity, ~t player.stats.timeSinceEternity ~ in this eternity)</span>
-        <button ~style.display=EternityPrestigeLayer.canEternity() ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.resetColors(), 'eternity')~ style="height: 48px;" onclick="EternityPrestigeLayer.eternity(true)">Eternity: Gain ~i EternityPrestigeLayer.eternityPointGain() ~ eternity point~s EternityPrestigeLayer.eternityPointGain() ~ (~r EternityPrestigeLayer.eternityPointGainRatioText() ~~i EternityPrestigeLayer.eternityPoints() ~ → ~i EternityPrestigeLayer.newEternityPoints() ~~r EternityPrestigeLayer.eternityPointNextText() ~)<br/>~t player.stats.timeSinceEternity ~, <span ~style.display=EternityPrestigeLayer.showLog('reset-buttons') ? 'none' : ''~>~f EternityPrestigeLayer.currentEPPerSec() ~ EP/sec, ~f EternityPrestigeLayer.peakEPPerSec() ~ peak EP/sec</span><span ~style.display=EternityPrestigeLayer.showLog('reset-buttons') ? '' : 'none'~>~f EternityPrestigeLayer.currentLogEPPerSecDisplay() ~ log EP/sec, ~f EternityPrestigeLayer.peakLogEPPerSecDisplay() ~ peak log EP/sec</span><span ~style.display=EternityChallenge.displayTiersCompletedOnEternity() ? '' : 'none'~>, +~i EternityChallenge.tiersCompletedOnEternity() ~ EC tier~s EternityChallenge.tiersCompletedOnEternity() ~ (~i EternityChallenge.getEternityChallengeCompletions() ~ → ~i EternityChallenge.getNextEternityChallengeCompletions() ~~r EternityChallenge.eternityChallengeCompletionsNextText() ~)</span></button>
+        <button ~style.display=EternityPrestigeLayer.canEternity() ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.resetColors(), 'eternity')~ style="height: 48px;" onclick="EternityPrestigeLayer.eternity(true)">Eternity: Gain ~i EternityPrestigeLayer.eternityPointGain() ~ eternity point~s EternityPrestigeLayer.eternityPointGain() ~ (~r EternityPrestigeLayer.eternityPointGainRatioText() ~~i EternityPrestigeLayer.eternityPoints() ~ → ~i EternityPrestigeLayer.newEternityPoints() ~~r EternityPrestigeLayer.eternityPointNextText() ~)<br/>~t player.stats.timeSinceEternity ~, <span ~style.display=EternityPrestigeLayer.showLog('reset-buttons') ? 'none' : ''~>~f EternityPrestigeLayer.currentEPPerSec() ~ EP/sec, ~f EternityPrestigeLayer.peakEPPerSec() ~ peak EP/sec</span><span ~style.display=EternityPrestigeLayer.showLog('reset-buttons') ? '' : 'none'~>~f EternityPrestigeLayer.currentLogEPPerSecDisplay() ~ log EP/sec, ~f EternityPrestigeLayer.peakLogEPPerSecDisplay() ~ peak log EP/sec</span><span ~style.display=EternityChallenge.displayTiersCompletedOnEternity() ? '' : 'none'~>, +~i EternityChallenge.tiersCompletedOnEternity() ~ EC tier~s EternityChallenge.tiersCompletedOnEternity() ~ (~i EternityChallenge.getEternityChallengeCompletions() ~ → ~i EternityChallenge.getNextEternityChallengeCompletions() ~~r EternityChallenge.eternityChallengeCompletionsNextText() ~)</span></button>
       </div>
       <div style="height: 56px;" ~style.display=ResetButtons.isResetButtonVisible('complexity') ? '' : 'none'~>
         <span ~style.display=ComplexityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~r ComplexityPrestigeLayer.requirementForComplexity() ~ to complexity.</span>
         <br ~style.display=ComplexityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
         <span ~style.display=ComplexityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i ComplexityPrestigeLayer.complexityPoints() ~ complexity point~s ComplexityPrestigeLayer.complexityPoints() ~ (~i ComplexityPrestigeLayer.totalComplexityPoints() ~ total this finality, ~t player.stats.timeSinceComplexity ~ in this complexity)</span>
-        <button ~style.display=ComplexityPrestigeLayer.canComplexity() ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.resetColors(), 'complexity')~ style="height: 48px;" onclick="ComplexityPrestigeLayer.complexity(true)">Complexity: Gain ~i ComplexityPrestigeLayer.complexityPointGain() ~ complexity point~s ComplexityPrestigeLayer.complexityPointGain() ~ (~r ComplexityPrestigeLayer.complexityPointGainRatioText() ~~i ComplexityPrestigeLayer.complexityPoints() ~ → ~i ComplexityPrestigeLayer.newComplexityPoints() ~~r ComplexityPrestigeLayer.complexityPointNextText() ~)<br/>~t player.stats.timeSinceComplexity ~, <span ~style.display=ComplexityPrestigeLayer.showLog('reset-buttons') ? 'none' : ''~>~f ComplexityPrestigeLayer.currentCPPerSec() ~ ℂP/sec, ~f ComplexityPrestigeLayer.peakCPPerSec() ~ peak ℂP/sec</span><span ~style.display=ComplexityPrestigeLayer.showLog('reset-buttons') ? '' : 'none'~>~f ComplexityPrestigeLayer.currentLogCPPerSecDisplay() ~ log ℂP/sec, ~f ComplexityPrestigeLayer.peakLogCPPerSecDisplay() ~ peak log ℂP/sec</span></button>
+        <button ~style.display=ComplexityPrestigeLayer.canComplexity() ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.resetColors(), 'complexity')~ style="height: 48px;" onclick="ComplexityPrestigeLayer.complexity(true)">Complexity: Gain ~i ComplexityPrestigeLayer.complexityPointGain() ~ complexity point~s ComplexityPrestigeLayer.complexityPointGain() ~ (~r ComplexityPrestigeLayer.complexityPointGainRatioText() ~~i ComplexityPrestigeLayer.complexityPoints() ~ → ~i ComplexityPrestigeLayer.newComplexityPoints() ~~r ComplexityPrestigeLayer.complexityPointNextText() ~)<br/>~t player.stats.timeSinceComplexity ~, <span ~style.display=ComplexityPrestigeLayer.showLog('reset-buttons') ? 'none' : ''~>~f ComplexityPrestigeLayer.currentCPPerSec() ~ ℂP/sec, ~f ComplexityPrestigeLayer.peakCPPerSec() ~ peak ℂP/sec</span><span ~style.display=ComplexityPrestigeLayer.showLog('reset-buttons') ? '' : 'none'~>~f ComplexityPrestigeLayer.currentLogCPPerSecDisplay() ~ log ℂP/sec, ~f ComplexityPrestigeLayer.peakLogCPPerSecDisplay() ~ peak log ℂP/sec</span></button>
       </div>
       <div style="height: 56px;" ~style.display=ResetButtons.isResetButtonVisible('finality') ? '' : 'none'~>
         <span ~style.display=FinalityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>You need ~f FinalityPrestigeLayer.complexityPointRequirementForFinality() ~ total complexity points to finality.</span>
         <br ~style.display=FinalityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~/>
         <span ~style.display=FinalityPrestigeLayer.isAmountSpanVisible() ? '' : 'none'~>You have ~i FinalityPrestigeLayer.finalityPoints() ~ finality point~s FinalityPrestigeLayer.finalityPoints() ~ (~i FinalityPrestigeLayer.totalFinalityPoints() ~ total, ~t player.stats.timeSinceFinality ~ in this finality)</span>
-        <button ~style.display=FinalityPrestigeLayer.canFinality() ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.resetColors(), 'finality')~ style="height: 48px;" onclick="FinalityPrestigeLayer.finality(true)">Finality: Gain ~i FinalityPrestigeLayer.finalityPointGain() ~ finality point~s FinalityPrestigeLayer.finalityPointGain() ~ (~r FinalityPrestigeLayer.finalityPointGainRatioText() ~~i FinalityPrestigeLayer.finalityPoints() ~ → ~i FinalityPrestigeLayer.newFinalityPoints() ~)<br/>~t player.stats.timeSinceFinality ~, +~i FinalityPrestigeLayer.finalityShardGain() ~ finality shard~s FinalityPrestigeLayer.finalityShardGain() ~ (~r FinalityPrestigeLayer.finalityShardGainRatioText() ~~i FinalityPrestigeLayer.finalityShards() ~ → ~i FinalityPrestigeLayer.newFinalityShards() ~)</button>
+        <button ~style.display=FinalityPrestigeLayer.canFinality() ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.resetColors(), 'finality')~ style="height: 48px;" onclick="FinalityPrestigeLayer.finality(true)">Finality: Gain ~i FinalityPrestigeLayer.finalityPointGain() ~ finality point~s FinalityPrestigeLayer.finalityPointGain() ~ (~r FinalityPrestigeLayer.finalityPointGainRatioText() ~~i FinalityPrestigeLayer.finalityPoints() ~ → ~i FinalityPrestigeLayer.newFinalityPoints() ~)<br/>~t player.stats.timeSinceFinality ~, +~i FinalityPrestigeLayer.finalityShardGain() ~ finality shard~s FinalityPrestigeLayer.finalityShardGain() ~ (~r FinalityPrestigeLayer.finalityShardGainRatioText() ~~i FinalityPrestigeLayer.finalityShards() ~ → ~i FinalityPrestigeLayer.newFinalityShards() ~)</button>
       </div>
     </div>
     <div ~style.display=Options.smallerHeader() ? '' : 'none'~>
-      <button ~style.display=ResetButtons.isResetButtonVisible('infinity') ? '' : 'none'~ ~style.background=InfinityPrestigeLayer.canInfinity() ? Colors.getButtonColor(Options.resetColors(), 'infinity') : '#555555'~ onclick="InfinityPrestigeLayer.infinity(true, null)">
+      <button ~style.display=ResetButtons.isResetButtonVisible('infinity') ? '' : 'none'~ ~style.background=InfinityPrestigeLayer.canInfinity() ? Colors.getButtonColorAltered(Options.resetColors(), 'infinity') : '#555555'~ onclick="InfinityPrestigeLayer.infinity(true, null)">
         <span ~style.display=InfinityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>Infinity: requires ~f InfinityPrestigeLayer.starRequirementForInfinity() ~ stars</span>
         <span ~style.display=InfinityPrestigeLayer.canInfinity() ? '' : 'none'~>Infinity: +~i InfinityPrestigeLayer.infinityPointGain() ~ IP</span>
       </button>
-      <button ~style.display=ResetButtons.isResetButtonVisible('eternity') ? '' : 'none'~ ~style.background=EternityPrestigeLayer.canEternity() ? Colors.getButtonColor(Options.resetColors(), 'eternity') : '#555555'~ onclick="EternityPrestigeLayer.eternity(true)">
+      <button ~style.display=ResetButtons.isResetButtonVisible('eternity') ? '' : 'none'~ ~style.background=EternityPrestigeLayer.canEternity() ? Colors.getButtonColorAltered(Options.resetColors(), 'eternity') : '#555555'~ onclick="EternityPrestigeLayer.eternity(true)">
         <span ~style.display=EternityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>Eternity: requires ~f EternityPrestigeLayer.infinityPointRequirementForEternity() ~ IP</span>
         <span ~style.display=EternityPrestigeLayer.canEternity() ? '' : 'none'~>Eternity: +~i EternityPrestigeLayer.eternityPointGain() ~ EP</span>
       </button>
-      <button ~style.display=ResetButtons.isResetButtonVisible('complexity') ? '' : 'none'~ ~style.background=ComplexityPrestigeLayer.canComplexity() ? Colors.getButtonColor(Options.resetColors(), 'complexity') : '#555555'~ onclick="ComplexityPrestigeLayer.complexity(true)">
+      <button ~style.display=ResetButtons.isResetButtonVisible('complexity') ? '' : 'none'~ ~style.background=ComplexityPrestigeLayer.canComplexity() ? Colors.getButtonColorAltered(Options.resetColors(), 'complexity') : '#555555'~ onclick="ComplexityPrestigeLayer.complexity(true)">
         <span ~style.display=ComplexityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>Complexity: requires ~f ComplexityPrestigeLayer.eternityPointRequirementForComplexity() ~ EP</span>
         <span ~style.display=ComplexityPrestigeLayer.canComplexity() ? '' : 'none'~>Complexity: +~i ComplexityPrestigeLayer.complexityPointGain() ~ ℂP</span>
       </button>
-      <button ~style.display=ResetButtons.isResetButtonVisible('finality') ? '' : 'none'~ ~style.background=FinalityPrestigeLayer.canFinality() ? Colors.getButtonColor(Options.resetColors(), 'finality') : '#555555'~ onclick="FinalityPrestigeLayer.finality(true)">
+      <button ~style.display=ResetButtons.isResetButtonVisible('finality') ? '' : 'none'~ ~style.background=FinalityPrestigeLayer.canFinality() ? Colors.getButtonColorAltered(Options.resetColors(), 'finality') : '#555555'~ onclick="FinalityPrestigeLayer.finality(true)">
         <span ~style.display=FinalityPrestigeLayer.isRequirementVisible() ? '' : 'none'~>Finality: requires ~f FinalityPrestigeLayer.complexityPointRequirementForFinality() ~ ℂP</span>
         <span ~style.display=FinalityPrestigeLayer.canFinality() ? '' : 'none'~>Finality: +~i FinalityPrestigeLayer.finalityPointGain() ~ FP, +~i FinalityPrestigeLayer.finalityShardGain() ~ FS</span>
       </button>
@@ -175,11 +175,11 @@
     <br/>
     <br/>
     <span ~style.display=Tabs.displayTabRow(1) ? '' : 'none'~>
-      <button ~style.display=Tabs.isTabVisible('main') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'normal')~ onclick="Tabs.setTab('main')">Main</button>
-      <button ~style.display=Tabs.isTabVisible('infinity') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'infinity')~ onclick="Tabs.setTab('infinity')">Infinity</button>
-      <button ~style.display=Tabs.isTabVisible('normal-challenges') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'infinity')~ onclick="Tabs.setTab('normal-challenges')">Normal Challenges</button>
-      <button ~style.display=Tabs.isTabVisible('autobuyers') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'normal')~ onclick="Tabs.setTab('autobuyers')">Autobuyers</button>
-      <button ~style.display=Tabs.isTabVisible('infinity-challenges') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'infinity')~ onclick="Tabs.setTab('infinity-challenges')">Infinity Challenges</button>
+      <button ~style.display=Tabs.isTabVisible('main') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), 'normal')~ onclick="Tabs.setTab('main')">Main</button>
+      <button ~style.display=Tabs.isTabVisible('infinity') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), 'infinity')~ onclick="Tabs.setTab('infinity')">Infinity</button>
+      <button ~style.display=Tabs.isTabVisible('normal-challenges') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), 'infinity')~ onclick="Tabs.setTab('normal-challenges')">Normal Challenges</button>
+      <button ~style.display=Tabs.isTabVisible('autobuyers') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), 'normal')~ onclick="Tabs.setTab('autobuyers')">Autobuyers</button>
+      <button ~style.display=Tabs.isTabVisible('infinity-challenges') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), 'infinity')~ onclick="Tabs.setTab('infinity-challenges')">Infinity Challenges</button>
     </span>
     <br ~style.display=Tabs.displayTabBreak(1) ? '' : 'none'~/>
     <span ~style.display=Tabs.displayTabRow(2) ? '' : 'none'~>
@@ -191,27 +191,27 @@
     </span>
     <br ~style.display=Tabs.displayTabBreak(2) ? '' : 'none'~/>
     <span ~style.display=Tabs.displayTabRow(3) ? '' : 'none'~>
-      <button ~style.display=Tabs.isTabVisible('eternity') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'eternity')~ onclick="Tabs.setTab('eternity')">Eternity</button>
-      <button ~style.display=Tabs.isTabVisible('eternity-milestones') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'eternity')~ onclick="Tabs.setTab('eternity-milestones')">Eternity Milestones</button>
-      <button ~style.display=Tabs.isTabVisible('studies') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'studies')~ onclick="Tabs.setTab('studies')">Studies</button>
-      <button ~style.display=Tabs.isTabVisible('eternity-producer') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'eternity-producer')~ onclick="Tabs.setTab('eternity-producer')">Eternity Producer</button>
-      <button ~style.display=Tabs.isTabVisible('eternity-challenges') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'eternity')~ onclick="Tabs.setTab('eternity-challenges')">Eternity Challenges</button>
-      <button ~style.display=Tabs.isTabVisible('chroma') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'chroma')~ onclick="Tabs.setTab('chroma')">Chroma</button>
+      <button ~style.display=Tabs.isTabVisible('eternity') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), 'eternity')~ onclick="Tabs.setTab('eternity')">Eternity</button>
+      <button ~style.display=Tabs.isTabVisible('eternity-milestones') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), 'eternity')~ onclick="Tabs.setTab('eternity-milestones')">Eternity Milestones</button>
+      <button ~style.display=Tabs.isTabVisible('studies') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), 'studies')~ onclick="Tabs.setTab('studies')">Studies</button>
+      <button ~style.display=Tabs.isTabVisible('eternity-producer') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), 'eternity-producer')~ onclick="Tabs.setTab('eternity-producer')">Eternity Producer</button>
+      <button ~style.display=Tabs.isTabVisible('eternity-challenges') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), 'eternity')~ onclick="Tabs.setTab('eternity-challenges')">Eternity Challenges</button>
+      <button ~style.display=Tabs.isTabVisible('chroma') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), 'chroma')~ onclick="Tabs.setTab('chroma')">Chroma</button>
     </span>
     <br ~style.display=Tabs.displayTabBreak(3) ? '' : 'none'~/>
     <span ~style.display=Tabs.displayTabRow(4) ? '' : 'none'~>
-      <button ~style.display=Tabs.isTabVisible('complexity') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'complexity')~ onclick="Tabs.setTab('complexity')">Complexity</button>
-      <button ~style.display=Tabs.isTabVisible('complexity-challenges') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'complexity')~ onclick="Tabs.setTab('complexity-challenges')">Complexity Challenges</button>
-      <button ~style.display=Tabs.isTabVisible('complexity-achievements') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'complexity')~ onclick="Tabs.setTab('complexity-achievements')">Complexity Achievements</button>
-      <button ~style.display=Tabs.isTabVisible('powers') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), Powers.tabColors())~ onclick="Tabs.setTab('powers')">Powers</button>
-      <button ~style.display=Tabs.isTabVisible('oracle') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'complexity')~ onclick="Tabs.setTab('oracle')">Oracle</button>
-      <button ~style.display=Tabs.isTabVisible('galaxies') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), Galaxy.tabColors())~ onclick="Tabs.setTab('galaxies')">Galaxies</button>
+      <button ~style.display=Tabs.isTabVisible('complexity') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), 'complexity')~ onclick="Tabs.setTab('complexity')">Complexity</button>
+      <button ~style.display=Tabs.isTabVisible('complexity-challenges') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), 'complexity')~ onclick="Tabs.setTab('complexity-challenges')">Complexity Challenges</button>
+      <button ~style.display=Tabs.isTabVisible('complexity-achievements') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), 'complexity')~ onclick="Tabs.setTab('complexity-achievements')">Complexity Achievements</button>
+      <button ~style.display=Tabs.isTabVisible('powers') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), Powers.tabColors())~ onclick="Tabs.setTab('powers')">Powers</button>
+      <button ~style.display=Tabs.isTabVisible('oracle') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), 'complexity')~ onclick="Tabs.setTab('oracle')">Oracle</button>
+      <button ~style.display=Tabs.isTabVisible('galaxies') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), Galaxy.tabColors())~ onclick="Tabs.setTab('galaxies')">Galaxies</button>
     </span>
     <br ~style.display=Tabs.displayTabBreak(4) ? '' : 'none'~/>
     <span ~style.display=Tabs.displayTabRow(5) ? '' : 'none'~>
-      <button ~style.display=Tabs.isTabVisible('finality') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'finality')~ onclick="Tabs.setTab('finality')">Finality</button>
-      <button ~style.display=Tabs.isTabVisible('finality-shards') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'finality')~ onclick="Tabs.setTab('finality-shards')">Finality Shards</button>
-      <button ~style.display=Tabs.isTabVisible('finality-milestones') ? '' : 'none'~ ~style.background=Colors.getButtonColor(Options.tabColors(), 'finality')~ onclick="Tabs.setTab('finality-milestones')">Finality Milestones</button>
+      <button ~style.display=Tabs.isTabVisible('finality') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), 'finality')~ onclick="Tabs.setTab('finality')">Finality</button>
+      <button ~style.display=Tabs.isTabVisible('finality-shards') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), 'finality')~ onclick="Tabs.setTab('finality-shards')">Finality Shards</button>
+      <button ~style.display=Tabs.isTabVisible('finality-milestones') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), 'finality')~ onclick="Tabs.setTab('finality-milestones')">Finality Milestones</button>
     </span>
     <div ~style.display=Options.showExportNotification() ? '' : 'none'~ class="reddiv">
       <span>You have not exported your save for a long time. You might want to export regularly.</span>
@@ -1818,7 +1818,7 @@
           </td>
         </tr>
       </table>
-      <span ~style.display=Studies.canAccessFourthRow() ? '' : 'none'~ class="greenspan">
+      <span ~style.display=Studies.canAccessFourthRow() ? '' : 'none'~ class="greenalteredspan">
         There is also a small multiplier to the chroma cap based on total fourth-row study purchases (currently ~r formatPrecisely(Studies.chromaCapMultiplier()) ~x).
       </span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 0px; border-collapse: separate;">
@@ -3216,7 +3216,7 @@
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>
-            <div class="complexitychallengediv yellowdiv" ~style.background=ComplexityChallenge.color(1)~>
+            <div class="complexitychallengediv yellowaltereddiv" ~style.background=ComplexityChallenge.color(1)~>
               <span>Complexity Challenge 1</span>
               <br/>
               <span>No requirement (you're always in this challenge).</span>
@@ -3233,7 +3233,7 @@
             </div>
           </td>
           <td>
-            <div class="complexitychallengediv greydiv" ~style.background=ComplexityChallenge.color(2)~>
+            <div class="complexitychallengediv greyaltereddiv" ~style.background=ComplexityChallenge.color(2)~>
               <span>Complexity Challenge 2</span>
               <br/>
               <span>You can't buy boosts.</span>
@@ -3256,7 +3256,7 @@
         </tr>
         <tr>
           <td>
-            <div class="complexitychallengediv purplediv" ~style.background=ComplexityChallenge.color(3)~>
+            <div class="complexitychallengediv purplealtereddiv" ~style.background=ComplexityChallenge.color(3)~>
               <span>Complexity Challenge 3</span>
               <br/>
               <span>You can't unlock the Eternity Producer.</span>
@@ -3277,7 +3277,7 @@
             </div>
           </td>
           <td>
-            <div class="complexitychallengediv orangediv" ~style.background=ComplexityChallenge.color(4)~>
+            <div class="complexitychallengediv orangealtereddiv" ~style.background=ComplexityChallenge.color(4)~>
               <span>Complexity Challenge 4</span>
               <br/>
               <span>You can't unlock chroma.</span>
@@ -3300,7 +3300,7 @@
         </tr>
         <tr>
           <td>
-            <div class="complexitychallengediv cyandiv" ~style.background=ComplexityChallenge.color(5)~>
+            <div class="complexitychallengediv cyanaltereddiv" ~style.background=ComplexityChallenge.color(5)~>
               <span>Complexity Challenge 5</span>
               <br/>
               <span>You can't buy Eternity Generator 8.</span>
@@ -3321,7 +3321,7 @@
             </div>
           </td>
           <td>
-            <div class="complexitychallengediv greendiv" ~style.background=ComplexityChallenge.color(6)~>
+            <div class="complexitychallengediv greenaltereddiv" ~style.background=ComplexityChallenge.color(6)~>
               <span>Complexity Challenge 6</span>
               <br/>
               <span>You can't buy or have studies.</span>
@@ -3432,7 +3432,7 @@
         <tr>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(1, 1)~>
-              <span class="greytogrey">~r ComplexityAchievements.getComplexityAchievementName(1, 1) ~</span>
+              <span class="greytogreyaltered">~r ComplexityAchievements.getComplexityAchievementName(1, 1) ~</span>
               <br/>
               Complete Complexity Challenge 2 ~i 8 ~ times.
               <br/>
@@ -3443,7 +3443,7 @@
           </td>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(1, 2)~>
-              <span class="greytopurple">~r ComplexityAchievements.getComplexityAchievementName(1, 2) ~</span>
+              <span class="greytopurplealtered">~r ComplexityAchievements.getComplexityAchievementName(1, 2) ~</span>
               <br/>
               Eternity in Complexity Challenge 2.
               <br/>
@@ -3454,7 +3454,7 @@
           </td>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(1, 3)~>
-              <span class="greytoorange">~r ComplexityAchievements.getComplexityAchievementName(1, 3) ~</span>
+              <span class="greytoorangealtered">~r ComplexityAchievements.getComplexityAchievementName(1, 3) ~</span>
               <br/>
               Unlock chroma in Complexity Challenge 2.
               <br/>
@@ -3465,7 +3465,7 @@
           </td>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(1, 4)~>
-              <span class="greytogreen">~r ComplexityAchievements.getComplexityAchievementName(1, 4) ~</span>
+              <span class="greytogreenaltered">~r ComplexityAchievements.getComplexityAchievementName(1, 4) ~</span>
               <br/>
               Get ~i 11 ~ studies in Complexity Challenge 2.
               <br/>
@@ -3478,7 +3478,7 @@
         <tr>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(2, 1)~>
-              <span class="purpletogrey">~r ComplexityAchievements.getComplexityAchievementName(2, 1) ~</span>
+              <span class="purpletogreyaltered">~r ComplexityAchievements.getComplexityAchievementName(2, 1) ~</span>
               <br/>
               Get a per-boost multiplier of ~f Math.pow(2, 24) ~ outside of Infinity Challenge 7 in Complexity Challenge 3.
               <br/>
@@ -3489,7 +3489,7 @@
           </td>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(2, 2)~>
-              <span class="purpletopurple">~r ComplexityAchievements.getComplexityAchievementName(2, 2) ~</span>
+              <span class="purpletopurplealtered">~r ComplexityAchievements.getComplexityAchievementName(2, 2) ~</span>
               <br/>
               Get ~f Math.pow(2, 24) ~ eternities in Complexity Challenge 3.
               <br/>
@@ -3500,7 +3500,7 @@
           </td>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(2, 3)~>
-              <span class="purpletoorange">~r ComplexityAchievements.getComplexityAchievementName(2, 3) ~</span>
+              <span class="purpletoorangealtered">~r ComplexityAchievements.getComplexityAchievementName(2, 3) ~</span>
               <br/>
               Unlock chroma in Complexity Challenge 3.
               <br/>
@@ -3511,7 +3511,7 @@
           </td>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(2, 4)~>
-              <span class="purpletogreen">~r ComplexityAchievements.getComplexityAchievementName(2, 4) ~</span>
+              <span class="purpletogreenaltered">~r ComplexityAchievements.getComplexityAchievementName(2, 4) ~</span>
               <br/>
               Get ~i 231 ~ theorems in Complexity Challenge 3.
               <br/>
@@ -3524,7 +3524,7 @@
         <tr>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(3, 1)~>
-              <span class="orangetogrey">~r ComplexityAchievements.getComplexityAchievementName(3, 1) ~</span>
+              <span class="orangetogreyaltered">~r ComplexityAchievements.getComplexityAchievementName(3, 1) ~</span>
               <br/>
               Get ~f 1024 ~ boosts in Eternity Challenge 2 in Complexity Challenge 4.
               <br/>
@@ -3535,7 +3535,7 @@
           </td>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(3, 2)~>
-              <span class="orangetopurple">~r ComplexityAchievements.getComplexityAchievementName(3, 2) ~</span>
+              <span class="orangetopurplealtered">~r ComplexityAchievements.getComplexityAchievementName(3, 2) ~</span>
               <br/>
               Complete all eternity challenges, without using automatic eternity challenge completion, in Complexity Challenge 4.
               <br/>
@@ -3546,7 +3546,7 @@
           </td>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(3, 3)~>
-              <span class="orangetoorange">~r ComplexityAchievements.getComplexityAchievementName(3, 3) ~</span>
+              <span class="orangetoorangealtered">~r ComplexityAchievements.getComplexityAchievementName(3, 3) ~</span>
               <br/>
               Complete Complexity Challenge 4 ~i 13 ~ times.
               <br/>
@@ -3557,7 +3557,7 @@
           </td>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(3, 4)~>
-              <span class="orangetogreen">~r ComplexityAchievements.getComplexityAchievementName(3, 4) ~</span>
+              <span class="orangetogreenaltered">~r ComplexityAchievements.getComplexityAchievementName(3, 4) ~</span>
               <br/>
               Get ~f Decimal.pow(2, 1.75 * Math.pow(2, 16)) ~ eternity points, without buying theorems, in Complexity Challenge 4.
               <br/>
@@ -3572,7 +3572,7 @@
         <tr>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(4, 1)~>
-              <span class="greentogrey">~r ComplexityAchievements.getComplexityAchievementName(4, 1) ~</span>
+              <span class="greentogreyaltered">~r ComplexityAchievements.getComplexityAchievementName(4, 1) ~</span>
               <br/>
               Get ~f Math.pow(2, 16) ~ boost power in Complexity Challenge 6.
               <br/>
@@ -3583,7 +3583,7 @@
           </td>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(4, 2)~>
-              <span class="greentopurple">~r ComplexityAchievements.getComplexityAchievementName(4, 2) ~</span>
+              <span class="greentopurplealtered">~r ComplexityAchievements.getComplexityAchievementName(4, 2) ~</span>
               <br/>
               Complete ~i 20 ~ eternity challenge tiers, without using automatic eternity challenge completion, in Complexity Challenge 6.
               <br/>
@@ -3594,7 +3594,7 @@
           </td>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(4, 3)~>
-              <span class="greentoorange">~r ComplexityAchievements.getComplexityAchievementName(4, 3) ~</span>
+              <span class="greentoorangealtered">~r ComplexityAchievements.getComplexityAchievementName(4, 3) ~</span>
               <br/>
               Unlock chroma in Complexity Challenge 6.
               <br/>
@@ -3605,7 +3605,7 @@
           </td>
           <td>
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(4, 4)~>
-              <span class="greentogreen">~r ComplexityAchievements.getComplexityAchievementName(4, 4) ~</span>
+              <span class="greentogreenaltered">~r ComplexityAchievements.getComplexityAchievementName(4, 4) ~</span>
               <br/>
               Get ~i 168 ~ theorems in Complexity Challenge 6.
               <br/>
@@ -3774,47 +3774,47 @@
         </table>
         <span>Current effects of equipped powers:</span>
         <br/>
-        <span style="margin-left: 19px;" class="yellowspan">~r Powers.totalEffectDescription('normal') ~</span>
+        <span style="margin-left: 19px;" class="yellowalteredspan">~r Powers.totalEffectDescription('normal') ~</span>
         <br/>
-        <span class="magentaspan">~r Powers.totalEffectDescription('infinity') ~</span>
+        <span class="magentaalteredspan">~r Powers.totalEffectDescription('infinity') ~</span>
         <br/>
-        <span class="cyanspan">~r Powers.totalEffectDescription('eternity') ~</span>
+        <span class="cyanalteredspan">~r Powers.totalEffectDescription('eternity') ~</span>
         <br/>
-        <span style="margin-left: -19px;" class="brownspan">~r Powers.totalEffectDescription('complexity') ~</span>
+        <span style="margin-left: -19px;" class="brownalteredspan">~r Powers.totalEffectDescription('complexity') ~</span>
         <br/>
         <br/>
         <span>Stored powers:</span>
         <table style="margin-left: auto; margin-right: auto; border-collapse: collapse;">
           <tr>
             <td class="largepowertd">
-              <span class="yellowspan">Normal</span>
+              <span class="yellowalteredspan">Normal</span>
               <br/>
-              <span class="yellowspan">No extra multiplier</span>
+              <span class="yellowalteredspan">No extra multiplier</span>
               <br/>
               <br/>
               <br/>
             </td>
             <td class="largepowertd">
-              <span class="magentaspan">Infinity</span>
+              <span class="magentaalteredspan">Infinity</span>
               <br/>
-              <span class="magentaspan">Extra multiplier from infinity stars</span>
+              <span class="magentaalteredspan">Extra multiplier from infinity stars</span>
               <br/>
               <br/>
-              <span class="magentaspan">~f Powers.getExtraMultiplier('infinity') ~x</span>
+              <span class="magentaalteredspan">~f Powers.getExtraMultiplier('infinity') ~x</span>
             </td>
             <td class="largepowertd">
-              <span class="cyanspan">Eternity</span>
+              <span class="cyanalteredspan">Eternity</span>
               <br/>
-              <span class="cyanspan">Extra multiplier from complexity stars and time in complexity</span>
+              <span class="cyanalteredspan">Extra multiplier from complexity stars and time in complexity</span>
               <br/>
-              <span class="cyanspan">~f Powers.getExtraMultiplier('eternity') ~x<span ~style.display=Powers.isTypeAtCap('eternity') ? '' : 'none'~> (capped)</span></span>
+              <span class="cyanalteredspan">~f Powers.getExtraMultiplier('eternity') ~x<span ~style.display=Powers.isTypeAtCap('eternity') ? '' : 'none'~> (capped)</span></span>
             </td>
             <td class="largepowertd">
-              <span class="brownspan">Complexity</span>
+              <span class="brownalteredspan">Complexity</span>
               <br/>
-              <span class="brownspan">Extra multiplier from total strength and rarity of equipped powers</span>
+              <span class="brownalteredspan">Extra multiplier from total strength and rarity of equipped powers</span>
               <br/>
-              <span class="brownspan">~f Powers.getExtraMultiplier('complexity') ~x</span>
+              <span class="brownalteredspan">~f Powers.getExtraMultiplier('complexity') ~x</span>
             </td>
           </tr>
           <tr>
@@ -4374,34 +4374,34 @@
           <table style="margin-left: auto; margin-right: auto; border-collapse: collapse;">
             <tr>
               <td class="largepowertd">
-                <span class="yellowspan">Normal</span>
+                <span class="yellowalteredspan">Normal</span>
                 <br/>
-                <span class="yellowspan">No extra multiplier</span>
+                <span class="yellowalteredspan">No extra multiplier</span>
                 <br/>
                 <br/>
                 <br/>
               </td>
               <td class="largepowertd">
-                <span class="magentaspan">Infinity</span>
+                <span class="magentaalteredspan">Infinity</span>
                 <br/>
-                <span class="magentaspan">Extra multiplier from infinity stars</span>
+                <span class="magentaalteredspan">Extra multiplier from infinity stars</span>
                 <br/>
                 <br/>
-                <span class="magentaspan">~f Powers.getExtraMultiplier('infinity', true) ~x</span>
+                <span class="magentaalteredspan">~f Powers.getExtraMultiplier('infinity', true) ~x</span>
               </td>
               <td class="largepowertd">
-                <span class="cyanspan">Eternity</span>
+                <span class="cyanalteredspan">Eternity</span>
                 <br/>
-                <span class="cyanspan">Extra multiplier from complexity stars and time in complexity</span>
+                <span class="cyanalteredspan">Extra multiplier from complexity stars and time in complexity</span>
                 <br/>
-                <span class="cyanspan">~f Powers.getExtraMultiplier('eternity', true) ~x<span ~style.display=Powers.isTypeAtCap('eternity', true) ? '' : 'none'~> (capped)</span></span>
+                <span class="cyanalteredspan">~f Powers.getExtraMultiplier('eternity', true) ~x<span ~style.display=Powers.isTypeAtCap('eternity', true) ? '' : 'none'~> (capped)</span></span>
               </td>
               <td class="largepowertd">
-                <span class="brownspan">Complexity</span>
+                <span class="brownalteredspan">Complexity</span>
                 <br/>
-                <span class="brownspan">Extra multiplier from total strength and rarity of equipped powers</span>
+                <span class="brownalteredspan">Extra multiplier from total strength and rarity of equipped powers</span>
                 <br/>
-                <span class="brownspan">~f Powers.getExtraMultiplier('complexity', true) ~x</span>
+                <span class="brownalteredspan">~f Powers.getExtraMultiplier('complexity', true) ~x</span>
               </td>
             </tr>
             <tr>
@@ -6068,7 +6068,7 @@
       <span>Number of last runs of each type to show: <input type="text" ~!value=Stats.lastRunsToShow()~ ~!onchange=function() {Stats.setLastRunsToShow(+this.value)}~></input></span>
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'options' ? '' : 'none'~>
-      <span><button ~class-name=Options.showExportNotification() ? 'redspan' : ''~ onclick="Options.setOptionTypeShown('saving')">Show saving options</button> <button onclick="Options.setOptionTypeShown('other')">Show other options</button></span>
+      <span><button ~class-name=Options.showExportNotification() ? 'redspan' : ''~ onclick="Options.setOptionTypeShown('saving')">Show saving options</button> <button onclick="Options.setOptionTypeShown('other')">Show other options</button> <button onclick="Options.setOptionTypeShown('color')">Show color options</button></span>
       <br/>
       <table ~style.display=Options.isOptionTypeShown('saving') ? '' : 'none'~ style="margin-left: auto; margin-right: auto; border-spacing: 24px 8px; border-collapse: separate;">
         <tr>
@@ -6138,36 +6138,11 @@
           <td><button class="options-button" onclick="Options.toggleNews()">News (non-game-relevant messages at top of screen): ~r player.options.news ? "On" : "Off" ~</button></td>
         </tr>
         <tr>
-          <td><div class="options-div">
-            <button class="mini-options-button" onclick="Options.toggleLargerCheckboxes()">Larger checkboxes: ~r player.options.largerCheckboxes ? "On" : "Off" ~</button>
-            <span>Clicked button outlines: <select ~!value=Options.buttonOutlines()~ ~!onchange=function() {Options.setButtonOutlines(this.value)}~>
-              <option value="None">None</option>
-              <option value="Black">Black</option>
-              <option value="Cyan">Cyan</option>
-              <option value="White">White</option>
-              <option value="Blue">Blue</option>
-              <option value="Gold">Gold</option>
-            </select></span>
-          </td>
+          <td><button class="options-button" onclick="Options.toggleLargerCheckboxes()">Larger checkboxes: ~r player.options.largerCheckboxes ? "On" : "Off" ~</button></td>
           <td><div class="options-div">
             <button class="mini-options-button" onclick="Options.toggleNotifications('saveLoad')">Save/load notifications: ~r Options.showNotifications('saveLoad') ? 'On' : 'Off' ~</button>
             <button class="mini-options-button" onclick="Options.toggleNotifications('achievements')">Achievement notifications: ~r Options.showNotifications('achievements') ? 'On' : 'Off' ~</button>
             <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~ class="mid-options-button" onclick="Options.toggleNotifications('complexityAchievements')">Complexity achievement notifications: ~r Options.showNotifications('complexityAchievements') ? 'On' : 'Off' ~</button>
-          </div></td>
-          <td><div class="options-div">
-            <button class="mini-options-button" onclick="Options.nextBackground()">Background: ~r player.options.theme.background ~</button>
-            <button class="mini-options-button" onclick="Options.nextButtonColor()">Button colors: ~r player.options.theme.buttonColor ~</button>
-            <button class="mini-options-button" onclick="Options.nextCompletionGradients()">Completion gradients: ~r player.options.theme.completionGradients ~</button>
-            <button class="mini-options-button" onclick="Options.nextEdgeGradients()">Edge gradients: ~r player.options.theme.edgeGradients ~</button>
-          </div></td>
-        <tr/>
-        <tr>
-          <td><button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? 'none' : ''~ class="options-button" onclick="Options.toggleTabColors()">Tab colors: ~r Options.tabColors() ? 'On' : 'Off' ~</button>
-          <div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="options-div">
-            <button class="mini-options-button" onclick="Options.toggleTabColors()">Tab colors: ~r Options.tabColors() ? 'On' : 'Off' ~</button>
-            <button class="mini-options-button" ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ onclick="Options.nextCompletionColors()">Completion colors: ~r player.options.completionColors ~</button>
-            <button class="mini-options-button" ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ onclick="Options.toggleResetColors()">Reset colors: ~r Options.resetColors() ? 'On' : 'Off' ~</button>
-            <button class="mini-options-button" ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~ onclick="Options.togglePresetHighlightColors()">Preset highlight colors: ~r Options.presetHighlightColors() ? 'On' : 'Off' ~</button>
           </div></td>
           <td><div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="options-div">
             <span>Log/second settings <span class="helpspan">(?)<span class="tooltiptext">This setting controls whether gain per second or log gain per second of things like IP is shown in various places. The default setting <span ~style.display=(Autobuyer(12).isUnlocked || PrestigeLayerProgress.hasReached('eternity')) ? 'none' : ''~>uses autobuyer settings.</span><span ~style.display=(Autobuyer(12).isUnlocked || PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~>checks whether your relevant autobuyer is set to a mode that uses log/second.</span></span></span>:</span>
@@ -6184,6 +6159,8 @@
               <option value="On">On</option>
             </select></span>
           </div></td>
+        <tr/>
+        <tr ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~>
           <td><div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="options-div">Max all mode <span class="helpspan">(?)<span class="tooltiptext">This setting controls what the M hotkey buys, and also what the Main tab "Max all" button buys.</span></span>: <select ~!value=Options.maxAllMode()~ ~!onchange=function() {Options.setMaxAllMode(this.value)}~>
             <option value="Normal generators and boosts">Normal generators and boosts</option>
             <option value="Generators and upgrades in current tab">Generators and upgrades in current tab</option>
@@ -6191,8 +6168,6 @@
             <option value="All generators and upgrades">All generators and upgrades</option>
             <option value="All generators, upgrades, and unlocks">All generators, upgrades, and unlocks</option>
           </select></div></td>
-        <tr/>
-        <tr ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~>
           <td><div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="options-div">
             <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleShowCurrentChallenges()">Current challenges in header: ~r Options.showCurrentChallenges() ? 'Shown' : 'Hidden' ~</button>
             <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleShowNextCCCompletion()">Next ℂC completion in header: ~r Options.showNextCCCompletion() ? 'Shown' : 'Hidden' ~</button>
@@ -6204,10 +6179,41 @@
             <button ~style.display=Options.optionDisplay(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('powers')">Full power options: ~r Options.showFullOptions('powers') ? 'On' : 'Off' ~</button>
             <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('finality')">Full finality shard options: ~r Options.showFullOptions('finality') ? 'On' : 'Off' ~</button>
           </div></td>
+        <tr/>
+      </table>
+      <table ~style.display=Options.isOptionTypeShown('color') ? '' : 'none'~ style="margin-left: auto; margin-right: auto; border-spacing: 24px 8px; border-collapse: separate;">
+        <tr>
+          <td><div class="options-div">
+            <span>Clicked button outlines: <select ~!value=Options.buttonOutlines()~ ~!onchange=function() {Options.setButtonOutlines(this.value)}~>
+              <option value="None">None</option>
+              <option value="Black">Black</option>
+              <option value="Cyan">Cyan</option>
+              <option value="White">White</option>
+              <option value="Blue">Blue</option>
+              <option value="Gold">Gold</option>
+            </select></span></div>
+          </td>
+          <td><div class="options-div">
+            <button class="mini-options-button" onclick="Options.nextBackground()">Background: ~r player.options.theme.background ~</button>
+            <button class="mini-options-button" onclick="Options.nextButtonColor()">Button colors: ~r player.options.theme.buttonColor ~</button>
+            <button class="mini-options-button" onclick="Options.nextCompletionGradients()">Completion gradients: ~r player.options.theme.completionGradients ~</button>
+            <button class="mini-options-button" onclick="Options.nextEdgeGradients()">Edge gradients: ~r player.options.theme.edgeGradients ~</button>
+          </div></td>
+          <td><button class="options-button" onclick="Options.nextColorChange()">Color change: ~r Options.colorChange() ~</button></td>
+        </tr>
+        <tr>
+          <td><button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? 'none' : ''~ class="options-button" onclick="Options.toggleTabColors()">Tab colors: ~r Options.tabColors() ? 'On' : 'Off' ~</button>
+          <div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="options-div">
+            <button class="mini-options-button" onclick="Options.toggleTabColors()">Tab colors: ~r Options.tabColors() ? 'On' : 'Off' ~</button>
+            <button class="mini-options-button" ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ onclick="Options.nextCompletionColors()">Completion colors: ~r player.options.completionColors ~</button>
+            <button class="mini-options-button" ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ onclick="Options.toggleResetColors()">Reset colors: ~r Options.resetColors() ? 'On' : 'Off' ~</button>
+            <button class="mini-options-button" ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~ onclick="Options.togglePresetHighlightColors()">Preset highlight colors: ~r Options.presetHighlightColors() ? 'On' : 'Off' ~</button>
+          </div></td>
           <td><button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~ class="options-button" onclick="Options.toggleComplexityChallengeRunningColors()" style="font-size: 0.875rem;">
             Complexity challenge colors: ~r Options.complexityChallengeRunningColors() ? "Running" : "Completions" ~
           </button></td>
-        <tr/>
+          <td/>
+        </tr>
       </table>
       <div>
         Confirmations:

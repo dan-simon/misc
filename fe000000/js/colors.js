@@ -37,10 +37,6 @@ let Colors = {
       'challengegreen': '#00cc00',
       'normal': '#ffff00',
       'yellow': '#ffff00',
-      'yellowtext': {
-        'Dark': '#ffff00',
-        'Light': '#cccc33'
-      },
       'infinity': '#ff00ff',
       'magenta': '#ff00ff',
       'eternity': '#00ffff',
@@ -65,17 +61,33 @@ let Colors = {
       document.documentElement.style.setProperty(i, table[i]);
     }
     for (let i of ['normal', 'infinity', 'eternity', 'chroma']) {
-      let buttonColor = this.getButtonColor(true, i === 'chroma' ? 'studies' : i);
+      let buttonColor = this.getButtonColorAltered(true, i === 'chroma' ? 'studies' : i);
       document.documentElement.style.setProperty('--study-' + i + '-color', buttonColor);
     }
     for (let i of ['grey', 'purple', 'orange', 'cyan', 'green', 'red']) {
       let nextColor = this.interpolate(this.backgroundColor(), this.colorToRgb(this.getStringToColorCode(i, 'Vibrant')), 0.5);
       document.documentElement.style.setProperty('--next-' + i + '-color', 'rgb(' + nextColor.map(Math.floor).join(', ') + ')');
     }
-    document.documentElement.style.setProperty('--yellow-text-color', this.getStringToColorCode('yellowtext', 'Vibrant'));
+    document.documentElement.style.setProperty('--yellow-text-color', this.adjust(this.getStringToColorCode('yellow', 'Vibrant')));
+    for (let i of ['yellow', 'grey', 'purple', 'orange', 'cyan', 'green', 'magenta', 'brown']) {
+      document.documentElement.style.setProperty('--' + i + '-altered-text-color', this.adjust(this.rotate(this.getStringToColorCode(i, 'Vibrant'))));
+    }
   },
   colorToRgb(x) {
     return [parseInt(x.slice(1, 3), 16), parseInt(x.slice(3, 5), 16), parseInt(x.slice(5, 7), 16)];
+  },
+  adjust(x) {
+    let y = this.colorToRgb(x);
+    if (y[0] === 255 && y[1] === 255 && Options.background() === 'Light') {
+      return '#' + [y[0] - 51, y[1] - 51, Math.min(y[2] + 51, 255)].map(i => (i + 256).toString(16).slice(1)).join('');
+    } else {
+      return x;
+    }
+  },
+  rotate(x) {
+    let y = this.colorToRgb(x);
+    let z = [0, 1, 2].map(i => y[(i + Options.colorChangeNumber()) % 3]);
+    return '#' + z.map(i => (i + 256).toString(16).slice(1)).join('');
   },
   backgroundColor() {
     return this.colorToRgb(this.backgroundColors[Options.background()]['--background-color']);
@@ -116,17 +128,23 @@ let Colors = {
     }
   },
   getStringToColorCode(color, buttonColor) {
-    let res = this.stringToColorCode[buttonColor || Options.usualButtonColor()][color];
-    return (typeof res === 'string') ? res : res[Options.background()];
+    return this.stringToColorCode[buttonColor || Options.usualButtonColor()][color];
   },
-  getButtonColor(hasColor, colorType) {
+  getStringToColorCodeAltered(color, buttonColor) {
+    let res = this.getStringToColorCode(color, buttonColor);
+    if (color !== 'finality' && color !== 'gold' && color !== 'chroma') {
+      res = this.rotate(res);
+    }
+    return res;
+  },
+  getButtonColorAltered(hasColor, colorType) {
     if (!hasColor) {
       return '#aaaaaa';
     }
     if (typeof colorType === 'string') {
-      return this.getStringToColorCode(colorType);
+      return this.getStringToColorCodeAltered(colorType);
     } else {
-      return 'linear-gradient(90deg, ' + colorType.map(x => this.getStringToColorCode(x)).join(', ') + ')';
+      return 'linear-gradient(90deg, ' + colorType.map(x => this.getStringToColorCodeAltered(x)).join(', ') + ')';
     }
   },
   rewardClass(hasReward) {

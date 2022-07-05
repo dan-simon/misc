@@ -539,6 +539,38 @@ input[type=text] {
   color: #ccaa33;
 }
 
+.yellowalteredspan, .yellowaltereddiv > span {
+  color: var(--yellow-altered-text-color);
+}
+
+.greyalteredspan, .greyaltereddiv > span {
+  color: var(--grey-altered-text-color);
+}
+
+.purplealteredspan, .purplealtereddiv > span {
+  color: var(--purple-altered-text-color);
+}
+
+.orangealteredspan, .orangealtereddiv > span {
+  color: var(--orange-altered-text-color);
+}
+
+.cyanalteredspan, .cyanaltereddiv > span {
+  color: var(--cyan-altered-text-color);
+}
+
+.greenalteredspan, .greenaltereddiv > span {
+  color: var(--green-altered-text-color);
+}
+
+.magentaalteredspan, .magentaaltereddiv > span {
+  color: var(--magenta-altered-text-color);
+}
+
+.brownalteredspan, .brownaltereddiv > span {
+  color: var(--brown-altered-text-color);
+}
+
 .chromacurrentgreydiv {
   background: radial-gradient(var(--background-color), var(--background-color) 75%, #aaaaaa);
 }
@@ -587,113 +619,113 @@ input[type=text] {
   background: radial-gradient(var(--background-color), var(--background-color) 75%, var(--next-red-color));
 }
 
-.greytogrey {
-   background-image: linear-gradient(to right, #aaaaaa, #aaaaaa);
+.greytogreyaltered {
+   background-image: linear-gradient(to right, var(--grey-altered-text-color), var(--grey-altered-text-color));
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;
 }
 
-.greytopurple {
-   background-image: linear-gradient(to right, #aaaaaa, #aa99ff);
+.greytopurplealtered {
+   background-image: linear-gradient(to right, var(--grey-altered-text-color), var(--purple-altered-text-color));
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;
 }
 
-.greytoorange {
-   background-image: linear-gradient(to right, #aaaaaa, #ff9933);
+.greytoorangealtered {
+   background-image: linear-gradient(to right, var(--grey-altered-text-color), var(--orange-altered-text-color));
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;
 }
 
-.greytogreen {
-   background-image: linear-gradient(to right, #aaaaaa, #33ff33);
+.greytogreenaltered {
+   background-image: linear-gradient(to right, var(--grey-altered-text-color), var(--green-altered-text-color));
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;
 }
 
-.purpletogrey {
-   background-image: linear-gradient(to right, #aa99ff, #aaaaaa);
+.purpletogreyaltered {
+   background-image: linear-gradient(to right, var(--purple-altered-text-color), var(--grey-altered-text-color));
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;
 }
 
-.purpletopurple {
-   background-image: linear-gradient(to right, #aa99ff, #aa99ff);
+.purpletopurplealtered {
+   background-image: linear-gradient(to right, var(--purple-altered-text-color), var(--purple-altered-text-color));
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;
 }
 
-.purpletoorange {
-   background-image: linear-gradient(to right, #aa99ff, #ff9933);
+.purpletoorangealtered {
+   background-image: linear-gradient(to right, var(--purple-altered-text-color), var(--orange-altered-text-color));
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;
 }
 
-.purpletogreen {
-   background-image: linear-gradient(to right, #aa99ff, #33ff33);
+.purpletogreenaltered {
+   background-image: linear-gradient(to right, var(--purple-altered-text-color), var(--green-altered-text-color));
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;
 }
 
-.orangetogrey {
-   background-image: linear-gradient(to right, #ff9933, #aaaaaa);
+.orangetogreyaltered {
+   background-image: linear-gradient(to right, var(--orange-altered-text-color), var(--grey-altered-text-color));
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;
 }
 
-.orangetopurple {
-   background-image: linear-gradient(to right, #ff9933, #aa99ff);
+.orangetopurplealtered {
+   background-image: linear-gradient(to right, var(--orange-altered-text-color), var(--purple-altered-text-color));
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;
 }
 
-.orangetoorange {
-   background-image: linear-gradient(to right, #ff9933, #ff9933);
+.orangetoorangealtered {
+   background-image: linear-gradient(to right, var(--orange-altered-text-color), var(--orange-altered-text-color));
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;
 }
 
-.orangetogreen {
-   background-image: linear-gradient(to right, #ff9933, #33ff33);
+.orangetogreenaltered {
+   background-image: linear-gradient(to right, var(--orange-altered-text-color), var(--green-altered-text-color));
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;
 }
 
-.greentogrey {
-   background-image: linear-gradient(to right, #33ff33, #aaaaaa);
+.greentogreyaltered {
+   background-image: linear-gradient(to right, var(--green-altered-text-color), var(--grey-altered-text-color));
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;
 }
 
-.greentopurple {
-   background-image: linear-gradient(to right, #33ff33, #aa99ff);
+.greentopurplealtered {
+   background-image: linear-gradient(to right, var(--green-altered-text-color), var(--purple-altered-text-color));
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;
 }
 
-.greentoorange {
-   background-image: linear-gradient(to right, #33ff33, #ff9933);
+.greentoorangealtered {
+   background-image: linear-gradient(to right, var(--green-altered-text-color), var(--orange-altered-text-color));
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;
 }
 
-.greentogreen {
-   background-image: linear-gradient(to right, #33ff33, #33ff33);
+.greentogreenaltered {
+   background-image: linear-gradient(to right, var(--green-altered-text-color), var(--green-altered-text-color));
    color: transparent;
    -webkit-background-clip: text;
    background-clip: text;

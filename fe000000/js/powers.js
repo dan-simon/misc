@@ -399,7 +399,7 @@ let Powers = {
   },
   color(type, i) {
     if (this.canAccessPower(type, i)) {
-      return this.colorData[this.accessPower(type, i).type] + 'span';
+      return this.colorData[this.accessPower(type, i).type] + 'alteredspan';
     }
   },
   title(x) {
