@@ -81,6 +81,8 @@ let Saving = {
       Options.updateButtonOutlines();
       Colors.updateColors();
       updateDisplaySaveLoadSetup();
+      // We had to do this here in case we immediately start simulating time again.
+      updateDisplay();
     }
     if (isOracle) {
       callback();
