@@ -132,7 +132,7 @@ let Colors = {
   },
   getStringToColorCodeAltered(color, buttonColor) {
     let res = this.getStringToColorCode(color, buttonColor);
-    if (color !== 'finality' && color !== 'gold' && color !== 'chroma') {
+    if (color !== 'finality' && color !== 'chroma') {
       res = this.rotate(res);
     }
     return res;

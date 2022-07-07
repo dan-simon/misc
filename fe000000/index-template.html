@@ -6068,7 +6068,7 @@
       <span>Number of last runs of each type to show: <input type="text" ~!value=Stats.lastRunsToShow()~ ~!onchange=function() {Stats.setLastRunsToShow(+this.value)}~></input></span>
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'options' ? '' : 'none'~>
-      <span><button ~class-name=Options.showExportNotification() ? 'redspan' : ''~ onclick="Options.setOptionTypeShown('saving')">Show saving options</button> <button onclick="Options.setOptionTypeShown('other')">Show other options</button> <button onclick="Options.setOptionTypeShown('color')">Show color options</button></span>
+      <span><button ~class-name=Options.showExportNotification() ? 'redspan' : ''~ onclick="Options.setOptionTypeShown('saving')">Show saving options</button> <button onclick="Options.setOptionTypeShown('color')">Show color options</button> <button onclick="Options.setOptionTypeShown('tab')">Show tab options</button> <button onclick="Options.setOptionTypeShown('other')">Show other options</button></span>
       <br/>
       <table ~style.display=Options.isOptionTypeShown('saving') ? '' : 'none'~ style="margin-left: auto; margin-right: auto; border-spacing: 24px 8px; border-collapse: separate;">
         <tr>
@@ -6091,6 +6091,359 @@
           <td/>
         </tr>
       </table>
+      <table ~style.display=Options.isOptionTypeShown('color') ? '' : 'none'~ style="margin-left: auto; margin-right: auto; border-spacing: 24px 8px; border-collapse: separate;">
+        <tr>
+          <td><div class="options-div">
+            <span>Clicked button outlines: <select ~!value=Options.buttonOutlines()~ ~!onchange=function() {Options.setButtonOutlines(this.value)}~>
+              <option value="None">None</option>
+              <option value="Black">Black</option>
+              <option value="Cyan">Cyan</option>
+              <option value="White">White</option>
+              <option value="Blue">Blue</option>
+              <option value="Gold">Gold</option>
+            </select></span></div>
+          </td>
+          <td><div class="options-div">
+            <button class="mini-options-button" onclick="Options.nextBackground()">Background: ~r player.options.theme.background ~</button>
+            <button class="mini-options-button" onclick="Options.nextButtonColor()">Button colors: ~r player.options.theme.buttonColor ~</button>
+            <button class="mini-options-button" onclick="Options.nextCompletionGradients()">Completion gradients: ~r player.options.theme.completionGradients ~</button>
+            <button class="mini-options-button" onclick="Options.nextEdgeGradients()">Edge gradients: ~r player.options.theme.edgeGradients ~</button>
+          </div></td>
+          <td><button class="options-button" onclick="Options.nextColorChange()">Color change: ~r Options.colorChange() ~</button></td>
+        </tr>
+        <tr>
+          <td><button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? 'none' : ''~ class="options-button" onclick="Options.toggleTabColors()">Tab colors: ~r Options.tabColors() ? 'On' : 'Off' ~</button>
+          <div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="options-div">
+            <button class="mini-options-button" onclick="Options.toggleTabColors()">Tab colors: ~r Options.tabColors() ? 'On' : 'Off' ~</button>
+            <button class="mini-options-button" ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ onclick="Options.nextCompletionColors()">Completion colors: ~r player.options.completionColors ~</button>
+            <button class="mini-options-button" ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ onclick="Options.toggleResetColors()">Reset colors: ~r Options.resetColors() ? 'On' : 'Off' ~</button>
+            <button class="mini-options-button" ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~ onclick="Options.togglePresetHighlightColors()">Preset highlight colors: ~r Options.presetHighlightColors() ? 'On' : 'Off' ~</button>
+          </div></td>
+          <td><button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~ class="options-button" onclick="Options.toggleComplexityChallengeRunningColors()" style="font-size: 0.875rem;">
+            Complexity challenge colors: ~r Options.complexityChallengeRunningColors() ? "Running" : "Completions" ~
+          </button></td>
+          <td/>
+        </tr>
+      </table>
+      <div ~style.display=Options.isOptionTypeShown('tab') ? '' : 'none'~>
+        <span>Tabs to show:</span>
+        <div>
+          <span>
+            <span ~style.display=Tabs.isTabOptionVisible('main') ? '' : 'none'~>Main: <input class="main-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('main')~ ~!onchange=function() {Tabs.setTabOption('main', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+            <span ~style.display=Tabs.isTabOptionVisible('infinity') ? '' : 'none'~>Infinity: <input class="infinity-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('infinity')~ ~!onchange=function() {Tabs.setTabOption('infinity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+            <span ~style.display=Tabs.isTabOptionVisible('normal-challenges') ? '' : 'none'~>Normal Challenges: <input class="normal-challenges-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('normal-challenges')~ ~!onchange=function() {Tabs.setTabOption('normal-challenges', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+            <span ~style.display=Tabs.isTabOptionVisible('autobuyers') ? '' : 'none'~>Autobuyers: <input class="autobuyers-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('autobuyers')~ ~!onchange=function() {Tabs.setTabOption('autobuyers', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+            <span ~style.display=Tabs.isTabOptionVisible('infinity-challenges') ? '' : 'none'~>Infinity Challenges: <input class="infinity-challenges-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('infinity-challenges')~ ~!onchange=function() {Tabs.setTabOption('infinity-challenges', this.checked)}~></input></span>
+          </span>
+        </div>
+        <div>
+          <span>
+            <span ~style.display=Tabs.isTabOptionVisible('goals') ? '' : 'none'~>Goals: <input class="goals-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('goals')~ ~!onchange=function() {Tabs.setTabOption('goals', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+            <span ~style.display=Tabs.isTabOptionVisible('achievements') ? '' : 'none'~>Achievements: <input class="achievements-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('achievements')~ ~!onchange=function() {Tabs.setTabOption('achievements', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+            <span ~style.display=Tabs.isTabOptionVisible('statistics') ? '' : 'none'~>Statistics: <input class="statistics-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('statistics')~ ~!onchange=function() {Tabs.setTabOption('statistics', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+            <span ~style.display=Tabs.isTabOptionVisible('last-ten-runs') ? '' : 'none'~>Last Ten Runs: <input class="last-ten-runs-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('last-ten-runs')~ ~!onchange=function() {Tabs.setTabOption('last-ten-runs', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+            <span ~style.display=Tabs.isTabOptionVisible('options') ? '' : 'none'~>Options: cannot be hidden</span>
+          </span>
+        </div>
+        <div ~style.display=Tabs.isTabOptionVisible('eternity') ? '' : 'none'~>
+          <span>
+            <span ~style.display=Tabs.isTabOptionVisible('eternity') ? '' : 'none'~>Eternity: <input class="eternity-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('eternity')~ ~!onchange=function() {Tabs.setTabOption('eternity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+            <span ~style.display=Tabs.isTabOptionVisible('eternity-milestones') ? '' : 'none'~>Eternity Milestones: <input class="eternity-milestones-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('eternity-milestones')~ ~!onchange=function() {Tabs.setTabOption('eternity-milestones', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+            <span ~style.display=Tabs.isTabOptionVisible('studies') ? '' : 'none'~>Studies: <input class="studies-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('studies')~ ~!onchange=function() {Tabs.setTabOption('studies', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+            <span ~style.display=Tabs.isTabOptionVisible('eternity-producer') ? '' : 'none'~>Eternity Producer: <input class="eternity-producer-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('eternity-producer')~ ~!onchange=function() {Tabs.setTabOption('eternity-producer', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+            <span ~style.display=Tabs.isTabOptionVisible('eternity-challenges') ? '' : 'none'~>Eternity Challenges: <input class="eternity-challenges-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('eternity-challenges')~ ~!onchange=function() {Tabs.setTabOption('eternity-challenges', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+            <span ~style.display=Tabs.isTabOptionVisible('chroma') ? '' : 'none'~>Chroma: <input class="chroma-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('chroma')~ ~!onchange=function() {Tabs.setTabOption('chroma', this.checked)}~></input></span>
+          </span>
+        </div>
+        <div ~style.display=Tabs.isTabOptionVisible('complexity') ? '' : 'none'~>
+          <span>
+            <span ~style.display=Tabs.isTabOptionVisible('complexity') ? '' : 'none'~>Complexity: <input class="complexity-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('complexity')~ ~!onchange=function() {Tabs.setTabOption('complexity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+            <span ~style.display=Tabs.isTabOptionVisible('complexity-challenges') ? '' : 'none'~>Complexity Challenges: <input class="complexity-challenges-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('complexity-challenges')~ ~!onchange=function() {Tabs.setTabOption('complexity-challenges', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+            <span ~style.display=Tabs.isTabOptionVisible('complexity-achievements') ? '' : 'none'~>Complexity Achievements: <input class="complexity-achievements-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('complexity-achievements')~ ~!onchange=function() {Tabs.setTabOption('complexity-achievements', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+            <span ~style.display=Tabs.isTabOptionVisible('powers') ? '' : 'none'~>Powers: <input class="powers-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('powers')~ ~!onchange=function() {Tabs.setTabOption('powers', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+            <span ~style.display=Tabs.isTabOptionVisible('oracle') ? '' : 'none'~>Oracle: <input class="oracle-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('oracle')~ ~!onchange=function() {Tabs.setTabOption('oracle', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+            <span ~style.display=Tabs.isTabOptionVisible('galaxies') ? '' : 'none'~>Galaxies: <input class="galaxies-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('galaxies')~ ~!onchange=function() {Tabs.setTabOption('galaxies', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+          </span>
+        </div>
+        <div ~style.display=Tabs.isTabOptionVisible('finality') ? '' : 'none'~>
+          <span>
+            <span ~style.display=Tabs.isTabOptionVisible('finality') ? '' : 'none'~>Finality: <input class="finality-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('finality')~ ~!onchange=function() {Tabs.setTabOption('finality', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+            <span ~style.display=Tabs.isTabOptionVisible('finality-shards') ? '' : 'none'~>Finality Shards: <input class="finality-shards-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('finality-shards')~ ~!onchange=function() {Tabs.setTabOption('finality-shards', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+            <span ~style.display=Tabs.isTabOptionVisible('finality-milestones') ? '' : 'none'~>Finality Milestones: <input class="finality-milestones-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('finality-milestones')~ ~!onchange=function() {Tabs.setTabOption('finality-milestones', this.checked)}~></input></span>
+          </span>
+        </div>
+        <span><button class="tabs-export-button" onclick="Tabs.export()">Export tabs to show</button> <button onclick="Tabs.import()">Import tabs to show</button> <button onclick="Tabs.showAllUnlockedTabs()">Show all unlocked tabs</button></span>
+        <div style="width: 1024px; margin-left: auto; margin-right: auto;">
+          <span>Click on the name of a tab preset on the line below to show those tabs:</span>
+          <br/>
+          <button ~class=Tabs.presetClass(1)~ ~style.display=Tabs.hasPreset(1) ? '' : 'none'~ onclick="Tabs.presetLoad(1)">~r Tabs.presetName(1) ~</button>
+          <button ~class=Tabs.presetClass(2)~ ~style.display=Tabs.hasPreset(2) ? '' : 'none'~ onclick="Tabs.presetLoad(2)">~r Tabs.presetName(2) ~</button>
+          <button ~class=Tabs.presetClass(3)~ ~style.display=Tabs.hasPreset(3) ? '' : 'none'~ onclick="Tabs.presetLoad(3)">~r Tabs.presetName(3) ~</button>
+          <button ~class=Tabs.presetClass(4)~ ~style.display=Tabs.hasPreset(4) ? '' : 'none'~ onclick="Tabs.presetLoad(4)">~r Tabs.presetName(4) ~</button>
+          <button ~class=Tabs.presetClass(5)~ ~style.display=Tabs.hasPreset(5) ? '' : 'none'~ onclick="Tabs.presetLoad(5)">~r Tabs.presetName(5) ~</button>
+          <button ~class=Tabs.presetClass(6)~ ~style.display=Tabs.hasPreset(6) ? '' : 'none'~ onclick="Tabs.presetLoad(6)">~r Tabs.presetName(6) ~</button>
+          <button ~class=Tabs.presetClass(7)~ ~style.display=Tabs.hasPreset(7) ? '' : 'none'~ onclick="Tabs.presetLoad(7)">~r Tabs.presetName(7) ~</button>
+          <button ~class=Tabs.presetClass(8)~ ~style.display=Tabs.hasPreset(8) ? '' : 'none'~ onclick="Tabs.presetLoad(8)">~r Tabs.presetName(8) ~</button>
+          <button ~class=Tabs.presetClass(9)~ ~style.display=Tabs.hasPreset(9) ? '' : 'none'~ onclick="Tabs.presetLoad(9)">~r Tabs.presetName(9) ~</button>
+          <button ~class=Tabs.presetClass(10)~ ~style.display=Tabs.hasPreset(10) ? '' : 'none'~ onclick="Tabs.presetLoad(10)">~r Tabs.presetName(10) ~</button>
+          <button ~class=Tabs.presetClass(11)~ ~style.display=Tabs.hasPreset(11) ? '' : 'none'~ onclick="Tabs.presetLoad(11)">~r Tabs.presetName(11) ~</button>
+          <button ~class=Tabs.presetClass(12)~ ~style.display=Tabs.hasPreset(12) ? '' : 'none'~ onclick="Tabs.presetLoad(12)">~r Tabs.presetName(12) ~</button>
+          <button ~class=Tabs.presetClass(13)~ ~style.display=Tabs.hasPreset(13) ? '' : 'none'~ onclick="Tabs.presetLoad(13)">~r Tabs.presetName(13) ~</button>
+          <button ~class=Tabs.presetClass(14)~ ~style.display=Tabs.hasPreset(14) ? '' : 'none'~ onclick="Tabs.presetLoad(14)">~r Tabs.presetName(14) ~</button>
+          <button ~class=Tabs.presetClass(15)~ ~style.display=Tabs.hasPreset(15) ? '' : 'none'~ onclick="Tabs.presetLoad(15)">~r Tabs.presetName(15) ~</button>
+          <button ~class=Tabs.presetClass(16)~ ~style.display=Tabs.hasPreset(16) ? '' : 'none'~ onclick="Tabs.presetLoad(16)">~r Tabs.presetName(16) ~</button>
+          <button ~class=Tabs.presetClass(17)~ ~style.display=Tabs.hasPreset(17) ? '' : 'none'~ onclick="Tabs.presetLoad(17)">~r Tabs.presetName(17) ~</button>
+          <button ~class=Tabs.presetClass(18)~ ~style.display=Tabs.hasPreset(18) ? '' : 'none'~ onclick="Tabs.presetLoad(18)">~r Tabs.presetName(18) ~</button>
+          <button ~class=Tabs.presetClass(19)~ ~style.display=Tabs.hasPreset(19) ? '' : 'none'~ onclick="Tabs.presetLoad(19)">~r Tabs.presetName(19) ~</button>
+          <button ~class=Tabs.presetClass(20)~ ~style.display=Tabs.hasPreset(20) ? '' : 'none'~ onclick="Tabs.presetLoad(20)">~r Tabs.presetName(20) ~</button>
+          <button ~class=Tabs.presetClass(21)~ ~style.display=Tabs.hasPreset(21) ? '' : 'none'~ onclick="Tabs.presetLoad(21)">~r Tabs.presetName(21) ~</button>
+          <button ~class=Tabs.presetClass(22)~ ~style.display=Tabs.hasPreset(22) ? '' : 'none'~ onclick="Tabs.presetLoad(22)">~r Tabs.presetName(22) ~</button>
+          <button ~class=Tabs.presetClass(23)~ ~style.display=Tabs.hasPreset(23) ? '' : 'none'~ onclick="Tabs.presetLoad(23)">~r Tabs.presetName(23) ~</button>
+          <button ~class=Tabs.presetClass(24)~ ~style.display=Tabs.hasPreset(24) ? '' : 'none'~ onclick="Tabs.presetLoad(24)">~r Tabs.presetName(24) ~</button>
+          <button ~class=Tabs.presetClass(25)~ ~style.display=Tabs.hasPreset(25) ? '' : 'none'~ onclick="Tabs.presetLoad(25)">~r Tabs.presetName(25) ~</button>
+          <button ~class=Tabs.presetClass(26)~ ~style.display=Tabs.hasPreset(26) ? '' : 'none'~ onclick="Tabs.presetLoad(26)">~r Tabs.presetName(26) ~</button>
+          <button ~class=Tabs.presetClass(27)~ ~style.display=Tabs.hasPreset(27) ? '' : 'none'~ onclick="Tabs.presetLoad(27)">~r Tabs.presetName(27) ~</button>
+          <button ~class=Tabs.presetClass(28)~ ~style.display=Tabs.hasPreset(28) ? '' : 'none'~ onclick="Tabs.presetLoad(28)">~r Tabs.presetName(28) ~</button>
+          <button ~class=Tabs.presetClass(29)~ ~style.display=Tabs.hasPreset(29) ? '' : 'none'~ onclick="Tabs.presetLoad(29)">~r Tabs.presetName(29) ~</button>
+          <button ~class=Tabs.presetClass(30)~ ~style.display=Tabs.hasPreset(30) ? '' : 'none'~ onclick="Tabs.presetLoad(30)">~r Tabs.presetName(30) ~</button>
+          <button ~class=Tabs.presetClass(31)~ ~style.display=Tabs.hasPreset(31) ? '' : 'none'~ onclick="Tabs.presetLoad(31)">~r Tabs.presetName(31) ~</button>
+          <button ~class=Tabs.presetClass(32)~ ~style.display=Tabs.hasPreset(32) ? '' : 'none'~ onclick="Tabs.presetLoad(32)">~r Tabs.presetName(32) ~</button>
+          <div ~style.display=Tabs.hasPreset(1) ? 'none' : ''~>
+            You don't currently have any tab presets.
+          </div>
+        </div>
+        <span>Tab presets (<button onclick="Tabs.presetSort()">sort by name</button>):</span>
+        <div ~style.display=Tabs.hasPreset(1) ? '' : 'none'~>
+          Name: <input class="presettabname1" type="text" ~!value=Tabs.presetName(1)~ ~!onchange=function() {Tabs.setPresetName(1, this.value)}~></input>
+          Tabs to show: <input class="presettablist1" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(1)~ ~!onchange=function() {Tabs.setPresetTabs(1, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(1)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(1)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(1)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(2) ? '' : 'none'~>
+          Name: <input class="presettabname2" type="text" ~!value=Tabs.presetName(2)~ ~!onchange=function() {Tabs.setPresetName(2, this.value)}~></input>
+          Tabs to show: <input class="presettablist2" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(2)~ ~!onchange=function() {Tabs.setPresetTabs(2, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(2)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(2)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(2)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(3) ? '' : 'none'~>
+          Name: <input class="presettabname3" type="text" ~!value=Tabs.presetName(3)~ ~!onchange=function() {Tabs.setPresetName(3, this.value)}~></input>
+          Tabs to show: <input class="presettablist3" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(3)~ ~!onchange=function() {Tabs.setPresetTabs(3, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(3)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(3)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(3)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(4) ? '' : 'none'~>
+          Name: <input class="presettabname4" type="text" ~!value=Tabs.presetName(4)~ ~!onchange=function() {Tabs.setPresetName(4, this.value)}~></input>
+          Tabs to show: <input class="presettablist4" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(4)~ ~!onchange=function() {Tabs.setPresetTabs(4, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(4)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(4)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(4)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(5) ? '' : 'none'~>
+          Name: <input class="presettabname5" type="text" ~!value=Tabs.presetName(5)~ ~!onchange=function() {Tabs.setPresetName(5, this.value)}~></input>
+          Tabs to show: <input class="presettablist5" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(5)~ ~!onchange=function() {Tabs.setPresetTabs(5, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(5)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(5)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(5)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(6) ? '' : 'none'~>
+          Name: <input class="presettabname6" type="text" ~!value=Tabs.presetName(6)~ ~!onchange=function() {Tabs.setPresetName(6, this.value)}~></input>
+          Tabs to show: <input class="presettablist6" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(6)~ ~!onchange=function() {Tabs.setPresetTabs(6, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(6)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(6)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(6)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(7) ? '' : 'none'~>
+          Name: <input class="presettabname7" type="text" ~!value=Tabs.presetName(7)~ ~!onchange=function() {Tabs.setPresetName(7, this.value)}~></input>
+          Tabs to show: <input class="presettablist7" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(7)~ ~!onchange=function() {Tabs.setPresetTabs(7, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(7)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(7)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(7)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(8) ? '' : 'none'~>
+          Name: <input class="presettabname8" type="text" ~!value=Tabs.presetName(8)~ ~!onchange=function() {Tabs.setPresetName(8, this.value)}~></input>
+          Tabs to show: <input class="presettablist8" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(8)~ ~!onchange=function() {Tabs.setPresetTabs(8, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(8)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(8)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(8)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(9) ? '' : 'none'~>
+          Name: <input class="presettabname9" type="text" ~!value=Tabs.presetName(9)~ ~!onchange=function() {Tabs.setPresetName(9, this.value)}~></input>
+          Tabs to show: <input class="presettablist9" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(9)~ ~!onchange=function() {Tabs.setPresetTabs(9, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(9)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(9)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(9)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(10) ? '' : 'none'~>
+          Name: <input class="presettabname10" type="text" ~!value=Tabs.presetName(10)~ ~!onchange=function() {Tabs.setPresetName(10, this.value)}~></input>
+          Tabs to show: <input class="presettablist10" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(10)~ ~!onchange=function() {Tabs.setPresetTabs(10, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(10)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(10)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(10)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(11) ? '' : 'none'~>
+          Name: <input class="presettabname11" type="text" ~!value=Tabs.presetName(11)~ ~!onchange=function() {Tabs.setPresetName(11, this.value)}~></input>
+          Tabs to show: <input class="presettablist11" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(11)~ ~!onchange=function() {Tabs.setPresetTabs(11, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(11)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(11)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(11)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(12) ? '' : 'none'~>
+          Name: <input class="presettabname12" type="text" ~!value=Tabs.presetName(12)~ ~!onchange=function() {Tabs.setPresetName(12, this.value)}~></input>
+          Tabs to show: <input class="presettablist12" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(12)~ ~!onchange=function() {Tabs.setPresetTabs(12, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(12)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(12)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(12)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(13) ? '' : 'none'~>
+          Name: <input class="presettabname13" type="text" ~!value=Tabs.presetName(13)~ ~!onchange=function() {Tabs.setPresetName(13, this.value)}~></input>
+          Tabs to show: <input class="presettablist13" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(13)~ ~!onchange=function() {Tabs.setPresetTabs(13, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(13)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(13)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(13)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(14) ? '' : 'none'~>
+          Name: <input class="presettabname14" type="text" ~!value=Tabs.presetName(14)~ ~!onchange=function() {Tabs.setPresetName(14, this.value)}~></input>
+          Tabs to show: <input class="presettablist14" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(14)~ ~!onchange=function() {Tabs.setPresetTabs(14, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(14)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(14)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(14)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(15) ? '' : 'none'~>
+          Name: <input class="presettabname15" type="text" ~!value=Tabs.presetName(15)~ ~!onchange=function() {Tabs.setPresetName(15, this.value)}~></input>
+          Tabs to show: <input class="presettablist15" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(15)~ ~!onchange=function() {Tabs.setPresetTabs(15, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(15)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(15)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(15)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(16) ? '' : 'none'~>
+          Name: <input class="presettabname16" type="text" ~!value=Tabs.presetName(16)~ ~!onchange=function() {Tabs.setPresetName(16, this.value)}~></input>
+          Tabs to show: <input class="presettablist16" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(16)~ ~!onchange=function() {Tabs.setPresetTabs(16, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(16)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(16)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(16)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(17) ? '' : 'none'~>
+          Name: <input class="presettabname17" type="text" ~!value=Tabs.presetName(17)~ ~!onchange=function() {Tabs.setPresetName(17, this.value)}~></input>
+          Tabs to show: <input class="presettablist17" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(17)~ ~!onchange=function() {Tabs.setPresetTabs(17, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(17)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(17)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(17)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(18) ? '' : 'none'~>
+          Name: <input class="presettabname18" type="text" ~!value=Tabs.presetName(18)~ ~!onchange=function() {Tabs.setPresetName(18, this.value)}~></input>
+          Tabs to show: <input class="presettablist18" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(18)~ ~!onchange=function() {Tabs.setPresetTabs(18, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(18)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(18)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(18)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(19) ? '' : 'none'~>
+          Name: <input class="presettabname19" type="text" ~!value=Tabs.presetName(19)~ ~!onchange=function() {Tabs.setPresetName(19, this.value)}~></input>
+          Tabs to show: <input class="presettablist19" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(19)~ ~!onchange=function() {Tabs.setPresetTabs(19, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(19)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(19)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(19)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(20) ? '' : 'none'~>
+          Name: <input class="presettabname20" type="text" ~!value=Tabs.presetName(20)~ ~!onchange=function() {Tabs.setPresetName(20, this.value)}~></input>
+          Tabs to show: <input class="presettablist20" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(20)~ ~!onchange=function() {Tabs.setPresetTabs(20, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(20)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(20)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(20)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(21) ? '' : 'none'~>
+          Name: <input class="presettabname21" type="text" ~!value=Tabs.presetName(21)~ ~!onchange=function() {Tabs.setPresetName(21, this.value)}~></input>
+          Tabs to show: <input class="presettablist21" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(21)~ ~!onchange=function() {Tabs.setPresetTabs(21, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(21)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(21)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(21)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(22) ? '' : 'none'~>
+          Name: <input class="presettabname22" type="text" ~!value=Tabs.presetName(22)~ ~!onchange=function() {Tabs.setPresetName(22, this.value)}~></input>
+          Tabs to show: <input class="presettablist22" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(22)~ ~!onchange=function() {Tabs.setPresetTabs(22, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(22)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(22)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(22)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(23) ? '' : 'none'~>
+          Name: <input class="presettabname23" type="text" ~!value=Tabs.presetName(23)~ ~!onchange=function() {Tabs.setPresetName(23, this.value)}~></input>
+          Tabs to show: <input class="presettablist23" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(23)~ ~!onchange=function() {Tabs.setPresetTabs(23, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(23)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(23)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(23)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(24) ? '' : 'none'~>
+          Name: <input class="presettabname24" type="text" ~!value=Tabs.presetName(24)~ ~!onchange=function() {Tabs.setPresetName(24, this.value)}~></input>
+          Tabs to show: <input class="presettablist24" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(24)~ ~!onchange=function() {Tabs.setPresetTabs(24, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(24)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(24)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(24)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(25) ? '' : 'none'~>
+          Name: <input class="presettabname25" type="text" ~!value=Tabs.presetName(25)~ ~!onchange=function() {Tabs.setPresetName(25, this.value)}~></input>
+          Tabs to show: <input class="presettablist25" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(25)~ ~!onchange=function() {Tabs.setPresetTabs(25, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(25)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(25)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(25)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(26) ? '' : 'none'~>
+          Name: <input class="presettabname26" type="text" ~!value=Tabs.presetName(26)~ ~!onchange=function() {Tabs.setPresetName(26, this.value)}~></input>
+          Tabs to show: <input class="presettablist26" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(26)~ ~!onchange=function() {Tabs.setPresetTabs(26, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(26)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(26)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(26)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(27) ? '' : 'none'~>
+          Name: <input class="presettabname27" type="text" ~!value=Tabs.presetName(27)~ ~!onchange=function() {Tabs.setPresetName(27, this.value)}~></input>
+          Tabs to show: <input class="presettablist27" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(27)~ ~!onchange=function() {Tabs.setPresetTabs(27, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(27)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(27)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(27)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(28) ? '' : 'none'~>
+          Name: <input class="presettabname28" type="text" ~!value=Tabs.presetName(28)~ ~!onchange=function() {Tabs.setPresetName(28, this.value)}~></input>
+          Tabs to show: <input class="presettablist28" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(28)~ ~!onchange=function() {Tabs.setPresetTabs(28, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(28)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(28)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(28)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(29) ? '' : 'none'~>
+          Name: <input class="presettabname29" type="text" ~!value=Tabs.presetName(29)~ ~!onchange=function() {Tabs.setPresetName(29, this.value)}~></input>
+          Tabs to show: <input class="presettablist29" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(29)~ ~!onchange=function() {Tabs.setPresetTabs(29, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(29)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(29)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(29)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(30) ? '' : 'none'~>
+          Name: <input class="presettabname30" type="text" ~!value=Tabs.presetName(30)~ ~!onchange=function() {Tabs.setPresetName(30, this.value)}~></input>
+          Tabs to show: <input class="presettablist30" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(30)~ ~!onchange=function() {Tabs.setPresetTabs(30, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(30)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(30)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(30)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(31) ? '' : 'none'~>
+          Name: <input class="presettabname31" type="text" ~!value=Tabs.presetName(31)~ ~!onchange=function() {Tabs.setPresetName(31, this.value)}~></input>
+          Tabs to show: <input class="presettablist31" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(31)~ ~!onchange=function() {Tabs.setPresetTabs(31, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(31)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(31)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(31)">Delete</button>
+        </div>
+        <div ~style.display=Tabs.hasPreset(32) ? '' : 'none'~>
+          Name: <input class="presettabname32" type="text" ~!value=Tabs.presetName(32)~ ~!onchange=function() {Tabs.setPresetName(32, this.value)}~></input>
+          Tabs to show: <input class="presettablist32" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(32)~ ~!onchange=function() {Tabs.setPresetTabs(32, this.value)}~></input>
+          <button onclick="Tabs.presetLoad(32)">Load</button>
+          <button onclick="Tabs.presetSetToCurrentTabs(32)">Change to currently shown tabs</button>
+          <button onclick="Tabs.presetDelete(32)">Delete</button>
+        </div>
+        <span>
+          <button ~style.display=Tabs.hasPreset(32) ? 'none' : ''~ onclick="Tabs.presetCreate()">Create a tab preset</button>
+          <span ~style.display=Tabs.hasPreset(32) ? '' : 'none'~>You can create at most ~i 32 ~ tab presets. Delete existing presets to create more.</span>
+        </span>
+        <br class="tabpresetbr" style="display: none;"/>
+        <span style="display: none;">Exported tabs to show (also copied to clipboard): <input id="tabs-export-output"></input></span>
+      </div>
       <table ~style.display=Options.isOptionTypeShown('other') ? '' : 'none'~ style="margin-left: auto; margin-right: auto; border-spacing: 24px 8px; border-collapse: separate;">
         <tr>
           <td>
@@ -6194,40 +6547,7 @@
           <td/>
         <tr/>
       </table>
-      <table ~style.display=Options.isOptionTypeShown('color') ? '' : 'none'~ style="margin-left: auto; margin-right: auto; border-spacing: 24px 8px; border-collapse: separate;">
-        <tr>
-          <td><div class="options-div">
-            <span>Clicked button outlines: <select ~!value=Options.buttonOutlines()~ ~!onchange=function() {Options.setButtonOutlines(this.value)}~>
-              <option value="None">None</option>
-              <option value="Black">Black</option>
-              <option value="Cyan">Cyan</option>
-              <option value="White">White</option>
-              <option value="Blue">Blue</option>
-              <option value="Gold">Gold</option>
-            </select></span></div>
-          </td>
-          <td><div class="options-div">
-            <button class="mini-options-button" onclick="Options.nextBackground()">Background: ~r player.options.theme.background ~</button>
-            <button class="mini-options-button" onclick="Options.nextButtonColor()">Button colors: ~r player.options.theme.buttonColor ~</button>
-            <button class="mini-options-button" onclick="Options.nextCompletionGradients()">Completion gradients: ~r player.options.theme.completionGradients ~</button>
-            <button class="mini-options-button" onclick="Options.nextEdgeGradients()">Edge gradients: ~r player.options.theme.edgeGradients ~</button>
-          </div></td>
-          <td><button class="options-button" onclick="Options.nextColorChange()">Color change: ~r Options.colorChange() ~</button></td>
-        </tr>
-        <tr>
-          <td><button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? 'none' : ''~ class="options-button" onclick="Options.toggleTabColors()">Tab colors: ~r Options.tabColors() ? 'On' : 'Off' ~</button>
-          <div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="options-div">
-            <button class="mini-options-button" onclick="Options.toggleTabColors()">Tab colors: ~r Options.tabColors() ? 'On' : 'Off' ~</button>
-            <button class="mini-options-button" ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ onclick="Options.nextCompletionColors()">Completion colors: ~r player.options.completionColors ~</button>
-            <button class="mini-options-button" ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ onclick="Options.toggleResetColors()">Reset colors: ~r Options.resetColors() ? 'On' : 'Off' ~</button>
-            <button class="mini-options-button" ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~ onclick="Options.togglePresetHighlightColors()">Preset highlight colors: ~r Options.presetHighlightColors() ? 'On' : 'Off' ~</button>
-          </div></td>
-          <td><button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~ class="options-button" onclick="Options.toggleComplexityChallengeRunningColors()" style="font-size: 0.875rem;">
-            Complexity challenge colors: ~r Options.complexityChallengeRunningColors() ? "Running" : "Completions" ~
-          </button></td>
-          <td/>
-        </tr>
-      </table>
+      <br/>
       <div>
         Confirmations:
         <span ~style.display=Options.optionDisplay(SpecialDivs.isDivVisible('sacrifice')) ? '' : 'none'~>Sacrifice: <input type="checkbox" ~!checked=Options.confirmation('sacrifice')~ ~!onchange=function() {Options.setConfirmation('sacrifice', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
@@ -6264,324 +6584,6 @@
         <span>Preset change: <input type="checkbox" ~!checked=Options.confirmation('presetChange')~ ~!onchange=function() {Options.setConfirmation('presetChange', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
         <span>Preset deletion: <input type="checkbox" ~!checked=Options.confirmation('presetDeletion')~ ~!onchange=function() {Options.setConfirmation('presetDeletion', this.checked)}~></input></span>
       </div>
-      <br/>
-      <span>Tabs to show:</span>
-      <div>
-        <span>
-          <span ~style.display=Tabs.isTabOptionVisible('main') ? '' : 'none'~>Main: <input class="main-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('main')~ ~!onchange=function() {Tabs.setTabOption('main', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span ~style.display=Tabs.isTabOptionVisible('infinity') ? '' : 'none'~>Infinity: <input class="infinity-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('infinity')~ ~!onchange=function() {Tabs.setTabOption('infinity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span ~style.display=Tabs.isTabOptionVisible('normal-challenges') ? '' : 'none'~>Normal Challenges: <input class="normal-challenges-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('normal-challenges')~ ~!onchange=function() {Tabs.setTabOption('normal-challenges', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span ~style.display=Tabs.isTabOptionVisible('autobuyers') ? '' : 'none'~>Autobuyers: <input class="autobuyers-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('autobuyers')~ ~!onchange=function() {Tabs.setTabOption('autobuyers', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span ~style.display=Tabs.isTabOptionVisible('infinity-challenges') ? '' : 'none'~>Infinity Challenges: <input class="infinity-challenges-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('infinity-challenges')~ ~!onchange=function() {Tabs.setTabOption('infinity-challenges', this.checked)}~></input></span>
-        </span>
-      </div>
-      <div>
-        <span>
-          <span ~style.display=Tabs.isTabOptionVisible('goals') ? '' : 'none'~>Goals: <input class="goals-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('goals')~ ~!onchange=function() {Tabs.setTabOption('goals', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span ~style.display=Tabs.isTabOptionVisible('achievements') ? '' : 'none'~>Achievements: <input class="achievements-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('achievements')~ ~!onchange=function() {Tabs.setTabOption('achievements', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span ~style.display=Tabs.isTabOptionVisible('statistics') ? '' : 'none'~>Statistics: <input class="statistics-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('statistics')~ ~!onchange=function() {Tabs.setTabOption('statistics', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span ~style.display=Tabs.isTabOptionVisible('last-ten-runs') ? '' : 'none'~>Last Ten Runs: <input class="last-ten-runs-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('last-ten-runs')~ ~!onchange=function() {Tabs.setTabOption('last-ten-runs', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span ~style.display=Tabs.isTabOptionVisible('options') ? '' : 'none'~>Options: cannot be hidden</span>
-        </span>
-      </div>
-      <div ~style.display=Tabs.isTabOptionVisible('eternity') ? '' : 'none'~>
-        <span>
-          <span ~style.display=Tabs.isTabOptionVisible('eternity') ? '' : 'none'~>Eternity: <input class="eternity-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('eternity')~ ~!onchange=function() {Tabs.setTabOption('eternity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span ~style.display=Tabs.isTabOptionVisible('eternity-milestones') ? '' : 'none'~>Eternity Milestones: <input class="eternity-milestones-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('eternity-milestones')~ ~!onchange=function() {Tabs.setTabOption('eternity-milestones', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span ~style.display=Tabs.isTabOptionVisible('studies') ? '' : 'none'~>Studies: <input class="studies-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('studies')~ ~!onchange=function() {Tabs.setTabOption('studies', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span ~style.display=Tabs.isTabOptionVisible('eternity-producer') ? '' : 'none'~>Eternity Producer: <input class="eternity-producer-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('eternity-producer')~ ~!onchange=function() {Tabs.setTabOption('eternity-producer', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span ~style.display=Tabs.isTabOptionVisible('eternity-challenges') ? '' : 'none'~>Eternity Challenges: <input class="eternity-challenges-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('eternity-challenges')~ ~!onchange=function() {Tabs.setTabOption('eternity-challenges', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span ~style.display=Tabs.isTabOptionVisible('chroma') ? '' : 'none'~>Chroma: <input class="chroma-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('chroma')~ ~!onchange=function() {Tabs.setTabOption('chroma', this.checked)}~></input></span>
-        </span>
-      </div>
-      <div ~style.display=Tabs.isTabOptionVisible('complexity') ? '' : 'none'~>
-        <span>
-          <span ~style.display=Tabs.isTabOptionVisible('complexity') ? '' : 'none'~>Complexity: <input class="complexity-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('complexity')~ ~!onchange=function() {Tabs.setTabOption('complexity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span ~style.display=Tabs.isTabOptionVisible('complexity-challenges') ? '' : 'none'~>Complexity Challenges: <input class="complexity-challenges-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('complexity-challenges')~ ~!onchange=function() {Tabs.setTabOption('complexity-challenges', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span ~style.display=Tabs.isTabOptionVisible('complexity-achievements') ? '' : 'none'~>Complexity Achievements: <input class="complexity-achievements-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('complexity-achievements')~ ~!onchange=function() {Tabs.setTabOption('complexity-achievements', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span ~style.display=Tabs.isTabOptionVisible('powers') ? '' : 'none'~>Powers: <input class="powers-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('powers')~ ~!onchange=function() {Tabs.setTabOption('powers', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span ~style.display=Tabs.isTabOptionVisible('oracle') ? '' : 'none'~>Oracle: <input class="oracle-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('oracle')~ ~!onchange=function() {Tabs.setTabOption('oracle', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span ~style.display=Tabs.isTabOptionVisible('galaxies') ? '' : 'none'~>Galaxies: <input class="galaxies-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('galaxies')~ ~!onchange=function() {Tabs.setTabOption('galaxies', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-        </span>
-      </div>
-      <div ~style.display=Tabs.isTabOptionVisible('finality') ? '' : 'none'~>
-        <span>
-          <span ~style.display=Tabs.isTabOptionVisible('finality') ? '' : 'none'~>Finality: <input class="finality-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('finality')~ ~!onchange=function() {Tabs.setTabOption('finality', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span ~style.display=Tabs.isTabOptionVisible('finality-shards') ? '' : 'none'~>Finality Shards: <input class="finality-shards-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('finality-shards')~ ~!onchange=function() {Tabs.setTabOption('finality-shards', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-          <span ~style.display=Tabs.isTabOptionVisible('finality-milestones') ? '' : 'none'~>Finality Milestones: <input class="finality-milestones-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('finality-milestones')~ ~!onchange=function() {Tabs.setTabOption('finality-milestones', this.checked)}~></input></span>
-        </span>
-      </div>
-      <span><button class="tabs-export-button" onclick="Tabs.export()">Export tabs to show</button> <button onclick="Tabs.import()">Import tabs to show</button> <button onclick="Tabs.showAllUnlockedTabs()">Show all unlocked tabs</button></span>
-      <div style="width: 1024px; margin-left: auto; margin-right: auto;">
-        <span>Click on the name of a tab preset on the line below to show those tabs:</span>
-        <br/>
-        <button ~class=Tabs.presetClass(1)~ ~style.display=Tabs.hasPreset(1) ? '' : 'none'~ onclick="Tabs.presetLoad(1)">~r Tabs.presetName(1) ~</button>
-        <button ~class=Tabs.presetClass(2)~ ~style.display=Tabs.hasPreset(2) ? '' : 'none'~ onclick="Tabs.presetLoad(2)">~r Tabs.presetName(2) ~</button>
-        <button ~class=Tabs.presetClass(3)~ ~style.display=Tabs.hasPreset(3) ? '' : 'none'~ onclick="Tabs.presetLoad(3)">~r Tabs.presetName(3) ~</button>
-        <button ~class=Tabs.presetClass(4)~ ~style.display=Tabs.hasPreset(4) ? '' : 'none'~ onclick="Tabs.presetLoad(4)">~r Tabs.presetName(4) ~</button>
-        <button ~class=Tabs.presetClass(5)~ ~style.display=Tabs.hasPreset(5) ? '' : 'none'~ onclick="Tabs.presetLoad(5)">~r Tabs.presetName(5) ~</button>
-        <button ~class=Tabs.presetClass(6)~ ~style.display=Tabs.hasPreset(6) ? '' : 'none'~ onclick="Tabs.presetLoad(6)">~r Tabs.presetName(6) ~</button>
-        <button ~class=Tabs.presetClass(7)~ ~style.display=Tabs.hasPreset(7) ? '' : 'none'~ onclick="Tabs.presetLoad(7)">~r Tabs.presetName(7) ~</button>
-        <button ~class=Tabs.presetClass(8)~ ~style.display=Tabs.hasPreset(8) ? '' : 'none'~ onclick="Tabs.presetLoad(8)">~r Tabs.presetName(8) ~</button>
-        <button ~class=Tabs.presetClass(9)~ ~style.display=Tabs.hasPreset(9) ? '' : 'none'~ onclick="Tabs.presetLoad(9)">~r Tabs.presetName(9) ~</button>
-        <button ~class=Tabs.presetClass(10)~ ~style.display=Tabs.hasPreset(10) ? '' : 'none'~ onclick="Tabs.presetLoad(10)">~r Tabs.presetName(10) ~</button>
-        <button ~class=Tabs.presetClass(11)~ ~style.display=Tabs.hasPreset(11) ? '' : 'none'~ onclick="Tabs.presetLoad(11)">~r Tabs.presetName(11) ~</button>
-        <button ~class=Tabs.presetClass(12)~ ~style.display=Tabs.hasPreset(12) ? '' : 'none'~ onclick="Tabs.presetLoad(12)">~r Tabs.presetName(12) ~</button>
-        <button ~class=Tabs.presetClass(13)~ ~style.display=Tabs.hasPreset(13) ? '' : 'none'~ onclick="Tabs.presetLoad(13)">~r Tabs.presetName(13) ~</button>
-        <button ~class=Tabs.presetClass(14)~ ~style.display=Tabs.hasPreset(14) ? '' : 'none'~ onclick="Tabs.presetLoad(14)">~r Tabs.presetName(14) ~</button>
-        <button ~class=Tabs.presetClass(15)~ ~style.display=Tabs.hasPreset(15) ? '' : 'none'~ onclick="Tabs.presetLoad(15)">~r Tabs.presetName(15) ~</button>
-        <button ~class=Tabs.presetClass(16)~ ~style.display=Tabs.hasPreset(16) ? '' : 'none'~ onclick="Tabs.presetLoad(16)">~r Tabs.presetName(16) ~</button>
-        <button ~class=Tabs.presetClass(17)~ ~style.display=Tabs.hasPreset(17) ? '' : 'none'~ onclick="Tabs.presetLoad(17)">~r Tabs.presetName(17) ~</button>
-        <button ~class=Tabs.presetClass(18)~ ~style.display=Tabs.hasPreset(18) ? '' : 'none'~ onclick="Tabs.presetLoad(18)">~r Tabs.presetName(18) ~</button>
-        <button ~class=Tabs.presetClass(19)~ ~style.display=Tabs.hasPreset(19) ? '' : 'none'~ onclick="Tabs.presetLoad(19)">~r Tabs.presetName(19) ~</button>
-        <button ~class=Tabs.presetClass(20)~ ~style.display=Tabs.hasPreset(20) ? '' : 'none'~ onclick="Tabs.presetLoad(20)">~r Tabs.presetName(20) ~</button>
-        <button ~class=Tabs.presetClass(21)~ ~style.display=Tabs.hasPreset(21) ? '' : 'none'~ onclick="Tabs.presetLoad(21)">~r Tabs.presetName(21) ~</button>
-        <button ~class=Tabs.presetClass(22)~ ~style.display=Tabs.hasPreset(22) ? '' : 'none'~ onclick="Tabs.presetLoad(22)">~r Tabs.presetName(22) ~</button>
-        <button ~class=Tabs.presetClass(23)~ ~style.display=Tabs.hasPreset(23) ? '' : 'none'~ onclick="Tabs.presetLoad(23)">~r Tabs.presetName(23) ~</button>
-        <button ~class=Tabs.presetClass(24)~ ~style.display=Tabs.hasPreset(24) ? '' : 'none'~ onclick="Tabs.presetLoad(24)">~r Tabs.presetName(24) ~</button>
-        <button ~class=Tabs.presetClass(25)~ ~style.display=Tabs.hasPreset(25) ? '' : 'none'~ onclick="Tabs.presetLoad(25)">~r Tabs.presetName(25) ~</button>
-        <button ~class=Tabs.presetClass(26)~ ~style.display=Tabs.hasPreset(26) ? '' : 'none'~ onclick="Tabs.presetLoad(26)">~r Tabs.presetName(26) ~</button>
-        <button ~class=Tabs.presetClass(27)~ ~style.display=Tabs.hasPreset(27) ? '' : 'none'~ onclick="Tabs.presetLoad(27)">~r Tabs.presetName(27) ~</button>
-        <button ~class=Tabs.presetClass(28)~ ~style.display=Tabs.hasPreset(28) ? '' : 'none'~ onclick="Tabs.presetLoad(28)">~r Tabs.presetName(28) ~</button>
-        <button ~class=Tabs.presetClass(29)~ ~style.display=Tabs.hasPreset(29) ? '' : 'none'~ onclick="Tabs.presetLoad(29)">~r Tabs.presetName(29) ~</button>
-        <button ~class=Tabs.presetClass(30)~ ~style.display=Tabs.hasPreset(30) ? '' : 'none'~ onclick="Tabs.presetLoad(30)">~r Tabs.presetName(30) ~</button>
-        <button ~class=Tabs.presetClass(31)~ ~style.display=Tabs.hasPreset(31) ? '' : 'none'~ onclick="Tabs.presetLoad(31)">~r Tabs.presetName(31) ~</button>
-        <button ~class=Tabs.presetClass(32)~ ~style.display=Tabs.hasPreset(32) ? '' : 'none'~ onclick="Tabs.presetLoad(32)">~r Tabs.presetName(32) ~</button>
-        <div ~style.display=Tabs.hasPreset(1) ? 'none' : ''~>
-          You don't currently have any tab presets.
-        </div>
-      </div>
-      <span>Tab presets (<button onclick="Tabs.presetSort()">sort by name</button>):</span>
-      <div ~style.display=Tabs.hasPreset(1) ? '' : 'none'~>
-        Name: <input class="presettabname1" type="text" ~!value=Tabs.presetName(1)~ ~!onchange=function() {Tabs.setPresetName(1, this.value)}~></input>
-        Tabs to show: <input class="presettablist1" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(1)~ ~!onchange=function() {Tabs.setPresetTabs(1, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(1)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(1)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(1)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(2) ? '' : 'none'~>
-        Name: <input class="presettabname2" type="text" ~!value=Tabs.presetName(2)~ ~!onchange=function() {Tabs.setPresetName(2, this.value)}~></input>
-        Tabs to show: <input class="presettablist2" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(2)~ ~!onchange=function() {Tabs.setPresetTabs(2, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(2)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(2)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(2)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(3) ? '' : 'none'~>
-        Name: <input class="presettabname3" type="text" ~!value=Tabs.presetName(3)~ ~!onchange=function() {Tabs.setPresetName(3, this.value)}~></input>
-        Tabs to show: <input class="presettablist3" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(3)~ ~!onchange=function() {Tabs.setPresetTabs(3, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(3)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(3)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(3)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(4) ? '' : 'none'~>
-        Name: <input class="presettabname4" type="text" ~!value=Tabs.presetName(4)~ ~!onchange=function() {Tabs.setPresetName(4, this.value)}~></input>
-        Tabs to show: <input class="presettablist4" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(4)~ ~!onchange=function() {Tabs.setPresetTabs(4, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(4)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(4)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(4)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(5) ? '' : 'none'~>
-        Name: <input class="presettabname5" type="text" ~!value=Tabs.presetName(5)~ ~!onchange=function() {Tabs.setPresetName(5, this.value)}~></input>
-        Tabs to show: <input class="presettablist5" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(5)~ ~!onchange=function() {Tabs.setPresetTabs(5, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(5)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(5)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(5)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(6) ? '' : 'none'~>
-        Name: <input class="presettabname6" type="text" ~!value=Tabs.presetName(6)~ ~!onchange=function() {Tabs.setPresetName(6, this.value)}~></input>
-        Tabs to show: <input class="presettablist6" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(6)~ ~!onchange=function() {Tabs.setPresetTabs(6, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(6)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(6)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(6)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(7) ? '' : 'none'~>
-        Name: <input class="presettabname7" type="text" ~!value=Tabs.presetName(7)~ ~!onchange=function() {Tabs.setPresetName(7, this.value)}~></input>
-        Tabs to show: <input class="presettablist7" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(7)~ ~!onchange=function() {Tabs.setPresetTabs(7, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(7)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(7)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(7)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(8) ? '' : 'none'~>
-        Name: <input class="presettabname8" type="text" ~!value=Tabs.presetName(8)~ ~!onchange=function() {Tabs.setPresetName(8, this.value)}~></input>
-        Tabs to show: <input class="presettablist8" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(8)~ ~!onchange=function() {Tabs.setPresetTabs(8, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(8)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(8)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(8)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(9) ? '' : 'none'~>
-        Name: <input class="presettabname9" type="text" ~!value=Tabs.presetName(9)~ ~!onchange=function() {Tabs.setPresetName(9, this.value)}~></input>
-        Tabs to show: <input class="presettablist9" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(9)~ ~!onchange=function() {Tabs.setPresetTabs(9, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(9)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(9)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(9)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(10) ? '' : 'none'~>
-        Name: <input class="presettabname10" type="text" ~!value=Tabs.presetName(10)~ ~!onchange=function() {Tabs.setPresetName(10, this.value)}~></input>
-        Tabs to show: <input class="presettablist10" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(10)~ ~!onchange=function() {Tabs.setPresetTabs(10, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(10)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(10)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(10)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(11) ? '' : 'none'~>
-        Name: <input class="presettabname11" type="text" ~!value=Tabs.presetName(11)~ ~!onchange=function() {Tabs.setPresetName(11, this.value)}~></input>
-        Tabs to show: <input class="presettablist11" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(11)~ ~!onchange=function() {Tabs.setPresetTabs(11, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(11)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(11)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(11)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(12) ? '' : 'none'~>
-        Name: <input class="presettabname12" type="text" ~!value=Tabs.presetName(12)~ ~!onchange=function() {Tabs.setPresetName(12, this.value)}~></input>
-        Tabs to show: <input class="presettablist12" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(12)~ ~!onchange=function() {Tabs.setPresetTabs(12, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(12)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(12)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(12)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(13) ? '' : 'none'~>
-        Name: <input class="presettabname13" type="text" ~!value=Tabs.presetName(13)~ ~!onchange=function() {Tabs.setPresetName(13, this.value)}~></input>
-        Tabs to show: <input class="presettablist13" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(13)~ ~!onchange=function() {Tabs.setPresetTabs(13, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(13)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(13)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(13)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(14) ? '' : 'none'~>
-        Name: <input class="presettabname14" type="text" ~!value=Tabs.presetName(14)~ ~!onchange=function() {Tabs.setPresetName(14, this.value)}~></input>
-        Tabs to show: <input class="presettablist14" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(14)~ ~!onchange=function() {Tabs.setPresetTabs(14, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(14)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(14)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(14)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(15) ? '' : 'none'~>
-        Name: <input class="presettabname15" type="text" ~!value=Tabs.presetName(15)~ ~!onchange=function() {Tabs.setPresetName(15, this.value)}~></input>
-        Tabs to show: <input class="presettablist15" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(15)~ ~!onchange=function() {Tabs.setPresetTabs(15, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(15)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(15)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(15)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(16) ? '' : 'none'~>
-        Name: <input class="presettabname16" type="text" ~!value=Tabs.presetName(16)~ ~!onchange=function() {Tabs.setPresetName(16, this.value)}~></input>
-        Tabs to show: <input class="presettablist16" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(16)~ ~!onchange=function() {Tabs.setPresetTabs(16, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(16)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(16)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(16)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(17) ? '' : 'none'~>
-        Name: <input class="presettabname17" type="text" ~!value=Tabs.presetName(17)~ ~!onchange=function() {Tabs.setPresetName(17, this.value)}~></input>
-        Tabs to show: <input class="presettablist17" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(17)~ ~!onchange=function() {Tabs.setPresetTabs(17, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(17)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(17)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(17)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(18) ? '' : 'none'~>
-        Name: <input class="presettabname18" type="text" ~!value=Tabs.presetName(18)~ ~!onchange=function() {Tabs.setPresetName(18, this.value)}~></input>
-        Tabs to show: <input class="presettablist18" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(18)~ ~!onchange=function() {Tabs.setPresetTabs(18, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(18)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(18)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(18)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(19) ? '' : 'none'~>
-        Name: <input class="presettabname19" type="text" ~!value=Tabs.presetName(19)~ ~!onchange=function() {Tabs.setPresetName(19, this.value)}~></input>
-        Tabs to show: <input class="presettablist19" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(19)~ ~!onchange=function() {Tabs.setPresetTabs(19, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(19)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(19)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(19)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(20) ? '' : 'none'~>
-        Name: <input class="presettabname20" type="text" ~!value=Tabs.presetName(20)~ ~!onchange=function() {Tabs.setPresetName(20, this.value)}~></input>
-        Tabs to show: <input class="presettablist20" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(20)~ ~!onchange=function() {Tabs.setPresetTabs(20, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(20)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(20)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(20)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(21) ? '' : 'none'~>
-        Name: <input class="presettabname21" type="text" ~!value=Tabs.presetName(21)~ ~!onchange=function() {Tabs.setPresetName(21, this.value)}~></input>
-        Tabs to show: <input class="presettablist21" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(21)~ ~!onchange=function() {Tabs.setPresetTabs(21, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(21)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(21)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(21)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(22) ? '' : 'none'~>
-        Name: <input class="presettabname22" type="text" ~!value=Tabs.presetName(22)~ ~!onchange=function() {Tabs.setPresetName(22, this.value)}~></input>
-        Tabs to show: <input class="presettablist22" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(22)~ ~!onchange=function() {Tabs.setPresetTabs(22, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(22)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(22)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(22)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(23) ? '' : 'none'~>
-        Name: <input class="presettabname23" type="text" ~!value=Tabs.presetName(23)~ ~!onchange=function() {Tabs.setPresetName(23, this.value)}~></input>
-        Tabs to show: <input class="presettablist23" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(23)~ ~!onchange=function() {Tabs.setPresetTabs(23, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(23)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(23)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(23)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(24) ? '' : 'none'~>
-        Name: <input class="presettabname24" type="text" ~!value=Tabs.presetName(24)~ ~!onchange=function() {Tabs.setPresetName(24, this.value)}~></input>
-        Tabs to show: <input class="presettablist24" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(24)~ ~!onchange=function() {Tabs.setPresetTabs(24, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(24)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(24)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(24)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(25) ? '' : 'none'~>
-        Name: <input class="presettabname25" type="text" ~!value=Tabs.presetName(25)~ ~!onchange=function() {Tabs.setPresetName(25, this.value)}~></input>
-        Tabs to show: <input class="presettablist25" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(25)~ ~!onchange=function() {Tabs.setPresetTabs(25, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(25)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(25)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(25)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(26) ? '' : 'none'~>
-        Name: <input class="presettabname26" type="text" ~!value=Tabs.presetName(26)~ ~!onchange=function() {Tabs.setPresetName(26, this.value)}~></input>
-        Tabs to show: <input class="presettablist26" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(26)~ ~!onchange=function() {Tabs.setPresetTabs(26, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(26)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(26)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(26)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(27) ? '' : 'none'~>
-        Name: <input class="presettabname27" type="text" ~!value=Tabs.presetName(27)~ ~!onchange=function() {Tabs.setPresetName(27, this.value)}~></input>
-        Tabs to show: <input class="presettablist27" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(27)~ ~!onchange=function() {Tabs.setPresetTabs(27, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(27)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(27)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(27)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(28) ? '' : 'none'~>
-        Name: <input class="presettabname28" type="text" ~!value=Tabs.presetName(28)~ ~!onchange=function() {Tabs.setPresetName(28, this.value)}~></input>
-        Tabs to show: <input class="presettablist28" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(28)~ ~!onchange=function() {Tabs.setPresetTabs(28, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(28)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(28)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(28)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(29) ? '' : 'none'~>
-        Name: <input class="presettabname29" type="text" ~!value=Tabs.presetName(29)~ ~!onchange=function() {Tabs.setPresetName(29, this.value)}~></input>
-        Tabs to show: <input class="presettablist29" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(29)~ ~!onchange=function() {Tabs.setPresetTabs(29, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(29)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(29)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(29)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(30) ? '' : 'none'~>
-        Name: <input class="presettabname30" type="text" ~!value=Tabs.presetName(30)~ ~!onchange=function() {Tabs.setPresetName(30, this.value)}~></input>
-        Tabs to show: <input class="presettablist30" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(30)~ ~!onchange=function() {Tabs.setPresetTabs(30, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(30)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(30)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(30)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(31) ? '' : 'none'~>
-        Name: <input class="presettabname31" type="text" ~!value=Tabs.presetName(31)~ ~!onchange=function() {Tabs.setPresetName(31, this.value)}~></input>
-        Tabs to show: <input class="presettablist31" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(31)~ ~!onchange=function() {Tabs.setPresetTabs(31, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(31)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(31)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(31)">Delete</button>
-      </div>
-      <div ~style.display=Tabs.hasPreset(32) ? '' : 'none'~>
-        Name: <input class="presettabname32" type="text" ~!value=Tabs.presetName(32)~ ~!onchange=function() {Tabs.setPresetName(32, this.value)}~></input>
-        Tabs to show: <input class="presettablist32" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(32)~ ~!onchange=function() {Tabs.setPresetTabs(32, this.value)}~></input>
-        <button onclick="Tabs.presetLoad(32)">Load</button>
-        <button onclick="Tabs.presetSetToCurrentTabs(32)">Change to currently shown tabs</button>
-        <button onclick="Tabs.presetDelete(32)">Delete</button>
-      </div>
-      <span>
-        <button ~style.display=Tabs.hasPreset(32) ? 'none' : ''~ onclick="Tabs.presetCreate()">Create a tab preset</button>
-        <span ~style.display=Tabs.hasPreset(32) ? '' : 'none'~>You can create at most ~i 32 ~ tab presets. Delete existing presets to create more.</span>
-      </span>
-      <br class="tabpresetbr" style="display: none;"/>
-      <span style="display: none;">Exported tabs to show (also copied to clipboard): <input id="tabs-export-output"></input></span>
       <br/>
       <br/>
       <div style="width: 1024px; margin-left: auto; margin-right: auto;">List of hotkeys: ~r Hotkeys.listText() ~.</div>
