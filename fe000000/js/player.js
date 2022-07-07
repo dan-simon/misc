@@ -360,7 +360,10 @@ let initialPlayer = {
       higherPrecision: 5,
       displayDigits: 10,
       exponentBase: 10,
-      alphabet: 'abcdefghijklmnopqrstuvwxyz'
+      alphabet: 'abcdefghijklmnopqrstuvwxyz',
+      formatOrdinals: false,
+      parseAutobuyersInCurrentBase: false,
+      autobuyerPrecision: 3
     },
     timeDisplay: 'Seconds',
     notationOnTimes: false,
@@ -526,7 +529,7 @@ let initialPlayer = {
     gameSpeed: 1,
   },
   currentTab: 'main',
-  version: 2.1328125
+  version: 2.13671875
 }
 
 let player;

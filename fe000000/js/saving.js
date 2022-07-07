@@ -1343,6 +1343,12 @@ let Saving = {
       player.options.colorChange = 'None';
       player.version = 2.1328125;
     }
+    if (player.version < 2.13671875) {
+      player.options.notation.formatOrdinals = false;
+      player.options.notation.parseAutobuyersInCurrentBase = false;
+      player.options.notation.autobuyerPrecision = 3;
+      player.version = 2.13671875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

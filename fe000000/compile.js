@@ -5,6 +5,8 @@ function extractCode(x) {
     return 'format(' + x.slice(3, -2) + ')';
   } else if (x[1] === 'i') {
     return 'formatInt(' + x.slice(3, -2) + ')';
+  } else if (x[1] === 'o') {
+    return 'formatOrdinalInt(' + x.slice(3, -2) + ')';
   } else if (x[1] === 'q') {
     return 'formatMaybeInt(' + x.slice(3, -2) + ')';
   } else if (x[1] === 'r') {
@@ -115,8 +117,8 @@ fs.readFile(files[0], 'utf8', function(err, contents) {
   let contentsWithTime = contents.replace(/%time%/g, time);
   let newContents = contentsWithTime.replace(
     /<[-a-z]+( [-a-z]+="[^"]+"| ~[-!.a-z]+=[^~]+~)*\/?>/g, dealWithElement).replace(
-    /~([fiqrsy]|t[iqs]?) [^~]+ ~/g, (x) => '<span id="e' + el1Number++ + '"></span>');
-  let el1CodeList = (contents.match(/~([fiqrsy]|t[iqs]?) [^~]+ ~/g) || []).map(updateDisplayOneElement);
+    /~([fioqrsy]|t[iqs]?) [^~]+ ~/g, (x) => '<span id="e' + el1Number++ + '"></span>');
+  let el1CodeList = (contents.match(/~([fioqrsy]|t[iqs]?) [^~]+ ~/g) || []).map(updateDisplayOneElement);
   let el2CodeList = (contents.match(/<[-a-z]+( [-a-z]+="[^"]+"| ~[-!.a-z]+=[^~]+~)*\/?>/g) || []).filter(x => x.includes('~')).map(updateDisplayOneStyle);
   let setupList = flatten(el2CodeList.map(x => x.filter(y => y[0] === '!').map(y => y.slice(1))));
   el2CodeList = el2CodeList.map(x => x.filter(y => y[0] !== '!'));

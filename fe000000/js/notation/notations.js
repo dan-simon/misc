@@ -20,9 +20,27 @@ function representExponentWithAlphabet(x, a) {
 // "what if places is undefined" that canHandleNegativePlaces was meant
 // to handle never comes up.
 
+// Time Scientific and Default Scientific seem to be the same but I have no trust in that continuing.
 class TimeScientificNotation extends ADNotations.Notation {
   get name() {
-    return "Scientific";
+    return "Time Scientific";
+  }
+  
+  formatUnder1000(value, places) {
+    return ADNotations.formatMantissaBaseTen(value, places);
+  }
+
+  formatDecimal(value, places, placesExponent) {
+    return ADNotations.formatMantissaWithExponent(ADNotations.formatMantissaBaseTen,
+      (n, p) => this.formatExponent(n, p, (n, _) => ADNotations.formatMantissaBaseTen(n, 0), p),
+      10, 1, true)(value, places, placesExponent);
+  }
+}
+
+
+class DefaultScientificNotation extends ADNotations.Notation {
+  get name() {
+    return "Default Scientific";
   }
   
   formatUnder1000(value, places) {
@@ -177,6 +195,7 @@ class MixedLogarithmSciNotation extends ADNotations.Notation {
 
 let ModifiedNotations = {
   'TimeScientificNotation': TimeScientificNotation,
+  'DefaultScientificNotation': DefaultScientificNotation,
   'ScientificNotation': ScientificNotation,
   'StandardNotation': StandardNotation,
   'LogarithmNotation': LogarithmNotation,

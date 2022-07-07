@@ -45,7 +45,7 @@ let Sacrifice = {
     } else if (Generator(8).amount().gt(0)) {
       return format(this.sacrificeRequirement()) + ' stars';
     } else {
-      return 'at least one of Generator 8';
+      return 'at least one of Generator ' + formatOrdinalInt(8);
     }
   },
   updateSacrificePossible() {

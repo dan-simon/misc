@@ -330,22 +330,25 @@ let Hotkeys = {
       PrestigeLayerProgress.hasReached('finality')
     ];
   },
-  eachText: [
-    '1-8 to buy max of Generator 1-8 respectively, shift+1-8 to buy one of ' +
-    'Generator 1-8 respectively, G to max all ~g~, M to max all ~g~ and boosts, ' +
-    'A to turn all autobuyers on/off, shift+A to toggle all autobuyers',
-    'B to buy max boosts, shift+B to buy a boost', 'S to sacrifice', 'P to prestige',
-    'I to infinity, X to exit challenge, Y to restart challenge (exit and start again)',
-    'E to eternity', 'shift+S to respec studies and eternity',
-    'R to gain permanence', 'shift+E to respec eternity challenge and eternity', 'C to complexity',
-    'shift+P to unequip equipped powers and complexity', 'O to get a prediction from the oracle',
-    'F to finality', 'shift+F to respec finality shard upgrades and finality'
-  ],
+  eachText: function () {
+    let oneToEight = formatOrdinalInt(1) + '-' + formatOrdinalInt(8);
+    return [
+      '1-8 to buy max of Generator ' + oneToEight + ' respectively, shift+1-8 to buy one of ' +
+      'Generator ' + oneToEight + ' respectively, G to max all ~g~, M to max all ~g~ and boosts, ' +
+      'A to turn all autobuyers on/off, shift+A to toggle all autobuyers',
+      'B to buy max boosts, shift+B to buy a boost', 'S to sacrifice', 'P to prestige',
+      'I to infinity, X to exit challenge, Y to restart challenge (exit and start again)',
+      'E to eternity', 'shift+S to respec studies and eternity',
+      'R to gain permanence', 'shift+E to respec eternity challenge and eternity', 'C to complexity',
+      'shift+P to unequip equipped powers and complexity', 'O to get a prediction from the oracle',
+      'F to finality', 'shift+F to respec finality shard upgrades and finality'
+    ];
+  },
   listText: function () {
     let criteria = this.criteria();
     // This join-then-split thing is very important if the first item of the list,
     // which has commas in it, is the only item (that is, before you can prestige).
-    let parts = this.eachText.filter((_, i) => criteria[i]).join(', ').split(', ');
+    let parts = this.eachText().filter((_, i) => criteria[i]).join(', ').split(', ');
     parts[parts.length - 1] = 'and ' + parts[parts.length - 1];
     return parts.join(', ').replace(/~g~/g, Generators.term());
   }

@@ -123,29 +123,29 @@ let Challenge = {
     let cc = this.currentChallenge();
     let ic = InfinityChallenge.currentInfinityChallenge();
     if (cc === 2) {
-      return 'Normal Challenge 2 multiplier: ' + formatMaybeInt(this.challenge2Mult());
+      return 'Normal Challenge ' + formatOrdinalInt(2) + ' multiplier: ' + formatMaybeInt(this.challenge2Mult());
     } else if (cc === 3) {
-      return 'Normal Challenge 3 multiplier: ' + formatPrecisely(this.challenge3Mult());
+      return 'Normal Challenge ' + formatOrdinalInt(3) + ' multiplier: ' + formatPrecisely(this.challenge3Mult());
     } else if (cc === 7) {
-      return 'Normal Challenge 7 purchases left: ' + formatInt(this.challenge7PurchasesLeft());
+      return 'Normal Challenge ' + formatOrdinalInt(7) + ' purchases left: ' + formatInt(this.challenge7PurchasesLeft());
     } else if (ic === 1) {
-      return 'Normal Challenge 2 multiplier: ' + formatMaybeInt(this.challenge2Mult()) + ', ' +
-      'Normal Challenge 3 multiplier: ' + formatPrecisely(this.challenge3Mult()) + ', ' +
-      'Normal Challenge 7 purchases left: ' + formatInt(this.challenge7PurchasesLeft());
+      return 'Normal Challenge ' + formatOrdinalInt(2) + ' multiplier: ' + formatMaybeInt(this.challenge2Mult()) + ', ' +
+      'Normal Challenge ' + formatOrdinalInt(3) + ' multiplier: ' + formatPrecisely(this.challenge3Mult()) + ', ' +
+      'Normal Challenge ' + formatOrdinalInt(7) + ' purchases left: ' + formatInt(this.challenge7PurchasesLeft());
     } else if (ic === 3) {
-      return 'Infinity Challenge 3 prestige power exponent: ' +
+      return 'Infinity Challenge ' + formatOrdinalInt(3) + ' prestige power exponent: ' +
       formatMaybeInt(InfinityChallenge.infinityChallenge3PrestigePowerExponent());
     } else if (ic === 4) {
-      return 'Infinity Challenge 4 multiplier exponent: ' +
+      return 'Infinity Challenge ' + formatOrdinalInt(4) + ' multiplier exponent: ' +
       formatMaybeInt(InfinityChallenge.infinityChallenge4Pow());
     } else if (ic === 5) {
-      return 'Infinity Challenge 5 multiplier exponent: ' +
+      return 'Infinity Challenge ' + formatOrdinalInt(5) + ' multiplier exponent: ' +
       formatMaybeInt(InfinityChallenge.infinityChallenge5Pow());
     } else if (ic === 6) {
-      return 'Infinity Challenge 6 prestige power exponent: ' +
+      return 'Infinity Challenge ' + formatOrdinalInt(6) + ' prestige power exponent: ' +
       formatMaybeInt(InfinityChallenge.infinityChallenge6PrestigePowerExponent());
     } else if (ic === 8) {
-      return 'Infinity Challenge 8 purchases left: ' +
+      return 'Infinity Challenge ' + formatOrdinalInt(8) + ' purchases left: ' +
       formatInt(InfinityChallenge.infinityChallenge8PurchasesLeft());
     } else {
       return 'This text should never appear.';

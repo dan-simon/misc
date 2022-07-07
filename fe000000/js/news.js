@@ -11,7 +11,7 @@ let News = {
     () => format(Stars.amount()) + ' stars? Those are rookie numbers, pump those numbers up!',
     'Lemme get some Dimbo- Boosts',
     'FE000000 lore when?',
-    'Generator 9 jokes don\'t ex... oh wait',
+    () => 'Generator ' + formatOrdinalInt(9) + ' jokes don\'t ex... oh wait',
     '\'Will there be new content?\' -everyone at some point (answer: no)',
     '1: stars float in space, 2: cover yourself in stars, 3: wait for it to space, 4: fly',
     'This is a serious warning about evil notation. Don\'t use it unless you want to not trust numbers.',

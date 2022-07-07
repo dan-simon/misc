@@ -380,11 +380,11 @@ let EternityChallenge = {
   eternityChallengeText() {
     let cc = this.currentEternityChallenge();
     if (cc === 1) {
-      return 'Eternity Challenge 1 exponents: ' +
+      return 'Eternity Challenge ' + formatOrdinalInt(1) + ' exponents: ' +
         formatPrecisely(this.eternityChallenge1InfinityStarsEffect()) + ' to normal generators, ' +
         formatPrecisely(this.eternityChallenge1EternityStarsEffect()) + ' to infinity generators';
     } else if (cc === 4) {
-      return 'Eternity Challenge 4: ' + formatInt(this.eternityChallenge4DoneInfinities()) + '/' +
+      return 'Eternity Challenge ' + formatOrdinalInt(4) + ': ' + formatInt(this.eternityChallenge4DoneInfinities()) + '/' +
         formatInt(this.eternityChallenge4AllowedInfinities()) + ' infinities done';
     } else {
       return 'This text should never appear.';

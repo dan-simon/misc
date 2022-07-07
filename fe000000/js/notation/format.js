@@ -17,6 +17,14 @@ function formatInt (x) {
   return getNotation().format(x, lp, 0, lp);
 }
 
+function formatOrdinalInt (x) {
+  if (NotationOptions.formatOrdinals()) {
+    return formatInt(x);
+  } else {
+    return '' + x;
+  }
+}
+
 function formatMaybeInt (x) {
   return Decimal.eq(x, Decimal.round(x)) ? formatInt(x) : format(x);
 }
@@ -98,3 +106,69 @@ function formatWithPrecision(x, n) {
 function pluralize(x, singular, plural) {
   return Decimal.eq(x, 1) ? singular : plural;
 }
+
+function autobuyerSettingToString(x) {
+  let prec = NotationOptions.autobuyerPrecision();
+  if (NotationOptions.parseAutobuyersInCurrentBase()) {
+    if (NotationOptions.notation() === 'Hex') {
+      return formatWithPrecision(x, prec);
+    } else {
+      return getNotation('Scientific').format(x, prec, prec, prec);
+    }
+  } else {
+    return getNotation('DefaultScientific').format(x, prec, prec, prec);
+  }
+}
+
+function stringToAutobuyerSetting(x) {
+  if (NotationOptions.notation() === 'Hex') {
+    return hexToNumber(x);
+  }
+  let y = x.split(displayDigitsAutobuyerSettings().includes('E') ? 'e' : /[Ee]/g).map(i => i.toUpperCase());
+  if (y[y.length - 1] === '' && x[x.length - 1].toUpperCase() === 'E') {
+    y.pop();
+    y[y.length - 1] += 'E';
+  }
+  y = y.map(stringToAutobuyerSettingNoExponent);
+  return y.length > 0 ? y.reduceRight((a, b) => Decimal.pow(exponentBaseAutobuyerSettings(), a).times(b)) : new Decimal(0);
+}
+
+function hexToNumber(x) {
+  let bits = [...x.toUpperCase()].flatMap(i => '0123456789ABCDEF'.includes(i) ? [...(parseInt(i, 16) + 16).toString(2).slice(1)].map(i => +i) : []);
+  bits.reverse();
+  let f = function (x) {
+    if (x.eq(Infinity)) {
+      return new Decimal(Infinity);
+    }
+    if (x.eq(-Infinity)) {
+      return new Decimal(0)
+    }
+    let int = Decimal.floor(x);
+    // Because sufficiently high powers of 2 give infinity again
+    return (int.gt(1e300) ? new Decimal(Infinity) : Decimal.pow(2, int)).times(x.minus(int).plus(1));
+  }
+  let op = new Decimal(-Infinity);
+  for (let b of bits) {
+    op = op.times(b ? 1 : -1);
+    op = f(op);
+    op = op.times(b ? 1 : -1);
+  }
+  return op;
+}
+
+function stringToAutobuyerSettingNoExponent(x) {
+  let digits = displayDigitsAutobuyerSettings();
+  let sign = Math.pow(-1, (x.match(/-/g) || []).length);
+  let actualDigits = [...x].filter(i => i === '.' || digits.includes(i));
+  let dec = actualDigits.includes('.') ? actualDigits.indexOf('.') - 1 : actualDigits.length - 1;
+  actualDigits = actualDigits.filter(i => i !== '.');
+  return actualDigits.length > 0 ? actualDigits.map(
+    (x, i) => Decimal.pow(digits.length, dec - i).times(digits.indexOf(x))).reduce(
+    (a, b) => a.plus(b)) : new Decimal(1);
+}
+
+let displayDigitsAutobuyerSettings = () => NotationOptions.parseAutobuyersInCurrentBase() ? NotationOptions.displayDigits() : '0123456789';
+
+let exponentBaseAutobuyerSettings = () => NotationOptions.parseAutobuyersInCurrentBase() ? NotationOptions.exponentBase() : 10;
+
+

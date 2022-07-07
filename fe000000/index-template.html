@@ -268,7 +268,7 @@
         <br/>
         <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
           <tr ~style.display=Generator(1).isVisible() ? '' : 'none'~>
-            <td>Generator 1</td>
+            <td>Generator ~o 1 ~</td>
             <td>~f Generator(1).amount() ~</td>
             <td>~f Generator(1).perSecond() ~/s</td>
             <td>~f Generator(1).multiplier() ~x</td>
@@ -277,7 +277,7 @@
             <td><button ~style.display=Autobuyer(1).hasAutobuyer() ? '' : 'none'~ onclick="Autobuyers.toggleSome(1)">Auto: ~r Autobuyer(1).isOn() ? "On" : "Off" ~<span ~style.display=Autobuyer(1).isSlow() ? '' : 'none'~> (slow)</span></button></td>
           </tr>
           <tr ~style.display=Generator(2).isVisible() ? '' : 'none'~>
-            <td>Generator 2</td>
+            <td>Generator ~o 2 ~</td>
             <td>~f Generator(2).amount() ~</td>
             <td>~f Generator(2).perSecond() ~/s</td>
             <td>~f Generator(2).multiplier() ~x</td>
@@ -286,7 +286,7 @@
             <td><button ~style.display=Autobuyer(2).hasAutobuyer() ? '' : 'none'~ onclick="Autobuyers.toggleSome(2)">Auto: ~r Autobuyer(2).isOn() ? "On" : "Off" ~<span ~style.display=Autobuyer(2).isSlow() ? '' : 'none'~> (slow)</span></button></td>
           </tr>
           <tr ~style.display=Generator(3).isVisible() ? '' : 'none'~>
-            <td>Generator 3</td>
+            <td>Generator ~o 3 ~</td>
             <td>~f Generator(3).amount() ~</td>
             <td>~f Generator(3).perSecond() ~/s</td>
             <td>~f Generator(3).multiplier() ~x</td>
@@ -295,7 +295,7 @@
             <td><button ~style.display=Autobuyer(3).hasAutobuyer() ? '' : 'none'~ onclick="Autobuyers.toggleSome(3)">Auto: ~r Autobuyer(3).isOn() ? "On" : "Off" ~<span ~style.display=Autobuyer(3).isSlow() ? '' : 'none'~> (slow)</span></button></td>
           </tr>
           <tr ~style.display=Generator(4).isVisible() ? '' : 'none'~>
-            <td>Generator 4</td>
+            <td>Generator ~o 4 ~</td>
             <td>~f Generator(4).amount() ~</td>
             <td>~f Generator(4).perSecond() ~/s</td>
             <td>~f Generator(4).multiplier() ~x</td>
@@ -304,7 +304,7 @@
             <td><button ~style.display=Autobuyer(4).hasAutobuyer() ? '' : 'none'~ onclick="Autobuyers.toggleSome(4)">Auto: ~r Autobuyer(4).isOn() ? "On" : "Off" ~<span ~style.display=Autobuyer(4).isSlow() ? '' : 'none'~> (slow)</span></button></td>
           </tr>
           <tr ~style.display=Generator(5).isVisible() ? '' : 'none'~>
-            <td>Generator 5</td>
+            <td>Generator ~o 5 ~</td>
             <td>~f Generator(5).amount() ~</td>
             <td>~f Generator(5).perSecond() ~/s</td>
             <td>~f Generator(5).multiplier() ~x</td>
@@ -313,7 +313,7 @@
             <td><button ~style.display=Autobuyer(5).hasAutobuyer() ? '' : 'none'~ onclick="Autobuyers.toggleSome(5)">Auto: ~r Autobuyer(5).isOn() ? "On" : "Off" ~<span ~style.display=Autobuyer(5).isSlow() ? '' : 'none'~> (slow)</span></button></td>
           </tr>
           <tr ~style.display=Generator(6).isVisible() ? '' : 'none'~>
-            <td>Generator 6</td>
+            <td>Generator ~o 6 ~</td>
             <td>~f Generator(6).amount() ~</td>
             <td>~f Generator(6).perSecond() ~/s</td>
             <td>~f Generator(6).multiplier() ~x</td>
@@ -322,7 +322,7 @@
             <td><button ~style.display=Autobuyer(6).hasAutobuyer() ? '' : 'none'~ onclick="Autobuyers.toggleSome(6)">Auto: ~r Autobuyer(6).isOn() ? "On" : "Off" ~<span ~style.display=Autobuyer(6).isSlow() ? '' : 'none'~> (slow)</span></button></td>
           </tr>
           <tr ~style.display=Generator(7).isVisible() ? '' : 'none'~>
-            <td>Generator 7</td>
+            <td>Generator ~o 7 ~</td>
             <td>~f Generator(7).amount() ~</td>
             <td>~f Generator(7).perSecond() ~/s</td>
             <td>~f Generator(7).multiplier() ~x</td>
@@ -331,7 +331,7 @@
             <td><button ~style.display=Autobuyer(7).hasAutobuyer() ? '' : 'none'~ onclick="Autobuyers.toggleSome(7)">Auto: ~r Autobuyer(7).isOn() ? "On" : "Off" ~<span ~style.display=Autobuyer(7).isSlow() ? '' : 'none'~> (slow)</span></button></td>
           </tr>
           <tr ~style.display=Generator(8).isVisible() ? '' : 'none'~>
-            <td>Generator 8</td>
+            <td>Generator ~o 8 ~</td>
             <td>~f Generator(8).amount() ~</td>
             <td>~f Generator(8).perSecond() ~/s</td>
             <td>~f Generator(8).multiplier() ~x</td>
@@ -342,7 +342,7 @@
         </table>
         <div style="min-height: 104px;" ~style.display=Sacrifice.isVisible() ? '' : 'none'~>
           <br/>
-          <span>You have a ~f Sacrifice.sacrificeMultiplier() ~ sacrifice multiplier multiplying Generator 8 by its amount.</span>
+          <span>You have a ~f Sacrifice.sacrificeMultiplier() ~ sacrifice multiplier multiplying Generator ~o 8 ~ by its amount.</span>
           <br/>
           <span ~style.display=Sacrifice.canSacrifice() ? '' : 'none'~><button style="height: 48px;" onclick="Sacrifice.sacrifice(true)">Sacrifice: ~f Sacrifice.sacrificeMultiplier() ~ → ~f Sacrifice.newSacrificeMultiplier() ~<br/>(+~f Sacrifice.sacrificeMultiplierGain() ~, ~f Sacrifice.sacrificeMultiplierMultGain() ~x)</button></span>
           <span ~style.display=Sacrifice.canSacrifice() ? 'none' : ''~>You need ~r Sacrifice.sacrificeRequirementText() ~ to sacrifice.</span>
@@ -407,7 +407,7 @@
       <br/>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr ~style.display=InfinityGenerator(1).isVisible() ? '' : 'none'~>
-          <td>Infinity Generator 1</td>
+          <td>Infinity Generator ~o 1 ~</td>
           <td>~f InfinityGenerator(1).amount() ~</td>
           <td>~f InfinityGenerator(1).perSecond() ~/s</td>
           <td>~f InfinityGenerator(1).multiplier() ~x</td>
@@ -416,7 +416,7 @@
           <td><button ~style.display=InfinityAutobuyer(1).hasInfinityAutobuyer() ? '' : 'none'~ onclick="InfinityAutobuyer(1).toggle()">Auto: ~r InfinityAutobuyer(1).isOn() ? "On" : "Off" ~</button></td>
         </tr>
         <tr ~style.display=InfinityGenerator(2).isVisible() ? '' : 'none'~>
-          <td>Infinity Generator 2</td>
+          <td>Infinity Generator ~o 2 ~</td>
           <td>~f InfinityGenerator(2).amount() ~</td>
           <td>~f InfinityGenerator(2).perSecond() ~/s</td>
           <td>~f InfinityGenerator(2).multiplier() ~x</td>
@@ -425,7 +425,7 @@
           <td><button ~style.display=InfinityAutobuyer(2).hasInfinityAutobuyer() ? '' : 'none'~ onclick="InfinityAutobuyer(2).toggle()">Auto: ~r InfinityAutobuyer(2).isOn() ? "On" : "Off" ~</button></td>
         </tr>
         <tr ~style.display=InfinityGenerator(3).isVisible() ? '' : 'none'~>
-          <td>Infinity Generator 3</td>
+          <td>Infinity Generator ~o 3 ~</td>
           <td>~f InfinityGenerator(3).amount() ~</td>
           <td>~f InfinityGenerator(3).perSecond() ~/s</td>
           <td>~f InfinityGenerator(3).multiplier() ~x</td>
@@ -434,7 +434,7 @@
           <td><button ~style.display=InfinityAutobuyer(3).hasInfinityAutobuyer() ? '' : 'none'~ onclick="InfinityAutobuyer(3).toggle()">Auto: ~r InfinityAutobuyer(3).isOn() ? "On" : "Off" ~</button></td>
         </tr>
         <tr ~style.display=InfinityGenerator(4).isVisible() ? '' : 'none'~>
-          <td>Infinity Generator 4</td>
+          <td>Infinity Generator ~o 4 ~</td>
           <td>~f InfinityGenerator(4).amount() ~</td>
           <td>~f InfinityGenerator(4).perSecond() ~/s</td>
           <td>~f InfinityGenerator(4).multiplier() ~x</td>
@@ -443,7 +443,7 @@
           <td><button ~style.display=InfinityAutobuyer(4).hasInfinityAutobuyer() ? '' : 'none'~ onclick="InfinityAutobuyer(4).toggle()">Auto: ~r InfinityAutobuyer(4).isOn() ? "On" : "Off" ~</button></td>
         </tr>
         <tr ~style.display=InfinityGenerator(5).isVisible() ? '' : 'none'~>
-          <td>Infinity Generator 5</td>
+          <td>Infinity Generator ~o 5 ~</td>
           <td>~f InfinityGenerator(5).amount() ~</td>
           <td>~f InfinityGenerator(5).perSecond() ~/s</td>
           <td>~f InfinityGenerator(5).multiplier() ~x</td>
@@ -452,7 +452,7 @@
           <td><button ~style.display=InfinityAutobuyer(5).hasInfinityAutobuyer() ? '' : 'none'~ onclick="InfinityAutobuyer(5).toggle()">Auto: ~r InfinityAutobuyer(5).isOn() ? "On" : "Off" ~</button></td>
         </tr>
         <tr ~style.display=InfinityGenerator(6).isVisible() ? '' : 'none'~>
-          <td>Infinity Generator 6</td>
+          <td>Infinity Generator ~o 6 ~</td>
           <td>~f InfinityGenerator(6).amount() ~</td>
           <td>~f InfinityGenerator(6).perSecond() ~/s</td>
           <td>~f InfinityGenerator(6).multiplier() ~x</td>
@@ -461,7 +461,7 @@
           <td><button ~style.display=InfinityAutobuyer(6).hasInfinityAutobuyer() ? '' : 'none'~ onclick="InfinityAutobuyer(6).toggle()">Auto: ~r InfinityAutobuyer(6).isOn() ? "On" : "Off" ~</button></td>
         </tr>
         <tr ~style.display=InfinityGenerator(7).isVisible() ? '' : 'none'~>
-          <td>Infinity Generator 7</td>
+          <td>Infinity Generator ~o 7 ~</td>
           <td>~f InfinityGenerator(7).amount() ~</td>
           <td>~f InfinityGenerator(7).perSecond() ~/s</td>
           <td>~f InfinityGenerator(7).multiplier() ~x</td>
@@ -470,7 +470,7 @@
           <td><button ~style.display=InfinityAutobuyer(7).hasInfinityAutobuyer() ? '' : 'none'~ onclick="InfinityAutobuyer(7).toggle()">Auto: ~r InfinityAutobuyer(7).isOn() ? "On" : "Off" ~</button></td>
         </tr>
         <tr ~style.display=InfinityGenerator(8).isVisible() ? '' : 'none'~>
-          <td>Infinity Generator 8</td>
+          <td>Infinity Generator ~o 8 ~</td>
           <td>~f InfinityGenerator(8).amount() ~</td>
           <td>~f InfinityGenerator(8).perSecond() ~/s</td>
           <td>~f InfinityGenerator(8).multiplier() ~x</td>
@@ -493,20 +493,20 @@
         <tr>
           <td>
             <div class="challengediv" ~style.background=Challenge.color(1)~>
-              <span>Normal Challenge 1</span>
+              <span>Normal Challenge ~o 1 ~</span>
               <br/>
-              <span>Generator 1 multiplier is raised ^~i 4 ~. All other ~r Generators.term(true) ~ multipliers are always ~i 1 ~x.</span>
+              <span>Generator ~o 1 ~ multiplier is raised ^~i 4 ~. All other ~r Generators.term(true) ~ multipliers are always ~i 1 ~x.</span>
               <br/>
               <span>~r Challenge.challengeStatusDescription(1) ~</span>
               <br/>
               <span><button onclick="Challenge.startOrExitChallenge(1)">~r Challenge.challengeButtonText(1) ~</button></span>
               <br/>
-              <span>Reward: Faster Generator 1 Autobuyer (triggering every game tick)</span>
+              <span>Reward: Faster Generator ~o 1 ~ Autobuyer (triggering every game tick)</span>
             </div>
           </td>
           <td>
             <div class="challengediv" ~style.background=Challenge.color(2)~>
-              <span>Normal Challenge 2</span>
+              <span>Normal Challenge ~o 2 ~</span>
               <br/>
               <span>There's a multiplier on all ~r Generators.term() ~ increasing linearly from ~i 0 ~ to ~i 1 ~ over ~ti 256 ~. Every time you buy a generator or boost, or sacrifice or prestige, this multiplier resets to ~i 0 ~.</span>
               <br/>
@@ -514,27 +514,27 @@
               <br/>
               <span><button onclick="Challenge.startOrExitChallenge(2)">~r Challenge.challengeButtonText(2) ~</button></span>
               <br/>
-              <span>Reward: Faster Generator 2 Autobuyer (triggering every game tick)</span>
+              <span>Reward: Faster Generator ~o 2 ~ Autobuyer (triggering every game tick)</span>
             </div>
           </td>
         </tr>
         <tr>
           <td>
             <div class="challengediv" ~style.background=Challenge.color(3)~>
-              <span>Normal Challenge 3</span>
+              <span>Normal Challenge ~o 3 ~</span>
               <br/>
-              <span>There's a multiplier on Generator 1, starting at ~r formatPrecisely(1 / 256) ~ and doubling every ~ti 256 ~. Every time you prestige, this multiplier resets to ~r formatPrecisely(1 / 256) ~.</span>
+              <span>There's a multiplier on Generator ~o 1 ~, starting at ~r formatPrecisely(1 / 256) ~ and doubling every ~ti 256 ~. Every time you prestige, this multiplier resets to ~r formatPrecisely(1 / 256) ~.</span>
               <br/>
               <span>~r Challenge.challengeStatusDescription(3) ~</span>
               <br/>
               <span><button onclick="Challenge.startOrExitChallenge(3)">~r Challenge.challengeButtonText(3) ~</button></span>
               <br/>
-              <span>Reward: Faster Generator 3 Autobuyer (triggering every game tick)</span>
+              <span>Reward: Faster Generator ~o 3 ~ Autobuyer (triggering every game tick)</span>
             </div>
           </td>
           <td>
             <div class="challengediv" ~style.background=Challenge.color(4)~>
-              <span>Normal Challenge 4</span>
+              <span>Normal Challenge ~o 4 ~</span>
               <br/>
               <span>Every time you buy a ~r Generators.term(true) ~, the amounts of all lower ~r Generators.term() ~ are reset, like a sacrifice without the benefit.</span>
               <br/>
@@ -542,14 +542,14 @@
               <br/>
               <span><button onclick="Challenge.startOrExitChallenge(4)">~r Challenge.challengeButtonText(4) ~</button></span>
               <br/>
-              <span>Reward: Faster Generator 4 Autobuyer (triggering every game tick)</span>
+              <span>Reward: Faster Generator ~o 4 ~ Autobuyer (triggering every game tick)</span>
             </div>
           </td>
         </tr>
         <tr>
           <td>
             <div class="challengediv" ~style.background=Challenge.color(5)~>
-              <span>Normal Challenge 5</span>
+              <span>Normal Challenge ~o 5 ~</span>
               <br/>
               <span>All ~r Generators.term(true) ~ cost increases are raised ^~i 2 ~.</span>
               <br/>
@@ -557,27 +557,27 @@
               <br/>
               <span><button onclick="Challenge.startOrExitChallenge(5)">~r Challenge.challengeButtonText(5) ~</button></span>
               <br/>
-              <span>Reward: Faster Generator 5 Autobuyer (triggering every game tick)</span>
+              <span>Reward: Faster Generator ~o 5 ~ Autobuyer (triggering every game tick)</span>
             </div>
           </td>
           <td>
             <div class="challengediv" ~style.background=Challenge.color(6)~>
-              <span>Normal Challenge 6</span>
+              <span>Normal Challenge ~o 6 ~</span>
               <br/>
-              <span>There are only 6 ~r Generators.term() ~. (Generator 7 and Generator 8 don't exist.)</span>
+              <span>There are only 6 ~r Generators.term() ~. (Generator ~o 7 ~ and Generator ~o 8 ~ don't exist.)</span>
               <br/>
               <span>~r Challenge.challengeStatusDescription(6) ~</span>
               <br/>
               <span><button onclick="Challenge.startOrExitChallenge(6)">~r Challenge.challengeButtonText(6) ~</button></span>
               <br/>
-              <span>Reward: Faster Generator 6 Autobuyer (triggering every game tick)</span>
+              <span>Reward: Faster Generator ~o 6 ~ Autobuyer (triggering every game tick)</span>
             </div>
           </td>
         </tr>
         <tr>
           <td>
             <div class="challengediv" ~style.background=Challenge.color(7)~>
-              <span>Normal Challenge 7</span>
+              <span>Normal Challenge ~o 7 ~</span>
               <br/>
               <span>You can only buy ~i 343 ~ total ~r Generators.term() ~ and boosts throughout this challenge. This count does not reset on prestige.</span>
               <br/>
@@ -585,27 +585,27 @@
               <br/>
               <span><button onclick="Challenge.startOrExitChallenge(7)">~r Challenge.challengeButtonText(7) ~</button></span>
               <br/>
-              <span>Reward: Faster Generator 7 Autobuyer (triggering every game tick)</span>
+              <span>Reward: Faster Generator ~o 7 ~ Autobuyer (triggering every game tick)</span>
             </div>
           </td>
           <td>
             <div class="challengediv" ~style.background=Challenge.color(8)~>
-              <span>Normal Challenge 8</span>
+              <span>Normal Challenge ~o 8 ~</span>
               <br/>
-              <span>You can't buy boosts, the per-boost multiplier is ~i 1 ~x, and prestige power is raised ^~f 0.5 ~, but all ~r Generators.term() ~ (including Generator 8) are multiplied by your amount of Generator 8.</span>
+              <span>You can't buy boosts, the per-boost multiplier is ~i 1 ~x, and prestige power is raised ^~f 0.5 ~, but all ~r Generators.term() ~ (including Generator ~o 8 ~) are multiplied by your amount of Generator ~o 8 ~.</span>
               <br/>
               <span>~r Challenge.challengeStatusDescription(8) ~</span>
               <br/>
               <span><button onclick="Challenge.startOrExitChallenge(8)">~r Challenge.challengeButtonText(8) ~</button></span>
               <br/>
-              <span>Reward: Faster Generator 8 Autobuyer (triggering every game tick)</span>
+              <span>Reward: Faster Generator ~o 8 ~ Autobuyer (triggering every game tick)</span>
             </div>
           </td>
         </tr>
         <tr>
           <td>
             <div class="challengediv" ~style.background=Challenge.color(9)~>
-              <span>Normal Challenge 9</span>
+              <span>Normal Challenge ~o 9 ~</span>
               <br/>
               <span>You can't buy boosts and the per-boost multiplier is ~i 1 ~x.</span>
               <br/>
@@ -618,7 +618,7 @@
           </td>
           <td>
             <div class="challengediv" ~style.background=Challenge.color(10)~>
-              <span>Normal Challenge 10</span>
+              <span>Normal Challenge ~o 10 ~</span>
               <br/>
               <span>You can't buy boosts or more than one of each ~r Generators.term(true) ~, and you can't prestige. You can sacrifice multiple times at the same point and the sacrifice bonuses multiply, but sacrifice resets everything that prestige resets.</span>
               <br/>
@@ -633,7 +633,7 @@
         <tr>
           <td>
             <div class="challengediv" ~style.background=Challenge.color(11)~>
-              <span>Normal Challenge 11</span>
+              <span>Normal Challenge ~o 11 ~</span>
               <br/>
               <span>Prestige power is raised ^~f 0.5 ~.</span>
               <br/>
@@ -646,7 +646,7 @@
           </td>
           <td>
             <div class="challengediv" ~style.background=Challenge.color(12)~>
-              <span>Normal Challenge 12</span>
+              <span>Normal Challenge ~o 12 ~</span>
               <br/>
               <span>Infinity generators are disabled.</span>
               <br/>
@@ -710,7 +710,7 @@
         <tr ~style.display=Autobuyers.showGeneratorAndBoost() ? '' : 'none'~>
           <td>
             <div class="autobuyerdiv" ~style.display=(Autobuyer(1).hasAutobuyer() || !Autobuyer(1).hasReachedDisplayThreshold()) ? '' : 'none'~>
-              <span><span ~style.display=Autobuyer(1).isSlow() ? '' : 'none'~>Slow </span>Generator 1 Autobuyer</span>
+              <span><span ~style.display=Autobuyer(1).isSlow() ? '' : 'none'~>Slow </span>Generator ~o 1 ~ Autobuyer</span>
               <br/>
               <span>On: <input type="checkbox" class="autobuyer-checkbox-1" ~!checked=Autobuyer(1).isOn()~ ~!onchange=function() {Autobuyer(1).setIsOn(this.checked)}~></input></span>
               <br/>
@@ -720,7 +720,7 @@
               </select></span>
             </div>
             <button ~style.display=Autobuyer(1).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(1).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(1).unlockSlow()">
-              Unlock Slow Generator 1 Autobuyer
+              Unlock Slow Generator ~o 1 ~ Autobuyer
               <br/>
               (triggering every ~ti 16 ~)
               <br/>
@@ -729,7 +729,7 @@
           </td>
           <td>
             <div class="autobuyerdiv" ~style.display=Autobuyer(2).hasAutobuyer() ? '' : 'none'~>
-              <span><span ~style.display=Autobuyer(2).isSlow() ? '' : 'none'~>Slow </span>Generator 2 Autobuyer</span>
+              <span><span ~style.display=Autobuyer(2).isSlow() ? '' : 'none'~>Slow </span>Generator ~o 2 ~ Autobuyer</span>
               <br/>
               <span>On: <input type="checkbox" class="autobuyer-checkbox-2" ~!checked=Autobuyer(2).isOn()~ ~!onchange=function() {Autobuyer(2).setIsOn(this.checked)}~></input></span>
               <br/>
@@ -739,7 +739,7 @@
               </select></span>
             </div>
             <button class="autobuyerunlockbutton" ~style.display=(Autobuyer(2).hasAutobuyer() || !Autobuyer(2).hasReachedDisplayThreshold()) ? 'none' : ''~ ~class=Autobuyer(2).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(2).unlockSlow()">
-              Unlock Slow Generator 2 Autobuyer
+              Unlock Slow Generator ~o 2 ~ Autobuyer
               <br/>
               (triggering every ~ti 16 ~)
               <br/>
@@ -748,7 +748,7 @@
           </td>
           <td>
             <div class="autobuyerdiv" ~style.display=Autobuyer(3).hasAutobuyer() ? '' : 'none'~>
-              <span><span ~style.display=Autobuyer(3).isSlow() ? '' : 'none'~>Slow </span>Generator 3 Autobuyer</span>
+              <span><span ~style.display=Autobuyer(3).isSlow() ? '' : 'none'~>Slow </span>Generator ~o 3 ~ Autobuyer</span>
               <br/>
               <span>On: <input type="checkbox" class="autobuyer-checkbox-3" ~!checked=Autobuyer(3).isOn()~ ~!onchange=function() {Autobuyer(3).setIsOn(this.checked)}~></input></span>
               <br/>
@@ -758,7 +758,7 @@
               </select></span>
             </div>
             <button class="autobuyerunlockbutton" ~style.display=(Autobuyer(3).hasAutobuyer() || !Autobuyer(3).hasReachedDisplayThreshold()) ? 'none' : ''~ ~class=Autobuyer(3).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(3).unlockSlow()">
-              Unlock Slow Generator 3 Autobuyer
+              Unlock Slow Generator ~o 3 ~ Autobuyer
               <br/>
               (triggering every ~ti 16 ~)
               <br/>
@@ -769,7 +769,7 @@
         <tr ~style.display=Autobuyers.showGeneratorAndBoost() ? '' : 'none'~>
           <td>
             <div class="autobuyerdiv" ~style.display=Autobuyer(4).hasAutobuyer() ? '' : 'none'~>
-              <span><span ~style.display=Autobuyer(4).isSlow() ? '' : 'none'~>Slow </span>Generator 4 Autobuyer</span>
+              <span><span ~style.display=Autobuyer(4).isSlow() ? '' : 'none'~>Slow </span>Generator ~o 4 ~ Autobuyer</span>
               <br/>
               <span>On: <input type="checkbox" class="autobuyer-checkbox-4" ~!checked=Autobuyer(4).isOn()~ ~!onchange=function() {Autobuyer(4).setIsOn(this.checked)}~></input></span>
               <br/>
@@ -779,7 +779,7 @@
               </select></span>
             </div>
             <button class="autobuyerunlockbutton" ~style.display=(Autobuyer(4).hasAutobuyer() || !Autobuyer(4).hasReachedDisplayThreshold()) ? 'none' : ''~ ~class=Autobuyer(4).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(4).unlockSlow()">
-              Unlock Slow Generator 4 Autobuyer
+              Unlock Slow Generator ~o 4 ~ Autobuyer
               <br/>
               (triggering every ~ti 16 ~)
               <br/>
@@ -788,7 +788,7 @@
           </td>
           <td>
             <div class="autobuyerdiv" ~style.display=Autobuyer(5).hasAutobuyer() ? '' : 'none'~>
-              <span><span ~style.display=Autobuyer(5).isSlow() ? '' : 'none'~>Slow </span>Generator 5 Autobuyer</span>
+              <span><span ~style.display=Autobuyer(5).isSlow() ? '' : 'none'~>Slow </span>Generator ~o 5 ~ Autobuyer</span>
               <br/>
               <span>On: <input type="checkbox" class="autobuyer-checkbox-5" ~!checked=Autobuyer(5).isOn()~ ~!onchange=function() {Autobuyer(5).setIsOn(this.checked)}~></input></span>
               <br/>
@@ -798,7 +798,7 @@
               </select></span>
             </div>
             <button class="autobuyerunlockbutton" ~style.display=(Autobuyer(5).hasAutobuyer() || !Autobuyer(5).hasReachedDisplayThreshold()) ? 'none' : ''~ ~class=Autobuyer(5).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(5).unlockSlow()">
-              Unlock Slow Generator 5 Autobuyer
+              Unlock Slow Generator ~o 5 ~ Autobuyer
               <br/>
               (triggering every ~ti 16 ~)
               <br/>
@@ -807,7 +807,7 @@
           </td>
           <td>
             <div class="autobuyerdiv" ~style.display=Autobuyer(6).hasAutobuyer() ? '' : 'none'~>
-              <span><span ~style.display=Autobuyer(6).isSlow() ? '' : 'none'~>Slow </span>Generator 6 Autobuyer</span>
+              <span><span ~style.display=Autobuyer(6).isSlow() ? '' : 'none'~>Slow </span>Generator ~o 6 ~ Autobuyer</span>
               <br/>
               <span>On: <input type="checkbox" class="autobuyer-checkbox-6" ~!checked=Autobuyer(6).isOn()~ ~!onchange=function() {Autobuyer(6).setIsOn(this.checked)}~></input></span>
               <br/>
@@ -817,7 +817,7 @@
               </select></span>
             </div>
             <button class="autobuyerunlockbutton" ~style.display=(Autobuyer(6).hasAutobuyer() || !Autobuyer(6).hasReachedDisplayThreshold()) ? 'none' : ''~ ~class=Autobuyer(6).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(6).unlockSlow()">
-              Unlock Slow Generator 6 Autobuyer
+              Unlock Slow Generator ~o 6 ~ Autobuyer
               <br/>
               (triggering every ~ti 16 ~)
               <br/>
@@ -828,7 +828,7 @@
         <tr ~style.display=Autobuyers.showGeneratorAndBoost() ? '' : 'none'~>
           <td>
             <div class="autobuyerdiv" ~style.display=Autobuyer(7).hasAutobuyer() ? '' : 'none'~>
-              <span><span ~style.display=Autobuyer(7).isSlow() ? '' : 'none'~>Slow </span>Generator 7 Autobuyer</span>
+              <span><span ~style.display=Autobuyer(7).isSlow() ? '' : 'none'~>Slow </span>Generator ~o 7 ~ Autobuyer</span>
               <br/>
               <span>On: <input type="checkbox" class="autobuyer-checkbox-7" ~!checked=Autobuyer(7).isOn()~ ~!onchange=function() {Autobuyer(7).setIsOn(this.checked)}~></input></span>
               <br/>
@@ -838,7 +838,7 @@
               </select></span>
             </div>
             <button class="autobuyerunlockbutton" ~style.display=(Autobuyer(7).hasAutobuyer() || !Autobuyer(7).hasReachedDisplayThreshold()) ? 'none' : ''~ ~class=Autobuyer(7).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(7).unlockSlow()">
-              Unlock Slow Generator 7 Autobuyer
+              Unlock Slow Generator ~o 7 ~ Autobuyer
               <br/>
               (triggering every ~ti 16 ~)
               <br/>
@@ -847,7 +847,7 @@
           </td>
           <td>
             <div class="autobuyerdiv" ~style.display=Autobuyer(8).hasAutobuyer() ? '' : 'none'~>
-              <span><span ~style.display=Autobuyer(8).isSlow() ? '' : 'none'~>Slow </span>Generator 8 Autobuyer</span>
+              <span><span ~style.display=Autobuyer(8).isSlow() ? '' : 'none'~>Slow </span>Generator ~o 8 ~ Autobuyer</span>
               <br/>
               <span>On: <input type="checkbox" class="autobuyer-checkbox-8" ~!checked=Autobuyer(8).isOn()~ ~!onchange=function() {Autobuyer(8).setIsOn(this.checked)}~></input></span>
               <br/>
@@ -857,7 +857,7 @@
               </select></span>
             </div>
             <button class="autobuyerunlockbutton" ~style.display=(Autobuyer(8).hasAutobuyer() || !Autobuyer(8).hasReachedDisplayThreshold()) ? 'none' : ''~ ~class=Autobuyer(8).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(8).unlockSlow()">
-              Unlock Slow Generator 8 Autobuyer
+              Unlock Slow Generator ~o 8 ~ Autobuyer
               <br/>
               (triggering every ~ti 16 ~)
               <br/>
@@ -899,7 +899,7 @@
               <br/>
               <span>~r Autobuyer(10).mode() ~:</span>
               <br/>
-              <span><input type="text" ~!value=Autobuyer(10).priority().toString()~ ~!onchange=function() {Autobuyer(10).setPriority(new Decimal(this.value))}~></input></span>
+              <span><input type="text" class="autobuyer-priority-10" ~!value=autobuyerSettingToString(Autobuyer(10).priority())~ ~!onchange=function() {Autobuyer(10).setPriority(stringToAutobuyerSetting(this.value))}~></input></span>
             </div>
           </td>
           <td>
@@ -916,7 +916,7 @@
               <br/>
               <span>~r Autobuyer(11).mode() ~:</span>
               <br/>
-              <span><input type="text" ~!value=Autobuyer(11).priority().toString()~ ~!onchange=function() {Autobuyer(11).setPriority(new Decimal(this.value))}~></input></span>
+              <span><input type="text" class="autobuyer-priority-11" ~!value=autobuyerSettingToString(Autobuyer(11).priority())~ ~!onchange=function() {Autobuyer(11).setPriority(stringToAutobuyerSetting(this.value))}~></input></span>
             </div>
           </td>
           <td>
@@ -940,7 +940,7 @@
               <br/>
               <span>~r Autobuyer(12).mode() ~:</span>
               <br/>
-              <span><input type="text" ~!value=Autobuyer(12).priority().toString()~ ~!onchange=function() {Autobuyer(12).setPriority(new Decimal(this.value))}~></input></span>
+              <span><input type="text" class="autobuyer-priority-12" ~!value=autobuyerSettingToString(Autobuyer(12).priority())~ ~!onchange=function() {Autobuyer(12).setPriority(stringToAutobuyerSetting(this.value))}~></input></span>
               <br ~style.display=Autobuyer(12).isSuspendedDueToGeneration() ? '' : 'none'~/>
               <span ~style.display=Autobuyer(12).isSuspendedDueToGeneration() ? '' : 'none'~ style="font-size: 0.875rem;">(not triggering due to IP generation)</span>
             </div>
@@ -970,7 +970,7 @@
               <br/>
               <span>~r Autobuyer(13).mode() ~:</span>
               <br/>
-              <span><input type="text" ~!value=Autobuyer(13).priority().toString()~ ~!onchange=function() {Autobuyer(13).setPriority(new Decimal(this.value))}~></input></span>
+              <span><input type="text" class="autobuyer-priority-13" ~!value=autobuyerSettingToString(Autobuyer(13).priority())~ ~!onchange=function() {Autobuyer(13).setPriority(stringToAutobuyerSetting(this.value))}~></input></span>
               <br ~style.display=Autobuyer(13).isSuspendedDueToGeneration() ? '' : 'none'~/>
               <span ~style.display=Autobuyer(13).isSuspendedDueToGeneration() ? '' : 'none'~ style="font-size: 0.875rem;">(not triggering due to EP generation)</span>
             </div>
@@ -989,7 +989,7 @@
               <br/>
               <span>~r Autobuyer(14).mode() ~:</span>
               <br/>
-              <span><input type="text" ~!value=Autobuyer(14).priority().toString()~ ~!onchange=function() {Autobuyer(14).setPriority(new Decimal(this.value))}~></input></span>
+              <span><input type="text" class="autobuyer-priority-14" ~!value=autobuyerSettingToString(Autobuyer(14).priority())~ ~!onchange=function() {Autobuyer(14).setPriority(stringToAutobuyerSetting(this.value))}~></input></span>
               <br ~style.display=Autobuyer(14).isSuspendedDueToGeneration() ? '' : 'none'~/>
               <span ~style.display=Autobuyer(14).isSuspendedDueToGeneration() ? '' : 'none'~ style="font-size: 0.875rem;">(not triggering due to permanence generation)</span>
             </div>
@@ -1017,7 +1017,7 @@
               <br/>
               <span>~r Autobuyer(15).mode() ~:</span>
               <br/>
-              <span><input type="text" ~!value=Autobuyer(15).priority().toString()~ ~!onchange=function() {Autobuyer(15).setPriority(new Decimal(this.value))}~></input></span>
+              <span><input type="text" class="autobuyer-priority-15" ~!value=autobuyerSettingToString(Autobuyer(15).priority())~ ~!onchange=function() {Autobuyer(15).setPriority(stringToAutobuyerSetting(this.value))}~></input></span>
               <br ~style.display=Autobuyer(15).isSuspendedDueToGeneration() ? '' : 'none'~/>
               <span ~style.display=Autobuyer(15).isSuspendedDueToGeneration() ? '' : 'none'~ style="font-size: 0.875rem;">(not triggering due to ℂP generation)</span>
             </div>
@@ -1051,9 +1051,9 @@
         <tr>
           <td>
             <div class="infinitychallengediv" ~style.background=InfinityChallenge.color(1)~>
-              <span>Infinity Challenge 1</span>
+              <span>Infinity Challenge ~o 1 ~</span>
               <br/>
-              <span>Normal Challenges 2, 3, 4, 5, 6, and 7 all apply.</span>
+              <span>Normal Challenges ~o 2 ~, ~o 3 ~, ~o 4 ~, ~o 5 ~, ~o 6 ~, and ~o 7 ~ all apply.</span>
               <br/>
               <span>Requirement to start: ~f InfinityChallenge.getInfinityChallengeRequirement(1) ~ stars this eternity</span>
               <br/>
@@ -1068,7 +1068,7 @@
           </td>
           <td>
             <div class="infinitychallengediv" ~style.background=InfinityChallenge.color(2)~>
-              <span>Infinity Challenge 2</span>
+              <span>Infinity Challenge ~o 2 ~</span>
               <br/>
               <span>Prestige power is raised ^~f 0.5 ~, but sacrifice is far stronger.</span>
               <br/>
@@ -1087,7 +1087,7 @@
         <tr>
           <td>
             <div class="infinitychallengediv" ~style.background=InfinityChallenge.color(3)~>
-              <span>Infinity Challenge 3</span>
+              <span>Infinity Challenge ~o 3 ~</span>
               <br/>
               <span>The prestige power formula is worse the more prestiges you do.</span>
               <br/>
@@ -1099,12 +1099,12 @@
               <br/>
               <span><button onclick="InfinityChallenge.startOrExitInfinityChallenge(3)">~r InfinityChallenge.infinityChallengeButtonText(3) ~</button></span>
               <br/>
-              <span>Reward: Multiplier to Infinity Generator 1 based on prestige power (~f InfinityChallenge.infinityChallenge3Reward() ~).</span>
+              <span>Reward: Multiplier to Infinity Generator ~o 1 ~ based on prestige power (~f InfinityChallenge.infinityChallenge3Reward() ~).</span>
             </div>
           </td>
           <td>
             <div class="infinitychallengediv" ~style.background=InfinityChallenge.color(4)~>
-              <span>Infinity Challenge 4</span>
+              <span>Infinity Challenge ~o 4 ~</span>
               <br/>
               <span>There's an exponent on the multipliers of all ~r Generators.term() ~ increasing linearly from ~i 0 ~ to ~i 1 ~ over ~ti 16 ~. Every time you buy a generator or boost, or sacrifice or prestige, this exponent resets to ~i 0 ~.</span>
               <br/>
@@ -1123,7 +1123,7 @@
         <tr>
           <td>
             <div class="infinitychallengediv" ~style.background=InfinityChallenge.color(5)~>
-              <span>Infinity Challenge 5</span>
+              <span>Infinity Challenge ~o 5 ~</span>
               <br/>
               <span>There's an exponent on the multipliers of all ~r Generators.term() ~ based on stars, capping at ~i 1 ~.</span>
               <br/>
@@ -1135,12 +1135,12 @@
               <br/>
               <span><button onclick="InfinityChallenge.startOrExitInfinityChallenge(5)">~r InfinityChallenge.infinityChallengeButtonText(5) ~</button></span>
               <br/>
-              <span>Reward: Exponent to Infinity Generator 5 multiplier based on stars (~f InfinityChallenge.infinityChallenge5Reward() ~).</span>
+              <span>Reward: Exponent to Infinity Generator ~o 5 ~ multiplier based on stars (~f InfinityChallenge.infinityChallenge5Reward() ~).</span>
             </div>
           </td>
           <td>
             <div class="infinitychallengediv" ~style.background=InfinityChallenge.color(6)~>
-              <span>Infinity Challenge 6</span>
+              <span>Infinity Challenge ~o 6 ~</span>
               <br/>
               <span>The prestige power formula alternates between being raised ^~i 1 ~ (as usual) and ^~f 0.5 ~ every time you prestige.</span>
               <br/>
@@ -1159,7 +1159,7 @@
         <tr>
           <td>
             <div class="infinitychallengediv" ~style.background=InfinityChallenge.color(7)~>
-              <span>Infinity Challenge 7</span>
+              <span>Infinity Challenge ~o 7 ~</span>
               <br/>
               <span>Prestige power is raised ^~f 0.5 ~, but the multiplier per boost is squared.</span>
               <br/>
@@ -1176,9 +1176,9 @@
           </td>
           <td>
             <div class="infinitychallengediv" ~style.background=InfinityChallenge.color(8)~>
-              <span>Infinity Challenge 8</span>
+              <span>Infinity Challenge ~o 8 ~</span>
               <br/>
-              <span>You can only buy ~i 7 ~ total ~r Generators.term() ~ (apart from Generator 8) and boosts throughout this challenge. Each Generator 8 you buy gives you ~i 8 ~ extra purchases.</span>
+              <span>You can only buy ~i 7 ~ total ~r Generators.term() ~ (apart from Generator ~o 8 ~) and boosts throughout this challenge. Each Generator ~o 8 ~ you buy gives you ~i 8 ~ extra purchases.</span>
               <br/>
               <span>Requirement to start: ~f InfinityChallenge.getInfinityChallengeRequirement(8) ~ stars this eternity</span>
               <br/>
@@ -1188,7 +1188,7 @@
               <br/>
               <span><button onclick="InfinityChallenge.startOrExitInfinityChallenge(8)">~r InfinityChallenge.infinityChallengeButtonText(8) ~</button></span>
               <br/>
-              <span>Reward: Multiplier to Infinity Generator 8 equal to number of Generator 8 (lower-bounded by ~i 1 ~).</span>
+              <span>Reward: Multiplier to Infinity Generator ~o 8 ~ equal to number of Generator ~o 8 ~ (lower-bounded by ~i 1 ~).</span>
             </div>
           </td>
         </tr>
@@ -1241,7 +1241,7 @@
       <br/>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr ~style.display=EternityGenerator(1).isVisible() ? '' : 'none'~>
-          <td>Eternity Generator 1</td>
+          <td>Eternity Generator ~o 1 ~</td>
           <td>~f EternityGenerator(1).amount() ~</td>
           <td>~f EternityGenerator(1).perSecond() ~/s</td>
           <td>~f EternityGenerator(1).multiplier() ~x</td>
@@ -1250,7 +1250,7 @@
           <td><button ~style.display=EternityAutobuyer(1).hasEternityAutobuyer() ? '' : 'none'~ onclick="EternityAutobuyer(1).toggle()">Auto: ~r EternityAutobuyer(1).isOn() ? "On" : "Off" ~</button></td>
         </tr>
         <tr ~style.display=EternityGenerator(2).isVisible() ? '' : 'none'~>
-          <td>Eternity Generator 2</td>
+          <td>Eternity Generator ~o 2 ~</td>
           <td>~f EternityGenerator(2).amount() ~</td>
           <td>~f EternityGenerator(2).perSecond() ~/s</td>
           <td>~f EternityGenerator(2).multiplier() ~x</td>
@@ -1259,7 +1259,7 @@
           <td><button ~style.display=EternityAutobuyer(2).hasEternityAutobuyer() ? '' : 'none'~ onclick="EternityAutobuyer(2).toggle()">Auto: ~r EternityAutobuyer(2).isOn() ? "On" : "Off" ~</button></td>
         </tr>
         <tr ~style.display=EternityGenerator(3).isVisible() ? '' : 'none'~>
-          <td>Eternity Generator 3</td>
+          <td>Eternity Generator ~o 3 ~</td>
           <td>~f EternityGenerator(3).amount() ~</td>
           <td>~f EternityGenerator(3).perSecond() ~/s</td>
           <td>~f EternityGenerator(3).multiplier() ~x</td>
@@ -1268,7 +1268,7 @@
           <td><button ~style.display=EternityAutobuyer(3).hasEternityAutobuyer() ? '' : 'none'~ onclick="EternityAutobuyer(3).toggle()">Auto: ~r EternityAutobuyer(3).isOn() ? "On" : "Off" ~</button></td>
         </tr>
         <tr ~style.display=EternityGenerator(4).isVisible() ? '' : 'none'~>
-          <td>Eternity Generator 4</td>
+          <td>Eternity Generator ~o 4 ~</td>
           <td>~f EternityGenerator(4).amount() ~</td>
           <td>~f EternityGenerator(4).perSecond() ~/s</td>
           <td>~f EternityGenerator(4).multiplier() ~x</td>
@@ -1277,7 +1277,7 @@
           <td><button ~style.display=EternityAutobuyer(4).hasEternityAutobuyer() ? '' : 'none'~ onclick="EternityAutobuyer(4).toggle()">Auto: ~r EternityAutobuyer(4).isOn() ? "On" : "Off" ~</button></td>
         </tr>
         <tr ~style.display=EternityGenerator(5).isVisible() ? '' : 'none'~>
-          <td>Eternity Generator 5</td>
+          <td>Eternity Generator ~o 5 ~</td>
           <td>~f EternityGenerator(5).amount() ~</td>
           <td>~f EternityGenerator(5).perSecond() ~/s</td>
           <td>~f EternityGenerator(5).multiplier() ~x</td>
@@ -1286,7 +1286,7 @@
           <td><button ~style.display=EternityAutobuyer(5).hasEternityAutobuyer() ? '' : 'none'~ onclick="EternityAutobuyer(5).toggle()">Auto: ~r EternityAutobuyer(5).isOn() ? "On" : "Off" ~</button></td>
         </tr>
         <tr ~style.display=EternityGenerator(6).isVisible() ? '' : 'none'~>
-          <td>Eternity Generator 6</td>
+          <td>Eternity Generator ~o 6 ~</td>
           <td>~f EternityGenerator(6).amount() ~</td>
           <td>~f EternityGenerator(6).perSecond() ~/s</td>
           <td>~f EternityGenerator(6).multiplier() ~x</td>
@@ -1295,7 +1295,7 @@
           <td><button ~style.display=EternityAutobuyer(6).hasEternityAutobuyer() ? '' : 'none'~ onclick="EternityAutobuyer(6).toggle()">Auto: ~r EternityAutobuyer(6).isOn() ? "On" : "Off" ~</button></td>
         </tr>
         <tr ~style.display=EternityGenerator(7).isVisible() ? '' : 'none'~>
-          <td>Eternity Generator 7</td>
+          <td>Eternity Generator ~o 7 ~</td>
           <td>~f EternityGenerator(7).amount() ~</td>
           <td>~f EternityGenerator(7).perSecond() ~/s</td>
           <td>~f EternityGenerator(7).multiplier() ~x</td>
@@ -1304,7 +1304,7 @@
           <td><button ~style.display=EternityAutobuyer(7).hasEternityAutobuyer() ? '' : 'none'~ onclick="EternityAutobuyer(7).toggle()">Auto: ~r EternityAutobuyer(7).isOn() ? "On" : "Off" ~</button></td>
         </tr>
         <tr ~style.display=EternityGenerator(8).isVisible() ? '' : 'none'~>
-          <td>Eternity Generator 8</td>
+          <td>Eternity Generator ~o 8 ~</td>
           <td>~f EternityGenerator(8).amount() ~</td>
           <td>~f EternityGenerator(8).perSecond() ~/s</td>
           <td>~f EternityGenerator(8).multiplier() ~x</td>
@@ -1410,7 +1410,7 @@
               <br/>
               ~r EternityMilestones.milestoneStatusDescription(9) ~
               <br/>
-              Unlock an Infinity Generator 1 autobuyer.
+              Unlock an Infinity Generator ~o 1 ~ autobuyer.
             </div>
           </td>
           <td>
@@ -1419,7 +1419,7 @@
               <br/>
               ~r EternityMilestones.milestoneStatusDescription(10) ~
               <br/>
-              Unlock an Infinity Generator 2 autobuyer.
+              Unlock an Infinity Generator ~o 2 ~ autobuyer.
             </div>
           </td>
           <td>
@@ -1428,7 +1428,7 @@
               <br/>
               ~r EternityMilestones.milestoneStatusDescription(11) ~
               <br/>
-              Unlock an Infinity Generator 3 autobuyer.
+              Unlock an Infinity Generator ~o 3 ~ autobuyer.
             </div>
           </td>
           <td>
@@ -1437,7 +1437,7 @@
               <br/>
               ~r EternityMilestones.milestoneStatusDescription(12) ~
               <br/>
-              Unlock an Infinity Generator 4 autobuyer.
+              Unlock an Infinity Generator ~o 4 ~ autobuyer.
             </div>
           </td>
         </tr>
@@ -1448,7 +1448,7 @@
               <br/>
               ~r EternityMilestones.milestoneStatusDescription(13) ~
               <br/>
-              Unlock an Infinity Generator 5 autobuyer.
+              Unlock an Infinity Generator ~o 5 ~ autobuyer.
             </div>
           </td>
           <td>
@@ -1457,7 +1457,7 @@
               <br/>
               ~r EternityMilestones.milestoneStatusDescription(14) ~
               <br/>
-              Unlock an Infinity Generator 6 autobuyer.
+              Unlock an Infinity Generator ~o 6 ~ autobuyer.
             </div>
           </td>
           <td>
@@ -1466,7 +1466,7 @@
               <br/>
               ~r EternityMilestones.milestoneStatusDescription(15) ~
               <br/>
-              Unlock an Infinity Generator 7 autobuyer.
+              Unlock an Infinity Generator ~o 7 ~ autobuyer.
             </div>
           </td>
           <td>
@@ -1475,7 +1475,7 @@
               <br/>
               ~r EternityMilestones.milestoneStatusDescription(16) ~
               <br/>
-              Unlock an Infinity Generator 8 autobuyer, and an eternity autobuyer.
+              Unlock an Infinity Generator ~o 8 ~ autobuyer, and an eternity autobuyer.
             </div>
           </td>
         </tr>
@@ -1613,7 +1613,7 @@
         </div>
         <br ~style.display=Studies.couldEverAccessFourthRow() ? '' : 'none'~/>
         <div ~style.display=Studies.couldEverAccessFourthRow() ? '' : 'none'~ style="width: 1024px; margin-left: auto; margin-right: auto;">
-          Adding &amp;a,b,c,d to the end of a study list will try to buy Study 13 up to a total times, then Study 14 b total times, and so on.
+          Adding &amp;a,b,c,d to the end of a study list will try to buy Study ~o 13 ~ up to a total times, then Study ~o 14 ~ b total times, and so on.
           If the game cannot buy a study in the list as many times as asked for, it will move to the next study.
           Adding &amp;sa,b,c,d, where the s is a literal s, will instead try to spend theorems on fourth-row studies in proportion to their costs when bought a, b, c, and d times.
           This &amp;sa,b,c,d syntax allows for a preset to keep the same relative values between fourth-row studies (that is, which is more important and which is less) without the preset changing for every fourth-row study purchase.
@@ -1628,7 +1628,7 @@
         <tr>
           <td>
             <button ~class=Study(1).className()~ onclick="Study(1).click()">
-              Study 1
+              Study ~o 1 ~
               <br/>
               Double per-boost multiplier
               <br/>
@@ -1639,7 +1639,7 @@
           </td>
           <td>
             <button ~class=Study(2).className()~ onclick="Study(2).click()">
-              Study 2
+              Study ~o 2 ~
               <br/>
               Multiplier to normal generators based on prestige power
               <br/>
@@ -1650,7 +1650,7 @@
           </td>
           <td>
             <button ~class=Study(3).className()~ onclick="Study(3).click()">
-              Study 3
+              Study ~o 3 ~
               <br/>
               Multiplier to normal generators based on total stars this complexity
               <br/>
@@ -1661,7 +1661,7 @@
           </td>
           <td>
             <button ~class=Study(4).className()~ onclick="Study(4).click()">
-              Study 4
+              Study ~o 4 ~
               <br/>
               Multiplier to normal generators based on total theorems
               <br/>
@@ -1674,7 +1674,7 @@
         <tr>
           <td>
             <button ~class=Study(5).className()~ onclick="Study(5).click()">
-              Study 5
+              Study ~o 5 ~
               <br/>
               Multiplier to infinity generators based on number of boosts
               <br/>
@@ -1685,7 +1685,7 @@
           </td>
           <td>
             <button ~class=Study(6).className()~ onclick="Study(6).click()">
-              Study 6
+              Study ~o 6 ~
               <br/>
               Multiplier to infinity generators based on prestige power
               <br/>
@@ -1696,7 +1696,7 @@
           </td>
           <td>
             <button ~class=Study(7).className()~ onclick="Study(7).click()">
-              Study 7
+              Study ~o 7 ~
               <br/>
               Multiplier to infinity generators based on eternities
               <br/>
@@ -1707,7 +1707,7 @@
           </td>
           <td>
             <button ~class=Study(8).className()~ onclick="Study(8).click()">
-              Study 8
+              Study ~o 8 ~
               <br/>
               Multiplier to infinity generators based on total theorems
               <br/>
@@ -1720,7 +1720,7 @@
         <tr>
           <td>
             <button ~class=Study(9).className()~ onclick="Study(9).click()">
-              Study 9
+              Study ~o 9 ~
               <br/>
               Eternity generators are multiplied by <span ~style.display=InfinityChallenge.isInfinityChallengeRunning(7) ? '' : 'none'~>square root of</span> per-boost multiplier
               <br/>
@@ -1731,7 +1731,7 @@
           </td>
           <td>
             <button ~class=Study(10).className()~ onclick="Study(10).click()">
-              Study 10
+              Study ~o 10 ~
               <br/>
               Multiplier to eternity generators based on prestige power
               <br/>
@@ -1742,7 +1742,7 @@
           </td>
           <td>
             <button ~class=Study(11).className()~ onclick="Study(11).click()">
-              Study 11
+              Study ~o 11 ~
               <br/>
               Multiplier to eternity generators based on eternity stars and time in eternity
               <br/>
@@ -1753,7 +1753,7 @@
           </td>
           <td>
             <button ~class=Study(12).className()~ onclick="Study(12).click()">
-              Study 12
+              Study ~o 12 ~
               <br/>
               Multiplier to eternity generators based on total theorems
               <br/>
@@ -1766,7 +1766,7 @@
         <tr ~style.display=Studies.canAccessFourthRow() ? '' : 'none'~>
           <td>
             <button ~class=Study(13).className()~ onclick="Study(13).click()">
-              Study 13
+              Study ~o 13 ~
               <br/>
               Large fixed multiplier to normal generators
               <br/>
@@ -1779,7 +1779,7 @@
           </td>
           <td>
             <button ~class=Study(14).className()~ onclick="Study(14).click()">
-              Study 14
+              Study ~o 14 ~
               <br/>
               Multiplier to infinity generators based on total color value
               <br/>
@@ -1792,7 +1792,7 @@
           </td>
           <td>
             <button ~class=Study(15).className()~ onclick="Study(15).click()">
-              Study 15
+              Study ~o 15 ~
               <br/>
               Eternity generators are multiplied by chroma
               <br/>
@@ -1805,7 +1805,7 @@
           </td>
           <td>
             <button ~class=Study(16).className()~ onclick="Study(16).click()">
-              Study 16
+              Study ~o 16 ~
               <br/>
               Multiplier to chroma buildup speed based on total theorems
               <br/>
@@ -2684,7 +2684,7 @@
         <tr>
           <td>
             <div class="eternitychallengediv" ~style.background=EternityChallenge.color(1)~>
-              <span>Eternity Challenge 1</span>
+              <span>Eternity Challenge ~o 1 ~</span>
               <br/>
               <span>There are exponents on all normal generator multipliers based on infinity stars and on all infinity generator multipliers based on eternity stars (both less than ~i 1 ~).</span>
               <br/>
@@ -2709,7 +2709,7 @@
           </td>
           <td>
             <div class="eternitychallengediv" ~style.background=EternityChallenge.color(2)~>
-              <span>Eternity Challenge 2</span>
+              <span>Eternity Challenge ~o 2 ~</span>
               <br/>
               <span>Boost costs are massively increased.</span>
               <br/>
@@ -2736,7 +2736,7 @@
         <tr>
           <td>
             <div class="eternitychallengediv" ~style.background=EternityChallenge.color(3)~>
-              <span>Eternity Challenge 3</span>
+              <span>Eternity Challenge ~o 3 ~</span>
               <br/>
               <span>You can't prestige.</span>
               <br/>
@@ -2761,7 +2761,7 @@
           </td>
           <td>
             <div class="eternitychallengediv" ~style.background=EternityChallenge.color(4)~>
-              <span>Eternity Challenge 4</span>
+              <span>Eternity Challenge ~o 4 ~</span>
               <br/>
               <span>You can infinity at most ~i EternityChallenge.eternityChallenge4AllowedInfinities() ~ time~s EternityChallenge.eternityChallenge4AllowedInfinities() ~. If you infinity more, you will automatically exit this challenge.</span>
               <br/>
@@ -2788,7 +2788,7 @@
         <tr>
           <td>
             <div class="eternitychallengediv" ~style.background=EternityChallenge.color(5)~>
-              <span>Eternity Challenge 5</span>
+              <span>Eternity Challenge ~o 5 ~</span>
               <br/>
               <span>Infinity generator multipliers are square-rooted (^~f 0.5 ~).</span>
               <br/>
@@ -2813,7 +2813,7 @@
           </td>
           <td>
             <div class="eternitychallengediv" ~style.background=EternityChallenge.color(6)~>
-              <span>Eternity Challenge 6</span>
+              <span>Eternity Challenge ~o 6 ~</span>
               <br/>
               <span>All eternity challenge rewards are disabled.</span>
               <br/>
@@ -2840,7 +2840,7 @@
         <tr>
           <td>
             <div class="eternitychallengediv" ~style.background=EternityChallenge.color(7)~>
-              <span>Eternity Challenge 7</span>
+              <span>Eternity Challenge ~o 7 ~</span>
               <br/>
               <span>Infinity generator per-purchase multipliers are disabled.</span>
               <br/>
@@ -2865,7 +2865,7 @@
           </td>
           <td>
             <div class="eternitychallengediv" ~style.background=EternityChallenge.color(8)~>
-              <span>Eternity Challenge 8</span>
+              <span>Eternity Challenge ~o 8 ~</span>
               <br/>
               <span>Eternity generators are disabled.</span>
               <br/>
@@ -3003,9 +3003,9 @@
                 <div class="cyandiv" ~style.display=Chroma.isColorUnlocked(4) ? '' : 'none'~>
                   <span>~r Chroma.colorName(4, true) ~: ~f Chroma.colorAmount(4) ~</span>
                   <br/>
-                  <span>Eternity Generator 8 ~f Chroma.effectOfColor(4) ~x</span>
+                  <span>Eternity Generator ~o 8 ~ ~f Chroma.effectOfColor(4) ~x</span>
                   <br/>
-                  <span>(based on Eternity Generator 8 amount)</span>
+                  <span>(based on Eternity Generator ~o 8 ~ amount)</span>
                   <br/>
                   <button ~style.display=Chroma.producingAll() ? 'none' : ''~ onclick="Chroma.setNextColor(4)">Produce ~r Chroma.colorName(4) ~ next</button>
                   <br/>
@@ -3077,7 +3077,7 @@
       <div ~style.display=FinalityMilestones.isFinalityMilestoneActive(9) ? '' : 'none'~>
         <span>You have ~f ComplexityStars.amount() ~^~f ComplexityStars.extraComplexityStarPower() ~ = ~f ComplexityStars.extraAmount() ~ hypercomplexity stars,</span>
         <br/>
-        <span>used for Complexity Challenge 6 reward strength and complexity star factor.</span>
+        <span>used for Complexity Challenge ~o 6 ~ reward strength and complexity star factor.</span>
       </div>
       <br ~style.display=FinalityMilestones.isFinalityMilestoneActive(9) ? 'none' : ''~/>
       <span>View all complexity generators even if they would be otherwise invisible: <input type="checkbox" ~!checked=Options.rawViewAllGenerators('complexity')~ ~!onchange=function() {Options.setRawViewAllGenerators('complexity', this.checked)}~></input></span>
@@ -3085,7 +3085,7 @@
       <br/>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr ~style.display=ComplexityGenerator(1).isVisible() ? '' : 'none'~>
-          <td>Complexity Generator 1</td>
+          <td>Complexity Generator ~o 1 ~</td>
           <td>~f ComplexityGenerator(1).amount() ~</td>
           <td>~f ComplexityGenerator(1).perSecond() ~/s</td>
           <td>~f ComplexityGenerator(1).multiplier() ~x</td>
@@ -3094,7 +3094,7 @@
           <td><button ~style.display=ComplexityAutobuyer(1).hasComplexityAutobuyer() ? '' : 'none'~ onclick="ComplexityAutobuyer(1).toggle()">Auto: ~r ComplexityAutobuyer(1).isOn() ? "On" : "Off" ~</button></td>
         </tr>
         <tr ~style.display=ComplexityGenerator(2).isVisible() ? '' : 'none'~>
-          <td>Complexity Generator 2</td>
+          <td>Complexity Generator ~o 2 ~</td>
           <td>~f ComplexityGenerator(2).amount() ~</td>
           <td>~f ComplexityGenerator(2).perSecond() ~/s</td>
           <td>~f ComplexityGenerator(2).multiplier() ~x</td>
@@ -3103,7 +3103,7 @@
           <td><button ~style.display=ComplexityAutobuyer(2).hasComplexityAutobuyer() ? '' : 'none'~ onclick="ComplexityAutobuyer(2).toggle()">Auto: ~r ComplexityAutobuyer(2).isOn() ? "On" : "Off" ~</button></td>
         </tr>
         <tr ~style.display=ComplexityGenerator(3).isVisible() ? '' : 'none'~>
-          <td>Complexity Generator 3</td>
+          <td>Complexity Generator ~o 3 ~</td>
           <td>~f ComplexityGenerator(3).amount() ~</td>
           <td>~f ComplexityGenerator(3).perSecond() ~/s</td>
           <td>~f ComplexityGenerator(3).multiplier() ~x</td>
@@ -3112,7 +3112,7 @@
           <td><button ~style.display=ComplexityAutobuyer(3).hasComplexityAutobuyer() ? '' : 'none'~ onclick="ComplexityAutobuyer(3).toggle()">Auto: ~r ComplexityAutobuyer(3).isOn() ? "On" : "Off" ~</button></td>
         </tr>
         <tr ~style.display=ComplexityGenerator(4).isVisible() ? '' : 'none'~>
-          <td>Complexity Generator 4</td>
+          <td>Complexity Generator ~o 4 ~</td>
           <td>~f ComplexityGenerator(4).amount() ~</td>
           <td>~f ComplexityGenerator(4).perSecond() ~/s</td>
           <td>~f ComplexityGenerator(4).multiplier() ~x</td>
@@ -3121,7 +3121,7 @@
           <td><button ~style.display=ComplexityAutobuyer(4).hasComplexityAutobuyer() ? '' : 'none'~ onclick="ComplexityAutobuyer(4).toggle()">Auto: ~r ComplexityAutobuyer(4).isOn() ? "On" : "Off" ~</button></td>
         </tr>
         <tr ~style.display=ComplexityGenerator(5).isVisible() ? '' : 'none'~>
-          <td>Complexity Generator 5</td>
+          <td>Complexity Generator ~o 5 ~</td>
           <td>~f ComplexityGenerator(5).amount() ~</td>
           <td>~f ComplexityGenerator(5).perSecond() ~/s</td>
           <td>~f ComplexityGenerator(5).multiplier() ~x</td>
@@ -3130,7 +3130,7 @@
           <td><button ~style.display=ComplexityAutobuyer(5).hasComplexityAutobuyer() ? '' : 'none'~ onclick="ComplexityAutobuyer(5).toggle()">Auto: ~r ComplexityAutobuyer(5).isOn() ? "On" : "Off" ~</button></td>
         </tr>
         <tr ~style.display=ComplexityGenerator(6).isVisible() ? '' : 'none'~>
-          <td>Complexity Generator 6</td>
+          <td>Complexity Generator ~o 6 ~</td>
           <td>~f ComplexityGenerator(6).amount() ~</td>
           <td>~f ComplexityGenerator(6).perSecond() ~/s</td>
           <td>~f ComplexityGenerator(6).multiplier() ~x</td>
@@ -3139,7 +3139,7 @@
           <td><button ~style.display=ComplexityAutobuyer(6).hasComplexityAutobuyer() ? '' : 'none'~ onclick="ComplexityAutobuyer(6).toggle()">Auto: ~r ComplexityAutobuyer(6).isOn() ? "On" : "Off" ~</button></td>
         </tr>
         <tr ~style.display=ComplexityGenerator(7).isVisible() ? '' : 'none'~>
-          <td>Complexity Generator 7</td>
+          <td>Complexity Generator ~o 7 ~</td>
           <td>~f ComplexityGenerator(7).amount() ~</td>
           <td>~f ComplexityGenerator(7).perSecond() ~/s</td>
           <td>~f ComplexityGenerator(7).multiplier() ~x</td>
@@ -3148,7 +3148,7 @@
           <td><button ~style.display=ComplexityAutobuyer(7).hasComplexityAutobuyer() ? '' : 'none'~ onclick="ComplexityAutobuyer(7).toggle()">Auto: ~r ComplexityAutobuyer(7).isOn() ? "On" : "Off" ~</button></td>
         </tr>
         <tr ~style.display=ComplexityGenerator(8).isVisible() ? '' : 'none'~>
-          <td>Complexity Generator 8</td>
+          <td>Complexity Generator ~o 8 ~</td>
           <td>~f ComplexityGenerator(8).amount() ~</td>
           <td>~f ComplexityGenerator(8).perSecond() ~/s</td>
           <td>~f ComplexityGenerator(8).multiplier() ~x</td>
@@ -3167,7 +3167,7 @@
       <br/>
       <span>Complexity challenge rewards are currently ~f ComplexityStars.complexityChallengeRewardMultiplier() ~x stronger (from ~f ComplexityStars.amount() ~ complexity stars).</span>
       <br ~style.display=FinalityMilestones.isFinalityMilestoneActive(9) ? '' : 'none'~/>
-      <span ~style.display=FinalityMilestones.isFinalityMilestoneActive(9) ? '' : 'none'~>The Complexity Challenge 6 reward is instead currently ~f ComplexityStars.complexityChallengeRewardMultiplier(6) ~x stronger (from ~f ComplexityStars.extraAmount() ~ hypercomplexity stars).</span>
+      <span ~style.display=FinalityMilestones.isFinalityMilestoneActive(9) ? '' : 'none'~>The Complexity Challenge ~o 6 ~ reward is instead currently ~f ComplexityStars.complexityChallengeRewardMultiplier(6) ~x stronger (from ~f ComplexityStars.extraAmount() ~ hypercomplexity stars).</span>
       <br/>
       <br/>
       <span>You do not need to complexity to complete complexity challenges.<span ~style.display=ComplexityChallenge.isExplanationMovedDown() ? '' : 'none'~> How to complete them is explained at the bottom of this tab.</span></span>
@@ -3190,15 +3190,15 @@
         <br ~style.display=Trivia.show('CC1 pre-complexity completion') ? 'none' : ''~/>
         <div ~style.display=Trivia.show('CC1 pre-complexity completion') ? '' : 'none'~/>
           <span>
-            You can complete Complexity Challenge 1 even pre-complexity.
+            You can complete Complexity Challenge ~o 1 ~ even pre-complexity.
           </span>
           <br/>
           <span>
-            This allows you to start with a Complexity Challenge 1 completion.
+            This allows you to start with a Complexity Challenge ~o 1 ~ completion.
           </span>
         </div>
         <span>
-          The header does not mention that you are in Complexity Challenge 1 to avoid clutter, since you are always in it.
+          The header does not mention that you are in Complexity Challenge ~o 1 ~ to avoid clutter, since you are always in it.
         </span>
         <br/>
         <span>
@@ -3217,7 +3217,7 @@
         <tr>
           <td>
             <div class="complexitychallengediv yellowaltereddiv" ~style.background=ComplexityChallenge.color(1)~>
-              <span>Complexity Challenge 1</span>
+              <span>Complexity Challenge ~o 1 ~</span>
               <br/>
               <span>No requirement (you're always in this challenge).</span>
               <br/>
@@ -3234,7 +3234,7 @@
           </td>
           <td>
             <div class="complexitychallengediv greyaltereddiv" ~style.background=ComplexityChallenge.color(2)~>
-              <span>Complexity Challenge 2</span>
+              <span>Complexity Challenge ~o 2 ~</span>
               <br/>
               <span>You can't buy boosts.</span>
               <br/>
@@ -3257,7 +3257,7 @@
         <tr>
           <td>
             <div class="complexitychallengediv purplealtereddiv" ~style.background=ComplexityChallenge.color(3)~>
-              <span>Complexity Challenge 3</span>
+              <span>Complexity Challenge ~o 3 ~</span>
               <br/>
               <span>You can't unlock the Eternity Producer.</span>
               <br/>
@@ -3278,7 +3278,7 @@
           </td>
           <td>
             <div class="complexitychallengediv orangealtereddiv" ~style.background=ComplexityChallenge.color(4)~>
-              <span>Complexity Challenge 4</span>
+              <span>Complexity Challenge ~o 4 ~</span>
               <br/>
               <span>You can't unlock chroma.</span>
               <br/>
@@ -3301,9 +3301,9 @@
         <tr>
           <td>
             <div class="complexitychallengediv cyanaltereddiv" ~style.background=ComplexityChallenge.color(5)~>
-              <span>Complexity Challenge 5</span>
+              <span>Complexity Challenge ~o 5 ~</span>
               <br/>
-              <span>You can't buy Eternity Generator 8.</span>
+              <span>You can't buy Eternity Generator ~o 8 ~.</span>
               <br/>
               <span>Goal: ~f ComplexityChallenge.getComplexityChallengeGoal(5) ~ stars</span>
               <br/>
@@ -3311,18 +3311,18 @@
               <br/>
               <span ~style.display=ComplexityChallenge.showComplexityChallengeLastCompletionDescription(5) ? '' : 'none'~>~r ComplexityChallenge.complexityChallengeLastCompletionDescription(5) ~</span>
               <br ~style.display=ComplexityChallenge.showComplexityChallengeLastCompletionDescription(5) ? '' : 'none'~/>
-              <span><button onclick="ComplexityChallenge.toggleSafeguard(5)">Buying Eternity Generator 8: ~r ComplexityChallenge.safeguardStatusText(5) ~</button></span>
+              <span><button onclick="ComplexityChallenge.toggleSafeguard(5)">Buying Eternity Generator ~o 8 ~: ~r ComplexityChallenge.safeguardStatusText(5) ~</button></span>
               <br/>
               <span ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(5) ? 'none' : ''~>(Disabling this doesn't put you in this challenge yet, since this challenge is locked.)</span>
               <br ~style.display=ComplexityChallenge.isComplexityChallengeUnlocked(5) ? 'none' : ''~/>
-              <span>Reward: Multiplier to per-purchase Eternity Generator 8 multiplier.</span>
+              <span>Reward: Multiplier to per-purchase Eternity Generator ~o 8 ~ multiplier.</span>
               <br/>
               <span>Current: ~f ComplexityChallenge.getComplexityChallengeReward(5) ~x, Next: ~f ComplexityChallenge.getComplexityChallengeNextReward(5) ~x</span>
             </div>
           </td>
           <td>
             <div class="complexitychallengediv greenaltereddiv" ~style.background=ComplexityChallenge.color(6)~>
-              <span>Complexity Challenge 6</span>
+              <span>Complexity Challenge ~o 6 ~</span>
               <br/>
               <span>You can't buy or have studies.</span>
               <br/>
@@ -3368,15 +3368,15 @@
         <br ~style.display=Trivia.show('CC1 pre-complexity completion') ? 'none' : ''~/>
         <div ~style.display=Trivia.show('CC1 pre-complexity completion') ? '' : 'none'~/>
           <span>
-            You can complete Complexity Challenge 1 even pre-complexity.
+            You can complete Complexity Challenge ~o 1 ~ even pre-complexity.
           </span>
           <br/>
           <span>
-            This allows you to start with a Complexity Challenge 1 completion.
+            This allows you to start with a Complexity Challenge ~o 1 ~ completion.
           </span>
         </div>
         <span>
-          The header does not mention that you are in Complexity Challenge 1 to avoid clutter, since you are always in it.
+          The header does not mention that you are in Complexity Challenge ~o 1 ~ to avoid clutter, since you are always in it.
         </span>
         <br/>
         <span>
@@ -3434,7 +3434,7 @@
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(1, 1)~>
               <span class="greytogreyaltered">~r ComplexityAchievements.getComplexityAchievementName(1, 1) ~</span>
               <br/>
-              Complete Complexity Challenge 2 ~i 8 ~ times.
+              Complete Complexity Challenge ~o 2 ~ ~i 8 ~ times.
               <br/>
               ~r ComplexityAchievements.complexityAchievementStatusDescription(1, 1) ~
               <br/>
@@ -3445,7 +3445,7 @@
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(1, 2)~>
               <span class="greytopurplealtered">~r ComplexityAchievements.getComplexityAchievementName(1, 2) ~</span>
               <br/>
-              Eternity in Complexity Challenge 2.
+              Eternity in Complexity Challenge ~o 2 ~.
               <br/>
               ~r ComplexityAchievements.complexityAchievementStatusDescription(1, 2) ~
               <br/>
@@ -3456,7 +3456,7 @@
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(1, 3)~>
               <span class="greytoorangealtered">~r ComplexityAchievements.getComplexityAchievementName(1, 3) ~</span>
               <br/>
-              Unlock chroma in Complexity Challenge 2.
+              Unlock chroma in Complexity Challenge ~o 2 ~.
               <br/>
               ~r ComplexityAchievements.complexityAchievementStatusDescription(1, 3) ~
               <br/>
@@ -3467,7 +3467,7 @@
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(1, 4)~>
               <span class="greytogreenaltered">~r ComplexityAchievements.getComplexityAchievementName(1, 4) ~</span>
               <br/>
-              Get ~i 11 ~ studies in Complexity Challenge 2.
+              Get ~i 11 ~ studies in Complexity Challenge ~o 2 ~.
               <br/>
               ~r ComplexityAchievements.complexityAchievementStatusDescription(1, 4) ~
               <br/>
@@ -3480,7 +3480,7 @@
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(2, 1)~>
               <span class="purpletogreyaltered">~r ComplexityAchievements.getComplexityAchievementName(2, 1) ~</span>
               <br/>
-              Get a per-boost multiplier of ~f Math.pow(2, 24) ~ outside of Infinity Challenge 7 in Complexity Challenge 3.
+              Get a per-boost multiplier of ~f Math.pow(2, 24) ~ outside of Infinity Challenge ~o 7 ~ in Complexity Challenge ~o 3 ~.
               <br/>
               ~r ComplexityAchievements.complexityAchievementStatusDescription(2, 1) ~
               <br/>
@@ -3491,7 +3491,7 @@
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(2, 2)~>
               <span class="purpletopurplealtered">~r ComplexityAchievements.getComplexityAchievementName(2, 2) ~</span>
               <br/>
-              Get ~f Math.pow(2, 24) ~ eternities in Complexity Challenge 3.
+              Get ~f Math.pow(2, 24) ~ eternities in Complexity Challenge ~o 3 ~.
               <br/>
               ~r ComplexityAchievements.complexityAchievementStatusDescription(2, 2) ~
               <br/>
@@ -3502,7 +3502,7 @@
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(2, 3)~>
               <span class="purpletoorangealtered">~r ComplexityAchievements.getComplexityAchievementName(2, 3) ~</span>
               <br/>
-              Unlock chroma in Complexity Challenge 3.
+              Unlock chroma in Complexity Challenge ~o 3 ~.
               <br/>
               ~r ComplexityAchievements.complexityAchievementStatusDescription(2, 3) ~
               <br/>
@@ -3513,11 +3513,11 @@
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(2, 4)~>
               <span class="purpletogreenaltered">~r ComplexityAchievements.getComplexityAchievementName(2, 4) ~</span>
               <br/>
-              Get ~i 231 ~ theorems in Complexity Challenge 3.
+              Get ~i 231 ~ theorems in Complexity Challenge ~o 3 ~.
               <br/>
               ~r ComplexityAchievements.complexityAchievementStatusDescription(2, 4) ~
               <br/>
-              Study 7 and Study 11 effects are uncapped and raised ^~i ComplexityAchievements.rawEffect(2, 4) ~.
+              Study ~o 7 ~ and Study ~o 11 ~ effects are uncapped and raised ^~i ComplexityAchievements.rawEffect(2, 4) ~.
             </div>
           </td>
         </tr>
@@ -3526,7 +3526,7 @@
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(3, 1)~>
               <span class="orangetogreyaltered">~r ComplexityAchievements.getComplexityAchievementName(3, 1) ~</span>
               <br/>
-              Get ~f 1024 ~ boosts in Eternity Challenge 2 in Complexity Challenge 4.
+              Get ~f 1024 ~ boosts in Eternity Challenge ~o 2 ~ in Complexity Challenge ~o 4 ~.
               <br/>
               ~r ComplexityAchievements.complexityAchievementStatusDescription(3, 1) ~
               <br/>
@@ -3537,7 +3537,7 @@
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(3, 2)~>
               <span class="orangetopurplealtered">~r ComplexityAchievements.getComplexityAchievementName(3, 2) ~</span>
               <br/>
-              Complete all eternity challenges, without using automatic eternity challenge completion, in Complexity Challenge 4.
+              Complete all eternity challenges, without using automatic eternity challenge completion, in Complexity Challenge ~o 4 ~.
               <br/>
               ~r ComplexityAchievements.complexityAchievementStatusDescription(3, 2) ~
               <br/>
@@ -3548,7 +3548,7 @@
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(3, 3)~>
               <span class="orangetoorangealtered">~r ComplexityAchievements.getComplexityAchievementName(3, 3) ~</span>
               <br/>
-              Complete Complexity Challenge 4 ~i 13 ~ times.
+              Complete Complexity Challenge ~o 4 ~ ~i 13 ~ times.
               <br/>
               ~r ComplexityAchievements.complexityAchievementStatusDescription(3, 3) ~
               <br/>
@@ -3559,7 +3559,7 @@
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(3, 4)~>
               <span class="orangetogreenaltered">~r ComplexityAchievements.getComplexityAchievementName(3, 4) ~</span>
               <br/>
-              Get ~f Decimal.pow(2, 1.75 * Math.pow(2, 16)) ~ eternity points, without buying theorems, in Complexity Challenge 4.
+              Get ~f Decimal.pow(2, 1.75 * Math.pow(2, 16)) ~ eternity points, without buying theorems, in Complexity Challenge ~o 4 ~.
               <br/>
               ~r ComplexityAchievements.complexityAchievementStatusDescription(3, 4) ~
               <br/>
@@ -3574,7 +3574,7 @@
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(4, 1)~>
               <span class="greentogreyaltered">~r ComplexityAchievements.getComplexityAchievementName(4, 1) ~</span>
               <br/>
-              Get ~f Math.pow(2, 16) ~ boost power in Complexity Challenge 6.
+              Get ~f Math.pow(2, 16) ~ boost power in Complexity Challenge ~o 6 ~.
               <br/>
               ~r ComplexityAchievements.complexityAchievementStatusDescription(4, 1) ~
               <br/>
@@ -3585,7 +3585,7 @@
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(4, 2)~>
               <span class="greentopurplealtered">~r ComplexityAchievements.getComplexityAchievementName(4, 2) ~</span>
               <br/>
-              Complete ~i 20 ~ eternity challenge tiers, without using automatic eternity challenge completion, in Complexity Challenge 6.
+              Complete ~i 20 ~ eternity challenge tiers, without using automatic eternity challenge completion, in Complexity Challenge ~o 6 ~.
               <br/>
               ~r ComplexityAchievements.complexityAchievementStatusDescription(4, 2) ~
               <br/>
@@ -3596,7 +3596,7 @@
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(4, 3)~>
               <span class="greentoorangealtered">~r ComplexityAchievements.getComplexityAchievementName(4, 3) ~</span>
               <br/>
-              Unlock chroma in Complexity Challenge 6.
+              Unlock chroma in Complexity Challenge ~o 6 ~.
               <br/>
               ~r ComplexityAchievements.complexityAchievementStatusDescription(4, 3) ~
               <br/>
@@ -3607,7 +3607,7 @@
             <div class="complexityachievementdiv" ~style.background=ComplexityAchievements.color(4, 4)~>
               <span class="greentogreenaltered">~r ComplexityAchievements.getComplexityAchievementName(4, 4) ~</span>
               <br/>
-              Get ~i 168 ~ theorems in Complexity Challenge 6.
+              Get ~i 168 ~ theorems in Complexity Challenge ~o 6 ~.
               <br/>
               ~r ComplexityAchievements.complexityAchievementStatusDescription(4, 4) ~
               <br/>
@@ -4627,7 +4627,7 @@
       <br/>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr ~style.display=FinalityGenerator(1).isVisible() ? '' : 'none'~>
-          <td>Finality Generator 1</td>
+          <td>Finality Generator ~o 1 ~</td>
           <td>~f FinalityGenerator(1).amount() ~</td>
           <td>~f FinalityGenerator(1).perSecond() ~/s</td>
           <td>~f FinalityGenerator(1).multiplier() ~x</td>
@@ -4635,7 +4635,7 @@
           <td><button ~class=FinalityGenerator(1).canBuy() ? "" : "disabled"~ onclick="FinalityGenerator(1).buyMax()">Max</button></td>
         </tr>
         <tr ~style.display=FinalityGenerator(2).isVisible() ? '' : 'none'~>
-          <td>Finality Generator 2</td>
+          <td>Finality Generator ~o 2 ~</td>
           <td>~f FinalityGenerator(2).amount() ~</td>
           <td>~f FinalityGenerator(2).perSecond() ~/s</td>
           <td>~f FinalityGenerator(2).multiplier() ~x</td>
@@ -4643,7 +4643,7 @@
           <td><button ~class=FinalityGenerator(2).canBuy() ? "" : "disabled"~ onclick="FinalityGenerator(2).buyMax()">Max</button></td>
         </tr>
         <tr ~style.display=FinalityGenerator(3).isVisible() ? '' : 'none'~>
-          <td>Finality Generator 3</td>
+          <td>Finality Generator ~o 3 ~</td>
           <td>~f FinalityGenerator(3).amount() ~</td>
           <td>~f FinalityGenerator(3).perSecond() ~/s</td>
           <td>~f FinalityGenerator(3).multiplier() ~x</td>
@@ -4651,7 +4651,7 @@
           <td><button ~class=FinalityGenerator(3).canBuy() ? "" : "disabled"~ onclick="FinalityGenerator(3).buyMax()">Max</button></td>
         </tr>
         <tr ~style.display=FinalityGenerator(4).isVisible() ? '' : 'none'~>
-          <td>Finality Generator 4</td>
+          <td>Finality Generator ~o 4 ~</td>
           <td>~f FinalityGenerator(4).amount() ~</td>
           <td>~f FinalityGenerator(4).perSecond() ~/s</td>
           <td>~f FinalityGenerator(4).multiplier() ~x</td>
@@ -4659,7 +4659,7 @@
           <td><button ~class=FinalityGenerator(4).canBuy() ? "" : "disabled"~ onclick="FinalityGenerator(4).buyMax()">Max</button></td>
         </tr>
         <tr ~style.display=FinalityGenerator(5).isVisible() ? '' : 'none'~>
-          <td>Finality Generator 5</td>
+          <td>Finality Generator ~o 5 ~</td>
           <td>~f FinalityGenerator(5).amount() ~</td>
           <td>~f FinalityGenerator(5).perSecond() ~/s</td>
           <td>~f FinalityGenerator(5).multiplier() ~x</td>
@@ -4667,7 +4667,7 @@
           <td><button ~class=FinalityGenerator(5).canBuy() ? "" : "disabled"~ onclick="FinalityGenerator(5).buyMax()">Max</button></td>
         </tr>
         <tr ~style.display=FinalityGenerator(6).isVisible() ? '' : 'none'~>
-          <td>Finality Generator 6</td>
+          <td>Finality Generator ~o 6 ~</td>
           <td>~f FinalityGenerator(6).amount() ~</td>
           <td>~f FinalityGenerator(6).perSecond() ~/s</td>
           <td>~f FinalityGenerator(6).multiplier() ~x</td>
@@ -4675,7 +4675,7 @@
           <td><button ~class=FinalityGenerator(6).canBuy() ? "" : "disabled"~ onclick="FinalityGenerator(6).buyMax()">Max</button></td>
         </tr>
         <tr ~style.display=FinalityGenerator(7).isVisible() ? '' : 'none'~>
-          <td>Finality Generator 7</td>
+          <td>Finality Generator ~o 7 ~</td>
           <td>~f FinalityGenerator(7).amount() ~</td>
           <td>~f FinalityGenerator(7).perSecond() ~/s</td>
           <td>~f FinalityGenerator(7).multiplier() ~x</td>
@@ -4683,7 +4683,7 @@
           <td><button ~class=FinalityGenerator(7).canBuy() ? "" : "disabled"~ onclick="FinalityGenerator(7).buyMax()">Max</button></td>
         </tr>
         <tr ~style.display=FinalityGenerator(8).isVisible() ? '' : 'none'~>
-          <td>Finality Generator 8</td>
+          <td>Finality Generator ~o 8 ~</td>
           <td>~f FinalityGenerator(8).amount() ~</td>
           <td>~f FinalityGenerator(8).perSecond() ~/s</td>
           <td>~f FinalityGenerator(8).multiplier() ~x</td>
@@ -5154,7 +5154,7 @@
               <br/>
               ~r FinalityMilestones.milestoneStatusDescription(9) ~
               <br/>
-              Complexity Challenge 6 reward strength and total complexity stars are based on hypercomplexity stars, which are what your complexity stars would be if your complexity power~s Powers.equippedLimit() ~ were equipped.
+              Complexity Challenge ~o 6 ~ reward strength and total complexity stars are based on hypercomplexity stars, which are what your complexity stars would be if your complexity power~s Powers.equippedLimit() ~ were equipped.
             </div>
           </td>
           <td>
@@ -5385,49 +5385,49 @@
             <span>~r Achievements.getAchievementName(1, 1) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(1, 1) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 1) ? '' : 'none'~>Buy Generator 1.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 1) ? '' : 'none'~>Buy Generator ~o 1 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(1, 2)~>
             <span>~r Achievements.getAchievementName(1, 2) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(1, 2) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 2) ? '' : 'none'~>Buy Generator 2.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 2) ? '' : 'none'~>Buy Generator ~o 2 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(1, 3)~>
             <span>~r Achievements.getAchievementName(1, 3) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(1, 3) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 3) ? '' : 'none'~>Buy Generator 3.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 3) ? '' : 'none'~>Buy Generator ~o 3 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(1, 4)~>
             <span>~r Achievements.getAchievementName(1, 4) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(1, 4) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 4) ? '' : 'none'~>Buy Generator 4.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 4) ? '' : 'none'~>Buy Generator ~o 4 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(1, 5)~>
             <span>~r Achievements.getAchievementName(1, 5) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(1, 5) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 5) ? '' : 'none'~>Buy Generator 5.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 5) ? '' : 'none'~>Buy Generator ~o 5 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(1, 6)~>
             <span>~r Achievements.getAchievementName(1, 6) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(1, 6) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 6) ? '' : 'none'~>Buy Generator 6.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 6) ? '' : 'none'~>Buy Generator ~o 6 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(1, 7)~>
             <span>~r Achievements.getAchievementName(1, 7) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(1, 7) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 7) ? '' : 'none'~>Buy Generator 7.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 7) ? '' : 'none'~>Buy Generator ~o 7 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(1, 8)~>
             <span>~r Achievements.getAchievementName(1, 8) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(1, 8) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 8) ? '' : 'none'~>Buy Generator 8.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 8) ? '' : 'none'~>Buy Generator ~o 8 ~.</span>
           </td>
         </tr>
         <tr ~style.display=Achievements.showRow(2) ? '' : 'none'~>
@@ -5447,7 +5447,7 @@
             <span>~r Achievements.getAchievementName(2, 3) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(2, 3) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(2, 3) ? '' : 'none'~>Have at least ~i Math.pow(2, 16) ~ of every ~r Generators.term(true) ~ other than Generator 8.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(2, 3) ? '' : 'none'~>Have at least ~i Math.pow(2, 16) ~ of every ~r Generators.term(true) ~ other than Generator ~o 8 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(2, 4)~>
             <span>~r Achievements.getAchievementName(2, 4) ~</span>
@@ -5515,13 +5515,13 @@
             <span>~r Achievements.getAchievementName(3, 6) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(3, 6) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 6) ? '' : 'none'~>Infinity in Normal Challenge 10 without sacrificing.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 6) ? '' : 'none'~>Infinity in Normal Challenge ~o 10 ~ without sacrificing.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(3, 7)~>
             <span>~r Achievements.getAchievementName(3, 7) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(3, 7) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 7) ? '' : 'none'~>Infinity in Normal Challenge 2 in ~ti 16 ~.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 7) ? '' : 'none'~>Infinity in Normal Challenge ~o 2 ~ in ~ti 16 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(3, 8)~>
             <span>~r Achievements.getAchievementName(3, 8) ~</span>
@@ -5535,13 +5535,13 @@
             <span>~r Achievements.getAchievementName(4, 1) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(4, 1) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(4, 1) ? '' : 'none'~>Infinity in Infinity Challenge 1 in ~ti 1 ~.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(4, 1) ? '' : 'none'~>Infinity in Infinity Challenge ~o 1 ~ in ~ti 1 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(4, 2)~>
             <span>~r Achievements.getAchievementName(4, 2) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(4, 2) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(4, 2) ? '' : 'none'~>Infinity in Infinity Challenge 3 in ~ti 3 ~.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(4, 2) ? '' : 'none'~>Infinity in Infinity Challenge ~o 3 ~ in ~ti 3 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(4, 3)~>
             <span>~r Achievements.getAchievementName(4, 3) ~</span>
@@ -5591,7 +5591,7 @@
             <span>~r Achievements.getAchievementName(5, 2) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(5, 2) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(5, 2) ? '' : 'none'~>Infinity in Infinity Challenge 4 in ~ti 16 ~.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(5, 2) ? '' : 'none'~>Infinity in Infinity Challenge ~o 4 ~ in ~ti 16 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(5, 3)~>
             <span>~r Achievements.getAchievementName(5, 3) ~</span>
@@ -5621,7 +5621,7 @@
             <span>~r Achievements.getAchievementName(5, 7) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(5, 7) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(5, 7) ? '' : 'none'~>Eternity for ~i Math.pow(2, 256) ~ EP while in Eternity Challenge 1.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(5, 7) ? '' : 'none'~>Eternity for ~i Math.pow(2, 256) ~ EP while in Eternity Challenge ~o 1 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(5, 8)~>
             <span>~r Achievements.getAchievementName(5, 8) ~</span>
@@ -5783,27 +5783,27 @@
       </table>
       <div class="major-div" style="width: 1024px; margin-left: auto; margin-right: auto;" ~style.display=Achievements.requirementDescriptions() ? '' : 'none'~>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(1, 1) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 1) ? '' : 'none'~>~r Achievements.getAchievementName(1, 1) ~ (~r Achievements.achievementStatusDescription(1, 1) ~): Buy Generator 1.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 1) ? '' : 'none'~>~r Achievements.getAchievementName(1, 1) ~ (~r Achievements.achievementStatusDescription(1, 1) ~): Buy Generator ~o 1 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(1, 2) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 2) ? '' : 'none'~>~r Achievements.getAchievementName(1, 2) ~ (~r Achievements.achievementStatusDescription(1, 2) ~): Buy Generator 2.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 2) ? '' : 'none'~>~r Achievements.getAchievementName(1, 2) ~ (~r Achievements.achievementStatusDescription(1, 2) ~): Buy Generator ~o 2 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(1, 3) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 3) ? '' : 'none'~>~r Achievements.getAchievementName(1, 3) ~ (~r Achievements.achievementStatusDescription(1, 3) ~): Buy Generator 3.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 3) ? '' : 'none'~>~r Achievements.getAchievementName(1, 3) ~ (~r Achievements.achievementStatusDescription(1, 3) ~): Buy Generator ~o 3 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(1, 4) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 4) ? '' : 'none'~>~r Achievements.getAchievementName(1, 4) ~ (~r Achievements.achievementStatusDescription(1, 4) ~): Buy Generator 4.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 4) ? '' : 'none'~>~r Achievements.getAchievementName(1, 4) ~ (~r Achievements.achievementStatusDescription(1, 4) ~): Buy Generator ~o 4 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(1, 5) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 5) ? '' : 'none'~>~r Achievements.getAchievementName(1, 5) ~ (~r Achievements.achievementStatusDescription(1, 5) ~): Buy Generator 5.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 5) ? '' : 'none'~>~r Achievements.getAchievementName(1, 5) ~ (~r Achievements.achievementStatusDescription(1, 5) ~): Buy Generator ~o 5 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(1, 6) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 6) ? '' : 'none'~>~r Achievements.getAchievementName(1, 6) ~ (~r Achievements.achievementStatusDescription(1, 6) ~): Buy Generator 6.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 6) ? '' : 'none'~>~r Achievements.getAchievementName(1, 6) ~ (~r Achievements.achievementStatusDescription(1, 6) ~): Buy Generator ~o 6 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(1, 7) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 7) ? '' : 'none'~>~r Achievements.getAchievementName(1, 7) ~ (~r Achievements.achievementStatusDescription(1, 7) ~): Buy Generator 7.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 7) ? '' : 'none'~>~r Achievements.getAchievementName(1, 7) ~ (~r Achievements.achievementStatusDescription(1, 7) ~): Buy Generator ~o 7 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(1, 8) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 8) ? '' : 'none'~>~r Achievements.getAchievementName(1, 8) ~ (~r Achievements.achievementStatusDescription(1, 8) ~): Buy Generator 8.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 8) ? '' : 'none'~>~r Achievements.getAchievementName(1, 8) ~ (~r Achievements.achievementStatusDescription(1, 8) ~): Buy Generator ~o 8 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(2, 1) ? '' : 'none'~/>
         <span ~style.display=Achievements.showAchievementDescriptionBelow(2, 1) ? '' : 'none'~>~r Achievements.getAchievementName(2, 1) ~ (~r Achievements.achievementStatusDescription(2, 1) ~): Sacrifice.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(2, 2) ? '' : 'none'~/>
         <span ~style.display=Achievements.showAchievementDescriptionBelow(2, 2) ? '' : 'none'~>~r Achievements.getAchievementName(2, 2) ~ (~r Achievements.achievementStatusDescription(2, 2) ~): Have ~i 2 ~ boosts.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(2, 3) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(2, 3) ? '' : 'none'~>~r Achievements.getAchievementName(2, 3) ~ (~r Achievements.achievementStatusDescription(2, 3) ~): Have at least ~i Math.pow(2, 16) ~ of every ~r Generators.term(true) ~ other than Generator 8.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(2, 3) ? '' : 'none'~>~r Achievements.getAchievementName(2, 3) ~ (~r Achievements.achievementStatusDescription(2, 3) ~): Have at least ~i Math.pow(2, 16) ~ of every ~r Generators.term(true) ~ other than Generator ~o 8 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(2, 4) ? '' : 'none'~/>
         <span ~style.display=Achievements.showAchievementDescriptionBelow(2, 4) ? '' : 'none'~>~r Achievements.getAchievementName(2, 4) ~ (~r Achievements.achievementStatusDescription(2, 4) ~): Have some generator multiplier over ~i Math.pow(2, 16) ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(2, 5) ? '' : 'none'~/>
@@ -5825,15 +5825,15 @@
         <br ~style.display=Achievements.showAchievementDescriptionBelow(3, 5) ? '' : 'none'~/>
         <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 5) ? '' : 'none'~>~r Achievements.getAchievementName(3, 5) ~ (~r Achievements.achievementStatusDescription(3, 5) ~): Get ~i 256 ~ infinities.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(3, 6) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 6) ? '' : 'none'~>~r Achievements.getAchievementName(3, 6) ~ (~r Achievements.achievementStatusDescription(3, 6) ~): Infinity in Normal Challenge 10 without sacrificing.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 6) ? '' : 'none'~>~r Achievements.getAchievementName(3, 6) ~ (~r Achievements.achievementStatusDescription(3, 6) ~): Infinity in Normal Challenge ~o 10 ~ without sacrificing.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(3, 7) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 7) ? '' : 'none'~>~r Achievements.getAchievementName(3, 7) ~ (~r Achievements.achievementStatusDescription(3, 7) ~): Infinity in Normal Challenge 2 in ~ti 16 ~.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 7) ? '' : 'none'~>~r Achievements.getAchievementName(3, 7) ~ (~r Achievements.achievementStatusDescription(3, 7) ~): Infinity in Normal Challenge ~o 2 ~ in ~ti 16 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(3, 8) ? '' : 'none'~/>
         <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 8) ? '' : 'none'~>~r Achievements.getAchievementName(3, 8) ~ (~r Achievements.achievementStatusDescription(3, 8) ~): Complete an infinity challenge.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(4, 1) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(4, 1) ? '' : 'none'~>~r Achievements.getAchievementName(4, 1) ~ (~r Achievements.achievementStatusDescription(4, 1) ~): Infinity in Infinity Challenge 1 in ~ti 1 ~.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(4, 1) ? '' : 'none'~>~r Achievements.getAchievementName(4, 1) ~ (~r Achievements.achievementStatusDescription(4, 1) ~): Infinity in Infinity Challenge ~o 1 ~ in ~ti 1 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(4, 2) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(4, 2) ? '' : 'none'~>~r Achievements.getAchievementName(4, 2) ~ (~r Achievements.achievementStatusDescription(4, 2) ~): Infinity in Infinity Challenge 3 in ~ti 3 ~.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(4, 2) ? '' : 'none'~>~r Achievements.getAchievementName(4, 2) ~ (~r Achievements.achievementStatusDescription(4, 2) ~): Infinity in Infinity Challenge ~o 3 ~ in ~ti 3 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(4, 3) ? '' : 'none'~/>
         <span ~style.display=Achievements.showAchievementDescriptionBelow(4, 3) ? '' : 'none'~>~r Achievements.getAchievementName(4, 3) ~ (~r Achievements.achievementStatusDescription(4, 3) ~): Complete all infinity challenges.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(4, 4) ? '' : 'none'~/>
@@ -5849,7 +5849,7 @@
         <br ~style.display=Achievements.showAchievementDescriptionBelow(5, 1) ? '' : 'none'~/>
         <span ~style.display=Achievements.showAchievementDescriptionBelow(5, 1) ? '' : 'none'~>~r Achievements.getAchievementName(5, 1) ~ (~r Achievements.achievementStatusDescription(5, 1) ~): Have all the first-row studies at once.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(5, 2) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(5, 2) ? '' : 'none'~>~r Achievements.getAchievementName(5, 2) ~ (~r Achievements.achievementStatusDescription(5, 2) ~): Infinity in Infinity Challenge 4 in ~ti 16 ~.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(5, 2) ? '' : 'none'~>~r Achievements.getAchievementName(5, 2) ~ (~r Achievements.achievementStatusDescription(5, 2) ~): Infinity in Infinity Challenge ~o 4 ~ in ~ti 16 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(5, 3) ? '' : 'none'~/>
         <span ~style.display=Achievements.showAchievementDescriptionBelow(5, 3) ? '' : 'none'~>~r Achievements.getAchievementName(5, 3) ~ (~r Achievements.achievementStatusDescription(5, 3) ~): Unlock the Eternity Producer.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(5, 4) ? '' : 'none'~/>
@@ -5859,7 +5859,7 @@
         <br ~style.display=Achievements.showAchievementDescriptionBelow(5, 6) ? '' : 'none'~/>
         <span ~style.display=Achievements.showAchievementDescriptionBelow(5, 6) ? '' : 'none'~>~r Achievements.getAchievementName(5, 6) ~ (~r Achievements.achievementStatusDescription(5, 6) ~): Gain permanence.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(5, 7) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(5, 7) ? '' : 'none'~>~r Achievements.getAchievementName(5, 7) ~ (~r Achievements.achievementStatusDescription(5, 7) ~): Eternity for ~i Math.pow(2, 256) ~ EP while in Eternity Challenge 1.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(5, 7) ? '' : 'none'~>~r Achievements.getAchievementName(5, 7) ~ (~r Achievements.achievementStatusDescription(5, 7) ~): Eternity for ~i Math.pow(2, 256) ~ EP while in Eternity Challenge ~o 1 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(5, 8) ? '' : 'none'~/>
         <span ~style.display=Achievements.showAchievementDescriptionBelow(5, 8) ? '' : 'none'~>~r Achievements.getAchievementName(5, 8) ~ (~r Achievements.achievementStatusDescription(5, 8) ~): Unlock chroma.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(6, 1) ? '' : 'none'~/>
@@ -6126,26 +6126,37 @@
             <br/>
             <span style="font-size: 0.75rem;">Alphabet <span class="helpspan">(?)<span class="tooltiptext">This is used for Letters notation as the list of letters to use.</span></span>: <input type="text" ~!value=NotationOptions.alphabet()~ ~!onchange=function() {NotationOptions.setAlphabet(this.value)}~/></span>
           </div></td>
-          <td><div class="options-div">Usual digits of precision:<br/><input type="text" ~!value=NotationOptions.lowerPrecision()~ ~!onchange=function() {NotationOptions.setLowerPrecision(+this.value)}~></input><br/>Higher digits of precision <span class="helpspan">(?)<span class="tooltiptext">This is used for some small values that are best shown precisely<span ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~> (such as Normal Challenge 3 multiplier)</span>.</span></span>:<br/><input type="text" ~!value=NotationOptions.higherPrecision()~ ~!onchange=function() {NotationOptions.setHigherPrecision(+this.value)}~></input></div></td>
+          <td><div class="options-div">Usual digits of precision:<br/><input type="text" ~!value=NotationOptions.lowerPrecision()~ ~!onchange=function() {NotationOptions.setLowerPrecision(+this.value)}~></input><br/>Higher digits of precision <span class="helpspan">(?)<span class="tooltiptext">This is used for some small values that are best shown precisely<span ~style.display=PrestigeLayerProgress.hasReached('infinity') ? '' : 'none'~> (such as Normal Challenge ~o 3 ~ multiplier)</span>.</span></span>:<br/><input type="text" ~!value=NotationOptions.higherPrecision()~ ~!onchange=function() {NotationOptions.setHigherPrecision(+this.value)}~></input></div></td>
+          <td><button ~style.display=Options.optionDisplay(Autobuyer(12).isUnlocked || PrestigeLayerProgress.hasReached('eternity')) ? 'none' : ''~ class="options-button" onclick="NotationOptions.toggleFormatOrdinals()">Format ordinals <span class="helpspan">(?)<span class="tooltiptext">These aren't Ordinal Markup's infinite ordinals, but e.g. generator numbers, or more generally things which are the nth of something.</span></span>: ~r NotationOptions.formatOrdinals() ? 'On' : 'Off' ~</button>
+            <div ~style.display=Options.optionDisplay(Autobuyer(12).isUnlocked || PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~ class="options-div">
+              <button class="mini-options-button" onclick="NotationOptions.toggleFormatOrdinals()">Format ordinals <span class="helpspan">(?)<span class="tooltiptext">These aren't Ordinal Markup's infinite ordinals, but e.g. generator numbers, or more generally things which are the nth of something.</span></span>: ~r NotationOptions.formatOrdinals() ? 'On' : 'Off' ~</button>
+              <br/>
+              <button class="mini-options-button" onclick="NotationOptions.toggleParseAutobuyersInCurrentBase()">Use base for AB settings <span class="helpspan">(?)<span class="tooltiptext">This option only affects the input for each autobuyer (AB). Also, it doesn't take into account notation (except for Hex); autobuyer inputs will generally still use Scientific.</span></span>: ~r NotationOptions.parseAutobuyersInCurrentBase() ? 'On' : 'Off' ~</button>
+              <br/>
+              <span style="font-size: 0.875rem;">Autobuyer digits of precision <span class="helpspan">(?)<span class="tooltiptext">This is used for autobuyer inputs.</span></span>:<br/><input type="text" ~!value=NotationOptions.autobuyerPrecision()~ ~!onchange=function() {NotationOptions.setAutobuyerPrecision(+this.value)}~></input></span>
+          </div></td>
+        </tr>
+        <tr>
           <td><div class="options-div">
             <button class="semi-options-button" onclick="Options.nextTimeDisplay()" style="font-size: 0.875rem;">Time display: ~r player.options.timeDisplay ~<br/>(for example, ~t 83.125 ~)</button>
             <br/>
             <button class="wide-mini-options-button" onclick="Options.toggleNotationOnTimes()">Notation on times: ~r player.options.notationOnTimes ? "On" : "Off" ~</button></td>
           </div></td>
-        </tr>
           <td><button class="options-button" onclick="Options.toggleHotkeys()">Hotkeys: ~r player.options.hotkeys ? "On" : "Off" ~</button></td>
           <td><button class="options-button" onclick="Options.toggleFitToWidth()">Decrease page size if page is too narrow: ~r player.options.fitToWidth ? "On" : "Off" ~</button></td>
-          <td><button class="options-button" onclick="Options.toggleNews()">News (non-game-relevant messages at top of screen): ~r player.options.news ? "On" : "Off" ~</button></td>
         </tr>
         <tr>
+          <td><button class="options-button" onclick="Options.toggleNews()">News (non-game-relevant messages at top of screen): ~r player.options.news ? "On" : "Off" ~</button></td>
           <td><button class="options-button" onclick="Options.toggleLargerCheckboxes()">Larger checkboxes: ~r player.options.largerCheckboxes ? "On" : "Off" ~</button></td>
           <td><div class="options-div">
             <button class="mini-options-button" onclick="Options.toggleNotifications('saveLoad')">Save/load notifications: ~r Options.showNotifications('saveLoad') ? 'On' : 'Off' ~</button>
             <button class="mini-options-button" onclick="Options.toggleNotifications('achievements')">Achievement notifications: ~r Options.showNotifications('achievements') ? 'On' : 'Off' ~</button>
             <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~ class="mid-options-button" onclick="Options.toggleNotifications('complexityAchievements')">Complexity achievement notifications: ~r Options.showNotifications('complexityAchievements') ? 'On' : 'Off' ~</button>
           </div></td>
+        </tr>
+        <tr>
           <td><div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="options-div">
-            <span>Log/second settings <span class="helpspan">(?)<span class="tooltiptext">This setting controls whether gain per second or log gain per second of things like IP is shown in various places. The default setting <span ~style.display=(Autobuyer(12).isUnlocked || PrestigeLayerProgress.hasReached('eternity')) ? 'none' : ''~>uses autobuyer settings.</span><span ~style.display=(Autobuyer(12).isUnlocked || PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~>checks whether your relevant autobuyer is set to a mode that uses log/second.</span></span></span>:</span>
+            <span>Log/second settings <span class="helpspan">(?)<span class="tooltiptext">This setting controls whether gain per second or log gain per second of things like IP is shown in various places. The default setting <span ~style.display=(Autobuyer(12).isUnlocked || PrestigeLayerProgress.hasReached('eternity')) ? 'none' : ''~>uses autobuyer settings.</span><span ~style.display=Options.optionDisplay(Autobuyer(12).isUnlocked || PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~>checks whether your relevant autobuyer is set to a mode that uses log/second.</span></span></span>:</span>
             <br/>
             <span>Header reset buttons: <select ~!value=Options.showLogSetting('reset-buttons')~ ~!onchange=function() {Options.setShowLogSetting('reset-buttons', this.value)}~>
               <option value="Default">Default</option>
@@ -6159,8 +6170,6 @@
               <option value="On">On</option>
             </select></span>
           </div></td>
-        <tr/>
-        <tr ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~>
           <td><div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="options-div">Max all mode <span class="helpspan">(?)<span class="tooltiptext">This setting controls what the M hotkey buys, and also what the Main tab "Max all" button buys.</span></span>: <select ~!value=Options.maxAllMode()~ ~!onchange=function() {Options.setMaxAllMode(this.value)}~>
             <option value="Normal generators and boosts">Normal generators and boosts</option>
             <option value="Generators and upgrades in current tab">Generators and upgrades in current tab</option>
@@ -6174,11 +6183,15 @@
             <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleShowResetButtonsForHiddenTabs()">Reset buttons for hidden tabs: ~r Options.showResetButtonsForHiddenTabs() ? 'Shown' : 'Hidden' ~</button>
             <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleSmallerHeader()">Smaller header: ~r Options.smallerHeader() ? 'On' : 'Off' ~</button>
           </div></td>
+        </tr>
+        <tr ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~>
+          <td/>
           <td><div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~ class="options-div">
             <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('studies')">Full study options: ~r Options.showFullOptions('studies') ? 'On' : 'Off' ~</button>
             <button ~style.display=Options.optionDisplay(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('powers')">Full power options: ~r Options.showFullOptions('powers') ? 'On' : 'Off' ~</button>
             <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~ class="mini-options-button" onclick="Options.toggleShowFullOptions('finality')">Full finality shard options: ~r Options.showFullOptions('finality') ? 'On' : 'Off' ~</button>
           </div></td>
+          <td/>
         <tr/>
       </table>
       <table ~style.display=Options.isOptionTypeShown('color') ? '' : 'none'~ style="margin-left: auto; margin-right: auto; border-spacing: 24px 8px; border-collapse: separate;">
