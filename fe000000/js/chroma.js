@@ -187,7 +187,7 @@ let Chroma = {
     } else if (this.isProducing()) {
       return 'are currently producing ' + this.currentColorName();
     } else {
-      return 'will start to produce ' + this.currentColorName() + ' in ' + formatTime(Chroma.timeUntilProduction(), {seconds: {f: format, s: false}, larger: {f: format, s: false}});
+      return 'will start to produce ' + this.currentColorName() + ' in ' + formatTime(Chroma.timeUntilProduction(), {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}});
     }
   },
   currentProductionTextPrefix() {
@@ -284,6 +284,6 @@ let Chroma = {
     if (t <= 0) {
       return '';
     }
-    return ' in ' + formatTime(t, {seconds: {f: format, s: false}, larger: {f: format, s: false}}) + ' at the current chroma buildup speed';
+    return ' in ' + formatTime(t, {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}) + ' at the current chroma buildup speed';
   }
 }
