@@ -1349,6 +1349,19 @@ let Saving = {
       player.options.notation.autobuyerPrecision = 3;
       player.version = 2.13671875;
     }
+    if (player.version < 2.138671875) {
+      player.currentTabGroup = 'normal';
+      player.currentTabInGroup = {
+        'normal': 'main',
+        'infinity': 'infinity',
+        'eternity': 'eternity',
+        'complexity': 'complexity',
+        'finality': 'finality',
+        'miscellaneous': 'options'
+      };
+      player.usingTabGroups = false;
+      player.version = 2.138671875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

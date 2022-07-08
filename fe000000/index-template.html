@@ -174,6 +174,15 @@
     <div style="height: 32px;" ~style.display=player.options.news ? '' : 'none'~>~r News.getMessage() ~</div>
     <br/>
     <br/>
+    <span ~style.display=Tabs.usingTabGroups() ? '' : 'none'~>
+      <button ~style.display=Tabs.isTabGroupVisible('normal') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), 'normal')~ onclick="Tabs.setTabGroup('normal')">Normal</button>
+      <button ~style.display=Tabs.isTabGroupVisible('infinity') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), 'infinity')~ onclick="Tabs.setTabGroup('infinity')">Infinity</button>
+      <button ~style.display=Tabs.isTabGroupVisible('eternity') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), 'eternity')~ onclick="Tabs.setTabGroup('eternity')">Eternity</button>
+      <button ~style.display=Tabs.isTabGroupVisible('complexity') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), 'complexity')~ onclick="Tabs.setTabGroup('complexity')">Complexity</button>
+      <button ~style.display=Tabs.isTabGroupVisible('finality') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), 'finality')~ onclick="Tabs.setTabGroup('finality')">Finality</button>
+      <button ~style.display=Tabs.isTabGroupVisible('miscellaneous') ? '' : 'none'~ onclick="Tabs.setTabGroup('miscellaneous')">Miscellaneous</button>
+    </span>
+    <br ~style.display=Tabs.usingTabGroups() ? '' : 'none'~/>
     <span ~style.display=Tabs.displayTabRow(1) ? '' : 'none'~>
       <button ~style.display=Tabs.isTabVisible('main') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), 'normal')~ onclick="Tabs.setTab('main')">Main</button>
       <button ~style.display=Tabs.isTabVisible('infinity') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), 'infinity')~ onclick="Tabs.setTab('infinity')">Infinity</button>
@@ -6126,6 +6135,8 @@
         </tr>
       </table>
       <div ~style.display=Options.isOptionTypeShown('tab') ? '' : 'none'~>
+        <span>Use tab groups <span class="helpspan">(?)<span class="tooltiptext">This option, rather than showing all the tabs at once, will divide the tabs intro groups and let you switch between viewing various groups, similarly to Antimatter Dimension's tab handling.</span></span>: <input type="checkbox" ~!checked=Tabs.usingTabGroups()~ ~!onchange=function() {Tabs.setUsingTabGroups(this.checked)}~></input></span>
+        <br/>
         <span>Tabs to show:</span>
         <div>
           <span>

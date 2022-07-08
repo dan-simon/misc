@@ -528,8 +528,18 @@ let initialPlayer = {
   cheats: {
     gameSpeed: 1,
   },
+  currentTabGroup: 'normal',
+  currentTabInGroup: {
+    'normal': 'main',
+    'infinity': 'infinity',
+    'eternity': 'eternity',
+    'complexity': 'complexity',
+    'finality': 'finality',
+    'miscellaneous': 'options'
+  },
+  usingTabGroups: false,
   currentTab: 'main',
-  version: 2.13671875
+  version: 2.138671875
 }
 
 let player;

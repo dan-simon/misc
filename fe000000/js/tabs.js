@@ -6,11 +6,44 @@ let Tabs = {
     ['complexity', 'complexity-challenges', 'complexity-achievements', 'powers', 'oracle', 'galaxies'],
     ['finality', 'finality-shards', 'finality-milestones']
   ],
+  tabToTabGroup: {
+    'main': 'normal',
+    'infinity': 'infinity',
+    'normal-challenges': 'infinity',
+    'autobuyers': 'normal',
+    'infinity-challenges': 'infinity',
+    'goals': 'miscellaneous',
+    'achievements': 'miscellaneous',
+    'statistics': 'miscellaneous',
+    'last-ten-runs': 'miscellaneous',
+    'options': 'miscellaneous',
+    'eternity': 'eternity',
+    'eternity-milestones': 'eternity',
+    'studies': 'eternity',
+    'eternity-producer': 'eternity',
+    'eternity-challenges': 'eternity',
+    'chroma': 'eternity',
+    'complexity': 'complexity',
+    'complexity-challenges': 'complexity',
+    'complexity-achievements': 'complexity',
+    'powers': 'complexity',
+    'oracle': 'complexity',
+    'galaxies': 'complexity',
+    'finality': 'finality',
+    'finality-shards': 'finality',
+    'finality-milestones': 'finality'
+  },
   currentTab() {
     return player.currentTab;
   },
   setTab(x) {
     player.currentTab = x;
+    player.currentTabGroup = this.tabToTabGroup[x];
+    player.currentTabInGroup[player.currentTabGroup] = x;
+  },
+  setTabGroup(x) {
+    player.currentTabGroup = x;
+    player.currentTab = player.currentTabInGroup[x];
   },
   isTabOptionVisible(x) {
     if (Options.showAllTabs()) {
@@ -47,8 +80,20 @@ let Tabs = {
   isTabOptionOn(x) {
     return player.tabOptions[x];
   },
-  isTabVisible(x) {
+  isTabVisibleRaw(x) {
     return this.isTabOptionVisible(x) && this.isTabOptionOn(x);
+  },
+  isTabVisible(x) {
+    return this.isTabVisibleRaw(x) && (this.tabToTabGroup[x] === player.currentTabGroup || !this.usingTabGroups());
+  },
+  usingTabGroups() {
+    return player.usingTabGroups;
+  },
+  setUsingTabGroups(x) {
+    player.usingTabGroups = x;
+  },
+  isTabGroupVisible(x) {
+    return this.usingTabGroups() && (x === 'miscellaneous' || this.isTabVisibleRaw(x === 'normal' ? 'main' : x));
   },
   displayTabRow(i) {
     return this.rows[i - 1].some(x => this.isTabVisible(x));
