@@ -1,0 +1,64 @@
+<head>
+  <title>REDDOThunt countdown</title>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+</head>
+<body>
+  REDDOThunt (written by Kirby, Redgrave, or Williams) <span id="time">[time goes here]</span>
+  <br/>
+  Some puzzles from last REDDOThunt are <a target="_blank" href="https://reddothunt.sg/2020/puzzle/you-have-to-read-the-titles">this,</a> <a target="_blank" href="https://reddothunt.sg/2020/puzzle/email">this,</a> <a target="_blank" href="https://reddothunt.sg/2020/puzzle/memos">this,</a> <a target="_blank" href="https://reddothunt.sg/2020/puzzle/employees">this,</a> and <a target="_blank" href="https://reddothunt.sg/2020/puzzle/networking-mixer">this.</a> It's going to be a stellar hunt<span id="stellar">[stellar stuff goes here]</span>
+  <br/>
+  <div id="meta" style="display: none;">
+    <p><i>What should you do if you're having trouble solving puzzles in REDDOThunt?</i></p>
+    <ul>
+      <li>For example (2 of 5)</li>
+      <li>West coast (2 of 3)</li>
+      <li>Outer neighbor (5 of 6)</li>
+      <li>For example (4 of 5)</li>
+      <li>Information (2 of 7)</li>
+      <li>Species (2 of 7)</li>
+    </ul>
+  </div>
+  <br/>
+  <input id="answer" type="text"></input> <button onclick="submit()">Submit!</button> <span id="answers"></span>
+  <script>
+    let answers = ['BARNARDSSTAR', 'GAIA', 'MISLEADING', 'OKLAHOMA', 'SEERED', 'VANESSA', 'YEMEN'];
+    let solverAnswers = [];
+    let mod = (a, b) => (a % b + b) % b;
+    let f = function() {
+      let timeUntilHunt = Math.round(Date.now() / 1000 - 1657332000);
+      let blank = [0, 15, 26, 38, 39, 47, 62, 75].includes(mod(timeUntilHunt, 76));
+      let stellarPhase = mod(Math.floor(timeUntilHunt / 5), 12);
+      timeUntilHunt += [9, 18, 18, 5, 12, 5, 22, 1, 14, 20][mod(timeUntilHunt, 10)];
+      let isHunt = timeUntilHunt > 0;
+      let days = Math.floor(Math.abs(timeUntilHunt) / 86400);
+      let hours = Math.floor(Math.abs(timeUntilHunt) / 3600 % 24);
+      let minutes = Math.floor(Math.abs(timeUntilHunt) / 60 % 60);
+      let seconds = Math.floor(Math.abs(timeUntilHunt) % 60);
+      let base = blank ? '🤷' : days + ' days, ' + hours + ' hours, ' + minutes + ' minutes, ' + seconds + ' seconds';
+      if (timeUntilHunt < 0) {
+        document.getElementById('time').innerHTML = 'is goin to strt n exctly ' + base + '.';
+      } else {
+        document.getElementById('time').innerHTML = 'started a while ao, tht s, exctly ' + base + ' ago.';
+      }
+      let stellarInfo = ['!!!!!! 🕊️', '! 🐏', '!!!!!!! 🦄', '!!! 🦀', '!!! 🐉', '!!!! 🦂', '!!!!!!!!!! 🦒', '!!! 🐟', '!!!!!! 🦢', '! 🐂', '!! 🦚', '!!!!! 🦎'];
+      document.getElementById('stellar').innerHTML = stellarInfo[stellarPhase];
+      document.getElementById('answers').innerHTML = solverAnswers.length > 0 ? 'Answers so far: ' + solverAnswers.filter(i => i !== 'SEERED').join(', ') + (solverAnswers.length >= 4 ? ', meta ' + (solverAnswers.includes('SEERED') ? 'solved' : 'unsolved') : '') : '';
+    }
+    f(); setInterval(f, 100);
+    let submit = function () {
+      let answer = document.getElementById('answer').value.toUpperCase().replace(/[^A-Z]/g, '');
+      if (answers.includes(answer)) {
+        if (!solverAnswers.includes(answer)) {
+          solverAnswers.push(answer);
+          solverAnswers.sort();
+        }
+        if (solverAnswers.length >= 4) {
+          document.getElementById('meta').style.display = '';
+        }
+        alert('Correct!');
+      } else {
+        alert('Incorrect!');
+      }
+    }
+  </script>
+</body>
