@@ -701,12 +701,6 @@
         <span>Automatically turn all autobuyers off when entering normal challenges: <input type="checkbox" ~!checked=Autobuyers.disableWhenStartingChallenge()~ ~!onchange=function() {Autobuyers.setDisableWhenStartingChallenge(this.checked)}~></input><span ~style.display=SpecialTabs.isTabVisible('infinity-challenges') ? '' : 'none'~> when entering infinity challenges: <input type="checkbox" ~!checked=Autobuyers.disableWhenStartingInfinityChallenge()~ ~!onchange=function() {Autobuyers.setDisableWhenStartingInfinityChallenge(this.checked)}~></input></span></span>
         <br/>
       </div>
-      <div ~style.display=(Autobuyer(12).hasGeneration() || PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~>
-        <span>Automatically stop autobuyers from triggering while the corresponding resource has generation</span>
-        <br/>
-        <span>(e.g., stop infinity autobuyer from triggering at ~i 24 ~ EC completions): <input type="checkbox" ~!checked=Autobuyers.suspendAutobuyers()~ ~!onchange=function() {Autobuyers.setSuspendAutobuyers(this.checked)}~></input></span>
-        <br/>
-      </div>
       <span>You can toggle an autobuyer by pressing T + the corresponding hotkey.</span>
       <br/>
       <span ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>Autobuyers options on this tab only apply to autobuyers on this tab.</span>
@@ -950,8 +944,11 @@
               <span>~r Autobuyer(12).mode() ~:</span>
               <br/>
               <span><input type="text" class="autobuyer-priority-12" ~!value=autobuyerSettingToString(Autobuyer(12).priority())~ ~!onchange=function() {Autobuyer(12).setPriority(stringToAutobuyerSetting(this.value))}~></input></span>
-              <br ~style.display=Autobuyer(12).isSuspendedDueToGeneration() ? '' : 'none'~/>
-              <span ~style.display=Autobuyer(12).isSuspendedDueToGeneration() ? '' : 'none'~ style="font-size: 0.875rem;">(not triggering due to IP generation)</span>
+              <div ~style.display=Autobuyer(12).hasGeneration() ? '' : 'none'~ style="font-size: 0.75rem;">
+                <span>Not on by default due to IP generation</span>
+                <br/>
+                <span>Turn on anyway: <input type="checkbox" ~!checked=Autobuyer(12).isOnDespiteSuspended()~ ~!onchange=function() {Autobuyer(12).setIsOnDespiteSuspended(this.checked)}~></input></span>
+              </div>
             </div>
           </td>
         </tr>
@@ -980,8 +977,11 @@
               <span>~r Autobuyer(13).mode() ~:</span>
               <br/>
               <span><input type="text" class="autobuyer-priority-13" ~!value=autobuyerSettingToString(Autobuyer(13).priority())~ ~!onchange=function() {Autobuyer(13).setPriority(stringToAutobuyerSetting(this.value))}~></input></span>
-              <br ~style.display=Autobuyer(13).isSuspendedDueToGeneration() ? '' : 'none'~/>
-              <span ~style.display=Autobuyer(13).isSuspendedDueToGeneration() ? '' : 'none'~ style="font-size: 0.875rem;">(not triggering due to EP generation)</span>
+              <div ~style.display=Autobuyer(13).hasGeneration() ? '' : 'none'~ style="font-size: 0.75rem;">
+                <span>Not on by default due to EP generation</span>
+                <br/>
+                <span>Turn on anyway: <input type="checkbox" ~!checked=Autobuyer(13).isOnDespiteSuspended()~ ~!onchange=function() {Autobuyer(13).setIsOnDespiteSuspended(this.checked)}~></input></span>
+              </div>
             </div>
           </td>
           <td>
@@ -999,8 +999,11 @@
               <span>~r Autobuyer(14).mode() ~:</span>
               <br/>
               <span><input type="text" class="autobuyer-priority-14" ~!value=autobuyerSettingToString(Autobuyer(14).priority())~ ~!onchange=function() {Autobuyer(14).setPriority(stringToAutobuyerSetting(this.value))}~></input></span>
-              <br ~style.display=Autobuyer(14).isSuspendedDueToGeneration() ? '' : 'none'~/>
-              <span ~style.display=Autobuyer(14).isSuspendedDueToGeneration() ? '' : 'none'~ style="font-size: 0.875rem;">(not triggering due to permanence generation)</span>
+              <div ~style.display=Autobuyer(14).hasGeneration() ? '' : 'none'~ style="font-size: 0.75rem;">
+                <span>Not on by default due to permanence generation</span>
+                <br/>
+                <span>Turn on anyway: <input type="checkbox" ~!checked=Autobuyer(14).isOnDespiteSuspended()~ ~!onchange=function() {Autobuyer(14).setIsOnDespiteSuspended(this.checked)}~></input></span>
+              </div>
             </div>
           </td>
           <td>
@@ -1027,8 +1030,11 @@
               <span>~r Autobuyer(15).mode() ~:</span>
               <br/>
               <span><input type="text" class="autobuyer-priority-15" ~!value=autobuyerSettingToString(Autobuyer(15).priority())~ ~!onchange=function() {Autobuyer(15).setPriority(stringToAutobuyerSetting(this.value))}~></input></span>
-              <br ~style.display=Autobuyer(15).isSuspendedDueToGeneration() ? '' : 'none'~/>
-              <span ~style.display=Autobuyer(15).isSuspendedDueToGeneration() ? '' : 'none'~ style="font-size: 0.875rem;">(not triggering due to ℂP generation)</span>
+              <div ~style.display=Autobuyer(15).hasGeneration() ? '' : 'none'~ style="font-size: 0.75rem;">
+                <span>Not on by default due to ℂP generation</span>
+                <br/>
+                <span>Turn on anyway: <input type="checkbox" ~!checked=Autobuyer(15).isOnDespiteSuspended()~ ~!onchange=function() {Autobuyer(15).setIsOnDespiteSuspended(this.checked)}~></input></span>
+              </div>
             </div>
           </td>
         </tr>

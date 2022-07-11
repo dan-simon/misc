@@ -428,7 +428,7 @@ let initialPlayer = {
         infinityChallenge: false,
       },
       showGeneratorAndBoostAutobuyers: true,
-      suspendAutobuyers: true
+      isOnDespiteSuspended: [false, false, false, false]
     }
   },
   confirmations: {
@@ -539,7 +539,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.138671875
+  version: 2.140625
 }
 
 let player;

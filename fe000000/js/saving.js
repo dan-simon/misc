@@ -1362,6 +1362,11 @@ let Saving = {
       player.usingTabGroups = false;
       player.version = 2.138671875;
     }
+    if (player.version < 2.140625) {
+      let suspend = player.options.autobuyers.suspendAutobuyers;
+      player.options.autobuyers.isOnDespiteSuspended = [!suspend, !suspend, !suspend, !suspend];
+      player.version = 2.140625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

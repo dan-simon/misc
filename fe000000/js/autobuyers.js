@@ -53,10 +53,13 @@ let Autobuyer = function (i) {
       ][i - 12];
     },
     isActive() {
-      return this.isOn() && this.hasAutobuyer() && !this.isSuspendedDueToGeneration();
+      return this.hasAutobuyer() && (this.hasGeneration() ? this.isOnDespiteSuspended() : this.isOn());
     },
-    isSuspendedDueToGeneration() {
-      return this.hasGeneration() && Autobuyers.suspendAutobuyers();
+    isOnDespiteSuspended() {
+      return 12 <= i && i <= 15 && player.options.autobuyers.isOnDespiteSuspended[i - 12];
+    },
+    setIsOnDespiteSuspended(x) {
+      player.options.autobuyers.isOnDespiteSuspended[i - 12] = x;
     },
     mode() {
       return player.autobuyers[i - 1].mode;
@@ -196,12 +199,6 @@ let Autobuyers = {
   },
   setDisableWhenStartingInfinityChallenge() {
     player.options.autobuyers.disableAutobuyersWhenStarting.infinityChallenge = !player.options.autobuyers.disableAutobuyersWhenStarting.infinityChallenge;
-  },
-  suspendAutobuyers() {
-    return player.options.autobuyers.suspendAutobuyers;
-  },
-  setSuspendAutobuyers() {
-    player.options.autobuyers.suspendAutobuyers = !player.options.autobuyers.suspendAutobuyers;
   },
   isLockedResetAutobuyer(x) {
     if (x < 12) return false;
