@@ -174,7 +174,7 @@ let Chroma = {
     if (c > cap) {
       return Infinity;
     }
-    let t = -cap * Math.log(1 - c / cap);
+    let t = -cap * Math.log(1 - c / cap) / 2;
     return t / this.chromaSpeedMultiplier() - player.stats.timeSinceEternity;
   },
   currentProductionText() {
