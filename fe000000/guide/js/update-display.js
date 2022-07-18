@@ -847,7 +847,7 @@ function updateDisplay() {
     if (shouldUpdate("e769")) {e[769].textContent = formatTime(2400, {seconds: {f: formatTimeMaybeInt, s: true}, larger: {f: formatTimeMaybeInt, s: true}})};
     if (shouldUpdate("e770")) {e[770].textContent = formatInt(Decimal.pow(2, Math.pow(2, 14)))};
     if (shouldUpdate("e771")) {e[771].textContent = formatInt(Math.pow(2, 35))};
-    if (shouldUpdate("e772")) {e[772].textContent = formatTime(30600, {seconds: {f: formatTimeMaybeInt, s: true}, larger: {f: formatTimeMaybeInt, s: true}})};
+    if (shouldUpdate("e772")) {e[772].textContent = formatTime(32400, {seconds: {f: formatTimeMaybeInt, s: true}, larger: {f: formatTimeMaybeInt, s: true}})};
     if (shouldUpdate("e773")) {e[773].textContent = formatInt(4096)};
     if (shouldUpdate("e774")) {e[774].textContent = formatTime(360, {seconds: {f: formatTimeMaybeInt, s: true}, larger: {f: formatTimeMaybeInt, s: true}})};
     if (shouldUpdate("e775")) {e[775].textContent = formatInt(Decimal.pow(2, 1.125 * Math.pow(2, 14)))};
@@ -888,8 +888,8 @@ function updateDisplay() {
     if (shouldUpdate("e810")) {e[810].textContent = formatInt(1.9375 * Math.pow(2, 15))};
     if (shouldUpdate("e811")) {e[811].textContent = formatTime(180, {seconds: {f: formatTimeMaybeInt, s: true}, larger: {f: formatTimeMaybeInt, s: true}})};
     if (shouldUpdate("e812")) {e[812].textContent = formatInt(2)};
-    if (shouldUpdate("e813")) {e[813].textContent = formatTime(61200, {seconds: {f: formatTimeMaybeInt, s: true}, larger: {f: formatTimeMaybeInt, s: true}})};
-    if (shouldUpdate("e814")) {e[814].textContent = formatTime(104400, {seconds: {f: formatTimeMaybeInt, s: true}, larger: {f: formatTimeMaybeInt, s: true}})};
+    if (shouldUpdate("e813")) {e[813].textContent = formatTime(45000, {seconds: {f: formatTimeMaybeInt, s: true}, larger: {f: formatTimeMaybeInt, s: true}})};
+    if (shouldUpdate("e814")) {e[814].textContent = formatTime(90000, {seconds: {f: formatTimeMaybeInt, s: true}, larger: {f: formatTimeMaybeInt, s: true}})};
     if (shouldUpdate("e815")) {e[815].textContent = formatInt(Decimal.pow(2, 3600))};
     if (shouldUpdate("e816")) {e[816].textContent = formatInt(110)};
     if (shouldUpdate("e817")) {e[817].textContent = formatInt(Decimal.pow(2, 3744))};
