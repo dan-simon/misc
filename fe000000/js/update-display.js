@@ -1446,8 +1446,8 @@ function updateDisplay() {
     if (shouldUpdate("e254")) {e[254].textContent = Challenge.restartOnCompletion() ? "On" : "Off"};
     if (shouldUpdate("e255")) {e[255].textContent = Challenge.isSomeChallengeRunning() ? '' : '\u200b'};
     if (shouldUpdate("b216")) {b[216].style.display = Challenge.isSomeChallengeRunning() ? '' : 'none'};
-    if (shouldUpdate("e256")) {e[256].textContent = Challenge.currentChallenge()};
-    if (shouldUpdate("e257")) {e[257].textContent = InfinityPrestigeLayer.canInfinity() ? '' : 'not '};
+    if (shouldUpdate("e256")) {e[256].textContent = formatOrdinalInt(Challenge.currentChallenge())};
+    if (shouldUpdate("e257")) {e[257].textContent = Challenge.exitChallengeHeaderButtonText()};
     if (shouldUpdate("b217")) {b[217].style.display = Challenge.isSomeChallengeRunning() ? '' : 'none'};
     if (shouldUpdate("b218")) {b[218].style.background = Challenge.color(1)};
     if (shouldUpdate("e258")) {e[258].textContent = formatOrdinalInt(1)};
@@ -1666,8 +1666,8 @@ function updateDisplay() {
     if (shouldUpdate("e382")) {e[382].textContent = InfinityChallenge.restartOnCompletion() ? "On" : "Off"};
     if (shouldUpdate("e383")) {e[383].textContent = InfinityChallenge.isSomeInfinityChallengeRunning() ? '' : '\u200b'};
     if (shouldUpdate("b347")) {b[347].style.display = InfinityChallenge.isSomeInfinityChallengeRunning() ? '' : 'none'};
-    if (shouldUpdate("e384")) {e[384].textContent = InfinityChallenge.currentInfinityChallenge()};
-    if (shouldUpdate("e385")) {e[385].textContent = InfinityPrestigeLayer.canInfinity() ? '' : 'not '};
+    if (shouldUpdate("e384")) {e[384].textContent = formatOrdinalInt(InfinityChallenge.currentInfinityChallenge())};
+    if (shouldUpdate("e385")) {e[385].textContent = InfinityChallenge.exitInfinityChallengeHeaderButtonText()};
     if (shouldUpdate("b348")) {b[348].style.display = InfinityChallenge.isSomeInfinityChallengeRunning() ? '' : 'none'};
     if (shouldUpdate("b349")) {b[349].style.background = InfinityChallenge.color(1)};
     if (shouldUpdate("e386")) {e[386].textContent = formatOrdinalInt(1)};

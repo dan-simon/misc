@@ -497,7 +497,7 @@
       <br/>
       <span>To complete a normal challenge, infinity while in the normal challenge.</span>
       <br/>
-      <span style="display: inline-block; height: 25px;">~r Challenge.isSomeChallengeRunning() ? '' : '\u200b' ~<button ~style.display=Challenge.isSomeChallengeRunning() ? '' : 'none'~ onclick="Challenge.exitChallenge()">Exit Normal Challenge ~r Challenge.currentChallenge() ~ (this will ~r InfinityPrestigeLayer.canInfinity() ? '' : 'not ' ~complete it)</button> <button ~style.display=Challenge.isSomeChallengeRunning() ? '' : 'none'~ onclick="Challenge.restartChallenge()">Reset it (exit and start again)</button></span>
+      <span style="display: inline-block; height: 25px;">~r Challenge.isSomeChallengeRunning() ? '' : '\u200b' ~<button ~style.display=Challenge.isSomeChallengeRunning() ? '' : 'none'~ onclick="Challenge.exitChallenge()">Exit Normal Challenge ~o Challenge.currentChallenge() ~ (~r Challenge.exitChallengeHeaderButtonText() ~)</button> <button ~style.display=Challenge.isSomeChallengeRunning() ? '' : 'none'~ onclick="Challenge.restartChallenge()">Reset it (exit and start again)</button></span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>
@@ -1061,7 +1061,7 @@
       <br/>
       <span>To complete an infinity challenge, infinity while in the infinity challenge.</span>
       <br/>
-      <span style="display: inline-block; height: 25px;">~r InfinityChallenge.isSomeInfinityChallengeRunning() ? '' : '\u200b' ~<button ~style.display=InfinityChallenge.isSomeInfinityChallengeRunning() ? '' : 'none'~ onclick="InfinityChallenge.exitInfinityChallenge()">Exit Infinity Challenge ~r InfinityChallenge.currentInfinityChallenge() ~ (this will ~r InfinityPrestigeLayer.canInfinity() ? '' : 'not ' ~complete it)</button>  <button ~style.display=InfinityChallenge.isSomeInfinityChallengeRunning() ? '' : 'none'~ onclick="InfinityChallenge.restartInfinityChallenge()">Reset it (exit and start again)</button></span>
+      <span style="display: inline-block; height: 25px;">~r InfinityChallenge.isSomeInfinityChallengeRunning() ? '' : '\u200b' ~<button ~style.display=InfinityChallenge.isSomeInfinityChallengeRunning() ? '' : 'none'~ onclick="InfinityChallenge.exitInfinityChallenge()">Exit Infinity Challenge ~o InfinityChallenge.currentInfinityChallenge() ~ (~r InfinityChallenge.exitInfinityChallengeHeaderButtonText() ~)</button>  <button ~style.display=InfinityChallenge.isSomeInfinityChallengeRunning() ? '' : 'none'~ onclick="InfinityChallenge.restartInfinityChallenge()">Reset it (exit and start again)</button></span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>

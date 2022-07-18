@@ -83,11 +83,17 @@ let EternityChallenge = {
   unlockedOrRunningEternityChallengeHeaderButtonText() {
     let unlocked = this.currentEternityChallenge() || this.getUnlockedEternityChallenge();
     if (unlocked !== 0) {
-      // Note the implicit conversion of unlocked directly to string (unformatted) in the below.
+      // Note the use of formatOrdinalInt (formatting the challenge number based on settings) in the below.
+      // It's important to be careful to format this in this way (i.e., not leave it unformatted and also not just
+      // use formatInt, which checks slightly different settings).
       if (this.isEternityChallengeRunning(unlocked)) {
-        return 'Exit Eternity Challenge ' + unlocked + ' (this will ' + (EternityPrestigeLayer.canEternity() ? '' : 'not ') + 'complete it)';
+        if (this.isEternityChallengeCompleted(unlocked)) {
+          return 'Exit Eternity Challenge ' + formatOrdinalInt(unlocked) + ' (already fully completed)';
+        } else {
+          return 'Exit Eternity Challenge ' + formatOrdinalInt(unlocked) + ' (this will ' + (EternityPrestigeLayer.canEternity() ? '' : 'not ') + 'complete it)';
+        }
       } else if (this.canEternityChallengeBeStarted(unlocked)) {
-        return 'Start Eternity Challenge ' + unlocked;
+        return 'Start Eternity Challenge ' + formatOrdinalInt(unlocked);
       }
     }
   },

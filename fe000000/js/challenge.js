@@ -10,6 +10,16 @@ let Challenge = {
       return "Requires infinity";
     }
   },
+  exitChallengeHeaderButtonText() {
+    let challenge = this.currentChallenge();
+    if (challenge !== 0) {
+      if (this.isChallengeCompleted(challenge)) {
+        return 'already completed';
+      } else {
+        return 'this will ' + (InfinityPrestigeLayer.canInfinity() ? '' : 'not ') + 'complete it';
+      }
+    }
+  },
   startOrExitChallenge(x) {
     if (this.isChallengeRunning(x)) {
       this.exitChallenge();

@@ -16,6 +16,16 @@ let InfinityChallenge = {
       return "Requires more stars";
     }
   },
+  exitInfinityChallengeHeaderButtonText() {
+    let challenge = this.currentInfinityChallenge();
+    if (challenge !== 0) {
+      if (this.isInfinityChallengeCompleted(challenge)) {
+        return 'already completed';
+      } else {
+        return 'this will ' + (InfinityPrestigeLayer.canInfinity() ? '' : 'not ') + 'complete it';
+      }
+    }
+  },
   startOrExitInfinityChallenge(x) {
     if (this.isInfinityChallengeRunning(x)) {
       this.exitInfinityChallenge();
