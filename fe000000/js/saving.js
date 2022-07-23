@@ -1367,6 +1367,10 @@ let Saving = {
       player.options.autobuyers.isOnDespiteSuspended = [!suspend, !suspend, !suspend, !suspend];
       player.version = 2.140625;
     }
+    if (player.version < 2.14453125) {
+      player.options.notation.exponentBase = Math.min(1e100, player.options.notation.exponentBase);
+      player.version = 2.14453125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

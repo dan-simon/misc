@@ -51,7 +51,7 @@ let NotationOptions = {
   },
   setExponentBase(x) {
     // This can intentionally be fractional.
-    player.options.notation.exponentBase = (x && (x >= 1 + 1e-6)) ? x : 10;
+    player.options.notation.exponentBase = x ? Math.max(1 + 1e-6, Math.min(1e100, x)) : 10;
     this.notationChange();
   },
   alphabet() {
