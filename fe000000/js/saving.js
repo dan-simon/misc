@@ -1368,7 +1368,7 @@ let Saving = {
       player.version = 2.140625;
     }
     if (player.version < 2.14453125) {
-      player.options.notation.exponentBase = Math.min(1e100, player.options.notation.exponentBase);
+      player.options.notation.exponentBase = Math.min(1e80, player.options.notation.exponentBase);
       player.version = 2.14453125;
     }
   },
