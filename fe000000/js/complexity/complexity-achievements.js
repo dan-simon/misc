@@ -127,7 +127,7 @@ let ComplexityAchievements = {
     this.giveComplexityAchievementGlobalResult();
     // When we finality, the complexity achievements we keep are just kept.
     // They don't get re-unlocked. So it's fine to notify whenever we get a complexity achievement,
-    // even if we get it from buying finality upgrades.
+    // even if we get it from buying finality shard upgrades.
     Notifications.notify(this.getComplexityAchievementName(row, column), 'complexityAchievements');
   },
   getComplexityAchievementName(row, column) {
