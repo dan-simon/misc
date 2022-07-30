@@ -1371,6 +1371,11 @@ let Saving = {
       player.options.notation.exponentBase = Math.min(1e80, player.options.notation.exponentBase);
       player.version = 2.14453125;
     }
+    if (player.version < 2.1484375) {
+      player.cheats.extraAchievements = 0;
+      player.cheats.achievementExtraMultiplier = 1;
+      player.version = 2.1484375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

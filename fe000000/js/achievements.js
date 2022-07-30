@@ -365,10 +365,15 @@ let Achievements = {
     return this.active() ? this.rawOtherMultiplier() : 1;
   },
   rawGeneratorMultiplier() {
-    return Math.pow(2, this.getTotalAchievementsUnlocked() / 64);
+    return Math.pow(2, this.getTotalAchievementsUnlockedForMultipliers() / 64);
   },
   rawOtherMultiplier() {
-    return 1 + this.getTotalAchievementsUnlocked() / 256;
+    // This stops things from being buggy if you have negative achievements.
+    let ach = this.getTotalAchievementsUnlockedForMultipliers();
+    return (ach >= 0) ? (1 + ach / 256) : (1 / (1 - ach / 256));
+  },
+  getTotalAchievementsUnlockedForMultipliers() {
+    return (this.getTotalAchievementsUnlocked() + player.cheats.extraAchievements) * player.cheats.achievementExtraMultiplier;
   },
   getTotalAchievementsUnlocked() {
     return range(1, 8).map(x => range(1, 8).filter(y => this.hasAchievement(x, y)).length).reduce((a, b) => a + b);

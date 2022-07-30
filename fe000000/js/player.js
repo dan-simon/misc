@@ -527,6 +527,8 @@ let initialPlayer = {
   },
   cheats: {
     gameSpeed: 1,
+    extraAchievements: 0,
+    achievementExtraMultiplier: 1
   },
   currentTabGroup: 'normal',
   currentTabInGroup: {
@@ -539,7 +541,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.14453125
+  version: 2.1484375
 }
 
 let player;
