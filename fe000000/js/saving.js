@@ -191,6 +191,22 @@ let Saving = {
     offlineSimulationData.ticks = newTicks;
     offlineSimulationData.tick = 0;
   },
+  slowDownOffline() {
+    if (!offlineSimulationData.active) {
+      return;
+    }
+    let baseTickLength = 0.064;
+    let oldTicks = offlineSimulationData.ticks - offlineSimulationData.tick;
+    let newTicks = Math.ceil(Math.min(offlineSimulationData.tickLength * oldTicks / baseTickLength, 2 * oldTicks));
+    // I think this always works; once slowDownOffline() is called enough that base tick length becomes relevant,
+    // the number of ticks is always the remaining time divided by base tick length, rounded up.
+    if (oldTicks >= newTicks) {
+      return;
+    }
+    offlineSimulationData.tickLength *= oldTicks / newTicks;
+    offlineSimulationData.ticks = newTicks;
+    offlineSimulationData.tick = 0;
+  },
   oracleSimulateTime(totalDiff, totalTicks, callback) {
     let firstDiff = Math.max(0, totalDiff - 16);
     let secondDiff = Math.min(16, totalDiff);
