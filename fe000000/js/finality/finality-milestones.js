@@ -46,6 +46,8 @@ let FinalityMilestones = {
     return FinalityMilestones.isFinalityMilestoneActive(15) ? this.rawFreeTimeInComplexity() : 0;
   },
   rawFreeTimeInComplexity() {
+    // This only takes effect once you get 32 finalities, making it unclear why
+    // it's always at least 1. But it doesn't matter so I'm not planning on changing it.
     return Math.min(16, Math.max(1, Math.sqrt(player.finalities)));
   },
   color(x) {
