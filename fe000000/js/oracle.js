@@ -86,7 +86,7 @@ let Oracle = {
   },
   invoke() {
     if (!this.isUnlocked()) {
-      // This button is grey when the oracle isn't unlocked, even if it's visible,
+      // This button is grey when the Oracle isn't unlocked, even if it's visible,
       // so it's reasonable to just return.
       return;
     }
@@ -145,7 +145,7 @@ let Oracle = {
     let messages = [
       this.complexityPointMessage(), this.complexityPointGainMessage(), this.otherThingsGainMessage(), this.otherThingsLossMessage()
     ];
-    return 'After ' + formatTime(player.oracle.timeSimulated, {seconds: {f: formatMaybeInt, s: true}, larger: {f: formatMaybeInt, s: true}}) +
+    return 'After ' + formatTime(player.oracle.timeSimulated, {seconds: {f: formatTimeMaybeInt, s: true}, larger: {f: formatTimeMaybeInt, s: true}}) +
       ' and ' + formatMaybeInt(player.oracle.ticksSimulated) + ' tick' +
       pluralize(player.oracle.ticksSimulated, '', 's') + ', you ' + coordinate('*', '', messages) + '.';
   },
@@ -209,7 +209,7 @@ let Oracle = {
   },
   messagePrequel() {
     if (this.isUsed()) {
-      let timeString = formatTime(player.stats.timeSinceOraclePrediction, {seconds: {f: format, s: false}, larger: {f: format, s: false}});
+      let timeString = formatTime(player.stats.timeSinceOraclePrediction, {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}});
       return 'The Oracle most recently said (' + timeString + ' ago):';
     } else {
       return 'The Oracle has not said anything yet in this finality.';

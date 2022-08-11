@@ -107,20 +107,20 @@ let Saving = {
   },
   simulateTimeUpdate(time, ticks, totalTicks) {
     document.getElementById('timesimulated').innerHTML =
-      formatTime(time, {seconds: {f: format, s: false}, larger: {f: format, s: false}});
+      formatTime(time, {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}});
     document.getElementById('tickssimulated').innerHTML = formatInt(ticks);
     document.getElementById('totaltickssimulated').innerHTML = formatInt(totalTicks);
     let expectedTotalTime = time * totalTicks / ticks;
     document.getElementById('expectedtotaltimesimulated').innerHTML = ticks === 0 ? 'unknown' :
-      formatTime(expectedTotalTime, {seconds: {f: format, s: false}, larger: {f: format, s: false}});
+      formatTime(expectedTotalTime, {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}});
     document.getElementById('expectedremainingtimesimulated').innerHTML = ticks === 0 ? 'unknown' :
-      formatTime(expectedTotalTime - time, {seconds: {f: format, s: false}, larger: {f: format, s: false}});
+      formatTime(expectedTotalTime - time, {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}});
     document.getElementById('bar').style.width = Math.floor(ticks / totalTicks * 512) + 'px';
   },
   simulateTime(totalDiff, maxTicks, showSimulation, callback) {
     if (totalDiff < 0) {
       alert('It appears that your save is somehow from ' +
-        formatTime(-totalDiff, {seconds: {f: format, s: false}, larger: {f: format, s: false}}) +
+        formatTime(-totalDiff, {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}) +
         ' in the future. You may want to figure out what might be causing this.');
       player.lastUpdate = Date.now();
       callback();
@@ -1600,7 +1600,7 @@ let Saving = {
     // The first false here sets Date.now() to when the game was reset
     // rather than when the window was loaded.
     // The null says we have no special setting for offline ticks.
-    // The second false confirms that this isn't the oracle.
+    // The second false confirms that this isn't the Oracle.
     this.loadGame(this.encode(initialPlayer), false, null, false, () => this.reseedInitialPlayer());
   },
   resetGameWithConfirmation() {
