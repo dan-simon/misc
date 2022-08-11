@@ -159,6 +159,14 @@ let FinalityPrestigeLayer = {
     // Jump to another seed, so each finality gets a new seed that doesn't depend
     // on when finality happened to happen.
     RNG.jump(Finalities.amount() * Math.pow(2, 20));
+    // The Void completely resets. It has no settings or other data we need to save.
+    player.voidData = {
+      unlocked: false,
+      enteringOrInVoid: false,
+      inVoid: false,
+      progress: 0,
+      displayCurrentProgress: 0
+    };
     // Note that player.oracle.timeSimulated doesn't matter here at all.
     // We let the player keep their settings since they probably want to.
     // Also, doing a finality doesn't change whether we're predicting or not.
@@ -175,6 +183,12 @@ let FinalityPrestigeLayer = {
       originalComplexityChallengeCompletions: [0, 0, 0, 0, 0, 0],
       powerShards: 0,
       originalPowerShards: 0,
+      inVoid: false,
+      originalInVoid: false,
+      currentVoidProgress: 0,
+      originalCurrentVoidProgress: 0,
+      maximumVoidProgress: 0,
+      originalMaximumVoidProgress: 0,
       galaxies: 0,
       originalGalaxies: 0,
       finalities: 0,

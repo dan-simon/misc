@@ -38,7 +38,7 @@ let ComplexityGenerator = function (i) {
       let factors = [
         Decimal.pow(perPurchaseMultiplier, this.bought()),
         Achievements.generatorMultiplier(), Complexities.complexityGeneratorMultiplier(),
-        FinalityStars.multiplier(),
+        Void.complexityGeneratorReward(), FinalityStars.multiplier(),
       ];
       let multiplier = factors.reduce((a, b) => a.times(b));
       let powFactors = [Powers.getTotalEffect('complexity'), FinalityShardUpgrade(1).effect()];

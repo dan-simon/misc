@@ -228,6 +228,13 @@ let initialPlayer = {
     powerList: '',
     on: true
   },
+  voidData: {
+    unlocked: false,
+    enteringOrInVoid: false,
+    inVoid: false,
+    progress: 0,
+    displayCurrentProgress: 0
+  },
   oracle: {
     unlocked: false,
     isPredicting: false,
@@ -241,6 +248,12 @@ let initialPlayer = {
     originalComplexityChallengeCompletions: [0, 0, 0, 0, 0, 0],
     powerShards: 0,
     originalPowerShards: 0,
+    inVoid: false,
+    originalInVoid: false,
+    currentVoidProgress: 0,
+    originalCurrentVoidProgress: 0,
+    maximumVoidProgress: 0,
+    originalMaximumVoidProgress: 0,
     galaxies: 0,
     originalGalaxies: 0,
     finalities: 0,
@@ -315,6 +328,7 @@ let initialPlayer = {
     'eternity-challenges': false,
     'chroma': false,
     'powers': false,
+    'void': false,
     'oracle': false,
     'galaxies': false,
   },
@@ -346,6 +360,7 @@ let initialPlayer = {
     'complexity-challenges': true,
     'complexity-achievements': true,
     'powers': true,
+    'void': true,
     'oracle': true,
     'galaxies': true,
     'finality': true,
@@ -541,7 +556,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.1484375
+  version: 2.15234375
 }
 
 let player;

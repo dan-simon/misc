@@ -3,7 +3,7 @@ let Tabs = {
     ['main', 'infinity', 'normal-challenges', 'autobuyers', 'infinity-challenges'],
     ['goals', 'achievements', 'statistics', 'last-ten-runs', 'options'],
     ['eternity', 'eternity-milestones', 'studies', 'eternity-producer', 'eternity-challenges', 'chroma'],
-    ['complexity', 'complexity-challenges', 'complexity-achievements', 'powers', 'oracle', 'galaxies'],
+    ['complexity', 'complexity-challenges', 'complexity-achievements', 'powers', 'void', 'oracle', 'galaxies'],
     ['finality', 'finality-shards', 'finality-milestones']
   ],
   tabToTabGroup: {
@@ -27,6 +27,7 @@ let Tabs = {
     'complexity-challenges': 'complexity',
     'complexity-achievements': 'complexity',
     'powers': 'complexity',
+    'void': 'complexity',
     'oracle': 'complexity',
     'galaxies': 'complexity',
     'finality': 'finality',
@@ -70,6 +71,7 @@ let Tabs = {
       'complexity-challenges': () => PrestigeLayerProgress.hasReached('complexity'),
       'complexity-achievements': () => PrestigeLayerProgress.hasReached('complexity'),
       'powers': () => SpecialTabs.isTabVisible('powers'),
+      'void': () => SpecialTabs.isTabVisible('void'),
       'oracle': () => SpecialTabs.isTabVisible('oracle'),
       'galaxies': () => SpecialTabs.isTabVisible('galaxies'),
       'finality': () => PrestigeLayerProgress.hasReached('finality'),
@@ -274,6 +276,8 @@ let Tabs = {
   }
 }
 
+// It's crucial that all these tab's objects are defined before this runs
+// (in particular, void.js must load before this file, so Void is defined).
 let SpecialTabs = {
   starRequirements: {
     'infinity-challenges': InfinityChallenge.getInfinityChallengeRequirement(1),
@@ -281,6 +285,7 @@ let SpecialTabs = {
     'eternity-challenges': EternityChallenge.getEternityChallengeRequirementAtTier(1, 0),
     'chroma': Decimal.pow(Chroma.getUnlockColorCost(1), Math.pow(2, 16)),
     'powers': Decimal.pow(Powers.unlockCost(), Math.pow(2, 32)),
+    'void': Decimal.pow(Void.unlockCost(), Math.pow(2, 32)),
     'oracle': Decimal.pow(Oracle.unlockCost(), Math.pow(2, 32)),
     'galaxies': Decimal.pow(Galaxy.unlockCost(), Math.pow(2, 32)),
   },
@@ -290,7 +295,8 @@ let SpecialTabs = {
     'eternity-challenges': () => Goals.hasGoal(8),
     'chroma': () => EternityChallenge.isTotalCompletionsRewardActive(3),
     'powers': () => Goals.hasGoal(12),
-    'oracle': () => Powers.isUnlocked(),
+    'void': () => Powers.isUnlocked(),
+    'oracle': () => Void.isUnlocked(),
     'galaxies': () => Oracle.isUnlocked(),
   },
   shouldMakeTabVisible(x) {

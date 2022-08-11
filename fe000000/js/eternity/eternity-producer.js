@@ -104,7 +104,7 @@ let EternityProducer = {
     return Math.pow(2, 20);
   },
   canUnlock() {
-    return !this.isUnlocked() && player.eternityPoints.gte(this.unlockCost()) && !ComplexityChallenge.isSafeguardOn(3);
+    return !this.isUnlocked() && player.eternityPoints.gte(this.unlockCost()) && !ComplexityChallenge.isSafeguardEffectOn(3);
   },
   unlock(auto) {
     if (!this.canUnlock() || (

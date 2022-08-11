@@ -79,7 +79,7 @@ let EternityGenerator = function (i) {
       return n <= this.maxBuyable();
     },
     maxBuyable(fraction) {
-      if (!this.isVisible() || (i == 8 && ComplexityChallenge.isSafeguardOn(5))) return 0;
+      if (!this.isVisible() || (i == 8 && ComplexityChallenge.isSafeguardEffectOn(5))) return 0;
       if (fraction === undefined) {
         fraction = 1;
       }

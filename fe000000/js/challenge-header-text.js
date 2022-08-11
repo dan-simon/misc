@@ -7,11 +7,13 @@ let ChallengeHeaderText = {
       InfinityChallenge.isSomeInfinityChallengeRunning() ? 'Infinity Challenge ' + InfinityChallenge.currentInfinityChallenge() : null,
       EternityChallenge.isSomeEternityChallengeRunning() ? 'Eternity Challenge ' + EternityChallenge.currentEternityChallenge() : null,
       runningComplexityChallenges.length > 0 ?
-      'Complexity Challenge' + pluralize(runningComplexityChallenges.length, '', 's') + ' ' + coordinate('*', '', runningComplexityChallenges) : null
+      'Complexity Challenge' + pluralize(runningComplexityChallenges.length, '', 's') + ' ' + coordinate('*', '', runningComplexityChallenges) : null,
+      Void.inVoid() ? 'the Void' : null,
     ];
     return coordinate('You are currently in *.', 'You are currently not in any challenge.', challenges);
   },
   getNextCCCompletionText() {
+    if (Void.inVoid()) return;
     let minRunningComplexityChallengeGoal = [1, 2, 3, 4, 5, 6].filter(
       x => ComplexityChallenge.isComplexityChallengeRunning(x)).map(
       x => ComplexityChallenge.getComplexityChallengeGoal(x)).reduce(
@@ -23,7 +25,7 @@ let ChallengeHeaderText = {
     if (PrestigeLayerProgress.hasReached('infinity') && Options.showCurrentChallenges()) {
       texts.push(this.getCurrentChallengesText());
     }
-    if (PrestigeLayerProgress.hasReached('complexity') && Options.showNextCCCompletion()) {
+    if (PrestigeLayerProgress.hasReached('complexity') && Options.showNextCCCompletion() && !Void.inVoid()) {
       texts.push(this.getNextCCCompletionText());
     }
     return texts.map(i => ' ' + i).join('');

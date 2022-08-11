@@ -49,6 +49,9 @@ function gameLoop(diff, display, isOnline) {
   Stats.addToTimeStats(diff, isOnline);
   // Why is this here? Because otherwise the eternity time will be out of sync with chroma when the UI updates.
   Chroma.updateColors();
+  // This seems like a decent place for void stuff too? There are similar issues with maximum not being exactly current.
+  Void.updateVoidProgress();
+  Void.givePowerShards(diff);
   Autobuyers.tick(diff);
   InfinityAutobuyers.tick();
   EternityAutobuyers.tick();
@@ -90,6 +93,8 @@ function gameLoop(diff, display, isOnline) {
   ComplexityPrestigeLayer.compareCPGain();
   // Why does checkForPowerGain need diff? Because it wants to know if a bunch of new powers
   // are due to a long tick or power production suddenly becoming possibile.
+  // Surprisingly, checkForPowerGain mostly just uses player.stats.timeSincePowerGain,
+  // which is updated while updating stats, so there's not as much need as one would expect for diff.
   Powers.checkForPowerGain(diff);
   Goals.checkForGoals();
   Achievements.checkForAchievements('loop');

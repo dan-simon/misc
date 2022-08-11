@@ -450,7 +450,7 @@ let Powers = {
       let power = this.accessPower(type, i);
       let wait = this.getWait(power);
       if (wait > 0) {
-        return 'Produced after ' + formatTime(wait, {seconds: {f: format, s: false}, larger: {f: format, s: false}});
+        return 'Produced after ' + formatTime(wait, {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}});
       } else if (wait === 0) {
         return 'Produced immediately';
       } else {

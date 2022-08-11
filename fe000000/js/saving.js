@@ -1392,6 +1392,32 @@ let Saving = {
       player.cheats.achievementExtraMultiplier = 1;
       player.version = 2.1484375;
     }
+    if (player.version < 2.15234375) {
+      player.voidData = {
+        unlocked: false,
+        enteringOrInVoid: false,
+        inVoid: false,
+        progress: 0,
+        displayCurrentProgress: 0
+      };
+      player.oracle.inVoid = false;
+      player.oracle.originalInVoid = false;
+      player.oracle.currentVoidProgress = 0;
+      player.oracle.originalCurrentVoidProgress = 0;
+      player.oracle.maximumVoidProgress = 0;
+      player.oracle.originalMaximumVoidProgress = 0;
+      player.tabOptions['void'] = true;
+      player.isTabVisible['void'] = false;
+      for (let i of player.tabPresets) {
+        i.tabs += ',v';
+      }
+      // Powers achievement moved.
+      player.achievements.table[6][2] = player.achievements.table[6][3];
+      // As a one-time-only thing, give the Void achievement based on the Oracle achievement.
+      // The idea is that if you've unlocked the Oracle, you could have easily unlocked the Void.
+      player.achievements.table[6][3] = player.achievements.table[6][5];
+      player.version = 2.15234375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
@@ -1600,7 +1626,7 @@ let Saving = {
     // The first false here sets Date.now() to when the game was reset
     // rather than when the window was loaded.
     // The null says we have no special setting for offline ticks.
-    // The second false confirms that this isn't the oracle.
+    // The second false confirms that this isn't the Oracle.
     this.loadGame(this.encode(initialPlayer), false, null, false, () => this.reseedInitialPlayer());
   },
   resetGameWithConfirmation() {

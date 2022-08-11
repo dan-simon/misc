@@ -86,7 +86,7 @@ let Oracle = {
   },
   invoke() {
     if (!this.isUnlocked()) {
-      // This button is grey when the oracle isn't unlocked, even if it's visible,
+      // This button is grey when the Oracle isn't unlocked, even if it's visible,
       // so it's reasonable to just return.
       return;
     }
@@ -109,6 +109,9 @@ let Oracle = {
         ComplexityPrestigeLayer.complexityPointGain() : new Decimal(0);
       let complexityChallengeCompletions = ComplexityChallenge.getAllComplexityChallengeCompletions();
       let powerShards = PowerShards.amount();
+      let inVoid = Void.inVoid();
+      let currentVoidProgress = Void.currentVoidProgress();
+      let maximumVoidProgress = Void.maximumVoidProgress();
       let galaxies = Galaxy.amount();
       let finalities = Finalities.amount();
       let finalityShards = FinalityShards.total();
@@ -125,6 +128,12 @@ let Oracle = {
         player.oracle.complexityChallengeCompletions = complexityChallengeCompletions;
         player.oracle.originalPowerShards = PowerShards.amount();
         player.oracle.powerShards = powerShards;
+        player.oracle.originalInVoid = Void.inVoid();
+        player.oracle.inVoid = inVoid;
+        player.oracle.originalCurrentVoidProgress = Void.currentVoidProgressDisplay();
+        player.oracle.currentVoidProgress = currentVoidProgress;
+        player.oracle.originalMaximumVoidProgress = Void.maximumVoidProgress();
+        player.oracle.maximumVoidProgress = maximumVoidProgress;
         player.oracle.originalGalaxies = Galaxy.amount();
         player.oracle.galaxies = galaxies;
         player.oracle.originalFinalities = Finalities.amount();
@@ -143,7 +152,7 @@ let Oracle = {
   },
   message() {
     let messages = [
-      this.complexityPointMessage(), this.complexityPointGainMessage(), this.otherThingsGainMessage(), this.otherThingsLossMessage()
+      this.complexityPointMessage(), this.complexityPointGainMessage(), this.voidMessage(), this.otherThingsGainMessage(), this.otherThingsLossMessage()
     ];
     return 'After ' + formatTime(player.oracle.timeSimulated, {seconds: {f: formatMaybeInt, s: true}, larger: {f: formatMaybeInt, s: true}}) +
       ' and ' + formatMaybeInt(player.oracle.ticksSimulated) + ' tick' +
@@ -155,6 +164,14 @@ let Oracle = {
   complexityPointGainMessage() {
     return player.oracle.complexityPointGain.gt(0) ?
       ('will be able to gain ' + formatInt(player.oracle.complexityPointGain) + ' ℂP') : 'will not yet be able to complexity';
+  },
+  voidMessage() {
+    let originalProgress = player.oracle.inVoid ? player.oracle.originalCurrentVoidProgress : player.oracle.originalMaximumVoidProgress;
+    let progress = player.oracle.inVoid ? player.oracle.currentVoidProgress : player.oracle.maximumVoidProgress;
+    let equal = originalProgress === progress;
+    let change = equal ? '' : ' (' + ((progress > originalProgress) ? '+' : '-') + format(Math.abs(progress - originalProgress)) + ')';
+    return player.oracle.originalInVoid ? (equal ? 'will still' : 'will') + ' have made ' +
+    format(progress) + ' progress in the Void' + change : null;
   },
   complexityChallengeCompletionsChangeText(gain) {
     // Note that we can lose complexity challenge completions, if we finality.

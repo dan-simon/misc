@@ -141,8 +141,11 @@ let Generators = {
   anyGenerators() {
     return Generators.list.some(x => x.amount().gt(0));
   },
+  baseNerfValue() {
+     return Decimal.pow(2, Math.pow(2, 29))
+  },
   nerfValue() {
-    return Decimal.pow(2, Math.pow(2, 29)).pow(Chroma.effectOfColor(6));
+    return this.baseNerfValue().pow(Chroma.effectOfColor(6) * Void.nerfEffect());
   },
   nerfExponent: -1 / 128,
   nerf(x) {

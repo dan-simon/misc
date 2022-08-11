@@ -116,7 +116,7 @@ let Chroma = {
     // You can't unlock any colors but the first without unlocking the first (that is, unlocking chroma) first.
     // Also, the Complexity Challenge 4 safeguard prevents any colors from being unlocked.
     return !this.isColorUnlocked(x) && player.eternityPoints.gte(this.getUnlockColorCost(x)) &&
-      !ComplexityChallenge.isSafeguardOn(4) && (x === 1 || this.isUnlocked()) &&
+      !ComplexityChallenge.isSafeguardEffectOn(4) && (x === 1 || this.isUnlocked()) &&
       this.canSeeThatColorExists(x);
   },
   unlockColor(x, auto) {

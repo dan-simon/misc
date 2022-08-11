@@ -91,6 +91,7 @@
   <script src="js/stars.js?time=%time%"></script>
   <script src="js/stats.js?time=%time%"></script>
   <script src="js/studies.js?time=%time%"></script>
+  <script src="js/void.js?time=%time%"></script>
   <script src="js/tabs.js?time=%time%"></script>
   <script src="js/text-box.js?time=%time%"></script>
   <script src="js/trivia.js?time=%time%"></script>
@@ -106,7 +107,7 @@
     <br/>
     <span>Reloading might work, so probably try that first.</span>
     <br id="script-count-br" style="display: none;"/>
-    <span id="script-count-span" style="display: none;">The page loads <span id="script-count"></span> scripts (should be 91).</span>
+    <span id="script-count-span" style="display: none;">The page loads <span id="script-count"></span> scripts (should be 92).</span>
     <br/>
     <span><button onclick="window.location.reload(true)">Reload window</button> <button class="export-button" onclick="Saving.exportGame(0)">Export</button> <button onclick="Saving.loadGamePrompt()">Import/Load</button> <button onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></span>
   </div>
@@ -215,6 +216,7 @@
       <button ~style.display=Tabs.isTabVisible('complexity-challenges') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), 'complexity')~ onclick="Tabs.setTab('complexity-challenges')">Complexity Challenges</button>
       <button ~style.display=Tabs.isTabVisible('complexity-achievements') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), 'complexity')~ onclick="Tabs.setTab('complexity-achievements')">Complexity Achievements</button>
       <button ~style.display=Tabs.isTabVisible('powers') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), Powers.tabColors())~ onclick="Tabs.setTab('powers')">Powers</button>
+      <button ~style.display=Tabs.isTabVisible('void') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), 'complexity')~ onclick="Tabs.setTab('void')">Void</button>
       <button ~style.display=Tabs.isTabVisible('oracle') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), 'complexity')~ onclick="Tabs.setTab('oracle')">Oracle</button>
       <button ~style.display=Tabs.isTabVisible('galaxies') ? '' : 'none'~ ~style.background=Colors.getButtonColorAltered(Options.tabColors(), Galaxy.tabColors())~ onclick="Tabs.setTab('galaxies')">Galaxies</button>
     </span>
@@ -3640,7 +3642,7 @@
         <button style="height: 48px;" onclick="Powers.unlock()" ~class=Powers.canUnlock() ? '' : 'disabled'~>
           Unlock Powers<br/>Cost: ~f Powers.unlockCost() ~ complexity points
         </button>
-        <div ~style.display=SpecialTabs.isTabVisible('oracle') ? 'none' : ''~>Unlocking powers for the first time will also let you view the Oracle tab.</div>
+        <div ~style.display=SpecialTabs.isTabVisible('void') ? 'none' : ''~>Unlocking powers for the first time will also let you view the Void tab.</div>
         <div ~style.display=FinalityMilestones.isFinalityMilestoneActive(8) ? 'none' : ''~>Unlocking powers will also let you gain your eternity points on eternity every second, without needing to eternity (EP generation).</div>
       </div>
       <div ~style.display=(Powers.isUnlocked() || Options.showAllTabs()) ? '' : 'none'~>
@@ -4314,6 +4316,36 @@
         </span>
         <br/>
         <span style="display: none;">Exported equipped powers (also copied to clipboard): <input id="powers-export-output"></input></span>
+      </div>
+    </tab>
+    <tab ~style.display=Tabs.currentTab() === 'void' ? '' : 'none'~>
+      <div ~style.display=Void.isUnlocked() ? 'none' : ''~>
+        <button style="height: 48px;" onclick="Void.unlock()" ~class=Void.canUnlock() ? '' : 'disabled'~>
+          Unlock the Void<br/>Cost: ~f Void.unlockCost() ~ complexity points
+        </button>
+        <div ~style.display=SpecialTabs.isTabVisible('oracle') ?  'none' : ''~>Unlocking the Void for the first time will also let you view the Oracle tab.</div>
+      </div>
+      <div ~style.display=(Void.isUnlocked() || Options.showAllTabs()) ? '' : 'none'~>
+        <div ~style.display=Void.isUnlocked() ? 'none' : ''~>
+          <br/>
+          <span>Note that you cannot enter the Void before you unlock the Void.</span>
+          <br/>
+          <br/>
+        </div>
+        <button style="height: 48px; width: 144px;" ~class=Void.canEnterOrExitVoid() ? '' : 'disabled'~ onclick="Void.enterOrExitVoid()">~r Void.inVoid() ? 'Exit' : 'Enter' ~ the Void</button>
+        <br/>
+        <span>You are currently ~r Void.inVoid() ? 'in' : 'not in' ~ the Void.<span ~style.display=Void.inVoid() ? '' : 'none'~> The multiplier softcap is currently ~f Generators.baseNerfValue() ~^~f Void.nerfEffect() ~ = ~f Generators.nerfValue() ~<span ~style.display=Void.isNerfEffectAtCap() ? '' : 'none'~> (capped)</span>.</span></span>
+        <br/>
+        <br/>
+        <span>You have made ~f Void.maximumVoidProgress() ~ progress in the Void<span ~style.display=Void.atMaximumProgressDisplay() ? 'none' : ''~> (currently ~f Void.currentVoidProgressDisplay() ~)</span>.</span>
+        <br>
+        <span ~style.display=Void.hasNonzeroPowerShardReward() ? 'none' : ''~>Reach complexity in the Void to get a complexity generator multiplier and get power shards over time.</span>
+        <span ~style.display=Void.hasNonzeroPowerShardReward() ? '' : 'none'~>This multiplies complexity generators by ~q Void.complexityGeneratorReward() ~x and gives you ~i 1 ~ power shard per ~tq Void.powerShardFrequency() ~<span ~style.display=FinalityMilestones.isFinalityMilestoneActive(7) ? '' : 'none'~> (capped due to Finality Milestone ~o 7 ~)</span>.</span>
+        <br/>
+        <br/>
+        <div style="width: 1024px; margin-left: auto; margin-right: auto;">
+          <span>In the Void, all complexity challenge restrictions apply but you cannot get any complexity challenge completions, and the multiplier softcap increases based on complexity stars and time in the Void (resetting when you enter the Void again). Once you can reach complexity, making progress in the Void will give you a complexity generator multiplier and also give you power shards over time (even after exiting the Void). Doing a complexity in the Void will exit it.</span>
+        </div>
       </div>
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'oracle' ? '' : 'none'~>
@@ -5151,7 +5183,7 @@
               <br/>
               ~r FinalityMilestones.milestoneStatusDescription(7) ~
               <br/>
-              Unlock autobuyers for power shard upgrades.
+              Unlock autobuyers for power shard upgrades, and automatically cap the Void reward if the Void is unlocked.
             </div>
           </td>
           <td>
@@ -5180,7 +5212,7 @@
               <br/>
               ~r FinalityMilestones.milestoneStatusDescription(10) ~
               <br/>
-              Automatically unlock powers when possible.
+              Automatically unlock powers and the Void when possible.
             </div>
           </td>
           <td>
@@ -5714,13 +5746,13 @@
             <span>~r Achievements.getAchievementName(7, 3) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(7, 3) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(7, 3) ? '' : 'none'~>Complexity while in all ~i 6 ~ complexity challenges.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(7, 3) ? '' : 'none'~>Unlock powers.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(7, 4)~>
             <span>~r Achievements.getAchievementName(7, 4) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(7, 4) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(7, 4) ? '' : 'none'~>Unlock powers.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(7, 4) ? '' : 'none'~>Unlock the Void.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(7, 5)~>
             <span>~r Achievements.getAchievementName(7, 5) ~</span>
@@ -5900,9 +5932,9 @@
         <br ~style.display=Achievements.showAchievementDescriptionBelow(7, 2) ? '' : 'none'~/>
         <span ~style.display=Achievements.showAchievementDescriptionBelow(7, 2) ? '' : 'none'~>~r Achievements.getAchievementName(7, 2) ~ (~r Achievements.achievementStatusDescription(7, 2) ~): Complexity for ~i 16 ~ ℂP without unlocking red.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(7, 3) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(7, 3) ? '' : 'none'~>~r Achievements.getAchievementName(7, 3) ~ (~r Achievements.achievementStatusDescription(7, 3) ~): Complexity while in all ~i 6 ~ complexity challenges.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(7, 3) ? '' : 'none'~>~r Achievements.getAchievementName(7, 3) ~ (~r Achievements.achievementStatusDescription(7, 3) ~): Unlock powers.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(7, 4) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(7, 4) ? '' : 'none'~>~r Achievements.getAchievementName(7, 4) ~ (~r Achievements.achievementStatusDescription(7, 4) ~): Unlock powers.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(7, 4) ? '' : 'none'~>~r Achievements.getAchievementName(7, 4) ~ (~r Achievements.achievementStatusDescription(7, 4) ~): Unlock the Void.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(7, 5) ? '' : 'none'~/>
         <span ~style.display=Achievements.showAchievementDescriptionBelow(7, 5) ? '' : 'none'~>~r Achievements.getAchievementName(7, 5) ~ (~r Achievements.achievementStatusDescription(7, 5) ~): Have ~i 12 ~ total powers (equipped and stored powers, not counting deleted powers).</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(7, 6) ? '' : 'none'~/>
@@ -6180,6 +6212,7 @@
             <span ~style.display=Tabs.isTabOptionVisible('complexity-challenges') ? '' : 'none'~>Complexity Challenges: <input class="complexity-challenges-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('complexity-challenges')~ ~!onchange=function() {Tabs.setTabOption('complexity-challenges', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
             <span ~style.display=Tabs.isTabOptionVisible('complexity-achievements') ? '' : 'none'~>Complexity Achievements: <input class="complexity-achievements-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('complexity-achievements')~ ~!onchange=function() {Tabs.setTabOption('complexity-achievements', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
             <span ~style.display=Tabs.isTabOptionVisible('powers') ? '' : 'none'~>Powers: <input class="powers-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('powers')~ ~!onchange=function() {Tabs.setTabOption('powers', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+            <span ~style.display=Tabs.isTabOptionVisible('void') ? '' : 'none'~>Void: <input class="void-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('void')~ ~!onchange=function() {Tabs.setTabOption('void', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
             <span ~style.display=Tabs.isTabOptionVisible('oracle') ? '' : 'none'~>Oracle: <input class="oracle-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('oracle')~ ~!onchange=function() {Tabs.setTabOption('oracle', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
             <span ~style.display=Tabs.isTabOptionVisible('galaxies') ? '' : 'none'~>Galaxies: <input class="galaxies-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('galaxies')~ ~!onchange=function() {Tabs.setTabOption('galaxies', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
           </span>

@@ -16,7 +16,7 @@ let ComplexityChallenge = {
   ],
   colors: [null, 'yellow', 'grey', 'purple', 'orange', 'cyan', 'green'],
   isComplexityChallengeRunning(x) {
-    return player.isComplexityChallengeRunning[x - 1] && this.isComplexityChallengeUnlocked(x);
+    return player.isComplexityChallengeRunning[x - 1] && this.isComplexityChallengeUnlocked(x) && !Void.inVoid();
   },
   exitComplexityChallenge(x) {
     player.isComplexityChallengeRunning[x - 1] = false;
@@ -136,12 +136,24 @@ let ComplexityChallenge = {
   isSafeguardOn(x) {
     return player.complexityChallengeSafeguards[x - 2];
   },
+  isSafeguardEffectOn(x) {
+    return Void.enteringOrInVoid() || this.isSafeguardOn(x);
+  },
   toggleSafeguard(x) {
     player.complexityChallengeSafeguards[x - 2] = !player.complexityChallengeSafeguards[x - 2];
-    if (x === 6 && !player.complexityChallengeSafeguards[x - 2] &&
-      ComplexityAchievements.isComplexityAchievementActive(4, 4) && Studies.rebuyAfterComplexityChallenge6()) {
+    if (x === 6 && !player.complexityChallengeSafeguards[x - 2]) {
+      this.rebuyStudies()
+    }
+  },
+  rebuyStudies() {
+    // This function is also called when exiting the Void, meaning that Studies.rebuyAfterComplexityChallenge6()
+    // applies there too. This is why we still need to check player.complexityChallengeSafeguards[6 - 2],
+    // which is the studies condition.
+    if (!player.complexityChallengeSafeguards[6 - 2] && ComplexityAchievements.isComplexityAchievementActive(4, 4) &&
+    Studies.rebuyAfterComplexityChallenge6()) {
       player.studies = [...player.studySettings.studiesBeforeLastRespec];
       player.studySettings.firstTwelveStudyPurchaseOrder = [...player.studySettings.firstTwelveStudyPurchaseOrderBeforeLastRespec];
+      // This does nothing when entering the Void; it's harmless.
       if (!Studies.areStudiesInitialStudies()) {
         ComplexityChallenge.exitComplexityChallenge(6);
       }
@@ -151,7 +163,7 @@ let ComplexityChallenge = {
     let running = ComplexityChallenge.isComplexityChallengeRunning(x)
     let safeguard = (x === 1) ? running : ComplexityChallenge.isSafeguardOn(x);
     let mainText = safeguard ? 'Disabled' : 'Enabled';
-    let extraText = (safeguard !== running) ? [' (not in challenge)', ' (in challenge)'][+running] : '';
+    let extraText = Void.inVoid() ? ' (in the Void)' : ((safeguard !== running) ? [' (not in challenge)', ' (in challenge)'][+running] : '');
     return mainText + extraText;
   },
   addToTimeStats(diff) {

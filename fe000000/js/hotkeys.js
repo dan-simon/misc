@@ -340,7 +340,7 @@ let Hotkeys = {
       'I to infinity, X to exit challenge, Y to restart challenge (exit and start again)',
       'E to eternity', 'shift+S to respec studies and eternity',
       'R to gain permanence', 'shift+E to respec eternity challenge and eternity', 'C to complexity',
-      'shift+P to unequip equipped powers and complexity', 'O to get a prediction from the oracle',
+      'shift+P to unequip equipped powers and complexity', 'O to get a prediction from the Oracle',
       'F to finality', 'shift+F to respec finality shard upgrades and finality'
     ];
   },

@@ -64,8 +64,8 @@ let Achievements = {
     [
       'Even more... this achievement name is overdone',
       'Unpolluted',
-      'They\'re not challenges',
       'Powerful',
+      'IC1 again?',
       'You can probably delete some',
       'Next comes Sokoban',
       'Very crafty',
@@ -163,8 +163,8 @@ let Achievements = {
     [
       () => Complexities.amount() >= 256,
       () => ComplexityPrestigeLayer.complexityPointGain().gte(16) && !Chroma.isColorUnlocked(6),
-      () => range(1, 6).every(i => ComplexityChallenge.isComplexityChallengeRunning(i)),
       () => Powers.isUnlocked(),
+      () => Void.isUnlocked(),
       () => Powers.equipped().concat(Powers.stored()).length >= 12,
       () => Oracle.isUnlocked(),
       () => true,
@@ -245,7 +245,7 @@ let Achievements = {
     [
       'loop',
       'complexity',
-      'complexity',
+      'loop',
       'loop',
       'loop',
       'loop',

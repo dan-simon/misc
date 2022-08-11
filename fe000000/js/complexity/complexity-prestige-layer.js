@@ -140,6 +140,7 @@ let ComplexityPrestigeLayer = {
     ComplexityPoints.addAmount(gain);
     Complexities.increment();
     Stats.addComplexity(player.stats.timeSinceComplexity, gain, amount);
+    Void.exitVoidInternal();
     Powers.maybeRespec();
     Goals.recordPrestige('complexity');
     this.complexityReset(false);
@@ -169,13 +170,9 @@ let ComplexityPrestigeLayer = {
     if (!ComplexityAchievements.isComplexityAchievementActive(4, 4)) {
       player.boughtTheorems = [0, 0, 0];
     }
-    if (!ComplexityAchievements.isComplexityAchievementActive(4, 4) || player.studySettings.respecStudies || ComplexityChallenge.isSafeguardOn(6)) {
-      if (ComplexityAchievements.isComplexityAchievementActive(4, 4) && !Studies.areStudiesInitialStudies()) {
-        Studies.setStudiesBeforeLastRespec();
-      }
-      player.studies = initialStudies();
-      player.studySettings.firstTwelveStudyPurchaseOrder = [];
-      player.lastPresetIndices[1] = 0;
+    // Note that this is called if you're in the Void.
+    if (!ComplexityAchievements.isComplexityAchievementActive(4, 4) || player.studySettings.respecStudies || ComplexityChallenge.isSafeguardEffectOn(6)) {
+      this.respecStudies();
     }
     if (Studies.list.some(x => x.isBought())) {
       ComplexityChallenge.exitComplexityChallenge(6);
@@ -224,5 +221,14 @@ let ComplexityPrestigeLayer = {
     player.stats.lastTenEternities = initialLastTenEternities();
     // Not sure where to do this, might as well be here.
     Galaxy.updateDilated();
+  },
+  respecStudies() {
+    // This is here because I wasn't sure how to handle it with the Void so I made it possible to call independently.
+    if (ComplexityAchievements.isComplexityAchievementActive(4, 4) && !Studies.areStudiesInitialStudies()) {
+      Studies.setStudiesBeforeLastRespec();
+    }
+    player.studies = initialStudies();
+    player.studySettings.firstTwelveStudyPurchaseOrder = [];
+    player.lastPresetIndices[1] = 0;
   }
 }
