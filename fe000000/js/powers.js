@@ -312,22 +312,41 @@ let Powers = {
     let cutoff = this.cutoff(p.type);
     return this.strength(p) * this.rarity(p) > cutoff;
   },
+  canEquippedSwap() {
+    return ['normal', 'infinity', 'eternity', 'complexity'].some(
+      t => Math.min(...this.equipped().filter(p => p.type === t).map(p => this.strength(p) * this.rarity(p))) <
+      Math.max(...this.stored().filter(p => p.type === t).map(p => this.strength(p) * this.rarity(p))));
+  },
+  canAutoEquippedSwap() {
+    return this.canEquippedSwap() && FinalityMilestones.isFinalityMilestoneActive(11);
+  },
   maybeEquippedSwap() {
-    if (FinalityMilestones.isFinalityMilestoneActive(11)) {
-      this.equippedSwap();
+    if (this.canAutoEquippedSwap()) {
+      this.equippedSwap(false);
     }
   },
-  equippedSwap() {
-    let numberEquipped = this.equipped().length;
-    for (let x of ['normal', 'infinity', 'eternity', 'complexity']) {
-      let sortedOfType = this.getSortedPowerList(x, true, false);
-      let numberEquippedOfType = sortedOfType.filter(i => i.index <= numberEquipped).length;
-      let equippedToReplace = sortedOfType.slice(numberEquippedOfType).filter(i => i.index <= numberEquipped);
-      let storedToReplace = sortedOfType.slice(0, numberEquippedOfType).filter(i => i.index > numberEquipped);
-      for (let i = 0; i < equippedToReplace.length; i++) {
-        this.swap(equippedToReplace[i].index - 1, storedToReplace[i].index - numberEquipped - 1);
+  equippedSwap(manual) {
+    // The button to do this manually shouldn't appear if the player has Finality Milestone 11,
+    // because then it's automatically happening every tick no matter what.
+    // That being said, if it did appear, nothing would go wrong.
+    if (!this.canEquippedSwap()) {
+      return true;
+    }
+    if (manual && Options.confirmation('powersUnequip') && !confirm(
+      'Are you sure you want to swap your equipped powers with ' +
+      'better stored powers of the same type and ' +
+      ComplexityPrestigeLayer.resetText() + '?')) return false;
+    let counts = this.getTypeCounts();
+    this.respec();
+    // We check for Finality Milestone 11 above to handle the automated case.
+    if (!FinalityMilestones.isFinalityMilestoneActive(11)) {
+      if (ComplexityPrestigeLayer.canComplexity()) {
+        ComplexityPrestigeLayer.complexity(false);
+      } else {
+        ComplexityPrestigeLayer.complexityReset(false);
       }
     }
+    this.importFromCounts(counts);
   },
   swap(equippedIndex, storedIndex) {
     let temp = this.equipped()[equippedIndex];
@@ -715,11 +734,15 @@ let Powers = {
     if (this.equipped().length === 0) {
       return 'none';
     }
-    let typeCount = [0, 0, 0, 0];
+    let typeCounts = this.getTypeCounts();
+    return typeCounts.map((n, i) => 'NIEC'[i].repeat(n)).join('');
+  },
+  getTypeCounts() {
+    let typeCounts = [0, 0, 0, 0];
     for (let p of this.equipped()) {
-      typeCount[this.index(p.type) - 1]++;
+      typeCounts[this.index(p.type) - 1]++;
     }
-    return typeCount.map((n, i) => 'NIEC'[i].repeat(n)).join('');
+    return typeCounts;
   },
   export() {
     let output = document.getElementById('powers-export-output');
@@ -764,7 +787,10 @@ let Powers = {
     let counts = this.importStringCounts(importString);
     let realCounts = [0, 1, 2, 3].map(i => Math.max(0, counts[i] - this.equipped().filter(
       x => x.type === ['normal', 'infinity', 'eternity', 'complexity'][i]).length));
-    let toEquipByType = [0, 1, 2, 3].map(i => this.getSortedPowerList(['normal', 'infinity', 'eternity', 'complexity'][i], false, false).slice(0, realCounts[i]));
+    this.importFromCounts(realCounts);
+  },
+  importFromCounts(counts) {
+    let toEquipByType = [0, 1, 2, 3].map(i => this.getSortedPowerList(['normal', 'infinity', 'eternity', 'complexity'][i], false, false).slice(0, counts[i]));
     let indicesToEquip = [].concat.apply([], toEquipByType).slice(0, this.equippedLimit() - this.equipped().length).map(x => x.index);
     player.powers.equipped = this.equipped().concat(indicesToEquip.map(i => this.stored()[i - 1]));
     player.powers.stored = this.stored().filter((_, i) => !indicesToEquip.includes(1 + i));

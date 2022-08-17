@@ -3699,7 +3699,11 @@
           <button class="powers-export-button" onclick="Powers.export()">Export equipped powers</button> <button onclick="Powers.import()">Import equipped powers</button>
           <button onclick="Powers.toggleRespec()">Unequip equipped powers on next complexity: ~r Powers.isRespecOn() ? "On" : "Off" ~</button>
           <br/>
-          <button onclick="Powers.respecAndReset()" ~class=Powers.canRespec() ? "" : "disabled"~>Unequip equipped powers and ~r ComplexityPrestigeLayer.resetText() ~</button></button>
+          <button onclick="Powers.respecAndReset()" ~class=Powers.canRespec() ? "" : "disabled"~>Unequip equipped powers and ~r ComplexityPrestigeLayer.resetText() ~</button>
+          <br ~style.display=Powers.canAutoEquippedSwap() ? 'none' : ''~/>
+          <button onclick="Powers.equippedSwap(true)" ~class=Powers.canEquippedSwap() ? "" : "disabled"~ ~style.display=Powers.canAutoEquippedSwap() ? 'none' : ''~>
+            Swap your equipped powers with better stored powers of the same type and ~r ComplexityPrestigeLayer.resetText() ~
+          </button>
           <div style="width: 1024px; margin-left: auto; margin-right: auto;">
             <span>There are a lot of power options. To hide most of them, go to the options tab and toggle (turn off) "Full power options" in the "other options" part.</span>
           </div>
