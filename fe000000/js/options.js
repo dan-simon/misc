@@ -126,6 +126,48 @@ let Options = {
     let options = ['Default', 'Small'];
     player.options.theme.edgeGradients = options[(options.indexOf(player.options.theme.edgeGradients) + 1) % options.length];
   },
+  adjustColors() {
+    return player.options.adjustColors;
+  },
+  toggleAdjustColors() {
+    player.options.adjustColors = !player.options.adjustColors;
+    Colors.updateColors();
+  },
+  colorSetting(color, dullOrVibrant) {
+    return player.options.colorData[dullOrVibrant][color];
+  },
+  setColorSetting(color, dullOrVibrant, x) {
+    let elem = document.getElementsByClassName(color + '-' + dullOrVibrant.toLowerCase() + '-input');
+    let colorSetting = this.standardizeColorSetting(x);
+    if (colorSetting === null) {
+      for (let i of elem) {
+        i.value = this.colorSetting(color, dullOrVibrant);
+      }
+      alert('Colors must have # followed by ' + formatInt(6) + ' hexadecimal characters (each 0-9 or a-f). ' + 
+      'You can also leave an input empty to use the default color.');
+      return;
+    }
+    for (let i of elem) {
+      i.value = colorSetting;
+    }
+    player.options.colorData[dullOrVibrant][color] = colorSetting;
+    // This is a bit computationally expensive for one color change, but setColorSetting is called rarely
+    // (for one rarely-taken user action) so it shouldn't be too bad.
+    Colors.updateColors();
+  },
+  standardizeColorSetting(x) {
+    x = x.toLowerCase().replace(/[ \t\n]/g, '');
+    if (x === '') {
+      return '';
+    }
+    if (x[0] !== '#') {
+      x = '#' + x;
+    }
+    if (!x.match(/^#[0-9a-f]{6}$/)) {
+      return null;
+    }
+    return x;
+  },
   fitToWidth() {
     return player.options.fitToWidth;
   },

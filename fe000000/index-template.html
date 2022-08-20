@@ -194,11 +194,11 @@
     </span>
     <br ~style.display=Tabs.displayTabBreak(1) ? '' : 'none'~/>
     <span ~style.display=Tabs.displayTabRow(2) ? '' : 'none'~>
-      <button ~style.display=Tabs.isTabVisible('goals') ? '' : 'none'~ onclick="Tabs.setTab('goals')">Goals</button>
-      <button ~style.display=Tabs.isTabVisible('achievements') ? '' : 'none'~ onclick="Tabs.setTab('achievements')">Achievements</button>
-      <button ~style.display=Tabs.isTabVisible('statistics') ? '' : 'none'~ onclick="Tabs.setTab('statistics')">Statistics</button>
-      <button ~style.display=Tabs.isTabVisible('last-ten-runs') ? '' : 'none'~ onclick="Tabs.setTab('last-ten-runs')">Last Ten Runs</button>
-      <button ~style.display=Tabs.isTabVisible('options') ? '' : 'none'~ ~class-name=Options.showExportNotification() ? 'redspan' : ''~ onclick="Tabs.setTab('options')">Options</button>
+      <button ~style.display=Tabs.isTabVisible('goals') ? '' : 'none'~ ~style.background=Colors.getStringToColorCode('grey')~ onclick="Tabs.setTab('goals')">Goals</button>
+      <button ~style.display=Tabs.isTabVisible('achievements') ? '' : 'none'~ ~style.background=Colors.getStringToColorCode('grey')~ onclick="Tabs.setTab('achievements')">Achievements</button>
+      <button ~style.display=Tabs.isTabVisible('statistics') ? '' : 'none'~ ~style.background=Colors.getStringToColorCode('grey')~ onclick="Tabs.setTab('statistics')">Statistics</button>
+      <button ~style.display=Tabs.isTabVisible('last-ten-runs') ? '' : 'none'~ ~style.background=Colors.getStringToColorCode('grey')~ onclick="Tabs.setTab('last-ten-runs')">Last Ten Runs</button>
+      <button ~style.display=Tabs.isTabVisible('options') ? '' : 'none'~ ~style.background=Colors.getStringToColorCode('grey')~ ~class-name=Options.showExportNotification() ? 'redspan' : ''~ onclick="Tabs.setTab('options')">Options</button>
     </span>
     <br ~style.display=Tabs.displayTabBreak(2) ? '' : 'none'~/>
     <span ~style.display=Tabs.displayTabRow(3) ? '' : 'none'~>
@@ -6112,40 +6112,128 @@
           <td/>
         </tr>
       </table>
-      <table ~style.display=Options.isOptionTypeShown('color') ? '' : 'none'~ style="margin-left: auto; margin-right: auto; border-spacing: 24px 8px; border-collapse: separate;">
-        <tr>
-          <td><div class="options-div">
-            <span>Clicked button outlines: <select ~!value=Options.buttonOutlines()~ ~!onchange=function() {Options.setButtonOutlines(this.value)}~>
-              <option value="None">None</option>
-              <option value="Black">Black</option>
-              <option value="Cyan">Cyan</option>
-              <option value="White">White</option>
-              <option value="Blue">Blue</option>
-              <option value="Gold">Gold</option>
-            </select></span></div>
-          </td>
-          <td><div class="options-div">
-            <button class="mini-options-button" onclick="Options.nextBackground()">Background: ~r player.options.theme.background ~</button>
-            <button class="mini-options-button" onclick="Options.nextButtonColor()">Button colors: ~r player.options.theme.buttonColor ~</button>
-            <button class="mini-options-button" onclick="Options.nextCompletionGradients()">Completion gradients: ~r player.options.theme.completionGradients ~</button>
-            <button class="mini-options-button" onclick="Options.nextEdgeGradients()">Edge gradients: ~r player.options.theme.edgeGradients ~</button>
-          </div></td>
-          <td><button class="options-button" onclick="Options.nextColorChange()">Color change: ~r Options.colorChange() ~</button></td>
-        </tr>
-        <tr>
-          <td><button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? 'none' : ''~ class="options-button" onclick="Options.toggleTabColors()">Tab colors: ~r Options.tabColors() ? 'On' : 'Off' ~</button>
-          <div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="options-div">
-            <button class="mini-options-button" onclick="Options.toggleTabColors()">Tab colors: ~r Options.tabColors() ? 'On' : 'Off' ~</button>
-            <button class="mini-options-button" ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ onclick="Options.nextCompletionColors()">Completion colors: ~r player.options.completionColors ~</button>
-            <button class="mini-options-button" ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ onclick="Options.toggleResetColors()">Reset colors: ~r Options.resetColors() ? 'On' : 'Off' ~</button>
-            <button class="mini-options-button" ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~ onclick="Options.togglePresetHighlightColors()">Preset highlight colors: ~r Options.presetHighlightColors() ? 'On' : 'Off' ~</button>
-          </div></td>
-          <td><button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~ class="options-button" onclick="Options.toggleComplexityChallengeRunningColors()" style="font-size: 0.875rem;">
-            Complexity challenge colors: ~r Options.complexityChallengeRunningColors() ? "Running" : "Completions" ~
-          </button></td>
-          <td/>
-        </tr>
-      </table>
+      <div ~style.display=Options.isOptionTypeShown('color') ? '' : 'none'~>
+        <table ~style.display=Options.isOptionTypeShown('color') ? '' : 'none'~ style="margin-left: auto; margin-right: auto; border-spacing: 24px 8px; border-collapse: separate;">
+          <tr>
+            <td><div class="options-div">
+              <span>Clicked button outlines: <select ~!value=Options.buttonOutlines()~ ~!onchange=function() {Options.setButtonOutlines(this.value)}~>
+                <option value="None">None</option>
+                <option value="Black">Black</option>
+                <option value="Cyan">Cyan</option>
+                <option value="White">White</option>
+                <option value="Blue">Blue</option>
+                <option value="Gold">Gold</option>
+              </select></span></div>
+            </td>
+            <td><div class="options-div">
+              <button class="mini-options-button" onclick="Options.nextBackground()">Background: ~r player.options.theme.background ~</button>
+              <button class="mini-options-button" onclick="Options.nextButtonColor()">Button colors: ~r player.options.theme.buttonColor ~</button>
+              <button class="mini-options-button" onclick="Options.nextCompletionGradients()">Completion gradients: ~r player.options.theme.completionGradients ~</button>
+              <button class="mini-options-button" onclick="Options.nextEdgeGradients()">Edge gradients: ~r player.options.theme.edgeGradients ~</button>
+            </div></td>
+            <td><button class="options-button" onclick="Options.nextColorChange()">Color change: ~r Options.colorChange() ~</button></td>
+          </tr>
+          <tr>
+            <td><button class="options-button" onclick="Options.toggleAdjustColors()">
+              Adjust text colors too close to background: ~r Options.adjustColors() ? "On" : "Off" ~
+            </button></td>
+            <td><button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? 'none' : ''~ class="options-button" onclick="Options.toggleTabColors()">Tab colors: ~r Options.tabColors() ? 'On' : 'Off' ~</button>
+            <div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="options-div">
+              <button class="mini-options-button" onclick="Options.toggleTabColors()">Tab colors: ~r Options.tabColors() ? 'On' : 'Off' ~</button>
+              <button class="mini-options-button" ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ onclick="Options.nextCompletionColors()">Completion colors: ~r player.options.completionColors ~</button>
+              <button class="mini-options-button" ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ onclick="Options.toggleResetColors()">Reset colors: ~r Options.resetColors() ? 'On' : 'Off' ~</button>
+              <button class="mini-options-button" ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~ onclick="Options.togglePresetHighlightColors()">Preset highlight colors: ~r Options.presetHighlightColors() ? 'On' : 'Off' ~</button>
+            </div></td>
+            <td><button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~ class="options-button" onclick="Options.toggleComplexityChallengeRunningColors()" style="font-size: 0.875rem;">
+              Complexity challenge colors: ~r Options.complexityChallengeRunningColors() ? "Running" : "Completions" ~
+            </button></td>
+          </tr>
+        </table>
+        <br/>
+        <br/>
+        <span>Change the values of colors:</span>
+        <br/>
+        <br/>
+        <table style="margin-left: auto; margin-right: auto; width: 90%;">
+          <colgroup>
+             <col span="1" style="width: 6%;">
+             <col span="1" style="width: 30%;">
+             <col span="1" style="width: 12%;">
+             <col span="1" style="width: 30%;">
+             <col span="1" style="width: 12%;">
+          </colgroup>
+          <tr>
+            <td>Brown</td>
+            <td ~style.color=Colors.adjust(Colors.getStringToColorCode('brown', 'Dull'))~>Dull brown (~r Colors.displayStringToColorCode('brown', 'Dull') ~):</td>
+            <td><input class="brown-dull-input" type="text" ~!value=Options.colorSetting('brown', 'Dull')~ ~!onchange=function() {Options.setColorSetting('brown', 'Dull', this.value)}~></input></td>
+            <td ~style.color=Colors.adjust(Colors.getStringToColorCode('brown', 'Vibrant'))~>Vibrant brown (~r Colors.displayStringToColorCode('brown', 'Vibrant') ~):</td>
+            <td><input class="brown-vibrant-input" type="text" ~!value=Options.colorSetting('brown', 'Vibrant')~ ~!onchange=function() {Options.setColorSetting('brown', 'Vibrant', this.value)}~></input></td>
+          </tr>
+          <tr>
+            <td>Cyan</td>
+            <td ~style.color=Colors.adjust(Colors.getStringToColorCode('cyan', 'Dull'))~>Dull cyan (~r Colors.displayStringToColorCode('cyan', 'Dull') ~):</td>
+            <td><input class="cyan-dull-input" type="text" ~!value=Options.colorSetting('cyan', 'Dull')~ ~!onchange=function() {Options.setColorSetting('cyan', 'Dull', this.value)}~></input></td>
+            <td ~style.color=Colors.adjust(Colors.getStringToColorCode('cyan', 'Vibrant'))~>Vibrant cyan (~r Colors.displayStringToColorCode('cyan', 'Vibrant') ~):</td>
+            <td><input class="cyan-vibrant-input" type="text" ~!value=Options.colorSetting('cyan', 'Vibrant')~ ~!onchange=function() {Options.setColorSetting('cyan', 'Vibrant', this.value)}~></input></td>
+          </tr>
+          <tr>
+            <td>Gold</td>
+            <td ~style.color=Colors.adjust(Colors.getStringToColorCode('gold', 'Dull'))~>Dull gold (~r Colors.displayStringToColorCode('gold', 'Dull') ~):</td>
+            <td><input class="gold-dull-input" type="text" ~!value=Options.colorSetting('gold', 'Dull')~ ~!onchange=function() {Options.setColorSetting('gold', 'Dull', this.value)}~></input></td>
+            <td ~style.color=Colors.adjust(Colors.getStringToColorCode('gold', 'Vibrant'))~>Vibrant gold (~r Colors.displayStringToColorCode('gold', 'Vibrant') ~):</td>
+            <td><input class="gold-vibrant-input" type="text" ~!value=Options.colorSetting('gold', 'Vibrant')~ ~!onchange=function() {Options.setColorSetting('gold', 'Vibrant', this.value)}~></input></td>
+          </tr>
+          <tr>
+            <td>Green</td>
+            <td ~style.color=Colors.adjust(Colors.getStringToColorCode('green', 'Dull'))~>Dull green (~r Colors.displayStringToColorCode('green', 'Dull') ~):</td>
+            <td><input class="green-dull-input" type="text" ~!value=Options.colorSetting('green', 'Dull')~ ~!onchange=function() {Options.setColorSetting('green', 'Dull', this.value)}~></input></td>
+            <td ~style.color=Colors.adjust(Colors.getStringToColorCode('green', 'Vibrant'))~>Vibrant green (~r Colors.displayStringToColorCode('green', 'Vibrant') ~):</td>
+            <td><input class="green-vibrant-input" type="text" ~!value=Options.colorSetting('green', 'Vibrant')~ ~!onchange=function() {Options.setColorSetting('green', 'Vibrant', this.value)}~></input></td>
+          </tr>
+          <tr>
+            <td>Grey</td>
+            <td ~style.color=Colors.adjust(Colors.getStringToColorCode('grey', 'Dull'))~>Dull grey (~r Colors.displayStringToColorCode('grey', 'Dull') ~):</td>
+            <td><input class="grey-dull-input" type="text" ~!value=Options.colorSetting('grey', 'Dull')~ ~!onchange=function() {Options.setColorSetting('grey', 'Dull', this.value)}~></input></td>
+            <td ~style.color=Colors.adjust(Colors.getStringToColorCode('grey', 'Vibrant'))~>Vibrant grey (~r Colors.displayStringToColorCode('grey', 'Vibrant') ~):</td>
+            <td><input class="grey-vibrant-input" type="text" ~!value=Options.colorSetting('grey', 'Vibrant')~ ~!onchange=function() {Options.setColorSetting('grey', 'Vibrant', this.value)}~></input></td>
+          </tr>
+          <tr>
+            <td>Magenta</td>
+            <td ~style.color=Colors.adjust(Colors.getStringToColorCode('magenta', 'Dull'))~>Dull magenta (~r Colors.displayStringToColorCode('magenta', 'Dull') ~):</td>
+            <td><input class="magenta-dull-input" type="text" ~!value=Options.colorSetting('magenta', 'Dull')~ ~!onchange=function() {Options.setColorSetting('magenta', 'Dull', this.value)}~></input></td>
+            <td ~style.color=Colors.adjust(Colors.getStringToColorCode('magenta', 'Vibrant'))~>Vibrant magenta (~r Colors.displayStringToColorCode('magenta', 'Vibrant') ~):</td>
+            <td><input class="magenta-vibrant-input" type="text" ~!value=Options.colorSetting('magenta', 'Vibrant')~ ~!onchange=function() {Options.setColorSetting('magenta', 'Vibrant', this.value)}~></input></td>
+          </tr>
+          <tr>
+            <td>Orange</td>
+            <td ~style.color=Colors.adjust(Colors.getStringToColorCode('orange', 'Dull'))~>Dull orange (~r Colors.displayStringToColorCode('orange', 'Dull') ~):</td>
+            <td><input class="orange-dull-input" type="text" ~!value=Options.colorSetting('orange', 'Dull')~ ~!onchange=function() {Options.setColorSetting('orange', 'Dull', this.value)}~></input></td>
+            <td ~style.color=Colors.adjust(Colors.getStringToColorCode('orange', 'Vibrant'))~>Vibrant orange (~r Colors.displayStringToColorCode('orange', 'Vibrant') ~):</td>
+            <td><input class="orange-vibrant-input" type="text" ~!value=Options.colorSetting('orange', 'Vibrant')~ ~!onchange=function() {Options.setColorSetting('orange', 'Vibrant', this.value)}~></input></td>
+          </tr>
+          <tr>
+            <td>Purple</td>
+            <td ~style.color=Colors.adjust(Colors.getStringToColorCode('purple', 'Dull'))~>Dull purple (~r Colors.displayStringToColorCode('purple', 'Dull') ~):</td>
+            <td><input class="purple-dull-input" type="text" ~!value=Options.colorSetting('purple', 'Dull')~ ~!onchange=function() {Options.setColorSetting('purple', 'Dull', this.value)}~></input></td>
+            <td ~style.color=Colors.adjust(Colors.getStringToColorCode('purple', 'Vibrant'))~>Vibrant purple (~r Colors.displayStringToColorCode('purple', 'Vibrant') ~):</td>
+            <td><input class="purple-vibrant-input" type="text" ~!value=Options.colorSetting('purple', 'Vibrant')~ ~!onchange=function() {Options.setColorSetting('purple', 'Vibrant', this.value)}~></input></td>
+          </tr>
+          <tr>
+            <td>Red</td>
+            <td ~style.color=Colors.adjust(Colors.getStringToColorCode('red', 'Dull'))~>Dull red (~r Colors.displayStringToColorCode('red', 'Dull') ~):</td>
+            <td><input class="red-dull-input" type="text" ~!value=Options.colorSetting('red', 'Dull')~ ~!onchange=function() {Options.setColorSetting('red', 'Dull', this.value)}~></input></td>
+            <td ~style.color=Colors.adjust(Colors.getStringToColorCode('red', 'Vibrant'))~>Vibrant red (~r Colors.displayStringToColorCode('red', 'Vibrant') ~):</td>
+            <td><input class="red-vibrant-input" type="text" ~!value=Options.colorSetting('red', 'Vibrant')~ ~!onchange=function() {Options.setColorSetting('red', 'Vibrant', this.value)}~></input></td>
+          </tr>
+          <tr>
+            <td>Yellow</td>
+            <td ~style.color=Colors.adjust(Colors.getStringToColorCode('yellow', 'Dull'))~>Dull yellow (~r Colors.displayStringToColorCode('yellow', 'Dull') ~):</td>
+            <td><input class="yellow-dull-input" type="text" ~!value=Options.colorSetting('yellow', 'Dull')~ ~!onchange=function() {Options.setColorSetting('yellow', 'Dull', this.value)}~></input></td>
+            <td ~style.color=Colors.adjust(Colors.getStringToColorCode('yellow', 'Vibrant'))~>Vibrant yellow (~r Colors.displayStringToColorCode('yellow', 'Vibrant') ~):</td>
+            <td><input class="yellow-vibrant-input" type="text" ~!value=Options.colorSetting('yellow', 'Vibrant')~ ~!onchange=function() {Options.setColorSetting('yellow', 'Vibrant', this.value)}~></input></td>
+          </tr>
+        </table>
+      </div>
       <div ~style.display=Options.isOptionTypeShown('tab') ? '' : 'none'~>
         <span>Use tab groups <span class="helpspan">(?)<span class="tooltiptext">This option, rather than showing all the tabs at once, will divide the tabs intro groups and let you switch between viewing various groups, similarly to Antimatter Dimension's tab handling.</span></span>: <input type="checkbox" ~!checked=Tabs.usingTabGroups()~ ~!onchange=function() {Tabs.setUsingTabGroups(this.checked)}~></input></span>
         <br/>

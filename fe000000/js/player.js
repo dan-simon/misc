@@ -375,6 +375,33 @@ let initialPlayer = {
     resetColors: true,
     tabColors: true,
     presetHighlightColors: false,
+    adjustColors: true,
+    colorData: {
+      'Dull': {
+        'yellow': '',
+        'grey': '',
+        'purple': '',
+        'orange': '',
+        'cyan': '',
+        'green': '',
+        'red': '',
+        'magenta': '',
+        'brown': '',
+        'gold': '',
+      },
+      'Vibrant': {
+        'yellow': '',
+        'grey': '',
+        'purple': '',
+        'orange': '',
+        'cyan': '',
+        'green': '',
+        'red': '',
+        'magenta': '',
+        'brown': '',
+        'gold': '',
+      }
+    },
     exportCopy: true,
     exportDownload: false,
     exportShow: false,
@@ -541,7 +568,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.1484375
+  version: 2.15234375
 }
 
 let player;

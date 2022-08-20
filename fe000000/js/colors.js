@@ -68,7 +68,10 @@ let Colors = {
       let nextColor = this.interpolate(this.backgroundColor(), this.colorToRgb(this.getStringToColorCode(i, 'Vibrant')), 0.5);
       document.documentElement.style.setProperty('--next-' + i + '-color', 'rgb(' + nextColor.map(Math.floor).join(', ') + ')');
     }
-    document.documentElement.style.setProperty('--yellow-text-color', this.adjust(this.getStringToColorCode('yellow', 'Vibrant')));
+    for (let i of ['yellow', 'grey', 'purple', 'orange', 'cyan', 'green', 'red', 'magenta', 'brown', 'gold']) {
+      document.documentElement.style.setProperty('--' + i + '-text-color', this.adjust(this.getStringToColorCode(i, 'Vibrant')));
+    }
+    // Red and gold are never rotated
     for (let i of ['yellow', 'grey', 'purple', 'orange', 'cyan', 'green', 'magenta', 'brown']) {
       document.documentElement.style.setProperty('--' + i + '-altered-text-color', this.adjust(this.rotate(this.getStringToColorCode(i, 'Vibrant'))));
     }
@@ -77,9 +80,14 @@ let Colors = {
     return [parseInt(x.slice(1, 3), 16), parseInt(x.slice(3, 5), 16), parseInt(x.slice(5, 7), 16)];
   },
   adjust(x) {
+    if (!Options.adjustColors()) {
+      return x;
+    }
     let y = this.colorToRgb(x);
     if (y[0] === 255 && y[1] === 255 && Options.background() === 'Light') {
       return '#' + [y[0] - 51, y[1] - 51, Math.min(y[2] + 51, 255)].map(i => (i + 256).toString(16).slice(1)).join('');
+    } else if (y[0] === 0 && y[1] === 0 && Options.background() === 'Dark') {
+      return '#' + [y[0] + 51, y[1] + 51, Math.max(y[2] - 51, 0)].map(i => (i + 256).toString(16).slice(1)).join('');
     } else {
       return x;
     }
@@ -127,8 +135,45 @@ let Colors = {
       return 'radial-gradient(' + a + ', ' + b + ')';
     }
   },
+  colorNameToPlayerAlias(color) {
+    // This can return undefined (e.g., for colors like challengered) but given where it's used, that's OK.
+    return {
+      'normal': 'yellow',
+      'yellow': 'yellow',
+      'infinity': 'magenta',
+      'magenta': 'magenta',
+      'eternity': 'cyan',
+      'cyan': 'cyan',
+      'complexity': 'brown',
+      'brown': 'brown',
+      'finality': 'gold',
+      'gold': 'gold',
+      'grey': 'grey',
+      'eternity-producer': 'purple',
+      'purple': 'purple',
+      'chroma': 'orange',
+      'orange': 'orange',
+      'studies': 'green',
+      'green': 'green',
+      'red': 'red',
+    }[color];
+  },
   getStringToColorCode(color, buttonColor) {
-    return this.stringToColorCode[buttonColor || Options.usualButtonColor()][color];
+    let dullOrVibrant = buttonColor || Options.usualButtonColor();
+    // This can be undefined for colors like challengered/etc. that we don't have an "equivalent color" to. But that's OK;
+    // we just default to the default color then.
+    let playerChoice = player.options.colorData[dullOrVibrant][this.colorNameToPlayerAlias(color)];
+    let defaultColor = this.stringToColorCode[dullOrVibrant][color];
+    return (playerChoice !== undefined && playerChoice !== '') ? playerChoice : defaultColor;
+  },
+  displayStringToColorCode(color, buttonColor) {
+    let original = this.getStringToColorCode(color, buttonColor);
+    let adjusted = this.adjust(original );
+    if (original  === adjusted) {
+      return original;
+    } else {
+      return original + ' → ' + adjusted;
+    }
   },
   getStringToColorCodeAltered(color, buttonColor) {
     let res = this.getStringToColorCode(color, buttonColor);
@@ -139,7 +184,7 @@ let Colors = {
   },
   getButtonColorAltered(hasColor, colorType) {
     if (!hasColor) {
-      return '#aaaaaa';
+      return 'var(--button-color)';
     }
     if (typeof colorType === 'string') {
       return this.getStringToColorCodeAltered(colorType);

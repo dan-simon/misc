@@ -6,6 +6,12 @@
 :root {
   --background-color: #000000;
   --text-color: #ffffff;
+  --progress-bar-background-color: #aaaaaa;
+  --progress-bar-foreground-color: #33ff33;
+  --button-color: #aaaaaa;
+  --button-disabled-color: #555555;
+  --button-text-color: #000000;
+  --link-color: #3366ff;
   --checkbox-scale: 1;
   --outline-offset: 0px;
   --outline-size: 0px;
@@ -16,13 +22,13 @@
   width: 512px;
   height: 32px;
   margin: auto;
-  background-color: #aaaaaa;
+  background-color: var(--progress-bar-background-color);
 }
 
 #bar {
   width: 0px;
   height: 32px;
-  background-color: #33ff33;
+  background-color: var(--progress-bar-foreground-color);
 }
 
 body {
@@ -35,7 +41,7 @@ body {
 }
 
 a {
-  color: #3366ff;
+  color: var(--link-color);
 }
 
 button {
@@ -43,8 +49,8 @@ button {
   font-family: Typewriter, serif;
   font-size: 1rem;
   margin: 2px;
-  background-color: #aaaaaa;
-  color: #000000;
+  background-color: var(--button-color);
+  color: var(--button-text-color);
 }
 
 button:focus {
@@ -198,7 +204,7 @@ input[type=text] {
 }
 
 .disabled {
-  background-color: #555555;
+  background-color: var(--button-disabled-color);
 }
 
 .autobuyerdiv {
@@ -394,7 +400,7 @@ input[type=text] {
 .studynormalunbuyable {
   display: table;
   text-align: center;
-  background: #555555;
+  background: var(--button-disabled-color);
   font-size: 0.875rem;
   width: 256px;
   height: 160px;
@@ -403,7 +409,7 @@ input[type=text] {
 .studynormalbuyable {
   display: table;
   text-align: center;
-  background: radial-gradient(var(--study-normal-color), #aaaaaa);
+  background: radial-gradient(var(--study-normal-color), var(--button-color));
   font-size: 0.875rem;
   width: 256px;
   height: 160px;
@@ -421,7 +427,7 @@ input[type=text] {
 .studyinfinityunbuyable {
   display: table;
   text-align: center;
-  background: #555555;
+  background: var(--button-disabled-color);
   font-size: 0.875rem;
   width: 256px;
   height: 160px;
@@ -430,7 +436,7 @@ input[type=text] {
 .studyinfinitybuyable {
   display: table;
   text-align: center;
-  background: radial-gradient(var(--study-infinity-color), #aaaaaa);
+  background: radial-gradient(var(--study-infinity-color), var(--button-color));
   font-size: 0.875rem;
   width: 256px;
   height: 160px;
@@ -448,7 +454,7 @@ input[type=text] {
 .studyeternityunbuyable {
   display: table;
   text-align: center;
-  background: #555555;
+  background: var(--button-disabled-color);
   font-size: 0.875rem;
   width: 256px;
   height: 160px;
@@ -457,7 +463,7 @@ input[type=text] {
 .studyeternitybuyable {
   display: table;
   text-align: center;
-  background: radial-gradient(var(--study-eternity-color), #aaaaaa);
+  background: radial-gradient(var(--study-eternity-color), var(--button-color));
   font-size: 0.875rem;
   width: 256px;
   height: 160px;
@@ -475,7 +481,7 @@ input[type=text] {
 .studychromaunbuyable {
   display: table;
   text-align: center;
-  background: #555555;
+  background: var(--button-disabled-color);
   font-size: 0.875rem;
   width: 256px;
   height: 160px;
@@ -484,7 +490,7 @@ input[type=text] {
 .studychromabuyable {
   display: table;
   text-align: center;
-  background: radial-gradient(var(--study-chroma-color), #aaaaaa);
+  background: radial-gradient(var(--study-chroma-color), var(--button-color));
   font-size: 0.875rem;
   width: 256px;
   height: 160px;
@@ -504,39 +510,39 @@ input[type=text] {
 }
 
 .greyspan, .greydiv > span {
-  color: #aaaaaa;
+  color: var(--grey-text-color);
 }
 
 .purplespan, .purplediv > span {
-  color: #aa99ff;
+  color: var(--purple-text-color);
 }
 
 .orangespan, .orangediv > span {
-  color: #ff9933;
+  color: var(--orange-text-color);
 }
 
 .cyanspan, .cyandiv > span {
-  color: #00ffff;
+  color: var(--cyan-text-color);
 }
 
 .greenspan, .greendiv > span {
-  color: #33ff33;
+  color: var(--green-text-color);
 }
 
 .redspan, .reddiv > span {
-  color: #ff0000;
+  color: var(--red-text-color);
 }
 
 .magentaspan, .magentadiv > span {
-  color: #ff00ff;
+  color: var(--magenta-text-color);
 }
 
 .brownspan, .browndiv > span {
-  color: #aa7777;
+  color: var(--brown-text-color);
 }
 
 .goldspan, .golddiv > span {
-  color: #ccaa33;
+  color: var(--gold-text-color);
 }
 
 .yellowalteredspan, .yellowaltereddiv > span {

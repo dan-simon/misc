@@ -1392,6 +1392,36 @@ let Saving = {
       player.cheats.achievementExtraMultiplier = 1;
       player.version = 2.1484375;
     }
+    if (player.version < 2.15234375) {
+      player.options.adjustColors = true;
+      player.options.colorData = {
+        'Dull': {
+          'yellow': '',
+          'grey': '',
+          'purple': '',
+          'orange': '',
+          'cyan': '',
+          'green': '',
+          'red': '',
+          'magenta': '',
+          'brown': '',
+          'gold': '',
+        },
+        'Vibrant': {
+          'yellow': '',
+          'grey': '',
+          'purple': '',
+          'orange': '',
+          'cyan': '',
+          'green': '',
+          'red': '',
+          'magenta': '',
+          'brown': '',
+          'gold': '',
+        }
+      };
+      player.version = 2.15234375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
