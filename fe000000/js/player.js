@@ -352,6 +352,7 @@ let initialPlayer = {
     'finality-shards': true,
     'finality-milestones': true,
   },
+  colorPresets: [],
   tabPresets: [],
   options: {
     notation: {
@@ -568,7 +569,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.15234375
+  version: 2.15625
 }
 
 let player;

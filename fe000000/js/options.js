@@ -136,15 +136,17 @@ let Options = {
   colorSetting(color, dullOrVibrant) {
     return player.options.colorData[dullOrVibrant][color];
   },
-  setColorSetting(color, dullOrVibrant, x) {
+  setColorSetting(color, dullOrVibrant, x, auto) {
     let elem = document.getElementsByClassName(color + '-' + dullOrVibrant.toLowerCase() + '-input');
     let colorSetting = this.standardizeColorSetting(x);
     if (colorSetting === null) {
       for (let i of elem) {
         i.value = this.colorSetting(color, dullOrVibrant);
       }
-      alert('Colors must have # followed by ' + formatInt(6) + ' hexadecimal characters (each 0-9 or a-f). ' + 
-      'You can also leave an input empty to use the default color.');
+      if (!auto) {
+        alert('Colors must have # followed by ' + formatInt(6) + ' hexadecimal characters (each 0-9 or a-f). ' + 
+        'You can also leave an input empty to use the default color.');
+      }
       return;
     }
     for (let i of elem) {
@@ -152,8 +154,11 @@ let Options = {
     }
     player.options.colorData[dullOrVibrant][color] = colorSetting;
     // This is a bit computationally expensive for one color change, but setColorSetting is called rarely
-    // (for one rarely-taken user action) so it shouldn't be too bad.
-    Colors.updateColors();
+    // (for one rarely-taken user action, and when it's called automatically this code doesn't run) so it shouldn't be too bad.
+    // Automatic code will call Colors.updateColors() when it's done making changes.
+    if (!auto) {
+      Colors.updateColors();
+    }
   },
   standardizeColorSetting(x) {
     x = x.toLowerCase().replace(/[ \t\n]/g, '');

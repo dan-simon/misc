@@ -197,3 +197,141 @@ let Colors = {
     return hasReward ? 'greenspan' : 'redspan';
   }
 }
+
+let ColorPreset = {
+  colorList: ['brown', 'cyan', 'gold', 'green', 'grey', 'magenta', 'orange', 'purple', 'red', 'yellow'],
+  exportString() {
+    return this.colorList.map(i => i + ':' + Options.colorSetting(i, 'Dull') + '&' + Options.colorSetting(i, 'Vibrant')).join(',');
+  },
+  export() {
+    let output = document.getElementById('colors-export-output');
+    let parent = output.parentElement;
+    let colorPresetBr = document.getElementsByClassName('colorpresetbr')[0];
+    parent.style.display = '';
+    colorresetBr.style.display = '';
+    output.value = this.exportString();
+    output.select();
+    if (player.options.exportCopy) {
+      output.select();
+      try {
+        document.execCommand('copy');
+      } catch(ex) {
+        alert('Copying to clipboard failed.');
+      }
+    }
+    if (!player.options.exportShow) {
+      parent.style.display = 'none';
+      colorPresetBr.style.display = 'none';
+      document.getElementsByClassName('colors-export-button')[0].focus();
+    }
+  },
+  importString(importString) {
+    let presetsWithName = player.colorPresets.filter(x => x.name === importString);
+    if (presetsWithName.length > 0) {
+      this.importStringFromPreset(presetsWithName[0].colors);
+    } else {
+      this.importStringFromPreset(importString);
+    }
+  },
+  importStringFromPreset(importString) {
+    importString = importString.toLowerCase().replace(/[ \t\n]/g, '');
+    for (let i of importString.split(',')) {
+      let parts = i.split(':');
+      let color = parts[0];
+      if (this.colorList.includes(color)) {
+        let dull = parts[1].split('&')[0];
+        let vibrant = parts[1].split('&')[1] || '';
+        Options.setColorSetting(color, 'Dull', dull, true);
+        Options.setColorSetting(color, 'Vibrant', vibrant, true);
+      }
+    }
+    Colors.updateColors();
+  },
+  import() {
+    this.importString(prompt('Enter color scheme (as previously exported):'));
+  },
+  hasPreset(x) {
+    return player.colorPresets.length >= x;
+  },
+  presetName(x) {
+    if (!this.hasPreset(x)) return 'Untitled';
+    return player.colorPresets[x - 1].name;
+  },
+  presetColors(x) {
+    if (!this.hasPreset(x)) return '';
+    return player.colorPresets[x - 1].colors;
+  },
+  setPresetName(x, name) {
+    player.colorPresets[x - 1].name = name;
+  },
+  setPresetColors(x, colors) {
+    player.colorPresets[x - 1].colors = colors;
+  },
+  presetSetToCurrentColors(x) {
+    if (Options.confirmation('presetChange') && !confirm('Are you sure you want to change this color preset?')) {
+      return;
+    }
+    this.setPresetColors(x, this.exportString());
+    this.redisplayPresetColors(x);
+  },
+  isLastPresetIndex(x) {
+    return player.lastPresetIndices[0] === x;
+  },
+  setLastPresetIndex(x) {
+    player.lastPresetIndices[0] = x;
+  },
+  updateLastPresetIndexFromDeletion(x) {
+    if (player.lastPresetIndices[1] === x) {
+      player.lastPresetIndices[0] = 0;
+    }
+    if (player.lastPresetIndices[1] > x) {
+      player.lastPresetIndices[0]--;
+    }
+  },
+  presetClass(x) {
+    return (Options.presetHighlightColors() && this.isLastPresetIndex(x)) ? 'softlyhighlighted' : '';
+  },
+  presetLoad(x) {
+    this.importStringFromPreset(this.presetColors(x));
+    this.setLastPresetIndex(x);
+  },
+  presetDelete(x) {
+    if (Options.confirmation('presetDeletion') && !confirm('Are you sure you want to delete this color preset?')) {
+      return;
+    }
+    player.colorPresets = player.colorPresets.slice(0, x - 1).concat(player.colorPresets.slice(x));
+    this.updateLastPresetIndexFromDeletion(x);
+    for (let i = x; i <= player.colorPresets.length; i++) {
+      this.redisplayPreset(i);
+    }
+  },
+  presetCreate() {
+    if (!this.hasPreset(32)) {
+      player.colorPresets.push({'name': 'Untitled', 'colors': this.exportString()});
+      this.redisplayPreset(player.colorPresets.length);
+    }
+  },
+  presetSort() {
+    player.colorPresets.sort((a, b) => presetSortFunction(a.name, b.name));
+    for (let i = 1; i <= player.colorPresets.length; i++) {
+      this.redisplayPreset(i);
+    }
+  },
+  redisplayPreset(x) {
+    this.redisplayPresetName(x);
+    this.redisplayPresetColors(x);
+  },
+  redisplayPresetName(x) {
+    document.getElementsByClassName('presetcolorname' + x)[0].value = this.presetName(x);
+  },
+  redisplayPresetColors(x) {
+    document.getElementsByClassName('presetcolorscheme' + x)[0].value = this.presetColors(x);
+  },
+  returnToDefault() {
+    for (let color of this.colorList) {
+      Options.setColorSetting(color, 'Dull', '', true);
+      Options.setColorSetting(color, 'Vibrant', '', true);
+    }
+    Colors.updateColors();
+  }
+}

@@ -1422,6 +1422,10 @@ let Saving = {
       };
       player.version = 2.15234375;
     }
+    if (player.version < 2.15625) {
+      player.colorPresets = [];
+      player.version = 2.15625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
