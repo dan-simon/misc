@@ -13,7 +13,34 @@ let startingPlayer = {
     },
     timeDisplay: 'Seconds',
     notationOnTimes: false,
-    theme: {background: 'Dark', buttonColor: 'Vibrant'}
+    theme: {background: 'Dark', buttonColor: 'Vibrant'},
+    adjustColors: true,
+    colorData: {
+      'Dull': {
+        'yellow': '',
+        'grey': '',
+        'purple': '',
+        'orange': '',
+        'cyan': '',
+        'green': '',
+        'red': '',
+        'magenta': '',
+        'brown': '',
+        'gold': '',
+      },
+      'Vibrant': {
+        'yellow': '',
+        'grey': '',
+        'purple': '',
+        'orange': '',
+        'cyan': '',
+        'green': '',
+        'red': '',
+        'magenta': '',
+        'brown': '',
+        'gold': '',
+      }
+    },
   },
   goals: [
     false, false, false, false,
