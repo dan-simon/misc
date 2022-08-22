@@ -160,16 +160,12 @@ let Colors = {
   },
   getStringToColorCode(color, buttonColor) {
     let dullOrVibrant = buttonColor || Options.usualButtonColor();
-    // This can be undefined for colors like challengered/etc. that we don't have an "equivalent color" to. But that's OK;
-    // we just default to the default color then.
-    let playerChoice = player.options.colorData[dullOrVibrant][this.colorNameToPlayerAlias(color)];
-    let defaultColor = this.stringToColorCode[dullOrVibrant][color];
-    return (playerChoice !== undefined && playerChoice !== '') ? playerChoice : defaultColor;
+    return Options.colorSetting(color, dullOrVibrant, true);
   },
   displayStringToColorCode(color, buttonColor) {
     let original = this.getStringToColorCode(color, buttonColor);
     let adjusted = this.adjust(original );
-    if (original  === adjusted) {
+    if (original === adjusted) {
       return original;
     } else {
       return original + ' → ' + adjusted;

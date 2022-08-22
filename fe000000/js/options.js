@@ -133,15 +133,23 @@ let Options = {
     player.options.adjustColors = !player.options.adjustColors;
     Colors.updateColors();
   },
-  colorSetting(color, dullOrVibrant) {
-    return player.options.colorData[dullOrVibrant][color];
+  colorSetting(color, dullOrVibrant, useDefault) {
+    // This can be undefined for colors like challengered/etc. that we don't have an "equivalent color" to
+    // (which can occur when this is called from colors.js).
+    // But that's OK; we just default to the default color then.
+    let playerChoice = player.options.colorData[dullOrVibrant][Colors.colorNameToPlayerAlias(color)];
+    if (!useDefault) {
+      return playerChoice;
+    }
+    let defaultColor = Colors.stringToColorCode[dullOrVibrant][color];
+    return (playerChoice !== undefined && playerChoice !== '') ? playerChoice : defaultColor;
   },
   setColorSetting(color, dullOrVibrant, x, auto) {
     let elem = document.getElementsByClassName(color + '-' + dullOrVibrant.toLowerCase() + '-input');
     let colorSetting = this.standardizeColorSetting(x);
     if (colorSetting === null) {
       for (let i of elem) {
-        i.value = this.colorSetting(color, dullOrVibrant);
+        i.value = this.colorSetting(color, dullOrVibrant, i.type === 'color');
       }
       if (!auto) {
         alert('Colors must have # followed by ' + formatInt(6) + ' hexadecimal characters (each 0-9 or a-f). ' + 
@@ -149,10 +157,11 @@ let Options = {
       }
       return;
     }
-    for (let i of elem) {
-      i.value = colorSetting;
-    }
     player.options.colorData[dullOrVibrant][color] = colorSetting;
+    // We do this kinda weird handling to update the color inputs to not be black.
+    for (let i of elem) {
+      i.value = this.colorSetting(color, dullOrVibrant, i.type === 'color');
+    }
     // This is a bit computationally expensive for one color change, but setColorSetting is called rarely
     // (for one rarely-taken user action, and when it's called automatically this code doesn't run) so it shouldn't be too bad.
     // Automatic code will call Colors.updateColors() when it's done making changes.

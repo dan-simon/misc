@@ -6154,83 +6154,105 @@
         <span>Change the values of colors:</span>
         <br/>
         <br/>
-        <table style="margin-left: auto; margin-right: auto; width: 90%;">
+        <table style="margin-left: auto; margin-right: auto; width: 86%;">
           <colgroup>
              <col span="1" style="width: 6%;">
-             <col span="1" style="width: 30%;">
-             <col span="1" style="width: 12%;">
-             <col span="1" style="width: 30%;">
-             <col span="1" style="width: 12%;">
+             <col span="1" style="width: 27%;">
+             <col span="1" style="width: 8%;">
+             <col span="1" style="width: 5%;">
+             <col span="1" style="width: 27%;">
+             <col span="1" style="width: 8%;">
+             <col span="1" style="width: 5%;">
           </colgroup>
           <tr>
             <td>Brown</td>
             <td ~style.color=Colors.adjust(Colors.getStringToColorCode('brown', 'Dull'))~>Dull brown (~r Colors.displayStringToColorCode('brown', 'Dull') ~):</td>
-            <td><input class="brown-dull-input" type="text" ~!value=Options.colorSetting('brown', 'Dull')~ ~!onchange=function() {Options.setColorSetting('brown', 'Dull', this.value, false)}~></input></td>
+            <td><input type="text" class="brown-dull-input" style="width: 80px;" ~!value=Options.colorSetting('brown', 'Dull', false)~ ~!onchange=function() {Options.setColorSetting('brown', 'Dull', this.value, false)}~></input></td>
+            <td><input type="color" class="brown-dull-input" ~!value=Options.colorSetting('brown', 'Dull', true)~ ~!onchange=function() {Options.setColorSetting('brown', 'Dull', this.value, false)}~></input></td>
             <td ~style.color=Colors.adjust(Colors.getStringToColorCode('brown', 'Vibrant'))~>Vibrant brown (~r Colors.displayStringToColorCode('brown', 'Vibrant') ~):</td>
-            <td><input class="brown-vibrant-input" type="text" ~!value=Options.colorSetting('brown', 'Vibrant')~ ~!onchange=function() {Options.setColorSetting('brown', 'Vibrant', this.value, false)}~></input></td>
+            <td><input type="text" class="brown-vibrant-input" style="width: 80px;" ~!value=Options.colorSetting('brown', 'Vibrant', false)~ ~!onchange=function() {Options.setColorSetting('brown', 'Vibrant', this.value, false)}~></input></td>
+            <td><input type="color" class="brown-vibrant-input" ~!value=Options.colorSetting('brown', 'Vibrant', true)~ ~!onchange=function() {Options.setColorSetting('brown', 'Vibrant', this.value, false)}~></input></td>
           </tr>
           <tr>
             <td>Cyan</td>
             <td ~style.color=Colors.adjust(Colors.getStringToColorCode('cyan', 'Dull'))~>Dull cyan (~r Colors.displayStringToColorCode('cyan', 'Dull') ~):</td>
-            <td><input class="cyan-dull-input" type="text" ~!value=Options.colorSetting('cyan', 'Dull')~ ~!onchange=function() {Options.setColorSetting('cyan', 'Dull', this.value, false)}~></input></td>
+            <td><input type="text" class="cyan-dull-input" style="width: 80px;" ~!value=Options.colorSetting('cyan', 'Dull', false)~ ~!onchange=function() {Options.setColorSetting('cyan', 'Dull', this.value, false)}~></input></td>
+            <td><input type="color" class="cyan-dull-input" ~!value=Options.colorSetting('cyan', 'Dull', true)~ ~!onchange=function() {Options.setColorSetting('cyan', 'Dull', this.value, false)}~></input></td>
             <td ~style.color=Colors.adjust(Colors.getStringToColorCode('cyan', 'Vibrant'))~>Vibrant cyan (~r Colors.displayStringToColorCode('cyan', 'Vibrant') ~):</td>
-            <td><input class="cyan-vibrant-input" type="text" ~!value=Options.colorSetting('cyan', 'Vibrant')~ ~!onchange=function() {Options.setColorSetting('cyan', 'Vibrant', this.value, false)}~></input></td>
+            <td><input type="text" class="cyan-vibrant-input" style="width: 80px;" ~!value=Options.colorSetting('cyan', 'Vibrant', false)~ ~!onchange=function() {Options.setColorSetting('cyan', 'Vibrant', this.value, false)}~></input></td>
+            <td><input type="color" class="cyan-vibrant-input" ~!value=Options.colorSetting('cyan', 'Vibrant', true)~ ~!onchange=function() {Options.setColorSetting('cyan', 'Vibrant', this.value, false)}~></input></td>
           </tr>
           <tr>
             <td>Gold</td>
             <td ~style.color=Colors.adjust(Colors.getStringToColorCode('gold', 'Dull'))~>Dull gold (~r Colors.displayStringToColorCode('gold', 'Dull') ~):</td>
-            <td><input class="gold-dull-input" type="text" ~!value=Options.colorSetting('gold', 'Dull')~ ~!onchange=function() {Options.setColorSetting('gold', 'Dull', this.value, false)}~></input></td>
+            <td><input type="text" class="gold-dull-input" style="width: 80px;" ~!value=Options.colorSetting('gold', 'Dull', false)~ ~!onchange=function() {Options.setColorSetting('gold', 'Dull', this.value, false)}~></input></td>
+            <td><input type="color" class="gold-dull-input" ~!value=Options.colorSetting('gold', 'Dull', true)~ ~!onchange=function() {Options.setColorSetting('gold', 'Dull', this.value, false)}~></input></td>
             <td ~style.color=Colors.adjust(Colors.getStringToColorCode('gold', 'Vibrant'))~>Vibrant gold (~r Colors.displayStringToColorCode('gold', 'Vibrant') ~):</td>
-            <td><input class="gold-vibrant-input" type="text" ~!value=Options.colorSetting('gold', 'Vibrant')~ ~!onchange=function() {Options.setColorSetting('gold', 'Vibrant', this.value, false)}~></input></td>
+            <td><input type="text" class="gold-vibrant-input" style="width: 80px;" ~!value=Options.colorSetting('gold', 'Vibrant', false)~ ~!onchange=function() {Options.setColorSetting('gold', 'Vibrant', this.value, false)}~></input></td>
+            <td><input type="color" class="gold-vibrant-input" ~!value=Options.colorSetting('gold', 'Vibrant', true)~ ~!onchange=function() {Options.setColorSetting('gold', 'Vibrant', this.value, false)}~></input></td>
           </tr>
           <tr>
             <td>Green</td>
             <td ~style.color=Colors.adjust(Colors.getStringToColorCode('green', 'Dull'))~>Dull green (~r Colors.displayStringToColorCode('green', 'Dull') ~):</td>
-            <td><input class="green-dull-input" type="text" ~!value=Options.colorSetting('green', 'Dull')~ ~!onchange=function() {Options.setColorSetting('green', 'Dull', this.value, false)}~></input></td>
+            <td><input type="text" class="green-dull-input" style="width: 80px;" ~!value=Options.colorSetting('green', 'Dull', false)~ ~!onchange=function() {Options.setColorSetting('green', 'Dull', this.value, false)}~></input></td>
+            <td><input type="color" class="green-dull-input" ~!value=Options.colorSetting('green', 'Dull', true)~ ~!onchange=function() {Options.setColorSetting('green', 'Dull', this.value, false)}~></input></td>
             <td ~style.color=Colors.adjust(Colors.getStringToColorCode('green', 'Vibrant'))~>Vibrant green (~r Colors.displayStringToColorCode('green', 'Vibrant') ~):</td>
-            <td><input class="green-vibrant-input" type="text" ~!value=Options.colorSetting('green', 'Vibrant')~ ~!onchange=function() {Options.setColorSetting('green', 'Vibrant', this.value, false)}~></input></td>
+            <td><input type="text" class="green-vibrant-input" style="width: 80px;" ~!value=Options.colorSetting('green', 'Vibrant', false)~ ~!onchange=function() {Options.setColorSetting('green', 'Vibrant', this.value, false)}~></input></td>
+            <td><input type="color" class="green-vibrant-input" ~!value=Options.colorSetting('green', 'Vibrant', true)~ ~!onchange=function() {Options.setColorSetting('green', 'Vibrant', this.value, false)}~></input></td>
           </tr>
           <tr>
             <td>Grey</td>
             <td ~style.color=Colors.adjust(Colors.getStringToColorCode('grey', 'Dull'))~>Dull grey (~r Colors.displayStringToColorCode('grey', 'Dull') ~):</td>
-            <td><input class="grey-dull-input" type="text" ~!value=Options.colorSetting('grey', 'Dull')~ ~!onchange=function() {Options.setColorSetting('grey', 'Dull', this.value, false)}~></input></td>
+            <td><input type="text" class="grey-dull-input" style="width: 80px;" ~!value=Options.colorSetting('grey', 'Dull', false)~ ~!onchange=function() {Options.setColorSetting('grey', 'Dull', this.value, false)}~></input></td>
+            <td><input type="color" class="grey-dull-input" ~!value=Options.colorSetting('grey', 'Dull', true)~ ~!onchange=function() {Options.setColorSetting('grey', 'Dull', this.value, false)}~></input></td>
             <td ~style.color=Colors.adjust(Colors.getStringToColorCode('grey', 'Vibrant'))~>Vibrant grey (~r Colors.displayStringToColorCode('grey', 'Vibrant') ~):</td>
-            <td><input class="grey-vibrant-input" type="text" ~!value=Options.colorSetting('grey', 'Vibrant')~ ~!onchange=function() {Options.setColorSetting('grey', 'Vibrant', this.value, false)}~></input></td>
+            <td><input type="text" class="grey-vibrant-input" style="width: 80px;" ~!value=Options.colorSetting('grey', 'Vibrant', false)~ ~!onchange=function() {Options.setColorSetting('grey', 'Vibrant', this.value, false)}~></input></td>
+            <td><input type="color" class="grey-vibrant-input" ~!value=Options.colorSetting('grey', 'Vibrant', true)~ ~!onchange=function() {Options.setColorSetting('grey', 'Vibrant', this.value, false)}~></input></td>
           </tr>
           <tr>
             <td>Magenta</td>
             <td ~style.color=Colors.adjust(Colors.getStringToColorCode('magenta', 'Dull'))~>Dull magenta (~r Colors.displayStringToColorCode('magenta', 'Dull') ~):</td>
-            <td><input class="magenta-dull-input" type="text" ~!value=Options.colorSetting('magenta', 'Dull')~ ~!onchange=function() {Options.setColorSetting('magenta', 'Dull', this.value, false)}~></input></td>
+            <td><input type="text" class="magenta-dull-input" style="width: 80px;" ~!value=Options.colorSetting('magenta', 'Dull', false)~ ~!onchange=function() {Options.setColorSetting('magenta', 'Dull', this.value, false)}~></input></td>
+            <td><input type="color" class="magenta-dull-input" ~!value=Options.colorSetting('magenta', 'Dull', true)~ ~!onchange=function() {Options.setColorSetting('magenta', 'Dull', this.value, false)}~></input></td>
             <td ~style.color=Colors.adjust(Colors.getStringToColorCode('magenta', 'Vibrant'))~>Vibrant magenta (~r Colors.displayStringToColorCode('magenta', 'Vibrant') ~):</td>
-            <td><input class="magenta-vibrant-input" type="text" ~!value=Options.colorSetting('magenta', 'Vibrant')~ ~!onchange=function() {Options.setColorSetting('magenta', 'Vibrant', this.value, false)}~></input></td>
+            <td><input type="text" class="magenta-vibrant-input" style="width: 80px;" ~!value=Options.colorSetting('magenta', 'Vibrant', false)~ ~!onchange=function() {Options.setColorSetting('magenta', 'Vibrant', this.value, false)}~></input></td>
+            <td><input type="color" class="magenta-vibrant-input" ~!value=Options.colorSetting('magenta', 'Vibrant', true)~ ~!onchange=function() {Options.setColorSetting('magenta', 'Vibrant', this.value, false)}~></input></td>
           </tr>
           <tr>
             <td>Orange</td>
             <td ~style.color=Colors.adjust(Colors.getStringToColorCode('orange', 'Dull'))~>Dull orange (~r Colors.displayStringToColorCode('orange', 'Dull') ~):</td>
-            <td><input class="orange-dull-input" type="text" ~!value=Options.colorSetting('orange', 'Dull')~ ~!onchange=function() {Options.setColorSetting('orange', 'Dull', this.value, false)}~></input></td>
+            <td><input type="text" class="orange-dull-input" style="width: 80px;" ~!value=Options.colorSetting('orange', 'Dull', false)~ ~!onchange=function() {Options.setColorSetting('orange', 'Dull', this.value, false)}~></input></td>
+            <td><input type="color" class="orange-dull-input" ~!value=Options.colorSetting('orange', 'Dull', true)~ ~!onchange=function() {Options.setColorSetting('orange', 'Dull', this.value, false)}~></input></td>
             <td ~style.color=Colors.adjust(Colors.getStringToColorCode('orange', 'Vibrant'))~>Vibrant orange (~r Colors.displayStringToColorCode('orange', 'Vibrant') ~):</td>
-            <td><input class="orange-vibrant-input" type="text" ~!value=Options.colorSetting('orange', 'Vibrant')~ ~!onchange=function() {Options.setColorSetting('orange', 'Vibrant', this.value, false)}~></input></td>
+            <td><input type="text" class="orange-vibrant-input" style="width: 80px;" ~!value=Options.colorSetting('orange', 'Vibrant', false)~ ~!onchange=function() {Options.setColorSetting('orange', 'Vibrant', this.value, false)}~></input></td>
+            <td><input type="color" class="orange-vibrant-input" ~!value=Options.colorSetting('orange', 'Vibrant', true)~ ~!onchange=function() {Options.setColorSetting('orange', 'Vibrant', this.value, false)}~></input></td>
           </tr>
           <tr>
             <td>Purple</td>
             <td ~style.color=Colors.adjust(Colors.getStringToColorCode('purple', 'Dull'))~>Dull purple (~r Colors.displayStringToColorCode('purple', 'Dull') ~):</td>
-            <td><input class="purple-dull-input" type="text" ~!value=Options.colorSetting('purple', 'Dull')~ ~!onchange=function() {Options.setColorSetting('purple', 'Dull', this.value, false)}~></input></td>
+            <td><input type="text" class="purple-dull-input" style="width: 80px;" ~!value=Options.colorSetting('purple', 'Dull', false)~ ~!onchange=function() {Options.setColorSetting('purple', 'Dull', this.value, false)}~></input></td>
+            <td><input type="color" class="purple-dull-input" ~!value=Options.colorSetting('purple', 'Dull', true)~ ~!onchange=function() {Options.setColorSetting('purple', 'Dull', this.value, false)}~></input></td>
             <td ~style.color=Colors.adjust(Colors.getStringToColorCode('purple', 'Vibrant'))~>Vibrant purple (~r Colors.displayStringToColorCode('purple', 'Vibrant') ~):</td>
-            <td><input class="purple-vibrant-input" type="text" ~!value=Options.colorSetting('purple', 'Vibrant')~ ~!onchange=function() {Options.setColorSetting('purple', 'Vibrant', this.value, false)}~></input></td>
+            <td><input type="text" class="purple-vibrant-input" style="width: 80px;" ~!value=Options.colorSetting('purple', 'Vibrant', false)~ ~!onchange=function() {Options.setColorSetting('purple', 'Vibrant', this.value, false)}~></input></td>
+            <td><input type="color" class="purple-vibrant-input" ~!value=Options.colorSetting('purple', 'Vibrant', true)~ ~!onchange=function() {Options.setColorSetting('purple', 'Vibrant', this.value, false)}~></input></td>
           </tr>
           <tr>
             <td>Red</td>
             <td ~style.color=Colors.adjust(Colors.getStringToColorCode('red', 'Dull'))~>Dull red (~r Colors.displayStringToColorCode('red', 'Dull') ~):</td>
-            <td><input class="red-dull-input" type="text" ~!value=Options.colorSetting('red', 'Dull')~ ~!onchange=function() {Options.setColorSetting('red', 'Dull', this.value, false)}~></input></td>
+            <td><input type="text" class="red-dull-input" style="width: 80px;" ~!value=Options.colorSetting('red', 'Dull', false)~ ~!onchange=function() {Options.setColorSetting('red', 'Dull', this.value, false)}~></input></td>
+            <td><input type="color" class="red-dull-input" ~!value=Options.colorSetting('red', 'Dull', true)~ ~!onchange=function() {Options.setColorSetting('red', 'Dull', this.value, false)}~></input></td>
             <td ~style.color=Colors.adjust(Colors.getStringToColorCode('red', 'Vibrant'))~>Vibrant red (~r Colors.displayStringToColorCode('red', 'Vibrant') ~):</td>
-            <td><input class="red-vibrant-input" type="text" ~!value=Options.colorSetting('red', 'Vibrant')~ ~!onchange=function() {Options.setColorSetting('red', 'Vibrant', this.value, false)}~></input></td>
+            <td><input type="text" class="red-vibrant-input" style="width: 80px;" ~!value=Options.colorSetting('red', 'Vibrant', false)~ ~!onchange=function() {Options.setColorSetting('red', 'Vibrant', this.value, false)}~></input></td>
+            <td><input type="color" class="red-vibrant-input" ~!value=Options.colorSetting('red', 'Vibrant', true)~ ~!onchange=function() {Options.setColorSetting('red', 'Vibrant', this.value, false)}~></input></td>
           </tr>
           <tr>
             <td>Yellow</td>
             <td ~style.color=Colors.adjust(Colors.getStringToColorCode('yellow', 'Dull'))~>Dull yellow (~r Colors.displayStringToColorCode('yellow', 'Dull') ~):</td>
-            <td><input class="yellow-dull-input" type="text" ~!value=Options.colorSetting('yellow', 'Dull')~ ~!onchange=function() {Options.setColorSetting('yellow', 'Dull', this.value, false)}~></input></td>
+            <td><input type="text" class="yellow-dull-input" style="width: 80px;" ~!value=Options.colorSetting('yellow', 'Dull', false)~ ~!onchange=function() {Options.setColorSetting('yellow', 'Dull', this.value, false)}~></input></td>
+            <td><input type="color" class="yellow-dull-input" ~!value=Options.colorSetting('yellow', 'Dull', true)~ ~!onchange=function() {Options.setColorSetting('yellow', 'Dull', this.value, false)}~></input></td>
             <td ~style.color=Colors.adjust(Colors.getStringToColorCode('yellow', 'Vibrant'))~>Vibrant yellow (~r Colors.displayStringToColorCode('yellow', 'Vibrant') ~):</td>
-            <td><input class="yellow-vibrant-input" type="text" ~!value=Options.colorSetting('yellow', 'Vibrant')~ ~!onchange=function() {Options.setColorSetting('yellow', 'Vibrant', this.value, false)}~></input></td>
+            <td><input type="text" class="yellow-vibrant-input" style="width: 80px;" ~!value=Options.colorSetting('yellow', 'Vibrant', false)~ ~!onchange=function() {Options.setColorSetting('yellow', 'Vibrant', this.value, false)}~></input></td>
+            <td><input type="color" class="yellow-vibrant-input" ~!value=Options.colorSetting('yellow', 'Vibrant', true)~ ~!onchange=function() {Options.setColorSetting('yellow', 'Vibrant', this.value, false)}~></input></td>
           </tr>
         </table>
         <br/>
@@ -6982,7 +7004,7 @@
         <br/>
         <span>Thanks to the testers (Boo, Dravitar, Earth, Omsi, Pichu, Sere, SpectralFlame, others, and Jazz) for testing before release and suggesting features.</span>
         <br/>
-        <span>Thanks to jdawson7 (clarifying strategy, improving guide) and eQueline (suggesting many great QoL features).</span>
+        <span>Thanks to jdawson7 (clarifying strategy, improving guide), eQueline (suggesting many great QoL features), and Kyleptune (suggesting the ability to change colors).</span>
       </div>
       <br/>
       <br/>
