@@ -107,6 +107,9 @@ let ComplexityAchievements = {
     }
     if (row === 4 && column === 2) {
       player.eternityChallengeCompletions = [4, 4, 4, 4, 4, 4, 4, 4];
+      // There are some edge cases where you get this from a finality shard upgrade,
+      // and you could be in EC4 at that time.
+      EternityChallenge.checkForExitingEternityChallenge4(0);
     }
     if (row === 4 && column === 4) {
       Studies.updateExtraTheorems();
