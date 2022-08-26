@@ -466,11 +466,28 @@ let EternityChallenge = {
           let newCompletions = Math.min(
             4 - player.eternityChallengeCompletions[ec - 1], autoCompletions);
           player.eternityChallengeCompletions[ec - 1] += newCompletions;
+          if (newCompletions > 0) {
+            this.processAdditionalCompletions(ec);
+          }
           autoCompletions -= newCompletions;
           player.usedAutoECCompletionThisComplexity = true;
         }
       }
       player.stats.timeSinceAutoECCompletion -= timePer * (startingAutoCompletions - autoCompletions);
+    }
+  },
+  processAdditionalCompletions(ec) {
+    if (ec === 4) {
+      this.checkForExitingEternityChallenge4(0);
+    }
+  },
+  checkForExitingEternityChallenge4(newInfinities) {
+    if (EternityChallenge.isEternityChallengeRunning(4) &&
+      EternityChallenge.eternityChallenge4RemainingInfinities() < newInfinities) {
+      EternityChallenge.exitEternityChallenge();
+      return true;
+    } else {
+      return false;
     }
   },
   imminentAutoECCompletionTiers() {

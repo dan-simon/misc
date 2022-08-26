@@ -143,9 +143,10 @@ let InfinityPrestigeLayer = {
   infinity(manual, newLimit) {
     if (!this.canInfinity()) return;
     if (manual && Options.confirmation('infinity') && !confirm(this.infinityConfirmationMessage())) return;
-    if (EternityChallenge.isEternityChallengeRunning(4) &&
-      EternityChallenge.eternityChallenge4RemainingInfinities() === 0) {
-      EternityChallenge.exitEternityChallenge();
+    // 1 is the number of new infinities (as opposed to EC autocomplete which doesn't itself give infinities,
+    // but does lower the allowed number of infinities).
+    if (EternityChallenge.checkForExitingEternityChallenge4(1)) {
+      // If this returns true, we exited.
       return;
     }
     Achievements.checkForAchievements('infinity');
