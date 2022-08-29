@@ -381,13 +381,17 @@ let Studies = {
     let result = Math.max(0, Math.floor(+x));
     return Number.isFinite(result) ? result : 0;
   },
-  importString(importString) {
-    let presetsWithName = player.presets.filter(x => x.name === importString);
+  // We're just doing this separate id-to-string function in this file, because here we also need it for costs.
+  presetIdToPresetString(id) {
+    let presetsWithName = player.presets.filter(x => x.name === id);
     if (presetsWithName.length > 0) {
-      this.importStringFromPreset(presetsWithName[0].studies);
+      return presetsWithName[0].studies;
     } else {
-      this.importStringFromPreset(importString);
+      return id
     }
+  },
+  importString(importString) {
+    this.importStringFromPreset(this.presetIdToPresetString(importString));
   },
   getUnspentEternityChallenge(x) {
     // Note: x can be null.

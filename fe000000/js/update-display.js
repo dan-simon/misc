@@ -2405,7 +2405,7 @@ function updateDisplay() {
     if (shouldUpdate("e666")) {e[666].textContent = formatOrdinalInt(14)};
     if (shouldUpdate("b521")) {b[521].style.display = Studies.isAutoLoadUnlocked() ? '' : 'none'};
     if (shouldUpdate("e667")) {e[667].textContent = Studies.isAutoLoadOn() ? "On" : "Off"};
-    if (shouldUpdate("e668")) {e[668].textContent = Studies.studyListCostText(Studies.studyListToAutoLoad())};
+    if (shouldUpdate("e668")) {e[668].textContent = Studies.studyListCostText(Studies.presetIdToPresetString(Studies.studyListToAutoLoad()))};
     if (shouldUpdate("b523")) {b[523].className = Study(1).className()};
     if (shouldUpdate("e669")) {e[669].textContent = formatOrdinalInt(1)};
     if (shouldUpdate("e670")) {e[670].textContent = format(Study(1).rawTotalEffect())};

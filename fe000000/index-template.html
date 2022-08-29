@@ -1639,7 +1639,7 @@
       <div ~style.display=Studies.isAutoLoadUnlocked() ? '' : 'none'~>
         Study list to constantly load: <input style="width: 256px;" type="text" ~!value=Studies.studyListToAutoLoad()~ ~!onchange=function() {Studies.setStudyListToAutoLoad(this.value)}~></input> <button onclick="Studies.toggleAutoLoad()">Auto-load: ~r Studies.isAutoLoadOn() ? "On" : "Off" ~</button>
         <br/>
-        Total cost: ~r Studies.studyListCostText(Studies.studyListToAutoLoad()) ~
+        Total cost: ~r Studies.studyListCostText(Studies.presetIdToPresetString(Studies.studyListToAutoLoad())) ~
       </div>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 8px; border-collapse: separate;">
         <tr>
