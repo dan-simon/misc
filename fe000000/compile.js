@@ -28,8 +28,13 @@ function extractCode(x) {
   }
 }
 
+function updateDisplaySet(l, ind, prop, val) {
+  let access = l + '[' + ind + '].' + prop;
+  return 'let v = ' + val + '; if (' + access + ' !== v) {' + access + ' = v};'
+}
+
 function updateDisplayOneElement(x, i) {
-  return 'if (shouldUpdate("e' + i + '")) {e[' + i + '].textContent = ' + extractCode(x) + '};'
+  return 'if (shouldUpdate("e' + i + '")) {' + updateDisplaySet('e', i, 'textContent', extractCode(x)) + '};'
 }
 
 function styleNameToJsName(x) {
@@ -47,7 +52,7 @@ function updateDisplayOneStyle(x, i) {
       property = property.slice(1);
       head = '!';
     }
-    return head + 'if (shouldUpdate("b' + i + '")) {b[' + i + '].' + property + ' = ' + y.split('=').slice(1).join('=').slice(0, -1) + '};';
+    return head + 'if (shouldUpdate("b' + i + '")) {' + updateDisplaySet('b', i, property, y.split('=').slice(1).join('=').slice(0, -1)) + '};';
   });
 }
 
