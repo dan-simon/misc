@@ -61,6 +61,14 @@ let NotationOptions = {
     player.options.notation.alphabet = (x && x.length >= 2) ? x : 'abcdefghijklmnopqrstuvwxyz';
     this.notationChange();
   },
+  decimalThresholdCache: {},
+  formatDecimalThreshold() {
+    let e = this.exponentBase();
+    if (!(e in this.decimalThresholdCache)) {
+      this.decimalThresholdCache[e] = Math.pow(e, Math.max(3, Math.ceil(3 / Math.log10(e))));
+    }
+    return this.decimalThresholdCache[e];
+  },
   formatOrdinals() {
     return player.options.notation.formatOrdinals;
   },

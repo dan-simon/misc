@@ -12,6 +12,32 @@ function representExponentWithAlphabet(x, a) {
   return r.join('');
 }
 
+let adaptedFormat = function (value, places, placesUnder1000, placesExponent) {
+  if (typeof value === "number" && !Number.isFinite(value)) {
+    return this.infinite;
+  }
+
+  const decimal = Decimal.fromValue_noAlloc(value);
+
+  // We don't have anything that uses very small formatting and uses this function
+  // at the same time, so we cut out that case.
+
+  if (decimal.lt(NotationOptions.formatDecimalThreshold())) {
+    const number = decimal.toNumber();
+    return number < 0
+      ? this.formatNegativeUnder1000(Math.abs(number), placesUnder1000)
+      : this.formatUnder1000(number, placesUnder1000);
+  }
+
+  if (ADNotations.Settings.isInfinite(decimal.abs())) {
+    return decimal.sign() < 0 ? this.negativeInfinite : this.infinite;
+  }
+
+  return decimal.sign() < 0
+    ? this.formatNegativeDecimal(decimal.abs(), places, placesExponent)
+    : this.formatDecimal(decimal, places, placesExponent);
+  }
+
 // General notes about the below notations:
 // None of them define canHandleNegativePlaces. This is because
 // FE000000 always makes sure to define places when calling format,
@@ -21,6 +47,7 @@ function representExponentWithAlphabet(x, a) {
 // to handle never comes up.
 
 // Time Scientific and Default Scientific seem to be the same but I have no trust in that continuing.
+// They also don't need the special case for a different threshold.
 class TimeScientificNotation extends ADNotations.Notation {
   get name() {
     return "Time Scientific";
@@ -204,4 +231,10 @@ let ModifiedNotations = {
   'MixedScientificNotation': MixedScientificNotation,
   'MixedEngineeringNotation': MixedEngineeringNotation,
   'MixedLogarithmSciNotation': MixedLogarithmSciNotation,
+}
+
+for (let i in ModifiedNotations) {
+  if (i !== 'TimeScientificNotation' && i !== 'DefaultScientificNotation') {
+    ModifiedNotations[i].prototype.format = adaptedFormat;
+  }
 }
