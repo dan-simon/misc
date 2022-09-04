@@ -1,5 +1,66 @@
 let fs = require('fs');
 
+let preprocessorVars = {};
+
+let access = (x, l) => (l.length > 0) ? access(x[l[0]], l.slice(1)) : x;
+
+function preprocess(x) {
+  let parts = x.split('loop');
+  let res = [null, null, null, parts[0].replace(/<\/?$/, '')];
+  let key = [];
+  for (let i = 1; i < parts.length; i++) {
+    let a = access(res, key);
+    if (parts[i - 1].endsWith('"js/')) {
+      a[a.length - 1] += parts[i].replace(/<\/?$/, '');
+    } else if (parts[i - 1].endsWith('<')) {
+      if (parts[i][0] !== ' ') {
+        throw new Error('Bad input');
+      }
+      let ind = parts[i].indexOf('>');
+      let m = parts[i].slice(1, ind).split(' ');
+      if (m.length !== 3) {
+        throw new Error('Bad input');
+      }
+      let n = [m[0], +m[1], +m[2], parts[i].slice(ind + 1).replace(/<\/?$/, '')];
+      key.push(a.length);
+      a.push(n);
+    } else if (parts[i - 1].endsWith('</')) {
+      key.pop();
+      if (parts[i][0] !== '>') {
+        throw new Error('Bad input');
+      }
+      access(res, key).push(parts[i].slice(1).replace(/<\/?$/, ''));
+    }
+  }
+  if (key.length > 0) {
+    throw new Error('Bad input');
+  }
+  return res;
+}
+
+function preprocessString(s) {
+  return s.replace(/% [^%]+ %/g, x => eval(x.slice(2, -2).replace('@', 'preprocessorVars.')));
+}
+
+function preprocessFinal(x) {
+  if (typeof x === 'string') {
+    return preprocessString(x);
+  } else if (x[0] === null) {
+    return x.slice(3).map(preprocessFinal).join('');
+  } else {
+    if (x[0] in preprocessorVars) {
+      throw new Error('Already-used variable ' + x[0]);
+    }
+    let r = [];
+    for (let i = x[1]; i <= x[2]; i++) {
+      preprocessorVars[x[0]] = i;
+      r.push(x.slice(3).map(preprocessFinal).join(''));
+    }
+    delete preprocessorVars[x[0]];
+    return r.join('');
+  }
+}
+
 function extractCode(x) {
   if (x[1] === 'f') {
     return 'format(' + x.slice(3, -2) + ')';
@@ -119,7 +180,7 @@ if (!(files[0].endsWith('.html') && files[1].endsWith('.html') && files[2].endsW
 }
 
 fs.readFile(files[0], 'utf8', function(err, contents) {
-  let contentsWithTime = contents.replace(/%time%/g, time);
+  let contentsWithTime = preprocessFinal(preprocess(contents.replace(/%time%/g, time)));
   let newContents = contentsWithTime.replace(
     /<[-a-z]+( [-a-z]+="[^"]+"| ~[-!.a-z]+=[^~]+~)*\/?>/g, dealWithElement).replace(
     /~([fioqrsy]|t[iqs]?) [^~]+ ~/g, (x) => '<span id="e' + el1Number++ + '"></span>');
