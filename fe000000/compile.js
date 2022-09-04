@@ -11,7 +11,7 @@ function preprocess(x) {
   for (let i = 1; i < parts.length; i++) {
     let a = access(res, key);
     if (parts[i - 1].endsWith('"js/')) {
-      a[a.length - 1] += parts[i].replace(/<\/?$/, '');
+      a[a.length - 1] += 'loop' + parts[i].replace(/<\/?$/, '');
     } else if (parts[i - 1].endsWith('<')) {
       if (parts[i][0] !== ' ') {
         throw new Error('Bad input');
