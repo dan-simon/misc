@@ -182,13 +182,13 @@ if (!(files[0].endsWith('.html') && files[1].endsWith('.html') && files[2].endsW
   throw new Error('Wrong file types. Files should be (1) input html file you\'re editing directly, (2) output html file, (3) output JS file.');
 }
 
-fs.readFile(files[0], 'utf8', function(err, contents) {
-  let contentsWithTime = preprocessFinal(preprocess(contents.replace(/%time%/g, time)));
-  let newContents = contentsWithTime.replace(
+fs.readFile(files[0], 'utf8', function(err, rawContents) {
+  let trueContents = preprocessFinal(preprocess(rawContents.replace(/%time%/g, time)));
+  let newContents = trueContents.replace(
     /<[-a-z]+( [-a-z]+="[^"]+"| ~[-!.a-z]+=[^~]+~)*\/?>/g, dealWithElement).replace(
     /~([fioqrsy]|t[iqs]?) [^~]+ ~/g, (x) => '<span id="e' + el1Number++ + '"></span>');
-  let el1CodeList = (contents.match(/~([fioqrsy]|t[iqs]?) [^~]+ ~/g) || []).map(updateDisplayOneElement);
-  let el2CodeList = (contents.match(/<[-a-z]+( [-a-z]+="[^"]+"| ~[-!.a-z]+=[^~]+~)*\/?>/g) || []).filter(x => x.includes('~')).map(updateDisplayOneStyle);
+  let el1CodeList = (trueContents.match(/~([fioqrsy]|t[iqs]?) [^~]+ ~/g) || []).map(updateDisplayOneElement);
+  let el2CodeList = (trueContents.match(/<[-a-z]+( [-a-z]+="[^"]+"| ~[-!.a-z]+=[^~]+~)*\/?>/g) || []).filter(x => x.includes('~')).map(updateDisplayOneStyle);
   let setupList = flatten(el2CodeList.map(x => x.filter(y => y[0] === '!').map(y => y.slice(1))));
   el2CodeList = el2CodeList.map(x => x.filter(y => y[0] !== '!'));
   let inTabs = (newContents.match(/<tab .*?<\/tab>/gs) || []).map(
