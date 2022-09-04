@@ -1426,6 +1426,10 @@ let Saving = {
       player.colorPresets = [];
       player.version = 2.15625;
     }
+    if (player.version < 2.16015625) {
+      player.offlineTicks = Math.min(Math.max(1, Math.floor(player.offlineTicks || 1)), Math.pow(2, 20));
+      player.version = 2.16015625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

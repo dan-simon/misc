@@ -6086,7 +6086,7 @@
         <span ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~>Finality: <input type="checkbox" ~!checked=Stats.showRunType('finality')~ ~!onchange=function() {Stats.setShowRunType('finality', this.checked)}~></input></span>
       </span>
       <br/>
-      <span>Number of last runs of each type to show: <input type="text" ~!value=Stats.lastRunsToShow()~ ~!onchange=function() {Stats.setLastRunsToShow(+this.value)}~></input></span>
+      <span>Number of last runs of each type to show (maximum ~i 10 ~): <input type="text" ~!value=Stats.lastRunsToShow()~ ~!onchange=function() {Stats.setLastRunsToShow(+this.value)}~></input></span>
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'options' ? '' : 'none'~>
       <span><button ~class-name=Options.showExportNotification() ? 'redspan' : ''~ onclick="Options.setOptionTypeShown('saving')">Show saving options</button> <button onclick="Options.setOptionTypeShown('color')">Show color options</button> <button onclick="Options.setOptionTypeShown('tab')">Show tab options</button> <button onclick="Options.setOptionTypeShown('other')">Show other options</button></span>
