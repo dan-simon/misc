@@ -26,7 +26,7 @@ let Permanence = {
     let template;
     let perSecond;
     if (this.hasPassiveProduction()) {
-      template = 'You get * from Finality Milestone ' + formatInt(4) + '.';
+      template = 'You get * from Finality Milestone ' + formatInt(5) + '.';
       perSecond = this.permanenceGain();
     } else {
       template = 'Your eternity generation rate translates to *.';
