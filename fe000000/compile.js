@@ -6,22 +6,25 @@ let access = (x, l) => (l.length > 0) ? access(x[l[0]], l.slice(1)) : x;
 
 function preprocess(x) {
   let parts = x.split('loop');
-  let res = [null, null, null, parts[0].replace(/<\/?$/, '')];
+  let res = [null, null, null, parts[0].replace(/\n *<\/?$/, '')];
   let key = [];
   for (let i = 1; i < parts.length; i++) {
     let a = access(res, key);
     if (parts[i - 1].endsWith('"js/')) {
-      a[a.length - 1] += 'loop' + parts[i].replace(/<\/?$/, '');
+      a[a.length - 1] += 'loop' + parts[i].replace(/\n *<\/?$/, '');
     } else if (parts[i - 1].endsWith('<')) {
       if (parts[i][0] !== ' ') {
         throw new Error('Bad input');
       }
       let ind = parts[i].indexOf('>');
+      if (parts[i][ind + 1] !== '\n') {
+        throw new Error('Bad input');
+      }
       let m = parts[i].slice(1, ind).split(' ');
       if (m.length !== 3) {
         throw new Error('Bad input');
       }
-      let n = [m[0], +m[1], +m[2], parts[i].slice(ind + 1).replace(/<\/?$/, '')];
+      let n = [m[0], +m[1], +m[2], parts[i].slice(ind + 1).replace(/\n *<\/?$/, '')];
       key.push(a.length);
       a.push(n);
     } else if (parts[i - 1].endsWith('</')) {
@@ -29,7 +32,7 @@ function preprocess(x) {
       if (parts[i][0] !== '>') {
         throw new Error('Bad input');
       }
-      access(res, key).push(parts[i].slice(1).replace(/<\/?$/, ''));
+      access(res, key).push(parts[i].slice(1).replace(/\n *<\/?$/, ''));
     }
   }
   if (key.length > 0) {
