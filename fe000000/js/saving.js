@@ -1430,6 +1430,16 @@ let Saving = {
       player.offlineTicks = Math.min(Math.max(1, Math.floor(player.offlineTicks || 1)), Math.pow(2, 20));
       player.version = 2.16015625;
     }
+    if (player.version < 2.1640625) {
+      // Allow for 20 rather than just 10
+      player.stats.lastTenInfinities = player.stats.lastTenInfinities.concat([...Array(10)].map(() => [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)]));
+      player.stats.lastTenEternities = player.stats.lastTenEternities.concat([...Array(10)].map(() => [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)]));
+      player.stats.lastTenComplexities = player.stats.lastTenComplexities.concat([...Array(10)].map(() => [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)]));
+      player.stats.lastTenFinalities = player.stats.lastTenFinalities.concat([...Array(10)].map(() => [-1, new Decimal(-1), -1, new Decimal(-1)]));
+      // Color presets were added but lastPresetIndices wasn't properly changed.
+      player.lastPresetIndices.push(0);
+      player.version = 2.1640625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
@@ -1474,7 +1484,7 @@ let Saving = {
     player.stats.peakIPPerSec = new Decimal(player.stats.peakIPPerSec);
     player.stats.peakEPPerSec = new Decimal(player.stats.peakEPPerSec);
     player.stats.peakCPPerSec = new Decimal(player.stats.peakCPPerSec);
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 20; i++) {
       if (player.stats.lastTenInfinities[i] !== -1) {
         player.stats.lastTenInfinities[i][1] = new Decimal(player.stats.lastTenInfinities[i][1]);
         player.stats.lastTenInfinities[i][2] = new Decimal(player.stats.lastTenInfinities[i][2]);

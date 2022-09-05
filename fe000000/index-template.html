@@ -1726,6 +1726,8 @@
         <div ~style.display=Studies.hasPreset(% @i %) ? '' : 'none'~>
           Name: <input class="presetname% @i %" type="text" ~!value=Studies.presetName(% @i %)~ ~!onchange=function() {Studies.setPresetName(% @i %, this.value)}~></input>
           Study list: <input class="presetstudylist% @i %" style="width: 256px;" type="text" ~!value=Studies.presetStudyList(% @i %)~ ~!onchange=function() {Studies.setPresetStudyList(% @i %, this.value)}~></input>
+          <button % (@i === 1) ? 'class="disabled" ' : '' %onclick="Studies.presetMoveUp(% @i %)">↑</button>
+          <button % (@i === 64) ? `class="disabled"` : `~class=Studies.hasPreset(${@i + 1}) ? "" : "disabled"~` % onclick="Studies.presetMoveDown(% @i %)">↓</button>
           <button onclick="Studies.presetLoad(% @i %)">Load</button>
           <button onclick="Studies.presetSetToCurrentStudies(% @i %)">Change to current studies</button>
           <button onclick="Studies.presetDelete(% @i %)">Delete</button>
@@ -3072,6 +3074,8 @@
           <div ~style.display=Powers.hasPreset(% @i %) ? '' : 'none'~>
             Name: <input class="presetpowername% @i %" type="text" ~!value=Powers.presetName(% @i %)~ ~!onchange=function() {Powers.setPresetName(% @i %, this.value)}~></input>
             Powers: <input class="presetpowerlist% @i %" style="width: 256px;" type="text" ~!value=Powers.presetPowerList(% @i %)~ ~!onchange=function() {Powers.setPresetPowerList(% @i %, this.value)}~></input>
+            <button % (@i === 1) ? 'class="disabled" ' : '' %onclick="Powers.presetMoveUp(% @i %)">↑</button>
+            <button % (@i === 32) ? `class="disabled"` : `~class=Powers.hasPreset(${@i + 1}) ? "" : "disabled"~` % onclick="Powers.presetMoveDown(% @i %)">↓</button>
             <button onclick="Powers.presetLoad(% @i %)">Load</button>
             <button onclick="Powers.presetSetToCurrentPowers(% @i %)">Change to current equipped powers</button>
             <button onclick="Powers.presetDelete(% @i %)">Delete</button>
@@ -3421,6 +3425,8 @@
         <div ~style.display=FinalityShardPresets.hasPreset(% @i %) ? '' : 'none'~>
           Name: <input class="presetfinalityshardupgradename% @i %" type="text" ~!value=FinalityShardPresets.presetName(% @i %)~ ~!onchange=function() {FinalityShardPresets.setPresetName(% @i %, this.value)}~></input>
           Finality shard upgrades: <input class="presetfinalityshardupgradelist% @i %" style="width: 256px;" type="text" ~!value=FinalityShardPresets.presetFinalityShardUpgradeList(% @i %)~ ~!onchange=function() {FinalityShardPresets.setPresetFinalityShardUpgradeList(% @i %, this.value)}~></input>
+          <button % (@i === 1) ? 'class="disabled" ' : '' %onclick="FinalityShardPresets.presetMoveUp(% @i %)">↑</button>
+          <button % (@i === 32) ? `class="disabled"` : `~class=FinalityShardPresets.hasPreset(${@i + 1}) ? "" : "disabled"~` % onclick="FinalityShardPresets.presetMoveDown(% @i %)">↓</button>
           <button onclick="FinalityShardPresets.presetLoad(% @i %)">Load</button>
           <button onclick="FinalityShardPresets.presetSetToCurrentFinalityShardUpgrades(% @i %)">Change to current upgrades</button>
           <button onclick="FinalityShardPresets.presetDelete(% @i %)">Delete</button>
@@ -4336,28 +4342,28 @@
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'last-ten-runs' ? '' : 'none'~>
       <div ~style.display=Stats.showRun(1, 'infinity') ? '' : 'none'~>
-        <loop i 1 10>
+        <loop i 1 20>
           % (@i > 1) ? `<br ~style.display=Stats.showRun(${@i}, 'infinity') ? '' : 'none'~/>` : "" %
           <span% (@i > 1) ? ` ~style.display=Stats.showRun(${@i}, 'infinity') ? '' : 'none'~` : "" %>% (@i > 1) ? `The infinity ${@numbers[@i]} infinities ago` : "Last infinity" % took ~t player.stats.lastTenInfinities[% @i - 1 %][0] ~ and gave ~i player.stats.lastTenInfinities[% @i - 1 %][1] ~ IP, giving <span ~style.display=InfinityPrestigeLayer.showLog('last-ten') ? '' : 'none'~>~f Stats.getLogPerSec(player.stats.lastTenInfinities[% @i - 1 %][0], player.stats.lastTenInfinities[% @i - 1 %][1], player.stats.lastTenInfinities[% @i - 1 %][3], true) ~ log IP/second.</span><span ~style.display=InfinityPrestigeLayer.showLog('last-ten') ? 'none' : ''~>~f player.stats.lastTenInfinities[% @i - 1 %][2] ~ IP/second.</span></span>
         </loop>
       </div>
       <br ~style.display=Stats.showRunBreak('eternity') ? '' : 'none'~/>
       <div ~style.display=Stats.showRun(1, 'eternity') ? '' : 'none'~>
-        <loop i 1 10>
+        <loop i 1 20>
           % (@i > 1) ? `<br ~style.display=Stats.showRun(${@i}, 'eternity') ? '' : 'none'~/>` : "" %
           <span% (@i > 1) ? ` ~style.display=Stats.showRun(${@i}, 'eternity') ? '' : 'none'~` : "" %>% (@i > 1) ? `The eternity ${@numbers[@i]} eternities ago` : "Last eternity" % took ~t player.stats.lastTenEternities[% @i - 1 %][0] ~ and gave ~i player.stats.lastTenEternities[% @i - 1 %][1] ~ EP, giving <span ~style.display=EternityPrestigeLayer.showLog('last-ten') ? '' : 'none'~>~f Stats.getLogPerSec(player.stats.lastTenEternities[% @i - 1 %][0], player.stats.lastTenEternities[% @i - 1 %][1], player.stats.lastTenEternities[% @i - 1 %][3], true) ~ log EP/second.</span><span ~style.display=EternityPrestigeLayer.showLog('last-ten') ? 'none' : ''~>~f player.stats.lastTenEternities[% @i - 1 %][2] ~ EP/second.</span></span>
         </loop>
       </div>
       <br ~style.display=Stats.showRunBreak('complexity') ? '' : 'none'~/>
       <div ~style.display=Stats.showRun(1, 'complexity') ? '' : 'none'~>
-        <loop i 1 10>
+        <loop i 1 20>
           % (@i > 1) ? `<br ~style.display=Stats.showRun(${@i}, 'complexity') ? '' : 'none'~/>` : "" %
           <span% (@i > 1) ? ` ~style.display=Stats.showRun(${@i}, 'complexity') ? '' : 'none'~` : "" %>% (@i > 1) ? `The complexity ${@numbers[@i]} complexities ago` : "Last complexity" % took ~t player.stats.lastTenComplexities[% @i - 1 %][0] ~ and gave ~i player.stats.lastTenComplexities[% @i - 1 %][1] ~ ℂP, giving <span ~style.display=ComplexityPrestigeLayer.showLog('last-ten') ? '' : 'none'~>~f Stats.getLogPerSec(player.stats.lastTenComplexities[% @i - 1 %][0], player.stats.lastTenComplexities[% @i - 1 %][1], player.stats.lastTenComplexities[% @i - 1 %][3], true) ~ log ℂP/second.</span><span ~style.display=ComplexityPrestigeLayer.showLog('last-ten') ? 'none' : ''~>~f player.stats.lastTenComplexities[% @i - 1 %][2] ~ ℂP/second.</span></span>
         </loop>
       </div>
       <br ~style.display=Stats.showRunBreak('finality') ? '' : 'none'~/>
       <div ~style.display=Stats.showRun(1, 'finality') ? '' : 'none'~>
-        <loop i 1 10>
+        <loop i 1 20>
           % (@i > 1) ? `<br ~style.display=Stats.showRun(${@i}, 'finality') ? '' : 'none'~/>` : "" %
           <span% (@i > 1) ? ` ~style.display=Stats.showRun(${@i}, 'finality') ? '' : 'none'~` : "" %>% (@i > 1) ? `The finality ${@numbers[@i]} finalities ago` : "Last finality" % took ~t player.stats.lastTenFinalities[% @i - 1 %][0] ~ and gave ~i player.stats.lastTenFinalities[% @i - 1 %][1] ~ FP and ~i player.stats.lastTenFinalities[% @i - 1 %][2] ~ FS.</span>
         </loop>
@@ -4372,7 +4378,7 @@
         <span ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~>Finality: <input type="checkbox" ~!checked=Stats.showRunType('finality')~ ~!onchange=function() {Stats.setShowRunType('finality', this.checked)}~></input></span>
       </span>
       <br/>
-      <span>Number of last runs of each type to show (maximum ~i 10 ~): <input type="text" ~!value=Stats.lastRunsToShow()~ ~!onchange=function() {Stats.setLastRunsToShow(+this.value)}~></input></span>
+      <span>Number of last runs of each type to show (maximum ~i 20 ~): <input type="text" ~!value=Stats.lastRunsToShow()~ ~!onchange=function() {Stats.setLastRunsToShow(+this.value)}~></input></span>
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'options' ? '' : 'none'~>
       <span><button ~class-name=Options.showExportNotification() ? 'redspan' : ''~ onclick="Options.setOptionTypeShown('saving')">Show saving options</button> <button onclick="Options.setOptionTypeShown('color')">Show color options</button> <button onclick="Options.setOptionTypeShown('tab')">Show tab options</button> <button onclick="Options.setOptionTypeShown('other')">Show other options</button></span>
@@ -4423,12 +4429,11 @@
             <td><button class="options-button" onclick="Options.toggleAdjustColors()">
               Adjust text colors too close to background: ~r Options.adjustColors() ? "On" : "Off" ~
             </button></td>
-            <td><button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? 'none' : ''~ class="options-button" onclick="Options.toggleTabColors()">Tab colors: ~r Options.tabColors() ? 'On' : 'Off' ~</button>
-            <div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="options-div">
+            <td><div class="options-div">
               <button class="mini-options-button" onclick="Options.toggleTabColors()">Tab colors: ~r Options.tabColors() ? 'On' : 'Off' ~</button>
+              <button class="mini-options-button" onclick="Options.togglePresetHighlightColors()">Preset highlight colors: ~r Options.presetHighlightColors() ? 'On' : 'Off' ~</button>
               <button class="mini-options-button" ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ onclick="Options.nextCompletionColors()">Completion colors: ~r player.options.completionColors ~</button>
               <button class="mini-options-button" ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ onclick="Options.toggleResetColors()">Reset colors: ~r Options.resetColors() ? 'On' : 'Off' ~</button>
-              <button class="mini-options-button" ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~ onclick="Options.togglePresetHighlightColors()">Preset highlight colors: ~r Options.presetHighlightColors() ? 'On' : 'Off' ~</button>
             </div></td>
             <td><button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~ class="options-button" onclick="Options.toggleComplexityChallengeRunningColors()" style="font-size: 0.875rem;">
               Complexity challenge colors: ~r Options.complexityChallengeRunningColors() ? "Running" : "Completions" ~
@@ -4480,6 +4485,8 @@
           <div ~style.display=ColorPreset.hasPreset(% @i %) ? '' : 'none'~>
             Name: <input class="presetcolorname% @i %" type="text" ~!value=ColorPreset.presetName(% @i %)~ ~!onchange=function() {ColorPreset.setPresetName(% @i %, this.value)}~></input>
             Color scheme: <input class="presetcolorscheme% @i %" style="width: 256px;" type="text" ~!value=ColorPreset.presetColors(% @i %)~ ~!onchange=function() {ColorPreset.setPresetColors(% @i %, this.value)}~></input>
+            <button % (@i === 1) ? 'class="disabled" ' : '' %onclick="ColorPreset.presetMoveUp(% @i %)">↑</button>
+            <button % (@i === 32) ? `class="disabled"` : `~class=ColorPreset.hasPreset(${@i + 1}) ? "" : "disabled"~` % onclick="ColorPreset.presetMoveDown(% @i %)">↓</button>
             <button onclick="ColorPreset.presetLoad(% @i %)">Load</button>
             <button onclick="ColorPreset.presetSetToCurrentColors(% @i %)">Change to current color scheme</button>
             <button onclick="ColorPreset.presetDelete(% @i %)">Delete</button>
@@ -4557,6 +4564,8 @@
           <div ~style.display=Tabs.hasPreset(% @i %) ? '' : 'none'~>
             Name: <input class="presettabname% @i %" type="text" ~!value=Tabs.presetName(% @i %)~ ~!onchange=function() {Tabs.setPresetName(% @i %, this.value)}~></input>
             Tabs to show: <input class="presettablist% @i %" style="width: 256px;" type="text" ~!value=Tabs.presetTabs(% @i %)~ ~!onchange=function() {Tabs.setPresetTabs(% @i %, this.value)}~></input>
+            <button % (@i === 1) ? 'class="disabled" ' : '' %onclick="Tabs.presetMoveUp(% @i %)">↑</button>
+            <button % (@i === 32) ? `class="disabled"` : `~class=Tabs.hasPreset(${@i + 1}) ? "" : "disabled"~` % onclick="Tabs.presetMoveDown(% @i %)">↓</button>
             <button onclick="Tabs.presetLoad(% @i %)">Load</button>
             <button onclick="Tabs.presetSetToCurrentTabs(% @i %)">Change to currently shown tabs</button>
             <button onclick="Tabs.presetDelete(% @i %)">Delete</button>

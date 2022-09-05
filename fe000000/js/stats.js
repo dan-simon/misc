@@ -65,7 +65,7 @@ let Stats = {
     return player.stats.lastRunsToShow;
   },
   setLastRunsToShow(x) {
-    player.stats.lastRunsToShow = Math.min(10, Math.max(0, x || 0));
+    player.stats.lastRunsToShow = Math.min(20, Math.max(0, x || 0));
   },
   setShowRunType(layer, b) {
     player.stats.lastRunTypesToShow[layer] = b;

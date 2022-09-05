@@ -676,6 +676,13 @@ let Studies = {
       player.lastPresetIndices[1]--;
     }
   },
+  updateLastPresetIndexFromSwap(x, y) {
+    if (player.lastPresetIndices[1] === x) {
+      player.lastPresetIndices[1] = y;
+    } else if (player.lastPresetIndices[1] === y) {
+      player.lastPresetIndices[1] = x;
+    }
+  },
   presetClass(x) {
     return (Options.presetHighlightColors() && this.isLastPresetIndex(x)) ? 'softlyhighlighted' : '';
   },
@@ -683,6 +690,23 @@ let Studies = {
     if (this.presetRespec() && !this.respecAndReset()) return;
     this.importStringFromPreset(this.presetStudyList(x));
     this.setLastPresetIndex(x);
+  },
+  presetMoveUp(x) {
+    this.presetSwap(x - 1, x);
+  },
+  presetMoveDown(x) {
+    this.presetSwap(x, x + 1);
+  },
+  presetSwap(x, y) {
+    if (x === y || !([x, y].every(z => this.hasPreset(z) && 1 <= z && z <= 64))) {
+      return;
+    }
+    let temp = player.presets[x - 1];
+    player.presets[x - 1] = player.presets[y - 1];
+    player.presets[y - 1] = temp;
+    this.updateLastPresetIndexFromSwap(x, y);
+    this.redisplayPreset(x);
+    this.redisplayPreset(y);
   },
   presetDelete(x) {
     if (Options.confirmation('presetDeletion') && !confirm('Are you sure you want to delete this study preset?')) {
