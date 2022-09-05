@@ -234,7 +234,9 @@ let ModifiedNotations = {
 }
 
 for (let i in ModifiedNotations) {
+  ModifiedNotations[i].prototype.isCommon = true;
   if (i !== 'TimeScientificNotation' && i !== 'DefaultScientificNotation') {
     ModifiedNotations[i].prototype.format = adaptedFormat;
+    ModifiedNotations[i].prototype.usesBase = true;
   }
 }

@@ -90,10 +90,10 @@ let NotationOptions = {
     player.options.notation.autobuyerPrecision = (x === 0) ? 0 : (x || 3);
     this.notationChange();
   },
-  notationChange() {
-    for (let i of [10, 11, 12, 13, 14, 15]) {
+  notationChange(x = [10, 11, 12, 13, 14, 15]) {
+    for (let i of x) {
       for (let input of Array.from(document.getElementsByClassName('autobuyer-priority-' + i))) {
-        input.value = autobuyerSettingToString(Autobuyer(i).priority());
+        input.value = autobuyerSettingToString(Autobuyer(i).priority(), i);
       }
     }
   }

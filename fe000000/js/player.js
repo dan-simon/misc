@@ -41,43 +41,19 @@ function initialStudies() {
 }
 
 function initialLastTenInfinities() {
-  return [
-    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
-    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
-    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
-    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
-    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
-  ];
+  return [...Array(20)].map(() => [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)]);
 }
 
 function initialLastTenEternities() {
-  return [
-    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
-    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
-    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
-    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
-    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
-  ];
+  return [...Array(20)].map(() => [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)]);
 }
 
 function initialLastTenComplexities() {
-  return [
-    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
-    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
-    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
-    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
-    [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)], [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)],
-  ];
+  return [...Array(20)].map(() => [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)]);
 }
 
 function initialLastTenFinalities() {
-  return [
-    [-1, new Decimal(-1), -1, new Decimal(-1)], [-1, new Decimal(-1), -1, new Decimal(-1)],
-    [-1, new Decimal(-1), -1, new Decimal(-1)], [-1, new Decimal(-1), -1, new Decimal(-1)],
-    [-1, new Decimal(-1), -1, new Decimal(-1)], [-1, new Decimal(-1), -1, new Decimal(-1)],
-    [-1, new Decimal(-1), -1, new Decimal(-1)], [-1, new Decimal(-1), -1, new Decimal(-1)],
-    [-1, new Decimal(-1), -1, new Decimal(-1)], [-1, new Decimal(-1), -1, new Decimal(-1)],
-  ];
+  return [...Array(20)].map(() => [-1, new Decimal(-1), -1, new Decimal(-1)]);
 }
 
 let initialSeed = RNG.createSeed();
@@ -146,7 +122,7 @@ let initialPlayer = {
     firstTwelveStudyPurchaseOrderBeforeLastRespec: []
   },
   presets: [],
-  lastPresetIndices: [0, 0, 0, 0],
+  lastPresetIndices: [0, 0, 0, 0, 0],
   eternityProducer: {
     unlocked: false,
     upgrades: [0, 0]

@@ -12,6 +12,7 @@ let Options = {
   },
   toggleNotationOnTimes() {
     player.options.notationOnTimes = !player.options.notationOnTimes;
+    NotationOptions.notationChange();
   },
   offlineProgress() {
     return player.options.offlineProgress;

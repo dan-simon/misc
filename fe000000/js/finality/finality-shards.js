@@ -272,6 +272,13 @@ let FinalityShardPresets = {
       player.lastPresetIndices[3]--;
     }
   },
+  updateLastPresetIndexFromSwap(x, y) {
+    if (player.lastPresetIndices[3] === x) {
+      player.lastPresetIndices[3] = y;
+    } else if (player.lastPresetIndices[3] === y) {
+      player.lastPresetIndices[3] = x;
+    }
+  },
   presetClass(x) {
     return (Options.presetHighlightColors() && this.isLastPresetIndex(x)) ? 'softlyhighlighted' : '';
   },
@@ -279,6 +286,23 @@ let FinalityShardPresets = {
     if (this.presetRespec() && !this.respecAndReset()) return;
     this.importStringFromPreset(this.presetFinalityShardUpgradeList(x));
     this.setLastPresetIndex(x);
+  },
+  presetMoveUp(x) {
+    this.presetSwap(x - 1, x);
+  },
+  presetMoveDown(x) {
+    this.presetSwap(x, x + 1);
+  },
+  presetSwap(x, y) {
+    if (x === y || !([x, y].every(z => this.hasPreset(z) && 1 <= z && z <= 32))) {
+      return;
+    }
+    let temp = player.finalityShardUpgradePresets[x - 1];
+    player.finalityShardUpgradePresets[x - 1] = player.finalityShardUpgradePresets[y - 1];
+    player.finalityShardUpgradePresets[y - 1] = temp;
+    this.updateLastPresetIndexFromSwap(x, y);
+    this.redisplayPreset(x);
+    this.redisplayPreset(y);
   },
   presetDelete(x) {
     if (Options.confirmation('presetDeletion') && !confirm('Are you sure you want to delete this finality preset?')) {
