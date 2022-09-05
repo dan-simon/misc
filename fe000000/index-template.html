@@ -4359,7 +4359,7 @@
       <div ~style.display=Stats.showRun(1, 'finality') ? '' : 'none'~>
         <loop i 1 10>
           % (@i > 1) ? `<br ~style.display=Stats.showRun(${@i}, 'finality') ? '' : 'none'~/>` : "" %
-          <span% (@i > 1) ? ` ~style.display=Stats.showRun(${@i}, 'finality') ? '' : 'none'~` : "" %>% (@i > 1) ? `The finality ${@numbers[@i]} finalities ago` : "Last finality" % took ~t player.stats.lastTenFinalities[% @i - 1 %][0] ~ and gave ~i player.stats.lastTenFinalities[% @i - 1 %][1] ~ FP and ~i player.stats.lastTenFinalities[% @i - 1 %][2] ~ FS.</span></span>
+          <span% (@i > 1) ? ` ~style.display=Stats.showRun(${@i}, 'finality') ? '' : 'none'~` : "" %>% (@i > 1) ? `The finality ${@numbers[@i]} finalities ago` : "Last finality" % took ~t player.stats.lastTenFinalities[% @i - 1 %][0] ~ and gave ~i player.stats.lastTenFinalities[% @i - 1 %][1] ~ FP and ~i player.stats.lastTenFinalities[% @i - 1 %][2] ~ FS.</span>
         </loop>
       </div>
       <br/>
