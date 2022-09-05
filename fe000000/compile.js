@@ -1,6 +1,11 @@
 let fs = require('fs');
 
-let preprocessorVars = {};
+let preprocessorVars = {
+  colors: ['brown', 'cyan', 'gold', 'green', 'grey', 'magenta', 'orange', 'purple', 'red', 'yellow'],
+  titleColors: ['Brown', 'Cyan', 'Gold', 'Green', 'Grey', 'Magenta', 'Orange', 'Purple', 'Red', 'Yellow'],
+  numbers: ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
+  'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty']
+};
 
 let access = (x, l) => (l.length > 0) ? access(x[l[0]], l.slice(1)) : x;
 
@@ -42,7 +47,7 @@ function preprocess(x) {
 }
 
 function preprocessString(s) {
-  return s.replace(/% [^%]+ %/g, x => eval(x.slice(2, -2).replace('@', 'preprocessorVars.')));
+  return s.replace(/% [^%]+ %/g, x => eval(x.slice(2, -2).replace(/@/g, 'preprocessorVars.')));
 }
 
 function preprocessFinal(x) {
