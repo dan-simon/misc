@@ -1440,6 +1440,10 @@ let Saving = {
       player.lastPresetIndices.push(0);
       player.version = 2.1640625;
     }
+    if (player.version < 2.1640625) {
+      player.options.autobuyers.explanation = '';
+      player.version = 2.1640625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

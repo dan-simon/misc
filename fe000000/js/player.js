@@ -432,8 +432,9 @@ let initialPlayer = {
         infinityChallenge: false,
       },
       showGeneratorAndBoostAutobuyers: true,
-      isOnDespiteSuspended: [false, false, false, false]
-    }
+      isOnDespiteSuspended: [false, false, false, false],
+      explanation: ''
+    },
   },
   confirmations: {
     sacrifice: true,
@@ -545,7 +546,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.16015625
+  version: 2.1640625
 }
 
 let player;

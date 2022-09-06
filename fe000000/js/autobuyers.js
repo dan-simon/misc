@@ -436,3 +436,23 @@ let Autobuyers = {
 }
 
 defined.autobuyers = true;
+
+let AutobuyerExplanations = {
+  isVisible(x) {
+    return {
+      'any': [10, 11, 12].some(x => Autobuyer(x).hasAutobuyer()) || PrestigeLayerProgress.hasReached('eternity'),
+      'basic': [10, 11, 12].some(x => Autobuyer(x).hasAutobuyer()) || PrestigeLayerProgress.hasReached('eternity'),
+      'per-sec': Autobuyer(12).hasAutobuyer() || PrestigeLayerProgress.hasReached('eternity')
+    }[x];
+  },
+  isShown(x) {
+    return player.options.autobuyers.explanation === x;
+  },
+  showOrHide(x) {
+    if (player.options.autobuyers.explanation === x) {
+      player.options.autobuyers.explanation = '';
+    } else {
+      player.options.autobuyers.explanation = x;
+    }
+  }
+}
