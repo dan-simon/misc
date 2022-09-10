@@ -15,7 +15,7 @@ let ChallengeHeaderText = {
     // Don't include 1.
     let nextComplexityChallenges = [2, 3, 4, 5, 6].filter(x => ComplexityChallenge.isComplexityChallengeNext(x)).map(x => formatOrdinalInt(x));
     if (nextComplexityChallenges.length > 0) {
-      return 'You will enter Complexity Challenge' + pluralize(nextComplexityChallenges.length, '', 's') + ' ' + coordinate('*', '', nextComplexityChallenges) + ' next complexity.';
+      return 'You\'ll enter ℂC' + pluralize(nextComplexityChallenges.length, '', 's ') + '' + coordinate('*', '', nextComplexityChallenges) + ' next complexity.';
     } else {
       return null;
     }
