@@ -131,7 +131,7 @@ let Chroma = {
       player.chroma.next = x;
     }
     if (x === 1) {
-      ComplexityChallenge.exitComplexityChallenge(4);
+      ComplexityChallenge.breakComplexityChallengeCondition(4);
       ComplexityAchievements.checkForComplexityAchievements('chroma');
     }
   },

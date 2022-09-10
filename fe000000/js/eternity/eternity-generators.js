@@ -21,7 +21,7 @@ let EternityGenerator = function (i) {
     addBought(n) {
       player.eternityGenerators[i - 1].bought += n;
       if (i === 8) {
-        ComplexityChallenge.exitComplexityChallenge(5);
+        ComplexityChallenge.breakComplexityChallengeCondition(5);
       }
     },
     costIncreasePer() {

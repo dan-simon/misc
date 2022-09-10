@@ -1444,6 +1444,24 @@ let Saving = {
       player.options.autobuyers.explanation = '';
       player.version = 2.1640625;
     }
+    if (player.version < 2.16796875) {
+      let complexities = player.complexities;
+      let baseRecs = [0, 2, 4, 6, 8, 12];
+      let mult = (player.finalities >= 2) ? 0 : (player.finalities === 1 ? 1 / 2 : 1);
+      let recs = baseRecs.map(i => i * mult);
+      let unlocks = recs.map(x => x <= complexities);
+      let nextUnlocks = recs.map(x => x <= complexities + 1);
+      player.cc = {
+        isComplexityChallengeConditionSatisfied: player.isComplexityChallengeRunning,
+        isComplexityChallengeNext: [null].concat(player.complexityChallengeSafeguards).map((x, i) => (i === 0) ? true :
+        (x && nextUnlocks[i] && !(player.isComplexityChallengeRunning[i] && unlocks[i]))),
+        isComplexityChallengeRunning: [null].concat(player.complexityChallengeSafeguards).map((x, i) => (i === 0) ? true :
+        (x && player.isComplexityChallengeRunning[i] && unlocks[i]))
+      }
+      delete player.isComplexityChallengeRunning;
+      delete player.complexityChallengeSafeguards;
+      player.version = 2.16796875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

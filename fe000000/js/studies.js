@@ -132,7 +132,7 @@ let Study = function (i) {
           player.studies[i - 1] = true;
           player.studySettings.firstTwelveStudyPurchaseOrder.push(i);
         }
-        ComplexityChallenge.exitComplexityChallenge(6);
+        ComplexityChallenge.breakComplexityChallengeCondition(6);
       }
     },
     refundText() {

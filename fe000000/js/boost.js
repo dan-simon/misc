@@ -12,7 +12,7 @@ let Boost = {
     player.boost.bought += n;
     player.highestBoostsBought = Math.max(player.highestBoostsBought, player.boost.bought);
     player.highestBoostsBoughtThisEternity = Math.max(player.highestBoostsBoughtThisEternity, player.boost.bought);
-    ComplexityChallenge.exitComplexityChallenge(2);
+    ComplexityChallenge.breakComplexityChallengeCondition(2);
   },
   costForOne(n) {
     return Decimal.pow(2, this.costSlowdown() * Math.pow(this.costSkip() * (this.bought() + this.costStart() + n - 1), this.costPower()));

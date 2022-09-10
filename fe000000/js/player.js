@@ -159,8 +159,11 @@ let initialPlayer = {
   complexityGenerators: initialComplexityGenerators(),
   highestComplexityGenerator: 0,
   complexityChallengeCompletions: [0, 0, 0, 0, 0, 0],
-  isComplexityChallengeRunning: [true, true, true, true, true, true],
-  complexityChallengeSafeguards: [false, false, false, false, false],
+  cc: {
+    isComplexityChallengeConditionSatisfied: [true, true, true, true, true, true],
+    isComplexityChallengeNext: [true, false, false, false, false, false],
+    isComplexityChallengeRunning: [true, true, true, true, true, true],
+  },
   complexityChallengeLastCompletion: [[-1, -1], [-1, -1], [-1, -1], [-1, -1], [-1, -1], [-1, -1]],
   complexityChallengeTimeSpent: [0, 0, 0, 0, 0, 0],
   isComplexityChallengeExplanationMovedDown: false,
@@ -546,7 +549,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.1640625
+  version: 2.16796875
 }
 
 let player;

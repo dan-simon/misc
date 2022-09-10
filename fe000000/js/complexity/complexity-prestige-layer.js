@@ -154,7 +154,9 @@ let ComplexityPrestigeLayer = {
     EternityChallenge.setEternityChallenge(0);
     player.complexityStars = new Decimal(2);
     ComplexityGenerators.list.forEach(x => x.resetAmount());
-    player.isComplexityChallengeRunning = [true, true, true, true, true, true];
+    for (let i = 2; i <= 6; i++) {
+      ComplexityChallenge.complexityChallengeUpdateState(i, false);
+    }
     player.boostPower = 1;
     if (!ComplexityAchievements.isComplexityAchievementActive(4, 4)) {
       player.bestBoostPower = 1;
@@ -178,7 +180,7 @@ let ComplexityPrestigeLayer = {
       player.lastPresetIndices[1] = 0;
     }
     if (Studies.list.some(x => x.isBought())) {
-      ComplexityChallenge.exitComplexityChallenge(6);
+      ComplexityChallenge.breakComplexityChallengeCondition(6);
     }
     player.studySettings.respecStudies = false;
     player.studySettings.boughtTheoremsThisComplexity = false;

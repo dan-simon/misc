@@ -111,7 +111,7 @@ let EternityProducer = {
       auto && player.eternityPoints.minus(this.unlockCost()).lt(2) && EternityGenerator(1).bought() === 0)) return;
     player.eternityPoints = player.eternityPoints.safeMinus(this.unlockCost());
     player.eternityProducer.unlocked = true;
-    ComplexityChallenge.exitComplexityChallenge(3);
+    ComplexityChallenge.breakComplexityChallengeCondition(3);
   },
   productionPerSecond() {
     return Eternities.commonEternityGainMultiplier().times(EternityProducerUpgrade(1).effect());

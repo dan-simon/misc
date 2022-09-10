@@ -15,11 +15,87 @@ let ComplexityChallenge = {
     x => Math.floor(x / 2),
   ],
   colors: [null, 'yellow', 'grey', 'purple', 'orange', 'cyan', 'green'],
-  isComplexityChallengeRunning(x) {
-    return player.isComplexityChallengeRunning[x - 1] && this.isComplexityChallengeUnlocked(x);
+  complexityChallengeUpdateState(x, isFinality) {
+    // Should never be called for CC1, be defensive.
+    if (x === 1) {
+      return;
+    }
+    if (player.cc.isComplexityChallengeRunning[x - 1] || !this.isComplexityChallengeUnlocked(x) || isFinality) {
+      // Exit, or if finality, don't enter no matter what.
+      // We need to check it's unlocked because the player could do a complexity reset to get here,
+      // and have one fewer complexity than they'd need.
+      let running = player.cc.isComplexityChallengeRunning[x - 1];
+      player.cc.isComplexityChallengeRunning[x - 1] = false;
+      // This code would otherwise restore theorems on finality, which we don't want.
+      if (running && !isFinality) {
+        this.specialExit(x);
+      }
+    } else if (this.isComplexityChallengeUnlocked(x)) {
+      // Enter if it's to be entered now.
+      player.cc.isComplexityChallengeRunning[x - 1] = player.cc.isComplexityChallengeNext[x - 1];
+    }
+    player.cc.isComplexityChallengeConditionSatisfied[x - 1] = true;
+    player.cc.isComplexityChallengeNext[x - 1] = false;
   },
-  exitComplexityChallenge(x) {
-    player.isComplexityChallengeRunning[x - 1] = false;
+  isComplexityChallengeRunning(x) {
+    return player.cc.isComplexityChallengeRunning[x - 1];
+  },
+  isComplexityChallengeNext(x) {
+    return player.cc.isComplexityChallengeNext[x - 1];
+  },
+  pressComplexityChallengeButton(x) {
+    // More defensiveness on 1
+    if (x === 1) {
+      return;
+    }
+    if (player.cc.isComplexityChallengeRunning[x - 1]) {
+      // Exit
+      player.cc.isComplexityChallengeRunning[x - 1] = false;
+      this.specialExit(x);
+    } else if (this.isComplexityChallengeUnlocked(x) && player.cc.isComplexityChallengeConditionSatisfied[x - 1]) {
+      // Enter
+      player.cc.isComplexityChallengeRunning[x - 1] = true;
+    } else if (this.willComplexityChallengeBeUnlockedNext(x)) {
+      // Enter next (also catches the case when you can't enter yet but can enter next, even if condition is satisfied).
+      player.cc.isComplexityChallengeNext[x - 1] = !player.cc.isComplexityChallengeNext[x - 1];
+    }
+  },
+  canPressComplexityChallengeButton(x) {
+    // Being in the challenge before it'll be unlocked next is an impossible state.
+    return x !== 1 && this.willComplexityChallengeBeUnlockedNext(x);
+  },
+  complexityChallengeButtonText(x) {
+    if (!this.canPressComplexityChallengeButton(x)) {
+      return 'Requires more complexities'
+    }
+    if (player.cc.isComplexityChallengeRunning[x - 1]) {
+      return 'Exit challenge'
+    } else if (this.isComplexityChallengeUnlocked(x) && player.cc.isComplexityChallengeConditionSatisfied[x - 1]) {
+      return 'Start challenge'
+    } else if (this.willComplexityChallengeBeUnlockedNext(x)) {
+      if (player.cc.isComplexityChallengeNext[x - 1]) {
+        return 'Start challenge next complexity: currently on';
+      } else {
+        return 'Start challenge next complexity: currently off'
+      }
+    }
+  },
+  breakComplexityChallengeCondition(x) {
+    // This should be impossible if the complexity challenge is running.
+    // I'm sure there's some weird edge case I'm not thinking of, so I'll be defensive here.
+    player.cc.isComplexityChallengeConditionSatisfied[x - 1] = false;
+    if (player.cc.isComplexityChallengeRunning[x - 1]) {
+      // Exit (this should never happen but who knows).
+      player.cc.isComplexityChallengeRunning[x - 1] = false;
+      this.specialExit(x);
+    }
+  },
+  specialExit(x) {
+    // Should only be called right after exit
+    if (x === 6 && ComplexityAchievements.isComplexityAchievementActive(4, 4) && Studies.rebuyAfterComplexityChallenge6()) {
+      player.studies = [...player.studySettings.studiesBeforeLastRespec];
+      player.studySettings.firstTwelveStudyPurchaseOrder = [...player.studySettings.firstTwelveStudyPurchaseOrderBeforeLastRespec];
+    }
   },
   getComplexityChallengeRequirement(x) {
     if (FinalityMilestones.isFinalityMilestoneActive(2)) {
@@ -35,6 +111,10 @@ let ComplexityChallenge = {
     // Yes, you can complete Complexity Challenge 1 before knowing that it exists.
     // Finality Milestone 2 also removes complexity requirements for unlocking complexity challenges.
     return player.complexities >= this.getComplexityChallengeRequirement(x) || FinalityMilestones.isFinalityMilestoneActive(2);
+  },
+  willComplexityChallengeBeUnlockedNext(x) {
+    // Similar to above except for a +1 because maybe you want to enter it next.
+    return player.complexities + 1 >= this.getComplexityChallengeRequirement(x) || FinalityMilestones.isFinalityMilestoneActive(2);
   },
   numberUnlocked() {
     return [1, 2, 3, 4, 5, 6].filter(i => this.isComplexityChallengeUnlocked(i)).length;
@@ -93,6 +173,9 @@ let ComplexityChallenge = {
     if (this.isComplexityChallengeRunning(x)) {
       description += ', running';
     }
+    if (this.isComplexityChallengeNext(x)) {
+      description += ', will run next complexity';
+    }
     return description;
   },
   showComplexityChallengeLastCompletionDescription(x) {
@@ -134,25 +217,8 @@ let ComplexityChallenge = {
     ComplexityPrestigeLayer.complexityReset(manual);
   },
   isSafeguardOn(x) {
-    return player.complexityChallengeSafeguards[x - 2];
-  },
-  toggleSafeguard(x) {
-    player.complexityChallengeSafeguards[x - 2] = !player.complexityChallengeSafeguards[x - 2];
-    if (x === 6 && !player.complexityChallengeSafeguards[x - 2] &&
-      ComplexityAchievements.isComplexityAchievementActive(4, 4) && Studies.rebuyAfterComplexityChallenge6()) {
-      player.studies = [...player.studySettings.studiesBeforeLastRespec];
-      player.studySettings.firstTwelveStudyPurchaseOrder = [...player.studySettings.firstTwelveStudyPurchaseOrderBeforeLastRespec];
-      if (!Studies.areStudiesInitialStudies()) {
-        ComplexityChallenge.exitComplexityChallenge(6);
-      }
-    }
-  },
-  safeguardStatusText(x) {
-    let running = ComplexityChallenge.isComplexityChallengeRunning(x)
-    let safeguard = (x === 1) ? running : ComplexityChallenge.isSafeguardOn(x);
-    let mainText = safeguard ? 'Disabled' : 'Enabled';
-    let extraText = (safeguard !== running) ? [' (not in challenge)', ' (in challenge)'][+running] : '';
-    return mainText + extraText;
+    // This function now does the same check that running does
+    return player.cc.isComplexityChallengeRunning[x - 1];
   },
   addToTimeStats(diff) {
     for (let i = 1; i <= 6; i++) {
@@ -167,7 +233,7 @@ let ComplexityChallenge = {
     return Math.pow(2, 16);
   },
   longTimeOn(x) {
-    return this.isSafeguardOn(x) && player.complexityChallengeTimeSpent[x - 1] >= this.longTimeThreshold();
+    return this.isComplexityChallengeRunning(x) && player.complexityChallengeTimeSpent[x - 1] >= this.longTimeThreshold();
   },
   anyLongTime() {
     return [2, 3, 4, 5, 6].some(x => this.longTimeOn(x));
@@ -192,8 +258,8 @@ let ComplexityChallenge = {
   color(x) {
     if (Options.complexityChallengeRunningColors()) {
       let running = this.isComplexityChallengeRunning(x);
-      let safeguard = (x === 1) ? running : this.isSafeguardOn(x);
-      return Colors.makeStyle('challenge' + ['red', 'orange', 'yellow', 'green'][+safeguard + 2 * +running], true);
+      let next = (x === 1) ? running : this.isComplexityChallengeNext(x);
+      return Colors.makeStyle('challenge' + ['red', 'yellow', 'green'][running ? 2 : (next ? 1 : 0)], true);
     } else {
       return Colors.makeStyle(1 - 2 / (2 + Math.log2(1 + this.getComplexityChallengeCompletions(x) / 2)), true);
     }
