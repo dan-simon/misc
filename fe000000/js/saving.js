@@ -1452,7 +1452,7 @@ let Saving = {
       let unlocks = recs.map(x => x <= complexities);
       let nextUnlocks = recs.map(x => x <= complexities + 1);
       player.cc = {
-        isComplexityChallengeConditionSatisfied: player.isComplexityChallengeRunning,
+        isComplexityChallengeConditionSatisfied: player.isComplexityChallengeRunning.map((x, i) => x && unlocks[i]),
         isComplexityChallengeNext: [null].concat(player.complexityChallengeSafeguards).map((x, i) => (i === 0) ? true :
         (x && nextUnlocks[i] && !(player.isComplexityChallengeRunning[i] && unlocks[i]))),
         isComplexityChallengeRunning: [null].concat(player.complexityChallengeSafeguards).map((x, i) => (i === 0) ? true :

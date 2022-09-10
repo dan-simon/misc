@@ -162,7 +162,7 @@ let initialPlayer = {
   cc: {
     isComplexityChallengeConditionSatisfied: [true, true, true, true, true, true],
     isComplexityChallengeNext: [true, false, false, false, false, false],
-    isComplexityChallengeRunning: [true, true, true, true, true, true],
+    isComplexityChallengeRunning: [true, false, false, false, false, false],
   },
   complexityChallengeLastCompletion: [[-1, -1], [-1, -1], [-1, -1], [-1, -1], [-1, -1], [-1, -1]],
   complexityChallengeTimeSpent: [0, 0, 0, 0, 0, 0],
