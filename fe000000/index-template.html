@@ -2594,7 +2594,7 @@
       </span>
       <br/>
       <span>
-        <button ~style.display=(ComplexityAchievements.isComplexityAchievementClose(1, 3) || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~ onclick="ComplexityAchievements.toggleAchievement(1, 3)">More colorful than a potato: ~r (ComplexityAchievements.isComplexityAchievementDisabled(1, 3) ? "Disabled" : "Enabled") + (ComplexityAchievements.hasComplexityAchievement(1, 3) ? '' : ' (once unlocked)') ~</button>
+        <button ~style.display=(ComplexityAchievements.hasComplexityAchievement(1, 3) || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~ onclick="ComplexityAchievements.toggleAchievement(1, 3)">More colorful than a potato: ~r (ComplexityAchievements.isComplexityAchievementDisabled(1, 3) ? "Disabled" : "Enabled") + (ComplexityAchievements.hasComplexityAchievement(1, 3) ? '' : ' (once unlocked)') ~</button>
       </span>
       <br/>
       <span ~class=ComplexityAchievements.getAchievementsUnlockedRewardClass(1)~>

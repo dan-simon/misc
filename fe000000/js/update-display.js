@@ -3523,7 +3523,7 @@ function updateDisplay() {
   if (b[1097].style.display !== "none") {
     if (shouldUpdate("e1327")) {let v = formatInt(ComplexityAchievements.getTotalAchievementsUnlocked()); if (e[1327].textContent !== v) {e[1327].textContent = v};};
     if (shouldUpdate("e1328")) {let v = pluralize(ComplexityAchievements.getTotalAchievementsUnlocked(), '', 's'); if (e[1328].textContent !== v) {e[1328].textContent = v};};
-    if (shouldUpdate("b1098")) {let v = (ComplexityAchievements.isComplexityAchievementClose(1, 3) || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'; if (b[1098].style.display !== v) {b[1098].style.display = v};};
+    if (shouldUpdate("b1098")) {let v = (ComplexityAchievements.hasComplexityAchievement(1, 3) || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'; if (b[1098].style.display !== v) {b[1098].style.display = v};};
     if (shouldUpdate("e1329")) {let v = (ComplexityAchievements.isComplexityAchievementDisabled(1, 3) ? "Disabled" : "Enabled") + (ComplexityAchievements.hasComplexityAchievement(1, 3) ? '' : ' (once unlocked)'); if (e[1329].textContent !== v) {e[1329].textContent = v};};
     if (shouldUpdate("b1099")) {let v = ComplexityAchievements.getAchievementsUnlockedRewardClass(1); if (b[1099].className !== v) {b[1099].className = v};};
     if (shouldUpdate("e1330")) {let v = formatInt(ComplexityAchievements.getAchievementsUnlockedRewardThreshold(1)); if (e[1330].textContent !== v) {e[1330].textContent = v};};

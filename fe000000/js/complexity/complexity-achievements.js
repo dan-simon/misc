@@ -151,9 +151,6 @@ let ComplexityAchievements = {
   isComplexityAchievementActive(row, column) {
     return this.hasComplexityAchievement(row, column) && !this.isComplexityAchievementDisabled(row, column);
   },
-  isComplexityAchievementClose(row, column) {
-    return ComplexityChallenge.isComplexityChallengeUnlocked(this.complexityChallengeFor(row));
-  },
   toggleAchievement(row, column) {
     if (row === 1 && column === 3) {
       player.complexityAchievementsEnabled[[1].indexOf(row)] = !player.complexityAchievementsEnabled[[1].indexOf(row)];
