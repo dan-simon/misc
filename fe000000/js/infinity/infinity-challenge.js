@@ -33,6 +33,9 @@ let InfinityChallenge = {
       this.startInfinityChallenge(x);
     }
   },
+  canStartOrExitInfinityChallenge(x) {
+    return this.isInfinityChallengeRequirementReached(x);
+  },
   restartInfinityChallenge() {
     let running = this.currentInfinityChallenge();
     if (running !== 0) {

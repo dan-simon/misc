@@ -59,6 +59,9 @@ let EternityChallenge = {
       this.unlockEternityChallenge(x);
     }
   },
+  canPressEternityChallengeButton(x) {
+    return this.isEternityChallengeUnlockingMeaningless() || this.getUnlockedEternityChallenge() === x || this.canEternityChallengeBeUnlocked(x);
+  },
   eternityChallengeButtonText(x) {
     if (this.isEternityChallengeRunning(x)) {
       return 'Exit challenge';

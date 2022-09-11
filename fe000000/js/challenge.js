@@ -27,6 +27,9 @@ let Challenge = {
       this.startChallenge(x);
     }
   },
+  canStartOrExitChallenge(x) {
+    return PrestigeLayerProgress.hasReached('infinity');
+  },
   restartChallenge() {
     let running = this.currentChallenge();
     if (running !== 0) {
