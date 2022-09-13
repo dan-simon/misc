@@ -1790,9 +1790,9 @@ function updateDisplay() {
     if (shouldUpdate("b271")) {let v = (Autobuyers.areAnyAutobuyersSlow() && Autobuyers.areAnyAutobuyersFast()) ? '' : 'none'; if (b[271].style.display !== v) {b[271].style.display = v};};
     if (shouldUpdate("b272")) {let v = Explanations.isVisible('autobuyers', 'any') ? '' : 'none' ; if (b[272].style.display !== v) {b[272].style.display = v};};
     if (shouldUpdate("b273")) {let v = Explanations.isVisible('autobuyers', 'basic') ? '' : 'none'; if (b[273].style.display !== v) {b[273].style.display = v};};
-    if (shouldUpdate("e338")) {let v = Explanations.isShown('autobuyers', 'basic') ? 'Hide' : 'Show'; if (e[338].textContent !== v) {e[338].textContent = v};};
+    if (shouldUpdate("e338")) {let v = Explanations.isShown('autobuyers', 'basic') ? 'Shown' : 'Hidden'; if (e[338].textContent !== v) {e[338].textContent = v};};
     if (shouldUpdate("b274")) {let v = Explanations.isVisible('autobuyers', 'per-sec') ? '' : 'none'; if (b[274].style.display !== v) {b[274].style.display = v};};
-    if (shouldUpdate("e339")) {let v = Explanations.isShown('autobuyers', 'per-sec') ? 'Hide' : 'Show'; if (e[339].textContent !== v) {e[339].textContent = v};};
+    if (shouldUpdate("e339")) {let v = Explanations.isShown('autobuyers', 'per-sec') ? 'Shown' : 'Hidden'; if (e[339].textContent !== v) {e[339].textContent = v};};
     if (shouldUpdate("b275")) {let v = Explanations.isShown('autobuyers', 'basic') ? '' : 'none'; if (b[275].style.display !== v) {b[275].style.display = v};};
     if (shouldUpdate("e340")) {let v = formatInt(60); if (e[340].textContent !== v) {e[340].textContent = v};};
     if (shouldUpdate("e341")) {let v = formatTime(60, {seconds: {f: formatTimeInt, s: true}, larger: {f: formatTimeNum, s: false}}); if (e[341].textContent !== v) {e[341].textContent = v};};
@@ -2234,7 +2234,7 @@ function updateDisplay() {
     if (shouldUpdate("e638")) {let v = formatInt(8); if (e[638].textContent !== v) {e[638].textContent = v};};
     if (shouldUpdate("e639")) {let v = (EternityMilestones.isEternityMilestoneDisabled(8) ? "Disabled" : "Enabled") + (EternityMilestones.hasEternityMilestone(8) ? '' : ' (once unlocked)'); if (e[639].textContent !== v) {e[639].textContent = v};};
     if (shouldUpdate("b445")) {let v = Explanations.isVisible('eternity-milestones', 'main') ? '' : 'none'; if (b[445].style.display !== v) {b[445].style.display = v};};
-    if (shouldUpdate("e640")) {let v = Explanations.isShown('eternity-milestones', 'main') ? 'Hide' : 'Show'; if (e[640].textContent !== v) {e[640].textContent = v};};
+    if (shouldUpdate("e640")) {let v = Explanations.isShown('eternity-milestones', 'main') ? 'Shown' : 'Hidden'; if (e[640].textContent !== v) {e[640].textContent = v};};
     if (shouldUpdate("b446")) {let v = Explanations.isShown('eternity-milestones', 'main') ? '' : 'none'; if (b[446].style.display !== v) {b[446].style.display = v};};
     if (shouldUpdate("b447")) {let v = EternityMilestones.color(1); if (b[447].style.background !== v) {b[447].style.background = v};};
     if (shouldUpdate("e641")) {let v = formatInt(1); if (e[641].textContent !== v) {e[641].textContent = v};};
@@ -3424,7 +3424,7 @@ function updateDisplay() {
     if (shouldUpdate("e1273")) {let v = format(ComplexityStars.complexityChallengeRewardMultiplier(6)); if (e[1273].textContent !== v) {e[1273].textContent = v};};
     if (shouldUpdate("e1274")) {let v = format(ComplexityStars.extraAmount()); if (e[1274].textContent !== v) {e[1274].textContent = v};};
     if (shouldUpdate("b1053")) {let v = Explanations.isVisible('complexity-challenges', 'main') ? '' : 'none'; if (b[1053].style.display !== v) {b[1053].style.display = v};};
-    if (shouldUpdate("e1275")) {let v = Explanations.isShown('complexity-challenges', 'main') ? 'Hide' : 'Show'; if (e[1275].textContent !== v) {e[1275].textContent = v};};
+    if (shouldUpdate("e1275")) {let v = Explanations.isShown('complexity-challenges', 'main') ? 'Shown' : 'Hidden'; if (e[1275].textContent !== v) {e[1275].textContent = v};};
     if (shouldUpdate("b1054")) {let v = Explanations.isShown('complexity-challenges', 'main') ? '' : 'none'; if (b[1054].style.display !== v) {b[1054].style.display = v};};
     if (shouldUpdate("b1055")) {let v = Trivia.show('CC1 pre-complexity completion') ? '' : 'none'; if (b[1055].style.display !== v) {b[1055].style.display = v};};
     if (shouldUpdate("e1276")) {let v = formatOrdinalInt(1); if (e[1276].textContent !== v) {e[1276].textContent = v};};
@@ -3644,7 +3644,7 @@ function updateDisplay() {
     if (shouldUpdate("e1415")) {let v = formatInt(Powers.equippedLimit()); if (e[1415].textContent !== v) {e[1415].textContent = v};};
     if (shouldUpdate("e1416")) {let v = pluralize(Powers.equippedLimit(), '', 's'); if (e[1416].textContent !== v) {e[1416].textContent = v};};
     if (shouldUpdate("b1129")) {let v = Explanations.isVisible('powers', 'main') ? '' : 'none'; if (b[1129].style.display !== v) {b[1129].style.display = v};};
-    if (shouldUpdate("e1417")) {let v = Explanations.isShown('powers', 'main') ? 'Hide' : 'Show'; if (e[1417].textContent !== v) {e[1417].textContent = v};};
+    if (shouldUpdate("e1417")) {let v = Explanations.isShown('powers', 'main') ? 'Shown' : 'Hidden'; if (e[1417].textContent !== v) {e[1417].textContent = v};};
     if (shouldUpdate("b1130")) {let v = Explanations.isShown('powers', 'main') ? '' : 'none'; if (b[1130].style.display !== v) {b[1130].style.display = v};};
     if (shouldUpdate("e1418")) {let v = formatInt(Powers.equippedLimit()); if (e[1418].textContent !== v) {e[1418].textContent = v};};
     if (shouldUpdate("e1419")) {let v = pluralize(Powers.equippedLimit(), '', 's'); if (e[1419].textContent !== v) {e[1419].textContent = v};};
@@ -6140,7 +6140,7 @@ function updateDisplay() {
   if (b[2461].style.display !== "none") {
     if (shouldUpdate("b2462")) {let v = Options.showExportNotification() ? 'redspan' : ''; if (b[2462].className !== v) {b[2462].className = v};};
     if (shouldUpdate("b2463")) {let v = Explanations.isVisible('options', 'offline') ? '' : 'none'; if (b[2463].style.display !== v) {b[2463].style.display = v};};
-    if (shouldUpdate("e2646")) {let v = Explanations.isShown('options', 'offline') ? 'Hide' : 'Show'; if (e[2646].textContent !== v) {e[2646].textContent = v};};
+    if (shouldUpdate("e2646")) {let v = Explanations.isShown('options', 'offline') ? 'Shown' : 'Hidden'; if (e[2646].textContent !== v) {e[2646].textContent = v};};
     if (shouldUpdate("b2464")) {let v = Explanations.isShown('options', 'offline') ? '' : 'none'; if (b[2464].style.display !== v) {b[2464].style.display = v};};
     if (shouldUpdate("e2647")) {let v = formatTime(0.064, {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2647].textContent !== v) {e[2647].textContent = v};};
     if (shouldUpdate("e2648")) {let v = formatTime(86400, {seconds: {f: formatTimeMaybeInt, s: true}, larger: {f: formatTimeMaybeInt, s: true}}); if (e[2648].textContent !== v) {e[2648].textContent = v};};

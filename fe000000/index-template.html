@@ -590,7 +590,7 @@
       <div ~style.display=(Autobuyers.anyNonGeneratorAndBoostDisplay() || (Autobuyers.areAnyAutobuyersSlow() && Autobuyers.areAnyAutobuyersFast())) ? '' : 'none'~>
         <span><button onclick="Autobuyers.toggleShowGeneratorAndBoost()" ~style.display=Autobuyers.anyNonGeneratorAndBoostDisplay() ? '' : 'none'~>Show generator and boost autobuyers: ~r Autobuyers.showGeneratorAndBoost() ? 'On' : 'Off' ~</button> <button onclick="Autobuyers.synchronize()" ~style.display=(Autobuyers.areAnyAutobuyersSlow() && Autobuyers.areAnyAutobuyersFast()) ? '' : 'none'~>Synchronize slow and fast autobuyers</button></span>
       </div>
-      <span ~style.display=Explanations.isVisible('autobuyers', 'any') ? '' : 'none' ~>Explanations: <button ~style.display=Explanations.isVisible('autobuyers', 'basic') ? '' : 'none'~ onclick="Explanations.showOrHide('autobuyers', 'basic')">~r Explanations.isShown('autobuyers', 'basic') ? 'Hide' : 'Show' ~: Autobuyers with text inputs</button> <button ~style.display=Explanations.isVisible('autobuyers', 'per-sec') ? '' : 'none'~ onclick="Explanations.showOrHide('autobuyers', 'per-sec')">~r Explanations.isShown('autobuyers', 'per-sec') ? 'Hide' : 'Show' ~: Autobuyer modes with /sec</button></span>
+      <span ~style.display=Explanations.isVisible('autobuyers', 'any') ? '' : 'none' ~>Explanations: <button ~style.display=Explanations.isVisible('autobuyers', 'basic') ? '' : 'none'~ onclick="Explanations.showOrHide('autobuyers', 'basic')">Autobuyers with text inputs: ~r Explanations.isShown('autobuyers', 'basic') ? 'Shown' : 'Hidden' ~</button> <button ~style.display=Explanations.isVisible('autobuyers', 'per-sec') ? '' : 'none'~ onclick="Explanations.showOrHide('autobuyers', 'per-sec')">Autobuyer modes with /sec: ~r Explanations.isShown('autobuyers', 'per-sec') ? 'Shown' : 'Hidden' ~</button></span>
       <div style="width: 1024px; margin-left: auto; margin-right: auto;" ~style.display=Explanations.isShown('autobuyers', 'basic') ? '' : 'none'~>
         <span>Autobuyers for some type of reset, such as the sacrifice, prestige, and infinity autobuyers, each have a text input, and have a mode which describes how that input is used. That text input is always converted to a number, which is then (for time-based modes) considered as a number of seconds, or (for other modes) just used as a number.</span>
         <br/>
@@ -1204,7 +1204,7 @@
         <button ~style.display=(EternityMilestones.hasEternityMilestone(6) || PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~ onclick="EternityMilestones.toggleMilestone(6)">Eternity Milestone ~i 6 ~: ~r (EternityMilestones.isEternityMilestoneDisabled(6) ? "Disabled" : "Enabled") + (EternityMilestones.hasEternityMilestone(6) ? '' : ' (once unlocked)') ~</button>
         <button ~style.display=(EternityMilestones.hasEternityMilestone(8) || PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~ onclick="EternityMilestones.toggleMilestone(8)">Eternity Milestone ~i 8 ~: ~r (EternityMilestones.isEternityMilestoneDisabled(8) ? "Disabled" : "Enabled") + (EternityMilestones.hasEternityMilestone(8) ? '' : ' (once unlocked)') ~</button>
       </span>
-      <button ~style.display=Explanations.isVisible('eternity-milestones', 'main') ? '' : 'none'~ onclick="Explanations.showOrHide('eternity-milestones', 'main')">~r Explanations.isShown('eternity-milestones', 'main') ? 'Hide' : 'Show' ~: Complexity reset effect explanation</button>
+      <button ~style.display=Explanations.isVisible('eternity-milestones', 'main') ? '' : 'none'~ onclick="Explanations.showOrHide('eternity-milestones', 'main')">Complexity reset effect explanation: ~r Explanations.isShown('eternity-milestones', 'main') ? 'Shown' : 'Hidden' ~:</button>
       <div style="width: 1024px; margin-left: auto; margin-right: auto;" ~style.display=Explanations.isShown('eternity-milestones', 'main') ? '' : 'none'~>
         <span>Complexity and resets beyond complexity will reset eternity milestones, and will lock those milestones (including the ones saying "Start each ... complexity"), removing their effects until you unlock the milestones again. Once you start with enough eternities after complexity to start with eternity milestones unlocked, however, those milestones will have an effect even at the start of a complexity. This situation will also arise later in the game with other similar mechanics.<span>
       </div>
@@ -2363,7 +2363,7 @@
       <span ~style.display=FinalityMilestones.isFinalityMilestoneActive(9) ? '' : 'none'~>The Complexity Challenge ~o 6 ~ reward is instead currently ~f ComplexityStars.complexityChallengeRewardMultiplier(6) ~x stronger (from ~f ComplexityStars.extraAmount() ~ hypercomplexity stars).</span>
       <br/>
       <br/>
-      <span>You do not need to complexity to complete complexity challenges. <button ~style.display=Explanations.isVisible('complexity-challenges', 'main') ? '' : 'none'~ onclick="Explanations.showOrHide('complexity-challenges', 'main')">~r Explanations.isShown('complexity-challenges', 'main') ? 'Hide' : 'Show' ~: Complexity challenges explanation</button></span>
+      <span>You do not need to complexity to complete complexity challenges. <button ~style.display=Explanations.isVisible('complexity-challenges', 'main') ? '' : 'none'~ onclick="Explanations.showOrHide('complexity-challenges', 'main')">Complexity challenges explanation: ~r Explanations.isShown('complexity-challenges', 'main') ? 'Shown' : 'Hidden' ~</button></span>
       <div style="width: 1024px; margin-left: auto; margin-right: auto;" ~style.display=Explanations.isShown('complexity-challenges', 'main') ? '' : 'none'~>
         <span>
           Being in a complexity challenge doesn't prevent you from violating its condition. Instead, violating the condition makes you exit the complexity challenge. Thus, you are automatically in whichever complexity challenges you have not yet violated the condition of this complexity. In particular, when starting a new complexity, you will be in all complexity challenges that you've unlocked at once.
@@ -2763,7 +2763,7 @@
           <br/>
           <br/>
         </div>
-        <span>You have ~i Powers.equipped().length ~/~i Powers.equippedLimit() ~ equipped power~s Powers.equippedLimit() ~. <button ~style.display=Explanations.isVisible('powers', 'main') ? '' : 'none'~ onclick="Explanations.showOrHide('powers', 'main')">~r Explanations.isShown('powers', 'main') ? 'Hide' : 'Show' ~: Powers explanation</button></span>
+        <span>You have ~i Powers.equipped().length ~/~i Powers.equippedLimit() ~ equipped power~s Powers.equippedLimit() ~. <button ~style.display=Explanations.isVisible('powers', 'main') ? '' : 'none'~ onclick="Explanations.showOrHide('powers', 'main')">Powers explanation: ~r Explanations.isShown('powers', 'main') ? 'Shown' : 'Hidden' ~</button></span>
         <br/>
         <div style="width: 1024px; margin-left: auto; margin-right: auto;" ~style.display=Explanations.isShown('powers', 'main') ? '' : 'none'~>
           <span>Each power raises all of a generator type's multipliers to a power. Up to ~i Powers.equippedLimit() ~ power~s Powers.equippedLimit() ~ can be equipped at the same time.</span>
@@ -4344,7 +4344,7 @@
     <tab ~style.display=Tabs.currentTab() === 'options' ? '' : 'none'~>
       <span><button ~class-name=Options.showExportNotification() ? 'redspan' : ''~ onclick="Options.setOptionTypeShown('saving')">Show saving options</button> <button onclick="Options.setOptionTypeShown('color')">Show color options</button> <button onclick="Options.setOptionTypeShown('tab')">Show tab options</button> <button onclick="Options.setOptionTypeShown('other')">Show other options</button></span>
       <br/>
-      <button ~style.display=Explanations.isVisible('options', 'offline') ? '' : 'none'~ onclick="Explanations.showOrHide('options', 'offline')">~r Explanations.isShown('options', 'offline') ? 'Hide' : 'Show' ~: Offline progress explanation</button>
+      <button ~style.display=Explanations.isVisible('options', 'offline') ? '' : 'none'~ onclick="Explanations.showOrHide('options', 'offline')">Offline progress explanation: ~r Explanations.isShown('options', 'offline') ? 'Shown' : 'Hidden' ~</button>
       <div style="width: 1024px; margin-left: auto; margin-right: auto;" ~style.display=Explanations.isShown('options', 'offline') ? '' : 'none'~>
         <span>When you're online, every ~t 0.064 ~ the game updates variable values and produces stuff. These updates are called ticks.</span>
         <br/>
