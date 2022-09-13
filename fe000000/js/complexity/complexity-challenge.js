@@ -183,12 +183,6 @@ let ComplexityChallenge = {
       }
     }
   },
-  isExplanationMovedDown() {
-    return player.isComplexityChallengeExplanationMovedDown;
-  },
-  moveExplanation() {
-    player.isComplexityChallengeExplanationMovedDown = !player.isComplexityChallengeExplanationMovedDown;
-  },
   color(x) {
     if (Options.complexityChallengeRunningColors()) {
       let running = this.isComplexityChallengeRunning(x);

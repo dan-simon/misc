@@ -721,12 +721,6 @@ let Powers = {
   toggleAutoLoad() {
     player.powerListAutoLoad.on = !player.powerListAutoLoad.on;
   },
-  isExplanationMovedDown() {
-    return player.isPowersExplanationMovedDown;
-  },
-  moveExplanation() {
-    player.isPowersExplanationMovedDown = !player.isPowersExplanationMovedDown;
-  },
   tabColors() {
     return ['normal', 'infinity', 'eternity', 'complexity'];
   },

@@ -63,6 +63,7 @@
   <script src="js/chroma.js?time=%time%"></script>
   <script src="js/colors.js?time=%time%"></script>
   <script src="js/coordinate.js?time=%time%"></script>
+  <script src="js/explanations.js?time=%time%"></script>
   <script src="js/fit-to-width.js?time=%time%"></script>
   <script src="js/galaxy.js?time=%time%"></script>
   <script src="js/generators.js?time=%time%"></script>
@@ -106,7 +107,7 @@
     <br/>
     <span>Reloading might work, so probably try that first.</span>
     <br id="script-count-br" style="display: none;"/>
-    <span id="script-count-span" style="display: none;">The page loads <span id="script-count"></span> scripts (should be 91).</span>
+    <span id="script-count-span" style="display: none;">The page loads <span id="script-count"></span> scripts (should be 92).</span>
     <br/>
     <span><button onclick="window.location.reload(true)">Reload window</button> <button class="export-button" onclick="Saving.exportGame(0)">Export</button> <button onclick="Saving.loadGamePrompt()">Import/Load</button> <button onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></span>
   </div>
@@ -589,8 +590,8 @@
       <div ~style.display=(Autobuyers.anyNonGeneratorAndBoostDisplay() || (Autobuyers.areAnyAutobuyersSlow() && Autobuyers.areAnyAutobuyersFast())) ? '' : 'none'~>
         <span><button onclick="Autobuyers.toggleShowGeneratorAndBoost()" ~style.display=Autobuyers.anyNonGeneratorAndBoostDisplay() ? '' : 'none'~>Show generator and boost autobuyers: ~r Autobuyers.showGeneratorAndBoost() ? 'On' : 'Off' ~</button> <button onclick="Autobuyers.synchronize()" ~style.display=(Autobuyers.areAnyAutobuyersSlow() && Autobuyers.areAnyAutobuyersFast()) ? '' : 'none'~>Synchronize slow and fast autobuyers</button></span>
       </div>
-      <span ~style.display=AutobuyerExplanations.isVisible('any') ? '' : 'none' ~>Explanations: <button ~style.display=AutobuyerExplanations.isVisible('basic') ? '' : 'none'~ onclick="AutobuyerExplanations.showOrHide('basic')">~r AutobuyerExplanations.isShown('basic') ? 'Hide' : 'Show' ~: Autobuyers with text inputs</button> <button ~style.display=AutobuyerExplanations.isVisible('per-sec') ? '' : 'none'~ onclick="AutobuyerExplanations.showOrHide('per-sec')">~r AutobuyerExplanations.isShown('per-sec') ? 'Hide' : 'Show' ~: Autobuyer modes with /sec</button></span>
-      <div style="width: 1024px; margin-left: auto; margin-right: auto;" ~style.display=AutobuyerExplanations.isShown('basic') ? '' : 'none'~>
+      <span ~style.display=Explanations.isVisible('autobuyers', 'any') ? '' : 'none' ~>Explanations: <button ~style.display=Explanations.isVisible('autobuyers', 'basic') ? '' : 'none'~ onclick="Explanations.showOrHide('autobuyers', 'basic')">~r Explanations.isShown('autobuyers', 'basic') ? 'Hide' : 'Show' ~: Autobuyers with text inputs</button> <button ~style.display=Explanations.isVisible('autobuyers', 'per-sec') ? '' : 'none'~ onclick="Explanations.showOrHide('autobuyers', 'per-sec')">~r Explanations.isShown('autobuyers', 'per-sec') ? 'Hide' : 'Show' ~: Autobuyer modes with /sec</button></span>
+      <div style="width: 1024px; margin-left: auto; margin-right: auto;" ~style.display=Explanations.isShown('autobuyers', 'basic') ? '' : 'none'~>
         <span>Autobuyers for some type of reset, such as the sacrifice, prestige, and infinity autobuyers, each have a text input, and have a mode which describes how that input is used. That text input is always converted to a number, which is then (for time-based modes) considered as a number of seconds, or (for other modes) just used as a number.</span>
         <br/>
         <br/>
@@ -601,7 +602,7 @@
         <br/>
         <br/>
       </div>
-      <div style="width: 1024px; margin-left: auto; margin-right: auto;" ~style.display=AutobuyerExplanations.isShown('per-sec') ? '' : 'none'~>
+      <div style="width: 1024px; margin-left: auto; margin-right: auto;" ~style.display=Explanations.isShown('autobuyers', 'per-sec') ? '' : 'none'~>
         <span ~style.display=(InfinityPrestigeLayer.canInfinityBeBroken() || PrestigeLayerProgress.hasReached('eternity')) ? 'none' : ''~>This explanation will become a lot more useful once you break infinity and can get more than ~i 2 ~ IP from a single infinity. For now, you can just set your infinity autobuyer to mode "Amount" and put ~i 2 ~ in its text input. If you want to read this explanation even though it's not useful yet, though, you can.</span>
         <br ~style.display=(InfinityPrestigeLayer.canInfinityBeBroken() || PrestigeLayerProgress.hasReached('eternity')) ? 'none' : ''~/>
         <span>I know this explanation is fairly long and takes a while to get to the point, but I think it's useful for understanding the autobuyer modes with /sec, which are some of the most useful autobuyer modes in the game. Hopefully it's thorough enough to not be confusing.</span>
@@ -1203,12 +1204,10 @@
         <button ~style.display=(EternityMilestones.hasEternityMilestone(6) || PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~ onclick="EternityMilestones.toggleMilestone(6)">Eternity Milestone ~i 6 ~: ~r (EternityMilestones.isEternityMilestoneDisabled(6) ? "Disabled" : "Enabled") + (EternityMilestones.hasEternityMilestone(6) ? '' : ' (once unlocked)') ~</button>
         <button ~style.display=(EternityMilestones.hasEternityMilestone(8) || PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~ onclick="EternityMilestones.toggleMilestone(8)">Eternity Milestone ~i 8 ~: ~r (EternityMilestones.isEternityMilestoneDisabled(8) ? "Disabled" : "Enabled") + (EternityMilestones.hasEternityMilestone(8) ? '' : ' (once unlocked)') ~</button>
       </span>
-      <div style="width: 1024px; margin-left: auto; margin-right: auto;" ~style.display=(PrestigeLayerProgress.hasReached('complexity') && !EternityMilestones.isExplanationMovedDown()) ? '' : 'none'~>
-        <span>Complexity and resets beyond complexity will reset eternity milestones, and will lock those milestones (including the ones saying "Start each ... complexity"), removing their effects until you unlock the milestones again. Once you start with enough eternities after complexity to start with eternity milestones unlocked, however, those milestones will have an effect even at the start of a complexity. This situation will also arise later in the game with other similar mechanics.</span>
+      <button ~style.display=Explanations.isVisible('eternity-milestones', 'main') ? '' : 'none'~ onclick="Explanations.showOrHide('eternity-milestones', 'main')">~r Explanations.isShown('eternity-milestones', 'main') ? 'Hide' : 'Show' ~: Complexity reset effect explanation</button>
+      <div style="width: 1024px; margin-left: auto; margin-right: auto;" ~style.display=Explanations.isShown('eternity-milestones', 'main') ? '' : 'none'~>
+        <span>Complexity and resets beyond complexity will reset eternity milestones, and will lock those milestones (including the ones saying "Start each ... complexity"), removing their effects until you unlock the milestones again. Once you start with enough eternities after complexity to start with eternity milestones unlocked, however, those milestones will have an effect even at the start of a complexity. This situation will also arise later in the game with other similar mechanics.<span>
       </div>
-      <span ~style.display=(PrestigeLayerProgress.hasReached('complexity') && !EternityMilestones.isExplanationMovedDown()) ? '' : 'none'~>
-        <button onclick="EternityMilestones.moveExplanation()">Move the above explanation to the bottom of this tab</button>
-      </span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
           <td>
@@ -1364,12 +1363,6 @@
         </tr>
       </table>
       <span ~style.display=SpecialTabs.isTabVisible('eternity-producer') ? 'none' : ''~>Completing all eternity milestones for the first time will also let you view the Eternity Producer tab.</span>
-      <div style="width: 1024px; margin-left: auto; margin-right: auto;" ~style.display=(PrestigeLayerProgress.hasReached('complexity') && EternityMilestones.isExplanationMovedDown()) ? '' : 'none'~>
-        <span>Complexity and resets beyond complexity will reset eternity milestones, and will lock those milestones (including the ones saying "Start each ... complexity"), removing their effects until you unlock the milestones again. Once you start with enough eternities after complexity to start with eternity milestones unlocked, however, those milestones will have an effect even at the start of a complexity. This situation will also arise later in the game with other similar mechanics.</span>
-      </div>
-      <span ~style.display=(PrestigeLayerProgress.hasReached('complexity') && EternityMilestones.isExplanationMovedDown()) ? '' : 'none'~>
-        <button onclick="EternityMilestones.moveExplanation()">Move the above explanation back to the top of this tab</button>
-      </span>
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'studies' ? '' : 'none'~>
       <span>You have ~i Studies.totalTheorems() ~ total theorem~s Studies.totalTheorems() ~ (a breakdown is below the theorem purchase buttons) and ~i Studies.unspentTheorems() ~ unspent theorem~s Studies.unspentTheorems() ~.</span>
@@ -2370,48 +2363,23 @@
       <span ~style.display=FinalityMilestones.isFinalityMilestoneActive(9) ? '' : 'none'~>The Complexity Challenge ~o 6 ~ reward is instead currently ~f ComplexityStars.complexityChallengeRewardMultiplier(6) ~x stronger (from ~f ComplexityStars.extraAmount() ~ hypercomplexity stars).</span>
       <br/>
       <br/>
-      <span>You do not need to complexity to complete complexity challenges.<span ~style.display=ComplexityChallenge.isExplanationMovedDown() ? '' : 'none'~> How to complete them is explained at the bottom of this tab.</span></span>
-      <div ~style.display=ComplexityChallenge.isExplanationMovedDown() ? 'none' : ''~>
+      <span>You do not need to complexity to complete complexity challenges. <button ~style.display=Explanations.isVisible('complexity-challenges', 'main') ? '' : 'none'~ onclick="Explanations.showOrHide('complexity-challenges', 'main')">~r Explanations.isShown('complexity-challenges', 'main') ? 'Hide' : 'Show' ~: Complexity challenges explanation</button></span>
+      <div style="width: 1024px; margin-left: auto; margin-right: auto;" ~style.display=Explanations.isShown('complexity-challenges', 'main') ? '' : 'none'~>
         <span>
-          Being in a complexity challenge doesn't prevent you from violating its condition.
+          Being in a complexity challenge doesn't prevent you from violating its condition. Instead, violating the condition makes you exit the complexity challenge. Thus, you are automatically in whichever complexity challenges you have not yet violated the condition of this complexity. In particular, when starting a new complexity, you will be in all complexity challenges that you've unlocked at once.
         </span>
         <br/>
+        <br/>
+        <span ~style.display=Trivia.show('CC1 pre-complexity completion') ? '' : 'none'~>
+          You can complete Complexity Challenge ~o 1 ~ even pre-complexity. This allows you to start with a Complexity Challenge ~o 1 ~ completion.
+        </span>
+        <br ~style.display=Trivia.show('CC1 pre-complexity completion') ? '' : 'none'~/>
+        <br ~style.display=Trivia.show('CC1 pre-complexity completion') ? '' : 'none'~/>
         <span>
-          Instead, violating the condition makes you exit the complexity challenge.
+          The header does not mention that you are in Complexity Challenge ~o 1 ~ to avoid clutter, since you are always in it. The ability to disable certain things is there to prevent accidental violation of complexity challenge requirements.
         </span>
         <br/>
-        <span>
-          Thus, you are automatically in whichever complexity challenges you have not yet violated the condition of this complexity.
-        </span>
         <br/>
-        <span>
-          In particular, when starting a new complexity, you will be in all complexity challenges that you've unlocked at once.
-        </span>
-        <br ~style.display=Trivia.show('CC1 pre-complexity completion') ? 'none' : ''~/>
-        <div ~style.display=Trivia.show('CC1 pre-complexity completion') ? '' : 'none'~/>
-          <span>
-            You can complete Complexity Challenge ~o 1 ~ even pre-complexity.
-          </span>
-          <br/>
-          <span>
-            This allows you to start with a Complexity Challenge ~o 1 ~ completion.
-          </span>
-        </div>
-        <span>
-          The header does not mention that you are in Complexity Challenge ~o 1 ~ to avoid clutter, since you are always in it.
-        </span>
-        <br/>
-        <span>
-          The ability to disable certain things is there to prevent accidental violation of complexity challenge requirements.
-        </span>
-        <br/>
-        <span>
-          Once you understand this explanation, you can move it to the bottom of this tab so that it doesn't take up so much space.
-        </span>
-        <br/>
-        <span>
-          <button onclick="ComplexityChallenge.moveExplanation()">Move explanation to the bottom of this tab</button>
-        </span>
       </div>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
         <tr>
@@ -2549,44 +2517,6 @@
           </td>
         </tr>
       </table>
-      <div ~style.display=ComplexityChallenge.isExplanationMovedDown() ? '' : 'none'~>
-        <span>
-          Being in a complexity challenge doesn't prevent you from violating its condition.
-        </span>
-        <br/>
-        <span>
-          Instead, violating the condition makes you exit the challenge.
-        </span>
-        <br/>
-        <span>
-          Thus, you are automatically in whichever complexity challenges you have not yet violated the condition of this complexity.
-        </span>
-        <br/>
-        <span>
-          In particular, when starting a new complexity, you will be in all complexity challenges that you've unlocked at once.
-        </span>
-        <br ~style.display=Trivia.show('CC1 pre-complexity completion') ? 'none' : ''~/>
-        <div ~style.display=Trivia.show('CC1 pre-complexity completion') ? '' : 'none'~/>
-          <span>
-            You can complete Complexity Challenge ~o 1 ~ even pre-complexity.
-          </span>
-          <br/>
-          <span>
-            This allows you to start with a Complexity Challenge ~o 1 ~ completion.
-          </span>
-        </div>
-        <span>
-          The header does not mention that you are in Complexity Challenge ~o 1 ~ to avoid clutter, since you are always in it.
-        </span>
-        <br/>
-        <span>
-          The ability to disable certain things is there to prevent accidental violation of complexity challenge requirements.
-        </span>
-        <br/>
-        <span>
-          <button onclick="ComplexityChallenge.moveExplanation()">Move explanation back to the top of this tab</button>
-        </span>
-      </div>
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'complexity-achievements' ? '' : 'none'~>
       <span>
@@ -2833,26 +2763,22 @@
           <br/>
           <br/>
         </div>
-        <span>You have ~i Powers.equipped().length ~/~i Powers.equippedLimit() ~ equipped power~s Powers.equippedLimit() ~.</span>
+        <span>You have ~i Powers.equipped().length ~/~i Powers.equippedLimit() ~ equipped power~s Powers.equippedLimit() ~. <button ~style.display=Explanations.isVisible('powers', 'main') ? '' : 'none'~ onclick="Explanations.showOrHide('powers', 'main')">~r Explanations.isShown('powers', 'main') ? 'Hide' : 'Show' ~: Powers explanation</button></span>
         <br/>
-        <div ~style.display=Powers.isExplanationMovedDown() ? 'none' : ''~>
+        <div style="width: 1024px; margin-left: auto; margin-right: auto;" ~style.display=Explanations.isShown('powers', 'main') ? '' : 'none'~>
           <span>Each power raises all of a generator type's multipliers to a power. Up to ~i Powers.equippedLimit() ~ power~s Powers.equippedLimit() ~ can be equipped at the same time.</span>
           <br/>
-          <span>Powers are never destroyed unless you delete them, or unless they're automatically deleted as explained on this tab below stored powers.</span>
           <br/>
-          <span>Powers can be equipped at any time as long as there is a free slot.</span>
+          <span>Powers are never destroyed unless you delete them, or unless they're automatically deleted as explained on this tab below stored powers. Powers can be equipped at any time as long as there is a free slot. If all power slots are full, to unequip a power and create a free slot you need to complexity.</span>
           <br/>
-          <span>If all power slots are full, to unequip a power and create a free slot you need to complexity.</span>
           <br/>
           <span>You start with ~i 1 ~ power of each type but get more over time. You can have multiple powers of the same type equipped.</span>
-          <br ~style.display=FinalityMilestones.isFinalityMilestoneActive(8) ? 'none' : ''~/>
+          <br/>
+          <br/>
           <span ~style.display=FinalityMilestones.isFinalityMilestoneActive(8) ? 'none' : ''~>Due to unlocking powers, you gain your eternity points on eternity every second, without needing to eternity (EP generation).</span>
-          <br/>
-          <span>Once you understand this explanation, you can move it to the bottom of this tab so that it doesn't take up so much space.</span>
-          <br/>
-          <span><button onclick="Powers.moveExplanation()">Move explanation to the bottom of this tab</button></span>
+          <br ~style.display=FinalityMilestones.isFinalityMilestoneActive(8) ? 'none' : ''~/>
+          <br ~style.display=FinalityMilestones.isFinalityMilestoneActive(8) ? 'none' : ''~/>
         </div>
-        <br ~style.display=Powers.isExplanationMovedDown() ? 'none' : ''~>
         <span ~style.display=Powers.isUnlocked() ? '' : 'none'~>You gain a new power once every ~t Powers.interval() ~, next in ~t Powers.timeUntilPowerGain() ~. <button onclick="Powers.togglePowerGain()">Power gain: ~r Powers.isPowerGainOn() ? "On" : "Off" ~</button></span>
         <span ~style.display=Powers.isUnlocked() ? 'none' : ''~>You would gain a new power once every ~t Powers.interval() ~, but you haven't unlocked them yet.</span>
         <br/>
@@ -3103,22 +3029,6 @@
           <span ~class=Powers.color('crafted', 1)~>~r Powers.descriptionFull('crafted', 1) ~</span>
         </div>
         <br/>
-        <div ~style.display=Powers.isExplanationMovedDown() ? '' : 'none'~>
-          <span>Each power raises all of a generator type's multipliers to a power. Up to ~i Powers.equippedLimit() ~ power~s Powers.equippedLimit() ~ can be equipped at the same time.</span>
-          <br/>
-          <span>Powers are never destroyed unless you delete them, or unless they're automatically deleted as explained on this tab below stored powers.</span>
-          <br/>
-          <span>Powers can be equipped at any time as long as there is a free slot.</span>
-          <br/>
-          <span>If all power slots are full, to unequip a power and create a free slot you need to complexity.</span>
-          <br/>
-          <span>You start with ~i 1 ~ power of each type but get more over time. You can have multiple powers of the same type equipped.</span>
-          <br ~style.display=FinalityMilestones.isFinalityMilestoneActive(8) ? 'none' : ''~/>
-          <span ~style.display=FinalityMilestones.isFinalityMilestoneActive(8) ? 'none' : ''~>Due to unlocking powers, you gain your eternity points on eternity every second, without needing to eternity (EP generation).</span>
-          <br/>
-          <span><button onclick="Powers.moveExplanation()">Move explanation back to the top of this tab</button></span>
-        </div>
-        <br ~style.display=Powers.isExplanationMovedDown() ? '' : 'none'~>
         <span>Power presets (<button onclick="Powers.presetSort()">sort by name</button>):</span>
         <br/>
         <loop i 1 32>
@@ -4434,6 +4344,24 @@
     <tab ~style.display=Tabs.currentTab() === 'options' ? '' : 'none'~>
       <span><button ~class-name=Options.showExportNotification() ? 'redspan' : ''~ onclick="Options.setOptionTypeShown('saving')">Show saving options</button> <button onclick="Options.setOptionTypeShown('color')">Show color options</button> <button onclick="Options.setOptionTypeShown('tab')">Show tab options</button> <button onclick="Options.setOptionTypeShown('other')">Show other options</button></span>
       <br/>
+      <button ~style.display=Explanations.isVisible('options', 'offline') ? '' : 'none'~ onclick="Explanations.showOrHide('options', 'offline')">~r Explanations.isShown('options', 'offline') ? 'Hide' : 'Show' ~: Offline progress explanation</button>
+      <div style="width: 1024px; margin-left: auto; margin-right: auto;" ~style.display=Explanations.isShown('options', 'offline') ? '' : 'none'~>
+        <span>When you're online, every ~t 0.064 ~ the game updates variable values and produces stuff. These updates are called ticks.</span>
+        <br/>
+        <br/>
+        <span>When you go offline and come back to the game, if you have offline progress on, this game (like most similar games) does some number of "offline ticks" partially based on how long you were offline. They're called "offline ticks" because they each update and produce stuff like online ticks, but they "happened" while you were offline, in some sense (even though they're only done when you return).</span>
+        <br/>
+        <br/>
+        <span>If you were offline for long enough, it's often impractical to do as many offline ticks as there would've been ticks. E.g., if you're offline for ~ts 86400 ~, there'd be ~i 1350000 ~ ticks over a day; if each takes ~t 0.001 ~, then together they'd take ~i 1350 ~, which is fairly long. So the "offline ticks" option makes the game do at most as many offline ticks as its value, making each offline tick longer (i.e. give you more production) to compensate.</span>
+        <br/>
+        <br/>
+        <span>Note that if you're offline for a short enough time, or have the "offline ticks" option high enough, that the number of online ticks over that time would be less than the "offline ticks" option, the game does the number of online ticks instead. For example, if you're offline for ~ts 3600 ~ and the option is ~i 100000 ~, the number of ticks over ~ts 3600 ~ is generally ~i 56250 ~, so the game would only do ~i 56250 ~ ticks.</span>
+        <br/>
+        <br/>
+        <span>Note also that the offline ticks input box, like most input boxes, uses default Scientific notation settings for its input.</span>
+        <br/>
+        <br/>
+      </div>
       <table ~style.display=Options.isOptionTypeShown('saving') ? '' : 'none'~ style="margin-left: auto; margin-right: auto; border-spacing: 24px 8px; border-collapse: separate;">
         <tr>
           <td><button class="options-button" onclick="Saving.saveGame(false, true)">Save</button></td>
@@ -4450,7 +4378,7 @@
           <td><div class="options-div">Show export reminder after X seconds (~i 0 ~ for never):<br/><input type="text" ~!value=Options.exportNotificationFrequency()~ ~!onchange=function() {Options.setExportNotificationFrequency(+this.value)}~></input></div></td>
         </tr>
         <tr>
-          <td><div class="options-div" style="font-size: 0.875rem;">Offline game ticks (between ~i 1 ~ and ~i Options.maxTicks() ~, slow above ~i 1024 ~, very slow above ~i Math.pow(2, 16) ~):<br/><input type="text" ~!value=Options.displayOfflineTicks()~ ~!onchange=function() {Options.setOfflineTicks(+this.value)}~></input></div></td>
+          <td><div class="options-div" style="font-size: 0.875rem;">Offline ticks (between ~i 1 ~ and ~i Options.maxTicks() ~, slow above ~i 1024 ~, very slow above ~i Math.pow(2, 16) ~):<br/><input type="text" ~!value=Options.displayOfflineTicks()~ ~!onchange=function() {Options.setOfflineTicks(+this.value)}~></input></div></td>
           <td><button class="options-button" onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></td>
           <td/>
         </tr>
@@ -4633,7 +4561,7 @@
         <tr>
           <td>
             <div class="options-div">
-              <span>Notation: <select ~!value=NotationOptions.notation()~ ~!onchange=function() {NotationOptions.setNotation(this.value)}~>
+              <span>Notation <span class="helpspan">(?)<span class="tooltiptext" style="font-size: 0.75rem;">The game uses theses settings for almost all numbers it displays, but not for numbers in text inputs boxes, which use default Scientific settings. There's an option for using base and exponent on autobuyer inputs, but that's it.</span></span>: <select ~!value=NotationOptions.notation()~ ~!onchange=function() {NotationOptions.setNotation(this.value)}~>
               <option value="Scientific">Scientific</option>
               <option value="Engineering">Engineering</option>
               <option value="Logarithm">Logarithm</option>
@@ -4669,7 +4597,7 @@
             <div ~style.display=Options.optionDisplay(Autobuyer(12).isUnlocked || PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~ class="options-div">
               <button class="mini-options-button" onclick="NotationOptions.toggleFormatOrdinals()">Format ordinals <span class="helpspan">(?)<span class="tooltiptext">These aren't Ordinal Markup's infinite ordinals, but e.g. generator numbers, or more generally things which are the nth of something.</span></span>: ~r NotationOptions.formatOrdinals() ? 'On' : 'Off' ~</button>
               <br/>
-              <button class="mini-options-button" onclick="NotationOptions.toggleParseAutobuyersInCurrentBase()">Use base for AB settings <span class="helpspan">(?)<span class="tooltiptext">This option only affects the input for each autobuyer (AB). Also, it doesn't take into account notation (except for Hex); autobuyer inputs will generally still use Scientific.</span></span>: ~r NotationOptions.parseAutobuyersInCurrentBase() ? 'On' : 'Off' ~</button>
+              <button class="mini-options-button" onclick="NotationOptions.toggleParseAutobuyersInCurrentBase()">Use base for AB settings <span class="helpspan">(?)<span class="tooltiptext">This option only affects the input for each autobuyer (AB). Also, it doesn't take into account notation (except for Hex); autobuyer inputs will generally still use Scientific, though they will take your base/exponent into account.</span></span>: ~r NotationOptions.parseAutobuyersInCurrentBase() ? 'On' : 'Off' ~</button>
               <br/>
               <span style="font-size: 0.875rem;">Autobuyer digits of precision <span class="helpspan">(?)<span class="tooltiptext">This is used for autobuyer inputs.</span></span>:<br/><input type="text" ~!value=NotationOptions.autobuyerPrecision()~ ~!onchange=function() {NotationOptions.setAutobuyerPrecision(+this.value)}~></input></span>
           </div></td>

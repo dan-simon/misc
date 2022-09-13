@@ -52,6 +52,7 @@ let NotationOptions = {
   setExponentBase(x) {
     // This can intentionally be fractional.
     player.options.notation.exponentBase = x ? Math.max(1 + 1e-6, Math.min(1e80, x)) : 10;
+    this.basePropsChange();
     this.notationChange();
   },
   alphabet() {
@@ -89,6 +90,10 @@ let NotationOptions = {
   setAutobuyerPrecision(x) {
     player.options.notation.autobuyerPrecision = (x === 0) ? 0 : (x || 3);
     this.notationChange();
+  },
+  basePropsChange() {
+    ADNotations.Settings.exponentCommas.min = Math.pow(Math.min(this.exponentBase(), 1e10), 5);
+    ADNotations.Settings.exponentCommas.max = Math.pow(Math.min(this.exponentBase(), 1e10), 9);
   },
   notationChange(x = [10, 11, 12, 13, 14, 15]) {
     for (let i of x) {

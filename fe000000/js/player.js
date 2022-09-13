@@ -102,7 +102,6 @@ let initialPlayer = {
   highestEternityGenerator: 0,
   eternityUpgrades: [0, 0, 0],
   eternityMilestonesEnabled: [true, true],
-  isEternityMilestoneExplanationMovedDown: false,
   infinityAutobuyers: [
     true, true, true, true, true, true, true, true, true, true,
   ],
@@ -163,8 +162,6 @@ let initialPlayer = {
   complexityChallengeSafeguards: [false, false, false, false, false],
   complexityChallengeLastCompletion: [[-1, -1], [-1, -1], [-1, -1], [-1, -1], [-1, -1], [-1, -1]],
   complexityChallengeTimeSpent: [0, 0, 0, 0, 0, 0],
-  isComplexityChallengeExplanationMovedDown: false,
-  isPowersExplanationMovedDown: false,
   complexityAchievements: [
     [false, false, false, false],
     [false, false, false, false],
@@ -433,8 +430,14 @@ let initialPlayer = {
       },
       showGeneratorAndBoostAutobuyers: true,
       isOnDespiteSuspended: [false, false, false, false],
-      explanation: ''
     },
+    explanations: {
+      'autobuyers': '',
+      'eternity-milestones': 'main',
+      'complexity-challenges': 'main',
+      'powers': 'main',
+      'options': ''
+    }
   },
   confirmations: {
     sacrifice: true,
@@ -546,7 +549,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.1640625
+  version: 2.16796875
 }
 
 let player;

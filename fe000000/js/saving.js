@@ -80,6 +80,7 @@ let Saving = {
       Options.updateCheckboxSize();
       Options.updateButtonOutlines();
       Colors.updateColors();
+      NotationOptions.basePropsChange();
       updateDisplaySaveLoadSetup();
       // We had to do this here in case we immediately start simulating time again.
       updateDisplay();
@@ -1443,6 +1444,17 @@ let Saving = {
     if (player.version < 2.1640625) {
       player.options.autobuyers.explanation = '';
       player.version = 2.1640625;
+    }
+    if (player.version < 2.16796875) {
+      player.options.explanations = {
+        'autobuyers': player.options.autobuyers.explanation,
+        'eternity-milestones': player.isEternityMilestoneExplanationMovedDown ? '' : 'main',
+        'complexity-challenges': player.isComplexityChallengeExplanationMovedDown ? '' : 'main',
+        'powers': player.isPowersExplanationMovedDown ? '' : 'main',
+        'options': ''
+      }
+      delete player.options.autobuyers.explanation;
+      player.version = 2.16796875;
     }
   },
   convertSaveToDecimal() {
