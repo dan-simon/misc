@@ -260,7 +260,7 @@ let Autobuyers = {
     } else if (mode === 'X times last') {
       shouldInfinity = InfinityPrestigeLayer.infinityPointGain().gte(player.stats.lastTenInfinities[0][1].times(priority));
     } else if (mode === 'X times best of last ten') {
-      shouldInfinity = InfinityPrestigeLayer.infinityPointGain().gte(player.stats.lastTenInfinities.map(x => x[1]).reduce(Decimal.max).times(priority));
+      shouldInfinity = InfinityPrestigeLayer.infinityPointGain().gte(player.stats.lastTenInfinities.slice(Stats.lastRunsToShow()).map(x => x[1]).reduce(Decimal.max, 0).times(priority));
     } else if (mode === 'Time past peak/sec') {
       InfinityPrestigeLayer.updatePeakIPPerSec();
       shouldInfinity = player.stats.timeSinceLastPeakIPPerSec >= priority.toNumber();
@@ -297,7 +297,7 @@ let Autobuyers = {
     } else if (mode === 'X times last') {
       shouldEternity = EternityPrestigeLayer.eternityPointGain().gte(player.stats.lastTenEternities[0][1].times(priority));
     }  else if (mode === 'X times best of last ten') {
-      shouldEternity = EternityPrestigeLayer.eternityPointGain().gte(player.stats.lastTenEternities.map(x => x[1]).reduce(Decimal.max).times(priority));
+      shouldEternity = EternityPrestigeLayer.eternityPointGain().gte(player.stats.lastTenEternities.slice(Stats.lastRunsToShow()).map(x => x[1]).reduce(Decimal.max, 0).times(priority));
     } else if (mode === 'Time past peak/sec') {
       EternityPrestigeLayer.updatePeakEPPerSec();
       shouldEternity = player.stats.timeSinceLastPeakEPPerSec >= priority.toNumber();
@@ -359,7 +359,7 @@ let Autobuyers = {
     } else if (mode === 'X times last') {
       shouldComplexity = ComplexityPrestigeLayer.complexityPointGain().gte(player.stats.lastTenComplexities[0][1].times(priority));
     } else if (mode === 'X times best of last ten') {
-      shouldComplexity = ComplexityPrestigeLayer.complexityPointGain().gte(player.stats.lastTenComplexities.map(x => x[1]).reduce(Decimal.max).times(priority));
+      shouldComplexity = ComplexityPrestigeLayer.complexityPointGain().gte(player.stats.lastTenComplexities.slice(Stats.lastRunsToShow()).map(x => x[1]).reduce(Decimal.max, 0).times(priority));
     } else if (mode === 'Time past peak/sec') {
       ComplexityPrestigeLayer.updatePeakCPPerSec();
       shouldComplexity = ComplexityPrestigeLayer.complexityPointGain().gte(ComplexityPrestigeLayer.complexityPoints()) && player.stats.timeSinceLastPeakCPPerSec >= priority.toNumber();

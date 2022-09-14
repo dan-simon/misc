@@ -1456,6 +1456,10 @@ let Saving = {
       delete player.options.autobuyers.explanation;
       player.version = 2.16796875;
     }
+    if (player.version < 2.171875) {
+      player.stats.lastRunsToShow = Math.floor(player.stats.lastRunsToShow);
+      player.version = 2.171875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

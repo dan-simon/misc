@@ -198,7 +198,7 @@
       <button ~style.display=Tabs.isTabVisible('goals') ? '' : 'none'~ ~style.background=Colors.getStringToColorCode('grey')~ onclick="Tabs.setTab('goals')">Goals</button>
       <button ~style.display=Tabs.isTabVisible('achievements') ? '' : 'none'~ ~style.background=Colors.getStringToColorCode('grey')~ onclick="Tabs.setTab('achievements')">Achievements</button>
       <button ~style.display=Tabs.isTabVisible('statistics') ? '' : 'none'~ ~style.background=Colors.getStringToColorCode('grey')~ onclick="Tabs.setTab('statistics')">Statistics</button>
-      <button ~style.display=Tabs.isTabVisible('last-ten-runs') ? '' : 'none'~ ~style.background=Colors.getStringToColorCode('grey')~ onclick="Tabs.setTab('last-ten-runs')">Last Ten Runs</button>
+      <button ~style.display=Tabs.isTabVisible('last-ten-runs') ? '' : 'none'~ ~style.background=Colors.getStringToColorCode('grey')~ onclick="Tabs.setTab('last-ten-runs')">Last ~r title(numbers[Stats.lastRunsToShow()]) ~ Run~s Stats.lastRunsToShow() ~</button>
       <button ~style.display=Tabs.isTabVisible('options') ? '' : 'none'~ ~style.background=Colors.getStringToColorCode('grey')~ ~class-name=Options.showExportNotification() ? 'redspan' : ''~ onclick="Tabs.setTab('options')">Options</button>
     </span>
     <br ~style.display=Tabs.displayTabBreak(2) ? '' : 'none'~/>
@@ -586,7 +586,7 @@
       <br/>
       <span ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>Autobuyers options on this tab only apply to autobuyers on this tab.</span>
       <br ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~/>
-      <span><button onclick="Autobuyers.setAll(true)">Turn all autobuyers on</button> <button onclick="Autobuyers.setAll(false)">Turn all autobuyers off</button> <button onclick="Autobuyers.turnAllOnOrOff()">Turn all autobuyers on/off</button> <button onclick="Autobuyers.toggleAll()">Toggle all autobuyers</button>
+      <span><button onclick="Autobuyers.setAll(true)">Turn all autobuyers on</button> <button onclick="Autobuyers.setAll(false)">Turn all autobuyers off</button> <button onclick="Autobuyers.turnAllOnOrOff()">Turn all autobuyers on/off</button> <button onclick="Autobuyers.toggleAll()">Toggle all autobuyers</button></span>
       <div ~style.display=(Autobuyers.anyNonGeneratorAndBoostDisplay() || (Autobuyers.areAnyAutobuyersSlow() && Autobuyers.areAnyAutobuyersFast())) ? '' : 'none'~>
         <span><button onclick="Autobuyers.toggleShowGeneratorAndBoost()" ~style.display=Autobuyers.anyNonGeneratorAndBoostDisplay() ? '' : 'none'~>Show generator and boost autobuyers: ~r Autobuyers.showGeneratorAndBoost() ? 'On' : 'Off' ~</button> <button onclick="Autobuyers.synchronize()" ~style.display=(Autobuyers.areAnyAutobuyersSlow() && Autobuyers.areAnyAutobuyersFast()) ? '' : 'none'~>Synchronize slow and fast autobuyers</button></span>
       </div>
@@ -862,7 +862,7 @@
                 <option value="Amount">Amount</option>
                 <option value="Time">Time</option>
                 <option value="X times last">X times last</option>
-                <option value="X times best of last ten">X times best of last ten</option>
+                <option value="X times best of last ten" ~text="X times best of last " + numbers[Stats.lastRunsToShow()]~></option>
                 <option value="Time past peak/sec">Time past peak/sec</option>
                 <option value="Fraction of peak/sec">Fraction of peak/sec</option>
                 <option value="Time past peak log/sec">Time past peak log/sec</option>
@@ -893,7 +893,7 @@
                 <option value="Amount">Amount</option>
                 <option value="Time">Time</option>
                 <option value="X times last">X times last</option>
-                <option value="X times best of last ten">X times best of last ten</option>
+                <option value="X times best of last ten" ~text="X times best of last " + numbers[Stats.lastRunsToShow()]~></option>
                 <option value="Time past peak/sec">Time past peak/sec</option>
                 <option value="Fraction of peak/sec">Fraction of peak/sec</option>
                 <option value="Time past peak log/sec">Time past peak log/sec</option>
@@ -946,7 +946,7 @@
                 <option value="Amount">Amount</option>
                 <option value="Time">Time</option>
                 <option value="X times last">X times last</option>
-                <option value="X times best of last ten">X times best of last ten</option>
+                <option value="X times best of last ten" ~text="X times best of last " + numbers[Stats.lastRunsToShow()]~></option>
                 <option value="Time past peak/sec">Time past peak/sec</option>
                 <option value="Fraction of peak/sec">Fraction of peak/sec</option>
                 <option value="Time past peak log/sec">Time past peak log/sec</option>
@@ -4500,7 +4500,7 @@
             <span ~style.display=Tabs.isTabOptionVisible('goals') ? '' : 'none'~>Goals: <input class="goals-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('goals')~ ~!onchange=function() {Tabs.setTabOption('goals', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
             <span ~style.display=Tabs.isTabOptionVisible('achievements') ? '' : 'none'~>Achievements: <input class="achievements-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('achievements')~ ~!onchange=function() {Tabs.setTabOption('achievements', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
             <span ~style.display=Tabs.isTabOptionVisible('statistics') ? '' : 'none'~>Statistics: <input class="statistics-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('statistics')~ ~!onchange=function() {Tabs.setTabOption('statistics', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-            <span ~style.display=Tabs.isTabOptionVisible('last-ten-runs') ? '' : 'none'~>Last Ten Runs: <input class="last-ten-runs-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('last-ten-runs')~ ~!onchange=function() {Tabs.setTabOption('last-ten-runs', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+            <span ~style.display=Tabs.isTabOptionVisible('last-ten-runs') ? '' : 'none'~>Last ~r title(numbers[Stats.lastRunsToShow()]) ~ Run~s Stats.lastRunsToShow() ~: <input class="last-ten-runs-tab-option" type="checkbox" ~!checked=Tabs.isTabOptionOn('last-ten-runs')~ ~!onchange=function() {Tabs.setTabOption('last-ten-runs', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
             <span ~style.display=Tabs.isTabOptionVisible('options') ? '' : 'none'~>Options: cannot be hidden</span>
           </span>
         </div>
@@ -4634,7 +4634,7 @@
               <option value="On">On</option>
             </select></span>
             <br/>
-            <span>Last Ten Runs tab: <select ~!value=Options.showLogSetting('last-ten')~ ~!onchange=function() {Options.setShowLogSetting('last-ten', this.value)}~>
+            <span>Last ~r title(numbers[Stats.lastRunsToShow()]) ~ Run~s Stats.lastRunsToShow() ~ tab: <select ~!value=Options.showLogSetting('last-ten')~ ~!onchange=function() {Options.setShowLogSetting('last-ten', this.value)}~>
               <option value="Default">Default</option>
               <option value="Off">Off</option>
               <option value="On">On</option>

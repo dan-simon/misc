@@ -202,4 +202,8 @@ let displayDigitsAutobuyerSettings = (specialFormat) => specialFormat ? Notation
 
 let exponentBaseAutobuyerSettings = (specialFormat) => specialFormat ? NotationOptions.exponentBase() : 10;
 
+// And now for something completely different.
+let numbers = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
+  'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty'];
 
+let title = x => x[0].toUpperCase() + x.slice(1).toLowerCase();
