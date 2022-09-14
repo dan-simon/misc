@@ -1368,7 +1368,8 @@
       <span>You have ~i Studies.totalTheorems() ~ total theorem~s Studies.totalTheorems() ~ (a breakdown is below the theorem purchase buttons) and ~i Studies.unspentTheorems() ~ unspent theorem~s Studies.unspentTheorems() ~.</span>
       <br/>
       <div ~style.display=Options.showFullOptions('studies') ? 'none' : ''~>
-        <button onclick="Studies.respecAndReset()" ~class=Studies.canRespec() ? "" : "disabled"~>Respec studies and ~r EternityPrestigeLayer.resetText() ~</button>
+        <button onclick="Studies.respecAndReset()" ~class=Studies.canRespec() ? "" : "disabled"~ ~style.display=Studies.canAccessFourthRow() ? 'none' : ''~>Respec studies and ~r EternityPrestigeLayer.resetText() ~</button>
+        <button onclick="Studies.respecFourthRowAndReset()" ~class=Studies.canRespecFourthRow() ? "" : "disabled"~ ~style.display=Studies.canAccessFourthRow() ? '' : 'none'~ ~style.display=Studies.canAccessFourthRow() ? '' : 'none'~>Respec fourth-row studies and ~r EternityPrestigeLayer.resetText() ~</button>
         <div style="width: 1024px; margin-left: auto; margin-right: auto;">
           <span>There are a lot of study options. To see the others, go to the options tab and toggle (turn on) "Full study options" in the "other options" part.</span>
         </div>
