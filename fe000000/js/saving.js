@@ -1488,9 +1488,19 @@ let Saving = {
       for (let p of [].concat(player.powers.equipped, player.powers.stored, player.oracle.equippedPowers, player.oracle.powers)) {
         p.id = [player.finalities, 0];
       }
+      player.powers.id = 1;
       // Are people using this option? Not sure
       delete player.oracle.showWaitsFromPastTime;
       player.version = 2.17578125;
+    }
+    if (player.version < 2.1796875) {
+      // Ugh I only did half of the migration.
+      // In retrospect, the previous migration didn't remove time properties from existing powers, but that's OK.
+      for (let p of [].concat(player.powers.equipped, player.powers.stored, player.oracle.equippedPowers, player.oracle.powers)) {
+        delete p.time;
+      }
+      player.powers.id = 1;
+      player.version = 2.1796875;
     }
   },
   convertSaveToDecimal() {
