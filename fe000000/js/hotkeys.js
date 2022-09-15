@@ -203,6 +203,14 @@ window.addEventListener('keydown', function(event) {
       globalShiftDown = true;
     break;
     
+    case 37: // left
+      Tabs.move(false, globalShiftDown);
+    break;
+    
+    case 39: // right
+      Tabs.move(true, globalShiftDown);
+    break;
+    
     case 65: // A
       if (shiftDown) {
         Autobuyers.toggleAll();

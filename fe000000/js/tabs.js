@@ -6,6 +6,7 @@ let Tabs = {
     ['complexity', 'complexity-challenges', 'complexity-achievements', 'powers', 'oracle', 'galaxies'],
     ['finality', 'finality-shards', 'finality-milestones']
   ],
+  groups: ['normal', 'infinity', 'eternity', 'complexity', 'finality', 'miscellaneous'],
   tabToTabGroup: {
     'main': 'normal',
     'infinity': 'infinity',
@@ -129,6 +130,15 @@ let Tabs = {
         player.tabOptions[x] = true;
         document.getElementsByClassName(x + '-tab-option')[0].checked = true;
       }
+    }
+  },
+  move(forward, canMoveGroups) {
+    if (canMoveGroups && Tabs.usingTabGroups()) {
+      let groups = this.groups.filter(i => this.isTabGroupVisible(i));
+      this.setTabGroup(groups[(groups.indexOf(player.currentTabGroup) + (forward ? 1 : (groups.length - 1))) % groups.length]);
+    } else {
+      let tabs = [].concat(...this.rows).filter(i => this.isTabVisible(i));
+      this.setTab(tabs[(tabs.indexOf(player.currentTab) + (forward ? 1 : (tabs.length - 1))) % tabs.length]);
     }
   },
   hash(x) {
