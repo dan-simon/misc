@@ -177,6 +177,7 @@ let initialPlayer = {
   powers: {
     seed: initialSeed,
     initialSeed: initialSeed,
+    id: 1,
     unlocked: false,
     upgrades: [0, 0, 0],
     equipped: [],
@@ -225,7 +226,6 @@ let initialPlayer = {
     powerGainInPredictions: 'Same',
     powerDisplay: true,
     powerFutureExtraMultipliers: true,
-    showWaitsFromPastTime: true,
     equippedPowers: [],
     powers: [],
     extraMultipliers: {
@@ -549,7 +549,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.171875
+  version: 2.17578125
 }
 
 let player;

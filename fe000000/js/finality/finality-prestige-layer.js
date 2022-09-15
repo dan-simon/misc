@@ -139,6 +139,7 @@ let FinalityPrestigeLayer = {
     player.powers = {
       seed: player.powers.initialSeed,
       initialSeed: player.powers.initialSeed,
+      id: 1,
       unlocked: false,
       upgrades: [0, 0, 0],
       equipped: [],
@@ -186,7 +187,6 @@ let FinalityPrestigeLayer = {
       powerGainInPredictions: player.oracle.powerGainInPredictions,
       powerDisplay: player.oracle.powerDisplay,
       powerFutureExtraMultipliers: player.oracle.powerFutureExtraMultipliers,
-      showWaitsFromPastTime: player.oracle.showWaitsFromPastTime,
       equippedPowers: [],
       powers: [],
       extraMultipliers: {

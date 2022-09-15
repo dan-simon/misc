@@ -16,14 +16,37 @@ let Saving = {
     }
     return r;
   },
+  encoder: new TextEncoder(),
+  decoder: new TextDecoder(),
+  startString: 'FE000000SaveStart',
+  endString: 'FE000000SaveEnd',
+  steps: [
+    { encode: JSON.stringify, decode: JSON.parse },
+    { encode: x => Saving.encoder.encode(x), decode: x => Saving.decoder.decode(x) },
+    { encode: x => pako.deflate(x), decode: x => pako.inflate(x) },
+    {
+      encode: x => Array.from(x).map(i => String.fromCharCode(i)).join(""),
+      decode: x => Uint8Array.from(Array.from(x).map(i => i.charCodeAt(0)))
+    },
+    { encode: x => btoa(x), decode: x => atob(x) },
+    {
+      encode: x => x.replace(/=+$/g, "").replace(/0/g, "0a").replace(/\+/g, "0b").replace(/\//g, "0c"),
+      decode: x => x.replace(/0b/g, "+").replace(/0c/g, "/").replace(/0a/g, "0")
+    },
+    {
+      encode: x => Saving.startString + x + Saving.endString,
+      decode: x => x.slice(Saving.startString.length, -Saving.endString.length),
+    }
+  ],
   encode(s) {
-    return btoa(JSON.stringify(s).replace(/[\u007F-\uFFFF]/g, function (chr) {
-      let code = chr.charCodeAt(0).toString(16);
-      return '\\u' + '0000'.slice(0, 4 - code.length) + code;
-    }));
+    return this.steps.reduce((x, f) => f.encode(x), s);
   },
   decode(s) {
-    return JSON.parse(atob(s));
+    if (s.startsWith(Saving.startString)) {
+      return this.steps.reduceRight((x, f) => f.decode(x), s);
+    } else {
+      return JSON.parse(atob(s));
+    }
   },
   saveGame(isAutoLoop, isDirectlyManual) {
     // Stop the player from saving the game while time is being simulated.
@@ -1459,6 +1482,15 @@ let Saving = {
     if (player.version < 2.171875) {
       player.stats.lastRunsToShow = Math.floor(player.stats.lastRunsToShow);
       player.version = 2.171875;
+    }
+    if (player.version < 2.17578125) {
+      // Note: this is slightly inaccurate, but close enough.
+      for (let p of [].concat(player.powers.equipped, player.powers.stored, player.oracle.equippedPowers, player.oracle.powers)) {
+        p.id = [player.finalities, 0];
+      }
+      // Are people using this option? Not sure
+      delete player.oracle.showWaitsFromPastTime;
+      player.version = 2.17578125;
     }
   },
   convertSaveToDecimal() {

@@ -143,6 +143,7 @@ let PowerShards = {
       rarity = this.craftedRarity();
     }
     return {
+      'id': [player.finalities, null],
       'type': this.craftedType(),
       'strength': this.craftedStrength(),
       'rarity': rarity,

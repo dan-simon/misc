@@ -50,9 +50,6 @@ let Oracle = {
   powerFutureExtraMultipliers() {
     return player.oracle.powerFutureExtraMultipliers;
   },
-  showWaitsFromPastTime() {
-    return player.oracle.showWaitsFromPastTime;
-  },
   powers() {
     return player.oracle.powers;
   },
@@ -74,9 +71,6 @@ let Oracle = {
   },
   togglePowerFutureExtraMultipliers() {
     player.oracle.powerFutureExtraMultipliers = !player.oracle.powerFutureExtraMultipliers;
-  },
-  toggleShowWaitsFromPastTime() {
-    player.oracle.showWaitsFromPastTime = !player.oracle.showWaitsFromPastTime;
   },
   setTime(x) {
     player.oracle.time = x || 0;
@@ -112,8 +106,8 @@ let Oracle = {
       let galaxies = Galaxy.amount();
       let finalities = Finalities.amount();
       let finalityShards = FinalityShards.total();
-      let equippedPowers = player.powers.equipped.map(p => Powers.makeFuture(p, originalTime));
-      let powers = player.powers.stored.map(p => Powers.makeFuture(p, originalTime));
+      let equippedPowers = player.powers.equipped;
+      let powers = player.powers.stored;
       let extraMultipliers = Powers.getAllExtraMultipliers();
       Saving.loadGame(save, null, null, true, function () {
         player.oracle.used = true;

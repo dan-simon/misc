@@ -101,27 +101,27 @@ let RNG = {
   randomPower(real, howLongAgo) {
     this.seed = player.powers.seed;
     return {
+      'id': [player.finalities, player.powers.id],
       'type': this.randomType(real),
       'strength': Powers.newStrength(),
-      'rarity': this.rarity(real),
-      'time': player.stats.timeSinceGameStart - howLongAgo
+      'rarity': this.rarity(real)
     };
   },
   powerWithRarity(r) {
     // Note that r here is a number.
     return {
+      'id': [player.finalities, null],
       'type': 'normal',
       'strength': Powers.newStrength(),
-      'rarity': this.rarityFromRandom(r),
-      'time': player.stats.timeSinceGameStart
+      'rarity': this.rarityFromRandom(r)
     };
   },
   initialPowers() {
     return Powers.typeList.map(x => ({
+      'id': [player.finalities, 0],
       'type': x,
       'strength': Powers.newStrength(),
-      'rarity': 1,
-      'time': player.stats.timeSinceGameStart
+      'rarity': 1
     }));
   }
 }

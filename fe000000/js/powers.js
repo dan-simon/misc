@@ -244,12 +244,14 @@ let Powers = {
       }
       PowerShards.gainPowerShards(RNG.averagePowerShardValue() * newPowers);
       RNG.jump(2 * newPowers);
+      player.powers.id += newPowers;
       this.onPowerChange(true, true);
     }
   },
   gainNewPower(returnPower, howLongAgo) {
     let newPower = RNG.randomPower(true, howLongAgo);
     player.powers.stored.push(newPower);
+    player.powers.id++;
     if (returnPower) {
       return newPower;
     }
@@ -457,21 +459,25 @@ let Powers = {
       return 'Multiplier ' + format(this.preExtraMultiplier(power)) + 'x (total ' + format(this.getOverallMultiplier(power)) + ')';
     }
   },
-  getWait(power) {
-    if (Oracle.showWaitsFromPastTime()) {
-      return power.time - player.stats.timeSinceGameStart;
-    } else {
-      return power.wait;
-    }
-  },
   descriptionWait(type, i) {
     if (this.canAccessPower(type, i)) {
       let power = this.accessPower(type, i);
-      let wait = this.getWait(power);
+      if (power.id[0] < player.finalities) {
+        return 'Produced in past finality';
+      } else if (power.id[0] > player.finalities) {
+        return 'Produced in future finalities';
+      } else if (!this.isUnlocked()) {
+        // This case should rarely happen, so it's probably fine to not be more precise.
+        return 'Produced after power unlock';
+      } else if (power.id[1] === null) {
+        // It's probably OK not to be more precise
+        return 'Already crafted';
+      }
+      let wait = (power.id[1] - player.powers.id + 1) * this.interval() - player.stats.timeSincePowerGain;
       if (wait > 0) {
         return 'Produced after ' + formatTime(wait, {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}});
-      } else if (wait === 0) {
-        return 'Produced immediately';
+      } else if (player.powers.id <= power.id[1]) {
+        return 'Produced by turning on power gain';
       } else {
         return 'Already produced';
       }
@@ -659,16 +665,6 @@ let Powers = {
   },
   getTotalEffectFrom(x, equipped) {
     return x.map(p => this.getEffect(p, equipped)).reduce((a, b) => a + b - 1, 1);
-  },
-  makeFuture(p, originalTime) {
-    return {
-      'type': p.type,
-      'strength': p.strength,
-      'rarity': p.rarity,
-      'time': p.time,
-      'future': true,
-      'wait': p.time - originalTime
-    }
   },
   anythingToBuy() {
     return this.upgradeList.some(x => x.canBuy());

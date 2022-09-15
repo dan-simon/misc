@@ -8,6 +8,7 @@
   <script src="js/break_infinity.min.js"></script>
   <script src="js/ad-notations.min.js"></script>
   <script src="js/ad-notations.community.min.js"></script>
+  <script src="js/pako.min.js"></script>
   <script src="js/defined.js?time=%time%"></script>
   <script src="js/complexity/complexities.js?time=%time%"></script>
   <script src="js/complexity/complexity-achievements.js?time=%time%"></script>
@@ -107,7 +108,7 @@
     <br/>
     <span>Reloading might work, so probably try that first.</span>
     <br id="script-count-br" style="display: none;"/>
-    <span id="script-count-span" style="display: none;">The page loads <span id="script-count"></span> scripts (should be 92).</span>
+    <span id="script-count-span" style="display: none;">The page loads <span id="script-count"></span> scripts (should be 93).</span>
     <br/>
     <span><button onclick="window.location.reload(true)">Reload window</button> <button class="export-button" onclick="Saving.exportGame(0)">Export</button> <button onclick="Saving.loadGamePrompt()">Import/Load</button> <button onclick="Saving.resetGameWithConfirmation()">RESET THE GAME</button></span>
   </div>
@@ -3078,7 +3079,7 @@
           <button ~class=Oracle.isUnlocked() ? '' : 'disabled'~ onclick="Oracle.invoke()">Get prediction</button> <button onclick="Oracle.toggleAlert()">Alert on prediction: ~r Oracle.alert() ? "On" : "Off" ~</button> <button onclick="Oracle.togglePowerDisplay()">Show future powers on prediction: ~r Oracle.powerDisplay() ? "On" : "Off" ~</button>
           <button onclick="Oracle.nextPowerGainInPredictions()">Power gain in predictions: ~r Oracle.powerGainInPredictions() ~</button>
           <button onclick="Oracle.togglePowerFutureExtraMultipliers()">Show future power extra multipliers (as opposed to current): ~r Oracle.powerFutureExtraMultipliers() ? "On" : "Off" ~</button>
-          <button onclick="Oracle.toggleShowWaitsFromPastTime()">Show waiting time from when prediction was made (as opposed to current): ~r Oracle.showWaitsFromPastTime() ? "On" : "Off" ~</button>
+          <span class="helpspan">(?)<span class="tooltiptext">The amounts of times shown until powers in predictions use the current actual rate of new powers, rather than the rate in the simulation. The current actual rate may sometimes be less accurate than the rate in the simulation due to upgrades, but it's generally more accurate at, for example, letting you know if you already have a certain power or not.</span></span>
         </div>
         <span>The Oracle can look between ~ti 0 ~ and ~ti Oracle.maxTime() ~ into the future,</span>
         <br/>
@@ -4709,7 +4710,8 @@
       <br/>
       <br/>
       <div style="width: 1024px; margin-left: auto; margin-right: auto;">
-        <span>This game uses <a target="_blank" rel="noopener noreferrer" href="https://github.com/Patashu/break_infinity.js">break_infinity</a> and <a target="_blank" rel="noopener noreferrer" href="https://github.com/antimatter-dimensions/notations">Antimatter Dimensions Notations</a>, both under an MIT license.</span>
+        <span>This game uses <a target="_blank" rel="noopener noreferrer" href="https://github.com/Patashu/break_infinity.js">break_infinity</a> for working with large numbers, <a target="_blank" rel="noopener noreferrer" href="https://github.com/antimatter-dimensions/notations">Antimatter Dimensions Notations</a> for displaying large numbers, and <a target="_blank" rel="noopener noreferrer" href="http://nodeca.github.io/pako/">pako</a> (a javascript port of <a target="_blank" rel="noopener noreferrer" href="http://www.zlib.net/">zlib</a>) for making saves shorter. All three are under an MIT license (zlib is under the zlib license).</span>
+        <br/>
         <br/>
         <span>Thanks to Universal Attractor (pre-infinity) and Antimatter Dimensions for game mechanics.</span>
         <br/>
