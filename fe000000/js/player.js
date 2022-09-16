@@ -337,7 +337,8 @@ let initialPlayer = {
       alphabet: 'abcdefghijklmnopqrstuvwxyz',
       formatOrdinals: false,
       parseAutobuyersInCurrentBase: false,
-      autobuyerPrecision: 3
+      parseInputsInCurrentBase: false,
+      inputPrecision: 3
     },
     timeDisplay: 'Seconds',
     notationOnTimes: false,
@@ -549,7 +550,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.1796875
+  version: 2.18359375
 }
 
 let player;

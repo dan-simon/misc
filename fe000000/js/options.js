@@ -20,9 +20,6 @@ let Options = {
   toggleOfflineProgress() {
     player.options.offlineProgress = !player.options.offlineProgress;
   },
-  displayOfflineTicks() {
-    return player.options.offlineTicks;
-  },
   offlineTicks() {
     return player.options.offlineTicks;
   },

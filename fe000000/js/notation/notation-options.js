@@ -75,31 +75,98 @@ let NotationOptions = {
   },
   toggleFormatOrdinals() {
     player.options.notation.formatOrdinals = !player.options.notation.formatOrdinals;
-    this.notationChange();
+    this.notationChangeAutobuyers();
   },
   parseAutobuyersInCurrentBase() {
     return player.options.notation.parseAutobuyersInCurrentBase;
   },
   toggleParseAutobuyersInCurrentBase() {
     player.options.notation.parseAutobuyersInCurrentBase = !player.options.notation.parseAutobuyersInCurrentBase;
+    this.notationChangeOthers();
+  },
+  parseInputsInCurrentBase() {
+    return player.options.notation.parseInputsInCurrentBase;
+  },
+  toggleParseInputsInCurrentBase() {
+    player.options.notation.parseInputsInCurrentBase = !player.options.notation.parseInputsInCurrentBase;
     this.notationChange();
   },
-  autobuyerPrecision() {
-    return Math.min(Math.max(0, Math.floor(player.options.notation.autobuyerPrecision)), 10);
+  inputPrecision() {
+    return Math.min(Math.max(0, Math.floor(player.options.notation.inputPrecision)), 10);
   },
-  setAutobuyerPrecision(x) {
-    player.options.notation.autobuyerPrecision = (x === 0) ? 0 : (x || 3);
+  setInputPrecision(x) {
+    player.options.notation.inputPrecision = (x === 0) ? 0 : (x || 3);
     this.notationChange();
   },
   basePropsChange() {
     ADNotations.Settings.exponentCommas.min = Math.pow(Math.min(this.exponentBase(), 1e10), 5);
     ADNotations.Settings.exponentCommas.max = Math.pow(Math.min(this.exponentBase(), 1e10), 9);
   },
-  notationChange(x = [10, 11, 12, 13, 14, 15]) {
+  notationChange() {
+    this.notationChangeAutobuyers();
+    this.notationChangeOthers();
+  },
+  notationChangeAutobuyers(x = [10, 11, 12, 13, 14, 15]) {
     for (let i of x) {
       for (let input of Array.from(document.getElementsByClassName('autobuyer-priority-' + i))) {
         input.value = autobuyerSettingToString(Autobuyer(i).priority(), i);
       }
+    }
+  },
+  formatMaybeTime(x, isTime) {
+    let specialFormat = NotationOptions.parseInputsInCurrentBase() && (!isTime || Options.notationOnTimes());
+    let prec = NotationOptions.inputPrecision();
+    return numToString(x, specialFormat, prec);
+  },
+  readMaybeTime(x, isTime) {
+    let specialFormat = NotationOptions.parseInputsInCurrentBase() && (!isTime || Options.notationOnTimes());
+    return stringToNum(x, specialFormat);
+  },
+  read(x, y) {
+    return {
+      'autobuyers-timer-length': () => this.readMaybeTime(y, true),
+      'chroma-value': () => this.readMaybeTime(y, false),
+      'craft-rarity': () => (y === 'max' || y === 'min') ? y : this.readMaybeTime(y, false),
+      'oracle-display-time': () => this.readMaybeTime(y, true),
+      'oracle-display-ticks': () => this.readMaybeTime(y, false),
+      'next-dilated-amount': () => this.readMaybeTime(y, Galaxy.nextDilatedMode() === 'Seconds to reach cap'),
+      'achievements-beyond-highest': () => this.readMaybeTime(y, false),
+      'last-runs-to-show': () => this.readMaybeTime(y, false),
+      'export-reminder': () => this.readMaybeTime(y, true),
+      'offline-ticks': () => this.readMaybeTime(y, false),
+      'lower-precision': () => this.readMaybeTime(y, false),
+      'higher-precision': () => this.readMaybeTime(y, false),
+      'input-precision': () => this.readMaybeTime(y, false),
+    }[x]();
+  },
+  format(x) {
+    return {
+      'autobuyers-timer-length': () => this.formatMaybeTime(Autobuyers.autobuyersTimerLength(), true),
+      'chroma-value': () => this.formatMaybeTime(Chroma.timeForChromaValue(), false),
+      'craft-rarity': () => {
+        let y = PowerShards.craftedRarityDisplay();
+        return (y === 'max' || y === 'min') ? y : this.formatMaybeTime(y, false);
+      },
+      'oracle-display-time': () => this.formatMaybeTime(Oracle.displayTime(), true),
+      'oracle-display-ticks': () => this.formatMaybeTime(Oracle.displayTicks(), false),
+      'next-dilated-amount': () => this.formatMaybeTime(Galaxy.nextDilatedAmount(), Galaxy.nextDilatedMode() === 'Seconds to reach cap'),
+      'achievements-beyond-highest': () => this.formatMaybeTime(Achievements.beyondHighest(), true),
+      'last-runs-to-show': () => this.formatMaybeTime(Stats.lastRunsToShow(), false),
+      'export-reminder': () => this.formatMaybeTime(Options.exportNotificationFrequency(), true),
+      'offline-ticks': () => this.formatMaybeTime(Options.offlineTicks(), false),
+      'lower-precision': () => this.formatMaybeTime(NotationOptions.lowerPrecision(), false),
+      'higher-precision': () => this.formatMaybeTime(NotationOptions.higherPrecision(), false),
+      'input-precision': () => this.formatMaybeTime(NotationOptions.inputPrecision(), false),
+    }[x]();
+  },
+  notationChangeOthers(x = null) {
+    if (x === null) {
+      x = ['autobuyers-timer-length', 'chroma-value', 'craft-rarity', 'oracle-display-time',
+      'oracle-display-ticks', 'next-dilated-amount', 'achievements-beyond-highest', 'last-runs-to-show',
+      'export-reminder', 'offline-ticks', 'lower-precision', 'higher-precision', 'input-precision'];
+    }
+    for (let i of x) {
+      document.getElementsByClassName(i)[0].value = this.format(i);
     }
   }
 }

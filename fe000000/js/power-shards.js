@@ -118,7 +118,7 @@ let PowerShards = {
     player.powers.craft.type = x;
   },
   setCraftedRarity(x) {
-    player.powers.craft.rarity = (x === 'max' || x === 'min') ? x : Math.max(+x || 0, 0);
+    player.powers.craft.rarity = (x === 'max' || x === 'min') ? x : Math.max(x || 0, 0);
   },
   craftedType() {
     return player.powers.craft.type;
@@ -186,7 +186,7 @@ let PowerShards = {
     if (!this.canCraftAny()) return;
     let max = this.maxCraftRarity();
     PowerShards.setCraftedRarity(max);
-    [...document.getElementsByClassName('craft-rarity')].forEach(i => i.value = max);
+    document.getElementsByClassName('craft-rarity')[0].value = NotationOptions.format('craft-rarity');
   },
   craft() {
     if (!this.canCraft()) return;

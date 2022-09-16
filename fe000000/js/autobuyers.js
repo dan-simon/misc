@@ -79,7 +79,7 @@ let Autobuyer = function (i) {
     setMode(x) {
       player.autobuyers[i - 1].mode = x;
       if ([10, 11, 12, 13, 14, 15].includes(i)) {
-        NotationOptions.notationChange([i]);
+        NotationOptions.notationChangeAutobuyers([i]);
       }
     },
     setPriority(x) {

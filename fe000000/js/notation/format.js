@@ -124,23 +124,32 @@ function isUsingTimeMode(autobuyer) {
 function autobuyerSettingToString(x, autobuyer) {
   let time = isUsingTimeMode(autobuyer);
   let specialFormat = NotationOptions.parseAutobuyersInCurrentBase() && (!time || Options.notationOnTimes());
-  let prec = NotationOptions.autobuyerPrecision();
+  let prec = NotationOptions.inputPrecision();
+  return numToString(x, specialFormat, prec);
+}
+
+function numToString(x, specialFormat, prec) {
+  let intPrec = Decimal.eq(x, Decimal.round(x)) ? 0 : prec;
   if (specialFormat) {
     // Actually formatting as DMHS is very annoying
     if (NotationOptions.notation() === 'Hex') {
       return formatWithPrecision(x, prec);
     } else {
-      return getNotation('Scientific').format(x, prec, prec, prec);
+      return getNotation('Scientific').format(x, prec, intPrec, prec);
     }
   } else {
-    return getNotation('DefaultScientific').format(x, prec, prec, prec);
+    return getNotation('DefaultScientific').format(x, prec, intPrec, prec);
   }
 }
 
 function stringToAutobuyerSetting(x, autobuyer) {
   let time = isUsingTimeMode(autobuyer);
   let specialFormat = NotationOptions.parseAutobuyersInCurrentBase() && (!time || Options.notationOnTimes());
-  let parts = x.split(':').map(i => stringToAutobuyerSettingNoColon(i, specialFormat));
+  return stringToNum(x, specialFormat);
+}
+
+function stringToNum(x, specialFormat) {
+  let parts = x.split(':').map(i => stringToNumNoColon(i, specialFormat));
   let res = parts[0];
   for (let i = 1; i < parts.length; i++) {
     let unit = parts.length - 1 - i;
@@ -151,17 +160,17 @@ function stringToAutobuyerSetting(x, autobuyer) {
   return res;
 }
 
-function stringToAutobuyerSettingNoColon(x, specialFormat) {
+function stringToNumNoColon(x, specialFormat) {
   if (specialFormat && NotationOptions.notation() === 'Hex') {
     return hexToNumber(x);
   }
-  let y = x.split(displayDigitsAutobuyerSettings(specialFormat).includes('E') ? 'e' : /[Ee]/g).map(i => i.toUpperCase());
+  let y = x.split(displayDigits(specialFormat).includes('E') ? 'e' : /[Ee]/g).map(i => i.toUpperCase());
   if (y[y.length - 1] === '' && x && x[x.length - 1].toUpperCase() === 'E') {
     y.pop();
     y[y.length - 1] += 'E';
   }
-  y = y.map(stringToAutobuyerSettingNoExponent);
-  return y.length > 0 ? y.reduceRight((a, b) => Decimal.pow(exponentBaseAutobuyerSettings(specialFormat), a).times(b)) : new Decimal(0);
+  y = y.map(x => stringToNumNoExponent(x, specialFormat));
+  return y.length > 0 ? y.reduceRight((a, b) => Decimal.pow(exponentBase(specialFormat), a).times(b)) : new Decimal(0);
 }
 
 function hexToNumber(x) {
@@ -187,8 +196,8 @@ function hexToNumber(x) {
   return op;
 }
 
-function stringToAutobuyerSettingNoExponent(x, specialFormat) {
-  let digits = displayDigitsAutobuyerSettings(specialFormat);
+function stringToNumNoExponent(x, specialFormat) {
+  let digits = displayDigits(specialFormat);
   let sign = Math.pow(-1, (x.match(/-/g) || []).length);
   let actualDigits = [...x].filter(i => i === '.' || digits.includes(i));
   let dec = actualDigits.includes('.') ? actualDigits.indexOf('.') - 1 : actualDigits.length - 1;
@@ -198,9 +207,9 @@ function stringToAutobuyerSettingNoExponent(x, specialFormat) {
     (a, b) => a.plus(b)) : new Decimal(1);
 }
 
-let displayDigitsAutobuyerSettings = (specialFormat) => specialFormat ? NotationOptions.displayDigits() : '0123456789';
+let displayDigits = (specialFormat) => specialFormat ? NotationOptions.displayDigits() : '0123456789';
 
-let exponentBaseAutobuyerSettings = (specialFormat) => specialFormat ? NotationOptions.exponentBase() : 10;
+let exponentBase = (specialFormat) => specialFormat ? NotationOptions.exponentBase() : 10;
 
 // And now for something completely different.
 let numbers = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',

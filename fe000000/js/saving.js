@@ -1502,6 +1502,13 @@ let Saving = {
       player.powers.id = 1;
       player.version = 2.1796875;
     }
+    if (player.version < 2.18359375) {
+      player.options.notation.inputPrecision = player.options.notation.autobuyerPrecision;
+      delete player.options.notation.autobuyerPrecision;
+      player.options.notation.parseInputsInCurrentBase = player.options.notation.parseAutobuyersInCurrentBase;
+      // Keep player.options.notation.parseAutobuyersInCurrentBase, it still controls autobuyers
+      player.version = 2.18359375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

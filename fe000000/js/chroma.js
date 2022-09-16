@@ -241,7 +241,7 @@ let Chroma = {
     let old = player.chroma.timeForChromaMode;
     player.chroma.timeForChromaMode = x;
     if (old !== x) {
-      document.getElementsByClassName('chroma-value')[0].value = Chroma.timeForChromaValue();
+      document.getElementsByClassName('chroma-value')[0].value = NotationOptions.format('chroma-value');
     }
   },
   timeForChromaTextMargin() {

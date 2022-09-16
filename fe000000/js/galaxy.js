@@ -186,8 +186,8 @@ let Galaxy = {
     this.updateNextDilatedInputDisplay();
   },
   updateNextDilatedInputDisplay() {
-    document.getElementsByClassName('nextdilatedmode')[0].value = this.nextDilatedMode();
-    document.getElementsByClassName('nextdilatedamount')[0].value = this.nextDilatedAmount();
+    document.getElementsByClassName('next-dilated-mode')[0].value = this.nextDilatedMode();
+    document.getElementsByClassName('next-dilated-amount')[0].value = NotationOptions.format('next-dilated-amount');
   },
   tabColors() {
     return ['normal', 'infinity', 'eternity', 'complexity'];
