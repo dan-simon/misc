@@ -2356,13 +2356,15 @@
     <tab ~style.display=Tabs.currentTab() === 'complexity-challenges' ? '' : 'none'~>
       <span>You have completed ~i ComplexityChallenge.getTotalComplexityChallengeCompletions() ~ complexity challenge tier~s ComplexityChallenge.getTotalComplexityChallengeCompletions() ~.</span>
       <br/>
-      <span><button onclick="ComplexityChallenge.complexityReset(true)" ~class=ComplexityPrestigeLayer.canComplexity() ? "disabled" : ""~>Restart complexity and re-enter all complexity challenges<span ~style.display=ComplexityPrestigeLayer.canComplexity() ? '' : 'none'~> (disabled because you can complexity)</span></button></span>
+      <span><button onclick="ComplexityChallenge.complexityReset(true, true)" ~class=ComplexityPrestigeLayer.canComplexity() ? "disabled" : ""~>Restart complexity and re-enter all complexity challenges<span ~style.display=ComplexityPrestigeLayer.canComplexity() ? '' : 'none'~> (disabled because you can complexity)</span></button></span>
       <br/>
       <span>You have ~i Complexities.amount() ~ complexit~y Complexities.amount() ~ (allowing you to enter ~i ComplexityChallenge.numberUnlocked() ~ complexity challenge~s ComplexityChallenge.numberUnlocked() ~).</span>
       <br/>
       <span>Complexity challenge rewards are currently ~f ComplexityStars.complexityChallengeRewardMultiplier() ~x stronger (from ~f ComplexityStars.amount() ~ complexity stars).</span>
       <br ~style.display=FinalityMilestones.isFinalityMilestoneActive(9) ? '' : 'none'~/>
       <span ~style.display=FinalityMilestones.isFinalityMilestoneActive(9) ? '' : 'none'~>The Complexity Challenge ~o 6 ~ reward is instead currently ~f ComplexityStars.complexityChallengeRewardMultiplier(6) ~x stronger (from ~f ComplexityStars.extraAmount() ~ hypercomplexity stars).</span>
+      <br/>
+      <span>Re-enable complexity challenges you're currently in on ~r PrestigeLayerNames.layersAboveDisplay('complexity') ~ <span class="helpspan">(?)<span class="tooltiptext" style="font-size: 0.75rem;">This means that if you're currently in a complexity challenge due to the ability to violate its condition being disabled, and you ~r PrestigeLayerProgress.hasReached('finality') ? 'complexity or finality' : 'complexity' ~, then the ability to violate that condition will be automatically enabled again, letting you exit the complexity challenge. This is generally good since you don't want to do a complexity challenge for two complexities in a row.</span></span>: <input type="checkbox" ~!checked=Options.exitComplexityChallengesOnComplexity()~ ~!onchange=function() {Options.setExitComplexityChallengesOnComplexity(this.checked)}~></input></span>
       <br/>
       <br/>
       <span>You do not need to complexity to complete complexity challenges. <button ~style.display=Explanations.isVisible('complexity-challenges', 'main') ? '' : 'none'~ onclick="Explanations.showOrHide('complexity-challenges', 'main')">Complexity challenges explanation: ~r Explanations.isShown('complexity-challenges', 'main') ? 'Shown' : 'Hidden' ~</button></span>

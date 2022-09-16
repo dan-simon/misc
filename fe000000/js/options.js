@@ -310,6 +310,12 @@ let Options = {
   toggleComplexityChallengeRunningColors() {
     player.options.complexityChallengeRunningColors = !player.options.complexityChallengeRunningColors;
   },
+  exitComplexityChallengesOnComplexity() {
+    return player.options.exitComplexityChallengesOnComplexity;
+  },
+  setExitComplexityChallengesOnComplexity(x) {
+    player.options.exitComplexityChallengesOnComplexity = x;
+  },
   setOptionTypeShown(x) {
     player.options.optionTypeShown = x;
   },

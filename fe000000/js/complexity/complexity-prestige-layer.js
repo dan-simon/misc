@@ -142,9 +142,9 @@ let ComplexityPrestigeLayer = {
     Stats.addComplexity(player.stats.timeSinceComplexity, gain, amount);
     Powers.maybeRespec();
     Goals.recordPrestige('complexity');
-    this.complexityReset(false);
+    this.complexityReset(false, false);
   },
-  complexityReset(manual) {
+  complexityReset(manual, entering) {
     if (manual && this.canComplexity()) return;
     if (manual && Options.confirmation('complexityReset') && !confirm(this.complexityResetConfirmationMessage())) return;
     // We need to do this here to avoid eternity milestones being applied in the eternity reset.
@@ -154,6 +154,11 @@ let ComplexityPrestigeLayer = {
     EternityChallenge.setEternityChallenge(0);
     player.complexityStars = new Decimal(2);
     ComplexityGenerators.list.forEach(x => x.resetAmount());
+    // It's crucial to exit while our running data is still accurate (that is, before we set player.isComplexityChallengeRunning).
+    // Also, if the player is entering a complexity challenge, we don't exit complexity challenges.
+    if (!entering && Options.exitComplexityChallengesOnComplexity()) {
+      ComplexityChallenge.turnAllActiveSafeguardsOff();
+    }
     player.isComplexityChallengeRunning = [true, true, true, true, true, true];
     player.boostPower = 1;
     if (!ComplexityAchievements.isComplexityAchievementActive(4, 4)) {

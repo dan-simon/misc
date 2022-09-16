@@ -1509,6 +1509,10 @@ let Saving = {
       // Keep player.options.notation.parseAutobuyersInCurrentBase, it still controls autobuyers
       player.version = 2.18359375;
     }
+    if (player.version < 2.1875) {
+      player.options.exitComplexityChallengesOnComplexity = true;
+      player.version = 2.1875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

@@ -128,10 +128,10 @@ let ComplexityChallenge = {
     }
     player.complexityChallengeCompletions[x - 1] = Math.max(player.complexityChallengeCompletions[x - 1], completions);
   },
-  complexityReset(manual) {
+  complexityReset(manual, entering) {
     // It's easy to imagine wanting something else here (for example, because certain things
     // disqualify you from complexity challenges), which is why this is its own method.
-    ComplexityPrestigeLayer.complexityReset(manual);
+    ComplexityPrestigeLayer.complexityReset(manual, entering);
   },
   isSafeguardOn(x) {
     return player.complexityChallengeSafeguards[x - 2];
@@ -140,10 +140,20 @@ let ComplexityChallenge = {
     player.complexityChallengeSafeguards[x - 2] = !player.complexityChallengeSafeguards[x - 2];
     if (x === 6 && !player.complexityChallengeSafeguards[x - 2] &&
       ComplexityAchievements.isComplexityAchievementActive(4, 4) && Studies.rebuyAfterComplexityChallenge6()) {
+      // Note that finality resets all four things used here (studies and purchase order, both from before last respec
+      // and current) before complexity reset is called, so this does nothing in the case of
+      // it happening as part of a finality reset.
       player.studies = [...player.studySettings.studiesBeforeLastRespec];
       player.studySettings.firstTwelveStudyPurchaseOrder = [...player.studySettings.firstTwelveStudyPurchaseOrderBeforeLastRespec];
       if (!Studies.areStudiesInitialStudies()) {
         ComplexityChallenge.exitComplexityChallenge(6);
+      }
+    }
+  },
+  turnAllActiveSafeguardsOff() {
+    for (let i = 2; i <= 6; i++) {
+      if (this.isComplexityChallengeRunning(i) && this.isSafeguardOn(i)) {
+        this.toggleSafeguard(i);
       }
     }
   },

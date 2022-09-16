@@ -421,6 +421,7 @@ let initialPlayer = {
       smallerHeader: false,
     },
     complexityChallengeRunningColors: false,
+    exitComplexityChallengesOnComplexity: true,
     news: false,
     optionTypeShown: 'saving',
     autobuyers: {
@@ -550,7 +551,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.18359375
+  version: 2.1875
 }
 
 let player;

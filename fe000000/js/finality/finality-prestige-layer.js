@@ -120,9 +120,10 @@ let FinalityPrestigeLayer = {
     // Complexities are here because they're used by a complexity achievement
     // to determine starting eternities.
     player.complexities = FinalityStartingBenefits.complexities();
-    // This function takes care of applying the rewards for certain numbers of achievements,
-    // so don't do it in initializeStartingComplexityAchievements().
-    ComplexityPrestigeLayer.complexityReset(false);
+    // This function takes care of applying the rewards for certain numbers of achievements.
+    // So we don't apply those rewards in initializeStartingComplexityAchievements();
+    // we apply them here instead.
+    ComplexityPrestigeLayer.complexityReset(false, false);
     player.finalityStars = new Decimal(1);
     FinalityGenerators.list.forEach(x => x.resetAmount());
     player.complexityPoints = FinalityStartingBenefits.complexityPoints().plus(FinalityMilestones.startingComplexityPoints());

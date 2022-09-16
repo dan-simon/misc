@@ -345,7 +345,7 @@ let Powers = {
       if (ComplexityPrestigeLayer.canComplexity()) {
         ComplexityPrestigeLayer.complexity(false);
       } else {
-        ComplexityPrestigeLayer.complexityReset(false);
+        ComplexityPrestigeLayer.complexityReset(false, false);
       }
     }
     this.importFromCounts(counts);
@@ -526,7 +526,7 @@ let Powers = {
       if (ComplexityPrestigeLayer.canComplexity()) {
         ComplexityPrestigeLayer.complexity(false);
       } else {
-        ComplexityPrestigeLayer.complexityReset(false);
+        ComplexityPrestigeLayer.complexityReset(false, false);
       }
     }
   },
@@ -574,7 +574,7 @@ let Powers = {
     if (ComplexityPrestigeLayer.canComplexity()) {
       ComplexityPrestigeLayer.complexity(false);
     } else {
-      ComplexityPrestigeLayer.complexityReset(false);
+      ComplexityPrestigeLayer.complexityReset(false, false);
     };
     return true;
   },
