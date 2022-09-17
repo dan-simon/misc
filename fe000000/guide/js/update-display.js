@@ -490,7 +490,7 @@ function updateDisplay() {
     if (shouldUpdate("e416")) {let v = formatInt(16); if (e[416].textContent !== v) {e[416].textContent = v};};
     if (shouldUpdate("e417")) {let v = formatTime(3600, {seconds: {f: formatTimeMaybeInt, s: true}, larger: {f: formatTimeMaybeInt, s: true}}); if (e[417].textContent !== v) {e[417].textContent = v};};
     if (shouldUpdate("e418")) {let v = formatInt(36); if (e[418].textContent !== v) {e[418].textContent = v};};
-    if (shouldUpdate("e419")) {let v = formatInt(32); if (e[419].textContent !== v) {e[419].textContent = v};};
+    if (shouldUpdate("e419")) {let v = formatInt(36); if (e[419].textContent !== v) {e[419].textContent = v};};
     if (shouldUpdate("e420")) {let v = formatInt(Math.pow(2, 32)); if (e[420].textContent !== v) {e[420].textContent = v};};
     if (shouldUpdate("e421")) {let v = formatInt(Math.pow(2, 48)); if (e[421].textContent !== v) {e[421].textContent = v};};
     if (shouldUpdate("e422")) {let v = format(Math.pow(2, Math.pow(2, 5.5))); if (e[422].textContent !== v) {e[422].textContent = v};};
