@@ -14,6 +14,7 @@ let startingPlayer = {
     timeDisplay: 'Seconds',
     notationOnTimes: false,
     theme: {background: 'Dark', buttonColor: 'Vibrant'},
+    colorChange: 'None',
     adjustColors: true,
     colorData: {
       'Dull': {
