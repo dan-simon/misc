@@ -114,6 +114,21 @@ input[type=text] {
   visibility: hidden;
 }
 
+.headertooltiptext {
+  width: 288px;
+  top: 100%;
+  left: 50%;
+  margin-left: -144px;
+  padding: 2px;
+  background-color: var(--text-color);
+  color: var(--background-color);
+  text-align: center;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 2;
+  visibility: hidden;
+}
+
 .achievementtd:hover .tooltiptext {
   visibility: visible;
 }
@@ -123,6 +138,14 @@ input[type=text] {
 }
 
 .helpspan:hover .tooltiptext {
+  visibility: visible;
+}
+
+.hoverbutton {
+  position: relative;
+}
+
+.hoverbutton:hover .headertooltiptext {
   visibility: visible;
 }
 
