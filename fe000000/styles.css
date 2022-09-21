@@ -600,6 +600,10 @@ input[type=text] {
   color: var(--brown-altered-text-color);
 }
 
+.hyperredspan, .hyperreddiv > span {
+  color: var(--red-text-color) !important;
+}
+
 .chromacurrentgreydiv {
   background: radial-gradient(var(--background-color), var(--background-color) 75%, #aaaaaa);
 }

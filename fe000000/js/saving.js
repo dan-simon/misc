@@ -1513,6 +1513,10 @@ let Saving = {
       player.options.exitComplexityChallengesOnComplexity = true;
       player.version = 2.1875;
     }
+    if (player.version < 2.19140625) {
+      player.confirmations.complexityChallengeEntering = true;
+      player.version = 2.19140625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

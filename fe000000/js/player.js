@@ -453,6 +453,7 @@ let initialPlayer = {
     singleStudyRefund: true,
     studiesRespec: true,
     eternityChallengeRespec: true,
+    complexityChallengeEntering: true,
     powerDeletionMode: 'Confirmation',
     powerUnequipMode: 'Confirmation',
     powersUnequip: true,
@@ -551,7 +552,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.1875
+  version: 2.19140625
 }
 
 let player;
