@@ -1517,6 +1517,15 @@ let Saving = {
       player.confirmations.complexityChallengeEntering = true;
       player.version = 2.19140625;
     }
+    if (player.version < 2.1953125) {
+      // For pre-complexity saves, set this option to its new value default value;.
+      // (Such players definitely won't have seen/set it yet unless they are
+      // using replay mode, which is very rare.)
+      if (player.complexities === 0 && player.finalities === 0) {
+        player.options.exitComplexityChallengesOnComplexity = false;
+      }
+      player.version = 2.1953125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

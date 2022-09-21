@@ -552,7 +552,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.19140625
+  version: 2.1953125
 }
 
 let player;
