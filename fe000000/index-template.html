@@ -4663,7 +4663,7 @@
               <option value="On">On</option>
             </select></span>
           </div></td>
-          <td><div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="options-div">Max all mode <span class="helpspan">(?)<span class="tooltiptext">This setting controls what the M hotkey buys, and also what the Main tab "Max all" button buys.</span></span>: <select ~!value=Options.maxAllMode()~ ~!onchange=function() {Options.setMaxAllMode(this.value)}~>
+          <td><div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="options-div">Max all mode <span class="helpspan">(?)<span class="tooltiptext">This setting controls what the M hotkey buys, and also what the Main tab "Max all" button buys. It also controls what the G hotkey buys (that is, whatever generators the M hotkey would buy).</span></span>: <select ~!value=Options.maxAllMode()~ ~!onchange=function() {Options.setMaxAllMode(this.value)}~>
             <option value="Normal generators and boosts">Normal generators and boosts</option>
             <option value="Generators and upgrades in current tab">Generators and upgrades in current tab</option>
             <option value="Both">Both</option>
