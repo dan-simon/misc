@@ -84,7 +84,7 @@ let FinalityPrestigeLayer = {
   finalityResetConfirmationMessage() {
     return 'Are you sure you want to do a finality reset? This will not give you any finality points or finality shards.';
   },
-  finality(manual) {
+  finality(manual, justReset) {
     if (!this.canFinality()) return;
     if (manual && Options.confirmation('finality') && !confirm(this.finalityConfirmationMessage())) return;
     Achievements.checkForAchievements('finality');
@@ -97,9 +97,9 @@ let FinalityPrestigeLayer = {
     Stats.addFinality(player.stats.timeSinceFinality, pointGain, shardGain, amount);
     FinalityShardPresets.maybeRespec();
     Goals.recordPrestige('finality');
-    this.finalityReset(false);
+    this.finalityReset(false, justReset);
   },
-  finalityReset(manual) {
+  finalityReset(manual, justReset) {
     if (manual && Options.confirmation('finality') && !confirm(this.finalityResetConfirmationMessage())) return;
     // We need to do this here to avoid complexity achievements being applied in the eternity reset.
     // As said below, this method shouldn't apply rewards.
@@ -123,7 +123,7 @@ let FinalityPrestigeLayer = {
     // This function takes care of applying the rewards for certain numbers of achievements.
     // So we don't apply those rewards in initializeStartingComplexityAchievements();
     // we apply them here instead.
-    ComplexityPrestigeLayer.complexityReset(false, false);
+    ComplexityPrestigeLayer.complexityReset(false, justReset, false);
     player.finalityStars = new Decimal(1);
     FinalityGenerators.list.forEach(x => x.resetAmount());
     player.complexityPoints = FinalityStartingBenefits.complexityPoints().plus(FinalityMilestones.startingComplexityPoints());

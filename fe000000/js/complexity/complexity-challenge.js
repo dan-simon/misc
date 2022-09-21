@@ -135,7 +135,7 @@ let ComplexityChallenge = {
   complexityReset(manual, entering) {
     // It's easy to imagine wanting something else here (for example, because certain things
     // disqualify you from complexity challenges), which is why this is its own method.
-    ComplexityPrestigeLayer.complexityReset(manual, entering);
+    ComplexityPrestigeLayer.complexityReset(manual, true, entering);
   },
   isSafeguardOn(x) {
     return player.complexityChallengeSafeguards[x - 2];

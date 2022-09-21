@@ -174,9 +174,9 @@ let FinalityShardPresets = {
       FinalityPrestigeLayer.resetText() + '?')) return false;
     this.respec();
     if (FinalityPrestigeLayer.canFinality()) {
-      FinalityPrestigeLayer.finality(false);
+      FinalityPrestigeLayer.finality(false, true);
     } else {
-      FinalityPrestigeLayer.finalityReset(false);
+      FinalityPrestigeLayer.finalityReset(false, true);
     }
     return true;
   },

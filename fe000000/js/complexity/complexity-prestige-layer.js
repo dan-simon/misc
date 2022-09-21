@@ -142,9 +142,9 @@ let ComplexityPrestigeLayer = {
     Stats.addComplexity(player.stats.timeSinceComplexity, gain, amount);
     Powers.maybeRespec();
     Goals.recordPrestige('complexity');
-    this.complexityReset(false, false);
+    this.complexityReset(false, false, false);
   },
-  complexityReset(manual, entering) {
+  complexityReset(manual, justReset, entering) {
     if (manual && this.canComplexity()) return;
     if (manual && Options.confirmation('complexityReset') && !confirm(this.complexityResetConfirmationMessage())) return;
     // We need to do this here to avoid eternity milestones being applied in the eternity reset.

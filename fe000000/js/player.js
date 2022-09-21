@@ -421,7 +421,7 @@ let initialPlayer = {
       smallerHeader: false,
     },
     complexityChallengeRunningColors: false,
-    exitComplexityChallengesOnComplexity: true,
+    exitComplexityChallengesOnComplexity: false,
     news: false,
     optionTypeShown: 'saving',
     autobuyers: {
