@@ -7,9 +7,9 @@ let ComplexityMaxAll = {
       types = [1, 2, 3, 4, 5, 6, 7, 8];
     }
     generalHighestSweep(() => ComplexityGenerators.highest(), types);
-    generalMaxAll(types.filter(x => x <= 8).map(x => ComplexityGenerator(x)));
-    generalMaxAll(types.filter(x => x > 8 && x <= 11).map(x => PowerUpgrade(x - 8)));
-    generalMaxAll(types.filter(x => x > 11).map(x => PowerShardUpgrade(x - 11)));
+    generalMaxAll(types.filter(x => x <= 8).map(x => ComplexityGenerator(x)), ComplexityPoints);
+    generalMaxAll(types.filter(x => x > 8 && x <= 11).map(x => PowerUpgrade(x - 8)), ComplexityPoints);
+    generalMaxAll(types.filter(x => x > 11).map(x => PowerShardUpgrade(x - 11)), PowerShards);
   },
   maxUpgrades() {
     this.maxAll([9, 10, 11]);

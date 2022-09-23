@@ -80,6 +80,9 @@ let Permanence = {
   add(x) {
     player.permanence = player.permanence.plus(x);
   },
+  safeSubtract(x) {
+    player.permanence = player.permanence.safeMinus(x);
+  },
   anythingToBuy() {
     return PermanenceUpgrades.list.some(x => x.canBuy());
   },
@@ -88,6 +91,6 @@ let Permanence = {
   },
   buyMaxOf(ids) {
     let list = ids.map(x => PermanenceUpgrades.list[x - 1]);
-    generalMaxAll(list);
+    generalMaxAll(list, Permanence);
   }
 }

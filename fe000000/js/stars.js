@@ -57,6 +57,9 @@ let Stars = {
     player.stats.totalStarsProducedThisComplexity = player.stats.totalStarsProducedThisComplexity.plus(change);
     player.stats.totalStarsProducedThisFinality = player.stats.totalStarsProducedThisFinality.plus(change);
   },
+  safeSubtract(x) {
+    player.stars = player.stars.safeMinus(x);
+  },
   perSecond() {
     return Generator(1).productionPerSecond();
   }

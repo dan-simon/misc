@@ -45,7 +45,14 @@ let InfinityUpgrade = function (i) {
       }
       return n <= this.maxBuyable();
     },
+    newAutobuyerStart: [3, 4][i - 1],
+    newAutobuyerScale: [3, 4][i - 1],
+    newAutobuyerCapLoc: [Infinity, 32][i - 1],
+    isGenerallyBuyable() {
+      return true;
+    },
     maxBuyable(fraction) {
+      if (!this.isGenerallyBuyable()) return 0;
       if (fraction === undefined) {
         fraction = 1;
       }
@@ -55,12 +62,14 @@ let InfinityUpgrade = function (i) {
       num = Math.max(num, 0);
       return num;
     },
-    buy(n, guaranteedBuyable) {
+    buy(n, guaranteedBuyable, free) {
       if (n === undefined) {
         n = 1;
       }
       if (n === 0 || (!guaranteedBuyable && !this.canBuy(n))) return;
-      player.infinityPoints = player.infinityPoints.safeMinus(this.costFor(n));
+      if (!free) {
+        player.infinityPoints = player.infinityPoints.safeMinus(this.costFor(n));
+      }
       this.addBought(n);
     },
     buyMax(fraction) {

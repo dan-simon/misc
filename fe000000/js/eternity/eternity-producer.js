@@ -71,23 +71,35 @@ let EternityProducerUpgrade = function (i) {
       }
       return n <= this.maxBuyable();
     },
-    maxBuyable() {
-      let num = Math.floor(player.eternityPoints.div(this.cost()).times(
+    newAutobuyerStart: 24,
+    newAutobuyerScale: 4,
+    newAutobuyerCapLoc: Infinity,
+    isGenerallyBuyable() {
+      return EternityProducer.isUnlocked();
+    },
+    maxBuyable(fraction) {
+      if (!this.isGenerallyBuyable()) return 0;
+      if (fraction === undefined) {
+        fraction = 1;
+      }
+      let num = Math.floor(player.eternityPoints.times(fraction).div(this.cost()).times(
         Decimal.minus(this.costIncreasePer(), 1)).plus(1).log(this.costIncreasePer()));
       num = Math.min(num, this.boughtLimit() - this.bought());
       num = Math.max(num, 0);
       return num;
     },
-    buy(n, guaranteedBuyable) {
+    buy(n, guaranteedBuyable, free) {
       if (n === undefined) {
         n = 1;
       }
       if (n === 0 || (!guaranteedBuyable && !this.canBuy(n))) return;
-      player.eternityPoints = player.eternityPoints.safeMinus(this.costFor(n));
+      if (!free) {
+        player.eternityPoints = player.eternityPoints.safeMinus(this.costFor(n));
+      };
       this.addBought(n);
     },
-    buyMax() {
-      this.buy(this.maxBuyable(), true);
+    buyMax(fraction) {
+      this.buy(this.maxBuyable(fraction), true);
     }
   }
 }

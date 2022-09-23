@@ -55,7 +55,14 @@ let EternityUpgrade = function (i) {
       }
       return n <= this.maxBuyable();
     },
+    newAutobuyerStart: [4, 12, 16][i - 1],
+    newAutobuyerScale: [4, 12, 16][i - 1],
+    newAutobuyerCapLoc: [28, Infinity, Infinity][i - 1],
+    isGenerallyBuyable() {
+      return true;
+    },
     maxBuyable(fraction) {
+      if (!this.isGenerallyBuyable()) return 0;
       if (fraction === undefined) {
         fraction = 1;
       }
@@ -65,12 +72,14 @@ let EternityUpgrade = function (i) {
       num = Math.max(num, 0);
       return num;
     },
-    buy(n, guaranteedBuyable) {
+    buy(n, guaranteedBuyable, free) {
       if (n === undefined) {
         n = 1;
       }
       if (n === 0 || (!guaranteedBuyable && !this.canBuy(n))) return;
-      player.eternityPoints = player.eternityPoints.safeMinus(this.costFor(n));
+      if (!free) {
+        player.eternityPoints = player.eternityPoints.safeMinus(this.costFor(n));
+      }
       this.addBought(n);
     },
     buyMax(fraction) {

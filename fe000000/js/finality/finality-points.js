@@ -8,5 +8,8 @@ let FinalityPoints = {
   addAmount(x) {
     player.finalityPoints = player.finalityPoints.plus(x);
     player.stats.totalFPProduced = player.stats.totalFPProduced.plus(x);
+  },
+  safeSubtract(x) {
+    player.finalityPoints = player.finalityPoints.safeMinus(x);
   }
 }

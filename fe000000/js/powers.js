@@ -77,7 +77,18 @@ let PowerUpgrade = function (i) {
       }
       return n <= this.maxBuyable();
     },
-    maxBuyable() {
+    newAutobuyerStart: [64, 64, null][i - 1],
+    newAutobuyerScale: [16, 64, null][i - 1],
+    newAutobuyerCapLoc: Infinity,
+    isGenerallyBuyable() {
+      return Powers.isUnlocked();
+    },
+    isSpecial: (i === 3) ? (() => true) : (() => false),
+    maxBuyable(fraction) {
+      if (!this.isGenerallyBuyable()) return 0;
+      if (fraction === undefined) {
+        fraction = 1;
+      }
       let num;
       if (i === 3) {
         if (player.complexityPoints.lt(this.initialCost())) {
@@ -87,25 +98,27 @@ let PowerUpgrade = function (i) {
           return 0;
         }
         // This may fail due to precision if the player has barely not enough CP.
-        num = Math.floor(1 + Math.log2(player.complexityPoints.log2() / this.initialCost().log2())) - this.bought();
+        num = Math.floor(1 + Math.log2(player.complexityPoints.times(fraction).log2() / this.initialCost().log2())) - this.bought();
       } else {
-        num = Math.floor(player.complexityPoints.div(this.cost()).times(
+        num = Math.floor(player.complexityPoints.times(fraction).div(this.cost()).times(
           Decimal.minus(this.costIncreasePer(), 1)).plus(1).log(this.costIncreasePer()));
       }
       num = Math.min(num, this.boughtLimit() - this.bought());
       num = Math.max(num, 0);
       return num;
     },
-    buy(n, guaranteedBuyable) {
+    buy(n, guaranteedBuyable, free) {
       if (n === undefined) {
         n = 1;
       }
       if (n === 0 || (!guaranteedBuyable && !this.canBuy(n))) return;
-      player.complexityPoints = player.complexityPoints.safeMinus(this.costFor(n));
+      if (!free) {
+        player.complexityPoints = player.complexityPoints.safeMinus(this.costFor(n));
+      }
       this.addBought(n);
     },
-    buyMax() {
-      this.buy(this.maxBuyable(), true);
+    buyMax(fraction) {
+      this.buy(this.maxBuyable(fraction), true);
     }
   }
 }

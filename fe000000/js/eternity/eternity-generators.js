@@ -78,8 +78,14 @@ let EternityGenerator = function (i) {
       }
       return n <= this.maxBuyable();
     },
+    newAutobuyerStart: Math.pow(i, 2),
+    newAutobuyerScale: i,
+    newAutobuyerCapLoc: Infinity,
+    isGenerallyBuyable() {
+      return i <= player.highestEternityGenerator + 1 && !(i == 8 && ComplexityChallenge.isSafeguardOn(5));
+    },
     maxBuyable(fraction) {
-      if (!this.isVisible() || (i == 8 && ComplexityChallenge.isSafeguardOn(5))) return 0;
+      if (!this.isGenerallyBuyable()) return 0;
       if (fraction === undefined) {
         fraction = 1;
       }
@@ -88,12 +94,14 @@ let EternityGenerator = function (i) {
       num = Math.max(num, 0);
       return num;
     },
-    buy(n, guaranteedBuyable) {
+    buy(n, guaranteedBuyable, free) {
       if (n === undefined) {
         n = 1;
       }
       if (n === 0 || (!guaranteedBuyable && !this.canBuy(n))) return;
-      player.eternityPoints = player.eternityPoints.safeMinus(this.costFor(n));
+      if (!free) {
+        player.eternityPoints = player.eternityPoints.safeMinus(this.costFor(n));
+      }
       this.addAmount(n);
       this.addBought(n);
       if (player.highestEternityGenerator < i) {

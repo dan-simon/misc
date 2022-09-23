@@ -10,6 +10,9 @@ let InfinityPoints = {
     player.stats.totalIPProduced = player.stats.totalIPProduced.plus(x);
     player.stats.totalIPProducedThisEternity = player.stats.totalIPProducedThisEternity.plus(x);
   },
+  safeSubtract(x) {
+    player.infinityPoints = player.infinityPoints.safeMinus(x);
+  },
   multiplier() {
     let mult = this.totalIPProducedThisEternity().div(4).plus(1);
     if (!InfinityChallenge.isInfinityChallengeCompleted(1)) {

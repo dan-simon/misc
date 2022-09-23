@@ -58,6 +58,9 @@ let Boost = {
   isVisible() {
     return !this.areBoostsDisabled() && SpecialDivs.isDivVisible('boosts');
   },
+  isVisibleBuy() {
+    return !this.areBoostsDisabled() && SpecialDivs.isDivVisible('boosts');
+  },
   canBuy(n) {
     if (n === undefined) {
       n = 1;
@@ -79,14 +82,21 @@ let Boost = {
   isNotBuyableAtAll() {
     // This function is a bit misleadingly named. It checks if there's some condition making boosts completely unbuyable
     // independent of how many stars you have.
-    return !this.isVisible() || !Stars.canBuyThings() || ComplexityChallenge.isSafeguardOn(2);
+    return !this.isVisibleBuy() || !Stars.canBuyThings() || ComplexityChallenge.isSafeguardOn(2);
   },
-  maxBuyable() {
-    if (this.isNotBuyableAtAll() || player.stars.minus(this.cost()).lt(Stars.requiredUnspent())) return 0;
-    let num = Math.floor(Math.pow(player.stars.max(1).log(2) / this.costSlowdown(), 1 / this.costPower()) / this.costSkip() - this.costStart() + 1) - this.bought();
+  isSpecial() {
+    return true;
+  },
+  maxBuyable(fraction) {
+    if (fraction === undefined) {
+      fraction = 1;
+    }
+    let thresh = Decimal.max(Stars.amount().times(1 - fraction), Stars.requiredUnspent());
+    if (this.isNotBuyableAtAll() || player.stars.minus(this.cost()).lt(thresh)) return 0;
+    let num = Math.floor(Math.pow(player.stars.max(1).times(fraction).log(2) / this.costSlowdown(), 1 / this.costPower()) / this.costSkip() - this.costStart() + 1) - this.bought();
     // We could use safeMinus here in theory, but the cost calculation should be as accurate as possible.
     // Cost increases quickly enough that we don't even get close to needing to decrease cost by more than 1.
-    if (player.stars.minus(this.costFor(num)).lt(Stars.requiredUnspent())) {
+    if (player.stars.minus(this.costFor(num)).lt(thresh)) {
       num -= 1;
     }
     num = Math.min(num, Challenge.isChallengeEffectActive(7) ? Challenge.challenge7PurchasesLeft() : Infinity,
@@ -94,17 +104,19 @@ let Boost = {
     num = Math.max(num, 0);
     return num;
   },
-  buy(n, guaranteedBuyable) {
+  buy(n, guaranteedBuyable, free) {
     if (n === undefined) {
       n = 1;
     }
     if (n === 0 || (!guaranteedBuyable && !this.canBuy(n))) return;
-    player.stars = player.stars.safeMinus(this.costFor(n));
+    if (!free) {
+      player.stars = player.stars.safeMinus(this.costFor(n));
+    }
     this.addBought(n);
     Stats.recordPurchase(0, n);
   },
-  buyMax() {
-    this.buy(this.maxBuyable(), true);
+  buyMax(fraction) {
+    this.buy(this.maxBuyable(fraction), true);
   },
   boostPower() {
     return player.boostPower;

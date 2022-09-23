@@ -13,8 +13,8 @@ let InfinityMaxAll = {
       types = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     }
     generalHighestSweep(() => InfinityGenerators.highest(), types);
-    generalMaxAll(types.filter(x => x > 8).map(x => InfinityUpgrade(x - 8)));
-    generalMaxAll(types.filter(x => x <= 8).map(x => InfinityGenerator(x)));
+    generalMaxAll(types.filter(x => x > 8).map(x => InfinityUpgrade(x - 8)), InfinityPoints);
+    generalMaxAll(types.filter(x => x <= 8).map(x => InfinityGenerator(x)), InfinityPoints);
   },
   maxUpgrades() {
     this.maxAll([9, 10]);

@@ -87,8 +87,18 @@ let Generator = function (i) {
       }
       return n <= this.maxBuyable();
     },
+    newAutobuyerStart: Math.pow(i, 2),
+    newAutobuyerScale: i,
+    newAutobuyerCapLoc: Infinity,
+    isGenerallyBuyable() {
+      return this.isDirectlyVisible() && Stars.canBuyThings();
+    },
+    isSpecial() {
+      // Called enough that it's worth speeding up a bit.
+      return player.currentChallenge !== 0 || player.currentInfinityChallenge !== 0;
+    },
     maxBuyable(fraction) {
-      if (!this.isDirectlyVisible() || !Stars.canBuyThings()) return 0;
+      if (!this.isGenerallyBuyable()) return 0;
       if (fraction === undefined) {
         fraction = 1;
       }
@@ -105,12 +115,14 @@ let Generator = function (i) {
       }
       return num;
     },
-    buy(n, guaranteedBuyable) {
+    buy(n, guaranteedBuyable, free) {
       if (n === undefined) {
         n = 1;
       }
       if (n === 0 || (!guaranteedBuyable && !this.canBuy(n))) return;
-      player.stars = player.stars.safeMinus(this.costFor(n));
+      if (!free) {
+        player.stars = player.stars.safeMinus(this.costFor(n));
+      }
       this.addAmount(n);
       this.addBought(n);
       if (player.highestGenerator < i) {

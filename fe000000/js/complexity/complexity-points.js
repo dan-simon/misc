@@ -12,5 +12,8 @@ let ComplexityPoints = {
     player.complexityPoints = player.complexityPoints.plus(x);
     player.stats.totalCPProduced = player.stats.totalCPProduced.plus(x);
     player.stats.totalCPProducedThisFinality = player.stats.totalCPProducedThisFinality.plus(x);
+  },
+  safeSubtract(x) {
+    player.complexityPoints = player.complexityPoints.safeMinus(x);
   }
 }
