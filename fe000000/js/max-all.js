@@ -78,7 +78,9 @@ let generalMaxAllFast = function (rawThings, currency) {
   let purchases = range(0, len - 1).map(i => Math.max(0, Math.floor((Math.min(caps[i], sx) - starts[i]) / scales[i]) + 1));
   let costs = range(0, len - 1).map(i => Math.pow(2, starts[i] + purchases[i] * scales[i] - sx) /
   (Math.pow(2, scales[i]) - 1) * (1 - Math.pow(2, -purchases[i] * scales[i])));
-  let start = Decimal.div(currency.amount(), Decimal.pow(2, sx));
+  // Convert to number, both to round to integer where relevant (not foolproof, but pretty often works)
+  // and to fix other potential Decimal/number arithmetic issues.
+  let start = Decimal.div(currency.amount(), Decimal.pow(2, sx)).toNumber();
   let left = start;
   for (let i of costs) {
     left -= i;
