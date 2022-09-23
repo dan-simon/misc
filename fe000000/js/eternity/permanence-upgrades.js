@@ -54,7 +54,14 @@ let PermanenceUpgrade = function (i) {
       }
       return n <= this.maxBuyable();
     },
+    newAutobuyerStart: 0,
+    newAutobuyerScale: 1,
+    newAutobuyerCapLoc: Infinity,
+    isGenerallyBuyable() {
+      return EternityProducer.isUnlocked();
+    },
     maxBuyable(fraction) {
+      if (!this.isGenerallyBuyable()) return 0;
       if (fraction === undefined) {
         fraction = 1;
       }

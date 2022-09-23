@@ -7,6 +7,6 @@ let FinalityMaxAll = {
       types = [1, 2, 3, 4, 5, 6, 7, 8];
     }
     generalHighestSweep(() => FinalityGenerators.highest(), types);
-    generalMaxAll(types.map(x => FinalityGenerator(x)));
+    generalMaxAll(types.map(x => FinalityGenerator(x)), FinalityPoints);
   }
 }

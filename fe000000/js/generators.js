@@ -87,8 +87,18 @@ let Generator = function (i) {
       }
       return n <= this.maxBuyable();
     },
+    newAutobuyerStart: Math.pow(i, 2),
+    newAutobuyerScale: i,
+    newAutobuyerCapLoc: Infinity,
+    isGenerallyBuyable() {
+      return this.isDirectlyVisible() && Stars.canBuyThings();
+    },
+    isSpecial() {
+      // Called enough that it's worth speeding up a bit.
+      return player.currentChallenge !== 0 || player.currentInfinityChallenge !== 0;
+    },
     maxBuyable(fraction) {
-      if (!this.isDirectlyVisible() || !Stars.canBuyThings()) return 0;
+      if (!this.isGenerallyBuyable()) return 0;
       if (fraction === undefined) {
         fraction = 1;
       }

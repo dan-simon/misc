@@ -67,11 +67,17 @@ let ComplexityGenerator = function (i) {
       }
       return n <= this.maxBuyable();
     },
+    newAutobuyerStart: Math.pow(i, 2),
+    newAutobuyerScale: i,
+    newAutobuyerCapLoc: Infinity,
+    isGenerallyBuyable() {
+      return i <= player.highestComplexityGenerator + 1;
+    },
     maxBuyable(fraction) {
+      if (!this.isGenerallyBuyable()) return 0;
       if (fraction === undefined) {
         fraction = 1;
       }
-      if (!this.isVisible()) return 0;
       let num = Math.floor(player.complexityPoints.times(fraction).div(this.cost()).times(
         Decimal.minus(this.costIncreasePer(), 1)).plus(1).log(this.costIncreasePer()));
       num = Math.max(num, 0);

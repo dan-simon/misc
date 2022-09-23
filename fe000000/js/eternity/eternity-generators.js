@@ -78,8 +78,14 @@ let EternityGenerator = function (i) {
       }
       return n <= this.maxBuyable();
     },
+    newAutobuyerStart: Math.pow(i, 2),
+    newAutobuyerScale: i,
+    newAutobuyerCapLoc: Infinity,
+    isGenerallyBuyable() {
+      return i <= player.highestEternityGenerator + 1 && !(i == 8 && ComplexityChallenge.isSafeguardOn(5));
+    },
     maxBuyable(fraction) {
-      if (!this.isVisible() || (i == 8 && ComplexityChallenge.isSafeguardOn(5))) return 0;
+      if (!this.isGenerallyBuyable()) return 0;
       if (fraction === undefined) {
         fraction = 1;
       }

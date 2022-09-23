@@ -45,7 +45,14 @@ let InfinityUpgrade = function (i) {
       }
       return n <= this.maxBuyable();
     },
+    newAutobuyerStart: [3, 4][i - 1],
+    newAutobuyerScale: [3, 4][i - 1],
+    newAutobuyerCapLoc: [Infinity, 8][i - 1],
+    isGenerallyBuyable() {
+      return true;
+    },
     maxBuyable(fraction) {
+      if (!this.isGenerallyBuyable()) return 0;
       if (fraction === undefined) {
         fraction = 1;
       }

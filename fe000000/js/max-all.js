@@ -22,7 +22,7 @@ let MaxAll = {
     for (let i of typesSingle) {
       Generator(i).buy();
     }
-    generalMaxAll(typesMultiple.map(x => Generator(x)));
+    generalMaxAll(typesMultiple.map(x => Generator(x)), Stars);
   }
 }
 
@@ -39,7 +39,11 @@ let generalHighestSweep = function (highestGetter, allowed) {
   }
 }
 
-let generalMaxAll = function (things) {
+let generalMaxAll = function (things, currency) {
+  if (things.every(i => !(i.isSpecial && i.isSpecial()))) {
+    generalMaxAllFast(things, currency);
+    return;
+  }
   let safetyMargin = 1e-10;
   things.forEach(x => x.buyMax(1 / (2 * things.length)));
   let bought = 0;
@@ -55,4 +59,40 @@ let generalMaxAll = function (things) {
     toBuy.buy();
     bought += 1;
   }
+}
+
+let generalMaxAllFast = function (rawThings, currency) {
+  let things = rawThings.filter(x => x.isGenerallyBuyable());
+  if (things.length === 0 || currency.amount().eq(0)) {
+    return;
+  }
+  let starts = things.map(x => x.newAutobuyerStart + x.bought() * x.newAutobuyerScale);
+  let scales = things.map(x => x.newAutobuyerScale);
+  let caps = things.map(x => x.newAutobuyerCapLoc);
+  let len = things.length;
+  let sx = Math.floor(Decimal.log2(currency.amount())) - 4;
+  let purchases = range(0, len - 1).map(i => Math.max(0, Math.floor((Math.min(caps[i], sx) - starts[i]) / scales[i]) + 1));
+  let costs = range(0, len - 1).map(i => Math.pow(2, starts[i] + purchases[i] * scales[i] - sx) /
+  (Math.pow(2, scales[i]) - 1) * (1 - Math.pow(2, -purchases[i] * scales[i])));
+  let start = Decimal.div(currency.amount(), Decimal.pow(2, sx));
+  let left = start;
+  for (let i of costs) {
+    left -= i;
+  }
+  for (let j = 1; j <= 4; j++) {
+    let c = Math.pow(2, j);
+    let x = sx + j;
+    for (let i = 0; i < len; i++) {
+      if (x >= starts[i] && x <= caps[i] && x % scales[i] === 0) {
+        if (left > c) {
+          purchases[i] += 1;
+          left -= c;
+        } else {
+          break;
+        }
+      }
+    }
+  }
+  things.forEach((thing, i) => thing.addBought(purchases[i]));
+  currency.safeSubtract(Decimal.times(start - left, Decimal.pow(2, sx)));
 }

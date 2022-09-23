@@ -63,8 +63,14 @@ let FinalityGenerator = function (i) {
       }
       return n <= this.maxBuyable();
     },
+    newAutobuyerStart: Math.pow(i, 2),
+    newAutobuyerScale: i,
+    newAutobuyerCapLoc: Infinity,
+    isGenerallyBuyable() {
+      return i <= player.highestFinalityGenerator + 1;
+    },
     maxBuyable(fraction) {
-      if (!this.isVisible()) return 0;
+      if (!this.isGenerallyBuyable()) return 0;
       if (fraction === undefined) {
         fraction = 1;
       }

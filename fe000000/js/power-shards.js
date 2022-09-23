@@ -46,7 +46,14 @@ let PowerShardUpgrade = function (i) {
       }
       return n <= this.maxBuyable();
     },
+    newAutobuyerStart: 0,
+    newAutobuyerScale: 1,
+    newAutobuyerCapLoc: Infinity,
+    isGenerallyBuyable() {
+      return Powers.isUnlocked();
+    },
     maxBuyable(fraction) {
+      if (!this.isGenerallyBuyable()) return 0;
       if (fraction === undefined) {
         fraction = 1;
       }
@@ -107,12 +114,15 @@ let PowerShards = {
   anythingToBuy() {
     return PowerShardUpgrades.list.some(x => x.canBuy());
   },
+  safeSubtract(x) {
+    player.powers.shards -= Math.min(player.powers.shards, x.toNumber());
+  },
   maxAll() {
     this.buyMaxOf([1, 2, 3, 4])
   },
   buyMaxOf(ids) {
     let list = ids.map(x => PowerShardUpgrades.list[x - 1]);
-    generalMaxAll(list);
+    generalMaxAll(list, PowerShards);
   },
   setCraftedType(x) {
     player.powers.craft.type = x;
@@ -162,13 +172,6 @@ let PowerShards = {
   },
   canCraft() {
     return player.powers.shards >= this.craftedPowerCost() - this.craftSafetyMargin();
-  },
-  craft() {
-    if (!this.canCraft()) return;
-    player.powers.shards -= Math.max(player.powers.shards, this.craftedPowerCost());
-    player.powers.stored.push(this.craftedPower());
-    Powers.cleanStored();
-    Powers.autoSort();
   },
   canCraftAny() {
     return player.powers.shards >= this.craftedPowerCost(0) - this.craftSafetyMargin();
