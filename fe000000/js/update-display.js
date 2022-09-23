@@ -1186,7 +1186,7 @@ function updateDisplay() {
   if (shouldUpdate("e57")) {let v = formatInt(FinalityPrestigeLayer.finalityPoints()); if (e[57].textContent !== v) {e[57].textContent = v};};
   if (shouldUpdate("e58")) {let v = pluralize(FinalityPrestigeLayer.finalityPoints(), '', 's'); if (e[58].textContent !== v) {e[58].textContent = v};};
   if (shouldUpdate("e59")) {let v = formatInt(FinalityPrestigeLayer.totalFinalityPoints()); if (e[59].textContent !== v) {e[59].textContent = v};};
-  if (shouldUpdate("e60")) {let v = formatInt(FinalityPrestigeLayer.finalityPoints()); if (e[60].textContent !== v) {e[60].textContent = v};};
+  if (shouldUpdate("e60")) {let v = formatInt(FinalityPrestigeLayer.finalityShards()); if (e[60].textContent !== v) {e[60].textContent = v};};
   if (shouldUpdate("e61")) {let v = pluralize(FinalityPrestigeLayer.finalityShards(), '', 's'); if (e[61].textContent !== v) {e[61].textContent = v};};
   if (shouldUpdate("e62")) {let v = formatInt(FinalityPrestigeLayer.totalFinalityShards()); if (e[62].textContent !== v) {e[62].textContent = v};};
   if (shouldUpdate("e63")) {let v = formatTime(player.stats.timeSinceFinality, {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[63].textContent !== v) {e[63].textContent = v};};
@@ -1255,7 +1255,7 @@ function updateDisplay() {
   if (shouldUpdate("e126")) {let v = formatInt(FinalityPrestigeLayer.finalityPoints()); if (e[126].textContent !== v) {e[126].textContent = v};};
   if (shouldUpdate("e127")) {let v = pluralize(FinalityPrestigeLayer.finalityPoints(), '', 's'); if (e[127].textContent !== v) {e[127].textContent = v};};
   if (shouldUpdate("e128")) {let v = formatInt(FinalityPrestigeLayer.totalFinalityPoints()); if (e[128].textContent !== v) {e[128].textContent = v};};
-  if (shouldUpdate("e129")) {let v = formatInt(FinalityPrestigeLayer.finalityPoints()); if (e[129].textContent !== v) {e[129].textContent = v};};
+  if (shouldUpdate("e129")) {let v = formatInt(FinalityPrestigeLayer.finalityShards()); if (e[129].textContent !== v) {e[129].textContent = v};};
   if (shouldUpdate("e130")) {let v = pluralize(FinalityPrestigeLayer.finalityShards(), '', 's'); if (e[130].textContent !== v) {e[130].textContent = v};};
   if (shouldUpdate("e131")) {let v = formatInt(FinalityPrestigeLayer.totalFinalityShards()); if (e[131].textContent !== v) {e[131].textContent = v};};
   if (shouldUpdate("e132")) {let v = formatTime(player.stats.timeSinceFinality, {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[132].textContent !== v) {e[132].textContent = v};};
