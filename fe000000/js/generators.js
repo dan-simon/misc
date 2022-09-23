@@ -115,12 +115,14 @@ let Generator = function (i) {
       }
       return num;
     },
-    buy(n, guaranteedBuyable) {
+    buy(n, guaranteedBuyable, free) {
       if (n === undefined) {
         n = 1;
       }
       if (n === 0 || (!guaranteedBuyable && !this.canBuy(n))) return;
-      player.stars = player.stars.safeMinus(this.costFor(n));
+      if (!free) {
+        player.stars = player.stars.safeMinus(this.costFor(n));
+      }
       this.addAmount(n);
       this.addBought(n);
       if (player.highestGenerator < i) {

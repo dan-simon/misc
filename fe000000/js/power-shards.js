@@ -62,12 +62,14 @@ let PowerShardUpgrade = function (i) {
       num = Math.max(num, 0);
       return num;
     },
-    buy(n, guaranteedBuyable) {
+    buy(n, guaranteedBuyable, free) {
       if (n === undefined) {
         n = 1;
       }
       if (n === 0 || (!guaranteedBuyable && !this.canBuy(n))) return;
-      player.powers.shards = player.powers.shards - this.costFor(n);
+      if (!free) {
+        player.powers.shards = player.powers.shards - this.costFor(n);
+      }
       this.addBought(n);
     },
     buyMax(fraction) {

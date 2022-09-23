@@ -44,7 +44,7 @@ let generalMaxAll = function (things, currency) {
     generalMaxAllFast(things, currency);
     return;
   }
-  let safetyMargin = 1e-10;
+  let safetyMargin = 1e-6;
   things.forEach(x => x.buyMax(1 / (2 * things.length)));
   let bought = 0;
   while (things.some(x => x.canBuy()) && bought < 256) {
@@ -52,6 +52,10 @@ let generalMaxAll = function (things, currency) {
     let minCost = legalThings.map(x => x.cost()).reduce((a, b) => Decimal.min(a, b));
     // Do this multiplication to avoid rounding errors
     // making costs that should be equal unequal.
+    // Note: in retrospect, this did not work fully; when raising numbers to powers,
+    // the difference becomes greater than this safety margin in many cases.
+    // But it doesn't matter much, especially since basically nothing calls this function anymore.
+    // I'm increasing the safety margin slightly anyway (it was 1e-10).
     let safeMinCost = Decimal.times(minCost, 1 + safetyMargin);
     let toBuy = legalThings.filter(x => Decimal.lte(x.cost(), safeMinCost))[0];
     // This should always buy at least one, and increase number bought
@@ -93,6 +97,6 @@ let generalMaxAllFast = function (rawThings, currency) {
       }
     }
   }
-  things.forEach((thing, i) => thing.addBought(purchases[i]));
+  things.forEach((thing, i) => thing.buy(purchases[i], true, true));
   currency.safeSubtract(Decimal.times(start - left, Decimal.pow(2, sx)));
 }
