@@ -82,7 +82,7 @@ let InfinityGenerator = function (i) {
     newAutobuyerScale: i,
     newAutobuyerCapLoc: Infinity,
     isGenerallyBuyable() {
-      return i <= player.highestinfinityGenerator + 1;
+      return i <= player.highestInfinityGenerator + 1;
     },
     maxBuyable(fraction) {
       if (!this.isGenerallyBuyable()) return 0;

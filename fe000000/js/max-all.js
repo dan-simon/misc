@@ -63,7 +63,7 @@ let generalMaxAll = function (things, currency) {
 
 let generalMaxAllFast = function (rawThings, currency) {
   let things = rawThings.filter(x => x.isGenerallyBuyable());
-  if (things.length === 0 || currency.amount().eq(0)) {
+  if (things.length === 0 || Decimal.eq(currency.amount(), 0)) {
     return;
   }
   let starts = things.map(x => x.newAutobuyerStart + x.bought() * x.newAutobuyerScale);
@@ -84,7 +84,7 @@ let generalMaxAllFast = function (rawThings, currency) {
     let x = sx + j;
     for (let i = 0; i < len; i++) {
       if (x >= starts[i] && x <= caps[i] && x % scales[i] === 0) {
-        if (left > c) {
+        if (left >= c) {
           purchases[i] += 1;
           left -= c;
         } else {

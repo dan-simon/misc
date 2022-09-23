@@ -47,7 +47,7 @@ let InfinityUpgrade = function (i) {
     },
     newAutobuyerStart: [3, 4][i - 1],
     newAutobuyerScale: [3, 4][i - 1],
-    newAutobuyerCapLoc: [Infinity, 8][i - 1],
+    newAutobuyerCapLoc: [Infinity, 32][i - 1],
     isGenerallyBuyable() {
       return true;
     },
