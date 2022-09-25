@@ -27,6 +27,10 @@ let Eternities = {
       infinityPoints: EternityStartingBenefits.infinityPoints(),
       infinities: EternityStartingBenefits.infinities()
     }
+    // This is a bit weird but it basically checks "is it true both that
+    // (1) you now have the keep-normal-challenges milestone and
+    // (2) you did *not* have it before?" and if so,
+    // gives all normal-challenge completions and breaks infinity.
     gainedAutobuyers = gainedAutobuyers && EternityMilestones.isEternityMilestoneActive(2);
     Stars.addAmount(newRewards.stars.minus(oldRewards.stars));
     InfinityPoints.addAmount(newRewards.infinityPoints.minus(oldRewards.infinityPoints));

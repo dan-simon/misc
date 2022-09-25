@@ -95,6 +95,12 @@ let ComplexityAchievements = {
       } else {
         // If we're getting this naturally, we're doing an eternity reset immediately, so
         // the player is practically just getting a lot more eternities from that reset.
+        // Note: This doesn't give normal challenge completions if the player doesn't have them,
+        // but by this point you've reached eternity (because you're doing an eternity reset)
+        // so you have normal challenge completions already and it's fine.
+        // You might be worried about the finality starting benefits allowing eternity
+        // without breaking infinity, but that many finality starting benefits means
+        // you start with this complexity achievement anyway.
         Eternities.add(this.effect(1, 2));
       }
     }
