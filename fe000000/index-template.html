@@ -3587,127 +3587,27 @@
       <span>By default, only goals up to the next goal after the last completed goal are displayed. <button onclick="Goals.toggleDisplayAllGoals()">Display all goals: ~r Goals.displayAllGoals() ? "On" : "Off" ~</button></span>
       <br/>
       <span>There is no in-game reward for completing goals, but you win the game (and have finished it) when you complete them all.</span>
+      <br/>
+      <span>(Note: saves from before these times were recorded may have some unknown times.) <button onclick="Goals.toggleTimes()">Show time taken to reach each goal: ~r Goals.showTimes() ? 'On' : 'Off' ~</button></span>
       <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
-        <tr>
-          <td>
-            <div class="goaldiv" ~style.background=Goals.color(1)~>
-              ~r Goals.getGoalText(1) ~
-              <br/>
-              ~r Goals.getGoalStatusDescription(1) ~
-            </div>
-          </td>
-          <td>
-            <div class="goaldiv" ~style.background=Goals.color(2)~>
-              ~r Goals.getGoalText(2) ~
-              <br/>
-              ~r Goals.getGoalStatusDescription(2) ~
-            </div>
-          </td>
-          <td>
-            <div class="goaldiv" ~style.background=Goals.color(3)~>
-              ~r Goals.getGoalText(3) ~
-              <br/>
-              ~r Goals.getGoalStatusDescription(3) ~
-            </div>
-          </td>
-          <td>
-            <div class="goaldiv" ~style.background=Goals.color(4)~>
-              ~r Goals.getGoalText(4) ~
-              <br/>
-              ~r Goals.getGoalStatusDescription(4) ~
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="goaldiv" ~style.background=Goals.color(5)~>
-              ~r Goals.getGoalText(5) ~
-              <br/>
-              ~r Goals.getGoalStatusDescription(5) ~
-            </div>
-          </td>
-          <td>
-            <div class="goaldiv" ~style.background=Goals.color(6)~>
-              ~r Goals.getGoalText(6) ~
-              <br/>
-              ~r Goals.getGoalStatusDescription(6) ~
-            </div>
-          </td>
-          <td>
-            <div class="goaldiv" ~style.background=Goals.color(7)~>
-              ~r Goals.getGoalText(7) ~
-              <br/>
-              ~r Goals.getGoalStatusDescription(7) ~
-            </div>
-          </td>
-          <td>
-            <div class="goaldiv" ~style.background=Goals.color(8)~>
-              ~r Goals.getGoalText(8) ~
-              <br/>
-              ~r Goals.getGoalStatusDescription(8) ~
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="goaldiv" ~style.background=Goals.color(9)~>
-              ~r Goals.getGoalText(9) ~
-              <br/>
-              ~r Goals.getGoalStatusDescription(9) ~
-            </div>
-          </td>
-          <td>
-            <div class="goaldiv" ~style.background=Goals.color(10)~>
-              ~r Goals.getGoalText(10) ~
-              <br/>
-              ~r Goals.getGoalStatusDescription(10) ~
-            </div>
-          </td>
-          <td>
-            <div class="goaldiv" ~style.background=Goals.color(11)~>
-              ~r Goals.getGoalText(11) ~
-              <br/>
-              ~r Goals.getGoalStatusDescription(11) ~
-            </div>
-          </td>
-          <td>
-            <div class="goaldiv" ~style.background=Goals.color(12)~>
-              ~r Goals.getGoalText(12) ~
-              <br/>
-              ~r Goals.getGoalStatusDescription(12) ~
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="goaldiv" ~style.background=Goals.color(13)~>
-              ~r Goals.getGoalText(13) ~
-              <br/>
-              ~r Goals.getGoalStatusDescription(13) ~
-            </div>
-          </td>
-          <td>
-            <div class="goaldiv" ~style.background=Goals.color(14)~>
-              ~r Goals.getGoalText(14) ~
-              <br/>
-              ~r Goals.getGoalStatusDescription(14) ~
-            </div>
-          </td>
-          <td>
-            <div class="goaldiv" ~style.background=Goals.color(15)~>
-              ~r Goals.getGoalText(15) ~
-              <br/>
-              ~r Goals.getGoalStatusDescription(15) ~
-            </div>
-          </td>
-          <td>
-            <div class="goaldiv" ~style.background=Goals.color(16)~>
-              ~r Goals.getGoalText(16) ~
-              <br/>
-              ~r Goals.getGoalStatusDescription(16) ~
-            </div>
-          </td>
-        </tr>
+        <loop i 0 3>
+          <tr>
+            <loop j 1 4>
+              <td>
+                <div class="goaldiv" ~style.background=Goals.color(% 4 * @i + @j %)~>
+                  ~r Goals.getGoalText(% 4 * @i + @j %) ~
+                  <br/>
+                  ~r Goals.getGoalStatusDescription(% 4 * @i + @j %) ~
+                  <div ~style.display=(Goals.showTimes() && Goals.hasGoal(% 4 * @i + @j %)) ? '' : 'none'~>
+                    ~r Goals.showTotalTime(% 4 * @i + @j %) ~
+                    <br/>
+                    (~r Goals.showOnlineTime(% 4 * @i + @j %) ~ online)
+                  </div>
+                </div>
+              </td>
+            </loop>
+          </tr>
+        </loop>
       </table>
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'achievements' ? '' : 'none'~>

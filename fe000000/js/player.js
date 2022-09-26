@@ -279,6 +279,13 @@ let initialPlayer = {
     showCompletedRows: true
   },
   displayAllGoals: false,
+  showGoalTimes: false,
+  goalTimes: [
+    [null, null], [null, null], [null, null], [null, null],
+    [null, null], [null, null], [null, null], [null, null],
+    [null, null], [null, null], [null, null], [null, null],
+    [null, null], [null, null], [null, null], [null, null],
+  ],
   hasSeenTextBox: {
     'boost-power': false
   },
@@ -552,7 +559,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.1953125
+  version: 2.19921875
 }
 
 let player;

@@ -1526,6 +1526,16 @@ let Saving = {
       }
       player.version = 2.1953125;
     }
+    if (player.version < 2.19921875) {
+      player.showGoalTimes = false;
+      player.goalTimes = [
+        [null, null], [null, null], [null, null], [null, null],
+        [null, null], [null, null], [null, null], [null, null],
+        [null, null], [null, null], [null, null], [null, null],
+        [null, null], [null, null], [null, null], [null, null],
+      ];
+      player.version = 2.19921875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

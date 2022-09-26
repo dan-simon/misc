@@ -33,7 +33,10 @@ let Goals = {
     return 16;
   },
   giveGoal(i) {
-    player.goals[i - 1] = true;
+    if (!player.goals[i - 1]) {
+      player.goals[i - 1] = true;
+      player.goalTimes[i - 1] = [player.stats.timeSinceGameStart, player.stats.onlineTimeSinceGameStart];
+    }
   },
   hasGoal(i) {
     return player.goals[i - 1];
@@ -53,6 +56,28 @@ let Goals = {
   },
   toggleDisplayAllGoals() {
     player.displayAllGoals = !player.displayAllGoals;
+  },
+  showTimes() {
+    return player.showGoalTimes;
+  },
+  toggleTimes() {
+    player.showGoalTimes = !player.showGoalTimes;
+  },
+  showTotalTime(x) {
+    let t = player.goalTimes[x - 1][0];
+    if (t === null) {
+      return 'unknown';
+    } else {
+      return formatTime(t, {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}});
+    }
+  },
+  showOnlineTime(x) {
+    let t = player.goalTimes[x - 1][1];
+    if (t === null) {
+      return 'unknown';
+    } else {
+      return formatTime(t, {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}});
+    }
   },
   numberOfGoalsCompleted() {
     return player.goals.reduce((a, b) => a + b)

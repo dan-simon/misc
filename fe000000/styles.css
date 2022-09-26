@@ -408,8 +408,8 @@ input[type=text] {
 .goaldiv {
   display: table;
   text-align: center;
-  width: 256px;
-  height: 128px;
+  width: 280px;
+  height: 192px;
   padding: 4px;
   margin: 4px;
   border: solid;
