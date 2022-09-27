@@ -1,10 +1,22 @@
 let toggleDown = false;
 let globalShiftDown = false;
+let lastTogglePress = null;
+let lastShiftPress = null;
 let lastHotkeyUse = {
   'infinity': -Infinity,
   'eternity': -Infinity,
   'complexity': -Infinity,
   'finality': -Infinity
+}
+
+let updateHotkeys = function () {
+  // If either shift or T has been held for about a minute, unhold it.
+  if (globalShiftDown && (Date.now() - lastShiftPress) / 1000 >= 64) {
+    globalShiftDown = false;
+  }
+  if (toggleDown && (Date.now() - lastTogglePress) / 1000 >= 64) {
+    toggleDown = false;
+  }
 }
 
 let codeToAutobuyers = {
@@ -201,6 +213,7 @@ window.addEventListener('keydown', function(event) {
   switch (tmp) {
     case 16: // shift
       globalShiftDown = true;
+      lastShiftPress = Date.now();
     break;
     
     case 37: // left
@@ -289,6 +302,7 @@ window.addEventListener('keydown', function(event) {
     
     case 84: // T
       toggleDown = true;
+      lastTogglePress = Date.now();
     break;
     
     case 8 * 11: // X
