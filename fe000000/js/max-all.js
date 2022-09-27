@@ -52,7 +52,7 @@ let generalMaxAll = function (things, currency) {
     let minCost = legalThings.map(x => x.cost()).reduce((a, b) => Decimal.min(a, b));
     // Do this multiplication to avoid rounding errors
     // making costs that should be equal unequal.
-    // Note: in retrospect, this did not work fully; when raising numbers to powers,
+    // Note: In retrospect, this did not work fully; when raising numbers to powers,
     // the difference becomes greater than this safety margin in many cases.
     // But it doesn't matter much, especially since basically nothing calls this function anymore.
     // I'm increasing the safety margin slightly anyway (it was 1e-10).

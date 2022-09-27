@@ -1484,7 +1484,7 @@ let Saving = {
       player.version = 2.171875;
     }
     if (player.version < 2.17578125) {
-      // Note: this is slightly inaccurate, but close enough.
+      // Note: This is slightly inaccurate, but close enough.
       for (let p of [].concat(player.powers.equipped, player.powers.stored, player.oracle.equippedPowers, player.oracle.powers)) {
         p.id = [player.finalities, 0];
       }
