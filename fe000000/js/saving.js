@@ -1536,6 +1536,10 @@ let Saving = {
       ];
       player.version = 2.19921875;
     }
+    if (player.version < 2.203125) {
+      player.options.loadFromTextInput = false;
+      player.version = 2.203125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
@@ -1634,8 +1638,15 @@ let Saving = {
     }
   },
   loadGamePrompt() {
+    this.loadGameFunc(() => prompt('Enter your save:'), () => null);
+  },
+  loadGameTextInput() {
+    this.loadGameFunc(() => document.getElementsByClassName('load-input')[0].value, () => (document.getElementsByClassName('load-input')[0].value = ''));
+  },
+  loadGameFunc(f, cleanup) {
     try {
-      let save = prompt('Enter your save:');
+      let save = f();
+      cleanup();
       if (save && !(/^\s+$/.test(save))) {
         if (this.h(save) === 715689180736) {
           Options.toggleShowAllTabs();

@@ -44,6 +44,12 @@ let Options = {
   toggleExportShow() {
     player.options.exportShow = !player.options.exportShow;
   },
+  toggleLoadMode() {
+    player.options.loadFromTextInput = !player.options.loadFromTextInput;
+  },
+  loadFromTextInput() {
+    return player.options.loadFromTextInput;
+  },
   exportNotificationFrequency() {
     return player.options.exportNotificationFrequency;
   },
