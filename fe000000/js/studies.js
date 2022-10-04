@@ -550,6 +550,9 @@ let Studies = {
     return Decimal.pow(2, Math.pow(256, 2 - x) * this.costPow(player.boughtTheorems[x], x)).floor();
   },
   canSeeTab() {
+    // This is only used to determine if the player can buy theorems,
+    // and for that purpose it works as intended in replay mode
+    // (you can't buy theorems before reaching eternity).
     return PrestigeLayerProgress.hasReached('eternity');
   },
   canBuy(x) {
