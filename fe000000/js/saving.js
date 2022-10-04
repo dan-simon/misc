@@ -1647,7 +1647,8 @@ let Saving = {
     try {
       let save = f();
       cleanup();
-      if (save && !(/^\s+$/.test(save))) {
+      save = save.replace(/^\s+|\s+$/, '');
+      if (save) {
         if (this.h(save) === 715689180736) {
           Options.toggleShowAllTabs();
           return;
