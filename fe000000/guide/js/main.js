@@ -52,7 +52,7 @@ let startingPlayer = {
   displayAllGoals: false
 };
 
-window.onload = function () {
+let guideLoad = function () {
   try {
     player = Saving.decode(localStorage.getItem('fe000000-save'));
   } catch (ex) {
@@ -66,6 +66,10 @@ window.onload = function () {
       player.options[i] = startingPlayer.options[i];
     }
   }
+}
+
+window.onload = function () {
+  guideLoad();
   temporarySettings = {
     viewAll: player.displayAllGoals,
     currentTab: 1
@@ -75,7 +79,10 @@ window.onload = function () {
   updateDisplayPageLoadSetup();
   updateDisplaySaveLoadSetup();
   updateDisplay();
-  setInterval(updateDisplay, 16384);
+  setInterval(function () {
+    guideLoad();
+    updateDisplay();
+  }, 16384);
 }
 
 let randomMessageList = [
