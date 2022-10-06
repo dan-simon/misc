@@ -1647,7 +1647,13 @@ let Saving = {
     try {
       let save = f();
       cleanup();
-      save = save.replace(/^\s+|\s+$/, '');
+      // We need to not do this replacement for null (from canceling the prompt to input a save).
+      // This is because in that case, we want no message (because the player hit "cancel"
+      // so expects no message, see below near the empty save message)
+      // and not an "error in importing, no .replace" message.
+      if (save) {
+        save = save.replace(/^\s+|\s+$/, '');
+      }
       if (save) {
         if (this.h(save) === 715689180736) {
           Options.toggleShowAllTabs();
@@ -1673,6 +1679,8 @@ let Saving = {
           });
         }
       } else if (save !== null) {
+        // Note: null only shows up if the player canceled the save input prompt,
+        // in which case we don't show any message.
         alert('The save you entered appears to be empty.');
       }
     } catch(ex) {
