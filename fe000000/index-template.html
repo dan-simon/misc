@@ -2550,6 +2550,7 @@
       <br/>
       <span>
         <button ~style.display=(ComplexityAchievements.hasComplexityAchievement(1, 3) || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~ onclick="ComplexityAchievements.toggleAchievement(1, 3)">More colorful than a potato: ~r (ComplexityAchievements.isComplexityAchievementDisabled(1, 3) ? "Disabled" : "Enabled") + (ComplexityAchievements.hasComplexityAchievement(1, 3) ? '' : ' (once unlocked)') ~</button>
+        <button ~style.display=(ComplexityChallenge.isComplexityChallengeUnlocked(4) || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~ onclick="Studies.toggleCanBuyGenerally()">Buying theorems <span class="helpspan">(?)<span class="tooltiptext">Disabling buying theorems can help to unlock "Thousand-theorem twilight".</span></span>: ~r (Studies.canBuyGenerally() ? "Enabled" : "Disabled") ~</button>
       </span>
       <br/>
       <span ~class=ComplexityAchievements.getAchievementsUnlockedRewardClass(1)~>

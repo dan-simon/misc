@@ -117,6 +117,7 @@ let initialPlayer = {
     boughtTheoremsThisComplexity: false,
     rebuyAfterComplexityChallenge6: true,
     showPresetExplanation: false,
+    canBuyStudies: true,
     studiesBeforeLastRespec: initialStudies(),
     firstTwelveStudyPurchaseOrderBeforeLastRespec: []
   },
@@ -559,7 +560,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.203125
+  version: 2.20703125
 }
 
 let player;

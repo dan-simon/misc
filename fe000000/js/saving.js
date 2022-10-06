@@ -1540,6 +1540,10 @@ let Saving = {
       player.options.loadFromTextInput = false;
       player.version = 2.203125;
     }
+    if (player.version < 2.20703125) {
+      player.studySettings.canBuyStudies = true;
+      player.version = 2.20703125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

@@ -557,7 +557,7 @@ let Studies = {
   },
   canBuy(x) {
     return player[['stars', 'infinityPoints', 'eternityPoints'][x]].gte(this.cost(x)) &&
-      this.canSeeTab() && (x !== 2 || EternityGenerator(1).bought() > 0);
+      this.canSeeTab() && this.canBuyGenerally() && (x !== 2 || EternityGenerator(1).bought() > 0);
   },
   getStat(x) {
     return player[['stars', 'infinityPoints', 'eternityPoints'][x]];
@@ -615,6 +615,12 @@ let Studies = {
   },
   areStudiesInitialStudies() {
     return player.studies.join(',') === initialStudies().join(',');
+  },
+  canBuyGenerally() {
+    return player.studySettings.canBuyStudies;
+  },
+  toggleCanBuyGenerally() {
+    player.studySettings.canBuyStudies = !player.studySettings.canBuyStudies;
   },
   boughtTheoremsThisComplexity() {
     return player.studySettings.boughtTheoremsThisComplexity;
