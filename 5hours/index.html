@@ -53,11 +53,41 @@
         <td><span id="effect-span-4"></span> total game time for patience meter to max out</td>
       </tr>
       <tr>
-        <td>Devs: <span id="devs-0"></span><br/><button onclick="addDev(0)">+</button><button onclick="subtractDev(0)">-</button><button onclick="maxDev(0)">max</button><button onclick="zeroDev(0)">0</button></td>
-        <td>Devs: <span id="devs-1"></span><br/><button onclick="addDev(1)">+</button><button onclick="subtractDev(1)">-</button><button onclick="maxDev(1)">max</button><button onclick="zeroDev(1)">0</button></td>
-        <td>Devs: <span id="devs-2"></span><br/><button onclick="addDev(2)">+</button><button onclick="subtractDev(2)">-</button><button onclick="maxDev(2)">max</button><button onclick="zeroDev(2)">0</button></td>
-        <td>Devs: <span id="devs-3"></span><br/><button onclick="addDev(3)">+</button><button onclick="subtractDev(3)">-</button><button onclick="maxDev(3)">max</button><button onclick="zeroDev(3)">0</button></td>
-        <td>Devs: <span id="devs-4"></span><br/><button onclick="addDev(4)">+</button><button onclick="subtractDev(4)">-</button><button onclick="maxDev(4)">max</button><button onclick="zeroDev(4)">0</button></td>
+        <td>
+          Devs: <span id="devs-0"></span>
+          <br/>
+          <button onclick="addDev(0)" style="width: 60px; height: 50px;">+</button><button onclick="addDevs(0, 10)" style="width: 60px; height: 50px;">+10</button><button onclick="maxDev(0)" style="width: 60px; height: 50px;">max</button>
+          <br/>
+          <button onclick="subtractDev(0)" style="width: 60px; height: 50px;">-</button><button onclick="subtractDevs(0, 10)" style="width: 60px; height: 50px;">-10</button><button onclick="zeroDev(0)" style="width: 60px; height: 50px;">0</button>
+        </td>
+        <td>
+          Devs: <span id="devs-1"></span>
+          <br/>
+          <button onclick="addDev(1)" style="width: 60px; height: 50px;">+</button><button onclick="addDevs(1, 10)" style="width: 60px; height: 50px;">+10</button><button onclick="maxDev(1)" style="width: 60px; height: 50px;">max</button>
+          <br/>
+          <button onclick="subtractDev(1)" style="width: 60px; height: 50px;">-</button><button onclick="subtractDevs(1, 10)" style="width: 60px; height: 50px;">-10</button><button onclick="zeroDev(1)" style="width: 60px; height: 50px;">0</button>
+        </td>
+        <td>
+          Devs: <span id="devs-2"></span>
+          <br/>
+          <button onclick="addDev(2)" style="width: 60px; height: 50px;">+</button><button onclick="addDevs(2, 10)" style="width: 60px; height: 50px;">+10</button><button onclick="maxDev(2)" style="width: 60px; height: 50px;">max</button>
+          <br/>
+          <button onclick="subtractDev(2)" style="width: 60px; height: 50px;">-</button><button onclick="subtractDevs(2, 10)" style="width: 60px; height: 50px;">-10</button><button onclick="zeroDev(2)" style="width: 60px; height: 50px;">0</button>
+        </td>
+        <td>
+          Devs: <span id="devs-3"></span>
+          <br/>
+          <button onclick="addDev(3)" style="width: 60px; height: 50px;">+</button><button onclick="addDevs(3, 10)" style="width: 60px; height: 50px;">+10</button><button onclick="maxDev(3)" style="width: 60px; height: 50px;">max</button>
+          <br/>
+          <button onclick="subtractDev(3)" style="width: 60px; height: 50px;">-</button><button onclick="subtractDevs(3, 10)" style="width: 60px; height: 50px;">-10</button><button onclick="zeroDev(3)" style="width: 60px; height: 50px;">0</button>
+        </td>
+        <td>
+          Devs: <span id="devs-4"></span>
+          <br/>
+          <button onclick="addDev(4)" style="width: 60px; height: 50px;">+</button><button onclick="addDevs(4, 10)" style="width: 60px; height: 50px;">+10</button><button onclick="maxDev(4)" style="width: 60px; height: 50px;">max</button>
+          <br/>
+          <button onclick="subtractDev(4)" style="width: 60px; height: 50px;">-</button><button onclick="subtractDevs(4, 10)" style="width: 60px; height: 50px;">-10</button><button onclick="zeroDev(4)" style="width: 60px; height: 50px;">0</button>
+        </td>
       </tr>
       <tr id="auto-dev-row">
         <td>Fraction of devs to assign: <input id="auto-dev-0" type="text" onchange="updateAutoDev(0)"></input></td>
@@ -122,7 +152,7 @@
     <br/>
     <span>Universal harmony: Have development, efficiency, refactoring, recruitment, and patience all within a minute of each other and all over an hour. <span id="normal-ach-status-4">&#x2718;</span></span>
     <br/>
-    <span>K-strategist: Have your production multiplier from efficiency above your number of devs, with more than one dev. <span id="normal-ach-status-5">&#x2718;</span></span>
+    <span>K-strategist: Have your production multiplier from efficiency above your number of devs. <span id="normal-ach-status-5">&#x2718;</span></span>
     <br/>
     <span>Wow that's a lot of progress: Gain at least 1:00:00 in one prestige. <span id="normal-ach-status-6">&#x2718;</span></span>
     <br/>
@@ -232,7 +262,7 @@
       <tr>
         <td><button id="up-0-0-button" style="height: 70px; width: 310px; border: 1px solid; background-color: #F02020;" onclick="buyUpdateUpgrade(0, 0)">Scaling becomes slower after 4:30:00.<br/>Cost: <span id="up-0-0-cost"></span> endgame experience<span id="up-0-0-bought"></span></button></td>
         <td><button id="up-0-1-button" style="height: 70px; width: 310px; border: 1px solid; background-color: #F02020;" onclick="buyUpdateUpgrade(0, 1)">Patience affects the patience meter more strongly.<br/>2.00x per 00:30:00 to 2.50x per 00:30:00<br/>00:01:00 softcap to 00:00:10 softcap<br/>Cost: <span id="up-0-1-cost"></span> patience experience<span id="up-0-1-bought"></span></button></td>
-        <td><button id="up-0-2-button" style="height: 70px; width: 310px; border: 1px solid; background-color: #F02020;" onclick="buyUpdateUpgrade(0, 2)">Start with 10 devs, and unlock auto dev assignment.<br/>Cost: <span id="up-0-2-cost"></span> headstart experience<span id="up-0-2-bought"></span></button></td>
+        <td><button id="up-0-2-button" style="height: 70px; width: 310px; border: 1px solid; background-color: #F02020;" onclick="buyUpdateUpgrade(0, 2)">Start with 20 devs, and unlock auto dev assignment.<br/>Cost: <span id="up-0-2-cost"></span> headstart experience<span id="up-0-2-bought"></span></button></td>
       </tr>
       <tr>
         <td><button id="up-1-0-button" style="height: 70px; width: 310px; border: 1px solid; background-color: #F02020;" onclick="buyUpdateUpgrade(1, 0)">Improve the update point gain formula<br/>10x multiplier, 2.00x per 01:00:00 to <span id="upgradeless-reward-up-1-0"></span>x per 01:00:00<br/>Cost: <span id="up-1-0-cost"></span> endgame experience<span id="up-1-0-bought"></span></button></td>

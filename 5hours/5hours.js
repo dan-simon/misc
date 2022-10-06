@@ -145,9 +145,9 @@ function tick() {
 
 function baseDevs() {
   if (updateUpgradeActive(0, 2)) {
-    return 10;
+    return 20;
   } else {
-    return 1;
+    return 5;
   }
 }
 
@@ -240,8 +240,16 @@ function addDev(i) {
   tryToChangeDevs(i, 1)
 }
 
+function addDevs(i, n) {
+  setDevs(i, Math.min(player.devs[i] + n, player.devs[i] + getTotalDevs() - player.devs.reduce((a, b) => a + b)));
+}
+
 function subtractDev(i) {
   tryToChangeDevs(i, -1)
+}
+
+function subtractDevs(i, n) {
+  setDevs(i, Math.max(player.devs[i] - n, 0));
 }
 
 function maxDev(i) {

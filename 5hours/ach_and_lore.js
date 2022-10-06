@@ -113,7 +113,7 @@ function checkForAchievementsAndLore() {
   if (loreFarthest >= 180) {
     giveLore(3);
   }
-  if (getTotalDevs() > 1) {
+  if (getTotalDevs() > baseDevs()) {
     giveLore(4);
   }
   if (devs.every(i => i !== 0)) {
@@ -131,7 +131,8 @@ function checkForAchievementsAndLore() {
   if (Math.max.apply(null, progress) - Math.min.apply(null, progress) <= 60 && progress.every(x => x >= 3600)) {
     giveNormalAchievement(4);
   }
-  if (getEffect(1).gt(getTotalDevs()) && getTotalDevs() > 1) {
+  // No longer need the > 1 total devs clause now that it starts at 5
+  if (getEffect(1).gt(getTotalDevs())) {
     giveNormalAchievement(5);
   }
   if (loreFarthest >= 12600) {
