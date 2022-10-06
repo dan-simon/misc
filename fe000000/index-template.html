@@ -887,7 +887,7 @@
                 <option value="Time since gain was total">Time since gain was total</option>
               </select></span>
               <br/>
-              <span>~r Autobuyer(12).mode() ~:</span>
+              <span>~r Autobuyer(12).displayMode() ~:</span>
               <br/>
               <span><input type="text" class="autobuyer-priority-12" ~!value=autobuyerSettingToString(Autobuyer(12).priority(), 12)~ ~!onchange=function() {Autobuyer(12).setPriority(stringToAutobuyerSetting(this.value, 12))}~></input></span>
               <div ~style.display=Autobuyer(12).hasGeneration() ? '' : 'none'~ style="font-size: 0.75rem;">
@@ -920,7 +920,7 @@
                 <option value="Chroma as fraction of cap" ~style.display=(Chroma.isUnlocked() || PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~>Chroma as fraction of cap</option>
               </select></span>
               <br/>
-              <span>~r Autobuyer(13).mode() ~:</span>
+              <span>~r Autobuyer(13).displayMode() ~:</span>
               <br/>
               <span><input type="text" class="autobuyer-priority-13" ~!value=autobuyerSettingToString(Autobuyer(13).priority(), 13)~ ~!onchange=function() {Autobuyer(13).setPriority(stringToAutobuyerSetting(this.value, 13))}~></input></span>
               <div ~style.display=Autobuyer(13).hasGeneration() ? '' : 'none'~ style="font-size: 0.75rem;">
@@ -942,7 +942,7 @@
                 <option value="X times last">X times last</option>
               </select></span>
               <br/>
-              <span>~r Autobuyer(14).mode() ~:</span>
+              <span>~r Autobuyer(14).displayMode() ~:</span>
               <br/>
               <span><input type="text" class="autobuyer-priority-14" ~!value=autobuyerSettingToString(Autobuyer(14).priority(), 14)~ ~!onchange=function() {Autobuyer(14).setPriority(stringToAutobuyerSetting(this.value, 14))}~></input></span>
               <div ~style.display=Autobuyer(14).hasGeneration() ? '' : 'none'~ style="font-size: 0.75rem;">
@@ -973,7 +973,7 @@
                 <option value="Galaxy effect (0 means cap)" ~style.display=(Galaxy.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Galaxy effect (0 means cap)</option>
               </select></span>
               <br/>
-              <span>~r Autobuyer(15).mode() ~:</span>
+              <span>~r Autobuyer(15).displayMode() ~:</span>
               <br/>
               <span><input type="text" class="autobuyer-priority-15" ~!value=autobuyerSettingToString(Autobuyer(15).priority(), 15)~ ~!onchange=function() {Autobuyer(15).setPriority(stringToAutobuyerSetting(this.value, 15))}~></input></span>
               <div ~style.display=Autobuyer(15).hasGeneration() ? '' : 'none'~ style="font-size: 0.75rem;">

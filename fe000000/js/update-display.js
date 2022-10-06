@@ -2057,22 +2057,22 @@ function updateDisplay() {
     if (shouldUpdate("e541")) {let v = Autobuyer(11).mode(); if (e[541].textContent !== v) {e[541].textContent = v};};
     if (shouldUpdate("b346")) {let v = Autobuyer(12).hasAutobuyer() ? '' : 'none'; if (b[346].style.display !== v) {b[346].style.display = v};};
     if (shouldUpdate("b349")) {let v = "X times best of last " + numbers[Stats.lastRunsToShow()]; if (b[349].text !== v) {b[349].text = v};};
-    if (shouldUpdate("e542")) {let v = Autobuyer(12).mode(); if (e[542].textContent !== v) {e[542].textContent = v};};
+    if (shouldUpdate("e542")) {let v = Autobuyer(12).displayMode(); if (e[542].textContent !== v) {e[542].textContent = v};};
     if (shouldUpdate("b351")) {let v = Autobuyer(12).hasGeneration() ? '' : 'none'; if (b[351].style.display !== v) {b[351].style.display = v};};
     if (shouldUpdate("b353")) {let v = Autobuyer(13).hasAutobuyer() ? '' : 'none'; if (b[353].style.display !== v) {b[353].style.display = v};};
     if (shouldUpdate("b356")) {let v = "X times best of last " + numbers[Stats.lastRunsToShow()]; if (b[356].text !== v) {b[356].text = v};};
     if (shouldUpdate("b357")) {let v = (Chroma.isUnlocked() || PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'; if (b[357].style.display !== v) {b[357].style.display = v};};
     if (shouldUpdate("b358")) {let v = (Chroma.isUnlocked() || PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'; if (b[358].style.display !== v) {b[358].style.display = v};};
-    if (shouldUpdate("e543")) {let v = Autobuyer(13).mode(); if (e[543].textContent !== v) {e[543].textContent = v};};
+    if (shouldUpdate("e543")) {let v = Autobuyer(13).displayMode(); if (e[543].textContent !== v) {e[543].textContent = v};};
     if (shouldUpdate("b360")) {let v = Autobuyer(13).hasGeneration() ? '' : 'none'; if (b[360].style.display !== v) {b[360].style.display = v};};
     if (shouldUpdate("b362")) {let v = Autobuyer(14).hasAutobuyer() ? '' : 'none'; if (b[362].style.display !== v) {b[362].style.display = v};};
-    if (shouldUpdate("e544")) {let v = Autobuyer(14).mode(); if (e[544].textContent !== v) {e[544].textContent = v};};
+    if (shouldUpdate("e544")) {let v = Autobuyer(14).displayMode(); if (e[544].textContent !== v) {e[544].textContent = v};};
     if (shouldUpdate("b366")) {let v = Autobuyer(14).hasGeneration() ? '' : 'none'; if (b[366].style.display !== v) {b[366].style.display = v};};
     if (shouldUpdate("b368")) {let v = Autobuyer(15).hasAutobuyer() ? '' : 'none'; if (b[368].style.display !== v) {b[368].style.display = v};};
     if (shouldUpdate("b371")) {let v = "X times best of last " + numbers[Stats.lastRunsToShow()]; if (b[371].text !== v) {b[371].text = v};};
     if (shouldUpdate("b372")) {let v = (Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'; if (b[372].style.display !== v) {b[372].style.display = v};};
     if (shouldUpdate("b373")) {let v = (Galaxy.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'; if (b[373].style.display !== v) {b[373].style.display = v};};
-    if (shouldUpdate("e545")) {let v = Autobuyer(15).mode(); if (e[545].textContent !== v) {e[545].textContent = v};};
+    if (shouldUpdate("e545")) {let v = Autobuyer(15).displayMode(); if (e[545].textContent !== v) {e[545].textContent = v};};
     if (shouldUpdate("b375")) {let v = Autobuyer(15).hasGeneration() ? '' : 'none'; if (b[375].style.display !== v) {b[375].style.display = v};};
     if (shouldUpdate("b377")) {let v = Autobuyer(16).hasAutobuyer() ? '' : 'none'; if (b[377].style.display !== v) {b[377].style.display = v};};
   }

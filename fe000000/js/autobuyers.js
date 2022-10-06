@@ -67,6 +67,14 @@ let Autobuyer = function (i) {
     mode() {
       return player.autobuyers[i - 1].mode;
     },
+    displayMode() {
+      let m = this.mode();
+      if (m === 'X times best of last ten') {
+        return 'X times best of last ' + numbers[Stats.lastRunsToShow()];
+      } else {
+        return m;
+      }
+    },
     priority() {
       return player.autobuyers[i - 1].priority;
     },
