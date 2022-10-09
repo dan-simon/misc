@@ -1724,6 +1724,10 @@
           </td>
         </tr>
       </table>
+      <span ~style.display=Studies.canBuyGenerally() ? "none" : ""~>
+        <span class="redspan">You have disabled buying theorems.</span> <button ~style.display=(ComplexityChallenge.isComplexityChallengeUnlocked(4) || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~ onclick="Studies.toggleCanBuyGenerally()">Buying theorems <span class="helpspan">(?)<span class="tooltiptext">Disabling buying theorems can help to unlock "Thousand-theorem twilight".</span></span>: ~r (Studies.canBuyGenerally() ? "Enabled" : "Disabled") ~</button>
+      </span>
+      <br ~style.display=Studies.canBuyGenerally() ? "none" : ""~/>
       <span>
         Bought theorems: ~i Studies.boughtTheoremsList()[0] ~ (from stars) + ~i Studies.boughtTheoremsList()[1] ~ (from IP) + ~i Studies.boughtTheoremsList()[2] ~ (from EP) = ~i Studies.boughtTheorems() ~.
       </span>
@@ -2385,7 +2389,9 @@
       <br ~style.display=FinalityMilestones.isFinalityMilestoneActive(9) ? '' : 'none'~/>
       <span ~style.display=FinalityMilestones.isFinalityMilestoneActive(9) ? '' : 'none'~>The Complexity Challenge ~o 6 ~ reward is instead currently ~f ComplexityStars.complexityChallengeRewardMultiplier(6) ~x stronger (from ~f ComplexityStars.extraAmount() ~ hypercomplexity stars).</span>
       <br/>
-      <span>Re-enable complexity challenges you're currently in on ~r PrestigeLayerNames.layersAboveDisplay('complexity') ~ <span class="helpspan">(?)<span class="tooltiptext" style="font-size: 0.75rem;">This means that if you're currently in a complexity challenge due to the ability to violate its condition being disabled, and you ~r PrestigeLayerProgress.hasReached('finality') ? 'complexity or finality' : 'complexity' ~, then the ability to violate that condition will be automatically enabled again, letting you exit the complexity challenge. This is often good since you don't want to do a complexity challenge for two complexities in a row, but it has <span ~style.display=(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? 'none' : ''~>a downside later in the game.</span><span ~style.display=(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>the downside that <span class="redspan">you will exit a complexity challenge if you, for example, unequip powers in it.</span></span></span></span>: <input type="checkbox" ~!checked=Options.exitComplexityChallengesOnComplexity()~ ~!onchange=function() {Options.setExitComplexityChallengesOnComplexity(this.checked)}~></input></span>
+      <span>Re-enable complexity challenges you're currently in on ~r PrestigeLayerNames.layersAboveDisplay('complexity') ~ <span class="helpspan">(?)<span class="tooltiptext" style="font-size: 0.75rem;">This means that if you're currently in a complexity challenge due to the ability to violate its condition being disabled, and you ~r PrestigeLayerProgress.hasReached('finality') ? 'complexity or finality' : 'complexity' ~, then the ability to violate that condition will be automatically enabled again, letting you exit the complexity challenge. This is often good since you don't want to do a complexity challenge for two complexities in a row, but it has
+        <span ~style.display=(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? 'none' : ''~>a downside later in the game.</span><span ~style.display=(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>the downside that <span class="redspan">you will exit a complexity challenge if you, for example, unequip powers in it.</span></span>
+      </span></span>: <input type="checkbox" ~!checked=Options.exitComplexityChallengesOnComplexity()~ ~!onchange=function() {Options.setExitComplexityChallengesOnComplexity(this.checked)}~></input></span>
       <br/>
       <br/>
       <span>You do not need to complexity to complete complexity challenges. <button ~style.display=Explanations.isVisible('complexity-challenges', 'main') ? '' : 'none'~ onclick="Explanations.showOrHide('complexity-challenges', 'main')">Complexity challenges explanation: ~r Explanations.isShown('complexity-challenges', 'main') ? 'Shown' : 'Hidden' ~</button></span>
