@@ -3608,7 +3608,7 @@
             <loop j 1 4>
               <td>
                 <div class="goaldiv" ~style.background=Goals.color(% 4 * @i + @j %)~>
-                  ~r Goals.getGoalText(% 4 * @i + @j %) ~
+                  <span>~r Goals.getGoalText(% 4 * @i + @j %) ~% (4 * @i + @j <= 3) ? ` <span class="helpspan" ~style.display=Goals.displayGoal(${4 * @i + @j}) ? '' : 'none'~>(?)<span class="tooltiptext">~r Goals.getGoalTooltip(${4 * @i + @j}) ~</span></span>` : '' %</span>
                   <br/>
                   ~r Goals.getGoalStatusDescription(% 4 * @i + @j %) ~
                   <div ~style.display=(Goals.showTimes() && Goals.hasGoal(% 4 * @i + @j %)) ? '' : 'none'~>

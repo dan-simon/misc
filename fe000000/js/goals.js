@@ -93,6 +93,18 @@ let Goals = {
       return '???';
     }
   },
+  getGoalTooltip(i) {
+    // Can assume goal is displayed
+    // This is used on goals so we don't want it to update if the player is e.g. in an infinity challenge.
+    // Thus we use raw numbers rather than methods.
+    if (i === 1) {
+      return 'Sacrifice requires at least one of Generator ' + formatOrdinalInt(8) + ' (costing ' + format(Decimal.pow(2, 64)) + ' stars).';
+    } else if (i == 2) {
+      return 'Prestige requires ' + format(Decimal.pow(2, 128)) + ' stars.';
+    } else if (i === 3) {
+      return 'Infinity requires ' + format(Decimal.pow(2, 256)) + ' stars.';
+    }
+  },
   getGoalStatusDescription(i) {
     if (this.hasGoal(i)) {
       return 'Reached';
