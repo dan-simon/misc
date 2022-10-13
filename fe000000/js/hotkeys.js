@@ -83,7 +83,9 @@ let HotkeyMaxAll = {
       tab: 'eternity'
     },
     // We deviate slightly from tab order to do things in the same order
-    // as the autobuyer code.
+    // as the autobuyer code. This *does* mean that if you can unlock the eternity producer
+    // and also can afford upgrades for it, it'll take a second tick/M press to get the upgrades,
+    // but I'm pretty worried about consequences of changing this order so I'm going to leave it.
     {
       purchase: list => EternityMaxAll.maxAll(list),
       upgrades: [12, 13],
