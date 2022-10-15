@@ -3691,7 +3691,7 @@ function updateDisplay() {
     if (shouldUpdate("e1454")) {let v = formatInt(ComplexityAchievements.rawEffect(2, 4)); if (e[1454].textContent !== v) {e[1454].textContent = v};};
     if (shouldUpdate("b1132")) {let v = ComplexityAchievements.color(3, 1); if (b[1132].style.background !== v) {b[1132].style.background = v};};
     if (shouldUpdate("e1455")) {let v = ComplexityAchievements.getComplexityAchievementName(3, 1); if (e[1455].textContent !== v) {e[1455].textContent = v};};
-    if (shouldUpdate("e1456")) {let v = format(1024); if (e[1456].textContent !== v) {e[1456].textContent = v};};
+    if (shouldUpdate("e1456")) {let v = formatInt(1024); if (e[1456].textContent !== v) {e[1456].textContent = v};};
     if (shouldUpdate("e1457")) {let v = formatOrdinalInt(2); if (e[1457].textContent !== v) {e[1457].textContent = v};};
     if (shouldUpdate("e1458")) {let v = formatOrdinalInt(4); if (e[1458].textContent !== v) {e[1458].textContent = v};};
     if (shouldUpdate("e1459")) {let v = ComplexityAchievements.complexityAchievementStatusDescription(3, 1); if (e[1459].textContent !== v) {e[1459].textContent = v};};
