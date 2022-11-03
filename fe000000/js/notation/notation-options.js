@@ -99,8 +99,12 @@ let NotationOptions = {
     this.notationChange();
   },
   basePropsChange() {
+    // This avoids recursive exponent expansion, which could previously happen with bases such that x^x^...^x^9 converged to a finite limit
+    // (threshold is somewhere between 1.2 and 1.3)
+    // The Math.pow(this.exponentBase() - 1, -2) gets some cases with very small bases, where even x^x^...^x^1000 doesn't converge.
+    // This isn't needed for commas, and it's easy to see that ADNotations.Settings.exponentCommas.min < ADNotations.Settings.exponentCommas.max is guaranteed.
     ADNotations.Settings.exponentCommas.min = Math.pow(Math.min(this.exponentBase(), 1e10), 5);
-    ADNotations.Settings.exponentCommas.max = Math.pow(Math.min(this.exponentBase(), 1e10), 9);
+    ADNotations.Settings.exponentCommas.max = Math.max(1000, Math.pow(this.exponentBase() - 1, -2), Math.pow(Math.min(this.exponentBase(), 1e10), 9));
   },
   notationChange() {
     this.notationChangeAutobuyers();
