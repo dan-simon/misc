@@ -234,7 +234,9 @@ let initialPlayer = {
       infinity: 1,
       eternity: 1,
       complexity: 1
-    }
+    },
+    complexityStars: new Decimal(0),
+    freeTime: 0,
   },
   galaxies: {
     unlocked: false,
@@ -560,7 +562,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.20703125
+  version: 2.2109375
 }
 
 let player;

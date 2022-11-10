@@ -109,6 +109,8 @@ let Oracle = {
       let equippedPowers = player.powers.equipped;
       let powers = player.powers.stored;
       let extraMultipliers = Powers.getAllExtraMultipliers();
+      let complexityStars = ComplexityStars.amount();
+      let freeTime = FinalityMilestones.freeTimeInComplexity();
       Saving.loadGame(save, null, null, true, function () {
         player.oracle.used = true;
         player.oracle.timeSimulated = time;
@@ -128,6 +130,8 @@ let Oracle = {
         player.oracle.equippedPowers = equippedPowers;
         player.oracle.powers = powers;
         player.oracle.extraMultipliers = extraMultipliers;
+        player.oracle.complexityStars = complexityStars;
+        player.oracle.freeTime = freeTime;
         player.stats.timeSinceOraclePrediction = 0;
         if (Oracle.alert()) {
           alert(Oracle.message());

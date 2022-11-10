@@ -1544,6 +1544,11 @@ let Saving = {
       player.studySettings.canBuyStudies = true;
       player.version = 2.20703125;
     }
+    if (player.version < 2.2109375) {
+      player.oracle.complexityStars = new Decimal(0);
+      player.oracle.freeTime = 0;
+      player.version = 2.2109375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
@@ -1616,6 +1621,7 @@ let Saving = {
     }
     player.oracle.complexityPoints = new Decimal(player.oracle.complexityPoints);
     player.oracle.complexityPointGain = new Decimal(player.oracle.complexityPointGain);
+    player.oracle.complexityStars = new Decimal(player.oracle.complexityStars);
   },
   doLastFixes(originalVersion) {
     if (originalVersion < 2.078125) {
