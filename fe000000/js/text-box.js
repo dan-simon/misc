@@ -9,8 +9,11 @@ let TextBoxes = {
     },
     'ec-4-exit': {
       'condition': () => false,
-      'text': (canEternity) => ('You were about to get too many infinities to stay in Eternity Challenge ' +
-      formatOrdinalInt(4) + ', so you exited it' + (canEternity ? ' (completing it).' : '.'))
+      'text': (completions) => ('You were about to get too many infinities to stay in Eternity Challenge ' +
+      formatOrdinalInt(4) + ', so you exited it ' + ((completions > 0) ?
+      (EternityChallenge.canCompleteMultipleTiersAtOnce() ?
+      '(completing ' + completions + ' EC' + formatOrdinalInt(4) + ' tier' + pluralize(completions, '', 's') + ').' :
+      '(completing it).') : '(not completing it).'))
     }
   },
   create(rawText, data) {

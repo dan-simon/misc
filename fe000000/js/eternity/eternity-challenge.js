@@ -348,7 +348,9 @@ let EternityChallenge = {
   exitEternityChallenge(forced) {
     let canEternity = EternityPrestigeLayer.canEternity();
     if (forced && this.currentEternityChallenge() === 4) {
-      TextBoxes.display('ec-4-exit', canEternity);
+      // This might be wrong in some very weird edge case where calling canEternity
+      // affects EC tier gain somehow, but that shouldn't generally happen.
+      TextBoxes.display('ec-4-exit', EternityChallenge.tiersCompletedOnEternity());
     }
     if (canEternity) {
       // Finish the eternity challenge.
