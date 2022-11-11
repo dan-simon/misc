@@ -150,7 +150,7 @@ input[type=text] {
 }
 
 .box {
-  position: absolute;
+  position: fixed;
   top: 200px;
   left: 50%;
   margin-left: -350px;

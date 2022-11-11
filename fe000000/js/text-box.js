@@ -6,10 +6,22 @@ let TextBoxes = {
       formatInt(Boost.boostPowerStart()) + '. Boost power resets on eternity but not on infinity. Boost power provides ' +
       'a multiplier to boosts based on its amount, and gives theorems (kept on eternity). ' +
       'You can view your boost power in the Main tab.')
+    },
+    'ec-4-exit': {
+      'condition': () => false,
+      'text': (canEternity) => ('You were about to get too many infinities to stay in Eternity Challenge ' +
+      formatOrdinalInt(4) + ', so you exited it' + (canEternity ? ' (completing it).' : '.'))
     }
   },
-  create(rawText) {
-    let text = typeof rawText === 'function' ? rawText() : rawText;
+  create(rawText, data) {
+    // It's rare enough for two text boxes to be created at once that we can just remove the existing one.
+    // It's probably best not to have two at once?
+    for (let i of document.getElementsByClassName('box')) {
+      if (i.parentElement === document.body) {
+        document.body.removeChild(i);
+      }
+    }
+    let text = typeof rawText === 'function' ? rawText(data) : rawText;
     let box = document.createElement('div');
     box.className = 'box';
     let textSpan = document.createElement('span');
@@ -28,9 +40,14 @@ let TextBoxes = {
   checkDisplay() {
     for (let i in this.data) {
       if (!player.hasSeenTextBox[i] && this.data[i].condition()) {
-        player.hasSeenTextBox[i] = true;
-        this.create(this.data[i].text);
+        this.display(i);
       }
     }
+  },
+  display(i, data) {
+    // Note that this will always redisplay the text box whether or not it's been shown.
+    // Data can be undefined.
+    player.hasSeenTextBox[i] = true;
+    this.create(this.data[i].text, data);
   }
 }
