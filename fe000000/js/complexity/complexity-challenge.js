@@ -159,7 +159,7 @@ let ComplexityChallenge = {
       return;
     }
     player.complexityChallengeSafeguards[x - 2] = !player.complexityChallengeSafeguards[x - 2];
-    if (x === 6 && !player.complexityChallengeSafeguards[x - 2] &&
+    if (x === 6 && !player.complexityChallengeSafeguards[x - 2] && ComplexityChallenge.isComplexityChallengeRunning(6) &&
       ComplexityAchievements.isComplexityAchievementActive(4, 4) && Studies.rebuyAfterComplexityChallenge6()) {
       // Note that finality resets all four things used here (studies and purchase order, both from before last respec
       // and current) before complexity reset is called, so this does nothing in the case of
