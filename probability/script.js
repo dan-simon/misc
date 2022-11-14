@@ -1,9 +1,21 @@
+function factorial(x) {
+  if (x <= 100) {
+    let r = 1;
+    for (let i = 1; i <= x; i++) {
+      r *= i;
+    }
+    return new Decimal(r);
+  } else {
+    return new Decimal(x).factorial();
+  }
+}
+
 function getSingleProb(n, k, p) {
   if (k < 0 || k > n) {
     return new Decimal(0);
   }
-  return new Decimal(n).factorial().div(new Decimal(k).factorial()).div(
-    new Decimal(n - k).factorial()).times(Decimal.pow(p, k)).times(Decimal.pow(1 - p, n - k));
+  return factorial(n).div(factorial(k)).div(
+    factorial(n - k)).times(Decimal.pow(p, k)).times(Decimal.pow(1 - p, n - k));
 }
 
 function adjustDown(n, k, p, v) {
@@ -11,6 +23,9 @@ function adjustDown(n, k, p, v) {
 }
 
 function getProbAtMost(n, k, p) {
+  if (n % 1) {
+    return 'Total must be an integer';
+  }
   if (k % 1) {
     return 'Threshold must be an integer';
   }
@@ -66,6 +81,12 @@ function display(x, mode, percentSub) {
     return display(x.times(100), 'normal', true) + '%';
   }
   if (mode === 'fraction') {
+    if (x.eq(0)) {
+      return '0';
+    }
+    if (x.eq(1)) {
+      return '1';
+    }
     if (x.abs().gt(0.5)) {
       x = x.plus(x.lt(0) ? 1 : -1);
     }
@@ -75,7 +96,6 @@ function display(x, mode, percentSub) {
     if (x.gt(0)) {
       return '1 / ' + display(new Decimal(1).div(x), 'normal');
     }
-    return '0';
   }
 }
 
