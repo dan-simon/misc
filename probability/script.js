@@ -55,9 +55,8 @@ function display(x) {
   return '0';
 }
 
-function parse(x) {
-  let f = x.includes('%') ? 0.01 : 1;
-  return +x.replace(/,/g, '.').replace(/%/g, '') * f;
+function parse(n) {
+  return eval(n.replace(/%/g, '/100').replace(/,/g, '.'));
 }
 
 function main() {
