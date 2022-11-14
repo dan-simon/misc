@@ -1,0 +1,25 @@
+<html>
+<head>
+  <title>Calculator</title>
+  <script src="break_infinity.min.js"></script>
+  <script src="script.js"></script>
+</head>
+<body>
+  <span>Total number of occurences: <input id="n" type="text"/></span>
+  <br/>
+  <span>Threshold number of occurences: <input id="k" type="text"/></span>
+  <br/>
+  <span>Probability: <input id="p" type="text"/></span>
+  <br/>
+  <span>Mode: <select id="mode">
+    <option value="At least">At least threshold</option>
+    <option value="At most">At most threshold</option>
+    <option value="Less than">Less than threshold</option>
+    <option value="More than">More than threshold</option>
+  </select></span>
+  <br/>
+  <button onclick="main()">Calculate!</button>
+  <br/>
+  <span>Result: <span id="ret"></span></span>
+</body>
+</html>
