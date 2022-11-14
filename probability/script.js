@@ -36,24 +36,47 @@ function getProbAtMost(n, k, p) {
     ret = ret.plus(term);
     k -= 1;
   }
-  return ret;
+  return ret.min(1);
 }
 
-function display(x) {
+function display(x, mode) {
   if (typeof x === 'string') {
-    return x;
+    return mode === 'normal' ? x : 'See above error'
   }
-  if (x.lte(-0.01) || x.gte(0.01)) {
-    return (x.lt(0) ? new Decimal(1).plus(x) : x).toFixed(3);
+  if (mode === 'normal') {
+    if (x.gte(10000)) {
+      // fraction
+      return x.mantissa.toFixed(3) + 'e' + x.exponent;
+    } 
+    if (x.lte(-1e-4) || x.gte(1e-4)) {
+      return (x.lt(0) ? new Decimal(1).plus(x) : x).toFixed(2 - Math.min(x.exponent, -1));
+    }
+    if (x.lt(0)) {
+      return '1 - ' + (-x.mantissa).toFixed(3) + 'e' + x.exponent;
+    }
+    if (x.gt(0)) {
+      return x.mantissa.toFixed(3) + 'e' + x.exponent;
+    }
+    return '0';
   }
-  if (x.lt(0)) {
-    return '1 - ' + (-x.mantissa).toFixed(3) + 'e' + x.exponent;
+  if (mode === 'percent') {
+    return display(x.times(100), 'normal') + '%';
   }
-  if (x.gt(0)) {
-    return x.mantissa.toFixed(3) + 'e' + x.exponent;
+  if (mode === 'fraction') {
+    if (x.abs().gt(0.5)) {
+      x = x.plus(x.lt(0) ? 1 : -1);
+    }
+    if (x.lt(0)) {
+      return '1 - 1 / ' + display(new Decimal(1).div(x.negate()), 'normal');
+    }
+    if (x.gt(0)) {
+      return '1 / ' + display(new Decimal(1).div(x), 'normal');
+    }
+    return '0';
   }
-  return '0';
 }
+
+
 
 function parse(n) {
   return eval(n.replace(/%/g, '/100').replace(/,/g, '.'));
@@ -79,7 +102,9 @@ function main() {
     neg = true;
   }
   let val = getProbAtMost(n, k, p);
-  document.getElementById('ret').innerHTML = display(val);
+  document.getElementById('ret-normal').innerHTML = display(val, 'normal');
+  document.getElementById('ret-percent').innerHTML = display(val, 'percent');
+  document.getElementById('ret-fraction').innerHTML = display(val, 'fraction');
 }
 
 
