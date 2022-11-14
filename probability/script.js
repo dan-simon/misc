@@ -47,7 +47,7 @@ function display(x) {
     return (x.lt(0) ? new Decimal(1).plus(x) : x).toFixed(3);
   }
   if (x.lt(0)) {
-    return '1 - ' + x.mantissa.toFixed(3) + 'e' + x.exponent;
+    return '1 - ' + (-x.mantissa).toFixed(3) + 'e' + x.exponent;
   }
   if (x.gt(0)) {
     return x.mantissa.toFixed(3) + 'e' + x.exponent;
