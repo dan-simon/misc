@@ -39,7 +39,7 @@ function getProbAtMost(n, k, p) {
   return ret.min(1);
 }
 
-function display(x, mode) {
+function display(x, mode, percentSub) {
   if (typeof x === 'string') {
     return mode === 'normal' ? x : 'See above error'
   }
@@ -49,6 +49,9 @@ function display(x, mode) {
       return x.mantissa.toFixed(3) + 'e' + x.exponent;
     } 
     if (x.lte(-1e-4) || x.gte(1e-4)) {
+      if (percentSub) {
+        return (x.lt(0) ? new Decimal(100).plus(x) : x).toFixed(2 - Math.min(x.exponent, 1));
+      }
       return (x.lt(0) ? new Decimal(1).plus(x) : x).toFixed(2 - Math.min(x.exponent, -1));
     }
     if (x.lt(0)) {
@@ -60,7 +63,7 @@ function display(x, mode) {
     return '0';
   }
   if (mode === 'percent') {
-    return display(x.times(100), 'normal') + '%';
+    return display(x.times(100), 'normal', true) + '%';
   }
   if (mode === 'fraction') {
     if (x.abs().gt(0.5)) {
