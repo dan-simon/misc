@@ -110,11 +110,9 @@ function main() {
   let k = parse(document.getElementById('k').value);
   let p = parse(document.getElementById('p').value);
   let mode = document.getElementById('mode').value;
-  let neg = false;
   if (mode === 'At least') {
     k = n - k;
     p = 1 - p;
-    neg = true;
   } else if (mode === 'At most') {
     // nothing
   } else if (mode === 'Less than') {
@@ -122,7 +120,6 @@ function main() {
   } else if (mode === 'More than') {
     k = n - k - 1;
     p = 1 - p;
-    neg = true;
   }
   let val = getProbAtMost(n, k, p);
   document.getElementById('ret-normal').innerHTML = display(val, 'normal');
