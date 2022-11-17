@@ -121,7 +121,12 @@ function main() {
     k = n - k - 1;
     p = 1 - p;
   }
-  let val = getProbAtMost(n, k, p);
+  let val;
+  if (mode === 'Exactly') {
+    val = getSingleProb(n, k, p);
+  } else {
+    val = getProbAtMost(n, k, p);
+  }
   document.getElementById('ret-normal').innerHTML = display(val, 'normal');
   document.getElementById('ret-percent').innerHTML = display(val, 'percent');
   document.getElementById('ret-fraction').innerHTML = display(val, 'fraction');
