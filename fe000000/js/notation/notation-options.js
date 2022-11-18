@@ -36,6 +36,7 @@ let NotationOptions = {
       let y = Math.floor(+x);
       player.options.notation.displayDigits = y ? Math.min(Math.max(2, y), 36) : 10;
     }
+    this.basePropsChange();
     this.notationChange();
   },
   displayBase() {
@@ -102,9 +103,10 @@ let NotationOptions = {
     // This avoids recursive exponent expansion, which could previously happen with bases such that x^x^...^x^9 converged to a finite limit
     // (threshold is somewhere between 1.2 and 1.3)
     // The Math.pow(this.exponentBase() - 1, -2) gets some cases with very small bases, where even x^x^...^x^1000 doesn't converge.
-    // This isn't needed for commas, and it's easy to see that ADNotations.Settings.exponentCommas.min < ADNotations.Settings.exponentCommas.max is guaranteed.
-    ADNotations.Settings.exponentCommas.min = Math.pow(Math.min(this.exponentBase(), 1e10), 5);
-    ADNotations.Settings.exponentCommas.max = Math.max(1000, Math.pow(this.exponentBase() - 1, -2), Math.pow(Math.min(this.exponentBase(), 1e10), 9));
+    // Commas don't have this specific issue, but they do have an issue where nested exponents above the comma threshold don't have decimals in log notation.
+    // It's easy to see that ADNotations.Settings.exponentCommas.min < ADNotations.Settings.exponentCommas.max is guaranteed.
+    ADNotations.Settings.exponentCommas.min = Math.max(1000, Math.pow(this.displayBase(), 5));
+    ADNotations.Settings.exponentCommas.max = Math.max(1000, Math.pow(this.exponentBase() - 1, -2), Math.pow(this.displayBase(), 9));
   },
   notationChange() {
     this.notationChangeAutobuyers();
