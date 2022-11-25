@@ -1,0 +1,19 @@
+<html>
+<head>
+  <title>SLS</title>
+  <script src="script.js"></script>
+</head>
+<body>
+  <span>This is a quick-and-dirty implementation of simple-loop solving based on parity.</span>
+  <div id="d">
+  </div>
+  <br/>
+  <button onclick="importPuzzle()">Import puzzle</button><button onclick="changeSize()">Change size</button><button onclick="toggleSolving()">Toggle solving</button>
+  <br/>
+  <button onclick="checkNumberOfConnections()">Do local calculation (L)</button><button onclick="parityCalc()">Check parity of highlighted region (P)</button><button onclick="clearHighlighting()">Clear highlighting (H)</button>
+  <br/>
+  <button onclick="alterHover()">Alter hover mode (O, clicking resets)</button><button onclick="toggleCheckerboard()">Toggle checkerboard shading (S)</button>
+  <br/>
+  <span id="parity"></span>
+</body>
+</html>
