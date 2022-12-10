@@ -3265,6 +3265,7 @@
           </select>
           <span style="display: inline-block; width: 16px;"></span>
           ~r Galaxy.nextDilatedMode() ~: <input class="next-dilated-amount" type="text" ~!value=NotationOptions.format('next-dilated-amount')~ ~!onchange=function() {Galaxy.setNextDilatedAmount(NotationOptions.read('next-dilated-amount', this.value))}~></input>
+          <button onclick="Galaxy.increaseDilated()">~r Galaxy.increaseDilatedText() ~</button> <button onclick="Galaxy.decreaseDilated()">~r Galaxy.decreaseDilatedText() ~</button>
         </span>
         <br ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~/>
         <span><button ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~ onclick="Galaxy.toggleResetNextDilatedOnFinality()">Reset dilated galaxies to ~i 0 ~ amount on finality: ~r Galaxy.isResetNextDilatedOnFinalityOn() ? "On" : "Off" ~</button></span>

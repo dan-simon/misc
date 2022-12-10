@@ -189,6 +189,41 @@ let Galaxy = {
     document.getElementsByClassName('next-dilated-mode')[0].value = this.nextDilatedMode();
     document.getElementsByClassName('next-dilated-amount')[0].value = NotationOptions.format('next-dilated-amount');
   },
+  inSecondsDilatedMode() {
+    return this.nextDilatedMode() === 'Seconds to reach cap';
+  },
+  increaseDilated() {
+    if (this.inSecondsDilatedMode()) {
+      player.galaxies.nextDilatedAmount *= 2;
+    } else {
+      player.galaxies.nextDilatedAmount += 1;
+    }
+    this.updateNextDilatedInputDisplay();
+  },
+  decreaseDilated() {
+    if (this.inSecondsDilatedMode()) {
+      player.galaxies.nextDilatedAmount /= 2;
+    } else {
+      player.galaxies.nextDilatedAmount -= 1;
+    }
+    this.updateNextDilatedInputDisplay();
+  },
+  increaseDilatedText() {
+    // This x2 is consistent with all the other operations, but inconsistent
+    // with other multipliers. We're going with it anyway, though.
+    if (this.inSecondsDilatedMode()) {
+      return 'x' + formatInt(2);
+    } else {
+      return '+' + formatInt(1);
+    }
+  },
+  decreaseDilatedText() {
+    if (this.inSecondsDilatedMode()) {
+      return '/' + formatInt(2);
+    } else {
+      return '-' + formatInt(1);
+    }
+  },
   tabColors() {
     return ['normal', 'infinity', 'eternity', 'complexity'];
   }
