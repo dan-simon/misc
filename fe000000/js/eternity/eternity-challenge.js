@@ -111,6 +111,7 @@ let EternityChallenge = {
     if (!this.canRestartEternityChallenge()) {
       return;
     }
+    let running = this.currentEternityChallenge();
     this.exitEternityChallenge();
     this.startEternityChallenge(running);
   },
