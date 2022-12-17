@@ -1,0 +1,22 @@
+<head>
+  <title>NaN Fixer</title>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <script>
+    fixNaN = function () {document.getElementById('b').value =
+    btoa(atob(document.getElementById('a').value).replace(/NaN/g, 0));
+    document.getElementById('b').select(); document.execCommand('copy')}
+  </script>
+</head>
+<body>
+  Old save (put text here):
+  <br/>
+  <textarea id="a"></textarea>
+  <br/>
+  <br/>
+  <br/>
+  New save (copy text here if clicking "Fix save" doesn't automatically copy it):
+  <br/>
+  <textarea id="b"></textarea>
+  <br/>
+  <button onclick="fixNaN()">Fix save and copy fixed save</button>
+</body>
