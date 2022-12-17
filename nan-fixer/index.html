@@ -10,7 +10,8 @@
     let j = JSON.parse(atob(document.getElementById('a').value));
     let nan1 = (Number.isNaN(j.autobuyers[11].priority) || j.autobuyers[11].priority === 'NaN') ? 1 : 0;
     if (nan1 < l) {
-      alert('Your save has UNEXPECTED NANS THAT MAY NOT BE FIXED CORRECTLY, please post it as a bug');
+      alert('Your save has UNEXPECTED NANS THAT WILL ALMOST CERTAINLY NOT BE FIXED CORRECTLY, please post it as a bug');
+      return;
     }
     document.getElementById('b').value =
     btoa(atob(document.getElementById('a').value).replace(/"NaN"|NaN/g, 0));
