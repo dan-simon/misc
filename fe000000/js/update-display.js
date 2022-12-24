@@ -3199,9 +3199,9 @@ function updateDisplay() {
     if (shouldUpdate("e1152")) {let v = EternityChallenge.eternityChallengeStatusDescription(2); if (e[1152].textContent !== v) {e[1152].textContent = v};};
     if (shouldUpdate("b948")) {let v = EternityChallenge.canPressEternityChallengeButton(2) ? '' : 'disabled'; if (b[948].className !== v) {b[948].className = v};};
     if (shouldUpdate("e1153")) {let v = EternityChallenge.eternityChallengeButtonText(2); if (e[1153].textContent !== v) {e[1153].textContent = v};};
-    if (shouldUpdate("e1154")) {let v = format(EternityChallenge.getEternityChallengeReward(2)); if (e[1154].textContent !== v) {e[1154].textContent = v};};
+    if (shouldUpdate("e1154")) {let v = formatPrecisely(EternityChallenge.getEternityChallengeReward(2)); if (e[1154].textContent !== v) {e[1154].textContent = v};};
     if (shouldUpdate("b949")) {let v = EternityChallenge.isEternityChallengeCompleted(2) ? 'none' : ''; if (b[949].style.display !== v) {b[949].style.display = v};};
-    if (shouldUpdate("e1155")) {let v = format(EternityChallenge.getEternityChallengeNextReward(2)); if (e[1155].textContent !== v) {e[1155].textContent = v};};
+    if (shouldUpdate("e1155")) {let v = formatPrecisely(EternityChallenge.getEternityChallengeNextReward(2)); if (e[1155].textContent !== v) {e[1155].textContent = v};};
     if (shouldUpdate("b950")) {let v = EternityChallenge.color(3); if (b[950].style.background !== v) {b[950].style.background = v};};
     if (shouldUpdate("e1156")) {let v = formatOrdinalInt(3); if (e[1156].textContent !== v) {e[1156].textContent = v};};
     if (shouldUpdate("b951")) {let v = EternityChallenge.isRequirementDisplayOn() ? '' : 'none'; if (b[951].style.display !== v) {b[951].style.display = v};};
@@ -3244,9 +3244,9 @@ function updateDisplay() {
     if (shouldUpdate("e1182")) {let v = EternityChallenge.eternityChallengeStatusDescription(5); if (e[1182].textContent !== v) {e[1182].textContent = v};};
     if (shouldUpdate("b963")) {let v = EternityChallenge.canPressEternityChallengeButton(5) ? '' : 'disabled'; if (b[963].className !== v) {b[963].className = v};};
     if (shouldUpdate("e1183")) {let v = EternityChallenge.eternityChallengeButtonText(5); if (e[1183].textContent !== v) {e[1183].textContent = v};};
-    if (shouldUpdate("e1184")) {let v = format(EternityChallenge.getEternityChallengeReward(5)); if (e[1184].textContent !== v) {e[1184].textContent = v};};
+    if (shouldUpdate("e1184")) {let v = formatPrecisely(EternityChallenge.getEternityChallengeReward(5)); if (e[1184].textContent !== v) {e[1184].textContent = v};};
     if (shouldUpdate("b964")) {let v = EternityChallenge.isEternityChallengeCompleted(5) ? 'none' : ''; if (b[964].style.display !== v) {b[964].style.display = v};};
-    if (shouldUpdate("e1185")) {let v = format(EternityChallenge.getEternityChallengeNextReward(5)); if (e[1185].textContent !== v) {e[1185].textContent = v};};
+    if (shouldUpdate("e1185")) {let v = formatPrecisely(EternityChallenge.getEternityChallengeNextReward(5)); if (e[1185].textContent !== v) {e[1185].textContent = v};};
     if (shouldUpdate("b965")) {let v = EternityChallenge.color(6); if (b[965].style.background !== v) {b[965].style.background = v};};
     if (shouldUpdate("e1186")) {let v = formatOrdinalInt(6); if (e[1186].textContent !== v) {e[1186].textContent = v};};
     if (shouldUpdate("b966")) {let v = EternityChallenge.isRequirementDisplayOn() ? '' : 'none'; if (b[966].style.display !== v) {b[966].style.display = v};};
@@ -3258,9 +3258,9 @@ function updateDisplay() {
     if (shouldUpdate("e1191")) {let v = EternityChallenge.eternityChallengeStatusDescription(6); if (e[1191].textContent !== v) {e[1191].textContent = v};};
     if (shouldUpdate("b968")) {let v = EternityChallenge.canPressEternityChallengeButton(6) ? '' : 'disabled'; if (b[968].className !== v) {b[968].className = v};};
     if (shouldUpdate("e1192")) {let v = EternityChallenge.eternityChallengeButtonText(6); if (e[1192].textContent !== v) {e[1192].textContent = v};};
-    if (shouldUpdate("e1193")) {let v = format(EternityChallenge.getEternityChallengeReward(6)); if (e[1193].textContent !== v) {e[1193].textContent = v};};
+    if (shouldUpdate("e1193")) {let v = formatPrecisely(EternityChallenge.getEternityChallengeReward(6)); if (e[1193].textContent !== v) {e[1193].textContent = v};};
     if (shouldUpdate("b969")) {let v = EternityChallenge.isEternityChallengeCompleted(6) ? 'none' : ''; if (b[969].style.display !== v) {b[969].style.display = v};};
-    if (shouldUpdate("e1194")) {let v = format(EternityChallenge.getEternityChallengeNextReward(6)); if (e[1194].textContent !== v) {e[1194].textContent = v};};
+    if (shouldUpdate("e1194")) {let v = formatPrecisely(EternityChallenge.getEternityChallengeNextReward(6)); if (e[1194].textContent !== v) {e[1194].textContent = v};};
     if (shouldUpdate("b970")) {let v = EternityChallenge.color(7); if (b[970].style.background !== v) {b[970].style.background = v};};
     if (shouldUpdate("e1195")) {let v = formatOrdinalInt(7); if (e[1195].textContent !== v) {e[1195].textContent = v};};
     if (shouldUpdate("b971")) {let v = EternityChallenge.isRequirementDisplayOn() ? '' : 'none'; if (b[971].style.display !== v) {b[971].style.display = v};};

@@ -2010,7 +2010,7 @@
               <br/>
               <span>Reward: Boosts are cheaper.</span>
               <br/>
-              <span>Current: Cost ^~f EternityChallenge.getEternityChallengeReward(2) ~<span ~style.display=EternityChallenge.isEternityChallengeCompleted(2) ? 'none' : ''~>, Next: Cost ^~f EternityChallenge.getEternityChallengeNextReward(2) ~</span></span>
+              <span>Current: Cost ^~r formatPrecisely(EternityChallenge.getEternityChallengeReward(2)) ~<span ~style.display=EternityChallenge.isEternityChallengeCompleted(2) ? 'none' : ''~>, Next: Cost ^~r formatPrecisely(EternityChallenge.getEternityChallengeNextReward(2)) ~</span></span>
             </div>
           </td>
         </tr>
@@ -2089,7 +2089,7 @@
               <br/>
               <span>Reward: Exponent to infinity generator multipliers.</span>
               <br/>
-              <span>Current: ^~f EternityChallenge.getEternityChallengeReward(5) ~<span ~style.display=EternityChallenge.isEternityChallengeCompleted(5) ? 'none' : ''~>, Next: ^~f EternityChallenge.getEternityChallengeNextReward(5) ~</span></span>
+              <span>Current: ^~r formatPrecisely(EternityChallenge.getEternityChallengeReward(5)) ~<span ~style.display=EternityChallenge.isEternityChallengeCompleted(5) ? 'none' : ''~>, Next: ^~r formatPrecisely(EternityChallenge.getEternityChallengeNextReward(5)) ~</span></span>
             </div>
           </td>
           <td>
@@ -2114,7 +2114,7 @@
               <br/>
               <span>Reward: All other eternity challenge rewards are stronger.</span>
               <br/>
-              <span>Current: ~f EternityChallenge.getEternityChallengeReward(6) ~x<span ~style.display=EternityChallenge.isEternityChallengeCompleted(6) ? 'none' : ''~>, Next: ~f EternityChallenge.getEternityChallengeNextReward(6) ~x</span></span>
+              <span>Current: ~r formatPrecisely(EternityChallenge.getEternityChallengeReward(6)) ~x<span ~style.display=EternityChallenge.isEternityChallengeCompleted(6) ? 'none' : ''~>, Next: ~r formatPrecisely(EternityChallenge.getEternityChallengeNextReward(6)) ~x</span></span>
             </div>
           </td>
         </tr>
