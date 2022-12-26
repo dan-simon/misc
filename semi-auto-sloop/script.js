@@ -1,6 +1,7 @@
 // OK it's plausibly best to write most of this from scratch
 
 let size = 5;
+let spaces;
 let tds = [];
 let state = [];
 let solving = false;
@@ -18,6 +19,9 @@ let press = function (key) {
   }
   if (key === 'KeyP') {
     parityCalc();
+  }
+  if (key === 'KeyE') {
+    expand();
   }
   if (key === 'KeyH') {
     clearHighlighting();
@@ -117,26 +121,35 @@ let checkNumberOfConnections = function () {
 
 let parity = i => (i[0] + i[1]) % 2;
 
-let parityCalc = function () {
-  if (inds().every(i => at(state, i) !== 0)) {
-    alert('Full region!');
+let rawParityCalc = function (rawCells, notify) {
+  if (rawCells.length === spaces) {
+    if (notify) {
+      alert('Full region!');
+    }
     return;
   }
-  if (inds().every(i => at(state, i) !== 2)) {
-    alert('Empty region!');
+  if (rawCells.length === 0) {
+    if (notify) {
+      alert('Empty region!');
+    }
     return;
   }
-  let rawCells = inds().filter(i => at(state, i) == 2);
+  let cellSet = {};
+  for (let [i, j] of rawCells) {
+    cellSet[i + ',' + j] = true;
+  }
   let cells = rawCells.map(parity);
   let cross = rawCells.flatMap(i => edgesFrom(i).map(e => [parity(i), e])).filter(
-    i => [0, 1].includes(edges[i[1]]) && i[1].split('-').some(j => at(state, j.split(',')) == 0)).map(
+    i => [0, 1].includes(edges[i[1]]) && i[1].split('-').some(j => !(j in cellSet))).map(
     i => i.concat([edges[i[1]]]));
   let requiredParity = 2 * cells.map(i => 2 * i - 1).reduce((a, b) => a + b, 0);
   let usedParity = cross.filter(i => i[2] === 1).map(i => 2 * i[0] - 1).reduce((a, b) => a + b, 0);
   let extraParity = requiredParity - usedParity;
   let c0 = cross.filter(i => i[0] === 0 && i[2] === 0);
   let c1 = cross.filter(i => i[0] === 1 && i[2] === 0);
-  document.getElementById('parity').innerText = requiredParity + ' required parity, ' + usedParity + ' used, ' + extraParity + ' remaining. Options: ' + c0.length + ' minus, ' + c1.length + ' plus';
+  if (notify) {
+    document.getElementById('parity').innerText = requiredParity + ' required parity, ' + usedParity + ' used, ' + extraParity + ' remaining. Options: ' + c0.length + ' minus, ' + c1.length + ' plus';
+  }
   if (requiredParity === 0) {
     if (cross.filter(i => i[0] === 0).length === 0 || cross.filter(i => i[0] === 1).length === 0) {
       alert('Contradiction!');
@@ -169,6 +182,11 @@ let parityCalc = function () {
       edges[i[1]] = (i[0] === 1) ? 1 : 2;
     }
   }
+}
+
+let parityCalc = function () {
+  let rawCells = inds().filter(i => at(state, i) == 2);
+  rawParityCalc(rawCells, true);
   redrawEdges();
 }
 
@@ -187,6 +205,59 @@ let getMouseoverFunction = function (i, j) {
   }
 }
 
+let expand = function () {
+  let r = getAllCC();
+  // This somewhat depends on order, but not if you hold it
+  for (let i of r) {
+    rawParityCalc(i, false);
+  }
+  redrawEdges();
+}
+
+let getAllCC = function () {
+  let r = [];
+  let allSeen = {};
+  for (let [i, j] of inds()) {
+    if (state[i][j] === 1 || i + ',' + j in allSeen) {
+      continue;
+    }
+    let seen = getCC(i, j);
+    r.push(Object.keys(seen).map(i => i.split(',').map(n => +n)));
+    for (let k in seen) {
+      allSeen[k] = true;
+    }
+  }
+  return r;
+}
+
+let getCC = function (i, j) {
+  let seenCells = {};
+  let lastCells = {};
+  lastCells[i + ',' + j] = true;
+  let thisCells = {};
+  while (true) {
+    if (Object.keys(lastCells).length === 0) {
+      break;
+    }
+    for (let i in lastCells) {
+      seenCells[i] = true;
+    }
+    thisCells = {};
+    for (let i in lastCells) {
+      for (let j of edgesFrom(i.split(',').map(n => +n)).filter(e => edges[e] === 1)) {
+        for (let k of j.split('-')) {
+          if (!(k in seenCells)) {
+            thisCells[k] = true;
+          }
+        }
+      }
+    }
+    lastCells = thisCells;
+    thisCells = {};
+  }
+  return seenCells;
+}
+
 let clickCell = function (i, j, shiftKey, val) {
   if (solving) {
     if (state[i][j] === 1) {
@@ -194,30 +265,7 @@ let clickCell = function (i, j, shiftKey, val) {
     }
     if (shiftKey) {
       let v = (val !== undefined) ? val : (2 - state[i][j]);
-      let seenCells = {};
-      let lastCells = {};
-      lastCells[i + ',' + j] = true;
-      let thisCells = {};
-      while (true) {
-        if (Object.keys(lastCells).length === 0) {
-          break;
-        }
-        for (let i in lastCells) {
-          seenCells[i] = true;
-        }
-        thisCells = {};
-        for (let i in lastCells) {
-          for (let j of edgesFrom(i.split(',').map(n => +n)).filter(e => edges[e] === 1)) {
-            for (let k of j.split('-')) {
-              if (!(k in seenCells)) {
-                thisCells[k] = true;
-              }
-            }
-          }
-        }
-        lastCells = thisCells;
-        thisCells = {};
-      }
+      let seenCells = getCC(i, j);
       for (let i in seenCells) {
         let ind = i.split(',').map(n => +n);
         state[ind[0]][ind[1]] = v;
@@ -296,6 +344,7 @@ let toggleSolving = function () {
     }
   } else {
     solving = true;
+    spaces = inds().filter(i => state[i[0]][i[1]] !== 1).length;
     for (let i of usedEdges()) {
       edges[i] = 0;
     }
