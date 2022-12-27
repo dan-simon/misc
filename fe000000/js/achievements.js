@@ -84,8 +84,9 @@ let Achievements = {
   ],
   // Various notes:
   // Yes, it is important that Challenge 10 be running (not just have its effect active)
-  // for the Challenge 10 achievement. If some other challenge incorperated Challenge 10,
-  // you still wouldn't be in Challenge 10 while in it. This is even more true for Challenge 2.
+  // for the Challenge 10 achievement. If some other challenge incorporated Challenge 10,
+  // you still wouldn't be in Challenge 10 while in it. This is even more true for Challenge 2,
+  // since in that case there actually *is* another challenge (IC1) incorporating it.
   // Whether the total EP achievement is current complexity or full total has no
   // consequences at all, because you necessarily get this achievement in first complexity.
   // Exception: Importing a save, where full total gives the achievement, as it should be.
