@@ -20,8 +20,20 @@ let press = function (key) {
   if (key === 'KeyP') {
     parityCalc();
   }
+  if (key === 'KeyC') {
+    checkMain();
+  }
   if (key === 'KeyE') {
     expand();
+  }
+  if (key === 'KeyB') {
+    bounce();
+  }
+  if (key === 'KeyA') {
+    specific();
+  }
+  if (key === 'KeyM') {
+    mini();
   }
   if (key === 'KeyH') {
     clearHighlighting();
@@ -206,12 +218,176 @@ let getMouseoverFunction = function (i, j) {
 }
 
 let expand = function () {
+  if (!solving) {
+    alert('Not solving!');
+    return;
+  }
   let r = getAllCC();
   // This somewhat depends on order, but not if you hold it
   for (let i of r) {
     rawParityCalc(i, false);
   }
   redrawEdges();
+}
+
+let uniqueFromS = function (l) {
+  let o = {};
+  for (let i of l) {
+    o[i] = true;
+  }
+  return Object.keys(o).map(i => i.split(',').map(j => +j));
+}
+
+// This isn't coded as parity, so that it's more efficient.
+let bounceRegion = function (ind, r, sides, table) {
+  if (r[ind].length % 2 === 0) {
+    return;
+  }
+  let s = {};
+  let sc = 0;
+  let add = function (x) {
+    for (let i of x) {
+      if (!s[i.join(',')]) {
+        sc++;
+      }
+      s[i.join(',')] = true;
+    }
+  }
+  add(r[ind]);
+  let newReg = {};
+  newReg[ind] = true;
+  let keyParity = (sides[ind][0][0] + sides[ind][0][1] + 1) % 2;
+  while (Object.keys(newReg).length !== 0) {
+    let keys = Object.keys(newReg);
+    newReg = {};
+    let ourSides = keys.flatMap(i => sides[i]);
+    let edgesOut = ourSides.flatMap(edgesFrom);
+    let maybeAdd = uniqueFromS(edgesOut.flatMap(i => i.split('-')).filter(j => !(j in s))).filter(j => (j[0] + j[1]) % 2 === keyParity);
+    for (let v of maybeAdd) {
+      // Some other loop iteration added it already
+      if (v.join(',') in s) {
+        continue;
+      }
+      if (sc === spaces - 1) {
+        // This thing we're about to add is literally the last thing, we can't trust stuff as much
+        return;
+      }
+      let jo = v.join(',');
+      let edgesLocal = edgesFrom(v);
+      let opts = edgesLocal.flatMap(i => i.split('-').map(j => [i, j])).filter(i => edges[i[0]] !== 2 && i[1] !== jo && !(i[1] in s)).map(i => [i[0], i[1].split(',').map(j => +j)]);
+      if (opts.length === 0) {
+        alert('Contradiction!');
+        return;
+      }
+      if (opts.length === 1) {
+        let opt = opts[0];
+        edges[opt[0]] = 1;
+        let maybeReg = table[opt[1]];
+        if (maybeReg in newReg) {
+          continue;
+        }
+        let vals = r[maybeReg];
+        let newParity = vals.some(i => i[0] === v[0] && i[1] === v[1]) ? 0 : (v[0] + v[1]) % 2 * 2 - 1;
+        for (let i of vals) {
+          newParity += (i[0] + i[1]) % 2 * 2 - 1;
+        }
+        if (newParity === 0) {
+          newReg[maybeReg] = true;
+          add([v]);
+          add(vals);
+        }
+      }
+    }
+  }
+}
+
+let bounce = function () {
+  if (!solving) {
+    alert('Not solving!');
+    return;
+  }
+  let r = getAllCC();
+  let sides = r.map(i => i.filter(j => edgesFrom(j).filter(k => edges[k] === 1).length < 2));
+  let table = {};
+  for (let ind = 0; ind < r.length; ind++) {
+    for (let j of r[ind]) {
+      table[j.join(',')] = ind;
+    }
+  }
+  for (let ind = 0; ind < r.length; ind++) {
+    bounceRegion(ind, r, sides, table);
+  }
+  redrawEdges();
+}
+
+let specific = function () {
+  if (!solving) {
+    alert('Not solving!');
+    return;
+  }
+  let r = getAllCC();
+  let sides = r.map(i => i.filter(j => edgesFrom(j).filter(k => edges[k] === 1).length < 2));
+  let table = {};
+  for (let ind = 0; ind < r.length; ind++) {
+    for (let j of r[ind]) {
+      table[j.join(',')] = ind;
+    }
+  }
+  for (let i of r.filter(j => j.length === 2)) {
+    let cells = i.concat(neighbors(i[0]), neighbors(i[1])).filter(j => at(state, j) !== 1 && r[table[j]].length > 1 && edgesFrom(j).filter(k => edges[k] === 1).length <= 1);
+    let regs = cells.map(j => table[j]);
+    let uregs = [];
+    for (let i of regs) {
+      if (!uregs.includes(i)) {
+        uregs.push(i);
+      }
+    }
+    let area = uregs.flatMap(i => r[i]);
+    rawParityCalc(area, false);
+  }
+  redrawEdges();
+}
+
+let mini = function () {
+  let groups = [[[0, 1], [0, 1]], [[0, 1], [0, 1, 2]], [[0, 1, 2], [0, 1]]].flatMap(([hs, ws]) =>
+  [...Array(size - hs.length + 1)].flatMap((_, h) => [...Array(size - ws.length + 1)].map((_, w) =>
+  hs.flatMap(i => ws.map(j => [h + i, w + j]))))).filter(i => i.every(j => at(state, j) !== 1));
+  for (let i of groups) {
+    rawParityCalc(i, false);
+  }
+  redrawEdges();
+}
+
+let check = function () {
+  let id = inds().filter(i => state[i[0]][i[1]] !== 1);
+  return Object.keys(getCC(id[0][0], id[0][1])).length === id.length && id.every(i => edgesFrom(i).filter(j => edges[j] === 1).length === 2);
+}
+
+let checkMain = function () {
+  if (check()) {
+    alert('Finished! Congratulations!');
+  } else {
+    alert('Not done yet.');
+  }
+}
+
+let makeAutoProgress = function (r) {
+  rawImport(r);
+  let score = () => allEdges().filter(i => edges[i] !== 0).length;
+  let s = 0;
+  while (true) {
+    checkNumberOfConnections();
+    expand();
+    bounce();
+    specific();
+    mini();
+    let n = score();
+    if (s === n) {
+      break;
+    }
+    s = n;
+  }
+  return s === allEdges().length;
 }
 
 let getAllCC = function () {
@@ -358,7 +534,10 @@ let changeSize = function () {
 }
 
 let importPuzzle = function () {
-  let r = prompt('Puzzle url?');
+  rawImport(prompt('Puzzle url?'));
+}
+
+let rawImport = function (r) {
   let parts = r.split('/').filter(i => i).slice(-3);
   if (parts.length === 0) {
     alert('Must be nonempty!');
