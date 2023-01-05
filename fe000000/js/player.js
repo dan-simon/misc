@@ -549,7 +549,8 @@ let initialPlayer = {
   cheats: {
     gameSpeed: 1,
     extraAchievements: 0,
-    achievementExtraMultiplier: 1
+    achievementExtraMultiplier: 1,
+    normalGeneratorPower: 1,
   },
   currentTabGroup: 'normal',
   currentTabInGroup: {

@@ -1549,6 +1549,10 @@ let Saving = {
       player.oracle.freeTime = 0;
       player.version = 2.2109375;
     }
+    if (player.version < 2.21484375) {
+      player.cheats.normalGeneratorPower = 1;
+      player.version = 2.21484375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
