@@ -1143,8 +1143,8 @@ function updateDisplay() {
   if (shouldUpdate("e14")) {let v = formatTime(player.stats.timeSinceInfinity, {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[14].textContent !== v) {e[14].textContent = v};};
   if (shouldUpdate("e15")) {let v = format(InfinityPrestigeLayer.currentIPPerSec()); if (e[15].textContent !== v) {e[15].textContent = v};};
   if (shouldUpdate("e16")) {let v = format(InfinityPrestigeLayer.peakIPPerSec()); if (e[16].textContent !== v) {e[16].textContent = v};};
-  if (shouldUpdate("e17")) {let v = format(InfinityPrestigeLayer.currentLogIPPerSecDisplay()); if (e[17].textContent !== v) {e[17].textContent = v};};
-  if (shouldUpdate("e18")) {let v = format(InfinityPrestigeLayer.peakLogIPPerSecDisplay()); if (e[18].textContent !== v) {e[18].textContent = v};};
+  if (shouldUpdate("e17")) {let v = formatPrecisely(InfinityPrestigeLayer.currentLogIPPerSecDisplay()); if (e[17].textContent !== v) {e[17].textContent = v};};
+  if (shouldUpdate("e18")) {let v = formatPrecisely(InfinityPrestigeLayer.peakLogIPPerSecDisplay()); if (e[18].textContent !== v) {e[18].textContent = v};};
   if (shouldUpdate("e19")) {let v = format(EternityPrestigeLayer.infinityPointRequirementForEternity()); if (e[19].textContent !== v) {e[19].textContent = v};};
   if (shouldUpdate("e20")) {let v = formatInt(EternityPrestigeLayer.eternityPoints()); if (e[20].textContent !== v) {e[20].textContent = v};};
   if (shouldUpdate("e21")) {let v = pluralize(EternityPrestigeLayer.eternityPoints(), '', 's'); if (e[21].textContent !== v) {e[21].textContent = v};};
@@ -1159,8 +1159,8 @@ function updateDisplay() {
   if (shouldUpdate("e30")) {let v = formatTime(player.stats.timeSinceEternity, {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[30].textContent !== v) {e[30].textContent = v};};
   if (shouldUpdate("e31")) {let v = format(EternityPrestigeLayer.currentEPPerSec()); if (e[31].textContent !== v) {e[31].textContent = v};};
   if (shouldUpdate("e32")) {let v = format(EternityPrestigeLayer.peakEPPerSec()); if (e[32].textContent !== v) {e[32].textContent = v};};
-  if (shouldUpdate("e33")) {let v = format(EternityPrestigeLayer.currentLogEPPerSecDisplay()); if (e[33].textContent !== v) {e[33].textContent = v};};
-  if (shouldUpdate("e34")) {let v = format(EternityPrestigeLayer.peakLogEPPerSecDisplay()); if (e[34].textContent !== v) {e[34].textContent = v};};
+  if (shouldUpdate("e33")) {let v = formatPrecisely(EternityPrestigeLayer.currentLogEPPerSecDisplay()); if (e[33].textContent !== v) {e[33].textContent = v};};
+  if (shouldUpdate("e34")) {let v = formatPrecisely(EternityPrestigeLayer.peakLogEPPerSecDisplay()); if (e[34].textContent !== v) {e[34].textContent = v};};
   if (shouldUpdate("e35")) {let v = formatInt(EternityChallenge.tiersCompletedOnEternity()); if (e[35].textContent !== v) {e[35].textContent = v};};
   if (shouldUpdate("e36")) {let v = pluralize(EternityChallenge.tiersCompletedOnEternity(), '', 's'); if (e[36].textContent !== v) {e[36].textContent = v};};
   if (shouldUpdate("e37")) {let v = formatInt(EternityChallenge.getEternityChallengeCompletions()); if (e[37].textContent !== v) {e[37].textContent = v};};
@@ -1180,8 +1180,8 @@ function updateDisplay() {
   if (shouldUpdate("e51")) {let v = formatTime(player.stats.timeSinceComplexity, {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[51].textContent !== v) {e[51].textContent = v};};
   if (shouldUpdate("e52")) {let v = format(ComplexityPrestigeLayer.currentCPPerSec()); if (e[52].textContent !== v) {e[52].textContent = v};};
   if (shouldUpdate("e53")) {let v = format(ComplexityPrestigeLayer.peakCPPerSec()); if (e[53].textContent !== v) {e[53].textContent = v};};
-  if (shouldUpdate("e54")) {let v = format(ComplexityPrestigeLayer.currentLogCPPerSecDisplay()); if (e[54].textContent !== v) {e[54].textContent = v};};
-  if (shouldUpdate("e55")) {let v = format(ComplexityPrestigeLayer.peakLogCPPerSecDisplay()); if (e[55].textContent !== v) {e[55].textContent = v};};
+  if (shouldUpdate("e54")) {let v = formatPrecisely(ComplexityPrestigeLayer.currentLogCPPerSecDisplay()); if (e[54].textContent !== v) {e[54].textContent = v};};
+  if (shouldUpdate("e55")) {let v = formatPrecisely(ComplexityPrestigeLayer.peakLogCPPerSecDisplay()); if (e[55].textContent !== v) {e[55].textContent = v};};
   if (shouldUpdate("e56")) {let v = format(FinalityPrestigeLayer.complexityPointRequirementForFinality()); if (e[56].textContent !== v) {e[56].textContent = v};};
   if (shouldUpdate("e57")) {let v = formatInt(FinalityPrestigeLayer.finalityPoints()); if (e[57].textContent !== v) {e[57].textContent = v};};
   if (shouldUpdate("e58")) {let v = pluralize(FinalityPrestigeLayer.finalityPoints(), '', 's'); if (e[58].textContent !== v) {e[58].textContent = v};};
@@ -1214,8 +1214,8 @@ function updateDisplay() {
   if (shouldUpdate("e85")) {let v = InfinityPrestigeLayer.infinityPointNextText(); if (e[85].textContent !== v) {e[85].textContent = v};};
   if (shouldUpdate("e86")) {let v = format(InfinityPrestigeLayer.currentIPPerSec()); if (e[86].textContent !== v) {e[86].textContent = v};};
   if (shouldUpdate("e87")) {let v = format(InfinityPrestigeLayer.peakIPPerSec()); if (e[87].textContent !== v) {e[87].textContent = v};};
-  if (shouldUpdate("e88")) {let v = format(InfinityPrestigeLayer.currentLogIPPerSecDisplay()); if (e[88].textContent !== v) {e[88].textContent = v};};
-  if (shouldUpdate("e89")) {let v = format(InfinityPrestigeLayer.peakLogIPPerSecDisplay()); if (e[89].textContent !== v) {e[89].textContent = v};};
+  if (shouldUpdate("e88")) {let v = formatPrecisely(InfinityPrestigeLayer.currentLogIPPerSecDisplay()); if (e[88].textContent !== v) {e[88].textContent = v};};
+  if (shouldUpdate("e89")) {let v = formatPrecisely(InfinityPrestigeLayer.peakLogIPPerSecDisplay()); if (e[89].textContent !== v) {e[89].textContent = v};};
   if (shouldUpdate("e90")) {let v = format(EternityPrestigeLayer.infinityPointRequirementForEternity()); if (e[90].textContent !== v) {e[90].textContent = v};};
   if (shouldUpdate("e91")) {let v = formatInt(EternityPrestigeLayer.eternityPoints()); if (e[91].textContent !== v) {e[91].textContent = v};};
   if (shouldUpdate("e92")) {let v = pluralize(EternityPrestigeLayer.eternityPoints(), '', 's'); if (e[92].textContent !== v) {e[92].textContent = v};};
@@ -1227,8 +1227,8 @@ function updateDisplay() {
   if (shouldUpdate("e98")) {let v = formatInt(EternityPrestigeLayer.eternityPoints()); if (e[98].textContent !== v) {e[98].textContent = v};};
   if (shouldUpdate("e99")) {let v = formatInt(EternityPrestigeLayer.newEternityPoints()); if (e[99].textContent !== v) {e[99].textContent = v};};
   if (shouldUpdate("e100")) {let v = EternityPrestigeLayer.eternityPointNextText(); if (e[100].textContent !== v) {e[100].textContent = v};};
-  if (shouldUpdate("e101")) {let v = format(EternityPrestigeLayer.currentEPPerSec()); if (e[101].textContent !== v) {e[101].textContent = v};};
-  if (shouldUpdate("e102")) {let v = format(EternityPrestigeLayer.peakEPPerSec()); if (e[102].textContent !== v) {e[102].textContent = v};};
+  if (shouldUpdate("e101")) {let v = formatPrecisely(EternityPrestigeLayer.currentLogEPPerSecDisplay()); if (e[101].textContent !== v) {e[101].textContent = v};};
+  if (shouldUpdate("e102")) {let v = formatPrecisely(EternityPrestigeLayer.peakLogEPPerSecDisplay()); if (e[102].textContent !== v) {e[102].textContent = v};};
   if (shouldUpdate("e103")) {let v = format(EternityPrestigeLayer.currentLogEPPerSecDisplay()); if (e[103].textContent !== v) {e[103].textContent = v};};
   if (shouldUpdate("e104")) {let v = format(EternityPrestigeLayer.peakLogEPPerSecDisplay()); if (e[104].textContent !== v) {e[104].textContent = v};};
   if (shouldUpdate("e105")) {let v = formatInt(EternityChallenge.tiersCompletedOnEternity()); if (e[105].textContent !== v) {e[105].textContent = v};};
@@ -1249,8 +1249,8 @@ function updateDisplay() {
   if (shouldUpdate("e120")) {let v = ComplexityPrestigeLayer.complexityPointNextText(); if (e[120].textContent !== v) {e[120].textContent = v};};
   if (shouldUpdate("e121")) {let v = format(ComplexityPrestigeLayer.currentCPPerSec()); if (e[121].textContent !== v) {e[121].textContent = v};};
   if (shouldUpdate("e122")) {let v = format(ComplexityPrestigeLayer.peakCPPerSec()); if (e[122].textContent !== v) {e[122].textContent = v};};
-  if (shouldUpdate("e123")) {let v = format(ComplexityPrestigeLayer.currentLogCPPerSecDisplay()); if (e[123].textContent !== v) {e[123].textContent = v};};
-  if (shouldUpdate("e124")) {let v = format(ComplexityPrestigeLayer.peakLogCPPerSecDisplay()); if (e[124].textContent !== v) {e[124].textContent = v};};
+  if (shouldUpdate("e123")) {let v = formatPrecisely(ComplexityPrestigeLayer.currentLogCPPerSecDisplay()); if (e[123].textContent !== v) {e[123].textContent = v};};
+  if (shouldUpdate("e124")) {let v = formatPrecisely(ComplexityPrestigeLayer.peakLogCPPerSecDisplay()); if (e[124].textContent !== v) {e[124].textContent = v};};
   if (shouldUpdate("e125")) {let v = format(FinalityPrestigeLayer.complexityPointRequirementForFinality()); if (e[125].textContent !== v) {e[125].textContent = v};};
   if (shouldUpdate("e126")) {let v = formatInt(FinalityPrestigeLayer.finalityPoints()); if (e[126].textContent !== v) {e[126].textContent = v};};
   if (shouldUpdate("e127")) {let v = pluralize(FinalityPrestigeLayer.finalityPoints(), '', 's'); if (e[127].textContent !== v) {e[127].textContent = v};};
@@ -5730,7 +5730,7 @@ function updateDisplay() {
     if (shouldUpdate("e2471")) {let v = formatTime(player.stats.lastTenInfinities[0][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2471].textContent !== v) {e[2471].textContent = v};};
     if (shouldUpdate("e2472")) {let v = formatInt(player.stats.lastTenInfinities[0][1]); if (e[2472].textContent !== v) {e[2472].textContent = v};};
     if (shouldUpdate("b2216")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2216].style.display !== v) {b[2216].style.display = v};};
-    if (shouldUpdate("e2473")) {let v = format(Stats.getLogPerSec(player.stats.lastTenInfinities[0][0], player.stats.lastTenInfinities[0][1], player.stats.lastTenInfinities[0][3], true)); if (e[2473].textContent !== v) {e[2473].textContent = v};};
+    if (shouldUpdate("e2473")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenInfinities[0][0], player.stats.lastTenInfinities[0][1], player.stats.lastTenInfinities[0][3], true)); if (e[2473].textContent !== v) {e[2473].textContent = v};};
     if (shouldUpdate("b2217")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2217].style.display !== v) {b[2217].style.display = v};};
     if (shouldUpdate("e2474")) {let v = format(player.stats.lastTenInfinities[0][2]); if (e[2474].textContent !== v) {e[2474].textContent = v};};
     if (shouldUpdate("b2218")) {let v = Stats.showRun(2, 'infinity') ? '' : 'none'; if (b[2218].style.display !== v) {b[2218].style.display = v};};
@@ -5738,7 +5738,7 @@ function updateDisplay() {
     if (shouldUpdate("e2475")) {let v = formatTime(player.stats.lastTenInfinities[1][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2475].textContent !== v) {e[2475].textContent = v};};
     if (shouldUpdate("e2476")) {let v = formatInt(player.stats.lastTenInfinities[1][1]); if (e[2476].textContent !== v) {e[2476].textContent = v};};
     if (shouldUpdate("b2220")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2220].style.display !== v) {b[2220].style.display = v};};
-    if (shouldUpdate("e2477")) {let v = format(Stats.getLogPerSec(player.stats.lastTenInfinities[1][0], player.stats.lastTenInfinities[1][1], player.stats.lastTenInfinities[1][3], true)); if (e[2477].textContent !== v) {e[2477].textContent = v};};
+    if (shouldUpdate("e2477")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenInfinities[1][0], player.stats.lastTenInfinities[1][1], player.stats.lastTenInfinities[1][3], true)); if (e[2477].textContent !== v) {e[2477].textContent = v};};
     if (shouldUpdate("b2221")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2221].style.display !== v) {b[2221].style.display = v};};
     if (shouldUpdate("e2478")) {let v = format(player.stats.lastTenInfinities[1][2]); if (e[2478].textContent !== v) {e[2478].textContent = v};};
     if (shouldUpdate("b2222")) {let v = Stats.showRun(3, 'infinity') ? '' : 'none'; if (b[2222].style.display !== v) {b[2222].style.display = v};};
@@ -5746,7 +5746,7 @@ function updateDisplay() {
     if (shouldUpdate("e2479")) {let v = formatTime(player.stats.lastTenInfinities[2][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2479].textContent !== v) {e[2479].textContent = v};};
     if (shouldUpdate("e2480")) {let v = formatInt(player.stats.lastTenInfinities[2][1]); if (e[2480].textContent !== v) {e[2480].textContent = v};};
     if (shouldUpdate("b2224")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2224].style.display !== v) {b[2224].style.display = v};};
-    if (shouldUpdate("e2481")) {let v = format(Stats.getLogPerSec(player.stats.lastTenInfinities[2][0], player.stats.lastTenInfinities[2][1], player.stats.lastTenInfinities[2][3], true)); if (e[2481].textContent !== v) {e[2481].textContent = v};};
+    if (shouldUpdate("e2481")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenInfinities[2][0], player.stats.lastTenInfinities[2][1], player.stats.lastTenInfinities[2][3], true)); if (e[2481].textContent !== v) {e[2481].textContent = v};};
     if (shouldUpdate("b2225")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2225].style.display !== v) {b[2225].style.display = v};};
     if (shouldUpdate("e2482")) {let v = format(player.stats.lastTenInfinities[2][2]); if (e[2482].textContent !== v) {e[2482].textContent = v};};
     if (shouldUpdate("b2226")) {let v = Stats.showRun(4, 'infinity') ? '' : 'none'; if (b[2226].style.display !== v) {b[2226].style.display = v};};
@@ -5754,7 +5754,7 @@ function updateDisplay() {
     if (shouldUpdate("e2483")) {let v = formatTime(player.stats.lastTenInfinities[3][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2483].textContent !== v) {e[2483].textContent = v};};
     if (shouldUpdate("e2484")) {let v = formatInt(player.stats.lastTenInfinities[3][1]); if (e[2484].textContent !== v) {e[2484].textContent = v};};
     if (shouldUpdate("b2228")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2228].style.display !== v) {b[2228].style.display = v};};
-    if (shouldUpdate("e2485")) {let v = format(Stats.getLogPerSec(player.stats.lastTenInfinities[3][0], player.stats.lastTenInfinities[3][1], player.stats.lastTenInfinities[3][3], true)); if (e[2485].textContent !== v) {e[2485].textContent = v};};
+    if (shouldUpdate("e2485")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenInfinities[3][0], player.stats.lastTenInfinities[3][1], player.stats.lastTenInfinities[3][3], true)); if (e[2485].textContent !== v) {e[2485].textContent = v};};
     if (shouldUpdate("b2229")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2229].style.display !== v) {b[2229].style.display = v};};
     if (shouldUpdate("e2486")) {let v = format(player.stats.lastTenInfinities[3][2]); if (e[2486].textContent !== v) {e[2486].textContent = v};};
     if (shouldUpdate("b2230")) {let v = Stats.showRun(5, 'infinity') ? '' : 'none'; if (b[2230].style.display !== v) {b[2230].style.display = v};};
@@ -5762,7 +5762,7 @@ function updateDisplay() {
     if (shouldUpdate("e2487")) {let v = formatTime(player.stats.lastTenInfinities[4][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2487].textContent !== v) {e[2487].textContent = v};};
     if (shouldUpdate("e2488")) {let v = formatInt(player.stats.lastTenInfinities[4][1]); if (e[2488].textContent !== v) {e[2488].textContent = v};};
     if (shouldUpdate("b2232")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2232].style.display !== v) {b[2232].style.display = v};};
-    if (shouldUpdate("e2489")) {let v = format(Stats.getLogPerSec(player.stats.lastTenInfinities[4][0], player.stats.lastTenInfinities[4][1], player.stats.lastTenInfinities[4][3], true)); if (e[2489].textContent !== v) {e[2489].textContent = v};};
+    if (shouldUpdate("e2489")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenInfinities[4][0], player.stats.lastTenInfinities[4][1], player.stats.lastTenInfinities[4][3], true)); if (e[2489].textContent !== v) {e[2489].textContent = v};};
     if (shouldUpdate("b2233")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2233].style.display !== v) {b[2233].style.display = v};};
     if (shouldUpdate("e2490")) {let v = format(player.stats.lastTenInfinities[4][2]); if (e[2490].textContent !== v) {e[2490].textContent = v};};
     if (shouldUpdate("b2234")) {let v = Stats.showRun(6, 'infinity') ? '' : 'none'; if (b[2234].style.display !== v) {b[2234].style.display = v};};
@@ -5770,7 +5770,7 @@ function updateDisplay() {
     if (shouldUpdate("e2491")) {let v = formatTime(player.stats.lastTenInfinities[5][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2491].textContent !== v) {e[2491].textContent = v};};
     if (shouldUpdate("e2492")) {let v = formatInt(player.stats.lastTenInfinities[5][1]); if (e[2492].textContent !== v) {e[2492].textContent = v};};
     if (shouldUpdate("b2236")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2236].style.display !== v) {b[2236].style.display = v};};
-    if (shouldUpdate("e2493")) {let v = format(Stats.getLogPerSec(player.stats.lastTenInfinities[5][0], player.stats.lastTenInfinities[5][1], player.stats.lastTenInfinities[5][3], true)); if (e[2493].textContent !== v) {e[2493].textContent = v};};
+    if (shouldUpdate("e2493")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenInfinities[5][0], player.stats.lastTenInfinities[5][1], player.stats.lastTenInfinities[5][3], true)); if (e[2493].textContent !== v) {e[2493].textContent = v};};
     if (shouldUpdate("b2237")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2237].style.display !== v) {b[2237].style.display = v};};
     if (shouldUpdate("e2494")) {let v = format(player.stats.lastTenInfinities[5][2]); if (e[2494].textContent !== v) {e[2494].textContent = v};};
     if (shouldUpdate("b2238")) {let v = Stats.showRun(7, 'infinity') ? '' : 'none'; if (b[2238].style.display !== v) {b[2238].style.display = v};};
@@ -5778,7 +5778,7 @@ function updateDisplay() {
     if (shouldUpdate("e2495")) {let v = formatTime(player.stats.lastTenInfinities[6][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2495].textContent !== v) {e[2495].textContent = v};};
     if (shouldUpdate("e2496")) {let v = formatInt(player.stats.lastTenInfinities[6][1]); if (e[2496].textContent !== v) {e[2496].textContent = v};};
     if (shouldUpdate("b2240")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2240].style.display !== v) {b[2240].style.display = v};};
-    if (shouldUpdate("e2497")) {let v = format(Stats.getLogPerSec(player.stats.lastTenInfinities[6][0], player.stats.lastTenInfinities[6][1], player.stats.lastTenInfinities[6][3], true)); if (e[2497].textContent !== v) {e[2497].textContent = v};};
+    if (shouldUpdate("e2497")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenInfinities[6][0], player.stats.lastTenInfinities[6][1], player.stats.lastTenInfinities[6][3], true)); if (e[2497].textContent !== v) {e[2497].textContent = v};};
     if (shouldUpdate("b2241")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2241].style.display !== v) {b[2241].style.display = v};};
     if (shouldUpdate("e2498")) {let v = format(player.stats.lastTenInfinities[6][2]); if (e[2498].textContent !== v) {e[2498].textContent = v};};
     if (shouldUpdate("b2242")) {let v = Stats.showRun(8, 'infinity') ? '' : 'none'; if (b[2242].style.display !== v) {b[2242].style.display = v};};
@@ -5786,7 +5786,7 @@ function updateDisplay() {
     if (shouldUpdate("e2499")) {let v = formatTime(player.stats.lastTenInfinities[7][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2499].textContent !== v) {e[2499].textContent = v};};
     if (shouldUpdate("e2500")) {let v = formatInt(player.stats.lastTenInfinities[7][1]); if (e[2500].textContent !== v) {e[2500].textContent = v};};
     if (shouldUpdate("b2244")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2244].style.display !== v) {b[2244].style.display = v};};
-    if (shouldUpdate("e2501")) {let v = format(Stats.getLogPerSec(player.stats.lastTenInfinities[7][0], player.stats.lastTenInfinities[7][1], player.stats.lastTenInfinities[7][3], true)); if (e[2501].textContent !== v) {e[2501].textContent = v};};
+    if (shouldUpdate("e2501")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenInfinities[7][0], player.stats.lastTenInfinities[7][1], player.stats.lastTenInfinities[7][3], true)); if (e[2501].textContent !== v) {e[2501].textContent = v};};
     if (shouldUpdate("b2245")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2245].style.display !== v) {b[2245].style.display = v};};
     if (shouldUpdate("e2502")) {let v = format(player.stats.lastTenInfinities[7][2]); if (e[2502].textContent !== v) {e[2502].textContent = v};};
     if (shouldUpdate("b2246")) {let v = Stats.showRun(9, 'infinity') ? '' : 'none'; if (b[2246].style.display !== v) {b[2246].style.display = v};};
@@ -5794,7 +5794,7 @@ function updateDisplay() {
     if (shouldUpdate("e2503")) {let v = formatTime(player.stats.lastTenInfinities[8][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2503].textContent !== v) {e[2503].textContent = v};};
     if (shouldUpdate("e2504")) {let v = formatInt(player.stats.lastTenInfinities[8][1]); if (e[2504].textContent !== v) {e[2504].textContent = v};};
     if (shouldUpdate("b2248")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2248].style.display !== v) {b[2248].style.display = v};};
-    if (shouldUpdate("e2505")) {let v = format(Stats.getLogPerSec(player.stats.lastTenInfinities[8][0], player.stats.lastTenInfinities[8][1], player.stats.lastTenInfinities[8][3], true)); if (e[2505].textContent !== v) {e[2505].textContent = v};};
+    if (shouldUpdate("e2505")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenInfinities[8][0], player.stats.lastTenInfinities[8][1], player.stats.lastTenInfinities[8][3], true)); if (e[2505].textContent !== v) {e[2505].textContent = v};};
     if (shouldUpdate("b2249")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2249].style.display !== v) {b[2249].style.display = v};};
     if (shouldUpdate("e2506")) {let v = format(player.stats.lastTenInfinities[8][2]); if (e[2506].textContent !== v) {e[2506].textContent = v};};
     if (shouldUpdate("b2250")) {let v = Stats.showRun(10, 'infinity') ? '' : 'none'; if (b[2250].style.display !== v) {b[2250].style.display = v};};
@@ -5802,7 +5802,7 @@ function updateDisplay() {
     if (shouldUpdate("e2507")) {let v = formatTime(player.stats.lastTenInfinities[9][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2507].textContent !== v) {e[2507].textContent = v};};
     if (shouldUpdate("e2508")) {let v = formatInt(player.stats.lastTenInfinities[9][1]); if (e[2508].textContent !== v) {e[2508].textContent = v};};
     if (shouldUpdate("b2252")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2252].style.display !== v) {b[2252].style.display = v};};
-    if (shouldUpdate("e2509")) {let v = format(Stats.getLogPerSec(player.stats.lastTenInfinities[9][0], player.stats.lastTenInfinities[9][1], player.stats.lastTenInfinities[9][3], true)); if (e[2509].textContent !== v) {e[2509].textContent = v};};
+    if (shouldUpdate("e2509")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenInfinities[9][0], player.stats.lastTenInfinities[9][1], player.stats.lastTenInfinities[9][3], true)); if (e[2509].textContent !== v) {e[2509].textContent = v};};
     if (shouldUpdate("b2253")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2253].style.display !== v) {b[2253].style.display = v};};
     if (shouldUpdate("e2510")) {let v = format(player.stats.lastTenInfinities[9][2]); if (e[2510].textContent !== v) {e[2510].textContent = v};};
     if (shouldUpdate("b2254")) {let v = Stats.showRun(11, 'infinity') ? '' : 'none'; if (b[2254].style.display !== v) {b[2254].style.display = v};};
@@ -5810,7 +5810,7 @@ function updateDisplay() {
     if (shouldUpdate("e2511")) {let v = formatTime(player.stats.lastTenInfinities[10][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2511].textContent !== v) {e[2511].textContent = v};};
     if (shouldUpdate("e2512")) {let v = formatInt(player.stats.lastTenInfinities[10][1]); if (e[2512].textContent !== v) {e[2512].textContent = v};};
     if (shouldUpdate("b2256")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2256].style.display !== v) {b[2256].style.display = v};};
-    if (shouldUpdate("e2513")) {let v = format(Stats.getLogPerSec(player.stats.lastTenInfinities[10][0], player.stats.lastTenInfinities[10][1], player.stats.lastTenInfinities[10][3], true)); if (e[2513].textContent !== v) {e[2513].textContent = v};};
+    if (shouldUpdate("e2513")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenInfinities[10][0], player.stats.lastTenInfinities[10][1], player.stats.lastTenInfinities[10][3], true)); if (e[2513].textContent !== v) {e[2513].textContent = v};};
     if (shouldUpdate("b2257")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2257].style.display !== v) {b[2257].style.display = v};};
     if (shouldUpdate("e2514")) {let v = format(player.stats.lastTenInfinities[10][2]); if (e[2514].textContent !== v) {e[2514].textContent = v};};
     if (shouldUpdate("b2258")) {let v = Stats.showRun(12, 'infinity') ? '' : 'none'; if (b[2258].style.display !== v) {b[2258].style.display = v};};
@@ -5818,7 +5818,7 @@ function updateDisplay() {
     if (shouldUpdate("e2515")) {let v = formatTime(player.stats.lastTenInfinities[11][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2515].textContent !== v) {e[2515].textContent = v};};
     if (shouldUpdate("e2516")) {let v = formatInt(player.stats.lastTenInfinities[11][1]); if (e[2516].textContent !== v) {e[2516].textContent = v};};
     if (shouldUpdate("b2260")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2260].style.display !== v) {b[2260].style.display = v};};
-    if (shouldUpdate("e2517")) {let v = format(Stats.getLogPerSec(player.stats.lastTenInfinities[11][0], player.stats.lastTenInfinities[11][1], player.stats.lastTenInfinities[11][3], true)); if (e[2517].textContent !== v) {e[2517].textContent = v};};
+    if (shouldUpdate("e2517")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenInfinities[11][0], player.stats.lastTenInfinities[11][1], player.stats.lastTenInfinities[11][3], true)); if (e[2517].textContent !== v) {e[2517].textContent = v};};
     if (shouldUpdate("b2261")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2261].style.display !== v) {b[2261].style.display = v};};
     if (shouldUpdate("e2518")) {let v = format(player.stats.lastTenInfinities[11][2]); if (e[2518].textContent !== v) {e[2518].textContent = v};};
     if (shouldUpdate("b2262")) {let v = Stats.showRun(13, 'infinity') ? '' : 'none'; if (b[2262].style.display !== v) {b[2262].style.display = v};};
@@ -5826,7 +5826,7 @@ function updateDisplay() {
     if (shouldUpdate("e2519")) {let v = formatTime(player.stats.lastTenInfinities[12][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2519].textContent !== v) {e[2519].textContent = v};};
     if (shouldUpdate("e2520")) {let v = formatInt(player.stats.lastTenInfinities[12][1]); if (e[2520].textContent !== v) {e[2520].textContent = v};};
     if (shouldUpdate("b2264")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2264].style.display !== v) {b[2264].style.display = v};};
-    if (shouldUpdate("e2521")) {let v = format(Stats.getLogPerSec(player.stats.lastTenInfinities[12][0], player.stats.lastTenInfinities[12][1], player.stats.lastTenInfinities[12][3], true)); if (e[2521].textContent !== v) {e[2521].textContent = v};};
+    if (shouldUpdate("e2521")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenInfinities[12][0], player.stats.lastTenInfinities[12][1], player.stats.lastTenInfinities[12][3], true)); if (e[2521].textContent !== v) {e[2521].textContent = v};};
     if (shouldUpdate("b2265")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2265].style.display !== v) {b[2265].style.display = v};};
     if (shouldUpdate("e2522")) {let v = format(player.stats.lastTenInfinities[12][2]); if (e[2522].textContent !== v) {e[2522].textContent = v};};
     if (shouldUpdate("b2266")) {let v = Stats.showRun(14, 'infinity') ? '' : 'none'; if (b[2266].style.display !== v) {b[2266].style.display = v};};
@@ -5834,7 +5834,7 @@ function updateDisplay() {
     if (shouldUpdate("e2523")) {let v = formatTime(player.stats.lastTenInfinities[13][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2523].textContent !== v) {e[2523].textContent = v};};
     if (shouldUpdate("e2524")) {let v = formatInt(player.stats.lastTenInfinities[13][1]); if (e[2524].textContent !== v) {e[2524].textContent = v};};
     if (shouldUpdate("b2268")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2268].style.display !== v) {b[2268].style.display = v};};
-    if (shouldUpdate("e2525")) {let v = format(Stats.getLogPerSec(player.stats.lastTenInfinities[13][0], player.stats.lastTenInfinities[13][1], player.stats.lastTenInfinities[13][3], true)); if (e[2525].textContent !== v) {e[2525].textContent = v};};
+    if (shouldUpdate("e2525")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenInfinities[13][0], player.stats.lastTenInfinities[13][1], player.stats.lastTenInfinities[13][3], true)); if (e[2525].textContent !== v) {e[2525].textContent = v};};
     if (shouldUpdate("b2269")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2269].style.display !== v) {b[2269].style.display = v};};
     if (shouldUpdate("e2526")) {let v = format(player.stats.lastTenInfinities[13][2]); if (e[2526].textContent !== v) {e[2526].textContent = v};};
     if (shouldUpdate("b2270")) {let v = Stats.showRun(15, 'infinity') ? '' : 'none'; if (b[2270].style.display !== v) {b[2270].style.display = v};};
@@ -5842,7 +5842,7 @@ function updateDisplay() {
     if (shouldUpdate("e2527")) {let v = formatTime(player.stats.lastTenInfinities[14][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2527].textContent !== v) {e[2527].textContent = v};};
     if (shouldUpdate("e2528")) {let v = formatInt(player.stats.lastTenInfinities[14][1]); if (e[2528].textContent !== v) {e[2528].textContent = v};};
     if (shouldUpdate("b2272")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2272].style.display !== v) {b[2272].style.display = v};};
-    if (shouldUpdate("e2529")) {let v = format(Stats.getLogPerSec(player.stats.lastTenInfinities[14][0], player.stats.lastTenInfinities[14][1], player.stats.lastTenInfinities[14][3], true)); if (e[2529].textContent !== v) {e[2529].textContent = v};};
+    if (shouldUpdate("e2529")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenInfinities[14][0], player.stats.lastTenInfinities[14][1], player.stats.lastTenInfinities[14][3], true)); if (e[2529].textContent !== v) {e[2529].textContent = v};};
     if (shouldUpdate("b2273")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2273].style.display !== v) {b[2273].style.display = v};};
     if (shouldUpdate("e2530")) {let v = format(player.stats.lastTenInfinities[14][2]); if (e[2530].textContent !== v) {e[2530].textContent = v};};
     if (shouldUpdate("b2274")) {let v = Stats.showRun(16, 'infinity') ? '' : 'none'; if (b[2274].style.display !== v) {b[2274].style.display = v};};
@@ -5850,7 +5850,7 @@ function updateDisplay() {
     if (shouldUpdate("e2531")) {let v = formatTime(player.stats.lastTenInfinities[15][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2531].textContent !== v) {e[2531].textContent = v};};
     if (shouldUpdate("e2532")) {let v = formatInt(player.stats.lastTenInfinities[15][1]); if (e[2532].textContent !== v) {e[2532].textContent = v};};
     if (shouldUpdate("b2276")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2276].style.display !== v) {b[2276].style.display = v};};
-    if (shouldUpdate("e2533")) {let v = format(Stats.getLogPerSec(player.stats.lastTenInfinities[15][0], player.stats.lastTenInfinities[15][1], player.stats.lastTenInfinities[15][3], true)); if (e[2533].textContent !== v) {e[2533].textContent = v};};
+    if (shouldUpdate("e2533")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenInfinities[15][0], player.stats.lastTenInfinities[15][1], player.stats.lastTenInfinities[15][3], true)); if (e[2533].textContent !== v) {e[2533].textContent = v};};
     if (shouldUpdate("b2277")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2277].style.display !== v) {b[2277].style.display = v};};
     if (shouldUpdate("e2534")) {let v = format(player.stats.lastTenInfinities[15][2]); if (e[2534].textContent !== v) {e[2534].textContent = v};};
     if (shouldUpdate("b2278")) {let v = Stats.showRun(17, 'infinity') ? '' : 'none'; if (b[2278].style.display !== v) {b[2278].style.display = v};};
@@ -5858,7 +5858,7 @@ function updateDisplay() {
     if (shouldUpdate("e2535")) {let v = formatTime(player.stats.lastTenInfinities[16][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2535].textContent !== v) {e[2535].textContent = v};};
     if (shouldUpdate("e2536")) {let v = formatInt(player.stats.lastTenInfinities[16][1]); if (e[2536].textContent !== v) {e[2536].textContent = v};};
     if (shouldUpdate("b2280")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2280].style.display !== v) {b[2280].style.display = v};};
-    if (shouldUpdate("e2537")) {let v = format(Stats.getLogPerSec(player.stats.lastTenInfinities[16][0], player.stats.lastTenInfinities[16][1], player.stats.lastTenInfinities[16][3], true)); if (e[2537].textContent !== v) {e[2537].textContent = v};};
+    if (shouldUpdate("e2537")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenInfinities[16][0], player.stats.lastTenInfinities[16][1], player.stats.lastTenInfinities[16][3], true)); if (e[2537].textContent !== v) {e[2537].textContent = v};};
     if (shouldUpdate("b2281")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2281].style.display !== v) {b[2281].style.display = v};};
     if (shouldUpdate("e2538")) {let v = format(player.stats.lastTenInfinities[16][2]); if (e[2538].textContent !== v) {e[2538].textContent = v};};
     if (shouldUpdate("b2282")) {let v = Stats.showRun(18, 'infinity') ? '' : 'none'; if (b[2282].style.display !== v) {b[2282].style.display = v};};
@@ -5866,7 +5866,7 @@ function updateDisplay() {
     if (shouldUpdate("e2539")) {let v = formatTime(player.stats.lastTenInfinities[17][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2539].textContent !== v) {e[2539].textContent = v};};
     if (shouldUpdate("e2540")) {let v = formatInt(player.stats.lastTenInfinities[17][1]); if (e[2540].textContent !== v) {e[2540].textContent = v};};
     if (shouldUpdate("b2284")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2284].style.display !== v) {b[2284].style.display = v};};
-    if (shouldUpdate("e2541")) {let v = format(Stats.getLogPerSec(player.stats.lastTenInfinities[17][0], player.stats.lastTenInfinities[17][1], player.stats.lastTenInfinities[17][3], true)); if (e[2541].textContent !== v) {e[2541].textContent = v};};
+    if (shouldUpdate("e2541")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenInfinities[17][0], player.stats.lastTenInfinities[17][1], player.stats.lastTenInfinities[17][3], true)); if (e[2541].textContent !== v) {e[2541].textContent = v};};
     if (shouldUpdate("b2285")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2285].style.display !== v) {b[2285].style.display = v};};
     if (shouldUpdate("e2542")) {let v = format(player.stats.lastTenInfinities[17][2]); if (e[2542].textContent !== v) {e[2542].textContent = v};};
     if (shouldUpdate("b2286")) {let v = Stats.showRun(19, 'infinity') ? '' : 'none'; if (b[2286].style.display !== v) {b[2286].style.display = v};};
@@ -5874,7 +5874,7 @@ function updateDisplay() {
     if (shouldUpdate("e2543")) {let v = formatTime(player.stats.lastTenInfinities[18][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2543].textContent !== v) {e[2543].textContent = v};};
     if (shouldUpdate("e2544")) {let v = formatInt(player.stats.lastTenInfinities[18][1]); if (e[2544].textContent !== v) {e[2544].textContent = v};};
     if (shouldUpdate("b2288")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2288].style.display !== v) {b[2288].style.display = v};};
-    if (shouldUpdate("e2545")) {let v = format(Stats.getLogPerSec(player.stats.lastTenInfinities[18][0], player.stats.lastTenInfinities[18][1], player.stats.lastTenInfinities[18][3], true)); if (e[2545].textContent !== v) {e[2545].textContent = v};};
+    if (shouldUpdate("e2545")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenInfinities[18][0], player.stats.lastTenInfinities[18][1], player.stats.lastTenInfinities[18][3], true)); if (e[2545].textContent !== v) {e[2545].textContent = v};};
     if (shouldUpdate("b2289")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2289].style.display !== v) {b[2289].style.display = v};};
     if (shouldUpdate("e2546")) {let v = format(player.stats.lastTenInfinities[18][2]); if (e[2546].textContent !== v) {e[2546].textContent = v};};
     if (shouldUpdate("b2290")) {let v = Stats.showRun(20, 'infinity') ? '' : 'none'; if (b[2290].style.display !== v) {b[2290].style.display = v};};
@@ -5882,7 +5882,7 @@ function updateDisplay() {
     if (shouldUpdate("e2547")) {let v = formatTime(player.stats.lastTenInfinities[19][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2547].textContent !== v) {e[2547].textContent = v};};
     if (shouldUpdate("e2548")) {let v = formatInt(player.stats.lastTenInfinities[19][1]); if (e[2548].textContent !== v) {e[2548].textContent = v};};
     if (shouldUpdate("b2292")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2292].style.display !== v) {b[2292].style.display = v};};
-    if (shouldUpdate("e2549")) {let v = format(Stats.getLogPerSec(player.stats.lastTenInfinities[19][0], player.stats.lastTenInfinities[19][1], player.stats.lastTenInfinities[19][3], true)); if (e[2549].textContent !== v) {e[2549].textContent = v};};
+    if (shouldUpdate("e2549")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenInfinities[19][0], player.stats.lastTenInfinities[19][1], player.stats.lastTenInfinities[19][3], true)); if (e[2549].textContent !== v) {e[2549].textContent = v};};
     if (shouldUpdate("b2293")) {let v = InfinityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2293].style.display !== v) {b[2293].style.display = v};};
     if (shouldUpdate("e2550")) {let v = format(player.stats.lastTenInfinities[19][2]); if (e[2550].textContent !== v) {e[2550].textContent = v};};
     if (shouldUpdate("b2294")) {let v = Stats.showRunBreak('eternity') ? '' : 'none'; if (b[2294].style.display !== v) {b[2294].style.display = v};};
@@ -5890,7 +5890,7 @@ function updateDisplay() {
     if (shouldUpdate("e2551")) {let v = formatTime(player.stats.lastTenEternities[0][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2551].textContent !== v) {e[2551].textContent = v};};
     if (shouldUpdate("e2552")) {let v = formatInt(player.stats.lastTenEternities[0][1]); if (e[2552].textContent !== v) {e[2552].textContent = v};};
     if (shouldUpdate("b2296")) {let v = EternityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2296].style.display !== v) {b[2296].style.display = v};};
-    if (shouldUpdate("e2553")) {let v = format(Stats.getLogPerSec(player.stats.lastTenEternities[0][0], player.stats.lastTenEternities[0][1], player.stats.lastTenEternities[0][3], true)); if (e[2553].textContent !== v) {e[2553].textContent = v};};
+    if (shouldUpdate("e2553")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenEternities[0][0], player.stats.lastTenEternities[0][1], player.stats.lastTenEternities[0][3], true)); if (e[2553].textContent !== v) {e[2553].textContent = v};};
     if (shouldUpdate("b2297")) {let v = EternityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2297].style.display !== v) {b[2297].style.display = v};};
     if (shouldUpdate("e2554")) {let v = format(player.stats.lastTenEternities[0][2]); if (e[2554].textContent !== v) {e[2554].textContent = v};};
     if (shouldUpdate("b2298")) {let v = Stats.showRun(2, 'eternity') ? '' : 'none'; if (b[2298].style.display !== v) {b[2298].style.display = v};};
@@ -5898,7 +5898,7 @@ function updateDisplay() {
     if (shouldUpdate("e2555")) {let v = formatTime(player.stats.lastTenEternities[1][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2555].textContent !== v) {e[2555].textContent = v};};
     if (shouldUpdate("e2556")) {let v = formatInt(player.stats.lastTenEternities[1][1]); if (e[2556].textContent !== v) {e[2556].textContent = v};};
     if (shouldUpdate("b2300")) {let v = EternityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2300].style.display !== v) {b[2300].style.display = v};};
-    if (shouldUpdate("e2557")) {let v = format(Stats.getLogPerSec(player.stats.lastTenEternities[1][0], player.stats.lastTenEternities[1][1], player.stats.lastTenEternities[1][3], true)); if (e[2557].textContent !== v) {e[2557].textContent = v};};
+    if (shouldUpdate("e2557")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenEternities[1][0], player.stats.lastTenEternities[1][1], player.stats.lastTenEternities[1][3], true)); if (e[2557].textContent !== v) {e[2557].textContent = v};};
     if (shouldUpdate("b2301")) {let v = EternityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2301].style.display !== v) {b[2301].style.display = v};};
     if (shouldUpdate("e2558")) {let v = format(player.stats.lastTenEternities[1][2]); if (e[2558].textContent !== v) {e[2558].textContent = v};};
     if (shouldUpdate("b2302")) {let v = Stats.showRun(3, 'eternity') ? '' : 'none'; if (b[2302].style.display !== v) {b[2302].style.display = v};};
@@ -5906,7 +5906,7 @@ function updateDisplay() {
     if (shouldUpdate("e2559")) {let v = formatTime(player.stats.lastTenEternities[2][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2559].textContent !== v) {e[2559].textContent = v};};
     if (shouldUpdate("e2560")) {let v = formatInt(player.stats.lastTenEternities[2][1]); if (e[2560].textContent !== v) {e[2560].textContent = v};};
     if (shouldUpdate("b2304")) {let v = EternityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2304].style.display !== v) {b[2304].style.display = v};};
-    if (shouldUpdate("e2561")) {let v = format(Stats.getLogPerSec(player.stats.lastTenEternities[2][0], player.stats.lastTenEternities[2][1], player.stats.lastTenEternities[2][3], true)); if (e[2561].textContent !== v) {e[2561].textContent = v};};
+    if (shouldUpdate("e2561")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenEternities[2][0], player.stats.lastTenEternities[2][1], player.stats.lastTenEternities[2][3], true)); if (e[2561].textContent !== v) {e[2561].textContent = v};};
     if (shouldUpdate("b2305")) {let v = EternityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2305].style.display !== v) {b[2305].style.display = v};};
     if (shouldUpdate("e2562")) {let v = format(player.stats.lastTenEternities[2][2]); if (e[2562].textContent !== v) {e[2562].textContent = v};};
     if (shouldUpdate("b2306")) {let v = Stats.showRun(4, 'eternity') ? '' : 'none'; if (b[2306].style.display !== v) {b[2306].style.display = v};};
@@ -5914,7 +5914,7 @@ function updateDisplay() {
     if (shouldUpdate("e2563")) {let v = formatTime(player.stats.lastTenEternities[3][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2563].textContent !== v) {e[2563].textContent = v};};
     if (shouldUpdate("e2564")) {let v = formatInt(player.stats.lastTenEternities[3][1]); if (e[2564].textContent !== v) {e[2564].textContent = v};};
     if (shouldUpdate("b2308")) {let v = EternityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2308].style.display !== v) {b[2308].style.display = v};};
-    if (shouldUpdate("e2565")) {let v = format(Stats.getLogPerSec(player.stats.lastTenEternities[3][0], player.stats.lastTenEternities[3][1], player.stats.lastTenEternities[3][3], true)); if (e[2565].textContent !== v) {e[2565].textContent = v};};
+    if (shouldUpdate("e2565")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenEternities[3][0], player.stats.lastTenEternities[3][1], player.stats.lastTenEternities[3][3], true)); if (e[2565].textContent !== v) {e[2565].textContent = v};};
     if (shouldUpdate("b2309")) {let v = EternityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2309].style.display !== v) {b[2309].style.display = v};};
     if (shouldUpdate("e2566")) {let v = format(player.stats.lastTenEternities[3][2]); if (e[2566].textContent !== v) {e[2566].textContent = v};};
     if (shouldUpdate("b2310")) {let v = Stats.showRun(5, 'eternity') ? '' : 'none'; if (b[2310].style.display !== v) {b[2310].style.display = v};};
@@ -5922,7 +5922,7 @@ function updateDisplay() {
     if (shouldUpdate("e2567")) {let v = formatTime(player.stats.lastTenEternities[4][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2567].textContent !== v) {e[2567].textContent = v};};
     if (shouldUpdate("e2568")) {let v = formatInt(player.stats.lastTenEternities[4][1]); if (e[2568].textContent !== v) {e[2568].textContent = v};};
     if (shouldUpdate("b2312")) {let v = EternityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2312].style.display !== v) {b[2312].style.display = v};};
-    if (shouldUpdate("e2569")) {let v = format(Stats.getLogPerSec(player.stats.lastTenEternities[4][0], player.stats.lastTenEternities[4][1], player.stats.lastTenEternities[4][3], true)); if (e[2569].textContent !== v) {e[2569].textContent = v};};
+    if (shouldUpdate("e2569")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenEternities[4][0], player.stats.lastTenEternities[4][1], player.stats.lastTenEternities[4][3], true)); if (e[2569].textContent !== v) {e[2569].textContent = v};};
     if (shouldUpdate("b2313")) {let v = EternityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2313].style.display !== v) {b[2313].style.display = v};};
     if (shouldUpdate("e2570")) {let v = format(player.stats.lastTenEternities[4][2]); if (e[2570].textContent !== v) {e[2570].textContent = v};};
     if (shouldUpdate("b2314")) {let v = Stats.showRun(6, 'eternity') ? '' : 'none'; if (b[2314].style.display !== v) {b[2314].style.display = v};};
@@ -5930,7 +5930,7 @@ function updateDisplay() {
     if (shouldUpdate("e2571")) {let v = formatTime(player.stats.lastTenEternities[5][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2571].textContent !== v) {e[2571].textContent = v};};
     if (shouldUpdate("e2572")) {let v = formatInt(player.stats.lastTenEternities[5][1]); if (e[2572].textContent !== v) {e[2572].textContent = v};};
     if (shouldUpdate("b2316")) {let v = EternityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2316].style.display !== v) {b[2316].style.display = v};};
-    if (shouldUpdate("e2573")) {let v = format(Stats.getLogPerSec(player.stats.lastTenEternities[5][0], player.stats.lastTenEternities[5][1], player.stats.lastTenEternities[5][3], true)); if (e[2573].textContent !== v) {e[2573].textContent = v};};
+    if (shouldUpdate("e2573")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenEternities[5][0], player.stats.lastTenEternities[5][1], player.stats.lastTenEternities[5][3], true)); if (e[2573].textContent !== v) {e[2573].textContent = v};};
     if (shouldUpdate("b2317")) {let v = EternityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2317].style.display !== v) {b[2317].style.display = v};};
     if (shouldUpdate("e2574")) {let v = format(player.stats.lastTenEternities[5][2]); if (e[2574].textContent !== v) {e[2574].textContent = v};};
     if (shouldUpdate("b2318")) {let v = Stats.showRun(7, 'eternity') ? '' : 'none'; if (b[2318].style.display !== v) {b[2318].style.display = v};};
@@ -5938,7 +5938,7 @@ function updateDisplay() {
     if (shouldUpdate("e2575")) {let v = formatTime(player.stats.lastTenEternities[6][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2575].textContent !== v) {e[2575].textContent = v};};
     if (shouldUpdate("e2576")) {let v = formatInt(player.stats.lastTenEternities[6][1]); if (e[2576].textContent !== v) {e[2576].textContent = v};};
     if (shouldUpdate("b2320")) {let v = EternityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2320].style.display !== v) {b[2320].style.display = v};};
-    if (shouldUpdate("e2577")) {let v = format(Stats.getLogPerSec(player.stats.lastTenEternities[6][0], player.stats.lastTenEternities[6][1], player.stats.lastTenEternities[6][3], true)); if (e[2577].textContent !== v) {e[2577].textContent = v};};
+    if (shouldUpdate("e2577")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenEternities[6][0], player.stats.lastTenEternities[6][1], player.stats.lastTenEternities[6][3], true)); if (e[2577].textContent !== v) {e[2577].textContent = v};};
     if (shouldUpdate("b2321")) {let v = EternityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2321].style.display !== v) {b[2321].style.display = v};};
     if (shouldUpdate("e2578")) {let v = format(player.stats.lastTenEternities[6][2]); if (e[2578].textContent !== v) {e[2578].textContent = v};};
     if (shouldUpdate("b2322")) {let v = Stats.showRun(8, 'eternity') ? '' : 'none'; if (b[2322].style.display !== v) {b[2322].style.display = v};};
@@ -5946,7 +5946,7 @@ function updateDisplay() {
     if (shouldUpdate("e2579")) {let v = formatTime(player.stats.lastTenEternities[7][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2579].textContent !== v) {e[2579].textContent = v};};
     if (shouldUpdate("e2580")) {let v = formatInt(player.stats.lastTenEternities[7][1]); if (e[2580].textContent !== v) {e[2580].textContent = v};};
     if (shouldUpdate("b2324")) {let v = EternityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2324].style.display !== v) {b[2324].style.display = v};};
-    if (shouldUpdate("e2581")) {let v = format(Stats.getLogPerSec(player.stats.lastTenEternities[7][0], player.stats.lastTenEternities[7][1], player.stats.lastTenEternities[7][3], true)); if (e[2581].textContent !== v) {e[2581].textContent = v};};
+    if (shouldUpdate("e2581")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenEternities[7][0], player.stats.lastTenEternities[7][1], player.stats.lastTenEternities[7][3], true)); if (e[2581].textContent !== v) {e[2581].textContent = v};};
     if (shouldUpdate("b2325")) {let v = EternityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2325].style.display !== v) {b[2325].style.display = v};};
     if (shouldUpdate("e2582")) {let v = format(player.stats.lastTenEternities[7][2]); if (e[2582].textContent !== v) {e[2582].textContent = v};};
     if (shouldUpdate("b2326")) {let v = Stats.showRun(9, 'eternity') ? '' : 'none'; if (b[2326].style.display !== v) {b[2326].style.display = v};};
@@ -5954,7 +5954,7 @@ function updateDisplay() {
     if (shouldUpdate("e2583")) {let v = formatTime(player.stats.lastTenEternities[8][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2583].textContent !== v) {e[2583].textContent = v};};
     if (shouldUpdate("e2584")) {let v = formatInt(player.stats.lastTenEternities[8][1]); if (e[2584].textContent !== v) {e[2584].textContent = v};};
     if (shouldUpdate("b2328")) {let v = EternityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2328].style.display !== v) {b[2328].style.display = v};};
-    if (shouldUpdate("e2585")) {let v = format(Stats.getLogPerSec(player.stats.lastTenEternities[8][0], player.stats.lastTenEternities[8][1], player.stats.lastTenEternities[8][3], true)); if (e[2585].textContent !== v) {e[2585].textContent = v};};
+    if (shouldUpdate("e2585")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenEternities[8][0], player.stats.lastTenEternities[8][1], player.stats.lastTenEternities[8][3], true)); if (e[2585].textContent !== v) {e[2585].textContent = v};};
     if (shouldUpdate("b2329")) {let v = EternityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2329].style.display !== v) {b[2329].style.display = v};};
     if (shouldUpdate("e2586")) {let v = format(player.stats.lastTenEternities[8][2]); if (e[2586].textContent !== v) {e[2586].textContent = v};};
     if (shouldUpdate("b2330")) {let v = Stats.showRun(10, 'eternity') ? '' : 'none'; if (b[2330].style.display !== v) {b[2330].style.display = v};};
@@ -5962,7 +5962,7 @@ function updateDisplay() {
     if (shouldUpdate("e2587")) {let v = formatTime(player.stats.lastTenEternities[9][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2587].textContent !== v) {e[2587].textContent = v};};
     if (shouldUpdate("e2588")) {let v = formatInt(player.stats.lastTenEternities[9][1]); if (e[2588].textContent !== v) {e[2588].textContent = v};};
     if (shouldUpdate("b2332")) {let v = EternityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2332].style.display !== v) {b[2332].style.display = v};};
-    if (shouldUpdate("e2589")) {let v = format(Stats.getLogPerSec(player.stats.lastTenEternities[9][0], player.stats.lastTenEternities[9][1], player.stats.lastTenEternities[9][3], true)); if (e[2589].textContent !== v) {e[2589].textContent = v};};
+    if (shouldUpdate("e2589")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenEternities[9][0], player.stats.lastTenEternities[9][1], player.stats.lastTenEternities[9][3], true)); if (e[2589].textContent !== v) {e[2589].textContent = v};};
     if (shouldUpdate("b2333")) {let v = EternityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2333].style.display !== v) {b[2333].style.display = v};};
     if (shouldUpdate("e2590")) {let v = format(player.stats.lastTenEternities[9][2]); if (e[2590].textContent !== v) {e[2590].textContent = v};};
     if (shouldUpdate("b2334")) {let v = Stats.showRun(11, 'eternity') ? '' : 'none'; if (b[2334].style.display !== v) {b[2334].style.display = v};};
@@ -5970,7 +5970,7 @@ function updateDisplay() {
     if (shouldUpdate("e2591")) {let v = formatTime(player.stats.lastTenEternities[10][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2591].textContent !== v) {e[2591].textContent = v};};
     if (shouldUpdate("e2592")) {let v = formatInt(player.stats.lastTenEternities[10][1]); if (e[2592].textContent !== v) {e[2592].textContent = v};};
     if (shouldUpdate("b2336")) {let v = EternityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2336].style.display !== v) {b[2336].style.display = v};};
-    if (shouldUpdate("e2593")) {let v = format(Stats.getLogPerSec(player.stats.lastTenEternities[10][0], player.stats.lastTenEternities[10][1], player.stats.lastTenEternities[10][3], true)); if (e[2593].textContent !== v) {e[2593].textContent = v};};
+    if (shouldUpdate("e2593")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenEternities[10][0], player.stats.lastTenEternities[10][1], player.stats.lastTenEternities[10][3], true)); if (e[2593].textContent !== v) {e[2593].textContent = v};};
     if (shouldUpdate("b2337")) {let v = EternityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2337].style.display !== v) {b[2337].style.display = v};};
     if (shouldUpdate("e2594")) {let v = format(player.stats.lastTenEternities[10][2]); if (e[2594].textContent !== v) {e[2594].textContent = v};};
     if (shouldUpdate("b2338")) {let v = Stats.showRun(12, 'eternity') ? '' : 'none'; if (b[2338].style.display !== v) {b[2338].style.display = v};};
@@ -5978,7 +5978,7 @@ function updateDisplay() {
     if (shouldUpdate("e2595")) {let v = formatTime(player.stats.lastTenEternities[11][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2595].textContent !== v) {e[2595].textContent = v};};
     if (shouldUpdate("e2596")) {let v = formatInt(player.stats.lastTenEternities[11][1]); if (e[2596].textContent !== v) {e[2596].textContent = v};};
     if (shouldUpdate("b2340")) {let v = EternityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2340].style.display !== v) {b[2340].style.display = v};};
-    if (shouldUpdate("e2597")) {let v = format(Stats.getLogPerSec(player.stats.lastTenEternities[11][0], player.stats.lastTenEternities[11][1], player.stats.lastTenEternities[11][3], true)); if (e[2597].textContent !== v) {e[2597].textContent = v};};
+    if (shouldUpdate("e2597")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenEternities[11][0], player.stats.lastTenEternities[11][1], player.stats.lastTenEternities[11][3], true)); if (e[2597].textContent !== v) {e[2597].textContent = v};};
     if (shouldUpdate("b2341")) {let v = EternityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2341].style.display !== v) {b[2341].style.display = v};};
     if (shouldUpdate("e2598")) {let v = format(player.stats.lastTenEternities[11][2]); if (e[2598].textContent !== v) {e[2598].textContent = v};};
     if (shouldUpdate("b2342")) {let v = Stats.showRun(13, 'eternity') ? '' : 'none'; if (b[2342].style.display !== v) {b[2342].style.display = v};};
@@ -5986,7 +5986,7 @@ function updateDisplay() {
     if (shouldUpdate("e2599")) {let v = formatTime(player.stats.lastTenEternities[12][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2599].textContent !== v) {e[2599].textContent = v};};
     if (shouldUpdate("e2600")) {let v = formatInt(player.stats.lastTenEternities[12][1]); if (e[2600].textContent !== v) {e[2600].textContent = v};};
     if (shouldUpdate("b2344")) {let v = EternityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2344].style.display !== v) {b[2344].style.display = v};};
-    if (shouldUpdate("e2601")) {let v = format(Stats.getLogPerSec(player.stats.lastTenEternities[12][0], player.stats.lastTenEternities[12][1], player.stats.lastTenEternities[12][3], true)); if (e[2601].textContent !== v) {e[2601].textContent = v};};
+    if (shouldUpdate("e2601")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenEternities[12][0], player.stats.lastTenEternities[12][1], player.stats.lastTenEternities[12][3], true)); if (e[2601].textContent !== v) {e[2601].textContent = v};};
     if (shouldUpdate("b2345")) {let v = EternityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2345].style.display !== v) {b[2345].style.display = v};};
     if (shouldUpdate("e2602")) {let v = format(player.stats.lastTenEternities[12][2]); if (e[2602].textContent !== v) {e[2602].textContent = v};};
     if (shouldUpdate("b2346")) {let v = Stats.showRun(14, 'eternity') ? '' : 'none'; if (b[2346].style.display !== v) {b[2346].style.display = v};};
@@ -5994,7 +5994,7 @@ function updateDisplay() {
     if (shouldUpdate("e2603")) {let v = formatTime(player.stats.lastTenEternities[13][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2603].textContent !== v) {e[2603].textContent = v};};
     if (shouldUpdate("e2604")) {let v = formatInt(player.stats.lastTenEternities[13][1]); if (e[2604].textContent !== v) {e[2604].textContent = v};};
     if (shouldUpdate("b2348")) {let v = EternityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2348].style.display !== v) {b[2348].style.display = v};};
-    if (shouldUpdate("e2605")) {let v = format(Stats.getLogPerSec(player.stats.lastTenEternities[13][0], player.stats.lastTenEternities[13][1], player.stats.lastTenEternities[13][3], true)); if (e[2605].textContent !== v) {e[2605].textContent = v};};
+    if (shouldUpdate("e2605")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenEternities[13][0], player.stats.lastTenEternities[13][1], player.stats.lastTenEternities[13][3], true)); if (e[2605].textContent !== v) {e[2605].textContent = v};};
     if (shouldUpdate("b2349")) {let v = EternityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2349].style.display !== v) {b[2349].style.display = v};};
     if (shouldUpdate("e2606")) {let v = format(player.stats.lastTenEternities[13][2]); if (e[2606].textContent !== v) {e[2606].textContent = v};};
     if (shouldUpdate("b2350")) {let v = Stats.showRun(15, 'eternity') ? '' : 'none'; if (b[2350].style.display !== v) {b[2350].style.display = v};};
@@ -6002,7 +6002,7 @@ function updateDisplay() {
     if (shouldUpdate("e2607")) {let v = formatTime(player.stats.lastTenEternities[14][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2607].textContent !== v) {e[2607].textContent = v};};
     if (shouldUpdate("e2608")) {let v = formatInt(player.stats.lastTenEternities[14][1]); if (e[2608].textContent !== v) {e[2608].textContent = v};};
     if (shouldUpdate("b2352")) {let v = EternityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2352].style.display !== v) {b[2352].style.display = v};};
-    if (shouldUpdate("e2609")) {let v = format(Stats.getLogPerSec(player.stats.lastTenEternities[14][0], player.stats.lastTenEternities[14][1], player.stats.lastTenEternities[14][3], true)); if (e[2609].textContent !== v) {e[2609].textContent = v};};
+    if (shouldUpdate("e2609")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenEternities[14][0], player.stats.lastTenEternities[14][1], player.stats.lastTenEternities[14][3], true)); if (e[2609].textContent !== v) {e[2609].textContent = v};};
     if (shouldUpdate("b2353")) {let v = EternityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2353].style.display !== v) {b[2353].style.display = v};};
     if (shouldUpdate("e2610")) {let v = format(player.stats.lastTenEternities[14][2]); if (e[2610].textContent !== v) {e[2610].textContent = v};};
     if (shouldUpdate("b2354")) {let v = Stats.showRun(16, 'eternity') ? '' : 'none'; if (b[2354].style.display !== v) {b[2354].style.display = v};};
@@ -6010,7 +6010,7 @@ function updateDisplay() {
     if (shouldUpdate("e2611")) {let v = formatTime(player.stats.lastTenEternities[15][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2611].textContent !== v) {e[2611].textContent = v};};
     if (shouldUpdate("e2612")) {let v = formatInt(player.stats.lastTenEternities[15][1]); if (e[2612].textContent !== v) {e[2612].textContent = v};};
     if (shouldUpdate("b2356")) {let v = EternityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2356].style.display !== v) {b[2356].style.display = v};};
-    if (shouldUpdate("e2613")) {let v = format(Stats.getLogPerSec(player.stats.lastTenEternities[15][0], player.stats.lastTenEternities[15][1], player.stats.lastTenEternities[15][3], true)); if (e[2613].textContent !== v) {e[2613].textContent = v};};
+    if (shouldUpdate("e2613")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenEternities[15][0], player.stats.lastTenEternities[15][1], player.stats.lastTenEternities[15][3], true)); if (e[2613].textContent !== v) {e[2613].textContent = v};};
     if (shouldUpdate("b2357")) {let v = EternityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2357].style.display !== v) {b[2357].style.display = v};};
     if (shouldUpdate("e2614")) {let v = format(player.stats.lastTenEternities[15][2]); if (e[2614].textContent !== v) {e[2614].textContent = v};};
     if (shouldUpdate("b2358")) {let v = Stats.showRun(17, 'eternity') ? '' : 'none'; if (b[2358].style.display !== v) {b[2358].style.display = v};};
@@ -6018,7 +6018,7 @@ function updateDisplay() {
     if (shouldUpdate("e2615")) {let v = formatTime(player.stats.lastTenEternities[16][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2615].textContent !== v) {e[2615].textContent = v};};
     if (shouldUpdate("e2616")) {let v = formatInt(player.stats.lastTenEternities[16][1]); if (e[2616].textContent !== v) {e[2616].textContent = v};};
     if (shouldUpdate("b2360")) {let v = EternityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2360].style.display !== v) {b[2360].style.display = v};};
-    if (shouldUpdate("e2617")) {let v = format(Stats.getLogPerSec(player.stats.lastTenEternities[16][0], player.stats.lastTenEternities[16][1], player.stats.lastTenEternities[16][3], true)); if (e[2617].textContent !== v) {e[2617].textContent = v};};
+    if (shouldUpdate("e2617")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenEternities[16][0], player.stats.lastTenEternities[16][1], player.stats.lastTenEternities[16][3], true)); if (e[2617].textContent !== v) {e[2617].textContent = v};};
     if (shouldUpdate("b2361")) {let v = EternityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2361].style.display !== v) {b[2361].style.display = v};};
     if (shouldUpdate("e2618")) {let v = format(player.stats.lastTenEternities[16][2]); if (e[2618].textContent !== v) {e[2618].textContent = v};};
     if (shouldUpdate("b2362")) {let v = Stats.showRun(18, 'eternity') ? '' : 'none'; if (b[2362].style.display !== v) {b[2362].style.display = v};};
@@ -6026,7 +6026,7 @@ function updateDisplay() {
     if (shouldUpdate("e2619")) {let v = formatTime(player.stats.lastTenEternities[17][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2619].textContent !== v) {e[2619].textContent = v};};
     if (shouldUpdate("e2620")) {let v = formatInt(player.stats.lastTenEternities[17][1]); if (e[2620].textContent !== v) {e[2620].textContent = v};};
     if (shouldUpdate("b2364")) {let v = EternityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2364].style.display !== v) {b[2364].style.display = v};};
-    if (shouldUpdate("e2621")) {let v = format(Stats.getLogPerSec(player.stats.lastTenEternities[17][0], player.stats.lastTenEternities[17][1], player.stats.lastTenEternities[17][3], true)); if (e[2621].textContent !== v) {e[2621].textContent = v};};
+    if (shouldUpdate("e2621")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenEternities[17][0], player.stats.lastTenEternities[17][1], player.stats.lastTenEternities[17][3], true)); if (e[2621].textContent !== v) {e[2621].textContent = v};};
     if (shouldUpdate("b2365")) {let v = EternityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2365].style.display !== v) {b[2365].style.display = v};};
     if (shouldUpdate("e2622")) {let v = format(player.stats.lastTenEternities[17][2]); if (e[2622].textContent !== v) {e[2622].textContent = v};};
     if (shouldUpdate("b2366")) {let v = Stats.showRun(19, 'eternity') ? '' : 'none'; if (b[2366].style.display !== v) {b[2366].style.display = v};};
@@ -6034,7 +6034,7 @@ function updateDisplay() {
     if (shouldUpdate("e2623")) {let v = formatTime(player.stats.lastTenEternities[18][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2623].textContent !== v) {e[2623].textContent = v};};
     if (shouldUpdate("e2624")) {let v = formatInt(player.stats.lastTenEternities[18][1]); if (e[2624].textContent !== v) {e[2624].textContent = v};};
     if (shouldUpdate("b2368")) {let v = EternityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2368].style.display !== v) {b[2368].style.display = v};};
-    if (shouldUpdate("e2625")) {let v = format(Stats.getLogPerSec(player.stats.lastTenEternities[18][0], player.stats.lastTenEternities[18][1], player.stats.lastTenEternities[18][3], true)); if (e[2625].textContent !== v) {e[2625].textContent = v};};
+    if (shouldUpdate("e2625")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenEternities[18][0], player.stats.lastTenEternities[18][1], player.stats.lastTenEternities[18][3], true)); if (e[2625].textContent !== v) {e[2625].textContent = v};};
     if (shouldUpdate("b2369")) {let v = EternityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2369].style.display !== v) {b[2369].style.display = v};};
     if (shouldUpdate("e2626")) {let v = format(player.stats.lastTenEternities[18][2]); if (e[2626].textContent !== v) {e[2626].textContent = v};};
     if (shouldUpdate("b2370")) {let v = Stats.showRun(20, 'eternity') ? '' : 'none'; if (b[2370].style.display !== v) {b[2370].style.display = v};};
@@ -6042,7 +6042,7 @@ function updateDisplay() {
     if (shouldUpdate("e2627")) {let v = formatTime(player.stats.lastTenEternities[19][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2627].textContent !== v) {e[2627].textContent = v};};
     if (shouldUpdate("e2628")) {let v = formatInt(player.stats.lastTenEternities[19][1]); if (e[2628].textContent !== v) {e[2628].textContent = v};};
     if (shouldUpdate("b2372")) {let v = EternityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2372].style.display !== v) {b[2372].style.display = v};};
-    if (shouldUpdate("e2629")) {let v = format(Stats.getLogPerSec(player.stats.lastTenEternities[19][0], player.stats.lastTenEternities[19][1], player.stats.lastTenEternities[19][3], true)); if (e[2629].textContent !== v) {e[2629].textContent = v};};
+    if (shouldUpdate("e2629")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenEternities[19][0], player.stats.lastTenEternities[19][1], player.stats.lastTenEternities[19][3], true)); if (e[2629].textContent !== v) {e[2629].textContent = v};};
     if (shouldUpdate("b2373")) {let v = EternityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2373].style.display !== v) {b[2373].style.display = v};};
     if (shouldUpdate("e2630")) {let v = format(player.stats.lastTenEternities[19][2]); if (e[2630].textContent !== v) {e[2630].textContent = v};};
     if (shouldUpdate("b2374")) {let v = Stats.showRunBreak('complexity') ? '' : 'none'; if (b[2374].style.display !== v) {b[2374].style.display = v};};
@@ -6050,7 +6050,7 @@ function updateDisplay() {
     if (shouldUpdate("e2631")) {let v = formatTime(player.stats.lastTenComplexities[0][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2631].textContent !== v) {e[2631].textContent = v};};
     if (shouldUpdate("e2632")) {let v = formatInt(player.stats.lastTenComplexities[0][1]); if (e[2632].textContent !== v) {e[2632].textContent = v};};
     if (shouldUpdate("b2376")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2376].style.display !== v) {b[2376].style.display = v};};
-    if (shouldUpdate("e2633")) {let v = format(Stats.getLogPerSec(player.stats.lastTenComplexities[0][0], player.stats.lastTenComplexities[0][1], player.stats.lastTenComplexities[0][3], true)); if (e[2633].textContent !== v) {e[2633].textContent = v};};
+    if (shouldUpdate("e2633")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenComplexities[0][0], player.stats.lastTenComplexities[0][1], player.stats.lastTenComplexities[0][3], true)); if (e[2633].textContent !== v) {e[2633].textContent = v};};
     if (shouldUpdate("b2377")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2377].style.display !== v) {b[2377].style.display = v};};
     if (shouldUpdate("e2634")) {let v = format(player.stats.lastTenComplexities[0][2]); if (e[2634].textContent !== v) {e[2634].textContent = v};};
     if (shouldUpdate("b2378")) {let v = Stats.showRun(2, 'complexity') ? '' : 'none'; if (b[2378].style.display !== v) {b[2378].style.display = v};};
@@ -6058,7 +6058,7 @@ function updateDisplay() {
     if (shouldUpdate("e2635")) {let v = formatTime(player.stats.lastTenComplexities[1][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2635].textContent !== v) {e[2635].textContent = v};};
     if (shouldUpdate("e2636")) {let v = formatInt(player.stats.lastTenComplexities[1][1]); if (e[2636].textContent !== v) {e[2636].textContent = v};};
     if (shouldUpdate("b2380")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2380].style.display !== v) {b[2380].style.display = v};};
-    if (shouldUpdate("e2637")) {let v = format(Stats.getLogPerSec(player.stats.lastTenComplexities[1][0], player.stats.lastTenComplexities[1][1], player.stats.lastTenComplexities[1][3], true)); if (e[2637].textContent !== v) {e[2637].textContent = v};};
+    if (shouldUpdate("e2637")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenComplexities[1][0], player.stats.lastTenComplexities[1][1], player.stats.lastTenComplexities[1][3], true)); if (e[2637].textContent !== v) {e[2637].textContent = v};};
     if (shouldUpdate("b2381")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2381].style.display !== v) {b[2381].style.display = v};};
     if (shouldUpdate("e2638")) {let v = format(player.stats.lastTenComplexities[1][2]); if (e[2638].textContent !== v) {e[2638].textContent = v};};
     if (shouldUpdate("b2382")) {let v = Stats.showRun(3, 'complexity') ? '' : 'none'; if (b[2382].style.display !== v) {b[2382].style.display = v};};
@@ -6066,7 +6066,7 @@ function updateDisplay() {
     if (shouldUpdate("e2639")) {let v = formatTime(player.stats.lastTenComplexities[2][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2639].textContent !== v) {e[2639].textContent = v};};
     if (shouldUpdate("e2640")) {let v = formatInt(player.stats.lastTenComplexities[2][1]); if (e[2640].textContent !== v) {e[2640].textContent = v};};
     if (shouldUpdate("b2384")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2384].style.display !== v) {b[2384].style.display = v};};
-    if (shouldUpdate("e2641")) {let v = format(Stats.getLogPerSec(player.stats.lastTenComplexities[2][0], player.stats.lastTenComplexities[2][1], player.stats.lastTenComplexities[2][3], true)); if (e[2641].textContent !== v) {e[2641].textContent = v};};
+    if (shouldUpdate("e2641")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenComplexities[2][0], player.stats.lastTenComplexities[2][1], player.stats.lastTenComplexities[2][3], true)); if (e[2641].textContent !== v) {e[2641].textContent = v};};
     if (shouldUpdate("b2385")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2385].style.display !== v) {b[2385].style.display = v};};
     if (shouldUpdate("e2642")) {let v = format(player.stats.lastTenComplexities[2][2]); if (e[2642].textContent !== v) {e[2642].textContent = v};};
     if (shouldUpdate("b2386")) {let v = Stats.showRun(4, 'complexity') ? '' : 'none'; if (b[2386].style.display !== v) {b[2386].style.display = v};};
@@ -6074,7 +6074,7 @@ function updateDisplay() {
     if (shouldUpdate("e2643")) {let v = formatTime(player.stats.lastTenComplexities[3][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2643].textContent !== v) {e[2643].textContent = v};};
     if (shouldUpdate("e2644")) {let v = formatInt(player.stats.lastTenComplexities[3][1]); if (e[2644].textContent !== v) {e[2644].textContent = v};};
     if (shouldUpdate("b2388")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2388].style.display !== v) {b[2388].style.display = v};};
-    if (shouldUpdate("e2645")) {let v = format(Stats.getLogPerSec(player.stats.lastTenComplexities[3][0], player.stats.lastTenComplexities[3][1], player.stats.lastTenComplexities[3][3], true)); if (e[2645].textContent !== v) {e[2645].textContent = v};};
+    if (shouldUpdate("e2645")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenComplexities[3][0], player.stats.lastTenComplexities[3][1], player.stats.lastTenComplexities[3][3], true)); if (e[2645].textContent !== v) {e[2645].textContent = v};};
     if (shouldUpdate("b2389")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2389].style.display !== v) {b[2389].style.display = v};};
     if (shouldUpdate("e2646")) {let v = format(player.stats.lastTenComplexities[3][2]); if (e[2646].textContent !== v) {e[2646].textContent = v};};
     if (shouldUpdate("b2390")) {let v = Stats.showRun(5, 'complexity') ? '' : 'none'; if (b[2390].style.display !== v) {b[2390].style.display = v};};
@@ -6082,7 +6082,7 @@ function updateDisplay() {
     if (shouldUpdate("e2647")) {let v = formatTime(player.stats.lastTenComplexities[4][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2647].textContent !== v) {e[2647].textContent = v};};
     if (shouldUpdate("e2648")) {let v = formatInt(player.stats.lastTenComplexities[4][1]); if (e[2648].textContent !== v) {e[2648].textContent = v};};
     if (shouldUpdate("b2392")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2392].style.display !== v) {b[2392].style.display = v};};
-    if (shouldUpdate("e2649")) {let v = format(Stats.getLogPerSec(player.stats.lastTenComplexities[4][0], player.stats.lastTenComplexities[4][1], player.stats.lastTenComplexities[4][3], true)); if (e[2649].textContent !== v) {e[2649].textContent = v};};
+    if (shouldUpdate("e2649")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenComplexities[4][0], player.stats.lastTenComplexities[4][1], player.stats.lastTenComplexities[4][3], true)); if (e[2649].textContent !== v) {e[2649].textContent = v};};
     if (shouldUpdate("b2393")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2393].style.display !== v) {b[2393].style.display = v};};
     if (shouldUpdate("e2650")) {let v = format(player.stats.lastTenComplexities[4][2]); if (e[2650].textContent !== v) {e[2650].textContent = v};};
     if (shouldUpdate("b2394")) {let v = Stats.showRun(6, 'complexity') ? '' : 'none'; if (b[2394].style.display !== v) {b[2394].style.display = v};};
@@ -6090,7 +6090,7 @@ function updateDisplay() {
     if (shouldUpdate("e2651")) {let v = formatTime(player.stats.lastTenComplexities[5][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2651].textContent !== v) {e[2651].textContent = v};};
     if (shouldUpdate("e2652")) {let v = formatInt(player.stats.lastTenComplexities[5][1]); if (e[2652].textContent !== v) {e[2652].textContent = v};};
     if (shouldUpdate("b2396")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2396].style.display !== v) {b[2396].style.display = v};};
-    if (shouldUpdate("e2653")) {let v = format(Stats.getLogPerSec(player.stats.lastTenComplexities[5][0], player.stats.lastTenComplexities[5][1], player.stats.lastTenComplexities[5][3], true)); if (e[2653].textContent !== v) {e[2653].textContent = v};};
+    if (shouldUpdate("e2653")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenComplexities[5][0], player.stats.lastTenComplexities[5][1], player.stats.lastTenComplexities[5][3], true)); if (e[2653].textContent !== v) {e[2653].textContent = v};};
     if (shouldUpdate("b2397")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2397].style.display !== v) {b[2397].style.display = v};};
     if (shouldUpdate("e2654")) {let v = format(player.stats.lastTenComplexities[5][2]); if (e[2654].textContent !== v) {e[2654].textContent = v};};
     if (shouldUpdate("b2398")) {let v = Stats.showRun(7, 'complexity') ? '' : 'none'; if (b[2398].style.display !== v) {b[2398].style.display = v};};
@@ -6098,7 +6098,7 @@ function updateDisplay() {
     if (shouldUpdate("e2655")) {let v = formatTime(player.stats.lastTenComplexities[6][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2655].textContent !== v) {e[2655].textContent = v};};
     if (shouldUpdate("e2656")) {let v = formatInt(player.stats.lastTenComplexities[6][1]); if (e[2656].textContent !== v) {e[2656].textContent = v};};
     if (shouldUpdate("b2400")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2400].style.display !== v) {b[2400].style.display = v};};
-    if (shouldUpdate("e2657")) {let v = format(Stats.getLogPerSec(player.stats.lastTenComplexities[6][0], player.stats.lastTenComplexities[6][1], player.stats.lastTenComplexities[6][3], true)); if (e[2657].textContent !== v) {e[2657].textContent = v};};
+    if (shouldUpdate("e2657")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenComplexities[6][0], player.stats.lastTenComplexities[6][1], player.stats.lastTenComplexities[6][3], true)); if (e[2657].textContent !== v) {e[2657].textContent = v};};
     if (shouldUpdate("b2401")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2401].style.display !== v) {b[2401].style.display = v};};
     if (shouldUpdate("e2658")) {let v = format(player.stats.lastTenComplexities[6][2]); if (e[2658].textContent !== v) {e[2658].textContent = v};};
     if (shouldUpdate("b2402")) {let v = Stats.showRun(8, 'complexity') ? '' : 'none'; if (b[2402].style.display !== v) {b[2402].style.display = v};};
@@ -6106,7 +6106,7 @@ function updateDisplay() {
     if (shouldUpdate("e2659")) {let v = formatTime(player.stats.lastTenComplexities[7][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2659].textContent !== v) {e[2659].textContent = v};};
     if (shouldUpdate("e2660")) {let v = formatInt(player.stats.lastTenComplexities[7][1]); if (e[2660].textContent !== v) {e[2660].textContent = v};};
     if (shouldUpdate("b2404")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2404].style.display !== v) {b[2404].style.display = v};};
-    if (shouldUpdate("e2661")) {let v = format(Stats.getLogPerSec(player.stats.lastTenComplexities[7][0], player.stats.lastTenComplexities[7][1], player.stats.lastTenComplexities[7][3], true)); if (e[2661].textContent !== v) {e[2661].textContent = v};};
+    if (shouldUpdate("e2661")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenComplexities[7][0], player.stats.lastTenComplexities[7][1], player.stats.lastTenComplexities[7][3], true)); if (e[2661].textContent !== v) {e[2661].textContent = v};};
     if (shouldUpdate("b2405")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2405].style.display !== v) {b[2405].style.display = v};};
     if (shouldUpdate("e2662")) {let v = format(player.stats.lastTenComplexities[7][2]); if (e[2662].textContent !== v) {e[2662].textContent = v};};
     if (shouldUpdate("b2406")) {let v = Stats.showRun(9, 'complexity') ? '' : 'none'; if (b[2406].style.display !== v) {b[2406].style.display = v};};
@@ -6114,7 +6114,7 @@ function updateDisplay() {
     if (shouldUpdate("e2663")) {let v = formatTime(player.stats.lastTenComplexities[8][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2663].textContent !== v) {e[2663].textContent = v};};
     if (shouldUpdate("e2664")) {let v = formatInt(player.stats.lastTenComplexities[8][1]); if (e[2664].textContent !== v) {e[2664].textContent = v};};
     if (shouldUpdate("b2408")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2408].style.display !== v) {b[2408].style.display = v};};
-    if (shouldUpdate("e2665")) {let v = format(Stats.getLogPerSec(player.stats.lastTenComplexities[8][0], player.stats.lastTenComplexities[8][1], player.stats.lastTenComplexities[8][3], true)); if (e[2665].textContent !== v) {e[2665].textContent = v};};
+    if (shouldUpdate("e2665")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenComplexities[8][0], player.stats.lastTenComplexities[8][1], player.stats.lastTenComplexities[8][3], true)); if (e[2665].textContent !== v) {e[2665].textContent = v};};
     if (shouldUpdate("b2409")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2409].style.display !== v) {b[2409].style.display = v};};
     if (shouldUpdate("e2666")) {let v = format(player.stats.lastTenComplexities[8][2]); if (e[2666].textContent !== v) {e[2666].textContent = v};};
     if (shouldUpdate("b2410")) {let v = Stats.showRun(10, 'complexity') ? '' : 'none'; if (b[2410].style.display !== v) {b[2410].style.display = v};};
@@ -6122,7 +6122,7 @@ function updateDisplay() {
     if (shouldUpdate("e2667")) {let v = formatTime(player.stats.lastTenComplexities[9][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2667].textContent !== v) {e[2667].textContent = v};};
     if (shouldUpdate("e2668")) {let v = formatInt(player.stats.lastTenComplexities[9][1]); if (e[2668].textContent !== v) {e[2668].textContent = v};};
     if (shouldUpdate("b2412")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2412].style.display !== v) {b[2412].style.display = v};};
-    if (shouldUpdate("e2669")) {let v = format(Stats.getLogPerSec(player.stats.lastTenComplexities[9][0], player.stats.lastTenComplexities[9][1], player.stats.lastTenComplexities[9][3], true)); if (e[2669].textContent !== v) {e[2669].textContent = v};};
+    if (shouldUpdate("e2669")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenComplexities[9][0], player.stats.lastTenComplexities[9][1], player.stats.lastTenComplexities[9][3], true)); if (e[2669].textContent !== v) {e[2669].textContent = v};};
     if (shouldUpdate("b2413")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2413].style.display !== v) {b[2413].style.display = v};};
     if (shouldUpdate("e2670")) {let v = format(player.stats.lastTenComplexities[9][2]); if (e[2670].textContent !== v) {e[2670].textContent = v};};
     if (shouldUpdate("b2414")) {let v = Stats.showRun(11, 'complexity') ? '' : 'none'; if (b[2414].style.display !== v) {b[2414].style.display = v};};
@@ -6130,7 +6130,7 @@ function updateDisplay() {
     if (shouldUpdate("e2671")) {let v = formatTime(player.stats.lastTenComplexities[10][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2671].textContent !== v) {e[2671].textContent = v};};
     if (shouldUpdate("e2672")) {let v = formatInt(player.stats.lastTenComplexities[10][1]); if (e[2672].textContent !== v) {e[2672].textContent = v};};
     if (shouldUpdate("b2416")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2416].style.display !== v) {b[2416].style.display = v};};
-    if (shouldUpdate("e2673")) {let v = format(Stats.getLogPerSec(player.stats.lastTenComplexities[10][0], player.stats.lastTenComplexities[10][1], player.stats.lastTenComplexities[10][3], true)); if (e[2673].textContent !== v) {e[2673].textContent = v};};
+    if (shouldUpdate("e2673")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenComplexities[10][0], player.stats.lastTenComplexities[10][1], player.stats.lastTenComplexities[10][3], true)); if (e[2673].textContent !== v) {e[2673].textContent = v};};
     if (shouldUpdate("b2417")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2417].style.display !== v) {b[2417].style.display = v};};
     if (shouldUpdate("e2674")) {let v = format(player.stats.lastTenComplexities[10][2]); if (e[2674].textContent !== v) {e[2674].textContent = v};};
     if (shouldUpdate("b2418")) {let v = Stats.showRun(12, 'complexity') ? '' : 'none'; if (b[2418].style.display !== v) {b[2418].style.display = v};};
@@ -6138,7 +6138,7 @@ function updateDisplay() {
     if (shouldUpdate("e2675")) {let v = formatTime(player.stats.lastTenComplexities[11][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2675].textContent !== v) {e[2675].textContent = v};};
     if (shouldUpdate("e2676")) {let v = formatInt(player.stats.lastTenComplexities[11][1]); if (e[2676].textContent !== v) {e[2676].textContent = v};};
     if (shouldUpdate("b2420")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2420].style.display !== v) {b[2420].style.display = v};};
-    if (shouldUpdate("e2677")) {let v = format(Stats.getLogPerSec(player.stats.lastTenComplexities[11][0], player.stats.lastTenComplexities[11][1], player.stats.lastTenComplexities[11][3], true)); if (e[2677].textContent !== v) {e[2677].textContent = v};};
+    if (shouldUpdate("e2677")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenComplexities[11][0], player.stats.lastTenComplexities[11][1], player.stats.lastTenComplexities[11][3], true)); if (e[2677].textContent !== v) {e[2677].textContent = v};};
     if (shouldUpdate("b2421")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2421].style.display !== v) {b[2421].style.display = v};};
     if (shouldUpdate("e2678")) {let v = format(player.stats.lastTenComplexities[11][2]); if (e[2678].textContent !== v) {e[2678].textContent = v};};
     if (shouldUpdate("b2422")) {let v = Stats.showRun(13, 'complexity') ? '' : 'none'; if (b[2422].style.display !== v) {b[2422].style.display = v};};
@@ -6146,7 +6146,7 @@ function updateDisplay() {
     if (shouldUpdate("e2679")) {let v = formatTime(player.stats.lastTenComplexities[12][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2679].textContent !== v) {e[2679].textContent = v};};
     if (shouldUpdate("e2680")) {let v = formatInt(player.stats.lastTenComplexities[12][1]); if (e[2680].textContent !== v) {e[2680].textContent = v};};
     if (shouldUpdate("b2424")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2424].style.display !== v) {b[2424].style.display = v};};
-    if (shouldUpdate("e2681")) {let v = format(Stats.getLogPerSec(player.stats.lastTenComplexities[12][0], player.stats.lastTenComplexities[12][1], player.stats.lastTenComplexities[12][3], true)); if (e[2681].textContent !== v) {e[2681].textContent = v};};
+    if (shouldUpdate("e2681")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenComplexities[12][0], player.stats.lastTenComplexities[12][1], player.stats.lastTenComplexities[12][3], true)); if (e[2681].textContent !== v) {e[2681].textContent = v};};
     if (shouldUpdate("b2425")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2425].style.display !== v) {b[2425].style.display = v};};
     if (shouldUpdate("e2682")) {let v = format(player.stats.lastTenComplexities[12][2]); if (e[2682].textContent !== v) {e[2682].textContent = v};};
     if (shouldUpdate("b2426")) {let v = Stats.showRun(14, 'complexity') ? '' : 'none'; if (b[2426].style.display !== v) {b[2426].style.display = v};};
@@ -6154,7 +6154,7 @@ function updateDisplay() {
     if (shouldUpdate("e2683")) {let v = formatTime(player.stats.lastTenComplexities[13][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2683].textContent !== v) {e[2683].textContent = v};};
     if (shouldUpdate("e2684")) {let v = formatInt(player.stats.lastTenComplexities[13][1]); if (e[2684].textContent !== v) {e[2684].textContent = v};};
     if (shouldUpdate("b2428")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2428].style.display !== v) {b[2428].style.display = v};};
-    if (shouldUpdate("e2685")) {let v = format(Stats.getLogPerSec(player.stats.lastTenComplexities[13][0], player.stats.lastTenComplexities[13][1], player.stats.lastTenComplexities[13][3], true)); if (e[2685].textContent !== v) {e[2685].textContent = v};};
+    if (shouldUpdate("e2685")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenComplexities[13][0], player.stats.lastTenComplexities[13][1], player.stats.lastTenComplexities[13][3], true)); if (e[2685].textContent !== v) {e[2685].textContent = v};};
     if (shouldUpdate("b2429")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2429].style.display !== v) {b[2429].style.display = v};};
     if (shouldUpdate("e2686")) {let v = format(player.stats.lastTenComplexities[13][2]); if (e[2686].textContent !== v) {e[2686].textContent = v};};
     if (shouldUpdate("b2430")) {let v = Stats.showRun(15, 'complexity') ? '' : 'none'; if (b[2430].style.display !== v) {b[2430].style.display = v};};
@@ -6162,7 +6162,7 @@ function updateDisplay() {
     if (shouldUpdate("e2687")) {let v = formatTime(player.stats.lastTenComplexities[14][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2687].textContent !== v) {e[2687].textContent = v};};
     if (shouldUpdate("e2688")) {let v = formatInt(player.stats.lastTenComplexities[14][1]); if (e[2688].textContent !== v) {e[2688].textContent = v};};
     if (shouldUpdate("b2432")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2432].style.display !== v) {b[2432].style.display = v};};
-    if (shouldUpdate("e2689")) {let v = format(Stats.getLogPerSec(player.stats.lastTenComplexities[14][0], player.stats.lastTenComplexities[14][1], player.stats.lastTenComplexities[14][3], true)); if (e[2689].textContent !== v) {e[2689].textContent = v};};
+    if (shouldUpdate("e2689")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenComplexities[14][0], player.stats.lastTenComplexities[14][1], player.stats.lastTenComplexities[14][3], true)); if (e[2689].textContent !== v) {e[2689].textContent = v};};
     if (shouldUpdate("b2433")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2433].style.display !== v) {b[2433].style.display = v};};
     if (shouldUpdate("e2690")) {let v = format(player.stats.lastTenComplexities[14][2]); if (e[2690].textContent !== v) {e[2690].textContent = v};};
     if (shouldUpdate("b2434")) {let v = Stats.showRun(16, 'complexity') ? '' : 'none'; if (b[2434].style.display !== v) {b[2434].style.display = v};};
@@ -6170,7 +6170,7 @@ function updateDisplay() {
     if (shouldUpdate("e2691")) {let v = formatTime(player.stats.lastTenComplexities[15][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2691].textContent !== v) {e[2691].textContent = v};};
     if (shouldUpdate("e2692")) {let v = formatInt(player.stats.lastTenComplexities[15][1]); if (e[2692].textContent !== v) {e[2692].textContent = v};};
     if (shouldUpdate("b2436")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2436].style.display !== v) {b[2436].style.display = v};};
-    if (shouldUpdate("e2693")) {let v = format(Stats.getLogPerSec(player.stats.lastTenComplexities[15][0], player.stats.lastTenComplexities[15][1], player.stats.lastTenComplexities[15][3], true)); if (e[2693].textContent !== v) {e[2693].textContent = v};};
+    if (shouldUpdate("e2693")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenComplexities[15][0], player.stats.lastTenComplexities[15][1], player.stats.lastTenComplexities[15][3], true)); if (e[2693].textContent !== v) {e[2693].textContent = v};};
     if (shouldUpdate("b2437")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2437].style.display !== v) {b[2437].style.display = v};};
     if (shouldUpdate("e2694")) {let v = format(player.stats.lastTenComplexities[15][2]); if (e[2694].textContent !== v) {e[2694].textContent = v};};
     if (shouldUpdate("b2438")) {let v = Stats.showRun(17, 'complexity') ? '' : 'none'; if (b[2438].style.display !== v) {b[2438].style.display = v};};
@@ -6178,7 +6178,7 @@ function updateDisplay() {
     if (shouldUpdate("e2695")) {let v = formatTime(player.stats.lastTenComplexities[16][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2695].textContent !== v) {e[2695].textContent = v};};
     if (shouldUpdate("e2696")) {let v = formatInt(player.stats.lastTenComplexities[16][1]); if (e[2696].textContent !== v) {e[2696].textContent = v};};
     if (shouldUpdate("b2440")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2440].style.display !== v) {b[2440].style.display = v};};
-    if (shouldUpdate("e2697")) {let v = format(Stats.getLogPerSec(player.stats.lastTenComplexities[16][0], player.stats.lastTenComplexities[16][1], player.stats.lastTenComplexities[16][3], true)); if (e[2697].textContent !== v) {e[2697].textContent = v};};
+    if (shouldUpdate("e2697")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenComplexities[16][0], player.stats.lastTenComplexities[16][1], player.stats.lastTenComplexities[16][3], true)); if (e[2697].textContent !== v) {e[2697].textContent = v};};
     if (shouldUpdate("b2441")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2441].style.display !== v) {b[2441].style.display = v};};
     if (shouldUpdate("e2698")) {let v = format(player.stats.lastTenComplexities[16][2]); if (e[2698].textContent !== v) {e[2698].textContent = v};};
     if (shouldUpdate("b2442")) {let v = Stats.showRun(18, 'complexity') ? '' : 'none'; if (b[2442].style.display !== v) {b[2442].style.display = v};};
@@ -6186,7 +6186,7 @@ function updateDisplay() {
     if (shouldUpdate("e2699")) {let v = formatTime(player.stats.lastTenComplexities[17][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2699].textContent !== v) {e[2699].textContent = v};};
     if (shouldUpdate("e2700")) {let v = formatInt(player.stats.lastTenComplexities[17][1]); if (e[2700].textContent !== v) {e[2700].textContent = v};};
     if (shouldUpdate("b2444")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2444].style.display !== v) {b[2444].style.display = v};};
-    if (shouldUpdate("e2701")) {let v = format(Stats.getLogPerSec(player.stats.lastTenComplexities[17][0], player.stats.lastTenComplexities[17][1], player.stats.lastTenComplexities[17][3], true)); if (e[2701].textContent !== v) {e[2701].textContent = v};};
+    if (shouldUpdate("e2701")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenComplexities[17][0], player.stats.lastTenComplexities[17][1], player.stats.lastTenComplexities[17][3], true)); if (e[2701].textContent !== v) {e[2701].textContent = v};};
     if (shouldUpdate("b2445")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2445].style.display !== v) {b[2445].style.display = v};};
     if (shouldUpdate("e2702")) {let v = format(player.stats.lastTenComplexities[17][2]); if (e[2702].textContent !== v) {e[2702].textContent = v};};
     if (shouldUpdate("b2446")) {let v = Stats.showRun(19, 'complexity') ? '' : 'none'; if (b[2446].style.display !== v) {b[2446].style.display = v};};
@@ -6194,7 +6194,7 @@ function updateDisplay() {
     if (shouldUpdate("e2703")) {let v = formatTime(player.stats.lastTenComplexities[18][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2703].textContent !== v) {e[2703].textContent = v};};
     if (shouldUpdate("e2704")) {let v = formatInt(player.stats.lastTenComplexities[18][1]); if (e[2704].textContent !== v) {e[2704].textContent = v};};
     if (shouldUpdate("b2448")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2448].style.display !== v) {b[2448].style.display = v};};
-    if (shouldUpdate("e2705")) {let v = format(Stats.getLogPerSec(player.stats.lastTenComplexities[18][0], player.stats.lastTenComplexities[18][1], player.stats.lastTenComplexities[18][3], true)); if (e[2705].textContent !== v) {e[2705].textContent = v};};
+    if (shouldUpdate("e2705")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenComplexities[18][0], player.stats.lastTenComplexities[18][1], player.stats.lastTenComplexities[18][3], true)); if (e[2705].textContent !== v) {e[2705].textContent = v};};
     if (shouldUpdate("b2449")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2449].style.display !== v) {b[2449].style.display = v};};
     if (shouldUpdate("e2706")) {let v = format(player.stats.lastTenComplexities[18][2]); if (e[2706].textContent !== v) {e[2706].textContent = v};};
     if (shouldUpdate("b2450")) {let v = Stats.showRun(20, 'complexity') ? '' : 'none'; if (b[2450].style.display !== v) {b[2450].style.display = v};};
@@ -6202,7 +6202,7 @@ function updateDisplay() {
     if (shouldUpdate("e2707")) {let v = formatTime(player.stats.lastTenComplexities[19][0], {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}); if (e[2707].textContent !== v) {e[2707].textContent = v};};
     if (shouldUpdate("e2708")) {let v = formatInt(player.stats.lastTenComplexities[19][1]); if (e[2708].textContent !== v) {e[2708].textContent = v};};
     if (shouldUpdate("b2452")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? '' : 'none'; if (b[2452].style.display !== v) {b[2452].style.display = v};};
-    if (shouldUpdate("e2709")) {let v = format(Stats.getLogPerSec(player.stats.lastTenComplexities[19][0], player.stats.lastTenComplexities[19][1], player.stats.lastTenComplexities[19][3], true)); if (e[2709].textContent !== v) {e[2709].textContent = v};};
+    if (shouldUpdate("e2709")) {let v = formatPrecisely(Stats.getLogPerSec(player.stats.lastTenComplexities[19][0], player.stats.lastTenComplexities[19][1], player.stats.lastTenComplexities[19][3], true)); if (e[2709].textContent !== v) {e[2709].textContent = v};};
     if (shouldUpdate("b2453")) {let v = ComplexityPrestigeLayer.showLog('last-ten') ? 'none' : ''; if (b[2453].style.display !== v) {b[2453].style.display = v};};
     if (shouldUpdate("e2710")) {let v = format(player.stats.lastTenComplexities[19][2]); if (e[2710].textContent !== v) {e[2710].textContent = v};};
     if (shouldUpdate("b2454")) {let v = Stats.showRunBreak('finality') ? '' : 'none'; if (b[2454].style.display !== v) {b[2454].style.display = v};};
