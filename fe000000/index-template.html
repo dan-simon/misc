@@ -2801,6 +2801,9 @@
           <span>Each power raises all of a generator type's multipliers to a power. Up to ~i Powers.equippedLimit() ~ power~s Powers.equippedLimit() ~ can be equipped at the same time.</span>
           <br/>
           <br/>
+          <span>You can have multiple powers of the same type equipped, but if you do, their multipliers combine as ~i 1 ~ + (a - ~i 1 ~) + (b - ~i 1 ~) where a and b are their individual multipliers (if there are ~i 2 ~), or ~i 1 ~ + (a - ~i 1 ~) + (b - ~i 1 ~) + (c - ~i 1 ~) where a, b, and c are their individual multipliers (if there are ~i 3 ~). In other words, they combine additively rather than multiplicatively.</span>
+          <br/>
+          <br/>
           <span>Note that the total multiplier of a power (basically strength times rarity times extra multiplier) is multiplied by a constant depending on type (~f 1 / 512 ~ for normal, ~f 1 / 32 ~ for infinity, ~f 1 / 16 ~ for eternity and complexity) before adding to the power that generator multipliers are raised to (this is because some generator types are more impactful than others).</span>
           <br/>
           <br/>
