@@ -60,7 +60,7 @@ class TimeScientificNotation extends ADNotations.Notation {
   formatDecimal(value, places, placesExponent) {
     return ADNotations.formatMantissaWithExponent(ADNotations.formatMantissaBaseTen,
       (n, p) => this.formatExponent(n, p, (n, _) => ADNotations.formatMantissaBaseTen(n, 0), p),
-      10, 1, true)(value, places, placesExponent);
+      10, 1, () => '')(value, places, placesExponent);
   }
 }
 
@@ -77,7 +77,7 @@ class DefaultScientificNotation extends ADNotations.Notation {
   formatDecimal(value, places, placesExponent) {
     return ADNotations.formatMantissaWithExponent(ADNotations.formatMantissaBaseTen,
       (n, p) => this.formatExponent(n, p, (n, _) => ADNotations.formatMantissaBaseTen(n, 0), p),
-      10, 1, true)(value, places, placesExponent);
+      10, 1, () => '')(value, places, placesExponent);
   }
 }
 
@@ -93,7 +93,7 @@ class ScientificNotation extends ADNotations.Notation {
   formatDecimal(value, places, placesExponent) {
     return ADNotations.formatMantissaWithExponent(baseFormat(),
       (n, p) => this.formatExponent(n, p, (n, _) => baseFormat()(n, 0), p),
-      NotationOptions.exponentBase(), 1, true)(value, places, placesExponent);
+      NotationOptions.exponentBase(), 1, () => '')(value, places, placesExponent);
   }
 }
 
@@ -109,7 +109,7 @@ class StandardNotation extends ADNotations.Notation {
   formatDecimal(value, places, placesExponent) {
     return ADNotations.formatMantissaWithExponent(baseFormat(),
       (n, _) => ADNotations.abbreviateStandard(n),
-      Math.pow(NotationOptions.exponentBase(), 3), 1, true, ' ', false)(value, places, placesExponent);
+      Math.pow(NotationOptions.exponentBase(), 3), 1, () => '', ' ', false)(value, places, placesExponent);
   }
 }
 
@@ -140,7 +140,7 @@ class EngineeringNotation extends ADNotations.Notation {
   formatDecimal(value, places, placesExponent) {
     return ADNotations.formatMantissaWithExponent(baseFormat(),
       (n, p) => this.formatExponent(n, p, (n, _) => baseFormat()(n, 0), p),
-      NotationOptions.exponentBase(), 3, true)(value, places, placesExponent);
+      NotationOptions.exponentBase(), 3, () => '')(value, places, placesExponent);
   }
 }
 
@@ -156,7 +156,7 @@ class LettersNotation extends ADNotations.Notation {
   formatDecimal(value, places, placesExponent) {
     return ADNotations.formatMantissaWithExponent(baseFormat(),
       (n, _) => representExponentWithAlphabet(n, NotationOptions.alphabet()),
-      NotationOptions.exponentBase(), 1, true, '')(value, places, placesExponent);
+      NotationOptions.exponentBase(), 1, () => '', '')(value, places, placesExponent);
   }
 }
 
@@ -179,7 +179,7 @@ class MixedScientificNotation extends ADNotations.Notation {
     }
     return ADNotations.formatMantissaWithExponent(baseFormat(),
       (n, p) => this.formatExponent(n, p, (n, _) => baseFormat()(n, 0), p),
-      NotationOptions.exponentBase(), 1, true)(value, places, placesExponent);
+      NotationOptions.exponentBase(), 1, () => '')(value, places, placesExponent);
   }
 }
 
@@ -198,7 +198,7 @@ class MixedEngineeringNotation extends ADNotations.Notation {
     }
     return ADNotations.formatMantissaWithExponent(baseFormat(),
       (n, p) => this.formatExponent(n, p, (n, _) => baseFormat()(n, 0), p),
-      NotationOptions.exponentBase(), 3, true)(value, places, placesExponent);
+      NotationOptions.exponentBase(), 3, () => '')(value, places, placesExponent);
   }
 }
 
