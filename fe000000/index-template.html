@@ -275,7 +275,7 @@
         <div ~style.display=Boost.isVisible() ? '' : 'none'~>
           <span>
             You have ~i Boost.bought() ~ boost~s Boost.bought() ~, multiplying all ~r Generators.term() ~ by ~f Boost.multiplier() ~x (~f Boost.multiplierPer() ~x each).
-            <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buy()">Cost: ~f Boost.cost() ~</button> <button ~class=Boost.canBuy() ? "" : "disabled"~ onclick="Boost.buyMax()">Max</button> <button ~style.display=Autobuyer(9).hasAutobuyer() ? '' : 'none'~ onclick="Autobuyers.toggleSome(9)">Auto: ~r Autobuyer(9).isOn() ? "On" : "Off" ~ <span ~style.display=Autobuyer(9).isSlow() ? '' : 'none'~> (slow)</span></button>
+            <button ~class=Boost.canBuy() ? "" : (ComplexityChallenge.isSafeguardOn(2) ? "forbidden" : "disabled")~ onclick="Boost.buy()">Cost: ~f Boost.cost() ~</button> <button ~class=Boost.canBuy() ? "" : (ComplexityChallenge.isSafeguardOn(2) ? "forbidden" : "disabled")~ onclick="Boost.buyMax()">Max</button> <button ~style.display=Autobuyer(9).hasAutobuyer() ? '' : 'none'~ onclick="Autobuyers.toggleSome(9)">Auto: ~r Autobuyer(9).isOn() ? "On" : "Off" ~ <span ~style.display=Autobuyer(9).isSlow() ? '' : 'none'~> (slow)</span></button>
           </span>
         </div>
         <div ~style.display=SpecialDivs.isDivVisible('boost-power') ? '' : 'none'~>
@@ -291,7 +291,7 @@
         <div ~style.display=(Boost.isBestBoostPowerVisible() && PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~>
           <span>Your ~r Boost.bestBoostPowerDescription() ~ is ~f Boost.bestBoostPower() ~ (giving ~i Boost.extraTheoremsActualAndDisplay() ~ extra theorem~s Boost.extraTheoremsActualAndDisplay() ~, next at ~f Boost.nextExtraTheorem() ~).</span>
         </div>
-        <span ~style.display=PrestigeLayerProgress.hasReached('prestige') ? '' : 'none'~>View all ~r Generators.term() ~ even if they would be otherwise invisible: <input type="checkbox" ~!checked=Options.rawViewAllGenerators('normal')~ ~!onchange=function() {Options.setRawViewAllGenerators('normal', this.checked)}~></input></span>
+        <span ~style.display=(PrestigeLayerProgress.hasReached('prestige') || Options.showAllTabs()) ? '' : 'none'~>View all ~r Generators.term() ~ even if they would be otherwise invisible: <input type="checkbox" ~!checked=Options.rawViewAllGenerators('normal')~ ~!onchange=function() {Options.setRawViewAllGenerators('normal', this.checked)}~></input></span>
         <br/>
         <br/>
         <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
@@ -1207,8 +1207,8 @@
             <td>~f EternityGenerator(% @i %).amount() ~</td>
             <td>~f EternityGenerator(% @i %).perSecond() ~/s</td>
             <td>~f EternityGenerator(% @i %).multiplier() ~x</td>
-            <td><button ~class=EternityGenerator(% @i %).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(% @i %).buy()">Cost: ~i EternityGenerator(% @i %).cost() ~ EP</button></td>
-            <td><button ~class=EternityGenerator(% @i %).canBuy() ? "" : "disabled"~ onclick="EternityGenerator(% @i %).buyMax()">Max</button></td>
+            <td><button ~class=EternityGenerator(% @i %).canBuy() ? "" : % (@i === 8) ? '(ComplexityChallenge.isSafeguardOn(5) ? "forbidden" : "disabled")' : '"disabled"' %~ onclick="EternityGenerator(% @i %).buy()">Cost: ~i EternityGenerator(% @i %).cost() ~ EP</button></td>
+            <td><button ~class=EternityGenerator(% @i %).canBuy() ? "" : % (@i === 8) ? '(ComplexityChallenge.isSafeguardOn(5) ? "forbidden" : "disabled")' : '"disabled"' %~ onclick="EternityGenerator(% @i %).buyMax()">Max</button></td>
             <td><button ~style.display=EternityAutobuyer(% @i %).hasEternityAutobuyer() ? '' : 'none'~ onclick="EternityAutobuyer(% @i %).toggle()">Auto: ~r EternityAutobuyer(% @i %).isOn() ? "On" : "Off" ~</button></td>
           </tr>
         </loop>
@@ -1808,7 +1808,7 @@
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'eternity-producer' ? '' : 'none'~>
       <div ~style.display=EternityProducer.isUnlocked() ? 'none' : ''~>
-        <button style="height: 48px;" onclick="EternityProducer.unlock()" ~class=EternityProducer.canUnlock() ? '' : 'disabled'~>
+        <button style="height: 48px;" onclick="EternityProducer.unlock()" ~class=EternityProducer.canUnlock() ? '' : (ComplexityChallenge.isSafeguardOn(3) ? 'forbidden' : 'disabled')~>
           Unlock the Eternity Producer<br/>Cost: ~f EternityProducer.unlockCost() ~ eternity points
         </button>
         <br/>
@@ -2183,7 +2183,7 @@
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'chroma' ? '' : 'none'~>
       <div ~style.display=Chroma.isUnlocked() ? 'none' : ''~>
-        <button style="height: 48px;" onclick="Chroma.unlockColor(1)" ~class=Chroma.canUnlockColor(1) ? '' : 'disabled'~>
+        <button style="height: 48px;" onclick="Chroma.unlockColor(1)" ~class=Chroma.canUnlockColor(1) ? '' : (ComplexityChallenge.isSafeguardOn(4) ? 'forbidden' : 'disabled')~>
           Unlock Chroma<br/>Cost: ~f Chroma.getUnlockColorCost(1) ~ eternity points
         </button>
       </div>
@@ -2217,7 +2217,7 @@
             <td>
               <div ~class=Chroma.chromaDivClass(1)~ ~style.display=Chroma.canSeeThatColorExists(1) ? '' : 'none'~>
                 <div ~style.display=Chroma.isColorUnlocked(1) ? 'none' : ''~>
-                  <button style="height: 48px;" onclick="Chroma.unlockColor(1)" ~class=Chroma.canUnlockColor(1) ? '' : 'disabled'~>
+                  <button style="height: 48px;" onclick="Chroma.unlockColor(1)" ~class=Chroma.canUnlockColor(1) ? '' : (ComplexityChallenge.isSafeguardOn(4) ? 'forbidden' : 'disabled')~>
                     Unlock ~r Chroma.colorName(1) ~<br/>Cost: ~f Chroma.getUnlockColorCost(1) ~ eternity points
                   </button>
                 </div>
@@ -2236,7 +2236,7 @@
             <td>
               <div ~class=Chroma.chromaDivClass(2)~ ~style.display=Chroma.canSeeThatColorExists(2) ? '' : 'none'~>
                 <div ~style.display=Chroma.isColorUnlocked(2) ? 'none' : ''~>
-                  <button style="height: 48px;" onclick="Chroma.unlockColor(2)" ~class=Chroma.canUnlockColor(2) ? '' : 'disabled'~>
+                  <button style="height: 48px;" onclick="Chroma.unlockColor(2)" ~class=Chroma.canUnlockColor(2) ? '' : (ComplexityChallenge.isSafeguardOn(4) ? 'forbidden' : 'disabled')~>
                     Unlock ~r Chroma.colorName(2) ~<br/>Cost: ~f Chroma.getUnlockColorCost(2) ~ eternity points
                   </button>
                 </div>
@@ -2255,7 +2255,7 @@
             <td>
               <div ~class=Chroma.chromaDivClass(3)~ ~style.display=Chroma.canSeeThatColorExists(3) ? '' : 'none'~>
                 <div ~style.display=Chroma.isColorUnlocked(3) ? 'none' : ''~>
-                  <button style="height: 48px;" onclick="Chroma.unlockColor(3)" ~class=Chroma.canUnlockColor(3) ? '' : 'disabled'~>
+                  <button style="height: 48px;" onclick="Chroma.unlockColor(3)" ~class=Chroma.canUnlockColor(3) ? '' : (ComplexityChallenge.isSafeguardOn(4) ? 'forbidden' : 'disabled')~>
                     Unlock ~r Chroma.colorName(3) ~<br/>Cost: ~f Chroma.getUnlockColorCost(3) ~ eternity points
                   </button>
                 </div>
@@ -2277,7 +2277,7 @@
             <td>
               <div ~class=Chroma.chromaDivClass(4)~ ~style.display=Chroma.canSeeThatColorExists(4) ? '' : 'none'~>
                 <div ~style.display=Chroma.isColorUnlocked(4) ? 'none' : ''~>
-                  <button style="height: 48px;" onclick="Chroma.unlockColor(4)" ~class=Chroma.canUnlockColor(4) ? '' : 'disabled'~>
+                  <button style="height: 48px;" onclick="Chroma.unlockColor(4)" ~class=Chroma.canUnlockColor(4) ? '' : (ComplexityChallenge.isSafeguardOn(4) ? 'forbidden' : 'disabled')~>
                     Unlock ~r Chroma.colorName(4) ~<br/>Cost: ~f Chroma.getUnlockColorCost(4) ~ eternity points
                   </button>
                 </div>
@@ -2297,7 +2297,7 @@
             <td>
               <div ~class=Chroma.chromaDivClass(5)~ ~style.display=Chroma.canSeeThatColorExists(5) ? '' : 'none'~>
                 <div ~style.display=Chroma.isColorUnlocked(5) ? 'none' : ''~>
-                  <button style="height: 48px;" onclick="Chroma.unlockColor(5)" ~class=Chroma.canUnlockColor(5) ? '' : 'disabled'~>
+                  <button style="height: 48px;" onclick="Chroma.unlockColor(5)" ~class=Chroma.canUnlockColor(5) ? '' : (ComplexityChallenge.isSafeguardOn(4) ? 'forbidden' : 'disabled')~>
                     Unlock ~r Chroma.colorName(5) ~<br/>Cost: ~f Chroma.getUnlockColorCost(5) ~ eternity points
                   </button>
                 </div>
@@ -2316,7 +2316,7 @@
             <td>
               <div ~class=Chroma.chromaDivClass(6)~ ~style.display=Chroma.canSeeThatColorExists(6) ? '' : 'none'~>
                 <div ~style.display=Chroma.isColorUnlocked(6) ? 'none' : ''~>
-                  <button style="height: 48px;" onclick="Chroma.unlockColor(6)" ~class=Chroma.canUnlockColor(6) ? '' : 'disabled'~>
+                  <button style="height: 48px;" onclick="Chroma.unlockColor(6)" ~class=Chroma.canUnlockColor(6) ? '' : (ComplexityChallenge.isSafeguardOn(4) ? 'forbidden' : 'disabled')~>
                     Unlock ~r Chroma.colorName(6) ~<br/>Cost: ~f Chroma.getUnlockColorCost(6) ~ eternity points
                   </button>
                 </div>

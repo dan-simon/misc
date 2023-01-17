@@ -1456,9 +1456,9 @@ function updateDisplay() {
     if (shouldUpdate("e154")) {let v = Generators.term(); if (e[154].textContent !== v) {e[154].textContent = v};};
     if (shouldUpdate("e155")) {let v = format(Boost.multiplier()); if (e[155].textContent !== v) {e[155].textContent = v};};
     if (shouldUpdate("e156")) {let v = format(Boost.multiplierPer()); if (e[156].textContent !== v) {e[156].textContent = v};};
-    if (shouldUpdate("b109")) {let v = Boost.canBuy() ? "" : "disabled"; if (b[109].className !== v) {b[109].className = v};};
+    if (shouldUpdate("b109")) {let v = Boost.canBuy() ? "" : (ComplexityChallenge.isSafeguardOn(2) ? "forbidden" : "disabled"); if (b[109].className !== v) {b[109].className = v};};
     if (shouldUpdate("e157")) {let v = format(Boost.cost()); if (e[157].textContent !== v) {e[157].textContent = v};};
-    if (shouldUpdate("b110")) {let v = Boost.canBuy() ? "" : "disabled"; if (b[110].className !== v) {b[110].className = v};};
+    if (shouldUpdate("b110")) {let v = Boost.canBuy() ? "" : (ComplexityChallenge.isSafeguardOn(2) ? "forbidden" : "disabled"); if (b[110].className !== v) {b[110].className = v};};
     if (shouldUpdate("b111")) {let v = Autobuyer(9).hasAutobuyer() ? '' : 'none'; if (b[111].style.display !== v) {b[111].style.display = v};};
     if (shouldUpdate("e158")) {let v = Autobuyer(9).isOn() ? "On" : "Off"; if (e[158].textContent !== v) {e[158].textContent = v};};
     if (shouldUpdate("b112")) {let v = Autobuyer(9).isSlow() ? '' : 'none'; if (b[112].style.display !== v) {b[112].style.display = v};};
@@ -1478,7 +1478,7 @@ function updateDisplay() {
     if (shouldUpdate("e168")) {let v = formatInt(Boost.extraTheoremsActualAndDisplay()); if (e[168].textContent !== v) {e[168].textContent = v};};
     if (shouldUpdate("e169")) {let v = pluralize(Boost.extraTheoremsActualAndDisplay(), '', 's'); if (e[169].textContent !== v) {e[169].textContent = v};};
     if (shouldUpdate("e170")) {let v = format(Boost.nextExtraTheorem()); if (e[170].textContent !== v) {e[170].textContent = v};};
-    if (shouldUpdate("b117")) {let v = PrestigeLayerProgress.hasReached('prestige') ? '' : 'none'; if (b[117].style.display !== v) {b[117].style.display = v};};
+    if (shouldUpdate("b117")) {let v = (PrestigeLayerProgress.hasReached('prestige') || Options.showAllTabs()) ? '' : 'none'; if (b[117].style.display !== v) {b[117].style.display = v};};
     if (shouldUpdate("e171")) {let v = Generators.term(); if (e[171].textContent !== v) {e[171].textContent = v};};
     if (shouldUpdate("b119")) {let v = Generator(1).isVisible() ? '' : 'none'; if (b[119].style.display !== v) {b[119].style.display = v};};
     if (shouldUpdate("e172")) {let v = formatOrdinalInt(1); if (e[172].textContent !== v) {e[172].textContent = v};};
@@ -2305,9 +2305,9 @@ function updateDisplay() {
     if (shouldUpdate("e698")) {let v = format(EternityGenerator(8).amount()); if (e[698].textContent !== v) {e[698].textContent = v};};
     if (shouldUpdate("e699")) {let v = format(EternityGenerator(8).perSecond()); if (e[699].textContent !== v) {e[699].textContent = v};};
     if (shouldUpdate("e700")) {let v = format(EternityGenerator(8).multiplier()); if (e[700].textContent !== v) {e[700].textContent = v};};
-    if (shouldUpdate("b453")) {let v = EternityGenerator(8).canBuy() ? "" : "disabled"; if (b[453].className !== v) {b[453].className = v};};
+    if (shouldUpdate("b453")) {let v = EternityGenerator(8).canBuy() ? "" : (ComplexityChallenge.isSafeguardOn(5) ? "forbidden" : "disabled"); if (b[453].className !== v) {b[453].className = v};};
     if (shouldUpdate("e701")) {let v = formatInt(EternityGenerator(8).cost()); if (e[701].textContent !== v) {e[701].textContent = v};};
-    if (shouldUpdate("b454")) {let v = EternityGenerator(8).canBuy() ? "" : "disabled"; if (b[454].className !== v) {b[454].className = v};};
+    if (shouldUpdate("b454")) {let v = EternityGenerator(8).canBuy() ? "" : (ComplexityChallenge.isSafeguardOn(5) ? "forbidden" : "disabled"); if (b[454].className !== v) {b[454].className = v};};
     if (shouldUpdate("b455")) {let v = EternityAutobuyer(8).hasEternityAutobuyer() ? '' : 'none'; if (b[455].style.display !== v) {b[455].style.display = v};};
     if (shouldUpdate("e702")) {let v = EternityAutobuyer(8).isOn() ? "On" : "Off"; if (e[702].textContent !== v) {e[702].textContent = v};};
   }
@@ -3014,7 +3014,7 @@ function updateDisplay() {
   }
   if (b[856].style.display !== "none") {
     if (shouldUpdate("b857")) {let v = EternityProducer.isUnlocked() ? 'none' : ''; if (b[857].style.display !== v) {b[857].style.display = v};};
-    if (shouldUpdate("b858")) {let v = EternityProducer.canUnlock() ? '' : 'disabled'; if (b[858].className !== v) {b[858].className = v};};
+    if (shouldUpdate("b858")) {let v = EternityProducer.canUnlock() ? '' : (ComplexityChallenge.isSafeguardOn(3) ? 'forbidden' : 'disabled'); if (b[858].className !== v) {b[858].className = v};};
     if (shouldUpdate("e1062")) {let v = format(EternityProducer.unlockCost()); if (e[1062].textContent !== v) {e[1062].textContent = v};};
     if (shouldUpdate("e1063")) {let v = formatMaybeInt(EternityProducer.productionPerSecondIfUnlocked()); if (e[1063].textContent !== v) {e[1063].textContent = v};};
     if (shouldUpdate("e1064")) {let v = pluralize(EternityProducer.productionPerSecondIfUnlocked(), 'y', 'ies'); if (e[1064].textContent !== v) {e[1064].textContent = v};};
@@ -3293,7 +3293,7 @@ function updateDisplay() {
   }
   if (b[981].style.display !== "none") {
     if (shouldUpdate("b982")) {let v = Chroma.isUnlocked() ? 'none' : ''; if (b[982].style.display !== v) {b[982].style.display = v};};
-    if (shouldUpdate("b983")) {let v = Chroma.canUnlockColor(1) ? '' : 'disabled'; if (b[983].className !== v) {b[983].className = v};};
+    if (shouldUpdate("b983")) {let v = Chroma.canUnlockColor(1) ? '' : (ComplexityChallenge.isSafeguardOn(4) ? 'forbidden' : 'disabled'); if (b[983].className !== v) {b[983].className = v};};
     if (shouldUpdate("e1213")) {let v = format(Chroma.getUnlockColorCost(1)); if (e[1213].textContent !== v) {e[1213].textContent = v};};
     if (shouldUpdate("b984")) {let v = (Chroma.isUnlocked() || Options.showAllTabs()) ? '' : 'none'; if (b[984].style.display !== v) {b[984].style.display = v};};
     if (shouldUpdate("b985")) {let v = Chroma.isUnlocked() ? 'none' : ''; if (b[985].style.display !== v) {b[985].style.display = v};};
@@ -3316,7 +3316,7 @@ function updateDisplay() {
     if (shouldUpdate("b994")) {let v = Chroma.chromaDivClass(1); if (b[994].className !== v) {b[994].className = v};};
     if (shouldUpdate("b994")) {let v = Chroma.canSeeThatColorExists(1) ? '' : 'none'; if (b[994].style.display !== v) {b[994].style.display = v};};
     if (shouldUpdate("b995")) {let v = Chroma.isColorUnlocked(1) ? 'none' : ''; if (b[995].style.display !== v) {b[995].style.display = v};};
-    if (shouldUpdate("b996")) {let v = Chroma.canUnlockColor(1) ? '' : 'disabled'; if (b[996].className !== v) {b[996].className = v};};
+    if (shouldUpdate("b996")) {let v = Chroma.canUnlockColor(1) ? '' : (ComplexityChallenge.isSafeguardOn(4) ? 'forbidden' : 'disabled'); if (b[996].className !== v) {b[996].className = v};};
     if (shouldUpdate("e1224")) {let v = Chroma.colorName(1); if (e[1224].textContent !== v) {e[1224].textContent = v};};
     if (shouldUpdate("e1225")) {let v = format(Chroma.getUnlockColorCost(1)); if (e[1225].textContent !== v) {e[1225].textContent = v};};
     if (shouldUpdate("b997")) {let v = Chroma.isColorUnlocked(1) ? '' : 'none'; if (b[997].style.display !== v) {b[997].style.display = v};};
@@ -3329,7 +3329,7 @@ function updateDisplay() {
     if (shouldUpdate("b999")) {let v = Chroma.chromaDivClass(2); if (b[999].className !== v) {b[999].className = v};};
     if (shouldUpdate("b999")) {let v = Chroma.canSeeThatColorExists(2) ? '' : 'none'; if (b[999].style.display !== v) {b[999].style.display = v};};
     if (shouldUpdate("b1000")) {let v = Chroma.isColorUnlocked(2) ? 'none' : ''; if (b[1000].style.display !== v) {b[1000].style.display = v};};
-    if (shouldUpdate("b1001")) {let v = Chroma.canUnlockColor(2) ? '' : 'disabled'; if (b[1001].className !== v) {b[1001].className = v};};
+    if (shouldUpdate("b1001")) {let v = Chroma.canUnlockColor(2) ? '' : (ComplexityChallenge.isSafeguardOn(4) ? 'forbidden' : 'disabled'); if (b[1001].className !== v) {b[1001].className = v};};
     if (shouldUpdate("e1231")) {let v = Chroma.colorName(2); if (e[1231].textContent !== v) {e[1231].textContent = v};};
     if (shouldUpdate("e1232")) {let v = format(Chroma.getUnlockColorCost(2)); if (e[1232].textContent !== v) {e[1232].textContent = v};};
     if (shouldUpdate("b1002")) {let v = Chroma.isColorUnlocked(2) ? '' : 'none'; if (b[1002].style.display !== v) {b[1002].style.display = v};};
@@ -3342,7 +3342,7 @@ function updateDisplay() {
     if (shouldUpdate("b1004")) {let v = Chroma.chromaDivClass(3); if (b[1004].className !== v) {b[1004].className = v};};
     if (shouldUpdate("b1004")) {let v = Chroma.canSeeThatColorExists(3) ? '' : 'none'; if (b[1004].style.display !== v) {b[1004].style.display = v};};
     if (shouldUpdate("b1005")) {let v = Chroma.isColorUnlocked(3) ? 'none' : ''; if (b[1005].style.display !== v) {b[1005].style.display = v};};
-    if (shouldUpdate("b1006")) {let v = Chroma.canUnlockColor(3) ? '' : 'disabled'; if (b[1006].className !== v) {b[1006].className = v};};
+    if (shouldUpdate("b1006")) {let v = Chroma.canUnlockColor(3) ? '' : (ComplexityChallenge.isSafeguardOn(4) ? 'forbidden' : 'disabled'); if (b[1006].className !== v) {b[1006].className = v};};
     if (shouldUpdate("e1238")) {let v = Chroma.colorName(3); if (e[1238].textContent !== v) {e[1238].textContent = v};};
     if (shouldUpdate("e1239")) {let v = format(Chroma.getUnlockColorCost(3)); if (e[1239].textContent !== v) {e[1239].textContent = v};};
     if (shouldUpdate("b1007")) {let v = Chroma.isColorUnlocked(3) ? '' : 'none'; if (b[1007].style.display !== v) {b[1007].style.display = v};};
@@ -3355,7 +3355,7 @@ function updateDisplay() {
     if (shouldUpdate("b1009")) {let v = Chroma.chromaDivClass(4); if (b[1009].className !== v) {b[1009].className = v};};
     if (shouldUpdate("b1009")) {let v = Chroma.canSeeThatColorExists(4) ? '' : 'none'; if (b[1009].style.display !== v) {b[1009].style.display = v};};
     if (shouldUpdate("b1010")) {let v = Chroma.isColorUnlocked(4) ? 'none' : ''; if (b[1010].style.display !== v) {b[1010].style.display = v};};
-    if (shouldUpdate("b1011")) {let v = Chroma.canUnlockColor(4) ? '' : 'disabled'; if (b[1011].className !== v) {b[1011].className = v};};
+    if (shouldUpdate("b1011")) {let v = Chroma.canUnlockColor(4) ? '' : (ComplexityChallenge.isSafeguardOn(4) ? 'forbidden' : 'disabled'); if (b[1011].className !== v) {b[1011].className = v};};
     if (shouldUpdate("e1245")) {let v = Chroma.colorName(4); if (e[1245].textContent !== v) {e[1245].textContent = v};};
     if (shouldUpdate("e1246")) {let v = format(Chroma.getUnlockColorCost(4)); if (e[1246].textContent !== v) {e[1246].textContent = v};};
     if (shouldUpdate("b1012")) {let v = Chroma.isColorUnlocked(4) ? '' : 'none'; if (b[1012].style.display !== v) {b[1012].style.display = v};};
@@ -3370,7 +3370,7 @@ function updateDisplay() {
     if (shouldUpdate("b1014")) {let v = Chroma.chromaDivClass(5); if (b[1014].className !== v) {b[1014].className = v};};
     if (shouldUpdate("b1014")) {let v = Chroma.canSeeThatColorExists(5) ? '' : 'none'; if (b[1014].style.display !== v) {b[1014].style.display = v};};
     if (shouldUpdate("b1015")) {let v = Chroma.isColorUnlocked(5) ? 'none' : ''; if (b[1015].style.display !== v) {b[1015].style.display = v};};
-    if (shouldUpdate("b1016")) {let v = Chroma.canUnlockColor(5) ? '' : 'disabled'; if (b[1016].className !== v) {b[1016].className = v};};
+    if (shouldUpdate("b1016")) {let v = Chroma.canUnlockColor(5) ? '' : (ComplexityChallenge.isSafeguardOn(4) ? 'forbidden' : 'disabled'); if (b[1016].className !== v) {b[1016].className = v};};
     if (shouldUpdate("e1254")) {let v = Chroma.colorName(5); if (e[1254].textContent !== v) {e[1254].textContent = v};};
     if (shouldUpdate("e1255")) {let v = format(Chroma.getUnlockColorCost(5)); if (e[1255].textContent !== v) {e[1255].textContent = v};};
     if (shouldUpdate("b1017")) {let v = Chroma.isColorUnlocked(5) ? '' : 'none'; if (b[1017].style.display !== v) {b[1017].style.display = v};};
@@ -3385,7 +3385,7 @@ function updateDisplay() {
     if (shouldUpdate("b1019")) {let v = Chroma.chromaDivClass(6); if (b[1019].className !== v) {b[1019].className = v};};
     if (shouldUpdate("b1019")) {let v = Chroma.canSeeThatColorExists(6) ? '' : 'none'; if (b[1019].style.display !== v) {b[1019].style.display = v};};
     if (shouldUpdate("b1020")) {let v = Chroma.isColorUnlocked(6) ? 'none' : ''; if (b[1020].style.display !== v) {b[1020].style.display = v};};
-    if (shouldUpdate("b1021")) {let v = Chroma.canUnlockColor(6) ? '' : 'disabled'; if (b[1021].className !== v) {b[1021].className = v};};
+    if (shouldUpdate("b1021")) {let v = Chroma.canUnlockColor(6) ? '' : (ComplexityChallenge.isSafeguardOn(4) ? 'forbidden' : 'disabled'); if (b[1021].className !== v) {b[1021].className = v};};
     if (shouldUpdate("e1263")) {let v = Chroma.colorName(6); if (e[1263].textContent !== v) {e[1263].textContent = v};};
     if (shouldUpdate("e1264")) {let v = format(Chroma.getUnlockColorCost(6)); if (e[1264].textContent !== v) {e[1264].textContent = v};};
     if (shouldUpdate("b1022")) {let v = Chroma.isColorUnlocked(6) ? '' : 'none'; if (b[1022].style.display !== v) {b[1022].style.display = v};};

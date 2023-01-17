@@ -230,6 +230,11 @@ input[type=text] {
   background-color: var(--button-disabled-color);
 }
 
+.forbidden {
+  background-color: var(--button-disabled-color);
+  color: var(--red-text-color);
+}
+
 .autobuyerdiv {
   display: table;
   text-align: center;
@@ -420,6 +425,16 @@ input[type=text] {
   background: var(--study-chroma-color);
 }
 
+.studynormalforbidden {
+  display: table;
+  text-align: center;
+  background: var(--button-disabled-color);
+  color: var(--red-text-color);
+  font-size: 0.875rem;
+  width: 256px;
+  height: 160px;
+}
+
 .studynormalunbuyable {
   display: table;
   text-align: center;
@@ -442,6 +457,16 @@ input[type=text] {
   display: table;
   text-align: center;
   background: var(--study-normal-color);
+  font-size: 0.875rem;
+  width: 256px;
+  height: 160px;
+}
+
+.studyinfinityforbidden {
+  display: table;
+  text-align: center;
+  background: var(--button-disabled-color);
+  color: var(--red-text-color);
   font-size: 0.875rem;
   width: 256px;
   height: 160px;
@@ -474,6 +499,16 @@ input[type=text] {
   height: 160px;
 }
 
+.studyeternityforbidden {
+  display: table;
+  text-align: center;
+  background: var(--button-disabled-color);
+  color: var(--red-text-color);
+  font-size: 0.875rem;
+  width: 256px;
+  height: 160px;
+}
+
 .studyeternityunbuyable {
   display: table;
   text-align: center;
@@ -496,6 +531,16 @@ input[type=text] {
   display: table;
   text-align: center;
   background: var(--study-eternity-color);
+  font-size: 0.875rem;
+  width: 256px;
+  height: 160px;
+}
+
+.studychromaforbidden {
+  display: table;
+  text-align: center;
+  background: var(--button-disabled-color);
+  color: var(--red-text-color);
   font-size: 0.875rem;
   width: 256px;
   height: 160px;
