@@ -211,6 +211,49 @@ let displayDigits = (specialFormat) => specialFormat ? NotationOptions.displayDi
 
 let exponentBase = (specialFormat) => specialFormat ? NotationOptions.exponentBase() : 10;
 
+function formatLogarithmVariant(n, places, placesExponent) {
+  let db = NotationOptions.displayBase();
+  // For this notation specifically, require exponent base to be at least 2.
+  let eb = Math.max(2, NotationOptions.exponentBase());
+  let c = NotationOptions.formatDecimalThresholdExponent(eb);
+  // Preliminary check
+  if (n.lessThan(eb ** c / 2)) {
+    return baseFormat()(n, places);
+  }
+  let exponent = Math.floor(n.log(eb));
+  let mantissa = n.div(Decimal.pow(eb, exponent)).toNumber();
+  if (!(1 <= mantissa && mantissa < eb)) {
+    const adjust = Math.floor(Math.log(mantissa) / Math.log(eb));
+    mantissa /= Math.pow(eb, adjust);
+    exponent += adjust;
+  }
+  if (baseFormat()(mantissa, places) === baseFormat()(eb, places)) {
+    mantissa /= eb;
+    exponent += 1;
+  }
+  // Stuff has been normalized
+  if (exponent < c) {
+    return baseFormat()(n, places);
+  }
+  if (exponent >= eb ** c) {
+    return 'e' + formatLogarithmVariant(new Decimal(n.log(eb)), placesExponent, placesExponent);
+  }
+  let epsilon = 1e-9;
+  let alteredMantissa = mantissa * eb ** (c - 1);
+  let alteration = c - 1;
+  if (Math.abs(alteredMantissa - Math.round(alteredMantissa)) > epsilon) {
+    return baseFormat()(mantissa, places) + 'e' + baseFormat()(exponent, 0);
+  }
+  alteredMantissa = Math.round(alteredMantissa);
+  while (alteration >= 0 && Number.isInteger(alteredMantissa)) {
+    alteredMantissa /= eb;
+    alteration -= 1;
+  }
+  alteredMantissa = Math.round(alteredMantissa * eb);
+  alteration += 1;
+  return (alteredMantissa === 1 ? '' : baseFormat()(alteredMantissa, 0)) + 'e' + baseFormat()(exponent - alteration, 0);
+}
+
 // And now for something completely different.
 let numbers = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
   'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty'];

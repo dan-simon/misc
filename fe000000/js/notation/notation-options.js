@@ -64,12 +64,18 @@ let NotationOptions = {
     this.notationChange();
   },
   decimalThresholdCache: {},
-  formatDecimalThreshold() {
-    let e = this.exponentBase();
+  formatDecimalThreshold(e=this.exponentBase()) {
     if (!(e in this.decimalThresholdCache)) {
       this.decimalThresholdCache[e] = Math.pow(e, Math.max(3, Math.ceil(3 / Math.log10(e))));
     }
     return this.decimalThresholdCache[e];
+  },
+  decimalThresholdExponentCache: {},
+  formatDecimalThresholdExponent(e=this.exponentBase()) {
+    if (!(e in this.decimalThresholdExponentCache)) {
+      this.decimalThresholdExponentCache[e] = Math.max(3, Math.ceil(3 / Math.log10(e)));
+    }
+    return this.decimalThresholdExponentCache[e];
   },
   formatOrdinals() {
     return player.options.notation.formatOrdinals;

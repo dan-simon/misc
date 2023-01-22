@@ -220,6 +220,20 @@ class MixedLogarithmSciNotation extends ADNotations.Notation {
   }
 }
 
+class LogarithmVariantNotation extends ADNotations.Notation {
+  get name() {
+    return "Logarithm Variant";
+  }
+  
+  formatUnder1000(value, places) {
+    return formatLogarithmVariant(new Decimal(value), places, places);
+  }
+
+  formatDecimal(value, places, placesExponent) {
+    return formatLogarithmVariant(value, places, placesExponent);
+  }
+}
+
 let ModifiedNotations = {
   'TimeScientificNotation': TimeScientificNotation,
   'DefaultScientificNotation': DefaultScientificNotation,
@@ -231,6 +245,7 @@ let ModifiedNotations = {
   'MixedScientificNotation': MixedScientificNotation,
   'MixedEngineeringNotation': MixedEngineeringNotation,
   'MixedLogarithmSciNotation': MixedLogarithmSciNotation,
+  'LogarithmVariantNotation': LogarithmVariantNotation,
 }
 
 for (let i in ModifiedNotations) {
