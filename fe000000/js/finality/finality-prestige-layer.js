@@ -14,8 +14,14 @@ let FinalityPrestigeLayer = {
   canFinality() {
     return ComplexityPoints.totalCPProducedThisFinality().gte(this.actualComplexityPointRequirementForFinality());
   },
+  canShowFinality() {
+    return this.canFinality() && !this.showFastSpecial();
+  },
+  showFastSpecial() {
+    return !Options.showResetButtonsForFastResets() && FastResetText.isDoingFastBeyond('finality');
+  },
   isRequirementVisible() {
-    return !this.canFinality() && PrestigeLayerProgress.hasReached('complexity');
+    return !this.canShowFinality() && PrestigeLayerProgress.hasReached('complexity');
   },
   isAmountSpanVisible() {
     return this.isRequirementVisible() && PrestigeLayerProgress.hasReached('finality');

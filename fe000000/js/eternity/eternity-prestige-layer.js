@@ -9,8 +9,14 @@ let EternityPrestigeLayer = {
   canEternity() {
     return InfinityPoints.totalIPProducedThisEternity().gte(this.infinityPointRequirementForEternity());
   },
+  canShowEternity() {
+    return this.canEternity() && !this.showFastSpecial();
+  },
+  showFastSpecial() {
+    return !Options.showResetButtonsForFastResets() && FastResetText.isDoingFastBeyond('eternity');
+  },
   isRequirementVisible() {
-    return !this.canEternity() && PrestigeLayerProgress.hasReached('infinity');
+    return !this.canShowEternity() && PrestigeLayerProgress.hasReached('infinity');
   },
   isAmountSpanVisible() {
     return this.isRequirementVisible() && PrestigeLayerProgress.hasReached('eternity');

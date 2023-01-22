@@ -1553,6 +1553,10 @@ let Saving = {
       player.cheats.normalGeneratorPower = 1;
       player.version = 2.21484375;
     }
+    if (player.version < 2.21875) {
+      player.options.headerSettings.showResetButtonsForFastResets = false;
+      player.version = 2.21875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

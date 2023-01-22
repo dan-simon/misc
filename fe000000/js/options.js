@@ -304,6 +304,12 @@ let Options = {
   toggleShowResetButtonsForHiddenTabs() {
     player.options.headerSettings.showResetButtonsForHiddenTabs = !player.options.headerSettings.showResetButtonsForHiddenTabs;
   },
+  showResetButtonsForFastResets() {
+    return player.options.headerSettings.showResetButtonsForFastResets;
+  },
+  toggleShowResetButtonsForFastResets() {
+    player.options.headerSettings.showResetButtonsForFastResets = !player.options.headerSettings.showResetButtonsForFastResets;
+  },
   smallerHeader() {
     return player.options.smallerHeader;
   },

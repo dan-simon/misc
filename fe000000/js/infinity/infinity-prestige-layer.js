@@ -30,11 +30,17 @@ let InfinityPrestigeLayer = {
   canInfinity() {
     return this.bestStarsThisInfinity().gte(this.starRequirementForInfinity());
   },
+  canShowInfinity() {
+    return this.canInfinity() && !this.showFastSpecial();
+  },
+  showFastSpecial() {
+    return !Options.showResetButtonsForFastResets() && FastResetText.isDoingFastBeyond('infinity');
+  },
   mustInfinity() {
     return this.canInfinity() && !this.isInfinityBroken();
   },
   isRequirementVisible() {
-    return !this.canInfinity();
+    return !this.canShowInfinity();
   },
   isAmountSpanVisible() {
     return this.isRequirementVisible() && PrestigeLayerProgress.hasReached('infinity');

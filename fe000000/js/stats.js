@@ -121,18 +121,45 @@ let FastResetText = {
       return 'an unknown cause (perhaps clicking the button quickly).';
     }
   },
+  cache: {'infinity': null, 'eternity': null, 'complexity': null, 'finality': null},
+  // We might end up calling this a lot.
   isDoingFast(x) {
-    let info = player.stats[Stats.lastTenKey(x)];
-    let times = info.map(x => x[0]);
-    return player.stats[Stats.timeSinceKey(x)] <= 1 &&
-      times.every(x => x !== -1 && x <= 1);
+    // Cache, and clear cache every time we reset.
+    if (this.cache[x] === null) {
+      let info = player.stats[Stats.lastTenKey(x)];
+      let times = info.map(x => x[0]);
+      this.cache[x] = player.stats[Stats.timeSinceKey(x)] <= 1 &&
+        times.every(x => x !== -1 && x <= 1);
+    }
+    return this.cache[x];
   },
-  getText(x) {
+  clearCache() {
+    this.cache = {'infinity': null, 'eternity': null, 'complexity': null, 'finality': null};
+  },
+  isDoingFastBeyond(x) {
+    return this.layers.slice(this.layers.indexOf(x)).some(y => this.isDoingFast(y));
+  },
+  getText() {
     for (let i of this.layers) {
       if (this.isDoingFast(i)) {
         return this.getTextForLayer(i);
       }
     }
     return '';
+  },
+  shortButtonExplanation() {
+    for (let i of this.layers) {
+      if (this.isDoingFast(i)) {
+        return 'doing fast ' + i.slice(0, -1) + 'ies';
+      }
+    }
+    return '';
+  }
+}
+
+// Why do we have an object here rather than a standalone function? What else is it going to do?
+let Cache = {
+  clearDisplayCaches() {
+    FastResetText.clearCache();
   }
 }

@@ -428,6 +428,7 @@ let initialPlayer = {
       showCurrentChallenges: true,
       showNextCCCompletion: true,
       showResetButtonsForHiddenTabs: true,
+      showResetButtonsForFastResets: false,
       smallerHeader: false,
     },
     complexityChallengeRunningColors: false,
@@ -563,7 +564,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.2109375
+  version: 2.21875
 }
 
 let player;

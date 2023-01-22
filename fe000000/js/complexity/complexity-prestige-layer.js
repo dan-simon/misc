@@ -13,6 +13,12 @@ let ComplexityPrestigeLayer = {
   canComplexity() {
     return this.hasEnoughEP() && this.hasComplexityChallenge1Completion();
   },
+  canShowComplexity() {
+    return this.canComplexity() && !this.showFastSpecial();
+  },
+  showFastSpecial() {
+    return !Options.showResetButtonsForFastResets() && FastResetText.isDoingFastBeyond('complexity');
+  },
   requirementForComplexity() {
     if (this.hasEnoughEP()) {
       // Formulate the requirement in terms the player can understand without knowing about complexity challenges.
