@@ -43,17 +43,17 @@ let Stats = {
   },
   addInfinity(time, gain, total) {
     player.stats.fastestInfinity = Math.min(time, player.stats.fastestInfinity);
-    player.stats.lastTenInfinities.unshift([time, gain, gain.div(time), total]);
+    player.stats.lastTenInfinities.unshift([time, gain, gain.div(Math.max(time, 1 / 16)), total]);
     player.stats.lastTenInfinities.pop();
   },
   addEternity(time, gain, total) {
     player.stats.fastestEternity = Math.min(time, player.stats.fastestEternity);
-    player.stats.lastTenEternities.unshift([time, gain, gain.div(time), total]);
+    player.stats.lastTenEternities.unshift([time, gain, gain.div(Math.max(time, 1 / 16)), total]);
     player.stats.lastTenEternities.pop();
   },
   addComplexity(time, gain, total) {
     player.stats.fastestComplexity = Math.min(time, player.stats.fastestComplexity);
-    player.stats.lastTenComplexities.unshift([time, gain, gain.div(time), total]);
+    player.stats.lastTenComplexities.unshift([time, gain, gain.div(Math.max(time, 1 / 16)), total]);
     player.stats.lastTenComplexities.pop();
   },
   addFinality(time, pointGain, shardGain, total) {
