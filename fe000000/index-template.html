@@ -2808,7 +2808,7 @@
           <span>You can have multiple powers of the same type equipped, but if you do, their multipliers combine as ~i 1 ~ + (a - ~i 1 ~) + (b - ~i 1 ~) where a and b are their individual multipliers (if there are ~i 2 ~), or ~i 1 ~ + (a - ~i 1 ~) + (b - ~i 1 ~) + (c - ~i 1 ~) where a, b, and c are their individual multipliers (if there are ~i 3 ~). In other words, they combine additively rather than multiplicatively.</span>
           <br/>
           <br/>
-          <span>Note that the total multiplier of a power (basically strength times rarity times extra multiplier) is multiplied by a constant depending on type (~f 1 / 512 ~ for normal, ~f 1 / 32 ~ for infinity, ~f 1 / 16 ~ for eternity and complexity) before adding to the power that generator multipliers are raised to (this is because some generator types are more impactful than others).</span>
+          <span>Note that the total multiplier of a power (basically strength times rarity times extra multiplier) is multiplied by a constant depending on type (~r formatPrecisely(1 / 512) ~ for normal, ~r formatPrecisely(1 / 32) ~ for infinity, ~r formatPrecisely(1 / 16) ~ for eternity and complexity) before adding to the power that generator multipliers are raised to (this is because some generator types are more impactful than others).</span>
           <br/>
           <br/>
           <span>Powers are never destroyed unless you delete them, or unless they're automatically deleted as explained on this tab below stored powers. Powers can be equipped at any time as long as there is a free slot. If all power slots are full, to unequip a power and create a free slot you need to complexity.</span>
@@ -3531,7 +3531,7 @@
               <br/>
               ~r FinalityMilestones.milestoneStatusDescription(9) ~
               <br/>
-              Complexity Challenge ~o 6 ~ reward strength and total complexity stars are based on hypercomplexity stars, which are approximately <span class="helpspan">(?)<span class="tooltiptext">Hypercomplexity stars are calculated as complexity stars to a certain power, which makes them go up over time somewhat faster than complexity stars would. However, this discrepancy is fairly small.</span></span> what your complexity stars would be if your complexity power~s Powers.equippedLimit() ~ were equipped.
+              Complexity Challenge ~o 6 ~ reward strength and total complexity stars are based on hypercomplexity stars, which are complexity stars^(power from best complexity power~s Powers.equippedLimit() ~/power from currently equipped complexity power(s)). <span class="helpspan">(?)<span class="tooltiptext">This means that hypercomplexity stars are in some sense roughly what your complexity stars would be if your best complexity power~s Powers.equippedLimit() ~ were all equipped, but with an additional term due to generator production, which makes hypercomplexity stars go up over time somewhat faster than complexity stars would. However, though this discrepancy can be large (over ~f Decimal.pow(2, 1024) ~ in some cases), it is not extremely important.</span></span>
             </div>
           </td>
           <td>
@@ -4674,9 +4674,14 @@
         <br/>
         <span>Thanks to Universal Attractor (pre-infinity) and Antimatter Dimensions for game mechanics.</span>
         <br/>
+        <br/>
         <span>Thanks to the testers (Boo, Dravitar, Earth, Omsi, Pichu, Sere, SpectralFlame, others, and Jazz) for testing before release and suggesting features.</span>
         <br/>
-        <span>Thanks to jdawson7 (clarifying strategy, improving guide), eQueline (suggesting many great QoL features), Kyleptune (suggesting the ability to change colors), and FIQ (noticing many UI confusions and inconsistencies, and suggesting a massive speed-up to autobuyers and max all).</span>
+        <br/>
+        <span>Thanks to jdawson7 (clarifying strategy, improving guide), eQueline (suggesting many great QoL features), Kyleptune (suggesting the ability to change colors), FIQ (noticing many UI confusions and inconsistencies, and suggesting a massive speed-up to autobuyers and max all), and john0512 (making very specific suggestions about a wide variety of things, largely strategy and in-game text).</span>
+        <br/>
+        <br/>
+        <span>Finally, thanks to all of you for playing!</span>
       </div>
     </tab>
   </div>
