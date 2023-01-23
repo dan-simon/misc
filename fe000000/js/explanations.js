@@ -1,5 +1,7 @@
 let Explanations = {
   isVisible(type, x) {
+    // Lots of uses of main here, but we'll refactor it next time we touch it
+    // to add more things with only one explanation option, I guess.
     return {
       'autobuyers': {
         'any': [10, 11, 12].some(x => Autobuyer(x).hasAutobuyer()) || PrestigeLayerProgress.hasReached('eternity'),
@@ -17,6 +19,18 @@ let Explanations = {
       },
       'options': {
         'offline': Options.isOptionTypeShown('saving')
+      },
+      'infinity-details': {
+        'main': true
+      },
+      'eternity-details': {
+        'main': true
+      },
+      'complexity-details': {
+        'main': true
+      },
+      'finality-details': {
+        'main': true
       }
     }[type][x];
   },

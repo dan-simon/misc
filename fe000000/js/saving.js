@@ -1557,6 +1557,13 @@ let Saving = {
       player.options.headerSettings.showResetButtonsForFastResets = false;
       player.version = 2.21875;
     }
+    if (player.version < 2.22265625) {
+      player.options.explanations['infinity-details'] = 'main';
+      player.options.explanations['eternity-details'] = 'main';
+      player.options.explanations['complexity-details'] = 'main';
+      player.options.explanations['finality-details'] = 'main';
+      player.version = 2.22265625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

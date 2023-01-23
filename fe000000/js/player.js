@@ -449,7 +449,11 @@ let initialPlayer = {
       'eternity-milestones': 'main',
       'complexity-challenges': 'main',
       'powers': 'main',
-      'options': ''
+      'options': '',
+      'infinity-details': 'main',
+      'eternity-details': 'main',
+      'complexity-details': 'main',
+      'finality-details': 'main'
     }
   },
   confirmations: {
@@ -564,7 +568,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.21875
+  version: 2.22265625
 }
 
 let player;

@@ -340,18 +340,19 @@
         <button ~class=InfinityMaxAll.anythingToBuy() ? "" : "disabled"~ onclick="InfinityMaxAll.maxAll()">Max all</button>
         <button ~class=InfinityMaxAll.anyUpgradesToBuy() ? "" : "disabled"~ onclick="InfinityMaxAll.maxUpgrades()">Max upgrades</button>
         <button ~class=InfinityMaxAll.anyGeneratorsToBuy() ? "" : "disabled"~ onclick="InfinityMaxAll.maxGenerators()">Max generators</button>
+        <button onclick="Explanations.showOrHide('infinity-details', 'main')">Details: ~r Explanations.isShown('infinity-details', 'main') ? 'Shown' : 'Hidden' ~</button>
       </span>
-      <br/>
-      <span>You have produced ~i InfinityPoints.totalIPProducedThisEternity() ~ infinity point~s InfinityPoints.totalIPProducedThisEternity() ~ this eternity, multiplying all ~r Generators.term() ~ by ~f InfinityPoints.multiplier() ~.</span>
-      <br/>
-      <span>You have ~i Infinities.amount() ~ infinit~y Infinities.amount() ~, multiplying all infinity generators (IGs) by ~q Infinities.infinityGeneratorMultiplier() ~.</span>
-      <br/>
-      <span ~style.display=InfinityPrestigeLayer.canInfinityBeBroken() ? '' : 'none'~><button style="height: 48px;" onclick="InfinityPrestigeLayer.toggleBreakInfinity()">~r InfinityPrestigeLayer.breakInfinityButtonText() ~</button></span>
-      <span ~style.display=InfinityPrestigeLayer.canInfinityBeBroken() ? 'none' : ''~>You need to complete all the normal challenges to be able to break infinity.</span>
-      <br ~style.display=(InfinityPrestigeLayer.canInfinityBeBroken() && !SpecialTabs.isTabVisible('infinity-challenges')) ? '' : 'none'~/>
-      <span ~style.display=(InfinityPrestigeLayer.canInfinityBeBroken() && !SpecialTabs.isTabVisible('infinity-challenges')) ? '' : 'none'~>Breaking infinity for the first time will also let you view the Infinity Challenges tab.</span>
-      <br ~style.display=InfinityPrestigeLayer.canInfinityBeBroken() ? 'none' : ''~/>
-      <br/>
+      <div ~style.display=Explanations.isShown('infinity-details', 'main') ? '' : 'none'~>
+        <span>You have produced ~i InfinityPoints.totalIPProducedThisEternity() ~ infinity point~s InfinityPoints.totalIPProducedThisEternity() ~ this eternity, multiplying all ~r Generators.term() ~ by ~f InfinityPoints.multiplier() ~.</span>
+        <br/>
+        <span>You have ~i Infinities.amount() ~ infinit~y Infinities.amount() ~, multiplying all infinity generators (IGs) by ~q Infinities.infinityGeneratorMultiplier() ~.</span>
+        <br/>
+        <span ~style.display=InfinityPrestigeLayer.canInfinityBeBroken() ? '' : 'none'~><button style="height: 48px;" onclick="InfinityPrestigeLayer.toggleBreakInfinity()">~r InfinityPrestigeLayer.breakInfinityButtonText() ~</button></span>
+        <span ~style.display=InfinityPrestigeLayer.canInfinityBeBroken() ? 'none' : ''~>You need to complete all the normal challenges to be able to break infinity.</span>
+        <br ~style.display=(InfinityPrestigeLayer.canInfinityBeBroken() && !SpecialTabs.isTabVisible('infinity-challenges')) ? '' : 'none'~/>
+        <span ~style.display=(InfinityPrestigeLayer.canInfinityBeBroken() && !SpecialTabs.isTabVisible('infinity-challenges')) ? '' : 'none'~>Breaking infinity for the first time will also let you view the Infinity Challenges tab.</span>
+      </div>
+      <br ~style.display=(InfinityPrestigeLayer.canInfinityBeBroken() && Explanations.isShown('infinity-details', 'main')) ? 'none' : ''~/>
       <span>You have ~f InfinityStars.amount() ~ infinity stars, multiplying all ~r Generators.term() ~ by their amount^~f InfinityStars.exponent() ~ = ~f InfinityStars.multiplier() ~.</span>
       <br/>
       <span>You are getting ~f InfinityStars.perSecond() ~ infinity stars per second.</span>
@@ -1165,14 +1166,15 @@
         <button ~class=EternityMaxAll.anythingToBuy() ? "" : "disabled"~ onclick="EternityMaxAll.maxAll()">Max all</button>
         <button ~class=EternityMaxAll.anyUpgradesToBuy() ? "" : "disabled"~ onclick="EternityMaxAll.maxUpgrades()">Max upgrades</button>
         <button ~class=EternityMaxAll.anyGeneratorsToBuy() ? "" : "disabled"~ onclick="EternityMaxAll.maxGenerators()">Max generators</button>
+        <button onclick="Explanations.showOrHide('eternity-details', 'main')">Details: ~r Explanations.isShown('eternity-details', 'main') ? 'Shown' : 'Hidden' ~</button>
       </span>
-      <br/>
-      <span>You have produced ~i EternityPoints.totalEPProducedThisComplexity() ~ eternity point~s EternityPoints.totalEPProducedThisComplexity() ~ this complexity,</span>
-      <br/>
-      <span>multiplying all eternity generators by ~f EternityUpgrade(3).effect() ~ (from Eternity Upgrade ~o 3 ~).</span></span>
-      <br/>
-      <span>You have ~q Eternities.amount() ~ eternit~y Eternities.amount() ~, multiplying all eternity generators (EGs) by ~q Eternities.eternityGeneratorMultiplierForDisplay() ~.</span>
-      <br/>
+      <div ~style.display=Explanations.isShown('eternity-details', 'main') ? '' : 'none'~>
+        <span>You have produced ~i EternityPoints.totalEPProducedThisComplexity() ~ eternity point~s EternityPoints.totalEPProducedThisComplexity() ~ this complexity,</span>
+        <br/>
+        <span>multiplying all eternity generators by ~f EternityUpgrade(3).effect() ~ (from Eternity Upgrade ~o 3 ~).</span></span>
+        <br/>
+        <span>You have ~q Eternities.amount() ~ eternit~y Eternities.amount() ~, multiplying all eternity generators (EGs) by ~q Eternities.eternityGeneratorMultiplierForDisplay() ~.</span>
+      </div>
       <br/>
       <span>You have ~f EternityStars.amount() ~ eternity stars, multiplying all normal and infinity generators by ~f EternityStars.multiplier() ~</span>
       <br/>
@@ -2348,18 +2350,19 @@
     <tab ~style.display=Tabs.currentTab() === 'complexity' ? '' : 'none'~>
       <span>You have ~i ComplexityPoints.amount() ~ complexity point~s ComplexityPoints.amount() ~ (ℂP).
         <button ~class=ComplexityMaxAll.anythingToBuy() ? "" : "disabled"~ onclick="ComplexityMaxAll.maxAll()">Max all</button>
+        <button onclick="Explanations.showOrHide('complexity-details', 'main')">Details: ~r Explanations.isShown('complexity-details', 'main') ? 'Shown' : 'Hidden' ~</button>
       </span>
-      <br/>
-      <span>You have produced ~i ComplexityPoints.totalCPProducedThisFinality() ~ complexity point~s ComplexityPoints.totalCPProducedThisFinality() ~ this finality.</span>
-      <br/>
-      <span>You have ~i Complexities.amount() ~ complexit~y Complexities.amount() ~, multiplying all complexity generators (ℂGs) by ~q Complexities.complexityGeneratorMultiplier() ~,</span>
-      <br/>
-      <span>multiplying permanence and chroma buildup speed by ~q Complexities.permanenceAndChromaMultiplier() ~,</span>
-      <br/>
-      <span>and <span ~style.display=EternityChallenge.autoECFromComplexities() ? '' : 'none'~>auto-completing an EC tier every ~tq Complexities.autoECCompletionTime() ~</span><span ~style.display=EternityChallenge.autoECFromComplexities() ? 'none' : ''~>never auto-completing an EC tier</span><span ~style.display=EternityChallenge.autoECFromFinalities() ? '' : 'none'~> (actually one EC tier per ~tq EternityChallenge.autoECCompletionTime() ~ due to finalities)</span>.</span>
-      <br ~style.display=Complexities.hasAutoECCompletionSpeedupFromFinalities() ? '' : 'none'~/>
-      <span ~style.display=Complexities.hasAutoECCompletionSpeedupFromFinalities() ? '' : 'none'~>After finality, EC tier auto-completion from complexities is ~i Complexities.autoECCompletionSpeedupFromFinalities() ~x faster.</span>
-      <br/>
+      <div ~style.display=Explanations.isShown('complexity-details', 'main') ? '' : 'none'~>
+        <span>You have produced ~i ComplexityPoints.totalCPProducedThisFinality() ~ complexity point~s ComplexityPoints.totalCPProducedThisFinality() ~ this finality.</span>
+        <br/>
+        <span>You have ~i Complexities.amount() ~ complexit~y Complexities.amount() ~, multiplying all complexity generators (ℂGs) by ~q Complexities.complexityGeneratorMultiplier() ~,</span>
+        <br/>
+        <span>multiplying permanence and chroma buildup speed by ~q Complexities.permanenceAndChromaMultiplier() ~,</span>
+        <br/>
+        <span>and <span ~style.display=EternityChallenge.autoECFromComplexities() ? '' : 'none'~>auto-completing an EC tier every ~tq Complexities.autoECCompletionTime() ~</span><span ~style.display=EternityChallenge.autoECFromComplexities() ? 'none' : ''~>never auto-completing an EC tier</span><span ~style.display=EternityChallenge.autoECFromFinalities() ? '' : 'none'~> (actually one EC tier per ~tq EternityChallenge.autoECCompletionTime() ~ due to finalities)</span>.</span>
+        <br ~style.display=Complexities.hasAutoECCompletionSpeedupFromFinalities() ? '' : 'none'~/>
+        <span ~style.display=Complexities.hasAutoECCompletionSpeedupFromFinalities() ? '' : 'none'~>After finality, EC tier auto-completion from complexities is ~i Complexities.autoECCompletionSpeedupFromFinalities() ~x faster.</span>
+      </div>
       <br/>
       <span>You have ~f ComplexityStars.amount() ~ complexity stars, making all complexity challenge rewards ~f ComplexityStars.complexityChallengeRewardMultiplier() ~x stronger.</span>
       <br/>
@@ -3286,16 +3289,17 @@
     <tab ~style.display=Tabs.currentTab() === 'finality' ? '' : 'none'~>
       <span>You have ~i FinalityPoints.amount() ~ finality point~s FinalityPoints.amount() ~ (FP).
         <button ~class=FinalityMaxAll.anythingToBuy() ? "" : "disabled"~ onclick="FinalityMaxAll.maxAll()">Max all</button>
+        <button onclick="Explanations.showOrHide('finality-details', 'main')">Details: ~r Explanations.isShown('finality-details', 'main') ? 'Shown' : 'Hidden' ~</button>
       </span>
-      <br/>
-      <span>You have produced ~i FinalityPoints.totalFPProduced() ~ total finality point~s FinalityPoints.totalFPProduced() ~.</span>
-      <br/>
-      <span>You have ~i Finalities.amount() ~ finalit~y Finalities.amount() ~, multiplying all finality generators (FGs) by ~q Finalities.finalityGeneratorMultiplier() ~,</span>
-      <br/>
-      <span>making the finality generator per-purchase multiplier ~q Finalities.finalityGeneratorPerPurchaseMultiplier() ~x,</span>
-      <br/>
-      <span>and <span ~style.display=EternityChallenge.autoECFromFinalities() ? '' : 'none'~>auto-completing an EC tier every ~tq Finalities.autoECCompletionTime() ~</span><span ~style.display=EternityChallenge.autoECFromFinalities() ? 'none' : ''~>never auto-completing an EC tier</span><span ~style.display=EternityChallenge.autoECFromComplexities() ? '' : 'none'~> (actually one EC tier per ~tq EternityChallenge.autoECCompletionTime() ~ due to complexities)</span>.</span>
-      <br/>
+      <div ~style.display=Explanations.isShown('finality-details', 'main') ? '' : 'none'~>
+        <span>You have produced ~i FinalityPoints.totalFPProduced() ~ total finality point~s FinalityPoints.totalFPProduced() ~.</span>
+        <br/>
+        <span>You have ~i Finalities.amount() ~ finalit~y Finalities.amount() ~, multiplying all finality generators (FGs) by ~q Finalities.finalityGeneratorMultiplier() ~,</span>
+        <br/>
+        <span>making the finality generator per-purchase multiplier ~q Finalities.finalityGeneratorPerPurchaseMultiplier() ~x,</span>
+        <br/>
+        <span>and <span ~style.display=EternityChallenge.autoECFromFinalities() ? '' : 'none'~>auto-completing an EC tier every ~tq Finalities.autoECCompletionTime() ~</span><span ~style.display=EternityChallenge.autoECFromFinalities() ? 'none' : ''~>never auto-completing an EC tier</span><span ~style.display=EternityChallenge.autoECFromComplexities() ? '' : 'none'~> (actually one EC tier per ~tq EternityChallenge.autoECCompletionTime() ~ due to complexities)</span>.</span>
+      </div>
       <br/>
       <span>You have ~f FinalityStars.amount() ~ finality stars, multiplying all non-finality generators by ~f FinalityStars.multiplier() ~x.</span>
       <br/>
