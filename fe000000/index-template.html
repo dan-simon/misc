@@ -1413,7 +1413,7 @@
         </div>
         <br/>
         <div style="width: 1024px; margin-left: auto; margin-right: auto;">
-          <button onclick="Studies.toggleShowFourthRow()" ~style.display=Studies.couldEverAccessFourthRow() ? '' : 'none'~>Show fourth row even before it's buyable: ~r Studies.showFourthRow() ? "On" : "Off" ~</button>
+          <button onclick="Studies.toggleShowFourthRow()" ~style.display=PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'~>Show fourth row even before it's buyable: ~r Studies.showFourthRow() ? "On" : "Off" ~</button>
           <button onclick="Studies.changeMode()">Study click mode: ~r Studies.mode() ~ (reversed when holding shift)</button> <button onclick="Studies.changeCostDisplayMode()">Cost display: ~r Studies.costDisplayMode() ~</button>
           <button ~style.display=(ComplexityAchievements.hasComplexityAchievement(4, 4) || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~ onclick="Studies.toggleRebuyAfterComplexityChallenge6()">Rebuy studies when finishing ℂC6: ~r Studies.rebuyAfterComplexityChallenge6() ? "On" : "Off" ~</button>
           <button onclick="Studies.toggleShowPresetExplanation()">Show explanation of presets and exported studies: ~r Studies.showPresetExplanation() ? "On" : "Off" ~</button>

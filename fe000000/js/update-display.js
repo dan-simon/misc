@@ -2445,7 +2445,7 @@ function updateDisplay() {
     if (shouldUpdate("b503")) {let v = Studies.canRespecFourthRow() ? "" : "disabled"; if (b[503].className !== v) {b[503].className = v};};
     if (shouldUpdate("b503")) {let v = Studies.canAccessFourthRow() ? '' : 'none'; if (b[503].style.display !== v) {b[503].style.display = v};};
     if (shouldUpdate("e781")) {let v = EternityPrestigeLayer.resetText(); if (e[781].textContent !== v) {e[781].textContent = v};};
-    if (shouldUpdate("b504")) {let v = Studies.couldEverAccessFourthRow() ? '' : 'none'; if (b[504].style.display !== v) {b[504].style.display = v};};
+    if (shouldUpdate("b504")) {let v = PrestigeLayerProgress.hasReached('complexity') ? '' : 'none'; if (b[504].style.display !== v) {b[504].style.display = v};};
     if (shouldUpdate("e782")) {let v = Studies.showFourthRow() ? "On" : "Off"; if (e[782].textContent !== v) {e[782].textContent = v};};
     if (shouldUpdate("e783")) {let v = Studies.mode(); if (e[783].textContent !== v) {e[783].textContent = v};};
     if (shouldUpdate("e784")) {let v = Studies.costDisplayMode(); if (e[784].textContent !== v) {e[784].textContent = v};};
