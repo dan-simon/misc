@@ -227,7 +227,8 @@ function formatLogarithmVariant(n, places, placesExponent) {
     mantissa /= Math.pow(eb, adjust);
     exponent += adjust;
   }
-  if (baseFormat()(mantissa, places) === baseFormat()(eb, places)) {
+  if (exponent < c ? (baseFormat()(n, places) === baseFormat()(eb ** (exponent + 1), places)) :
+  (baseFormat()(mantissa, places) === baseFormat()(eb, places))) {
     mantissa /= eb;
     exponent += 1;
   }
