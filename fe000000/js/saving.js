@@ -1564,6 +1564,10 @@ let Saving = {
       player.options.explanations['finality-details'] = 'main';
       player.version = 2.22265625;
     }
+    if (player.version < 2.2265625) {
+      player.studySettings.showFourthRow = false;
+      player.version = 2.2265625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

@@ -115,6 +115,7 @@ let initialPlayer = {
     studyMode: 'Buy',
     studyDisplayCostWhenBought: false,
     boughtTheoremsThisComplexity: false,
+    showFourthRow: false,
     rebuyAfterComplexityChallenge6: true,
     showPresetExplanation: false,
     canBuyStudies: true,
@@ -568,7 +569,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.22265625
+  version: 2.2265625
 }
 
 let player;
