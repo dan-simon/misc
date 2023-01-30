@@ -62,6 +62,10 @@ let Saving = {
     }
   },
   quickLoadIssueCheck(s) {
+    if (s.startsWith(Saving.startString) && !s.endsWith(Saving.endString)) {
+      return 'It seems to not be the full save, only the start. If you\'re on mobile, this may be due to input text length being limited. ' +
+      'Perhaps try using Text Input save loading mode.';
+    }
     let p = this.decode(s);
     for (let i of ['boost', 'currentTab', 'generators', 'lastUpdate', 'prestigePower', 'stars']) {
       if (!(i in p)) {
