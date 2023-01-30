@@ -166,7 +166,7 @@ function makeUpdateDisplay(el1CodeList, el2CodeList, setupList, inTabs) {
   let f = x => [el1CodeList, el2CodeList]['eb'.indexOf(x[0])][+x.slice(1)];
   let untabbed = getUntabbed(inTabs);
   let setupCode = makeUpdateDisplaySetup(setupList);
-  let updateDisplayCode = 'function updateDisplay() {\n  Cache.clearDisplayCaches();\n  tickMap = {};\n' + g(flatten(untabbed.map(f)), '  ') + '\n' +
+  let updateDisplayCode = 'function updateDisplay() {' + (cache ? '\n  Cache.clearDisplayCaches();' : '') + '\n  tickMap = {};\n' + g(flatten(untabbed.map(f)), '  ') + '\n' +
   inTabs.map(x => '  if (' + x[0][0] + '[' + x[0].slice(1) + '].style.display !== "none") {\n' +
   g(flatten(x[1].map(f)), '    ') + '\n  }').join('\n') + '\n}';
   return setupCode + '\n\n' + updateDisplayCode;
@@ -185,6 +185,12 @@ let time = Date.now();
 
 if (!(files[0].endsWith('.html') && files[1].endsWith('.html') && files[2].endsWith('.js'))) {
   throw new Error('Wrong file types. Files should be (1) input html file you\'re editing directly, (2) output html file, (3) output JS file.');
+}
+
+let cache = files.length <= 3 || files[3] !== 'no-cache';
+
+if (cache && process.argv.length > 2) {
+  console.log('Didn\'t specify cache. Are you sure? Use no-cache to disable cache.');
 }
 
 fs.readFile(files[0], 'utf8', function(err, rawContents) {
