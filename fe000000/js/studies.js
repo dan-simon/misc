@@ -7,7 +7,7 @@ let STUDY_EFFECTS = [
   () => Decimal.pow(2, Math.pow(4 * Prestige.prestigePower().log2(), 0.875) / 1024),
   () => Decimal.pow(2, Math.pow(Math.max(0, Decimal.log2(Eternities.amount())), 2) / 4),
   () => Decimal.pow(2, Math.pow(Studies.totalTheorems(), 2) / 16),
-  () => Decimal.pow(Boost.multiplierPer(), InfinityChallenge.isInfinityChallengeRunning(7) ? 0.5 : 1),
+  () => new Decimal(Boost.alteredMultiplierPer()),
   () => Decimal.pow(Math.max(1, Math.log2(Prestige.prestigePower().log2())), 3),
   () => Decimal.pow(2, Math.pow(Math.log2(
     1 + player.stats.timeSinceEternity * (1 + EternityStars.amount().max(1).log2() / 1024) / 64), 4 / 3)),

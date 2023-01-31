@@ -52,6 +52,9 @@ let Boost = {
     }
     return mult;
   },
+  alteredMultiplierPer() {
+    return Math.pow(Boost.multiplierPer(), InfinityChallenge.isInfinityChallengeRunning(7) ? 0.5 : 1);
+  },
   multiplier() {
     return Decimal.pow(this.multiplierPer(), this.bought());
   },

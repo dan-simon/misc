@@ -36,7 +36,7 @@ let ComplexityAchievements = {
       () => Complexities.permanenceAndChromaMultiplier(),
       () => ComplexityAchievements.complexityAchievementRow1Column2EffectFormula(Complexities.amount()),
       () => null,
-      () => Math.pow(Math.max(1, Math.log2(Boost.multiplierPer())), 0.5)
+      () => Math.pow(Math.max(1, Math.log2(Boost.alteredMultiplierPer())), 0.5)
     ],
     [
       () => 1 + Math.max(0, player.eternities.log(2) / 64),
