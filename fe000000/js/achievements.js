@@ -63,7 +63,7 @@ let Achievements = {
     ],
     [
       'Even more... this achievement name is overdone',
-      'Unpolluted',
+      'High-frequency',
       'They\'re not challenges',
       'Powerful',
       'You can probably delete some',
