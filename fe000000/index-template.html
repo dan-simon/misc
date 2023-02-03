@@ -2406,7 +2406,7 @@
         <span ~style.display=(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? 'none' : ''~>a downside later in the game.</span><span ~style.display=(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>the downside that <span class="redspan">you will exit a complexity challenge if you, for example, unequip powers in it.</span></span>
       </span></span>: <input type="checkbox" ~!checked=Options.exitComplexityChallengesOnComplexity()~ ~!onchange=function() {Options.setExitComplexityChallengesOnComplexity(this.checked)}~></input></span>
       <br/>
-      <span><button onclick="ComplexityChallenge.complexityReset(true, true)" ~class=ComplexityPrestigeLayer.canComplexity() ? "disabled" : ""~>Restart complexity and re-enter all complexity challenges<span ~style.display=ComplexityPrestigeLayer.canComplexity() ? '' : 'none'~> (disabled because you can complexity)</span></button></span>
+      <span><button onclick="ComplexityChallenge.complexityReset(true, true)" ~class=ComplexityPrestigeLayer.canComplexityReset() ? "" : "disabled"~>Restart complexity and re-enter all complexity challenges<span ~style.display=ComplexityPrestigeLayer.canComplexity() ? '' : 'none'~> (disabled because you can complexity)</span></button></span>
       <br/>
       <br/>
       <span>You do not need to complexity to complete complexity challenges. <button ~style.display=Explanations.isVisible('complexity-challenges', 'main') ? '' : 'none'~ onclick="Explanations.showOrHide('complexity-challenges', 'main')">Complexity challenges explanation: ~r Explanations.isShown('complexity-challenges', 'main') ? 'Shown' : 'Hidden' ~</button></span>
@@ -4648,7 +4648,11 @@
       </div>
       <div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity') || ComplexityPrestigeLayer.canComplexity()) ? '' : 'none'~>
         <span ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity') || ComplexityPrestigeLayer.canComplexity()) ? '' : 'none'~>Complexity: <input type="checkbox" ~!checked=Options.confirmation('complexity')~ ~!onchange=function() {Options.setConfirmation('complexity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-        <span ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~>Complexity reset: <input type="checkbox" ~!checked=Options.confirmation('complexityReset')~ ~!onchange=function() {Options.setConfirmation('complexityReset', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
+        <span ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~>Complexity reset: <select ~!value=Options.confirmation('complexityReset')~ ~!onchange=function() {Options.setConfirmation('complexityReset', this.value)}~>
+          <option value="Confirmation">Confirmation</option>
+          <option value="No confirmation">No confirmation</option>
+          <option value="Disabled">Disabled</option>
+        </select><span style="display: inline-block; width: 16px;"></span></span>
         <span ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('finality') || FinalityPrestigeLayer.canFinality()) ? '' : 'none'~>Finality: <input type="checkbox" ~!checked=Options.confirmation('finality')~ ~!onchange=function() {Options.setConfirmation('finality', this.checked)}~></input></span>
       </div>
       <div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~>
@@ -4658,20 +4662,24 @@
         <span ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~>Complexity challenge entering <span class="helpspan">(?)<span class="tooltiptext">This option is only used when the complexity challenge you're entering isn't yet unlocked.</span></span>: <input type="checkbox" ~!checked=Options.confirmation('complexityChallengeEntering')~ ~!onchange=function() {Options.setConfirmation('complexityChallengeEntering', this.checked)}~></input></span>
       </div>
       <div ~style.display=Options.optionDisplay(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>
-        <span ~style.display=Options.optionDisplay(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Power deletion: <select ~!value=Powers.powerDeletionMode()~ ~!onchange=function() {Powers.setPowerDeletionMode(this.value)}~>
+        <span ~style.display=Options.optionDisplay(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Power deletion: <select ~!value=Options.confirmation('powerDeletionMode')~ ~!onchange=function() {Options.setConfirmation('powerDeletionMode', this.value)}~>
           <option value="Confirmation">Confirmation</option>
           <option value="No confirmation">No confirmation</option>
           <option value="Disabled">Disabled</option>
         </select><span style="display: inline-block; width: 16px;"></span></span>
-        <span ~style.display=Options.optionDisplay(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Single power unequip: <select ~!value=Powers.powerUnequipMode()~ ~!onchange=function() {Powers.setPowerUnequipMode(this.value)}~>
+        <span ~style.display=Options.optionDisplay(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Single power unequip: <select ~!value=Options.confirmation('powerUnequipMode')~ ~!onchange=function() {Options.setConfirmation('powerUnequipMode', this.value)}~>
           <option value="Confirmation">Confirmation</option>
           <option value="No confirmation">No confirmation</option>
           <option value="Disabled">Disabled</option>
         </select><span style="display: inline-block; width: 16px;"></span></span>
-        <span ~style.display=Options.optionDisplay(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Powers unequip: <input type="checkbox" ~!checked=Options.confirmation('powersUnequip')~ ~!onchange=function() {Options.setConfirmation('powersUnequip', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-        <span ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Finality shard upgrades respec: <input type="checkbox" ~!checked=Options.confirmation('finalityShardUpgradesRespec')~ ~!onchange=function() {Options.setConfirmation('finalityShardUpgradesRespec', this.checked)}~></input></span>
+        <span ~style.display=Options.optionDisplay(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Powers unequip: <input type="checkbox" ~!checked=Options.confirmation('powersUnequip')~ ~!onchange=function() {Options.setConfirmation('powersUnequip', this.checked)}~></input></span>
       </div>
       <div>
+        <span ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Finality shard upgrades respec: <select ~!value=Options.confirmation('finalityShardUpgradesRespec')~ ~!onchange=function() {Options.setConfirmation('finalityShardUpgradesRespec', this.value)}~>
+          <option value="Confirmation">Confirmation</option>
+          <option value="No confirmation">No confirmation</option>
+          <option value="Disabled">Disabled</option>
+        </select><span style="display: inline-block; width: 16px;"></span></span>
         <span>Preset change: <input type="checkbox" ~!checked=Options.confirmation('presetChange')~ ~!onchange=function() {Options.setConfirmation('presetChange', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
         <span>Preset deletion: <input type="checkbox" ~!checked=Options.confirmation('presetDeletion')~ ~!onchange=function() {Options.setConfirmation('presetDeletion', this.checked)}~></input></span>
       </div>

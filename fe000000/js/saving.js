@@ -1572,6 +1572,14 @@ let Saving = {
       player.studySettings.showFourthRow = false;
       player.version = 2.2265625;
     }
+    if (player.version < 2.23046875) {
+      let cr = player.confirmations.complexityReset;
+      let fsur = player.confirmations.finalityShardUpgradesRespec;
+      let table = {'true': 'Confirmation', 'false': 'No confirmation'};
+      player.confirmations.complexityReset = (cr in table) ? table[cr] : cr;
+      player.confirmations.finalityShardUpgradesRespec = (fsur in table) ? table[fsur] : fsur;
+      player.version = 2.23046875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

@@ -13,6 +13,9 @@ let ComplexityPrestigeLayer = {
   canComplexity() {
     return this.hasEnoughEP() && this.hasComplexityChallenge1Completion();
   },
+  canComplexityReset() {
+    return !this.canComplexity() && Options.confirmation('complexityReset') !== 'Disabled';
+  },
   canShowComplexity() {
     return this.canComplexity() && !this.showFastSpecial();
   },
@@ -151,8 +154,8 @@ let ComplexityPrestigeLayer = {
     this.complexityReset(false, false, false);
   },
   complexityReset(manual, justReset, entering) {
-    if (manual && this.canComplexity()) return;
-    if (manual && Options.confirmation('complexityReset') && !confirm(this.complexityResetConfirmationMessage())) return;
+    if (manual && !this.canComplexityReset()) return;
+    if (manual && Options.confirmation('complexityReset') === 'Confirmation' && !confirm(this.complexityResetConfirmationMessage())) return;
     // We need to do this here to avoid eternity milestones being applied in the eternity reset.
     player.eternities = ComplexityAchievements.effect(1, 2);
     EternityPrestigeLayer.eternityReset(false);

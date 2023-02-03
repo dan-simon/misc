@@ -464,7 +464,7 @@ let initialPlayer = {
     eternity: true,
     permanence: true,
     complexity: true,
-    complexityReset: true,
+    complexityReset: 'Confirmation',
     finality: true,
     singleStudyRefund: true,
     studiesRespec: true,
@@ -473,7 +473,7 @@ let initialPlayer = {
     powerDeletionMode: 'Confirmation',
     powerUnequipMode: 'Confirmation',
     powersUnequip: true,
-    finalityShardUpgradesRespec: true,
+    finalityShardUpgradesRespec: 'Confirmation',
     presetChange: true,
     presetDeletion: true,
   },
@@ -569,7 +569,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.2265625
+  version: 2.23046875
 }
 
 let player;
