@@ -135,7 +135,9 @@ let NotationOptions = {
     return stringToNum(x, specialFormat);
   },
   read(x, y) {
-    return {
+    // Never return decimal, always return number. This is only used on number inputs,
+    // as you can see by looking at all the things below that it's used for.
+    return +{
       'autobuyers-timer-length': () => this.readMaybeTime(y, true),
       'chroma-value': () => this.readMaybeTime(y, false),
       'craft-rarity': () => (y === 'max' || y === 'min') ? y : this.readMaybeTime(y, false),

@@ -707,14 +707,8 @@ let Powers = {
   powerDeletionMode() {
     return player.confirmations.powerDeletionMode;
   },
-  setPowerDeletionMode(x) {
-    player.confirmations.powerDeletionMode = x;
-  },
   powerUnequipMode() {
     return player.confirmations.powerUnequipMode;
-  },
-  setPowerUnequipMode(x) {
-    player.confirmations.powerUnequipMode = x;
   },
   isAutoLoadUnlocked() {
     return FinalityMilestones.isFinalityMilestoneActive(13);

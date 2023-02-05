@@ -204,7 +204,7 @@ let Galaxy = {
     if (this.inSecondsDilatedMode()) {
       player.galaxies.nextDilatedAmount /= 2;
     } else {
-      player.galaxies.nextDilatedAmount -= 1;
+      player.galaxies.nextDilatedAmount = Math.max(player.galaxies.nextDilatedAmount - 1, 0);
     }
     this.updateNextDilatedInputDisplay();
   },
