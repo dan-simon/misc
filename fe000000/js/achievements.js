@@ -18,47 +18,77 @@ let Achievements = {
       'That\'s still a lot',
       'Lose more now, gain more later',
       'You can idle now',
-      'Reversed',
-      'Too many stars spoil the universe'
+      'Quick return',
+      'Reversed'
     ],
     [
+      'All a lot',
+      'Too many stars spoil the universe',
       'Challenged',
+      'Infinitely quick',
+      'Too high',
+      'Infinity is more than one',
       'Hopefully they were the easy ones',
-      'Uncapped',
+      'Uncapped'
+    ],
+    [
       'Infinity?',
+      'Infinitely quicker',
+      'Thrifty',
       'Nerf removal',
       'Lose nothing, gain anyway',
       'Stop-and-go',
+      'A taste of what\'s coming',
       'Challenged again'
     ],
     [
+      'The last infinity',
       'Pull a fast one',
+      'Far too high',
+      'Infinite effect',
       'Tri-vial',
+      'Sacrifice is enough',
       'You can skip IC8 and get this later',
-      'That took forever',
+      'That took forever'
+    ],
+    [
       'Hold infinity in the palm of your hand',
       'Not edutainment',
       'Longer than forever',
+      'I knew him forever',
       'More nerf removal',
-    ],
-    [
       'Normal achievement',
       'More stop-and-go',
-      'Forever idle',
+      'Forever idle'
+    ],
+    [
+      'You\'ll want this theorem eventually',
       'Forever challenged',
+      'One down, seven to go',
       'Not enough',
       'Forever tired of all the "forever" achievements',
       'It\'s hard to notice the nerf',
+      'Nicer than it sounds',
       'Rainbow'
     ],
     [
+      'Ever closer',
       'That took long enough',
       'This achievement doesn\'t exist',
       'Fourth row hype',
+      'What\'s that?',
       'That doesn\'t sound right',
-      'It\'s not simple',
+      'No more waiting',
+      'It\'s not simple'
+    ],
+    [
+      'Double rainbow',
+      'If you\'re asking, it\'s worth it',
       'Faster than a snail',
       'More achievements?',
+      'Too complex?',
+      'Faster than a turtle',
+      'Bingo',
       'Still two more rows here'
     ],
     [
@@ -66,19 +96,29 @@ let Achievements = {
       'High-frequency',
       'They\'re not challenges',
       'Powerful',
+      'Diminishing returns',
       'You can probably delete some',
-      'Next comes Sokoban',
-      'Very crafty',
-      'Wait, there\'s no tickspeed?'
+      'Forever capped',
+      'Next comes Sokoban'
     ],
     [
+      'Very crafty',
+      'Infinite eternities',
       'It is luck',
-      'Forever capped',
+      'Wait, there\'s no tickspeed?',
+      'Not that type of power',
       'Update before cap',
-      'Nearing the end',
+      'Short run era?',
+      'Nearing the end'
+    ],
+    [
+      'It\'s still not simple',
+      'Still powerful',
       'Faster than another snail with the same speed',
       'Permanently greener grass',
+      'Short-run achievement naming is hard',
       'Last-mile delivery',
+      'The final one',
       'The end'
     ]
   ],
@@ -92,6 +132,8 @@ let Achievements = {
   // Exception: Importing a save, where full total gives the achievement, as it should be.
   // Yes, there is some confusion between chroma and display chroma. But chroma is IMO the right one
   // to use because it's the thing we're actually basing stuff on.
+  // No, I'm not sure if comparing to the chroma cap requires us to also check that chroma is unlocked,
+  // but better safe that sorry.
   // Yes, "Have a power with rarity at least 3" actually requires you to have such a power,
   // not just to gain one. This very rarely encourages deleting a power so you can get
   // a new power with rarity at least 3 to not be deleted, but that's very rare.
@@ -111,54 +153,82 @@ let Achievements = {
     [
       () => true,
       () => Boost.bought() >= 2,
-      () => range(1, 7).map(i => Generator(i).amount()).reduce(
-        (a, b) => Decimal.min(a, b)).gte(Math.pow(2, 16)),
-      () => range(1, 8).map(i => Generator(i).multiplier()).reduce(
-        (a, b) => Decimal.max(a, b)).gte(Math.pow(2, 16)),
+      () => range(1, 7).map(i => Generator(i).amount()).every(i => i.gte(Math.pow(2, 16))),
+      () => range(1, 8).map(i => Generator(i).multiplier()).some(i => i.gte(Math.pow(2, 16))),
       () => true,
       () => range(1, 9).every(x => Autobuyer(x).hasAutobuyer()),
-      () => Achievements.hasReversed(range(1, 8).map(i => Generator(i).multiplier())),
-      () => true
+      () => Stars.amount().gte(Decimal.pow(2, 128)) && player.stats.timeSincePrestige <= 60,
+      () => Achievements.hasReversed(range(1, 8).map(i => Generator(i).multiplier()))
     ],
     [
+      () => range(1, 8).map(i => Generator(i).multiplier()).every(i => i.gte(Math.pow(2, 16))),
+      () => true,
       () => Challenge.numberOfChallengesCompleted() > 0,
+      () => Prestige.prestigePowerMultGain().gte(16),
+      () => InfinityGenerator(2).bought() > 0,
+      () => player.stats.timeSinceInfinity <= 3600,
       () => Challenge.numberOfChallengesCompleted() >= 6,
-      () => InfinityPrestigeLayer.isBreakInfinityOn(),
+      () => InfinityPrestigeLayer.isBreakInfinityOn()
+    ],
+    [
       () => Stars.amount().gte(Decimal.pow(2, 1024)),
+      () => player.stats.timeSinceInfinity <= 60,
+      () => Challenge.isChallengeRunning(7) && Challenge.challenge7PurchasesLeft() >= 256,
       () => Infinities.amount() >= 256,
       () => Challenge.isChallengeRunning(10) && player.stats.sacrificesThisInfinity === 0,
       () => Challenge.isChallengeRunning(2) && player.stats.timeSinceInfinity <= 16,
+      () => InfinityPrestigeLayer.infinityPointGain().gte(4096) && player.stats.prestigesThisInfinity <= 4,
       () => InfinityChallenge.numberOfInfinityChallengesCompleted() > 0
     ],
     [
+      () => InfinityGenerator(8).bought() > 0,
       () => InfinityChallenge.isInfinityChallengeRunning(1) && player.stats.timeSinceInfinity <= 1,
+      () => Prestige.prestigePowerMultGain().gte(Decimal.pow(2, 256)),
+      () => InfinityStars.multiplier().gte(Decimal.pow(2, 256)),
       () => InfinityChallenge.isInfinityChallengeRunning(3) && player.stats.timeSinceInfinity <= 3,
+      () => InfinityChallenge.isInfinityChallengeRunning(2) && player.stats.prestigesThisInfinity === 0,
       () => InfinityChallenge.numberOfInfinityChallengesCompleted() >= 8,
-      () => true,
+      () => true
+    ],
+    [
       () => player.stats.timeSinceEternity <= 3600,
       () => range(1, 16).some(i => Study(i).isBought()),
       () => EternityMilestones.hasAllEternityMilestones(),
-      () => Eternities.amount().gte(256)
-    ],
-    [
+      () => player.stats.timeSinceEternity <= 60,
+      () => Eternities.amount().gte(256),
       () => range(1, 4).every(i => Study(i).isBought()),
       () => InfinityChallenge.isInfinityChallengeRunning(4) && player.stats.timeSinceInfinity <= 16,
-      () => EternityProducer.isUnlocked(),
+      () => EternityProducer.isUnlocked()
+    ],
+    [
+      () => Boost.extraTheoremsActualAndDisplay() >= 6,
       () => EternityChallenge.getTotalEternityChallengeCompletions() > 0,
+      () => [1, 2, 3, 4, 5, 6, 7, 8].some(x => EternityChallenge.getEternityChallengeCompletions(x) === 4),
       () => EternityPoints.totalEPProduced().gte(Decimal.pow(2, 256)),
       () => true,
       () => EternityChallenge.isEternityChallengeRunning(1) &&
-        EternityPrestigeLayer.eternityPointGain().gte(Decimal.pow(2, 256)),
+          EternityPrestigeLayer.eternityPointGain().gte(Decimal.pow(2, 256)),
+      () => EternityChallenge.getTotalEternityChallengeCompletions() >= 24,
       () => Chroma.isUnlocked()
     ],
     [
+      () => Chroma.isUnlocked() && Chroma.amount() >= Chroma.cap() * 0.75,
       () => EternityChallenge.areAllEternityChallengesCompleted(),
       () => Stars.amount().gte(Decimal.pow(9, Math.pow(9, 9))),
       () => range(1, 12).every(i => Study(i).isBought()),
+      () => Generators.areAnyMultipliersNerfed(),
       () => Permanence.getEternitiesPerPermanence().lte(1),
-      () => true,
+      () => Chroma.effectOfColor(3) >= 64,
+      () => true
+    ],
+    [
+      () => PrestigeLayerProgress.hasReached('complexity') && Chroma.isUnlocked(),
+      () => ComplexityChallenge.getComplexityChallengeCompletions(1) >= 2,
       () => player.stats.timeSinceComplexity <= Math.pow(2, 16),
       () => ComplexityAchievements.getTotalAchievementsUnlocked() > 0,
+      () => ComplexityGenerator(2).bought() > 0,
+      () => player.stats.timeSinceComplexity <= 3600,
+      () => Achievements.complexityAchievementLines.some(i => i.every(j => ComplexityAchievements.hasComplexityAchievement(j[0], j[1]))),
       () => ComplexityAchievements.getTotalAchievementsUnlocked() >= 16
     ],
     [
@@ -166,19 +236,29 @@ let Achievements = {
       () => ComplexityPrestigeLayer.complexityPointGain().gte(16) && !Chroma.isColorUnlocked(6),
       () => range(1, 6).every(i => ComplexityChallenge.isComplexityChallengeRunning(i)),
       () => Powers.isUnlocked(),
+      () => Powers.equipped().length === 3 && Powers.equipped().every(i => i.type === Powers.equipped()[0].type),
       () => Powers.equipped().concat(Powers.stored()).length >= 12,
-      () => Oracle.isUnlocked(),
-      () => true,
-      () => Galaxy.isUnlocked()
+      () => Powers.isUnlocked() && Powers.getExtraMultiplier('eternity') === 3,
+      () => Oracle.isUnlocked()
     ],
     [
-      () => Powers.equipped().concat(Powers.stored()).some(x => x.rarity >= 3),
-      () => Powers.isUnlocked() && Powers.getExtraMultiplier('eternity') === 3,
-      () => Galaxy.timeToReachEffectCap() >= 18000,
       () => true,
+      () => Eternities.amount().gte(Decimal.pow(2, 256)),
+      () => Powers.equipped().concat(Powers.stored()).some(x => x.rarity >= 3),
+      () => Galaxy.isUnlocked(),
+      () => Chroma.isUnlocked() && Chroma.amount() >= Math.pow(2, Achievements.logThresholdChromaForDoubling()),
+      () => Galaxy.timeToReachEffectCap() >= 18000,
+      () => Powers.isUnlocked() && Powers.getExtraMultiplier('eternity') === 3 && player.stats.timeSinceComplexity <= 60,
+      () => true
+    ],
+    [
+      () => PrestigeLayerProgress.hasReached('finality'),
+      () => PrestigeLayerProgress.hasReached('finality') && Powers.isUnlocked(),
       () => player.stats.timeSinceFinality <= Math.pow(2, 16),
       () => FinalityShards.totalUpgradeBonuses() >= 16,
+      () => player.stats.timeSinceFinality <= 3600,
       () => FinalityMilestones.hasAllFinalityMilestones(),
+      () => FinalityGenerator(8).bought() > 0,
       () => FinalityShards.areAllUpgradesCapped()
     ]
   ],
@@ -201,63 +281,103 @@ let Achievements = {
       'prestige',
       'loop',
       'loop',
-      'infinity'
-    ],
-    [
-      'loop',
-      'loop',
-      'loop',
-      'loop',
-      'loop',
-      'infinity',
-      'infinity',
       'loop'
     ],
     [
-      'infinity',
+      'loop',
       'infinity',
       'loop',
-      'eternity',
-      'eternity',
+      'prestige',
       'loop',
+      'infinity',
       'loop',
       'loop'
     ],
     [
       'loop',
       'infinity',
+      'infinity',
+      'loop',
+      'infinity',
+      'infinity',
+      'infinity',
+      'loop'
+    ],
+    [
+      'loop',
+      'infinity',
+      'prestige',
+      'loop',
+      'infinity',
+      'infinity',
+      'loop',
+      'eternity'
+    ],
+    [
+      'eternity',
+      'loop',
+      'loop',
+      'eternity',
+      'loop',
+      'loop',
+      'infinity',
+      'loop'
+    ],
+    [
+      'loop',
       'loop',
       'loop',
       'loop',
       'permanence',
       'eternity',
-      'loop'
-    ],
-    [
-      'loop',
-      'loop',
-      'loop',
-      'loop',
-      'complexity',
-      'complexity',
       'loop',
       'loop'
     ],
     [
       'loop',
+      'loop',
+      'loop',
+      'loop',
+      'loop',
+      'loop',
+      'loop',
+      'complexity'
+    ],
+    [
+      'loop',
+      'loop',
+      'complexity',
+      'loop',
+      'loop',
+      'complexity',
+      'loop',
+      'loop'
+    ],
+    [
+      'loop',
       'complexity',
       'complexity',
       'loop',
       'loop',
       'loop',
+      'loop',
+      'loop'
+    ],
+    [
       'craft',
-      'loop'
+      'loop',
+      'loop',
+      'loop',
+      'loop',
+      'loop',
+      'loop',
+      'finality'
     ],
     [
-      'loop',
-      'loop',
+      'complexity',
       'loop',
       'finality',
+      'loop',
       'finality',
       'loop',
       'loop',
@@ -268,7 +388,7 @@ let Achievements = {
     this.cache = {};
   },
   checkForAchievements(situation) {
-    for (let row = 1; row <= 8; row++) {
+    for (let row = 1; row <= 12; row++) {
       for (let column = 1; column <= 8; column++) {
         if (!this.hasAchievement(row, column) &&
           this.getAchievementSituation(row, column) === situation &&
@@ -296,6 +416,9 @@ let Achievements = {
   unlockAchievement(row, column) {
     player.achievements.table[row - 1][column - 1] = true;
     Notifications.notify(this.getAchievementRawName(row, column), 'achievements');
+    if (this.cache.count) {
+      this.cache.count++;
+    }
   },
   active() {
     return player.achievements.active;
@@ -323,7 +446,7 @@ let Achievements = {
   },
   showRow(x) {
     if (!('row' + x in this.cache)) {
-      let highestCloseRow = Math.min(8, Math.floor(this.getHighest() + this.beyondHighest() - 1) / 8);
+      let highestCloseRow = Math.min(12, Math.floor(this.getHighest() + this.beyondHighest() - 1) / 8);
       this.cache['row' + x] = (this.showFullyFarRows() || x <= highestCloseRow) &&
         (this.showCompletedRows() || range(1, 8).some(y => !this.hasAchievement(x, y)));
     }
@@ -340,7 +463,7 @@ let Achievements = {
   },
   getHighest() {
     if (!('highest' in this.cache)) {
-      this.cache['highest'] = Math.max(8, ...range(1, 8).map(
+      this.cache['highest'] = Math.max(8, ...range(1, 12).map(
         x => 8 * x + Math.max(...range(1, 8).filter(y => this.hasAchievement(x, y)))));
     }
     return this.cache['highest'];
@@ -377,7 +500,10 @@ let Achievements = {
     return (this.getTotalAchievementsUnlocked() + player.cheats.extraAchievements) * player.cheats.achievementExtraMultiplier;
   },
   getTotalAchievementsUnlocked() {
-    return range(1, 8).map(x => range(1, 8).filter(y => this.hasAchievement(x, y)).length).reduce((a, b) => a + b);
+    if (this.cache.count === undefined) {
+      this.cache.count = range(1, 12).map(x => range(1, 8).filter(y => this.hasAchievement(x, y)).length).reduce((a, b) => a + b);
+    }
+    return this.cache.count;
   },
   nonGeneratorEffectsText() {
     let result = []
@@ -397,6 +523,33 @@ let Achievements = {
   },
   hasReversed(x) {
     return range(0, x.length - 2).every(i => x[i].lt(x[i + 1]));
+  },
+  complexityAchievementLines: [
+    [[1, 1], [1, 2], [1, 3], [1, 4]],
+    [[2, 1], [2, 2], [2, 3], [2, 4]],
+    [[3, 1], [3, 2], [3, 3], [3, 4]],
+    [[4, 1], [4, 2], [4, 3], [4, 4]],
+    [[1, 1], [2, 1], [3, 1], [4, 1]],
+    [[1, 2], [2, 2], [3, 2], [4, 2]],
+    [[1, 3], [2, 3], [3, 3], [4, 3]],
+    [[1, 4], [2, 4], [3, 4], [4, 4]]
+  ],
+  logThresholdChromaForDoubling() {
+    let eff = Galaxy.effect();
+    // Note that this can be infinite if the galaxy effect is slightly more than 1, also.
+    // I just feel slightly unsafe about the effect = 1 logic even though it should work,
+    // so it's special-cased.
+    return (eff === 1) ? Infinity : eff / (eff - 1);
+  },
+  thresholdChromaForDoublingText() {
+    if (!(Chroma.isUnlocked() && Galaxy.isUnlocked())) {
+      return '';
+    }
+    if (Galaxy.effect() === 1) {
+      return ' (currently requires infinite chroma)'
+    }
+    let t = Decimal.pow(2, this.logThresholdChromaForDoubling());
+    return ' (currently requires ' + format(t) + ' chroma)';
   },
   color(row, column) {
     return Colors.makeStyle(this.hasAchievement(row, column), false);
