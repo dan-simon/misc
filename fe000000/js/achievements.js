@@ -78,7 +78,7 @@ let Achievements = {
       'Fourth row hype',
       'What\'s that?',
       'That doesn\'t sound right',
-      'No more waiting',
+      'Lightspeed',
       'It\'s not simple'
     ],
     [
@@ -133,7 +133,7 @@ let Achievements = {
   // Yes, there is some confusion between chroma and display chroma. But chroma is IMO the right one
   // to use because it's the thing we're actually basing stuff on.
   // No, I'm not sure if comparing to the chroma cap requires us to also check that chroma is unlocked,
-  // but better safe that sorry.
+  // but better safe that sorry (perhaps the chroma cap could be 0, which would give the achievement for free).
   // Yes, "Have a power with rarity at least 3" actually requires you to have such a power,
   // not just to gain one. This very rarely encourages deleting a power so you can get
   // a new power with rarity at least 3 to not be deleted, but that's very rare.
@@ -218,7 +218,7 @@ let Achievements = {
       () => range(1, 12).every(i => Study(i).isBought()),
       () => Generators.areAnyMultipliersNerfed(),
       () => Permanence.getEternitiesPerPermanence().lte(1),
-      () => Chroma.effectOfColor(3) >= 64,
+      () => Chroma.amount() >= Math.pow(2, 14) && player.stats.timeSinceEternity <= 16,
       () => true
     ],
     [
