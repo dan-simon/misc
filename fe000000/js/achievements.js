@@ -164,9 +164,9 @@ let Achievements = {
       () => range(1, 8).map(i => Generator(i).multiplier()).every(i => i.gte(Math.pow(2, 16))),
       () => true,
       () => Challenge.numberOfChallengesCompleted() > 0,
+      () => player.stats.timeSinceInfinity <= 3600,
       () => Prestige.prestigePowerMultGain().gte(16),
       () => InfinityGenerator(2).bought() > 0,
-      () => player.stats.timeSinceInfinity <= 3600,
       () => Challenge.numberOfChallengesCompleted() >= 6,
       () => InfinityPrestigeLayer.isBreakInfinityOn()
     ],
@@ -287,9 +287,9 @@ let Achievements = {
       'loop',
       'infinity',
       'loop',
+      'infinity',
       'prestige',
       'loop',
-      'infinity',
       'loop',
       'loop'
     ],
