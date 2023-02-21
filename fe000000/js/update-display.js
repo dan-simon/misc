@@ -5406,7 +5406,7 @@ function updateDisplay() {
     if (shouldUpdate("e2302")) {let v = Achievements.achievementStatusDescription(9, 2); if (e[2302].textContent !== v) {e[2302].textContent = v};};
     if (shouldUpdate("b2062")) {let v = Achievements.isAchievementClose(9, 2) ? '' : 'none'; if (b[2062].style.display !== v) {b[2062].style.display = v};};
     if (shouldUpdate("e2303")) {let v = formatOrdinalInt(1); if (e[2303].textContent !== v) {e[2303].textContent = v};};
-    if (shouldUpdate("e2304")) {let v = format(2); if (e[2304].textContent !== v) {e[2304].textContent = v};};
+    if (shouldUpdate("e2304")) {let v = formatInt(2); if (e[2304].textContent !== v) {e[2304].textContent = v};};
     if (shouldUpdate("b2063")) {let v = Achievements.color(9, 3); if (b[2063].style.background !== v) {b[2063].style.background = v};};
     if (shouldUpdate("e2305")) {let v = Achievements.getAchievementName(9, 3); if (e[2305].textContent !== v) {e[2305].textContent = v};};
     if (shouldUpdate("e2306")) {let v = Achievements.achievementStatusDescription(9, 3); if (e[2306].textContent !== v) {e[2306].textContent = v};};
@@ -5872,7 +5872,7 @@ function updateDisplay() {
     if (shouldUpdate("e2571")) {let v = Achievements.getAchievementName(9, 2); if (e[2571].textContent !== v) {e[2571].textContent = v};};
     if (shouldUpdate("e2572")) {let v = Achievements.achievementStatusDescription(9, 2); if (e[2572].textContent !== v) {e[2572].textContent = v};};
     if (shouldUpdate("e2573")) {let v = formatOrdinalInt(1); if (e[2573].textContent !== v) {e[2573].textContent = v};};
-    if (shouldUpdate("e2574")) {let v = format(2); if (e[2574].textContent !== v) {e[2574].textContent = v};};
+    if (shouldUpdate("e2574")) {let v = formatInt(2); if (e[2574].textContent !== v) {e[2574].textContent = v};};
     if (shouldUpdate("b2259")) {let v = Achievements.showAchievementDescriptionBelow(9, 3) ? '' : 'none'; if (b[2259].style.display !== v) {b[2259].style.display = v};};
     if (shouldUpdate("b2260")) {let v = Achievements.showAchievementDescriptionBelow(9, 3) ? '' : 'none'; if (b[2260].style.display !== v) {b[2260].style.display = v};};
     if (shouldUpdate("e2575")) {let v = Achievements.getAchievementName(9, 3); if (e[2575].textContent !== v) {e[2575].textContent = v};};
