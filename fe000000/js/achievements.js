@@ -89,7 +89,7 @@ let Achievements = {
       'Too complex?',
       'Faster than a turtle',
       'Bingo',
-      'Still two more rows here'
+      'Still three more rows here'
     ],
     [
       'Even more... this achievement name is overdone',
@@ -125,8 +125,9 @@ let Achievements = {
   // Various notes:
   // Yes, it is important that Challenge 10 be running (not just have its effect active)
   // for the Challenge 10 achievement. If some other challenge incorporated Challenge 10,
-  // you still wouldn't be in Challenge 10 while in it. This is even more true for Challenge 2,
-  // since in that case there actually *is* another challenge (IC1) incorporating it.
+  // you still wouldn't be in Challenge 10 while in it. This is even more true for Challenge 2
+  // (and with new achievements, now also Challenge 7), since in that case
+  // there actually *is* another challenge (IC1) incorporating them.
   // Whether the total EP achievement is current complexity or full total has no
   // consequences at all, because you necessarily get this achievement in first complexity.
   // Exception: Importing a save, where full total gives the achievement, as it should be.
@@ -134,9 +135,16 @@ let Achievements = {
   // to use because it's the thing we're actually basing stuff on.
   // No, I'm not sure if comparing to the chroma cap requires us to also check that chroma is unlocked,
   // but better safe that sorry (perhaps the chroma cap could be 0, which would give the achievement for free).
+  // No, even though the permanence multipliers from sources other than the last permanence upgrade
+  // aren't high enough to get 1 permanence per eternity, I'm not completely sure that will stay true;
+  // we do require the eternity producer to be unlocked (i.e., you can see permanence) but we don't require
+  // enough eternities for gaining permanence to be possible.
   // Yes, "Have a power with rarity at least 3" actually requires you to have such a power,
   // not just to gain one. This very rarely encourages deleting a power so you can get
   // a new power with rarity at least 3 to not be deleted, but that's very rare.
+  // The "Have a power with rarity at least 3" is one or two slots earlier than it is on average,
+  // but it's possible to get it very early and I want to minimize the chance of that somewhat,
+  // and also I like galaxies being in the middle of (i.e., 4th in) their row.
   // You don't need an eternity power for the achievement for capping eternity power
   // extra multiplier, but powers do need to be unlocked.
   requirements: [
@@ -217,7 +225,7 @@ let Achievements = {
       () => Stars.amount().gte(Decimal.pow(9, Math.pow(9, 9))),
       () => range(1, 12).every(i => Study(i).isBought()),
       () => Generators.areAnyMultipliersNerfed(),
-      () => Permanence.getEternitiesPerPermanence().lte(1),
+      () => EternityProducer.isUnlocked() && Permanence.getEternitiesPerPermanence().lte(1),
       () => Chroma.amount() >= Math.pow(2, 14) && player.stats.timeSinceEternity <= 16,
       () => true
     ],
