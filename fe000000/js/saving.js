@@ -1140,7 +1140,7 @@ let Saving = {
       player.version = 2.015625;
     }
     if (player.version < 2.01953125) {
-      if (Decimal.lte(4, player.eternities) && Decimal.lte(player.eternities, 6)) {
+      if (Decimal.lte(4, player.eternities) && Decimal.lt(player.eternities, 6)) {
         alert('Eternity milestones 4 and 6 have been swapped (view the eternity milestones tab for more information). ' +
           'You may want to change your sacrifice autobuyer to not constantly sacrifice.');
       }
@@ -1603,7 +1603,7 @@ let Saving = {
           player.achievements.table[3][1], false, player.achievements.table[3][2], player.achievements.table[3][3]
         ],
         [
-          player.achievements.table[3][4], player.achievements.table[3][5], player.achievements.table[3][6], false, 
+          player.achievements.table[3][4], player.achievements.table[3][5], false, player.achievements.table[3][6],
           player.achievements.table[3][7], player.achievements.table[4][0], player.achievements.table[4][1], player.achievements.table[4][2]
         ],
         [

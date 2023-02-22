@@ -54,8 +54,8 @@ let Achievements = {
     [
       'Hold infinity in the palm of your hand',
       'Not edutainment',
-      'Longer than forever',
       'I knew him forever',
+      'Longer than forever',
       'More nerf removal',
       'Normal achievement',
       'More stop-and-go',
@@ -193,8 +193,8 @@ let Achievements = {
     [
       () => player.stats.timeSinceEternity <= 3600,
       () => range(1, 16).some(i => Study(i).isBought()),
-      () => EternityMilestones.hasAllEternityMilestones(),
       () => player.stats.timeSinceEternity <= 60,
+      () => EternityMilestones.hasAllEternityMilestones(),
       () => Eternities.amount().gte(256),
       () => range(1, 4).every(i => Study(i).isBought()),
       () => InfinityChallenge.isInfinityChallengeRunning(4) && player.stats.timeSinceInfinity <= 16,
@@ -316,8 +316,8 @@ let Achievements = {
     [
       'eternity',
       'loop',
-      'loop',
       'eternity',
+      'loop',
       'loop',
       'loop',
       'infinity',
