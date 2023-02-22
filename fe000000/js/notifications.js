@@ -19,7 +19,7 @@ let Notifications = {
       }
     };
     e.onclick = remove;
-    setTimeout(remove, 16000);
+    setTimeout(remove, 16384);
     if (document.getElementById('notificationarea').children.length >= 4 &&
     document.getElementById('notificationarea').children[0].className !== 'notification removal') {
       this.addRemoveAll();
@@ -30,9 +30,15 @@ let Notifications = {
     e.className = 'notification removal';
     e.innerText = 'Click this to clear all notifications immediately';
     document.getElementById('notificationarea').insertBefore(e, document.getElementById('notificationarea').children[0]);
+    let remove = function() {
+      if (document.body.contains(e)) {
+        document.getElementById('notificationarea').removeChild(e);
+      }
+    };
     let removeAll = function() {
       document.getElementById('notificationarea').textContent = '';
     };
     e.onclick = removeAll;
+    setTimeout(remove, 16384);
   }
 }
