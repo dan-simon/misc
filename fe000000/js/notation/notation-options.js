@@ -135,9 +135,11 @@ let NotationOptions = {
     return stringToNum(x, specialFormat);
   },
   read(x, y) {
-    // Never return decimal, always return number. This is only used on number inputs,
+    // Never return decimal, always return number. Generally, this is only used on number inputs,
     // as you can see by looking at all the things below that it's used for.
-    return +{
+    // However, there's one special case, which is that we can return "min" or "max",
+    // so we can't just always apply + to the result.
+    let res = {
       'autobuyers-timer-length': () => this.readMaybeTime(y, true),
       'chroma-value': () => this.readMaybeTime(y, false),
       'craft-rarity': () => (y === 'max' || y === 'min') ? y : this.readMaybeTime(y, false),
@@ -152,6 +154,11 @@ let NotationOptions = {
       'higher-precision': () => this.readMaybeTime(y, false),
       'input-precision': () => this.readMaybeTime(y, false),
     }[x]();
+    if (res == 'min' || res === 'max') {
+      return res;
+    } else {
+      return +res;
+    }
   },
   format(x) {
     return {

@@ -286,7 +286,7 @@ let Powers = {
     return result;
   },
   cutoff(x) {
-    return this.getSortedPowerList(x, true, true).map(p => this.strength(p) * this.rarity(p))[this.maximumEquippedLimit() - 1] || 0;
+    return this.getSortedPowerList(x, true, true).map(p => this.strength(p) * this.rarity(p))[this.maximumEquippedLimit() - 1] || -1;
   },
   cutoffIndex(x, cutoff) {
     let over = this.equipped().concat(this.stored()).filter(p => p.type === x && this.strength(p) * this.rarity(p) > cutoff);
