@@ -9,11 +9,13 @@ let Chroma = {
     Decimal.pow(2, Math.pow(2, 15)),
     Decimal.pow(2, Math.pow(2, 17)),
   ],
+  // The third color formula has a special case for x < 256 so that having more EP
+  // doesn't hurt for sufficiently small x (due to the power of Math.log2(x / 256) / 4 being negative).
   colorEffectFormulas: [
     null,
     x => Math.pow(1 + x / 1024, 2.5),
     x => Decimal.pow(1 + x / 64, 0.5),
-    x => Decimal.pow(Math.max(EternityPoints.totalEPProducedThisComplexity().log2() / 4096, 1),
+    x => Decimal.pow((x >= 256) ? Math.max(EternityPoints.totalEPProducedThisComplexity().log2() / 4096, 1) : 2,
       Math.log2(x / 256) / 4).div(2).plus(1),
     x => Decimal.pow(EternityGenerator(8).amount().max(1), 2 * Math.sqrt(x)),
     x => Math.floor(Math.pow(16 * Math.log2(1 + x / 4096), ComplexityAchievements.effect(3, 4))),

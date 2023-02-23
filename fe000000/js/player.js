@@ -275,8 +275,12 @@ let initialPlayer = {
       [false, false, false, false, false, false, false, false],
       [false, false, false, false, false, false, false, false],
       [false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false, false],
     ],
-    beyondHighest: 2,
+    beyondHighest: 4,
     active: true,
     requirementDescriptions: true,
     showFullyFarRows: true,
@@ -569,7 +573,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.23046875
+  version: 2.25
 }
 
 let player;

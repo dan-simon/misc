@@ -44,7 +44,7 @@ let PowerUpgrade = function (i) {
       if (i === 1) {
         return 1 + Math.sqrt(Math.log2(1 + x / 4)) + Galaxy.getStrengthIncrease() + FinalityShardUpgrade(7).effect();
       } else if (i === 3) {
-        return Math.sqrt(-Math.log2(4 / (4 + x)));
+        return Math.sqrt(-Math.log2(4 / (8 + x)));
       } else {
         return x;
       }
@@ -286,7 +286,7 @@ let Powers = {
     return result;
   },
   cutoff(x) {
-    return this.getSortedPowerList(x, true, true).map(p => this.strength(p) * this.rarity(p))[this.maximumEquippedLimit() - 1] || 0;
+    return this.getSortedPowerList(x, true, true).map(p => this.strength(p) * this.rarity(p))[this.maximumEquippedLimit() - 1] || -1;
   },
   cutoffIndex(x, cutoff) {
     let over = this.equipped().concat(this.stored()).filter(p => p.type === x && this.strength(p) * this.rarity(p) > cutoff);

@@ -3263,7 +3263,7 @@
         <span>Your galaxies are increasing the strength of new powers by ~r formatPrecisely(Galaxy.getStrengthIncrease()) ~.</span>
         <br/>
         <br/>
-        <span>You have spent ~t player.stats.timeSinceComplexity ~ in this complexity, increasing chroma caps ^~r formatPrecisely(Galaxy.effect()) ~.</span>
+        <span>You have spent ~t player.stats.timeSinceComplexity ~ in this complexity, increasing the chroma cap ^~r formatPrecisely(Galaxy.effect()) ~.</span>
         <br/>
         <br/>
         <span>You can make some of your galaxies dilated to make the galaxy effect increase faster, but have a lower cap.</span>
@@ -3761,13 +3761,13 @@
             <span>~r Achievements.getAchievementName(2, 7) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(2, 7) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(2, 7) ? '' : 'none'~>Have all ~r Generators.term(true) ~ multipliers in reverse order (G8 multiplier larger than G7 multiplier ... larger than G1 multiplier).</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(2, 7) ? '' : 'none'~>Get ~i Math.pow(2, 128) ~ stars in a minute or less after prestige.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(2, 8)~>
             <span>~r Achievements.getAchievementName(2, 8) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(2, 8) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(2, 8) ? '' : 'none'~>Infinity.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(2, 8) ? '' : 'none'~>Have all ~r Generators.term(true) ~ multipliers in reverse order (G8 multiplier larger than G7 multiplier ... larger than G1 multiplier).</span>
           </td>
         </tr>
         <tr ~style.display=Achievements.showRow(3) ? '' : 'none'~>
@@ -3775,49 +3775,49 @@
             <span>~r Achievements.getAchievementName(3, 1) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(3, 1) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 1) ? '' : 'none'~>Complete a normal challenge.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 1) ? '' : 'none'~>Have all ~r Generators.term(true) ~ multipliers over ~i Math.pow(2, 16) ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(3, 2)~>
             <span>~r Achievements.getAchievementName(3, 2) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(3, 2) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 2) ? '' : 'none'~>Complete ~i 6 ~ normal challenges.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 2) ? '' : 'none'~>Infinity.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(3, 3)~>
             <span>~r Achievements.getAchievementName(3, 3) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(3, 3) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 3) ? '' : 'none'~>Break infinity.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 3) ? '' : 'none'~>Complete a normal challenge.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(3, 4)~>
             <span>~r Achievements.getAchievementName(3, 4) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(3, 4) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 4) ? '' : 'none'~>Get ~i Decimal.pow(2, 1024) ~ stars.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 4) ? '' : 'none'~>Infinity in ~ts 3600 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(3, 5)~>
             <span>~r Achievements.getAchievementName(3, 5) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(3, 5) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 5) ? '' : 'none'~>Get ~i 256 ~ infinities.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 5) ? '' : 'none'~>Prestige for ~i 16 ~x or more prestige power in a single prestige.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(3, 6)~>
             <span>~r Achievements.getAchievementName(3, 6) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(3, 6) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 6) ? '' : 'none'~>Infinity in Normal Challenge ~o 10 ~ without sacrificing.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 6) ? '' : 'none'~>Buy Infinity Generator ~o 2 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(3, 7)~>
             <span>~r Achievements.getAchievementName(3, 7) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(3, 7) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 7) ? '' : 'none'~>Infinity in Normal Challenge ~o 2 ~ in ~ti 16 ~.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 7) ? '' : 'none'~>Complete ~i 6 ~ normal challenges.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(3, 8)~>
             <span>~r Achievements.getAchievementName(3, 8) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(3, 8) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 8) ? '' : 'none'~>Complete an infinity challenge.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(3, 8) ? '' : 'none'~>Break infinity.</span>
           </td>
         </tr>
         <tr ~style.display=Achievements.showRow(4) ? '' : 'none'~>
@@ -3825,49 +3825,49 @@
             <span>~r Achievements.getAchievementName(4, 1) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(4, 1) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(4, 1) ? '' : 'none'~>Infinity in Infinity Challenge ~o 1 ~ in ~ti 1 ~.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(4, 1) ? '' : 'none'~>Get ~i Decimal.pow(2, 1024) ~ stars.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(4, 2)~>
             <span>~r Achievements.getAchievementName(4, 2) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(4, 2) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(4, 2) ? '' : 'none'~>Infinity in Infinity Challenge ~o 3 ~ in ~ti 3 ~.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(4, 2) ? '' : 'none'~>Infinity in ~ti 60 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(4, 3)~>
             <span>~r Achievements.getAchievementName(4, 3) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(4, 3) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(4, 3) ? '' : 'none'~>Complete all infinity challenges.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(4, 3) ? '' : 'none'~>Infinity in Normal Challenge ~o 7 ~ with at least ~i 256 ~ purchases remaining.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(4, 4)~>
             <span>~r Achievements.getAchievementName(4, 4) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(4, 4) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(4, 4) ? '' : 'none'~>Eternity.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(4, 4) ? '' : 'none'~>Get ~i 256 ~ infinities.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(4, 5)~>
             <span>~r Achievements.getAchievementName(4, 5) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(4, 5) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(4, 5) ? '' : 'none'~>Eternity in ~ts 3600 ~.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(4, 5) ? '' : 'none'~>Infinity in Normal Challenge ~o 10 ~ without sacrificing.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(4, 6)~>
             <span>~r Achievements.getAchievementName(4, 6) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(4, 6) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(4, 6) ? '' : 'none'~>Buy a study.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(4, 6) ? '' : 'none'~>Infinity in Normal Challenge ~o 2 ~ in ~ti 16 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(4, 7)~>
             <span>~r Achievements.getAchievementName(4, 7) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(4, 7) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(4, 7) ? '' : 'none'~>Complete all eternity milestones.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(4, 7) ? '' : 'none'~>Infinity for ~i 4096 ~ IP, having done ~i 4 ~ or fewer prestiges (you have done ~i player.stats.prestigesThisInfinity ~ prestiges).</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(4, 8)~>
             <span>~r Achievements.getAchievementName(4, 8) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(4, 8) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(4, 8) ? '' : 'none'~>Get ~i 256 ~ eternities.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(4, 8) ? '' : 'none'~>Complete an infinity challenge.</span>
           </td>
         </tr>
         <tr ~style.display=Achievements.showRow(5) ? '' : 'none'~>
@@ -3875,49 +3875,49 @@
             <span>~r Achievements.getAchievementName(5, 1) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(5, 1) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(5, 1) ? '' : 'none'~>Have all the first-row studies at once.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(5, 1) ? '' : 'none'~>Buy Infinity Generator ~o 8 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(5, 2)~>
             <span>~r Achievements.getAchievementName(5, 2) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(5, 2) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(5, 2) ? '' : 'none'~>Infinity in Infinity Challenge ~o 4 ~ in ~ti 16 ~.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(5, 2) ? '' : 'none'~>Infinity in Infinity Challenge ~o 1 ~ in ~ti 1 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(5, 3)~>
             <span>~r Achievements.getAchievementName(5, 3) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(5, 3) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(5, 3) ? '' : 'none'~>Unlock the Eternity Producer.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(5, 3) ? '' : 'none'~>Prestige for ~i Math.pow(2, 256) ~x or more prestige power in a single prestige.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(5, 4)~>
             <span>~r Achievements.getAchievementName(5, 4) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(5, 4) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(5, 4) ? '' : 'none'~>Complete an eternity challenge.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(5, 4) ? '' : 'none'~>Get a ~i Math.pow(2, 256) ~x multiplier from infinity stars.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(5, 5)~>
             <span>~r Achievements.getAchievementName(5, 5) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(5, 5) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(5, 5) ? '' : 'none'~>Get ~i Math.pow(2, 256) ~ total EP.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(5, 5) ? '' : 'none'~>Infinity in Infinity Challenge ~o 3 ~ in ~ti 3 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(5, 6)~>
             <span>~r Achievements.getAchievementName(5, 6) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(5, 6) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(5, 6) ? '' : 'none'~>Gain permanence.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(5, 6) ? '' : 'none'~>Infinity in Infinity Challenge ~o 2 ~ without prestiging.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(5, 7)~>
             <span>~r Achievements.getAchievementName(5, 7) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(5, 7) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(5, 7) ? '' : 'none'~>Eternity for ~i Math.pow(2, 256) ~ EP while in Eternity Challenge ~o 1 ~.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(5, 7) ? '' : 'none'~>Complete all infinity challenges.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(5, 8)~>
             <span>~r Achievements.getAchievementName(5, 8) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(5, 8) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(5, 8) ? '' : 'none'~>Unlock chroma.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(5, 8) ? '' : 'none'~>Eternity.</span>
           </td>
         </tr>
         <tr ~style.display=Achievements.showRow(6) ? '' : 'none'~>
@@ -3925,49 +3925,49 @@
             <span>~r Achievements.getAchievementName(6, 1) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(6, 1) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(6, 1) ? '' : 'none'~>Complete all eternity challenges (~i 4 ~ times each).</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(6, 1) ? '' : 'none'~>Eternity in ~ts 3600 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(6, 2)~>
             <span>~r Achievements.getAchievementName(6, 2) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(6, 2) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(6, 2) ? '' : 'none'~>Get ~i Decimal.pow(9, Math.pow(9, 9)) ~ stars.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(6, 2) ? '' : 'none'~>Buy a study.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(6, 3)~>
             <span>~r Achievements.getAchievementName(6, 3) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(6, 3) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(6, 3) ? '' : 'none'~>Have all the studies in the first three rows at once.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(6, 3) ? '' : 'none'~>Eternity in ~ti 60 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(6, 4)~>
             <span>~r Achievements.getAchievementName(6, 4) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(6, 4) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(6, 4) ? '' : 'none'~>Get at least ~i 1 ~ permanence per eternity.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(6, 4) ? '' : 'none'~>Complete all eternity milestones.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(6, 5)~>
             <span>~r Achievements.getAchievementName(6, 5) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(6, 5) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(6, 5) ? '' : 'none'~>Complexity.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(6, 5) ? '' : 'none'~>Get ~i 256 ~ eternities.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(6, 6)~>
             <span>~r Achievements.getAchievementName(6, 6) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(6, 6) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(6, 6) ? '' : 'none'~>Complexity in ~ts Math.pow(2, 16) ~.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(6, 6) ? '' : 'none'~>Have all the first-row studies at once.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(6, 7)~>
             <span>~r Achievements.getAchievementName(6, 7) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(6, 7) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(6, 7) ? '' : 'none'~>Complete a complexity achievement.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(6, 7) ? '' : 'none'~>Infinity in Infinity Challenge ~o 4 ~ in ~ti 16 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(6, 8)~>
             <span>~r Achievements.getAchievementName(6, 8) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(6, 8) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(6, 8) ? '' : 'none'~>Complete all the complexity achievements.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(6, 8) ? '' : 'none'~>Unlock the Eternity Producer.</span>
           </td>
         </tr>
         <tr ~style.display=Achievements.showRow(7) ? '' : 'none'~>
@@ -3975,49 +3975,49 @@
             <span>~r Achievements.getAchievementName(7, 1) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(7, 1) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(7, 1) ? '' : 'none'~>Get ~i 256 ~ complexities.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(7, 1) ? '' : 'none'~>Get ~i 6 ~ theorems from boost power.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(7, 2)~>
             <span>~r Achievements.getAchievementName(7, 2) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(7, 2) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(7, 2) ? '' : 'none'~>Complexity for ~i 16 ~ ℂP without unlocking red.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(7, 2) ? '' : 'none'~>Complete an eternity challenge.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(7, 3)~>
             <span>~r Achievements.getAchievementName(7, 3) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(7, 3) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(7, 3) ? '' : 'none'~>Complexity while in all ~i 6 ~ complexity challenges.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(7, 3) ? '' : 'none'~>Complete an eternity challenge ~i 4 ~ times.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(7, 4)~>
             <span>~r Achievements.getAchievementName(7, 4) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(7, 4) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(7, 4) ? '' : 'none'~>Unlock powers.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(7, 4) ? '' : 'none'~>Get ~i Math.pow(2, 256) ~ total EP.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(7, 5)~>
             <span>~r Achievements.getAchievementName(7, 5) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(7, 5) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(7, 5) ? '' : 'none'~>Have ~i 12 ~ total powers (equipped and stored powers, not counting deleted powers).</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(7, 5) ? '' : 'none'~>Gain permanence.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(7, 6)~>
             <span>~r Achievements.getAchievementName(7, 6) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(7, 6) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(7, 6) ? '' : 'none'~>Unlock the Oracle.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(7, 6) ? '' : 'none'~>Eternity for ~i Math.pow(2, 256) ~ EP while in Eternity Challenge ~o 1 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(7, 7)~>
             <span>~r Achievements.getAchievementName(7, 7) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(7, 7) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(7, 7) ? '' : 'none'~>Craft a power.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(7, 7) ? '' : 'none'~>Complete ~i 24 ~ eternity challenge tiers.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(7, 8)~>
             <span>~r Achievements.getAchievementName(7, 8) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(7, 8) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(7, 8) ? '' : 'none'~>Unlock galaxies.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(7, 8) ? '' : 'none'~>Unlock chroma.</span>
           </td>
         </tr>
         <tr ~style.display=Achievements.showRow(8) ? '' : 'none'~>
@@ -4025,49 +4025,249 @@
             <span>~r Achievements.getAchievementName(8, 1) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(8, 1) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(8, 1) ? '' : 'none'~>Get a power with rarity at least ~i 3 ~.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(8, 1) ? '' : 'none'~>Get chroma to at least ~f 0.75 ~x your chroma cap.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(8, 2)~>
             <span>~r Achievements.getAchievementName(8, 2) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(8, 2) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(8, 2) ? '' : 'none'~>Have the eternity power extra multiplier reach its cap (which is ~i 3 ~).</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(8, 2) ? '' : 'none'~>Complete all eternity challenges (~i 4 ~ times each).</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(8, 3)~>
             <span>~r Achievements.getAchievementName(8, 3) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(8, 3) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(8, 3) ? '' : 'none'~>Have the time for the galaxy effect to cap be at least ~ts 18000 ~ (you don't have to wait for the galaxy effect to actually reach the cap).</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(8, 3) ? '' : 'none'~>Get ~i Decimal.pow(9, Math.pow(9, 9)) ~ stars.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(8, 4)~>
             <span>~r Achievements.getAchievementName(8, 4) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(8, 4) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(8, 4) ? '' : 'none'~>Finality.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(8, 4) ? '' : 'none'~>Have all the studies in the first three rows at once.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(8, 5)~>
             <span>~r Achievements.getAchievementName(8, 5) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(8, 5) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(8, 5) ? '' : 'none'~>Finality in ~ts Math.pow(2, 16) ~.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(8, 5) ? '' : 'none'~>Reach the multiplier softcap.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(8, 6)~>
             <span>~r Achievements.getAchievementName(8, 6) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(8, 6) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(8, 6) ? '' : 'none'~>Get finality shard upgrade starting bonuses to a strength of ~i 16 ~.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(8, 6) ? '' : 'none'~>Get at least ~i 1 ~ permanence per eternity.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(8, 7)~>
             <span>~r Achievements.getAchievementName(8, 7) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(8, 7) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(8, 7) ? '' : 'none'~>Complete all finality milestones.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(8, 7) ? '' : 'none'~>Get ~i Math.pow(2, 14) ~ chroma in ~ti 16 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(8, 8)~>
             <span>~r Achievements.getAchievementName(8, 8) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(8, 8) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(8, 8) ? '' : 'none'~>Buy the maximum possible of all finality shard upgrades.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(8, 8) ? '' : 'none'~>Complexity.</span>
+          </td>
+        </tr>
+        <tr ~style.display=Achievements.showRow(9) ? '' : 'none'~>
+          <td class="achievementtd" ~style.background=Achievements.color(9, 1)~>
+            <span>~r Achievements.getAchievementName(9, 1) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(9, 1) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(9, 1) ? '' : 'none'~>Unlock chroma after complexity.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(9, 2)~>
+            <span>~r Achievements.getAchievementName(9, 2) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(9, 2) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(9, 2) ? '' : 'none'~>Complete Complexity Challenge ~o 1 ~<span> </span>~i 2 ~ times.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(9, 3)~>
+            <span>~r Achievements.getAchievementName(9, 3) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(9, 3) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(9, 3) ? '' : 'none'~>Complexity in ~ts Math.pow(2, 16) ~.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(9, 4)~>
+            <span>~r Achievements.getAchievementName(9, 4) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(9, 4) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(9, 4) ? '' : 'none'~>Complete a complexity achievement.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(9, 5)~>
+            <span>~r Achievements.getAchievementName(9, 5) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(9, 5) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(9, 5) ? '' : 'none'~>Buy Complexity Generator ~o 2 ~.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(9, 6)~>
+            <span>~r Achievements.getAchievementName(9, 6) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(9, 6) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(9, 6) ? '' : 'none'~>Complexity in ~ts 3600 ~.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(9, 7)~>
+            <span>~r Achievements.getAchievementName(9, 7) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(9, 7) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(9, 7) ? '' : 'none'~>Get all ~i 4 ~ complexity achievements in some row or column.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(9, 8)~>
+            <span>~r Achievements.getAchievementName(9, 8) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(9, 8) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(9, 8) ? '' : 'none'~>Complete all the complexity achievements.</span>
+          </td>
+        </tr>
+        <tr ~style.display=Achievements.showRow(10) ? '' : 'none'~>
+          <td class="achievementtd" ~style.background=Achievements.color(10, 1)~>
+            <span>~r Achievements.getAchievementName(10, 1) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(10, 1) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(10, 1) ? '' : 'none'~>Get ~i 256 ~ complexities.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(10, 2)~>
+            <span>~r Achievements.getAchievementName(10, 2) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(10, 2) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(10, 2) ? '' : 'none'~>Complexity for ~i 16 ~ ℂP without unlocking red.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(10, 3)~>
+            <span>~r Achievements.getAchievementName(10, 3) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(10, 3) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(10, 3) ? '' : 'none'~>Complexity while in all ~i 6 ~ complexity challenges.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(10, 4)~>
+            <span>~r Achievements.getAchievementName(10, 4) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(10, 4) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(10, 4) ? '' : 'none'~>Unlock powers.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(10, 5)~>
+            <span>~r Achievements.getAchievementName(10, 5) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(10, 5) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(10, 5) ? '' : 'none'~>Have ~i 3 ~ powers of the same type equipped.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(10, 6)~>
+            <span>~r Achievements.getAchievementName(10, 6) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(10, 6) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(10, 6) ? '' : 'none'~>Have ~i 12 ~ total powers (equipped and stored powers, not counting deleted powers).</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(10, 7)~>
+            <span>~r Achievements.getAchievementName(10, 7) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(10, 7) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(10, 7) ? '' : 'none'~>Have the eternity power extra multiplier reach its cap (which is ~i 3 ~).</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(10, 8)~>
+            <span>~r Achievements.getAchievementName(10, 8) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(10, 8) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(10, 8) ? '' : 'none'~>Unlock the Oracle.</span>
+          </td>
+        </tr>
+        <tr ~style.display=Achievements.showRow(11) ? '' : 'none'~>
+          <td class="achievementtd" ~style.background=Achievements.color(11, 1)~>
+            <span>~r Achievements.getAchievementName(11, 1) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(11, 1) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(11, 1) ? '' : 'none'~>Craft a power.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(11, 2)~>
+            <span>~r Achievements.getAchievementName(11, 2) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(11, 2) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(11, 2) ? '' : 'none'~>Get ~i Math.pow(2, 256) ~ eternities.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(11, 3)~>
+            <span>~r Achievements.getAchievementName(11, 3) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(11, 3) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(11, 3) ? '' : 'none'~>Get a power with rarity at least ~i 3 ~.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(11, 4)~>
+            <span>~r Achievements.getAchievementName(11, 4) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(11, 4) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(11, 4) ? '' : 'none'~>Unlock galaxies.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(11, 5)~>
+            <span>~r Achievements.getAchievementName(11, 5) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(11, 5) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(11, 5) ? '' : 'none'~>Get the galaxy effect to multiply the chroma cap by ~i 2 ~x or more~r Achievements.thresholdChromaForDoublingText() ~.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(11, 6)~>
+            <span>~r Achievements.getAchievementName(11, 6) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(11, 6) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(11, 6) ? '' : 'none'~>Have the time for the galaxy effect to cap be at least ~ts 18000 ~ (you don't have to wait for the galaxy effect to actually reach the cap).</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(11, 7)~>
+            <span>~r Achievements.getAchievementName(11, 7) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(11, 7) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(11, 7) ? '' : 'none'~>Have the eternity power extra multiplier reach its cap in ~ti 60 ~ or less.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(11, 8)~>
+            <span>~r Achievements.getAchievementName(11, 8) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(11, 8) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(11, 8) ? '' : 'none'~>Finality.</span>
+          </td>
+        </tr>
+        <tr ~style.display=Achievements.showRow(12) ? '' : 'none'~>
+          <td class="achievementtd" ~style.background=Achievements.color(12, 1)~>
+            <span>~r Achievements.getAchievementName(12, 1) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(12, 1) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(12, 1) ? '' : 'none'~>Complexity after finality.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(12, 2)~>
+            <span>~r Achievements.getAchievementName(12, 2) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(12, 2) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(12, 2) ? '' : 'none'~>Unlock powers after finality.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(12, 3)~>
+            <span>~r Achievements.getAchievementName(12, 3) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(12, 3) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(12, 3) ? '' : 'none'~>Finality in ~ts Math.pow(2, 16) ~.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(12, 4)~>
+            <span>~r Achievements.getAchievementName(12, 4) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(12, 4) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(12, 4) ? '' : 'none'~>Get finality shard upgrade starting bonuses to a strength of ~i 16 ~.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(12, 5)~>
+            <span>~r Achievements.getAchievementName(12, 5) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(12, 5) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(12, 5) ? '' : 'none'~>Finality in ~ts 3600 ~.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(12, 6)~>
+            <span>~r Achievements.getAchievementName(12, 6) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(12, 6) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(12, 6) ? '' : 'none'~>Complete all finality milestones.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(12, 7)~>
+            <span>~r Achievements.getAchievementName(12, 7) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(12, 7) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(12, 7) ? '' : 'none'~>Buy Finality Generator ~o 8 ~.</span>
+          </td>
+          <td class="achievementtd" ~style.background=Achievements.color(12, 8)~>
+            <span>~r Achievements.getAchievementName(12, 8) ~</span>
+            <br/>
+            <span>(~r Achievements.achievementStatusDescription(12, 8) ~)</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(12, 8) ? '' : 'none'~>Buy the maximum possible of all finality shard upgrades.</span>
           </td>
         </tr>
       </table>
@@ -4101,105 +4301,169 @@
         <br ~style.display=Achievements.showAchievementDescriptionBelow(2, 6) ? '' : 'none'~/>
         <span ~style.display=Achievements.showAchievementDescriptionBelow(2, 6) ? '' : 'none'~>~r Achievements.getAchievementName(2, 6) ~ (~r Achievements.achievementStatusDescription(2, 6) ~): Have autobuyers for all ~r Generators.term() ~ and boosts.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(2, 7) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(2, 7) ? '' : 'none'~>~r Achievements.getAchievementName(2, 7) ~ (~r Achievements.achievementStatusDescription(2, 7) ~): Have all ~r Generators.term(true) ~ multipliers in reverse order (G8 multiplier larger than G7 multiplier ... larger than G1 multiplier).</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(2, 7) ? '' : 'none'~>~r Achievements.getAchievementName(2, 7) ~ (~r Achievements.achievementStatusDescription(2, 7) ~): Get ~i Math.pow(2, 128) ~ stars in a minute or less after prestige.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(2, 8) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(2, 8) ? '' : 'none'~>~r Achievements.getAchievementName(2, 8) ~ (~r Achievements.achievementStatusDescription(2, 8) ~): Infinity.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(2, 8) ? '' : 'none'~>~r Achievements.getAchievementName(2, 8) ~ (~r Achievements.achievementStatusDescription(2, 8) ~): Have all ~r Generators.term(true) ~ multipliers in reverse order (G8 multiplier larger than G7 multiplier ... larger than G1 multiplier).</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(3, 1) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 1) ? '' : 'none'~>~r Achievements.getAchievementName(3, 1) ~ (~r Achievements.achievementStatusDescription(3, 1) ~): Complete a normal challenge.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 1) ? '' : 'none'~>~r Achievements.getAchievementName(3, 1) ~ (~r Achievements.achievementStatusDescription(3, 1) ~): Have all ~r Generators.term(true) ~ multipliers over ~i Math.pow(2, 16) ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(3, 2) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 2) ? '' : 'none'~>~r Achievements.getAchievementName(3, 2) ~ (~r Achievements.achievementStatusDescription(3, 2) ~): Complete ~i 6 ~ normal challenges.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 2) ? '' : 'none'~>~r Achievements.getAchievementName(3, 2) ~ (~r Achievements.achievementStatusDescription(3, 2) ~): Infinity.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(3, 3) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 3) ? '' : 'none'~>~r Achievements.getAchievementName(3, 3) ~ (~r Achievements.achievementStatusDescription(3, 3) ~): Break infinity.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 3) ? '' : 'none'~>~r Achievements.getAchievementName(3, 3) ~ (~r Achievements.achievementStatusDescription(3, 3) ~): Complete a normal challenge.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(3, 4) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 4) ? '' : 'none'~>~r Achievements.getAchievementName(3, 4) ~ (~r Achievements.achievementStatusDescription(3, 4) ~): Get ~i Decimal.pow(2, 1024) ~ stars.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 4) ? '' : 'none'~>~r Achievements.getAchievementName(3, 4) ~ (~r Achievements.achievementStatusDescription(3, 4) ~): Infinity in ~ts 3600 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(3, 5) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 5) ? '' : 'none'~>~r Achievements.getAchievementName(3, 5) ~ (~r Achievements.achievementStatusDescription(3, 5) ~): Get ~i 256 ~ infinities.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 5) ? '' : 'none'~>~r Achievements.getAchievementName(3, 5) ~ (~r Achievements.achievementStatusDescription(3, 5) ~): Prestige for ~i 16 ~x or more prestige power in a single prestige..</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(3, 6) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 6) ? '' : 'none'~>~r Achievements.getAchievementName(3, 6) ~ (~r Achievements.achievementStatusDescription(3, 6) ~): Infinity in Normal Challenge ~o 10 ~ without sacrificing.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 6) ? '' : 'none'~>~r Achievements.getAchievementName(3, 6) ~ (~r Achievements.achievementStatusDescription(3, 6) ~): Buy Infinity Generator ~o 2 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(3, 7) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 7) ? '' : 'none'~>~r Achievements.getAchievementName(3, 7) ~ (~r Achievements.achievementStatusDescription(3, 7) ~): Infinity in Normal Challenge ~o 2 ~ in ~ti 16 ~.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 7) ? '' : 'none'~>~r Achievements.getAchievementName(3, 7) ~ (~r Achievements.achievementStatusDescription(3, 7) ~): Complete ~i 6 ~ normal challenges.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(3, 8) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 8) ? '' : 'none'~>~r Achievements.getAchievementName(3, 8) ~ (~r Achievements.achievementStatusDescription(3, 8) ~): Complete an infinity challenge.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 8) ? '' : 'none'~>~r Achievements.getAchievementName(3, 8) ~ (~r Achievements.achievementStatusDescription(3, 8) ~): Break infinity.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(4, 1) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(4, 1) ? '' : 'none'~>~r Achievements.getAchievementName(4, 1) ~ (~r Achievements.achievementStatusDescription(4, 1) ~): Infinity in Infinity Challenge ~o 1 ~ in ~ti 1 ~.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(4, 1) ? '' : 'none'~>~r Achievements.getAchievementName(4, 1) ~ (~r Achievements.achievementStatusDescription(4, 1) ~): Get ~i Decimal.pow(2, 1024) ~ stars.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(4, 2) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(4, 2) ? '' : 'none'~>~r Achievements.getAchievementName(4, 2) ~ (~r Achievements.achievementStatusDescription(4, 2) ~): Infinity in Infinity Challenge ~o 3 ~ in ~ti 3 ~.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(4, 2) ? '' : 'none'~>~r Achievements.getAchievementName(4, 2) ~ (~r Achievements.achievementStatusDescription(4, 2) ~): Infinity in ~ti 60 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(4, 3) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(4, 3) ? '' : 'none'~>~r Achievements.getAchievementName(4, 3) ~ (~r Achievements.achievementStatusDescription(4, 3) ~): Complete all infinity challenges.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(4, 3) ? '' : 'none'~>~r Achievements.getAchievementName(4, 3) ~ (~r Achievements.achievementStatusDescription(4, 3) ~): Infinity in Normal Challenge ~o 7 ~ with at least ~i 256 ~ purchases remaining.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(4, 4) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(4, 4) ? '' : 'none'~>~r Achievements.getAchievementName(4, 4) ~ (~r Achievements.achievementStatusDescription(4, 4) ~): Eternity.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(4, 4) ? '' : 'none'~>~r Achievements.getAchievementName(4, 4) ~ (~r Achievements.achievementStatusDescription(4, 4) ~): Get ~i 256 ~ infinities.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(4, 5) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(4, 5) ? '' : 'none'~>~r Achievements.getAchievementName(4, 5) ~ (~r Achievements.achievementStatusDescription(4, 5) ~): Eternity in ~ts 3600 ~.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(4, 5) ? '' : 'none'~>~r Achievements.getAchievementName(4, 5) ~ (~r Achievements.achievementStatusDescription(4, 5) ~): Infinity in Normal Challenge ~o 10 ~ without sacrificing.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(4, 6) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(4, 6) ? '' : 'none'~>~r Achievements.getAchievementName(4, 6) ~ (~r Achievements.achievementStatusDescription(4, 6) ~): Buy a study.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(4, 6) ? '' : 'none'~>~r Achievements.getAchievementName(4, 6) ~ (~r Achievements.achievementStatusDescription(4, 6) ~): Infinity in Normal Challenge ~o 2 ~ in ~ti 16 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(4, 7) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(4, 7) ? '' : 'none'~>~r Achievements.getAchievementName(4, 7) ~ (~r Achievements.achievementStatusDescription(4, 7) ~): Complete all eternity milestones.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(4, 7) ? '' : 'none'~>~r Achievements.getAchievementName(4, 7) ~ (~r Achievements.achievementStatusDescription(4, 7) ~): Infinity for ~i 4096 ~ IP, having done ~i 4 ~ or fewer prestiges (you have done ~i player.stats.prestigesThisInfinity ~ prestiges).</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(4, 8) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(4, 8) ? '' : 'none'~>~r Achievements.getAchievementName(4, 8) ~ (~r Achievements.achievementStatusDescription(4, 8) ~): Get ~i 256 ~ eternities.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(4, 8) ? '' : 'none'~>~r Achievements.getAchievementName(4, 8) ~ (~r Achievements.achievementStatusDescription(4, 8) ~): Complete an infinity challenge.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(5, 1) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(5, 1) ? '' : 'none'~>~r Achievements.getAchievementName(5, 1) ~ (~r Achievements.achievementStatusDescription(5, 1) ~): Have all the first-row studies at once.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(5, 1) ? '' : 'none'~>~r Achievements.getAchievementName(5, 1) ~ (~r Achievements.achievementStatusDescription(5, 1) ~): Buy Infinity Generator ~o 8 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(5, 2) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(5, 2) ? '' : 'none'~>~r Achievements.getAchievementName(5, 2) ~ (~r Achievements.achievementStatusDescription(5, 2) ~): Infinity in Infinity Challenge ~o 4 ~ in ~ti 16 ~.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(5, 2) ? '' : 'none'~>~r Achievements.getAchievementName(5, 2) ~ (~r Achievements.achievementStatusDescription(5, 2) ~): Infinity in Infinity Challenge ~o 1 ~ in ~ti 1 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(5, 3) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(5, 3) ? '' : 'none'~>~r Achievements.getAchievementName(5, 3) ~ (~r Achievements.achievementStatusDescription(5, 3) ~): Unlock the Eternity Producer.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(5, 3) ? '' : 'none'~>~r Achievements.getAchievementName(5, 3) ~ (~r Achievements.achievementStatusDescription(5, 3) ~): Prestige for ~i Math.pow(2, 256) ~x or more prestige power in a single prestige.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(5, 4) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(5, 4) ? '' : 'none'~>~r Achievements.getAchievementName(5, 4) ~ (~r Achievements.achievementStatusDescription(5, 4) ~): Complete an eternity challenge.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(5, 4) ? '' : 'none'~>~r Achievements.getAchievementName(5, 4) ~ (~r Achievements.achievementStatusDescription(5, 4) ~): Get a ~i Math.pow(2, 256) ~x multiplier from infinity stars.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(5, 5) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(5, 5) ? '' : 'none'~>~r Achievements.getAchievementName(5, 5) ~ (~r Achievements.achievementStatusDescription(5, 5) ~): Get ~i Math.pow(2, 256) ~ total EP.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(5, 5) ? '' : 'none'~>~r Achievements.getAchievementName(5, 5) ~ (~r Achievements.achievementStatusDescription(5, 5) ~): Infinity in Infinity Challenge ~o 3 ~ in ~ti 3 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(5, 6) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(5, 6) ? '' : 'none'~>~r Achievements.getAchievementName(5, 6) ~ (~r Achievements.achievementStatusDescription(5, 6) ~): Gain permanence.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(5, 6) ? '' : 'none'~>~r Achievements.getAchievementName(5, 6) ~ (~r Achievements.achievementStatusDescription(5, 6) ~): Infinity in Infinity Challenge ~o 2 ~ without prestiging.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(5, 7) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(5, 7) ? '' : 'none'~>~r Achievements.getAchievementName(5, 7) ~ (~r Achievements.achievementStatusDescription(5, 7) ~): Eternity for ~i Math.pow(2, 256) ~ EP while in Eternity Challenge ~o 1 ~.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(5, 7) ? '' : 'none'~>~r Achievements.getAchievementName(5, 7) ~ (~r Achievements.achievementStatusDescription(5, 7) ~): Complete all infinity challenges.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(5, 8) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(5, 8) ? '' : 'none'~>~r Achievements.getAchievementName(5, 8) ~ (~r Achievements.achievementStatusDescription(5, 8) ~): Unlock chroma.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(5, 8) ? '' : 'none'~>~r Achievements.getAchievementName(5, 8) ~ (~r Achievements.achievementStatusDescription(5, 8) ~): Eternity.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(6, 1) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(6, 1) ? '' : 'none'~>~r Achievements.getAchievementName(6, 1) ~ (~r Achievements.achievementStatusDescription(6, 1) ~): Complete all eternity challenges (~i 4 ~ times each).</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(6, 1) ? '' : 'none'~>~r Achievements.getAchievementName(6, 1) ~ (~r Achievements.achievementStatusDescription(6, 1) ~): Eternity in ~ts 3600 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(6, 2) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(6, 2) ? '' : 'none'~>~r Achievements.getAchievementName(6, 2) ~ (~r Achievements.achievementStatusDescription(6, 2) ~): Get ~i Decimal.pow(9, Math.pow(9, 9)) ~ stars.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(6, 2) ? '' : 'none'~>~r Achievements.getAchievementName(6, 2) ~ (~r Achievements.achievementStatusDescription(6, 2) ~): Buy a study.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(6, 3) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(6, 3) ? '' : 'none'~>~r Achievements.getAchievementName(6, 3) ~ (~r Achievements.achievementStatusDescription(6, 3) ~): Have all the studies in the first three rows at once.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(6, 3) ? '' : 'none'~>~r Achievements.getAchievementName(6, 3) ~ (~r Achievements.achievementStatusDescription(6, 3) ~): Eternity in ~ti 60 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(6, 4) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(6, 4) ? '' : 'none'~>~r Achievements.getAchievementName(6, 4) ~ (~r Achievements.achievementStatusDescription(6, 4) ~): Get at least ~i 1 ~ permanence per eternity.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(6, 4) ? '' : 'none'~>~r Achievements.getAchievementName(6, 4) ~ (~r Achievements.achievementStatusDescription(6, 4) ~): Complete all eternity milestones.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(6, 5) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(6, 5) ? '' : 'none'~>~r Achievements.getAchievementName(6, 5) ~ (~r Achievements.achievementStatusDescription(6, 5) ~): Complexity.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(6, 5) ? '' : 'none'~>~r Achievements.getAchievementName(6, 5) ~ (~r Achievements.achievementStatusDescription(6, 5) ~): Get ~i 256 ~ eternities.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(6, 6) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(6, 6) ? '' : 'none'~>~r Achievements.getAchievementName(6, 6) ~ (~r Achievements.achievementStatusDescription(6, 6) ~): Complexity in ~ts Math.pow(2, 16) ~.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(6, 6) ? '' : 'none'~>~r Achievements.getAchievementName(6, 6) ~ (~r Achievements.achievementStatusDescription(6, 6) ~): Have all the first-row studies at once.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(6, 7) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(6, 7) ? '' : 'none'~>~r Achievements.getAchievementName(6, 7) ~ (~r Achievements.achievementStatusDescription(6, 7) ~): Complete a complexity achievement.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(6, 7) ? '' : 'none'~>~r Achievements.getAchievementName(6, 7) ~ (~r Achievements.achievementStatusDescription(6, 7) ~): Infinity in Infinity Challenge ~o 4 ~ in ~ti 16 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(6, 8) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(6, 8) ? '' : 'none'~>~r Achievements.getAchievementName(6, 8) ~ (~r Achievements.achievementStatusDescription(6, 8) ~): Complete all the complexity achievements.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(6, 8) ? '' : 'none'~>~r Achievements.getAchievementName(6, 8) ~ (~r Achievements.achievementStatusDescription(6, 8) ~): Unlock the Eternity Producer.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(7, 1) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(7, 1) ? '' : 'none'~>~r Achievements.getAchievementName(7, 1) ~ (~r Achievements.achievementStatusDescription(7, 1) ~): Get ~i 256 ~ complexities.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(7, 1) ? '' : 'none'~>~r Achievements.getAchievementName(7, 1) ~ (~r Achievements.achievementStatusDescription(7, 1) ~): Get ~i 6 ~ theorems from boost power.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(7, 2) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(7, 2) ? '' : 'none'~>~r Achievements.getAchievementName(7, 2) ~ (~r Achievements.achievementStatusDescription(7, 2) ~): Complexity for ~i 16 ~ ℂP without unlocking red.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(7, 2) ? '' : 'none'~>~r Achievements.getAchievementName(7, 2) ~ (~r Achievements.achievementStatusDescription(7, 2) ~): Complete an eternity challenge.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(7, 3) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(7, 3) ? '' : 'none'~>~r Achievements.getAchievementName(7, 3) ~ (~r Achievements.achievementStatusDescription(7, 3) ~): Complexity while in all ~i 6 ~ complexity challenges.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(7, 3) ? '' : 'none'~>~r Achievements.getAchievementName(7, 3) ~ (~r Achievements.achievementStatusDescription(7, 3) ~): Complete an eternity challenge ~i 4 ~ times.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(7, 4) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(7, 4) ? '' : 'none'~>~r Achievements.getAchievementName(7, 4) ~ (~r Achievements.achievementStatusDescription(7, 4) ~): Unlock powers.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(7, 4) ? '' : 'none'~>~r Achievements.getAchievementName(7, 4) ~ (~r Achievements.achievementStatusDescription(7, 4) ~): Get ~i Math.pow(2, 256) ~ total EP.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(7, 5) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(7, 5) ? '' : 'none'~>~r Achievements.getAchievementName(7, 5) ~ (~r Achievements.achievementStatusDescription(7, 5) ~): Have ~i 12 ~ total powers (equipped and stored powers, not counting deleted powers).</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(7, 5) ? '' : 'none'~>~r Achievements.getAchievementName(7, 5) ~ (~r Achievements.achievementStatusDescription(7, 5) ~): Gain permanence.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(7, 6) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(7, 6) ? '' : 'none'~>~r Achievements.getAchievementName(7, 6) ~ (~r Achievements.achievementStatusDescription(7, 6) ~): Unlock the Oracle.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(7, 6) ? '' : 'none'~>~r Achievements.getAchievementName(7, 6) ~ (~r Achievements.achievementStatusDescription(7, 6) ~): Eternity for ~i Math.pow(2, 256) ~ EP while in Eternity Challenge ~o 1 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(7, 7) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(7, 7) ? '' : 'none'~>~r Achievements.getAchievementName(7, 7) ~ (~r Achievements.achievementStatusDescription(7, 7) ~): Craft a power.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(7, 7) ? '' : 'none'~>~r Achievements.getAchievementName(7, 7) ~ (~r Achievements.achievementStatusDescription(7, 7) ~): Complete ~i 24 ~ eternity challenge tiers.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(7, 8) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(7, 8) ? '' : 'none'~>~r Achievements.getAchievementName(7, 8) ~ (~r Achievements.achievementStatusDescription(7, 8) ~): Unlock galaxies.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(7, 8) ? '' : 'none'~>~r Achievements.getAchievementName(7, 8) ~ (~r Achievements.achievementStatusDescription(7, 8) ~): Unlock chroma.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(8, 1) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(8, 1) ? '' : 'none'~>~r Achievements.getAchievementName(8, 1) ~ (~r Achievements.achievementStatusDescription(8, 1) ~): Get a power with rarity at least ~i 3 ~.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(8, 1) ? '' : 'none'~>~r Achievements.getAchievementName(8, 1) ~ (~r Achievements.achievementStatusDescription(8, 1) ~): Get chroma to at least ~f 0.75 ~x your chroma cap.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(8, 2) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(8, 2) ? '' : 'none'~>~r Achievements.getAchievementName(8, 2) ~ (~r Achievements.achievementStatusDescription(8, 2) ~): Have the eternity power extra multiplier reach its cap (which is ~i 3 ~).</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(8, 2) ? '' : 'none'~>~r Achievements.getAchievementName(8, 2) ~ (~r Achievements.achievementStatusDescription(8, 2) ~): Complete all eternity challenges (~i 4 ~ times each).</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(8, 3) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(8, 3) ? '' : 'none'~>~r Achievements.getAchievementName(8, 3) ~ (~r Achievements.achievementStatusDescription(8, 3) ~): Have the time for the galaxy effect to cap be at least ~ts 18000 ~ (you don't have to wait for the galaxy effect to actually reach the cap).</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(8, 3) ? '' : 'none'~>~r Achievements.getAchievementName(8, 3) ~ (~r Achievements.achievementStatusDescription(8, 3) ~): Get ~i Decimal.pow(9, Math.pow(9, 9)) ~ stars.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(8, 4) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(8, 4) ? '' : 'none'~>~r Achievements.getAchievementName(8, 4) ~ (~r Achievements.achievementStatusDescription(8, 4) ~): Finality.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(8, 4) ? '' : 'none'~>~r Achievements.getAchievementName(8, 4) ~ (~r Achievements.achievementStatusDescription(8, 4) ~): Have all the studies in the first three rows at once.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(8, 5) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(8, 5) ? '' : 'none'~>~r Achievements.getAchievementName(8, 5) ~ (~r Achievements.achievementStatusDescription(8, 5) ~): Finality in ~ts Math.pow(2, 16) ~.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(8, 5) ? '' : 'none'~>~r Achievements.getAchievementName(8, 5) ~ (~r Achievements.achievementStatusDescription(8, 5) ~): Reach the multiplier softcap.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(8, 6) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(8, 6) ? '' : 'none'~>~r Achievements.getAchievementName(8, 6) ~ (~r Achievements.achievementStatusDescription(8, 6) ~): Get finality shard upgrade starting bonuses to a strength of ~i 16 ~.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(8, 6) ? '' : 'none'~>~r Achievements.getAchievementName(8, 6) ~ (~r Achievements.achievementStatusDescription(8, 6) ~): Get at least ~i 1 ~ permanence per eternity.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(8, 7) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(8, 7) ? '' : 'none'~>~r Achievements.getAchievementName(8, 7) ~ (~r Achievements.achievementStatusDescription(8, 7) ~): Complete all finality milestones.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(8, 7) ? '' : 'none'~>~r Achievements.getAchievementName(8, 7) ~ (~r Achievements.achievementStatusDescription(8, 7) ~): Get ~i Math.pow(2, 14) ~ chroma in ~ti 16 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(8, 8) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(8, 8) ? '' : 'none'~>~r Achievements.getAchievementName(8, 8) ~ (~r Achievements.achievementStatusDescription(8, 8) ~): Buy the maximum possible of all finality shard upgrades.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(8, 8) ? '' : 'none'~>~r Achievements.getAchievementName(8, 8) ~ (~r Achievements.achievementStatusDescription(8, 8) ~): Complexity.</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(9, 1) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(9, 1) ? '' : 'none'~>~r Achievements.getAchievementName(9, 1) ~ (~r Achievements.achievementStatusDescription(9, 1) ~): Unlock chroma after complexity.</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(9, 2) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(9, 2) ? '' : 'none'~>~r Achievements.getAchievementName(9, 2) ~ (~r Achievements.achievementStatusDescription(9, 2) ~): Complete Complexity Challenge ~o 1 ~<span> </span>~i 2 ~ times.</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(9, 3) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(9, 3) ? '' : 'none'~>~r Achievements.getAchievementName(9, 3) ~ (~r Achievements.achievementStatusDescription(9, 3) ~): Complexity in ~ts Math.pow(2, 16) ~.</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(9, 4) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(9, 4) ? '' : 'none'~>~r Achievements.getAchievementName(9, 4) ~ (~r Achievements.achievementStatusDescription(9, 4) ~): Complete a complexity achievement.</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(9, 5) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(9, 5) ? '' : 'none'~>~r Achievements.getAchievementName(9, 5) ~ (~r Achievements.achievementStatusDescription(9, 5) ~): Buy Complexity Generator ~o 2 ~.</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(9, 6) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(9, 6) ? '' : 'none'~>~r Achievements.getAchievementName(9, 6) ~ (~r Achievements.achievementStatusDescription(9, 6) ~): Complexity in ~ts 3600 ~.</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(9, 7) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(9, 7) ? '' : 'none'~>~r Achievements.getAchievementName(9, 7) ~ (~r Achievements.achievementStatusDescription(9, 7) ~): Get all ~i 4 ~ complexity achievements in some row or column.</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(9, 8) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(9, 8) ? '' : 'none'~>~r Achievements.getAchievementName(9, 8) ~ (~r Achievements.achievementStatusDescription(9, 8) ~): Complete all the complexity achievements.</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(10, 1) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(10, 1) ? '' : 'none'~>~r Achievements.getAchievementName(10, 1) ~ (~r Achievements.achievementStatusDescription(10, 1) ~): Get ~i 256 ~ complexities.</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(10, 2) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(10, 2) ? '' : 'none'~>~r Achievements.getAchievementName(10, 2) ~ (~r Achievements.achievementStatusDescription(10, 2) ~): Complexity for ~i 16 ~ ℂP without unlocking red.</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(10, 3) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(10, 3) ? '' : 'none'~>~r Achievements.getAchievementName(10, 3) ~ (~r Achievements.achievementStatusDescription(10, 3) ~): Complexity while in all ~i 6 ~ complexity challenges.</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(10, 4) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(10, 4) ? '' : 'none'~>~r Achievements.getAchievementName(10, 4) ~ (~r Achievements.achievementStatusDescription(10, 4) ~): Unlock powers.</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(10, 5) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(10, 5) ? '' : 'none'~>~r Achievements.getAchievementName(10, 5) ~ (~r Achievements.achievementStatusDescription(10, 5) ~): Have ~i 3 ~ powers of the same type equipped.</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(10, 6) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(10, 6) ? '' : 'none'~>~r Achievements.getAchievementName(10, 6) ~ (~r Achievements.achievementStatusDescription(10, 6) ~): Have ~i 12 ~ total powers (equipped and stored powers, not counting deleted powers).</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(10, 7) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(10, 7) ? '' : 'none'~>~r Achievements.getAchievementName(10, 7) ~ (~r Achievements.achievementStatusDescription(10, 7) ~): Have the eternity power extra multiplier reach its cap (which is ~i 3 ~).</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(10, 8) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(10, 8) ? '' : 'none'~>~r Achievements.getAchievementName(10, 8) ~ (~r Achievements.achievementStatusDescription(10, 8) ~): Unlock the Oracle.</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(11, 1) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(11, 1) ? '' : 'none'~>~r Achievements.getAchievementName(11, 1) ~ (~r Achievements.achievementStatusDescription(11, 1) ~): Craft a power.</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(11, 2) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(11, 2) ? '' : 'none'~>~r Achievements.getAchievementName(11, 2) ~ (~r Achievements.achievementStatusDescription(11, 2) ~): Get ~i Math.pow(2, 256) ~ eternities.</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(11, 3) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(11, 3) ? '' : 'none'~>~r Achievements.getAchievementName(11, 3) ~ (~r Achievements.achievementStatusDescription(11, 3) ~): Get a power with rarity at least ~i 3 ~.</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(11, 4) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(11, 4) ? '' : 'none'~>~r Achievements.getAchievementName(11, 4) ~ (~r Achievements.achievementStatusDescription(11, 4) ~): Unlock galaxies.</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(11, 5) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(11, 5) ? '' : 'none'~>~r Achievements.getAchievementName(11, 5) ~ (~r Achievements.achievementStatusDescription(11, 5) ~): Get the galaxy effect to multiply the chroma cap by ~i 2 ~x or more~r Achievements.thresholdChromaForDoublingText() ~.</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(11, 6) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(11, 6) ? '' : 'none'~>~r Achievements.getAchievementName(11, 6) ~ (~r Achievements.achievementStatusDescription(11, 6) ~): Have the time for the galaxy effect to cap be at least ~ts 18000 ~ (you don't have to wait for the galaxy effect to actually reach the cap).</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(11, 7) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(11, 7) ? '' : 'none'~>~r Achievements.getAchievementName(11, 7) ~ (~r Achievements.achievementStatusDescription(11, 7) ~): Have the eternity power extra multiplier reach its cap in ~ti 60 ~ or less.</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(11, 8) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(11, 8) ? '' : 'none'~>~r Achievements.getAchievementName(11, 8) ~ (~r Achievements.achievementStatusDescription(11, 8) ~): Finality.</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(12, 1) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(12, 1) ? '' : 'none'~>~r Achievements.getAchievementName(12, 1) ~ (~r Achievements.achievementStatusDescription(12, 1) ~): Complexity after finality.</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(12, 2) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(12, 2) ? '' : 'none'~>~r Achievements.getAchievementName(12, 2) ~ (~r Achievements.achievementStatusDescription(12, 2) ~): Unlock powers after finality.</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(12, 3) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(12, 3) ? '' : 'none'~>~r Achievements.getAchievementName(12, 3) ~ (~r Achievements.achievementStatusDescription(12, 3) ~): Finality in ~ts Math.pow(2, 16) ~.</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(12, 4) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(12, 4) ? '' : 'none'~>~r Achievements.getAchievementName(12, 4) ~ (~r Achievements.achievementStatusDescription(12, 4) ~): Get finality shard upgrade starting bonuses to a strength of ~i 16 ~.</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(12, 5) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(12, 5) ? '' : 'none'~>~r Achievements.getAchievementName(12, 5) ~ (~r Achievements.achievementStatusDescription(12, 5) ~): Finality in ~ts 3600 ~.</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(12, 6) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(12, 6) ? '' : 'none'~>~r Achievements.getAchievementName(12, 6) ~ (~r Achievements.achievementStatusDescription(12, 6) ~): Complete all finality milestones.</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(12, 7) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(12, 7) ? '' : 'none'~>~r Achievements.getAchievementName(12, 7) ~ (~r Achievements.achievementStatusDescription(12, 7) ~): Buy Finality Generator ~o 8 ~.</span>
+        <br ~style.display=Achievements.showAchievementDescriptionBelow(12, 8) ? '' : 'none'~/>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(12, 8) ? '' : 'none'~>~r Achievements.getAchievementName(12, 8) ~ (~r Achievements.achievementStatusDescription(12, 8) ~): Buy the maximum possible of all finality shard upgrades.</span>
       </div>
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'statistics' ? '' : 'none'~>

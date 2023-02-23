@@ -1140,7 +1140,7 @@ let Saving = {
       player.version = 2.015625;
     }
     if (player.version < 2.01953125) {
-      if (Decimal.lte(4, player.eternities) && Decimal.lte(player.eternities, 6)) {
+      if (Decimal.lte(4, player.eternities) && Decimal.lt(player.eternities, 6)) {
         alert('Eternity milestones 4 and 6 have been swapped (view the eternity milestones tab for more information). ' +
           'You may want to change your sacrifice autobuyer to not constantly sacrifice.');
       }
@@ -1579,6 +1579,62 @@ let Saving = {
       player.confirmations.complexityReset = (cr in table) ? table[cr] : cr;
       player.confirmations.finalityShardUpgradesRespec = (fsur in table) ? table[fsur] : fsur;
       player.version = 2.23046875;
+    }
+    if (player.version < 2.25) {
+      player.achievements.table = [
+        [
+          player.achievements.table[0][0], player.achievements.table[0][1], player.achievements.table[0][2], player.achievements.table[0][3], 
+          player.achievements.table[0][4], player.achievements.table[0][5], player.achievements.table[0][6], player.achievements.table[0][7]
+        ],
+        [
+          player.achievements.table[1][0], player.achievements.table[1][1], player.achievements.table[1][2], player.achievements.table[1][3], 
+          player.achievements.table[1][4], player.achievements.table[1][5], false, player.achievements.table[1][6]
+        ],
+        [
+          false, player.achievements.table[1][7], player.achievements.table[2][0], false, 
+          false, false, player.achievements.table[2][1], player.achievements.table[2][2]
+        ],
+        [
+          player.achievements.table[2][3], false, false, player.achievements.table[2][4], 
+          player.achievements.table[2][5], player.achievements.table[2][6], false, player.achievements.table[2][7]
+        ],
+        [
+          false, player.achievements.table[3][0], false, false, 
+          player.achievements.table[3][1], false, player.achievements.table[3][2], player.achievements.table[3][3]
+        ],
+        [
+          player.achievements.table[3][4], player.achievements.table[3][5], false, player.achievements.table[3][6],
+          player.achievements.table[3][7], player.achievements.table[4][0], player.achievements.table[4][1], player.achievements.table[4][2]
+        ],
+        [
+          false, player.achievements.table[4][3], false, player.achievements.table[4][4], 
+          player.achievements.table[4][5], player.achievements.table[4][6], false, player.achievements.table[4][7]
+        ],
+        [
+          false, player.achievements.table[5][0], player.achievements.table[5][1], player.achievements.table[5][2], 
+          false, player.achievements.table[5][3], false, player.achievements.table[5][4]
+        ],
+        [
+          false, false, player.achievements.table[5][5], player.achievements.table[5][6], 
+          false, false, false, player.achievements.table[5][7]
+        ],
+        [
+          player.achievements.table[6][0], player.achievements.table[6][1], player.achievements.table[6][2], player.achievements.table[6][3], 
+          false, player.achievements.table[6][4], player.achievements.table[7][1], player.achievements.table[6][5]
+        ],
+        [
+          player.achievements.table[6][6], false, player.achievements.table[7][0], player.achievements.table[6][7], 
+          false, player.achievements.table[7][2], false, player.achievements.table[7][3]
+        ],
+        [
+          false, false, player.achievements.table[7][4], player.achievements.table[7][5], 
+          false, player.achievements.table[7][6], false, player.achievements.table[7][7]
+        ]
+      ];
+      if (player.achievements.beyondHighest === 2) {
+        player.achievements.beyondHighest = 4;
+      }
+      player.version = 2.25;
     }
   },
   convertSaveToDecimal() {
