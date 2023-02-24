@@ -144,7 +144,15 @@ let Study = function (i) {
         'if any fourth-row study is bought.';
     },
     refund() {
-      if (!this.isBought()) return;
+      if (!this.isBought()) {
+        let cause = globalShiftDown ?
+        'you\'re holding the shift key. (Or possibly you were holding shift in the past, ' +
+        'and the game didn\'t notice when you released it.) This can be fixed by closing ' +
+        'this alert, and then releasing shift (or briefly pressing it).' :
+        'you set your study click mode to Refund; you can change your study click mode back to Buy at the top of the Studies tab.';
+        alert('You\'re currently refunding studies when you click them, rather than buying them. This is probably because ' + cause);
+        return;
+      }
       if (this.row() !== 4 && Studies.anyFourthRowStudiesBought()) {
         alert(this.refundImpossibleText());
         return;
