@@ -4707,7 +4707,7 @@
           <span ~style.display=ColorPreset.hasPreset(32) ? '' : 'none'~>You can create at most ~i 32 ~ color presets. Delete existing presets to create more.</span>
         </span>
         <br class="colorpresetbr" style="display: none;"/>
-        <span style="display: none;">Exported tabs to show (also copied to clipboard): <input id="colors-export-output"></input></span>
+        <span style="display: none;">Exported color scheme (also copied to clipboard): <input id="colors-export-output"></input></span>
       </div>
       <div ~style.display=Options.isOptionTypeShown('tab') ? '' : 'none'~>
         <span>Use tab groups <span class="helpspan">(?)<span class="tooltiptext">This option, rather than showing all the tabs at once, will divide the tabs into groups and let you switch between viewing various groups, similarly to Antimatter Dimension's tab handling. A tab group will be shown if and only if its tab with generators is shown (Miscellaneous is always shown).</span></span>: <input type="checkbox" ~!checked=Tabs.usingTabGroups()~ ~!onchange=function() {Tabs.setUsingTabGroups(this.checked)}~></input></span>
