@@ -4710,7 +4710,14 @@
         <span style="display: none;">Exported color scheme (also copied to clipboard): <input id="colors-export-output"></input></span>
       </div>
       <div ~style.display=Options.isOptionTypeShown('tab') ? '' : 'none'~>
-        <span>Use tab groups <span class="helpspan">(?)<span class="tooltiptext">This option, rather than showing all the tabs at once, will divide the tabs into groups and let you switch between viewing various groups, similarly to Antimatter Dimension's tab handling. A tab group will be shown if and only if its tab with generators is shown (Miscellaneous is always shown).</span></span>: <input type="checkbox" ~!checked=Tabs.usingTabGroups()~ ~!onchange=function() {Tabs.setUsingTabGroups(this.checked)}~></input></span>
+        <span>Use tab groups: <input type="checkbox" ~!checked=Tabs.usingTabGroups()~ ~!onchange=function() {Tabs.setUsingTabGroups(this.checked)}~></input> <button ~style.display=Explanations.isVisible('tabs', 'tab-groups') ? '' : 'none'~ onclick="Explanations.showOrHide('tabs', 'tab-groups')">Tab group details: ~r Explanations.isShown('tabs', 'tab-groups') ? 'Shown' : 'Hidden' ~</button></span>
+        <div style="width: 1024px; margin-left: auto; margin-right: auto;" ~style.display=Explanations.isShown('tabs', 'tab-groups') ? '' : 'none'~>
+          <span>Using tab groups, rather than showing all the tabs at once, will divide the tabs into groups and let you switch between viewing various groups, similarly to Antimatter Dimension's tab handling.</span>
+          <br/>
+          <br/>
+          <span>A tab group will be shown if and only if its tab with generators is shown. (Exceptions: the group Miscellaneous is always shown, and the group Normal is shown if either Main or Autobuyers is shown.)</span>
+          <br/>
+        </div>
         <br/>
         <span>Tabs to show:</span>
         <div>

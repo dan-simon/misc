@@ -20,6 +20,9 @@ let Explanations = {
       'options': {
         'offline': Options.isOptionTypeShown('saving')
       },
+      'tabs': {
+        'tab-groups': true
+      },
       'infinity-details': {
         'main': true
       },

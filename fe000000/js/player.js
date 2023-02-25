@@ -455,6 +455,7 @@ let initialPlayer = {
       'complexity-challenges': 'main',
       'powers': 'main',
       'options': '',
+      'tabs': '',
       'infinity-details': 'main',
       'eternity-details': 'main',
       'complexity-details': 'main',
@@ -573,7 +574,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.25
+  version: 2.25390625
 }
 
 let player;

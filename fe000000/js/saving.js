@@ -1636,6 +1636,10 @@ let Saving = {
       }
       player.version = 2.25;
     }
+    if (player.version < 2.25390625) {
+      player.options.explanations.tabs = '';
+      player.version = 2.25390625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

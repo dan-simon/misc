@@ -94,7 +94,8 @@ let Tabs = {
     player.usingTabGroups = x;
   },
   isTabGroupVisible(x) {
-    return this.usingTabGroups() && (x === 'miscellaneous' || this.isTabVisibleRaw(x === 'normal' ? 'main' : x));
+    return this.usingTabGroups() && (x === 'miscellaneous' || (x === 'normal' ? this.isTabVisibleRaw('main') ||
+    this.isTabVisibleRaw('autobuyers') : this.isTabVisibleRaw(x)));
   },
   displayTabRow(i) {
     return this.rows[i - 1].some(x => this.isTabVisible(x));
