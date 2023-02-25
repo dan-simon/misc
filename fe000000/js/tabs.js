@@ -34,6 +34,14 @@ let Tabs = {
     'finality-shards': 'finality',
     'finality-milestones': 'finality'
   },
+  tabGroupToTab: {
+    'normal': ['main', 'autobuyers'],
+    'infinity': ['infinity', 'normal-challenges', 'infinity-challenges'],
+    'eternity': ['eternity', 'eternity-milestones', 'studies', 'eternity-producer', 'eternity-challenges', 'chroma'],
+    'complexity': ['complexity', 'complexity-challenges', 'complexity-achievements', 'powers', 'oracle', 'galaxies'],
+    'finality': ['finality', 'finality-shards', 'finality-milestones'],
+    'miscellaneous': ['goals', 'achievements', 'statistics', 'last-ten-runs', 'options'],
+  },
   currentTab() {
     return player.currentTab;
   },
@@ -94,8 +102,7 @@ let Tabs = {
     player.usingTabGroups = x;
   },
   isTabGroupVisible(x) {
-    return this.usingTabGroups() && (x === 'miscellaneous' || (x === 'normal' ? this.isTabVisibleRaw('main') ||
-    this.isTabVisibleRaw('autobuyers') : this.isTabVisibleRaw(x)));
+    return this.usingTabGroups() && this.tabGroupToTab[x].some(y => this.isTabVisibleRaw(y));
   },
   displayTabRow(i) {
     return this.rows[i - 1].some(x => this.isTabVisible(x));
