@@ -204,7 +204,7 @@ let ColorPreset = {
     let parent = output.parentElement;
     let colorPresetBr = document.getElementsByClassName('colorpresetbr')[0];
     parent.style.display = '';
-    colorresetBr.style.display = '';
+    colorPresetBr.style.display = '';
     output.value = this.exportString();
     output.select();
     if (player.options.exportCopy) {
