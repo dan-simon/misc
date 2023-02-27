@@ -30,7 +30,7 @@ let ComplexityPrestigeLayer = {
     return format(this.eternityPointRequirementForComplexity()) + ' total eternity points';
   },
   isRequirementVisible() {
-    return !this.canComplexity() && PrestigeLayerProgress.hasReached('eternity');
+    return !this.canShowComplexity() && PrestigeLayerProgress.hasReached('eternity');
   },
   isAmountSpanVisible() {
     return this.isRequirementVisible() && PrestigeLayerProgress.hasReached('complexity');

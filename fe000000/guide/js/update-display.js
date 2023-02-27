@@ -112,7 +112,7 @@ function updateDisplay() {
     if (shouldUpdate("e48")) {let v = formatInt(2); if (e[48].textContent !== v) {e[48].textContent = v};};
     if (shouldUpdate("e49")) {let v = formatInt(1); if (e[49].textContent !== v) {e[49].textContent = v};};
     if (shouldUpdate("e50")) {let v = formatInt(4); if (e[50].textContent !== v) {e[50].textContent = v};};
-    if (shouldUpdate("e51")) {let v = formatInt(1.5); if (e[51].textContent !== v) {e[51].textContent = v};};
+    if (shouldUpdate("e51")) {let v = format(1.5); if (e[51].textContent !== v) {e[51].textContent = v};};
     if (shouldUpdate("e52")) {let v = formatInt(2); if (e[52].textContent !== v) {e[52].textContent = v};};
     if (shouldUpdate("e53")) {let v = formatInt(1); if (e[53].textContent !== v) {e[53].textContent = v};};
     if (shouldUpdate("e54")) {let v = formatInt(4); if (e[54].textContent !== v) {e[54].textContent = v};};
@@ -957,7 +957,7 @@ function updateDisplay() {
     if (shouldUpdate("e879")) {let v = formatInt(111); if (e[879].textContent !== v) {e[879].textContent = v};};
     if (shouldUpdate("e880")) {let v = formatInt(Decimal.pow(2, 4096)); if (e[880].textContent !== v) {e[880].textContent = v};};
     if (shouldUpdate("e881")) {let v = formatInt(112); if (e[881].textContent !== v) {e[881].textContent = v};};
-    if (shouldUpdate("e882")) {let v = formatInt(3.072e3); if (e[882].textContent !== v) {e[882].textContent = v};};
+    if (shouldUpdate("e882")) {let v = formatInt(3072); if (e[882].textContent !== v) {e[882].textContent = v};};
     if (shouldUpdate("e883")) {let v = formatInt(Decimal.pow(2, 5376)); if (e[883].textContent !== v) {e[883].textContent = v};};
     if (shouldUpdate("e884")) {let v = formatInt(114); if (e[884].textContent !== v) {e[884].textContent = v};};
     if (shouldUpdate("e885")) {let v = formatInt(Decimal.pow(2, 6144)); if (e[885].textContent !== v) {e[885].textContent = v};};
