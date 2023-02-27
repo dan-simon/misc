@@ -154,7 +154,7 @@ let NotationOptions = {
       'higher-precision': () => this.readMaybeTime(y, false),
       'input-precision': () => this.readMaybeTime(y, false),
     }[x]();
-    if (res == 'min' || res === 'max') {
+    if (res === 'min' || res === 'max') {
       return res;
     } else {
       return +res;

@@ -99,7 +99,7 @@ let Goals = {
     // Thus we use raw numbers rather than methods.
     if (i === 1) {
       return 'Sacrifice requires at least one of Generator ' + formatOrdinalInt(8) + ' (costing ' + format(Decimal.pow(2, 64)) + ' stars).';
-    } else if (i == 2) {
+    } else if (i === 2) {
       return 'Prestige requires ' + format(Decimal.pow(2, 128)) + ' stars.';
     } else if (i === 3) {
       return 'Infinity requires ' + format(Decimal.pow(2, 256)) + ' stars.';

@@ -82,7 +82,7 @@ let EternityGenerator = function (i) {
     newAutobuyerScale: i,
     newAutobuyerCapLoc: Infinity,
     isGenerallyBuyable() {
-      return i <= player.highestEternityGenerator + 1 && !(i == 8 && ComplexityChallenge.isSafeguardOn(5));
+      return i <= player.highestEternityGenerator + 1 && !(i === 8 && ComplexityChallenge.isSafeguardOn(5));
     },
     maxBuyable(fraction) {
       if (!this.isGenerallyBuyable()) return 0;
