@@ -18,6 +18,9 @@ let hexDig = function (x) {
     dig.push((x < 0) ? 0 : 1);
     x = (x < 0) ? -ln(-x) : ln(x);
   }
+  if (x === 0 && dig.length < digitLength * 4) {
+    dig.push(1);
+  }
   while (dig.length < digitLength * 4) {
     dig.push(0);
   }
