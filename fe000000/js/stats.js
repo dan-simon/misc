@@ -101,6 +101,10 @@ let Stats = {
     }
     let r = c / Math.max(t, 1 / 16);
     return useBase ? r / Math.log2(NotationOptions.exponentBase()) : r;
+  },
+  showCheatStats() {
+    return player.cheats.gameSpeed !== 1 || player.cheats.extraAchievements !== 0 ||
+    player.cheats.achievementExtraMultiplier !== 1 || player.cheats.normalGeneratorPower !== 1;
   }
 }
 

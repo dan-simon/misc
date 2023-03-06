@@ -4520,6 +4520,17 @@
       <span>You have spent ~t player.stats.onlineTimeSinceGameStart ~ playing this game (only counting time online).</span>
       <br/>
       <span>You have spent ~t player.stats.timeSinceGameStart ~ playing this game (counting time offline).</span>
+      <div ~style.display=Stats.showCheatStats() ? '' : 'none' ~>
+        <span>player.cheats:</span>
+        <br/>
+        <span>~f player.cheats.gameSpeed ~x game speed</span>
+        <br/>
+        <span>+~i player.cheats.extraAchievements ~ extra achievements</span>
+        <br/>
+        <span>~f player.cheats.achievementExtraMultiplier ~x achievements</span>
+        <br/>
+        <span>^~r formatPrecisely(player.cheats.normalGeneratorPower) ~ to normal generator multipliers</span>
+      </div>
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'last-ten-runs' ? '' : 'none'~>
       <div ~style.display=Stats.showRun(1, 'infinity') ? '' : 'none'~>
