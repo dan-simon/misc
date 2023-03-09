@@ -352,7 +352,9 @@
         <br ~style.display=(InfinityPrestigeLayer.canInfinityBeBroken() && !SpecialTabs.isTabVisible('infinity-challenges')) ? '' : 'none'~/>
         <span ~style.display=(InfinityPrestigeLayer.canInfinityBeBroken() && !SpecialTabs.isTabVisible('infinity-challenges')) ? '' : 'none'~>Breaking infinity for the first time will also let you view the Infinity Challenges tab.</span>
       </div>
-      <br ~style.display=(InfinityPrestigeLayer.canInfinityBeBroken() && Explanations.isShown('infinity-details', 'main')) ? 'none' : ''~/>
+      <br ~style.display=(!Explanations.isShown('infinity-details', 'main') && InfinityPrestigeLayer.canInfinityBeBroken() && !InfinityPrestigeLayer.isInfinityBroken()) ? '' : 'none'~/>
+      <button style="height: 48px;" ~style.display=(!Explanations.isShown('infinity-details', 'main') && InfinityPrestigeLayer.canInfinityBeBroken() && !InfinityPrestigeLayer.isInfinityBroken()) ? '' : 'none'~ onclick="InfinityPrestigeLayer.toggleBreakInfinity()">~r InfinityPrestigeLayer.breakInfinityButtonText() ~</button>
+      <br/>
       <span>You have ~f InfinityStars.amount() ~ infinity stars, multiplying all ~r Generators.term() ~ by their amount^~f InfinityStars.exponent() ~ = ~f InfinityStars.multiplier() ~.</span>
       <br/>
       <span>You are getting ~f InfinityStars.perSecond() ~ infinity stars per second.</span>
