@@ -18,7 +18,7 @@ let InfinityPrestigeLayer = {
   breakInfinity() {
     if (this.canInfinityBeBroken()) {
       // Used to be player.breakInfinity = !player.breakInfinity.
-      // Fixing infinity has been removed
+      // Fixing infinity has been removed.
       player.breakInfinity = true;
     }
   },
