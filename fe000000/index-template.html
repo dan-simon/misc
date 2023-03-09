@@ -347,13 +347,14 @@
         <br/>
         <span>You have ~i Infinities.amount() ~ infinit~y Infinities.amount() ~, multiplying all infinity generators (IGs) by ~q Infinities.infinityGeneratorMultiplier() ~.</span>
         <br/>
-        <span ~style.display=InfinityPrestigeLayer.canInfinityBeBroken() ? '' : 'none'~><button style="height: 48px;" onclick="InfinityPrestigeLayer.toggleBreakInfinity()">~r InfinityPrestigeLayer.breakInfinityButtonText() ~</button></span>
+        <span ~style.display=(InfinityPrestigeLayer.canInfinityBeBroken() && !InfinityPrestigeLayer.isInfinityBroken()) ? '' : 'none'~><button style="height: 48px;" onclick="InfinityPrestigeLayer.breakInfinity()">~r InfinityPrestigeLayer.breakInfinityButtonText() ~</button></span>
+        <span ~style.display=InfinityPrestigeLayer.isInfinityBroken() ? '' : 'none'~>Infinity is broken.</span>
         <span ~style.display=InfinityPrestigeLayer.canInfinityBeBroken() ? 'none' : ''~>You need to complete all the normal challenges to be able to break infinity.</span>
         <br ~style.display=(InfinityPrestigeLayer.canInfinityBeBroken() && !SpecialTabs.isTabVisible('infinity-challenges')) ? '' : 'none'~/>
         <span ~style.display=(InfinityPrestigeLayer.canInfinityBeBroken() && !SpecialTabs.isTabVisible('infinity-challenges')) ? '' : 'none'~>Breaking infinity for the first time will also let you view the Infinity Challenges tab.</span>
       </div>
       <br ~style.display=(!Explanations.isShown('infinity-details', 'main') && InfinityPrestigeLayer.canInfinityBeBroken() && !InfinityPrestigeLayer.isInfinityBroken()) ? '' : 'none'~/>
-      <button style="height: 48px;" ~style.display=(!Explanations.isShown('infinity-details', 'main') && InfinityPrestigeLayer.canInfinityBeBroken() && !InfinityPrestigeLayer.isInfinityBroken()) ? '' : 'none'~ onclick="InfinityPrestigeLayer.toggleBreakInfinity()">~r InfinityPrestigeLayer.breakInfinityButtonText() ~</button>
+      <button style="height: 48px;" ~style.display=(!Explanations.isShown('infinity-details', 'main') && InfinityPrestigeLayer.canInfinityBeBroken() && !InfinityPrestigeLayer.isInfinityBroken()) ? '' : 'none'~ onclick="InfinityPrestigeLayer.breakInfinity()">~r InfinityPrestigeLayer.breakInfinityButtonText() ~</button>
       <br/>
       <span>You have ~f InfinityStars.amount() ~ infinity stars, multiplying all ~r Generators.term() ~ by their amount^~f InfinityStars.exponent() ~ = ~f InfinityStars.multiplier() ~.</span>
       <br/>

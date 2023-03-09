@@ -15,9 +15,11 @@ let InfinityPrestigeLayer = {
       ('Fix infinity: force infinity at ' + format(Decimal.pow(2, 256)) + ' stars') :
       ('Break infinity: allow stars to go beyond ' + format(Decimal.pow(2, 256)) + ', with greater IP gain');
   },
-  toggleBreakInfinity() {
+  breakInfinity() {
     if (this.canInfinityBeBroken()) {
-      player.breakInfinity = !player.breakInfinity;
+      // Used to be player.breakInfinity = !player.breakInfinity.
+      // Fixing infinity has been removed
+      player.breakInfinity = true;
     }
   },
   starRequirementForInfinity() {
