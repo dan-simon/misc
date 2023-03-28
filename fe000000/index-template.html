@@ -130,6 +130,12 @@
   </div>
   <div id="main" style="display: none;">
     <div style="height: 32px;">You have ~f Stars.amount() ~ stars.~r ChallengeHeaderText.getText() ~~r FastResetText.getText() ~</div>
+    <div style="height: 32px;" ~style.display=(Options.showChallengeInfo() && Challenge.isThereChallengeText()) ? '' : 'none'~>
+      ~r Challenge.challengeText() ~
+    </div>
+    <div style="height: 32px;" ~style.display=(Options.showChallengeInfo() && EternityChallenge.isThereEternityChallengeText()) ? '' : 'none'~>
+      ~r EternityChallenge.eternityChallengeText() ~
+    </div>
     <div ~style.display=Options.smallerHeader() ? 'none' : ''~>
       <div style="height: 56px;" ~style.display=ResetButtons.isResetButtonVisible('infinity') ? '' : 'none'~>
         <span ~style.display=(InfinityPrestigeLayer.isRequirementVisible() && !InfinityPrestigeLayer.showFastSpecial()) ? '' : 'none'~>You need ~f InfinityPrestigeLayer.starRequirementForInfinity() ~ stars to infinity.</span>
@@ -4903,6 +4909,7 @@
           </select></div></td>
           <td><div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="options-div">
             <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleShowCurrentChallenges()">Current challenges in header: ~r Options.showCurrentChallenges() ? 'Shown' : 'Hidden' ~</button>
+            <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('infinity')) ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleShowChallengeInfo()">Challenge info in header <span class="helpspan">(?)<span class="tooltiptext">This setting shows information such as the Normal Challenge ~o 2 ~ multiplier.</span></span>: ~r Options.showChallengeInfo() ? 'Shown' : 'Hidden' ~</button>
             <button ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~ class="minier-options-button" onclick="Options.toggleShowNextCCCompletion()">Next ℂC completion in header: ~r Options.showNextCCCompletion() ? 'Shown' : 'Hidden' ~</button>
           </div></td>
         </tr>

@@ -1640,6 +1640,11 @@ let Saving = {
       player.options.explanations.tabs = '';
       player.version = 2.25390625;
     }
+    if (player.version < 2.26953125) {
+      player.recentEternityChallengeRequirements = [false, false, false, false, false, false, false, false];
+      player.options.headerSettings.showChallengeInfo = false;
+      player.version = 2.26953125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

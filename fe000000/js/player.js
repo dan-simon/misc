@@ -136,6 +136,7 @@ let initialPlayer = {
   currentEternityChallenge: 0,
   eternityChallengeCompletions: [0, 0, 0, 0, 0, 0, 0, 0],
   respecEternityChallenge: false,
+  recentEternityChallengeRequirements: [false, false, false, false, false, false, false, false],
   isEternityChallengeRequirementDisplayOn: true,
   autoECCompletion: true,
   usedAutoECCompletionThisComplexity: false,
@@ -432,6 +433,7 @@ let initialPlayer = {
     headerSettings: {
       showCurrentChallenges: true,
       showNextCCCompletion: true,
+      showChallengeInfo: false,
       showResetButtonsForHiddenTabs: true,
       showResetButtonsForFastResets: false,
       smallerHeader: false,
@@ -574,7 +576,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.25390625
+  version: 2.26953125
 }
 
 let player;

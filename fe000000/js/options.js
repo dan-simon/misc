@@ -298,6 +298,12 @@ let Options = {
   toggleShowNextCCCompletion() {
     player.options.headerSettings.showNextCCCompletion = !player.options.headerSettings.showNextCCCompletion;
   },
+  showChallengeInfo() {
+    return player.options.headerSettings.showChallengeInfo;
+  },
+  toggleShowChallengeInfo() {
+    player.options.headerSettings.showChallengeInfo = !player.options.headerSettings.showChallengeInfo;
+  },
   showResetButtonsForHiddenTabs() {
     return player.options.headerSettings.showResetButtonsForHiddenTabs;
   },

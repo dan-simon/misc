@@ -71,7 +71,7 @@ let EternityChallenge = {
       return 'Unlock challenge';
     } else if (this.getUnlockedEternityChallenge() !== 0) {
       return 'Another EC already unlocked';
-    } else if (Decimal.lt(this.getEternityChallengeResourceAmount(x), this.getEternityChallengeRequirement(x))) {
+    } else if (!this.hasRequirementRecentlyBeenReached(x)) {
       return 'Requires more ' + this.getEternityChallengeResourceName(x);
     } else if (Studies.unspentTheorems() < this.getEternityChallengeCost(x)) {
       return 'Requires more unspent theorems';
@@ -258,7 +258,7 @@ let EternityChallenge = {
     // Also, we don't use formatInt because it might show the current resource amount incorrectly
     // (for example, 2 stars rather than 1.75).
     return formatMaybeInt(this.getEternityChallengeResourceAmount(x)) + '/' + formatMaybeInt(this.getEternityChallengeRequirement(x)) +
-      ' ' + this.getEternityChallengeResourceName(x);
+      ' ' + this.getEternityChallengeResourceName(x) + (this.hasRequirementRecentlyBeenReached(x) ? ' (reached)' : '');
   },
   eternityChallengeStatusDescription(x) {
     let description;
@@ -285,9 +285,23 @@ let EternityChallenge = {
     if (this.isEternityChallengeUnlockingMeaningless()) {
       return true;
     }
+    // Since this.hasRequirementRecentlyBeenReached(x) is checked every tick, this should be fine.
+    // It may lose a tick.
     return this.getUnlockedEternityChallenge() === 0 &&
-      Decimal.gte(this.getEternityChallengeResourceAmount(x), this.getEternityChallengeRequirement(x)) &&
+      this.hasRequirementRecentlyBeenReached(x) &&
       Studies.unspentTheorems() >= this.getEternityChallengeCost(x);
+  },
+  hasRequirementRecentlyBeenReached(x) {
+    return player.recentEternityChallengeRequirements[x - 1];
+  },
+  checkForEternityChallengeRequirements() {
+    for (let ec = 1; ec <= 8; ec++) {
+      if (!this.hasRequirementRecentlyBeenReached(ec) &&
+      Decimal.gte(this.getEternityChallengeResourceAmount(ec), this.getEternityChallengeRequirement(ec)) &&
+      Studies.unspentTheorems() >= this.getEternityChallengeCost(ec)) {
+        player.recentEternityChallengeRequirements[ec - 1] = true;
+      }
+    }
   },
   unlockEternityChallenge(x) {
     // This function should only be called if the eternity challenge
@@ -368,9 +382,16 @@ let EternityChallenge = {
     }
   },
   completeEternityChallenge(x) {
-    player.eternityChallengeCompletions[x - 1] = this.getNextEternityChallengeCompletions(x);
+    let newCompletions = this.getNextEternityChallengeCompletions(x);
+    let completed = newCompletions > player.eternityChallengeCompletions[x - 1];
+    player.eternityChallengeCompletions[x - 1] = newCompletions;
     // Current eternity challenge is set to 0 as part of lockUnlockedEternityChallenge.
     this.lockUnlockedEternityChallenge();
+    // Require requirement to be reached again for future completions.
+    // This function might only be called if completions were gained but I doubt it.
+    if (completed) {
+      player.recentEternityChallengeRequirements[x - 1] = false;
+    }
   },
   eternityChallenge1InfinityStarsEffect() {
     return 1 - 1 / (1 + player.infinityStars.max(1).log2() / 2048);
@@ -490,6 +511,7 @@ let EternityChallenge = {
     if (ec === 4) {
       this.checkForExitingEternityChallenge4(0);
     }
+    player.recentEternityChallengeRequirements[ec - 1] = false;
   },
   checkForExitingEternityChallenge4(newInfinities) {
     if (EternityChallenge.isEternityChallengeRunning(4) &&

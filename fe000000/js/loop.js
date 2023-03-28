@@ -67,6 +67,7 @@ function gameLoop(diff, display, isOnline) {
     ComplexityPoints.addAmount(ComplexityPrestigeLayer.complexityPointGain().times(diff));
   }
   Studies.updateExtraTheorems();
+  EternityChallenge.checkForEternityChallengeRequirements();
   EternityChallenge.checkForAutoEternityChallengeCompletions();
   ComplexityChallenge.checkForComplexityChallengeCompletions();
   ComplexityAchievements.checkForComplexityAchievements();
