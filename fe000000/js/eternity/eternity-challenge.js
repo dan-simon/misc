@@ -71,7 +71,7 @@ let EternityChallenge = {
       return 'Unlock challenge';
     } else if (this.getUnlockedEternityChallenge() !== 0) {
       return 'Another EC already unlocked';
-    } else if (!this.hasRequirementRecentlyBeenReached(x)) {
+    } else if (!this.hasRequirementRecentlyBeenReached(x) && !this.currentlyHasRequirement(x)) {
       return 'Requires more ' + this.getEternityChallengeResourceName(x);
     } else if (Studies.unspentTheorems() < this.getEternityChallengeCost(x)) {
       return 'Requires more unspent theorems';
@@ -285,19 +285,21 @@ let EternityChallenge = {
     if (this.isEternityChallengeUnlockingMeaningless()) {
       return true;
     }
-    // Since this.hasRequirementRecentlyBeenReached(x) is checked every tick, this should be fine.
-    // It may lose a tick.
+    // this.currentlyHasRequirement(x) is needed due to e.g. a single tick where Eternity Challenge 6 should be possible to unlock
+    // due to an EC auto-completion, but this.checkForEternityChallengeRequirements() hasn't been called yet.
     return this.getUnlockedEternityChallenge() === 0 &&
-      this.hasRequirementRecentlyBeenReached(x) &&
+      (this.hasRequirementRecentlyBeenReached(x) || this.currentlyHasRequirement(x)) &&
       Studies.unspentTheorems() >= this.getEternityChallengeCost(x);
+  },
+  currentlyHasRequirement(x) {
+    return Decimal.gte(this.getEternityChallengeResourceAmount(x), this.getEternityChallengeRequirement(x));
   },
   hasRequirementRecentlyBeenReached(x) {
     return player.recentEternityChallengeRequirements[x - 1];
   },
   checkForEternityChallengeRequirements() {
     for (let ec = 1; ec <= 8; ec++) {
-      if (!this.hasRequirementRecentlyBeenReached(ec) &&
-      Decimal.gte(this.getEternityChallengeResourceAmount(ec), this.getEternityChallengeRequirement(ec)) &&
+      if (!this.hasRequirementRecentlyBeenReached(ec) && this.currentlyHasRequirement(ec) &&
       Studies.unspentTheorems() >= this.getEternityChallengeCost(ec)) {
         player.recentEternityChallengeRequirements[ec - 1] = true;
       }
