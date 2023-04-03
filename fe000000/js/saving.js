@@ -1645,6 +1645,10 @@ let Saving = {
       player.options.headerSettings.showChallengeInfo = false;
       player.version = 2.26953125;
     }
+    if (player.version < 2.2734375) {
+      player.options.autobuyers.automaticallyCompleteChallenges = false;
+      player.version = 2.2734375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

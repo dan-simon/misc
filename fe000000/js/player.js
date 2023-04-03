@@ -448,6 +448,7 @@ let initialPlayer = {
         challenge: false,
         infinityChallenge: false,
       },
+      automaticallyCompleteChallenges: false,
       showGeneratorAndBoostAutobuyers: true,
       isOnDespiteSuspended: [false, false, false, false],
     },
@@ -576,7 +577,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.26953125
+  version: 2.2734375
 }
 
 let player;

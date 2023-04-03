@@ -613,6 +613,10 @@
         <span>Automatically turn all autobuyers off when entering normal challenges: <input type="checkbox" ~!checked=Autobuyers.disableWhenStartingChallenge()~ ~!onchange=function() {Autobuyers.setDisableWhenStartingChallenge(this.checked)}~></input><span ~style.display=SpecialTabs.isTabVisible('infinity-challenges') ? '' : 'none'~> when entering infinity challenges: <input type="checkbox" ~!checked=Autobuyers.disableWhenStartingInfinityChallenge()~ ~!onchange=function() {Autobuyers.setDisableWhenStartingInfinityChallenge(this.checked)}~></input></span></span>
         <br/>
       </div>
+      <div ~style.display=(Autobuyer(12).hasAutobuyer() || PrestigeLayerProgress.hasReached('eternity')) ? '' : 'none'~>
+        <span>Automatically complete ~r Autobuyers.challengeTypesDisplay() ~ as soon as possible <span class="helpspan">(?)<span class="tooltiptext">This setting ignores whether autobuyers are on, but it does require the ~r SpecialTabs.isTabVisible('eternity-challenges') ? 'infinity/eternity autobuyer' : 'infinity autobuyer' ~ to be unlocked. <span ~style.display=SpecialTabs.isTabVisible('eternity-challenges')  ? '' : 'none'~>Due to some special cases requiring being in an eternity challenge, this setting does not apply to an eternity challenge that you have already fully completed.</span></span>: <input type="checkbox" ~!checked=Autobuyers.automaticallyCompleteChallenges()~ ~!onchange=function() {Autobuyers.setAutomaticallyCompleteChallenges(this.checked)}~></input></span>
+        <br/>
+      </div>
       <span>You can toggle an autobuyer by pressing T + the corresponding hotkey.</span>
       <br/>
       <span ~style.display=PrestigeLayerProgress.hasReached('eternity') ? '' : 'none'~>Autobuyers options on this tab only apply to autobuyers on this tab.</span>

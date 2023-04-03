@@ -205,14 +205,29 @@ let Autobuyers = {
   disableWhenStartingChallenge() {
     return player.options.autobuyers.disableAutobuyersWhenStarting.challenge;
   },
-  setDisableWhenStartingChallenge() {
-    player.options.autobuyers.disableAutobuyersWhenStarting.challenge = !player.options.autobuyers.disableAutobuyersWhenStarting.challenge;
+  setDisableWhenStartingChallenge(x) {
+    player.options.autobuyers.disableAutobuyersWhenStarting.challenge = x;
   },
   disableWhenStartingInfinityChallenge() {
     return player.options.autobuyers.disableAutobuyersWhenStarting.infinityChallenge;
   },
-  setDisableWhenStartingInfinityChallenge() {
-    player.options.autobuyers.disableAutobuyersWhenStarting.infinityChallenge = !player.options.autobuyers.disableAutobuyersWhenStarting.infinityChallenge;
+  setDisableWhenStartingInfinityChallenge(x) {
+    player.options.autobuyers.disableAutobuyersWhenStarting.infinityChallenge = x;
+  },
+  automaticallyCompleteChallenges() {
+    return player.options.autobuyers.automaticallyCompleteChallenges;
+  },
+  setAutomaticallyCompleteChallenges(x) {
+    player.options.autobuyers.automaticallyCompleteChallenges = x;
+  },
+  challengeTypesDisplay() {
+    if (SpecialTabs.isTabVisible('eternity-challenges')) {
+      return 'normal, infinity, and eternity challenges';
+    } else if (SpecialTabs.isTabVisible('infinity-challenges')) {
+      return 'normal and infinity challenges';
+    } else {
+      return 'normal challenges';
+    }
   },
   isLockedResetAutobuyer(x) {
     if (x < 12) return false;
@@ -257,6 +272,12 @@ let Autobuyers = {
     }
   },
   infinity() {
+    if (Autobuyer(12).hasAutobuyer() && Autobuyers.automaticallyCompleteChallenges() &&
+    InfinityPrestigeLayer.canInfinity() &&
+    (Challenge.isSomeChallengeRunning() || InfinityChallenge.isSomeInfinityChallengeRunning())) {
+      InfinityPrestigeLayer.infinity(false, null);
+      return;
+    }
     if (!Autobuyer(12).isActive() || !InfinityPrestigeLayer.canInfinity()) return;
     let shouldInfinity;
     let mode = Autobuyer(12).mode();
@@ -294,6 +315,12 @@ let Autobuyers = {
     }
   },
   eternity() {
+    if (Autobuyer(13).hasAutobuyer() && Autobuyers.automaticallyCompleteChallenges() &&
+    EternityPrestigeLayer.canEternity() &&
+    EternityChallenge.isSomeEternityChallengeRunning() && !EternityChallenge.isCurrentEternityChallengeCompleted()) {
+      EternityPrestigeLayer.eternity(false);
+      return;
+    }
     if (!Autobuyer(13).isActive() || !EternityPrestigeLayer.canEternity()) return;
     let shouldEternity;
     let mode = Autobuyer(13).mode();
