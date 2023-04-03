@@ -513,7 +513,8 @@ let EternityChallenge = {
     if (ec === 4) {
       this.checkForExitingEternityChallenge4(0);
     }
-    player.recentEternityChallengeRequirements[ec - 1] = false;
+    // We'll be nice to the player and not do player.recentEternityChallengeRequirements[ec - 1] = false,
+    // which would re-lock the EC.
   },
   checkForExitingEternityChallenge4(newInfinities) {
     if (EternityChallenge.isEternityChallengeRunning(4) &&
