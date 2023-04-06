@@ -57,3 +57,23 @@ function main() {
   let res = winChance(yb, yp, yc, yh, ob, op, oc, oh);
   document.getElementById('ret').innerHTML = (res === null) ? 'invalid' : (res * 100).toFixed(2) + '%';
 }
+
+function munge() {
+  let wholeData = document.getElementById('data').value.split('\n').map(i => i.split('\t').filter(j => j));
+  let first = [];
+  for (let i of wholeData) {
+    if (i.length === 12) {
+      first.push(i[0]);
+    } else {
+      first.push(first[first.length - 1]);
+    }
+  }
+  let heads = wholeData.map((i, ind) => [ind + 1, i[i.length - 10], first[ind], i[i.length - 11]]);
+  let nums = wholeData.map(i => i.slice(-9).map(x => +x));
+  let decks = nums.map(i => [0, 3, 6].flatMap(j => Array(3 - j / 3).fill(i.slice(j, j + 3))));
+  let cards = decks.flat();
+  let scoreDeck = deck => deck.map(score).reduce((a, b) => a + b) / deck.length;
+  let score = card => cards.map(i => winChance(...card, 0.5, ...i, 0.5)).reduce((a, b) => a + b) / cards.length;
+  let x = decks.map(i => [scoreDeck(i), score(i[0]), score(i[3]), score(i[5])]);
+  document.getElementById('result').innerText = heads.map((i, ind) => i.concat(x[ind].map(j => (j * 100).toFixed(2) + '%')).join(',')).join('\n');
+}
