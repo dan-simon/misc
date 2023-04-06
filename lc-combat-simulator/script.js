@@ -59,6 +59,7 @@ function main() {
 }
 
 function munge() {
+  let mod = document.getElementById('mod').checked ? 0.45 : 0;
   let wholeData = document.getElementById('data').value.split('\n').map(i => i.split('\t').filter(j => j));
   let first = [];
   for (let i of wholeData) {
@@ -73,7 +74,7 @@ function munge() {
   let decks = nums.map(i => [0, 3, 6].flatMap(j => Array(3 - j / 3).fill(i.slice(j, j + 3))));
   let cards = decks.flat();
   let scoreDeck = deck => deck.map(score).reduce((a, b) => a + b) / deck.length;
-  let score = card => cards.map(i => winChance(...card, 0.5, ...i, 0.5)).reduce((a, b) => a + b) / cards.length;
+  let score = card => cards.map(i => winChance(...card, 0.5 + mod, ...i, 0.5)).reduce((a, b) => a + b) / cards.length;
   let x = decks.map(i => [scoreDeck(i), score(i[0]), score(i[3]), score(i[5])]);
   document.getElementById('result').innerText = heads.map((i, ind) => i.concat(x[ind].map(j => (j * 100).toFixed(2) + '%')).join(',')).join('\n');
 }
