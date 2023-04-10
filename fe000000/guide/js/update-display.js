@@ -879,8 +879,8 @@ function updateDisplay() {
     if (shouldUpdate("e801")) {let v = format(Math.E); if (e[801].textContent !== v) {e[801].textContent = v};};
     if (shouldUpdate("e802")) {let v = formatInt(2); if (e[802].textContent !== v) {e[802].textContent = v};};
     if (shouldUpdate("e803")) {let v = formatInt(1); if (e[803].textContent !== v) {e[803].textContent = v};};
-    if (shouldUpdate("e804")) {let v = formatInt(2); if (e[804].textContent !== v) {e[804].textContent = v};};
-    if (shouldUpdate("e805")) {let v = format(Math.E); if (e[805].textContent !== v) {e[805].textContent = v};};
+    if (shouldUpdate("e804")) {let v = format(Math.E); if (e[804].textContent !== v) {e[804].textContent = v};};
+    if (shouldUpdate("e805")) {let v = formatInt(2); if (e[805].textContent !== v) {e[805].textContent = v};};
     if (shouldUpdate("e806")) {let v = formatInt(3072); if (e[806].textContent !== v) {e[806].textContent = v};};
     if (shouldUpdate("e807")) {let v = formatInt(3072); if (e[807].textContent !== v) {e[807].textContent = v};};
     if (shouldUpdate("e808")) {let v = formatTime(2700, {seconds: {f: formatTimeMaybeInt, s: true}, larger: {f: formatTimeMaybeInt, s: true}}); if (e[808].textContent !== v) {e[808].textContent = v};};
