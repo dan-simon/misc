@@ -349,7 +349,7 @@ let specific = function () {
 }
 
 let mini = function () {
-  let groups = [[[0, 1], [0, 1]], [[0, 1], [0, 1, 2]], [[0, 1, 2], [0, 1]]].flatMap(([hs, ws]) =>
+  let groups = [[[0, 1], [0, 1]], [[0, 1], [0, 1, 2]], [[0, 1, 2], [0, 1]], [[0, 1], [0, 1, 2, 3, 4]], [[0, 1, 2, 3, 4], [0, 1]]].flatMap(([hs, ws]) =>
   [...Array(size - hs.length + 1)].flatMap((_, h) => [...Array(size - ws.length + 1)].map((_, w) =>
   hs.flatMap(i => ws.map(j => [h + i, w + j]))))).filter(i => i.every(j => at(state, j) !== 1));
   for (let i of groups) {
