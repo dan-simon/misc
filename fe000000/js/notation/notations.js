@@ -1,5 +1,59 @@
 function baseFormat() {
-  return ADNotations.formatMantissa(NotationOptions.displayBase(), NotationOptions.displayDigits());
+  return fm(NotationOptions.displayBase(), NotationOptions.displayDigits());
+}
+
+function specialBaseFormat() {
+  return sfm(NotationOptions.displayBase(), NotationOptions.displayDigits());
+}
+
+function fm(base, digits) {
+  return function (n, precision) {
+   // We use -1 as a sentinal undefined value for formatExponent in some cases,
+   // so we max with zero to avoid strange results.
+   let value = Math.round(n * base ** Math.max(0, precision));
+   const d = [];
+   while (value > 0 || d.length === 0) {
+     d.push(digits[value % base]);
+     value = Math.floor(value / base);
+   }
+   let result = d.reverse().join("");
+   // This only happens for positive values so if precision is negative it's not a concern.
+   if (precision > 0) {
+     result = result.padStart(precision + 1, digits[0]);
+     result = `${result.slice(0, -precision)}.${result.slice(-precision)}`;
+   }
+   return result;
+ };
+}
+
+function sfm(base, digits) {
+  return function (n, precision) {
+    precision = Math.max(0, precision);
+    if (n === 0) {
+      return (precision === 0) ? digits[0] : (digits[0] + '.' + digits[0].repeat(precision));
+    }
+    let rvalue = n * base ** precision;
+    while (rvalue < 1) {
+      if (precision >= 3) {
+        return 'not exactly ' + digits[0];
+      }
+      rvalue *= base;
+      precision += 1;
+    }
+    value = Math.round(rvalue);
+    const d = [];
+    while (value > 0 || d.length === 0) {
+      d.push(digits[value % base]);
+      value = Math.floor(value / base);
+    }
+    let result = d.reverse().join("");
+    // This only happens for positive values so if precision is negative it's not a concern.
+    if (precision > 0) {
+      result = result.padStart(precision + 1, digits[0]);
+      result = `${result.slice(0, -precision)}.${result.slice(-precision)}`;
+    }
+    return result;
+  };
 }
 
 function representExponentWithAlphabet(x, a) {
@@ -71,7 +125,15 @@ class DefaultScientificNotation extends ADNotations.Notation {
   }
   
   formatUnder1000(value, places) {
-    return ADNotations.formatMantissaBaseTen(value, places);
+    if (value < 1 && value !== 0) {
+      if (value < 0.001) {
+        return 'not exactly 0';
+      }
+      if (places < 3) {
+        places = Math.max(Math.ceil(-Math.log10(value)), places);
+      }
+    }
+    return value.toFixed(Math.max(0, places));
   }
 
   formatDecimal(value, places, placesExponent) {
@@ -87,7 +149,7 @@ class ScientificNotation extends ADNotations.Notation {
   }
   
   formatUnder1000(value, places) {
-    return baseFormat()(value, places);
+    return specialBaseFormat()(value, places);
   }
 
   formatDecimal(value, places, placesExponent) {
@@ -103,7 +165,7 @@ class StandardNotation extends ADNotations.Notation {
   }
   
   formatUnder1000(value, places) {
-    return baseFormat()(value, places);
+    return specialBaseFormat()(value, places);
   }
 
   formatDecimal(value, places, placesExponent) {
@@ -119,7 +181,7 @@ class LogarithmNotation extends ADNotations.Notation {
   }
   
   formatUnder1000(value, places) {
-    return baseFormat()(value, places);
+    return specialBaseFormat()(value, places);
   }
 
   formatDecimal(value, places, placesExponent) {
@@ -134,7 +196,7 @@ class EngineeringNotation extends ADNotations.Notation {
   }
   
   formatUnder1000(value, places) {
-    return baseFormat()(value, places);
+    return specialBaseFormat()(value, places);
   }
 
   formatDecimal(value, places, placesExponent) {
@@ -150,7 +212,7 @@ class LettersNotation extends ADNotations.Notation {
   }
   
   formatUnder1000(value, places) {
-    return baseFormat()(value, places);
+    return specialBaseFormat()(value, places);
   }
 
   formatDecimal(value, places, placesExponent) {
@@ -170,7 +232,7 @@ class MixedScientificNotation extends ADNotations.Notation {
   }
   
   formatUnder1000(value, places) {
-    return baseFormat()(value, places);
+    return specialBaseFormat()(value, places);
   }
 
   formatDecimal(value, places, placesExponent) {
@@ -189,7 +251,7 @@ class MixedEngineeringNotation extends ADNotations.Notation {
   }
   
   formatUnder1000(value, places) {
-    return baseFormat()(value, places);
+    return specialBaseFormat()(value, places);
   }
 
   formatDecimal(value, places, placesExponent) {
@@ -208,7 +270,7 @@ class MixedLogarithmSciNotation extends ADNotations.Notation {
   }
   
   formatUnder1000(value, places) {
-    return baseFormat()(value, places);
+    return specialBaseFormat()(value, places);
   }
 
   formatDecimal(value, places, placesExponent) {
