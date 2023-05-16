@@ -653,7 +653,7 @@ input[type=text] {
 }
 
 .chromacurrentgreydiv {
-  background: radial-gradient(var(--background-color), var(--background-color) 75%, #aaaaaa);
+  background: radial-gradient(var(--background-color), var(--background-color) 75%, var(--grey-text-color));
 }
 
 .chromanextgreydiv {
@@ -661,7 +661,7 @@ input[type=text] {
 }
 
 .chromacurrentpurplediv {
-  background: radial-gradient(var(--background-color), var(--background-color) 75%, #aa99ff);
+  background: radial-gradient(var(--background-color), var(--background-color) 75%, var(--purple-text-color));
 }
 
 .chromanextpurplediv {
@@ -669,7 +669,7 @@ input[type=text] {
 }
 
 .chromacurrentorangediv {
-  background: radial-gradient(var(--background-color), var(--background-color) 75%, #ff9933);
+  background: radial-gradient(var(--background-color), var(--background-color) 75%, var(--orange-text-color));
 }
 
 .chromanextorangediv {
@@ -677,7 +677,7 @@ input[type=text] {
 }
 
 .chromacurrentcyandiv {
-  background: radial-gradient(var(--background-color), var(--background-color) 75%, #00ffff);
+  background: radial-gradient(var(--background-color), var(--background-color) 75%, var(--cyan-text-color));
 }
 
 .chromanextcyandiv {
@@ -685,7 +685,7 @@ input[type=text] {
 }
 
 .chromacurrentgreendiv {
-  background: radial-gradient(var(--background-color), var(--background-color) 75%, #33ff33);
+  background: radial-gradient(var(--background-color), var(--background-color) 75%, var(--green-text-color));
 }
 
 .chromanextgreendiv {
@@ -693,7 +693,7 @@ input[type=text] {
 }
 
 .chromacurrentreddiv {
-  background: radial-gradient(var(--background-color), var(--background-color) 75%, #ff0000);
+  background: radial-gradient(var(--background-color), var(--background-color) 75%, var(--red-text-color));
 }
 
 .chromanextreddiv {
