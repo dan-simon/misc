@@ -43,6 +43,10 @@ const el = function (x) {
   return r;
 }
 
+function clamp(a, b) {
+  return Math.max(1, Math.min(a, b));
+}
+
 function getBit(n) {
   let bit = (n >= 0) ? 1 : 0;
   n = Decimal.abs(n);
@@ -55,7 +59,7 @@ function getBit(n) {
     let base = el('base');
     if (el('linearize')) {
       let c = Math.floor(Decimal.log(n, base));
-      r = c + (n.div(Decimal.pow(base, c)) - 1) / (base - 1);
+      r = c + (clamp(n.div(Decimal.pow(base, c)), base) - 1) / (base - 1);
     } else {
       r = Decimal.log(n, base);
     }
