@@ -15,8 +15,11 @@ function autoAssignDevs() {
   for (let i = 0; i <= 4; i++) {
     player.devs[i] = 0;
   }
+  // Set total to at least 1, so that if you want to leave half your devs unused you can
+  let total = Math.max(player.auto.dev.settings.reduce((a, b) => a + b), 1);
+  let realSettings = player.auto.dev.settings.map(i => i / total);
   for (let i = 0; i <= 4; i++) {
-    let askedFor = Math.floor(getTotalDevs() * player.auto.dev.settings[i]);
+    let askedFor = Math.floor(getTotalDevs() * realSettings[i]);
     let maxAllowed = getUnassignedDevs();
     setDevs(i, Math.min(askedFor, maxAllowed));
   }
