@@ -7,8 +7,10 @@ function updateAchievementDisplay() {
   for (let i = 0; i <= 26; i++) {
     if (player.achievements.normal.list[i]) {
       document.getElementById('normal-ach-status-' + i).innerHTML = '&#x2714;';
+      document.getElementById('normal-ach-status-' + i).style.color = 'green';
     } else {
       document.getElementById('normal-ach-status-' + i).innerHTML = '&#x2718;';
+      document.getElementById('normal-ach-status-' + i).style.color = 'red';
     }
   }
   document.getElementById('total-lategame-achievements').innerHTML = player.achievements.lategame.number;
@@ -19,8 +21,10 @@ function updateAchievementDisplay() {
   for (let i = 0; i <= 8; i++) {
     if (player.achievements.lategame.list[i]) {
       document.getElementById('lategame-ach-status-' + i).innerHTML = '&#x2714;';
+      document.getElementById('lategame-ach-status-' + i).style.color = 'green';
     } else {
       document.getElementById('lategame-ach-status-' + i).innerHTML = '&#x2718;';
+      document.getElementById('lategame-ach-status-' + i).style.color = 'red';
     }
   }
 }
