@@ -220,6 +220,12 @@ let Autobuyers = {
   setAutomaticallyCompleteChallenges(x) {
     player.options.autobuyers.automaticallyCompleteChallenges = x;
   },
+  automaticallyCompleteChallengesTierRequirement() {
+    return player.options.autobuyers.automaticallyCompleteChallengesTierRequirement;
+  },
+  setAutomaticallyCompleteChallengesTierRequirement(x) {
+    player.options.autobuyers.automaticallyCompleteChallengesTierRequirement = x || 0;
+  },
   challengeTypesDisplay() {
     if (SpecialTabs.isTabVisible('eternity-challenges')) {
       return 'normal, infinity, and eternity challenges';
@@ -318,8 +324,16 @@ let Autobuyers = {
     if (Autobuyer(13).hasAutobuyer() && Autobuyers.automaticallyCompleteChallenges() &&
     EternityPrestigeLayer.canEternity() &&
     EternityChallenge.isSomeEternityChallengeRunning() && !EternityChallenge.isCurrentEternityChallengeCompleted()) {
-      EternityPrestigeLayer.eternity(false);
-      return;
+      let ec = EternityChallenge.currentEternityChallenge();
+      let nextTiers = EternityChallenge.getNextEternityChallengeCompletions(ec);
+      let newTiers = nextTiers - EternityChallenge.getEternityChallengeCompletions(ec);
+      // If we're either going one tier at once, would fully complete,
+      // or would get required number of tiers, we eternity.
+      if ((!EternityChallenge.canCompleteMultipleTiersAtOnce()) || nextTiers >= 4 ||
+      newTiers >= Autobuyers.automaticallyCompleteChallengesTierRequirement()) {
+        EternityPrestigeLayer.eternity(false);
+        return;
+      }
     }
     if (!Autobuyer(13).isActive() || !EternityPrestigeLayer.canEternity()) return;
     let shouldEternity;

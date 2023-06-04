@@ -141,6 +141,7 @@ let NotationOptions = {
     // so we can't just always apply + to the result.
     let res = {
       'autobuyers-timer-length': () => this.readMaybeTime(y, true),
+      'autobuyers-tier-requirement': () => this.readMaybeTime(y, false),
       'chroma-value': () => this.readMaybeTime(y, false),
       'craft-rarity': () => (y === 'max' || y === 'min') ? y : this.readMaybeTime(y, false),
       'oracle-display-time': () => this.readMaybeTime(y, true),
@@ -163,6 +164,7 @@ let NotationOptions = {
   format(x) {
     return {
       'autobuyers-timer-length': () => this.formatMaybeTime(Autobuyers.autobuyersTimerLength(), true),
+      'autobuyers-tier-requirement': () => this.formatMaybeTime(Autobuyers.automaticallyCompleteChallengesTierRequirement(), false),
       'chroma-value': () => this.formatMaybeTime(Chroma.timeForChromaValue(), false),
       'craft-rarity': () => {
         let y = PowerShards.craftedRarityDisplay();
@@ -182,7 +184,7 @@ let NotationOptions = {
   },
   notationChangeOthers(x = null) {
     if (x === null) {
-      x = ['autobuyers-timer-length', 'chroma-value', 'craft-rarity', 'oracle-display-time',
+      x = ['autobuyers-timer-length', 'autobuyers-tier-requirement', 'chroma-value', 'craft-rarity', 'oracle-display-time',
       'oracle-display-ticks', 'next-dilated-amount', 'achievements-beyond-highest', 'last-runs-to-show',
       'export-reminder', 'offline-ticks', 'lower-precision', 'higher-precision', 'input-precision'];
     }
