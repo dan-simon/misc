@@ -44,6 +44,9 @@ let press = function (key) {
   if (key === 'KeyS') {
     toggleShading();
   }
+  if (key === 'Digit2') {
+    findPairs();
+  }
 }
 
 window.onload = function () {
@@ -356,6 +359,123 @@ let mini = function () {
     rawParityCalc(i, false);
   }
   redrawEdges();
+}
+
+let findPairs = function () {
+  if (!solving) {
+    alert('Not solving!');
+    return;
+  }
+  let rc = getAllReverseCC();
+  let assign = {};
+  for (let ind = 0; ind < rc.length; ind++) {
+    for (let j of rc[ind]) {
+      assign[j.join(',')] = ind;
+    }
+  }
+  let l = [...Array(size + 1)].flatMap((_, i) => [...Array(size + 1)].map((_, j) => [i, j]));
+  let l2 = inds();
+  let counts = {};
+  let things = {};
+  for (let i of l) {
+    let a = assign[i.join(',')];
+    for (let j of smallReverseEdges(i[0], i[1])) {
+      let b = assign[j[0].join(',')];
+      if (a !== b) {
+        let k = Math.min(a, b) + ',' + Math.max(a, b);
+        if (!counts[k]) {
+          counts[k] = 1;
+          things[k] = [[j[1], j[2]]];
+        } else {
+          counts[k]++;
+          things[k].push([j[1], j[2]]);
+        }
+      }
+    }
+  }
+  for (let i of l2) {
+    // We're not adding edges here, only adding to counts.
+    let [a, b, c, d] = [assign[i[0] + ',' + i[1]], assign[i[0] + ',' + (i[1] + 1)], assign[(i[0] + 1) + ',' + i[1]], assign[(i[0] + 1) + ',' + (i[1] + 1)]];
+    if (a !== b && a !== c && b !== d && c !== d) {
+      if (a !== d) {
+        let k = Math.min(a, d) + ',' + Math.max(a, d);
+        counts[k] = (counts[k] || 0) + 1;
+      }
+      if (b !== c) {
+        let k = Math.min(b, c) + ',' + Math.max(b, c);
+        counts[k] = (counts[k] || 0) + 1;
+      }
+    }
+  }
+  for (let i in things) {
+    if (counts[i] >= 2) {
+      for (let j of things[i]) {
+        edges[j.map(k => k.join(',')).join('-')] = 1;
+      }
+    }
+  }
+  redrawEdges();
+}
+
+let getAllReverseCC = function () {
+  let r = [];
+  let allSeen = {};
+  let l = [...Array(size + 1)].flatMap((_, i) => [...Array(size + 1)].map((_, j) => [i, j]));
+  for (let [i, j] of l) {
+    if (i + ',' + j in allSeen) {
+      continue;
+    }
+    let seen = getReverseCC(i, j);
+    r.push(Object.keys(seen).map(i => i.split(',').map(n => +n)));
+    for (let k in seen) {
+      allSeen[k] = true;
+    }
+  }
+  return r;
+}
+
+let reverseEdges = function (i, j) {
+  return [[[i - 1, j], [i - 1, j - 1], [i - 1, j]], [[i, j - 1], [i - 1, j - 1], [i, j - 1]],
+  [[i, j + 1], [i - 1, j], [i, j]], [[i + 1, j], [i, j - 1], [i, j]]].filter(
+    i => 0 <= i[0][0] && i[0][0] <= size && 0 <= i[0][1] && i[0][1] <= size);
+}
+
+let smallReverseEdges = function (i, j) {
+  return [[[i, j + 1], [i - 1, j], [i, j]], [[i + 1, j], [i, j - 1], [i, j]]].filter(
+    i => 0 <= i[0][0] && i[0][0] <= size && 0 <= i[0][1] && i[0][1] <= size);
+}
+
+let reverseNeighbors = function (x) {
+  let [i, j] = x.split(',').map(v => +v);
+  let possible = reverseEdges(i, j);
+  return possible.filter(i => i[1].concat(i[2]).some(j => j < 0 || j > size - 1) ||
+    edges[i[1].join(',') + '-' + i[2].join(',')] === 2 || edges[i[1].join(',') + '-' + i[2].join(',')] === -1).map(i => i[0].join(','));
+}
+
+let getReverseCC = function (i, j) {
+  let seenCells = {};
+  let lastCells = {};
+  lastCells[i + ',' + j] = true;
+  let thisCells = {};
+  while (true) {
+    if (Object.keys(lastCells).length === 0) {
+      break;
+    }
+    for (let i in lastCells) {
+      seenCells[i] = true;
+    }
+    thisCells = {};
+    for (let i in lastCells) {
+      for (let j of reverseNeighbors(i)) {
+        if (!(j in seenCells)) {
+          thisCells[j] = true;
+        }
+      }
+    }
+    lastCells = thisCells;
+    thisCells = {};
+  }
+  return seenCells;
 }
 
 let check = function () {
