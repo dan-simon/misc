@@ -501,6 +501,7 @@ let makeAutoProgress = function (r) {
     bounce();
     specific();
     mini();
+    findPairs();
     let n = score();
     if (s === n) {
       break;
