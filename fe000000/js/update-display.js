@@ -1651,14 +1651,14 @@ function updateDisplay() {
     if (shouldUpdate("e263")) {let v = formatInt(Infinities.amount()); if (e[263].textContent !== v) {e[263].textContent = v};};
     if (shouldUpdate("e264")) {let v = pluralize(Infinities.amount(), 'y', 'ies'); if (e[264].textContent !== v) {e[264].textContent = v};};
     if (shouldUpdate("e265")) {let v = formatMaybeInt(Infinities.infinityGeneratorMultiplier()); if (e[265].textContent !== v) {e[265].textContent = v};};
-    if (shouldUpdate("b190")) {let v = (InfinityPrestigeLayer.canInfinityBeBroken() && !InfinityPrestigeLayer.isInfinityBroken()) ? '' : 'none'; if (b[190].style.display !== v) {b[190].style.display = v};};
+    if (shouldUpdate("b190")) {let v = (InfinityPrestigeLayer.canInfinityBeBroken() && !InfinityPrestigeLayer.isBreakInfinityOn()) ? '' : 'none'; if (b[190].style.display !== v) {b[190].style.display = v};};
     if (shouldUpdate("e266")) {let v = InfinityPrestigeLayer.breakInfinityButtonText(); if (e[266].textContent !== v) {e[266].textContent = v};};
-    if (shouldUpdate("b191")) {let v = InfinityPrestigeLayer.isInfinityBroken() ? '' : 'none'; if (b[191].style.display !== v) {b[191].style.display = v};};
+    if (shouldUpdate("b191")) {let v = InfinityPrestigeLayer.isBreakInfinityOn() ? '' : 'none'; if (b[191].style.display !== v) {b[191].style.display = v};};
     if (shouldUpdate("b192")) {let v = InfinityPrestigeLayer.canInfinityBeBroken() ? 'none' : ''; if (b[192].style.display !== v) {b[192].style.display = v};};
     if (shouldUpdate("b193")) {let v = (InfinityPrestigeLayer.canInfinityBeBroken() && !SpecialTabs.isTabVisible('infinity-challenges')) ? '' : 'none'; if (b[193].style.display !== v) {b[193].style.display = v};};
     if (shouldUpdate("b194")) {let v = (InfinityPrestigeLayer.canInfinityBeBroken() && !SpecialTabs.isTabVisible('infinity-challenges')) ? '' : 'none'; if (b[194].style.display !== v) {b[194].style.display = v};};
-    if (shouldUpdate("b195")) {let v = (!Explanations.isShown('infinity-details', 'main') && InfinityPrestigeLayer.canInfinityBeBroken() && !InfinityPrestigeLayer.isInfinityBroken()) ? '' : 'none'; if (b[195].style.display !== v) {b[195].style.display = v};};
-    if (shouldUpdate("b196")) {let v = (!Explanations.isShown('infinity-details', 'main') && InfinityPrestigeLayer.canInfinityBeBroken() && !InfinityPrestigeLayer.isInfinityBroken()) ? '' : 'none'; if (b[196].style.display !== v) {b[196].style.display = v};};
+    if (shouldUpdate("b195")) {let v = (!Explanations.isShown('infinity-details', 'main') && InfinityPrestigeLayer.canInfinityBeBroken() && !InfinityPrestigeLayer.isBreakInfinityOn()) ? '' : 'none'; if (b[195].style.display !== v) {b[195].style.display = v};};
+    if (shouldUpdate("b196")) {let v = (!Explanations.isShown('infinity-details', 'main') && InfinityPrestigeLayer.canInfinityBeBroken() && !InfinityPrestigeLayer.isBreakInfinityOn()) ? '' : 'none'; if (b[196].style.display !== v) {b[196].style.display = v};};
     if (shouldUpdate("e267")) {let v = InfinityPrestigeLayer.breakInfinityButtonText(); if (e[267].textContent !== v) {e[267].textContent = v};};
     if (shouldUpdate("e268")) {let v = format(InfinityStars.amount()); if (e[268].textContent !== v) {e[268].textContent = v};};
     if (shouldUpdate("e269")) {let v = Generators.term(); if (e[269].textContent !== v) {e[269].textContent = v};};

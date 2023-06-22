@@ -11,8 +11,7 @@ let InfinityPrestigeLayer = {
       InfinityChallenge.isNoInfinityChallengeRunning();
   },
   breakInfinityButtonText() {
-    return player.breakInfinity ?
-      ('Fix infinity: force infinity at ' + format(Decimal.pow(2, 256)) + ' stars') :
+    return player.breakInfinity ? 'This text shouldn\'t show up' :
       ('Break infinity: allow stars to go beyond ' + format(Decimal.pow(2, 256)) + ', with greater IP gain');
   },
   breakInfinity() {
