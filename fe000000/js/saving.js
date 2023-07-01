@@ -1653,6 +1653,11 @@ let Saving = {
       player.options.autobuyers.automaticallyCompleteChallengesTierRequirement = 1;
       player.version = 2.27734375;
     }
+    if (player.version < 2.28125) {
+      player.stats.lastTenSacrifices = [...Array(20)].map(() => -1);
+      player.stats.lastTenPrestiges = [...Array(20)].map(() => -1);
+      player.version = 2.28125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

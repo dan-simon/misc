@@ -60,6 +60,9 @@ let Prestige = {
     // The above experiment has failed to some extent; it's now not visible immediately, but becomes visible long before you can do it.
     return !this.isPrestigeDisabled() && SpecialDivs.isDivVisible('prestige');
   },
+  showFastSpecial() {
+    return !Options.showResetButtonsForFastResets() && FastResetText.isDoingFastBeyond('prestige');
+  },
   newPrestigePower() {
     return this.canPrestige() ? Decimal.pow(2, this.prestigePowerExponent() * (this.bestStarsThisPrestige().max(1).log(2) - 96) / 16) : this.prestigePower();
   },
@@ -95,7 +98,11 @@ let Prestige = {
     player.stats.bestStarsThisSacrifice = Stars.amount();
     player.stats.bestStarsThisPrestige = Stars.amount();
     player.stats.timeSincePurchase = 0;
+    player.stats.lastTenSacrifices.unshift(player.stats.timeSinceSacrifice);
+    player.stats.lastTenSacrifices.pop();
     player.stats.timeSinceSacrifice = 0;
+    player.stats.lastTenPrestiges.unshift(player.stats.timeSincePrestige);
+    player.stats.lastTenPrestiges.pop();
     player.stats.timeSincePrestige = 0;
     player.stats.timeSinceSacrificePossible = 0;
     player.stats.timeSincePrestigePossible = 0;

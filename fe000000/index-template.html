@@ -129,7 +129,7 @@
   <div id="notificationarea">
   </div>
   <div id="main" style="display: none;">
-    <div style="height: 32px;">You have ~f Stars.amount() ~ stars.~r ChallengeHeaderText.getText() ~~r FastResetText.getText() ~</div>
+    <div style="height: 32px;">You have ~f Stars.amount() ~ stars.~r ChallengeHeaderText.getText() ~~r FastResetText.getText('infinity', false) ~</div>
     <div style="height: 32px;" ~style.display=(Options.showChallengeInfo() && Challenge.isThereChallengeText()) ? '' : 'none'~>
       ~r Challenge.challengeText() ~
     </div>
@@ -321,15 +321,17 @@
           <br/>
           <span>You have a ~f Sacrifice.sacrificeMultiplier() ~ sacrifice multiplier multiplying Generator ~o 8 ~ by its amount.</span>
           <br/>
-          <span ~style.display=Sacrifice.canSacrifice() ? '' : 'none'~><button style="height: 48px;" onclick="Sacrifice.sacrifice(true)">Sacrifice: ~f Sacrifice.sacrificeMultiplier() ~ → ~f Sacrifice.newSacrificeMultiplier() ~<br/>(+~f Sacrifice.sacrificeMultiplierGain() ~, ~f Sacrifice.sacrificeMultiplierMultGain() ~x)</button></span>
-          <span ~style.display=Sacrifice.canSacrifice() ? 'none' : ''~>You need ~r Sacrifice.sacrificeRequirementText() ~ to sacrifice.</span>
+          <span ~style.display=(Sacrifice.canSacrifice() && !Sacrifice.showFastSpecial()) ? '' : 'none'~><button style="height: 48px;" onclick="Sacrifice.sacrifice(true)">Sacrifice: ~f Sacrifice.sacrificeMultiplier() ~ → ~f Sacrifice.newSacrificeMultiplier() ~<br/>(+~f Sacrifice.sacrificeMultiplierGain() ~, ~f Sacrifice.sacrificeMultiplierMultGain() ~x)</button></span>
+          <span ~style.display=(!Sacrifice.canSacrifice() && !Sacrifice.showFastSpecial()) ? '' : 'none'~>You need ~r Sacrifice.sacrificeRequirementText() ~ to sacrifice.</span>
+          <span ~style.display=Sacrifice.showFastSpecial() ? '' : 'none'~>The sacrifice button isn't appearing since ~r FastResetText.getText('sacrifice', true) ~</span>
         </div>
         <div style="min-height: 104px;" ~style.display=Prestige.isVisible() ? '' : 'none'~>
           <br/>
           <span>You have ~f Prestige.prestigePower() ~ prestige power multiplying all ~r Generators.term() ~ by its amount.</span>
           <br/>
-          <span ~style.display=Prestige.canPrestige() ? '' : 'none'~><button style="height: 48px;" onclick="Prestige.prestige(true)">Prestige: ~f Prestige.prestigePower() ~ → ~f Prestige.newPrestigePower() ~<br/>(+~f Prestige.prestigePowerGain() ~, ~f Prestige.prestigePowerMultGain() ~x)</button></span>
-          <span ~style.display=Prestige.canPrestige() ? 'none' : ''~>You need ~r Prestige.prestigeRequirementText() ~ to prestige.</span>
+          <span ~style.display=(Prestige.canPrestige() && !Prestige.showFastSpecial()) ? '' : 'none'~><button style="height: 48px;" onclick="Prestige.prestige(true)">Prestige: ~f Prestige.prestigePower() ~ → ~f Prestige.newPrestigePower() ~<br/>(+~f Prestige.prestigePowerGain() ~, ~f Prestige.prestigePowerMultGain() ~x)</button></span>
+          <span ~style.display=(!Prestige.canPrestige() && !Prestige.showFastSpecial()) ? '' : 'none'~>You need ~r Prestige.prestigeRequirementText() ~ to prestige.</span>
+          <span ~style.display=Prestige.showFastSpecial() ? '' : 'none'~>The prestige button isn't appearing since ~r FastResetText.getText('prestige', true) ~</span>
         </div>
         <br ~style.display=SpecialDivs.isDivVisible('softcap') ? '' : 'none'~/>
         <span ~style.display=SpecialDivs.isDivVisible('softcap') ? '' : 'none'~>~r Generators.term(true, true) ~ multipliers are reduced above ~f Generators.nerfValue() ~x (the multiplier softcap).</span>
@@ -861,7 +863,7 @@
               <br/>
               <span>On: <input type="checkbox" class="autobuyer-checkbox-10" ~!checked=Autobuyer(10).isOn()~ ~!onchange=function() {Autobuyer(10).setIsOn(this.checked)}~></input></span>
               <br/>
-              <span>Mode: <select ~!value=Autobuyer(10).mode()~ ~!onchange=function() {Autobuyer(10).setMode(this.value)}~>
+              <span>Mode: <select class="autobuyer-mode-10" ~!value=Autobuyer(10).mode()~ ~!onchange=function() {Autobuyer(10).setMode(this.value)}~>
                 <option value="Multiplier">Multiplier</option>
                 <option value="Time">Time</option>
                 <option value="Time since possible">Time since possible</option>
@@ -878,7 +880,7 @@
               <br/>
               <span>On: <input type="checkbox" class="autobuyer-checkbox-11" ~!checked=Autobuyer(11).isOn()~ ~!onchange=function() {Autobuyer(11).setIsOn(this.checked)}~></input></span>
               <br/>
-              <span>Mode: <select ~!value=Autobuyer(11).mode()~ ~!onchange=function() {Autobuyer(11).setMode(this.value)}~>
+              <span>Mode: <select class="autobuyer-mode-11" ~!value=Autobuyer(11).mode()~ ~!onchange=function() {Autobuyer(11).setMode(this.value)}~>
                 <option value="Multiplier">Multiplier</option>
                 <option value="Time">Time</option>
                 <option value="Time since possible">Time since possible</option>
@@ -895,7 +897,7 @@
               <br/>
               <span>On: <input type="checkbox" class="autobuyer-checkbox-12" ~!checked=Autobuyer(12).isOn()~ ~!onchange=function() {Autobuyer(12).setIsOn(this.checked)}~></input></span>
               <br/>
-              <span>Mode: <select ~!value=Autobuyer(12).mode()~ ~!onchange=function() {Autobuyer(12).setMode(this.value)}~>
+              <span>Mode: <select class="autobuyer-mode-12" ~!value=Autobuyer(12).mode()~ ~!onchange=function() {Autobuyer(12).setMode(this.value)}~>
                 <option value="Amount">Amount</option>
                 <option value="Time">Time</option>
                 <option value="X times last">X times last</option>
@@ -926,7 +928,7 @@
               <br/>
               <span>On: <input type="checkbox" class="autobuyer-checkbox-13" ~!checked=Autobuyer(13).isOn()~ ~!onchange=function() {Autobuyer(13).setIsOn(this.checked)}~></input></span>
               <br/>
-              <span>Mode: <select ~!value=Autobuyer(13).mode()~ ~!onchange=function() {Autobuyer(13).setMode(this.value)}~>
+              <span>Mode: <select class="autobuyer-mode-13" ~!value=Autobuyer(13).mode()~ ~!onchange=function() {Autobuyer(13).setMode(this.value)}~>
                 <option value="Amount">Amount</option>
                 <option value="Time">Time</option>
                 <option value="X times last">X times last</option>
@@ -957,7 +959,7 @@
               <br/>
               <span>On: <input type="checkbox" class="autobuyer-checkbox-14" ~!checked=Autobuyer(14).isOn()~ ~!onchange=function() {Autobuyer(14).setIsOn(this.checked)}~></input></span>
               <br/>
-              <span>Mode: <select ~!value=Autobuyer(14).mode()~ ~!onchange=function() {Autobuyer(14).setMode(this.value)}~>
+              <span>Mode: <select class="autobuyer-mode-14" ~!value=Autobuyer(14).mode()~ ~!onchange=function() {Autobuyer(14).setMode(this.value)}~>
                 <option value="Amount">Amount</option>
                 <option value="Time">Time</option>
                 <option value="X times last">X times last</option>
@@ -979,7 +981,7 @@
               <br/>
               <span>On: <input type="checkbox" class="autobuyer-checkbox-15" ~!checked=Autobuyer(15).isOn()~ ~!onchange=function() {Autobuyer(15).setIsOn(this.checked)}~></input></span>
               <br/>
-              <span>Mode: <select ~!value=Autobuyer(15).mode()~ ~!onchange=function() {Autobuyer(15).setMode(this.value)}~>
+              <span>Mode: <select class="autobuyer-mode-15" ~!value=Autobuyer(15).mode()~ ~!onchange=function() {Autobuyer(15).setMode(this.value)}~>
                 <option value="Amount">Amount</option>
                 <option value="Time">Time</option>
                 <option value="X times last">X times last</option>
@@ -2231,7 +2233,7 @@
         <span>You ~r Chroma.timeForChromaTextPrefix() ~ <input type="text" class="chroma-value" ~!value=NotationOptions.format('chroma-value')~ ~!onchange=function() {Chroma.setTimeForChromaValue(NotationOptions.read('chroma-value', this.value))}~></input> <select ~!value=Chroma.timeForChromaMode()~ ~!onchange=function() {Chroma.setTimeForChromaMode(this.value)}~>
           <option value="chroma">chroma</option>
           <option value="fraction of chroma cap">fraction of chroma cap</option>
-        </select>~r Chroma.timeForChromaTextSuffix() ~.</span>
+        </select>~r Chroma.timeForChromaTextSuffix() ~. <button ~class=Chroma.syncedWithEternityAutobuyer() ? 'disabled' : ''~ onclick="Chroma.syncWithEternityAutobuyer()">~r Chroma.syncedWithEternityAutobuyer() ? 'Synced with eternity autobuyer' : 'Sync with eternity autobuyer' ~ <span class="helpspan">(?)<span class="tooltiptext">This button sets the eternity autobuyer's mode and amount to the mode and amount shown earlier on this line.</span></span></button></span>
         <br/>
         <span>
           <span ~style.display=Chroma.producingAll() ? 'none' : ''~>The value of whatever color you are producing is</span>

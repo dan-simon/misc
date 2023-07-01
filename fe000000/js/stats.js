@@ -74,7 +74,7 @@ let Stats = {
     return 'timeSince' + layer[0].toUpperCase() + layer.slice(1);
   },
   lastTenKey(layer) {
-    return 'lastTen' + layer[0].toUpperCase() + layer.slice(1, -1) + 'ies';
+    return 'lastTen' + layer[0].toUpperCase() + (layer[layer.length - 1] === 'y' ? layer.slice(1, -1) + 'ies' : layer.slice(1) + 's');
   },
   showAnyRuns(x) {
     return this.lastRunsToShow() >= x;
@@ -110,11 +110,16 @@ let Stats = {
 
 // This is here since it's vaguely stats-related and adding a new file just for this didn't seem wise.
 let FastResetText = {
-  layers: ['infinity', 'eternity', 'complexity', 'finality'],
-  autobuyerIndices: [12, 13, 15, 16],
-  getTextForLayer(x) {
-    // We need the leading space to separate from previous text.
-    return ' You are currently doing fast ' + x.slice(0, -1) + 'ies due to ' + this.getCauseForLayer(x);
+  layers: ['sacrifice', 'prestige', 'infinity', 'eternity', 'complexity', 'finality'],
+  layersReversed: ['finality', 'complexity', 'eternity', 'infinity', 'prestige', 'sacrifice'],
+  
+  autobuyerIndices: [10, 11, 12, 13, 15, 16],
+  getTextForLayer(x, altered) {
+    if (altered) {
+      return 'you\'re currently doing fast ' + (x[x.length - 1] === 'y' ? x.slice(0, -1) + 'ies' : x + 's') + ' due to ' + this.getCauseForLayer(x);
+    } else {
+      return ' You are currently doing fast ' + (x[x.length - 1] === 'y' ? x.slice(0, -1) + 'ies' : x + 's') + ' due to ' + this.getCauseForLayer(x);
+    }
   },
   getCauseForLayer(x) {
     if (lastHotkeyUse[x] >= Date.now() / 1000 - 1) {
@@ -125,34 +130,35 @@ let FastResetText = {
       return 'an unknown cause (perhaps clicking the button quickly).';
     }
   },
-  cache: {'infinity': null, 'eternity': null, 'complexity': null, 'finality': null},
+  isLonger: {'sacrifice': false, 'prestige': false, 'infinity': true, 'eternity': true, 'complexity': true, 'finality': true},
+  cache: {'sacrifice': null, 'prestige': null, 'infinity': null, 'eternity': null, 'complexity': null, 'finality': null},
   // We might end up calling this a lot.
   isDoingFast(x) {
     // Cache, and clear cache every time we reset.
     if (this.cache[x] === null) {
       let info = player.stats[Stats.lastTenKey(x)];
-      let times = info.map(x => x[0]);
+      let times = this.isLonger[x] ? info.map(x => x[0]) : info;
       this.cache[x] = player.stats[Stats.timeSinceKey(x)] <= 1 &&
         times.every(x => x !== -1 && x <= 1);
     }
     return this.cache[x];
   },
   clearCache() {
-    this.cache = {'infinity': null, 'eternity': null, 'complexity': null, 'finality': null};
+    this.cache = {'sacrifice': null, 'prestige': null, 'infinity': null, 'eternity': null, 'complexity': null, 'finality': null};
   },
   isDoingFastBeyond(x) {
     return this.layers.slice(this.layers.indexOf(x)).some(y => this.isDoingFast(y));
   },
-  getText() {
-    for (let i of this.layers) {
+  getText(x, altered) {
+    for (let i of this.layersReversed.slice(0, this.layersReversed.indexOf(x) + 1)) {
       if (this.isDoingFast(i)) {
-        return this.getTextForLayer(i);
+        return this.getTextForLayer(i, altered);
       }
     }
     return '';
   },
   shortButtonExplanation() {
-    for (let i of this.layers) {
+    for (let i of this.layersReversed) {
       if (this.isDoingFast(i)) {
         return 'doing fast ' + i.slice(0, -1) + 'ies';
       }

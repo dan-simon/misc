@@ -60,6 +60,9 @@ let Sacrifice = {
     // Note: Long after the above comments were written, made this stricter (you can basically only see it once you can do it).
     return !Challenge.isChallengeEffectActive(6) && SpecialDivs.isDivVisible('sacrifice');
   },
+  showFastSpecial() {
+    return !Options.showResetButtonsForFastResets() && FastResetText.isDoingFastBeyond('sacrifice');
+  },
   newSacrificeMultiplier() {
     let stars = this.bestStarsThisSacrifice();
     let mult = new Decimal(stars.log(2) / 16);
@@ -104,6 +107,8 @@ let Sacrifice = {
     // and in stats tab). It also still resets best stars.
     player.stats.bestStarsThisSacrifice = Stars.amount();
     player.stats.timeSincePurchase = 0;
+    player.stats.lastTenSacrifices.unshift(player.stats.timeSinceSacrifice);
+    player.stats.lastTenSacrifices.pop();
     player.stats.timeSinceSacrifice = 0;
     player.stats.timeSinceSacrificePossible = 0;
   }

@@ -246,6 +246,18 @@ let Chroma = {
       document.getElementsByClassName('chroma-value')[0].value = NotationOptions.format('chroma-value');
     }
   },
+  modeTranslationTable: {
+    'chroma': 'Chroma amount',
+    'fraction of chroma cap': 'Chroma as fraction of cap'
+  },
+  syncedWithEternityAutobuyer() {
+    return Autobuyer(13).mode() === this.modeTranslationTable[player.chroma.timeForChromaMode] && Autobuyer(13).priority().eq(this.timeForChromaValue());
+  },
+  syncWithEternityAutobuyer() {
+    Autobuyer(13).setMode(this.modeTranslationTable[player.chroma.timeForChromaMode]);
+    Autobuyer(13).setPriority(new Decimal(this.timeForChromaValue()));
+    Autobuyer(13).redisplayPriority();
+  },
   timeForChromaTextMargin() {
     return this.cap() * (1 - Math.pow(2, -16));
   },

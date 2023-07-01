@@ -3,6 +3,8 @@ let globalShiftDown = false;
 let lastTogglePress = null;
 let lastShiftPress = null;
 let lastHotkeyUse = {
+  'sacrifice': -Infinity,
+  'prestige': -Infinity,
   'infinity': -Infinity,
   'eternity': -Infinity,
   'complexity': -Infinity,
@@ -287,6 +289,7 @@ window.addEventListener('keydown', function(event) {
         Powers.respecAndReset();
       } else {
         Prestige.prestige(true);
+        lastHotkeyUse.prestige = Date.now() / 1000;
       }
     break;
     
@@ -299,6 +302,7 @@ window.addEventListener('keydown', function(event) {
         Studies.respecAndReset();
       } else {
         Sacrifice.sacrifice(true);
+        lastHotkeyUse.sacrifice = Date.now() / 1000;
       }
     break;
     

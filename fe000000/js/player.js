@@ -547,6 +547,8 @@ let initialPlayer = {
     purchasesThisInfinityByType: [0, 0, 0, 0, 0, 0, 0, 0, 0],
     sacrificesThisInfinity: 0,
     prestigesThisInfinity: 0,
+    lastTenSacrifices: [...Array(20)].map(() => -1),
+    lastTenPrestiges: [...Array(20)].map(() => -1),
     lastTenInfinities: initialLastTenInfinities(),
     lastTenEternities: initialLastTenEternities(),
     lastTenComplexities: initialLastTenComplexities(),
@@ -578,7 +580,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.27734375
+  version: 2.28125
 }
 
 let player;

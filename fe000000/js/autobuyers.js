@@ -91,10 +91,20 @@ let Autobuyer = function (i) {
       }
     },
     setPriority(x) {
-      player.autobuyers[i - 1].priority = x || 0;
+      player.autobuyers[i - 1].priority = x || new Decimal(0);
     },
     checkboxes() {
       return Array.from(document.getElementsByClassName('autobuyer-checkbox-' + i));
+    },
+    redisplayMode() {
+      for (let input of Array.from(document.getElementsByClassName('autobuyer-mode-' + i))) {
+        input.value = autobuyerSettingToString(this.mode(), i);
+      }
+    },
+    redisplayPriority() {
+      for (let input of Array.from(document.getElementsByClassName('autobuyer-priority-' + i))) {
+        input.value = autobuyerSettingToString(this.priority(), i);
+      }
     },
     target() {
       if (i <= 8) {
