@@ -13,6 +13,7 @@ function updateCore(now, gain, oldChallenge) {
   if (gain !== null) {
     giveUpdateAchievementsAndLore(now, gain, oldChallenge);
   }
+  player.stats.recordDevelopmentThisUpdate = 0;
   player.stats.last.update = now;
   player.stats.last.prestige = now;
   player.stats.last.enlightened = now;

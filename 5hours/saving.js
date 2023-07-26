@@ -186,6 +186,9 @@ function fixPlayer () {
   if (!('turnAllUpdatePointsIntoExperience' in player.options.confirmations)) {
     player.options.confirmations.turnAllUpdatePointsIntoExperience = true;
   }
+  if (!('recordDevelopmentThisUpdate' in player.stats)) {
+    player.stats.recordDevelopmentThisUpdate = 0;
+  }
 }
 
 function convertSaveToDecimal () {

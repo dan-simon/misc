@@ -76,6 +76,7 @@ function updateDisplay () {
   document.getElementById('progress-milestones').innerHTML = player.milestones;
   document.getElementById('progress-milestones-effect').innerHTML = getMilestoneEffect();
   document.getElementById('record-development').innerHTML = toTime(player.stats.recordDevelopment['']);
+  document.getElementById('record-development-this-update').innerHTML = toTime(player.stats.recordDevelopmentThisUpdate);
   document.getElementById('unassigned-devs').innerHTML = format(getUnassignedDevs());
   document.getElementById('enlightened').innerHTML = getTotalEnlightened();
   document.getElementById('last-update-point-gain').innerHTML = format(player.stats.last.updatePointGain);

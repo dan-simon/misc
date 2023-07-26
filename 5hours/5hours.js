@@ -136,6 +136,7 @@ function checkForRecordDevelopement() {
     player.stats.recordDevelopment[player.currentChallenge] = Math.max(
       player.progress[0], player.stats.recordDevelopment[player.currentChallenge]);
   }
+  player.stats.recordDevelopmentThisUpdate = Math.max(player.progress[0], player.stats.recordDevelopmentThisUpdate);
 }
 
 function tick() {
