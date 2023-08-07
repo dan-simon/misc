@@ -1774,6 +1774,8 @@ let Saving = {
     this.loadGameFunc(() => prompt('Enter your save:'), () => null);
   },
   loadGameFile(event) {
+    // No file selected, probably because the user hit cancel.
+    if (event.target.files.length === 0) return;
     let f = new FileReader();
     f.onload = () => this.loadGameFunc(() => f.result, () => null);
     f.readAsText(event.target.files[0]);
