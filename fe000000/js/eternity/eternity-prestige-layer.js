@@ -168,6 +168,15 @@ let EternityPrestigeLayer = {
       false, false, false, false, false, false, false, false,
     ];
     if (!EternityMilestones.isEternityMilestoneActive(2)) {
+      // Give the player slow autobuyers for challenges completed
+      // (which should be all of them, but we check just in case).
+      // The 0-to-8 bound in the below loop is due to zero-indexing
+      // and the boost autobuyer, and is thus intended.
+      for (let i = 0; i <= 8; i++) {
+        if (player.challengesCompleted[i]) {
+          player.slowAutobuyers[i] = true;
+        }
+      }
       // No need to reset autobuyers. They'll only do anything if active,
       // which requires them to be unlocked.
       player.challengesCompleted = [

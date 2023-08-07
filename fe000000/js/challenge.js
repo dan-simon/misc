@@ -76,6 +76,12 @@ let Challenge = {
   toggleRestartOnCompletion() {
     player.challengeRestartOnCompletion = !player.challengeRestartOnCompletion;
   },
+  hideCompletedChallenges() {
+    return player.hideCompletedChallenges;
+  },
+  toggleHideCompletedChallenges() {
+    player.hideCompletedChallenges = !player.hideCompletedChallenges;
+  },
   startChallenge(x) {
     let newLimit = Decimal.pow(2, 256);
     if (InfinityPrestigeLayer.canInfinity()) {
@@ -106,6 +112,9 @@ let Challenge = {
   },
   completeChallenge(x) {
     player.challengesCompleted[x - 1] = true;
+  },
+  show(x) {
+    return !(this.isChallengeCompleted(x) && !this.isChallengeRunning(x) && this.hideCompletedChallenges());
   },
   isChallengeCompleted(x) {
     return player.challengesCompleted[x - 1];

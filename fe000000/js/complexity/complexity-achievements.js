@@ -106,8 +106,11 @@ let ComplexityAchievements = {
     }
     if (row === 3 && column === 4) {
       // This usually doesn't matter, but we don't really want the player to
-      // have an unlocked EC with "Broke every stone" (it leads to a potential
-      // hidden unlocked EC which shows up in presets, but isn't visible anywhere else).
+      // have an unlocked EC with "Broke every stone". This is because,
+      // if the player does have an unlocked EC:
+      // - It leads to a potential hidden unlocked EC which shows up in presets,
+      // but isn't visible anywhere else).
+      // - It means the EC is shown even if you've hidden completed ECs.
       // So we lock the currently unlocked EC if any.
       player.unlockedEternityChallenge = 0;
     }

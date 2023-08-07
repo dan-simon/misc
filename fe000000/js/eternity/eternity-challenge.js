@@ -171,6 +171,10 @@ let EternityChallenge = {
     if (x === 0) return;
     return player.eternityChallengeCompletions[x - 1];
   },
+  show(x) {
+    return !(this.isEternityChallengeCompleted(x) && !this.isEternityChallengeRunning(x) &&
+    this.getUnlockedEternityChallenge() !== x && player.hideCompletedEternityChallenges);
+  },
   isEternityChallengeCompleted(x) {
     return this.getEternityChallengeCompletions(x) >= 4;
   },
@@ -353,6 +357,12 @@ let EternityChallenge = {
     // This can happen if we're respeccing and doing an eternity reset.
     this.setEternityChallenge(0);
     player.unlockedEternityChallenge = 0;
+  },
+  hideCompletedEternityChallenges() {
+    return player.hideCompletedEternityChallenges;
+  },
+  toggleHideCompletedEternityChallenges() {
+    player.hideCompletedEternityChallenges = !player.hideCompletedEternityChallenges;
   },
   startEternityChallenge(x) {
     if (EternityPrestigeLayer.canEternity()) {

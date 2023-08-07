@@ -1658,6 +1658,13 @@ let Saving = {
       player.stats.lastTenPrestiges = [...Array(20)].map(() => -1);
       player.version = 2.28125;
     }
+    if (player.version < 2.28515625) {
+      player.studySettings.showTopRows = true;
+      player.hideCompletedChallenges = false;
+      player.hideCompletedInfinityChallenges = false;
+      player.hideCompletedEternityChallenges = false;
+      player.version = 2.28515625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

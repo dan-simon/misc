@@ -270,8 +270,17 @@ input[type=text] {
   border-width: 1px 1px;
 }
 
+.challengecontainer {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0px 24px;
+}
+
 .challengediv {
-  display: table;
   text-align: center;
   width: 512px;
   height: 256px;

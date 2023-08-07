@@ -535,6 +535,9 @@ let Studies = {
     // but then you deserve to hear about it.
     return this.canAccessFourthRow() || PrestigeLayerProgress.hasReached('complexity');
   },
+  canSeeTopRows() {
+    return this.showTopRows() || !range(1, 12).every(i => Study(i).isBought());
+  },
   canSeeFourthRow() {
     return this.showFourthRow() ? this.couldEverAccessFourthRow() : this.canAccessFourthRow();
   },
@@ -617,6 +620,12 @@ let Studies = {
   },
   toggleShowFourthRow() {
     player.studySettings.showFourthRow = !player.studySettings.showFourthRow;
+  },
+  showTopRows() {
+    return player.studySettings.showTopRows;
+  },
+  toggleShowTopRows() {
+    player.studySettings.showTopRows = !player.studySettings.showTopRows;
   },
   rebuyAfterComplexityChallenge6() {
     return player.studySettings.rebuyAfterComplexityChallenge6;

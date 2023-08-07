@@ -82,6 +82,7 @@ let initialPlayer = {
     false, false, false, false, false, false,
   ],
   challengeRestartOnCompletion: false,
+  hideCompletedChallenges: false,
   slowAutobuyers: [
     false, false, false, false, false, false, false, false, false,
   ],
@@ -93,6 +94,7 @@ let initialPlayer = {
     false, false, false, false, false, false, false, false,
   ],
   infinityChallengeRestartOnCompletion: false,
+  hideCompletedInfinityChallenges: false,
   breakInfinity: false,
   autobuyers: initialAutobuyers(),
   eternityPoints: new Decimal(0),
@@ -116,6 +118,7 @@ let initialPlayer = {
     studyDisplayCostWhenBought: false,
     boughtTheoremsThisComplexity: false,
     showFourthRow: false,
+    showTopRows: true,
     rebuyAfterComplexityChallenge6: true,
     showPresetExplanation: false,
     canBuyStudies: true,
@@ -138,6 +141,7 @@ let initialPlayer = {
   respecEternityChallenge: false,
   recentEternityChallengeRequirements: [false, false, false, false, false, false, false, false],
   isEternityChallengeRequirementDisplayOn: true,
+  hideCompletedEternityChallenges: false,
   autoECCompletion: true,
   usedAutoECCompletionThisComplexity: false,
   permanence: new Decimal(0),
@@ -580,7 +584,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.28125
+  version: 2.28515625
 }
 
 let player;

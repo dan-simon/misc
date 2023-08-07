@@ -91,6 +91,12 @@ let InfinityChallenge = {
   toggleRestartOnCompletion() {
     player.infinityChallengeRestartOnCompletion = !player.infinityChallengeRestartOnCompletion;
   },
+  hideCompletedInfinityChallenges() {
+    return player.hideCompletedInfinityChallenges;
+  },
+  toggleHideCompletedInfinityChallenges() {
+    player.hideCompletedInfinityChallenges = !player.hideCompletedInfinityChallenges;
+  },
   startInfinityChallenge(x) {
     let newLimit = InfinityChallenge.getInfinityChallengeGoal(x);
     if (InfinityPrestigeLayer.canInfinity()) {
@@ -135,6 +141,9 @@ let InfinityChallenge = {
     if (this.isInfinityChallengeRequirementReached(x)) {
       this.completeInfinityChallenge(x);
     }
+  },
+  show(x) {
+    return !(this.isInfinityChallengeCompleted(x) && !this.isInfinityChallengeRunning(x) && player.hideCompletedInfinityChallenges);
   },
   isInfinityChallengeCompleted(x) {
     return player.infinityChallengesCompleted[x - 1];
