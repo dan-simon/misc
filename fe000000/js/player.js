@@ -401,6 +401,7 @@ let initialPlayer = {
     exportDownload: false,
     exportShow: false,
     exportNotificationFrequency: Math.pow(2, 16),
+    loadMode: 'Prompt',
     theme: {
       background: 'Dark',
       buttonColor: 'Vibrant',
@@ -584,7 +585,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.28515625
+  version: 2.2890625
 }
 
 let player;

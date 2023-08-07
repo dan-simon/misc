@@ -1665,6 +1665,13 @@ let Saving = {
       player.hideCompletedEternityChallenges = false;
       player.version = 2.28515625;
     }
+    if (player.version < 2.2890625) {
+      player.options.loadMode = player.options.loadFromTextInput ? 'Text Input' : 'Prompt';
+      // This wasn't defined on some saves due to oversight, but fortunately in that case
+      // delete silently does nothing rather than throwing an error.
+      delete player.options.loadFromTextInput;
+      player.version = 2.2890625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
@@ -1765,6 +1772,11 @@ let Saving = {
   },
   loadGamePrompt() {
     this.loadGameFunc(() => prompt('Enter your save:'), () => null);
+  },
+  loadGameFile(event) {
+    let f = new FileReader();
+    f.onload = () => this.loadGameFunc(() => f.result, () => null);
+    f.readAsText(event.target.files[0]);
   },
   loadGameTextInput() {
     this.loadGameFunc(() => document.getElementsByClassName('load-input')[0].value, () => (document.getElementsByClassName('load-input')[0].value = ''));
