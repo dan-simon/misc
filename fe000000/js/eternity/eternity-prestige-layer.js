@@ -28,6 +28,9 @@ let EternityPrestigeLayer = {
       return 'do an eternity reset (no eternity point gain or eternity gain)';
     }
   },
+  hasEternityPointGeneration() {
+    return Powers.isUnlocked() || FinalityMilestones.isFinalityMilestoneActive(8) || player.cheats.eternityPointGeneration;
+  },
   eternityPointGain() {
     if (!this.canEternity()) {
       return new Decimal(0);

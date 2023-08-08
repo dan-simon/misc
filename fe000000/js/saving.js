@@ -1672,6 +1672,12 @@ let Saving = {
       delete player.options.loadFromTextInput;
       player.version = 2.2890625;
     }
+    if (player.version < 2.29296875) {
+      player.cheats.infinityPointGeneration = false;
+      player.cheats.eternityPointGeneration = false;
+      player.cheats.complexityPointGeneration = false;
+      player.version = 2.29296875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

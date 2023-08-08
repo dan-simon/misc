@@ -103,8 +103,12 @@ let Stats = {
     return useBase ? r / Math.log2(NotationOptions.exponentBase()) : r;
   },
   showCheatStats() {
+    // We just check for truthy values of generation, since things like null behave exactly like false
+    // (including display).
     return player.cheats.gameSpeed !== 1 || player.cheats.extraAchievements !== 0 ||
-    player.cheats.achievementExtraMultiplier !== 1 || player.cheats.normalGeneratorPower !== 1;
+    player.cheats.achievementExtraMultiplier !== 1 || player.cheats.normalGeneratorPower !== 1 ||
+    player.cheats.infinityPointGeneration || player.cheats.eternityPointGeneration ||
+    player.cheats.complexityPointGeneration;
   }
 }
 
