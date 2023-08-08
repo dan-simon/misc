@@ -6173,9 +6173,9 @@ function updateDisplay() {
     if (shouldUpdate("e2711")) {let v = formatInt(player.cheats.extraAchievements); if (e[2711].textContent !== v) {e[2711].textContent = v};};
     if (shouldUpdate("e2712")) {let v = format(player.cheats.achievementExtraMultiplier); if (e[2712].textContent !== v) {e[2712].textContent = v};};
     if (shouldUpdate("e2713")) {let v = formatPrecisely(player.cheats.normalGeneratorPower); if (e[2713].textContent !== v) {e[2713].textContent = v};};
-    if (shouldUpdate("e2714")) {let v = player.cheats.IPGen == 1 ? 'Yes' : 'No'; if (e[2714].textContent !== v) {e[2714].textContent = v};};
-    if (shouldUpdate("e2715")) {let v = player.cheats.EPGen == 1 ? 'Yes' : 'No'; if (e[2715].textContent !== v) {e[2715].textContent = v};};
-    if (shouldUpdate("e2716")) {let v = player.cheats.CPGen == 1 ? 'Yes' : 'No'; if (e[2716].textContent !== v) {e[2716].textContent = v};};
+    if (shouldUpdate("e2714")) {let v = player.cheats.infinityPointGeneration ? 'On' : 'Off'; if (e[2714].textContent !== v) {e[2714].textContent = v};};
+    if (shouldUpdate("e2715")) {let v = player.cheats.eternityPointGeneration ? 'On' : 'Off'; if (e[2715].textContent !== v) {e[2715].textContent = v};};
+    if (shouldUpdate("e2716")) {let v = player.cheats.complexityPointGeneration ? 'On' : 'Off'; if (e[2716].textContent !== v) {e[2716].textContent = v};};
   }
   if (b[2387].style.display !== "none") {
     if (shouldUpdate("b2388")) {let v = Stats.showRun(1, 'infinity') ? '' : 'none'; if (b[2388].style.display !== v) {b[2388].style.display = v};};

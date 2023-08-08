@@ -42,6 +42,9 @@ let ComplexityPrestigeLayer = {
       return 'do a complexity reset (no complexity point gain or complexity gain)';
     }
   },
+  hasComplexityPointGeneration() {
+    return FinalityMilestones.isFinalityMilestoneActive(16) || player.cheats.complexityPointGeneration;
+  },
   complexityPointGain() {
     if (!this.canComplexity()) {
       return new Decimal(0);

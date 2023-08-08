@@ -49,6 +49,9 @@ let InfinityPrestigeLayer = {
   bestStarsThisInfinity() {
     return player.stats.bestStarsThisInfinity;
   },
+  hasInfinityPointGeneration() {
+    return EternityChallenge.isTotalCompletionsRewardActive(3) || player.cheats.infinityPointGeneration;
+  },
   infinityPointGain() {
     if (!this.canInfinity()) {
       return new Decimal(0);

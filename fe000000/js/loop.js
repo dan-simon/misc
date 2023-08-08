@@ -54,16 +54,16 @@ function gameLoop(diff, display, isOnline) {
   EternityAutobuyers.tick();
   ComplexityAutobuyers.tick();
   InfinityChallenge.checkForAllAutoInfinityChallengeCompletions();
-  if (EternityChallenge.isTotalCompletionsRewardActive(3) || player.cheats.IPGen == 1) {
+  if (InfinityPrestigeLayer.hasInfinityPointGeneration()) {
     InfinityPoints.addAmount(InfinityPrestigeLayer.infinityPointGain().times(diff));
   }
-  if (Powers.isUnlocked() || FinalityMilestones.isFinalityMilestoneActive(8) || player.cheats.EPGen == 1) {
+  if (EternityPrestigeLayer.hasEternityPointGeneration()) {
     EternityPoints.addAmount(EternityPrestigeLayer.eternityPointGain().times(diff));
   }
   if (Permanence.hasPassiveProduction()) {
     Permanence.add(Permanence.permanenceGain().times(diff));
   }
-  if (FinalityMilestones.isFinalityMilestoneActive(16) || player.cheats.CPGen == 1) {
+  if (ComplexityPrestigeLayer.hasComplexityPointGeneration()) {
     ComplexityPoints.addAmount(ComplexityPrestigeLayer.complexityPointGain().times(diff));
   }
   Studies.updateExtraTheorems();

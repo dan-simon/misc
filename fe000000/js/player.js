@@ -573,9 +573,9 @@ let initialPlayer = {
     extraAchievements: 0,
     achievementExtraMultiplier: 1,
     normalGeneratorPower: 1,
-    IPGen: 0,
-    EPGen: 0,
-    CPGen: 0,
+    infinityPointGeneration: false,
+    eternityPointGeneration: false,
+    complexityPointGeneration: false,
   },
   currentTabGroup: 'normal',
   currentTabInGroup: {
@@ -588,7 +588,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.2890625
+  version: 2.29296875
 }
 
 let player;
