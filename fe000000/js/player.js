@@ -573,6 +573,9 @@ let initialPlayer = {
     extraAchievements: 0,
     achievementExtraMultiplier: 1,
     normalGeneratorPower: 1,
+    IPGen: 0,
+    EPGen: 0,
+    CPGen: 0,
   },
   currentTabGroup: 'normal',
   currentTabInGroup: {
