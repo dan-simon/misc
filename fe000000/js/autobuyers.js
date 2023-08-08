@@ -45,10 +45,10 @@ let Autobuyer = function (i) {
         return false;
       }
       return [
-        EternityChallenge.isTotalCompletionsRewardActive(3),
-        Powers.isUnlocked() || FinalityMilestones.isFinalityMilestoneActive(8),
+        EternityChallenge.isTotalCompletionsRewardActive(3) || player.cheats.IPGen == 1,
+        Powers.isUnlocked() || FinalityMilestones.isFinalityMilestoneActive(8) || player.cheats.EPGen == 1,
         Permanence.hasPassiveProduction(),
-        FinalityMilestones.isFinalityMilestoneActive(16),
+        FinalityMilestones.isFinalityMilestoneActive(16) || player.cheats.CPGen == 1,
         false
       ][i - 12];
     },

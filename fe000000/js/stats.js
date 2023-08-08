@@ -104,7 +104,8 @@ let Stats = {
   },
   showCheatStats() {
     return player.cheats.gameSpeed !== 1 || player.cheats.extraAchievements !== 0 ||
-    player.cheats.achievementExtraMultiplier !== 1 || player.cheats.normalGeneratorPower !== 1;
+    player.cheats.achievementExtraMultiplier !== 1 || player.cheats.normalGeneratorPower !== 1 || player.cheats.EPGen == 1 || 
+    player.cheats.IPGen == 1 || player.cheats.CPGen == 1
   }
 }
 
