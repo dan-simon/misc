@@ -49,7 +49,7 @@ let ComplexityPrestigeLayer = {
     if (!this.canComplexity()) {
       return new Decimal(0);
     }
-    let oom = EternityPoints.totalEPProducedThisComplexity().plus(EternityPoints.newEternityPoints()).max(1).log(2) / Math.pow(2, 16);
+    let oom = EternityPoints.totalEPProducedThisComplexity().plus(EternityPrestigeLayer.eternityPointGain()).max(1).log(2) / Math.pow(2, 16);
     return Decimal.pow(2, oom).floor();
   },
   complexityPoints() {

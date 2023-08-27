@@ -35,7 +35,7 @@ let EternityPrestigeLayer = {
     if (!this.canEternity()) {
       return new Decimal(0);
     }
-    let oom = InfinityPoints.totalIPProducedThisEternity().plus(InfinityPoints.newInfinityPoints()).max(1).log(2) / 256;
+    let oom = InfinityPoints.totalIPProducedThisEternity().plus(InfinityPrestigeLayer.infinityPointGain()).max(1).log(2) / 256;
     return Decimal.pow(2, oom).floor();
   },
   eternityPoints() {
