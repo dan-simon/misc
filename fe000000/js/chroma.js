@@ -256,6 +256,7 @@ let Chroma = {
   syncWithEternityAutobuyer() {
     Autobuyer(13).setMode(this.modeTranslationTable[player.chroma.timeForChromaMode]);
     Autobuyer(13).setPriority(new Decimal(this.timeForChromaValue()));
+    Autobuyer(13).redisplayMode();
     Autobuyer(13).redisplayPriority();
   },
   timeForChromaTextMargin() {

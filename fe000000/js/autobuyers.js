@@ -98,7 +98,7 @@ let Autobuyer = function (i) {
     },
     redisplayMode() {
       for (let input of Array.from(document.getElementsByClassName('autobuyer-mode-' + i))) {
-        input.value = autobuyerSettingToString(this.mode(), i);
+        input.value = this.mode();
       }
     },
     redisplayPriority() {

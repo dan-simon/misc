@@ -52,6 +52,10 @@ let Tabs = {
   },
   setTabGroup(x) {
     player.currentTabGroup = x;
+    if (!this.isTabVisibleRaw(player.currentTabInGroup[x])) {
+      // Change it to some visible tab
+      player.currentTabInGroup[x] = this.tabGroupToTab[x].filter(i => this.isTabVisibleRaw(i))[0];
+    }
     player.currentTab = player.currentTabInGroup[x];
   },
   isTabOptionVisible(x) {
