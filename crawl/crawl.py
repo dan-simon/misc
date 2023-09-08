@@ -63,3 +63,11 @@ def extract_full_urls(soup, base_url):
 
 handle_url('https://2021.huntinality.com/', s)
 # handle_url('https://dan-simon.github.io/puzzles', s)
+
+'''
+Next steps:
+- List files rather than getting them all, for internet archive
+- Add command-line arguments
+- Get all href/src tags rather than just those on some subset of elements (maybe let user control this)
+- Get fonts from css files
+'''
