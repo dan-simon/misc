@@ -85,8 +85,11 @@ let generalMaxAllFast = function (rawThings, currency) {
   for (let i of costs) {
     left -= i;
   }
-  for (let j = 1; j <= 4; j++) {
+  for (let j = 1; j <= 5; j++) {
     let c = Math.pow(2, j);
+    if (left < c) {
+      break;
+    }
     let x = sx + j;
     for (let i = 0; i < len; i++) {
       if (x >= starts[i] && x <= caps[i] && x % scales[i] === 0) {
