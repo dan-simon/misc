@@ -90,6 +90,8 @@ let generalMaxAllFast = function (rawThings, currency) {
     if (left < c) {
       break;
     }
+    // Rounding errors can mean you can sometimes buy something
+    // five factors of two above sx (i.e., slightly more costly than expected).
     let x = sx + j;
     for (let i = 0; i < len; i++) {
       if (x >= starts[i] && x <= caps[i] && x % scales[i] === 0) {
