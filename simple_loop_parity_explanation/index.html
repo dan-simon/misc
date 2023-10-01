@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Visual Grid</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        td {
+            width: 30px;
+            height: 30px;
+            border: 1px solid black;
+            position: relative;
+        }
+        .black {
+            background-color: black;
+        }
+        .highlighted {
+            background-color: lime;
+        }
+        .edge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            pointer-events: none;
+            z-index: 1;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .edge.used {
+            background-color: black;
+        }
+        .horizontal {
+            width: 39px;
+            height: 6px;
+            left: 13px;
+            top: 13px;
+        }
+        .vertical {
+            width: 6px;
+            height: 39px;
+            left: 13px;
+            top: 13px;
+        }
+    </style>
+    <script src="script.js"></script>
+</head>
+<body>
+    <table id="gridTable"></table>
+</body>
+</html>
