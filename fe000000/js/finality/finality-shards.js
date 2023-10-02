@@ -163,12 +163,23 @@ let FinalityShardPresets = {
     player.respecFinalityShards = false;
   },
   canRespec() {
-    return FinalityShards.totalUpgrades() !== 0 && Options.confirmation('finalityShardUpgradesRespec') !== 'Disabled' &&
+    return this.rawCanRespec() && this.isRespecEnabled();
+  },
+  rawCanRespec() {
+    return FinalityShards.totalUpgrades() !== 0;
+  },
+  isRespecEnabled() {
+    return Options.confirmation('finalityShardUpgradesRespec') !== 'Disabled' &&
     (Options.confirmation('finalityShardUpgradesRespec') !== 'Usually disabled' || player.stats.timeSinceFinality <= 64);
   },
   respecAndReset() {
-    if (!this.canRespec()) {
+    if (!this.rawCanRespec()) {
       return true;
+    }
+    if (!this.isRespecEnabled()) {
+      alert('You cannot respec your bought finality shard upgrades due to your finality shard upgrades respec setting of "' +
+      Options.confirmation('finalityShardUpgradesRespec') + '". Go to the Options tab to change this.');
+      return false;
     }
     if (Options.confirmation('finalityShardUpgradesRespec') === 'Confirmation' && !confirm(
       'Are you sure you want to respec your bought finality shard upgrades and ' +

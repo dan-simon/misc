@@ -347,7 +347,12 @@ let Powers = {
     if (!this.canEquippedSwap()) {
       return true;
     }
-    if (manual && !this.isPowersUnequipEnabled()) return false;
+    if (manual && !this.isPowersUnequipEnabled()) {
+      alert('You cannot swap your equipped powers with better stored powers of the same type ' +
+      'due to your powers unequip setting of "' + Options.confirmation('powersUnequip') +
+      '". Go to the Options tab to change this.');
+      return false;
+    }
     if (manual && Options.confirmation('powersUnequip') !== 'No confirmation' && !confirm(
       'Are you sure you want to swap your equipped powers with ' +
       'better stored powers of the same type and ' +
@@ -527,12 +532,25 @@ let Powers = {
     }
   },
   canUnequip(i) {
-    return this.canAccessEquipped(i) && this.powerUnequipMode() !== 'Disabled' && (this.powerUnequipMode() !== 'Usually disabled' || player.stats.timeSinceComplexity <= 64);
+    return this.rawCanUnequip(i) && this.isSingleUnequipEnabled();
+  },
+  rawCanUnequip(i) {
+    return this.canAccessEquipped(i);
+  },
+  isSingleUnequipEnabled() {
+    this.powerUnequipMode() !== 'Disabled' && (this.powerUnequipMode() !== 'Usually disabled' || player.stats.timeSinceComplexity <= 64);
   },
   unequip(i) {
-    if (this.canUnequip(i) && (this.powerUnequipMode() === 'No confirmation' ||
+    if (!this.rawCanUnequip(i)) return false;
+    if (!this.isSingleUnequipEnabled()) {
+      alert('You cannot unequip this equipped power ' +
+      'due to your single power unequip setting of "' + Options.confirmation('powerUnequipMode') +
+      '". Go to the Options tab to change this.');
+      return false;
+    }
+    if (this.powerUnequipMode() === 'No confirmation' ||
         confirm('Are you sure you want to unequip this equipped power and ' +
-        ComplexityPrestigeLayer.resetText() + '?'))) {
+        ComplexityPrestigeLayer.resetText() + '?')) {
       player.powers.stored.push(this.accessPower('equipped', i));
       player.powers.equipped = [...Array(this.equipped().length)].map((_, j) => j + 1).map(
         j => i === j ? null : this.accessPower('equipped', j)).filter(x => x !== null);
@@ -584,7 +602,12 @@ let Powers = {
     if (!this.canRespec()) {
       return true;
     }
-    if (!this.isPowersUnequipEnabled()) return false;
+    if (!this.isPowersUnequipEnabled()) {
+      alert('You cannot unequip your equipped powers ' +
+      'due to your powers unequip setting of "' + Options.confirmation('powersUnequip') +
+      '". Go to the Options tab to change this.');
+      return false;
+    }
     if (Options.confirmation('powersUnequip') !== 'No confirmation' && !confirm(
       'Are you sure you want to unequip your equipped powers and ' +
       ComplexityPrestigeLayer.resetText() + '?')) return false;

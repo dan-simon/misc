@@ -14,7 +14,13 @@ let ComplexityPrestigeLayer = {
     return this.hasEnoughEP() && this.hasComplexityChallenge1Completion();
   },
   canComplexityReset() {
-    return !this.canComplexity() && Options.confirmation('complexityReset') !== 'Disabled' && (Options.confirmation('complexityReset') !== 'Usually disabled' || player.stats.timeSinceComplexity <= 64);;
+    return this.rawCanComplexityReset() && this.isComplexityResetEnabled();
+  },
+  rawCanComplexityReset() {
+    return !this.canComplexity();
+  },
+  isComplexityResetEnabled() {
+    return Options.confirmation('complexityReset') !== 'Disabled' && (Options.confirmation('complexityReset') !== 'Usually disabled' || player.stats.timeSinceComplexity <= 64);
   },
   canShowComplexity() {
     return this.canComplexity() && !this.showFastSpecial();
@@ -157,7 +163,12 @@ let ComplexityPrestigeLayer = {
     this.complexityReset(false, false, false);
   },
   complexityReset(manual, justReset, entering) {
-    if (manual && !this.canComplexityReset()) return;
+    if (manual && !this.rawCanComplexityReset()) return;
+    if (manual && !this.isComplexityResetEnabled()) {
+      alert('You cannot do a complexity reset due to your complexity reset confirmation setting of "' +
+      Options.confirmation('complexityReset') + '". Go to the Options tab to change this.');
+      return;
+    }
     if (manual && Options.confirmation('complexityReset') === 'Confirmation' && !confirm(this.complexityResetConfirmationMessage())) return;
     // We need to do this here to avoid eternity milestones being applied in the eternity reset.
     player.eternities = ComplexityAchievements.effect(1, 2);
