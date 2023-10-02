@@ -478,16 +478,16 @@ let initialPlayer = {
     eternity: true,
     permanence: true,
     complexity: true,
-    complexityReset: 'Confirmation',
+    complexityReset: 'Usually disabled',
     finality: true,
     singleStudyRefund: true,
     studiesRespec: true,
     eternityChallengeRespec: true,
     complexityChallengeEntering: true,
     powerDeletionMode: 'Confirmation',
-    powerUnequipMode: 'Confirmation',
-    powersUnequip: true,
-    finalityShardUpgradesRespec: 'Confirmation',
+    powerUnequipMode: 'Usually disabled',
+    powersUnequip: 'Usually disabled',
+    finalityShardUpgradesRespec: 'Usually disabled',
     presetChange: true,
     presetDeletion: true,
   },
@@ -588,7 +588,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.29296875
+  version: 2.296875
 }
 
 let player;

@@ -14,7 +14,7 @@ let ComplexityPrestigeLayer = {
     return this.hasEnoughEP() && this.hasComplexityChallenge1Completion();
   },
   canComplexityReset() {
-    return !this.canComplexity() && Options.confirmation('complexityReset') !== 'Disabled';
+    return !this.canComplexity() && Options.confirmation('complexityReset') !== 'Disabled' && (Options.confirmation('complexityReset') !== 'Usually disabled' || player.stats.timeSinceComplexity <= 64);;
   },
   canShowComplexity() {
     return this.canComplexity() && !this.showFastSpecial();

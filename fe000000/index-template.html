@@ -1570,7 +1570,7 @@
         <tr ~style.display=Studies.canSeeFourthRow() ? '' : 'none'~>
           <td>
             <button ~class=Study(13).className()~ onclick="Study(13).click()">
-              Study ~o 13 ~
+              Study ~o 13 ~ (~f Study(13).timesBought() ~x)
               <br/>
               Large fixed multiplier to normal generators
               <br/>
@@ -1583,7 +1583,7 @@
           </td>
           <td>
             <button ~class=Study(14).className()~ onclick="Study(14).click()">
-              Study ~o 14 ~
+              Study ~o 14 ~ (~f Study(14).timesBought() ~x)
               <br/>
               Multiplier to infinity generators based on total color value
               <br/>
@@ -1596,7 +1596,7 @@
           </td>
           <td>
             <button ~class=Study(15).className()~ onclick="Study(15).click()">
-              Study ~o 15 ~
+              Study ~o 15 ~ (~f Study(15).timesBought() ~x)
               <br/>
               Eternity generators are multiplied by chroma
               <br/>
@@ -1609,7 +1609,7 @@
           </td>
           <td>
             <button ~class=Study(16).className()~ onclick="Study(16).click()">
-              Study ~o 16 ~
+              Study ~o 16 ~ (~f Study(16).timesBought() ~x)
               <br/>
               Multiplier to chroma buildup speed based on total theorems
               <br/>
@@ -2769,7 +2769,7 @@
         <span>The powers equipped by importing powers will be the strongest stored powers of the chosen types.</span>
         <br/>
         <div ~style.display=Options.showFullOptions('powers') ? 'none' : ''~>
-          <button onclick="Powers.respecAndReset()" ~class=Powers.canRespec() ? "" : "disabled"~>Unequip equipped powers and ~r ComplexityPrestigeLayer.resetText() ~</button></button>
+          <button onclick="Powers.respecAndReset()" ~class=Powers.canRespec() && Powers.isPowersUnequipEnabled() ? "" : "disabled"~>Unequip equipped powers and ~r ComplexityPrestigeLayer.resetText() ~</button></button>
           <div style="width: 1024px; margin-left: auto; margin-right: auto;">
             <span>There are a lot of power options. To see the others, go to the options tab and toggle (turn on) "Full power options" in the "other options" part.</span>
           </div>
@@ -2778,9 +2778,9 @@
           <button class="powers-export-button" onclick="Powers.export()">Export equipped powers</button> <button onclick="Powers.import()">Import equipped powers</button>
           <button onclick="Powers.toggleRespec()">Unequip equipped powers on next complexity: ~r Powers.isRespecOn() ? "On" : "Off" ~</button>
           <br/>
-          <button onclick="Powers.respecAndReset()" ~class=Powers.canRespec() ? "" : "disabled"~>Unequip equipped powers and ~r ComplexityPrestigeLayer.resetText() ~</button>
+          <button onclick="Powers.respecAndReset()" ~class=Powers.canRespec() && Powers.isPowersUnequipEnabled() ? "" : "disabled"~>Unequip equipped powers and ~r ComplexityPrestigeLayer.resetText() ~</button>
           <br ~style.display=Powers.canAutoEquippedSwap() ? 'none' : ''~/>
-          <button onclick="Powers.equippedSwap(true)" ~class=Powers.canEquippedSwap() ? "" : "disabled"~ ~style.display=Powers.canAutoEquippedSwap() ? 'none' : ''~>
+          <button onclick="Powers.equippedSwap(true)" ~class=Powers.canEquippedSwap() && Powers.isPowersUnequipEnabled() ? "" : "disabled"~ ~style.display=Powers.canAutoEquippedSwap() ? 'none' : ''~>
             Swap your equipped powers with better stored powers of the same type and ~r ComplexityPrestigeLayer.resetText() ~
           </button>
           <div style="width: 1024px; margin-left: auto; margin-right: auto;">
@@ -4865,9 +4865,10 @@
       </div>
       <div ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity') || ComplexityPrestigeLayer.canComplexity()) ? '' : 'none'~>
         <span ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity') || ComplexityPrestigeLayer.canComplexity()) ? '' : 'none'~>Complexity: <input type="checkbox" ~!checked=Options.confirmation('complexity')~ ~!onchange=function() {Options.setConfirmation('complexity', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>
-        <span ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~>Complexity reset: <select ~!value=Options.confirmation('complexityReset')~ ~!onchange=function() {Options.setConfirmation('complexityReset', this.value)}~>
+        <span ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('complexity')) ? '' : 'none'~>Complexity reset <span class="helpspan">(?)<span class="tooltiptext">The default setting of "Usually disabled" disables complexity reset (not complexity itself) after ~ti 64 ~ in a complexity, but has a confirmation before that (in case you misconfigure something and quickly want to reset).</span></span>: <select ~!value=Options.confirmation('complexityReset')~ ~!onchange=function() {Options.setConfirmation('complexityReset', this.value)}~>
           <option value="Confirmation">Confirmation</option>
           <option value="No confirmation">No confirmation</option>
+          <option value="Usually disabled">Usually disabled</option>
           <option value="Disabled">Disabled</option>
         </select><span style="display: inline-block; width: 16px;"></span></span>
         <span ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('finality') || FinalityPrestigeLayer.canFinality()) ? '' : 'none'~>Finality: <input type="checkbox" ~!checked=Options.confirmation('finality')~ ~!onchange=function() {Options.setConfirmation('finality', this.checked)}~></input></span>
@@ -4884,17 +4885,24 @@
           <option value="No confirmation">No confirmation</option>
           <option value="Disabled">Disabled</option>
         </select><span style="display: inline-block; width: 16px;"></span></span>
-        <span ~style.display=Options.optionDisplay(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Single power unequip: <select ~!value=Options.confirmation('powerUnequipMode')~ ~!onchange=function() {Options.setConfirmation('powerUnequipMode', this.value)}~>
+        <span ~style.display=Options.optionDisplay(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Single power unequip <span class="helpspan">(?)<span class="tooltiptext">The default setting of "Usually disabled" disables single power unequip after ~ti 64 ~ in a complexity, but has a confirmation before that (in case you misconfigure something and quickly want to reset).</span></span>: <select ~!value=Options.confirmation('powerUnequipMode')~ ~!onchange=function() {Options.setConfirmation('powerUnequipMode', this.value)}~>
           <option value="Confirmation">Confirmation</option>
           <option value="No confirmation">No confirmation</option>
+          <option value="Usually disabled">Usually disabled</option>
           <option value="Disabled">Disabled</option>
         </select><span style="display: inline-block; width: 16px;"></span></span>
-        <span ~style.display=Options.optionDisplay(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Powers unequip: <input type="checkbox" ~!checked=Options.confirmation('powersUnequip')~ ~!onchange=function() {Options.setConfirmation('powersUnequip', this.checked)}~></input></span>
-      </div>
-      <div>
-        <span ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Finality shard upgrades respec: <select ~!value=Options.confirmation('finalityShardUpgradesRespec')~ ~!onchange=function() {Options.setConfirmation('finalityShardUpgradesRespec', this.value)}~>
+        <span ~style.display=Options.optionDisplay(Powers.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Powers unequip <span class="helpspan">(?)<span class="tooltiptext">The default setting of "Usually disabled" disables powers unequip after ~ti 64 ~ in a complexity, but has a confirmation before that (in case you misconfigure something and quickly want to reset).</span></span>: <select ~!value=Options.confirmation('powersUnequip')~ ~!onchange=function() {Options.setConfirmation('powersUnequip', this.value)}~>
           <option value="Confirmation">Confirmation</option>
           <option value="No confirmation">No confirmation</option>
+          <option value="Usually disabled">Usually disabled</option>
+          <option value="Disabled">Disabled</option>
+        </select></span>
+      </div>
+      <div>
+        <span ~style.display=Options.optionDisplay(PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>Finality shard upgrades respec <span class="helpspan">(?)<span class="tooltiptext">The default setting of "Usually disabled" disables finality shard upgrades respec after ~ti 64 ~ in a finality, but has a confirmation before that (in case you misconfigure something and quickly want to reset).</span></span>: <select ~!value=Options.confirmation('finalityShardUpgradesRespec')~ ~!onchange=function() {Options.setConfirmation('finalityShardUpgradesRespec', this.value)}~>
+          <option value="Confirmation">Confirmation</option>
+          <option value="No confirmation">No confirmation</option>
+          <option value="Usually disabled">Usually disabled</option>
           <option value="Disabled">Disabled</option>
         </select><span style="display: inline-block; width: 16px;"></span></span>
         <span>Preset change: <input type="checkbox" ~!checked=Options.confirmation('presetChange')~ ~!onchange=function() {Options.setConfirmation('presetChange', this.checked)}~></input><span style="display: inline-block; width: 16px;"></span></span>

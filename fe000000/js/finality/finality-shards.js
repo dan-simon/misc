@@ -163,7 +163,8 @@ let FinalityShardPresets = {
     player.respecFinalityShards = false;
   },
   canRespec() {
-    return FinalityShards.totalUpgrades() !== 0 && Options.confirmation('finalityShardUpgradesRespec') !== 'Disabled';
+    return FinalityShards.totalUpgrades() !== 0 && Options.confirmation('finalityShardUpgradesRespec') !== 'Disabled' &&
+    (Options.confirmation('finalityShardUpgradesRespec') !== 'Usually disabled' || player.stats.timeSinceFinality <= 64);
   },
   respecAndReset() {
     if (!this.canRespec()) {

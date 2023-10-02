@@ -347,7 +347,8 @@ let Powers = {
     if (!this.canEquippedSwap()) {
       return true;
     }
-    if (manual && Options.confirmation('powersUnequip') && !confirm(
+    if (manual && !this.isPowersUnequipEnabled()) return false;
+    if (manual && Options.confirmation('powersUnequip') !== 'No confirmation' && !confirm(
       'Are you sure you want to swap your equipped powers with ' +
       'better stored powers of the same type and ' +
       ComplexityPrestigeLayer.resetText() + '?')) return false;
@@ -526,7 +527,7 @@ let Powers = {
     }
   },
   canUnequip(i) {
-    return this.canAccessEquipped(i) && this.powerUnequipMode() !== 'Disabled';
+    return this.canAccessEquipped(i) && this.powerUnequipMode() !== 'Disabled' && (this.powerUnequipMode() !== 'Usually disabled' || player.stats.timeSinceComplexity <= 64);
   },
   unequip(i) {
     if (this.canUnequip(i) && (this.powerUnequipMode() === 'No confirmation' ||
@@ -576,11 +577,15 @@ let Powers = {
   canRespec() {
     return this.equipped().length !== 0;
   },
+  isPowersUnequipEnabled() {
+    return Options.confirmation('powersUnequip') !== 'Disabled' && (Options.confirmation('powersUnequip') !== 'Usually disabled' || player.stats.timeSinceComplexity <= 64);
+  },
   respecAndReset() {
     if (!this.canRespec()) {
       return true;
     }
-    if (Options.confirmation('powersUnequip') && !confirm(
+    if (!this.isPowersUnequipEnabled()) return false;
+    if (Options.confirmation('powersUnequip') !== 'No confirmation' && !confirm(
       'Are you sure you want to unequip your equipped powers and ' +
       ComplexityPrestigeLayer.resetText() + '?')) return false;
     this.respec();

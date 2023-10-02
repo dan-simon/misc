@@ -1678,6 +1678,23 @@ let Saving = {
       player.cheats.complexityPointGeneration = false;
       player.version = 2.29296875;
     }
+    if (player.version < 2.296875) {
+      if (player.confirmations.complexityReset === 'Confirmation') {
+        player.confirmations.complexityReset = 'Usually disabled';
+      }
+      if (player.confirmations.powerUnequipMode === 'Confirmation') {
+        player.confirmations.powerUnequipMode = 'Usually disabled';
+      }
+      if (player.confirmations.powersUnequip === true) {
+        player.confirmations.powersUnequip = 'Usually disabled';
+      } else if (player.confirmations.powersUnequip === false) {
+        player.confirmations.powersUnequip = 'No confirmation';
+      }
+      if (player.confirmations.finalityShardUpgradesRespec === 'Confirmation') {
+        player.confirmations.finalityShardUpgradesRespec = 'Usually disabled';
+      }
+      player.version = 2.296875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
