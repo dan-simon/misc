@@ -1,9 +1,5 @@
 let ComplexityChallenge = {
-  goals: [Infinity,
-    Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, 4096),
-    Decimal.pow(2, Math.pow(2, 24)), Decimal.pow(2, Math.pow(2, 29)),
-    Decimal.pow(2, Math.pow(2, 32)), Decimal.pow(2, Math.pow(2, 24)),
-  ],
+  logLogGoals: [Infinity, 32, 12, 24, 29, 32, 24],
   baseRequirements: [Infinity, 0, 2, 4, 6, 8, 12],
   rewards: [
     null,
@@ -44,10 +40,11 @@ let ComplexityChallenge = {
     return [1, 2, 3, 4, 5, 6].filter(i => this.isComplexityChallengeUnlocked(i)).length;
   },
   getComplexityChallengeGoal(x) {
-    return this.goals[x].pow(Math.pow(2, this.getComplexityChallengeCompletions(x) / 4));
+    // Note that this will return the exact same result for two goals that should be the same.
+    return Decimal.pow(2, Math.pow(2, this.logLogGoals[x] + this.getComplexityChallengeCompletions(x) / 4));
   },
   getComplexityChallengeCompletionsAt(x, stars) {
-    return 1 + Math.floor(4 * Math.log2(stars.max(1).log2() / this.goals[x].log2()));
+    return 1 + Math.floor(4 * (Math.log2(stars.max(1).log2()) - this.logLogGoals[x]));
   },
   getComplexityChallengeReward(x) {
     return this.rewards[x](this.getComplexityChallengeCompletions(x) * ComplexityStars.complexityChallengeRewardMultiplier(x));

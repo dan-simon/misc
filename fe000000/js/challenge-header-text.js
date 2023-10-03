@@ -16,7 +16,12 @@ let ChallengeHeaderText = {
       x => ComplexityChallenge.isComplexityChallengeRunning(x)).map(
       x => ComplexityChallenge.getComplexityChallengeGoal(x)).reduce(
       (x, y) => Decimal.min(x, y));
-    return 'Next ℂC completion at ' + format(minRunningComplexityChallengeGoal) + ' stars.';
+    let nextComplexityChallengeGoalDisplay = [1, 2, 3, 4, 5, 6].filter(
+      x => ComplexityChallenge.isComplexityChallengeRunning(x) &&
+      ComplexityChallenge.getComplexityChallengeGoal(x).eq(minRunningComplexityChallengeGoal)).map(
+      x => 'ℂC' + formatOrdinalInt(x) + 'x' + formatInt(ComplexityChallenge.getComplexityChallengeCompletions(x) + 1));
+    return 'Next ℂC completion' + pluralize(nextComplexityChallengeGoalDisplay.length, '', 's') +
+    ' (' + nextComplexityChallengeGoalDisplay.join(', ') + ') at ' + format(minRunningComplexityChallengeGoal) + ' stars.';
   },
   getText() {
     let texts = [];
