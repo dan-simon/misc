@@ -256,44 +256,56 @@ class Grid {
     parity1() {
       let m = this.cells.length;
       let n = this.cells[0].length;
-      const edgeStates = {};
-      let ev = assignEdgeValues(this.cells);
-      for (const edge in ev) {
-          let converted = convertToUndirectedEdge(JSON.parse(edge), [m, n]);
-          edgeStates[edge] = (converted === null) ? -1 : {'used': 1, 'unknown': 0, 'unused': -1}[this.edges[JSON.stringify(converted)]];
+      let c1 = [...Array(m)].flatMap((_, i) => [...Array(n)].map((_, j) => [i, j])).filter(x => !this.cells[x[0]][x[1]] && (x[0] + x[1]) % 2 === 0).map(i => JSON.stringify(i));
+      let c2 = [...Array(m)].flatMap((_, i) => [...Array(n)].map((_, j) => [i, j])).filter(x => !this.cells[x[0]][x[1]] && (x[0] + x[1]) % 2 === 1).map(i => JSON.stringify(i));
+      let adj = adjacency(Object.keys(this.edges).filter(i => this.edges[i] !== 'unused').map(i => JSON.parse(i).map(j => JSON.stringify(j))), c1.concat(c2));
+      let forced = adjacency(Object.keys(this.edges).filter(i => this.edges[i] === 'used').map(i => JSON.parse(i).map(j => JSON.stringify(j))), c1.concat(c2));
+      let f;
+      let uf;
+      try {
+        preliminaryCheck(adj, c1, c2);
+        [f, uf] = parity1(adj, forced, c1, c2);
+      } catch (e) {
+        alert('The parity calculation found a contradiction!');
+        return;
       }
-      const [used, unused] = parity1(edgeStates, ev);
-      for (let edge of used) {
-        let undirectedEdge = JSON.stringify(convertToUndirectedEdge(JSON.parse(edge), [m, n]));
-        this.edges[undirectedEdge] = "used";
-        this.updateEdgeDisplay(undirectedEdge);
+      for (let i of f) {
+        let n = JSON.stringify(i.map(j => JSON.parse(j)));
+        if (n in this.edges) {
+          this.edges[n] = 'used';
+          this.updateEdgeDisplay(n);
+        }
       }
-      for (let edge of unused) {
-        let undirectedEdge = JSON.stringify(convertToUndirectedEdge(JSON.parse(edge), [m, n]));
-        this.edges[undirectedEdge] = "unused";
-        this.updateEdgeDisplay(undirectedEdge);
+      for (let i of uf) {
+        let n = JSON.stringify(i.map(j => JSON.parse(j)));
+        if (n in this.edges) {
+          this.edges[n] = 'unused';
+          this.updateEdgeDisplay(n);
+        }
       }
     }
     
     parity2() {
       let m = this.cells.length;
       let n = this.cells[0].length;
-      let ev = assignEdgeValues(this.cells);
-      const edgeStates = {};
-      for (const edge in ev) {
-          let converted = convertToUndirectedEdge(JSON.parse(edge), [m, n]);
-          edgeStates[edge] = (converted === null) ? -1 : {'used': 1, 'unknown': 0, 'unused': -1}[this.edges[JSON.stringify(converted)]];
+      let c1 = [...Array(m)].flatMap((_, i) => [...Array(n)].map((_, j) => [i, j])).filter(x => !this.cells[x[0]][x[1]] && (x[0] + x[1]) % 2 === 0).map(i => JSON.stringify(i));
+      let c2 = [...Array(m)].flatMap((_, i) => [...Array(n)].map((_, j) => [i, j])).filter(x => !this.cells[x[0]][x[1]] && (x[0] + x[1]) % 2 === 1).map(i => JSON.stringify(i));
+      let adj = adjacency(Object.keys(this.edges).filter(i => this.edges[i] !== 'unused').map(i => JSON.parse(i).map(j => JSON.stringify(j))), c1.concat(c2));
+      let forced = adjacency(Object.keys(this.edges).filter(i => this.edges[i] === 'used').map(i => JSON.parse(i).map(j => JSON.stringify(j))), c1.concat(c2));
+      let f;
+      try {
+        preliminaryCheck(adj, c1, c2);
+        f = parity2(adj, forced, c1, c2);
+      } catch (e) {
+        alert('The parity calculation found a contradiction!');
+        return;
       }
-      const [used, unused] = parity2(edgeStates, ev);
-      for (let edge of used) {
-        let undirectedEdge = JSON.stringify(convertToUndirectedEdge(JSON.parse(edge), [m, n]));
-        this.edges[undirectedEdge] = "used";
-        this.updateEdgeDisplay(undirectedEdge);
-      }
-      for (let edge of unused) {
-        let undirectedEdge = JSON.stringify(convertToUndirectedEdge(JSON.parse(edge), [m, n]));
-        this.edges[undirectedEdge] = "unused";
-        this.updateEdgeDisplay(undirectedEdge);
+      for (let i of f) {
+        let n = JSON.stringify(i.map(j => JSON.parse(j)));
+        if (n in this.edges) {
+          this.edges[n] = 'used';
+          this.updateEdgeDisplay(n);
+        }
       }
     }
     
@@ -437,159 +449,238 @@ function urlToNestedArray(url) {
   return nestedArray;
 }
 
-function calculateAreaLeftOfEdge(grid, i, j) {
-    let area = 0;
-    for (let y = 0; y < j; y++) {
-        if (!grid[i][y]) {
-            if ((i + y) % 2 === 0) {
-                area += 1;
-            } else {
-                area -= 1;
-            }
+let search = function (start, adj, adj2, forced, usage) {
+  let wave = [start];
+  let step = 0;
+  let retrace = {[start]: null};
+  while (wave.length > 0) {
+    let newWave = [];
+    for (let i of wave) {
+      if (step % 2 === 1 && usage[i] < 2) {
+        let res = [i];
+        while (res.at(-1) !== start) {
+          res.push(retrace[res.at(-1)]);
         }
+        // Note: this modifies res but that's fine
+        return res.reverse();
+      }
+      let opts;
+      if (step % 2 === 0) {
+        opts = adj[i].filter(k => !adj2[i].includes(k));
+      } else {
+        opts = adj2[i].filter(k => !forced[i].includes(k));
+      }
+      for (let j of opts) {
+        if (!(j in retrace)) {
+          newWave.push(j);
+          retrace[j] = i;
+        }
+      }
     }
-    return area;
+    wave = newWave;
+    step++;
+  }
+  return null;
 }
 
-function assignEdgeValues(grid) {
-    let m = grid.length;
-    let n = grid[0].length;
-    let edgeValues = {};
-
-    for (let i = 0; i <= m; i++) {
-        for (let j = 0; j <= n; j++) {
-            if (i < m) {
-                let areaLeft = calculateAreaLeftOfEdge(grid, i, j);
-                let value = i < m ? areaLeft : -areaLeft;
-                let keyForward = JSON.stringify([[i, j], [i + 1, j]]);
-                let keyBackward = JSON.stringify([[i + 1, j], [i, j]]);
-                edgeValues[keyForward] = value;
-                edgeValues[keyBackward] = -value;
-            }
-            if (j < n) {
-                let keyRight = JSON.stringify([[i, j], [i, j + 1]]);
-                let keyLeft = JSON.stringify([[i, j + 1], [i, j]]);
-                edgeValues[keyRight] = 0;
-                edgeValues[keyLeft] = 0;
-            }
+let findParity = function (adj, forced, c1, c2) {
+  let adj2 = Object.fromEntries(c1.concat(c2).map(i => [i, [...forced[i]]]));
+  let usage = Object.fromEntries(c1.concat(c2).map(i => [i, adj2[i].length]));
+  for (let node of c1) {
+    while (usage[node] < 2) {
+      let addedPath = search(node, adj, adj2, forced, usage);
+      usage[addedPath[0]]++;
+      usage[addedPath.at(-1)]++;
+      for (let i = 0; i < addedPath.length - 1; i++) {
+        let n1 = addedPath[i];
+        let n2 = addedPath[i + 1];
+        if (i % 2 === 0) {
+          adj2[n1].push(n2);
+          adj2[n2].push(n1);
+        } else if (i % 2 === 1) {
+          adj2[n1] = adj2[n1].filter(j => j !== n2);
+          adj2[n2] = adj2[n2].filter(j => j !== n1);
         }
+      }
     }
-
-    return edgeValues;
+  }
+  return adj2;
 }
 
-function bellmanFord(edgeValues, source, target, dist) {
-    let graph = Object.keys(edgeValues).map(JSON.parse).flat();
-    graph = [...new Set(graph.map(JSON.stringify))].map(JSON.parse); 
-    let V = graph.length;
+let findForcedEdges = function (adj, adj2, forced, c1, c2) {
+  let sc1 = new Set(c1);
+  let adj3 = Object.fromEntries(c1.concat(c2).map(i => [
+    i, sc1.has(i) ? adj[i].filter(k => !adj2[i].includes(k)) : adj2[i].filter(k => !forced[i].includes(k))]));
+  let components = tarjan(adj3, c1.concat(c2));
+  let cdict = Object.fromEntries(components.flatMap((i, ind) => i.map(j => [j, ind])));
+  let known = c1.concat(c2).flatMap(i => adj[i].filter(j => cdict[i] !== cdict[j]).map(j => [i, j]));
+  return [known.filter(([i, j]) => adj2[i].includes(j)), known.filter(([i, j]) => !adj2[i].includes(j))];
+}
 
-    let distances = {};
-    graph.forEach(vertex => distances[JSON.stringify(vertex)] = Infinity);
-    distances[JSON.stringify(source)] = 0;
-
-    for (let _ = 0; _ < V - 1; _++) {
-        let updated = false;
-        for (let [edge, weight] of Object.entries(edgeValues)) {
-            let [u, v] = JSON.parse(edge);
-            if (JSON.stringify([u, v]) === JSON.stringify([source, target]) || JSON.stringify([u, v]) === JSON.stringify([target, source])) {
-                continue;
-            }
-            if (distances[JSON.stringify(u)] !== Infinity && distances[JSON.stringify(u)] + weight < distances[JSON.stringify(v)]) {
-                distances[JSON.stringify(v)] = distances[JSON.stringify(u)] + weight;
-                updated = true;
-            }
-        }
-
-        if (!updated || distances[JSON.stringify(target)] < dist) {
-            break;
-        }
+let tarjan = function (g, vertices) {
+  let res = [];
+  let index = 0;
+  let indices = {};
+  let lowLink = {};
+  let s = [];
+  let ss = new Set();
+  let strongConnect = function (v) {
+    indices[v] = index;
+    lowLink[v] = index;
+    index++;
+    s.push(v);
+    ss.add(v);
+    for (let w of g[v]) {
+      if (!(w in indices)) {
+        strongConnect(w);
+        lowLink[v] = Math.min(lowLink[v], lowLink[w]);
+      } else if (ss.has(w)) {
+        lowLink[v] = Math.min(lowLink[v], indices[w]);
+      }
     }
-
-    return distances[JSON.stringify(target)] < dist ? -1 : distances[JSON.stringify(target)] > dist ? 1 : 0;
-}
-
-function convertToUndirectedEdge(edge, gridShape) {
-    let [[i1, j1], [i2, j2]] = edge;
-    let [m, n] = gridShape;
-
-    if (i1 !== i2) {
-        if (j1 === 0 || j1 === n) {
-            return null;
+    if (lowLink[v] === indices[v]) {
+      let comp = [];
+      while (true) {
+        let w = s.pop();
+        ss.delete(w);
+        comp.push(w);
+        if (w === v) {
+          break;
         }
-        return [[Math.min(i1, i2), j1-1], [Math.min(i1, i2), j1]];
-    } else if (j1 !== j2) {
-        if (i1 === 0 || i1 === m) {
-            return null;
-        }
-        return [[i1-1, Math.min(j1, j2)], [i1, Math.min(j1, j2)]];
-    } else {
-        return null;
+      }
+      res.push(comp);
     }
-}
-
-function adjacentPairs(m, n) {
-    let pairs = [];
-    for (let i = 0; i < m; i++) {
-        for (let j = 0; j < n; j++) {
-            if (j + 1 < n) {
-                pairs.push([[i, j], [i, j + 1]]);
-            }
-            if (i + 1 < m) {
-                pairs.push([[i, j], [i + 1, j]]);
-            }
-        }
+  }
+  for (let v of vertices) {
+    if (!(v in indices)) {
+      strongConnect(v);
     }
-    return pairs;
+  }
+  return res;
 }
 
-function edgeParity(edge) {
-    return (edge[0].reduce((a, b) => a + b) + (edge[0][1] === edge[1][1])) % 2;
+let adjacency = function (graph, vertices) {
+  let adj = Object.fromEntries(vertices.map(i => [i, []]));
+  for (let [i, j] of graph) {
+    adj[i].push(j);
+    adj[j].push(i);
+  }
+  return adj;
 }
 
-function parity1(edgeStates, ev) {
-    let candidates = Object.keys(ev).filter(i => edgeStates[i] === 0);
-    let graph = {};
-    for (let i in ev) {
-        graph[i] = 2 * ev[i] + ((edgeParity(JSON.parse(i)) === 0 && edgeStates[i] === 1) ? -1 : (edgeParity(JSON.parse(i)) === 1 && edgeStates[i] !== -1) ? 1 : 0);
-    };
-
-    let used = [];
-    let unused = [];
-    candidates.forEach(i => {
-        let b = bellmanFord(graph, JSON.parse(i)[1], JSON.parse(i)[0], -graph[i]);
-        if (b === -1) {
-            throw new Error('Contradiction!');
-        }
-        if (b === 0) {
-            if (edgeParity(JSON.parse(i)) === 0) {
-                unused.push(i);
-            } else {
-                used.push(i);
-            }
-        }
-    });
-    return [used, unused];
+let preliminaryCheck = function (adj, c1, c2) {
+  let sc1 = new Set(c1);
+  let sc2 = new Set(c2);
+  if (c1.length !== c2.length || !c1.every(i => adj[i].every(j => sc2.has(j) && adj[j].includes(i))) ||
+  !c2.every(i => adj[i].every(j => sc1.has(j) && adj[j].includes(i)))) {
+    throw new Error('Puzzle is broken');
+  }
 }
 
-function parity2(edgeStates, ev) {
-    let candidates = Object.keys(ev).filter(i => edgeParity(JSON.parse(i)) === 1 && edgeStates[i] === 0);
-    let graph = {};
-    for (let i in ev) {
-        if (edgeParity(JSON.parse(i)) === 0 || edgeStates[i] === -1) {
-            graph[i] = ev[i];
-        }
-    };
+let parity1 = function (adj, forced, c1, c2) {
+  let adj2 = findParity(adj, forced, c1, c2);
+  return findForcedEdges(adj, adj2, forced, c1, c2);
+}
 
-    let used = [];
-    let unused = [];
-    candidates.forEach(i => {
-        let b = bellmanFord(graph, JSON.parse(i)[1], JSON.parse(i)[0], -ev[i]);
-        if (b === -1) {
-            throw new Error('Contradiction!');
+let dominoData = function (p, adj) {
+  let lookup = Object.fromEntries(p.flatMap((i, ind) => i.map(j => [j, ind])));
+  let black = p.map(i => adj[i[0]].filter(j => j !== i[1]).map(j => lookup[j]));
+  let white = p.map(i => adj[i[1]].filter(j => j !== i[0]).map(j => lookup[j]));
+  return [black, white, lookup];
+}
+
+let dominoPartitions = function (adj, adj2, c1, c2) {
+  let cycles = [];
+  let used = new Set();
+  for (let node of c1) {
+    if (used.has(node)) {
+      continue;
+    }
+    let cycle = [node];
+    while (true) {
+      used.add(cycle.at(-1));
+      let opts = adj2[cycle.at(-1)].filter(i => !used.has(i));
+      if (opts.length === 0) {
+        break;
+      }
+      cycle.push(opts[0]);
+    }
+    cycles.push(cycle);
+  }
+  let cycles2 = cycles.map(i => [i[0]].concat(i.slice(1).reverse()));
+  let pairs = [cycles, cycles2].map(c => c.flatMap(i => [...Array(i.length / 2)].map((_, ind) => i.slice(2 * ind, 2 * ind + 2))));
+  return pairs.map(p => dominoData(p, adj));
+}
+
+let fullBFS = function (g) {
+  let s = new Set([0]);
+  let n = new Set([0]);
+  while (n.size > 0) {
+    n = new Set([...n].flatMap(i => g[i].filter(j => !s.has(j))));
+    for (let i of n) {
+      s.add(i);
+    }
+  }
+  return s.size === g.length;
+}
+
+let isForcedParity2 = function (black, white, bn, wn) {
+  let bnew = new Set(black[bn]);
+  bnew.delete(wn);
+  let wnew = new Set(white[wn]);
+  wnew.delete(bn);
+  let bs = new Set(bnew);
+  bs.add(bn);
+  let ws = new Set(wnew);
+  ws.add(wn);
+  while (true) {
+    bnew = new Set([...bnew].flatMap(i => black[i].filter(j => !bs.has(j))));
+    for (let i of bnew) {
+      bs.add(i);
+    }
+    wnew = new Set([...wnew].flatMap(i => white[i].filter(j => !ws.has(j))));
+    for (let i of wnew) {
+      ws.add(i);
+    }
+    if (bs.has(wn) || ws.has(bn)) {
+      return false;
+    }
+    if (bnew.size === 0 || wnew.size === 0) {
+      return true;
+    }
+  }
+}
+
+let parity2 = function (adj, forced, c1, c2) {
+  let adj2 = findParity(adj, forced, c1, c2);
+  let [dom1, dom2] = dominoPartitions(adj, adj2, c1, c2);
+  if (!fullBFS(dom1[0]) || !fullBFS(dom1[1])) {
+    throw new Error('Puzzle is broken');
+  }
+  let newForced = [];
+  let sc1 = new Set(c1);
+  for (let i in adj) {
+    if (!(sc1.has(i))) {
+      continue;
+    }
+    for (let j of adj[i]) {
+      if (forced[i].includes(j)) {
+        continue;
+      }
+      let dom;
+      if (dom1[2][i] === dom1[2][j]) {
+        if (dom2[2][i] === dom2[2][j]) {
+          throw new Error('Puzzle is broken');
         }
-        if (b === 0) {
-            used.push(i);
-        }
-    });
-    return [used, unused];
+        dom = dom2;
+      } else {
+        dom = dom1;
+      }
+      if (isForcedParity2(dom[0], dom[1], dom[2][i], dom[2][j])) {
+        newForced.push([i, j]);
+        newForced.push([j, i]);
+      }
+    }
+  }
+  return newForced;
 }
