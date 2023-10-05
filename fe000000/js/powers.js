@@ -538,7 +538,7 @@ let Powers = {
     return this.canAccessEquipped(i);
   },
   isSingleUnequipEnabled() {
-    this.powerUnequipMode() !== 'Disabled' && (this.powerUnequipMode() !== 'Usually disabled' || player.stats.timeSinceComplexity <= 64);
+    return this.powerUnequipMode() !== 'Disabled' && (this.powerUnequipMode() !== 'Usually disabled' || player.stats.timeSinceComplexity <= 64);
   },
   unequip(i) {
     if (!this.rawCanUnequip(i)) return false;
