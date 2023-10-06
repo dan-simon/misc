@@ -309,6 +309,30 @@ class Grid {
       }
     }
     
+    dontClosePaths() {
+      let m = this.cells.length;
+      let n = this.cells[0].length;
+      let c1 = [...Array(m)].flatMap((_, i) => [...Array(n)].map((_, j) => [i, j])).filter(x => !this.cells[x[0]][x[1]] && (x[0] + x[1]) % 2 === 0).map(i => JSON.stringify(i));
+      let c2 = [...Array(m)].flatMap((_, i) => [...Array(n)].map((_, j) => [i, j])).filter(x => !this.cells[x[0]][x[1]] && (x[0] + x[1]) % 2 === 1).map(i => JSON.stringify(i));
+      let adj = adjacency(Object.keys(this.edges).filter(i => this.edges[i] !== 'unused').map(i => JSON.parse(i).map(j => JSON.stringify(j))), c1.concat(c2));
+      let forced = adjacency(Object.keys(this.edges).filter(i => this.edges[i] === 'used').map(i => JSON.parse(i).map(j => JSON.stringify(j))), c1.concat(c2));
+      let uf;
+      try {
+        preliminaryCheck(adj, c1, c2);
+        uf = dontClosePaths(adj, forced, c1, c2);
+      } catch (e) {
+        alert('The path calculation found a contradiction!');
+        return;
+      }
+      for (let i of uf) {
+        let n = JSON.stringify(i.map(j => JSON.parse(j)));
+        if (n in this.edges) {
+          this.edges[n] = 'unused';
+          this.updateEdgeDisplay(n);
+        }
+      }
+    }
+    
     isCompletedState() {
         if (Object.values(this.edges).some(state => state === "unknown")) {
             return false;
@@ -396,6 +420,10 @@ window.onload = function () {
     createButton('Parity 2 (2)', function () {
         grid.parity2();
     }, '2');
+    
+    createButton('Don\'t close paths (3)', function () {
+        grid.dontClosePaths();
+    }, '3');
 
     createButton('Complete? (c)', function () {
         if (grid.isCompletedState()) {
@@ -484,7 +512,7 @@ let search = function (start, adj, adj2, forced, usage) {
 }
 
 let findParity = function (adj, forced, c1, c2) {
-  let adj2 = Object.fromEntries(c1.concat(c2).map(i => [i, [...forced[i]]]));
+  let adj2 = Object.fromEntries(c1.concat(c2).map(i => [i, forced[i].slice()]));
   let usage = Object.fromEntries(c1.concat(c2).map(i => [i, adj2[i].length]));
   for (let node of c1) {
     while (usage[node] < 2) {
@@ -616,7 +644,7 @@ let fullBFS = function (g) {
   let s = new Set([0]);
   let n = new Set([0]);
   while (n.size > 0) {
-    n = new Set([...n].flatMap(i => g[i].filter(j => !s.has(j))));
+    n = new Set(Array.from(n).flatMap(i => g[i].filter(j => !s.has(j))));
     for (let i of n) {
       s.add(i);
     }
@@ -634,11 +662,11 @@ let isForcedParity2 = function (black, white, bn, wn) {
   let ws = new Set(wnew);
   ws.add(wn);
   while (true) {
-    bnew = new Set([...bnew].flatMap(i => black[i].filter(j => !bs.has(j))));
+    bnew = new Set(Array.from(bnew).flatMap(i => black[i].filter(j => !bs.has(j))));
     for (let i of bnew) {
       bs.add(i);
     }
-    wnew = new Set([...wnew].flatMap(i => white[i].filter(j => !ws.has(j))));
+    wnew = new Set(Array.from(wnew).flatMap(i => white[i].filter(j => !ws.has(j))));
     for (let i of wnew) {
       ws.add(i);
     }
@@ -683,4 +711,47 @@ let parity2 = function (adj, forced, c1, c2) {
     }
   }
   return newForced;
+}
+
+let findPathEndpoints = function (forced) {
+  let res = [];
+  let used = new Set();
+  for (let node in forced) {
+    if (used.has(node)) {
+      continue;
+    }
+    let path = new Set([node]);
+    let n = [node];
+    while (n.length > 0) {
+      n = n.flatMap(i => forced[i].filter(j => !path.has(j)));
+      for (let i of n) {
+        path.add(i);
+      }
+    }
+    res.push([Array.from(path).filter(i => forced[i].length < 2), path.size]);
+    for (let i of path) {
+      used.add(i);
+    }
+  }
+  return res;
+}
+
+let dontClosePaths = function (adj, forced, c1, c2) {
+  let endpoints = findPathEndpoints(forced)
+  let unforced = [];
+  if (endpoints.length > 1) {
+    for (let [i, size] of endpoints) {
+      if (i.length !== Math.min(size, 2)) {
+        throw new Error('Puzzle is broken');
+      }
+      if (size > 2 && adj[i[0]].includes(i[1])) {
+        if (forced[i[0]].includes(i[1])) {
+          throw new Error('Puzzle is broken');
+        }
+        unforced.push([i[0], i[1]]);
+        unforced.push([i[1], i[0]]);
+      }
+    }
+  }
+  return unforced;
 }
