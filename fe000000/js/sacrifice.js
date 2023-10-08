@@ -82,7 +82,18 @@ let Sacrifice = {
   },
   sacrificeConfirmationMessage() {
     return 'Are you sure you want to sacrifice to increase your sacrifice multiplier from ' +
-      format(this.sacrificeMultiplier()) + ' to ' + format(this.newSacrificeMultiplier()) + '?';
+      format(this.sacrificeMultiplier()) + ' to ' + format(this.newSacrificeMultiplier()) + '? ' +
+      this.extraSacrificeText();
+  },
+  extraSacrificeText() {
+    if (Challenge.isChallengeEffectActive(10)) {
+      return 'This will reset your stars, boosts, and generators.'
+    } else if (!EternityMilestones.isEternityMilestoneActive(6)) {
+      return 'This will reset your amounts of Generators ' + formatOrdinalInt(1) + ' through ' + formatOrdinalInt(7) +
+      ' (though not their multipliers).';
+    } else {
+      return '(This will not reset anything due to Eternity Milestone ' + formatOrdinalInt(6) + '.)'
+    }
   },
   sacrifice(manual) {
     if (!this.canSacrifice()) return;

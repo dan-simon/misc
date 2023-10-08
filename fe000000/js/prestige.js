@@ -74,7 +74,15 @@ let Prestige = {
   },
   prestigeConfirmationMessage() {
     return 'Are you sure you want to prestige to increase your prestige power from ' +
-      format(this.prestigePower()) + ' to ' + format(this.newPrestigePower()) + '?';
+      format(this.prestigePower()) + ' to ' + format(this.newPrestigePower()) + '? ' +
+      this.extraPrestigeText();
+  },
+  extraPrestigeText() {
+    if (!EternityMilestones.isEternityMilestoneActive(8)) {
+      return 'This will reset your stars, boosts, generators, and sacrifice multiplier.'
+    } else {
+      return '(This will not reset anything due to Eternity Milestone ' + formatOrdinalInt(8) + '.)'
+    }
   },
   prestige(manual) {
     if (!this.canPrestige()) return;
