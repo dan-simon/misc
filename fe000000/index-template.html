@@ -3257,7 +3257,7 @@
       <div ~style.display=Options.showFullOptions('finality') ? 'none' : ''~>
         <button onclick="FinalityShardPresets.respecAndReset()" ~class=FinalityShardPresets.canRespec() ? "" : "disabled"~>Respec finality shard upgrades and ~r FinalityPrestigeLayer.resetText() ~</button></button>
         <div style="width: 1024px; margin-left: auto; margin-right: auto;">
-          <span>There are a lot of finality shard options. To see the others, go to the options tab and toggle (turn on) "Full finality shard options" in the "other options" part.</span>
+          <span>There are a lot of finality shard options. <button onclick="Options.toggleShowFullOptions('finality')">Full finality shard options: ~r Options.showFullOptions('finality') ? 'On' : 'Off' ~</button></span>
         </div>
       </div>
       <div ~style.display=Options.showFullOptions('finality') ? '' : 'none'~>
@@ -3266,7 +3266,7 @@
         <br/>
         <button onclick="FinalityShardPresets.respecAndReset()" ~class=FinalityShardPresets.canRespec() ? "" : "disabled"~>Respec finality shard upgrades and ~r FinalityPrestigeLayer.resetText() ~</button>
         <div style="width: 1024px; margin-left: auto; margin-right: auto;">
-          <span>There are a lot of finality shard options. To hide most of them, go to the options tab and toggle (turn off) "Full finality shard options" in the "other options" part.</span>
+          <span>There are a lot of finality shard options. <button onclick="Options.toggleShowFullOptions('finality')">Full finality shard options: ~r Options.showFullOptions('finality') ? 'On' : 'Off' ~</button></span>
         </div>
       </div>
       <br/>
