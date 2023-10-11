@@ -71,10 +71,16 @@ let EternityChallenge = {
       return 'Unlock challenge';
     } else if (this.getUnlockedEternityChallenge() !== 0) {
       return 'Another EC already unlocked';
-    } else if (!this.hasRequirementRecentlyBeenReached(x) && !this.currentlyHasRequirement(x)) {
-      return 'Requires more ' + this.getEternityChallengeResourceName(x);
-    } else if (Studies.unspentTheorems() < this.getEternityChallengeCost(x)) {
-      return 'Requires more unspent theorems';
+    } else {
+      let requirementMissing = !this.hasRequirementRecentlyBeenReached(x) && !this.currentlyHasRequirement(x);
+      let costMissing = Studies.unspentTheorems() < this.getEternityChallengeCost(x);
+      if (requirementMissing && costMissing) {
+        return 'Requires more ' + this.getEternityChallengeResourceName(x) + ' and unspent theorems';
+      } else if (requirementMissing) {
+        return 'Requires more ' + this.getEternityChallengeResourceName(x);
+      } else if (costMissing) {
+        return 'Requires more unspent theorems';
+      }
     }
   },
   pressUnlockedOrRunningEternityChallengeHeaderButton() {
