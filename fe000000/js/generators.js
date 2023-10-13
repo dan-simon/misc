@@ -178,11 +178,10 @@ let Generators = {
     player.options.viewGeneratorsWhenStarsAtLimit = x;
   },
   term(singular, title) {
-    let x = (PrestigeLayerProgress.hasReached('infinity') ? 'normal generator' : 'generator') + (singular ? '' : 's');
     if (title) {
-      return x[0].toUpperCase() + x.slice(1);
+      return (PrestigeLayerProgress.hasReached('infinity') ? 'Normal Generator' : 'Generator') + (singular ? '' : 's');
     } else {
-      return x;
+      return (PrestigeLayerProgress.hasReached('infinity') ? 'normal generator' : 'generator') + (singular ? '' : 's');
     }
   }
 }

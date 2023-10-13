@@ -79,7 +79,7 @@ let Prestige = {
   },
   extraPrestigeText() {
     if (!EternityMilestones.isEternityMilestoneActive(8)) {
-      return 'This will reset your stars, boosts, generators, and sacrifice multiplier.'
+      return 'This will reset your stars, boosts, ' + Generators.term() + ', and sacrifice multiplier.'
     } else {
       return '(This will not reset anything due to Eternity Milestone ' + formatOrdinalInt(8) + '.)'
     }

@@ -307,7 +307,7 @@
         <table style="margin-left: auto; margin-right: auto; border-spacing: 24px 0px; border-collapse: separate;">
           <loop i 1 8>
             <tr ~style.display=Generator(% @i %).isVisible() ? '' : 'none'~>
-              <td>Generator ~o % @i % ~</td>
+              <td>~r Generators.term(true, true) ~ ~o % @i % ~</td>
               <td>~f Generator(% @i %).amount() ~</td>
               <td>~f Generator(% @i %).perSecond() ~/s</td>
               <td>~f Generator(% @i %).multiplier() ~x</td>
@@ -319,7 +319,7 @@
         </table>
         <div style="min-height: 104px;" ~style.display=Sacrifice.isVisible() ? '' : 'none'~>
           <br/>
-          <span>You have a ~f Sacrifice.sacrificeMultiplier() ~ sacrifice multiplier multiplying Generator ~o 8 ~ by its amount.</span>
+          <span>You have a ~f Sacrifice.sacrificeMultiplier() ~ sacrifice multiplier multiplying ~r Generators.term(true, true) ~ ~o 8 ~ by its amount.</span>
           <br/>
           <span ~style.display=(Sacrifice.canSacrifice() && !Sacrifice.showFastSpecial()) ? '' : 'none'~><button style="height: 48px;" onclick="Sacrifice.sacrifice(true)">Sacrifice: ~f Sacrifice.sacrificeMultiplier() ~ → ~f Sacrifice.newSacrificeMultiplier() ~<br/>(+~f Sacrifice.sacrificeMultiplierGain() ~, ~f Sacrifice.sacrificeMultiplierMultGain() ~x)</button></span>
           <span ~style.display=(!Sacrifice.canSacrifice() && !Sacrifice.showFastSpecial()) ? '' : 'none'~>You need ~r Sacrifice.sacrificeRequirementText() ~ to sacrifice.</span>
@@ -334,7 +334,7 @@
           <span ~style.display=Prestige.showFastSpecial() ? '' : 'none'~>The prestige button isn't appearing since ~r FastResetText.getText('prestige', true) ~</span>
         </div>
         <br ~style.display=SpecialDivs.isDivVisible('softcap') ? '' : 'none'~/>
-        <span ~style.display=SpecialDivs.isDivVisible('softcap') ? '' : 'none'~>~r Generators.term(true, true) ~ multipliers are reduced above ~f Generators.nerfValue() ~x (the multiplier softcap).</span>
+        <span ~style.display=SpecialDivs.isDivVisible('softcap') ? '' : 'none'~>~r PrestigeLayerProgress.hasReached('infinity') ? 'Normal generator' : 'Generator' ~ multipliers are reduced above ~f Generators.nerfValue() ~x (the multiplier softcap).</span>
         <br ~style.display=Generators.areAnyMultipliersNerfed() ? '' : 'none'~/>
         <div ~style.display=Generators.areAnyMultipliersNerfed() ? '' : 'none'~>
           Given a multiplier x, let y be log(x, ~f Generators.nerfValue() ~). <span class="helpspan">(?)<span class="tooltiptext">This is the log of x with base ~f Generators.nerfValue() ~ (or equivalently log(x) / log(~f Generators.nerfValue() ~)), so if x is exactly ~f Generators.nerfValue() ~ then y is ~i 1 ~, and as x increases beyond that, y increases also.</span></span> x is reduced to ~f Generators.nerfValue() ~^(y^(y^~r formatPrecisely(Generators.nerfExponent) ~)). <span class="helpspan">(?)<span class="tooltiptext">Since y starts close to 1, y^(y^~r formatPrecisely(Generators.nerfExponent) ~) is initially close to y and the multiplier reduction is initially small, but as y increases the reduction gets larger. Of course, if a multiplier x is below ~f Generators.nerfValue() ~, it will not get reduced at all.</span></span>
@@ -416,13 +416,13 @@
         <div class="challengediv" ~style.background=Challenge.color(1)~ ~style.display=Challenge.show(1) ? '' : 'none'~>
           <span>Normal Challenge ~o 1 ~</span>
           <br/>
-          <span>Generator ~o 1 ~ multiplier is raised ^~i 4 ~. All other ~r Generators.term(true) ~ multipliers are always ~i 1 ~x.</span>
+          <span>~r Generators.term(true, true) ~ ~o 1 ~ multiplier is raised ^~i 4 ~. All other ~r Generators.term(true) ~ multipliers are always ~i 1 ~x.</span>
           <br/>
           <span>~r Challenge.challengeStatusDescription(1) ~</span>
           <br/>
           <span><button ~class=Challenge.canStartOrExitChallenge(1) ? '' : 'disabled'~ onclick="Challenge.startOrExitChallenge(1)">~r Challenge.challengeButtonText(1) ~</button></span>
           <br/>
-          <span>Reward: Faster Generator ~o 1 ~ Autobuyer (triggering every game tick)</span>
+          <span>Reward: Faster ~r Generators.term(true, true) ~ ~o 1 ~ Autobuyer (triggering every game tick)</span>
         </div>
         <div class="challengediv" ~style.background=Challenge.color(2)~ ~style.display=Challenge.show(2) ? '' : 'none'~>
           <span>Normal Challenge ~o 2 ~</span>
@@ -433,18 +433,18 @@
           <br/>
           <span><button ~class=Challenge.canStartOrExitChallenge(2) ? '' : 'disabled'~ onclick="Challenge.startOrExitChallenge(2)">~r Challenge.challengeButtonText(2) ~</button></span>
           <br/>
-          <span>Reward: Faster Generator ~o 2 ~ Autobuyer (triggering every game tick)</span>
+          <span>Reward: Faster ~r Generators.term(true, true) ~ ~o 2 ~ Autobuyer (triggering every game tick)</span>
         </div>
         <div class="challengediv" ~style.background=Challenge.color(3)~ ~style.display=Challenge.show(3) ? '' : 'none'~>
           <span>Normal Challenge ~o 3 ~</span>
           <br/>
-          <span>There's a multiplier on Generator ~o 1 ~, starting at ~r formatPrecisely(1 / 256) ~ and doubling every ~ti 256 ~. Every time you prestige, this multiplier resets to ~r formatPrecisely(1 / 256) ~.</span>
+          <span>There's a multiplier on ~r Generators.term(true, true) ~ ~o 1 ~, starting at ~r formatPrecisely(1 / 256) ~ and doubling every ~ti 256 ~. Every time you prestige, this multiplier resets to ~r formatPrecisely(1 / 256) ~.</span>
           <br/>
           <span>~r Challenge.challengeStatusDescription(3) ~</span>
           <br/>
           <span><button ~class=Challenge.canStartOrExitChallenge(3) ? '' : 'disabled'~ onclick="Challenge.startOrExitChallenge(3)">~r Challenge.challengeButtonText(3) ~</button></span>
           <br/>
-          <span>Reward: Faster Generator ~o 3 ~ Autobuyer (triggering every game tick)</span>
+          <span>Reward: Faster ~r Generators.term(true, true) ~ ~o 3 ~ Autobuyer (triggering every game tick)</span>
         </div>
         <div class="challengediv" ~style.background=Challenge.color(4)~ ~style.display=Challenge.show(4) ? '' : 'none'~>
           <span>Normal Challenge ~o 4 ~</span>
@@ -455,7 +455,7 @@
           <br/>
           <span><button ~class=Challenge.canStartOrExitChallenge(4) ? '' : 'disabled'~ onclick="Challenge.startOrExitChallenge(4)">~r Challenge.challengeButtonText(4) ~</button></span>
           <br/>
-          <span>Reward: Faster Generator ~o 4 ~ Autobuyer (triggering every game tick)</span>
+          <span>Reward: Faster ~r Generators.term(true, true) ~ ~o 4 ~ Autobuyer (triggering every game tick)</span>
         </div>
         <div class="challengediv" ~style.background=Challenge.color(5)~ ~style.display=Challenge.show(5) ? '' : 'none'~>
           <span>Normal Challenge ~o 5 ~</span>
@@ -466,18 +466,18 @@
           <br/>
           <span><button ~class=Challenge.canStartOrExitChallenge(5) ? '' : 'disabled'~ onclick="Challenge.startOrExitChallenge(5)">~r Challenge.challengeButtonText(5) ~</button></span>
           <br/>
-          <span>Reward: Faster Generator ~o 5 ~ Autobuyer (triggering every game tick)</span>
+          <span>Reward: Faster ~r Generators.term(true, true) ~ ~o 5 ~ Autobuyer (triggering every game tick)</span>
         </div>
         <div class="challengediv" ~style.background=Challenge.color(6)~ ~style.display=Challenge.show(6) ? '' : 'none'~>
           <span>Normal Challenge ~o 6 ~</span>
           <br/>
-          <span>There are only 6 ~r Generators.term() ~. (Generator ~o 7 ~ and Generator ~o 8 ~ don't exist.)</span>
+          <span>There are only 6 ~r Generators.term() ~. (~r Generators.term(true, true) ~ ~o 7 ~ and ~r Generators.term(true, true) ~ ~o 8 ~ don't exist.)</span>
           <br/>
           <span>~r Challenge.challengeStatusDescription(6) ~</span>
           <br/>
           <span><button ~class=Challenge.canStartOrExitChallenge(6) ? '' : 'disabled'~ onclick="Challenge.startOrExitChallenge(6)">~r Challenge.challengeButtonText(6) ~</button></span>
           <br/>
-          <span>Reward: Faster Generator ~o 6 ~ Autobuyer (triggering every game tick)</span>
+          <span>Reward: Faster ~r Generators.term(true, true) ~ ~o 6 ~ Autobuyer (triggering every game tick)</span>
         </div>
         <div class="challengediv" ~style.background=Challenge.color(7)~ ~style.display=Challenge.show(7) ? '' : 'none'~>
           <span>Normal Challenge ~o 7 ~</span>
@@ -488,18 +488,18 @@
           <br/>
           <span><button ~class=Challenge.canStartOrExitChallenge(7) ? '' : 'disabled'~ onclick="Challenge.startOrExitChallenge(7)">~r Challenge.challengeButtonText(7) ~</button></span>
           <br/>
-          <span>Reward: Faster Generator ~o 7 ~ Autobuyer (triggering every game tick)</span>
+          <span>Reward: Faster ~r Generators.term(true, true) ~ ~o 7 ~ Autobuyer (triggering every game tick)</span>
         </div>
         <div class="challengediv" ~style.background=Challenge.color(8)~ ~style.display=Challenge.show(8) ? '' : 'none'~>
           <span>Normal Challenge ~o 8 ~</span>
           <br/>
-          <span>You can't buy boosts, the per-boost multiplier is ~i 1 ~x, and prestige power is raised ^~f 0.5 ~, but all ~r Generators.term() ~ (including Generator ~o 8 ~) are multiplied by your amount of Generator ~o 8 ~.</span>
+          <span>You can't buy boosts, the per-boost multiplier is ~i 1 ~x, and prestige power is raised ^~f 0.5 ~, but all ~r Generators.term() ~ (including ~r Generators.term(true, true) ~ ~o 8 ~) are multiplied by your amount of ~r Generators.term(true, true) ~ ~o 8 ~.</span>
           <br/>
           <span>~r Challenge.challengeStatusDescription(8) ~</span>
           <br/>
           <span><button ~class=Challenge.canStartOrExitChallenge(8) ? '' : 'disabled'~ onclick="Challenge.startOrExitChallenge(8)">~r Challenge.challengeButtonText(8) ~</button></span>
           <br/>
-          <span>Reward: Faster Generator ~o 8 ~ Autobuyer (triggering every game tick)</span>
+          <span>Reward: Faster ~r Generators.term(true, true) ~ ~o 8 ~ Autobuyer (triggering every game tick)</span>
         </div>
         <div class="challengediv" ~style.background=Challenge.color(9)~ ~style.display=Challenge.show(9) ? '' : 'none'~>
           <span>Normal Challenge ~o 9 ~</span>
@@ -646,7 +646,7 @@
         <tr ~style.display=Autobuyers.showGeneratorAndBoost() ? '' : 'none'~>
           <td>
             <div class="autobuyerdiv" ~style.display=(Autobuyer(1).hasAutobuyer() || !Autobuyer(1).hasReachedDisplayThreshold()) ? '' : 'none'~>
-              <span><span ~style.display=Autobuyer(1).isSlow() ? '' : 'none'~>Slow </span>Generator ~o 1 ~ Autobuyer</span>
+              <span><span ~style.display=Autobuyer(1).isSlow() ? '' : 'none'~>Slow </span>~r Generators.term(true, true) ~ ~o 1 ~ Autobuyer</span>
               <br/>
               <span>On: <input type="checkbox" class="autobuyer-checkbox-1" ~!checked=Autobuyer(1).isOn()~ ~!onchange=function() {Autobuyer(1).setIsOn(this.checked)}~></input></span>
               <br/>
@@ -656,7 +656,7 @@
               </select></span>
             </div>
             <button ~style.display=Autobuyer(1).hasAutobuyer() ? 'none' : ''~ ~class=Autobuyer(1).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(1).unlockSlow()">
-              Unlock Slow Generator ~o 1 ~ Autobuyer
+              Unlock Slow ~r Generators.term(true, true) ~ ~o 1 ~ Autobuyer
               <br/>
               (triggering every ~ti 16 ~)
               <br/>
@@ -665,7 +665,7 @@
           </td>
           <td>
             <div class="autobuyerdiv" ~style.display=Autobuyer(2).hasAutobuyer() ? '' : 'none'~>
-              <span><span ~style.display=Autobuyer(2).isSlow() ? '' : 'none'~>Slow </span>Generator ~o 2 ~ Autobuyer</span>
+              <span><span ~style.display=Autobuyer(2).isSlow() ? '' : 'none'~>Slow </span>~r Generators.term(true, true) ~ ~o 2 ~ Autobuyer</span>
               <br/>
               <span>On: <input type="checkbox" class="autobuyer-checkbox-2" ~!checked=Autobuyer(2).isOn()~ ~!onchange=function() {Autobuyer(2).setIsOn(this.checked)}~></input></span>
               <br/>
@@ -675,7 +675,7 @@
               </select></span>
             </div>
             <button class="autobuyerunlockbutton" ~style.display=(Autobuyer(2).hasAutobuyer() || !Autobuyer(2).hasReachedDisplayThreshold()) ? 'none' : ''~ ~class=Autobuyer(2).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(2).unlockSlow()">
-              Unlock Slow Generator ~o 2 ~ Autobuyer
+              Unlock Slow ~r Generators.term(true, true) ~ ~o 2 ~ Autobuyer
               <br/>
               (triggering every ~ti 16 ~)
               <br/>
@@ -684,7 +684,7 @@
           </td>
           <td>
             <div class="autobuyerdiv" ~style.display=Autobuyer(3).hasAutobuyer() ? '' : 'none'~>
-              <span><span ~style.display=Autobuyer(3).isSlow() ? '' : 'none'~>Slow </span>Generator ~o 3 ~ Autobuyer</span>
+              <span><span ~style.display=Autobuyer(3).isSlow() ? '' : 'none'~>Slow </span>~r Generators.term(true, true) ~ ~o 3 ~ Autobuyer</span>
               <br/>
               <span>On: <input type="checkbox" class="autobuyer-checkbox-3" ~!checked=Autobuyer(3).isOn()~ ~!onchange=function() {Autobuyer(3).setIsOn(this.checked)}~></input></span>
               <br/>
@@ -694,7 +694,7 @@
               </select></span>
             </div>
             <button class="autobuyerunlockbutton" ~style.display=(Autobuyer(3).hasAutobuyer() || !Autobuyer(3).hasReachedDisplayThreshold()) ? 'none' : ''~ ~class=Autobuyer(3).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(3).unlockSlow()">
-              Unlock Slow Generator ~o 3 ~ Autobuyer
+              Unlock Slow ~r Generators.term(true, true) ~ ~o 3 ~ Autobuyer
               <br/>
               (triggering every ~ti 16 ~)
               <br/>
@@ -705,7 +705,7 @@
         <tr ~style.display=Autobuyers.showGeneratorAndBoost() ? '' : 'none'~>
           <td>
             <div class="autobuyerdiv" ~style.display=Autobuyer(4).hasAutobuyer() ? '' : 'none'~>
-              <span><span ~style.display=Autobuyer(4).isSlow() ? '' : 'none'~>Slow </span>Generator ~o 4 ~ Autobuyer</span>
+              <span><span ~style.display=Autobuyer(4).isSlow() ? '' : 'none'~>Slow </span>~r Generators.term(true, true) ~ ~o 4 ~ Autobuyer</span>
               <br/>
               <span>On: <input type="checkbox" class="autobuyer-checkbox-4" ~!checked=Autobuyer(4).isOn()~ ~!onchange=function() {Autobuyer(4).setIsOn(this.checked)}~></input></span>
               <br/>
@@ -715,7 +715,7 @@
               </select></span>
             </div>
             <button class="autobuyerunlockbutton" ~style.display=(Autobuyer(4).hasAutobuyer() || !Autobuyer(4).hasReachedDisplayThreshold()) ? 'none' : ''~ ~class=Autobuyer(4).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(4).unlockSlow()">
-              Unlock Slow Generator ~o 4 ~ Autobuyer
+              Unlock Slow ~r Generators.term(true, true) ~ ~o 4 ~ Autobuyer
               <br/>
               (triggering every ~ti 16 ~)
               <br/>
@@ -724,7 +724,7 @@
           </td>
           <td>
             <div class="autobuyerdiv" ~style.display=Autobuyer(5).hasAutobuyer() ? '' : 'none'~>
-              <span><span ~style.display=Autobuyer(5).isSlow() ? '' : 'none'~>Slow </span>Generator ~o 5 ~ Autobuyer</span>
+              <span><span ~style.display=Autobuyer(5).isSlow() ? '' : 'none'~>Slow </span>~r Generators.term(true, true) ~ ~o 5 ~ Autobuyer</span>
               <br/>
               <span>On: <input type="checkbox" class="autobuyer-checkbox-5" ~!checked=Autobuyer(5).isOn()~ ~!onchange=function() {Autobuyer(5).setIsOn(this.checked)}~></input></span>
               <br/>
@@ -734,7 +734,7 @@
               </select></span>
             </div>
             <button class="autobuyerunlockbutton" ~style.display=(Autobuyer(5).hasAutobuyer() || !Autobuyer(5).hasReachedDisplayThreshold()) ? 'none' : ''~ ~class=Autobuyer(5).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(5).unlockSlow()">
-              Unlock Slow Generator ~o 5 ~ Autobuyer
+              Unlock Slow ~r Generators.term(true, true) ~ ~o 5 ~ Autobuyer
               <br/>
               (triggering every ~ti 16 ~)
               <br/>
@@ -743,7 +743,7 @@
           </td>
           <td>
             <div class="autobuyerdiv" ~style.display=Autobuyer(6).hasAutobuyer() ? '' : 'none'~>
-              <span><span ~style.display=Autobuyer(6).isSlow() ? '' : 'none'~>Slow </span>Generator ~o 6 ~ Autobuyer</span>
+              <span><span ~style.display=Autobuyer(6).isSlow() ? '' : 'none'~>Slow </span>~r Generators.term(true, true) ~ ~o 6 ~ Autobuyer</span>
               <br/>
               <span>On: <input type="checkbox" class="autobuyer-checkbox-6" ~!checked=Autobuyer(6).isOn()~ ~!onchange=function() {Autobuyer(6).setIsOn(this.checked)}~></input></span>
               <br/>
@@ -753,7 +753,7 @@
               </select></span>
             </div>
             <button class="autobuyerunlockbutton" ~style.display=(Autobuyer(6).hasAutobuyer() || !Autobuyer(6).hasReachedDisplayThreshold()) ? 'none' : ''~ ~class=Autobuyer(6).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(6).unlockSlow()">
-              Unlock Slow Generator ~o 6 ~ Autobuyer
+              Unlock Slow ~r Generators.term(true, true) ~ ~o 6 ~ Autobuyer
               <br/>
               (triggering every ~ti 16 ~)
               <br/>
@@ -764,7 +764,7 @@
         <tr ~style.display=Autobuyers.showGeneratorAndBoost() ? '' : 'none'~>
           <td>
             <div class="autobuyerdiv" ~style.display=Autobuyer(7).hasAutobuyer() ? '' : 'none'~>
-              <span><span ~style.display=Autobuyer(7).isSlow() ? '' : 'none'~>Slow </span>Generator ~o 7 ~ Autobuyer</span>
+              <span><span ~style.display=Autobuyer(7).isSlow() ? '' : 'none'~>Slow </span>~r Generators.term(true, true) ~ ~o 7 ~ Autobuyer</span>
               <br/>
               <span>On: <input type="checkbox" class="autobuyer-checkbox-7" ~!checked=Autobuyer(7).isOn()~ ~!onchange=function() {Autobuyer(7).setIsOn(this.checked)}~></input></span>
               <br/>
@@ -774,7 +774,7 @@
               </select></span>
             </div>
             <button class="autobuyerunlockbutton" ~style.display=(Autobuyer(7).hasAutobuyer() || !Autobuyer(7).hasReachedDisplayThreshold()) ? 'none' : ''~ ~class=Autobuyer(7).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(7).unlockSlow()">
-              Unlock Slow Generator ~o 7 ~ Autobuyer
+              Unlock Slow ~r Generators.term(true, true) ~ ~o 7 ~ Autobuyer
               <br/>
               (triggering every ~ti 16 ~)
               <br/>
@@ -783,7 +783,7 @@
           </td>
           <td>
             <div class="autobuyerdiv" ~style.display=Autobuyer(8).hasAutobuyer() ? '' : 'none'~>
-              <span><span ~style.display=Autobuyer(8).isSlow() ? '' : 'none'~>Slow </span>Generator ~o 8 ~ Autobuyer</span>
+              <span><span ~style.display=Autobuyer(8).isSlow() ? '' : 'none'~>Slow </span>~r Generators.term(true, true) ~ ~o 8 ~ Autobuyer</span>
               <br/>
               <span>On: <input type="checkbox" class="autobuyer-checkbox-8" ~!checked=Autobuyer(8).isOn()~ ~!onchange=function() {Autobuyer(8).setIsOn(this.checked)}~></input></span>
               <br/>
@@ -793,7 +793,7 @@
               </select></span>
             </div>
             <button class="autobuyerunlockbutton" ~style.display=(Autobuyer(8).hasAutobuyer() || !Autobuyer(8).hasReachedDisplayThreshold()) ? 'none' : ''~ ~class=Autobuyer(8).canUnlockSlow() ? "autobuyerunlockbutton" : "autobuyerunlockbutton disabled"~ onclick="Autobuyer(8).unlockSlow()">
-              Unlock Slow Generator ~o 8 ~ Autobuyer
+              Unlock Slow ~r Generators.term(true, true) ~ ~o 8 ~ Autobuyer
               <br/>
               (triggering every ~ti 16 ~)
               <br/>
@@ -1104,7 +1104,7 @@
         <div class="infinitychallengediv" ~style.background=InfinityChallenge.color(8)~ ~style.display=InfinityChallenge.show(8) ? '' : 'none'~>
           <span>Infinity Challenge ~o 8 ~</span>
           <br/>
-          <span>You can only buy ~i 7 ~ total ~r Generators.term() ~ (apart from Generator ~o 8 ~) and boosts throughout this challenge. Each Generator ~o 8 ~ you buy gives you ~i 8 ~ extra purchases.</span>
+          <span>You can only buy ~i 7 ~ total ~r Generators.term() ~ (apart from ~r Generators.term(true, true) ~ ~o 8 ~) and boosts throughout this challenge. Each ~r Generators.term(true, true) ~ ~o 8 ~ you buy gives you ~i 8 ~ extra purchases.</span>
           <br/>
           <span>Requirement to start: ~f InfinityChallenge.getInfinityChallengeRequirement(8) ~ stars this eternity</span>
           <br/>
@@ -1114,7 +1114,7 @@
           <br/>
           <span><button ~class=InfinityChallenge.canStartOrExitInfinityChallenge(8) ? '' : 'disabled'~ onclick="InfinityChallenge.startOrExitInfinityChallenge(8)">~r InfinityChallenge.infinityChallengeButtonText(8) ~</button></span>
           <br/>
-          <span>Reward: Multiplier to Infinity Generator ~o 8 ~ equal to number of Generator ~o 8 ~ (lower-bounded by ~i 1 ~).</span>
+          <span>Reward: Multiplier to Infinity Generator ~o 8 ~ equal to number of ~r Generators.term(true, true) ~ ~o 8 ~ (lower-bounded by ~i 1 ~).</span>
         </div>
       </div>
     </tab>
@@ -3592,49 +3592,49 @@
             <span>~r Achievements.getAchievementName(1, 1) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(1, 1) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 1) ? '' : 'none'~>Buy Generator ~o 1 ~.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 1) ? '' : 'none'~>Buy ~r Generators.term(true, true) ~ ~o 1 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(1, 2)~>
             <span>~r Achievements.getAchievementName(1, 2) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(1, 2) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 2) ? '' : 'none'~>Buy Generator ~o 2 ~.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 2) ? '' : 'none'~>Buy ~r Generators.term(true, true) ~ ~o 2 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(1, 3)~>
             <span>~r Achievements.getAchievementName(1, 3) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(1, 3) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 3) ? '' : 'none'~>Buy Generator ~o 3 ~.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 3) ? '' : 'none'~>Buy ~r Generators.term(true, true) ~ ~o 3 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(1, 4)~>
             <span>~r Achievements.getAchievementName(1, 4) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(1, 4) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 4) ? '' : 'none'~>Buy Generator ~o 4 ~.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 4) ? '' : 'none'~>Buy ~r Generators.term(true, true) ~ ~o 4 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(1, 5)~>
             <span>~r Achievements.getAchievementName(1, 5) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(1, 5) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 5) ? '' : 'none'~>Buy Generator ~o 5 ~.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 5) ? '' : 'none'~>Buy ~r Generators.term(true, true) ~ ~o 5 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(1, 6)~>
             <span>~r Achievements.getAchievementName(1, 6) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(1, 6) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 6) ? '' : 'none'~>Buy Generator ~o 6 ~.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 6) ? '' : 'none'~>Buy ~r Generators.term(true, true) ~ ~o 6 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(1, 7)~>
             <span>~r Achievements.getAchievementName(1, 7) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(1, 7) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 7) ? '' : 'none'~>Buy Generator ~o 7 ~.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 7) ? '' : 'none'~>Buy ~r Generators.term(true, true) ~ ~o 7 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(1, 8)~>
             <span>~r Achievements.getAchievementName(1, 8) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(1, 8) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 8) ? '' : 'none'~>Buy Generator ~o 8 ~.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(1, 8) ? '' : 'none'~>Buy ~r Generators.term(true, true) ~ ~o 8 ~.</span>
           </td>
         </tr>
         <tr ~style.display=Achievements.showRow(2) ? '' : 'none'~>
@@ -3654,13 +3654,13 @@
             <span>~r Achievements.getAchievementName(2, 3) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(2, 3) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(2, 3) ? '' : 'none'~>Have at least ~i Math.pow(2, 16) ~ of every ~r Generators.term(true) ~ other than Generator ~o 8 ~.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(2, 3) ? '' : 'none'~>Have at least ~i Math.pow(2, 16) ~ of every ~r Generators.term(true) ~ other than ~r Generators.term(true, true) ~ ~o 8 ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(2, 4)~>
             <span>~r Achievements.getAchievementName(2, 4) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(2, 4) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(2, 4) ? '' : 'none'~>Have some generator multiplier over ~i Math.pow(2, 16) ~.</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(2, 4) ? '' : 'none'~>Have some ~r Generators.term(true) ~ multiplier over ~i Math.pow(2, 16) ~.</span>
           </td>
           <td class="achievementtd" ~style.background=Achievements.color(2, 5)~>
             <span>~r Achievements.getAchievementName(2, 5) ~</span>
@@ -3684,7 +3684,7 @@
             <span>~r Achievements.getAchievementName(2, 8) ~</span>
             <br/>
             <span>(~r Achievements.achievementStatusDescription(2, 8) ~)</span>
-            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(2, 8) ? '' : 'none'~>Have all ~r Generators.term(true) ~ multipliers in reverse order (G8 multiplier larger than G7 multiplier ... larger than G1 multiplier).</span>
+            <span class="tooltiptext" ~style.display=Achievements.isAchievementClose(2, 8) ? '' : 'none'~>Have all ~r Generators.term(true) ~ multipliers in reverse order (~r PrestigeLayerProgress.hasReached('infinity') ? 'NG8 multiplier larger than NG7 multiplier ... larger than NG1 multiplier' : 'G8 multiplier larger than G7 multiplier ... larger than G1 multiplier' ~).</span>
           </td>
         </tr>
         <tr ~style.display=Achievements.showRow(3) ? '' : 'none'~>
@@ -4190,27 +4190,27 @@
       </table>
       <div class="major-div" style="width: 1024px; margin-left: auto; margin-right: auto;" ~style.display=Achievements.requirementDescriptions() ? '' : 'none'~>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(1, 1) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 1) ? '' : 'none'~>~r Achievements.getAchievementName(1, 1) ~ (~r Achievements.achievementStatusDescription(1, 1) ~): Buy Generator ~o 1 ~.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 1) ? '' : 'none'~>~r Achievements.getAchievementName(1, 1) ~ (~r Achievements.achievementStatusDescription(1, 1) ~): Buy ~r Generators.term(true, true) ~ ~o 1 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(1, 2) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 2) ? '' : 'none'~>~r Achievements.getAchievementName(1, 2) ~ (~r Achievements.achievementStatusDescription(1, 2) ~): Buy Generator ~o 2 ~.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 2) ? '' : 'none'~>~r Achievements.getAchievementName(1, 2) ~ (~r Achievements.achievementStatusDescription(1, 2) ~): Buy ~r Generators.term(true, true) ~ ~o 2 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(1, 3) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 3) ? '' : 'none'~>~r Achievements.getAchievementName(1, 3) ~ (~r Achievements.achievementStatusDescription(1, 3) ~): Buy Generator ~o 3 ~.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 3) ? '' : 'none'~>~r Achievements.getAchievementName(1, 3) ~ (~r Achievements.achievementStatusDescription(1, 3) ~): Buy ~r Generators.term(true, true) ~ ~o 3 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(1, 4) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 4) ? '' : 'none'~>~r Achievements.getAchievementName(1, 4) ~ (~r Achievements.achievementStatusDescription(1, 4) ~): Buy Generator ~o 4 ~.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 4) ? '' : 'none'~>~r Achievements.getAchievementName(1, 4) ~ (~r Achievements.achievementStatusDescription(1, 4) ~): Buy ~r Generators.term(true, true) ~ ~o 4 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(1, 5) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 5) ? '' : 'none'~>~r Achievements.getAchievementName(1, 5) ~ (~r Achievements.achievementStatusDescription(1, 5) ~): Buy Generator ~o 5 ~.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 5) ? '' : 'none'~>~r Achievements.getAchievementName(1, 5) ~ (~r Achievements.achievementStatusDescription(1, 5) ~): Buy ~r Generators.term(true, true) ~ ~o 5 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(1, 6) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 6) ? '' : 'none'~>~r Achievements.getAchievementName(1, 6) ~ (~r Achievements.achievementStatusDescription(1, 6) ~): Buy Generator ~o 6 ~.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 6) ? '' : 'none'~>~r Achievements.getAchievementName(1, 6) ~ (~r Achievements.achievementStatusDescription(1, 6) ~): Buy ~r Generators.term(true, true) ~ ~o 6 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(1, 7) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 7) ? '' : 'none'~>~r Achievements.getAchievementName(1, 7) ~ (~r Achievements.achievementStatusDescription(1, 7) ~): Buy Generator ~o 7 ~.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 7) ? '' : 'none'~>~r Achievements.getAchievementName(1, 7) ~ (~r Achievements.achievementStatusDescription(1, 7) ~): Buy ~r Generators.term(true, true) ~ ~o 7 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(1, 8) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 8) ? '' : 'none'~>~r Achievements.getAchievementName(1, 8) ~ (~r Achievements.achievementStatusDescription(1, 8) ~): Buy Generator ~o 8 ~.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(1, 8) ? '' : 'none'~>~r Achievements.getAchievementName(1, 8) ~ (~r Achievements.achievementStatusDescription(1, 8) ~): Buy ~r Generators.term(true, true) ~ ~o 8 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(2, 1) ? '' : 'none'~/>
         <span ~style.display=Achievements.showAchievementDescriptionBelow(2, 1) ? '' : 'none'~>~r Achievements.getAchievementName(2, 1) ~ (~r Achievements.achievementStatusDescription(2, 1) ~): Sacrifice.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(2, 2) ? '' : 'none'~/>
         <span ~style.display=Achievements.showAchievementDescriptionBelow(2, 2) ? '' : 'none'~>~r Achievements.getAchievementName(2, 2) ~ (~r Achievements.achievementStatusDescription(2, 2) ~): Have ~i 2 ~ boosts.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(2, 3) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(2, 3) ? '' : 'none'~>~r Achievements.getAchievementName(2, 3) ~ (~r Achievements.achievementStatusDescription(2, 3) ~): Have at least ~i Math.pow(2, 16) ~ of every ~r Generators.term(true) ~ other than Generator ~o 8 ~.</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(2, 3) ? '' : 'none'~>~r Achievements.getAchievementName(2, 3) ~ (~r Achievements.achievementStatusDescription(2, 3) ~): Have at least ~i Math.pow(2, 16) ~ of every ~r Generators.term(true) ~ other than ~r Generators.term(true, true) ~ ~o 8 ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(2, 4) ? '' : 'none'~/>
         <span ~style.display=Achievements.showAchievementDescriptionBelow(2, 4) ? '' : 'none'~>~r Achievements.getAchievementName(2, 4) ~ (~r Achievements.achievementStatusDescription(2, 4) ~): Have some generator multiplier over ~i Math.pow(2, 16) ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(2, 5) ? '' : 'none'~/>
@@ -4220,7 +4220,7 @@
         <br ~style.display=Achievements.showAchievementDescriptionBelow(2, 7) ? '' : 'none'~/>
         <span ~style.display=Achievements.showAchievementDescriptionBelow(2, 7) ? '' : 'none'~>~r Achievements.getAchievementName(2, 7) ~ (~r Achievements.achievementStatusDescription(2, 7) ~): Get ~i Math.pow(2, 128) ~ stars in a minute or less after prestige.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(2, 8) ? '' : 'none'~/>
-        <span ~style.display=Achievements.showAchievementDescriptionBelow(2, 8) ? '' : 'none'~>~r Achievements.getAchievementName(2, 8) ~ (~r Achievements.achievementStatusDescription(2, 8) ~): Have all ~r Generators.term(true) ~ multipliers in reverse order (G8 multiplier larger than G7 multiplier ... larger than G1 multiplier).</span>
+        <span ~style.display=Achievements.showAchievementDescriptionBelow(2, 8) ? '' : 'none'~>~r Achievements.getAchievementName(2, 8) ~ (~r Achievements.achievementStatusDescription(2, 8) ~): Have all ~r Generators.term(true) ~ multipliers in reverse order (~r PrestigeLayerProgress.hasReached('infinity') ? 'NG8 multiplier larger than NG7 multiplier ... larger than NG1 multiplier' : 'G8 multiplier larger than G7 multiplier ... larger than G1 multiplier' ~).</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(3, 1) ? '' : 'none'~/>
         <span ~style.display=Achievements.showAchievementDescriptionBelow(3, 1) ? '' : 'none'~>~r Achievements.getAchievementName(3, 1) ~ (~r Achievements.achievementStatusDescription(3, 1) ~): Have all ~r Generators.term(true) ~ multipliers over ~i Math.pow(2, 16) ~.</span>
         <br ~style.display=Achievements.showAchievementDescriptionBelow(3, 2) ? '' : 'none'~/>

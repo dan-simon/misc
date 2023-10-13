@@ -89,7 +89,7 @@ let Sacrifice = {
     if (Challenge.isChallengeEffectActive(10)) {
       return 'This will reset your stars, boosts, and generators.'
     } else if (!EternityMilestones.isEternityMilestoneActive(6)) {
-      return 'This will reset your amounts of Generators ' + formatOrdinalInt(1) + ' through ' + formatOrdinalInt(7) +
+      return 'This will reset your amounts of ' + Generators.term(false, true) + ' ' + formatOrdinalInt(1) + ' through ' + formatOrdinalInt(7) +
       ' (though not their multipliers).';
     } else {
       return '(This will not reset anything due to Eternity Milestone ' + formatOrdinalInt(6) + '.)'
