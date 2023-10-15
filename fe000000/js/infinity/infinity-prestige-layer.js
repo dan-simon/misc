@@ -85,7 +85,7 @@ let InfinityPrestigeLayer = {
     return Decimal.pow(this.infinityPointGain().plus(1), 256);
   },
   infinityPointNextText() {
-    if (this.infinityPointGain().lt(256)) {
+    if (this.infinityPointGain().lt(256) && this.isInfinityBroken()) {
       return ', next at ' + format(this.infinityPointNext()) + ' stars';
     } else {
       return '';
