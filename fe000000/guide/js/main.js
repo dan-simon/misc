@@ -42,6 +42,12 @@ let startingPlayer = {
         'gold': '',
       }
     },
+    specialColorData: {
+      'background': '',
+      'text': '',
+      'button': '',
+      'button-disabled': '',
+    }
   },
   goals: [
     false, false, false, false,

@@ -192,6 +192,7 @@ let initialPlayer = {
     gain: true,
     respec: false,
     presetRespec: false,
+    eternityPowerRemainingTime: false,
     hasGainedShards: false,
     shards: 0,
     shardUpgrades: [0, 0, 0, 0],
@@ -243,6 +244,7 @@ let initialPlayer = {
     },
     complexityStars: new Decimal(0),
     freeTime: 0,
+    timeSinceComplexity: 0,
   },
   galaxies: {
     unlocked: false,
@@ -396,6 +398,12 @@ let initialPlayer = {
         'brown': '',
         'gold': '',
       }
+    },
+    specialColorData: {
+      'background': '',
+      'text': '',
+      'button': '',
+      'button-disabled': '',
     },
     exportCopy: true,
     exportDownload: false,
@@ -588,7 +596,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.296875
+  version: 2.30078125
 }
 
 let player;

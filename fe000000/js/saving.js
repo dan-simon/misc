@@ -1695,6 +1695,17 @@ let Saving = {
       }
       player.version = 2.296875;
     }
+    if (player.version < 2.30078125) {
+      player.powers.eternityPowerRemainingTime = false;
+      player.oracle.timeSinceComplexity = 0;
+      player.options.specialColorData = {
+        'background': '',
+        'text': '',
+        'button': '',
+        'button-disabled': '',
+      };
+      player.version = 2.30078125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

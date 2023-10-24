@@ -2785,6 +2785,8 @@
           <button onclick="Powers.equippedSwap(true)" ~class=Powers.canEquippedSwap() && Powers.isPowersUnequipEnabled() ? "" : "disabled"~ ~style.display=Powers.canAutoEquippedSwap() ? 'none' : ''~>
             Swap your equipped powers with better stored powers of the same type and ~r ComplexityPrestigeLayer.resetText() ~
           </button>
+          <br>
+          <button onclick="Powers.toggleEternityPowerRemainingTime()">Eternity power multiplier shows <span class="helpspan" ~style.display=(Oracle.isUnlocked() || PrestigeLayerProgress.hasReached('finality')) ? '' : 'none'~>(?)<span class="tooltiptext">This setting also applies to the Oracle future powers display.</span></span>: ~r Powers.eternityPowerRemainingTime() ? "remaining time to cap" : "total time to cap" ~</button>
           <div style="width: 1024px; margin-left: auto; margin-right: auto;">
             <span>There are a lot of power options. <button onclick="Options.toggleShowFullOptions('powers')">Full power options: ~r Options.showFullOptions('powers') ? 'On' : 'Off' ~</button></span>
           </div>
@@ -2880,7 +2882,7 @@
               <br/>
               <span class="cyanalteredspan">Extra multiplier from complexity stars and time in complexity</span>
               <br/>
-              <span class="cyanalteredspan">~f Powers.getExtraMultiplier('eternity') ~x <span ~style.display=Powers.isTypeAtCap('eternity') ? '' : 'none'~>(capped in ~t Powers.timeForTypeAtCap('eternity') ~)</span><span ~style.display=Powers.isTypeAtCap('eternity') ? 'none' : ''~>(caps at ~i 3 ~x in ~t Powers.timeForTypeAtCap('eternity') ~)</span></span>
+              <span class="cyanalteredspan">~f Powers.getExtraMultiplier('eternity') ~x <span ~style.display=Powers.isTypeAtCap('eternity') ? '' : 'none'~>(capped in ~t Powers.timeForTypeAtCap('eternity', false, false) ~)</span><span ~style.display=Powers.isTypeAtCap('eternity') ? 'none' : ''~>(caps at ~i 3 ~x in ~t Powers.timeForTypeAtCap('eternity', false, Powers.eternityPowerRemainingTime()) ~)</span></span>
             </td>
             <td class="largepowertd">
               <span class="brownalteredspan">Complexity</span>
@@ -3117,7 +3119,7 @@
                 <br/>
                 <span class="cyanalteredspan">Extra multiplier from complexity stars and time in complexity</span>
                 <br/>
-                <span class="cyanalteredspan">~f Powers.getExtraMultiplier('eternity', true) ~x <span ~style.display=Powers.isTypeAtCap('eternity', true) ? '' : 'none'~>(capped in ~t Powers.timeForTypeAtCap('eternity', true) ~)</span><span ~style.display=Powers.isTypeAtCap('eternity', true) ? 'none' : ''~>(caps at ~i 3 ~x in ~t Powers.timeForTypeAtCap('eternity', true) ~)</span></span>
+                <span class="cyanalteredspan">~f Powers.getExtraMultiplier('eternity', true) ~x <span ~style.display=Powers.isTypeAtCap('eternity', true) ? '' : 'none'~>(capped in ~t Powers.timeForTypeAtCap('eternity', true, false) ~)</span><span ~style.display=Powers.isTypeAtCap('eternity', true) ? 'none' : ''~>(caps at ~i 3 ~x in ~t Powers.timeForTypeAtCap('eternity', true, Powers.eternityPowerRemainingTime()) ~)</span></span>
               </td>
               <td class="largepowertd">
                 <span class="brownalteredspan">Complexity</span>
@@ -4602,13 +4604,13 @@
         <span>Change the values of colors:</span>
         <br/>
         <br/>
-        <table style="margin-left: auto; margin-right: auto; width: 86%;">
+        <table style="margin-left: auto; margin-right: auto; width: 90%;">
           <colgroup>
-             <col span="1" style="width: 6%;">
-             <col span="1" style="width: 27%;">
+             <col span="1" style="width: 10%;">
+             <col span="1" style="width: 25%;">
              <col span="1" style="width: 8%;">
              <col span="1" style="width: 5%;">
-             <col span="1" style="width: 27%;">
+             <col span="1" style="width: 25%;">
              <col span="1" style="width: 8%;">
              <col span="1" style="width: 5%;">
           </colgroup>
@@ -4621,6 +4623,17 @@
               <td ~style.color=Colors.adjust(Colors.getStringToColorCode('% @colors[@i] %', 'Vibrant'))~>Vibrant % @colors[@i] % (~r Colors.displayStringToColorCode('% @colors[@i] %', 'Vibrant') ~):</td>
               <td><input type="text" class="% @colors[@i] %-vibrant-input" style="width: 80px;" ~!value=Options.colorSetting('% @colors[@i] %', 'Vibrant', false)~ ~!onchange=function() {Options.setColorSetting('% @colors[@i] %', 'Vibrant', this.value, false)}~></input></td>
               <td><input type="color" class="% @colors[@i] %-vibrant-input" ~!value=Options.colorSetting('% @colors[@i] %', 'Vibrant', true)~ ~!onchange=function() {Options.setColorSetting('% @colors[@i] %', 'Vibrant', this.value, false)}~></input></td>
+            </tr>
+          </loop>
+          <loop i 0 3>
+            <tr>
+              <td>% @titleSpecialColors[@i] %</td>
+              <td ~style.color=Options.colorSetting('% @specialColors[@i] %', null, true)~>% (@i === 0) ? '~r (Options.colorSetting(\'' + @specialColors[@i] + '\', null, true) === \'#000000\') ? \'●☾↑\' : \'Try setting the background to black.\' ~' : (@titleSpecialColors[@i] + ' (~r Options.colorSetting(\'' + @specialColors[@i] + '\', null, true) ~):') %</td>
+              <td><input type="text" class="% @specialColors[@i] %-input" style="width: 80px;" ~!value=Options.colorSetting('% @specialColors[@i] %', null, false)~ ~!onchange=function() {Options.setColorSetting('% @specialColors[@i] %', null, this.value, false)}~></input></td>
+              <td><input type="color" class="% @specialColors[@i] %-input" ~!value=Options.colorSetting('% @specialColors[@i] %', null, true)~ ~!onchange=function() {Options.setColorSetting('% @specialColors[@i] %', null, this.value, false)}~></input></td>
+              <td/>
+              <td/>
+              <td/>
             </tr>
           </loop>
         </table>

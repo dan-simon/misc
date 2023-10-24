@@ -3,10 +3,14 @@ let Colors = {
     'Dark': {
       '--background-color': '#000000',
       '--text-color': '#ffffff',
+      '--button-color': '#aaaaaa',
+      '--button-disabled-color': '#555555'
     },
     'Light': {
       '--background-color': '#ffffff',
       '--text-color': '#000000',
+      '--button-color': '#aaaaaa',
+      '--button-disabled-color': '#555555'
     }
   },
   stringToColorCode: {
@@ -56,9 +60,8 @@ let Colors = {
     }
   },
   updateColors() {
-    let table = this.backgroundColors[Options.background()];
-    for (let i in table) {
-      document.documentElement.style.setProperty(i, table[i]);
+    for (let i of ColorPreset.specialColorList) {
+      document.documentElement.style.setProperty('--' + i + '-color', Options.colorSetting(i, null));
     }
     for (let i of ['normal', 'infinity', 'eternity', 'chroma']) {
       let buttonColor = this.getButtonColorAltered(true, i === 'chroma' ? 'studies' : i);
@@ -84,9 +87,9 @@ let Colors = {
       return x;
     }
     let y = this.colorToRgb(x);
-    if (y[0] === 255 && y[1] === 255 && Options.background() === 'Light') {
+    if (y[0] === 255 && y[1] === 255 && this.backgroundColor() === '#ffffff') {
       return '#' + [y[0] - 51, y[1] - 51, Math.min(y[2] + 51, 255)].map(i => (i + 256).toString(16).slice(1)).join('');
-    } else if (y[0] === 0 && y[1] === 0 && Options.background() === 'Dark') {
+    } else if (y[0] === 0 && y[1] === 0 && this.backgroundColor() === '#000000') {
       return '#' + [y[0] + 51, y[1] + 51, Math.max(y[2] - 51, 0)].map(i => (i + 256).toString(16).slice(1)).join('');
     } else {
       return x;
@@ -98,7 +101,7 @@ let Colors = {
     return '#' + z.map(i => (i + 256).toString(16).slice(1)).join('');
   },
   backgroundColor() {
-    return this.colorToRgb(this.backgroundColors[Options.background()]['--background-color']);
+    return Options.colorSetting('background', null);
   },
   interpolate(a, b, dimmed) {
     return [0, 1, 2].map(i => a[i] * (1 - dimmed) + b[i] * dimmed);
@@ -196,8 +199,11 @@ let Colors = {
 
 let ColorPreset = {
   colorList: ['brown', 'cyan', 'gold', 'green', 'grey', 'magenta', 'orange', 'purple', 'red', 'yellow'],
+  specialColorList: ['background', 'text', 'button', 'button-disabled'],
   exportString() {
-    return this.colorList.map(i => i + ':' + Options.colorSetting(i, 'Dull') + '&' + Options.colorSetting(i, 'Vibrant')).join(',');
+    let main = this.colorList.map(i => i + ':' + Options.colorSetting(i, 'Dull') + '&' + Options.colorSetting(i, 'Vibrant'));
+    let extra = this.specialColorList.map(i => i + ':' + Options.colorSetting(i, null));
+    return main.concat(extra).join(',');
   },
   export() {
     let output = document.getElementById('colors-export-output');
@@ -234,7 +240,9 @@ let ColorPreset = {
     for (let i of importString.split(',')) {
       let parts = i.split(':');
       let color = parts[0];
-      if (this.colorList.includes(color)) {
+      if (this.specialColorList.includes(color)) {
+        Options.setColorSetting(color, null, parts[1], true);
+      } else if (this.colorList.includes(color)) {
         let dull = parts[1].split('&')[0];
         let vibrant = parts[1].split('&')[1] || '';
         Options.setColorSetting(color, 'Dull', dull, true);
@@ -351,6 +359,9 @@ let ColorPreset = {
     for (let color of this.colorList) {
       Options.setColorSetting(color, 'Dull', '', true);
       Options.setColorSetting(color, 'Vibrant', '', true);
+    }
+    for (let color of this.specialColorList) {
+      Options.setColorSetting(color, null, '', true);
     }
     Colors.updateColors();
   }

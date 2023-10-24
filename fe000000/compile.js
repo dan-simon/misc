@@ -3,6 +3,8 @@ let fs = require('fs');
 let preprocessorVars = {
   colors: ['brown', 'cyan', 'gold', 'green', 'grey', 'magenta', 'orange', 'purple', 'red', 'yellow'],
   titleColors: ['Brown', 'Cyan', 'Gold', 'Green', 'Grey', 'Magenta', 'Orange', 'Purple', 'Red', 'Yellow'],
+  specialColors: ['background', 'text', 'button', 'button-disabled'],
+  titleSpecialColors: ['Background', 'Text', 'Buttons', 'Unclickable'],
   numbers: ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
   'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty']
 };

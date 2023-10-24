@@ -660,13 +660,20 @@ let Powers = {
   isTypeAtCap(x, future) {
     return this.getExtraMultiplier(x, future) === this.typeCap(x);
   },
-  timeForTypeAtCap(x, future) {
+  timeForTypeAtCap(x, future, remainingTime) {
     if (x !== 'eternity') return null;
     // We directly access the oracle here but it'd be a bit weird to add a method just for this.
     let complexityStars = (future && Oracle.powerFutureExtraMultipliers()) ? player.oracle.complexityStars : ComplexityStars.amount();
     // I'd rather make every save a little bigger than rewrite the free time code to take in an arbitrary number of finalities.
     let freeTime = (future && Oracle.powerFutureExtraMultipliers()) ? player.oracle.freeTime : FinalityMilestones.freeTimeInComplexity();
-    return Math.max(0, (Math.pow(2, Math.pow(3, 0.8) * 4) - 1) / (1 + complexityStars.max(1).log2() / 1024) * 64 - freeTime);
+    let usedTime = remainingTime ? ((future && Oracle.powerFutureExtraMultipliers()) ? player.oracle.timeSinceComplexity : player.stats.timeSinceComplexity) : 0;
+    return Math.max(0, (Math.pow(2, Math.pow(3, 0.8) * 4) - 1) / (1 + complexityStars.max(1).log2() / 1024) * 64 - freeTime - usedTime);
+  },
+  toggleEternityPowerRemainingTime() {
+    player.powers.eternityPowerRemainingTime = !player.powers.eternityPowerRemainingTime;
+  },
+  eternityPowerRemainingTime() {
+    return player.powers.eternityPowerRemainingTime;
   },
   index(x) {
     return this.indexData[x];

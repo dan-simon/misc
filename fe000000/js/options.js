@@ -141,15 +141,26 @@ let Options = {
     // This can be undefined for colors like challengered/etc. that we don't have an "equivalent color" to
     // (which can occur when this is called from colors.js).
     // But that's OK; we just default to the default color then.
-    let playerChoice = player.options.colorData[dullOrVibrant][Colors.colorNameToPlayerAlias(color)];
+    let playerChoice;
+    if (dullOrVibrant === null) {
+      playerChoice = player.options.specialColorData[color];
+    } else {
+      playerChoice = player.options.colorData[dullOrVibrant][Colors.colorNameToPlayerAlias(color)];
+    }
     if (!useDefault) {
       return playerChoice;
     }
-    let defaultColor = Colors.stringToColorCode[dullOrVibrant][color];
+    let defaultColor;
+    if (dullOrVibrant === null) {
+      defaultColor = Colors.backgroundColors[Options.background()]['--' + color + '-color'];
+    } else {
+      defaultColor = Colors.stringToColorCode[dullOrVibrant][color];
+    }
     return (playerChoice !== undefined && playerChoice !== '') ? playerChoice : defaultColor;
   },
   setColorSetting(color, dullOrVibrant, x, auto) {
-    let elem = document.getElementsByClassName(color + '-' + dullOrVibrant.toLowerCase() + '-input');
+    let className = (dullOrVibrant === null) ? color + '-input' : color + '-' + dullOrVibrant.toLowerCase() + '-input';
+    let elem = document.getElementsByClassName(className);
     let colorSetting = this.standardizeColorSetting(x);
     if (colorSetting === null) {
       for (let i of elem) {
@@ -161,7 +172,11 @@ let Options = {
       }
       return;
     }
-    player.options.colorData[dullOrVibrant][color] = colorSetting;
+    if (dullOrVibrant === null) {
+      player.options.specialColorData[color] = colorSetting;
+    } else {
+      player.options.colorData[dullOrVibrant][color] = colorSetting;
+    }
     // We do this kinda weird handling to update the color inputs to not be black.
     for (let i of elem) {
       i.value = this.colorSetting(color, dullOrVibrant, i.type === 'color');
