@@ -68,7 +68,7 @@ let Colors = {
       document.documentElement.style.setProperty('--study-' + i + '-color', buttonColor);
     }
     for (let i of ['grey', 'purple', 'orange', 'cyan', 'green', 'red']) {
-      let nextColor = this.interpolate(this.backgroundColor(), this.colorToRgb(this.getStringToColorCode(i, 'Vibrant')), 0.5);
+      let nextColor = this.interpolateBackground(this.colorToRgb(this.getStringToColorCode(i, 'Vibrant')), 0.5);
       document.documentElement.style.setProperty('--next-' + i + '-color', 'rgb(' + nextColor.map(Math.floor).join(', ') + ')');
     }
     for (let i of ['yellow', 'grey', 'purple', 'orange', 'cyan', 'green', 'red', 'magenta', 'brown', 'gold']) {
@@ -101,21 +101,24 @@ let Colors = {
     return '#' + z.map(i => (i + 256).toString(16).slice(1)).join('');
   },
   backgroundColor() {
-    return Options.colorSetting('background', null);
+    return Options.colorSetting('background', null, true);
   },
   interpolate(a, b, dimmed) {
     return [0, 1, 2].map(i => a[i] * (1 - dimmed) + b[i] * dimmed);
   },
+  interpolateBackground(b, dimmed) {
+    return this.interpolate(this.colorToRgb(this.backgroundColor()), b, dimmed);
+  },
   makeColor(x, dimmed) {
     if (typeof x === 'string') {
       let colorCode = this.getStringToColorCode(x, 'Vibrant');
-      return 'rgb(' + this.interpolate(this.backgroundColor(), this.colorToRgb(colorCode), dimmed).map(Math.floor).join(', ') + ')';
+      return 'rgb(' + this.interpolateBackground(this.colorToRgb(colorCode), dimmed).map(Math.floor).join(', ') + ')';
     }
     // Handle true and false properly.
     x = +x;
     let r = x <= 1 / 4 ? 1 - x * 8 / 5 : (1 - x) * 4 / 5;
     let g = x * 4 / 5;
-    return 'rgb(' + this.interpolate(this.backgroundColor(), [255 * r, 255 * g, 0], dimmed).map(Math.floor).join(', ') + ')';
+    return 'rgb(' + this.interpolateBackground([255 * r, 255 * g, 0], dimmed).map(Math.floor).join(', ') + ')';
   },
   interpolationFactor(isChallenge) {
     return {'Dull': 0.5, 'Dull on challenges': isChallenge ? 0.5 : 1, 'Vibrant': 1}[Options.buttonColor()];
