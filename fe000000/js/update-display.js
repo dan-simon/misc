@@ -1258,10 +1258,10 @@ function updateDisplay() {
   if (shouldUpdate("e106")) {let v = formatInt(EternityPrestigeLayer.eternityPoints()); if (e[106].textContent !== v) {e[106].textContent = v};};
   if (shouldUpdate("e107")) {let v = formatInt(EternityPrestigeLayer.newEternityPoints()); if (e[107].textContent !== v) {e[107].textContent = v};};
   if (shouldUpdate("e108")) {let v = EternityPrestigeLayer.eternityPointNextText(); if (e[108].textContent !== v) {e[108].textContent = v};};
-  if (shouldUpdate("e109")) {let v = formatPrecisely(EternityPrestigeLayer.currentLogEPPerSecDisplay()); if (e[109].textContent !== v) {e[109].textContent = v};};
-  if (shouldUpdate("e110")) {let v = formatPrecisely(EternityPrestigeLayer.peakLogEPPerSecDisplay()); if (e[110].textContent !== v) {e[110].textContent = v};};
-  if (shouldUpdate("e111")) {let v = format(EternityPrestigeLayer.currentLogEPPerSecDisplay()); if (e[111].textContent !== v) {e[111].textContent = v};};
-  if (shouldUpdate("e112")) {let v = format(EternityPrestigeLayer.peakLogEPPerSecDisplay()); if (e[112].textContent !== v) {e[112].textContent = v};};
+  if (shouldUpdate("e109")) {let v = format(EternityPrestigeLayer.currentEPPerSec()); if (e[109].textContent !== v) {e[109].textContent = v};};
+  if (shouldUpdate("e110")) {let v = format(EternityPrestigeLayer.peakEPPerSec()); if (e[110].textContent !== v) {e[110].textContent = v};};
+  if (shouldUpdate("e111")) {let v = formatPrecisely(EternityPrestigeLayer.currentLogEPPerSecDisplay()); if (e[111].textContent !== v) {e[111].textContent = v};};
+  if (shouldUpdate("e112")) {let v = formatPrecisely(EternityPrestigeLayer.peakLogEPPerSecDisplay()); if (e[112].textContent !== v) {e[112].textContent = v};};
   if (shouldUpdate("e113")) {let v = formatInt(EternityChallenge.tiersCompletedOnEternity()); if (e[113].textContent !== v) {e[113].textContent = v};};
   if (shouldUpdate("e114")) {let v = pluralize(EternityChallenge.tiersCompletedOnEternity(), '', 's'); if (e[114].textContent !== v) {e[114].textContent = v};};
   if (shouldUpdate("e115")) {let v = formatInt(EternityChallenge.getEternityChallengeCompletions()); if (e[115].textContent !== v) {e[115].textContent = v};};
