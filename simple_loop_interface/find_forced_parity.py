@@ -24,6 +24,7 @@ def search(start, adj, adj2, forced, usage):
 
 def find_parity(adj, forced, c1, c2):
     adj2 = {i: {*forced[i]} for i in c1 + c2}
+    assert all(len(i) <= 2 for i in adj2.values())
     usage = {i: len(adj2[i]) for i in c1 + c2}
     for node in c1:
         for _ in range(2 - usage[node]):

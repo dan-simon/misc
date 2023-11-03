@@ -512,6 +512,9 @@ let search = function (start, adj, adj2, forced, usage) {
 }
 
 let findParity = function (adj, forced, c1, c2) {
+  if (forced.some(i => i.length > 2)) {
+    throw new Error('Puzzle is broken');
+  }
   let adj2 = Object.fromEntries(c1.concat(c2).map(i => [i, forced[i].slice()]));
   let usage = Object.fromEntries(c1.concat(c2).map(i => [i, adj2[i].length]));
   for (let node of c1) {
