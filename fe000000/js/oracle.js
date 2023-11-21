@@ -161,7 +161,7 @@ let Oracle = {
     let gainedCompletions = [1, 2, 3, 4, 5, 6].map(
       i => player.oracle.complexityChallengeCompletions[i - 1] - player.oracle.originalComplexityChallengeCompletions[i - 1]);
     let completionText = gainedCompletions.map(x => x * (gain ? 1 : -1)).map(
-      (x, i) => x > 0 ? formatInt(x) + ' completion' + pluralize(x, '', 's') + ' of Complexity Challenge ' + (i + 1) : null);
+      (x, i) => x > 0 ? formatInt(x) + ' completion' + pluralize(x, '', 's') + ' of Complexity Challenge ' + formatOrdinalInt(i + 1) : null);
     return coordinate('*', null, completionText);
   },
   powerShardChangeText(gain) {

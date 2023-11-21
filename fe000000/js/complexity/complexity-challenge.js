@@ -205,7 +205,7 @@ let ComplexityChallenge = {
     return [2, 3, 4, 5, 6].some(x => this.longTimeOn(x));
   },
   longTimeText() {
-    let complexityChallenges = [2, 3, 4, 5, 6].filter(x => this.longTimeOn(x));
+    let complexityChallenges = [2, 3, 4, 5, 6].filter(x => this.longTimeOn(x)).map(i => formatOrdinalInt(i));
     return 'Complexity Challenge' + pluralize(complexityChallenges.length, '', 's') + ' ' + coordinate('*', '', complexityChallenges);
   },
   removeLongTimeMessage() {
