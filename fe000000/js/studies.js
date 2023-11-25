@@ -137,10 +137,10 @@ let Study = function (i) {
     },
     refundText() {
       return 'Are you sure you want to refund ' + (this.row() === 4 ? 'one purchase of ' : '') +
-        'Study ' + i + ' and ' + EternityPrestigeLayer.resetText() + '?';
+        'Study ' + formatOrdinalInt(i) + ' and ' + EternityPrestigeLayer.resetText() + '?';
     },
     refundImpossibleText() {
-      return 'Only fourth-row studies, not Study ' + i + ', can be refunded ' +
+      return 'Only fourth-row studies, not Study ' + formatOrdinalInt(i) + ', can be refunded ' +
         'if any fourth-row study is bought.';
     },
     refund() {
