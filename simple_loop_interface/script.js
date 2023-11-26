@@ -150,20 +150,19 @@ class Grid {
         const cols = this.cells[0].length;
         const component = [];
         const visited = new Set();
+        const stack = [cell];
 
-        const dfs = (r, c) => {
-            const cell = [r, c];
+        while (stack.length > 0) {
+            const cell = stack.pop();
             const cellStr = JSON.stringify(cell);
-            if (visited.has(cellStr)) return;
+            if (visited.has(cellStr)) continue;
             visited.add(cellStr);
             component.push(cell);
 
             for (let [[i, j], _] of this.neighbors(cell).filter(([_, edge]) => this.edges[edge] === 'used')) {
-              dfs(i, j);
+              stack.push([i, j]);
             }
-        };
-
-        dfs(cell[0], cell[1]);
+        }
         return component;
     }
 
