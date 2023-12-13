@@ -252,6 +252,40 @@ class Grid {
         return true;
     }
     
+    localInclude(r, c, handled) {
+        if (this.cells[r][c] || handled.has(JSON.stringify([r, c]))) {
+          return false;
+        }
+        let possible = this.neighbors([r, c]).filter(([node, edge]) => this.edges[edge] !== "unused");
+        let used = possible.filter(([node, edge]) => this.edges[edge] === "used");
+        return (used.length < possible.length) && (possible.length <= 2 || used.length >= 2);
+    }
+    
+    local() {
+        const rows = this.cells.length;
+        const cols = this.cells[0].length;
+        const stack = [];
+        const handled = new Set();
+        for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+                if (this.localInclude(r, c, handled)) {
+                    stack.push([r, c]);
+                    handled.add(JSON.stringify([r, c]));
+                }
+            }
+        }
+        while (stack.length > 0) {
+            let [r, c] = stack.pop();
+            this.adjustEdges(new Set([JSON.stringify([r, c])]));
+            for (let [[nr, nc], _] of this.neighbors([r, c])) {
+                if (this.localInclude(nr, nc, handled)) {
+                    stack.push([nr, nc]);
+                    handled.add(JSON.stringify([nr, nc]));
+                }
+            }
+        }
+    }
+    
     parity1() {
       let m = this.cells.length;
       let n = this.cells[0].length;
@@ -401,15 +435,7 @@ window.onload = function () {
     }, 'p');
     
     createButton('Parity on each cell (l)', function () {
-        const rows = grid.cells.length;
-        const cols = grid.cells[0].length;
-        for (let r = 0; r < rows; r++) {
-            for (let c = 0; c < cols; c++) {
-                if (!grid.cells[r][c]) {
-                    grid.adjustEdges(new Set([JSON.stringify([r, c])]));
-                }
-            }
-        }
+        grid.local();
     }, 'l');
     
     createButton('Parity 1 (1)', function () {
