@@ -476,7 +476,7 @@ function createButton(text, onClick, key) {
     document.body.appendChild(button);
     if (typeof key === 'string') {
         document.addEventListener('keydown', function (event) {
-            if (event.key === key) {
+            if (event.key.toLowerCase() === key) {
                 button.click();
             }
         });
