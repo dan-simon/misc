@@ -273,30 +273,65 @@ class Grid {
         return [totalParity, exitingEdgesParity, exitingEdges.used, exitingEdges.unknown];
     }
     
+    isSafeSubset(subset) {
+      if (subset.size === 1) {
+          return true;
+      }
+      // This is a copy of getConnectedComponent
+      const rows = this.cells.length;
+      const cols = this.cells[0].length;
+      const component = [];
+      const visited = new Set();
+      const stack = [JSON.parse(Array.from(subset)[0])];
+
+      while (stack.length > 0) {
+          const cell = stack.pop();
+          const cellStr = JSON.stringify(cell);
+          if (visited.has(cellStr)) continue;
+          visited.add(cellStr);
+          component.push(cell);
+
+          for (let [[i, j], _] of this.neighbors(cell).filter(([_, edge]) => this.edges[edge] === 'used')) {
+            stack.push([i, j]);
+            if (!subset.has(JSON.stringify([i, j]))) {
+              return false;
+            }
+          }
+      }
+      return subset.size === visited.size;
+    }
+    
     adjustEdges(subset, manual) {
         if (subset.size === 0 || subset.size === this.unshadedCount) {
             return;
         }
-
-        const [totalParity, exitParity, usedExits, unknownExits] = this.getParityInfo(subset);
         
-        [0, 1].forEach(parity => {
-            const x = Math.pow(-1, parity) * (usedExits[parity] - usedExits[1 - parity] + unknownExits[parity]);
-            if ((parity === 0 && x < 2 * totalParity) || (parity === 1 && x > 2 * totalParity)) {
-                throw new Error("Inconsistent edge states detected.");
-            }
-            if (2 * totalParity === x) {
-                Object.keys(exitParity).forEach(edge => {
-                    const state = this.edges[edge];
-                    if (state === "unknown") {
-                        const edgeParity = exitParity[edge];
-                        this.edges[edge] = edgeParity === parity ? "used" : "unused";
-                    }
-                });
-            }
-        });
+        // In case we want to pass parity info into something directly (e.g. a deduction legality check)
+        const parityInfo = this.getParityInfo(subset);
         
-        if (totalParity === 0) {
+        const [totalParity, exitParity, usedExits, unknownExits] = parityInfo;
+        
+        const allowed = this.isSafeSubset(subset) ? [1, 2] : this.allowedParity;
+        
+        if (allowed.includes(1)) {
+            [0, 1].forEach(parity => {
+                const x = Math.pow(-1, parity) * (usedExits[parity] - usedExits[1 - parity] + unknownExits[parity]);
+                if ((parity === 0 && x < 2 * totalParity) || (parity === 1 && x > 2 * totalParity)) {
+                    throw new Error("Inconsistent edge states detected.");
+                }
+                if (2 * totalParity === x) {
+                    Object.keys(exitParity).forEach(edge => {
+                        const state = this.edges[edge];
+                        if (state === "unknown") {
+                            const edgeParity = exitParity[edge];
+                            this.edges[edge] = edgeParity === parity ? "used" : "unused";
+                        }
+                    });
+                }
+            });
+        }
+        
+        if (allowed.includes(2) && totalParity === 0) {
             [0, 1].forEach(parity => {
                 if (usedExits[parity] === 0) {
                     if (unknownExits[parity] === 1) {
@@ -483,10 +518,22 @@ function createButton(text, onClick, key) {
     }
 }
 
+function createSelect(options, onSelect) {
+    const select = document.createElement('select');
+    for (let i of options) {
+      const o = document.createElement('option');
+      o.innerText = i;
+      select.appendChild(o);
+    }
+    select.onchange = () => onSelect(select.value);
+    document.body.appendChild(select);
+}
+
 window.onload = function () {
     // Initialize a grid with some cell states
     const grid = new Grid();
     grid.hoverMode = 0;
+    grid.allowedParity = [1, 2];
     grid.generateColorParams();
     grid.initialize([[false, false], [false, false]]);
     document.body.appendChild(document.createElement('br'));
@@ -526,6 +573,8 @@ window.onload = function () {
         }
     }, 'c');
     
+    document.body.appendChild(document.createElement('br'));
+    
     createButton('Change hover mode (y)', function () {
         grid.changeHoverMode();
     }, 'y');
@@ -533,6 +582,17 @@ window.onload = function () {
     createButton('Recolor (z)', function () {
         grid.recolor();
     }, 'z');
+    
+    let table = {
+      'Mode: Default': [1, 2],
+      'Mode: 1-less': [2],
+      'Mode: 2-less': [1],
+      'Mode: 12-less': []
+    }
+    
+    createSelect(['Mode: Default', 'Mode: 1-less', 'Mode: 2-less', 'Mode: 12-less'], function (x) {
+      grid.allowedParity = table[x];
+    });
 }
 
 function base32CharToBinary(c) {
