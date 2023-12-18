@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Simple Loop Interface</title>
+    <title>Sloopste</title>
     <style>
         table {
             border-collapse: collapse;
@@ -12,12 +12,6 @@
             height: 30px;
             border: 1px solid black;
             position: relative;
-        }
-        .black {
-            background-color: black;
-        }
-        .highlighted {
-            background-color: lime;
         }
         .edge {
             display: flex;
@@ -48,6 +42,10 @@
     <script src="script.js"></script>
 </head>
 <body>
-    <table id="gridTable"></table>
+    <h2 id="level">Use "Load puzzles" with a level string</h2>
+    <h3 id="info"></h3>
+    <h3 id="time"></h3>
+    <div id="levelSelect" style="display: none;"></div>
+    <table id="gridTable" style="display: none;"></table>
 </body>
 </html>
