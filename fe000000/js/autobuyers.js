@@ -52,6 +52,15 @@ let Autobuyer = function (i) {
         false
       ][i - 12];
     },
+    hasNoCost() {
+      if (!(10 <= i && i <= 11)) {
+        return false;
+      }
+      return [
+        EternityMilestones.isEternityMilestoneActive(6),
+        EternityMilestones.isEternityMilestoneActive(8)
+      ][i - 10];
+    },
     isActive() {
       // change to
       // return this.hasAutobuyer() && (this.hasGeneration() ? this.isOnDespiteSuspended() : this.isOn());
@@ -63,6 +72,16 @@ let Autobuyer = function (i) {
     },
     setIsOnDespiteSuspended(x) {
       player.options.autobuyers.isOnDespiteSuspended[i - 12] = x;
+    },
+    isHyperactive() {
+      return 10 <= i && i <= 11 && this.hasNoCost() && !this.useSettingsDespiteNoCost() &&
+      !(Challenge.isSomeChallengeRunning() || InfinityChallenge.isSomeInfinityChallengeRunning());
+    },
+    useSettingsDespiteNoCost() {
+      return 10 <= i && i <= 11 && player.options.autobuyers.useSettingsDespiteNoCost[i - 10];
+    },
+    setUseSettingsDespiteNoCost(x) {
+      return player.options.autobuyers.useSettingsDespiteNoCost[i - 10] = x;
     },
     mode() {
       return player.autobuyers[i - 1].mode;
@@ -255,6 +274,10 @@ let Autobuyers = {
   },
   sacrifice() {
     if (!Autobuyer(10).isActive() || !Sacrifice.canSacrifice()) return;
+    if (Autobuyer(10).isHyperactive()) {
+      Sacrifice.sacrifice(false);
+      return;
+    }
     let shouldSacrifice;
     let mode = Autobuyer(10).mode();
     let priority = Autobuyer(10).priority();
@@ -272,6 +295,10 @@ let Autobuyers = {
   },
   prestige() {
     if (!Autobuyer(11).isActive() || !Prestige.canPrestige()) return;
+    if (Autobuyer(11).isHyperactive()) {
+      Prestige.prestige(false);
+      return;
+    }
     let shouldPrestige;
     let mode = Autobuyer(11).mode();
     let priority = Autobuyer(11).priority();

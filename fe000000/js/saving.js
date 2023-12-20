@@ -1706,6 +1706,10 @@ let Saving = {
       };
       player.version = 2.30078125;
     }
+    if (player.version < 2.3046875) {
+      player.options.autobuyers.useSettingsDespiteNoCost = [false, false];
+      player.version = 2.3046875;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

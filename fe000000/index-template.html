@@ -836,6 +836,11 @@
               <span>~r Autobuyer(10).mode() ~:</span>
               <br/>
               <span><input type="text" class="autobuyer-priority-10" ~!value=autobuyerSettingToString(Autobuyer(10).priority(), 10)~ ~!onchange=function() {Autobuyer(10).setPriority(stringToAutobuyerSetting(this.value, 10))}~></input></span>
+              <div ~style.display=Autobuyer(10).hasNoCost() ? '' : 'none'~ style="font-size: 0.75rem;">
+                <span>Applying every tick due to EM ~o 6 ~ <span class="helpspan">(?)<span class="tooltiptext">Due to Eternity Milestone ~o 6 ~, sacrificing doesn't reset everything, so by default you do it every tick. This does not apply in normal challenges and infinity challenges, since there sacrificing can still be bad.</span></span></span>
+                <br/>
+                <span>Use settings instead: <input type="checkbox" ~!checked=Autobuyer(10).useSettingsDespiteNoCost()~ ~!onchange=function() {Autobuyer(10).setUseSettingsDespiteNoCost(this.checked)}~></input></span>
+              </div>
             </div>
           </td>
           <td>
@@ -853,6 +858,11 @@
               <span>~r Autobuyer(11).mode() ~:</span>
               <br/>
               <span><input type="text" class="autobuyer-priority-11" ~!value=autobuyerSettingToString(Autobuyer(11).priority(), 11)~ ~!onchange=function() {Autobuyer(11).setPriority(stringToAutobuyerSetting(this.value, 11))}~></input></span>
+              <div ~style.display=Autobuyer(11).hasNoCost() ? '' : 'none'~ style="font-size: 0.75rem;">
+                <span>Applying every tick due to EM ~o 8 ~ <span class="helpspan">(?)<span class="tooltiptext">Due to Eternity Milestone ~o 8 ~, prestiging doesn't reset everything, so by default you do it every tick. This does not apply in normal challenges and infinity challenges, since there prestiging can still be bad.</span></span></span>
+                <br/>
+                <span>Use settings instead: <input type="checkbox" ~!checked=Autobuyer(11).useSettingsDespiteNoCost()~ ~!onchange=function() {Autobuyer(11).setUseSettingsDespiteNoCost(this.checked)}~></input></span>
+              </div>
             </div>
           </td>
           <td>

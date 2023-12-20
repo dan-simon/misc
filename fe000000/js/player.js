@@ -465,6 +465,7 @@ let initialPlayer = {
       automaticallyCompleteChallengesTierRequirement: 1,
       showGeneratorAndBoostAutobuyers: true,
       isOnDespiteSuspended: [false, false, false, false],
+      useSettingsDespiteNoCost: [false, false],
     },
     explanations: {
       'autobuyers': '',
@@ -596,7 +597,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.30078125
+  version: 2.3046875
 }
 
 let player;
