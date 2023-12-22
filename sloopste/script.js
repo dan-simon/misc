@@ -467,6 +467,7 @@ class State {
       this.lastTick = Date.now();
       setInterval(() => {
         this.checkAutoSkip();
+        this.tick();
         this.timeEl.innerText = this.timer ? this.currTime() : '';
       }, 64);
     }
@@ -477,12 +478,15 @@ class State {
       }
     }
     
-    currTime() {
+    tick() {
       let now = Date.now();
       if (this.position !== null && !this.pause) {
         this.time += now - this.lastTick;
       }
       this.lastTick = now;
+    }
+    
+    currTime() {
       let time = this.time;
       let parts = [Math.floor(time / 3.6e6), Math.floor(time / 6e4) % 60, Math.floor(time / 1000) % 60, time % 1000];
       return (parts[0] ? (parts[0] + ':' + ('' + ('' + parts[1]).padStart(2, '0'))) : parts[1]) + ':' +
