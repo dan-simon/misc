@@ -473,7 +473,7 @@ class State {
     }
     
     checkAutoSkip() {
-      if (this.autoSkip) {
+      if (this.skipMode === 'Auto') {
         this.skip(false);
       }
     }
@@ -509,14 +509,25 @@ class State {
         return;
       }
       let t = this.getType();
-      if (t === 'bonus' || t === 'big') {
-        this.jumps++;
-        this.completeForUnlock();
-        this.incrementPosition();
-        this.setupLoop();
-      } else if (manual) {
-        alert('Only 🍓 can be skipped!');
+      if (t !== 'bonus' && t !== 'big') {
+        if (manual) {
+          alert('Only 🍓 can be skipped!');
+        }
+        return;
       }
+      if (this.skipMode === 'Disabled') {
+        if (manual) {
+          alert('Skipping 🍓 is disabled!');
+        }
+        return;
+      }
+      if (this.skipMode === 'Confirmation' && !confirm('Are you sure you want to skip ' + this.getLoopName() + '?')) {
+        return;
+      }
+      this.jumps++;
+      this.completeForUnlock();
+      this.incrementPosition();
+      this.setupLoop();
     }
     
     quit() {
@@ -652,7 +663,7 @@ class State {
           }
           return 'Get ' + crit[0] + ' ' + display[crit[1]] + ' first.';
         } else {
-          return 'Get ??? first';
+          return 'Get ??? first.';
         }
       } else {
         return 'Finish ' + this.chapterName(a, b - 1) + ' first.';
@@ -691,7 +702,7 @@ class State {
         }
       }
       // Check if the new simple loop can be skipped.
-      if (this.autoSkip) {
+      if (this.skipMode === 'Auto') {
         this.skip(false);
       }
     }
@@ -832,7 +843,7 @@ window.onload = function () {
     const state = new State();
     state.audio = false;
     state.timer = false;
-    state.autoSkip = false;
+    state.skipMode = 'Default';
     state.pause = false;
     state.grid = grid;
     grid.state = state;
@@ -910,9 +921,9 @@ window.onload = function () {
         state.skip(true);
     }, 's');
     
-    createToggleButton('Toggle autoskip 🍓 (d)', () => state.autoSkip, function () {
-        state.autoSkip = !state.autoSkip;
-    }, 's');
+    createSelect(['Skip mode: Default', 'Skip mode: Auto', 'Skip mode: Confirmation', 'Skip mode: Disabled'], function (x) {
+      state.skipMode = x.split(': ')[1];
+    });
     
     createToggleButton('Toggle pause (space)', () => state.pause, function () {
         state.pause = !state.pause;
@@ -927,7 +938,7 @@ window.onload = function () {
         state.jumpToSubsection('123456780'.indexOf(event.key), 0, state.position !== null);
       }
       if (event.key === '9') {
-        alert('This chapter doesn\'t exist');
+        alert('This chapter doesn\'t exist!');
       }
       if ('abc'.includes(event.key.toLowerCase()) && this.position !== null) {
         if (state.pause) {
