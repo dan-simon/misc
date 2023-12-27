@@ -1,0 +1,15 @@
+The stats the grid *should* have in game state are:
+- grid
+- highlighted subset
+- known edges
+
+There should also be a position, progress, options, and time
+
+Everything else can be stored outside of game state
+
+# JSON.stringify(new Set([1, 2, 3]), (key, value) => value instanceof Set ? Array.from(value) : value)
+
+when loading a game state:
+- you should probably increase jumps?
+- you have to unsetify the highlighted subset
+- you have to set up the grid again based on data provided
