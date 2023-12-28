@@ -406,8 +406,10 @@ let Grid = {
         parity => 2 * totalParity === Math.pow(-1, parity) * (usedExits[parity] - usedExits[1 - parity] + unknownExits[parity]));
       const canApplyParity2 = allowed.includes(2) && totalParity === 0 && [0, 1].some(
         parity => usedExits[parity] === 0 && unknownExits[parity] === 1);
-      const canApplyEither = canApplyParity1 && canApplyParity2 && [0, 1].some(
-        parity => unknownExits[1 - parity] === 0 && unknownExits[parity] === 1);
+      // The effect of allowed.includes(1) || allowed.includes(2) is that if parity does nothing (i.e. both parts of the or are false),
+      // nothing will happen.
+      const canApplyEither = (allowed.includes(1) || allowed.includes(2)) && totalParity === 0 && [0, 1].some(
+        parity => unknownExits[1 - parity] === 0 && unknownExits[parity] === 1 && usedExits[1 - parity] === usedExits[parity] + 1);
       if (canApplyEither) {
         return [1, 2];
       } else if (canApplyParity1) {
