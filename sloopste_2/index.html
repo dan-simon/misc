@@ -5,9 +5,9 @@
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
   <meta content="utf-8" http-equiv="encoding">
   <script src="js/pako.min.js"></script>
-  <script src="js/script.js?time=1703725557994"></script>
-  <script src="js/update-display.js?time=1703725557994"></script>
-  <link rel="stylesheet" href="styles.css?time=1703725557994"></link>
+  <script src="js/script.js?time=1703782556414"></script>
+  <script src="js/update-display.js?time=1703782556414"></script>
+  <link rel="stylesheet" href="styles.css?time=1703782556414"></link>
 </head>
 <body>
     <h2><span id="e0"></span></h2>
@@ -94,5 +94,21 @@
     <button onclick="Saving.loadPrompt()">Load</button><button onclick="Grid.clearHighlightedSubset()">Clear (x)</button><button onclick="Grid.adjustEdges(player.grid.highlightedSubset, true)">Parity on selected region (p)</button>
     <br/>
     <button onclick="Options.advanceOption('hover', ['None', 'Highlight', 'Unhighlight'])">Change hover mode (y) (<span id="e3"></span>)</button><button onclick="Grid.recolor()">Recolor (z)</button>
+    <br/>
+    <button onclick="Options.toggleOption('checkerboard')">Toggle checkerboard shading (k) (<span id="e4"></span>)</button> Parity mode: <select id="b29">
+      <option value="Default">Default</option>
+      <option value="1-less">1-less</option>
+      <option value="2-less">2-less</option>
+      <option value="12-less">12-less</option>
+    </select>
+    <br/>
+    <button onclick="Options.toggleOption('audio')">Toggle audio (m) (<span id="e5"></span>)</button><button onclick="Options.toggleOption('timer')">Toggle timer (t) (<span id="e6"></span>)</button>
+    <br/>
+    <button onclick="Stats.quit()">Return to level select (q)</button><button onclick="Stats.skip(true)">Skip 🍓 (s)</button> Skip mode: <select id="b30">
+      <option value="Default">Default</option>
+      <option value="Auto">Auto</option>
+      <option value="Confirmation">Confirmation</option>
+      <option value="Disabled">Disabled</option>
+    </select><button onclick="Options.toggleOption('pause')">Toggle pause (space) (<span id="e7"></span>)</button>
 </body>
 </html>

@@ -32,5 +32,21 @@
     <button onclick="Saving.loadPrompt()">Load</button><button onclick="Grid.clearHighlightedSubset()">Clear (x)</button><button onclick="Grid.adjustEdges(player.grid.highlightedSubset, true)">Parity on selected region (p)</button>
     <br/>
     <button onclick="Options.advanceOption('hover', ['None', 'Highlight', 'Unhighlight'])">Change hover mode (y) (~r Options.advanceDescription('hover', ['None', 'Highlight', 'Unhighlight']) ~)</button><button onclick="Grid.recolor()">Recolor (z)</button>
+    <br/>
+    <button onclick="Options.toggleOption('checkerboard')">Toggle checkerboard shading (k) (~r Options.toggleDescription('checkerboard') ~)</button> Parity mode: <select ~!value=Options.getOption('allowedParity')~ ~!onchange=function() {Options.setOption('allowedParity', this.value)}~>
+      <option value="Default">Default</option>
+      <option value="1-less">1-less</option>
+      <option value="2-less">2-less</option>
+      <option value="12-less">12-less</option>
+    </select>
+    <br/>
+    <button onclick="Options.toggleOption('audio')">Toggle audio (m) (~r Options.toggleDescription('audio') ~)</button><button onclick="Options.toggleOption('timer')">Toggle timer (t) (~r Options.toggleDescription('timer') ~)</button>
+    <br/>
+    <button onclick="Stats.quit()">Return to level select (q)</button><button onclick="Stats.skip(true)">Skip 🍓 (s)</button> Skip mode: <select ~!value=Options.getOption('skipMode')~ ~!onchange=function() {Options.setOption('skipMode', this.value)}~>
+      <option value="Default">Default</option>
+      <option value="Auto">Auto</option>
+      <option value="Confirmation">Confirmation</option>
+      <option value="Disabled">Disabled</option>
+    </select><button onclick="Options.toggleOption('pause')">Toggle pause (space) (~r Options.toggleDescription('pause') ~)</button>
 </body>
 </html>

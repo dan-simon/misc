@@ -7,8 +7,8 @@ let tickMap;
 let shouldUpdate = x => majorDivTable[x].every(y => {if (!(y in tickMap)) {tickMap[y] = document.getElementById(y).style.display !== "none"}; return tickMap[y]});
 
 function updateDisplayPageLoadSetup() {
-  e = [document.getElementById("e0"), document.getElementById("e1"), document.getElementById("e2"), document.getElementById("e3")];
-  b = [document.getElementById("b0"), document.getElementById("b1"), document.getElementById("b2"), document.getElementById("b3"), document.getElementById("b4"), document.getElementById("b5"), document.getElementById("b6"), document.getElementById("b7"), document.getElementById("b8"), document.getElementById("b9"), document.getElementById("b10"), document.getElementById("b11"), document.getElementById("b12"), document.getElementById("b13"), document.getElementById("b14"), document.getElementById("b15"), document.getElementById("b16"), document.getElementById("b17"), document.getElementById("b18"), document.getElementById("b19"), document.getElementById("b20"), document.getElementById("b21"), document.getElementById("b22"), document.getElementById("b23"), document.getElementById("b24"), document.getElementById("b25"), document.getElementById("b26"), document.getElementById("b27"), document.getElementById("b28")];
+  e = [document.getElementById("e0"), document.getElementById("e1"), document.getElementById("e2"), document.getElementById("e3"), document.getElementById("e4"), document.getElementById("e5"), document.getElementById("e6"), document.getElementById("e7")];
+  b = [document.getElementById("b0"), document.getElementById("b1"), document.getElementById("b2"), document.getElementById("b3"), document.getElementById("b4"), document.getElementById("b5"), document.getElementById("b6"), document.getElementById("b7"), document.getElementById("b8"), document.getElementById("b9"), document.getElementById("b10"), document.getElementById("b11"), document.getElementById("b12"), document.getElementById("b13"), document.getElementById("b14"), document.getElementById("b15"), document.getElementById("b16"), document.getElementById("b17"), document.getElementById("b18"), document.getElementById("b19"), document.getElementById("b20"), document.getElementById("b21"), document.getElementById("b22"), document.getElementById("b23"), document.getElementById("b24"), document.getElementById("b25"), document.getElementById("b26"), document.getElementById("b27"), document.getElementById("b28"), document.getElementById("b29"), document.getElementById("b30")];
   let majorDivsOrig = [...document.getElementsByClassName("major-div")];
   majorDivs = majorDivsOrig.map(x => x.id);
   majorDivTable = {};
@@ -16,7 +16,10 @@ function updateDisplayPageLoadSetup() {
 }
 
 function updateDisplaySaveLoadSetup() {
-
+  if (shouldUpdate("b29")) {let v = Options.getOption('allowedParity'); if (b[29].value !== v) {b[29].value = v};};
+  if (shouldUpdate("b29")) {let v = function() {Options.setOption('allowedParity', this.value)}; if (b[29].onchange !== v) {b[29].onchange = v};};
+  if (shouldUpdate("b30")) {let v = Options.getOption('skipMode'); if (b[30].value !== v) {b[30].value = v};};
+  if (shouldUpdate("b30")) {let v = function() {Options.setOption('skipMode', this.value)}; if (b[30].onchange !== v) {b[30].onchange = v};};
 }
 
 function updateDisplay() {
@@ -25,6 +28,10 @@ function updateDisplay() {
   if (shouldUpdate("e1")) {let v = Headers.progressInfo(); if (e[1].textContent !== v) {e[1].textContent = v};};
   if (shouldUpdate("e2")) {let v = Headers.time(); if (e[2].textContent !== v) {e[2].textContent = v};};
   if (shouldUpdate("e3")) {let v = Options.advanceDescription('hover', ['None', 'Highlight', 'Unhighlight']); if (e[3].textContent !== v) {e[3].textContent = v};};
+  if (shouldUpdate("e4")) {let v = Options.toggleDescription('checkerboard'); if (e[4].textContent !== v) {e[4].textContent = v};};
+  if (shouldUpdate("e5")) {let v = Options.toggleDescription('audio'); if (e[5].textContent !== v) {e[5].textContent = v};};
+  if (shouldUpdate("e6")) {let v = Options.toggleDescription('timer'); if (e[6].textContent !== v) {e[6].textContent = v};};
+  if (shouldUpdate("e7")) {let v = Options.toggleDescription('pause'); if (e[7].textContent !== v) {e[7].textContent = v};};
   if (shouldUpdate("b0")) {let v = Display.displayLevelSelect() ? '' : 'none'; if (b[0].style.display !== v) {b[0].style.display = v};};
   if (shouldUpdate("b28")) {let v = Display.displayGrid() ? '' : 'none'; if (b[28].style.display !== v) {b[28].style.display = v};};
   if (b[0].style.display !== "none") {

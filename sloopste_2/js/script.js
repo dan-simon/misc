@@ -13,11 +13,13 @@ let player = {
   grid: {},
   position: [null, 0],
   options: {
-    checkerboard: false,
-    pause: false,
-    timer: false,
-    hover: 'None',
     allowedParity: 'Default',
+    audio: false,
+    checkerboard: false,
+    hover: 'None',
+    pause: false,
+    skipMode: 'Default',
+    timer: false,
   },
   time: {
     time: 0,
@@ -39,7 +41,7 @@ let Misc = {
   colorParams: getRandomColorParams(),
   generateColorParams() {
     this.colorParams = getRandomColorParams();
-  },
+  }
 }
 
 let Grid = {
@@ -48,6 +50,10 @@ let Grid = {
         player.grid.edges = this.initialEdges();
         player.grid.highlightedSubset = new Set();
         this.setup();
+    },
+    
+    cellCount() {
+      return player.grid.cells.length * player.grid.cells[0].length;
     },
     
     initialEdges() {
@@ -526,6 +532,12 @@ let Options = {
   },
   advanceDescription(x, l) {
     return player.options[x] + ' → ' + l[(l.indexOf(player.options[x]) + 1) % l.length];
+  },
+  toggleOption(x) {
+    player.options[x] = !player.options[x];
+  },
+  toggleDescription(x) {
+    return player.options[x] ? 'on → off' : 'off → on';
   }
 }
 
@@ -542,9 +554,6 @@ let State = {
     player.progress = initialProgress();
     player.data = data;
     State.setupNames();
-  },
-  nextTimeout() {
-    
   },
   jump() {
     this.jumps++;
@@ -626,6 +635,130 @@ let State = {
     };
     let end = (l, i) => table[i] + ((i === 'big') ? '' : l.filter(it => it[1] == i).length);
     this.names = player.data.loops.map((i, ind) => i.map((j, jnd) => j.map((k, knd) => this.chapterName(ind, jnd) + '-' + end(j.slice(0, knd + 1), k[1]))));
+  },
+  nextTimeout() {
+    this.complete();
+    let jumps = this.jumps;
+    setTimeout(() => {
+      if (this.jumps > jumps) return;
+      this.jump();
+      this.incrementPosition();
+      this.setupLoop();
+    }, 500);
+  },
+  
+  checkAutoSkip() {
+    if (Options.getOption('skipMode') === 'Auto') {
+      this.skip(false);
+    }
+  },
+  
+  skip(manual) {
+    if (Options.getOption('pause')) {
+        if (manual) {
+            alert('Paused!');
+        }
+        return;
+    }
+    let t = this.getType();
+    // Catches null case
+    if (t !== 'bonus' && t !== 'big') {
+      if (manual) {
+        alert('Only 🍓 can be skipped!');
+      }
+      return;
+    }
+    if (Options.getOption('skipMode') === 'Disabled') {
+      if (manual) {
+        alert('Skipping 🍓 is disabled!');
+      }
+      return;
+    }
+    if (Options.getOption('skipMode') === 'Confirmation' && !confirm('Are you sure you want to skip ' + this.getName() + '?')) {
+      return;
+    }
+    this.jump();
+    this.completeForUnlock();
+    this.incrementPosition();
+    this.setupLoop();
+  },
+  
+  quit() {
+    if (player.position[0] === null || !confirm('Are you sure you want to return to level select?')) {
+      return;
+    }
+    this.jump();
+    player.position = [null, 1];
+    this.setupLoop();
+  },
+  
+  completeForUnlock() {
+    let id = player.position.join(',');
+    let a = player.data.loops[player.position[0]];
+    let b = a[player.position[1]];
+    if (player.position[1] === a.length - 1 && player.position[2] === b.length - 1 &&
+    !player.progress.sections.includes(player.position.slice(0, 1).join(','))) {
+      player.progress.sections.push(player.position.slice(0, 1).join(','));
+    }
+    if (player.position[2] === b.length - 1 &&
+    !player.progress.subsections.includes(player.position.slice(0, 2).join(','))) {
+      player.progress.subsections.push(player.position.slice(0, 2).join(','));
+    }
+  },
+  
+  complete() {
+    // this should only be called when the loop is guaranteed to be complete
+    if (Options.getOption('audio')) {
+      new Audio('spheal.mp3').play();
+    }
+    let id = player.position.join(',');
+    if (player.progress.loops.includes(id)) {
+      return;
+    }
+    player.progress.loops.push(id);
+    let type = this.getType();
+    if (type === 'cells') {
+      player.progress.cells += Grid.cellCount();
+    } else if (type === 'bonus') {
+      player.progress.bonus.push(id);
+    } else if (type === 'big') {
+      player.progress.bonus.push(id);
+      player.progress.big.push(id);
+    }
+    this.completeForUnlock();
+  },
+  
+  incrementPosition() {
+    for (let i of [2, 1, 0]) {
+      if (i === 0) {
+        player.position = [null, 1];
+        return;
+      }
+      player.position[i]++;
+      if (!this.inRange(player.position, player.data.loops)) {
+        player.position[i] = 0;
+      } else {
+        break;
+      }
+    }
+  },
+  
+  getType() {
+    if (player.position[0] === null) {
+      return null;
+    }
+    return player.data.loops[player.position[0]][player.position[1]][player.position[2]][1];
+  },
+  
+  getName() {
+    if (player.position[0] === null) {
+      return null;
+    }
+    return State.names[player.position[0]][player.position[1]][player.position[2]];
+  },
+  
+  inRange(x, y) {
+    return x.length ? 0 <= x[0] && x[0] < y.length && this.inRange(x.slice(1), y[x[0]]) : true;
   }
 }
 
@@ -666,7 +799,7 @@ let Headers = {
     if (player.position[0] === null) {
       return ['Use "Load" with a level string', 'Main'][player.position[1]];
     }
-    return State.names[player.position[0]][player.position[1]][player.position[2]];
+    return State.getName();
   },
   progressInfo() {
     if (player.position[0] === null && player.position[1] === 0) {
@@ -684,7 +817,7 @@ let Headers = {
     let time = player.time.time;
     let parts = [Math.floor(time / 3.6e6), Math.floor(time / 6e4) % 60, Math.floor(time / 1000) % 60, time % 1000];
     return (parts[0] ? (parts[0] + ':' + ('' + ('' + parts[1]).padStart(2, '0'))) : parts[1]) + ':' +
-    ('' + parts[2]).padStart(2, '0') + '.' + ('' + parts[3]).padStart(3, '0') + (this.pause ? ' (paused)' : '');
+    ('' + parts[2]).padStart(2, '0') + '.' + ('' + parts[3]).padStart(3, '0') + (Options.getOption('pause') ? ' (paused)' : '');
   }
 }
 
@@ -715,7 +848,7 @@ let Saving = {
   steps: [
     {
       encode: x => JSON.stringify(x, (key, value) => value instanceof Set ? ['__set'].concat(Array.from(value)) : value),
-      decode: x => JSON.parse(x, (key, value) => (Array.isArray(x) && x[0] === '__set') ? new Set(x.slice(1)) : value)
+      decode: x => JSON.parse(x, (key, value) => (Array.isArray(value) && value[0] === '__set') ? new Set(value.slice(1)) : value)
     },
     { encode: x => Saving.encoder.encode(x), decode: x => Saving.decoder.decode(x) },
     { encode: x => pako.deflate(x), decode: x => pako.inflate(x) },
@@ -765,9 +898,7 @@ let Saving = {
     // add changes here
   },
   convertSave() {
-    if ('highlightedSubset' in player.grid) {
-      player.grid.highlightedSubset = new Set(player.grid.highlightedSubset);
-    }
+
   },
   misc() {
     State.jump();
@@ -779,6 +910,7 @@ let Saving = {
 }
 
 let gameLoop = function () {
+  State.checkAutoSkip();
   State.tick();
   updateDisplay();
 }
@@ -789,11 +921,18 @@ window.addEventListener('keydown', function(event) {
     case 'p': Grid.parityCalc(true); break;
     case 'y': Options.advanceOption('hover', ['None', 'Highlight', 'Unhighlight']); break;
     case 'z': Grid.recolor(); break;
+    case 'k': Options.toggleOption('checkerboard'); break;
+    case 'm': Options.toggleOption('audio'); break;
+    case 't': Options.toggleOption('timer'); break;
+    case 'q': State.quit(); break;
+    case 's': State.skip(true); break;
+    case ' ': Options.toggleOption('pause'); break;
   }
 });
 
 window.onload = function () {
   updateDisplayPageLoadSetup();
+  updateDisplaySaveLoadSetup();
   setInterval(gameLoop, 64);
 }
 
