@@ -11,6 +11,22 @@ let initialProgress = function () {
 
 let player = {
   grid: {},
+  parity: {
+    subsection: [[1], [2], [1, 2]],
+    loop: [[1], [2], [1, 2]]
+  },
+  parityProgress: {
+    subsection: {
+      '1': [],
+      '2': [],
+      '12': []
+    },
+    bonus: {
+      '1': [],
+      '2': [],
+      '12': []
+    }
+  },
   position: [null, 0],
   options: {
     allowedParity: 'Default',
@@ -384,6 +400,25 @@ let Grid = {
       this.adjustEdges(player.grid.highlightedSubset, manual);
     },
     
+    getUsedParityTypes(totalParity, usedExits, unknownExits, allowed) {
+      // Doesn't handle errors
+      const canApplyParity1 = allowed.includes(1) && [0, 1].some(parity => unknownExits[parity] > 0) && [0, 1].some(
+        parity => 2 * totalParity === Math.pow(-1, parity) * (usedExits[parity] - usedExits[1 - parity] + unknownExits[parity]));
+      const canApplyParity2 = allowed.includes(2) && totalParity === 0 && [0, 1].some(
+        parity => usedExits[parity] === 0 && unknownExits[parity] === 1);
+      const canApplyEither = canApplyParity1 && canApplyParity2 && [0, 1].some(
+        parity => unknownExits[1 - parity] === 0 && unknownExits[parity] === 1);
+      if (canApplyEither) {
+        return [1, 2];
+      } else if (canApplyParity1) {
+        return [1];
+      } else if (canApplyParity2) {
+        return [2];
+      } else {
+        return null;
+      }
+    },
+    
     adjustEdges(subset, manual) {
         if (subset.size === 0 || subset.size === this.unshadedCount) {
             return;
@@ -394,9 +429,15 @@ let Grid = {
         
         const [totalParity, exitParity, usedExits, unknownExits] = parityInfo;
         
-        const allowed = this.isSafeSubset(subset) ? [1, 2] : {
+        const safe =  this.isSafeSubset(subset);
+        
+        const allowed = safe ? [1, 2] : {
           'Default': [1, 2], '1-less': [2], '2-less': [1], '12-less': []
         }[Options.getOption('allowedParity')];
+        
+        if (!safe) {
+          ParityTracker.merge(this.getUsedParityTypes(totalParity, usedExits, unknownExits, allowed));
+        }
         
         if (allowed.includes(1)) {
             [0, 1].forEach(parity => {
@@ -513,11 +554,21 @@ let Grid = {
     }
 }
 
-let offlineSimulationData = {active: false, globalId: 0};
-
-let getOfflineSimulationID = function () {
-  offlineSimulationData.globalId++;
-  return offlineSimulationData.globalId;
+let ParityTracker = {
+  merge(x) {
+    if (x !== null) {
+      for (let i in player.parity) {
+        player.parity[i] = player.parity[i].filter(j => x.some(k => !j.includes(k)));
+      }
+    }
+  },
+  resetLoop() {
+    player.parity.loop = [[1], [2], [1, 2]];
+  },
+  resetSubsection() {
+    player.parity.loop = [[1], [2], [1, 2]];
+    player.parity.subsection = [[1], [2], [1, 2]];
+  }
 }
 
 let Options = {
@@ -599,6 +650,7 @@ let State = {
       }
       this.jump();
       player.position = [i, j, 0];
+      ParityTracker.resetSubsection();
       this.setupLoop();
     } else {
       alert(this.unlockMessage(i, j));
@@ -704,6 +756,13 @@ let State = {
     !player.progress.subsections.includes(player.position.slice(0, 2).join(','))) {
       player.progress.subsections.push(player.position.slice(0, 2).join(','));
     }
+    if (player.position[2] === b.length - 1) {
+      for (let i of player.parity.subsection) {
+        if (!player.parityProgress.subsection[i.join('')].includes(player.position.slice(0, 2).join(','))) {
+          player.parityProgress.subsection[i.join('')].push(player.position.slice(0, 2).join(','));
+        }
+      }
+    }
   },
   
   complete() {
@@ -712,11 +771,19 @@ let State = {
       new Audio('spheal.mp3').play();
     }
     let id = player.position.join(',');
+    let type = this.getType();
+    // Parity handling
+    if (type === 'bonus' || type === 'big') {
+      for (let i of player.parity.loop) {
+        if (!player.parityProgress.bonus[i.join('')].includes(id)) {
+          player.parityProgress.bonus[i.join('')].push(id);
+        }
+      }
+    }
     if (player.progress.loops.includes(id)) {
       return;
     }
     player.progress.loops.push(id);
-    let type = this.getType();
     if (type === 'cells') {
       player.progress.cells += Grid.cellCount();
     } else if (type === 'bonus') {
@@ -738,6 +805,11 @@ let State = {
       if (!this.inRange(player.position, player.data.loops)) {
         player.position[i] = 0;
       } else {
+        if (i === 2) {
+          ParityTracker.resetLoop();
+        } else {
+          ParityTracker.resetSubsection();
+        }
         break;
       }
     }
