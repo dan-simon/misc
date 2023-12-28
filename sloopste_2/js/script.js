@@ -17,6 +17,7 @@ let player = {
     pause: false,
     timer: false,
     hover: 'None',
+    allowedParity: 'Default',
   },
   time: {
     time: 0,
@@ -262,14 +263,18 @@ let Grid = {
         return neighbors;
     },
     
-    clearHighlightedSubset() {
-        if (!Options.getOption('pause')) {
-            player.grid.highlightedSubset.forEach(cellStr => {
-                const [rowIndex, colIndex] = JSON.parse(cellStr);
-                document.getElementById(cellStr).style.backgroundColor = this.getColor((rowIndex + colIndex) % 2, player.grid.cells[rowIndex][colIndex], false);
-            });
-            player.grid.highlightedSubset.clear();
+    clearHighlightedSubset(manual) {
+        if (Options.getOption('pause')) {
+            if (manual) {
+                alert('Paused!');
+            }
+            return;
         }
+        player.grid.highlightedSubset.forEach(cellStr => {
+            const [rowIndex, colIndex] = JSON.parse(cellStr);
+            document.getElementById(cellStr).style.backgroundColor = this.getColor((rowIndex + colIndex) % 2, player.grid.cells[rowIndex][colIndex], false);
+        });
+        player.grid.highlightedSubset.clear();
     },
     
     getConnectedComponent(cell) {
@@ -363,6 +368,16 @@ let Grid = {
       return subset.size === visited.size;
     },
     
+    parityCalc(manual) {
+      if (Options.getOption('pause')) {
+        if (manual) {
+          alert('Paused!');
+        }
+        return;
+      }
+      this.adjustEdges(player.grid.highlightedSubset, manual);
+    },
+    
     adjustEdges(subset, manual) {
         if (subset.size === 0 || subset.size === this.unshadedCount) {
             return;
@@ -373,7 +388,9 @@ let Grid = {
         
         const [totalParity, exitParity, usedExits, unknownExits] = parityInfo;
         
-        const allowed = this.isSafeSubset(subset) ? [1, 2] : this.allowedParity;
+        const allowed = this.isSafeSubset(subset) ? [1, 2] : {
+          'Default': [1, 2], '1-less': [2], '2-less': [1], '12-less': []
+        }[Options.getOption('allowedParity')];
         
         if (allowed.includes(1)) {
             [0, 1].forEach(parity => {
@@ -503,6 +520,12 @@ let Options = {
   },
   setOption(x, y) {
     player.options[x] = y;
+  },
+  advanceOption(x, l) {
+    player.options[x] = l[(l.indexOf(player.options[x]) + 1) % l.length];
+  },
+  advanceDescription(x, l) {
+    return player.options[x] + ' → ' + l[(l.indexOf(player.options[x]) + 1) % l.length];
   }
 }
 
@@ -641,7 +664,7 @@ let Parser = {
 let Headers = {
   levelString() {
     if (player.position[0] === null) {
-      return ['Use "Load puzzles" with a level string', 'Main'][player.position[1]];
+      return ['Use "Load" with a level string', 'Main'][player.position[1]];
     }
     return State.names[player.position[0]][player.position[1]][player.position[2]];
   },
@@ -723,7 +746,14 @@ let Saving = {
   save() {
     return this.encode(player);
   },
+  loadPrompt() {
+    this.load(prompt('Level string/save:'));
+  },
   load(x) {
+    if ('0123456789'.includes(x[0])) {
+      State.initializeLoops(x);
+      return;
+    }
     player = this.decode(x);
     player.time.lastUpdate = Date.now();
     this.fixPlayer();
@@ -734,10 +764,17 @@ let Saving = {
   fixPlayer() {
     // add changes here
   },
+  convertSave() {
+    if ('highlightedSubset' in player.grid) {
+      player.grid.highlightedSubset = new Set(player.grid.highlightedSubset);
+    }
+  },
   misc() {
     State.jump();
-    Grid.setup();
     State.setupNames();
+    if (player.position[0] !== null) {
+      Grid.setup();
+    }
   }
 }
 
@@ -745,6 +782,15 @@ let gameLoop = function () {
   State.tick();
   updateDisplay();
 }
+
+window.addEventListener('keydown', function(event) {
+  switch (event.key.toLowerCase()) {
+    case 'x': Grid.clearHighlightedSubset(true); break;
+    case 'p': Grid.parityCalc(true); break;
+    case 'y': Options.advanceOption('hover', ['None', 'Highlight', 'Unhighlight']); break;
+    case 'z': Grid.recolor(); break;
+  }
+});
 
 window.onload = function () {
   updateDisplayPageLoadSetup();

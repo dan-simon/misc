@@ -4,108 +4,95 @@
   <title>Sloopste</title>
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
   <meta content="utf-8" http-equiv="encoding">
-  <script src="js/script.js?time=1703705337142"></script>
-  <script src="js/update-display.js?time=1703705337142"></script>
-  <link rel="stylesheet" href="styles.css?time=1703705337142"></link>
+  <script src="js/pako.min.js"></script>
+  <script src="js/script.js?time=1703725557994"></script>
+  <script src="js/update-display.js?time=1703725557994"></script>
+  <link rel="stylesheet" href="styles.css?time=1703725557994"></link>
 </head>
 <body>
     <h2><span id="e0"></span></h2>
     <h3><span id="e1"></span></h3>
     <h3><span id="e2"></span></h3>
     <div id="b0">
-          <button id="b1" onclick="State.jumpToSubsection(0, 0)">
-            1-a
-          </button>
-          <button id="b2" onclick="State.jumpToSubsection(0, 1)">
-            1-b
-          </button>
-          <button id="b3" onclick="State.jumpToSubsection(0, 2)">
-            1-c
-          </button>
+        <button id="b1" onclick="State.jumpToSubsection(0, 0, false)">
+          1-a
+        </button><button id="b2" onclick="State.jumpToSubsection(0, 1, false)">
+          1-b
+        </button><button id="b3" onclick="State.jumpToSubsection(0, 2, false)">
+          1-c
+        </button>
         <br/> 
-          <button id="b4" onclick="State.jumpToSubsection(1, 0)">
-            2-a
-          </button>
-          <button id="b5" onclick="State.jumpToSubsection(1, 1)">
-            2-b
-          </button>
-          <button id="b6" onclick="State.jumpToSubsection(1, 2)">
-            2-c
-          </button>
+        <button id="b4" onclick="State.jumpToSubsection(1, 0, false)">
+          2-a
+        </button><button id="b5" onclick="State.jumpToSubsection(1, 1, false)">
+          2-b
+        </button><button id="b6" onclick="State.jumpToSubsection(1, 2, false)">
+          2-c
+        </button>
         <br/> 
-          <button id="b7" onclick="State.jumpToSubsection(2, 0)">
-            3-a
-          </button>
-          <button id="b8" onclick="State.jumpToSubsection(2, 1)">
-            3-b
-          </button>
-          <button id="b9" onclick="State.jumpToSubsection(2, 2)">
-            3-c
-          </button>
+        <button id="b7" onclick="State.jumpToSubsection(2, 0, false)">
+          3-a
+        </button><button id="b8" onclick="State.jumpToSubsection(2, 1, false)">
+          3-b
+        </button><button id="b9" onclick="State.jumpToSubsection(2, 2, false)">
+          3-c
+        </button>
         <br/> 
-          <button id="b10" onclick="State.jumpToSubsection(3, 0)">
-            4-a
-          </button>
-          <button id="b11" onclick="State.jumpToSubsection(3, 1)">
-            4-b
-          </button>
-          <button id="b12" onclick="State.jumpToSubsection(3, 2)">
-            4-c
-          </button>
+        <button id="b10" onclick="State.jumpToSubsection(3, 0, false)">
+          4-a
+        </button><button id="b11" onclick="State.jumpToSubsection(3, 1, false)">
+          4-b
+        </button><button id="b12" onclick="State.jumpToSubsection(3, 2, false)">
+          4-c
+        </button>
         <br/> 
-          <button id="b13" onclick="State.jumpToSubsection(4, 0)">
-            5-a
-          </button>
-          <button id="b14" onclick="State.jumpToSubsection(4, 1)">
-            5-b
-          </button>
-          <button id="b15" onclick="State.jumpToSubsection(4, 2)">
-            5-c
-          </button>
+        <button id="b13" onclick="State.jumpToSubsection(4, 0, false)">
+          5-a
+        </button><button id="b14" onclick="State.jumpToSubsection(4, 1, false)">
+          5-b
+        </button><button id="b15" onclick="State.jumpToSubsection(4, 2, false)">
+          5-c
+        </button>
         <br/> 
-          <button id="b16" onclick="State.jumpToSubsection(5, 0)">
-            6-a
-          </button>
-          <button id="b17" onclick="State.jumpToSubsection(5, 1)">
-            6-b
-          </button>
-          <button id="b18" onclick="State.jumpToSubsection(5, 2)">
-            6-c
-          </button>
+        <button id="b16" onclick="State.jumpToSubsection(5, 0, false)">
+          6-a
+        </button><button id="b17" onclick="State.jumpToSubsection(5, 1, false)">
+          6-b
+        </button><button id="b18" onclick="State.jumpToSubsection(5, 2, false)">
+          6-c
+        </button>
         <br/> 
-          <button id="b19" onclick="State.jumpToSubsection(6, 0)">
-            7-a
-          </button>
-          <button id="b20" onclick="State.jumpToSubsection(6, 1)">
-            7-b
-          </button>
-          <button id="b21" onclick="State.jumpToSubsection(6, 2)">
-            7-c
-          </button>
+        <button id="b19" onclick="State.jumpToSubsection(6, 0, false)">
+          7-a
+        </button><button id="b20" onclick="State.jumpToSubsection(6, 1, false)">
+          7-b
+        </button><button id="b21" onclick="State.jumpToSubsection(6, 2, false)">
+          7-c
+        </button>
         <br/> 
-          <button id="b22" onclick="State.jumpToSubsection(7, 0)">
-            8-a
-          </button>
-          <button id="b23" onclick="State.jumpToSubsection(7, 1)">
-            8-b
-          </button>
-          <button id="b24" onclick="State.jumpToSubsection(7, 2)">
-            8-c
-          </button>
+        <button id="b22" onclick="State.jumpToSubsection(7, 0, false)">
+          8-a
+        </button><button id="b23" onclick="State.jumpToSubsection(7, 1, false)">
+          8-b
+        </button><button id="b24" onclick="State.jumpToSubsection(7, 2, false)">
+          8-c
+        </button>
         <br/> 
-          <button id="b25" onclick="State.jumpToSubsection(8, 0)">
-            10-a
-          </button>
-          <button id="b26" onclick="State.jumpToSubsection(8, 1)">
-            10-b
-          </button>
-          <button id="b27" onclick="State.jumpToSubsection(8, 2)">
-            10-c
-          </button>
+        <button id="b25" onclick="State.jumpToSubsection(8, 0, false)">
+          10-a
+        </button><button id="b26" onclick="State.jumpToSubsection(8, 1, false)">
+          10-b
+        </button><button id="b27" onclick="State.jumpToSubsection(8, 2, false)">
+          10-c
+        </button>
          
     </div>
     <div id="b28">
       <table id="gridTable"></table>
     </div>
+    <hr/>
+    <button onclick="Saving.loadPrompt()">Load</button><button onclick="Grid.clearHighlightedSubset()">Clear (x)</button><button onclick="Grid.adjustEdges(player.grid.highlightedSubset, true)">Parity on selected region (p)</button>
+    <br/>
+    <button onclick="Options.advanceOption('hover', ['None', 'Highlight', 'Unhighlight'])">Change hover mode (y) (<span id="e3"></span>)</button><button onclick="Grid.recolor()">Recolor (z)</button>
 </body>
 </html>
