@@ -864,7 +864,8 @@ let Parser = {
     let parts = x.split(/[xyz]/g);
     let type = table[x[parts[0].length]];
     let data = parts[1];
-    return [urlToNestedArray('https://puzz.link/p?simpleloop/' + parts[0] + '/' + parts[0] + '/' + parts[1]), type];
+    let num = (+parts[0] >= 60) ? Math.floor(+parts[0] / 10) : +parts[0];
+    return [urlToNestedArray('https://puzz.link/p?simpleloop/' + num + '/' + num + '/' + parts[1]), type];
   }
 }
 
