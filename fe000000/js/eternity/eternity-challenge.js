@@ -270,6 +270,15 @@ let EternityChallenge = {
     return formatMaybeInt(this.getEternityChallengeResourceAmount(x)) + '/' + formatMaybeInt(this.getEternityChallengeRequirement(x)) +
       ' ' + this.getEternityChallengeResourceName(x) + (this.hasRequirementRecentlyBeenReached(x) ? ' (reached)' : '');
   },
+  eternityChallengeCostDescription(x) {
+    // This could be done as easily in the HTML but it seems nice to have a method.
+    // Also, we don't use formatInt because it might show the current resource amount incorrectly
+    // (for example, 2 stars rather than 1.75).
+    let unspent = Studies.unspentTheorems();
+    let cost = this.getEternityChallengeCost(x);
+    return ((unspent >= cost) ? '' : formatMaybeInt(unspent) + '/') + formatMaybeInt(cost) +
+      ' theorem' + pluralize(cost, '', 's') + ((unspent >= cost) ? ' (reached)' : '');
+  },
   eternityChallengeStatusDescription(x) {
     let description;
     if (this.isEternityChallengeCompleted(x)) {
