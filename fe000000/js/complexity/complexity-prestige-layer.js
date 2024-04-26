@@ -154,10 +154,10 @@ let ComplexityPrestigeLayer = {
     if (manual && Options.confirmation('complexity') && !confirm(this.complexityConfirmationMessage())) return;
     Achievements.checkForAchievements('complexity');
     let gain = this.complexityPointGain();
-    let amount = this.complexityPoints();
+    let prevTotal = this.totalComplexityPoints();
     ComplexityPoints.addAmount(gain);
     Complexities.increment();
-    Stats.addComplexity(player.stats.timeSinceComplexity, gain, amount);
+    Stats.addComplexity(player.stats.timeSinceComplexity, gain, prevTotal);
     Powers.maybeRespec();
     Goals.recordPrestige('complexity');
     this.complexityReset(false, false, false);

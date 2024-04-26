@@ -134,13 +134,13 @@ let EternityPrestigeLayer = {
     if (manual && Options.confirmation('eternity') && !confirm(this.eternityConfirmationMessage())) return;
     Achievements.checkForAchievements('eternity');
     let gain = this.eternityPointGain();
-    let amount = this.eternityPoints();
+    let prevTotal = this.totalEternityPoints();
     EternityPoints.addAmount(gain);
     Eternities.add(Eternities.commonEternityGainMultiplier());
     // Note that this happens before starting benefits which might care
     // about additional eternities from complexity achievements.
     ComplexityAchievements.checkForComplexityAchievements('eternity');
-    Stats.addEternity(player.stats.timeSinceEternity, gain, amount);
+    Stats.addEternity(player.stats.timeSinceEternity, gain, prevTotal);
     // Eternity challenge handling
     EternityChallenge.checkForEternityChallengeCompletion();
     // I'm not sure whether or not this should go in the reset function.

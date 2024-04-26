@@ -161,11 +161,11 @@ let InfinityPrestigeLayer = {
     }
     Achievements.checkForAchievements('infinity');
     let gain = this.infinityPointGain();
-    let amount = this.infinityPoints();
+    let prevTotal = this.totalInfinityPoints();
     InfinityPoints.addAmount(gain);
     Infinities.increment();
     ComplexityAchievements.checkForComplexityAchievements('infinity');
-    Stats.addInfinity(player.stats.timeSinceInfinity, gain, amount);
+    Stats.addInfinity(player.stats.timeSinceInfinity, gain, prevTotal);
     Challenge.checkForChallengeCompletion();
     InfinityChallenge.checkForInfinityChallengeCompletion();
     if (!Challenge.restartOnCompletion()) {
