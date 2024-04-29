@@ -1710,6 +1710,10 @@ let Saving = {
       player.options.autobuyers.useSettingsDespiteNoCost = [false, false];
       player.version = 2.3046875;
     }
+    if (player.version < 2.30859375) {
+      player.oracle.showInPowers = false;
+      player.version = 2.30859375;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

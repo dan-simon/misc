@@ -49,6 +49,7 @@ let Tabs = {
     player.currentTab = x;
     player.currentTabGroup = this.tabToTabGroup[x];
     player.currentTabInGroup[player.currentTabGroup] = x;
+    this.noteTabChange();
   },
   setTabGroup(x) {
     player.currentTabGroup = x;
@@ -57,6 +58,14 @@ let Tabs = {
       player.currentTabInGroup[x] = this.tabGroupToTab[x].filter(i => this.isTabVisibleRaw(i))[0];
     }
     player.currentTab = player.currentTabInGroup[x];
+    this.noteTabChange();
+  },
+  noteTabChange() {
+    // Note: This might be called even if the tab stays the same; it's only possible that the tab has changed.
+    // However, any tab change apart from a save being loaded should lead to this being called.
+    if (Tabs.currentTab() !== 'powers') {
+      player.oracle.showInPowers = false;
+    }
   },
   isTabOptionVisible(x) {
     if (Options.showAllTabs()) {

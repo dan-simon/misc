@@ -204,6 +204,8 @@ let FinalityPrestigeLayer = {
       },
       complexityStars: new Decimal(0),
       freeTime: 0,
+      timeSinceComplexity: 0,
+      showInPowers: false,
     };
     player.galaxies.unlocked = false;
     if (Galaxy.isResetNextDilatedOnFinalityOn()) {

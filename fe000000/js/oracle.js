@@ -138,8 +138,14 @@ let Oracle = {
         if (Oracle.alert()) {
           alert(Oracle.message());
         }
+        if (Tabs.currentTab() === 'powers') {
+          player.oracle.showInPowers = true;
+        }
       });
     });
+  },
+  showInPowers() {
+    return player.oracle.showInPowers;
   },
   message() {
     let messages = [

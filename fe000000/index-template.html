@@ -2781,7 +2781,8 @@
         <span>The powers equipped by importing powers will be the strongest stored powers of the chosen types.</span>
         <br/>
         <div ~style.display=Options.showFullOptions('powers') ? 'none' : ''~>
-          <button onclick="Powers.respecAndReset()" ~class=Powers.canRespec() && Powers.isPowersUnequipEnabled() ? "" : "disabled"~>Unequip equipped powers and ~r ComplexityPrestigeLayer.resetText() ~</button></button>
+          <button onclick="Powers.respecAndReset()" ~class=Powers.canRespec() && Powers.isPowersUnequipEnabled() ? "" : "disabled"~>Unequip equipped powers and ~r ComplexityPrestigeLayer.resetText() ~</button>
+          <button onclick="Oracle.invoke()" ~style.display=Oracle.isUnlocked() ? '' : 'none'~>Get prediction from the Oracle</button>
           <div style="width: 1024px; margin-left: auto; margin-right: auto;">
             <span>There are a lot of power options. <button onclick="Options.toggleShowFullOptions('powers')">Full power options: ~r Options.showFullOptions('powers') ? 'On' : 'Off' ~</button></span>
           </div>
@@ -2791,6 +2792,7 @@
           <button onclick="Powers.toggleRespec()">Unequip equipped powers on next complexity: ~r Powers.isRespecOn() ? "On" : "Off" ~</button>
           <br/>
           <button onclick="Powers.respecAndReset()" ~class=Powers.canRespec() && Powers.isPowersUnequipEnabled() ? "" : "disabled"~>Unequip equipped powers and ~r ComplexityPrestigeLayer.resetText() ~</button>
+          <button onclick="Oracle.invoke()" ~style.display=Oracle.isUnlocked() ? '' : 'none'~>Get prediction from the Oracle</button>
           <br ~style.display=Powers.canAutoEquippedSwap() ? 'none' : ''~/>
           <button onclick="Powers.equippedSwap(true)" ~class=Powers.canEquippedSwap() && Powers.isPowersUnequipEnabled() ? "" : "disabled"~ ~style.display=Powers.canAutoEquippedSwap() ? 'none' : ''~>
             Swap your equipped powers with better stored powers of the same type and ~r ComplexityPrestigeLayer.resetText() ~
@@ -2800,6 +2802,11 @@
           <div style="width: 1024px; margin-left: auto; margin-right: auto;">
             <span>There are a lot of power options. <button onclick="Options.toggleShowFullOptions('powers')">Full power options: ~r Options.showFullOptions('powers') ? 'On' : 'Off' ~</button></span>
           </div>
+        </div>
+        <div ~style.display=Oracle.showInPowers() ? '' : 'none'~>
+          <br/>
+          <span>~r Oracle.messagePrequel() ~</span>
+          <div class="oraclediv" ~style.display=Oracle.isUsed() ? '' : 'none'~>~r Oracle.message() ~</div>
         </div>
         <br/>
         <div style="width: 1024px; margin-left: auto; margin-right: auto;">
