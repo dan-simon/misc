@@ -162,7 +162,7 @@ let Powers = {
     'eternity': 'Eternity generator multiplier power',
     'complexity': 'Complexity generator multiplier power',
   },
-  upgradeList: [1, 2, 3, 4].map((x) => PowerUpgrade(x)),
+  upgradeList: [1, 2, 3].map((x) => PowerUpgrade(x)),
   getUpgrade: function (x) {
     return this.upgradeList[x - 1];
   },
@@ -726,7 +726,11 @@ let Powers = {
     return this.upgradeList.some(x => x.canBuy());
   },
   maxAll() {
-    this.upgradeList.forEach(x => x.buyMax());
+    this.buyMaxOf([1, 2, 3]);
+  },
+  buyMaxOf(ids) {
+    let list = ids.map(x => Powers.upgradeList[x - 1]);
+    generalMaxAll(list, ComplexityPoints);
   },
   bestComplexityPowers() {
     let bestComplexityPowers = this.getSortedPowerList('complexity', true, true).slice(0, this.equippedLimit());

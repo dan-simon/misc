@@ -148,6 +148,13 @@ let EternityProducer = {
   },
   maxAll() {
     this.upgradeList.forEach(x => x.buyMax());
+  },
+  maxAll() {
+    this.buyMaxOf([1, 2]);
+  },
+  buyMaxOf(ids) {
+    let list = ids.map(x => EternityProducer.upgradeList[x - 1]);
+    generalMaxAll(list, EternityPoints);
   }
 }
 
