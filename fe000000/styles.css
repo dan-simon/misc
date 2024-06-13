@@ -44,7 +44,7 @@ a {
   color: var(--link-color);
 }
 
-button {
+button, .buttonlike {
 	border: 0;
   font-family: Typewriter, serif;
   font-size: 1rem;
@@ -53,12 +53,20 @@ button {
   color: var(--button-text-color);
 }
 
-button:focus {
+button:focus, .buttonlike:focus {
   outline-offset: 0;
   outline-style: solid;
   outline-offset: var(--outline-offset);
   outline-width: var(--outline-size);
   outline-color: var(--outline-color);
+}
+
+.buttonlike {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
 }
 
 input[type=checkbox] {
@@ -437,152 +445,79 @@ input[type=text] {
   background: var(--study-chroma-color);
 }
 
-.studynormalforbidden {
-  display: table;
-  text-align: center;
-  background: var(--button-disabled-color);
-  color: var(--red-text-color);
+.study {
   font-size: 0.875rem;
   width: 256px;
   height: 160px;
+  padding: 10px;
+}
+
+.studynormalforbidden {
+  background: var(--button-disabled-color);
+  color: var(--red-text-color);
 }
 
 .studynormalunbuyable {
-  display: table;
-  text-align: center;
   background: var(--button-disabled-color);
-  font-size: 0.875rem;
-  width: 256px;
-  height: 160px;
 }
 
 .studynormalbuyable {
-  display: table;
-  text-align: center;
   background: radial-gradient(var(--study-normal-color), var(--button-color));
-  font-size: 0.875rem;
-  width: 256px;
-  height: 160px;
 }
 
 .studynormalbought {
-  display: table;
-  text-align: center;
   background: var(--study-normal-color);
-  font-size: 0.875rem;
-  width: 256px;
-  height: 160px;
 }
 
 .studyinfinityforbidden {
-  display: table;
-  text-align: center;
   background: var(--button-disabled-color);
   color: var(--red-text-color);
-  font-size: 0.875rem;
-  width: 256px;
-  height: 160px;
 }
 
 .studyinfinityunbuyable {
-  display: table;
-  text-align: center;
   background: var(--button-disabled-color);
-  font-size: 0.875rem;
-  width: 256px;
-  height: 160px;
 }
 
 .studyinfinitybuyable {
-  display: table;
-  text-align: center;
   background: radial-gradient(var(--study-infinity-color), var(--button-color));
-  font-size: 0.875rem;
-  width: 256px;
-  height: 160px;
 }
 
 .studyinfinitybought {
-  display: table;
-  text-align: center;
   background: var(--study-infinity-color);
-  font-size: 0.875rem;
-  width: 256px;
-  height: 160px;
 }
 
 .studyeternityforbidden {
-  display: table;
-  text-align: center;
   background: var(--button-disabled-color);
   color: var(--red-text-color);
-  font-size: 0.875rem;
-  width: 256px;
-  height: 160px;
 }
 
 .studyeternityunbuyable {
-  display: table;
-  text-align: center;
   background: var(--button-disabled-color);
-  font-size: 0.875rem;
-  width: 256px;
-  height: 160px;
 }
 
 .studyeternitybuyable {
-  display: table;
-  text-align: center;
   background: radial-gradient(var(--study-eternity-color), var(--button-color));
-  font-size: 0.875rem;
-  width: 256px;
-  height: 160px;
 }
 
 .studyeternitybought {
-  display: table;
-  text-align: center;
   background: var(--study-eternity-color);
-  font-size: 0.875rem;
-  width: 256px;
-  height: 160px;
 }
 
 .studychromaforbidden {
-  display: table;
-  text-align: center;
   background: var(--button-disabled-color);
   color: var(--red-text-color);
-  font-size: 0.875rem;
-  width: 256px;
-  height: 160px;
 }
 
 .studychromaunbuyable {
-  display: table;
-  text-align: center;
   background: var(--button-disabled-color);
-  font-size: 0.875rem;
-  width: 256px;
-  height: 160px;
 }
 
 .studychromabuyable {
-  display: table;
-  text-align: center;
   background: radial-gradient(var(--study-chroma-color), var(--button-color));
-  font-size: 0.875rem;
-  width: 256px;
-  height: 160px;
 }
 
 .studychromabought {
-  display: table;
-  text-align: center;
   background: var(--study-chroma-color);
-  font-size: 0.875rem;
-  width: 256px;
-  height: 160px;
 }
 
 .yellowspan, .yellowdiv > span {

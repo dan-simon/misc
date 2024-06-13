@@ -1441,193 +1441,141 @@
       <table style="margin-left: auto; margin-right: auto; border-spacing: 8px 8px; border-collapse: separate;">
         <tr ~style.display=Studies.canSeeTopRows() ? '' : 'none'~>
           <td>
-            <button ~class=Study(1).className()~ onclick="Study(1).click()">
-              Study ~o 1 ~
-              <br/>
-              Double per-boost multiplier
-              <br/>
-              Currently: ~f Study(1).rawTotalEffect() ~x
-              <br/>
-              Cost: ~i Study(1).displayCost() ~ theorem~s Study(1).displayCost() ~
+            <div ~class=Study(1).className()~ onclick="Study(1).click()">
+              <span>Study ~o 1 ~</span>
+              <span>Double per-boost multiplier</span>
+              <span>Currently: ~f Study(1).rawTotalEffect() ~x</span>
+              <span>Cost: ~i Study(1).displayCost() ~ theorem~s Study(1).displayCost() ~</span>
             </button>
           </td>
           <td>
-            <button ~class=Study(2).className()~ onclick="Study(2).click()">
-              Study ~o 2 ~
-              <br/>
-              Multiplier to normal generators based on prestige power
-              <br/>
-              Currently: ~f Study(2).rawEffect() ~x
-              <br/>
-              Cost: ~i Study(2).displayCost() ~ theorem~s Study(2).displayCost() ~
+            <div ~class=Study(2).className()~ onclick="Study(2).click()">
+              <span>Study ~o 2 ~</span>
+              <span>Multiplier to normal generators based on prestige power</span>
+              <span>Currently: ~f Study(2).rawEffect() ~x</span>
+              <span>Cost: ~i Study(2).displayCost() ~ theorem~s Study(2).displayCost() ~</span>
             </button>
           </td>
           <td>
-            <button ~class=Study(3).className()~ onclick="Study(3).click()">
-              Study ~o 3 ~
-              <br/>
-              Multiplier to normal generators based on total stars this complexity
-              <br/>
-              Currently: ~f Study(3).rawEffect() ~x
-              <br/>
-              Cost: ~i Study(3).displayCost() ~ theorem~s Study(3).displayCost() ~
+            <div ~class=Study(3).className()~ onclick="Study(3).click()">
+              <span>Study ~o 3 ~</span>
+              <span>Multiplier to normal generators based on total stars this complexity</span>
+              <span>Currently: ~f Study(3).rawEffect() ~x</span>
+              <span>Cost: ~i Study(3).displayCost() ~ theorem~s Study(3).displayCost() ~</span>
             </button>
           </td>
           <td>
-            <button ~class=Study(4).className()~ onclick="Study(4).click()">
-              Study ~o 4 ~
-              <br/>
-              Multiplier to normal generators based on total theorems
-              <br/>
-              Currently: ~f Study(4).rawEffect() ~x
-              <br/>
-              Cost: ~i Study(4).displayCost() ~ theorem~s Study(4).displayCost() ~
+            <div ~class=Study(4).className()~ onclick="Study(4).click()">
+              <span>Study ~o 4 ~</span>
+              <span>Multiplier to normal generators based on total theorems</span>
+              <span>Currently: ~f Study(4).rawEffect() ~x</span>
+              <span>Cost: ~i Study(4).displayCost() ~ theorem~s Study(4).displayCost() ~</span>
             </button>
           </td>
         </tr>
         <tr ~style.display=Studies.canSeeTopRows() ? '' : 'none'~>
           <td>
-            <button ~class=Study(5).className()~ onclick="Study(5).click()">
-              Study ~o 5 ~
-              <br/>
-              Multiplier to infinity generators based on number of boosts
-              <br/>
-              Currently: ~f Study(5).rawEffect() ~x
-              <br/>
-              Cost: ~i Study(5).displayCost() ~ theorem~s Study(5).displayCost() ~
+            <div ~class=Study(5).className()~ onclick="Study(5).click()">
+              <span>Study ~o 5 ~</span>
+              <span>Multiplier to infinity generators based on number of boosts</span>
+              <span>Currently: ~f Study(5).rawEffect() ~x</span>
+              <span>Cost: ~i Study(5).displayCost() ~ theorem~s Study(5).displayCost() ~</span>
             </button>
           </td>
           <td>
-            <button ~class=Study(6).className()~ onclick="Study(6).click()">
-              Study ~o 6 ~
-              <br/>
-              Multiplier to infinity generators based on prestige power
-              <br/>
-              Currently: ~f Study(6).rawEffect() ~x
-              <br/>
-              Cost: ~i Study(6).displayCost() ~ theorem~s Study(6).displayCost() ~
+            <div ~class=Study(6).className()~ onclick="Study(6).click()">
+              <span>Study ~o 6 ~</span>
+              <span>Multiplier to infinity generators based on prestige power</span>
+              <span>Currently: ~f Study(6).rawEffect() ~x</span>
+              <span>Cost: ~i Study(6).displayCost() ~ theorem~s Study(6).displayCost() ~</span>
             </button>
           </td>
           <td>
-            <button ~class=Study(7).className()~ onclick="Study(7).click()">
-              Study ~o 7 ~
-              <br/>
-              Multiplier to infinity generators based on eternities
-              <br/>
-              ~r Study(7).cappedText() ~: ~f Study(7).rawEffect() ~x
-              <br/>
-              Cost: ~i Study(7).displayCost() ~ theorem~s Study(7).displayCost() ~
+            <div ~class=Study(7).className()~ onclick="Study(7).click()">
+              <span>Study ~o 7 ~</span>
+              <span>Multiplier to infinity generators based on eternities</span>
+              <span>~r Study(7).cappedText() ~: ~f Study(7).rawEffect() ~x</span>
+              <span>Cost: ~i Study(7).displayCost() ~ theorem~s Study(7).displayCost() ~</span>
             </button>
           </td>
           <td>
-            <button ~class=Study(8).className()~ onclick="Study(8).click()">
-              Study ~o 8 ~
-              <br/>
-              Multiplier to infinity generators based on total theorems
-              <br/>
-              Currently: ~f Study(8).rawEffect() ~x
-              <br/>
-              Cost: ~i Study(8).displayCost() ~ theorem~s Study(8).displayCost() ~
+            <div ~class=Study(8).className()~ onclick="Study(8).click()">
+              <span>Study ~o 8 ~</span>
+              <span>Multiplier to infinity generators based on total theorems</span>
+              <span>Currently: ~f Study(8).rawEffect() ~x</span>
+              <span>Cost: ~i Study(8).displayCost() ~ theorem~s Study(8).displayCost() ~</span>
             </button>
           </td>
         </tr>
         <tr ~style.display=Studies.canSeeTopRows() ? '' : 'none'~>
           <td>
-            <button ~class=Study(9).className()~ onclick="Study(9).click()">
-              Study ~o 9 ~
-              <br/>
-              Eternity generators are multiplied by <span ~style.display=InfinityChallenge.isInfinityChallengeRunning(7) ? '' : 'none'~>square root of</span> per-boost multiplier
-              <br/>
-              Currently: ~f Study(9).rawEffect() ~x
-              <br/>
-              Cost: ~i Study(9).displayCost() ~ theorem~s Study(9).displayCost() ~
+            <div ~class=Study(9).className()~ onclick="Study(9).click()">
+              <span>Study ~o 9 ~</span>
+              <span>Eternity generators are multiplied by <span ~style.display=InfinityChallenge.isInfinityChallengeRunning(7) ? '' : 'none'~>square root of</span> per-boost multiplier</span>
+              <span>Currently: ~f Study(9).rawEffect() ~x</span>
+              <span>Cost: ~i Study(9).displayCost() ~ theorem~s Study(9).displayCost() ~</span>
             </button>
           </td>
           <td>
-            <button ~class=Study(10).className()~ onclick="Study(10).click()">
-              Study ~o 10 ~
-              <br/>
-              Multiplier to eternity generators based on prestige power
-              <br/>
-              Currently: ~f Study(10).rawEffect() ~x
-              <br/>
-              Cost: ~i Study(10).displayCost() ~ theorem~s Study(10).displayCost() ~
+            <div ~class=Study(10).className()~ onclick="Study(10).click()">
+              <span>Study ~o 10 ~</span>
+              <span>Multiplier to eternity generators based on prestige power</span>
+              <span>Currently: ~f Study(10).rawEffect() ~x</span>
+              <span>Cost: ~i Study(10).displayCost() ~ theorem~s Study(10).displayCost() ~</span>
             </button>
           </td>
           <td>
-            <button ~class=Study(11).className()~ onclick="Study(11).click()">
-              Study ~o 11 ~
-              <br/>
-              Multiplier to eternity generators based on eternity stars and time in eternity
-              <br/>
-              ~r Study(11).cappedText() ~: ~f Study(11).rawEffect() ~x
-              <br/>
-              Cost: ~i Study(11).displayCost() ~ theorem~s Study(11).displayCost() ~
+            <div ~class=Study(11).className()~ onclick="Study(11).click()">
+              <span>Study ~o 11 ~</span>
+              <span>Multiplier to eternity generators based on eternity stars and time in eternity</span>
+              <span>~r Study(11).cappedText() ~: ~f Study(11).rawEffect() ~x</span>
+              <span>Cost: ~i Study(11).displayCost() ~ theorem~s Study(11).displayCost() ~</span>
             </button>
           </td>
           <td>
-            <button ~class=Study(12).className()~ onclick="Study(12).click()">
-              Study ~o 12 ~
-              <br/>
-              Multiplier to eternity generators based on total theorems
-              <br/>
-              Currently: ~f Study(12).rawEffect() ~x
-              <br/>
-              Cost: ~i Study(12).displayCost() ~ theorem~s Study(12).displayCost() ~
+            <div ~class=Study(12).className()~ onclick="Study(12).click()">
+              <span>Study ~o 12 ~</span>
+              <span>Multiplier to eternity generators based on total theorems</span>
+              <span>Currently: ~f Study(12).rawEffect() ~x</span>
+              <span>Cost: ~i Study(12).displayCost() ~ theorem~s Study(12).displayCost() ~</span>
             </button>
           </td>
         </tr>
         <tr ~style.display=Studies.canSeeFourthRow() ? '' : 'none'~>
           <td>
-            <button ~class=Study(13).className()~ onclick="Study(13).click()">
-              Study ~o 13 ~ (~i Study(13).timesBought() ~x)
-              <br/>
-              Large fixed multiplier to normal generators
-              <br/>
-              Currently: ~f Study(13).effect() ~x
-              <br/>
-              Next: ~f Study(13).nextEffect() ~x
-              <br/>
-              Cost: ~i Study(13).displayCost() ~ theorem~s Study(13).displayCost() ~
+            <div ~class=Study(13).className()~ onclick="Study(13).click()">
+              <span>Study ~o 13 ~ (~i Study(13).timesBought() ~x)</span>
+              <span>Large fixed multiplier to normal generators</span>
+              <span>Currently: ~f Study(13).effect() ~x</span>
+              <span>Next: ~f Study(13).nextEffect() ~x</span>
+              <span>Cost: ~i Study(13).displayCost() ~ theorem~s Study(13).displayCost() ~</span>
             </button>
           </td>
           <td>
-            <button ~class=Study(14).className()~ onclick="Study(14).click()">
-              Study ~o 14 ~ (~i Study(14).timesBought() ~x)
-              <br/>
-              Multiplier to infinity generators based on total color value
-              <br/>
-              Currently: ~f Study(14).effect() ~x
-              <br/>
-              Next: ~f Study(14).nextEffect() ~x
-              <br/>
-              Cost: ~i Study(14).displayCost() ~ theorem~s Study(14).displayCost() ~
+            <div ~class=Study(14).className()~ onclick="Study(14).click()">
+              <span>Study ~o 14 ~ (~i Study(14).timesBought() ~x)</span>
+              <span>Multiplier to infinity generators based on total color value</span>
+              <span>Currently: ~f Study(14).effect() ~x</span>
+              <span>Next: ~f Study(14).nextEffect() ~x</span>
+              <span>Cost: ~i Study(14).displayCost() ~ theorem~s Study(14).displayCost() ~</span>
             </button>
           </td>
           <td>
-            <button ~class=Study(15).className()~ onclick="Study(15).click()">
-              Study ~o 15 ~ (~i Study(15).timesBought() ~x)
-              <br/>
-              Eternity generators are multiplied by chroma
-              <br/>
-              Currently: ~f Study(15).effect() ~x
-              <br/>
-              Next: ~f Study(15).nextEffect() ~x
-              <br/>
-              Cost: ~i Study(15).displayCost() ~ theorem~s Study(15).displayCost() ~
+            <div ~class=Study(15).className()~ onclick="Study(15).click()">
+              <span>Study ~o 15 ~ (~i Study(15).timesBought() ~x)</span>
+              <span>Eternity generators are multiplied by chroma</span>
+              <span>Currently: ~f Study(15).effect() ~x</span>
+              <span>Next: ~f Study(15).nextEffect() ~x</span>
+              <span>Cost: ~i Study(15).displayCost() ~ theorem~s Study(15).displayCost() ~</span>
             </button>
           </td>
           <td>
-            <button ~class=Study(16).className()~ onclick="Study(16).click()">
-              Study ~o 16 ~ (~i Study(16).timesBought() ~x)
-              <br/>
-              Multiplier to chroma buildup speed based on total theorems
-              <br/>
-              Currently: ~f Study(16).effect() ~x
-              <br/>
-              Next: ~f Study(16).nextEffect() ~x
-              <br/>
-              Cost: ~i Study(16).displayCost() ~ theorem~s Study(16).displayCost() ~
+            <div ~class=Study(16).className()~ onclick="Study(16).click()">
+              <span>Study ~o 16 ~ (~i Study(16).timesBought() ~x)</span>
+              <span>Multiplier to chroma buildup speed based on total theorems</span>
+              <span>Currently: ~f Study(16).effect() ~x</span>
+              <span>Next: ~f Study(16).nextEffect() ~x</span>
+              <span>Cost: ~i Study(16).displayCost() ~ theorem~s Study(16).displayCost() ~</span>
             </button>
           </td>
         </tr>
@@ -2163,7 +2111,7 @@
         <span>You ~r Chroma.timeForChromaTextPrefix() ~ <input type="text" class="chroma-value" ~!value=NotationOptions.format('chroma-value')~ ~!onchange=function() {Chroma.setTimeForChromaValue(NotationOptions.read('chroma-value', this.value))}~></input> <select ~!value=Chroma.timeForChromaMode()~ ~!onchange=function() {Chroma.setTimeForChromaMode(this.value)}~>
           <option value="chroma">chroma</option>
           <option value="fraction of chroma cap">fraction of chroma cap</option>
-        </select>~r Chroma.timeForChromaTextSuffix() ~. <button ~class=Chroma.syncedWithEternityAutobuyer() ? 'disabled' : ''~ onclick="Chroma.syncWithEternityAutobuyer()">~r Chroma.syncedWithEternityAutobuyer() ? 'Synced with eternity autobuyer' : 'Sync with eternity autobuyer' ~ <span class="helpspan">(?)<span class="tooltiptext">This button sets the eternity autobuyer's mode and amount to the mode and amount shown earlier on this line.</span></span></button></span>
+        </select>~r Chroma.timeForChromaTextSuffix() ~. <button ~class=Chroma.syncedWithEternityAutobuyer() ? 'disabled' : ''~ onclick="Chroma.syncWithEternityAutobuyer()">~r Chroma.syncedWithEternityAutobuyer() ? 'Synced with eternity autobuyer' : 'Sync with eternity autobuyer' ~ <span class="helpspan">(?)<span class="tooltiptext" style="left: 62.5%; margin-left: -180px;">This button sets the eternity autobuyer's mode and amount to the mode and amount shown earlier on this line.</span></span></button></span>
         <br/>
         <span>
           <span ~style.display=Chroma.producingAll() ? 'none' : ''~>The value of whatever color you are producing is</span>

@@ -181,7 +181,7 @@ let Study = function (i) {
       let infix = ['normal', 'infinity', 'eternity', 'chroma'][this.row() - 1];
       // For the rebuyable studies this order is very important.
       let suffix =  this.isBuyable() ? 'buyable' : (this.isBought() ? 'bought' : (ComplexityChallenge.isSafeguardOn(6) ? 'forbidden' : 'unbuyable'));
-      return 'study' + infix + suffix;
+      return 'study' + infix + suffix + ' study buttonlike';
     }
   }
 }
