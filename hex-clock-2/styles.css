@@ -1,0 +1,8 @@
+@font-face {
+  font-family: Typewriter;
+  src: url('MonospaceTypewriter.ttf');
+}
+
+body {
+  font-family: Typewriter, serif;
+}
