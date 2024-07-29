@@ -37,23 +37,49 @@ let hex = function (x, digits) {
     8 * dig[4 * i] + 4 * dig[4 * i + 1] + 2 * dig[4 * i + 2] + dig[4 * i + 3]]).join('');
 }
 
-let [start, unit, digits, useColor] = [0, 1, 12, true];
+let parseColor = function (x) {
+  let digs = [...x.toUpperCase()].filter(j => '0123456789ABCDEF'.includes(j)).join('');
+  if (digs.length === 6) {
+    return '#' + digs;
+  } else if (digs.length === 0) {
+    return '';
+  } else {
+    return null; 
+  }
+}
+
+let isValidColor = function (x) {
+  return x !== null && (x.length === 0 || (x.length === 7 && x[0] === '#' && [...x[1]].every(j => '0123456789ABCDEF'.includes(j))));
+}
+
+let getColor = function (c, x) {
+  if (!c) {
+    let rgb = colors.map(f => f(x));
+    return 'rgb(' + rgb.map(x => Math.round(255 * ((1 + x) / 2))).join(', ') + ')';
+  } else {
+    return c;
+  }
+}
+
+let [start, unit, digits, textColor, backgroundColor] = [0, 1, 12, '', '#FFFFFF'];
 
 let loadState = function () {
   if (localStorage.getItem('state') !== null) {
-    [start, unit, digits, useColor] = localStorage.getItem('state').split(',').map(i => +i);
+    [start, unit, digits, textColor, backgroundColor] = localStorage.getItem('state').split(',').map((i, ind) => ind < 3 ? +i : i);
   }
   document.getElementById('start').value = start;
   document.getElementById('unit').value = unit;
   document.getElementById('digits').value = digits;
-  document.getElementById('colors').checked = !!useColor;
+  document.getElementById('textColor').value = textColor;
+  document.getElementById('backgroundColor').value = backgroundColor;
 }
 
 let updateState = function () {
   let newStart = +document.getElementById('start').value;
   let newUnit = +document.getElementById('unit').value;
   let newDigits = +document.getElementById('digits').value;
-  let newUseColor = document.getElementById('colors').checked;
+  let newTextColor = parseColor(document.getElementById('textColor').value);
+  let newBackgroundColor = parseColor(document.getElementById('backgroundColor').value);
   if (isFinite(newStart)) {
     start = newStart;
   }
@@ -63,8 +89,13 @@ let updateState = function () {
   if (isFinite(newDigits)) {
     digits = newDigits;
   }
-  useColor = newUseColor;
-  localStorage.setItem('state', start + ',' + unit + ',' + digits + ',' + (+useColor));
+  if (isValidColor(newTextColor)) {
+    textColor = newTextColor;
+  }
+  if (isValidColor(newBackgroundColor)) {
+    backgroundColor = newBackgroundColor;
+  }
+  localStorage.setItem('state', [start, unit, digits, textColor, backgroundColor].join(','));
 }
 
 window.onload = function () {
@@ -73,11 +104,7 @@ window.onload = function () {
     let x = (Date.now() / 1000 - start) / (unit || 1);
     let num = document.getElementById('num');
     num.textContent = hex(x, digits);
-    if (useColor) {
-      rgb = colors.map(f => f(x));
-      num.style.color = 'rgb(' + rgb.map(x => Math.round(255 * ((1 + x) / 2))).join(', ') + ')';
-    } else {
-      num.style.color = '';
-    }
+    num.style.color = getColor(textColor, x);
+    document.body.style.backgroundColor = getColor(backgroundColor, x);
   }, interval);
 }
