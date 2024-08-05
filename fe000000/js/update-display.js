@@ -2886,8 +2886,8 @@ function updateDisplay() {
     if (shouldUpdate("e994")) {let v = formatInt(Studies.cost(2)); if (e[994].textContent !== v) {e[994].textContent = v};};
     if (shouldUpdate("b625")) {let v = Trivia.show('EG requirement for theorems') ? '' : 'none'; if (b[625].style.display !== v) {b[625].style.display = v};};
     if (shouldUpdate("b626")) {let v = Studies.canBuy(0) ? 'buttonlike' : 'buttonlike disabled'; if (b[626].className !== v) {b[626].className = v};};
-    if (shouldUpdate("b627")) {let v = Studies.canBuy(0) ? 'buttonlike' : 'buttonlike disabled'; if (b[627].className !== v) {b[627].className = v};};
-    if (shouldUpdate("b628")) {let v = Studies.canBuy(0) ? 'buttonlike' : 'buttonlike disabled'; if (b[628].className !== v) {b[628].className = v};};
+    if (shouldUpdate("b627")) {let v = Studies.canBuy(1) ? 'buttonlike' : 'buttonlike disabled'; if (b[627].className !== v) {b[627].className = v};};
+    if (shouldUpdate("b628")) {let v = Studies.canBuy(2) ? 'buttonlike' : 'buttonlike disabled'; if (b[628].className !== v) {b[628].className = v};};
     if (shouldUpdate("b629")) {let v = EternityAutobuyers.hasTheoremAutobuyers() ? '' : 'none'; if (b[629].style.display !== v) {b[629].style.display = v};};
     if (shouldUpdate("e995")) {let v = EternityAutobuyer(14).isOn() ? "On" : "Off"; if (e[995].textContent !== v) {e[995].textContent = v};};
     if (shouldUpdate("e996")) {let v = EternityAutobuyer(15).isOn() ? "On" : "Off"; if (e[996].textContent !== v) {e[996].textContent = v};};
