@@ -51,6 +51,15 @@ let Chroma = {
     ];
     return factors.reduce((a, b) => a.times(b));
   },
+  slowdown() {
+    return this.cap() / (this.cap() - this.amount());
+  },
+  totalSpeed() {
+    return this.chromaSpeedMultiplier().div(this.slowdown());
+  },
+  perSecond() {
+    return this.totalSpeed().times(2);
+  },
   extraTheoremsRaw() {
     return this.effectOfColor(5);
   },
