@@ -25,7 +25,7 @@ let Chroma = {
     if (!this.isUnlocked()) {
       return 0;
     }
-    if (this.chromaSpeedMultiplier().gte(Decimal.pow(2, 256))) {
+    if (this.isFast()) {
       return this.cap();
     }
     let t = player.stats.timeSinceEternity * this.chromaSpeedMultiplier().toNumber();
@@ -168,13 +168,17 @@ let Chroma = {
   timeUntilProduction() {
     return this.timeUntilChromaIs(this.colorAmount(player.chroma.current));
   },
+  isFast() {
+    return this.chromaSpeedMultiplier().gte(Decimal.pow(2, 256));
+  },
   timeUntilChromaIs(c) {
-    if (this.chromaSpeedMultiplier().gte(Decimal.pow(2, 256))) {
-      return 0;
-    }
     let cap = this.cap();
     if (c > cap) {
       return Infinity;
+    }
+    // Do this special case *after* checking for cap.
+    if (this.isFast()) {
+      return 0;
     }
     let t = -cap * Math.log(1 - c / cap) / 2;
     return t / this.chromaSpeedMultiplier() - player.stats.timeSinceEternity;
