@@ -2720,7 +2720,7 @@
         <br/>
         <div ~style.display=Powers.showNextPower() ? '' : 'none'~>
           <br/>
-          <span>Next power<span ~style.display=Powers.nextKept() ? 'none' : ''~> (will be automatically deleted due to being bad enough to be useless)</span>:</span>
+          <span>Next power<span ~style.display=Powers.nextKept() ? 'none' : ''~> (will be automatically deleted for ~f Powers.nextDeletedShards() ~ power shards due to being bad enough to be useless)</span>:</span>
           <br/>
           <span ~class=Powers.color('next', 1)~>~r Powers.descriptionFull('next', 1) ~</span>
         </div>
@@ -2962,7 +2962,7 @@
           <span>Crafting cost depends only on rarity (not on type), and is always at least twice the power shards gained from deletion.</span>
           <br/>
           <br/>
-          <span>Crafted power<span ~style.display=Powers.craftedKept() ? 'none' : ''~> (will be automatically deleted due to being bad enough to be useless)</span>:</span>
+          <span>Crafted power<span ~style.display=Powers.craftedKept() ? 'none' : ''~> (will be automatically deleted for ~f Powers.craftedDeletedShards() ~ power shards due to being bad enough to be useless)</span>:</span>
           <br/>
           <span ~class=Powers.color('crafted', 1)~>~r Powers.descriptionFull('crafted', 1) ~</span>
         </div>

@@ -327,6 +327,12 @@ let Powers = {
     let cutoff = this.cutoff(p.type);
     return this.strength(p) * this.rarity(p) > cutoff;
   },
+  nextDeletedShards() {
+    return PowerShards.shardGain(this.next());
+  },
+  craftedDeletedShards() {
+    return PowerShards.shardGain(PowerShards.craftedPower());
+  },
   canEquippedSwap() {
     return ['normal', 'infinity', 'eternity', 'complexity'].some(
       t => Math.min(...this.equipped().filter(p => p.type === t).map(p => this.strength(p) * this.rarity(p))) <
