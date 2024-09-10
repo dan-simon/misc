@@ -147,6 +147,9 @@ let Oracle = {
   showInPowers() {
     return player.oracle.showInPowers;
   },
+  hideInPowers() {
+    player.oracle.showInPowers = false;
+  },
   message() {
     let messages = [
       this.complexityPointMessage(), this.complexityPointGainMessage(), this.otherThingsGainMessage(), this.otherThingsLossMessage()

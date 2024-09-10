@@ -2752,6 +2752,8 @@
         </div>
         <div ~style.display=Oracle.showInPowers() ? '' : 'none'~>
           <br/>
+          <button onclick="Oracle.hideInPowers()">Hide this prediction (also hidden by switching tabs)</button>
+          <br/>
           <span>~r Oracle.messagePrequel() ~</span>
           <div class="oraclediv" ~style.display=Oracle.isUsed() ? '' : 'none'~>~r Oracle.message() ~</div>
         </div>

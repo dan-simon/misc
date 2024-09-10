@@ -63,7 +63,9 @@ let Tabs = {
   noteTabChange() {
     // Note: This might be called even if the tab stays the same; it's only possible that the tab has changed.
     // However, any tab change apart from a save being loaded should lead to this being called.
-    if (Tabs.currentTab() !== 'powers') {
+    if (this.currentTab() !== 'powers') {
+      // I'm pretty worried about referencing non-tabs stuff in this file bc I think it's used in the guide,
+      // hence the lack of calling an oracle method here.
       player.oracle.showInPowers = false;
     }
   },
