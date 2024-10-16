@@ -521,8 +521,8 @@ function updateDisplay() {
     if (shouldUpdate("e447")) {let v = formatInt(Math.pow(2, 60)); if (e[447].textContent !== v) {e[447].textContent = v};};
     if (shouldUpdate("e448")) {let v = formatInt(Math.pow(2, 16)); if (e[448].textContent !== v) {e[448].textContent = v};};
     if (shouldUpdate("e449")) {let v = formatTime(10, {seconds: {f: formatTimeInt, s: true}, larger: {f: formatTimeNum, s: false}}); if (e[449].textContent !== v) {e[449].textContent = v};};
-    if (shouldUpdate("e450")) {let v = formatTime(360, {seconds: {f: formatTimeMaybeInt, s: true}, larger: {f: formatTimeMaybeInt, s: true}}); if (e[450].textContent !== v) {e[450].textContent = v};};
-    if (shouldUpdate("e451")) {let v = formatTime(420, {seconds: {f: formatTimeMaybeInt, s: true}, larger: {f: formatTimeMaybeInt, s: true}}); if (e[451].textContent !== v) {e[451].textContent = v};};
+    if (shouldUpdate("e450")) {let v = formatTime(300, {seconds: {f: formatTimeMaybeInt, s: true}, larger: {f: formatTimeMaybeInt, s: true}}); if (e[450].textContent !== v) {e[450].textContent = v};};
+    if (shouldUpdate("e451")) {let v = formatTime(120, {seconds: {f: formatTimeMaybeInt, s: true}, larger: {f: formatTimeMaybeInt, s: true}}); if (e[451].textContent !== v) {e[451].textContent = v};};
     if (shouldUpdate("e452")) {let v = formatInt(Math.pow(2, 14)); if (e[452].textContent !== v) {e[452].textContent = v};};
     if (shouldUpdate("e453")) {let v = formatInt(24); if (e[453].textContent !== v) {e[453].textContent = v};};
     if (shouldUpdate("e454")) {let v = formatInt(Math.pow(2, 21)); if (e[454].textContent !== v) {e[454].textContent = v};};
@@ -541,8 +541,8 @@ function updateDisplay() {
     if (shouldUpdate("e465")) {let v = formatInt(Math.pow(2, 60)); if (e[465].textContent !== v) {e[465].textContent = v};};
     if (shouldUpdate("e466")) {let v = formatInt(Math.pow(2, 16)); if (e[466].textContent !== v) {e[466].textContent = v};};
     if (shouldUpdate("e467")) {let v = formatTime(10, {seconds: {f: formatTimeInt, s: true}, larger: {f: formatTimeNum, s: false}}); if (e[467].textContent !== v) {e[467].textContent = v};};
-    if (shouldUpdate("e468")) {let v = formatTime(360, {seconds: {f: formatTimeMaybeInt, s: true}, larger: {f: formatTimeMaybeInt, s: true}}); if (e[468].textContent !== v) {e[468].textContent = v};};
-    if (shouldUpdate("e469")) {let v = formatTime(420, {seconds: {f: formatTimeMaybeInt, s: true}, larger: {f: formatTimeMaybeInt, s: true}}); if (e[469].textContent !== v) {e[469].textContent = v};};
+    if (shouldUpdate("e468")) {let v = formatTime(300, {seconds: {f: formatTimeMaybeInt, s: true}, larger: {f: formatTimeMaybeInt, s: true}}); if (e[468].textContent !== v) {e[468].textContent = v};};
+    if (shouldUpdate("e469")) {let v = formatTime(120, {seconds: {f: formatTimeMaybeInt, s: true}, larger: {f: formatTimeMaybeInt, s: true}}); if (e[469].textContent !== v) {e[469].textContent = v};};
     if (shouldUpdate("e470")) {let v = formatTime(10, {seconds: {f: formatTimeInt, s: true}, larger: {f: formatTimeNum, s: false}}); if (e[470].textContent !== v) {e[470].textContent = v};};
     if (shouldUpdate("e471")) {let v = formatInt(Math.pow(2, 64)); if (e[471].textContent !== v) {e[471].textContent = v};};
     if (shouldUpdate("e472")) {let v = formatTime(900, {seconds: {f: formatTimeMaybeInt, s: true}, larger: {f: formatTimeMaybeInt, s: true}}); if (e[472].textContent !== v) {e[472].textContent = v};};
