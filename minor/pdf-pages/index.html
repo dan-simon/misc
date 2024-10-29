@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Page Downloader</title>
+</head>
+<body>
+    <input type="file" id="pdf-upload" accept="application/pdf">
+    <input type="text" id="page-numbers" placeholder="Enter page numbers">
+    <input type="text" id="filename" placeholder="Enter filename">
+    <button onclick="downloadPages()">Download Pages</button>
+    <br/>
+    Valid page numbers include:
+    <ul>
+      <li>Single pages, e.g. 4</li>
+      <li>Two pages, e.g. 2, 5</li>
+      <li>Ranges, e.g. 3-6</li>
+      <li>Ranges plus pages, e.g. 2-4, 6</li>
+      <li>Excluding a page or pages, e.g., not 2-4, 6 (on a 7-page document this would give pages 1, 5, 7)</li>
+    </ul>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script>
+        let pdfDoc = null;
+        let pageCount = 0;
+
+        // Load PDF and get page count using pdf-lib only
+        document.getElementById("pdf-upload").addEventListener("change", async function(event) {
+            const file = event.target.files[0];
+            if (!file || file.type !== "application/pdf") {
+                alert("Please upload a valid PDF file.");
+                return;
+            }
+
+            // Read the uploaded file as an ArrayBuffer and load it with pdf-lib
+            const arrayBuffer = await file.arrayBuffer();
+            pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
+            pageCount = pdfDoc.getPageCount();
+
+            alert(`PDF loaded. It has ${pageCount} pages.`);
+        });
+        
+        function int(x) {
+          return +x.trim();
+        }
+        
+        function range(a, b) {
+          return [...Array(b - a + 1)].map((x, i) => a + i);
+        }
+        
+        function parsePageList (x, y) {
+          let notCheck = x.startsWith('not');
+          if (notCheck) {
+            x = x.slice(3);
+          }
+          x = x.split(',').flatMap(i => i.includes('-') ? range(int(i.split('-')[0]), int(i.split('-')[1])) : [int(i)]);
+          if (notCheck) {
+            return range(1, y).filter(i => !x.includes(i));
+          }
+          return x;
+        }
+
+        // Function to download selected pages as a single PDF using pdf-lib only
+        async function downloadPages() {
+            const pageNumbers = parsePageList(document.getElementById("page-numbers").value, pageCount);
+            const filename = document.getElementById("filename").value || "selected_pages.pdf";
+
+            if (!pdfDoc) {
+                alert("Please upload a PDF file first.");
+                return;
+            }
+
+            // Create a new PDF document to store selected pages
+            const pdfLibDoc = await PDFLib.PDFDocument.create();
+
+            // Loop through each specified page number and copy it into the new document
+            for (let pageNum of pageNumbers) {
+                if (pageNum > 0 && pageNum <= pageCount) {
+                    const [page] = await pdfLibDoc.copyPages(pdfDoc, [pageNum - 1]); // pdf-lib is 0-indexed
+                    pdfLibDoc.addPage(page);
+                } else {
+                    alert(`Invalid page number: ${pageNum}. Please enter numbers between 1 and ${pageCount}.`);
+                }
+            }
+
+            // Serialize the final PDF and trigger download
+            const pdfBytes = await pdfLibDoc.save();
+            const blob = new Blob([pdfBytes], { type: "application/pdf" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            link.click();
+        }
+    </script>
+</body>
+</html>
+
