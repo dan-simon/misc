@@ -31,6 +31,32 @@
   background-color: var(--progress-bar-foreground-color);
 }
 
+.ad-progress-bar {
+  position: fixed;
+  z-index: 1;
+  bottom: 8px;
+  left: 5%;
+  right: 5%;
+  width: 90%;
+  height: 24px;
+  text-align: left;
+  background-color: var(--progress-bar-background-color);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.ad-progress-bar-fill {
+  width: 50%;
+  height: 24px;
+  text-align: center;
+}
+
+.ad-progress-bar-fraction {
+  overflow-wrap: normal;
+  white-space: nowrap;
+  color: black;
+}
+
 body {
   touch-action: manipulation;
   text-align: center;

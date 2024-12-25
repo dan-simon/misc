@@ -32,8 +32,11 @@ let Options = {
   toggleHotkeys() {
     player.options.hotkeys = !player.options.hotkeys;
   },
-  toggleNews() {
-    player.options.news = !player.options.news;
+  setNews(x) {
+    player.options.news = x;
+  },
+  setProgressBar(x) {
+    player.options.progressBar = x;
   },
   toggleExportCopy() {
     player.options.exportCopy = !player.options.exportCopy;

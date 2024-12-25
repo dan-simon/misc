@@ -1719,6 +1719,10 @@ let Saving = {
       player.chroma.startProducingWhenUnlocked = false;
       player.version = 2.3125;
     }
+    if (player.version < 2.31640625) {
+      player.options.progressBar = 'Disabled';
+      player.version = 2.31640625;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

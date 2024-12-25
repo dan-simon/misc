@@ -457,6 +457,7 @@ let initialPlayer = {
     complexityChallengeRunningColors: false,
     exitComplexityChallengesOnComplexity: false,
     news: false,
+    progressBar: 'Disabled',
     optionTypeShown: 'saving',
     autobuyers: {
       areNewlyUnlockedAutobuyersOn: true,
@@ -600,7 +601,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.3125
+  version: 2.31640625
 }
 
 let player;
