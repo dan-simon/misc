@@ -169,6 +169,7 @@ input[type=text] {
 
 .helpspan {
   position: relative;
+  white-space: initial;
 }
 
 .helpspan:hover .tooltiptext {

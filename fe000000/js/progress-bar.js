@@ -15,7 +15,7 @@ let ProgressBar = {
       return Math.min(1, player.stars.max(1).log2() / 256);
     }
     if (s < 5) {
-      return Math.min(1, Math.log2(player.stats['total' + ['IP', 'EP', 'CP'][s - 2] + 'Produced'].log2()) / (s === 2 ? 8 : 16));
+      return Math.min(1, Math.log2(player.stats['total' + ['IP', 'EP', 'CP'][s - 2] + 'Produced'].max(2).log2()) / (s === 2 ? 8 : 16));
     }
     return FinalityShards.totalUpgrades() / 192;
   },
@@ -30,10 +30,10 @@ let ProgressBar = {
     return 'Progress to buying all finality upgrades'
   },
   stage() {
-    if (InfinityPrestigeLayer.isRequirementVisible()) {
+    if (!SpecialDivs.isDivVisible('infinity')) {
       return 0;
     }
-    let conds = PrestigeLayerProgress.conditions.slice(1).map(x => x());
+    let conds = PrestigeLayerProgress.conditions.slice(2).map(x => x());
     return conds.lastIndexOf(true) + 2;
   }
 }
