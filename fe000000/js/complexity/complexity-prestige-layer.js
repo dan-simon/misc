@@ -235,7 +235,9 @@ let ComplexityPrestigeLayer = {
       next: 0,
       displayAmount: 0,
       timeForChromaValue: player.chroma.timeForChromaValue,
-      timeForChromaMode: player.chroma.timeForChromaMode
+      timeForChromaMode: player.chroma.timeForChromaMode,
+      rotate: player.chroma.rotate,
+      startProducingWhenUnlocked: player.chroma.startProducingWhenUnlocked,
     };
     // Small bonus, arguably unexpected but not that big in the grand scheme of things.
     player.stats.totalStarsProducedThisComplexity = Stars.startingAmount();

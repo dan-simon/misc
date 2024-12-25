@@ -157,7 +157,9 @@ let initialPlayer = {
       amount: 3584,
       capFraction: 0.875, 
     },
-    timeForChromaMode: 'fraction of chroma cap'
+    timeForChromaMode: 'fraction of chroma cap',
+    rotate: false,
+    startProducingWhenUnlocked: false
   },
   complexityPoints: new Decimal(0),
   complexities: 0,
@@ -598,7 +600,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.30859375
+  version: 2.3125
 }
 
 let player;

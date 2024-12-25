@@ -1714,6 +1714,11 @@ let Saving = {
       player.oracle.showInPowers = false;
       player.version = 2.30859375;
     }
+    if (player.version < 2.3125) {
+      player.chroma.rotate = false;
+      player.chroma.startProducingWhenUnlocked = false;
+      player.version = 2.3125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

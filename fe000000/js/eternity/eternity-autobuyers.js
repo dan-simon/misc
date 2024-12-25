@@ -5,6 +5,7 @@ let EternityAutobuyer = function (i) {
   return {
     hasEternityAutobuyer() {
       return (i <= 13 && EternityChallenge.isTotalCompletionsRewardActive(4)) ||
+        (i > 16 && ComplexityAchievements.isComplexityAchievementActive(1, 1)) ||
         ComplexityAchievements.isComplexityAchievementActive(2, 2);
     },
     isOn() {

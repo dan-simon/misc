@@ -110,6 +110,9 @@ let Chroma = {
       this.setColorAmount(color, Math.max(this.colorAmount(color), chromaAmount));
     }
   },
+  hasOptions() {
+    return ComplexityAchievements.isComplexityAchievementActive(1, 1);
+  },
   setNextColor(x) {
     if (this.isColorUnlocked(x)) {
       player.chroma.next = x;
@@ -135,11 +138,14 @@ let Chroma = {
       auto && player.eternityPoints.minus(this.getUnlockColorCost(x)).lt(2) && EternityGenerator(1).bought() === 0)) return;
     player.eternityPoints = player.eternityPoints.safeMinus(this.getUnlockColorCost(x));
     player.chroma.unlocked[x - 1] = true;
-    if (player.chroma.current === 0) {
+    let freeSwitch = this.hasOptions() && this.startProducingWhenUnlocked();
+    if (player.chroma.current === 0 || freeSwitch) {
       player.chroma.current = x;
     }
-    if (player.chroma.next === 0) {
+    if (player.chroma.next === 0 || freeSwitch) {
       player.chroma.next = x;
+      // Since we unlocked a new color, we may want to rotate.
+      this.potentiallyRotate();
     }
     if (x === 1) {
       ComplexityChallenge.exitComplexityChallenge(4);
@@ -148,6 +154,29 @@ let Chroma = {
   },
   updateChromaOnEternity() {
     player.chroma.current = player.chroma.next;
+    this.potentiallyRotate();
+  },
+  nextColor (x) {
+    let c = [1, 2, 3, 4, 5, 6].filter(i => this.isColorUnlocked(i));
+    return c[(x ? (c.indexOf(x) + 1) : 0) % c.length];
+  },
+  potentiallyRotate() {
+    if (this.hasOptions() && this.rotate()) {
+      player.chroma.next = this.nextColor(player.chroma.current);
+    }
+  },
+  rotate() {
+    return player.chroma.rotate;
+  },
+  startProducingWhenUnlocked() {
+    return player.chroma.startProducingWhenUnlocked; 
+  },
+  setRotate(x) {
+    player.chroma.rotate = x;
+    this.potentiallyRotate();
+  },
+  setStartProducingWhenUnlocked(x) {
+    player.chroma.startProducingWhenUnlocked = x;
   },
   colorName(x, title) {
     if (title) {
@@ -312,6 +341,6 @@ let Chroma = {
     if (t <= 0) {
       return '';
     }
-    return ' in ' + formatTime(t, {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}}) + ' at the current chroma buildup speed';
+    return ' in ' + formatTime(t, {seconds: {f: formatTimeNum, s: false}, larger: {f: formatTimeNum, s: false}});
   }
 }
