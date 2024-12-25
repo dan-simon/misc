@@ -189,6 +189,10 @@ if (!(files[0].endsWith('.html') && files[1].endsWith('.html') && files[2].endsW
   throw new Error('Wrong file types. Files should be (1) input html file you\'re editing directly, (2) output html file, (3) output JS file.');
 }
 
+if (files[0] === files[1]) {
+  throw new Error('Input HTML file and output HTML file have same name. This is almost certainly a typo.');
+}
+
 let cache = files.length <= 3 || files[3] !== 'no-cache';
 
 if (cache && process.argv.length > 2) {
