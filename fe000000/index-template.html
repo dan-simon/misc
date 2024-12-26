@@ -2120,8 +2120,8 @@
           <option value="fraction of chroma cap">fraction of chroma cap</option>
         </select>~r Chroma.timeForChromaTextSuffix() ~ <span class="helpspan">(?)<span class="tooltiptext">This assumes chroma buildup speed remains the same.</span></span>. <button ~class=Chroma.syncedWithEternityAutobuyer() ? 'disabled' : ''~ onclick="Chroma.syncWithEternityAutobuyer()">~r Chroma.syncedWithEternityAutobuyer() ? 'Synced with eternity autobuyer' : 'Sync with eternity autobuyer' ~ <span class="helpspan">(?)<span class="tooltiptext">This button sets the eternity autobuyer's mode and amount to the mode and amount shown earlier on this line.</span></span></button></span>
         <br/>
-        <span ~style.display=Chroma.hasOptions() ? '' : 'none'~>Rotate chroma <span class="helpspan">(?)<span class="tooltiptext">This option causes the color of chroma produced to automatically rotate among unlocked colors every eternity.</span></span>: <input type="checkbox" ~!checked=Chroma.rotate()~ ~!onchange=function() {Chroma.setRotate(this.checked)}~> Start producing a new color when unlocked <span class="helpspan">(?)<span class="tooltiptext">When a new color is unlocked, this option will immediately automatically switch the color of chroma produced to that color.</span></span>: <input type="checkbox" ~!checked=Chroma.startProducingWhenUnlocked()~ ~!onchange=function() {Chroma.setStartProducingWhenUnlocked(this.checked)}~></input></span>
-        <br ~style.display=Chroma.hasOptions() ? '' : 'none'~/>
+        <span ~style.display=(Chroma.hasOptions() && !Chroma.producingAll()) ? '' : 'none'~>Rotate chroma <span class="helpspan">(?)<span class="tooltiptext">This option causes the color of chroma produced to automatically rotate among unlocked colors every eternity.</span></span>: <input type="checkbox" ~!checked=Chroma.rotate()~ ~!onchange=function() {Chroma.setRotate(this.checked)}~> Start producing a new color when unlocked <span class="helpspan">(?)<span class="tooltiptext">When a new color is unlocked, this option will immediately automatically switch the color of chroma produced to that color.</span></span>: <input type="checkbox" ~!checked=Chroma.startProducingWhenUnlocked()~ ~!onchange=function() {Chroma.setStartProducingWhenUnlocked(this.checked)}~></input></span>
+        <br ~style.display=(Chroma.hasOptions() && !Chroma.producingAll()) ? '' : 'none'~/>
         <span>
           <span ~style.display=Chroma.producingAll() ? 'none' : ''~>The value of whatever color you are producing is</span>
           <span ~style.display=Chroma.producingAll() ? '' : 'none'~>The values of all colors are</span>
@@ -2501,7 +2501,7 @@
               <br/>
               ~r ComplexityAchievements.complexityAchievementStatusDescription(1, 1) ~
               <br/>
-              The multiplier to permanence and chroma from complexities also applies to boost power (currently ~q ComplexityAchievements.rawEffect(1, 1) ~x), and you get permanence and permanence upgrade autobuyers and more chroma options.
+              The multiplier to permanence and chroma from complexities also applies to boost power (currently ~q ComplexityAchievements.rawEffect(1, 1) ~x), and you get permanence and permanence upgrade autobuyers and more chroma options. <span class="helpspan">(?)<span class="tooltiptext">The chroma options control which color is produced and so become irrelevant and don't appear once you have Shadeless.</span></span>
             </div>
           </td>
           <td>

@@ -3495,8 +3495,8 @@ function updateDisplay() {
     if (shouldUpdate("e1300")) {let v = Chroma.timeForChromaTextSuffix(); if (e[1300].textContent !== v) {e[1300].textContent = v};};
     if (shouldUpdate("b1036")) {let v = Chroma.syncedWithEternityAutobuyer() ? 'disabled' : ''; if (b[1036].className !== v) {b[1036].className = v};};
     if (shouldUpdate("e1301")) {let v = Chroma.syncedWithEternityAutobuyer() ? 'Synced with eternity autobuyer' : 'Sync with eternity autobuyer'; if (e[1301].textContent !== v) {e[1301].textContent = v};};
-    if (shouldUpdate("b1037")) {let v = Chroma.hasOptions() ? '' : 'none'; if (b[1037].style.display !== v) {b[1037].style.display = v};};
-    if (shouldUpdate("b1040")) {let v = Chroma.hasOptions() ? '' : 'none'; if (b[1040].style.display !== v) {b[1040].style.display = v};};
+    if (shouldUpdate("b1037")) {let v = (Chroma.hasOptions() && !Chroma.producingAll()) ? '' : 'none'; if (b[1037].style.display !== v) {b[1037].style.display = v};};
+    if (shouldUpdate("b1040")) {let v = (Chroma.hasOptions() && !Chroma.producingAll()) ? '' : 'none'; if (b[1040].style.display !== v) {b[1040].style.display = v};};
     if (shouldUpdate("b1041")) {let v = Chroma.producingAll() ? 'none' : ''; if (b[1041].style.display !== v) {b[1041].style.display = v};};
     if (shouldUpdate("b1042")) {let v = Chroma.producingAll() ? '' : 'none'; if (b[1042].style.display !== v) {b[1042].style.display = v};};
     if (shouldUpdate("b1043")) {let v = Chroma.chromaDivClass(1); if (b[1043].className !== v) {b[1043].className = v};};
