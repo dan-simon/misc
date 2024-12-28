@@ -136,7 +136,8 @@ let Oracle = {
         player.oracle.timeSinceComplexity = timeSinceComplexity;
         player.stats.timeSinceOraclePrediction = 0;
         if (Oracle.alert()) {
-          alert(Oracle.message());
+          // We're trying replacing the alert by a text box. Easy to undo this if needed.
+          TextBoxes.create(Oracle.message(), null);
         }
         if (Tabs.currentTab() === 'powers') {
           player.oracle.showInPowers = true;
