@@ -327,7 +327,10 @@ let Saving = {
       player.eternityGenerators = initialEternityGenerators();
       player.highestEternityGenerator = 0;
       player.eternityMilestonesOn = [true, true];
-      player.autobuyers.push({on: false, mode: 'Amount', priority: new Decimal(2)});
+      if (player.autobuyers.length < 13) {
+        player.autobuyers.push({isOn: false, mode: 'Amount', priority: new Decimal(2)});
+      }
+      // Comment from far later: I don't know why this was set to all-false rather than all-true but I don't plan to mess with it.
       player.infinityAutobuyers = [
         false, false, false, false, false, false, false, false, false, false
       ];
@@ -361,7 +364,7 @@ let Saving = {
       player.version = 1.5234375;
     }
     if (player.version < 1.53125) {
-      player.totalIPProducedThisEternity = player.totalIPProduced;
+      player.stats.totalIPProducedThisEternity = player.stats.totalIPProduced;
       player.version = 1.53125;
     }
     if (player.version < 1.546875) {
@@ -469,7 +472,9 @@ let Saving = {
       player.version = 1.78125;
     }
     if (player.version < 1.796875) {
-      player.autobuyers.push({isOn: true, mode: 'X times last', priority: new Decimal(2)});
+      if (player.autobuyers.length < 14) {
+        player.autobuyers.push({isOn: true, mode: 'X times last', priority: new Decimal(2)});
+      }
       // The loose justification for the array being arranged like this is that
       // the first 8 autobuyers are for eternity generators, and the other 9 are
       // for other things.
@@ -500,7 +505,9 @@ let Saving = {
       player.version = 1.84375;
     }
     if (player.version < 1.859375) {
-      player.autobuyers.push({isOn: true, mode: 'Amount', priority: new Decimal(2)});
+      if (player.autobuyers.length < 15) {
+        player.autobuyers.push({isOn: true, mode: 'Amount', priority: new Decimal(2)});
+      }
       player.bestBoostPower = player.bestBoostPowerThisComplexity;
       delete player.bestBoostPowerThisComplexity;
       player.extraTheorems = [0, 0, 0, 0];
@@ -555,9 +562,12 @@ let Saving = {
       player.version = 1.93359375;
     }
     if (player.version < 1.9345703125) {
-      player.stats.totalInfinityStarsProduced = player.infinityStars;
-      player.stats.totalEternityStarsProduced = player.eternityStars;
-      player.stats.totalComplexityStarsProduced = player.complexityStars;
+      // This is a change from the future to check what layers have been unlocked
+      let layers = ['infinities', 'eternities', 'complexities', 'finalities'].map(i => i in player && Decimal.gt(player[i], 0));
+      let maxLayer = layers.lastIndexOf(true);
+      player.stats.totalInfinityStarsProduced = (maxLayer >= 0) ? player.infinityStars : new Decimal(0);
+      player.stats.totalEternityStarsProduced = (maxLayer >= 1) ? player.eternityStars : new Decimal(0);
+      player.stats.totalComplexityStarsProduced = (maxLayer >= 2) ? player.complexityStars : new Decimal(0);
       player.galaxies = {
         unlocked: false
       };
@@ -615,7 +625,11 @@ let Saving = {
       ];
       player.version = 1.9404296875;
     }
-    if (player.version < 1.940673828125 || !player.firstTwelveStudyPurchaseOrder) {
+    // This is tricky: We add this property and then later rename it.
+    // The code was previously player.version < 1.940673828125 || !player.firstTwelveStudyPurchaseOrder,
+    // presumably because the property wasn't defined correctly initially. However, if our version
+    // is past the deletion, we don't want to re-add, so we need the additional condition.
+    if (player.version < 1.940673828125 || (player.version < 1.9765625 && !player.firstTwelveStudyPurchaseOrder)) {
       player.firstTwelveStudyPurchaseOrder = player.studies.slice(0, 12).map(
         (x, i) => x ? i + 1 : 0).filter(x => x);
       player.version = Math.max(player.version, 1.940673828125);
@@ -647,10 +661,10 @@ let Saving = {
         false, false, false, false, false, false, false, false,
         false, false, false, false, false, false, false, false
       ];
-      if (player.sacrificeMultiplier !== '1') {
+      if (new Decimal(1).neq(player.sacrificeMultiplier)) {
         player.goals[0] = true;
       }
-      if (player.prestigePower !== '1') {
+      if (new Decimal(1).neq(player.prestigePower)) {
         player.goals[1] = true;
       }
       // This works for numbers, strings (that can be converted to Decimal), and Decimals.
@@ -711,7 +725,9 @@ let Saving = {
         powerList: '',
         on: true
       };
-      player.autobuyers.push({isOn: true, mode: 'none', priority: 'none'});
+      if (player.autobuyers.length < 16) {
+        player.autobuyers.push({isOn: true, mode: 'none', priority: 'none'});
+      }
       player.version = 1.9443359375;
     }
     if (player.version < 1.9453125) {
@@ -1010,6 +1026,9 @@ let Saving = {
     }
     if (player.version < 1.98828125) {
       // New saves get -1 for this. 0 is slightly less likely to lead to bug reports, I think.
+      // Message from the future: In trying to ensure old saves are migrated fully, I didn't change this,
+      // because I'm not exactly sure what my reasoning was and I think it only matters in text display edge cases.
+      // Also it seems very hard to test.
       player.complexityChallengeLastCompletion = player.complexityChallengeLastCompletion.map(i => i.concat([0]));
       player.oracle.activePowers = [];
       player.version = 1.98828125;
@@ -1083,10 +1102,10 @@ let Saving = {
         notifications: true
       };
       // Add some achievement migrations. (This isn't complete but hopefully it's good enough.)
-      if (player.sacrificeMultiplier !== '1') {
+      if (new Decimal(1).neq(player.sacrificeMultiplier)) {
         player.achievements.table[1][0] = true;
       }
-      if (player.prestigePower !== '1') {
+      if (new Decimal(1).neq(player.prestigePower)) {
         player.achievements.table[1][4] = true;
       }
       // Search for either isPositive or posData above to see more information about them.
@@ -1374,7 +1393,11 @@ let Saving = {
     if (player.version < 2.12890625) {
       for (let i of ['lastTenInfinities', 'lastTenEternities', 'lastTenComplexities', 'lastTenFinalities']) {
         for (let j of player.stats[i]) {
-          j.push(new Decimal(-1));
+          // Conveniently all of these seem to have length 4.
+          // This is needed because very old saves will have already had these set to correct current values.
+          if (j.length < 4) {
+            j.push(new Decimal(-1));
+          }
         }
       }
       player.options.showLog = {
@@ -1460,17 +1483,27 @@ let Saving = {
     }
     if (player.version < 2.1640625) {
       // Allow for 20 rather than just 10
-      player.stats.lastTenInfinities = player.stats.lastTenInfinities.concat([...Array(10)].map(() => [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)]));
-      player.stats.lastTenEternities = player.stats.lastTenEternities.concat([...Array(10)].map(() => [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)]));
-      player.stats.lastTenComplexities = player.stats.lastTenComplexities.concat([...Array(10)].map(() => [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)]));
-      player.stats.lastTenFinalities = player.stats.lastTenFinalities.concat([...Array(10)].map(() => [-1, new Decimal(-1), -1, new Decimal(-1)]));
+      // Note that old enough saves will already have 20
+      if (player.stats.lastTenInfinities.length < 20) {
+        player.stats.lastTenInfinities = player.stats.lastTenInfinities.concat([...Array(10)].map(() => [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)]));
+      }
+      if (player.stats.lastTenEternities.length < 20) {
+        player.stats.lastTenEternities = player.stats.lastTenEternities.concat([...Array(10)].map(() => [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)]));
+      }
+      if (player.stats.lastTenComplexities.length < 20) {
+        player.stats.lastTenComplexities = player.stats.lastTenComplexities.concat([...Array(10)].map(() => [-1, new Decimal(-1), new Decimal(-1), new Decimal(-1)]));
+      }
+      if (player.stats.lastTenFinalities.length < 20) {
+        player.stats.lastTenFinalities = player.stats.lastTenFinalities.concat([...Array(10)].map(() => [-1, new Decimal(-1), -1, new Decimal(-1)]));
+      }
       // Color presets were added but lastPresetIndices wasn't properly changed.
       player.lastPresetIndices.push(0);
       player.version = 2.1640625;
     }
-    if (player.version < 2.1640625) {
+    // This version was previously also 2.1640625, leading to small bugs.
+    if (player.version < 2.166015625) {
       player.options.autobuyers.explanation = '';
-      player.version = 2.1640625;
+      player.version = 2.166015625;
     }
     if (player.version < 2.16796875) {
       player.options.explanations = {
@@ -1726,6 +1759,61 @@ let Saving = {
     if (player.version < 2.3203125) {
       player.oracle.showInGalaxies = false;
       player.version = 2.3203125;
+    }
+    if (player.version < 2.32421875) {
+      delete player.isEternityMilestoneExplanationMovedDown;
+      delete player.isComplexityChallengeExplanationMovedDown;
+      delete player.isPowersExplanationMovedDown;
+      // These will be set to true after one tick if they should be true.
+      // They apparently weren't properly set in saves at first.
+      if (!('boosts' in player.isDivVisible)) {
+        player.isDivVisible.boosts = false;
+      };
+      if (!('sacrifice' in player.isDivVisible)) {
+        player.isDivVisible.sacrifice = false;
+      };
+      if ('offlineTicks' in player) {
+        // IDK if this conditional does anything, but it seems worth including just in case.
+        if (!('offlineTicks' in player.options)) {
+          player.options.offlineTicks = player.offlineTicks;
+        }
+        delete player.offlineTicks;
+      }
+      // This is tricky bc we don't want to either give too much of an advantage in EC4 or force-exit EC4.
+      // We assume the player has all eternity milestones, which is basically usually safe, even though it requires some hardcoding.
+      if (!('realInfinities' in player)) {
+        player.realInfinities = (player.currentEternityChallenge === 4) ? Math.max(0, player.infinities - 256) : player.infinities; 
+      }
+      // This was defined but isn't used; it's probably obsolete.
+      delete player.powers.lastData.next;
+      // This was set to "normal" in some very old saves.
+      if (player.powers.unlocked === false) {
+        player.powers.lastData.type = 'none';
+      }
+      // This can be undefined (rather than just nonexistant) due to version 2.166015625,
+      // which was previously instead version 2.1640625, which already existed.
+      // Version 2.166015625 set player.options.autobuyers.explanation to '', but as explaned this didn't always run.
+      // Version 2.16796875 set player.options.explanations.autobuyers to player.options.autobuyers.explanation,
+      // which was sometimes undefined because it had never been set.
+      // This option just controls text display, I think, so it's not very important and
+      // if this doesn't make sense it's probably not worth trying to understand.
+      if (player.options.explanations.autobuyers === undefined) {
+        player.options.explanations.autobuyers = '';
+      }
+      if ('higherPrecision' in player.options) {
+        if (!('higherPrecision' in player.options.notation)) {
+          player.options.notation.higherPrecision = player.options.higherPrecision;
+        }
+        delete player.options.higherPrecision;
+      }
+      if ('lowerPrecision' in player.options) {
+        if (!('lowerPrecision' in player.options.notation)) {
+          player.options.notation.lowerPrecision = player.options.lowerPrecision;
+        }
+        delete player.options.lowerPrecision;
+      }
+      delete player.options.autobuyers.suspendAutobuyers;
+      player.version = 2.32421875;
     }
   },
   convertSaveToDecimal() {

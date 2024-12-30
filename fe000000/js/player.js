@@ -318,6 +318,8 @@ let initialPlayer = {
     'galaxies': false,
   },
   isDivVisible: {
+    'boosts': false,
+    'sacrifice': false,
     'prestige': false,
     'infinity': false,
     'boost-power': false,
@@ -602,7 +604,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.3203125
+  version: 2.32421875
 }
 
 let player;
