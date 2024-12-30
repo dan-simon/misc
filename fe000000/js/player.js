@@ -248,6 +248,7 @@ let initialPlayer = {
     freeTime: 0,
     timeSinceComplexity: 0,
     showInPowers: false,
+    showInGalaxies: false,
   },
   galaxies: {
     unlocked: false,
@@ -601,7 +602,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.31640625
+  version: 2.3203125
 }
 
 let player;

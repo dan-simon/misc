@@ -3182,6 +3182,14 @@
         </span>
         <br ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~/>
         <span><button ~style.display=PrestigeLayerProgress.hasReached('finality') ? '' : 'none'~ onclick="Galaxy.toggleResetNextDilatedOnFinality()">Reset dilated galaxies to ~i 0 ~ amount on finality: ~r Galaxy.isResetNextDilatedOnFinalityOn() ? "On" : "Off" ~</button></span>
+        <br/>
+        <button onclick="Oracle.invoke()" ~style.display=Oracle.isUnlocked() ? '' : 'none'~>Get prediction from the Oracle</button>
+        <div ~style.display=Oracle.showInGalaxies() ? '' : 'none'~>
+          <button onclick="Oracle.hideInGalaxies()">Hide this prediction (also hidden by switching tabs)</button>
+          <br/>
+          <span>~r Oracle.messagePrequel() ~</span>
+          <div class="oraclediv" ~style.display=Oracle.isUsed() ? '' : 'none'~>~r Oracle.message() ~</div>
+        </div>
       </div>
     </tab>
     <tab ~style.display=Tabs.currentTab() === 'finality' ? '' : 'none'~>

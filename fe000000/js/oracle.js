@@ -142,6 +142,9 @@ let Oracle = {
         if (Tabs.currentTab() === 'powers') {
           player.oracle.showInPowers = true;
         }
+        if (Tabs.currentTab() === 'galaxies') {
+          player.oracle.showInGalaxies = true;
+        }
       });
     });
   },
@@ -150,6 +153,12 @@ let Oracle = {
   },
   hideInPowers() {
     player.oracle.showInPowers = false;
+  },
+  showInGalaxies() {
+    return player.oracle.showInGalaxies;
+  },
+  hideInGalaxies() {
+    player.oracle.showInGalaxies = false;
   },
   message() {
     let messages = [

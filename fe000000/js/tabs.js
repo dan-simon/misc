@@ -68,6 +68,9 @@ let Tabs = {
       // hence the lack of calling an oracle method here.
       player.oracle.showInPowers = false;
     }
+    if (this.currentTab() !== 'galaxies') {
+      player.oracle.showInGalaxies = false;
+    }
   },
   isTabOptionVisible(x) {
     if (Options.showAllTabs()) {

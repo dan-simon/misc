@@ -1723,6 +1723,10 @@ let Saving = {
       player.options.progressBar = 'Disabled';
       player.version = 2.31640625;
     }
+    if (player.version < 2.3203125) {
+      player.oracle.showInGalaxies = false;
+      player.version = 2.3203125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);
