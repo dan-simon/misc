@@ -1,0 +1,15 @@
+Can you solve this 6x6 Simple Loop puzzle? The rules of Simple Loop are that you have to visit every unshaded cell in a single loop, only passing between pairs of cells sharing an edge, not visiting any shaded cells, and not visiting any cells more than once. Some tips:
+1: If an unshaded cell can only have two possible exits to adjacent cells (e.g., if it's a corner), both must be used.
+2: If an unshaded cell is known to already have two used exits (e.g., if it's next to two corners), it can't have any other exits.
+3: If drawing an edge would close off part of the loop from the rest, that edge can't be used.
+
+This is the Simple Loop puzzle, presented in a 6x6 character grid format, with . being an unshaded cell and # being a shaded cell. There are six shaded cells, at zero-indexed coordinates (first row, then column) (0, 0), (1, 4), (2, 2), (2, 3), (4, 1), and (5, 5).
+
+```
+#.....
+....#.
+..##..
+......
+.#....
+.....#
+```
