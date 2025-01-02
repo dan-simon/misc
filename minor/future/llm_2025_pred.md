@@ -4,11 +4,11 @@ Predictions (for end of 2025):
 - Top LLM performance:
   - This is so hard to define, and LMSYS general leaderboard actually seems mostly reasonable to me, so I'll go by it. Predictions are all conditional on it still operating and not changing the scale. I guess I'll round exact 00/50 ratings into the above category, so 1600 is in the top bucket, 1550 is in the second-to-top, etc.
   - LMSYS highest rating below 1400: 5%
-  - LMSYS highest rating between 1400 and 1450: 30%
-  - LMSYS highest rating between 1450 and 1500: 30%
+  - LMSYS highest rating between 1400 and 1450: 15%
   - LMSYS highest rating between 1450 and 1500: 20%
-  - LMSYS highest rating between 1550 and 1600: 10%
-  - LMSYS highest rating above 1600: 5%
+  - LMSYS highest rating between 1450 and 1500: 20%
+  - LMSYS highest rating between 1550 and 1600: 15%
+  - LMSYS highest rating above 1600: 25%
 - Other predictions:
   - Transformative AI (20% unemployment or something with equivalent impact): 3%
   - There are no types of question that most humans can answer but AIs can't (same caveats as last year): 15%
