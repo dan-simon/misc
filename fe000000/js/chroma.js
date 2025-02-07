@@ -30,7 +30,7 @@ let Chroma = {
     }
     let t = player.stats.timeSinceEternity * this.chromaSpeedMultiplier().toNumber();
     let cap = this.cap();
-    return cap * (1 - Math.exp(-2 * t / cap));
+    return cap * (-Math.expm1(-2 * t / cap));
   },
   displayAmount() {
     return player.chroma.displayAmount;
