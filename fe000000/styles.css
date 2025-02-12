@@ -276,7 +276,7 @@ input[type=text] {
 .autobuyerdiv {
   display: table;
   text-align: center;
-  width: 352px;
+  width: 384px;
   height: 128px;
   padding: 4px;
   margin: 4px;
@@ -287,7 +287,7 @@ input[type=text] {
 .tallautobuyerdiv {
   display: table;
   text-align: center;
-  width: 352px;
+  width: 384px;
   height: 160px;
   padding: 4px;
   margin: 4px;
@@ -297,7 +297,7 @@ input[type=text] {
 
 .autobuyerunlockbutton {
   text-align: center;
-  width: 352px;
+  width: 384px;
   height: 72px;
   padding: 4px;
   margin: 4px;
