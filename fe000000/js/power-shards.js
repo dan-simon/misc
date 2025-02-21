@@ -196,7 +196,8 @@ let PowerShards = {
   craft() {
     if (!this.canCraft()) return;
     Achievements.checkForAchievements('craft');
-    player.powers.shards -= this.craftedPowerCost();
+    // Reuse safeSubtract here.
+    this.safeSubtract(new Decimal(this.craftedPowerCost()));
     player.powers.stored.push(this.craftedPower());
     Powers.cleanStored();
     Powers.autoSort();
