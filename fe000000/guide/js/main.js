@@ -9,7 +9,8 @@ let startingPlayer = {
       higherPrecision: 5,
       displayDigits: 10,
       exponentBase: 10,
-      alphabet: 'abcdefghijklmnopqrstuvwxyz'
+      alphabet: 'abcdefghijklmnopqrstuvwxyz',
+      notExactlyZero: '',
     },
     timeDisplay: 'Seconds',
     notationOnTimes: false,

@@ -35,7 +35,7 @@ function sfm(base, digits) {
     let rvalue = n * base ** precision;
     while (rvalue < 1) {
       if (precision >= 3) {
-        return 'not exactly ' + digits[0];
+        return NotationOptions.notExactlyZero() || 'not exactly ' + digits[0];
       }
       rvalue *= base;
       precision += 1;
@@ -127,7 +127,7 @@ class DefaultScientificNotation extends ADNotations.Notation {
   formatUnder1000(value, places) {
     if (value < 1 && value !== 0) {
       if (value < 0.001) {
-        return 'not exactly 0';
+        return NotationOptions.notExactlyZero() || 'not exactly 0';
       }
       if (places < 3) {
         places = Math.max(Math.ceil(-Math.log10(value)), places);

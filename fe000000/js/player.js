@@ -363,6 +363,7 @@ let initialPlayer = {
       displayDigits: 10,
       exponentBase: 10,
       alphabet: 'abcdefghijklmnopqrstuvwxyz',
+      notExactlyZero: '',
       formatOrdinals: false,
       parseAutobuyersInCurrentBase: false,
       parseInputsInCurrentBase: false,
@@ -604,7 +605,7 @@ let initialPlayer = {
   },
   usingTabGroups: false,
   currentTab: 'main',
-  version: 2.32421875
+  version: 2.328125
 }
 
 let player;

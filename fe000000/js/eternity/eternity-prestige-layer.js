@@ -9,6 +9,9 @@ let EternityPrestigeLayer = {
   canEternity() {
     return InfinityPoints.totalIPProducedThisEternity().gte(this.infinityPointRequirementForEternity());
   },
+  canEternityWith(x) {
+    return InfinityPoints.totalIPProducedThisEternity().plus(x).gte(this.infinityPointRequirementForEternity());
+  },
   canShowEternity() {
     return this.canEternity() && !this.showFastSpecial();
   },

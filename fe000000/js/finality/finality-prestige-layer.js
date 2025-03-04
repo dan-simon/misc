@@ -9,10 +9,15 @@ let FinalityPrestigeLayer = {
     // EP will get high enough. But for that second, if you complexity,
     // total complexity points and complexity points requirement will look the same,
     // and it'll be confusing. Hence, this.
+    // The new generation code doesn't actually fix this because you don't get extra EP
+    // at the finality threshold.
     return this.complexityPointRequirementForFinality().times(255 / 256);
   },
   canFinality() {
     return ComplexityPoints.totalCPProducedThisFinality().gte(this.actualComplexityPointRequirementForFinality());
+  },
+  canFinalityWith(x) {
+    return ComplexityPoints.totalCPProducedThisFinality().plus(x).gte(this.actualComplexityPointRequirementForFinality());
   },
   canShowFinality() {
     return this.canFinality() && !this.showFastSpecial();

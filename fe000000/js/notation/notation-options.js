@@ -63,6 +63,13 @@ let NotationOptions = {
     player.options.notation.alphabet = (x && x.length >= 2) ? x : 'abcdefghijklmnopqrstuvwxyz';
     this.notationChange();
   },
+  notExactlyZero() {
+    return player.options.notation.notExactlyZero;
+  },
+  setNotExactlyZero(x) {
+    player.options.notation.notExactlyZero = x;
+    this.notationChange();
+  },
   decimalThresholdCache: {},
   formatDecimalThreshold(e=this.exponentBase()) {
     if (!(e in this.decimalThresholdCache)) {

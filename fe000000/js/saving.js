@@ -1815,6 +1815,10 @@ let Saving = {
       delete player.options.autobuyers.suspendAutobuyers;
       player.version = 2.32421875;
     }
+    if (player.version < 2.328125) {
+      player.options.notation.notExactlyZero = '';
+      player.version = 2.328125;
+    }
   },
   convertSaveToDecimal() {
     player.stars = new Decimal(player.stars);

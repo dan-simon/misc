@@ -5,6 +5,9 @@ let ComplexityPrestigeLayer = {
   hasEnoughEP() {
     return EternityPoints.totalEPProducedThisComplexity().gte(this.eternityPointRequirementForComplexity());
   },
+  hasEnoughEPWith(x) {
+    return EternityPoints.totalEPProducedThisComplexity().plus(x).gte(this.eternityPointRequirementForComplexity());
+  },
   hasComplexityChallenge1Completion() {
     // It is possible, though extremely rare, that someone could have gotten about the same amount
     // of EP two eternities in a row and thus never have had enough stars for this completion.
@@ -12,6 +15,9 @@ let ComplexityPrestigeLayer = {
   },
   canComplexity() {
     return this.hasEnoughEP() && this.hasComplexityChallenge1Completion();
+  },
+  canComplexityWith(x) {
+    return this.hasEnoughEPWith(x) && this.hasComplexityChallenge1Completion();
   },
   canComplexityReset() {
     return this.rawCanComplexityReset() && this.isComplexityResetEnabled();

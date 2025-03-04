@@ -49,11 +49,32 @@ function gameLoop(diff, display, isOnline) {
   Stats.addToTimeStats(diff, isOnline);
   // Why is this here? Because otherwise the eternity time will be out of sync with chroma when the UI updates.
   Chroma.updateColors();
+  // This code purposefully gives a one-time boost of generated resources to get the player to a prestige threshold.
+  // It has two functions, which are somewhat similar:
+  // - Make some resets (especially infinities) one tick.
+  // - Save a second on late finalities waiting for complexity points to generate.
+  // It doesn't apply to permanence because permanence doesn't reset anything.
+  // It doesn't apply to eternities because as a historical accident they're not in this part of the reset loop anyway,
+  // so this is less of an issue and I'm worried it'd break stuff.
+  if (InfinityPrestigeLayer.hasInfinityPointGeneration() &&
+  !EternityPrestigeLayer.canEternity() && EternityPrestigeLayer.canEternityWith(InfinityPrestigeLayer.infinityPointGain())) {
+    InfinityPoints.addAmount(InfinityPrestigeLayer.infinityPointGain());
+  }
+  if (EternityPrestigeLayer.hasEternityPointGeneration() &&
+  !ComplexityPrestigeLayer.canComplexity() && ComplexityPrestigeLayer.canComplexityWith(EternityPrestigeLayer.eternityPointGain())) {
+    EternityPoints.addAmount(EternityPrestigeLayer.eternityPointGain());
+  }
+  if (ComplexityPrestigeLayer.hasComplexityPointGeneration() &&
+  !FinalityPrestigeLayer.canFinality() && FinalityPrestigeLayer.canFinalityWith(ComplexityPrestigeLayer.complexityPointGain())) {
+    ComplexityPoints.addAmount(ComplexityPrestigeLayer.complexityPointGain());
+  }
   Autobuyers.tick(diff);
   InfinityAutobuyers.tick();
   EternityAutobuyers.tick();
   ComplexityAutobuyers.tick();
   InfinityChallenge.checkForAllAutoInfinityChallengeCompletions();
+  // For why this is somewhat duplicated above, see above.
+  // It's not moved above because I don't want to break game loop order stuff.
   if (InfinityPrestigeLayer.hasInfinityPointGeneration()) {
     InfinityPoints.addAmount(InfinityPrestigeLayer.infinityPointGain().times(diff));
   }

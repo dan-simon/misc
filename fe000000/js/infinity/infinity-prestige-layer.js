@@ -31,6 +31,10 @@ let InfinityPrestigeLayer = {
   canInfinity() {
     return this.bestStarsThisInfinity().gte(this.starRequirementForInfinity());
   },
+  // This isn't currently used but exists for consistency with other resets.
+  canInfinityWith(x) {
+    return this.bestStarsThisInfinity().plus(x).gte(this.starRequirementForInfinity());
+  },
   canShowInfinity() {
     return this.canInfinity() && !this.showFastSpecial();
   },
