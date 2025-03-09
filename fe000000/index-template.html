@@ -3022,7 +3022,7 @@
           <button ~class=Oracle.isUnlocked() ? '' : 'disabled'~ onclick="Oracle.invoke()">Get prediction</button> <button onclick="Oracle.toggleAlert()">Alert on prediction: ~r Oracle.alert() ? "On" : "Off" ~</button> <button onclick="Oracle.togglePowerDisplay()">Show future powers on prediction: ~r Oracle.powerDisplay() ? "On" : "Off" ~</button>
           <button onclick="Oracle.nextPowerGainInPredictions()">Power gain in predictions: ~r Oracle.powerGainInPredictions() ~</button>
           <button onclick="Oracle.togglePowerFutureExtraMultipliers()">Show future power extra multipliers (as opposed to current): ~r Oracle.powerFutureExtraMultipliers() ? "On" : "Off" ~</button>
-          <span class="helpspan">(?)<span class="tooltiptext" style="font-size: 0.875rem;">The amounts of times shown until powers in predictions use the current actual rate of new powers, rather than the rate in the simulation. The current actual rate may sometimes be less accurate than the rate in the simulation due to upgrades, but it's generally more accurate at, for example, letting you know if you already have a certain power or not.</span></span>
+          <span class="helpspan">(?)<span class="tooltiptext" style="font-size: 0.875rem;">The amounts of time shown until powers in predictions use the current actual rate of new powers, rather than the rate in the simulation. The current actual rate may sometimes be less accurate than the rate in the simulation due to upgrades, but it's generally more accurate at, for example, letting you know if you already have a certain power or not.</span></span>
         </div>
         <span>The Oracle can look between ~ti 0 ~ and ~ti Oracle.maxTime() ~ into the future,</span>
         <br/>
