@@ -61,7 +61,7 @@ let Colors = {
   },
   updateColors() {
     for (let i of ColorPreset.specialColorList) {
-      document.documentElement.style.setProperty('--' + i + '-color', Options.colorSetting(i, null));
+      document.documentElement.style.setProperty('--' + i + '-color', Options.colorSetting(i, null, true));
     }
     for (let i of ['normal', 'infinity', 'eternity', 'chroma']) {
       let buttonColor = this.getButtonColorAltered(true, i === 'chroma' ? 'studies' : i);
