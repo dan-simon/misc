@@ -6,7 +6,7 @@ let blockableGameLoop = function () {
   }
 }
 
-window.onload = function () {
+window.addEventListener('load', function () {
   updateDisplayPageLoadSetup();
   Saving.loadGameStorage(function (success) {
     if (success) {
@@ -21,4 +21,4 @@ window.onload = function () {
   });
   setInterval(blockableGameLoop, 64);
   setInterval(() => {updateHotkeys(); Saving.saveGame(true, false);}, 16384);
-}
+});
