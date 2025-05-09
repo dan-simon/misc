@@ -74,8 +74,8 @@ function formatBitArray(bitArray) {
   let outputform = el('outputform');
   if (outputform === 'hex') {
     let chars = Math.ceil(bitArray.length / 4);
-    let x = parseInt(bitArray.join('').padEnd(4 * chars, '0'), 2);
-    return x.toString(16).toUpperCase().padStart(chars, '0');
+    let padded = bitArray.join('').padEnd(4 * chars, '0');
+    return [...Array(chars)].map((_, i) => parseInt(padded.slice(4 * i, 4 * i + 4), 2).toString(16)).join('').toUpperCase();
   } else {
     let formatting = el('outputform').split(' and ');
     if (formatting[0] === '-e/-e-') formatting[0] = el('-e-') ? '-e-' : '-e';
