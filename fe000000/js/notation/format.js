@@ -103,7 +103,8 @@ function getNotation(x) {
     // the new names having capitalization on every word.
     let key = x.replace(/[()]/g, '').replace(/ [A-Za-z]/g, (x) => x[1].toUpperCase()) + 'Notation';
     let Source = (key in ModifiedNotations) ? ModifiedNotations :
-    ((key === 'EvilNotation') ? ADCommunityNotations : ADNotations);
+    ((key in NewNotations) ? NewNotations :
+    ((key === 'EvilNotation') ? ADCommunityNotations : ADNotations));
     NOTATIONS[x] = new Source[key]();
   }
   return NOTATIONS[x];

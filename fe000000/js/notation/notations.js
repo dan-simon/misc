@@ -296,6 +296,98 @@ class LogarithmVariantNotation extends ADNotations.Notation {
   }
 }
 
+class SpokenBinaryNotation extends ADNotations.Notation {
+  get name() {
+    return "Spoken Binary";
+  }
+
+  formatVerySmallDecimal(value, places) {
+    return this.formatSpokenBinary(value, 8);
+  }
+
+  formatUnder1000(value, places) {
+    if (places === 0) {
+      return this.formatSpokenBinaryInt(new Decimal(value), 8)[0];
+    } else {
+      return this.formatSpokenBinary(new Decimal(value), 8);
+    }
+  }
+
+  formatDecimal(value, places) {
+    if (places === 0) {
+      return this.formatSpokenBinaryInt(new Decimal(value), 8)[0];
+    } else {
+      return this.formatSpokenBinary(new Decimal(value), 8);
+    }
+  }
+
+  formatSpokenBinary(x, d) {
+    let [a, v] = this.formatSpokenBinaryInt(x, d);
+    let frac = x.minus(v);
+    // This is a bit unsafe
+    if (frac.lte(0) || frac.gt(1) || a.length > d - 2) {
+      return a;
+    }
+    let bv = new Decimal(0);
+    let curr = '';
+    for (let c = 0; c < 10; c++) {
+      if (frac.lt(SpokenBinaryData.revPowTable[c])) {
+        continue;
+      }
+      if (a.length === d - 2) {
+        return a + '.' + SpokenBinaryData.binaryIntChars[c];
+      }
+      let [t, nv] = this.formatSpokenBinaryInt(frac.times(SpokenBinaryData.powTable[c]).plus(1e-9).floor(), d - 2 - a.length);
+      nv = nv.times(SpokenBinaryData.revPowTable[c]);
+      if (t === '1') {
+        t = '';
+      }
+      if (nv.gt(bv.times(1 + 1e-9))) {
+        bv = nv;
+        curr = t + SpokenBinaryData.binaryIntChars[c];
+      }
+      if (bv.gt(nv.times(1 + 1e-9))) {
+        return a + '.' + curr;
+      }
+    }
+    return a + '.' + curr;
+  }
+
+  formatSpokenBinaryInt(x, d) {
+    if (x.lt(1) || d === 0) {
+      return ['0', new Decimal(0)];
+    }
+    if (x.lt(2)) {
+      return ['1', new Decimal(1)];
+    }
+    let c = Math.floor(Math.log2(Decimal.log2(x)) + 1e-9);
+    let n = SpokenBinaryData.powTable[c];
+    if (d === 1) {
+      return [SpokenBinaryData.binaryIntChars[c], n];
+    }
+    let f = x.div(n).plus(1e-9).floor();
+    let [a, v1] = this.formatSpokenBinaryInt(f, d - 1);
+    if (a === '1') {
+      a = '';
+    }
+    let [b, v2] = this.formatSpokenBinaryInt(x.minus(f.times(n)).max(0).plus(1e-9).floor(), d - 1 - a.length);
+    if (b === '0') {
+      b = '';
+    }
+    return [a + SpokenBinaryData.binaryIntChars[c] + b, v1.times(n).plus(v2)];
+  }
+}
+
+let SpokenBinaryData = {
+  genPowTable: function (rev) {
+    return [...Array(54)].map((_, i) => Decimal.pow(2, (rev ? -1 : 1) * Math.pow(2, i)));
+  },
+  binaryIntChars: '24ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+}
+
+SpokenBinaryData.powTable = SpokenBinaryData.genPowTable(false);
+SpokenBinaryData.revPowTable = SpokenBinaryData.genPowTable(true);
+
 let ModifiedNotations = {
   'TimeScientificNotation': TimeScientificNotation,
   'DefaultScientificNotation': DefaultScientificNotation,
@@ -308,6 +400,10 @@ let ModifiedNotations = {
   'MixedEngineeringNotation': MixedEngineeringNotation,
   'MixedLogarithmSciNotation': MixedLogarithmSciNotation,
   'LogarithmVariantNotation': LogarithmVariantNotation,
+}
+
+let NewNotations = {
+  'SpokenBinaryNotation': SpokenBinaryNotation,
 }
 
 for (let i in ModifiedNotations) {
