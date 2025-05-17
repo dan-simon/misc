@@ -365,12 +365,14 @@ class SpokenBinaryNotation extends ADNotations.Notation {
     if (d === 1) {
       return [SpokenBinaryData.binaryIntChars[c], n];
     }
-    let f = x.div(n).plus(1e-9).floor();
+    // If this is 1e-9 it causes some weird issues
+    // specifically, 2^64 - 2^11 -> 2^32 - 2^-23 which is rounded down
+    let f = x.div(n).plus(1e-6).floor();
     let [a, v1] = this.formatSpokenBinaryInt(f, d - 1);
     if (a === '1') {
       a = '';
     }
-    let [b, v2] = this.formatSpokenBinaryInt(x.minus(f.times(n)).max(0).plus(1e-9).floor(), d - 1 - a.length);
+    let [b, v2] = f.lt(1e6) ? this.formatSpokenBinaryInt(x.minus(f.times(n)).max(0).plus(1e-6).floor(), d - 1 - a.length) : ['0', new Decimal(0)];
     if (b === '0') {
       b = '';
     }
