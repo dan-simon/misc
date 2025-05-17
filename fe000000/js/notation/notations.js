@@ -372,7 +372,12 @@ class SpokenBinaryNotation extends ADNotations.Notation {
     if (a === '1') {
       a = '';
     }
-    let [b, v2] = f.lt(1e6) ? this.formatSpokenBinaryInt(x.minus(f.times(n)).max(0).plus(1e-6).floor(), d - 1 - a.length) : ['0', new Decimal(0)];
+    let rem = x.minus(f.times(n)).max(0).plus(1e-6).floor();
+    // This is such a hacky solution
+    if (rem.div(n).min(1).lt(f.div(1e6))) {
+      rem = new Decimal(0);
+    }
+    let [b, v2] = this.formatSpokenBinaryInt(rem, d - 1 - a.length);
     if (b === '0') {
       b = '';
     }
