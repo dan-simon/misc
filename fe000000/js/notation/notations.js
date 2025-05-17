@@ -361,8 +361,12 @@ class SpokenBinaryNotation extends ADNotations.Notation {
     if (x.lt(2 - 1e-6)) {
       return ['1', new Decimal(1)];
     }
+    // edge case
+    if (x.lt(2.5)) {
+      return ['2', new Decimal(2)];
+    }
     let y = x.minus(x.round()).abs().lte(1e-6) ? x.round() : x;
-    let c = Math.floor(Math.log2(Decimal.log2(y)) + 1e-9);
+    let c = Math.floor(Math.log2(Decimal.log2(y)));
     let n = SpokenBinaryData.powTable[c];
     if (d === 1) {
       return [SpokenBinaryData.binaryIntChars[c], n];
@@ -371,13 +375,18 @@ class SpokenBinaryNotation extends ADNotations.Notation {
     // specifically, 2^64 - 2^11 -> 2^32 - 2^-23 which is rounded down
     let f = x.div(n);
     let rem;
-    if (f.minus(f.round()).abs().lte(1e-6)) {
+    if (f.minus(f.round()).abs().lte(f.times(1e-6))) {
       f = f.round();
       rem = new Decimal(0);
     } else {
-      rem = x.minus(f.times(n)).clamp(0, 1);
+      f = f.floor();
+      rem = x.minus(f.times(n)).clamp(0, n);
     }
     let [a, v1] = this.formatSpokenBinaryInt(f, d - 1);
+    if (v1.gte(n)) {
+      // Rounding error can lead to this sometimes
+      return [SpokenBinaryData.binaryIntChars[c + 1], SpokenBinaryData.powTable[c + 1]];
+    }
     if (a === '1') {
       a = '';
     }
