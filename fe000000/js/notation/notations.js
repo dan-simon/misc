@@ -354,28 +354,32 @@ class SpokenBinaryNotation extends ADNotations.Notation {
   }
 
   formatSpokenBinaryInt(x, d) {
-    if (x.lt(1) || d === 0) {
+    // Include some margin for error.
+    if (x.lt(1 - 1e-6) || d === 0) {
       return ['0', new Decimal(0)];
     }
-    if (x.lt(2)) {
+    if (x.lt(2 - 1e-6)) {
       return ['1', new Decimal(1)];
     }
-    let c = Math.floor(Math.log2(Decimal.log2(x)) + 1e-9);
+    let y = x.minus(x.round()).abs().lte(1e-6) ? x.round() : x;
+    let c = Math.floor(Math.log2(Decimal.log2(y)) + 1e-9);
     let n = SpokenBinaryData.powTable[c];
     if (d === 1) {
       return [SpokenBinaryData.binaryIntChars[c], n];
     }
     // If this is 1e-9 it causes some weird issues
     // specifically, 2^64 - 2^11 -> 2^32 - 2^-23 which is rounded down
-    let f = x.div(n).plus(1e-6).floor();
+    let f = x.div(n);
+    let rem;
+    if (f.minus(f.round()).abs().lte(1e-6)) {
+      f = f.round();
+      rem = new Decimal(0);
+    } else {
+      rem = x.minus(f.times(n)).clamp(0, 1);
+    }
     let [a, v1] = this.formatSpokenBinaryInt(f, d - 1);
     if (a === '1') {
       a = '';
-    }
-    let rem = x.minus(f.times(n)).max(0).plus(1e-6).floor();
-    // This is such a hacky solution
-    if (rem.div(n).min(1).lt(f.div(1e6))) {
-      rem = new Decimal(0);
     }
     let [b, v2] = this.formatSpokenBinaryInt(rem, d - 1 - a.length);
     if (b === '0') {
