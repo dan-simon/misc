@@ -205,6 +205,10 @@ let Autobuyers = {
     player.slowAutobuyersTimer = newTimer;
     player.fastAutobuyersTimer = newTimer;
   },
+  areAnySlowAutobuyersLocked() {
+    // This is only used for showing a message in the challenges tab about how completing challenges unlocks slow autobuyers.
+    return this.list.slice(0, 9).some(i => !i.hasAutobuyer());
+  },
   anyNonGeneratorAndBoostDisplay() {
     // This is only used for showing the option to hide generator and boost autobuyers.
     return this.list.slice(9).some(i => i.hasAutobuyer()) || PrestigeLayerProgress.hasReached('eternity');
