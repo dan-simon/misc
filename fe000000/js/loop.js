@@ -111,7 +111,7 @@ function gameLoop(diff, display, isOnline) {
   EternityPrestigeLayer.compareEPGain();
   ComplexityPrestigeLayer.compareCPGain();
   // Why does checkForPowerGain need diff? Because it wants to know if a bunch of new powers
-  // are due to a long tick or power production suddenly becoming possibile.
+  // are due to a long tick or power production suddenly becoming possible.
   Powers.checkForPowerGain(diff);
   Goals.checkForGoals();
   Achievements.checkForAchievements('loop');
