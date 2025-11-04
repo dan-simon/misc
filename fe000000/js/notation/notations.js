@@ -366,9 +366,11 @@ class SpokenBinaryNotation extends ADNotations.Notation {
       return ['2', new Decimal(2)];
     }
     let y = x.minus(x.round()).abs().lte(1e-6) ? x.round() : x;
-    let c = Math.floor(Math.log2(Decimal.log2(y)));
+    let c2 = Math.log2(Decimal.log2(y));
+    let near = Math.abs(c2 - Math.round(c2)) <= 1e-9;
+    let c = near ? Math.round(c2) : Math.floor(c2);
     let n = SpokenBinaryData.powTable[c];
-    if (d === 1) {
+    if (d === 1 || near) {
       return [SpokenBinaryData.binaryIntChars[c], n];
     }
     // If this is 1e-9 it causes some weird issues
