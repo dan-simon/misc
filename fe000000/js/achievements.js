@@ -256,7 +256,7 @@ let Achievements = {
       () => Galaxy.isUnlocked(),
       () => Chroma.isUnlocked() && Chroma.amount() >= Math.pow(2, Achievements.logThresholdChromaForDoubling()),
       () => Galaxy.timeToReachEffectCap() >= 18000,
-      () => Powers.isUnlocked() && Powers.getExtraMultiplier('eternity') === 3 && player.stats.timeSinceComplexity <= 60,
+      () => Powers.isUnlocked() && Powers.timeForTypeAtCap('eternity', false, false) <= 60,
       () => true
     ],
     [
