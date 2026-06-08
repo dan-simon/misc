@@ -698,9 +698,22 @@ let puzzles = [
 
 let makeInit = function (p, n, x) {
   return () => {
+    if (n === p.num) {
+      return;
+    }
+    let ol = document.getElementById(`u${p.num}`);
+    let ne = document.getElementById(`u${n}`);
+    ol.innerText = ol.innerText.slice(1);
+    ne.innerText = '*' + ne.innerText;
+    if (!p.solved) {
+      ol.style.backgroundColor = '';
+    }
     p.save();
     savePuzzle(-1, n);
     let d = loadPuzzle(n);
+    if (!d.solved) {
+      ne.style.backgroundColor = 'yellow';
+    }
     p.reset();
     p.init(n, x, d);
   }
@@ -727,8 +740,8 @@ window.onload = function () {
   for (let i = 0; i < puzzles.length; i++) {
     let d = document.createElement('button');
     d.id = `u${i}`;
-    d.style.backgroundColor = pz[i + 1].solved ? 'lime' : '';
-    d.innerText = `${i + 1} [${puzzles[i].size}]`;
+    d.style.backgroundColor = pz[i + 1].solved ? 'lime' : (i === c) ? 'yellow' : '';
+    d.innerText = ((i === c) ? '*' : '') + `${i + 1} [${puzzles[i].size}]`;
     d.onclick = makeInit(p, i, puzzles[i]);
     document.body.appendChild(d);
     if ([7, 20].includes(i)) {
