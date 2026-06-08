@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>🪞</title>
+    <style>
+        td {
+          width: 50px;
+          height: 50px;
+          border: 1px solid black;
+          position: relative;
+        }
+        .overlay {
+          position: absolute;
+        }
+        .diamond {
+          width: 100px;
+          height: 100px;
+          clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+          background-color: silver;
+          z-index: 3;
+        }
+        .vertical {
+          width: 4px;
+          height: 54px;
+        }
+        .vertical-half {
+          width: 4px;
+          height: 27px;
+        }
+        .horizontal {
+          width: 54px;
+          height: 4px;
+        }
+        .horizontal-half {
+          width: 27px;
+          height: 4px;
+        }
+        .highlight {
+          z-index: 2 !important;
+          background-color: silver !important;
+        }
+    </style>
+    <script src="script.js"></script>
+</head>
+<body>
+  <div id="grid" style="position: relative;"></div>
+</body>
+</html>
