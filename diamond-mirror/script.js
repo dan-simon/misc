@@ -1,23 +1,24 @@
 'use strict';
 
 class Puzzle {
-  constructor(pn, num, data, state) {
+  constructor(pn, num, data, state, checkOn) {
     this.name = pn;
     this.grid = document.getElementById(pn);
-    this.init(num, data, state);
+    this.init(num, data, state, checkOn);
   }
   reset() {
     while (this.grid.children.length > 0) {
       this.grid.removeChild(this.grid.children[0]);
     }
   }
-  init(num, data, state) {
+  init(num, data, state, checkOn) {
     this.solved = false;
     this.fullyInitialized = false;
     this.stateChanged = false;
     this.state = state;
     this.num = num;
     this.data = data;
+    this.checkOn = checkOn;
     this.grid.style.height = `${data.size * 50 + (hasBottomText(data) ? 185 : 150)}px`;
     this.grid.style.width = `${data.size * 50 + 150}px`;
     this.size = data.size;
@@ -177,6 +178,9 @@ class Puzzle {
     }
   }
   check() {
+    if (!this.checkOn) {
+      return false;
+    }
     if (this.used.length !== this.size) {
       return false;
     }
@@ -709,38 +713,39 @@ let makeInit = function (p, n, x) {
       ol.style.backgroundColor = '';
     }
     p.save();
-    savePuzzle(-1, n);
+    savePuzzle(-2, n);
+    let c = loadPuzzle(-1);
     let d = loadPuzzle(n);
-    if (!d.solved) {
+    p.reset();
+    p.init(n, x, d, c);
+    if (!p.solved) {
       ne.style.backgroundColor = 'yellow';
     }
-    p.reset();
-    p.init(n, x, d);
   }
 }
 
 let loadPuzzle = function (x) {
-  return JSON.parse(atob(localStorage.getItem('mirror-puzzles')))[x + 1];
+  return JSON.parse(atob(localStorage.getItem('mirror-puzzles')))[x + 2];
 }
 
 let savePuzzle = function (x, d) {
   let states = JSON.parse(atob(localStorage.getItem('mirror-puzzles')));
-  states[x + 1] = d;
+  states[x + 2] = d;
   localStorage.setItem('mirror-puzzles', btoa(JSON.stringify(states)));
 }
 
 window.onload = function () {
   if (localStorage.getItem('mirror-puzzles') === null) {
     localStorage.setItem('mirror-puzzles', btoa(JSON.stringify(
-      [...Array(puzzles.length + 1)].map((_, i) => i ? {used: [], xs: [], solved: false} : 0))));
+      [0, true].concat([...Array(puzzles.length)].map(() => ({used: [], xs: [], solved: false}))))));
   }
   let pz = JSON.parse(atob(localStorage.getItem('mirror-puzzles')));
   let c = pz[0];
-  let p = new Puzzle('grid', c, puzzles[c], pz[c + 1]);
+  let p = new Puzzle('grid', c, puzzles[c], pz[c + 2], pz[1]);
   for (let i = 0; i < puzzles.length; i++) {
     let d = document.createElement('button');
     d.id = `u${i}`;
-    d.style.backgroundColor = pz[i + 1].solved ? 'lime' : (i === c) ? 'yellow' : '';
+    d.style.backgroundColor = pz[i + 2].solved ? 'lime' : (i === c) ? 'yellow' : '';
     d.innerText = ((i === c) ? '*' : '') + `${i + 1} [${puzzles[i].size}]`;
     d.onclick = makeInit(p, i, puzzles[i]);
     document.body.appendChild(d);
@@ -748,6 +753,30 @@ window.onload = function () {
       document.body.appendChild(document.createElement('br'));
     }
   }
+  document.body.appendChild(document.createElement('br'));
+  let check = document.createElement('span');
+  check.appendChild(document.createTextNode('✔'));
+  let cbox = document.createElement('input');
+  cbox.style.marginRight = '20px';
+  cbox.type = 'checkbox';
+  cbox.checked = pz[1];
+  cbox.addEventListener('change', function() {
+    // Check if the checkbox is checked or unchecked
+    p.checkOn = this.checked;
+    if (p.checkOn && p.check()) {
+      p.solvePuzzle();
+      p.recomputeEdgePaths();
+      p.save();
+    }
+    savePuzzle(-1, p.checkOn);
+  });
+  check.appendChild(cbox);
+  document.body.appendChild(check);
+  let help = document.createElement('a');
+  help.innerText = '?';
+  help.href = 'help.html';
+  help.target = '_blank';
+  check.appendChild(help);
   /*document.body.appendChild(document.createElement('br'));
   document.body.appendChild(document.createElement('br'));
   let d = document.createElement('button');
@@ -758,7 +787,7 @@ window.onload = function () {
     p.state.xs = [];
     p.stateChanged = true;
     p.save();
-    let n = loadPuzzle(-1);
+    let n = loadPuzzle(-2);
     let d = loadPuzzle(n);
     p.reset();
     p.init(n, puzzles[n], d);
