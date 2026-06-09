@@ -1,24 +1,23 @@
 'use strict';
 
 class Puzzle {
-  constructor(pn, num, data, state, checkOn) {
+  constructor(pn, num, data, state, check) {
     this.name = pn;
     this.grid = document.getElementById(pn);
-    this.init(num, data, state, checkOn);
+    this.check = check;
+    this.init(num, data, state);
   }
   reset() {
     while (this.grid.children.length > 0) {
       this.grid.removeChild(this.grid.children[0]);
     }
   }
-  init(num, data, state, checkOn) {
-    this.solved = false;
+  init(num, data, state) {
     this.fullyInitialized = false;
     this.stateChanged = false;
     this.state = state;
     this.num = num;
     this.data = data;
-    this.checkOn = checkOn;
     this.grid.style.height = `${data.size * 50 + (hasBottomText(data) ? 185 : 150)}px`;
     this.grid.style.width = `${data.size * 50 + 150}px`;
     this.size = data.size;
@@ -34,14 +33,14 @@ class Puzzle {
     this.initState();
     this.fullyInitialized = true;
     this.recomputeEdgePaths();
-    if (this.check()) {
+    if (this.checkF()) {
       this.solvePuzzle();
       this.recomputeEdgePaths();
     }
   }
   save() {
     if (this.stateChanged) {
-      savePuzzle(this.num, this.state);
+      this.saveHook(this.num, this.state);
       this.stateChanged = false;
     }
   }
@@ -64,20 +63,31 @@ class Puzzle {
     d.style.top = `${50 * y + 50}px`;
     if (removable) {
       d.onclick = e => {
-        if (this.solved) return;
         e.stopPropagation();
         d.parentNode.removeChild(d);
+        this.state.solved = false;
+        let u = document.getElementById(`u${this.num}`);
+        if (u !== null) {
+          u.style.backgroundColor = 'yellow';
+        }
         this.used = this.used.filter(i => i[0] !== x || i[1] !== y);
         this.state.used = this.state.used.filter(i => i[0] !== x || i[1] !== y);
         this.stateChanged = true;
         this.recomputeEdgePaths();
       }
       d.oncontextmenu = e => {
-        if (this.solved) return;
+        e.stopPropagation();
         e.preventDefault();
         d.parentNode.removeChild(d);
+        this.state.solved = false;
+        let u = document.getElementById(`u${this.num}`);
+        if (u !== null) {
+          u.style.backgroundColor = 'yellow';
+        }
         this.used = this.used.filter(i => i[0] !== x || i[1] !== y);
         this.state.used = this.state.used.filter(i => i[0] !== x || i[1] !== y);
+        // add x on space itself, not whereever click happened to be
+        this.addX(x, y);
         this.stateChanged = true;
         this.recomputeEdgePaths();
       }
@@ -116,7 +126,7 @@ class Puzzle {
       return;
     }
     for (let i of this.edgePathList) {
-      let color = getColor(i[0], i[i.length - 1], this.colorTable, this.secColorTable, this.solved);
+      let color = getColor(i[0], i[i.length - 1], this.colorTable, this.secColorTable, this.check && this.state.solved);
       if (color !== undefined) {
         for (let c of i) {
           let e = this.els[c];
@@ -129,6 +139,11 @@ class Puzzle {
     for (let i of this.used) {
       for (let c of getEdgesUnder(...i)) {
         this.els[c].style.display = 'none';
+      }
+    }
+    for (let i in this.els) {
+      if (i.startsWith('x')) {
+        this.els[i].style.display = (this.check && this.state.solved) ? 'none' : '';
       }
     }
   }
@@ -177,10 +192,7 @@ class Puzzle {
       }
     }
   }
-  check() {
-    if (!this.checkOn) {
-      return false;
-    }
+  checkF() {
     if (this.used.length !== this.size) {
       return false;
     }
@@ -319,7 +331,6 @@ class Puzzle {
     }
   }
   addX(rx, ry) {
-    if (this.solved) return;
     let x = Math.round(rx);
     let y = Math.round(ry);
     if (Math.min(x, y) < 0 || Math.max(x, y) >= this.size) return;
@@ -340,28 +351,20 @@ class Puzzle {
     }
   }
   solvePuzzle() {
-    this.solved = true;
     this.state.solved = true;
+    this.state.everSolved = true;
     let u = document.getElementById(`u${this.num}`);
-    if (u !== null) {
+    if (u !== null && this.check) {
       u.style.backgroundColor = 'lime';
-    }
-    for (let i in this.els) {
-      if (i.startsWith('x')) {
-        let xe = this.els[i];
-        xe.parentNode.removeChild(xe);
-        delete this.els[i];
-      }
     }
   }
   diamondManip(rx, ry) {
-    if (this.solved) return;
     let x = Math.round(rx);
     let y = Math.round(ry);
     if (Math.min(x, y) < 0 || Math.max(x, y) >= this.size) return;
     if (this.used.some(i => i[0] === x || i[1] === y)) return;
     this.createDiamond(x, y, true);
-    if (this.check()) {
+    if (this.checkF()) {
       this.solvePuzzle();
       this.recomputeEdgePaths();
       this.save();
@@ -700,7 +703,7 @@ let puzzles = [
   }
 ];
 
-let makeInit = function (p, n, x) {
+let makeInit = function (p, n, x, saveHook) {
   return () => {
     if (n === p.num) {
       return;
@@ -708,46 +711,60 @@ let makeInit = function (p, n, x) {
     let ol = document.getElementById(`u${p.num}`);
     let ne = document.getElementById(`u${n}`);
     ol.innerText = ol.innerText.slice(1);
+    ol.style.backgroundColor = (p.check && p.state.solved) ? 'lime' : '';
     ne.innerText = '*' + ne.innerText;
-    if (!p.solved) {
-      ol.style.backgroundColor = '';
-    }
     p.save();
-    savePuzzle(-2, n);
-    let c = loadPuzzle(-1);
+    saveHook('num', n);
     let d = loadPuzzle(n);
     p.reset();
-    p.init(n, x, d, c);
-    if (!p.solved) {
-      ne.style.backgroundColor = 'yellow';
-    }
+    p.init(n, x, d);
+    ne.style.backgroundColor = (p.check && p.state.solved) ? 'lime' : 'yellow';
   }
 }
 
 let loadPuzzle = function (x) {
-  return JSON.parse(atob(localStorage.getItem('mirror-puzzles')))[x + 2];
+  return JSON.parse(atob(localStorage.getItem('mirror-puzzles'))).states[x];
 }
 
-let savePuzzle = function (x, d) {
-  let states = JSON.parse(atob(localStorage.getItem('mirror-puzzles')));
-  states[x + 2] = d;
-  localStorage.setItem('mirror-puzzles', btoa(JSON.stringify(states)));
+let saveUpdate = function () {
+  let rawSave = localStorage.getItem('mirror-puzzles');
+  if (rawSave === null) {
+    localStorage.setItem('mirror-puzzles', btoa(JSON.stringify(
+      [0, true].concat([...Array(puzzles.length)].map(() => ({used: [], xs: [], solved: false, onceSolved: false}))))));
+  }
+  let save = JSON.parse(atob(rawSave));
+  let saveWasUpToDate = !Array.isArray(save) && save.version >= 0.5;
+  if (Array.isArray(save)) {
+    save = {version: 0.5, num: save[0], check: save[1], states: save.slice(2)};
+  }
+  if (!saveWasUpToDate) {
+    localStorage.setItem('mirror-puzzles', btoa(JSON.stringify(save)));
+  }
 }
 
 window.onload = function () {
-  if (localStorage.getItem('mirror-puzzles') === null) {
-    localStorage.setItem('mirror-puzzles', btoa(JSON.stringify(
-      [0, true].concat([...Array(puzzles.length)].map(() => ({used: [], xs: [], solved: false}))))));
+  saveUpdate();
+  let saveHook = function (x, d) {
+    if (x !== null && x !== undefined) {
+      if (typeof x === 'number') {
+        pza.states[x] = d;
+      } else {
+        pza[x] = d;
+      }
+    }
+    localStorage.setItem('mirror-puzzles', btoa(JSON.stringify(pza)));
   }
-  let pz = JSON.parse(atob(localStorage.getItem('mirror-puzzles')));
-  let c = pz[0];
-  let p = new Puzzle('grid', c, puzzles[c], pz[c + 2], pz[1]);
+  let pza = JSON.parse(atob(localStorage.getItem('mirror-puzzles')));
+  let pz = pza.states;
+  let c = pza.num;
+  let p = new Puzzle('grid', c, puzzles[c], pz[c], pza.check);
+  p.saveHook = saveHook;
   for (let i = 0; i < puzzles.length; i++) {
     let d = document.createElement('button');
     d.id = `u${i}`;
-    d.style.backgroundColor = pz[i + 2].solved ? 'lime' : (i === c) ? 'yellow' : '';
+    d.style.backgroundColor = (pza.check && pz[i].solved) ? 'lime' : (i === c) ? 'yellow' : '';
     d.innerText = ((i === c) ? '*' : '') + `${i + 1} [${puzzles[i].size}]`;
-    d.onclick = makeInit(p, i, puzzles[i]);
+    d.onclick = makeInit(p, i, puzzles[i], saveHook);
     document.body.appendChild(d);
     if ([7, 20].includes(i)) {
       document.body.appendChild(document.createElement('br'));
@@ -759,16 +776,18 @@ window.onload = function () {
   let cbox = document.createElement('input');
   cbox.style.marginRight = '20px';
   cbox.type = 'checkbox';
-  cbox.checked = pz[1];
+  cbox.checked = pza.check;
   cbox.addEventListener('change', function() {
     // Check if the checkbox is checked or unchecked
-    p.checkOn = this.checked;
-    if (p.checkOn && p.check()) {
-      p.solvePuzzle();
-      p.recomputeEdgePaths();
-      p.save();
+    p.check = this.checked;
+    pza.check = this.checked;
+    p.recomputeEdgePaths();
+    p.save();
+    saveHook();
+    for (let i = 0; i < puzzles.length; i++) {
+      let d = document.getElementById(`u${i}`);
+      d.style.backgroundColor = (pza.check && pz[i].solved) ? 'lime' : (i === pza.num) ? 'yellow' : '';
     }
-    savePuzzle(-1, p.checkOn);
   });
   check.appendChild(cbox);
   document.body.appendChild(check);
