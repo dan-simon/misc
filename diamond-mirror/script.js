@@ -729,8 +729,13 @@ let loadPuzzle = function (x) {
 let saveUpdate = function () {
   let rawSave = localStorage.getItem('mirror-puzzles');
   if (rawSave === null) {
-    localStorage.setItem('mirror-puzzles', btoa(JSON.stringify(
-      [0, true].concat([...Array(puzzles.length)].map(() => ({used: [], xs: [], solved: false, onceSolved: false}))))));
+    localStorage.setItem('mirror-puzzles', btoa(JSON.stringify({
+      version: 0.5,
+      num: 0,
+      check: true,
+      states: [...Array(puzzles.length)].map(() => ({used: [], xs: [], solved: false, onceSolved: false}))
+    })));
+    return;
   }
   let save = JSON.parse(atob(rawSave));
   let saveWasUpToDate = !Array.isArray(save) && save.version >= 0.5;
