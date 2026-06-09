@@ -585,15 +585,11 @@ let puzzles = [
   },
   {
     size: 6,
-    given: [[3, 0]],
-    turns: [],
-    pairs: [['vertical,2,-1', 'horizontal,-1,2']],
+    given: [],
+    turns: [['vertical,4,6', 1], ['horizontal,-1,2', 1], ['horizontal,-1,5', 3]],
+    pairs: [['vertical,4,6', 'horizontal,-1,2']],
     turnCounts: [],
-    pairCounts: [[['vertical,0,-1', 'vertical,1,-1', 'vertical,2,-1', 'vertical,3,-1',
-    'vertical,4,-1', 'vertical,5,-1', 'vertical,6,-1',
-    'vertical,0,6', 'vertical,1,6', 'vertical,2,6', 'vertical,3,6',
-    'vertical,4,6', 'vertical,5,6', 'vertical,6,6',
-    ], 2]]
+    pairCounts: []
   },
   {
     size: 6,
@@ -605,11 +601,15 @@ let puzzles = [
   },
   {
     size: 6,
-    given: [],
-    turns: [['vertical,4,6', 1], ['horizontal,-1,2', 1], ['horizontal,-1,5', 3]],
-    pairs: [['vertical,4,6', 'horizontal,-1,2']],
+    given: [[3, 0]],
+    turns: [],
+    pairs: [['vertical,2,-1', 'horizontal,-1,2']],
     turnCounts: [],
-    pairCounts: []
+    pairCounts: [[['vertical,0,-1', 'vertical,1,-1', 'vertical,2,-1', 'vertical,3,-1',
+    'vertical,4,-1', 'vertical,5,-1', 'vertical,6,-1',
+    'vertical,0,6', 'vertical,1,6', 'vertical,2,6', 'vertical,3,6',
+    'vertical,4,6', 'vertical,5,6', 'vertical,6,6',
+    ], 2]]
   },
   {
     size: 7,
@@ -730,17 +730,28 @@ let saveUpdate = function () {
   let rawSave = localStorage.getItem('mirror-puzzles');
   if (rawSave === null) {
     localStorage.setItem('mirror-puzzles', btoa(JSON.stringify({
-      version: 0.5,
+      version: 0.6,
       num: 0,
       check: true,
-      states: [...Array(puzzles.length)].map(() => ({used: [], xs: [], solved: false, onceSolved: false}))
+      states: [...Array(puzzles.length)].map(() => ({used: [], xs: [], solved: false, everSolved: false}))
     })));
     return;
   }
   let save = JSON.parse(atob(rawSave));
-  let saveWasUpToDate = !Array.isArray(save) && save.version >= 0.5;
+  let saveWasUpToDate = !Array.isArray(save) && save.version >= 0.6;
   if (Array.isArray(save)) {
     save = {version: 0.5, num: save[0], check: save[1], states: save.slice(2)};
+  }
+  if (save.version < 0.6) {
+    [save.states[18], save.states[19], save.states[20]] = [save.states[20], save.states[19], save.states[18]];
+    save.num = [save.num, 18, 19, 20][[20, 19, 18].indexOf(save.num) + 1];
+    for (let i of save.states) {
+      if (!('everSolved' in i)) {
+        i.everSolved = false;
+      }
+      delete i.onceSolved;
+    }
+    save.version = 0.6;
   }
   if (!saveWasUpToDate) {
     localStorage.setItem('mirror-puzzles', btoa(JSON.stringify(save)));
