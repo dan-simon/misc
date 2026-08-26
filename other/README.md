@@ -1,0 +1,1 @@
+Anything in this folder is by other people and posted here with their consent (usually because they didn't want to host themselves).

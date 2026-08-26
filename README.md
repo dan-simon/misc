@@ -1,5 +1,5 @@
 # misc
-A repository of random stuff, created by dan-simon. (Readme last updated September 24, 2024.)
+A repository of random stuff, created by dan-simon. (Readme last updated August 26, 2026.)
 ## Incremental games
 - The "fe000000" directory has a game I made called FE000000 which is complete and has been getting bugfixes and QoL improvements for several years. It's probably the best/longest game here (roughly a week of active play, though as an incremental a lot of that is waiting).
 - The "5hours" directory has a game I made called "5 hours until the update" which was made somewhat earlier and is less polished. It's also shorter.
@@ -28,3 +28,4 @@ Most of my puzzle stuff can be found in my "puzzles" repository, not here.
 - The "probability" directory has some code that can do probability calculations with very small chances.
 - The "status" directory has a sometimes-updated file with my current status.
 - The "minor" directory has miscellaneous stuff of all these types that I wanted to store away for one reason or another (mostly just being lower-quality).
+- The "other" directory has files I'm hosting for other people.
