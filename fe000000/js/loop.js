@@ -20,9 +20,12 @@ function gameLoop(diff, display, isOnline) {
       }
       return;
     }
-    diff = Math.max(0, rawDiff * player.cheats.gameSpeed);
+    // Kind of a useless line of code, but this previously changed game speed.
+    // So it's left as a separate variable in case we want to do that again.
+    diff = rawDiff;
     player.lastUpdate = now;
   }
+  diff = Math.max(0, diff * player.cheats.gameSpeed);
   // We cache stuff in achievements for efficiency. This deletes the cache.
   // The issue is mostly recomputation in a single tick.
   Achievements.invalidateCache();
